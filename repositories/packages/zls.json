@@ -1,9 +1,0 @@
-{
-  "name": "Zig Language Server",
-  "owner": "zigtools",
-  "repo": "zls",
-  "description": "A language server for Zig providing code completion, goto definition, references, and more for editors supporting LSP",
-  "category": "development-tools",
-  "license": "MIT",
-  "homepage": "https://zigtools.github.io/zls/"
-}
