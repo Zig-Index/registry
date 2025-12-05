@@ -1,0 +1,405 @@
+name: Validate Registry Entries
+
+on:
+  pull_request:
+    paths:
+      - 'repositories/**/*.json'
+    types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - main
+    paths:
+      - 'repositories/**/*.json'
+
+jobs:
+  validate:
+    name: Validate JSON Entries
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v44
+        with:
+          files: |
+            repositories/**/*.json
+
+      - name: Validate JSON syntax
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          echo "🔍 Validating JSON syntax..."
+          
+          ERRORS=0
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "Checking: $file"
+            if ! jq empty "$file" 2>/dev/null; then
+              echo "❌ Invalid JSON syntax in: $file"
+              ERRORS=$((ERRORS + 1))
+            else
+              echo "✅ Valid JSON syntax"
+            fi
+          done
+          
+          if [ $ERRORS -gt 0 ]; then
+            echo "::error::Found $ERRORS file(s) with invalid JSON syntax"
+            exit 1
+          fi
+
+      - name: Validate schema and check GitHub repos
+        if: steps.changed-files.outputs.any_changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          echo "🔍 Validating schema and checking GitHub repositories..."
+          
+          ERRORS=0
+          WARNINGS=0
+          
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo ""
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            echo "📄 Validating: $file"
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            
+            # Check if file was deleted
+            if [ ! -f "$file" ]; then
+              echo "🗑️ File was deleted - skipping validation"
+              continue
+            fi
+            
+            # Extract fields
+            NAME=$(jq -r '.name // empty' "$file")
+            OWNER=$(jq -r '.owner // empty' "$file")
+            REPO=$(jq -r '.repo // empty' "$file")
+            DESCRIPTION=$(jq -r '.description // empty' "$file")
+            LICENSE=$(jq -r '.license // empty' "$file")
+            CATEGORY=$(jq -r '.category // empty' "$file")
+            HOMEPAGE=$(jq -r '.homepage // empty' "$file")
+            
+            # Validate required fields
+            echo ""
+            echo "📋 Required fields:"
+            
+            if [ -z "$NAME" ]; then
+              echo "  ❌ name: MISSING (required)"
+              ERRORS=$((ERRORS + 1))
+            else
+              echo "  ✅ name: $NAME"
+            fi
+            
+            if [ -z "$OWNER" ]; then
+              echo "  ❌ owner: MISSING (required)"
+              ERRORS=$((ERRORS + 1))
+            else
+              echo "  ✅ owner: $OWNER"
+            fi
+            
+            if [ -z "$REPO" ]; then
+              echo "  ❌ repo: MISSING (required)"
+              ERRORS=$((ERRORS + 1))
+            else
+              echo "  ✅ repo: $REPO"
+            fi
+            
+            if [ -z "$DESCRIPTION" ]; then
+              echo "  ❌ description: MISSING (required)"
+              ERRORS=$((ERRORS + 1))
+            else
+              DESC_LEN=${#DESCRIPTION}
+              if [ $DESC_LEN -gt 200 ]; then
+                echo "  ⚠️ description: Too long ($DESC_LEN chars, max 200)"
+                WARNINGS=$((WARNINGS + 1))
+              else
+                echo "  ✅ description: $DESC_LEN chars"
+              fi
+            fi
+            
+            # Validate optional fields
+            echo ""
+            echo "📋 Optional fields:"
+            
+            if [ -z "$LICENSE" ]; then
+              echo "  ℹ️ license: Not specified (will be fetched from GitHub)"
+            else
+              echo "  ✅ license: $LICENSE"
+            fi
+            
+            if [ -z "$CATEGORY" ]; then
+              echo "  ℹ️ category: Not specified"
+            else
+              # Validate category
+              VALID_CATEGORIES="networking|web|graphics|game-engine|database|embedded|cli|gui|runtime|development-tools|testing|compiler|science|machine-learning|security|audio|video|compression|serialization|math|os|data-structures|memory|concurrency|other"
+              if [[ "$CATEGORY" =~ ^($VALID_CATEGORIES)$ ]]; then
+                echo "  ✅ category: $CATEGORY"
+              else
+                echo "  ⚠️ category: '$CATEGORY' might not be a standard category"
+                WARNINGS=$((WARNINGS + 1))
+              fi
+            fi
+            
+            if [ -z "$HOMEPAGE" ]; then
+              echo "  ℹ️ homepage: Not specified"
+            else
+              echo "  ✅ homepage: $HOMEPAGE"
+            fi
+            
+            # Check GitHub repository exists
+            if [ -n "$OWNER" ] && [ -n "$REPO" ]; then
+              echo ""
+              echo "🌐 Checking GitHub repository: $OWNER/$REPO"
+              
+              HTTP_CODE=$(curl -s -o /tmp/repo_response.json -w "%{http_code}" \
+                -H "Accept: application/vnd.github+json" \
+                -H "Authorization: Bearer $GH_TOKEN" \
+                -H "X-GitHub-Api-Version: 2022-11-28" \
+                "https://api.github.com/repos/$OWNER/$REPO")
+              
+              if [ "$HTTP_CODE" = "200" ]; then
+                echo "  ✅ Repository exists"
+                
+                # Check if repo is archived
+                IS_ARCHIVED=$(jq -r '.archived' /tmp/repo_response.json)
+                if [ "$IS_ARCHIVED" = "true" ]; then
+                  echo "  ⚠️ Repository is archived"
+                  WARNINGS=$((WARNINGS + 1))
+                fi
+                
+                # Check if repo is a fork
+                IS_FORK=$(jq -r '.fork' /tmp/repo_response.json)
+                if [ "$IS_FORK" = "true" ]; then
+                  echo "  ⚠️ Repository is a fork"
+                  WARNINGS=$((WARNINGS + 1))
+                fi
+                
+                # Get repo language
+                LANGUAGE=$(jq -r '.language // "Unknown"' /tmp/repo_response.json)
+                echo "  📝 Primary language: $LANGUAGE"
+                
+                # Get repo license from GitHub
+                GITHUB_LICENSE=$(jq -r '.license.spdx_id // "None"' /tmp/repo_response.json)
+                echo "  📜 GitHub license: $GITHUB_LICENSE"
+                
+                # Check last update
+                UPDATED_AT=$(jq -r '.updated_at' /tmp/repo_response.json)
+                echo "  📅 Last updated: $UPDATED_AT"
+                
+                # Check for releases
+                echo ""
+                echo "📦 Checking releases..."
+                
+                RELEASES_CODE=$(curl -s -o /tmp/releases_response.json -w "%{http_code}" \
+                  -H "Accept: application/vnd.github+json" \
+                  -H "Authorization: Bearer $GH_TOKEN" \
+                  -H "X-GitHub-Api-Version: 2022-11-28" \
+                  "https://api.github.com/repos/$OWNER/$REPO/releases?per_page=5")
+                
+                if [ "$RELEASES_CODE" = "200" ]; then
+                  RELEASE_COUNT=$(jq 'length' /tmp/releases_response.json)
+                  if [ "$RELEASE_COUNT" -gt 0 ]; then
+                    LATEST_RELEASE=$(jq -r '.[0].tag_name' /tmp/releases_response.json)
+                    echo "  ✅ Found $RELEASE_COUNT release(s), latest: $LATEST_RELEASE"
+                    
+                    # Check for release assets
+                    ASSET_COUNT=$(jq -r '.[0].assets | length' /tmp/releases_response.json)
+                    if [ "$ASSET_COUNT" -gt 0 ]; then
+                      echo "  📎 Latest release has $ASSET_COUNT asset(s)"
+                    fi
+                  else
+                    echo "  ℹ️ No releases found (will use main branch)"
+                  fi
+                fi
+                
+                # Check for build.zig or build.zig.zon
+                echo ""
+                echo "🔧 Checking for Zig build files..."
+                
+                BUILD_ZIG_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
+                  -H "Accept: application/vnd.github+json" \
+                  -H "Authorization: Bearer $GH_TOKEN" \
+                  "https://api.github.com/repos/$OWNER/$REPO/contents/build.zig")
+                
+                BUILD_ZON_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
+                  -H "Accept: application/vnd.github+json" \
+                  -H "Authorization: Bearer $GH_TOKEN" \
+                  "https://api.github.com/repos/$OWNER/$REPO/contents/build.zig.zon")
+                
+                if [ "$BUILD_ZIG_CODE" = "200" ]; then
+                  echo "  ✅ build.zig found"
+                else
+                  echo "  ⚠️ build.zig not found"
+                  WARNINGS=$((WARNINGS + 1))
+                fi
+                
+                if [ "$BUILD_ZON_CODE" = "200" ]; then
+                  echo "  ✅ build.zig.zon found"
+                else
+                  echo "  ℹ️ build.zig.zon not found"
+                fi
+                
+              elif [ "$HTTP_CODE" = "404" ]; then
+                echo "  ❌ Repository not found: https://github.com/$OWNER/$REPO"
+                ERRORS=$((ERRORS + 1))
+              elif [ "$HTTP_CODE" = "403" ]; then
+                echo "  ⚠️ Rate limited or access denied, skipping repo check"
+                WARNINGS=$((WARNINGS + 1))
+              else
+                echo "  ⚠️ Unexpected HTTP status: $HTTP_CODE"
+                WARNINGS=$((WARNINGS + 1))
+              fi
+            fi
+            
+            echo ""
+          done
+          
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "📊 Validation Summary"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "  ❌ Errors: $ERRORS"
+          echo "  ⚠️ Warnings: $WARNINGS"
+          echo ""
+          
+          if [ $ERRORS -gt 0 ]; then
+            echo "::error::Validation failed with $ERRORS error(s)"
+            exit 1
+          fi
+          
+          if [ $WARNINGS -gt 0 ]; then
+            echo "::warning::Validation completed with $WARNINGS warning(s)"
+          fi
+          
+          echo "✅ Validation passed!"
+
+  check-duplicates:
+    name: Check for Duplicates
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check for duplicate repos
+        run: |
+          echo "🔍 Checking for duplicate repository entries..."
+          
+          DUPLICATES=0
+          
+          # Get all owner/repo combinations
+          find repositories -name "*.json" -exec jq -r '"\(.owner)/\(.repo)"' {} \; | sort | uniq -d > /tmp/duplicates.txt
+          
+          if [ -s /tmp/duplicates.txt ]; then
+            echo "❌ Found duplicate repository entries:"
+            cat /tmp/duplicates.txt
+            DUPLICATES=1
+          else
+            echo "✅ No duplicate repository entries found"
+          fi
+          
+          # Check for duplicate names
+          find repositories -name "*.json" -exec jq -r '.name' {} \; | sort | uniq -di > /tmp/name_duplicates.txt
+          
+          if [ -s /tmp/name_duplicates.txt ]; then
+            echo ""
+            echo "⚠️ Found entries with similar names (case-insensitive):"
+            cat /tmp/name_duplicates.txt
+          fi
+          
+          if [ $DUPLICATES -gt 0 ]; then
+            exit 1
+          fi
+
+  lint-filenames:
+    name: Lint Filenames
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v44
+        with:
+          files: |
+            repositories/**/*.json
+
+      - name: Validate filenames
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          echo "🔍 Validating filenames..."
+          
+          ERRORS=0
+          
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            FILENAME=$(basename "$file")
+            
+            # Check lowercase
+            if [[ "$FILENAME" =~ [A-Z] ]]; then
+              echo "❌ Filename should be lowercase: $FILENAME"
+              ERRORS=$((ERRORS + 1))
+            fi
+            
+            # Check no spaces
+            if [[ "$FILENAME" =~ \  ]]; then
+              echo "❌ Filename should not contain spaces: $FILENAME"
+              ERRORS=$((ERRORS + 1))
+            fi
+            
+            # Check valid characters (alphanumeric, hyphens, underscores)
+            if [[ ! "$FILENAME" =~ ^[a-z0-9_-]+\.json$ ]]; then
+              echo "❌ Filename should only contain lowercase letters, numbers, hyphens, and underscores: $FILENAME"
+              ERRORS=$((ERRORS + 1))
+            fi
+          done
+          
+          if [ $ERRORS -gt 0 ]; then
+            echo "::error::Found $ERRORS filename issue(s)"
+            exit 1
+          fi
+          
+          echo "✅ All filenames are valid"
+
+  summary:
+    name: Create Summary
+    runs-on: ubuntu-latest
+    needs: [validate, check-duplicates, lint-filenames]
+    if: always()
+    
+    steps:
+      - name: Check job results
+        run: |
+          echo "## 📋 Registry Validation Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ needs.validate.result }}" = "success" ]; then
+            echo "✅ **Schema Validation**: Passed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ **Schema Validation**: Failed" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          if [ "${{ needs.check-duplicates.result }}" = "success" ]; then
+            echo "✅ **Duplicate Check**: Passed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ **Duplicate Check**: Failed" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          if [ "${{ needs.lint-filenames.result }}" = "success" ]; then
+            echo "✅ **Filename Lint**: Passed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ **Filename Lint**: Failed" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "For guidelines on adding projects, see [CONTRIBUTING.md](../CONTRIBUTING.md)" >> $GITHUB_STEP_SUMMARY

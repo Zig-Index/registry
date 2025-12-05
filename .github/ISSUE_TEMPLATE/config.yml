@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 Submission Guidelines
+    url: https://github.com/Zig-Index/registry/blob/main/README.md#-adding-your-project
+    about: Read the guidelines before submitting a new entry
+  - name: 🌐 Zig Index Website
+    url: https://zig-index.github.io
+    about: Visit the Zig Index website to browse packages and applications
+  - name: 💬 Zig Discord
+    url: https://discord.gg/ziglang
+    about: Join the Zig community on Discord

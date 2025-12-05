@@ -1,0 +1,123 @@
+name: Auto Label PRs
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    paths:
+      - 'repositories/**/*.json'
+
+jobs:
+  label:
+    name: Label PR
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v44
+        with:
+          files: |
+            repositories/**/*.json
+
+      - name: Auto label based on changes
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const changedFiles = `${{ steps.changed-files.outputs.all_changed_files }}`.split(' ').filter(f => f);
+            const labels = new Set();
+            
+            // Determine labels based on file paths
+            for (const file of changedFiles) {
+              if (file.includes('repositories/packages/')) {
+                labels.add('package');
+              }
+              if (file.includes('repositories/applications/')) {
+                labels.add('application');
+              }
+            }
+            
+            // Check if files were added, modified, or deleted
+            const addedFiles = `${{ steps.changed-files.outputs.added_files }}`.split(' ').filter(f => f);
+            const deletedFiles = `${{ steps.changed-files.outputs.deleted_files }}`.split(' ').filter(f => f);
+            const modifiedFiles = `${{ steps.changed-files.outputs.modified_files }}`.split(' ').filter(f => f);
+            
+            if (addedFiles.length > 0) {
+              labels.add('new-entry');
+            }
+            if (deletedFiles.length > 0) {
+              labels.add('deletion');
+            }
+            if (modifiedFiles.length > 0) {
+              labels.add('update');
+            }
+            
+            // Add registry label to all
+            labels.add('registry');
+            
+            // Apply labels
+            if (labels.size > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                labels: Array.from(labels)
+              });
+              
+              console.log('Applied labels:', Array.from(labels));
+            }
+
+      - name: Comment on new entry PRs
+        if: contains(steps.changed-files.outputs.added_files, '.json')
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = `## 🎉 Thanks for contributing to Zig Index!
+            
+            Your PR to add a new entry to the registry is being reviewed.
+            
+            ### Checklist
+            
+            Please ensure your submission meets our guidelines:
+            
+            - [ ] Project is open source and hosted on GitHub
+            - [ ] Project uses Zig (has \`build.zig\` or \`build.zig.zon\`)
+            - [ ] JSON file follows the schema (name, owner, repo, description are required)
+            - [ ] Description is under 200 characters
+            - [ ] Filename is lowercase with hyphens (e.g., \`my-package.json\`)
+            
+            ### Automated Checks
+            
+            The validation workflow will verify:
+            - ✅ JSON syntax is valid
+            - ✅ Required fields are present
+            - ✅ GitHub repository exists
+            - ✅ No duplicate entries
+            
+            ---
+            
+            Thank you for helping grow the Zig ecosystem! 🚀`;
+            
+            // Check if we already commented
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number
+            });
+            
+            const botComment = comments.data.find(c => 
+              c.user.type === 'Bot' && c.body.includes('Thanks for contributing to Zig Index')
+            );
+            
+            if (!botComment) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: body
+              });
+            }
