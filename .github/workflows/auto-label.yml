@@ -6,13 +6,16 @@ on:
     paths:
       - 'repositories/**/*.json'
 
+# Required for pull_request_target to have write access
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
 jobs:
   label:
     name: Label PR
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-      contents: read
     
     steps:
       - name: Checkout PR head
@@ -56,7 +59,7 @@ jobs:
         if: steps.changed-files.outputs.any_changed == 'true'
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.GH_TOKEN || secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GH_TOKEN }}
           script: |
             const prNumber = context.payload.pull_request?.number;
             if (!prNumber) {
@@ -145,7 +148,7 @@ jobs:
         if: contains(steps.changed-files.outputs.added_files, '.json')
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.GH_TOKEN || secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GH_TOKEN }}
           script: |
             const prNumber = context.payload.pull_request?.number;
             if (!prNumber) {
@@ -211,7 +214,7 @@ jobs:
         if: contains(steps.changed-files.outputs.deleted_files, '.json')
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.GH_TOKEN || secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GH_TOKEN }}
           script: |
             const prNumber = context.payload.pull_request?.number;
             if (!prNumber) return;

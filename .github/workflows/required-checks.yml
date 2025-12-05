@@ -6,6 +6,10 @@ on:
     paths:
       - 'repositories/**/*.json'
 
+# Permissions needed for checking out code from forked repos
+permissions:
+  contents: read
+
 jobs:
   # This job aggregates all required checks for branch protection
   all-checks-pass:
@@ -62,7 +66,7 @@ jobs:
       - name: Validate JSON syntax and schema
         if: steps.changed-files.outputs.any_changed == 'true'
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN || secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           echo "🔍 Validating JSON files..."
           

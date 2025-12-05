@@ -5,18 +5,19 @@ on:
     - cron: '0 0 * * *'  # Run daily at midnight
   workflow_dispatch:
 
+permissions:
+  issues: write
+  pull-requests: write
+
 jobs:
   stale:
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
-      pull-requests: write
     
     steps:
       - name: Mark stale issues and PRs
         uses: actions/stale@v9
         with:
-          repo-token: ${{ secrets.GH_TOKEN || secrets.GITHUB_TOKEN }}
+          repo-token: ${{ secrets.GH_TOKEN }}
           
           # Issue settings
           stale-issue-message: |

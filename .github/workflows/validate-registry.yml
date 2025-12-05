@@ -11,6 +11,11 @@ on:
     paths:
       - 'repositories/**/*.json'
 
+# Required for pull_request_target to have write access to PRs
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   validate:
     name: Validate JSON Entries
@@ -93,7 +98,7 @@ jobs:
       - name: Validate schema and check GitHub repos
         if: steps.changed-files.outputs.any_changed == 'true'
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN || secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           echo "🔍 Validating schema and checking GitHub repositories..."
           
@@ -412,14 +417,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: [validate, check-duplicates, lint-filenames]
     if: always() && github.event_name == 'pull_request_target'
-    permissions:
-      pull-requests: write
+    # Note: permissions are inherited from top-level but can be more restrictive
     
     steps:
       - name: Create PR Comment
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.GH_TOKEN || secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GH_TOKEN }}
           script: |
             const validateResult = '${{ needs.validate.result }}';
             const duplicateResult = '${{ needs.check-duplicates.result }}';
