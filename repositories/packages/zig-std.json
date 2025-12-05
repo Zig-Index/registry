@@ -1,9 +1,0 @@
-{
-  "name": "Zig Standard Library",
-  "owner": "ziglang",
-  "repo": "zig",
-  "description": "The Zig programming language standard library providing essential data structures, algorithms, and OS interfaces",
-  "category": "standard-library",
-  "license": "MIT",
-  "homepage": "https://ziglang.org/documentation/"
-}

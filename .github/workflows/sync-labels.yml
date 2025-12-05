@@ -1,0 +1,92 @@
+name: Sync Labels
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/labels.yml'
+  workflow_dispatch:
+
+# Permissions for managing labels
+permissions:
+  issues: write
+
+jobs:
+  sync:
+    name: Sync Labels
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create/Update Labels
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          script: |
+            const labels = [
+              // Entry types
+              { name: 'package', color: '1d76db', description: 'Zig package/library submission' },
+              { name: 'application', color: '5319e7', description: 'Zig application submission' },
+              
+              // Change types
+              { name: 'new-entry', color: '0e8a16', description: 'New entry submission' },
+              { name: 'update', color: 'fbca04', description: 'Update to existing entry' },
+              { name: 'removal', color: 'b60205', description: 'Entry removal request' },
+              
+              // Status
+              { name: 'registry', color: '7057ff', description: 'Registry-related change' },
+              { name: 'needs-review', color: 'd93f0b', description: 'Needs maintainer review' },
+              { name: 'approved', color: '0e8a16', description: 'Approved and ready to merge' },
+              { name: 'changes-requested', color: 'fbca04', description: 'Changes have been requested' },
+              
+              // Priority
+              { name: 'priority-high', color: 'b60205', description: 'High priority' },
+              { name: 'priority-low', color: 'c5def5', description: 'Low priority' },
+              
+              // Other
+              { name: 'stale', color: 'ffffff', description: 'Stale issue or PR' },
+              { name: 'duplicate', color: 'cfd3d7', description: 'Duplicate issue or PR' },
+              { name: 'invalid', color: 'e4e669', description: 'Invalid submission' },
+              { name: 'wontfix', color: 'ffffff', description: 'Will not be fixed' },
+              { name: 'help-wanted', color: '008672', description: 'Help wanted' },
+              { name: 'good-first-issue', color: '7057ff', description: 'Good for newcomers' },
+              { name: 'pinned', color: '006b75', description: 'Pinned issue' },
+              { name: 'work-in-progress', color: 'fbca04', description: 'Work in progress' },
+            ];
+            
+            for (const label of labels) {
+              try {
+                // Try to update existing label
+                await github.rest.issues.updateLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: label.name,
+                  color: label.color,
+                  description: label.description
+                });
+                console.log(`Updated label: ${label.name}`);
+              } catch (error) {
+                if (error.status === 404) {
+                  // Label doesn't exist, create it
+                  try {
+                    await github.rest.issues.createLabel({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      name: label.name,
+                      color: label.color,
+                      description: label.description
+                    });
+                    console.log(`Created label: ${label.name}`);
+                  } catch (createError) {
+                    console.log(`Error creating label ${label.name}:`, createError.message);
+                  }
+                } else {
+                  console.log(`Error updating label ${label.name}:`, error.message);
+                }
+              }
+            }
+            
+            console.log('Label sync complete!');
