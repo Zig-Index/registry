@@ -1,7 +1,7 @@
 name: Required Checks
 
 on:
-  pull_request:
+  pull_request_target:
     types: [opened, synchronize, reopened]
     paths:
       - 'repositories/**/*.json'
@@ -33,15 +33,31 @@ jobs:
     name: Validate JSON
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout PR head
         uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Fetch base branch
+        run: |
+          git remote add upstream https://github.com/${{ github.event.pull_request.base.repo.full_name }}.git || true
+          git fetch upstream ${{ github.event.pull_request.base.ref }} --depth=1
 
       - name: Get changed files
         id: changed-files
-        uses: tj-actions/changed-files@v44
-        with:
-          files: |
-            repositories/**/*.json
+        run: |
+          CHANGED_FILES=$(git diff --name-only upstream/${{ github.event.pull_request.base.ref }}...HEAD -- 'repositories/**/*.json' | tr '\n' ' ')
+          echo "all_changed_files=$CHANGED_FILES" >> $GITHUB_OUTPUT
+          
+          if [ -n "$CHANGED_FILES" ]; then
+            echo "any_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "any_changed=false" >> $GITHUB_OUTPUT
+          fi
+          
+          echo "Changed files: $CHANGED_FILES"
 
       - name: Validate JSON syntax and schema
         if: steps.changed-files.outputs.any_changed == 'true'
@@ -127,8 +143,11 @@ jobs:
     name: Check Duplicates
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout PR head
         uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Check for duplicate entries
         run: |
@@ -149,15 +168,29 @@ jobs:
     name: Lint Filenames
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout PR head
         uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Fetch base branch
+        run: |
+          git remote add upstream https://github.com/${{ github.event.pull_request.base.repo.full_name }}.git || true
+          git fetch upstream ${{ github.event.pull_request.base.ref }} --depth=1
 
       - name: Get changed files
         id: changed-files
-        uses: tj-actions/changed-files@v44
-        with:
-          files: |
-            repositories/**/*.json
+        run: |
+          CHANGED_FILES=$(git diff --name-only upstream/${{ github.event.pull_request.base.ref }}...HEAD -- 'repositories/**/*.json' | tr '\n' ' ')
+          echo "all_changed_files=$CHANGED_FILES" >> $GITHUB_OUTPUT
+          
+          if [ -n "$CHANGED_FILES" ]; then
+            echo "any_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "any_changed=false" >> $GITHUB_OUTPUT
+          fi
 
       - name: Validate filenames
         if: steps.changed-files.outputs.any_changed == 'true'

@@ -1,7 +1,7 @@
 name: Validate Registry Entries
 
 on:
-  pull_request:
+  pull_request_target:
     paths:
       - 'repositories/**/*.json'
     types: [opened, synchronize, reopened]
@@ -17,10 +17,25 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v5
+      - name: Checkout repository (push)
+        if: github.event_name == 'push'
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Checkout PR head (pull_request_target)
+        if: github.event_name == 'pull_request_target'
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Fetch base branch (PR only)
+        if: github.event_name == 'pull_request_target'
+        run: |
+          git remote add upstream https://github.com/${{ github.event.pull_request.base.repo.full_name }}.git || true
+          git fetch upstream ${{ github.event.pull_request.base.ref }} --depth=1
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -29,10 +44,24 @@ jobs:
 
       - name: Get changed files
         id: changed-files
-        uses: tj-actions/changed-files@v44
-        with:
-          files: |
-            repositories/**/*.json
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            # For push events, compare with previous commit
+            CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD -- 'repositories/**/*.json' 2>/dev/null | tr '\n' ' ' || echo "")
+          else
+            # For PR events, compare with base branch
+            CHANGED_FILES=$(git diff --name-only upstream/${{ github.event.pull_request.base.ref }}...HEAD -- 'repositories/**/*.json' | tr '\n' ' ')
+          fi
+          
+          echo "all_changed_files=$CHANGED_FILES" >> $GITHUB_OUTPUT
+          
+          if [ -n "$CHANGED_FILES" ]; then
+            echo "any_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "any_changed=false" >> $GITHUB_OUTPUT
+          fi
+          
+          echo "Changed files: $CHANGED_FILES"
 
       - name: Validate JSON syntax
         if: steps.changed-files.outputs.any_changed == 'true'
@@ -41,6 +70,12 @@ jobs:
           
           ERRORS=0
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            # Skip if file was deleted
+            if [ ! -f "$file" ]; then
+              echo "ℹ️ Skipping deleted file: $file"
+              continue
+            fi
+            
             echo "Checking: $file"
             if ! jq empty "$file" 2>/dev/null; then
               echo "❌ Invalid JSON syntax in: $file"
@@ -58,7 +93,7 @@ jobs:
       - name: Validate schema and check GitHub repos
         if: steps.changed-files.outputs.any_changed == 'true'
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN || secrets.GITHUB_TOKEN }}
         run: |
           echo "🔍 Validating schema and checking GitHub repositories..."
           
@@ -73,7 +108,7 @@ jobs:
             
             # Check if file was deleted
             if [ ! -f "$file" ]; then
-              echo "🗑️ File was deleted - skipping validation"
+              echo "ℹ️ File was deleted, skipping validation"
               continue
             fi
             
@@ -91,28 +126,28 @@ jobs:
             echo "📋 Required fields:"
             
             if [ -z "$NAME" ]; then
-              echo "  ❌ name: MISSING (required)"
+              echo "  ❌ name: Missing (required)"
               ERRORS=$((ERRORS + 1))
             else
               echo "  ✅ name: $NAME"
             fi
             
             if [ -z "$OWNER" ]; then
-              echo "  ❌ owner: MISSING (required)"
+              echo "  ❌ owner: Missing (required)"
               ERRORS=$((ERRORS + 1))
             else
               echo "  ✅ owner: $OWNER"
             fi
             
             if [ -z "$REPO" ]; then
-              echo "  ❌ repo: MISSING (required)"
+              echo "  ❌ repo: Missing (required)"
               ERRORS=$((ERRORS + 1))
             else
               echo "  ✅ repo: $REPO"
             fi
             
             if [ -z "$DESCRIPTION" ]; then
-              echo "  ❌ description: MISSING (required)"
+              echo "  ❌ description: Missing (required)"
               ERRORS=$((ERRORS + 1))
             else
               DESC_LEN=${#DESCRIPTION}
@@ -120,7 +155,7 @@ jobs:
                 echo "  ⚠️ description: Too long ($DESC_LEN chars, max 200)"
                 WARNINGS=$((WARNINGS + 1))
               else
-                echo "  ✅ description: $DESC_LEN chars"
+                echo "  ✅ description: $DESCRIPTION"
               fi
             fi
             
@@ -137,13 +172,12 @@ jobs:
             if [ -z "$CATEGORY" ]; then
               echo "  ℹ️ category: Not specified"
             else
-              # Validate category
-              VALID_CATEGORIES="networking|web|graphics|game-engine|database|embedded|cli|gui|runtime|development-tools|testing|compiler|science|machine-learning|security|audio|video|compression|serialization|math|os|data-structures|memory|concurrency|other"
-              if [[ "$CATEGORY" =~ ^($VALID_CATEGORIES)$ ]]; then
-                echo "  ✅ category: $CATEGORY"
-              else
-                echo "  ⚠️ category: '$CATEGORY' might not be a standard category"
+              # Validate category format (lowercase, hyphenated)
+              if [[ ! "$CATEGORY" =~ ^[a-z0-9-]+$ ]]; then
+                echo "  ⚠️ category: Invalid format '$CATEGORY' (use lowercase with hyphens)"
                 WARNINGS=$((WARNINGS + 1))
+              else
+                echo "  ✅ category: $CATEGORY"
               fi
             fi
             
@@ -156,105 +190,69 @@ jobs:
             # Check GitHub repository exists
             if [ -n "$OWNER" ] && [ -n "$REPO" ]; then
               echo ""
-              echo "🌐 Checking GitHub repository: $OWNER/$REPO"
+              echo "🔗 Checking GitHub repository: $OWNER/$REPO"
               
-              HTTP_CODE=$(curl -s -o /tmp/repo_response.json -w "%{http_code}" \
-                -H "Accept: application/vnd.github+json" \
-                -H "Authorization: Bearer $GH_TOKEN" \
-                -H "X-GitHub-Api-Version: 2022-11-28" \
+              RESPONSE=$(curl -s -w "\n%{http_code}" \
+                -H "Accept: application/vnd.github.v3+json" \
+                -H "Authorization: token $GH_TOKEN" \
                 "https://api.github.com/repos/$OWNER/$REPO")
               
+              HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+              BODY=$(echo "$RESPONSE" | sed '$d')
+              
               if [ "$HTTP_CODE" = "200" ]; then
-                echo "  ✅ Repository exists"
+                echo "  ✅ Repository exists and is accessible"
                 
-                # Check if repo is archived
-                IS_ARCHIVED=$(jq -r '.archived' /tmp/repo_response.json)
-                if [ "$IS_ARCHIVED" = "true" ]; then
+                # Check if repo has build.zig or build.zig.zon
+                ZIG_CHECK=$(curl -s -o /dev/null -w "%{http_code}" \
+                  -H "Accept: application/vnd.github.v3+json" \
+                  -H "Authorization: token $GH_TOKEN" \
+                  "https://api.github.com/repos/$OWNER/$REPO/contents/build.zig")
+                
+                ZON_CHECK=$(curl -s -o /dev/null -w "%{http_code}" \
+                  -H "Accept: application/vnd.github.v3+json" \
+                  -H "Authorization: token $GH_TOKEN" \
+                  "https://api.github.com/repos/$OWNER/$REPO/contents/build.zig.zon")
+                
+                if [ "$ZIG_CHECK" = "200" ] || [ "$ZON_CHECK" = "200" ]; then
+                  echo "  ✅ Zig project files found"
+                else
+                  echo "  ⚠️ No build.zig or build.zig.zon found (may not be a Zig project)"
+                  WARNINGS=$((WARNINGS + 1))
+                fi
+                
+                # Extract repo info
+                REPO_STARS=$(echo "$BODY" | jq -r '.stargazers_count // 0')
+                REPO_ARCHIVED=$(echo "$BODY" | jq -r '.archived // false')
+                REPO_PUSHED=$(echo "$BODY" | jq -r '.pushed_at // empty')
+                
+                echo "  ⭐ Stars: $REPO_STARS"
+                
+                if [ "$REPO_ARCHIVED" = "true" ]; then
                   echo "  ⚠️ Repository is archived"
                   WARNINGS=$((WARNINGS + 1))
                 fi
                 
-                # Check if repo is a fork
-                IS_FORK=$(jq -r '.fork' /tmp/repo_response.json)
-                if [ "$IS_FORK" = "true" ]; then
-                  echo "  ⚠️ Repository is a fork"
-                  WARNINGS=$((WARNINGS + 1))
-                fi
-                
-                # Get repo language
-                LANGUAGE=$(jq -r '.language // "Unknown"' /tmp/repo_response.json)
-                echo "  📝 Primary language: $LANGUAGE"
-                
-                # Get repo license from GitHub
-                GITHUB_LICENSE=$(jq -r '.license.spdx_id // "None"' /tmp/repo_response.json)
-                echo "  📜 GitHub license: $GITHUB_LICENSE"
-                
-                # Check last update
-                UPDATED_AT=$(jq -r '.updated_at' /tmp/repo_response.json)
-                echo "  📅 Last updated: $UPDATED_AT"
-                
-                # Check for releases
-                echo ""
-                echo "📦 Checking releases..."
-                
-                RELEASES_CODE=$(curl -s -o /tmp/releases_response.json -w "%{http_code}" \
-                  -H "Accept: application/vnd.github+json" \
-                  -H "Authorization: Bearer $GH_TOKEN" \
-                  -H "X-GitHub-Api-Version: 2022-11-28" \
-                  "https://api.github.com/repos/$OWNER/$REPO/releases?per_page=5")
-                
-                if [ "$RELEASES_CODE" = "200" ]; then
-                  RELEASE_COUNT=$(jq 'length' /tmp/releases_response.json)
-                  if [ "$RELEASE_COUNT" -gt 0 ]; then
-                    LATEST_RELEASE=$(jq -r '.[0].tag_name' /tmp/releases_response.json)
-                    echo "  ✅ Found $RELEASE_COUNT release(s), latest: $LATEST_RELEASE"
-                    
-                    # Check for release assets
-                    ASSET_COUNT=$(jq -r '.[0].assets | length' /tmp/releases_response.json)
-                    if [ "$ASSET_COUNT" -gt 0 ]; then
-                      echo "  📎 Latest release has $ASSET_COUNT asset(s)"
-                    fi
-                  else
-                    echo "  ℹ️ No releases found (will use main branch)"
+                # Check if updated within last year
+                if [ -n "$REPO_PUSHED" ]; then
+                  PUSHED_TIMESTAMP=$(date -d "$REPO_PUSHED" +%s 2>/dev/null || date -j -f "%Y-%m-%dT%H:%M:%SZ" "$REPO_PUSHED" +%s 2>/dev/null || echo "0")
+                  NOW_TIMESTAMP=$(date +%s)
+                  YEAR_AGO=$((NOW_TIMESTAMP - 31536000))
+                  
+                  if [ "$PUSHED_TIMESTAMP" -lt "$YEAR_AGO" ] 2>/dev/null; then
+                    echo "  ⚠️ Repository hasn't been updated in over a year"
+                    WARNINGS=$((WARNINGS + 1))
                   fi
                 fi
-                
-                # Check for build.zig or build.zig.zon
-                echo ""
-                echo "🔧 Checking for Zig build files..."
-                
-                BUILD_ZIG_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
-                  -H "Accept: application/vnd.github+json" \
-                  -H "Authorization: Bearer $GH_TOKEN" \
-                  "https://api.github.com/repos/$OWNER/$REPO/contents/build.zig")
-                
-                BUILD_ZON_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
-                  -H "Accept: application/vnd.github+json" \
-                  -H "Authorization: Bearer $GH_TOKEN" \
-                  "https://api.github.com/repos/$OWNER/$REPO/contents/build.zig.zon")
-                
-                if [ "$BUILD_ZIG_CODE" = "200" ]; then
-                  echo "  ✅ build.zig found"
-                else
-                  echo "  ⚠️ build.zig not found"
-                  WARNINGS=$((WARNINGS + 1))
-                fi
-                
-                if [ "$BUILD_ZON_CODE" = "200" ]; then
-                  echo "  ✅ build.zig.zon found"
-                else
-                  echo "  ℹ️ build.zig.zon not found"
-                fi
-                
               elif [ "$HTTP_CODE" = "404" ]; then
-                echo "  ❌ Repository not found: https://github.com/$OWNER/$REPO"
+                echo "  ❌ Repository not found"
                 ERRORS=$((ERRORS + 1))
               elif [ "$HTTP_CODE" = "403" ]; then
                 echo "  ⚠️ Rate limited or access denied, skipping repo check"
                 WARNINGS=$((WARNINGS + 1))
               else
-                echo "  ⚠️ Unexpected HTTP status: $HTTP_CODE"
-                WARNINGS=$((WARNINGS + 1))
+                echo "  ❌ Failed to access repository (HTTP $HTTP_CODE)"
+                ERRORS=$((ERRORS + 1))
               fi
             fi
             
@@ -285,8 +283,16 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout repository
+      - name: Checkout repository (push)
+        if: github.event_name == 'push'
         uses: actions/checkout@v4
+
+      - name: Checkout PR head (pull_request_target)
+        if: github.event_name == 'pull_request_target'
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Check for duplicate repos
         run: |
@@ -295,7 +301,7 @@ jobs:
           DUPLICATES=0
           
           # Get all owner/repo combinations
-          find repositories -name "*.json" -exec jq -r '"\(.owner)/\(.repo)"' {} \; | sort | uniq -d > /tmp/duplicates.txt
+          find repositories -name "*.json" -exec jq -r '"\(.owner)/\(.repo)"' {} \; 2>/dev/null | sort | uniq -d > /tmp/duplicates.txt
           
           if [ -s /tmp/duplicates.txt ]; then
             echo "❌ Found duplicate repository entries:"
@@ -306,7 +312,7 @@ jobs:
           fi
           
           # Check for duplicate names
-          find repositories -name "*.json" -exec jq -r '.name' {} \; | sort | uniq -di > /tmp/name_duplicates.txt
+          find repositories -name "*.json" -exec jq -r '.name' {} \; 2>/dev/null | sort | uniq -di > /tmp/name_duplicates.txt
           
           if [ -s /tmp/name_duplicates.txt ]; then
             echo ""
@@ -323,15 +329,42 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout repository
+      - name: Checkout repository (push)
+        if: github.event_name == 'push'
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout PR head (pull_request_target)
+        if: github.event_name == 'pull_request_target'
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Fetch base branch (PR only)
+        if: github.event_name == 'pull_request_target'
+        run: |
+          git remote add upstream https://github.com/${{ github.event.pull_request.base.repo.full_name }}.git || true
+          git fetch upstream ${{ github.event.pull_request.base.ref }} --depth=1
 
       - name: Get changed files
         id: changed-files
-        uses: tj-actions/changed-files@v44
-        with:
-          files: |
-            repositories/**/*.json
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD -- 'repositories/**/*.json' 2>/dev/null | tr '\n' ' ' || echo "")
+          else
+            CHANGED_FILES=$(git diff --name-only upstream/${{ github.event.pull_request.base.ref }}...HEAD -- 'repositories/**/*.json' | tr '\n' ' ')
+          fi
+          
+          echo "all_changed_files=$CHANGED_FILES" >> $GITHUB_OUTPUT
+          
+          if [ -n "$CHANGED_FILES" ]; then
+            echo "any_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "any_changed=false" >> $GITHUB_OUTPUT
+          fi
 
       - name: Validate filenames
         if: steps.changed-files.outputs.any_changed == 'true'
@@ -341,23 +374,28 @@ jobs:
           ERRORS=0
           
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            # Skip deleted files
+            if [ ! -f "$file" ]; then
+              continue
+            fi
+            
             FILENAME=$(basename "$file")
             
             # Check lowercase
             if [[ "$FILENAME" =~ [A-Z] ]]; then
-              echo "❌ Filename should be lowercase: $FILENAME"
+              echo "❌ Filename contains uppercase letters: $file"
               ERRORS=$((ERRORS + 1))
             fi
             
             # Check no spaces
             if [[ "$FILENAME" =~ \  ]]; then
-              echo "❌ Filename should not contain spaces: $FILENAME"
+              echo "❌ Filename contains spaces: $file"
               ERRORS=$((ERRORS + 1))
             fi
             
             # Check valid characters (alphanumeric, hyphens, underscores)
             if [[ ! "$FILENAME" =~ ^[a-z0-9_-]+\.json$ ]]; then
-              echo "❌ Filename should only contain lowercase letters, numbers, hyphens, and underscores: $FILENAME"
+              echo "❌ Filename contains invalid characters: $file (use only lowercase, numbers, hyphens, underscores)"
               ERRORS=$((ERRORS + 1))
             fi
           done
@@ -373,7 +411,7 @@ jobs:
     name: Create Summary and Comment
     runs-on: ubuntu-latest
     needs: [validate, check-duplicates, lint-filenames]
-    if: always() && github.event_name == 'pull_request'
+    if: always() && github.event_name == 'pull_request_target'
     permissions:
       pull-requests: write
     
@@ -395,7 +433,7 @@ jobs:
             const statusText = allPassed ? 'All checks passed!' : 'Some checks failed';
             
             const body = [
-              `## ${statusEmoji} Registry Validation Results`,
+              `## ${statusEmoji} Registry Validation: ${statusText}`,
               '',
               '| Check | Status |',
               '|-------|--------|',
@@ -403,11 +441,9 @@ jobs:
               `| Duplicate Check | ${duplicateResult === 'success' ? '✅ Passed' : '❌ Failed'} |`,
               `| Filename Lint | ${filenameResult === 'success' ? '✅ Passed' : '❌ Failed'} |`,
               '',
-              `**Status**: ${statusText}`,
-              '',
               allPassed 
                 ? '🎉 Your submission looks good! A maintainer will review it shortly.'
-                : '⚠️ Please fix the issues above and push your changes.',
+                : '⚠️ Please fix the issues above and push new changes.',
               '',
               '---',
               '*🤖 This is an automated message from the Zig Index validation bot.*'
@@ -421,12 +457,11 @@ jobs:
             });
             
             const botComment = comments.find(c => 
-              c.body?.includes('Registry Validation Results') && 
+              c.body?.includes('Registry Validation') &&
               c.body?.includes('automated message')
             );
             
             if (botComment) {
-              // Update existing comment
               await github.rest.issues.updateComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -435,7 +470,6 @@ jobs:
               });
               console.log('Updated existing validation comment');
             } else {
-              // Create new comment
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
