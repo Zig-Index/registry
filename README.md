@@ -226,7 +226,6 @@ This registry is open source under the **MIT License**.
 - **Website**: https://zig-index.github.io
 - **Repository**: https://github.com/Zig-Index/zig-index.github.io
 - **Zig Language**: https://ziglang.org
-- **Zig Discord**: https://discord.gg/ziglang
 
 ## 🤝 Contributing
 
