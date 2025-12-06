@@ -2,6 +2,9 @@
 
 **Zig Index is an independent and unofficial registry of Zig projects. It is not affiliated with, endorsed by, or maintained by the Zig Software Foundation or any of its founders. All projects listed on this website are owned and maintained by their respective developers and the community. No ownership or responsibility is claimed over any third-party software hosted or indexed. I do not own or claim any rights to trademarks, logos, or names referenced or displayed; all such assets belong to their respective owners.**
 
+> **Update:** Based on community feedback, the registry functionality has been changed to be fully automated! no need for Fork PR anymore, Thank you for all your feedback!
+> All new projects will appear on the live site within few hours automatically!
+
 ## 🌟 Overview
 
 Zig Index is a community-driven registry for discovering and sharing Zig projects. It provides:
