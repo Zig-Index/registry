@@ -1,0 +1,65 @@
+{
+  "name": "eth-p2p-z",
+  "owner": "zen-eth",
+  "repo": "eth-p2p-z",
+  "description": "Ethereum p2p implementation in Zig",
+  "type": "project",
+  "topics": [
+    "libp2p",
+    "libp2p-pubsub",
+    "libp2p-transport",
+    "libp2p-muxer",
+    "libp2p-security",
+    "zig",
+    "ziglang",
+    "gossipsub",
+    "multistream",
+    "quic"
+  ],
+  "stars": 23,
+  "forks": 9,
+  "watchers": 2,
+  "updated_at": "2025-12-05T04:03:03Z",
+  "dependencies": [
+    {
+      "name": "libxev",
+      "url": "git+https://github.com/zen-eth/libxev#fe9928d11540b723aa131fe097c2c4b5359bb073",
+      "hash": "libxev-0.0.0-86vtc5gdEwBLKZucNlSW_tEfwaN9l4z6kqRegMdaux4-"
+    },
+    {
+      "name": "zmultiformats",
+      "url": "git+https://github.com/zen-eth/multiformats-zig#1359ac3ab12a6af173c2b7f13ae9c4f5ff34e11e",
+      "hash": "zmultiformats-0.1.0-yjvchlEaBQCuIiXU5ScwglKjcfv9KxWERFPuriP7ReZs"
+    },
+    {
+      "name": "gremlin",
+      "url": "git+https://github.com/octopus-foundation/gremlin.zig#fccfe2659f24497199d86404e0ef7dbc79e033d2",
+      "hash": "gremlin-0.0.0-E2s91bN4DgDYbb4QNxl4ZT5nEEhNBkk5ngfVasDbsnNF"
+    },
+    {
+      "name": "lsquic",
+      "url": "git+https://github.com/zen-eth/lsquic.git#59bee4ce57e35dab8c28415d4a5dfb2c26089c84",
+      "hash": "lsquic-0.0.0-jO7gdhAfAABVzSIdOXi13ePKeV-C6EMJ7KVosCgbTmOk"
+    },
+    {
+      "name": "cache",
+      "url": "git+https://github.com/karlseguin/cache.zig#9f3329b05b3e98da928fe9988d74971da70328b4",
+      "hash": "cache-0.0.0-winRwKaSAAAKIcUzY8IXwcbH050imeWPFMbPW_sCdPLF"
+    },
+    {
+      "name": "secp256k1",
+      "url": "git+https://github.com/zig-bitcoin/libsecp256k1-zig#b96922b375a601f3303bf43be1dceb3d101df6c6",
+      "hash": "secp256k1-0.0.0-AAAAAPPgAAADPOkS7brnO1B26LjbhZsxwz6Kx8a6jCwB"
+    }
+  ],
+  "minimum_zig_version": "0.11.0",
+  "readme": "# eth-p2p-z\n\nZig implementation of the Ethereum peer-to-peer stack, built on top of the [libp2p](https://libp2p.io/) architecture.\n\n**Note**: This project is pre-release software. Expect rapid iteration and frequent breaking API changes while we carve out the Ethereum-focused feature set.\n\n## Project scope\n\n- Transport: QUIC (lsquic-backed) is the only supported transport. TCP, WebRTC, WebTransport, and other stacks are intentionally out of scope.\n- PubSub: Gossipsub v1.0 router is available today; additional Ethereum networking protocols will be layered on top in subsequent milestones.\n- Platform: Zig 0.14.1 toolchain targeting modern desktop/server environments. Browser runtimes are not supported.\n\nIf you are looking for a general-purpose libp2p implementation with multiple transports and protocol stacks, this project is not a drop-in replacement.\n\n## Prerequisites\n\n- Zig 0.14.1\n\n## Building\n\nTo build the project, run the following command in the root directory of the project:\n\n```bash\nzig build -Doptimize=ReleaseSafe\n```\n\n## Running Tests\n\nTo run the tests, run the following command in the root directory of the project:\n\n```bash\nzig build test --summary all\n```\n\n## Usage\n\nUpdate `build.zig.zon`:\n\n```sh\nzig fetch --save git+https://github.com/zen-eth/zig-libp2p.git\n```\n\nIn your `build.zig`:\n\n```zig\nconst libp2p_dep = b.dependency(\"libp2p\", .{\n    .target = target,\n    .optimize = optimize,\n});\nconst libp2p_module = libp2p_dep.module(\"zig-libp2p\");\nroot_module.addImport(\"libp2p\", libp2p_module);\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/190158618?v=4",
+  "releases": [],
+  "owner_bio": "An open source organization that builds Ethereum public goods",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2024-11-30T04:26:27Z",
+  "category": "library"
+}

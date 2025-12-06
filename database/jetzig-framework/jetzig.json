@@ -1,0 +1,67 @@
+{
+  "name": "jetzig",
+  "owner": "jetzig-framework",
+  "repo": "jetzig",
+  "description": "Jetzig is a web framework written in Zig",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 1340,
+  "forks": 47,
+  "watchers": 14,
+  "updated_at": "2025-12-06T10:07:40Z",
+  "dependencies": [
+    {
+      "name": "jetcommon",
+      "url": "https://github.com/jetzig-framework/jetcommon/archive/f613f2cb9084d4b1c19ea89f5dab9ad7ba4fa3c4.tar.gz",
+      "hash": "jetcommon-0.1.0-jPY_DRRJAADaN4sQby3c31hyFSAgqIP90D4DYcTNVquG"
+    },
+    {
+      "name": "zmd",
+      "url": "https://github.com/jetzig-framework/zmd/archive/89d4c7a17009d077b95822f87ed798e5a1d377fe.tar.gz",
+      "hash": "zmd-0.1.0-H8YV7T3iAABKSUpySUgTppc0BkTvQFI0E5KpmXWQabw5"
+    },
+    {
+      "name": "smtp_client",
+      "url": "https://github.com/karlseguin/smtp_client.zig/archive/857d6f7be55cc878eb55b87dfae2539f05eda14d.tar.gz",
+      "hash": "smtp_client-0.0.1-Vh9B1NFoAQDw7GpdHsd5IE4XVJN3spr7mG22diw54-1i"
+    },
+    {
+      "name": "args",
+      "url": "https://github.com/ikskuh/zig-args/archive/8ae26b44a884ff20dca98ee84c098e8f8e94902f.tar.gz",
+      "hash": "args-0.0.0-CiLiqojRAACGzDRO7A9dw7kWSchNk29caJZkXuMCb0Cn"
+    },
+    {
+      "name": "jetkv",
+      "url": "https://github.com/jetzig-framework/jetkv/archive/7d793d1d95e830468849fa00169beef33698bdeb.tar.gz",
+      "hash": "jetkv-0.0.0-zCv0foOLAgBFvqbzeDP0nhnOd5cqGIVYQSbwSDOjm2Cv"
+    },
+    {
+      "name": "zmpl",
+      "url": "https://github.com/jetzig-framework/zmpl/archive/a4746fcab433a86b461a48c48aed80effcf5853a.tar.gz",
+      "hash": "zmpl-0.0.1-SYFGBoeqAwAVSZK5OD-wzQkL11iie_jNZ0w0F5z22j5u"
+    },
+    {
+      "name": "httpz",
+      "url": "https://github.com/karlseguin/http.zig/archive/90e7fc07ef7157a4da6922571fb4daef38b48998.tar.gz",
+      "hash": "httpz-0.0.0-PNVzrHLABgDoVnzqKpEbx2rZIzmMclEdoEmdJDfZmxsv"
+    },
+    {
+      "name": "jetquery",
+      "url": "https://github.com/jetzig-framework/jetquery/archive/a5a97b5f10dbd43b4dd18d9fddb7a1d9f1403c91.tar.gz",
+      "hash": "jetquery-0.0.0-TNf3zuDABgCbhjXEg2zcJSfspQd2MNwxZw3gdr1Do17U"
+    }
+  ],
+  "minimum_zig_version": "0.15.0-dev.355+206bd1ced",
+  "readme": "[![CI](https://github.com/jetzig-framework/jetzig/actions/workflows/CI.yml/badge.svg)](https://github.com/jetzig-framework/jetzig/actions/workflows/CI.yml)\n\n![Jetzig Logo](demo/public/jetzig.png)\n\n_Jetzig_ is a web framework written in 100% pure [Zig](https://ziglang.org) :lizard: for _Linux_, _OS X_, _Windows_, and any _OS_ that can compile _Zig_ code.\n\nOfficial website: [jetzig.dev](https://www.jetzig.dev/)\n\nPlease note that _Jetzig_'s `main` branch aims to be compatible with the latest [Zig nightly master build](https://ziglang.org/download/) and older versions of _Zig_ are not supported.\n\n_Jetzig_ aims to provide a rich set of user-friendly tools for building modern web applications quickly. See the checklist below.\n\nJoin us on Discord ! [https://discord.gg/eufqssz7X6](https://discord.gg/eufqssz7X6).\n\nIf you are interested in _Jetzig_ you will probably find these tools interesting too:\n\n* [Zap](https://github.com/zigzap/zap)\n* [http.zig](https://github.com/karlseguin/http.zig) (_Jetzig_'s backend)\n* [tokamak](https://github.com/cztomsik/tokamak)\n* [zig-router](https://github.com/Cloudef/zig-router)\n* [zig-webui](https://github.com/webui-dev/zig-webui/)\n* [ZTS](https://github.com/zigster64/zts)\n* [Zine](https://github.com/kristoff-it/zine)\n* [Zinc](https://github.com/zon-dev/zinc/)\n* [zUI](https://github.com/thienpow/zui)\n\n## Checklist\n\n* :white_check_mark: File system-based routing with [slug] matching.\n* :white_check_mark: _HTML_ and _JSON_ response (inferred from extension and/or `Accept` header).\n* :white_check_mark: _JSON_-compatible response data builder.\n* :white_check_mark: _HTML_ templating (see [Zmpl](https://github.com/jetzig-framework/zmpl)).\n* :white_check_mark: Per-request arena allocator.\n* :white_check_mark: Sessions.\n* :white_check_mark: Cookies.\n* :white_check_mark: Error handling.\n* :white_check_mark: Static content from /public directory.\n* :white_check_mark: Request/response headers.\n* :white_check_mark: Stack trace output on error.\n* :white_check_mark: Static content generation.\n* :white_check_mark: Param/JSON payload parsing/abstracting.\n* :white_check_mark: Static content parameter definitions.\n* :white_check_mark: Middleware interface.\n* :white_check_mark: MIME type inference.\n* :white_check_mark: Email delivery.\n* :white_check_mark: Background jobs.\n* :white_check_mark: General-purpose cache.\n* :white_check_mark: Development server auto-reload.\n* :white_check_mark: Testing helpers for testing HTTP requests/responses.\n* :white_check_mark: Custom/non-conventional routes.\n* :white_check_mark: Database integration.\n* :x: Environment configurations (development/production/etc.)\n* :x: Email receipt (via SendGrid/AWS SES/etc.)\n\n## LICENSE\n\n[MIT](LICENSE)\n\n## Contributors\n\n* [Zackary Housend](https://github.com/z1fire)\n* [Andreas Stührk](https://github.com/Trundle)\n* [Karl Seguin](https://github.com/karlseguin)\n* [Bob Farrell](https://github.com/bobf)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/157241284?v=4",
+  "releases": [],
+  "owner_bio": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2024-01-20T18:49:18Z",
+  "license": "MIT",
+  "category": "library"
+}

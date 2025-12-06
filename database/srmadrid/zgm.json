@@ -1,0 +1,27 @@
+{
+  "name": "zgm",
+  "owner": "srmadrid",
+  "repo": "zgm",
+  "description": "Zig Graphics Mathematics",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 3,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-10-05T09:02:57Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# ZGM: Zig Graphics Mathematics\n\nA Zig library for mathematics for graphics programming.\n\n## Current Features\n\n- Vectors\n- Matrices\n  - Column-major\n  - Transformations are offered only for homogeneous coordinates, i.e., 3x3 matrices work as 2D transformations and 4x4 matrices work as 3D transformations, and no 2x2 or 3x3 matrices are provided for 2D or 3D transformations, respectively.\n- Quaternions\n- Colors\n\nAll transformations assume a right-handed coordinate system.\n\n## Installation\n\nTo use this library in your project, run\n\n```bash\nzig fetch --save git+https://github.com/srmadrid/zgm\n```\n\nand add it to your `build.zig` file:\n\n```zig\nconst zgm = b.dependency(\"zgm\", .{});\nexe.root_module.addImport(\"zgm\", zgm.module(\"zgm\"));\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/127796005?u=1f54d2a3141c97acf78e978883127b703d6d161e&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 5,
+  "owner_following": 7,
+  "owner_created_at": "2023-03-13T21:17:23Z",
+  "license": "MIT",
+  "category": "library"
+}

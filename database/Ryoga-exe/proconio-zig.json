@@ -1,0 +1,59 @@
+{
+  "name": "proconio-zig",
+  "owner": "Ryoga-exe",
+  "repo": "proconio-zig",
+  "description": "proconio for the Zig programming language. useful and easy io library for programming contests.",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package",
+    "competitive-programming",
+    "proconio"
+  ],
+  "stars": 3,
+  "forks": 1,
+  "watchers": 2,
+  "updated_at": "2025-09-15T12:29:17Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# proconio-zig\n\nproconio for the Zig programming language. useful and easy IO library for programming contests.\n\n## usage\n\n```zig\nconst std = @import(\"std\");\nconst proconio = @import(\"proconio\");\n\npub fn main() !void {\n    const allocator = std.heap.page_allocator;\n    var io = try proconio.init(allocator);\n    defer io.deinit();\n\n    const in = try io.input(struct {\n        n: u8,\n        m: u32,\n        l: i32,\n    });\n    std.debug.print(\"{}, {}, {}\\n\", .{in.n, in.m, in.l});\n}\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/49950206?u=afc964f56275c5460c1272df19caba6135d6d72b&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.3.0",
+      "name": "v0.3.0",
+      "body": "The third release of proconio-zig. This release compatible with Zig v0.15.1.\r\n\r\n## What's Changed\r\n* Update for Zig 0.15.1 (https://github.com/Ryoga-exe/proconio-zig/pull/4)\r\n\r\n\r\n**Full Changelog**: https://github.com/Ryoga-exe/proconio-zig/compare/v0.2.0...v0.3.0",
+      "prerelease": false,
+      "published_at": "2025-09-02T18:22:17Z",
+      "html_url": "https://github.com/Ryoga-exe/proconio-zig/releases/tag/v0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "The second release of `proconio-zig` – now with handy slice/bytes markers!\r\n\r\n## Added\r\n\r\n* `Bytes` marker by @s3igo in https://github.com/Ryoga-exe/proconio-zig/pull/3\r\n  * Returns the next token as a raw `[]const u8` byte slice.\r\n* `Slice(T, len)` marker\r\n  * Reads `len` values of type `T` and returns them as a `[]T`.\r\n\r\n### Example\r\n\r\n```zig\r\nconst std = @import(\"std\");\r\nconst proconio = @import(\"proconio\");\r\nconst marker = proconio.marker;\r\n\r\npub fn main() !void {\r\n    const allocator = std.heap.page_allocator;\r\n    var io = try proconio.init(allocator);\r\n    defer io.deinit();\r\n\r\n    const in = try io.input(struct {\r\n        s: marker.Bytes,           // ex) \"hello\"\r\n        a: marker.Slice(usize, 3), // ex) \"1 2 3\"\r\n    });\r\n    std.debug.print(\"{s}\\n\", .{in.s}); // -> hello\r\n    std.debug.print(\"{any}\\n\", .{in.a}); // -> { 1, 2, 3 }\r\n}\r\n```\r\n\r\n## New Contributors\r\n* @s3igo made their first contribution in https://github.com/Ryoga-exe/proconio-zig/pull/3, thank you! 🎉\r\n\r\n**Full Changelog**: https://github.com/Ryoga-exe/proconio-zig/compare/v0.1.0...v0.2.0",
+      "prerelease": false,
+      "published_at": "2025-06-20T06:03:42Z",
+      "html_url": "https://github.com/Ryoga-exe/proconio-zig/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "The first release of `proconio-zig`.\r\n\r\n## Added\r\n\r\n- `proconio.init`\r\n  - Returns a `Proconio` instance that provides an easy way to read values from stdin.\r\n- `proconio.initInteractive`\r\n  - An interactive version of `proconio.init`.\r\n  - The normal `proconio.init` reads the entire input at once in judge environment to optimize I/O performance. However this does not work well with interactive probrems.\r\n- `proconio.ProconioAny`\r\n  - It has `deinit` and `input` method to handle input and memory management.\r\n\r\n### Supported types for `input`:\r\n\r\n| Type      | Support | Notes |\r\n|-----------|---------|-------|\r\n| `void`    | ✅      | Ignored input token |\r\n| `int`     | ✅      | Parsed using `std.fmt.parseInt` with `base = 0` |\r\n| `float`   | ✅      | Parsed using `std.fmt.parseFloat` |\r\n| `bool`    | ✅      | Custom conversion function can be overridden |\r\n| `enum`    | ✅      | If a number is provided, it attempts to convert it to an enum value |\r\n| `array`   | ✅      | — |\r\n| `optional`| ✅      | If parsing fails, the value is set to `null` |\r\n| `vector`  | ✅      | — |\r\n| `struct`  | 🟡      | Partial support |\r\n| `pointer` | ❌      | Not supported |\r\n\r\n**Full Changelog**: https://github.com/Ryoga-exe/proconio-zig/commits/v0.1.0\r\n",
+      "prerelease": false,
+      "published_at": "2025-03-09T13:53:47Z",
+      "html_url": "https://github.com/Ryoga-exe/proconio-zig/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Student / Programmer / Skier",
+  "owner_company": "University of Tsukuba",
+  "owner_location": "Ibaraki, Japan",
+  "owner_blog": "https://ryoga.dev",
+  "owner_twitter_username": "Ryoga_exe",
+  "owner_followers": 88,
+  "owner_following": 52,
+  "owner_created_at": "2019-04-24T13:42:08Z",
+  "license": "MIT",
+  "category": "library"
+}

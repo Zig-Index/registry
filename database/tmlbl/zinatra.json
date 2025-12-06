@@ -1,0 +1,46 @@
+{
+  "name": "zinatra",
+  "owner": "tmlbl",
+  "repo": "zinatra",
+  "description": "An HTTP framework for Zig with a familiar API",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 16,
+  "forks": 2,
+  "watchers": 1,
+  "updated_at": "2025-10-06T09:20:48Z",
+  "readme": "Zinatra\n=======\n\nZinatra is an HTTP server framework based on Zig's `std.http.Server`, with a\nfamiliar high-level API.\n\n```zig\nconst std = @import(\"std\");\nconst zin = @import(\"zinatra\");\n\n// zin.Handler functions accept a *Context and return !void\nfn greet(ctx: *zin.Context) !void {\n    // params can be accessed via the built-in map\n    const name = ctx.params.get(\"name\").?;\n    // each context creates an arena allocator, so you can make quick\n    // per-request allocations without calling free\n    const msg = try std.fmt.allocPrint(ctx.allocator(), \"Hello, {s}!\", .{name});\n    // Context helper methods for common response types\n    try ctx.text(msg);\n}\n\n// zin.Context provides shortcuts for common cases, like sending JSON\nfn sendJson(ctx: *zin.Context) !void {\n    try ctx.json(.{\n        .foo = \"bar\",\n    });\n}\n\n// Middleware functions have the same function signature as route handlers\nfn defaultHeaders(ctx: *zin.Context) !void {\n    try ctx.headers.append(.{ .name = \"server\", .value = \"zin/v0.1.0\" });\n}\n\npub fn main() !void {\n    var app = try zin.App.init(.{\n        .allocator = std.heap.page_allocator,\n    });\n    defer app.deinit();\n\n    // optionally add query string parameters to route parameters map\n    try app.use(zin.mw.queryStringParser);\n\n    try app.use(defaultHeaders);\n\n    // use classic route templating syntax to register handlers\n    try app.get(\"/greet/:name\", greet);\n\n    try app.get(\"/json\", sendJson);\n\n    try app.listen();\n}\n\n```\n\nCheck out the examples folder for more functionality.\n\nPerhaps your next \"microservice\" at work could be in Zig! Think about it...\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/6007526?u=40c9bf650ae2e140a99370d7f9475f840ebf5be1&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.1",
+      "name": "v0.1.1 Release",
+      "body": "Multithreading works now 🙂 ",
+      "prerelease": false,
+      "published_at": "2025-08-06T21:34:26Z",
+      "html_url": "https://github.com/tmlbl/zinatra/releases/tag/v0.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "Initial version of the Zinatra web framework, constituting a very complete and capable toolkit for web application development. Watch this space.",
+      "prerelease": false,
+      "published_at": "2025-07-18T14:53:24Z",
+      "html_url": "https://github.com/tmlbl/zinatra/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "computer",
+  "owner_company": "Datavant",
+  "owner_location": "Plant City, FL",
+  "owner_blog": "twitter.com/larpitecht",
+  "owner_twitter_username": null,
+  "owner_followers": 51,
+  "owner_following": 36,
+  "owner_created_at": "2013-11-22T05:55:10Z",
+  "license": "MIT",
+  "category": "library"
+}

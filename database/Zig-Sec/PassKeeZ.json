@@ -1,0 +1,301 @@
+{
+  "name": "PassKeeZ",
+  "owner": "Zig-Sec",
+  "repo": "PassKeeZ",
+  "description": "PassKeeZ is a FIDO2/ Passkey compatible authenticator implementation for Linux",
+  "type": "project",
+  "topics": [
+    "authentication",
+    "authenticator",
+    "authenticator-app",
+    "ctap2",
+    "fido2",
+    "fido2-authenticator",
+    "passkey",
+    "passkeys",
+    "linux",
+    "webauthn"
+  ],
+  "stars": 70,
+  "forks": 1,
+  "watchers": 3,
+  "updated_at": "2025-12-06T17:26:08Z",
+  "dependencies": [
+    {
+      "name": "keylib",
+      "url": "https://github.com/Zig-Sec/keylib/archive/refs/tags/0.7.0.tar.gz",
+      "hash": "keylib-0.7.0-mbYjk6qaCQACutrMpyhgstSmYxSKmcuRmLI-CJSumBeA"
+    },
+    {
+      "name": "uuid",
+      "url": "https://github.com/r4gus/uuid-zig/archive/refs/tags/0.4.0.tar.gz",
+      "hash": "uuid-0.4.0-oOieIR2AAAChAUVBY4ABjYI1XN0EbVALmiN0JIlggC3i"
+    },
+    {
+      "name": "kdbx",
+      "url": "https://github.com/Zig-Sec/kdbx/archive/refs/tags/0.2.3.tar.gz",
+      "hash": "kdbx-0.2.3-eJXZBJWkEgDQRsIA_22SQSygPD6WlqEbjW83djSNqjQN"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "![Screenshot from 2025-04-15 11-16-56](https://github.com/user-attachments/assets/2ed6b32a-92d9-4fca-88ce-56f1e7b521ff)\n\n![GitHub](https://img.shields.io/github/license/Zig-Sec/PassKeeZ?style=flat-square)\n<noscript><a href=\"https://liberapay.com/r4gus/donate\"><img alt=\"Donate using Liberapay\" src=\"https://liberapay.com/assets/widgets/donate.svg\"></a></noscript>\n\nPassKeeZ is a Passkey (FIDO2) compatible authenticator for Linux based on [keylib](https://github.com/r4gus/keylib).\n\n**To get started, please visit the [Wiki](https://github.com/Zig-Sec/PassKeeZ/wiki)**.\n\nThe project currently supports only Linux due to the absence of a standardized API for interprocess communication (IPC) between the client and authenticator. As a workaround, platform authenticators on Linux act as virtual USB HID devices utilizing uhid. However, extending this functionality to other platforms remains unexplored as I haven't had the opportunity to investigate the equivalent mechanisms elsewhere.\n\n| Browser | Supported? | Tested version| Notes |\n|:-------:|:----------:|:-------------:|:-----:|\n| Cromium   | &#9989;    | 119.0.6045.159 (Official Build) Arch Linux (64-bit) | |\n| Brave | &#9989; | Version 1.62.153 Chromium: 121.0.6167.85 (Official Build) (64-bit) | |\n| Firefox | &#9989; | 122.0 (64-bit) |  |\n| Opera | &#9989; | version: 105.0.4970.16 chromium: 119.0.6045.159 | |\n\n> [!NOTE]\n> All tests were conducted using passkey for Github.\n\n> [!IMPORTANT]\n> Browsers running in sandboxed environments might not be able to communicate with the authenticator out of the box (e.g. when installing browsers with the Ubuntu App Center).\n\n## Features\n\n* Works with all services that support Passkeys.\n* Store your Passkeys (just a private key + related data) in a local, encrypted database. \n* Constant sign-counter, i.e. you can safely sync your credentials/passkeys between devices.\n\n> [!IMPORTANT]\n> With the release of version 0.5.0, PassKeeZ uses the KDBX format for storing credentials. The advantage of using KDBX is that you can manage your passkeys using KeePass or KeePassXC (PassKeeZ uses the same format for storing passkeys as KeePassXC). If you run into issues please open an issue.\n\n## Getting Started \n\nTo get started please visit the [wiki](https://github.com/Zig-Sec/PassKeeZ/wiki/Installing-PassKeeZ).  \n\n### Database Management\n\n- KDBX: You can manage your `.kdbx` database with [KeePassXC](https://keepassxc.org/) or KeePass.\n    - _We recommend making regular backups of your KDBX database._\n\n### File synchronization\n\nYou can synchronize your database files using a service like [Syncthing](https://docs.syncthing.net/intro/getting-started.html) between your devices. This allows you to use the same Passkeys to login to your accounts on multiple devices.\n\n#### Syncthing\n\nPlease see the [Getting Started guide](https://docs.syncthing.net/intro/getting-started.html) on how to setup Syncthing on your device. Make sure you also setup Syncthing to [startup automatically](https://docs.syncthing.net/users/autostart.html#linux), to prevent a situation where your databases are out of sync.\n\n## Contributing\n\nCurrently this application and the surrounding infrastructure is only maintained by me. One exception is the graphics library [dvui](https://github.com/david-vanderson/dvui) I use for the frontend (zigenity).\n\nIf you find a bug or want to help out, feel free to either open a issue for one of the mentioned projects or write me a mail.\n\nAll contributions are welcome! Including:\n\n* Bug fixes\n* Documentation\n* New features\n* Support for other systems (linux distros, OSs, ...)\n* ...\n\n## QA\n\n<details>\n<summary><ins>What is this project about?</ins></summary>\n\nFIDO2 stands as a dedicated authentication protocol crafted for diverse authentication needs. Whether employed as a standalone method, supplanting traditional password-based authentication, or as an additional layer of security, FIDO2 serves both purposes. The FIDO Alliance has actively advocated for the widespread adoption of this protocol for several years, with 2023 witnessing a substantial surge in its adoption. However, it's crucial to note that FIDO2 introduces a heightened level of complexity in comparison to conventional passwords. Notably, the use of roaming authenticators, such as YubiKey, can be a cost-intensive aspect.\n\nUpon initiating the keylib project in October 2022, my primary objective was to develop a library empowering individuals to transform their own hardware, such as ESP32, into a functional authenticator. I believe I've achieved this goal successfully. However, during this process, I also recognized the evolving trend favoring hybrid/platform authenticators with discoverable credentials, now commonly marketed as Passkeys.\n\nWhile traditional authenticators like YubiKeys provide robust protection against various attacks, they come with notable drawbacks. Their high cost, limited update/patching capabilities, and restricted storage for discoverable credentials (for instance, my YubiKey 5 supports around 25 credentials) underscore these challenges. Additionally, the inability to back up data, although enhancing confidentiality, poses availability concerns. The official solution offered for this predicament is surprisingly simple: \"buy a second one.\"\n\nConversely, platform authenticators present a more flexible and cost-effective alternative. Unlike traditional counterparts, they can undergo regular updates and patches, akin to any software component. Furthermore, these authenticators permit the backup and secure sharing of credentials, leveraging an encrypted database within this project.\n\nOne key advantage lies in their cost-effectiveness, eliminating the need for additional hardware. When implemented with precision, platform authenticators can attain a commendable level of security, providing a compelling alternative to their more expensive counterparts.\n\nThe primary objective of this project is to furnish an alternative —keeping in mind that the term \"alternative\" is subjective and, due to resource constraints, I may not offer a polished, \"commercial-grade\" product— to existing commercial Passkey implementations.\n\n</details>\n\n<details>\n<summary><ins>What is FIDO2/ Passkey?</ins></summary>\nPlease read the QA of the [keylib](https://github.com/r4gus/keylib) project.\n</details>\n\n<!--\n## Showcase\n\n<table>\n  <tr>\n    <td><img src=\"static/login.png\" width=\"400\"></td>\n    <td><img src=\"static/new-database.png\" width=\"400\"></td>\n  </tr>\n  <tr>\n    <td><img src=\"static/main.png\" width=\"400\"></td>\n    <td><img src=\"static/assertion.png\" width=\"400\"></td>\n  </tr>\n</table>\n-->\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/175068426?v=4",
+  "releases": [
+    {
+      "tag_name": "0.6.2",
+      "name": "0.6.2",
+      "body": "- Updated kdbx version to 0.2.3\r\n    - Make LastModificationTime optional for custom icons",
+      "prerelease": false,
+      "published_at": "2025-10-07T07:49:37Z",
+      "html_url": "https://github.com/Zig-Sec/PassKeeZ/releases/tag/0.6.2",
+      "assets": []
+    },
+    {
+      "tag_name": "0.6.1",
+      "name": "0.6.1",
+      "body": "- Fixes default database config issue\r\n- Fixes writer issue when creating a new database\r\n\r\nBoth issues were reported by @manner82  in #23 ",
+      "prerelease": false,
+      "published_at": "2025-10-02T14:20:20Z",
+      "html_url": "https://github.com/Zig-Sec/PassKeeZ/releases/tag/0.6.1",
+      "assets": []
+    },
+    {
+      "tag_name": "0.6.0",
+      "name": "0.6.0",
+      "body": "## What's Changed\r\n* 0.15.1 by @r4gus in https://github.com/Zig-Sec/PassKeeZ/pull/22\r\n\r\n\r\n**Full Changelog**: https://github.com/Zig-Sec/PassKeeZ/compare/0.5.3...0.6.0\r\n\r\n- Updated PassKeeZ to compile with Zig version 0.15.1\r\n- KDBX4 regression due to switch to Zig version 0.15.1. The gzip compression algorithm was removed from the standard library -> currently no suitable alternative found. This will be fixed in a later release. **For now: gzip compression is automatically disabled by PassKeeZ when storing a new passkey to prevent database corruptions. This has NO security implications but the file size will be slightly larger.**\r\n- Fixed support for custom icons (KDBX4)",
+      "prerelease": false,
+      "published_at": "2025-09-30T19:47:03Z",
+      "html_url": "https://github.com/Zig-Sec/PassKeeZ/releases/tag/0.6.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.5.3",
+      "name": "0.5.3",
+      "body": "More KDBX issues fixed.\r\n\r\nInstall with:\r\n\r\n```\r\nsudo bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Zig-Sec/PassKeeZ/refs/heads/master/script/install-linux.sh)\" install-linux.sh --vzig \"0.14.0\" --vzigenity \"0.5.0\" --vpasskeez \"0.5.3\"\r\n```",
+      "prerelease": false,
+      "published_at": "2025-08-23T21:30:18Z",
+      "html_url": "https://github.com/Zig-Sec/PassKeeZ/releases/tag/0.5.3",
+      "assets": []
+    },
+    {
+      "tag_name": "0.5.2",
+      "name": "0.5.2",
+      "body": "- fixed kdbx issue (im very sorry for this inconvenience)\r\n\r\nInstall with:\r\n```bash\r\nsudo bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Zig-Sec/PassKeeZ/refs/heads/master/script/install-linux.sh)\" install-linux.sh --vzig \"0.14.0\" --vzigenity \"0.5.0\" --vpasskeez \"0.5.2\"\r\n```",
+      "prerelease": false,
+      "published_at": "2025-05-12T07:50:42Z",
+      "html_url": "https://github.com/Zig-Sec/PassKeeZ/releases/tag/0.5.2",
+      "assets": []
+    },
+    {
+      "tag_name": "0.5.1",
+      "name": "0.5.1",
+      "body": "**DO NOT USE** please install the latest version.\r\n\r\n- fixes minor bug where PassKeeZ asks for a password even though no database exists.\r\n\r\nTo install PassKeeZ run:\r\n```bash\r\nsudo bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Zig-Sec/PassKeeZ/refs/heads/master/script/install-linux.sh)\" install-linux.sh \"0.5.1\" \"0.4.1\" \"0.14.0\"\r\n```",
+      "prerelease": false,
+      "published_at": "2025-04-04T13:23:17Z",
+      "html_url": "https://github.com/Zig-Sec/PassKeeZ/releases/tag/0.5.1",
+      "assets": [
+        {
+          "name": "passkeez-linux-x86_64-0.5.1",
+          "url": "https://github.com/Zig-Sec/PassKeeZ/releases/download/0.5.1/passkeez-linux-x86_64-0.5.1",
+          "size": 699000,
+          "content_type": "application/x-troff-man"
+        },
+        {
+          "name": "passkeez-linux-aarch64-0.5.1",
+          "url": "https://github.com/Zig-Sec/PassKeeZ/releases/download/0.5.1/passkeez-linux-aarch64-0.5.1",
+          "size": 651600,
+          "content_type": "application/x-troff-man"
+        },
+        {
+          "name": "zigenity-linux-x86_64-0.5.1",
+          "url": "https://github.com/Zig-Sec/PassKeeZ/releases/download/0.5.1/zigenity-linux-x86_64-0.5.1",
+          "size": 10231048,
+          "content_type": "application/x-troff-man"
+        },
+        {
+          "name": "zigenity-linux-aarch64-0.5.1",
+          "url": "https://github.com/Zig-Sec/PassKeeZ/releases/download/0.5.1/zigenity-linux-aarch64-0.5.1",
+          "size": 10011104,
+          "content_type": "application/x-troff-man"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.5.0",
+      "name": "0.5.0",
+      "body": "I'm happy to announce the release of PassKeeZ version 0.5.0. With this release, we're introducing [KDBX](https://keepass.info/help/kb/kdbx_4.html) support, i.e., you're now able to manage your passkeys using a password manager with KDBX support ([KeePassXC](https://keepassxc.org/) is recommended).\r\n\r\nI've also rewritten zigenity using [DVUI](https://github.com/david-vanderson/dvui), i.e. we are no longer dependent on GTK.\r\n\r\nPlease note that this software is still in development. While I test my software before releasing it, it's still possible that you run into problems. If you run into any issues, please open an issue on Github.",
+      "prerelease": false,
+      "published_at": "2025-03-31T06:59:21Z",
+      "html_url": "https://github.com/Zig-Sec/PassKeeZ/releases/tag/0.5.0",
+      "assets": [
+        {
+          "name": "passkeez-linux-x86_64-0.5.0",
+          "url": "https://github.com/Zig-Sec/PassKeeZ/releases/download/0.5.0/passkeez-linux-x86_64-0.5.0",
+          "size": 696712,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "zigenity-linux-x86_64-0.4.0",
+          "url": "https://github.com/Zig-Sec/PassKeeZ/releases/download/0.5.0/zigenity-linux-x86_64-0.4.0",
+          "size": 10160808,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "passkeez-linux-aarch64-0.5.0",
+          "url": "https://github.com/Zig-Sec/PassKeeZ/releases/download/0.5.0/passkeez-linux-aarch64-0.5.0",
+          "size": 651328,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "zigenity-linux-aarch64-0.4.0",
+          "url": "https://github.com/Zig-Sec/PassKeeZ/releases/download/0.5.0/zigenity-linux-aarch64-0.4.0",
+          "size": 9950608,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "install-linux.sh",
+          "url": "https://github.com/Zig-Sec/PassKeeZ/releases/download/0.5.0/install-linux.sh",
+          "size": 5143,
+          "content_type": "application/x-shellscript"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.4.0",
+      "name": "0.4.0",
+      "body": "Credential management support.\r\n\r\nThe following endpoints have been implemented:\r\n\r\n- getCredsMetadata\r\n- enumerateRPsBegin\r\n- enumerateRPsGetNextRP\r\n- enumerateCredentialsBegin\r\n- enumerateCredentialsGetNextCredential\r\n- deleteCredential\r\n\r\nThis allows the management of credentials via external tools like [fido2-manage](https://github.com/token2/fido2-manage).\r\n\r\nFurther endpoints will be added in future releases.",
+      "prerelease": false,
+      "published_at": "2024-10-18T22:25:52Z",
+      "html_url": "https://github.com/Zig-Sec/PassKeeZ/releases/tag/0.4.0",
+      "assets": [
+        {
+          "name": "passkeez_linux_x86_64",
+          "url": "https://github.com/Zig-Sec/PassKeeZ/releases/download/0.4.0/passkeez_linux_x86_64",
+          "size": 551464,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "zigenity_linux_x86_64",
+          "url": "https://github.com/Zig-Sec/PassKeeZ/releases/download/0.4.0/zigenity_linux_x86_64",
+          "size": 24664,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.3.2",
+      "name": "",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-10-09T19:11:48Z",
+      "html_url": "https://github.com/Zig-Sec/PassKeeZ/releases/tag/0.3.2",
+      "assets": []
+    },
+    {
+      "tag_name": "0.3.1",
+      "name": "0.3.1",
+      "body": "## What's Changed\r\n* i18n support (english, german)\r\n* prepared for 0.3.1 by @r4gus in https://github.com/r4gus/keypass/pull/11\r\n\r\n\r\n**Full Changelog**: https://github.com/r4gus/keypass/compare/0.3.0...0.3.1",
+      "prerelease": false,
+      "published_at": "2024-09-29T21:31:34Z",
+      "html_url": "https://github.com/Zig-Sec/PassKeeZ/releases/tag/0.3.1",
+      "assets": []
+    },
+    {
+      "tag_name": "0.3.0",
+      "name": "0.3.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-09-05T14:06:40Z",
+      "html_url": "https://github.com/Zig-Sec/PassKeeZ/releases/tag/0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.2.5",
+      "name": "0.2.5",
+      "body": "**Full Changelog**: https://github.com/r4gus/keypass/compare/0.2.4...0.2.5\r\n\r\nnow also works as expected with firefox",
+      "prerelease": false,
+      "published_at": "2024-02-04T20:31:28Z",
+      "html_url": "https://github.com/Zig-Sec/PassKeeZ/releases/tag/0.2.5",
+      "assets": []
+    },
+    {
+      "tag_name": "0.2.4",
+      "name": "0.2.4",
+      "body": "**Full Changelog**: https://github.com/r4gus/keypass/compare/0.2.3...0.2.4\r\n\r\n* NULL terminator bug fixed in keylib\r\n* workaround added for deleting credentials (will be removed in the future)\r\n* fixes #5 ",
+      "prerelease": false,
+      "published_at": "2024-01-30T13:39:11Z",
+      "html_url": "https://github.com/Zig-Sec/PassKeeZ/releases/tag/0.2.4",
+      "assets": []
+    },
+    {
+      "tag_name": "0.2.3",
+      "name": "0.2.3",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-01-12T23:51:22Z",
+      "html_url": "https://github.com/Zig-Sec/PassKeeZ/releases/tag/0.2.3",
+      "assets": []
+    },
+    {
+      "tag_name": "0.2.2",
+      "name": "0.2.2",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-01-04T10:45:10Z",
+      "html_url": "https://github.com/Zig-Sec/PassKeeZ/releases/tag/0.2.2",
+      "assets": []
+    },
+    {
+      "tag_name": "0.2.1",
+      "name": "0.2.1",
+      "body": "keylib updated",
+      "prerelease": false,
+      "published_at": "2024-01-02T21:39:57Z",
+      "html_url": "https://github.com/Zig-Sec/PassKeeZ/releases/tag/0.2.1",
+      "assets": []
+    },
+    {
+      "tag_name": "0.2.0",
+      "name": "0.2.0",
+      "body": "New logo as the new logos of the fido alliance look way to similar.",
+      "prerelease": false,
+      "published_at": "2023-12-23T10:27:34Z",
+      "html_url": "https://github.com/Zig-Sec/PassKeeZ/releases/tag/0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.1.3",
+      "name": "",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2023-12-21T23:07:23Z",
+      "html_url": "https://github.com/Zig-Sec/PassKeeZ/releases/tag/0.1.3",
+      "assets": []
+    },
+    {
+      "tag_name": "0.1.2",
+      "name": "",
+      "body": "- enhanced user presence check window",
+      "prerelease": false,
+      "published_at": "2023-12-08T18:41:08Z",
+      "html_url": "https://github.com/Zig-Sec/PassKeeZ/releases/tag/0.1.2",
+      "assets": []
+    },
+    {
+      "tag_name": "0.1.1",
+      "name": "",
+      "body": "- login screen: hitting enter now trigger db unlock",
+      "prerelease": false,
+      "published_at": "2023-12-07T23:02:29Z",
+      "html_url": "https://github.com/Zig-Sec/PassKeeZ/releases/tag/0.1.1",
+      "assets": []
+    }
+  ],
+  "owner_bio": "ZigSec - Because we jump from bytes to bytes. ",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2024-07-08T23:35:57Z",
+  "license": "MIT",
+  "category": "library"
+}

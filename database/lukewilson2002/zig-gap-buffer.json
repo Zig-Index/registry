@@ -1,0 +1,32 @@
+{
+  "name": "zig-gap-buffer",
+  "owner": "lukewilson2002",
+  "repo": "zig-gap-buffer",
+  "description": "A gap buffer implementation for Zig.",
+  "type": "project",
+  "topics": [
+    "gap-buffers",
+    "zig",
+    "cursor",
+    "allocation",
+    "data-structures",
+    "zig-package",
+    "text-editor"
+  ],
+  "stars": 5,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2023-12-29T19:41:26Z",
+  "readme": "# Zig Gap Buffer\r\nA gap buffer implementation for Zig, designed to be idiomatic. The design of this code is styled after the standard library.\r\n\r\nFeel free to just copy the gap-buffer.zig source file to your project if you'd rather.\r\n\r\n## What is a Gap Buffer?\r\nA [gap buffer](https://en.wikipedia.org/wiki/Gap_buffer) is like a growable array, but the reserved space is in the middle of the data, separating two sides, as opposed to being fixed at the end. This data structure is efficient for inserting and deleting data in close proximity. Gap buffers are commonly used in text editors as a simpler method than, say, [ropes](https://en.wikipedia.org/wiki/Rope_(data_structure)).\r\n\r\nOn each side of the gap is a string. The gap of the gap buffer should be at the same location as the cursor in the text editor. When the cursor moves, the gap moves. Moving the cursor causes no allocation because it is moving data from the right side of the gap to the left side. Inserting text appends to the data on the left side, shrinking the gap. Deleting text grows the gap. When data inserted exceeds the gap size, more space is allocated.\r\n\r\nGap buffers are not efficient for large files. For more information, see [the Gap Buffer Wikipedia article](https://en.wikipedia.org/wiki/Gap_buffer).\r\n\r\n## Examples\r\n\r\nThere are several examples of usage in the test section at the bottom of the `gap-buffer.zig` source file.\r\n\r\nBut basically, here's your getting started:\r\n\r\n```zig\r\nconst std = @import(\"std\");\r\nconst GapBuffer = @import(\"gap-buffer\").GapBuffer;\r\n\r\npub fn main() void {\r\n    // Whatever allocator you wish to use ...\r\n    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);\r\n    defer arena.deinit();\r\n\r\n    var gb = try GapBuffer.init(&arena.allocator, \"\");\r\n    // defer gb.deinit(); // Arena frees data automatically\r\n\r\n    // Insert some text into the currently empty buffer\r\n    try gb.insert(\"some text\", .{ .line = 0, .col = 0 });\r\n\r\n    var text = try gb.toSlice(&arena.allocator); // Don't forget to free the string\r\n    std.debug.warn(\"{}\\n\", .{text}); // \"some text\"\r\n}\r\n```\r\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/13669835?u=8b100f10c7706c116ead330329f1eb65fefe7a88&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "United States",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 67,
+  "owner_following": 108,
+  "owner_created_at": "2015-08-06T00:49:42Z",
+  "license": "MIT",
+  "category": "library"
+}

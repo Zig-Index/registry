@@ -1,0 +1,824 @@
+{
+  "name": "superhtml",
+  "owner": "kristoff-it",
+  "repo": "superhtml",
+  "description": "HTML Validator, Formatter, LSP, and Templating Language Library",
+  "type": "project",
+  "topics": [
+    "language-server",
+    "language-server-protocol",
+    "lsp",
+    "lsp-server",
+    "templating-engine",
+    "zig-package",
+    "html",
+    "validator"
+  ],
+  "stars": 1184,
+  "forks": 53,
+  "watchers": 9,
+  "updated_at": "2025-12-05T08:08:50Z",
+  "dependencies": [
+    {
+      "name": "known_folders",
+      "url": "git+https://github.com/ziglibs/known-folders#ab5cf5feb936fa3b72c95d3ad0c0c67791937ba1",
+      "hash": "known_folders-0.0.0-Fy-PJtTTAADUOhGKM0sxzG4eMkNQxRvx9e5dfHVyaeA3"
+    },
+    {
+      "name": "tracy",
+      "url": "git+https://github.com/kristoff-it/tracy#67d2d89e351048c76fc6d161e0ac09d8a831dc60",
+      "hash": "tracy-0.0.0-4Xw-1pwwAABTfMgoDP1unCbZDZhJEfict7XCBGF6IdIn"
+    },
+    {
+      "name": "lsp_kit",
+      "url": "git+https://github.com/zigtools/lsp-kit#fe98e895ca3bd1b39965ab30f0f252f7b7e83ee6",
+      "hash": "lsp_kit-0.1.0-bi_PLzAyCgClDh8_M0U9Q50ysdsQBuRuBTZfwg6rZPd6"
+    },
+    {
+      "name": "scripty",
+      "url": "git+https://github.com/kristoff-it/scripty#50dbab8945440089384f26ec165d870c29555247",
+      "hash": "scripty-0.1.0-LKK5O7v4AADWWXuFcTJky_5sY12tmw3kRi3k2wkpfxAX"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# SuperHTML\nHTML Validator, Formatter, LSP, and Templating Language Library\n\n## SuperHTML CLI Tool\nThe SuperHTML CLI Tool offers **validation** and **autoformatting** features for HTML files.\n\nThe tool can be used either directly (for example by running it on save), or through a LSP client implementation.\n\n```\n$ superhtml\nUsage: superhtml COMMAND [OPTIONS]\n\nCommands:\n  check         Check documents for errors.\n  fmt           Format documents.\n  lsp           Start the Language Server.\n  help          Show this menu and exit.\n  version       Print the version and exit.\n\nGeneral Options:\n  --help, -h        Print command specific usage.\n  --syntax-only     Disable HTML element and attribute validation.\n```\n\n>[!WARNING]\n>SuperHTML only supports HTML5 (the WHATWG living spec) regardless of what you put in your doctype (a warning will be generated for unsupported doctypes).\n\n>[!WARNING]\n>Templated HTML (Jinja2, Angular, Mustache, ...) is not yet supported when all validation rules are enabled, use `--syntax-only` (or the relative Extension Setting in VSCode) to limit validation to syntax errors to use SuperHTML with templated HTML documents.\n>\n> Compatibility with popular templating languages is being explored. \n\n\n### Diagnostics\nSuperHTML validates not only syntax but also element nesting and attribute values.\nNo other language server implements the full HTML spec in its validation code.\n\n![](.github/helix.png)\n\n\n### Autoformatting\nThe autoformatter has two main ways of interacting with it in order to request for horizontal / vertical alignment.\n\n1. Adding / removing whitespace between the **start tag** of an element and its content.\n2. Adding / removing whitespace between the **last attribute** of a start tag and the closing  `>`.\n\n\n>[!TIP]\n>Consider using `superhtml fmt --check` in your CI to enforce every change to be performed on normalized HTML files. This is a technique commonly used in Zig (and Go) for source code that can also help streamline frontend development.\n\n\n#### Example of rule #1\nBefore:\n```html\n<div> <p>Foo</p></div>\n```\n\nAfter:\n```html\n<div>\n    <p>Foo</p>\n</div>\n```\n\n##### Reverse\n\nBefore:\n```html\n<div><p>Foo</p>\n</div>\n```\n\nAfter:\n```html\n<div><p>Foo</p></div>\n```\n\n### Example of rule #2\nBefore:\n```html\n<div foo=\"bar\" style=\"verylongstring\" hidden >\n    Foo\n</div>\n```\n\nAfter:\n```html\n<div foo=\"bar\" \n     style=\"verylongstring\" \n     hidden\n>\n    Foo\n</div>\n```\n\n#### Reverse\n\nBefore:\n```html\n<div foo=\"bar\" \n     style=\"verylongstring\"\n     hidden>\n    Foo\n</div>\n```\n\nAfter:\n```html\n<div foo=\"bar\" style=\"verylongstring\" hidden>\n    Foo\n</div>\n```\n\n### Download\nSee the Releases section here on GitHub.\n\n### Editor support\n#### VSCode\nInstall the [Super HTML VSCode extension](https://marketplace.visualstudio.com/items?itemName=LorisCro.super) (doesn't require the CLI tool as it bundles a WASM build of the language server).\n\n#### Neovim\n1. Download a prebuilt version of `superhtml` from the Releases section (or build it yourself).\n2. Put `superhtml` in your `PATH`.\n3. Configure `superhtml` for your chosen lsp\n\n\t- ##### [Neovim Built-In](https://neovim.io/doc/user/lsp.html#vim.lsp.start())\n\n\t\t```lua\n\t\tvim.api.nvim_create_autocmd(\"Filetype\", {\n\t\t\tpattern = { \"html\", \"shtml\", \"htm\" },\n\t\t\tcallback = function()\n\t\t\t\tvim.lsp.start({\n\t\t\t\t\tname = \"superhtml\",\n\t\t\t\t\tcmd = { \"superhtml\", \"lsp\" },\n\t\t\t\t\troot_dir = vim.fs.dirname(vim.fs.find({\".git\"}, { upward = true })[1])\n\t\t\t\t})\n\t\t\tend\n\t\t})\n\t\t```\n\n\t- ##### [LspZero](https://github.com/VonHeikemen/lsp-zero.nvim)\n\n\t\t```lua\n\t\tlocal lsp = require(\"lsp-zero\")\n\n\t\trequire('lspconfig.configs').superhtml = {\n\t\t\t\tdefault_config = {\n\t\t\t\t\t\tname = 'superhtml',\n\t\t\t\t\t\tcmd = {'superhtml', 'lsp'},\n\t\t\t\t\t\tfiletypes = {'html', 'shtml', 'htm'},\n\t\t\t\t\t\troot_dir = require('lspconfig.util').root_pattern('.git')\n\t\t\t\t}\n\t\t}\n\n\t\tlsp.configure('superhtml', {force_setup = true})\n\t\t```\n\n#### Helix\nIn versions later than `24.07` `superhtml` is supported out of the box, simply add executable to your `PATH`.\n\n\n#### [Flow Control](https://github.com/neurocyte/flow)\nAlready defaults to using SuperHTML, just add the executable to your `PATH`.\n\n#### Vim\nVim should be able to parse the errors that `superhtml check [PATH]` generates.\nThis means that you can use `:make` and the quickfix window to check for syntax\nerrors.\n\nSet the `makeprg` to the following in your .vimrc:\n```\n\" for any html file, a :make<cr> action will populate the quickfix menu\nautocmd filetype html setlocal makeprg=superhtml\\ check\\ %\n\" if you want to use gq{motion} to format sections or the whole buffer (with gggqG)\nautocmd filetype html setlocal formatprg=superhtml\\ fmt\\ --stdin\n```\n\n#### Zed\nSee [WeetHet/superhtml-zed](https://github.com/WeetHet/superhtml-zed).\n\n#### Other editors\nFollow your editor specific instructions on how to define a new Language Server for a given language / file format.\n\n*(Also feel free to contribute more specific instructions to this readme / add files under the `editors/` subdirectory).*\n\n\n## FAQs\n### Why doesn't SuperHTML support self-closing tags?\nBecause self-closing tags don't exist in HTML and, while harmless when used with void elements, it just keeps misleating people into thinking that you can self-close HTML tags.\n\nIn particular, given this HTML code:\n\n```html\n<!doctype html>\n<html> \n  <head></head>\n  <body>\n    <div/>\n    <p></p>\n  </body>\n</html>\n```\n\nYou might think that `<div>` and `<p>` are siblings, while in reality browsers are required **by the spec** to ignore the self-closing slash in `<div/>`, making `<p>` a child, not a sibling of it.\n\nAdd to that the fact that tooling like the default HTML formatter in VSCode will provide misleading autoformatting (try it yourself, disable SuperHTML in VSCode and autoformat the snippet above), to this day people are way more confused about HTML than they need to be.\n\nRelated: [#100](https://github.com/kristoff-it/superhtml/pull/100).\n\n### Why doesn't SuperHTML report duplicate values in `[class]` as an error?\nThe HTML spec defines the global `class` attribute as a space-separated list of tokens, as opposed to a space-separated list of *unique* tokens, like some other attributes are (e.g. `accesskey`).\n\n### Why is `<style>` under `<body>` an error? It works in all browsers!\nAs far as I'm concerned, there is no good reason to forbid `<style>` in body, but that's what the HTML spec does.\n\nRelated upstream issue: https://github.com/whatwg/html/issues/1605\n\n### Why does SuperHTML consider unclosed `<li>` elements an error?\n\nAccording to the HTML spec it's legal to leave some tags unclosed.\nOne common example is `<li>`, which enables this usage pattern:\n\n```html\n<ul>\n  <li> First point\n  <li> Second point\n</ul>\t\n```\n\nThe reason why this is not ambiguous is that `<li>`cannot be nested inside\nanother `<li>` so whe the second sibling is encountered, it's possible to always\ncorrectly implicitly close the first `<li>`.\n\nSuperHTML breaks compatibility with the HTML spec in this regard for one main reason:\nwhile implicitly closed tags are unambiguous in *valid* HTML documents, it creates a\nproblematic gray area when it comes to typos.\n\nConsider the following snippet:\n\n```html\n<li>first point<li>\n```\n\nIf SuperHTML were to follow the HTML spec it would have to consider this valid\nHTML that represents two bullet points, the second of which contains no content.\n\nUnfortunately it's also very likely (acutally even more so) that the user just\nforgot the closing slash in the second tag.\n\nFor this reason SuperHTML does not allow closing tags implicitly even if the\nHTML spec allows it.\n\nIf you want to write HTML code that leverages this feature, do not use SuperHTML\nas there are no plans to ever support it.\n\n#### But what about Google AMP?\nWhy are you letting an ad company decide what the world wide web should look like.\nDo you want ads? Because that's how you get ads.\n\n## Templating Language Library\nSuperHTML is also a HTML templating language. More on that soon.\n\n## Contributing\nSuperHTML tracks the latest Zig release (0.15.1 at the moment of writing).\n\n### Contributing to the HTML parser & LSP\nContributing to the HTML parser and LSP doesn't require you to be familiar with the templating language, basically limiting the scope of what you have to worry about to:\n\n- `src/cli.zig`\n- `src/cli/`\n- `src/html/`\n\nIn particular, you will care about the source files under `src/html`.\n\nYou can invoke `zig build test` to run all unit tests.\n\nRunning `zig build` will compile the SuperHTML CLI tool, allowing you to also then test the LSP behavior directly from your favorite editor.\n\nFor testing within VSCode:\n1. Run `zig build wasm -p src/editors/vscode/wasm`\n2. Open `src/editors/vscode` in VSCode\n3. Start debugging.\n\nDebug builds will produce logs in your cache directory so you can `tail -f ~/.cache/superhtml.log`.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1950733?u=4c433986c229d3bff345521171a121c84014917e&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.6.2",
+      "name": "v0.6.2",
+      "body": "- The \"boolean attributes cannot have a value\" error now puts squigglies under the attribute name instead of the value.\r\n- Improved validation for `<link>` `[crossorigin]`, it previously used its own implementation of CORS validation, while now it uses one central implementation shared by all other similar attributes.\r\n- `[lang]` (and similar attributes) now accept the empty string as value, used to signify that the language is unknown.\r\n- Fixed a condition that would cause the language server to attempt to detect html elements inside of svg elements.\r\n\r\n",
+      "prerelease": false,
+      "published_at": "2025-10-13T10:46:07Z",
+      "html_url": "https://github.com/kristoff-it/superhtml/releases/tag/v0.6.2",
+      "assets": [
+        {
+          "name": "aarch64-linux.tar.xz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.6.2/aarch64-linux.tar.xz",
+          "size": 1331216,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "aarch64-macos.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.6.2/aarch64-macos.zip",
+          "size": 817174,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.6.2/aarch64-windows.zip",
+          "size": 688061,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "wasm-wasi-lsponly.tar.xz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.6.2/wasm-wasi-lsponly.tar.xz",
+          "size": 329700,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.xz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.6.2/x86_64-linux-musl.tar.xz",
+          "size": 1393084,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "x86_64-macos.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.6.2/x86_64-macos.zip",
+          "size": 847726,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.6.2/x86_64-windows.zip",
+          "size": 731956,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.6.1",
+      "name": "v0.6.1",
+      "body": "Fixes two bugs:\r\n\r\n- `fmt` now properly leaves `<pre>` tags untouched, this regressed in the recent changes to formatting code, sorry!\r\n- `--syntax-only` (and relative switch in VSCode) now silences also \"invalid element name\" errors, making it viable to use superhtml with some kinds of templated html",
+      "prerelease": false,
+      "published_at": "2025-10-03T13:01:38Z",
+      "html_url": "https://github.com/kristoff-it/superhtml/releases/tag/v0.6.1",
+      "assets": [
+        {
+          "name": "aarch64-linux.tar.xz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.6.1/aarch64-linux.tar.xz",
+          "size": 1331560,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "aarch64-macos.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.6.1/aarch64-macos.zip",
+          "size": 817470,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.6.1/aarch64-windows.zip",
+          "size": 688291,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "wasm-wasi-lsponly.tar.xz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.6.1/wasm-wasi-lsponly.tar.xz",
+          "size": 331636,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.xz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.6.1/x86_64-linux-musl.tar.xz",
+          "size": 1393092,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "x86_64-macos.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.6.1/x86_64-macos.zip",
+          "size": 849209,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.6.1/x86_64-windows.zip",
+          "size": 732095,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.6.0",
+      "name": "v0.6.0 - State of the art release!",
+      "body": "## This release introduces two huge new features\r\n- Validation for HTML elements and attributes (including nesting, attribute values and combinations, etc).\r\n- All the main LSP features: completions, polished autoformatting, definitions, etc.\r\n\r\n**SuperHTML is as of today the only HTML language server that implements the WHATWG HTML living spec to this degree** (see open issues for the last few remaining bits).\r\n\r\nDetailed changelist:\r\n\r\n- All major Language Server features implemented: completions, clear diagnostics, descriptions, etc.\r\n- New diagnostics cover element nesting errors and attribute validation, including complex interactions between different attributes and elements.\r\n- Duplicate ID diagnostics that are `<template>` aware.\r\n- Rename symbol on a tag name will rename both start and end tags at once.\r\n- Find references can be used on class names to find other elements that have the same class.\r\n- New improved autoformatting that keeps the first attribute on the same line as the element:\r\n   - Uses tabs for indentation and spaces for alignment (experimental, might be reverted)\r\n   - Respects empty lines that delineate separate blocks.\r\n   - Doesn't format vertically elements in between text nodes anymore.\r\n   - Basic CSS and JS autoformatting.\r\n- Introduced a \"Syntax Only Mode\" setting to disable advanced validation for compatibility with templated HTML files.\r\n\r\nThis is a huge jump forward bug reports (with repro instructions!) are appreciated.\r\nIf you believe a diagnostic produced by SuperHTML to be wrong you are welcome to open an issue but\r\nyou will be asked to reference the HTML spec to dissuade poorly researched, drive-by issues.\r\n\r\n\r\n",
+      "prerelease": false,
+      "published_at": "2025-09-22T13:46:30Z",
+      "html_url": "https://github.com/kristoff-it/superhtml/releases/tag/v0.6.0",
+      "assets": [
+        {
+          "name": "aarch64-linux.tar.xz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.6.0/aarch64-linux.tar.xz",
+          "size": 1615668,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "aarch64-macos.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.6.0/aarch64-macos.zip",
+          "size": 882642,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.6.0/aarch64-windows.zip",
+          "size": 732008,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "wasm-wasi-lsponly.tar.xz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.6.0/wasm-wasi-lsponly.tar.xz",
+          "size": 331672,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.xz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.6.0/x86_64-linux-musl.tar.xz",
+          "size": 1697276,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "x86_64-macos.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.6.0/x86_64-macos.zip",
+          "size": 919718,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.6.0/x86_64-windows.zip",
+          "size": 775910,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.5.3",
+      "name": "v0.5.3",
+      "body": "- Fixes a remaining bug when formatting void elements vertically.\r\n- patch version bumped to 3 to match the VScode extension\r\n",
+      "prerelease": false,
+      "published_at": "2024-10-31T16:34:20Z",
+      "html_url": "https://github.com/kristoff-it/superhtml/releases/tag/v0.5.3",
+      "assets": [
+        {
+          "name": "aarch64-linux.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.5.3/aarch64-linux.tar.gz",
+          "size": 1513358,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "aarch64-macos.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.5.3/aarch64-macos.tar.gz",
+          "size": 379615,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.5.3/aarch64-windows.zip",
+          "size": 1110003,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "wasm-wasi-lsponly.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.5.3/wasm-wasi-lsponly.tar.gz",
+          "size": 159391,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.5.3/x86_64-linux-musl.tar.gz",
+          "size": 1542748,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-macos.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.5.3/x86_64-macos.tar.gz",
+          "size": 396839,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.5.3/x86_64-windows.zip",
+          "size": 1499164,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.5.1",
+      "name": "v0.5.1",
+      "body": "- Added WASM build of the Language Server to the list of releases, in case editors other than vscode might want to bundle a WASM-WASI version of SuperHTML. **NOTE: unlike other artifacts, the wasm module only contains the language server, not the entire CLI tool.**\r\n- Fixed #40 ",
+      "prerelease": false,
+      "published_at": "2024-10-30T16:03:16Z",
+      "html_url": "https://github.com/kristoff-it/superhtml/releases/tag/v0.5.1",
+      "assets": [
+        {
+          "name": "aarch64-linux.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.5.1/aarch64-linux.tar.gz",
+          "size": 1513508,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "aarch64-macos.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.5.1/aarch64-macos.tar.gz",
+          "size": 379608,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.5.1/aarch64-windows.zip",
+          "size": 1109999,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "wasm-wasi-lsponly.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.5.1/wasm-wasi-lsponly.tar.gz",
+          "size": 159376,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.5.1/x86_64-linux-musl.tar.gz",
+          "size": 1542740,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-macos.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.5.1/x86_64-macos.tar.gz",
+          "size": 396848,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.5.1/x86_64-windows.zip",
+          "size": 1499223,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.5.0",
+      "name": "v0.5.0",
+      "body": "Fixed the list of obsolete tag names as it previously contained outdated entries.",
+      "prerelease": false,
+      "published_at": "2024-09-12T01:38:14Z",
+      "html_url": "https://github.com/kristoff-it/superhtml/releases/tag/v0.5.0",
+      "assets": [
+        {
+          "name": "aarch64-linux.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.5.0/aarch64-linux.tar.gz",
+          "size": 1514762,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "aarch64-macos.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.5.0/aarch64-macos.tar.gz",
+          "size": 379710,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.5.0/aarch64-windows.zip",
+          "size": 1111112,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.5.0/x86_64-linux-musl.tar.gz",
+          "size": 1544589,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-macos.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.5.0/x86_64-macos.tar.gz",
+          "size": 397021,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.5.0/x86_64-windows.zip",
+          "size": 1499945,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.4.3",
+      "name": "v0.4.3",
+      "body": "Add `-Dforce-version` flag to build the SuperHTML CLI tool with a manually specified version, bypassing `git describe`. This is useful for package managers that build `superhtml` from a shallow clone of the git repository (or use a tarball, et simila).\r\n\r\n",
+      "prerelease": false,
+      "published_at": "2024-07-26T10:41:45Z",
+      "html_url": "https://github.com/kristoff-it/superhtml/releases/tag/v0.4.3",
+      "assets": [
+        {
+          "name": "aarch64-linux.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.4.3/aarch64-linux.tar.gz",
+          "size": 1498969,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "aarch64-macos.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.4.3/aarch64-macos.tar.gz",
+          "size": 375675,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.4.3/aarch64-windows.zip",
+          "size": 1102655,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.4.3/x86_64-linux-musl.tar.gz",
+          "size": 1532864,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-macos.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.4.3/x86_64-macos.tar.gz",
+          "size": 393924,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.4.3/x86_64-windows.zip",
+          "size": 1489301,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.4.2",
+      "name": "v0.4.2",
+      "body": "Fixes a crash found by @EliSauder, updates zig-afl-fuzz (development only) dependency. ",
+      "prerelease": false,
+      "published_at": "2024-07-25T16:52:01Z",
+      "html_url": "https://github.com/kristoff-it/superhtml/releases/tag/v0.4.2",
+      "assets": [
+        {
+          "name": "aarch64-linux.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.4.2/aarch64-linux.tar.gz",
+          "size": 1498973,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "aarch64-macos.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.4.2/aarch64-macos.tar.gz",
+          "size": 375682,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.4.2/aarch64-windows.zip",
+          "size": 1102649,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.4.2/x86_64-linux-musl.tar.gz",
+          "size": 1532864,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-macos.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.4.2/x86_64-macos.tar.gz",
+          "size": 393920,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.4.2/x86_64-windows.zip",
+          "size": 1489302,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.4.1",
+      "name": "v0.4.1",
+      "body": "Minor polishes to the CLI help menu and other improvements to the build script.",
+      "prerelease": false,
+      "published_at": "2024-07-24T20:07:52Z",
+      "html_url": "https://github.com/kristoff-it/superhtml/releases/tag/v0.4.1",
+      "assets": [
+        {
+          "name": "aarch64-linux.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.4.1/aarch64-linux.tar.gz",
+          "size": 1499449,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "aarch64-macos.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.4.1/aarch64-macos.tar.gz",
+          "size": 375433,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.4.1/aarch64-windows.zip",
+          "size": 1103155,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.4.1/x86_64-linux-musl.tar.gz",
+          "size": 1532782,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-macos.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.4.1/x86_64-macos.tar.gz",
+          "size": 393814,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.4.1/x86_64-windows.zip",
+          "size": 1488969,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.4.0",
+      "name": "Bugfixes, proper version reporting ",
+      "body": "## SuperHTML CLI (LSP)\r\n- Bugfixes\r\n- Introduced correct version reporting (now `superhtml version` will report the correct version)\r\n\r\n## SuperHTML Templating Language\r\n- Added support for Scripty interrupts",
+      "prerelease": false,
+      "published_at": "2024-07-23T16:47:28Z",
+      "html_url": "https://github.com/kristoff-it/superhtml/releases/tag/v0.4.0",
+      "assets": [
+        {
+          "name": "aarch64-linux.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.4.0/aarch64-linux.tar.gz",
+          "size": 1499398,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "aarch64-macos.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.4.0/aarch64-macos.tar.gz",
+          "size": 375552,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.4.0/aarch64-windows.zip",
+          "size": 1103110,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.4.0/x86_64-linux-musl.tar.gz",
+          "size": 1532823,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-macos.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.4.0/x86_64-macos.tar.gz",
+          "size": 393856,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.4.0/x86_64-windows.zip",
+          "size": 1488911,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.3.1",
+      "name": "fmt bugfix",
+      "body": "Last release introduced a minor bug in the autoformatting code, which is now fixed.",
+      "prerelease": false,
+      "published_at": "2024-07-15T16:39:51Z",
+      "html_url": "https://github.com/kristoff-it/superhtml/releases/tag/v0.3.1",
+      "assets": [
+        {
+          "name": "aarch64-linux.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.3.1/aarch64-linux.tar.gz",
+          "size": 1486144,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "aarch64-macos.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.3.1/aarch64-macos.tar.gz",
+          "size": 370840,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.3.1/aarch64-windows.zip",
+          "size": 1094924,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.3.1/x86_64-linux-musl.tar.gz",
+          "size": 1518701,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-macos.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.3.1/x86_64-macos.tar.gz",
+          "size": 389948,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.3.1/x86_64-windows.zip",
+          "size": 1477304,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.3.0",
+      "name": "Fuzztested!",
+      "body": "The HTML parser was fuzztested with AFL++ (see the `fuzz` build step for more info) and a few crashes were solved.\r\n\r\nThe language server is now fit for general use with HTML files.\r\n\r\n",
+      "prerelease": false,
+      "published_at": "2024-07-15T16:14:32Z",
+      "html_url": "https://github.com/kristoff-it/superhtml/releases/tag/v0.3.0",
+      "assets": [
+        {
+          "name": "aarch64-linux.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.3.0/aarch64-linux.tar.gz",
+          "size": 1486822,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "aarch64-macos.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.3.0/aarch64-macos.tar.gz",
+          "size": 370914,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.3.0/aarch64-windows.zip",
+          "size": 1095272,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.3.0/x86_64-linux-musl.tar.gz",
+          "size": 1518949,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-macos.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.3.0/x86_64-macos.tar.gz",
+          "size": 390087,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.3.0/x86_64-windows.zip",
+          "size": 1477615,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "<svg> support & bugfixes",
+      "body": "- Various bugfixes\r\n- Support for `<self-closing/>` tags in `<svg>`",
+      "prerelease": true,
+      "published_at": "2024-07-11T13:29:54Z",
+      "html_url": "https://github.com/kristoff-it/superhtml/releases/tag/v0.2.0",
+      "assets": [
+        {
+          "name": "aarch64-linux.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.2.0/aarch64-linux.tar.gz",
+          "size": 1473685,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "aarch64-macos.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.2.0/aarch64-macos.tar.gz",
+          "size": 368921,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.2.0/aarch64-windows.zip",
+          "size": 1088452,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.2.0/x86_64-linux-musl.tar.gz",
+          "size": 1505506,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-macos.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.2.0/x86_64-macos.tar.gz",
+          "size": 388030,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/v0.2.0/x86_64-windows.zip",
+          "size": 1469647,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.1.3",
+      "name": "",
+      "body": "- fix erroneous 'duplicate attr name' diagnostics\r\n- mark `plaintext` and `listing` as deprecated and unsupported tags ",
+      "prerelease": true,
+      "published_at": "2024-07-08T15:47:47Z",
+      "html_url": "https://github.com/kristoff-it/superhtml/releases/tag/0.1.3",
+      "assets": [
+        {
+          "name": "aarch64-linux.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/0.1.3/aarch64-linux.tar.gz",
+          "size": 1451241,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "aarch64-macos.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/0.1.3/aarch64-macos.tar.gz",
+          "size": 354091,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/0.1.3/aarch64-windows.zip",
+          "size": 1080873,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/0.1.3/x86_64-linux-musl.tar.gz",
+          "size": 1475676,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-macos.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/0.1.3/x86_64-macos.tar.gz",
+          "size": 371236,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/0.1.3/x86_64-windows.zip",
+          "size": 1445873,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.1.2",
+      "name": "Character Reference Checking",
+      "body": "Main feature of this release is the addition of character reference errors (e.g. `&doesntexist;`).\r\n",
+      "prerelease": true,
+      "published_at": "2024-07-06T16:02:58Z",
+      "html_url": "https://github.com/kristoff-it/superhtml/releases/tag/0.1.2",
+      "assets": [
+        {
+          "name": "aarch64-linux.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/0.1.2/aarch64-linux.tar.gz",
+          "size": 1450795,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "aarch64-macos.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/0.1.2/aarch64-macos.tar.gz",
+          "size": 353889,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/0.1.2/aarch64-windows.zip",
+          "size": 1080638,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/0.1.2/x86_64-linux-musl.tar.gz",
+          "size": 1475901,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-macos.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/0.1.2/x86_64-macos.tar.gz",
+          "size": 370988,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/0.1.2/x86_64-windows.zip",
+          "size": 1445798,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.1.0",
+      "name": "Initial HTML LSP Release",
+      "body": "This is an initial release of the Super CLI tool that supports `fmt` and `lsp` functionality.\r\n\r\nThe LSP still has a lot of missing functionality but autoformatting and basic diagnostic errors should work.\r\nIf using VSCode, consider installing the \"Super HTML\" extension from its marketplace.",
+      "prerelease": true,
+      "published_at": "2024-07-05T20:40:58Z",
+      "html_url": "https://github.com/kristoff-it/superhtml/releases/tag/0.1.0",
+      "assets": [
+        {
+          "name": "aarch64-linux.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/0.1.0/aarch64-linux.tar.gz",
+          "size": 1435911,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "aarch64-macos.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/0.1.0/aarch64-macos.tar.gz",
+          "size": 339649,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/0.1.0/aarch64-windows.zip",
+          "size": 1064839,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/0.1.0/x86_64-linux-musl.tar.gz",
+          "size": 1456406,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-macos.tar.gz",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/0.1.0/x86_64-macos.tar.gz",
+          "size": 354910,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/superhtml/releases/download/0.1.0/x86_64-windows.zip",
+          "size": 1426986,
+          "content_type": "application/zip"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "vp of community @ziglang • curator of software you can love (https://sycl.it)",
+  "owner_company": "@ziglang",
+  "owner_location": "Milan, Italy",
+  "owner_blog": "https://kristoff.it",
+  "owner_twitter_username": null,
+  "owner_followers": 1291,
+  "owner_following": 22,
+  "owner_created_at": "2012-07-10T15:27:34Z",
+  "license": "MIT",
+  "category": "library"
+}

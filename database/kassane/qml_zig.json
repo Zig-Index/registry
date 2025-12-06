@@ -1,0 +1,58 @@
+{
+  "name": "qml_zig",
+  "owner": "kassane",
+  "repo": "qml_zig",
+  "description": "QML bindings for the Zig programming language",
+  "type": "project",
+  "topics": [
+    "qml-zig",
+    "qml-bindings",
+    "zig",
+    "ziglang",
+    "zig-package"
+  ],
+  "stars": 118,
+  "forks": 4,
+  "watchers": 6,
+  "updated_at": "2025-10-12T02:10:40Z",
+  "dependencies": [
+    {
+      "name": "dotherside",
+      "url": "git+https://github.com/filcuc/dotherside#56cb910b368ad0f8ef1f18ef52d46ab8136ca5d6",
+      "hash": "N-V-__8AAOS6BQCGuntyjwYjjkXwt4xU33mcVW_sgHs0IYRS"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# QML-zig\n![GitHub All Releases](https://img.shields.io/github/downloads/kassane/qml_zig/total?style=flat-square) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/kassane/qml_zig?style=flat-square) ![GitHub](https://img.shields.io/github/license/kassane/qml_zig?style=flat-square)\n\nBindings are based on [DOtherSide](https://github.com/filcuc/dotherside) C bindings for QML Library is mostly feature-compliant with other bindings based on the library, but lacks some minor features and has quite a few bugs.\n\n# Preview\n![qml_zig](https://user-images.githubusercontent.com/6756180/102698635-a5518500-421d-11eb-8705-98013d2328d7.jpg)\n\n# Build - Steps\n\n## Requirements\n\nAll software required for building.\n\n- Qt 5.15 or higher\n- Zig v0.14.0 or master\n- CMake v3.2 or higher (DOtherSide build)\n\n### Question\n\n#### Works on Qt6?\n\nMaybe, check [DOtherSide](https://github.com/filcuc/dotherside) support!!\n\n## Instructions\n\n~~~bash\n# Clone repo\ngit clone --recursive https://github.com/kassane/qml_zig\n\n# Open folder\ncd qml_zig\n\n# build DOtherSide\nzig build cmake\n\n# Build\nzig build ExampleName -Doptimize=ReleaseSafe|-Doptimize=ReleaseFast|-Doptimize=ReleaseSmall\n~~~\n\n# Examples\n\n`zig build Animated` - Run an Animated Box\n\n`zig build Hello` - Hello World, with Menu and Clickable Button\n\n`zig build Cells` - Cells example from QML Tute, click a color to change the text\n\n`zig build Button` - Button with 2-way comms to the Zig code\n\n`zig build Layouts` - Layouts examples\n\n`zig build Splits` - Splitview example\n\n`zig build Tables` - Tableview example\n\n# Work in Progres Examples\n\n`zig build Particle` - Particle system example\n- Needs QObject wrapper working yet, to pass zig objects to the QML side\n\n# Status\n\n- Basic initialization and execution\n- More Examples - thanks [@zigster64](https://github.com/zigster64)!\n- Providing properties to QML files\n\n# TODO\n\n- [ ] QAbstractListModels\n- [ ] QObject - **working progress**\n- [ ] QStyle\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/6756180?u=d6f3a7066e4d3a99cc18ce3af2fd4b2fa754eec7&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.2",
+      "name": "v0.2",
+      "body": "## What's Changed\r\n* Ci config by @kassane in https://github.com/kassane/qml_zig/pull/6\r\n* Update: Zig v0.9.0 or higher by @kassane in https://github.com/kassane/qml_zig/pull/7\r\n* Zig 0.11 - update to master by @kassane in https://github.com/kassane/qml_zig/pull/8\r\n* Update to latest version by @kassane in https://github.com/kassane/qml_zig/pull/9\r\n\r\n## New Contributors\r\n* @kassane made their first contribution in https://github.com/kassane/qml_zig/pull/6\r\n\r\n**Full Changelog**: https://github.com/kassane/qml_zig/compare/v0.1...v0.2",
+      "prerelease": false,
+      "published_at": "2023-05-13T14:10:43Z",
+      "html_url": "https://github.com/kassane/qml_zig/releases/tag/v0.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1",
+      "name": "QML-zig v0.1-alpha",
+      "body": "QmlApplication with more examples.",
+      "prerelease": false,
+      "published_at": "2021-02-02T11:38:15Z",
+      "html_url": "https://github.com/kassane/qml_zig/releases/tag/v0.1",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Software developer 👨‍🦽",
+  "owner_company": null,
+  "owner_location": "Bahia, Brazil",
+  "owner_blog": "https://kassane.github.io",
+  "owner_twitter_username": "TheuCatarino",
+  "owner_followers": 145,
+  "owner_following": 34,
+  "owner_created_at": "2014-02-22T13:35:59Z",
+  "license": "Apache-2.0",
+  "category": "library"
+}

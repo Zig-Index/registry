@@ -1,0 +1,75 @@
+{
+  "name": "comlink",
+  "owner": "rockorager",
+  "repo": "comlink",
+  "description": "An experimental IRC client",
+  "type": "project",
+  "topics": [
+    "irc",
+    "irc-client",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 55,
+  "forks": 7,
+  "watchers": 3,
+  "updated_at": "2025-07-17T10:01:04Z",
+  "dependencies": [
+    {
+      "name": "vaxis",
+      "url": "git+https://github.com/rockorager/libvaxis#a379a185fb5414c3f0545121deda73aef6adac15",
+      "hash": "vaxis-0.1.0-BWNV_IrzCABjEgB2wCfG6hGZ29_xfIy-_BCNtNfsrsTt"
+    },
+    {
+      "name": "zeit",
+      "url": "git+https://github.com/rockorager/zeit#44bebf856693332b168d8ba2c45b9d1ec15511de",
+      "hash": "zeit-0.0.0-5I6bk_pZAgB03N1p1GmVOZ--gOFwwQSRKj1UXb5tnaKS"
+    },
+    {
+      "name": "tls",
+      "url": "git+https://github.com/ianic/tls.zig#cbcb175b9e7b23356aafd005fdd20f3f6dd80a04",
+      "hash": "tls-0.1.0-ER2e0sz1BABm_MuU6VMiQJ152-Q-wLAtEYCmgloFmVzV"
+    },
+    {
+      "name": "zzdoc",
+      "url": "git+https://github.com/rockorager/zzdoc#57e86eb4e621bc4a96fbe0dd89ad0986db6d0483",
+      "hash": "zzdoc-0.0.0-tzT1PuPZAACr1jIJxjTrdOsLbfXS6idWFGfTq0gwxJiv"
+    },
+    {
+      "name": "lua_wrapper",
+      "url": "git+https://github.com/natecraddock/ziglua#70cf5b7c3941923fdcdb5c9d308f7c49de504ad4",
+      "hash": "lua_wrapper-0.1.0-OyMC23XKBADKmeC0WOW1mgWw5bUgS5_HEqD2X6k9Jpm_"
+    }
+  ],
+  "readme": "# comlink\n\nAn experimental IRC client written in zig. Join the discussion in #comlink on\nlibera.chat.\n\n![screenshot of comlink](screenshot.png)\n\n## Installation\n\n### Arch Linux\n\n[comlink](https://aur.archlinux.org/packages/comlink) is available as a package in the AUR. It can be installed using an AUR helper (e.g. paru).\n\n```sh\nparu -S comlink\n```\n\n### Zig Build System\n\n`comlink` is written in zig and can be installed using the zig build system,\nversion 0.14.0.\n\n```sh\ngit clone https://github.com/rockorager/comlink\ncd comlink\nzig build -Doptimize=ReleaseSafe --prefix ~/.local\n```\n\n## Configuration\n\nConfiguration is loaded from `$HOME/.config/comlink/init.lua`\n\nWorks best with `soju`. [irctoday](https://irctoday.com) runs a paid instance of `soju`, and\nanother paid alternative is [pico.sh](https://pico.sh/irc)\n\n```lua\nlocal comlink = require(\"comlink\")\n\nlocal config = {\n\tserver = \"chat.sr.ht\",\n\tuser = \"rockorager\",\n\tnick = \"rockorager\",\n\tpassword = \"password\",\n\treal_name = \"Tim Culverhouse\",\n\ttls = true,\n}\n\n-- Pass the server config to connect. Connect to as many servers as you need\ncomlink.connect(config)\n\n-- Bind a key to an action\ncomlink.bind(\"ctrl+c\", \"quit\")\n```\n\nStoring passwords in configuration files is generally considered a poor\nsecurity practice. The following example reads the password from an external\npassword manager:\n\n```lua\nlocal comlink = require(\"comlink\")\n\nlocal proc =\n  assert(io.popen(\"hiq -dFpassword proto=irc address=irc.example.com nickname=alex\", \"r\"))\nlocal password = proc:read(\"*l\")\nproc:close()\n\nlocal config = {\n\t-- …other fields here…\n\tpassword = password,\n}\n```\n\n## Contributing\n\nPatches accepted on the [mailing list](https://lists.sr.ht/~rockorager/comlink)\n\nPull requests accepted on [Github](https://github.com/rockorager/comlink)\n\nPull requests accepted on\n[tangled.sh](https://tangled.sh/@rockorager.dev/comlink)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/476352?u=aff432b811e969bae9d2f71a01510895e4bf469e&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.1",
+      "name": "v0.1.1",
+      "body": "- Fix tag mismatch in build.zig",
+      "prerelease": false,
+      "published_at": "2024-12-23T12:54:58Z",
+      "html_url": "https://github.com/rockorager/comlink/releases/tag/v0.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "Initial release of comlink.",
+      "prerelease": false,
+      "published_at": "2024-12-23T12:46:18Z",
+      "html_url": "https://github.com/rockorager/comlink/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": "Sourcegraph",
+  "owner_location": "St. Paul, MN",
+  "owner_blog": "https://rockorager.dev",
+  "owner_twitter_username": "rockorager",
+  "owner_followers": 232,
+  "owner_following": 5,
+  "owner_created_at": "2010-11-10T20:36:25Z",
+  "license": "MIT",
+  "category": "library"
+}

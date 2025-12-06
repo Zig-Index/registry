@@ -1,0 +1,38 @@
+{
+  "name": "bibleparsing",
+  "owner": "scripturial",
+  "repo": "bibleparsing",
+  "description": "Zig library to read Greek parsing codes commonly used in annotated Koine Greek text.",
+  "type": "project",
+  "topics": [
+    "biblical-greek",
+    "zig",
+    "zig-package",
+    "scripturial"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-02-09T16:11:45Z",
+  "dependencies": [
+    {
+      "name": "bibleparsing",
+      "url": "git+https://github.com/scripturial/bibleparsing#efc0965909af0bafdb0122be3d8a35896b8887c0",
+      "hash": "122058706bf46188011de3727bda43a4c07c6308d3010b331db47ca8bb9bd1fa6aad"
+    }
+  ],
+  "minimum_zig_version": "0.11.0",
+  "readme": "# Bible Parsing\n\nThis library converts a bible parsing/tagging code into a compressed\nu32 value, and allows writing a u32 value back to a string. Tested\nusing the parsing codes found in the Byzantine Text data files.\n\n```zig\n// Convert code 'A-DSN' to u32 value.\nconst in = try parse(\"A-DSN\");\n\n// Convert u32 value back to code.\nvar out = std.ArrayList(u8).init(allocator);\ntry byz.string(in, out);\ntry std.testing.expectEqualStrings(code, out.items);\n\n// Incomplete or InvalidParsing errors may be returned.\ntry std.testing.expectEqual(Error.Incomplete, parse(\"\"));\ntry std.testing.expectEqual(Error.InvalidParsing, parse(\"Z\"));\n```\n\nThere is no promise this code will work for you. It works for me for\nmy personal use cases. Feel free to use at your own risk. Released\ninto the public domain under the MIT license.\n\nSponsored by [Scripturial - Learn Biblical Greek](https://scripturial.com/)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/138373494?u=ff526221fc2764a6bc588ac2cf92fa9a350a66e3&v=4",
+  "releases": [],
+  "owner_bio": "Go and Rust afficionado. Developer for the scripturial app.",
+  "owner_company": "Scripturial",
+  "owner_location": null,
+  "owner_blog": "https://scripturial.com/",
+  "owner_twitter_username": null,
+  "owner_followers": 1,
+  "owner_following": 1,
+  "owner_created_at": "2023-07-02T12:06:17Z",
+  "license": "MIT",
+  "category": "library"
+}

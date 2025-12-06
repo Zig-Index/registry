@@ -1,0 +1,76 @@
+{
+  "name": "zigxll",
+  "owner": "AlexJReid",
+  "repo": "zigxll",
+  "description": "Write Excel custom functions in zig",
+  "type": "project",
+  "topics": [
+    "excel",
+    "excel-custom-functions",
+    "finance",
+    "zig",
+    "zig-package",
+    "custom-functions",
+    "excel-udf",
+    "trading",
+    "xll"
+  ],
+  "stars": 5,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-11-27T10:33:35Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# ZigXLL\n\nA Zig package for implementing Excel custom functions against the C SDK.\n\nThere's a [standalone repo here](https://github.com/AlexJReid/zigxll-standalone/) which can be used as a template.\n\n## Why\n\nThis exists because I wanted to see if it was possible to use Zig's C interop and comptime to make the Excel C SDK nicer to work with.\n\nThis came about as I'm working on [xllify](https://xllify.com) in C++ and Luau. I have no complaints, other than curiosity over how this would look in Zig. One day maybe xllify will be Zig - it's too soon to tell as I'm still learning the language (it's a moving target.)\n\nClaude helped a lot with the comptime stuff and the demos. Thanks, Claude.\n\nAnyway, we end up with:\n\n- **C performance but not C**: Higher level. No boilerplate. Memory rules enforced.\n- **Zero boilerplate**: No need to export `xlAutoOpen`, `xlAutoClose`, etc. - the framework handles it all\n- **Automatic discovery**: Just add an `ExcelFunction()` and reference your function\n- **Type safety**: Zig types automatically convert to/from Excel values (support for ranges soon)\n- **Thread-safe by default**: Functions marked thread-safe automatically for MTR\n- **UTF-8 strings**: Write Zig code with normal `[]u8` strings, framework handles UTF-16 conversion\n- **Error handling**: Zig errors automatically become `#VALUE!` in Excel\n- **comptime**: Compilation-time code generation balances conciseness without affecting runtime performance\n\nSee [how it works](./HOW_IT_WORKS.md) for more details.\n\n## Walkthrough\n\n> See [example](./example) for a simple working example.\n\nAdd ZigXLL as a dependency in your `build.zig.zon`:\n\n```zig\n.dependencies = .{\n    .xll = .{\n        .url = \"https://github.com/alexjreid/zigxll/archive/refs/tags/v0.2.0.tar.gz\",\n        .hash = \"...\",\n    },\n},\n```\n\nCreate your `build.zig`:\n\n```zig\nconst std = @import(\"std\");\n\npub fn build(b: *std.Build) void {\n    const target = b.resolveTargetQuery(.{\n        .cpu_arch = .x86_64,\n        .os_tag = .windows,\n        .abi = .msvc,\n    });\n    const optimize = b.standardOptimizeOption(.{ .preferred_optimize_mode = .ReleaseSmall });\n\n    // Create a module for your functions\n    const user_module = b.createModule(.{\n        .root_source_file = b.path(\"src/main.zig\"),\n        .target = target,\n        .optimize = optimize,\n        .strip = true,\n    });\n\n    // Build the XLL using the framework helper\n    const xll_build = @import(\"xll\");\n    const xll = xll_build.buildXll(b, .{\n        .name = \"my_functions\",\n        .user_module = user_module,\n        .target = target,\n        .optimize = optimize,\n    });\n\n    const install_xll = b.addInstallFile(xll.getEmittedBin(), \"lib/my_functions.xll\");\n    b.getInstallStep().dependOn(&install_xll.step);\n}\n```\n\n`src/main.zig` lists your function modules:\n\n```zig\npub const function_modules = .{\n    @import(\"my_functions.zig\"),\n};\n```\n\n`src/my_functions.zig` defines your Excel functions:\n\n```zig\nconst std = @import(\"std\");\nconst xll = @import(\"xll\");\nconst ExcelFunction = xll.ExcelFunction;\nconst ParamMeta = xll.ParamMeta;\n\npub const add = ExcelFunction(.{\n    .name = \"add\",\n    .description = \"Add two numbers\",\n    .category = \"Zig Math\",\n    .params = &[_]ParamMeta{\n        .{ .name = \"a\", .description = \"First number\" },\n        .{ .name = \"b\", .description = \"Second number\" },\n    },\n    .func = addImpl,\n});\n\nfn addImpl(a: f64, b: f64) !f64 {\n    return a + b;\n}\n\n// You can namespace functions using dots in the name\npub const bs_call = ExcelFunction(.{\n    .name = \"MyFunctions.BSCall\",\n    .description = \"Black-Scholes European Call Option Price\",\n    .category = \"Finance\",\n    .params = &[_]ParamMeta{\n        .{ .name = \"S\", .description = \"Current stock price\" },\n        .{ .name = \"K\", .description = \"Strike price\" },\n        .{ .name = \"T\", .description = \"Time to maturity (years)\" },\n        .{ .name = \"r\", .description = \"Risk-free rate\" },\n        .{ .name = \"sigma\", .description = \"Volatility\" },\n    },\n    .func = blackScholesCall,\n});\n\nfn blackScholesCall(S: f64, K: f64, T: f64, r: f64, sigma: f64) !f64 {\n    if (T <= 0) return error.InvalidMaturity;\n    // ... implementation\n    return call_price;\n}\n```\n\nBuild:\n\n```bash\nzig build\n```\n\nThe XLL lands in `zig-out/lib/my_functions.xll`. Double click to load in Excel.\n\n## Supported types\n\n**Parameters:**\n- `f64` - Numbers\n- `bool` - Booleans (TRUE/FALSE)\n- `[]const u8` - Strings (UTF-8)\n- `[][]const f64` - 2D arrays/ranges of numbers (empty cells become 0.0)\n- `*XLOPER12` - Raw Excel values (advanced)\n\n**Return types:**\n- `f64` - Numbers\n- `bool` - Booleans (TRUE/FALSE)\n- `[]const u8` / `[]u8` - Strings (automatically freed by Excel)\n- `[][]const f64` / `[][]f64` - 2D arrays/ranges of numbers (automatically freed by Excel)\n- `*XLOPER12` - Raw Excel values (advanced)\n\n**Optional parameters:** Use `?T` types (like `?f64`, `?bool`, `?[]const u8`) for optional parameters.\n\nFunctions return `!T` - errors become `#VALUE!` in Excel.\n\n## Available options for `ExcelFunction`\n\n```zig\npub const myFunc = ExcelFunction(.{\n    .name = \"myFunc\",\n    .description = \"My function\",\n    .category = \"MyCategory\",\n    .params = &[_]ParamMeta{\n        .{ .name = \"x\", .description = \"Parameter help text\" },\n        .{ .name = \"y\", .description = \"Optional parameter (default 10)\" },\n        .{ .description = \"Name is optional\" },\n    },\n    .func = myFuncImpl,\n    .thread_safe = true, // Default is true\n});\n\n// Function with optional parameter\nfn myFuncImpl(x: f64, y: ?f64, z: f64) !f64 {\n    const y_val = y orelse 10.0; // Use default if not provided\n    return x + y_val + z;\n}\n```\n\n**Optional parameters**: Use `?T` types (like `?f64`, `?bool`) for optional parameters. When Excel passes a missing value, it becomes `null`. Use the `orelse` operator to provide default values in your implementation.\n\n## Built-in Example Functions\n\nThe framework includes several example functions in `src/builtin_functions.zig` that demonstrate different features:\n\n### ZigDouble\n```\n=ZigDouble(x, y, z)\n```\nDemonstrates basic numeric operations: returns `x * 2 + y - z`\n\n**Example:** `=ZigDouble(5, 3, 1)` → 12\n\n### ZigMatrix\n```\n=ZigMatrix([rows], [cols])\n```\nReturns a matrix filled with sequential numbers. Both parameters are optional.\n\n- **Default:** 10×5 matrix (50 values: 1-50)\n- **Max size:** 100×100\n- **Examples:**\n  - `=ZigMatrix()` → 10×5 matrix\n  - `=ZigMatrix(3, 7)` → 3×7 matrix (21 values: 1-21)\n\nDemonstrates: optional parameters, 2D array return values (`[][]f64`)\n\n### ZigNot\n```\n=ZigNot(value)\n```\nReturns the logical NOT of a boolean value.\n\n**Examples:**\n- `=ZigNot(TRUE)` → FALSE\n- `=ZigNot(A1>10)` → inverts the comparison\n\nDemonstrates: boolean parameter and return type\n\n### ZigPower\n```\n=ZigPower(base, [exponent])\n```\nRaises a number to a power. Exponent is optional (default: 2).\n\n**Examples:**\n- `=ZigPower(5)` → 25 (5²)\n- `=ZigPower(5, 3)` → 125 (5³)\n\nDemonstrates: optional numeric parameter with default value\n\n### ZigSumRange\n```\n=ZigSumRange(data)\n```\nSums all values in a range or 2D array.\n\n**Examples:**\n- `=ZigSumRange(A1:C5)` → sums all values in the range\n- `=ZigSumRange(A:A)` → sums entire column A\n- `=ZigSumRange(1:10)` → sums rows 1-10\n\nDemonstrates: range/array input parameter (`[][]const f64`)\n\n## Dependencies\n\nThis library uses the **Microsoft Excel 2013 XLL SDK** headers and libraries. These are included in the `excel/` directory and are required to build Excel add-ins.\n\n- **Download**: https://www.microsoft.com/en-gb/download/details.aspx?id=35567\n- **Files used**: `xlcall.h`, `FRAMEWRK.H`, `xlcall32.lib`, `frmwrk32.lib`\n\nBy using this software you agree to the EULA specified by Microsoft in the above download.\n\n## Working on the framework\n\nYou can also clone this repo to improve the framework directly:\n\n1. Edit `src/user_functions.zig` or create new modules\n2. Run `zig build`\n3. Your XLL is in `zig-out/lib/output.xll`\n\n## License\n\n[MIT](./LICENSE)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1062363?u=a5f4e0864bf7129e3e17312e870c201dc1cb59c7&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.2.4",
+      "name": "v0.2.4",
+      "body": "- fixes botched release numbering\r\n- optional parameter support with default pattern\r\n- range fixes\r\n- example functions (ZigDouble, ZigMatrix, ZigNot, ZigPower, ZigSumRange)\r\n- BOOL support\r\n- matrix [][]f64 support (numeric ranges)\r\n- added demo funcs in builtin_functions.zig for above\r\n- performance boost",
+      "prerelease": false,
+      "published_at": "2025-11-02T17:11:39Z",
+      "html_url": "https://github.com/AlexJReid/zigxll/releases/tag/v0.2.4",
+      "assets": [
+        {
+          "name": "builtins.xll",
+          "url": "https://github.com/AlexJReid/zigxll/releases/download/v0.2.4/builtins.xll",
+          "size": 228864,
+          "content_type": "application/vnd.ms-excel"
+        },
+        {
+          "name": "example.xll",
+          "url": "https://github.com/AlexJReid/zigxll/releases/download/v0.2.4/example.xll",
+          "size": 221696,
+          "content_type": "application/vnd.ms-excel"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "**Full Changelog**: https://github.com/AlexJReid/zigxll/compare/v0.1.0...v0.2.0",
+      "prerelease": false,
+      "published_at": "2025-11-02T09:59:45Z",
+      "html_url": "https://github.com/AlexJReid/zigxll/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "Initial release",
+      "prerelease": false,
+      "published_at": "2025-11-01T21:46:31Z",
+      "html_url": "https://github.com/AlexJReid/zigxll/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": "Lexvica Limited",
+  "owner_location": "Newcastle, UK",
+  "owner_blog": "https://xllify.com",
+  "owner_twitter_username": "alexjreid",
+  "owner_followers": 9,
+  "owner_following": 6,
+  "owner_created_at": "2011-09-19T15:12:09Z",
+  "license": "MIT",
+  "category": "library"
+}

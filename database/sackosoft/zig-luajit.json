@@ -1,0 +1,200 @@
+{
+  "name": "zig-luajit",
+  "owner": "sackosoft",
+  "repo": "zig-luajit",
+  "description": "Run Lua code in Zig apps! A package providing Zig language bindings to LuaJIT. ",
+  "type": "project",
+  "topics": [
+    "bindings",
+    "language-bindings",
+    "lua",
+    "luajit",
+    "zig",
+    "zig-package",
+    "lua-bindings"
+  ],
+  "stars": 60,
+  "forks": 6,
+  "watchers": 1,
+  "updated_at": "2025-12-04T09:05:43Z",
+  "dependencies": [
+    {
+      "name": "luajit_build",
+      "url": "git+https://github.com/sackosoft/zig-luajit-build#1664f2be707feccf4191fb8c6c6dff9ac2bd6edb",
+      "hash": "luajit_build-1.1.6-HFjoU9xAAAANlxEGfin2P8D_sVc-AHtqKC6Fg8WWztZN"
+    }
+  ],
+  "readme": "<div align=\"center\">\n\n# zig-luajit\n\n**Zig ⚡ language bindings for the [LuaJIT](https://luajit.org/) C API. Use `zig-luajit` to run [Lua scripts](https://www.lua.org/) within a Zig application.**\n\n![Ubuntu Regression Tests Badge](https://img.shields.io/github/actions/workflow/status/sackosoft/zig-luajit/tests-ubuntu.yml?label=Tests%20Ubuntu)\n![Windows Regression Tests Badge](https://img.shields.io/github/actions/workflow/status/sackosoft/zig-luajit/tests-windows.yml?label=Tests%20Windows)\n<!--\n![GitHub License](https://img.shields.io/github/license/sackosoft/zig-luajit)\n-->\n\n<!--\nTODO: Capture attention with a visualization, diagram, demo or other visual placeholder here.\n![Placeholder]()\n-->\n\n</div>\n\n## About\n\nThe goal of the `zig-luajit` project is to provide the most idiomatic Zig language bindings for the LuaJIT C API and C\nAPI Auxilary Library. Additionally the `zig-luajit` project emphasizes safety by making liberal use of runtime safety\nchecks in `Debug` and `ReleaseSafe` builds and provides full test coverage of the API.\n\n## Zig Version\n\nThe `main` branch targets the latest stable Zig version. Currently `0.15.1`.\n\nFor other Zig versions look for branches with the named version.\n\n## Installation & Usage\n\nIt is recommended that you install `zig-luajit` using `zig fetch`. This will add a `luajit` dependency to your `build.zig.zon` file.\n\n```bash\nzig fetch --save=luajit git+https://github.com/sackosoft/zig-luajit\n```\n\nNext, in order for your code to import `zig-luajit`, you'll need to update your `build.zig` to do the following:\n\n1. get a reference the `zig-luajit` dependency.\n2. get a reference to the `luajit` module, which contains the core Zig language bindings for LuaJIT.\n3. add the module as an import to your executable or library.\n\n```zig\n// (1) Get a reference to the `zig fetch`'ed dependency\nconst luajit_dep = b.dependency(\"luajit\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\n// (2) Get a reference to the language bindings module.\nconst luajit = luajit_dep.module(\"luajit\");\n\n// Set up your library or executable\nconst lib = // ...\nconst exe = // ...\n\n// (3) Add the module as an import to your executable or library.\nmy_exe.root_module.addImport(\"luajit\", luajit);\nmy_lib.root_module.addImport(\"luajit\", luajit);\n```\n\nNow the code in your library or exectable can import and use the LuaJIT Zig API!\n\n```zig\nconst luajit = @import(\"luajit\");\nconst Lua = luajit.Lua;\n\nvar gpa = std.heap.GeneralPurposeAllocator(.{}){};\nconst lua = Lua.init(gpa.allocator());\ndefer lua.deinit();\n\nlua.openBaseLib();\nlua.doString(\n    \\\\ print(\"Hello, world!\")\n);\n```\n\n## Examples\n\nSome examples are provided in [examples/](./examples/) to aid users in learning to use `zig-luajit`. These\nsmall self-contained applications should always be working, please create an issue if they do not work for\nyou.\n\n```zig\nconst std = @import(\"std\");\nconst Lua = @import(\"luajit\").Lua;\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n\n    const lua = try Lua.init(gpa.allocator());\n    defer lua.deinit();\n\n    lua.openBaseLib();\n\n    try lua.doString(\n        \\\\ message = \"Hello, world!\"\n        \\\\ print(message)\n    );\n}\n```\n\n\n## Language Binding Coverage Progress\n\n| API                         | Support                               |\n|-----------------------------|---------------------------------------|\n| Lua C API (`lua_*`)         | 🎉 100% coverage<sup>†</sup> (92/92)  |\n| Auxilary Library (`luaL_*`) | 🤩 100% coverage (48/48)              |\n| Debug API (`lua_Debug`)     | 🥳 100% coverage (12/12)              |\n| LuaJIT Extensions           | *No plans to implement.*              |\n\n*†: Coroutine yield/resume is not yet part of the public `zig-luajit` Zig API, see [#6][ISSUE-6].*\n\n## Coverage and Compatibility\n\nThis section describes the current status of Zig language bindings (\"the Zig API\").\n\n* ☑️ Fully Supported: Test coverage and runtime safety checks enabled in `Debug` or `ReleaseSafe` builds.\n* ➖ Internal: Used internally and intentionally hidden from the Zig API.\n* 🆖 Superseded: Has no direct Zig equivalent, but the functionality is provided by a different part of the Zig API.\n* 📢 Renamed: Renamed in a non-obvious way from the C API. Renaming is avoided but done in cases deemed required:\n    1. to conform to Zig idioms or patterns, such as the `init()` / `deinit()` pattern.\n    1. to avoid conflicts with Zig language keywords, such as the Zig `error` keyword.\n    1. to show that the Zig API has slightly different behavior than the C API, such as using `lua.setAllocator()`\n       instead of `lua.setAllocF()`; since the Zig API uses `std.mem.Allocator` instead of allocation functions.\n    1. to improve the clarity, discoverability or consistency of the symbol in the overall API surface.\n\n\n### Core C API Coverage (`lua_`)\n\n| C Type Definition          | Available in `zig-luajit`                                           |\n|----------------------------|---------------------------------------------------------------------|\n| `lua_State`                | ☑️ `Lua`                                                             |\n| `lua_Alloc`                | ➖ Hidden, please use `lua.setAllocator()` and `lua.getAllocator()` |\n| `lua_CFunction`            | ☑️ `lua.CFunction`                                                   |\n| `lua_Integer`              | ☑️ `Lua.Integer`                                                     |\n| `lua_Number`               | ☑️ `Lua.Number`                                                      |\n| `lua_Reader`               | ☑️ [`std.io.AnyReader`][ZIG-DOC-ANYREADER]                           |\n| `lua_Writer`               | ☑️ [`std.io.AnyWriter`][ZIG-DOC-ANYWRITER]                           |\n\n[ZIG-DOC-ANYREADER]: https://ziglang.org/documentation/master/std/#std.io.AnyReader\n[ZIG-DOC-ANYWRITER]: https://ziglang.org/documentation/master/std/#std.io.AnyWriter\n\n| C API Symbols              | Available in `zig-luajit`           |\n|----------------------------|-------------------------------------|\n| `lua_atpanic`              | ☑️ `lua.atPanic()`                   |\n| `lua_call`                 | ☑️ `lua.call()`                      |\n| `lua_pcall`                | ☑️📢 `lua.callProtected()`           |\n| `lua_cpcall`               | ☑️📢 `lua.callProtectedC()`          |\n| `lua_checkstack`           | ☑️ `lua.checkStack()`                |\n| `lua_close`                | ☑️📢 `lua.deinit()`                  |\n| `lua_concat`               | ☑️ `lua.concat()`                    |\n| `lua_createtable`          | ☑️ `lua.createTable()`               |\n| `lua_dump`                 | ☑️ `lua.dump()`                      |\n| `lua_equal`                | ☑️ `lua.equal()`                     |\n| `lua_error`                | ☑️📢 `lua.raiseError()`              |\n| `lua_gc`                   | ☑️ `lua.gc()` + `lua.gcIsRunning()`  |\n| `lua_getallocf`            | ☑️📢 `lua.getAllocator()`            |\n| `lua_getfenv`              | ☑️📢 `lua.getEnvironment()`          |\n| `lua_getfield`             | ☑️ `lua.getField()`                  |\n| `lua_getglobal`            | ☑️ `lua.getGlobal()`                 |\n| `lua_getmetatable`         | ☑️ `lua.getMetatable()`              |\n| `lua_gettable`             | ☑️ `lua.getTable()`                  |\n| `lua_gettop`               | ☑️ `lua.getTop()`                    |\n| `lua_insert`               | ☑️ `lua.insert()`                    |\n| `lua_isboolean`            | ☑️ `lua.isBoolean()`                 |\n| `lua_iscfunction`          | ☑️ `lua.isCFunction()`               |\n| `lua_isfunction`           | ☑️ `lua.isFunction()`                |\n| `lua_islightuserdata`      | ☑️ `lua.isLightUserdata()`           |\n| `lua_isnil`                | ☑️ `lua.isNil()`                     |\n| `lua_isnone`               | ☑️ `lua.isNone()`                    |\n| `lua_isnoneornil`          | ☑️ `lua.isNilOrNone()`               |\n| `lua_isnumber`             | ☑️ `lua.isNumber()`                  |\n| `lua_isstring`             | ☑️ `lua.isString()`                  |\n| `lua_istable`              | ☑️ `lua.isTable()`                   |\n| `lua_isthread`             | ☑️ `lua.isThread()`                  |\n| `lua_isuserdata`           | ☑️ `lua.isUserdata()`                |\n| `lua_lessthan`             | ☑️ `lua.lessThan()`                  |\n| `lua_load`                 | ☑️ `lua.load()`                      |\n| `lua_newstate`             | ☑️📢 `Lua.init()`                    |\n| `lua_newtable`             | ☑️ `lua.newTable()`                  |\n| `lua_newthread`            | ☑️ `lua.newThread()`                 |\n| `lua_newuserdata`          | ☑️ `lua.newUserdata()`               |\n| `lua_next`                 | ☑️ `lua.next()`                      |\n| `lua_objlen`               | ☑️📢 `lua.getLength()`               |\n| `lua_pop`                  | ☑️ `lua.pop()`                       |\n| `lua_pushboolean`          | ☑️ `lua.pushBoolean()`               |\n| `lua_pushcclosure`         | ☑️ `lua.pushCClosure()`              |\n| `lua_pushcfunction`        | ☑️ `lua.pushCFunction()`             |\n| `lua_pushfstring`          | ☑️ `lua.pushFString()`               |\n| `lua_pushinteger`          | ☑️ `lua.pushInteger()`               |\n| `lua_pushlightuserdata`    | ☑️ `lua.pushLightUserdata()`         |\n| `lua_pushliteral`          | 🆖 please use `lua.pushLString()`   |\n| `lua_pushlstring`          | ☑️ `lua.pushLString()`               |\n| `lua_pushnil`              | ☑️ `lua.pushNil()`                   |\n| `lua_pushnumber`           | ☑️ `lua.pushNumber()`                |\n| `lua_pushstring`           | ☑️ `lua.pushString()`                |\n| `lua_pushthread`           | ☑️ `lua.pushThread()`                |\n| `lua_pushvalue`            | ☑️ `lua.pushValue()`                 |\n| `lua_pushvfstring`         | 🆖 please use `lua.pushFString()`   |\n| `lua_rawequal`             | ☑️📢 `lua.equalRaw()`                |\n| `lua_rawgeti`              | ☑️📢 `lua.getTableIndexRaw()`        |\n| `lua_rawget`               | ☑️📢 `lua.getTableRaw()`             |\n| `lua_rawseti`              | ☑️📢 `lua.setTableIndexRaw()`        |\n| `lua_rawset`               | ☑️📢 `lua.setTableRaw()`             |\n| `lua_register`             | ☑️📢 `lua.registerFunction()`        |\n| `lua_remove`               | ☑️ `lua.remove()`                    |\n| `lua_replace`              | ☑️ `lua.replace()`                   |\n| `lua_resume`               | ➖ Hidden, see [Issue #6][ISSUE-6]  |\n| `lua_setallocf`            | ☑️📢 `lua.setAllocator()`            |\n| `lua_setfenv`              | ☑️📢 `lua.setEnvironment()`          |\n| `lua_setfield`             | ☑️ `lua.setField()`                  |\n| `lua_setglobal`            | ☑️ `lua.setGlobal()`                 |\n| `lua_setmetatable`         | ☑️ `lua.setMetatable()`              |\n| `lua_settable`             | ☑️ `lua.setTable()`                  |\n| `lua_settop`               | ☑️ `lua.setTop()`                    |\n| `lua_status`               | ☑️ `lua.status()`                    |\n| `lua_toboolean`            | ☑️ `lua.toBoolean()`                 |\n| `lua_tocfunction`          | ☑️ `lua.toCFunction()`               |\n| `lua_tointeger`            | ☑️ `lua.toInteger()`                 |\n| `lua_tolstring`            | ☑️ `lua.toLString()`                 |\n| `lua_tonumber`             | ☑️ `lua.toNumber()`                  |\n| `lua_topointer`            | ☑️ `lua.toPointer()`                 |\n| `lua_tostring`             | ☑️ `lua.toString()`                  |\n| `lua_tothread`             | ☑️ `lua.toThread()`                  |\n| `lua_touserdata`           | ☑️ `lua.toUserdata()`                |\n| `lua_type`                 | ☑️📢 `lua.getType()`                 |\n| `lua_typename`             | ☑️ `lua.getTypeName()`               |\n| `lua_xmove`                | ☑️ `lua.xmove()`                     |\n| `lua_yield`                | ➖ Hidden, see [Issue #6][ISSUE-6]  |\n\n[ISSUE-6]: https://github.com/sackosoft/zig-luajit/issues/6\n\n\n### Auxilary Library Coverage (`luaL_`)\n\n| C Type Definition          | Available in `zig-luajit`           |\n|----------------------------|-------------------------------------|\n| `luaL_Buffer`              | ☑️ `Lua.Buffer`                      |\n| `luaL_Reg`                 | ☑️ `Lua.Reg` and `Lua.RegEnd`        |\n\n| C API Symbol               | Available in `zig-luajit`           |\n|----------------------------|-------------------------------------|\n| `luaL_addchar`             | ☑️ `buffer.addChar()`|\n| `luaL_addsize`             | ☑️ `buffer.addSize()`|\n| `luaL_addlstring`          | ☑️ `buffer.addLString()`|\n| `luaL_addstring`           | ☑️ `buffer.addString()`|\n| `luaL_addvalue`            | ☑️ `buffer.addValue()`|\n| `luaL_argcheck`            | ☑️📢 `lua.checkArgument()` |\n| `luaL_argerror`            | ☑️📢 `lua.raiseErrorArgument()` |\n| `luaL_buffinit`            | ☑️📢 `lua.initBuffer()`|\n| `luaL_callmeta`            | ☑️ `lua.callMeta()`|\n| `luaL_checkany`            | ☑️ `lua.checkAny()`|\n| `luaL_checkinteger`        | ☑️ `lua.checkInteger()` |\n| `luaL_checkint`            | 🆖 please use `lua.checkInteger()` |\n| `luaL_checklong`           | 🆖 please use `lua.checkInteger()` |\n| `luaL_checklstring`        | ☑️ `lua.checkLString()` |\n| `luaL_checknumber`         | ☑️ `lua.checkNumber()` |\n| `luaL_checkoption`         | ☑️ `lua.checkOption()` |\n| `luaL_checkstack`          | ☑️📢 `lua.checkStackOrError()` |\n| `luaL_checkstring`         | ☑️ `lua.checkString()` |\n| `luaL_checktype`           | ☑️ `lua.checkType()` |\n| `luaL_checkudata`          | ☑️ `lua.checkUserdata()`|\n| `luaL_dofile`              | ☑️ `lua.doFile()` |\n| `luaL_dostring`            | ☑️ `lua.doString()` |\n| `luaL_error`               | ☑️📢 `lua.raiseErrorFormat()` |\n| `luaL_getmetafield`        | ☑️ `lua.getMetaField()` |\n| `luaL_getmetatable`        | ☑️📢 `lua.getMetatableRegistry()` |\n| `luaL_gsub`                | ☑️ `lua.gsub()` |\n| `luaL_loadbuffer`          | ☑️ `lua.loadBuffer()` |\n| `luaL_loadfile`            | ☑️ `lua.loadFile()` |\n| `luaL_loadstring`          | ☑️ `lua.loadString()` |\n| `luaL_newmetatable`        | ☑️ `lua.newMetatable()` |\n| `luaL_newstate`            | 🆖 please use `Lua.init()` |\n| `luaL_openlibs`            | ☑️ `lua.openLibs()` |\n| `luaL_optinteger`          | ☑️📢 `lua.checkIntegerOptional()` |\n| `luaL_optint`              | 🆖 please use `lua.checkIntegerOptional()` |\n| `luaL_optlong`             | 🆖 please use `lua.checkIntegerOptional()` |\n| `luaL_optlstring`          | ☑️📢 `lua.checkLStringOptional()` |\n| `luaL_optnumber`           | ☑️📢 `lua.checkNumberOptional()` |\n| `luaL_optstring`           | ☑️📢 `lua.checkStringOptional()` |\n| `luaL_prepbuffer`          | ☑️ `buffer.prepBuffer()` |\n| `luaL_pushresult`          | ☑️ `buffer.pushResult()` |\n| `luaL_ref`                 | ☑️ `lua.ref()` |\n| `luaL_unref`               | ☑️ `lua.unref()` |\n| `luaL_register`            | ☑️📢 `lua.registerLibrary()` |\n| `luaL_typename`            | ☑️ `lua.getTypeNameAt()` |\n| `luaL_typerror`            | ☑️📢 `lua.raiseErrorType()` |\n| `luaL_where`               | ☑️ `lua.where()` |\n\n### Debug API Coverage (`lua_Debug`)\n\n| C Type Definition          | Available in `zig-luajit`           |\n|----------------------------|-------------------------------------|\n| `lua_Debug`                | ☑️ `Lua.DebugInfo`                   |\n| `lua_Hook`                 | ☑️📢 `Lua.HookFunction`              |\n\n| C API Symbol               | Available in `zig-luajit`           |\n|----------------------------|-------------------------------------|\n| `lua_getinfo`              | ☑️ `lua.getInfo()`                   |\n| `lua_getstack`             | ☑️ `lua.getStack()`                  |\n| `lua_gethookcount`         | ☑️ `lua.getHookCount()`              |\n| `lua_gethookmask`          | ☑️ `lua.getHookMask()`               |\n| `lua_gethook`              | ☑️ `lua.getHook()`                   |\n| `lua_sethook`              | ☑️ `lua.setHook()`                   |\n| `lua_getlocal`             | ☑️ `lua.getLocal()`                  |\n| `lua_setlocal`             | ☑️ `lua.setLocal()`                  |\n| `lua_getupvalue`           | ☑️ `lua.getUpvalue()`                |\n| `lua_setupvalue`           | ☑️ `lua.setUpvalue()`                |\n\n\n## Additions to the API in `zig-luajit`\n\nThe following functions are added in `zig-luajit` and do not necessarily have a corresponding\nfunction or macro in the C API.\n\n| `zig-luajit` Extension Function | Description |\n|---------------------------------|-------------|\n| `lua.getInfoFunction()`         | A simplified version of `lua.getInfo()` for inspecting functions, that has a more idiomatic Zig result type. |\n| `lua.toNumberStrict()`          | Gets the value of a number on the stack, without doing type coersion (e.g. from string values). |\n| `lua.toIntegerStrict()`         | Gets the value of an integer on the stack, without doing type coersion (e.g. from string values). |\n| `lua.toBooleanStrict()`         | Gets the value of a boolean on the stack, without doing type coersion based on \"truthyness\" of the value. |\n| `lua.openBaseLib()`             | Opens the `Base` Lua standard library. |\n| `lua.openMathLib()`             | Opens the `Math` Lua standard library. |\n| `lua.openStringLib()`           | Opens the `String` Lua standard library. |\n| `lua.openTableLib()`            | Opens the `Table` Lua standard library. |\n| `lua.openIOLib()`               | Opens the `IO` Lua standard library. |\n| `lua.openOSLib()`               | Opens the `OS` Lua standard library. |\n| `lua.openPackageLib()`          | Opens the `Package` Lua standard library. |\n| `lua.openDebugLib()`            | Opens the `Debug` Lua standard library. |\n| `lua.openBitLib()`              | Opens the `Bit` LuaJIT standard library. |\n| `lua.openJITLib()`              | Opens the `JIT` LuaJIT standard library. |\n| `lua.openFFILib()`              | Opens the `FFI` LuaJIT standard library. |\n| `lua.openStringBufferLib()`     | Opens the `StringBuffer` LuaJIT standard library. |\n\n\n## Licensing\n\nThe `zig-luajit` Zig languge bindings are distributed under the terms of the open and permissive MIT License. The terms of this\nlicense can be found in the [LICENSE](./LICENSE) file.\n\nThis project depends on source code and other artifacts from third parties. Information about their respective licenses\ncan be found in the [COPYRIGHT](./COPYRIGHT.md) file.\n* [The LuaJIT Project](https://luajit.org/)\n* [Lua](https://www.lua.org/)\n\n## Credits\n\nThis project was inspired by [natecraddock/ziglua](https://github.com/natecraddock/ziglua) which provides great\nfunctionality if you're looking to use Lua runtimes other than LuaJIT!\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/192897928?v=4",
+  "releases": [
+    {
+      "tag_name": "v2.0.1",
+      "name": "v2.0.1 - Zig 0.15.1 - 2025-09-01",
+      "body": "Update to support Zig 0.15.1 on main\r\n\r\n**Full Changelog**: https://github.com/sackosoft/zig-luajit/compare/v2.0.0...v2.0.1",
+      "prerelease": false,
+      "published_at": "2025-09-02T12:45:55Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit/releases/tag/v2.0.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v2.0.0",
+      "name": "v2.0.0",
+      "body": "## What's Changed\r\n* [Breaking Change] Fix checkArgument logical error by @thsackos in https://github.com/sackosoft/zig-luajit/pull/18\r\n\r\n\r\n**Full Changelog**: https://github.com/sackosoft/zig-luajit/compare/v1.5.4...v2.0.0",
+      "prerelease": false,
+      "published_at": "2025-05-22T03:12:26Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit/releases/tag/v2.0.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.5.4",
+      "name": "v1.5.4",
+      "body": "Updated to luajit-build 1.5.4, Zig 0.15.0-dev.565+8e72a2528",
+      "prerelease": false,
+      "published_at": "2025-05-18T02:12:38Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit/releases/tag/v1.5.4",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.5.3",
+      "name": "v1.5.3",
+      "body": "Upgrade to `zig-luajit-build` 1.1.3;\r\n\r\nhttps://github.com/sackosoft/zig-luajit-build/releases/tag/v1.1.3",
+      "prerelease": false,
+      "published_at": "2025-03-12T00:58:07Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit/releases/tag/v1.5.3",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.5.2",
+      "name": "Zig 0.14.0 Released",
+      "body": "This release tracks the official release of Zig 0.14.0: https://ziglang.org/download/0.14.0/release-notes.html",
+      "prerelease": false,
+      "published_at": "2025-03-06T02:54:29Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit/releases/tag/v1.5.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.5.1",
+      "name": "v1.5.1",
+      "body": "## What's Changed\r\n* Adopt changes to Zig packages in 0.14.0-dev.3460 by @thsackos in https://github.com/sackosoft/zig-luajit/pull/14\r\n\r\n\r\n**Full Changelog**: https://github.com/sackosoft/zig-luajit/compare/v1.5.0...v1.5.1",
+      "prerelease": false,
+      "published_at": "2025-03-04T15:00:23Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit/releases/tag/v1.5.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.5.0",
+      "name": "v1.5.0",
+      "body": "Version 1.5.0 is the first \"Official\" release of `zig-luajit` now that it has reached 100% Zig API coverage of the backing C interface.\r\n\r\n## What's Changed\r\n* ⭐Add support for lua.getUpvalue() and lua.setUpvalue() by @thsackos in https://github.com/sackosoft/zig-luajit/pull/12\r\n\r\n\r\n**Full Changelog**: https://github.com/sackosoft/zig-luajit/compare/v1.4.0...v1.5.0",
+      "prerelease": false,
+      "published_at": "2025-02-27T15:27:37Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit/releases/tag/v1.5.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.4.0",
+      "name": "v1.4.0",
+      "body": "## What's Changed\r\n* Add support for lua.getHook(), lua.getHookMask(), lua.getHookCount() by @thsackos in https://github.com/sackosoft/zig-luajit/pull/10\r\n* Add support for lua.getLocal() and lua.setLocal() by @thsackos in https://github.com/sackosoft/zig-luajit/pull/11\r\n\r\n\r\n**Full Changelog**: https://github.com/sackosoft/zig-luajit/compare/v1.3.0...v1.4.0",
+      "prerelease": false,
+      "published_at": "2025-02-27T15:01:22Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit/releases/tag/v1.4.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.3.0",
+      "name": "v1.3.0",
+      "body": "## What's Changed\r\n* Add support for Lua.HookFunction and lua.setHook() by @thsackos in https://github.com/sackosoft/zig-luajit/pull/9\r\n\r\n\r\n**Full Changelog**: https://github.com/sackosoft/zig-luajit/compare/v.1.2.1...v1.3.0",
+      "prerelease": false,
+      "published_at": "2025-02-27T02:50:13Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit/releases/tag/v1.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v.1.2.1",
+      "name": "v.1.2.1",
+      "body": "## What's Changed\r\n* Add support for lua.getStack() by @thsackos in https://github.com/sackosoft/zig-luajit/pull/8\r\n\r\n\r\n**Full Changelog**: https://github.com/sackosoft/zig-luajit/compare/v1.1.1...v.1.2.1",
+      "prerelease": false,
+      "published_at": "2025-02-25T04:21:55Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit/releases/tag/v.1.2.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.1.1",
+      "name": "v1.1.1",
+      "body": "## What's Changed\r\n\r\n1. Begin Debug API: add support for lua.getInfo() and lua.getInfoFunction() by @thsackos in https://github.com/sackosoft/zig-luajit/pull/7\r\n\r\nAPI Coverage:\r\n\r\n* Added the Lua.DebugInfo struct, used to wrap the parts of the C API using the lua_Debug struct.\r\n* Added the Zig function lua.getInfo(lua: *Lua, what: [:0]const u8, info: *Lua.DebugInfo) to wrap lua_getinfo().\r\n* Added FunctionKind enum for callers to parse Lua.DebugInfo.what strings. Makes it easier to determine the type of function inspected by getInfo().\r\n\r\nImprovements:\r\n\r\n* Added the Lua.DebugInfoFunction struct, a simplified and easier to use version of the Lua.DebugInfo struct for inspecting a \"dead\" function.\r\n* Added the Zig function lua.getInfoFunction(lua: *Lua, func: *Lua.Function, info: *Lua.DebugInfoFunction) to wrap common usage of lua_getinfo() for functions.\r\n* Added pretty print functions for both Lua.DebugInfo and Lua.DebugInfoFunction.\r\n\r\n\r\n**Full Changelog**: https://github.com/sackosoft/zig-luajit/compare/v1.0.0...v1.1.0",
+      "prerelease": false,
+      "published_at": "2025-02-23T22:47:45Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit/releases/tag/v1.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.0.0",
+      "name": "v1.0.0",
+      "body": "🎉 API is considered stable and semantic versioning will apply for all future changes.",
+      "prerelease": false,
+      "published_at": "2025-02-23T16:33:39Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit/releases/tag/v1.0.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.4.0-rc1",
+      "name": "v0.4.0-rc1",
+      "body": "Approaching first stable API version -- after reaching 100% API coverage we will improve test coverage and cut a stable 1.0.0 release.",
+      "prerelease": true,
+      "published_at": "2025-02-23T02:55:48Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit/releases/tag/v0.4.0-rc1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.3.0-rc1",
+      "name": "v0.3.0-rc1",
+      "body": "## What's changed?\r\n\r\n* Functions to control Lua memory allocation behavior have been broken.\r\n    - Introduced functions `Lua.setAllocator(std.mem.Allocator) -> void` and `Lua.getAllocator() -> std.mem.Allocator` to replace ~Lua.setAllocF~ and ~Lua.getAllocF~",
+      "prerelease": true,
+      "published_at": "2025-02-09T18:08:41Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit/releases/tag/v0.3.0-rc1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0-rc1",
+      "name": "",
+      "body": "## What's changed\r\n* A potentially breaking change to lua.doString() is introduced. The doString() function now accepts a string slice instead of a null-terminated pointer.\r\n* Cutting release for 75% API coverage milestone\r\n* Added `examples/simple-repl` for folks to get started.",
+      "prerelease": true,
+      "published_at": "2025-02-09T14:59:46Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit/releases/tag/v0.2.0-rc1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.1-rc1",
+      "name": "v0.1.1-rc1",
+      "body": "## What's Changed\r\n* Upgrade to zig-luajit-build 1.0.1 to enable support for Windows by @thsackos in https://github.com/sackosoft/zig-luajit/pull/1\r\n\r\n**Full Changelog**: https://github.com/sackosoft/zig-luajit/compare/v0.1.0-rc2...v0.1.1-rc1",
+      "prerelease": true,
+      "published_at": "2025-01-31T16:32:08Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit/releases/tag/v0.1.1-rc1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0-rc2",
+      "name": "v0.1.0-rc2",
+      "body": "Changes from v0.1.0-rc1:\r\n\r\n* [Make Lua.Status public, add status(), some incomplete test coverage, more assertions on returned status values](https://github.com/sackosoft/zig-luajit/commit/dcf3a8efe6f2fd41a777be840e88ee1036973a08)\r\n* [Rename Lua.LuaStatus to Lua.Status and converge with modern zig enum member naming conventions](https://github.com/sackosoft/zig-luajit/commit/67c66940d1eef7b29bb0a4f8232a2a938bd0ec4c)\r\n* [Converge Lua.Type enum with modern zig enum member naming convention](https://github.com/sackosoft/zig-luajit/commit/1cebf2342c13561bf007c7c7a489b821b300f6e4)\r\n",
+      "prerelease": true,
+      "published_at": "2025-01-26T23:07:05Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit/releases/tag/v0.1.0-rc2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0-rc1",
+      "name": "v0.1.0-rc1",
+      "body": "Cutting a release now to mark the stability of the current API. The Zig API that is supported has been tested and validated; however, some minor contract changes may come before the first major version release.\r\n\r\nThis release is capable of loading Lua code and executing it; and a MessagePack serialization library has been written and validated using the current Zig API bindings.",
+      "prerelease": true,
+      "published_at": "2025-01-26T15:34:50Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit/releases/tag/v0.1.0-rc1",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Building stable foundations for modern software.",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2024-12-26T15:40:18Z",
+  "license": "MIT",
+  "category": "library"
+}

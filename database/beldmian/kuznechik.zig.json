@@ -1,0 +1,45 @@
+{
+  "name": "kuznechik.zig",
+  "owner": "beldmian",
+  "repo": "kuznechik.zig",
+  "description": "Kuznechik cipher implementation in pure zig",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-04-24T15:53:14Z",
+  "readme": "# kuznechik.zig\n\nA fast implementation of the Kuznechik (GOST R 34.12-2015) block cipher in Zig. Kuznechik is a symmetric block cipher with a block size of 128 bits and a key length of 256 bits, standardized as GOST R 34.12-2015.\n\n## Features\n\n- Pure Zig implementation\n- Optimized using precomputed lookup tables\n- Includes both encryption and decryption\n- Performance benchmarks\n\n## Usage\n\n### Basic Example\n\n```zig\nconst kuznechik = @import(\"kuznechik\");\n\n// Initialize cipher with 256-bit key\nvar key = kuznechik.key{\n    0x88, 0x99, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff,\n    0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77,\n    0xfe, 0xdc, 0xba, 0x98, 0x76, 0x54, 0x32, 0x10,\n    0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef,\n};\n\nvar cipher = kuznechik.Cipher.init(key);\n\n// Create a 128-bit block\nvar block = kuznechik.block{\n    0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x00,\n    0xff, 0xee, 0xdd, 0xcc, 0xbb, 0xaa, 0x99, 0x88,\n};\n\n// Encrypt\ncipher.encrypt(&block);\n\n// Decrypt\ncipher.decrypt(&block);\n```\n\n### Building\n\n```bash\nzig build\n```\n\n*To achieve better performance, compile with `-Doptimize=ReleaseFast`*\n\n### Running Tests\n\n```bash\nzig build test\n```\n\n### Running Benchmarks\n\n```bash\nzig build bench\n```\n\n## Performance\n\nThe implementation is optimized using precomputed lookup tables for the S-box, inverse S-box, and linear transformations. Benchmark results on Apple M2:\n\n```\nRunning benchmark: Encrypt Benchmark (65535 iterations)\nEncrypt Benchmark:\n  Iterations: 65535\n  Total time: 5056195 ns\n  Average time: 77 ns\n  Min time: 0 ns\n  Max time: 18375 ns\n\nRunning benchmark: Decrypt Benchmark (65535 iterations)\nDecrypt Benchmark:\n  Iterations: 65535\n  Total time: 5698981 ns\n  Average time: 86 ns\n  Min time: 0 ns\n  Max time: 10167 ns\n```\n\n\n## Algorithm Details\n\nKuznechik is a symmetric block cipher that operates on 128-bit blocks using a 256-bit key. The encryption process consists of:\n- 10 rounds of transformations\n- Key schedule generating 10 round keys\n- Each round applies:\n  - Key addition (XOR)\n  - Substitution layer (S-box)\n  - Linear transformation (L)\n\n## References\n\n- [RFC 7801 - GOST R 34.12-2015](https://www.rfc-editor.org/rfc/rfc7801.html)\n- [Implementation of «Kuznyechik» cipher using vector instructions](https://www.researchgate.net/publication/346964920_Implementation_of_Kuznyechik_cipher_using_vector_instructions)\n## License\n\nMIT License - see the [LICENSE](LICENSE) file for details.\n\n## Contributing\n\nContributions are welcome! Please feel free to submit a Pull Request.\n\n## Future Plans\n\n- [ ] Add fuzzing tests\n- [ ] Improve performance further\n- [ ] Add cipher operation modes\n\n## Author\n\n[beldmian](https://github.com/beldmian)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/33232961?u=a7e828bbad6383fa16d30a8ab95ceb73a1d0ff04&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0 Small performance and code improvements",
+      "body": "## What's Changed\r\n* Refactoring by @beldmian in https://github.com/beldmian/kuznechik.zig/pull/1\r\n\r\n## New Contributors\r\n* @beldmian made their first contribution in https://github.com/beldmian/kuznechik.zig/pull/1\r\n\r\n**Full Changelog**: https://github.com/beldmian/kuznechik.zig/compare/v0.1.0...v0.2.0",
+      "prerelease": false,
+      "published_at": "2025-04-24T15:54:15Z",
+      "html_url": "https://github.com/beldmian/kuznechik.zig/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0 Initial release ",
+      "body": "**Full Changelog**: https://github.com/beldmian/kuznechik.zig/commits/v0.1.0",
+      "prerelease": false,
+      "published_at": "2025-02-09T10:23:59Z",
+      "html_url": "https://github.com/beldmian/kuznechik.zig/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": "go dev @etecs-ru",
+  "owner_location": "Moscow, Russian Federation",
+  "owner_blog": "beldmian.ru",
+  "owner_twitter_username": null,
+  "owner_followers": 14,
+  "owner_following": 15,
+  "owner_created_at": "2017-10-30T18:27:38Z",
+  "license": "MIT",
+  "category": "library"
+}

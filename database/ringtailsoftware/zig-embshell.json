@@ -1,0 +1,32 @@
+{
+  "name": "zig-embshell",
+  "owner": "ringtailsoftware",
+  "repo": "zig-embshell",
+  "description": "Small embeddable command line shell in zig",
+  "type": "project",
+  "topics": [
+    "embedded",
+    "zig",
+    "ziglang",
+    "cli",
+    "shell",
+    "zig-package"
+  ],
+  "stars": 18,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-10-31T22:23:19Z",
+  "readme": "# EmbShell\n\nA very small interactive command shell for (embedded) Zig programs.\n\nEmbShell makes an ideal system monitor for debugging and interacting with a small embedded system. It interactively takes lines of text, parses commands and makes callbacks into handler functions.\n\nCompared with Readline, Linenoise and Editline - EmbShell is tiny. It lacks most of their features, but it does have:\n\n - Tab completion for command names\n - Backspace for line editing\n - No reliance on libc and very little use of Zig's `std` (ie. no fancy print formatting)\n - Very little RAM use (just a configurable buffer for the incoming command line)\n\nIn EmbShell:\n\n - All commands and configuration are set at `comptime` to optimise footprint\n - All arguments are separated by whitespace, there is no support for quoted strings, multiline commands or escaped data\n - All handler arguments are strings, leaving it to the app to decide how to parse them\n - No runtime memory allocations\n\n## Using\n\nDeveloped with `zig 0.14.0`\n\n### Run the sample\n\n    cd example-posix\n    zig build run\n\n```\nmyshell> help\necho\nled\nmyshell> echo hello world\nYou said: { echo, hello, world }\nOK\nmyshell> led 1\nIf we had an LED it would be set to true\nOK\n```\n\n## Using in your own project\n\nFirst add the library as a dependency in your `build.zig.zon` file.\n\n`zig fetch --save git+https://github.com/ringtailsoftware/zig-embshell.git`\n\nAnd add it to `build.zig` file.\n```zig\nconst embshell_dep = b.dependency(\"embshell\", .{\n    .target = target,\n    .optimize = optimize,\n});\nexe.root_module.addImport(\"embshell\", embshell_dep.module(\"embshell\"));\n```\n\n`@import` the module and provide a configuration.\n\n - `.prompt` is the string shown to the user before each command is entered\n - `.maxargs` is the maximum number of arguments EmbShell will process (e.g. \"mycmd foo bar\" is 3 arguments)\n - `.maxlinelen` is the maximum length of a line to be handled, a buffer of this size will be created\n - `.cmdtable` an array of names and handler function for commands\n\n```zig\nconst UserdataT = u32;\nconst EmbShellT = @import(\"embshell\").EmbShellFixedParams(UserdataT);\nconst EmbShell = @import(\"embshell\").EmbShellFixed(.{\n    .prompt = \"myshell> \",\n    .maxargs = 16,\n    .maxlinelen = 128,\n    .cmdtable = &.{\n        .{ .name = \"echo\", .handler = echoHandler },\n        .{ .name = \"led\", .handler = ledHandler },\n    },\n    .userdataT = UserdataT,\n});\n```\n\n\nEach handler function is in the following form. EmbShell prints \"OK\" after successfully executing each function and \"Failed\" if an error is returned.\n\n```zig\nfn myHandler(userdata: UserdataT, args:[][]const u8) anyerror!void {\n    // process args\n    // optionally return error\n}\n```\n\nNext, call `.init()` and provide a write callback to allow EmbShell to emit data\n\n```zig\nfn write(data:[]const u8) void {\n    // emit data to terminal\n}\n\nvar shell = try EmbShell.init(write, userdata);\n```\n\nFinally, feed EmbShell with incoming data from the terminal to be processed\n\n```zig\nconst buf = readFromMyTerminal();\nshell.feed(buf)\n```\n\n\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/20110944?u=93548b94fa9de08e939a35745a2affd82408e198&v=4",
+  "releases": [],
+  "owner_bio": "@tobyjaffey@mastodon.me.uk",
+  "owner_company": "Ringtail Software Ltd",
+  "owner_location": "UK",
+  "owner_blog": "http://www.ringtailsoftware.co.uk",
+  "owner_twitter_username": null,
+  "owner_followers": 39,
+  "owner_following": 8,
+  "owner_created_at": "2016-06-23T13:40:30Z",
+  "license": "MIT",
+  "category": "embedded"
+}

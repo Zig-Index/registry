@@ -1,0 +1,56 @@
+{
+  "name": "EmbedFile.zig",
+  "owner": "robbielyman",
+  "repo": "EmbedFile.zig",
+  "description": "an extension to the Zig build system to programmatically collect assets",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-build",
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-08-07T17:36:39Z",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/46907231?u=88141aeba367273052b0876acbf6776961d3f15d&v=4",
+  "releases": [
+    {
+      "tag_name": "1.0.0",
+      "name": "1.0.0",
+      "body": "- feat: adds `writeSources`, which creates and returns a named `WriteFile` step which collects everything the `EmbedFile` step touches and outputs it into one directory.\r\n- feat: one can now use the `embed-file` executable standalone if desired.\r\n\r\n- BREAKING CHANGE: the signatures of `addFile` and `addDirectory` have changed. taking `sub_path` as an argument was incorrect.\r\n- BREAKING CHANGE: `createModule` is removed; instead use `embed_file.module` directly.\r\n\r\n- KNOWN ISSUE: the Zig build system appears to cache too eagerly when using `addDirectory`—changing the contents of a file inside the directory may not result in the `EmbedFile` step being rerun. `addFile` does not suffer from this deficiency, so users should prefer using it.\r\n\r\n**Full Changelog**: https://github.com/robbielyman/EmbedFile.zig/compare/0.1.1...1.0.0",
+      "prerelease": false,
+      "published_at": "2025-01-03T03:58:26Z",
+      "html_url": "https://github.com/robbielyman/EmbedFile.zig/releases/tag/1.0.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.1.1",
+      "name": "0.1.1",
+      "body": "fix: cache hit depends on file contents as well as names\r\n\r\n**Full Changelog**: https://github.com/robbielyman/EmbedFile.zig/compare/0.1.0...0.1.1",
+      "prerelease": false,
+      "published_at": "2025-01-01T00:16:25Z",
+      "html_url": "https://github.com/robbielyman/EmbedFile.zig/releases/tag/0.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "0.1.0",
+      "name": "EmbedFile.Zig 0.1.0",
+      "body": "compatible with Zig 0.13.0",
+      "prerelease": false,
+      "published_at": "2024-12-31T19:46:26Z",
+      "html_url": "https://github.com/robbielyman/EmbedFile.zig/releases/tag/0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "she sliced like a knife through everything",
+  "owner_company": "Rutgers University–Newark",
+  "owner_location": "New York, NY",
+  "owner_blog": "robbielyman.com",
+  "owner_twitter_username": null,
+  "owner_followers": 113,
+  "owner_following": 91,
+  "owner_created_at": "2019-01-21T21:43:19Z",
+  "license": "MIT",
+  "category": "library"
+}

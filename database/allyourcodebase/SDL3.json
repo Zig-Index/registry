@@ -1,0 +1,152 @@
+{
+  "name": "SDL3",
+  "owner": "allyourcodebase",
+  "repo": "SDL3",
+  "description": "SDL3 ported to the Zig build system.",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 19,
+  "forks": 3,
+  "watchers": 1,
+  "updated_at": "2025-11-21T03:22:54Z",
+  "dependencies": [
+    {
+      "name": "sdl",
+      "url": "https://github.com/libsdl-org/SDL/archive/refs/tags/release-3.2.22.tar.gz",
+      "hash": "N-V-__8AAKFOjAPblBRKaUrjSSH-09iZsd0hSjTHMs3Wj2BE"
+    },
+    {
+      "name": "dbus",
+      "url": "https://gitlab.freedesktop.org/dbus/dbus/-/archive/dbus-1.16.0/dbus-dbus-1.16.0.tar.gz",
+      "hash": "N-V-__8AAINjaQDkpaIvG4MTKbGNglOKX7IQJFsq8g7866ub"
+    },
+    {
+      "name": "x11",
+      "url": "https://gitlab.freedesktop.org/xorg/lib/libx11/-/archive/libX11-1.8.12/libx11-libX11-1.8.12.tar.gz",
+      "hash": "N-V-__8AABFAxQAzwFX9CantfXOo7FpEMuFaDHJU7rouFJDm"
+    },
+    {
+      "name": "egl",
+      "url": "https://github.com/KhronosGroup/EGL-Registry/archive/3ae2b7c48690d2ce13cc6db3db02dfc0572be65e.tar.gz",
+      "hash": "N-V-__8AAMlebQAc6dRDTEIyEn_i5KeO8qNg3YdK_Sg1KgDT"
+    },
+    {
+      "name": "wayland",
+      "url": "https://gitlab.freedesktop.org/wayland/wayland/-/archive/1.23.91/wayland-1.23.91.tar.gz",
+      "hash": "N-V-__8AAKwRGQDuKfsGZKYj0NR5UBS8cR6-VKgoYzbRcqbY"
+    },
+    {
+      "name": "xkbcommon",
+      "url": "https://github.com/xkbcommon/libxkbcommon/archive/refs/tags/xkbcommon-1.10.0.tar.gz",
+      "hash": "N-V-__8AAEq0XgBjGDGxFauY884ZX6kSkgXmismD6G5l5Su9"
+    },
+    {
+      "name": "xorgproto",
+      "url": "https://gitlab.freedesktop.org/xorg/proto/xorgproto/-/archive/xorgproto-2024.1/xorgproto-xorgproto-2024.1.tar.gz",
+      "hash": "N-V-__8AAJkAZgCO0RI9CmCz9GB-r604Mcghuo2rp7BoteNP"
+    },
+    {
+      "name": "xext",
+      "url": "https://gitlab.freedesktop.org/xorg/lib/libxext/-/archive/libXext-1.3.6/libxext-libXext-1.3.6.tar.gz",
+      "hash": "N-V-__8AAKbaBwCHCqin8ym--Sq1JjkgGknUDDGABcfOD5Ax"
+    },
+    {
+      "name": "xcb",
+      "url": "https://gitlab.freedesktop.org/xorg/lib/libxcb/-/archive/libxcb-1.17.0/libxcb-libxcb-1.17.0.tar.gz",
+      "hash": "N-V-__8AAPZxCQD7JyQLx0_D9J9dnkSoP7iziBVxreTgUqlj"
+    },
+    {
+      "name": "ibus",
+      "url": "https://github.com/ibus/ibus/releases/download/1.5.32/ibus-1.5.32.tar.gz",
+      "hash": "N-V-__8AADqspgFDvy12L2K2kbcOVJukO_srdGXLV_ppgnuC"
+    },
+    {
+      "name": "usb",
+      "url": "https://github.com/libusb/libusb/archive/a61afe5f75d969c4561a1d0ad753aa23cee6329a.zip",
+      "hash": "N-V-__8AAGT5GgAxQXXIen0EleLF0xfjZZMkR7soefwO0s7E"
+    },
+    {
+      "name": "xcursor",
+      "url": "https://gitlab.freedesktop.org/xorg/lib/libxcursor/-/archive/libXcursor-1.2.3/libxcursor-libXcursor-1.2.3.tar.gz",
+      "hash": "N-V-__8AAKtlAgAAqwksheZkCSajEEPpi2XivNet-_3hZyz2"
+    },
+    {
+      "name": "xi",
+      "url": "https://gitlab.freedesktop.org/xorg/lib/libxi/-/archive/libXi-1.8.2/libxi-libXi-1.8.2.tar.gz",
+      "hash": "N-V-__8AAPVzDQBJt3bUATh5SVq-T6QI-Ns9v2pSScvG_cwH"
+    },
+    {
+      "name": "xfixes",
+      "url": "https://gitlab.freedesktop.org/xorg/lib/libxfixes/-/archive/libXfixes-6.0.1/libxfixes-libXfixes-6.0.1.tar.gz",
+      "hash": "N-V-__8AAE0GAQANT3I-eBEAsjhOjUozMQrbDAoSL8FczRwQ"
+    },
+    {
+      "name": "xrandr",
+      "url": "https://gitlab.freedesktop.org/xorg/lib/libxrandr/-/archive/libXrandr-1.5.4/libxrandr-libXrandr-1.5.4.tar.gz",
+      "hash": "N-V-__8AAFo1AgAoJp29fLlLfpunfbO5_7FhzG5OGgu05F-P"
+    },
+    {
+      "name": "xrender",
+      "url": "https://gitlab.freedesktop.org/xorg/lib/libxrender/-/archive/libXrender-0.9.12/libxrender-libXrender-0.9.12.tar.gz",
+      "hash": "N-V-__8AANorBADbt-RlITZJofNvQWTiaQlv7r7lWYtxAqGx"
+    },
+    {
+      "name": "decor",
+      "url": "https://gitlab.freedesktop.org/libdecor/libdecor/-/archive/0.2.3/libdecor-0.2.3.tar.gz",
+      "hash": "N-V-__8AAEG5BAAsZkN2QXLyeuqTnHEOXHHUOGPC9azQ7zq8"
+    },
+    {
+      "name": "opengl",
+      "url": "https://github.com/KhronosGroup/OpenGL-Registry/archive/200cea4030cb49d3e40677379e6368a5f0e8c27b.zip",
+      "hash": "N-V-__8AAGJE5QqpMdB7CdsJRTzpYhbtgDgfqfd_ZbcaCTsD"
+    },
+    {
+      "name": "pipewire",
+      "url": "https://gitlab.freedesktop.org/pipewire/pipewire/-/archive/1.4.3/pipewire-1.4.3.tar.gz",
+      "hash": "N-V-__8AAELD0QClFJpe9uubHxEl5Y9K4lEPfY93oACSzA4E"
+    },
+    {
+      "name": "jack",
+      "url": "https://github.com/jackaudio/jack2/archive/refs/tags/jack2-control-api-relicense-nedko.tar.gz",
+      "hash": "N-V-__8AANOERwAn9QBxYJf43h9P3jq2HYTPvXlZRCHPEmrj"
+    },
+    {
+      "name": "pulseaudio",
+      "url": "https://github.com/Games-by-Mason/pulseaudio/archive/refs/tags/v16.2.tar.gz",
+      "hash": "N-V-__8AADiK2wBbQBbppKI9s1sR8vTGLV1mhn44OEYxyPD4"
+    },
+    {
+      "name": "pulseaudio_windows",
+      "url": "https://github.com/Games-by-Mason/pulseaudio/archive/refs/tags/v16.2.tar.gz",
+      "hash": "N-V-__8AAH-J2wA1QFgeIKK0hLveAjq3mNnOJb96xak4HFqx"
+    },
+    {
+      "name": "xscrnsaver",
+      "url": "https://gitlab.freedesktop.org/xorg/lib/libxscrnsaver/-/archive/libXScrnSaver-1.2.4/libxscrnsaver-libXScrnSaver-1.2.4.tar.gz",
+      "hash": "N-V-__8AAEO3AADhS3i2HiVniZnPqWJh33VqmmUp7JO33xqe"
+    },
+    {
+      "name": "alsa",
+      "url": "https://github.com/alsa-project/alsa-lib/archive/refs/tags/v1.2.14.tar.gz",
+      "hash": "N-V-__8AACPMQgBfqlZq9Kx2qUwCMrZVkl-5dDd5bVDiF06E"
+    },
+    {
+      "name": "sndio",
+      "url": "https://sndio.org/sndio-1.10.0.tar.gz",
+      "hash": "N-V-__8AAKA0CgB5SuKmufbOKBnZsjDFZuUTNO70MHQEf1p8"
+    }
+  ],
+  "minimum_zig_version": "0.15.0",
+  "readme": "[![CI](https://github.com/Games-By-Mason/sdl_zig/actions/workflows/ci.yaml/badge.svg)](https://github.com/Games-By-Mason/sdl_zig/actions)\n\n# SDL3 Zig\n\nSDL3 ported to the Zig build system. Requires at least Zig `0.15.0-dev.1218+bc8e1a74c`.\n\nSupports cross compilation and custom platform configuration.\n\n# Setup\n\nYou can add SDL3 to your project like this by updating `build.zig.zon` from the command line:\n```sh\nzig fetch --save <url-of-this-repo>\n```\n\nAnd then you can add it to your `build.zig` like this:\n```zig\nconst sdl = b.dependency(\"sdl\", .{\n    .optimize = optimize,\n    .target = target,\n});\nexe.linkLibrary(sdl.artifact(\"SDL3\"));\n```\n\nFinally, you can use SDL's C API from Zig like this:\n```zig\nconst std = @import(\"std\");\nconst c = @cImport({\n    @cInclude(\"SDL3/SDL.h\");\n});\nif (!c.SDL_Init(c.SDL_INIT_VIDEO)) {\n    std.debug.panic(\"SDL_Init failed: {s}\\n\", .{c.SDL_GetError()});\n}\ndefer c.SDL_Quit();\n```\n\n## Example\n\nYou can run `src/example.zig` from the command line:\n```sh\nzig build run-example\n```\n\nThis should produce a window with a pulsing gradient.\n\n## Help, `SDL_Init` failed on Linux!\n\n```sh\nSDL_Init failed: No available video device\n```\n\nBy default, [SDL loads most of its dependencies at runtime on Linux.](https://wiki.libsdl.org/SDL3/README-linux) This lets it decide at runtime which audio drivers to use, whether to use Wayland or X11, etc.\n\nFor this to work, the libraries SDL is looking for need to be on your `LD_LIBRARY_PATH`. This may not be the case by default on distributions like NixOS.\n\nHere's a `shell.nix` for a Vulkan app as an example of running an SDL application on NixOS with either X11 or Wayland.\n```\n{ pkgs ? import <nixpkgs> {}}:\n\npkgs.mkShell {\n  packages = with pkgs; [\n    vulkan-validation-layers\n  ];\n  LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath (with pkgs; [\n    alsa-lib\n    libdecor\n    libusb1\n    libxkbcommon\n    vulkan-loader\n    wayland\n    xorg.libX11\n    xorg.libXext\n    xorg.libXi\n    udev\n  ]);\n}\n```\n\nNot all of these dependencies in this example are required. Since both X11 and Wayland dependencies are listed, SDL will use its judgement to decide which to prefer unless `SDL_VIDEODRIVER` is set.\n\n# Target Configuration\n\nThis library provides a default configuration for common targets:\n* [x] Linux (including Steam Deck)\n  * [x] Steam Deck\n* [x] Windows\n* [ ] [macOS (help wanted!)](https://github.com/allyourcodebase/SDL3/issues/4)\n* [ ] [Emscripten (help wanted!)](https://github.com/allyourcodebase/SDL3/issues/5)\n* [ ] [Consoles (help wanted!)](https://github.com/allyourcodebase/SDL3/issues/6)\n\nYou can override the default target configuration by setting `default_target_config` to `false`, and then providing your own configuration. This is typically only necessary when your platform doesn't yet have a default configuration:\n```zig\nconst sdl = b.dependency(\"sdl\", .{\n    .optimize = optimize,\n    .target = target,\n    .default_target_config = false,\n});\nconst sdl_lib = sdl.artifact(\"SDL3\");\nsdl_lib.addIncludePath(...); // Path to your `SDL_build_config.h`, see `windows.zig` for an example of generating this\n```\n\nAny other necessary tweaks such as turning of linking with libc, linking with dependencies, or adding other headers can be done here as well.\n\nIf you're interested in adding default configuration for additional targets, listed or not, contributions are welcome! See [src/linux.zig](src/linux.zig) or [src/windows.zig](src/windows.zig) for examples of how this works.\n\nWhen making a PR that adds support for a new target:\n* Replicate the [default SDL configuration for the target](https://github.com/libsdl-org/SDL/tree/main/include/build_config) within reason\n* Pull dependencies in via the build system rather than vendoring them when possible. If this isn't possible, vendor the needed files in `/deps` with a README explaining why they couldn't be pulled in via the build system and any relevant licensing information.\n* Cross compilation to all targets should be possible within reason unless forbidden by licensing.\n* Update [.github/workflows/ci.yaml](.github/workflows/ci.yaml) to test the new target.\n\n# Updating Dependencies\n\n## SDL\n\n* Modify `build.zig.zon` to point to the desired SDL version\n* If you get linker errors or missing headers relating to Wayland protocols on Linux, new Wayland protocols were added upstream. You can fix this by running `zig build wayland-scanner` with `wayland-scanner`.\n* If you get any other linker errors or missing files, sources were added or renamed upstream, and you need to update `src/sdl.zon`.\n\n## SDL's Dependencies\n\nThis should rarely be necessary. When it is, you can update their version in `build.zig.zon` if present, and any relevant files in `/deps` if present.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
+  "releases": [],
+  "owner_bio": "...are belong to Ziguanas, but we'd also be delighted to give them back!",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2023-09-28T21:29:33Z",
+  "license": "MIT",
+  "category": "library"
+}

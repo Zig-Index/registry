@@ -1,0 +1,27 @@
+{
+  "name": "zig-pkg",
+  "owner": "baguetteism",
+  "repo": "zig-pkg",
+  "description": "Zig Package Aggregator ",
+  "type": "project",
+  "topics": [
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2024-04-28T23:17:19Z",
+  "readme": "# Zig Package Aggregator\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/53385738?u=2eddc3b84e83ede164c50e9df807381618ee5056&v=4",
+  "releases": [],
+  "owner_company": "Colosseum (Thailand)  Co., Ltd.",
+  "owner_location": "Bangkok, Thailand",
+  "owner_blog": null,
+  "owner_twitter_username": "baguetteism",
+  "owner_followers": 0,
+  "owner_following": 0,
+  "owner_created_at": "2019-07-28T01:45:17Z",
+  "homepage": "https://zkg.waff.cc",
+  "category": "library"
+}

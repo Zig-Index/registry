@@ -1,0 +1,73 @@
+{
+  "name": "msgpack.zig",
+  "owner": "lalinsky",
+  "repo": "msgpack.zig",
+  "description": "Msgpack serialization for Zig / msgpack.org[Zig]",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 14,
+  "forks": 2,
+  "watchers": 1,
+  "updated_at": "2025-11-03T23:55:01Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# Zig library for working with msgpack messages\n\nThis is a Zig library for encoding/decoding [msgpack](https://msgpack.org/) messages based on static types.\n\nYou can define a struct type and then serialize it using a stable binary format that is readable with any\nlanguage that supports msgpack. This is useful for data files and network APIs. You can use it like protobuf,\nbut with the advantage that you use Zig's type system instead of a foreign schema language.\n\nThere are multiple options on how to encode struct fields, in order to generate compact messages, see below for details.\n\n## Installation\n\n1) Add msgpack.zig as a dependency in your `build.zig.zon`:\n\n```bash\nzig fetch --save \"git+https://github.com/lalinsky/msgpack.zig?ref=v0.6.0\"\n```\n\n2) In your `build.zig`, add the `msgpack` module as a dependency you your program:\n\n```zig\nconst msgpack = b.dependency(\"msgpack\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\n// the executable from your call to b.addExecutable(...)\nexe.root_module.addImport(\"msgpack\", msgpack.module(\"msgpack\"));\n```\n\n## Usage\n\nBasic encoding and decoding:\n\n```zig\nconst std = @import(\"std\");\nconst msgpack = @import(\"msgpack\");\n\nconst Message = struct {\n    name: []const u8,\n    age: u8,\n};\n\nvar buffer = std.ArrayList(u8).init(allocator);\ndefer buffer.deinit();\n\ntry msgpack.encode(Message{\n    .name = \"John\",\n    .age = 20,\n}, buffer.writer());\n\nconst decoded = try msgpack.decodeFromSlice(Message, allocator, buffer.items);\ndefer decoded.deinit();\n\nstd.debug.assert(std.mem.eql(u8, decoded.value.name, \"John\"));\nstd.debug.assert(decoded.value.age == 20);\n```\n\nThe encoded message will use field names as keys to encode the message. In order to generate more compact messages, you can change the format to use field indexes:\n\n```zig\nconst std = @import(\"std\");\nconst msgpack = @import(\"msgpack\");\n\nconst Message = struct {\n    name: []const u8,\n    age: u8,\n\n    pub fn msgpackFormat() msgpack.StructFormat {\n        return .{ .as_map = .{ .key = .field_index } };\n    }\n};\n```\n\nOr you can also use field name prefixes:\n\n```zig\nconst std = @import(\"std\");\nconst msgpack = @import(\"msgpack\");\n\nconst Message = struct {\n    name: []const u8,\n    age: u8,\n\n    pub fn msgpackFormat() msgpack.StructFormat {\n        return .{ .as_map = .{ .key = .{ .field_name_prefix = 1 } } };\n    }\n};\n```\n\nBoth options have the disadvantage that changing the fields in the struct will have impact on the encoded message, so you need to be careful about backwarads compatibility.\nYou can also use custom protobuf-like field keys to ensure full compatibility even after changing the struct:\n\n```zig\nconst std = @import(\"std\");\nconst msgpack = @import(\"msgpack\");\n\nconst Message = struct {\n    name: []const u8,\n    age: u8,\n\n    pub fn msgpackFormat() msgpack.StructFormat {\n        return .{ .as_map = .{ .key = .custom } };\n    }\n\n    pub fn msgpackFieldKey(field: std.meta.FieldEnum(@This())) u8 {\n        return switch (field) {\n            .name => 1,\n            .age => 2,\n        };\n    }\n};\n```\n\nOr you can use a completely custom format:\n\n```zig\nconst std = @import(\"std\");\nconst msgpack = @import(\"msgpack\");\n\nconst Message = struct {\n    items: []u32,\n\n    pub fn msgpackWrite(self: Message, packer: anytype) !void {\n        try packer.writeArray(u32, self.items);\n    }\n\n    pub fn msgpackRead(unpacker: anytype) !Message {\n        const items = try unpacker.readArray(u32);\n        return Message{ .items = items };\n    }\n};\n```\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/220839?u=76f817358cb458727e81dd4ec11188d343becc9e&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.6.0",
+      "name": "v0.6.0",
+      "body": "### Changed\n- Switched to the new `std.Io.Reader` and `std.Io.Writer` types",
+      "prerelease": false,
+      "published_at": "2025-10-26T17:06:23Z",
+      "html_url": "https://github.com/lalinsky/msgpack.zig/releases/tag/v0.6.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.5.0",
+      "name": "Release v0.5.0",
+      "body": "- Support for Zig 0.15\n- Added msgspec-style encoding of tagged unions",
+      "prerelease": false,
+      "published_at": "2025-10-05T06:05:26Z",
+      "html_url": "https://github.com/lalinsky/msgpack.zig/releases/tag/v0.5.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.4.0",
+      "name": "v0.4.0",
+      "body": "## New Features\r\n\r\n### Tagged Union Format\r\n- Added new `as_tagged` union format for serializing unions as flat maps with type tags\r\n- Provides msgspec compatibility for tagged union serialization\r\n- Configurable tag field name (default: \"type\") and tag value strategies (field name, field index, or field name prefix)\r\n- Supports struct fields within union variants\r\n\r\n## Bug Fixes\r\n\r\n- Fixed `msgpackFieldKey` function type reflection for custom struct field keys\r\n- Improved integer overflow testing with helper function",
+      "prerelease": false,
+      "published_at": "2025-09-01T06:44:23Z",
+      "html_url": "https://github.com/lalinsky/msgpack.zig/releases/tag/v0.4.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "- Support for Zig 0.14.",
+      "prerelease": false,
+      "published_at": "2025-03-09T21:29:56Z",
+      "html_url": "https://github.com/lalinsky/msgpack.zig/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "Initial release.",
+      "prerelease": false,
+      "published_at": "2024-12-02T12:58:09Z",
+      "html_url": "https://github.com/lalinsky/msgpack.zig/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": "Trenčín, Slovakia",
+  "owner_blog": "https://lalinsky.com",
+  "owner_twitter_username": null,
+  "owner_followers": 297,
+  "owner_following": 27,
+  "owner_created_at": "2010-03-11T19:55:55Z",
+  "license": "MIT",
+  "category": "library"
+}

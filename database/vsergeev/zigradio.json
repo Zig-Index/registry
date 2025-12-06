@@ -1,0 +1,113 @@
+{
+  "name": "zigradio",
+  "owner": "vsergeev",
+  "repo": "zigradio",
+  "description": "A lightweight software-defined radio framework built with Zig",
+  "type": "project",
+  "topics": [
+    "sdr",
+    "zig",
+    "radio",
+    "zigradio",
+    "zig-package"
+  ],
+  "stars": 28,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-12-06T16:44:04Z",
+  "readme": "# ZigRadio [![Tests Status](https://github.com/vsergeev/zigradio/actions/workflows/tests.yml/badge.svg)](https://github.com/vsergeev/zigradio/actions/workflows/tests.yml) [![GitHub release](https://img.shields.io/github/release/vsergeev/zigradio.svg?maxAge=7200)](https://github.com/vsergeev/zigradio) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/vsergeev/zigradio/blob/master/LICENSE)\n\n**ZigRadio** is a lightweight flow graph signal processing framework for\nsoftware-defined radio. It provides a suite of source, sink, and processing\nblocks, with a simple API for defining flow graphs, running flow graphs, and\ncreating blocks. ZigRadio has an API similar to that of\n[LuaRadio](https://luaradio.io/) and is also MIT licensed.\n\nZigRadio can be used to rapidly prototype software radios,\nmodulation/demodulation utilities, and signal processing experiments.\n\n## Example\n\n##### Wideband FM Broadcast Radio Receiver\n\n``` zig\nconst std = @import(\"std\");\n\nconst radio = @import(\"radio\");\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n\n    const frequency: f64 = 91.1e6; // 91.1 MHz\n\n    var source = radio.blocks.RtlSdrSource.init(frequency - 250e3, 960000, .{});\n    var if_translator = radio.blocks.FrequencyTranslatorBlock.init(-250e3);\n    var if_filter = radio.blocks.LowpassFilterBlock(std.math.Complex(f32), 128).init(200e3, .{});\n    var if_downsampler = radio.blocks.DownsamplerBlock(std.math.Complex(f32)).init(4);\n    var fm_demod = radio.blocks.FrequencyDiscriminatorBlock.init(75e3);\n    var af_filter = radio.blocks.LowpassFilterBlock(f32, 128).init(15e3, .{});\n    var af_deemphasis = radio.blocks.FMDeemphasisFilterBlock.init(75e-6);\n    var af_downsampler = radio.blocks.DownsamplerBlock(f32).init(5);\n    var sink = radio.blocks.PulseAudioSink(1).init();\n\n    var top = radio.Flowgraph.init(gpa.allocator(), .{ .debug = true });\n    defer top.deinit();\n    try top.connect(&source.block, &if_translator.block);\n    try top.connect(&if_translator.block, &if_filter.block);\n    try top.connect(&if_filter.block, &if_downsampler.block);\n    try top.connect(&if_downsampler.block, &fm_demod.block);\n    try top.connect(&fm_demod.block, &af_filter.block);\n    try top.connect(&af_filter.block, &af_deemphasis.block);\n    try top.connect(&af_deemphasis.block, &af_downsampler.block);\n    try top.connect(&af_downsampler.block, &sink.block);\n\n    _ = try top.run();\n}\n```\n\nCheck out some more [examples](examples) of what you can build with ZigRadio.\n\n## Quickstart\n\nZigRadio requires Zig version 0.15.\n\n```\n$ git clone https://github.com/vsergeev/zigradio.git\n$ cd zigradio\n```\n\nBuild examples:\n\n``` shell\n$ zig build examples\n```\n\nTry out one of the [examples](examples) with an\n[RTL-SDR](http://www.rtl-sdr.com/about-rtl-sdr/) dongle:\n\n```\n$ ./zig-out/bin/example-rtlsdr_wbfm_mono 89.7e6\n```\n\n## Building\n\nFetch the ZigRadio package:\n\n```\nzig fetch --save git+https://github.com/vsergeev/zigradio#master\n```\n\nAdd ZigRadio as a dependency to your `build.zig`:\n\n``` zig\nconst radio = b.dependency(\"radio\", .{});\n...\nexe.root_module.addImport(\"radio\", radio.module(\"radio\"));\nexe.linkLibC();\n```\n\nOptimization `ReleaseFast` is recommended for real-time applications. libc is\nrequired for loading dynamic libraries used for acceleration and I/O.\n\n## Project Structure\n\n* [src/](src/) - Sources\n    * [radio.zig](src/radio.zig) - Top-level package\n    * [core/](src/core) - Core framework\n    * [blocks/](src/blocks) - Blocks\n        * [sources/](src/blocks/sources) - Sources\n        * [sinks/](src/blocks/sinks) - Sinks\n        * [signal/](src/blocks/signal) - Signal blocks\n        * [digital/](src/blocks/digital) - Digital blocks\n        * [composites/](src/blocks/composites) - Composite blocks\n    * [utils/](src/utils) - Utility functions\n    * [vectors/](src/vectors) - Generated test vectors\n* [examples/](examples) - Examples\n* [benchmarks/](benchmarks) - Benchmark Suite\n* [website/](website) - Website\n* [build.zig](build.zig) - Zig build script\n* [build.zig.zon](build.zig.zon) - Zig package manifest\n* [generate.py](generate.py) - Test vectors generator\n* [CHANGELOG.md](CHANGELOG.md) - Change log\n* [LICENSE](LICENSE) - MIT License\n* [README.md](README.md) - This README\n\n## Testing\n\nRun unit tests with:\n\n```\n$ zig build test\n```\n\nTest vectors are generated with Python 3 and NumPy/SciPy:\n\n```\n$ zig build generate\n```\n\n## Benchmarking\n\nRun the benchmark suite with:\n\n```\n$ zig build benchmark\n```\n\n## License\n\nZigRadio is MIT licensed. See the included [LICENSE](LICENSE) file.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/524033?u=889a4a45a5288cfd44d13a04bb77cca966fc0a62&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.9.0",
+      "name": "v0.9.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-11-11T11:40:44Z",
+      "html_url": "https://github.com/vsergeev/zigradio/releases/tag/v0.9.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.8.0",
+      "name": "v0.8.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-06-25T14:02:14Z",
+      "html_url": "https://github.com/vsergeev/zigradio/releases/tag/v0.8.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.7.0",
+      "name": "v0.7.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-05-14T08:19:29Z",
+      "html_url": "https://github.com/vsergeev/zigradio/releases/tag/v0.7.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.6.0",
+      "name": "v0.6.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-02-26T09:46:09Z",
+      "html_url": "https://github.com/vsergeev/zigradio/releases/tag/v0.6.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.5.0",
+      "name": "v0.5.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-02-05T09:22:32Z",
+      "html_url": "https://github.com/vsergeev/zigradio/releases/tag/v0.5.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.4.0",
+      "name": "v0.4.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-01-27T11:46:35Z",
+      "html_url": "https://github.com/vsergeev/zigradio/releases/tag/v0.4.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.3.0",
+      "name": "v0.3.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-01-19T03:13:10Z",
+      "html_url": "https://github.com/vsergeev/zigradio/releases/tag/v0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-01-19T03:12:49Z",
+      "html_url": "https://github.com/vsergeev/zigradio/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2023-07-13T07:03:16Z",
+      "html_url": "https://github.com/vsergeev/zigradio/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": "Illinois",
+  "owner_blog": "https://sergeev.io",
+  "owner_twitter_username": null,
+  "owner_followers": 377,
+  "owner_following": 40,
+  "owner_created_at": "2010-12-15T09:09:46Z",
+  "homepage": "https://zigradio.org",
+  "license": "MIT",
+  "category": "library"
+}

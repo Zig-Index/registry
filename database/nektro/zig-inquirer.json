@@ -1,0 +1,28 @@
+{
+  "name": "zig-inquirer",
+  "owner": "nektro",
+  "repo": "zig-inquirer",
+  "description": "A collection of utilities for prompting information from the user on the CLI",
+  "type": "project",
+  "topics": [
+    "zig-package",
+    "zig"
+  ],
+  "stars": 27,
+  "forks": 2,
+  "watchers": 1,
+  "updated_at": "2025-11-03T07:28:35Z",
+  "readme": "# zig-inquirer\n\n![loc](https://sloc.xyz/github/nektro/zig-inquirer)\n[![license](https://img.shields.io/github/license/nektro/zig-inquirer.svg)](https://github.com/nektro/zig-inquirer/blob/master/LICENSE)\n[![nektro @ github sponsors](https://img.shields.io/badge/sponsors-nektro-purple?logo=github)](https://github.com/sponsors/nektro)\n[![Zig](https://img.shields.io/badge/Zig-0.14-f7a41d)](https://ziglang.org/)\n[![Zigmod](https://img.shields.io/badge/Zigmod-latest-f7a41d)](https://github.com/nektro/zigmod)\n\nA collection of utilities for prompting information from the user on the CLI\n\nAdapted from https://github.com/SBoudrias/Inquirer.js\n\n## Run example\n\n```\nzig build run\n```\n\n## Screenshots\n\n![image](https://user-images.githubusercontent.com/5464072/127479686-fda8f860-a705-4fd6-9768-a3e1f53a6bc7.png)\n\n## Usage\n\n- `pub fn answer(writer, reader, comptime prompt: []const u8, value: []const u8) []const u8`\n    - Prints just the done string.\n- `pub fn forEnum(writer, reader, comptime prompt: []const u8, alloc: *std.mem.Allocator, comptime options: enum, default: ?options) !options`\n    - Accepts an enum and prompts the user to pick on of the fields.\n- `pub fn forString(writer, reader, comptime prompt: []const u8, alloc: *std.mem.Allocator, default: ?[]const u8) ![]const u8`\n    - Base function, asks prompt and returns non-empty answer.\n- `pub fn forConfirm(writer, reader, comptime prompt: []const u8, alloc: *std.mem.Allocator) !bool`\n    - Calls `forEnum` with `y/n`\n\n## TODO\n\n- number (current implementation causes compiler crash)\n- list with strings\n- string password\n- long list with autocomplete\n- date\n- time\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/5464072?u=a84ae9f68c3b0567fe276def3ab932d2f2f6703f&v=4",
+  "releases": [],
+  "owner_bio": "29. Local trans witch who prefers to do her magic with a keyboard. she/her.",
+  "owner_company": null,
+  "owner_location": "San Francisco, CA, USA",
+  "owner_blog": "https://mlog.nektro.net/",
+  "owner_twitter_username": "nektro",
+  "owner_followers": 576,
+  "owner_following": 254,
+  "owner_created_at": "2013-09-15T16:41:53Z",
+  "license": "MIT",
+  "category": "library"
+}

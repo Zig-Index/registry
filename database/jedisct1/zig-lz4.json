@@ -1,0 +1,51 @@
+{
+  "name": "zig-lz4",
+  "owner": "jedisct1",
+  "repo": "zig-lz4",
+  "description": "LZ4 implementation in pure Zig.",
+  "type": "project",
+  "topics": [
+    "library",
+    "lz4",
+    "lz4f",
+    "lz4hc",
+    "zig",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 5,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-10-30T15:07:10Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# zig-lz4\n\nA pure Zig implementation of LZ4 compression. This is a complete port of the C reference implementation by Yann Collet, rewritten in safe Zig.\n\n## What is LZ4?\n\nLZ4 is a fast lossless compression algorithm focused on speed. It's widely used in systems where you need compression but can't afford the CPU overhead of heavier algorithms like gzip or zstd.\n\n## Features\n\nThis library implements the full LZ4 spec:\n\n- Block compression - The basic LZ4 algorithm for compressing individual blocks\n- HC mode - High compression variant that trades speed for better compression ratios\n- Frame format - The standard LZ4 frame format with checksums and metadata\n- Streaming - Compress and decompress data incrementally\n- Dictionaries - Use external dictionaries for better compression of small blocks\n\nAll code is pure Zig with no C dependencies. The implementation follows the same algorithms as the reference C library and passes compatibility tests with the standard `lz4` tool.\n\n## Requirements\n\n- Zig 0.15.1 or newer\n\n## Usage\n\nAdd it to your `build.zig.zon`:\n\n```zig\n.dependencies = .{\n    .lz4 = .{\n        .url = \"https://github.com/jedisct1/zig-lz4/archive/<commit>.tar.gz\",\n        .hash = \"...\",\n    },\n},\n```\n\nThen in your `build.zig`:\n\n```zig\nconst lz4 = b.dependency(\"lz4\", .{\n    .target = target,\n    .optimize = optimize,\n});\nexe.root_module.addImport(\"lz4\", lz4.module(\"lz4\"));\n```\n\n### Basic compression\n\n```zig\nconst lz4 = @import(\"lz4\");\nconst std = @import(\"std\");\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    const input = \"Hello, World!\";\n\n    // Allocate buffer for compressed data\n    const max_size = lz4.compressBound(input.len);\n    const compressed = try allocator.alloc(u8, max_size);\n    defer allocator.free(compressed);\n\n    // Compress\n    const compressed_size = try lz4.compressDefault(input, compressed);\n\n    // Decompress\n    const decompressed = try allocator.alloc(u8, input.len);\n    defer allocator.free(decompressed);\n\n    _ = try lz4.decompressSafe(compressed[0..compressed_size], decompressed);\n}\n```\n\n### HC (high compression) mode\n\n```zig\nconst lz4 = @import(\"lz4\");\n\n// Use higher compression level (2-12)\nconst compressed_size = try lz4.compressHC(\n    input,\n    compressed,\n    lz4.LZ4HC_CLEVEL_DEFAULT, // level 9\n);\n```\n\n### Frame format\n\nThe frame format adds checksums and is what the `lz4` command-line tool uses:\n\n```zig\nconst lz4 = @import(\"lz4\");\n\n// Compression context\nvar cctx = try lz4.lz4f.createCompressionContext(allocator);\ndefer lz4.lz4f.freeCompressionContext(cctx);\n\n// Write frame header\nvar prefs = lz4.lz4f.Preferences.init();\nconst header_size = try lz4.lz4f.compressBegin(\n    cctx,\n    output_buffer,\n    &prefs,\n);\n\n// Compress data\nconst compressed_size = try lz4.lz4f.compressUpdate(\n    cctx,\n    output_buffer[header_size..],\n    input_data,\n    null,\n);\n\n// Finish frame\nconst end_size = try lz4.lz4f.compressEnd(\n    cctx,\n    output_buffer[header_size + compressed_size..],\n    null,\n);\n```\n\n## Building and testing\n\n```bash\n# Run tests\nzig build test\n\n# Run specific test suites\nzig build test-lz4hc\nzig build test-lz4f\nzig build test-compat\n\n# Build the library\nzig build\n```\n\nThe test suite includes compatibility tests against the reference `lz4` implementation to verify the output is byte-for-byte identical.\n\n## Compatibility\n\nThis implementation is designed to be wire-compatible with the reference LZ4 library. Files compressed with this library can be decompressed by the standard `lz4` tool and vice versa.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/124872?v=4",
+  "releases": [
+    {
+      "tag_name": "0.1.0",
+      "name": "0.1.0",
+      "body": "Initial public release.",
+      "prerelease": false,
+      "published_at": "2025-10-29T22:46:18Z",
+      "html_url": "https://github.com/jedisct1/zig-lz4/releases/tag/0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Get my public keys here: https://sk.tl/7CPRo8kn",
+  "owner_company": null,
+  "owner_location": "Antibes, France",
+  "owner_blog": "https://primulinus.tpopsite.com",
+  "owner_twitter_username": "jedisct1",
+  "owner_followers": 4074,
+  "owner_following": 194,
+  "owner_created_at": "2009-09-09T10:20:57Z",
+  "license": "MIT",
+  "category": "library"
+}

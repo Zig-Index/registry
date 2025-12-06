@@ -1,0 +1,39 @@
+{
+  "name": "zig-zconfig",
+  "owner": "jrosberg",
+  "repo": "zig-zconfig",
+  "description": "ZMQ zconfig with Zig",
+  "type": "project",
+  "topics": [
+    "zig-library",
+    "zig-package",
+    "zmq"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-11-07T21:17:58Z",
+  "minimum_zig_version": "0.15.2",
+  "readme": "# zig-zconfig\n\nA ZeroMQ ZConfig implementation in Zig.\n\nImplements [rfc.zeromq.org/spec:4/ZPL](https://rfc.zeromq.org/spec:4/ZPL).\n\n## Features\n\nThis is currently a read-only version. No saving implemented yet.\n\n## Status\n\n**Stable** - All ZPL specification requirements implemented and tested.\n\n## Usage\n\n```zig\nconst std = @import(\"std\");\nconst zconfig = @import(\"zconfig\");\n\n// Initialize with allocator\nconst zc = try zconfig.ZConfiguration.init(std.heap.page_allocator);\n\n// Load from file\nconst root = try zc.load(\"config.zpl\");\ndefer root.destroy();\n\n// Or load from string\nconst config_text =\n    \\\\context\n    \\\\    iothreads = 1\n    \\\\    verbose = 1\n    \\\\main\n    \\\\    type = zqueue\n    \\\\    frontend\n    \\\\        bind = 'inproc://addr1'\n    \\\\        bind = 'ipc://addr2'\n;\nconst root = try zc.loadFromString(config_text);\ndefer root.destroy();\n\n// Navigate the tree\nconst ctx = try root.locate(\"context\");\nconst iothreads = ctx.childByName(\"iothreads\").?.getValue().?; // \"1\"\n\nconst node_name = ctx.name();\n\n// Build configuration programmatically\nvar config = try zc.new(\"root\", null);\ndefer config.destroy();\n\nvar child = try config.add(\"server\");\ntry child.setValue(\"localhost\");\n_ = try config.addWithValue(\"port\", \"8080\");\n```\n\n## License\n\nMIT License - see [LICENSE](LICENSE) file for details.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/12546697?u=a51645dbaf0f8dba83e7615076b7ad4220bec219&v=4",
+  "releases": [
+    {
+      "tag_name": "0.1.0",
+      "name": "0.1.0",
+      "body": "First public version",
+      "prerelease": false,
+      "published_at": "2025-11-07T17:55:58Z",
+      "html_url": "https://github.com/jrosberg/zig-zconfig/releases/tag/0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": "Offcode",
+  "owner_location": "Oulu, Finland",
+  "owner_blog": "https://offcode.fi",
+  "owner_twitter_username": null,
+  "owner_followers": 1,
+  "owner_following": 3,
+  "owner_created_at": "2015-05-21T14:45:04Z",
+  "license": "MIT",
+  "category": "library"
+}

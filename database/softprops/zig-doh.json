@@ -1,0 +1,42 @@
+{
+  "name": "zig-doh",
+  "owner": "softprops",
+  "repo": "zig-doh",
+  "description": "DNS over HTTPS client",
+  "type": "project",
+  "topics": [
+    "dns",
+    "doh",
+    "zig",
+    "zig-library",
+    "zig-package",
+    "zigdex-lib"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-02-17T09:47:42Z",
+  "readme": "\n<h1 align=\"center\">\n    zig DoH\n</h1>\n\n<div align=\"center\">\n    A DNS over HTTPs client interface\n</div>\n\n---\n\n[![Main](https://github.com/softprops/zig-doh/actions/workflows/ci.yml/badge.svg)](https://github.com/softprops/zig-doh/actions/workflows/ci.yml) ![License Info](https://img.shields.io/github/license/softprops/zig-doh) ![Release](https://img.shields.io/github/v/release/softprops/zig-doh) [![Zig Support](https://img.shields.io/badge/zig-0.13.0-black?logo=zig)](https://ziglang.org/documentation/0.13.0/)\n\n\n## examples\n\nSee examples directory\n\n## 📼 installing\n\nCreate a new exec project with `zig init`. Copy an example from the examples directory into your into `src/main.zig`\n\nCreate a `build.zig.zon` file to declare a dependency\n\n> .zon short for \"zig object notation\" files are essentially zig structs. `build.zig.zon` is zigs native package manager convention for where to declare dependencies\n\nStarting in zig 0.12.0, you can use and should prefer\n\n```sh\nzig fetch --save https://github.com/softprops/zig-doh/archive/refs/tags/v0.1.0.tar.gz\n```\n\notherwise, to manually add it, do so as follows\n\n```diff\n.{\n    .name = \"my-app\",\n    .version = \"0.1.0\",\n    .dependencies = .{\n+       // 👇 declare dep properties\n+        .doh = .{\n+            // 👇 uri to download\n+            .url = \"https://github.com/softprops/zig-doh/archive/refs/tags/v0.1.0.tar.gz\",\n+            // 👇 hash verification\n+            .hash = \"...\",\n+        },\n    },\n}\n```\n\n> the hash below may vary. you can also depend any tag with `https://github.com/softprops/zig-doh/archive/refs/tags/v{version}.tar.gz` or current main with `https://github.com/softprops/zig-doh/archive/refs/heads/main/main.tar.gz`. to resolve a hash omit it and let zig tell you the expected value.\n\nAdd the following in your `build.zig` file\n\n```diff\nconst std = @import(\"std\");\n\npub fn build(b: *std.Build) void {\n    const target = b.standardTargetOptions(.{});\n\n    const optimize = b.standardOptimizeOption(.{});\n    // 👇 de-reference dep from build.zig.zon\n+    const doh = b.dependency(\"doh\", .{\n+        .target = target,\n+        .optimize = optimize,\n+    }).module(\"doh\");\n    var exe = b.addExecutable(.{\n        .name = \"your-exe\",\n        .root_source_file = .{ .path = \"src/main.zig\" },\n        .target = target,\n        .optimize = optimize,\n    });\n    // 👇 add the module to executable\n+    exe.root_mode.addImport(\"doh\", doh);\n\n    b.installArtifact(exe);\n}\n```\n\n## 🥹 for budding ziglings\n\nDoes this look interesting but you're new to zig and feel left out? No problem, zig is young so most us of our new are as well. Here are some resources to help get you up to speed on zig\n\n- [the official zig website](https://ziglang.org/)\n- [zig's one-page language documentation](https://ziglang.org/documentation/0.13.0/)\n- [ziglearn](https://ziglearn.org/)\n- [ziglings exercises](https://github.com/ratfactor/ziglings)\n\n\n\\- softprops 2024",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/2242?v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "Initial release",
+      "prerelease": false,
+      "published_at": "2024-06-23T04:41:34Z",
+      "html_url": "https://github.com/softprops/zig-doh/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "I'm coming in jwt",
+  "owner_company": "https://www.mongodb.com/atlas",
+  "owner_location": "nyc",
+  "owner_blog": "http://lessis.me",
+  "owner_twitter_username": "softprops",
+  "owner_followers": 942,
+  "owner_following": 168,
+  "owner_created_at": "2008-03-05T03:41:51Z",
+  "license": "MIT",
+  "category": "library"
+}

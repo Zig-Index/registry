@@ -1,0 +1,45 @@
+{
+  "name": "zrm",
+  "owner": "zigzedd",
+  "repo": "zrm",
+  "description": "[MIRROR] Zig relational mapper.",
+  "type": "project",
+  "topics": [
+    "database",
+    "mapper",
+    "orm",
+    "zig",
+    "model",
+    "relationships",
+    "zig-library",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-01-14T10:52:47Z",
+  "dependencies": [
+    {
+      "name": "zollections",
+      "url": "https://code.zeptotech.net/zedd/zollections/archive/v0.1.1.tar.gz",
+      "hash": "12200fe147879d72381633e6f44d76db2c8a603cda1969b4e474c15c31052dbb24b7"
+    },
+    {
+      "name": "pg",
+      "url": "git+https://github.com/karlseguin/pg.zig?ref=zig-0.13#bc31e767e56218e8c51f9b0e40c581219b0ac62a",
+      "hash": "1220795dd7be5bb28a29b7cf1a46233b0c370c158d7f4183c35db27f2b7db9564358"
+    }
+  ],
+  "minimum_zig_version": "0.13.0",
+  "readme": "<p align=\"center\">\n\t<a href=\"https://code.zeptotech.net/zedd/zrm\">\n\t\t<picture>\n\t\t\t<img alt=\"ZRM logo\" width=\"150\" src=\"https://code.zeptotech.net/zedd/zrm/raw/branch/main/logo.svg\" />\n\t\t</picture>\n\t</a>\n</p>\n\n<h1 align=\"center\">\n\tZRM\n</h1>\n\n<h4 align=\"center\">\n\t<a href=\"https://zedd.zeptotech.net/zrm\">Documentation</a>\n|\n\t<a href=\"https://zedd.zeptotech.net/zrm/api\">API</a>\n</h4>\n\n<p align=\"center\">\n\tZig relational mapper\n</p>\n\nZRM is part of [_zedd_](https://code.zeptotech.net/zedd), a collection of useful libraries for zig.\n\n## ZRM\n\n_ZRM_ provides a simple interface to relational databases in Zig. Define your repositories and easily write queries to retrieve and save complex Zig structures.\n\n## Versions\n\nZRM 0.3.1 is made and tested with zig 0.13.0.\n\n## Work in progress\n\nZRM aims to handle a lot for you, but it takes time to make. Have a look to [the issues](https://code.zeptotech.net/zedd/zrm/issues) to see what is currently planned or being worked on.\n\n## How to use\n\n### Install\n\nIn your project directory:\n\n```shell\n$ zig fetch --save https://code.zeptotech.net/zedd/zrm/archive/v0.3.1.tar.gz\n```\n\nIn `build.zig`:\n\n```zig\n// Add zrm dependency.\nconst zrm = b.dependency(\"zrm\", .{\n\t.target = target,\n\t.optimize = optimize,\n});\nexe.root_module.addImport(\"zrm\", zrm.module(\"zrm\"));\n```\n\n### Documentation\n\nA full documentation can be found on [zedd.zeptotech.net/zrm](https://zedd.zeptotech.net/zrm).\n\n### Examples\n\nSome examples can be found in `tests` directory:\n\n- [`tests/example.zig`](https://code.zeptotech.net/zedd/zrm/src/branch/main/tests/example.zig)\n- [`tests/repository.zig`](https://code.zeptotech.net/zedd/zrm/src/branch/main/tests/repository.zig)\n- [`tests/composite.zig`](https://code.zeptotech.net/zedd/zrm/src/branch/main/tests/composite.zig)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/184568612?v=4",
+  "releases": [],
+  "owner_bio": "Zig libraries.",
+  "owner_location": null,
+  "owner_blog": "https://code.zeptotech.net/zedd",
+  "owner_twitter_username": null,
+  "owner_created_at": "2024-10-10T22:10:33Z",
+  "homepage": "https://code.zeptotech.net/zedd/zrm",
+  "license": "MIT",
+  "category": "database"
+}

@@ -1,0 +1,30 @@
+{
+  "name": "replace-exe",
+  "owner": "weezy20",
+  "repo": "replace-exe",
+  "description": "A smol Zig library that lets a running executable replace (or delete) itself.",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-library",
+    "zig-package"
+  ],
+  "stars": 8,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-11-14T21:36:15Z",
+  "minimum_zig_version": "0.15.2",
+  "readme": "# replace-exe\n\nA smol Zig library that lets a running executable replace (or delete) itself.\n\nThis can be used, for instance, in applications implementing a self update feature keeping the current installation path intact.\n\nOnly windows, linux, and unix like systems (macOS, *BSD) are supported.\n\n---\n### Usage\n1. Add the library to your **build.zig.zon**:\n```zsh\nzig fetch --save git+https://github.com/weezy20/replace-exe.git\n```\n\n2. Add it to your **build.zig**:\n```zig\nconst exe = b.addExecutable(.{\n    ...\n});\n\n// Add the replace_exe dependency\nconst libreplace_exe = b.dependency(\"replace_exe\", .{});\nexe.root_module.addImport(\"replace_exe\", libreplace_exe.module(\"replace_exe\"));\n```\n\n3. Call `selfReplace` or `selfDelete` from your code:\n```zig\n// step 1: import\nconst re = @import(\"replace_exe\");\n// step 2: register hook as soon as possible in main(). This is a no-op on non-windows OS:\npub fn main() !void {\n    const allocator = std.heap.page_allocator;\n    // CRITICAL (windows): Call init() BEFORE any application logic.\n    // On Windows, this detects if the process is a cleanup helper and exits immediately.\n    // Any code before this line will run in helper processes too if spawned using selfDelete or selfReplace in windows!\n    re.init(allocator); // or re.init(null) if you want to go with the default ArenaAllocator(std.heap.page_allocator) for `selfDeleteInit()` operations\n    // your logic here..\n}\n// Replace current executable with a new one\ntry re.selfReplace(allocator, \"path/to/new/executable\");\n// Warning: Deletes current executable\ntry re.selfDelete();\n```\n\n\nNote: On windows, if you're deleting the parent folder itself of the current exe itself then you might not want to use `selfDelete` directly but instead provide the current parent dir (or really any dir that you want to prevent from being locked) using `selfDeleteExcludingPath(path: []const u8)` where the function ensures that no temporary exes are put into that path, thereby preventing its deletion for the lifetime of the current running executable.\n\nThe current strategy is to place temporary exes in `%TMP%` or `%TEMP%` & if that fails due to cross filesystem paths (exe & temp dir being on different filesystems) we fallback to storing the temp exe helpers in current parent of running exe unless `selfDeleteExcludingPath(p)` is provided in which case, the parent of `p` would be selected & as a fallback, we would go back to using the same parent dir of current-exe.\n\n> Recommended guidelines:\n\n> - Call these functions at most once each per program execution\n> - (UNSAFE windows) If using both, prefer do selfReplace before selfDelete - This will still not cleanup the helpers properly as the original file would've been moved & will spawn the new/exe/ which my not have\n> the call to `init()` thereby preventing self-cleanup. It's best to avoid this.\n> - Ideally, make them mutually exclusive in your application logic\n\n---\n\n### Demo\nSome example code is provided in the [demo](demo) folder:\n[demo.zig](demo/demo.zig) is an application that calls `selfReplace` to replace itself with the updated version [demo2.zig](demo/demo2.zig)\n\nBuild the demo applications with:\n```sh\n# Build zig demo exes:\nzig build -Ddemo\n# Build the demo-c executable alongside the above:\nzig build -Ddemo -Dcapi\n```\n\nThen run the first demo exe:\n```sh\n./zig-out/bin/demo delete # self-delete\n./zig-out/bin/demo replace ?</path/to/new/exe> # self-replace; default path is ./zig-out/bin/demo2\n```\n\nTry out the `demo-c` exe which calls libreplace-exe from C:\n```sh\n./zig-out/bin/demo-c delete\n# verify demo-c is deleted\n```\n\n---\n### FFI via C ABI\nIf you're using it via FFI, the function signatures are defined in [replace_exe.h](include/replace_exe.h) and can be used in your code as the following:\n- `selfReplace` becomes `self_replace(const char* path)`\n- `selfDelete` becomes `self_delete()`\n- `selfDeleteExcludingPath` becomes `self_delete_excluding_path(const char* path)`\n- `init(?std.mem.Allocator)` becomes `init()`\n\nSee [c_api.zig](c_api.zig) for definitions. \nBuilding the library as a shared object or static library for use with C/C++:\n\nBuilding:\n```sh\n# This builds a .so shared library like libreplace-exe.so that you can link against\nzig build -Dcapi -Dso -Doptimization=ReleaseFast\n# Or if you prefer a static library:\nzig build -Dcapi -Doptimization=ReleaseFast\n```\nExample usage in C (using dynamic library): See [demo.c](demo/demo.c)\n\n1. Build your C app using either of the generated libraries:\n```sh\ngcc demo/demo.c -Izig-out/include -Lzig-out/lib -lreplace-exe -o test\n```\n2. Run the C demo:\n```sh\nLD_LIBRARY_PATH=zig-out/lib ./test /path/to/new/executable\n```\n3. Run again to verify replacement:\n```sh\nLD_LIBRARY_PATH=zig-out/lib ./test\n```\n\nOr if you prefer go (using `cgo`): See [demo/main.go](demo/main.go) for an example.\n1. Build your Go app linking `libreplace-exe.a` or `libreplace-exe.so`:\n```sh\ngo build -o demo-go demo/main.go\n```\n2. Run the Go demo:\n```sh\n./demo-go replace /path/to/new/executable\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/15669111?u=ef37e5ee464381e66ea7cb9f77df0f2e894b7651&v=4",
+  "releases": [],
+  "owner_bio": "All your codebase are belong to us",
+  "owner_company": null,
+  "owner_location": "India",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 24,
+  "owner_following": 33,
+  "owner_created_at": "2015-11-05T10:12:26Z",
+  "license": "MIT",
+  "category": "library"
+}

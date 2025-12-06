@@ -1,0 +1,36 @@
+{
+  "name": "spsc-queue",
+  "owner": "freref",
+  "repo": "spsc-queue",
+  "description": " Fast bounded SPSC queue written in Zig",
+  "type": "project",
+  "topics": [
+    "spsc-queue",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 25,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-11-16T06:49:58Z",
+  "dependencies": [
+    {
+      "name": "spsc_queue",
+      "url": "https://github.com/freref/spsc-queue/archive/325b0765de97362e50ccc0eefbb4df09c7ef808a.tar.gz",
+      "hash": "spsc_queue-0.0.0-AVEohxc6AADVXTAl-PXZCaz_5e8v3hQ0QMEcnUJaF2sk"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# spsc-queue\nA single producer single consumer wait-free and lock-free fixed size queue written in Zig. Inspired by [rigtorp's](https://github.com/rigtorp/SPSCQueue/tree/master) implementation in C++. This implementation is faster than [rigtorp/SPSCQueue](https://github.com/rigtorp/SPSCQueue/tree/master),\n[*boost::lockfree::spsc*](https://www.boost.org/doc/libs/1_76_0/doc/html/boost/lockfree/spsc_queue.html), [cdolan/zig-spsc-ring](https://github.com/cdolan/zig-spsc-ring.git), and [*folly::ProducerConsumerQueue*](https://github.com/facebook/folly/blob/master/folly/docs/ProducerConsumerQueue.md).\n\n## Implementation\nThis library provides a **managed** and an **unmanaged** version of the queue, following the Zig standard library conventions. There are **2 implementations** of the queue:\n- One that uses a slack space in the buffer and allows the user to set any capacity.\n- One that enforces power-of-2 (po2) capacity and is faster due to less expensive arithmetic operations.\n\nThe user can choose which implementation they want to use by setting the ``enforce_po2`` flag to ``true`` when defining the queue type. I opted for this interface over detecting if the capacity is po2, because the flag makes the choice explicit and known at comptime. It's clear to the user that there are two distinct implementations with different trade-offs. I borrowed this idea from [joadnacer/atomic_queue](https://github.com/joadnacer/atomic_queues.git).\n\n## Usage\nYou can find a basic example [here](./src/example.zig). You can run this example with the following command:\n```sh\nzig build run-example\n```\n\n**Unmanaged version:**\n```zig\npub fn initBuffer(buffer: []T) Self\npub fn initCapacity(allocator: std.mem.Allocator, num: usize) !Self\npub fn deinit(self: *Self, allocator: std.mem.Allocator) void\n```\n\n**Managed version:**\n```zig\npub fn initCapacity(allocator: std.mem.Allocator, num: usize) !Self\npub fn fromOwnedSlice(allocator: std.mem.Allocator, buffer: []T) Self\npub fn deinit(self: *Self) void\n```\n\n**General API:**\n```zig\npub fn isEmpty(self: *Self) bool\npub fn size(self: *Self) usize\npub fn push(self: *Self, value: T) void\npub fn tryPush(self: *Self, value: T) bool\npub fn front(self: *Self) ?*T\npub fn pop(self: *Self) void\n```\n\n## Benchmarks\nI made a seperate repo for benchmarking various SPSC queue implementations, more info on the benchmarks can be found [there](https://github.com/freref/spsc-queue-benchmark/tree/master). These benchmarks are currently not very rigorous, but they give a rudimentary idea of the performance of this implementation compared to others. The benchmarks were run on a MacBook Pro (Apple M4 Pro, 14 cores: 10 performance + 4 efficiency) with 48 GB unified memory. ![Benchmarks bar chart](https://github.com/freref/spsc-queue-benchmark/blob/master/benchmarks.png?raw=true)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/35976402?u=54ccbfc2224f6b1d7a2687366d2d96a1252b1639&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 26,
+  "owner_following": 13,
+  "owner_created_at": "2018-01-30T21:34:30Z",
+  "license": "MIT",
+  "category": "library"
+}

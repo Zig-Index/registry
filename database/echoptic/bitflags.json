@@ -1,0 +1,34 @@
+{
+  "name": "bitflags",
+  "owner": "echoptic",
+  "repo": "bitflags",
+  "description": "",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2024-08-29T18:50:25Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.11.0",
+  "readme": "# bitflags\n## Usage\nAdd this to your `build.zig`:\n```zig\nconst bitflags = b.dependency(\"bitflags\", .{});\nexe.root_module.addImport(\"bitflags\", bitflags.module(\"root\"));\n```\nand this to your source code:\n```zig\nconst bitflags = @import(\"bitflags\");\n```\n## Example\n```zig\nconst std = @import(\"std\");\nconst assert = std.debug.assert;\nconst bitflags = @import(\"bitflags\");\n\n// The `Bitflags` function generates a struct that has all flags and needed padding.\nconst Flags = bitflags.Bitflags(enum(u8) {\n    // The value `a`, at bit position `0`.\n    a = 0b00000001,\n    // The value `b`, at bit position `1`.\n    b = 0b00000010,\n    // The value `c`, at bit position `4`.\n    c = 0b00010000,\n});\n\npub fn main() !void {\n    const flags: Flags = @bitCast(@as(u8, 0b10001));\n\n    // Check which flags are used.\n    assert(flags.a and !flags.b and flags.c);\n\n    // You can also check flags like this, but you need to make sure that there are\n    // no unspecified bits present in the number or the result won't be correct.\n    assert(std.meta.eql(flags, .{ .a = true, .c = true }));\n\n    // If you don't think the input will contain only expected bit flags,\n    // you can use `bitflags.zeroUnused` to set all padding fields to 0.\n    assert(std.meta.eql(bitflags.zeroUnused(flags), .{ .a = true, .c = true }));\n}\n```\n## Zig Version Support\nCurrently supported Zig version is the latest master.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/80367123?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 2,
+  "owner_following": 1,
+  "owner_created_at": "2021-03-10T00:06:02Z",
+  "license": "MIT",
+  "category": "library"
+}

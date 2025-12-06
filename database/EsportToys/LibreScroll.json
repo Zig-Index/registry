@@ -1,0 +1,257 @@
+{
+  "name": "LibreScroll",
+  "owner": "EsportToys",
+  "repo": "LibreScroll",
+  "description": "Smooth inertial scrolling with any regular mouse.",
+  "type": "project",
+  "topics": [
+    "autoit",
+    "momentum",
+    "sendinput",
+    "trackball",
+    "accessibility",
+    "ergonomics",
+    "mouse",
+    "winapi",
+    "windows",
+    "middle-click"
+  ],
+  "stars": 177,
+  "forks": 6,
+  "watchers": 4,
+  "updated_at": "2025-12-04T21:42:38Z",
+  "readme": "# LibreScroll\nSmooth inertial scrolling on Windows with any regular mouse.\n\n### [Download Here](https://github.com/EsportToys/LibreScroll/releases)\n\nhttps://github.com/EsportToys/LibreScroll/assets/98432183/c7fc05a5-6b10-4b91-9984-0d809a52b025\n\n\n## Instructions\n1. Run LibreScroll\n2. Hold Mouse 3 and move your mouse, the cursor will stay in-place, mouse motion is instead converted to scroll momentum.\n3. Release middle-mouse-button to halt scroll momentum and release the cursor.\n\n\nTo compile from source, run \n```\nzig build-exe main.zig main.rc main.manifest --subsystem windows\n```\n\n## Options\n\n![image](https://github.com/user-attachments/assets/00ea0369-4a97-49f5-99ca-1b8d97b2ad2b)\n\n### Friction\nThe rate at which momentum decays.\n\n(Units: deceleration per velocity, in s&#8315;&sup1;)\n\n### X/Y-Sensitivity\nThe horizontal/vertical multiplier at which mouse movement is converted to scroll momentum. \n\nSet a negative sensitivity to use reversed-direction scrolling, or zero to disable that axis entirely.\n\n(Units: scroll-velocity per mouse-displacement, in s&#8315;&sup1;)\n\n### Minimum X/Y Step\nThe granularity at which to send scrolling inputs.\n\nThis is a workaround for some legacy apps that do not handle smooth scrolling increments correctly. \n\nA \"standard\" coarse scrollwheel step is 120, and the smallest step is 1.\n\n### Flick Mode\nWhen enabled, releasing middle-mouse-button will not stop the scrolling momentum. \n\nPress any button again (or move the actual wheel) to stop the momentum.\n\n### ThinkPad Mode\nWhen enabled, scrolling snaps to either horizontal or vertical, never both at the same time.\n\nThis emulates how scrolling works on ThinkPad TrackPoints.\n\n### Pause/Unpause\nTemporarily disable the utility if you need to use the unmodified behavior in another app.\n\nThis kills the worker thread, which can be restarted by clicking Unpause or Apply.\n\n### Apply\nAfter modifying the preference, click this to apply the configuration as displayed.\n\nThis kills and restarts the worker thread with the new configuration.\n\n## Recommended Settings for ThinkPad users (replacing TPmiddle)\n\nWith your TrackPoint's middle button set to \"middle click mode\", the following configurations are recommended to emulate TPmiddle's direct scrolling:\n\n![image](https://github.com/user-attachments/assets/6a0ee926-d331-4481-8f6e-a5f6f2a01c94)\n\n```\nFriction: 30\nY-Sensitivity: 90\nX-Sensitivity: 90\nMinimum X-Step: 10\nMinimum Y-Step: 10\nFlick Mode: No\nThinkPad Mode: Yes\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/98668553?v=4",
+  "releases": [
+    {
+      "tag_name": "v2.1.3",
+      "name": "",
+      "body": "## Changelog\r\n\r\n- change: default y-sensitivity is now 18 instead of 9\r\n- added: ability to input negative numbers for x- and y-sensitivity.\r\n\r\n---\r\n\r\n#### Personal thoughts:\r\nThese days I've found that I actually prefer using low friction even on my ThinkPad TrackPoint, whereas I was previously using high friction counteracted by a proportionally high sensitivity to emulate the behavior of stock TrackPoint scrolling.\r\n\r\nI've changed my preference to use a higher scroll sensitivity-to-friction ratio (previously 36/6, now 36/3). This is the configuration that I currently use on both my ThinkPad T14sG3 and Tex Shinobi:\r\n\r\n```ini\r\n[LibreScroll]\r\ndecay=3\r\nsensY=36\r\nsensX=36\r\nstepX=1\r\nstepY=1\r\nflick=0\r\nthink=1\r\n```\r\n\r\nIt turns out that low friction actually kind of gives you an extra fine dimension of control via time: whereas typical displacement-based controls means that your minimum precision of input change is entirely limited by the increment granularity, with a momentum-based input it becomes quite natural to freely transition between velocity-driven and position-driven controls by modulating your speed and/or button hold-time.\r\n\r\nBy gently tapping the rim of my TrackPoint and let the inertia smooth out the motion, I am able to make far finer scroll inputs than I ever could with vanilla TrackPoint scrolling, while simultaneously being able to scroll long distances quickly and effortlessly thanks to the combination of high sensitivity and low velocity attenuation.",
+      "prerelease": false,
+      "published_at": "2025-06-23T18:16:49Z",
+      "html_url": "https://github.com/EsportToys/LibreScroll/releases/tag/v2.1.3",
+      "assets": [
+        {
+          "name": "LibreScroll-v2.1.3.zip",
+          "url": "https://github.com/EsportToys/LibreScroll/releases/download/v2.1.3/LibreScroll-v2.1.3.zip",
+          "size": 8508,
+          "content_type": "application/x-zip-compressed"
+        }
+      ]
+    },
+    {
+      "tag_name": "v2.1.2",
+      "name": "v2.1.2 (recompiled)",
+      "body": "- bugfix: prevent unwanted double-middleclick on Windows Precision Touchpad\r\n\r\n(recompiled to baseline x86_64, instead of native to my laptop)",
+      "prerelease": false,
+      "published_at": "2025-05-20T12:06:57Z",
+      "html_url": "https://github.com/EsportToys/LibreScroll/releases/tag/v2.1.2",
+      "assets": [
+        {
+          "name": "LibreScroll-v2.1.2.zip",
+          "url": "https://github.com/EsportToys/LibreScroll/releases/download/v2.1.2/LibreScroll-v2.1.2.zip",
+          "size": 8270,
+          "content_type": "application/x-zip-compressed"
+        }
+      ]
+    },
+    {
+      "tag_name": "v2.1.1",
+      "name": "",
+      "body": "- use a dedicated thread for low-level hook",
+      "prerelease": false,
+      "published_at": "2025-05-17T14:00:20Z",
+      "html_url": "https://github.com/EsportToys/LibreScroll/releases/tag/v2.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v2.1",
+      "name": "",
+      "body": "- make the input thread use highest priority\r\n- add low-level mouse hook to filter out stray middle clicks",
+      "prerelease": false,
+      "published_at": "2025-05-17T11:59:01Z",
+      "html_url": "https://github.com/EsportToys/LibreScroll/releases/tag/v2.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v2.0",
+      "name": "v2.0 - Zig rewrite",
+      "body": "LibreScroll is now rewritten in Zig!",
+      "prerelease": false,
+      "published_at": "2025-05-14T05:40:51Z",
+      "html_url": "https://github.com/EsportToys/LibreScroll/releases/tag/v2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.2",
+      "name": "",
+      "body": "Added ThinkPad mode, which when enabled will snap scroll motion to either vertical or horizontal, emulating how TrackPoint works.\r\n\r\n\r\n## Recommended Settings for ThinkPad users (replacing TPmiddle)\r\n\r\nWith your TrackPoint's middle button set to \"middle click mode\", the following configurations are recommended to emulate TPmiddle's direct scrolling:\r\n\r\n![image](https://github.com/user-attachments/assets/6a0ee926-d331-4481-8f6e-a5f6f2a01c94)\r\n\r\n```\r\nFriction: 30\r\nY-Sensitivity: 90\r\nX-Sensitivity: 90\r\nMinimum X-Step: 10\r\nMinimum Y-Step: 10\r\nFlick Mode: No\r\nThinkPad Mode: Yes\r\n```",
+      "prerelease": false,
+      "published_at": "2024-09-12T13:18:56Z",
+      "html_url": "https://github.com/EsportToys/LibreScroll/releases/tag/v1.2",
+      "assets": [
+        {
+          "name": "LibreScroll-compiled-exe-v1.2.zip",
+          "url": "https://github.com/EsportToys/LibreScroll/releases/download/v1.2/LibreScroll-compiled-exe-v1.2.zip",
+          "size": 976874,
+          "content_type": "application/x-zip-compressed"
+        },
+        {
+          "name": "LibreScroll-v1.2.zip",
+          "url": "https://github.com/EsportToys/LibreScroll/releases/download/v1.2/LibreScroll-v1.2.zip",
+          "size": 543982,
+          "content_type": "application/x-zip-compressed"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.1.1",
+      "name": "",
+      "body": "- fixed LibreScroll interfering with middle-click-to-close-window on taskbar hover, by delaying sending cancel until the first scroll action is emitted",
+      "prerelease": false,
+      "published_at": "2024-09-12T10:07:45Z",
+      "html_url": "https://github.com/EsportToys/LibreScroll/releases/tag/v1.1.1",
+      "assets": [
+        {
+          "name": "LibreScroll-v1.1.1.zip",
+          "url": "https://github.com/EsportToys/LibreScroll/releases/download/v1.1.1/LibreScroll-v1.1.1.zip",
+          "size": 543612,
+          "content_type": "application/x-zip-compressed"
+        },
+        {
+          "name": "LibreScroll-compiled-exe-v1.1.1.zip",
+          "url": "https://github.com/EsportToys/LibreScroll/releases/download/v1.1.1/LibreScroll-compiled-exe-v1.1.1.zip",
+          "size": 976291,
+          "content_type": "application/x-zip-compressed"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.1",
+      "name": "",
+      "body": "Fixed issue of dialog closing/aborting when attempt to scroll over Open/Save/etc dialogs.\r\n\r\n### Explanation: \r\n\r\nTo work around Microsoft Edge failing to exit the autoscroll mode despite detecting scroll inputs, the script sends VK_CANCEL so that Edge would exit autoscroll.\r\n\r\nHowever, this also gets detected by traditional win32 file dialogs as if you had clicked \"Cancel\", immediately closing the dialog box.\r\n\r\nThis time I made it so that it only sends the converted scancode while leaving out the virtual key, this way programs do not receive an actual \"Cancel\" character but does detect the corresponding keyboard press.\r\n\r\n### Known Issue\r\n\r\nThe Windows WiFi network list is extremely finicky in that if it detects even a tiny bit of horizontal scroll motion, prevoius vertical scrolls gets cancelled. You can work around this by setting X-sensitivity to zero, which disables horizontal scrolling.",
+      "prerelease": false,
+      "published_at": "2024-09-09T08:38:04Z",
+      "html_url": "https://github.com/EsportToys/LibreScroll/releases/tag/v1.1",
+      "assets": [
+        {
+          "name": "LibreScroll.zip",
+          "url": "https://github.com/EsportToys/LibreScroll/releases/download/v1.1/LibreScroll.zip",
+          "size": 543613,
+          "content_type": "application/x-zip-compressed"
+        },
+        {
+          "name": "LibreScroll-compiled-exe-v1.1.zip",
+          "url": "https://github.com/EsportToys/LibreScroll/releases/download/v1.1/LibreScroll-compiled-exe-v1.1.zip",
+          "size": 976254,
+          "content_type": "application/x-zip-compressed"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.0.2.2",
+      "name": "",
+      "body": "- Fixed cursor not stationary when scrolling Win10 start menu.",
+      "prerelease": false,
+      "published_at": "2024-06-10T18:51:46Z",
+      "html_url": "https://github.com/EsportToys/LibreScroll/releases/tag/v1.0.2.2",
+      "assets": [
+        {
+          "name": "LibreScroll-compiled-exe-v1.0.2.2.zip",
+          "url": "https://github.com/EsportToys/LibreScroll/releases/download/v1.0.2.2/LibreScroll-compiled-exe-v1.0.2.2.zip",
+          "size": 976067,
+          "content_type": "application/x-zip-compressed"
+        },
+        {
+          "name": "LibreScroll.zip",
+          "url": "https://github.com/EsportToys/LibreScroll/releases/download/v1.0.2.2/LibreScroll.zip",
+          "size": 543886,
+          "content_type": "application/x-zip-compressed"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.0.2.1",
+      "name": "v1.0.2.1",
+      "body": "- add missing `$tagSECURITY_ATTRIBUTES` struct def used by the `_Singleton` function pasted from `Misc.au3` (by @freerror)",
+      "prerelease": false,
+      "published_at": "2024-03-05T23:46:41Z",
+      "html_url": "https://github.com/EsportToys/LibreScroll/releases/tag/v1.0.2.1",
+      "assets": [
+        {
+          "name": "LibreScroll.zip",
+          "url": "https://github.com/EsportToys/LibreScroll/releases/download/v1.0.2.1/LibreScroll.zip",
+          "size": 543870,
+          "content_type": "application/x-zip-compressed"
+        },
+        {
+          "name": "LibreScroll-compiled-exe-v1.0.2.1.zip",
+          "url": "https://github.com/EsportToys/LibreScroll/releases/download/v1.0.2.1/LibreScroll-compiled-exe-v1.0.2.1.zip",
+          "size": 506673,
+          "content_type": "application/x-zip-compressed"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.0.2",
+      "name": "v1.0.2",
+      "body": "### [Download Link (plaintext script version - recommended)](https://github.com/EsportToys/LibreScroll/releases/download/v1.0.2/LibreScroll.zip)\r\n\r\n#### [Compiled .exe version](https://github.com/EsportToys/LibreScroll/releases/download/v1.0.2/LibreScroll-compiled-exe-v1.0.2.zip)\r\n\r\nChangelog:\r\n- added the ability to relaunch as admin from the tray menu.",
+      "prerelease": false,
+      "published_at": "2023-07-21T08:33:40Z",
+      "html_url": "https://github.com/EsportToys/LibreScroll/releases/tag/v1.0.2",
+      "assets": [
+        {
+          "name": "LibreScroll.zip",
+          "url": "https://github.com/EsportToys/LibreScroll/releases/download/v1.0.2/LibreScroll.zip",
+          "size": 543809,
+          "content_type": "application/x-zip-compressed"
+        },
+        {
+          "name": "LibreScroll-compiled-exe-v1.0.2.zip",
+          "url": "https://github.com/EsportToys/LibreScroll/releases/download/v1.0.2/LibreScroll-compiled-exe-v1.0.2.zip",
+          "size": 506592,
+          "content_type": "application/x-zip-compressed"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.0.1",
+      "name": "v1.0.1",
+      "body": "### [Download Link](https://github.com/EsportToys/LibreScroll/releases/download/v1.0.1/LibreScroll.zip)\r\n\r\nChangelog:\r\n- Fix stray scroll counts that happens when Flick Mode is enabled.",
+      "prerelease": false,
+      "published_at": "2023-07-19T15:00:20Z",
+      "html_url": "https://github.com/EsportToys/LibreScroll/releases/tag/v1.0.1",
+      "assets": [
+        {
+          "name": "LibreScroll.zip",
+          "url": "https://github.com/EsportToys/LibreScroll/releases/download/v1.0.1/LibreScroll.zip",
+          "size": 543690,
+          "content_type": "application/x-zip-compressed"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.0",
+      "name": "LibreScroll v1.0",
+      "body": "### [Download Link](https://github.com/EsportToys/LibreScroll/releases/download/v1.0/LibreScroll.zip)",
+      "prerelease": false,
+      "published_at": "2023-07-19T09:06:42Z",
+      "html_url": "https://github.com/EsportToys/LibreScroll/releases/tag/v1.0",
+      "assets": [
+        {
+          "name": "LibreScroll.zip",
+          "url": "https://github.com/EsportToys/LibreScroll/releases/download/v1.0/LibreScroll.zip",
+          "size": 543809,
+          "content_type": "application/x-zip-compressed"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2022-01-29T21:24:31Z",
+  "license": "GPL-3.0",
+  "category": "library"
+}

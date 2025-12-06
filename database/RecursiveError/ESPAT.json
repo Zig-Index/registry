@@ -1,0 +1,31 @@
+{
+  "name": "ESPAT",
+  "owner": "RecursiveError",
+  "repo": "ESPAT",
+  "description": "simple driver to use ESP32 boards as WiFi module via AT command firmware",
+  "type": "project",
+  "topics": [
+    "embedded",
+    "esp32",
+    "wifi",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 7,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-11-15T00:32:05Z",
+  "readme": "# ESPAT\n\nZIG VERSION: 0.15.1\n\n\n\n\n\nsimple driver made in Zig to use ESP32 boards as WiFi module via AT command firmware\n\nAT command firmware for ESP modules (32/8266) is a simple and inexpensive way to add wireless connection to embedded devices, although it is more limited than conventional RF modules, ESP modules abstract much of the network stack, allowing their use in more limited devices.\n\n***Important***: This driver is still under development, invalid inputs may cause deadlocks or breaks\n\n__Recommended Espressif AT Firmware Version__:4.0.0.0\n__Minimum Espressif AT Firmware Version__: 3.4.0.0\n\n**Warning**: for Ai-thinker modules such as ESP-01 or ESP-12.\nBoantong AT firmware (AT =< 1.7) is not supported, and Espressif firmware (2.2.0.0) is not compatible with the pin layout of these boards, to use them it is necessary to customize the firmware to ESP8266, if you don't know how to do this follow this guide: [custom pin AT](docs/customAT.md)\n\n## Supported Features\n- WiFi STA/AP/AP+STA modes\n- WiFi static IP and DHCP config\n- WiFi protocol config\n- Multi conn support\n- TCP/UDP Client\n- TCP Server\n- Server + Client mode\n- passive and active recv mode (for All sockets)\n- build-in HTTP/HTTPS client\n- mDNs\n\n\n\n## Get started\n\n***WARNING***: Documentation for version 0.15.1 is still under development. Files in the `docs/` directory are outdated! Please refer to the examples for guidance in the meantime.\n\n- [ESP AT](#what-is-esp-at)\n- [Driver](#how-this-driver-works)\n- [Porting](#porting)\n- [Dvices](#devices)\n- [Error Handling](#error-handling)\n- [Examples](#examples)\n\n### What is ESP-AT?\n\nThe [ESP-AT firmware](https://www.espressif.com/en/products/sdks/esp-at/overview) is an official firmware provided by Espressif Systems for their ESP8266 and ESP32 series of microcontrollers. It transforms the ESP module into a device that can be controlled via standard AT commands over a serial interface.\n\nAT commands, which are simple text-based instructions, enable the configuration and operation of the ESP module without requiring the user to write custom firmware. These commands can be used to perform tasks such as:\n\n    Configuring Wi-Fi connections (e.g., connecting to an access point or setting up as a Wi-Fi hotspot)\n    Sending and receiving data over TCP/UDP or HTTP protocols\n    Managing low-power modes\n    Accessing additional features, like Bluetooth (on ESP32) or GPIO control\n\nThe ESP-AT firmware is particularly suitable for applications where the ESP chip is used as a peripheral communication module controlled by another host device, such as a microcontroller or a computer. By using this firmware, developers can focus on the integration and higher-level functionalities of their system without delving into the complexities of programming the ESP chip itself.\n\n### How this driver works\n\nThis driver is made in a modular way, where parse of AT commands (Runner)  are separated from the device features (Devices)\n\nAllowing the user to choose between the implementations they want to use without additional memory cost\n\n### Porting\n\nTODO\n\n### Devices\n- WiFi TODO\n- Networkdocs TODO\n- HTTP CLient TODO\n\n\n### Examples:\ncomplete example code: \n- [Generic port](examples/) \n\n\n\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/65524156?u=568d579680b0c757b4659290e006ecfebe7dbf2a&v=4",
+  "releases": [],
+  "owner_bio": "Autodidata em Sistemas Embarcados, eletrônica e programação \r\n\r\n\r\n",
+  "owner_company": null,
+  "owner_location": "Praia Grande-sp,  Brasil ",
+  "owner_blog": "https://www.linkedin.com/in/guilherme-s-schultz-a72b70217",
+  "owner_twitter_username": "RecursiveError",
+  "owner_followers": 43,
+  "owner_following": 73,
+  "owner_created_at": "2020-05-18T04:06:34Z",
+  "license": "MIT",
+  "category": "embedded"
+}

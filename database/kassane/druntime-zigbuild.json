@@ -1,0 +1,43 @@
+{
+  "name": "druntime-zigbuild",
+  "owner": "kassane",
+  "repo": "druntime-zigbuild",
+  "description": "D runtime build using zig-build",
+  "type": "project",
+  "topics": [
+    "d",
+    "dlang",
+    "zig-package",
+    "build-system",
+    "zig-build",
+    "cross-compile"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2024-09-17T14:34:03Z",
+  "dependencies": [
+    {
+      "name": "abs",
+      "url": "git+https://github.com/kassane/anotherBuildStep#c7e33a3b1dfb3b9ca8f5da3d7cb282852ad34547",
+      "hash": "1220134c00c68e0081ff763e0f468776e9fe1a7279a09497ad3edf1c048c0df7fd5c"
+    },
+    {
+      "name": "phobos",
+      "url": "git+https://github.com/ldc-developers/phobos#788d4b0fed3c7ba46654a5548d1e7401586471c3",
+      "hash": "1220f84f733cacb01e3b24b3f03db90446a0ddb69d8fd3f8c0c2f8ad66f5ec7a1df2"
+    }
+  ],
+  "readme": "# Druntime + phobos (standalone) for zig-build (ABS)\n\n> [!Note]\n> A standalone runtime + stdlib (for easy cross-compile) using ABS is the goal of this project\n\n**More info:** [issue#6: cross-compile with Druntime + Phobos2](https://github.com/kassane/anotherBuildStep/issues/6)\n\n```bash\nProject-Specific Options:\n  -Dtarget=[string]            The CPU architecture, OS, and ABI to build for\n  -Dcpu=[string]               Target CPU features to add or subtract\n  -Ddynamic-linker=[string]    Path to interpreter on the target system\n  -Doptimize=[enum]            Prioritize performance, safety, or binary size\n                                 Supported Values:\n                                   Debug\n                                   ReleaseSafe\n                                   ReleaseFast\n                                   ReleaseSmall\n  -Dlinkage=[enum]             Change linking mode (default: static)\n                                 Supported Values:\n                                   static\n                                   dynamic\n  -Dphobos=[bool]              Build phobos library (default: false)\n```",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/6756180?u=d6f3a7066e4d3a99cc18ce3af2fd4b2fa754eec7&v=4",
+  "releases": [],
+  "owner_bio": "Software developer 👨‍🦽",
+  "owner_company": null,
+  "owner_location": "Bahia, Brazil",
+  "owner_blog": "https://kassane.github.io",
+  "owner_twitter_username": "TheuCatarino",
+  "owner_followers": 145,
+  "owner_following": 34,
+  "owner_created_at": "2014-02-22T13:35:59Z",
+  "category": "library"
+}

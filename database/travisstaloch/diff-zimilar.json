@@ -1,0 +1,28 @@
+{
+  "name": "diff-zimilar",
+  "owner": "travisstaloch",
+  "repo": "diff-zimilar",
+  "description": "a port of the dtolnay/dissimilar text diffing library to zig.  based on google's diff-match-patch ",
+  "type": "project",
+  "topics": [
+    "text-diff",
+    "diff-match-patch",
+    "zig-package"
+  ],
+  "stars": 6,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2023-05-08T16:58:11Z",
+  "readme": "# diff-zimilar\n\na port of [dtolnay/dissimilar](https://github.com/dtolnay/dissimilar/) text diffing library to [zig](https://ziglang.org/). includes semantic cleanups.  based on google's diff match patch. \n\n# goals\n\n* reduced memory footprint, limited allocations\n* fast diffing, maybe for use in [zls](https://github.com/zigtools/zls)\n\n# tools\n### diffit\na simple diffing utility that can be run from the command line:\n```console\n$ zig build run -- <file_a> <file_b>\n```\n```console\n$ zig build && zig-out/bin/diffit <file_a> <file_b>\n```\nthis shows ansi colored diffs.\n\n### benchmark\n```console\n$ zig run -lc -OReleaseFast src/bench.zig -- <file_a> <file_b> <iterations>\n```\n```console\n$ zig  run -lc -OReleaseFast src/bench.zig -- /tmp/dissimilar/benches/document1.txt /tmp/dissimilar/benches/document2.txt 10\ntook 1.363s for 10 diffs\n```\n\n# usage\n```zig\ntest {\n    const diff = @import(\"lib.zig\");\n    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);\n    const aalloc = arena.allocator();\n    // 'catch return' just allows test to pass\n    const file_a = std.fs.cwd().openFile(\"/path/to/file_a\", .{}) catch return; \n    const file_b = std.fs.cwd().openFile(\"/path/to/file_b\", .{}) catch return;\n    const doc_a = try file_a.readToEndAlloc(aalloc, std.math.maxInt(u32));\n    const doc_b = try file_b.readToEndAlloc(aalloc, std.math.maxInt(u32));\n    var chunks = try diff.diff(aalloc, doc_a, doc_b);\n    defer chunks.deinit(aalloc);\n}\n```\n\n# references\n* inspired by [tomhoule/zig-diff](https://github.com/tomhoule/zig-diff/)\n* ported from [dtolnay/dissimilar](https://github.com/dtolnay/dissimilar/)\n* [google diff match patch](https://github.com/google/diff-match-patch)\n* [Myers' diff algorithm](https://neil.fraser.name/writing/diff/myers.pdf)\n* [semantic cleanups](https://neil.fraser.name/writing/diff/)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1562827?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 68,
+  "owner_following": 32,
+  "owner_created_at": "2012-03-22T00:22:23Z",
+  "license": "MIT",
+  "category": "library"
+}

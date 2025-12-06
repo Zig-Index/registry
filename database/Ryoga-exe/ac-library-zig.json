@@ -1,0 +1,88 @@
+{
+  "name": "ac-library-zig",
+  "owner": "Ryoga-exe",
+  "repo": "ac-library-zig",
+  "description": "Zig implementation of AtCoder Library",
+  "type": "project",
+  "topics": [
+    "atcoder-library",
+    "zig",
+    "zig-library",
+    "zig-package",
+    "competitive-programming"
+  ],
+  "stars": 6,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-11-29T14:50:18Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# ac-library-zig\n\nac-library-zig is a Zig implementation of AtCoder Library (ACL).\n\nSee below for ACL.\n\n- [Original repository (implemented in C++)](https://github.com/atcoder/ac-library)\n- [AtCoder Library (ACL) - AtCoder](https://atcoder.jp/posts/517)\n- [AtCoder Library - Codeforces](https://codeforces.com/blog/entry/82400)\n\n## API Reference\n\nAutomatically generated API Reference for the project can be found at https://repos.ryoga.dev/ac-library-zig.\n\n> [!NOTE]\n> Zig autodoc is in beta;\n> the website may be broken or incomplete.\n\n## Installation\n\nAdd `ac-library-zig` package to your `build.zig.zon` by following command:\n\n```shell\n# Use tagged release of ac-library-zig\n# Replace `<REPLACE ME>` with the version of ac-library-zig that you want to use\n# See: https://github.com/Ryoga-exe/ac-library-zig/releases\nzig fetch --save=ac-library git+https://github.com/Ryoga-exe/ac-library-zig#<REPLACE ME>\n\n# Use latest build of master branch\nzig fetch --save=ac-library git+https://github.com/Ryoga-exe/ac-library-zig\n```\n\nYou can then import `ac-library` in your `build.zig` with:\n\n```zig\nconst ac_library = b.dependency(\"ac-library\", .{});\nconst exe = b.addExecutable(...);\nexe.root_module.addImport(\"ac-library\", ac_library.module(\"ac-library\"));\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/49950206?u=afc964f56275c5460c1272df19caba6135d6d72b&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.5.1",
+      "name": "v0.5.1",
+      "body": "This release is compatible with Zig v0.15.1.\r\n\r\n## What's Changed\r\n\r\n- Add missing `convolution` exports to lib.zig\r\n\r\n**Full Changelog**: https://github.com/Ryoga-exe/ac-library-zig/compare/v0.5.0...v0.5.1",
+      "prerelease": false,
+      "published_at": "2025-11-29T14:53:59Z",
+      "html_url": "https://github.com/Ryoga-exe/ac-library-zig/releases/tag/v0.5.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.5.0",
+      "name": "v0.5.0",
+      "body": "This release is compatible with Zig v0.15.1.\r\n\r\n## What's Changed\r\n* Implement convolution (https://github.com/Ryoga-exe/ac-library-zig/pull/26)\r\n\r\n**Full Changelog**: https://github.com/Ryoga-exe/ac-library-zig/compare/v0.4.0...v0.5.0",
+      "prerelease": false,
+      "published_at": "2025-09-24T16:20:47Z",
+      "html_url": "https://github.com/Ryoga-exe/ac-library-zig/releases/tag/v0.5.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.4.0",
+      "name": "v0.4.0",
+      "body": "This release is compatible with Zig v0.15.1.\r\n\r\n## What's Changed\r\n* Implement modint (https://github.com/Ryoga-exe/ac-library-zig/pull/13)\r\n* Update for Zig 0.15.1 (https://github.com/Ryoga-exe/ac-library-zig/pull/24)\r\n\r\n\r\n**Full Changelog**: https://github.com/Ryoga-exe/ac-library-zig/compare/v0.3.0...v0.4.0",
+      "prerelease": false,
+      "published_at": "2025-08-30T08:55:24Z",
+      "html_url": "https://github.com/Ryoga-exe/ac-library-zig/releases/tag/v0.4.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.3.0",
+      "name": "v0.3.0",
+      "body": "This release is compatible with Zig v0.14.1.\r\n\r\nNOTE: This update contains breaking changes to `minRight` and `minLeft` in `Segtree` and `LazySegtree`.\r\n\r\n## What's Changed\r\n* Add context to minRight and minLeft args (breaking changes) (https://github.com/Ryoga-exe/ac-library-zig/pull/23)\r\n* Add docs\r\n\r\n**Full Changelog**: https://github.com/Ryoga-exe/ac-library-zig/compare/v0.2.0...v0.3.0",
+      "prerelease": false,
+      "published_at": "2025-08-07T05:49:39Z",
+      "html_url": "https://github.com/Ryoga-exe/ac-library-zig/releases/tag/v0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "This release is compatible with Zig v0.14.0.\r\n\r\n## What's Changed\r\n* Delete `internal_bit.zig`, replace `bitCeil` with `std.math.ceilPowerOfTwo` (https://github.com/Ryoga-exe/ac-library-zig/pull/21)\r\n* Add Docs by (https://github.com/Ryoga-exe/ac-library-zig/pull/20)\r\n* Implement mincostflow (https://github.com/Ryoga-exe/ac-library-zig/pull/16)\r\n\r\n\r\n**Full Changelog**: https://github.com/Ryoga-exe/ac-library-zig/compare/v0.1.0...v0.2.0",
+      "prerelease": false,
+      "published_at": "2025-03-19T10:47:57Z",
+      "html_url": "https://github.com/Ryoga-exe/ac-library-zig/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "The first release of `ac-library-zig`.\r\n\r\nThis release is compatible with Zig v0.14.0.\r\n\r\n## Added\r\n* fenwicktree (https://github.com/Ryoga-exe/ac-library-zig/pull/1)\r\n* scc (https://github.com/Ryoga-exe/ac-library-zig/pull/2)\r\n* segtree (https://github.com/Ryoga-exe/ac-library-zig/pull/3)\r\n* math (https://github.com/Ryoga-exe/ac-library-zig/pull/6)\r\n* lazysegtree (https://github.com/Ryoga-exe/ac-library-zig/pull/7)\r\n* string (https://github.com/Ryoga-exe/ac-library-zig/pull/12)\r\n* maxflow (https://github.com/Ryoga-exe/ac-library-zig/pull/14)\r\n* twosat (https://github.com/Ryoga-exe/ac-library-zig/pull/17)\r\n\r\n**Full Changelog**: https://github.com/Ryoga-exe/ac-library-zig/commits/v0.1.0",
+      "prerelease": false,
+      "published_at": "2025-03-07T13:36:17Z",
+      "html_url": "https://github.com/Ryoga-exe/ac-library-zig/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Student / Programmer / Skier",
+  "owner_company": "University of Tsukuba",
+  "owner_location": "Ibaraki, Japan",
+  "owner_blog": "https://ryoga.dev",
+  "owner_twitter_username": "Ryoga_exe",
+  "owner_followers": 88,
+  "owner_following": 52,
+  "owner_created_at": "2019-04-24T13:42:08Z",
+  "homepage": "https://repos.ryoga.dev/ac-library-zig/#ac-library.lib",
+  "license": "CC0-1.0",
+  "category": "library"
+}

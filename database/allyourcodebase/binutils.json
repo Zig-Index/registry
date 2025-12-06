@@ -1,0 +1,43 @@
+{
+  "name": "binutils",
+  "owner": "allyourcodebase",
+  "repo": "binutils",
+  "description": "binutils ported to the zig build system",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 2,
+  "updated_at": "2025-11-17T18:03:38Z",
+  "dependencies": [
+    {
+      "name": "binutils",
+      "url": "https://sourceware.org/pub/binutils/releases/binutils-2.45.tar.xz",
+      "hash": "N-V-__8AAA6W9hFBAXcaEDszHBBVI0IfEpYUwk8y2YtqoTBr"
+    },
+    {
+      "name": "zlib",
+      "url": "git+https://github.com/allyourcodebase/zlib#61e7df7e996ec5a5f13a653db3c419adb340d6ef",
+      "hash": "zlib-1.3.1-ZZQ7lbYMAAB1hTSOKSXAKAgHsfDcyWNH_37ojw5WSpgR"
+    },
+    {
+      "name": "zstd",
+      "url": "git+https://github.com/allyourcodebase/zstd.git?ref=1.5.7#01327d49cbc56dc24c20a167bb0055d7fc23de84",
+      "hash": "zstd-1.5.7-KEItkJ8vAAC5_rRlKmLflYQ-eKXbAIQBWZNmmJtS18q0"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "[![CI](https://github.com/allyourcodebase/binutils/actions/workflows/ci.yaml/badge.svg)](https://github.com/allyourcodebase/binutils/actions)\n\n# binutils\n\nThis is [binutils](https://www.gnu.org/software/binutils/), packaged for [Zig](https://ziglang.org/).\n\nThe following subset of tools and libraries have been ported:\n\n- `bfd` - A library for manipulating binary files in a variety of different formats.\n- `libsframe` - A library for assembling and disassembling a variety of different assembler languages.\n- `opcodes` - A library for manipulating the SFRAME debug format.\n\n## Installation\n\nFirst, update your `build.zig.zon`:\n\n```\n# Initialize a `zig build` project if you haven't already\nzig init\nzig fetch --save git+https://github.com/allyourcodebase/binutils.git\n```\n\nYou can then import `binutils` in your `build.zig` with:\n\n```zig\nconst binutils_dependency = b.dependency(\"binutils\", .{\n    .target = target,\n    .optimize = optimize,\n});\nyour_exe.root_module.linkLibrary(binutils_dependency.artifact(\"binutils\"));\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
+  "releases": [],
+  "owner_bio": "...are belong to Ziguanas, but we'd also be delighted to give them back!",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2023-09-28T21:29:33Z",
+  "license": "GPL-2.0",
+  "category": "library"
+}

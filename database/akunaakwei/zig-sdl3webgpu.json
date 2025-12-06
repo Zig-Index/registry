@@ -1,0 +1,34 @@
+{
+  "name": "zig-sdl3webgpu",
+  "owner": "akunaakwei",
+  "repo": "zig-sdl3webgpu",
+  "description": "sdl3webgpu for zig",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-08-31T17:56:23Z",
+  "dependencies": [
+    {
+      "name": "sdl3webgpu",
+      "url": "https://github.com/eliemichel/sdl3webgpu/archive/4fa9d70935e41c075f664b231ee10a64262a8ac7.tar.gz",
+      "hash": "N-V-__8AAFtZAADm6a1_6N_xImNJ7m6xuSE0bV1U7vdf2dqn"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# sdl3webgpu\r\nThis is sdl3webgpu for the zig build system.\r\n\r\n# Usage\r\nYou need to bring your own headers and library for SDL 3 and a WebGPU implementation (dawn for example).  \r\nIf you want to use the zig module the translations for SDL 3 and WebGPU are also required.  \r\n```zig\r\npub fn build(b: *std.Build) void {\r\n    const target = b.standardTargetOptions(.{});\r\n    const optimize = b.standardOptimizeOption(.{});\r\n\r\n    const sdl3_dep = b.dependency(\"sdl\", .{\r\n        .target = target,\r\n        .optimize = optimize,\r\n    });\r\n    const sdl3_mod = sdl3_dep.module(\"sdl3\");\r\n    const sdl3_lib = sdl3_dep.artifact(\"sdl3\");\r\n\r\n    const dawn_dep = b.dependency(\"dawn\", .{\r\n        .target = target,\r\n        .optimize = optimize,\r\n    });\r\n    const webgpu_mod = dawn_dep.module(\"webgpu\");\r\n    const webgpu_lib = dawn_dep.artifact(\"webgpu_dawn\");\r\n\r\n    const sdl3webgpu_dep = b.dependency(\"sdl3webgpu\", .{\r\n        .target = target,\r\n        .optimize = optimize,\r\n        .sdl3_headers = sdl3_lib.getEmittedIncludeTree(),\r\n        .sdl3_library = sdl3_lib.getEmittedBin(),\r\n        .webgpu_headers = webgpu_lib.getEmittedIncludeTree(),\r\n        .webgpu_library = webgpu_lib.getEmittedBin(),\r\n    });\r\n    const sdl3webgpu_mod = sdl3webgpu_dep.module(\"sdl3webgpu\");\r\n    sdl3webgpu_mod.addImport(\"sdl3\", sdl3_mod);\r\n    sdl3webgpu_mod.addImport(\"webgpu\", webgpu_mod);\r\n\r\n    const exe = b.addExecutable(.{\r\n        .name = \"example\",\r\n        .root_module = b.createModule(.{\r\n            .root_source_file = b.path(\"src/main.zig\"),\r\n            .target = target,\r\n            .optimize = optimize,\r\n        }),\r\n    });\r\n    exe.root_module.addImport(\"sdl3\", sdl3_mod);\r\n    exe.root_module.addImport(\"webgpu\", webgpu_mod);\r\n    exe.root_module.addImport(\"sdl3webgpu\", sdl3webgpu_mod);\r\n}\r\n```\r\n\r\n# Example\r\nCheck out [sdl3 dawn example](https://github.com/akunaakwei/zig-sdl3-dawn-example) for a fully functional example.",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/11787994?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 0,
+  "owner_following": 2,
+  "owner_created_at": "2015-04-03T16:34:07Z",
+  "license": "Zlib",
+  "category": "library"
+}

@@ -1,0 +1,44 @@
+{
+  "name": "lz4",
+  "owner": "zig-devel",
+  "repo": "lz4",
+  "description": "",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-library",
+    "zig-package",
+    "lz4"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-10-21T14:09:23Z",
+  "dependencies": [
+    {
+      "name": "lz4",
+      "url": "https://github.com/lz4/lz4/archive/ebb370ca83af193212df4dcbadcc5d87bc0de2f0.tar.gz",
+      "hash": "N-V-__8AAPaNGQD6bmfRjArvYAnsL8DYxbXiNxVE_B6HRpUx"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# [lz4](https://www.lz4.org)@v1.10.0 [![Build and test library](https://github.com/zig-devel/lz4/actions/workflows/library.yml/badge.svg)](https://github.com/zig-devel/lz4/actions/workflows/library.yml)\n\nExtremely fast compression algorithm\n\n## Usage\n\nInstall library:\n\n```sh\nzig fetch --save https://github.com/zig-devel/lz4/archive/refs/tags/1.10.0-0.tar.gz\n```\n\nStatically link with `mod` module:\n\n```zig\nconst lz4 = b.dependency(\"lz4\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\nmod.linkLibrary(lz4.artifact(\"lz4\"));\n```\n\n## License\n\nAll code in this repo is dual-licensed under [0BSD](./LICENSES/0BSD.txt) OR [GPL-2.0-or-later](./LICENSES/GPL-2.0-or-later.txt).\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/235410832?v=4",
+  "releases": [
+    {
+      "tag_name": "1.10.0-0",
+      "name": "1.10.0-0",
+      "body": "Initial release. Adds static library build, basic test and CI on Linux.\r\n\r\n**Full Changelog**: https://github.com/zig-devel/lz4/commits/1.10.0-0\r\n**Release checks**: https://github.com/zig-devel/lz4/actions/runs/18243802740\r\n",
+      "prerelease": false,
+      "published_at": "2025-10-04T11:39:06Z",
+      "html_url": "https://github.com/zig-devel/lz4/releases/tag/1.10.0-0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "An opinionated collection of C/C++ libraries builded by the Zig build system.",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2025-10-01T00:33:09Z",
+  "category": "library"
+}

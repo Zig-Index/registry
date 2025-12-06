@@ -1,0 +1,60 @@
+{
+  "name": "libelf",
+  "owner": "pierrelgol",
+  "repo": "libelf",
+  "description": "Small Elf parsing library",
+  "type": "project",
+  "topics": [
+    "elf",
+    "elf-parser",
+    "zig",
+    "zig-library",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-05-29T18:45:46Z",
+  "minimum_zig_version": "0.15.0-dev.643+dc6ffc28b",
+  "readme": "# libelf\n\n**libelf** is a lightweight ELF file parsing library written in [Zig](https://ziglang.org/), designed for simplicity, modularity, correctness, and ease of integration into low-level projects.\n\n> ⚠️ **Work in Progress**: This library is still under active development. The API and behavior are subject to change. Use at your own risk.\n\n## Goals\n\n- Provide a faithfull translation 1:1 of elf.h\n- Provide a convenient namespaced organization of Elf constants.\n- Provide a minimal, dependency-free ELF parser in Zig\n- Support reading headers, sections, and common ELF structures\n- Be suitable for use in embedded and systems programming contexts\n\n## Status\n\nCurrently supports:\n- Some core constants and enums\n\nPlanned features:\n- Basic ELF header parsing\n- Program and section header interpretation\n- Symbol table parsing\n- Relocation entries\n- Versioning, notes, and dynamic sections\n- DWARF and debugging info (possibly as a separate extension)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/119697612?u=37a68a08bbf84ef9c713ac3f5ae7f32998c2e54e&v=4",
+  "releases": [
+    {
+      "tag_name": "0.0.3-dev",
+      "name": "0.0.3-dev",
+      "body": "Bunch of improvements.",
+      "prerelease": false,
+      "published_at": "2025-05-29T18:47:38Z",
+      "html_url": "https://github.com/pierrelgol/libelf/releases/tag/0.0.3-dev",
+      "assets": []
+    },
+    {
+      "tag_name": "0.0.2-dev",
+      "name": "0.0.2-dev",
+      "body": "Temporary Fix for Miss-compilation",
+      "prerelease": false,
+      "published_at": "2025-05-29T17:15:05Z",
+      "html_url": "https://github.com/pierrelgol/libelf/releases/tag/0.0.2-dev",
+      "assets": []
+    },
+    {
+      "tag_name": "0.0.1-dev",
+      "name": "0.0.1-dev",
+      "body": "First alpha release.",
+      "prerelease": false,
+      "published_at": "2025-05-29T16:52:00Z",
+      "html_url": "https://github.com/pierrelgol/libelf/releases/tag/0.0.1-dev",
+      "assets": []
+    }
+  ],
+  "owner_bio": "What stands in the way becomes the way.",
+  "owner_company": "Thales",
+  "owner_location": "France",
+  "owner_blog": "https://github.com/pierrelgol/pierrelgol",
+  "owner_twitter_username": null,
+  "owner_followers": 41,
+  "owner_following": 102,
+  "owner_created_at": "2022-12-02T18:22:46Z",
+  "license": "MIT",
+  "category": "library"
+}

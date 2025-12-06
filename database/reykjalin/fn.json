@@ -1,0 +1,48 @@
+{
+  "name": "fn",
+  "owner": "reykjalin",
+  "repo": "fn",
+  "description": "Editor backend and TUI editor written in Zig",
+  "type": "project",
+  "topics": [
+    "editor",
+    "tui",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 5,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-12-05T19:18:45Z",
+  "dependencies": [
+    {
+      "name": "log_to_file",
+      "url": "https://git.sr.ht/~reykjalin/log_to_file/archive/3.0.0.tar.gz",
+      "hash": "log_to_file-3.0.0-vcE8A7FAAACoRP9IxaWcrHhv-uK2Uoqu_Uw8gdVH71Cq"
+    },
+    {
+      "name": "vaxis",
+      "url": "git+https://github.com/rockorager/libvaxis#cfa6311448755cf18684c09697d20b7a7622e578",
+      "hash": "vaxis-0.5.1-BWNV_IcuCQCjrYTHNe3-ArhtpwLzRfgI2mBu0yKT7IZl"
+    },
+    {
+      "name": "vxim",
+      "url": "git+https://tangled.org/@reykjalin.org/vxim#bec46a41791ab417b0c69b0e554bda44d0df97d0",
+      "hash": "vxim-0.0.0-TaTdBTGbAAB6rptvOUADv3vMxvDYCUgcxxwKcVUuFeAj"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# ❄️ Fönn\n\n[![Build and run Fönn tests](https://github.com/reykjalin/fn/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/reykjalin/fn/actions/workflows/tests.yml) [![builds.sr.ht status](https://builds.sr.ht/~reykjalin/fn/commits/main/tests.yml.svg)](https://builds.sr.ht/~reykjalin/fn/commits/main/tests.yml?)\n\nThis repo contains 2 projects: `libfn`, and Fönn. `libfn` is an editor engine that I'm working on for fun. Fönn is a code editor powered by `libfn`.\n\nMy primary goal is to eventually have a modern, capable TUI code editor that's powered by a reusable\nediting engine. The engine itself will eventually be exposed as a static library with a C API, but\nmade in Zig. If I can get this project that far that is :)\n\nA secondary goal is for `fn` to eventually have both a GUI and a TUI powered by this same text\nediting \"engine\".\n\n## Fönn (TUI)\n\n❄️ Fönn: A code editor for _fun_.\n\n![Screenshot of the fn TUI modifying its own source code](./screenshots/fn.webp)\n\nThis is currently a toy project, but `fn` is stable enough that I'm exclusively using it when working on changes to the editor.\n\nMy primary goal is to have a modern, capable TUI code editor.\nA secondary goal is for `fn` to eventually have both a GUI and a TUI powered by the same text editing \"engine\".\n\n### Build instructions\n\n```sh\n# Debug build in ./zig-out/bin/fn.\nzig build\n\n# Run debug build in current directory.\nzig build run\n\n# Open a file with debug build.\nzig build run -- path/to/file\n\n# Release build in ~/.local/bin/fn.\nzig build --release=fast --prefix ~/.local\n```\n\n## Usage\n\n```sh\n$ fn --help\nUsage: fn [file]\n\nGeneral options:\n\n  -h, --help     Print fn help\n  -v, --version  Print fn version\n\n```\n\n## libfn\n\nIf you're working on a Zig project and want to play around with the library itself you can do so by\ninstalling fun with `zig fetch --save git+https://git.sr.ht/~reykjalin/fn`.\n\n### Build instructions\n\n```sh\n# Make sure libfn builds.\nzig build check\n\n# Run tests.\nzig build test\n```\n\n### Usage\n\n```sh\n$ zig fetch --save git+https://tangled.org/@reykjalin.org/fn\n```\n\nThen, in your `build.zig`:\n\n```zig\nconst target = b.standardTargetOptions(.{});\nconst optimize = b.standardOptimizeOption(.{});\n\nconst libfn_dep = b.dependency(\"libfn\", .{ .optimize = optimize, .target = target });\n\nconst root_module = b.createModule(.{\n    .root_source_file = b.path(\"src/tui/main.zig\"),\n    .target = target,\n    .optimize = optimize,\n});\n\nroot_module.addImport(\"libfn\", libfn_dep.module(\"libfn\"));\n\nconst exe = b.addExecutable(.{\n    .name = \"example\",\n    .root_module = root_module,\n});\n\nb.installArtifact(exe);\n```\n\nand then you can import it in your code:\n\n```zig\nconst libfn = @import(\"libfn\");\n\n// ...\n\nconst editor: libfn.Editor = .init(allocator);\n```\n\n## Acknowledgements\n\n- [Tim Culverhouse](https://rockorager.dev) - for his incredible work on [libvaxis](https://github.com/rockorager/libvaxis).\n- [CJ van den Berg](https://github.com/neurocyte) - for his inspiring work on [Flow Control](https://flow-control.dev).\n- [David Vanderson](https://github.com/david-vanderson) - for his work on [DVUI](https://david-vanderson.github.io/), the inspiration for the TUI framework used to develop Fönn.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/13835680?u=0ed8bc9bec4c852eeed4f9b933e77e629caf4cc1&v=4",
+  "releases": [],
+  "owner_company": "@Shopify",
+  "owner_location": "Canada",
+  "owner_blog": "https://thorlaksson.com",
+  "owner_twitter_username": null,
+  "owner_followers": 11,
+  "owner_following": 3,
+  "owner_created_at": "2015-08-17T15:18:03Z",
+  "homepage": "https://www.thorlaksson.com/projects/fonn",
+  "license": "MIT",
+  "category": "tui"
+}

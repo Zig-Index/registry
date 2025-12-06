@@ -1,0 +1,86 @@
+{
+  "name": "skia-zig",
+  "owner": "basdp",
+  "repo": "skia-zig",
+  "description": "Zig bindings for the Skia 2D Graphics Library",
+  "type": "project",
+  "topics": [
+    "skia",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 10,
+  "forks": 3,
+  "watchers": 2,
+  "updated_at": "2025-11-30T10:16:05Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.11.0",
+  "readme": "<p align=\"center\">\n    <h1 align=\"center\">Skia Zig Bindings</h1>\n</p>\n\n<p align=\"center\">\n    <a href=\"https://github.com/basdp/skia-zig/actions/workflows/build.yml\"><img src=\"https://github.com/basdp/skia-zig/actions/workflows/build.yml/badge.svg\" /></a>\n</p>\n\n<p align=\"center\">Zig bindings for the famous <a href=\"https://skia.org/\">Skia 2D Graphics Library</a>.</p>\n\n## Overview\n\nThis repository provides Zig bindings to the Skia C API. It builds Skia for multiple platforms and exposes the raw C headers to be used directly in Zig projects. **No wrappers** are provided—this is a low-level binding to the C layer only.\n\nThis repository is using the [Skia fork from the Mono project](https://github.com/mono/skia), as they actively maintain a C wrapper for Skia (which is C++ only). We need C wrappers to bridge to Zig. \n\n## Features\n\n- Pre-built Skia binaries\n- Exposes the raw Skia C API headers to Zig\n- Easy to import and use directly from Zig code without any dependencies or extra build steps\n\n## Project status\n*Warning*: This wrapper is in a very early stage and is _not_ stable for production use. Also not all features and plaforms are implemented.\n\n- [x] Skia build for Windows x86_64\n- [ ] Skia build for macOS x86_64\n- [ ] Skia build for macOS Apple Silicon\n- [ ] Skia build for Linux\n\n## Getting Started\n\n### Usage\n\n1. Import the `skia-zig` package into your project:\n```bash\nzig fetch --save https://github.com/basdp/skia-zig/releases/latest/download/skia-zig-package.zip\n```\n\n2. Add the dependency to your `build.zig` file, somewhere below `b.addExecutable(...)` or whatever you are building:\n\n```zig\nconst skia_dep = b.dependency(\"skia-zig\", .{\n    .target = target,\n    .optimize = optimize,\n});\nexe.root_module.addImport(\"skia-zig\", skia_dep.module(\"skia-zig\"));\n```\n\n3. You can now import `skia-zig` in your Zig code:\n```zig\nconst skia = @import(\"skia-zig\");\n\npub fn main() !void {\n    const gr_glinterface = skia.gr_glinterface_create_native_interface();\n    defer skia.gr_glinterface_unref(gr_glinterface);\n    const gr_context = skia.gr_direct_context_make_gl(gr_glinterface) orelse return error.SkiaCreateContextFailed;\n    defer skia.gr_direct_context_free_gpu_resources(gr_context);\n\n    const gl_info = skia.gr_gl_framebufferinfo_t{\n        .fFBOID = 0,\n        .fFormat = gl.RGBA8,\n    };\n\n    const samples: c_int = ... // get from GL or something\n    const stencil_bits: c_int = ... // get from GL or something\n\n    const backendRenderTarget = skia.gr_backendrendertarget_new_gl(640, 480, samples, stencil_bits, &gl_info) orelse return error.SkiaCreateRenderTargetFailed;\n\n    const color_type = skia.RGBA_8888_SK_COLORTYPE;\n    const colorspace = null;\n    const props = null;\n    const surface = skia.sk_surface_new_backend_render_target(@ptrCast(gr_context), backendRenderTarget, skia.BOTTOM_LEFT_GR_SURFACE_ORIGIN, color_type, colorspace, props) orelse return error.SkiaCreateSurfaceFailed;\n    defer skia.sk_surface_unref(surface);\n\n    const canvas = skia.sk_surface_get_canvas(surface) orelse unreachable;\n\n    while (/* app is running */) {\n        skia.sk_canvas_clear(canvas, 0xffffffff);\n\n        const fill = skia.sk_paint_new() orelse return error.SkiaCreatePaintFailed;\n        defer skia.sk_paint_delete(fill);\n        skia.sk_paint_set_color(fill, 0xff0000ff);\n        skia.sk_canvas_draw_paint(canvas, fill);\n\n        // Your Skia drawing here\n\n        skia.sk_canvas_flush(canvas);\n    }\n}\n```\n\n\n### Setting your ABI to MSVC on Windows\n\nSkia requires the `msvc` ABI on Windows, so make sure you target that ABI. There are two possible \noptions to do so (only one of these is necessary):\n\n1. Set the target from the command line while building:\n\n    ```bash\n    zig build -Dtarget=x86_64-windows-msvc\n    ```\n\n2. Or better yet; replace the `const target = ...` line in your `build.zig` file:\n\n    ```zig\n    const target = b.standardTargetOptions(.{ .default_target = .{\n        .abi = if (b.graph.host.result.os.tag == .windows) .msvc else null,\n    } });\n    ```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/98805?u=a7817e5e87843399c40b154043e8a1b8f71c8643&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.2",
+      "name": "v0.2",
+      "body": "**Full Changelog**: https://github.com/basdp/skia-zig/compare/v0.1...v0.2",
+      "prerelease": false,
+      "published_at": "2024-10-15T07:55:00Z",
+      "html_url": "https://github.com/basdp/skia-zig/releases/tag/v0.2",
+      "assets": [
+        {
+          "name": "skia-zig-package.zip",
+          "url": "https://github.com/basdp/skia-zig/releases/download/v0.2/skia-zig-package.zip",
+          "size": 8675803,
+          "content_type": "application/x-zip-compressed"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1b",
+      "name": "v0.1b",
+      "body": "**Full Changelog**: https://github.com/basdp/skia-zig/compare/v0.1...v0.1b",
+      "prerelease": false,
+      "published_at": "2024-10-14T07:54:41Z",
+      "html_url": "https://github.com/basdp/skia-zig/releases/tag/v0.1b",
+      "assets": [
+        {
+          "name": "skia-zig-package.zip",
+          "url": "https://github.com/basdp/skia-zig/releases/download/v0.1b/skia-zig-package.zip",
+          "size": 8657836,
+          "content_type": "application/x-zip-compressed"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1",
+      "name": "v0.1",
+      "body": "**Full Changelog**: https://github.com/basdp/skia-zig/commits/v0.1",
+      "prerelease": false,
+      "published_at": "2024-10-09T20:51:28Z",
+      "html_url": "https://github.com/basdp/skia-zig/releases/tag/v0.1",
+      "assets": [
+        {
+          "name": "skia-zig-package.zip",
+          "url": "https://github.com/basdp/skia-zig/releases/download/v0.1/skia-zig-package.zip",
+          "size": 8658003,
+          "content_type": "application/x-zip-compressed"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "Professional DevOps lead, hobbyist game developer (and sometimes not so hobbyist). Also interested in hard-core computer science. ",
+  "owner_company": null,
+  "owner_location": "the Netherlands",
+  "owner_blog": "https://basdupre.com",
+  "owner_twitter_username": null,
+  "owner_followers": 12,
+  "owner_following": 6,
+  "owner_created_at": "2009-06-25T12:26:22Z",
+  "license": "MIT",
+  "category": "library"
+}

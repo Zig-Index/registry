@@ -1,0 +1,29 @@
+{
+  "name": "interface.zig",
+  "owner": "alexnask",
+  "repo": "interface.zig",
+  "description": "Dynamic dispatch for zig made easy",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package",
+    "zig-library",
+    "dynamic-dispatch"
+  ],
+  "stars": 179,
+  "forks": 14,
+  "watchers": 5,
+  "updated_at": "2025-12-03T19:12:20Z",
+  "readme": "# Zig Interfaces\r\nEasy solution for all your zig dynamic dispatch needs!\r\n\r\n## Features\r\n- Fully decoupled interfaces and implementations\r\n- Control over the storage/ownership of interface objects\r\n- Comptime support (including comptime-only interfaces)\r\n- Async function partial support (blocking on [#4621](https://github.com/ziglang/zig/issues/4621))\r\n- Optional function support\r\n- Support for manually written vtables\r\n\r\n## Example\r\n\r\n```zig\r\n\r\nconst interface = @import(\"interface.zig\");\r\nconst Interface = interface.Interface;\r\nconst SelfType = interface.SelfType;\r\n\r\n// Let us create a Reader interface.\r\n// We wrap it in our own struct to make function calls more natural.\r\nconst Reader = struct {\r\n    pub const ReadError = error { CouldNotRead };\r\n\r\n    const IFace = Interface(struct {\r\n\r\n        // Our interface requires a single non optional, non-const read function.\r\n        read: fn (*SelfType, buf: []u8) ReadError!usize,\r\n\r\n    }, interface.Storage.NonOwning); // This is a non owning interface, similar to Rust dyn traits.\r\n\r\n    iface: IFace,\r\n\r\n    // Wrap the interface's init, since the interface is non owning it requires no allocator argument.\r\n    pub fn init(impl_ptr: var) Reader {\r\n        return .{ .iface = try IFace.init(.{impl_ptr}) };\r\n    }\r\n\r\n    // Wrap the read function call\r\n    pub fn read(self: *Reader, buf: []u8) ReadError!usize {\r\n        return self.iface.call(\"read\", .{buf});\r\n    }\r\n\r\n    // Define additional, non-dynamic functions!\r\n    pub fn readAll(self: *Self, buf: []u8) ReadError!usize {\r\n        var index: usize = 0;\r\n        while (index != buf.len) {\r\n            const partial_amt = try self.read(buffer[index..]);\r\n            if (partial_amt == 0) return index;\r\n            index += partial_amt;\r\n        }\r\n        return index;\r\n    }\r\n};\r\n\r\n// Let's create an example reader\r\nconst ExampleReader = struct {\r\n    state: u8,\r\n\r\n    // Note that this reader cannot return an error, the return type\r\n    // of our implementation functions only needs to coerce to the\r\n    // interface's function return type.\r\n    pub fn read(self: ExampleReader, buf: []u8) usize {\r\n        for (buf) |*c| {\r\n            c.* = self.state;\r\n        }\r\n        return buf.len;\r\n    }\r\n};\r\n\r\ntest \"Use our reader interface!\" {\r\n    var example_reader = ExampleReader{ .state=42 };\r\n\r\n    var reader = Reader.init(&example_reader);\r\n\r\n    var buf: [100]u8 = undefined;\r\n    _ = reader.read(&buf) catch unreachable;\r\n}\r\n\r\n```\r\n\r\nSee examples.zig for more examples.\r\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/265903?u=a6353bd1505f2acb70acc7f215684168a7c46943&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 167,
+  "owner_following": 24,
+  "owner_created_at": "2010-05-05T20:15:05Z",
+  "license": "MIT",
+  "category": "library"
+}

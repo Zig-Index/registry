@@ -1,0 +1,60 @@
+{
+  "name": "raftz",
+  "owner": "burdzwastaken",
+  "repo": "raftz",
+  "description": "Raft Consensus Algorithm in Zig",
+  "type": "project",
+  "topics": [
+    "zig-package",
+    "distributed-systems",
+    "raft",
+    "raft-consensus-algorithm",
+    "zig-library",
+    "ziglang",
+    "zig"
+  ],
+  "stars": 5,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-12-05T17:37:25Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.15.2",
+  "readme": "# raftz\n\n[![Zig support](https://img.shields.io/badge/Zig-≥0.15.2-color?logo=zig&color=%23f3ab20)](https://ziglang.org/download/)\n[![Release](https://img.shields.io/github/v/release/burdzwastaken/raftz)](https://github.com/burdzwastaken/raftz/releases)\n[![CI Status](https://img.shields.io/github/actions/workflow/status/burdzwastaken/raftz/ci.yml)](https://github.com/burdzwastaken/raftz/actions)\n\nImplementation of the [Raft consensus algorithm](https://raft.github.io/raft.pdf) in Zig\n\n## Features\n\n- **Leader Election** - Automatic leader election with randomized timeouts for split-vote prevention\n- **Log Replication** - Reliable log replication across cluster nodes with consistency guarantees\n- **Persistence** - Durable state storage with snapshot support for efficient recovery\n- **Pluggable State Machines** - Bring your own state machine or use the built-in key-value store\n- **Network Transport** - TCP-based RPC communication between cluster nodes\n- **Pre-vote Optimization** - Reduces election disruptions from partitioned nodes\n- **ReadIndex Protocol** - Linearizable reads with heartbeat confirmation and follower caching\n- **Leadership Transfer** - Graceful leader handoff for maintenance and load balancing\n- **Dynamic Membership** - Add/remove servers from a running cluster\n- **Non-voting Members (Learners)** - Add learners that replicate logs but don't vote\n\n## Quick Start\n\n### Installation\n\n```bash\nzig fetch --save https://github.com/burdzwastaken/raftz/archive/refs/tags/v0.0.2.tar.gz\n```\n\n### Basic Usage\n\n```zig\nconst raft = @import(\"raftz\");\n\n// initialize state machine (built in k/v store)\nvar kv = raft.KvStore.init(allocator);\ndefer kv.deinit();\n\n// configure cluster\nconst servers = [_]raft.ServerId{ 1, 2, 3 };\nconst cluster = raft.ClusterConfig.simple(&servers);\n\n// create node with persistence\nvar storage = try raft.Storage.init(allocator, \"data_dir\");\ndefer storage.deinit();\n\nvar node = try raft.Node.init(\n    allocator,\n    .{ .id = 1 },\n    cluster,\n    kv.stateMachine(),\n    &storage,\n);\ndefer node.deinit();\n\n// setup network transport\nvar transport = raft.Transport.init(allocator, 1000);\ndefer transport.deinit();\n\ntry transport.listen(.{ .host = \"127.0.0.1\", .port = 5001 });\ntry transport.addPeer(2, .{ .host = \"127.0.0.1\", .port = 5002 });\n\n// start server\nvar server = raft.Server.init(allocator, &node, &transport);\ntry server.start();\ndefer server.stop();\n```\n\n## Development\n\n```bash\n# dev shell\nnix develop\n\n# build\nzig build\n\n# tests\nzig build test\n\n# fmt\nzig fmt --check src/ examples/\n```\n\n## Examples\n\n```bash\n# simple node & RPC mocks\nzig build run-simple\n\n# client with log replication\nzig build run-client\n\n# full cluster with leader election and failover\nzig build run-cluster\n```\n\n## TODO\n\n### Zig Improvements\n- [ ] Migrate to new Zig reader/writer I/O interfaces\n- [ ] Optimize allocations and memory usage as we haven't focused on perf at all\n\n### Raft Enhancements\n- [ ] **Client request dedups**\n  - [ ] Idempotent operations \n  - [ ] Client session tracking (client_id, request_id)\n  - [ ] Response caching per client\n  - [ ] Session cleanup on timeout\n- [ ] **Request batching/pipelining**\n  - [ ] Batch multiple client requests into single AppendEntries RPC\n  - [ ] Pipeline multiple outstanding requests\n  - [ ] Adaptive batching based on load\n- [ ] **Enhanced membership changes**\n  - [ ] Catch-up mechanism (snapshot transfer for new servers far behind)\n  - [ ] Configuration change timeout/abort mechanism\n  - [ ] Pre-replication before adding to old,new\n\n### Advanced Membership Features\n- [ ] **Non-voting members (learners)**\n  - [ ] Automatic promotion when caught up\n- [ ] **Witness members**\n  - [ ] Witness server type (votes but doesn't store log/snapshot)\n  - [ ] AddWitness/RemoveWitness RPCs\n  - [ ] Witness state sync\n\n## Credits\n\nThanks to Diego Ongaro and John Ousterhout for the excellent resources at [https://raft.github.io/](https://raft.github.io/). Also a shout out to the many Raft implementations in the wild for inspiration!\n\n## License\n\nMIT\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/13855668?u=7423262c8d6a46bc9cce88be8bc2e190271db147&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.0.2",
+      "name": "v0.0.2",
+      "body": "**Full Changelog**: https://github.com/burdzwastaken/raftz/compare/v0.0.1...v0.0.2",
+      "prerelease": false,
+      "published_at": "2025-11-30T16:51:43Z",
+      "html_url": "https://github.com/burdzwastaken/raftz/releases/tag/v0.0.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.1",
+      "name": "v0.0.1",
+      "body": "**Full Changelog**: https://github.com/burdzwastaken/raftz/commits/v0.0.1",
+      "prerelease": false,
+      "published_at": "2025-11-25T09:43:47Z",
+      "html_url": "https://github.com/burdzwastaken/raftz/releases/tag/v0.0.1",
+      "assets": []
+    }
+  ],
+  "owner_bio": "cloud janitor",
+  "owner_company": "Ping",
+  "owner_location": "The Internet",
+  "owner_blog": "https://void.burdz.net",
+  "owner_twitter_username": "burdzwastaken",
+  "owner_followers": 27,
+  "owner_following": 10,
+  "owner_created_at": "2015-08-18T17:25:49Z",
+  "license": "MIT",
+  "category": "library"
+}

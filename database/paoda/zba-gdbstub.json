@@ -1,0 +1,42 @@
+{
+  "name": "zba-gdbstub",
+  "owner": "paoda",
+  "repo": "zba-gdbstub",
+  "description": "GDB Server for Debugging guest code in paoda/zba",
+  "type": "project",
+  "topics": [
+    "gdb",
+    "gdbstub",
+    "zig",
+    "debugger",
+    "emulation",
+    "gdb-protocol",
+    "gdb-rsp",
+    "zig-library",
+    "zig-package"
+  ],
+  "stars": 3,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-11-13T00:54:59Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# ZBA-GDBSTUB\n\nThis is a gdbstub server for paoda/zba, because I don't want to import a C library and i _love_ reinventing the wheel I guess.\n\n## Scope\n\nThis is tailor made for targeting the GBA. Anything that isn't necessary for stepping through ARMv4T code isn't included. This means lots of hardcoded values and assumptions that would be really awful for any halfway decent gdbstub implementation.\n\nThis project will have succeeded as soon as I use it to determine why Rhythm Heaven is stuck in an infinite loop.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/22038970?u=7d82a47c81f4722620030dd3cc064cd80098fd56&v=4",
+  "releases": [],
+  "owner_bio": "Freelance Developer + University of Manitoba Student",
+  "owner_company": null,
+  "owner_location": "Winnipeg, Manitoba, Canada",
+  "owner_blog": "https://musuka.dev",
+  "owner_twitter_username": "paoda_",
+  "owner_followers": 63,
+  "owner_following": 58,
+  "owner_created_at": "2016-09-06T22:02:43Z",
+  "category": "library"
+}

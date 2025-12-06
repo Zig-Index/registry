@@ -1,0 +1,44 @@
+{
+  "name": "ps",
+  "owner": "mostik",
+  "repo": "ps",
+  "description": "linux proc/pid/stat",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-03-31T06:03:25Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.11.0",
+  "readme": "# Proc stat\n\n## Install\n```\nzig fetch --save https://github.com/Mostik/ps/archive/v0.0.1.tar.gz\n```\n```zig\n//build.zig\nconst ps = b.dependency(\"ps\", .{}).module(\"ps\");\n\nexe.root_module.addImport(\"ps\", ps);\n\n```\n```zig\nconst std = @import(\"std\");\nconst ps = @import(\"ps\");\n\npub fn main() !void {\n    \n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n\n    const allocator = gpa.allocator();\n\n    const stat: ps.ProcStat = try ps.get(allocator, std.os.linux.getpid());\n\n    std.debug.print(\"PID: {d} Vsize: {d} \\n\", .{ stat.pid, stat.vsize });\n\n}\n\n```\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/51542168?u=0aa3dc346d6d88097c9ffd2336fea69619cda006&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.0.1",
+      "name": "v0.0.1",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-01-07T23:37:24Z",
+      "html_url": "https://github.com/mostik/ps/releases/tag/v0.0.1",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 6,
+  "owner_following": 5,
+  "owner_created_at": "2019-06-09T20:28:28Z",
+  "category": "library"
+}

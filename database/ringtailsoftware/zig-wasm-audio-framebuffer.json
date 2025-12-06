@@ -1,0 +1,65 @@
+{
+  "name": "zig-wasm-audio-framebuffer",
+  "owner": "ringtailsoftware",
+  "repo": "zig-wasm-audio-framebuffer",
+  "description": "Examples of integrating Zig and Wasm (and C) for audio and graphics on the web",
+  "type": "project",
+  "topics": [
+    "wasm",
+    "webassembly",
+    "webaudio",
+    "zig",
+    "c",
+    "doom",
+    "zig-package"
+  ],
+  "stars": 71,
+  "forks": 2,
+  "watchers": 1,
+  "updated_at": "2025-11-20T12:27:27Z",
+  "dependencies": [
+    {
+      "name": "zeptolibc",
+      "url": "git+https://github.com/ringtailsoftware/zeptolibc.git#d787abfdd597bee5616a439f12393e11fb370822",
+      "hash": "zeptolibc-0.0.1-T3flJ4M4AAAEx1K1DS-SmkmuXvJJ3JqnNHIw4Aqo0PfD"
+    },
+    {
+      "name": "mime",
+      "url": "git+https://github.com/andrewrk/mime.git#4535b74bd5fcaa03e22f2f25af164a4c6253af00",
+      "hash": "mime-4.0.0-zwmL--0gAACndOVlROQeDnM0chfojNDS8tpohlsBqMNy"
+    },
+    {
+      "name": "zvterm",
+      "url": "git+https://github.com/ringtailsoftware/zvterm.git#05cee2f1d00c7b4cec0eb9f7beef0b48918b748b",
+      "hash": "zvterm-0.0.1-VuAjA4JnAwAqsAyUTtgA60fx5WNSOnnO68VHq2kCdl0s"
+    },
+    {
+      "name": "zigtris",
+      "url": "git+https://github.com/ringtailsoftware/zigtris.git#1dc9fc4c5dae709279bfe0708e3fae5c810837f0",
+      "hash": "zigtris-0.0.1-of0vIotsAACy777-kWnBDCH2tYIprpqXLpidQgvRF6r1"
+    },
+    {
+      "name": "mibu",
+      "url": "git+https://github.com/xyaman/mibu.git#be3713ff04e7db3584669e679253ef388e426dc6",
+      "hash": "mibu-0.0.1-dev-Ddr1riTEAAAYAe1TWBT--W8fPUL8UyBE7dy-yNNZ3z5V"
+    },
+    {
+      "name": "zlm",
+      "url": "git+https://github.com/ziglibs/zlm.git#b4fcb32f98bd895f940ef8819c375ac3f89077d7",
+      "hash": "zlm-0.1.0-LoZ6yI2sAACW1YdckJV4qm7HXCGcRkkk_wO36dUi5qcQ"
+    }
+  ],
+  "minimum_zig_version": "0.11.0",
+  "readme": "# zig-wasm-audio-framebuffer\n\nToby Jaffey https://mastodon.me.uk/@tobyjaffey\n\nStraightforward examples of integrating Zig and Wasm for audio and graphics on the web.\n\nCompiling against Zig v0.15.2.\n\nWhere C code requires functions from the C library, https://github.com/ringtailsoftware/zeptolibc is used.\n\n# Demos\n\nVisit https://ringtailsoftware.github.io/zig-wasm-audio-framebuffer\n\n - Sinetone, simple waveform generator\n - Synth, HTML/CSS piano keyboard driving MIDI synth\n - Mod, Pro-Tracker mod player\n - Mandelbrot, mandelbrot set, mouse interaction\n - Bat, arcade style game skeleton, keyboard control, interactive graphics, background music, sound effects\n - Doom, Doom1 Shareware, keyboard control, MIDI music, sound effects\n - TinyGL, software GL renderer in Wasm\n - OliveC, graphics library with sprite blit, circle, rectangle, line, etc.\n - Agnes, NES emulator (no sound)\n - Terminal, libvterm based terminal emulator, playing a terminal tetris game\n\n## Aims\n\n - Cross-platform (running on multiple browsers and operating systems)\n - Simple understandable code. No hidden libraries, no \"emscripten magic\"\n - Main loop in browser, wasm responds to function calls to init/update/render\n - One wasm binary per program\n - Use existing C libraries to do fun things\n\n# Build and test\n\n    zig build && zig build serve -- zig-out -p 8000\n\nBrowse to http://localhost:8000\n\n## Video system\n\nAn in-memory 32bpp ARGB framebuffer is created and controlled in Zig. To render onto a canvas element, JavaScript:\n\n - Requests the framebuffer Zig/WebAssembly pointer with `getGfxBufPtr()`\n - Wraps the memory in a `Uint8ClampedArray`\n - Creates an `ImageData` from the `Uint8ClampedArray`\n - Shows the `ImageData` in canvas's graphics context\n\n## Audio pipeline\n\nAn <a href=\"https://developer.mozilla.org/en-US/docs/Web/API/AudioWorkletNode\">AudioWorkletNode</a> is used to move PCM samples from WebAssembly to the audio output device.\n\nThe system is hardcoded to 2 channels (stereo) and uses 32-bit floats for audio data throughout. In-memory arrays of audio data are created and controlled in Zig.\n\nThe AudioWorkletNode expects to pull chunks of audio to be rendered on-demand. However, being isolated from the main thread it cannot directly communicate with the main Wasm program. This is solved by using a <a href=\"https://github.com/padenot/ringbuf.js/\">shared ringbuffer</a>. To render audio to the output device, JavaScript:\n\n - Tells Zig/WebAssembly the expected sample rate in Hz for the output device, `setSampleRate(44100)`\n - Forever, checks if the ringbuffer has space for more data\n - Tells Zig/WebAssembly to fill its audio buffers with `renderSoundQuantum()`\n - Fetches pointers to the left and right channels using `getLeftBufPtr()` `getRightBufPtr()`\n - Copies from left and right channels into the ringbuffer\n\nThe `WasmPcm` (`wasmpcm.js`) class creates the `AudioWorkletNode` `WASMWorkletProcessor` using `pcm-processor.js`. At regular intervals `WasmPcm` calls `pcmProcess()` to request audio data from Wasm.\n\n# Compatibility\n\nTested on Safari/Chrome/Firefox on macOS, Safari on iPhone SE2/iPad, Chrome/Android Galaxy Tablet\n\n# iOS unmute\n\nBy default web audio plays under the same rules as the ringer. The `unmute.js` script loops a constant silence in the background to force playback while the mute button is on.\n\n# CORS (Cross-Origin Resource Sharing)\n\nTo share data between the main thread and the worklet, SharedArrayBuffer is used. This requires two HTTP headers to be set:\n\n    Cross-Origin-Opener-Policy: same-origin\n    Cross-Origin-Embedder-Policy: require-corp\n\nHowever, this is worked around by using <a href=\"https://github.com/gzuidhof/coi-serviceworker\">coi-serviceworker</a> which reloads the page on startup.\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/20110944?u=93548b94fa9de08e939a35745a2affd82408e198&v=4",
+  "releases": [],
+  "owner_bio": "@tobyjaffey@mastodon.me.uk",
+  "owner_company": "Ringtail Software Ltd",
+  "owner_location": "UK",
+  "owner_blog": "http://www.ringtailsoftware.co.uk",
+  "owner_twitter_username": null,
+  "owner_followers": 39,
+  "owner_following": 8,
+  "owner_created_at": "2016-06-23T13:40:30Z",
+  "category": "library"
+}

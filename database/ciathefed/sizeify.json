@@ -1,0 +1,31 @@
+{
+  "name": "sizeify",
+  "owner": "ciathefed",
+  "repo": "sizeify",
+  "description": "Format byte sizes into human-readable strings in Zig. Supports SI, IEC, and Windows-style units with no dependencies.",
+  "type": "project",
+  "topics": [
+    "human",
+    "readable",
+    "sizes",
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-12-03T01:20:44Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# sizeify\n\nFormat byte sizes into human-readable strings using multiple scale types. Supports decimal (SI), binary (IEC), and Windows-style units.\n\nInspired by the [humansize](https://crates.io/crates/humansize) crate from the Rust ecosystem.\n\nWritten in [Zig](https://ziglang.org/). No dependencies.\n\n## Features\n\n- Decimal (SI): `kB`, `MB`, `GB`, etc. (base 1000)\n- Binary (IEC): `KiB`, `MiB`, `GiB`, etc. (base 1024)\n- Windows-style: `KB`, `MB`, `GB`, etc. (base 1024, but uses SI labels)\n- Both short and long unit names\n- Works with fixed buffers, writers, or allocators\n- Accurate rounding to two decimal places\n\n## Install\n\nRun this command in the root of your Zig project:\n\n```shell\nzig fetch --save \"git+https://github.com/ciathefed/sizeify\"\n```\n\nAdd this snippet to your `build.zig`:\n\n```zig\nconst sizeify = b.dependency(\"sizeify\", .{\n    .target = target,\n    .optimize = optimize,\n});\nexe.root_module.addImport(\"sizeify\", sizeify.module(\"sizeify\"));\n```\n\n## Usage\n\n```zig\nconst sizeify = @import(\"sizeify\");\n\nstd.log.debug(\"{f}\", .{sizeify.fmt(1536, .binary_short)});\n// debug: 1.50 KiB\n```\n\nAlso available:\n\n- `formatBuf(size, scale, buffer)`\n- `formatAlloc(size, scale, allocator)`\n- `formatWriter(size, scale, writer)`\n\n## Output Examples\n\n| Bytes     | Scale              | Output          |\n|-----------|--------------------|-----------------|\n| 0         | decimal_short       | `0.00 B`        |\n| 1500      | decimal_short       | `1.50 kB`       |\n| 1024      | binary_long         | `1.00 Kibibytes`|\n| 1024      | windows_short       | `1.00 KB`       |\n| max usize | decimal_short       | `18.45 EB` (on 64-bit) |\n\n## Testing\n\nRun with:\n\n```sh\nzig build test\n```\n\n## License\n\nThis project is licensed under the [MIT License](./LICENSE)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/183272735?u=cd376ff37a2470ecc323b67461fd9a3319118383&v=4",
+  "releases": [],
+  "owner_bio": "I do programming and things.",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 1,
+  "owner_following": 0,
+  "owner_created_at": "2024-09-29T09:08:24Z",
+  "license": "MIT",
+  "category": "library"
+}

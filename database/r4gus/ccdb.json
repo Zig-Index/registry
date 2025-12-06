@@ -1,0 +1,95 @@
+{
+  "name": "ccdb",
+  "owner": "r4gus",
+  "repo": "ccdb",
+  "description": "CBOR Credential Database Format",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package",
+    "credential-manager",
+    "credential-store",
+    "passkey",
+    "password",
+    "password-database"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-03-30T21:49:19Z",
+  "dependencies": [
+    {
+      "name": "zbor",
+      "url": "https://github.com/r4gus/zbor/archive/refs/tags/0.17.2.tar.gz",
+      "hash": "zbor-0.17.0-kr-CoHIkAwCy2WhoS6MgwSvyQsLWzzNy6a7UTHqMPMmO"
+    },
+    {
+      "name": "uuid",
+      "url": "https://github.com/r4gus/uuid-zig/archive/refs/tags/0.3.1.tar.gz",
+      "hash": "uuid-0.3.0-oOieIYF1AAA_BtE7FvVqqTn5uEYTvvz7ycuVnalCOf8C"
+    },
+    {
+      "name": "clap",
+      "url": "https://github.com/Hejsil/zig-clap/archive/refs/tags/0.10.0.tar.gz",
+      "hash": "clap-0.10.0-oBajB434AQBDh-Ei3YtoKIRxZacVPF1iSwp3IX_ZB8f0"
+    }
+  ],
+  "minimum_zig_version": "0.12.0",
+  "readme": "# CBOR Credential Database Format\n\nThis document describes a format to store secrets at rest based on the CBOR data format. It is designed as an alternative to other file formats like KDBX used with KeePass and KeePassXC.\n\n## Source Code\n\n### Installation\n\nVersions:\n\n| Zig version | ccdb version |\n|:-----------:|:------------:|\n| 0.13.0      | 0.1.0, 0.2.0 |\n| 0.14.0      | 0.3.0 |\n\n#### Module\n\nThe `ccdb` module can be added to your projects by adding `ccdb` to your list of dependencies in `build.zig.zon`.\n\n```zig\n.dependencies = .{\n    //...\n    .ccdb = .{\n        .url = \"https://github.com/r4gus/ccdb/archive/refs/tags/0.1.0.tar.gz\",\n        // Adjust the hash if you use another version!\n        .hash = \"12202413b8cfe91ea51f3680b8eaa5645870a6e3fabc5cb9076c80f8182ea1d4028f\",\n    },\n},\n```\n\nAlternatively you can use the following command, which will automatically add `ccdb` as an dependency to your `build.zig.zon` file:\n\n```bash\n# Replace <VERSION TAG> with the version you want to use\nzig fetch --save https://github.com/r4gus/ccdb/archive/refs/tags/<VERSION TAG>.tar.gz\n``` \n\nYou can then import the module within your `build.zig`.\n\n```zig\nconst ccdb_dep = b.dependency(\"ccdb\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\n// Create a exe or library and then...\nexe.root_module.addImport(\"ccdb\", ccdb_dep.module(\"ccdb\"));\n```\n\n#### Command Line Tool\n\nYou can manage a CCDB database from the command line using `ccdbcmd`. Run `build zig -Doptimize=ReleaseSmall`\nto build the executable.\n\n## Documentation\n\nYou can build the documentation by running `bikeshed` within the `/docs` folder.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/25912761?u=03c61d1386a1628b528c35971c59d99c0c5ee8b2&v=4",
+  "releases": [
+    {
+      "tag_name": "0.3.1",
+      "name": "0.3.1",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-03-30T21:50:01Z",
+      "html_url": "https://github.com/r4gus/ccdb/releases/tag/0.3.1",
+      "assets": []
+    },
+    {
+      "tag_name": "0.3.0",
+      "name": "",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-01-26T15:25:36Z",
+      "html_url": "https://github.com/r4gus/ccdb/releases/tag/0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.2.0",
+      "name": "0.2.0",
+      "body": "New command line application and minor extension for the library.",
+      "prerelease": false,
+      "published_at": "2024-09-10T13:59:24Z",
+      "html_url": "https://github.com/r4gus/ccdb/releases/tag/0.2.0",
+      "assets": [
+        {
+          "name": "ccdb_x86_64",
+          "url": "https://github.com/r4gus/ccdb/releases/download/0.2.0/ccdb_x86_64",
+          "size": 3921544,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.1.0",
+      "name": "0.1.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-07-23T15:59:35Z",
+      "html_url": "https://github.com/r4gus/ccdb/releases/tag/0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Maybe we meet @ Zigtoberfest (https://zigtoberfest.de) or Software You Can Love (https://softwareyoucan.love)",
+  "owner_company": null,
+  "owner_location": "Germany",
+  "owner_blog": "https://zigtoberfest.de",
+  "owner_twitter_username": null,
+  "owner_followers": 57,
+  "owner_following": 27,
+  "owner_created_at": "2017-02-20T22:05:23Z",
+  "homepage": "https://r4gus.github.io/ccdb/",
+  "category": "library"
+}

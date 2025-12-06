@@ -1,0 +1,48 @@
+{
+  "name": "zig-linear-algebra",
+  "owner": "johan0A",
+  "repo": "zig-linear-algebra",
+  "description": "A simple linear algebra library written in Zig.",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-library",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 6,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-09-22T14:58:40Z",
+  "readme": "This library is a simple linear algebra library.\n\nThis library was written for my own use, and will be extended and optimized as I need it.\n\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/85748765?u=aedb06a7b1afcfbb8c854c2c7ca78e233b8d5619&v=4",
+  "releases": [
+    {
+      "tag_name": "0.0.2",
+      "name": "0.0.2",
+      "body": "# progress:\r\n\r\n- [x] rework how precision of output types is handled for vectors\r\n- [x] rework how vectors handle integer types\r\n- [x] add doc comments for Vector operations\r\n- [x] add more operations to Vectors\r\n- [x] rework how precision of output types is handled for vectors again\r\n- [ ] decide how to handle undefined behavior (eg overflows)\r\n- [ ] add install guide\r\n- [ ] add usage guide\r\n- [ ] rework how precision of output types is handle for matrices\r\n- [ ] rework how matrices handle integer types\r\n- [ ] add even more operations to Vectors\r\n- [ ] Add more operations to Matrices\r\n- [ ] Compare performance to openblas\r\n\r\nVec type and operations should be usable for small projects",
+      "prerelease": true,
+      "published_at": "2024-08-06T16:42:49Z",
+      "html_url": "https://github.com/johan0A/zig-linear-algebra/releases/tag/0.0.2",
+      "assets": []
+    },
+    {
+      "tag_name": "0.0.1",
+      "name": "0.0.1",
+      "body": "# progress:\r\n\r\n- [x] rework how precision of output types is handle for vectors\r\n- [x] rework how vectors handle integer types\r\n- [x] add doc comments for Vector operations\r\n- [x] add more operations to Vectors\r\n- [ ] decide how to handle undefined behavior (eg overflows)\r\n- [ ] add install guide\r\n- [ ] add usage guide\r\n- [ ] rework how precision of output types is handle for matrices\r\n- [ ] rework how matrices handle integer types\r\n- [ ] add even more operations to Vectors\r\n- [ ] Add more operations to Matrices\r\n- [ ] Compare performance to openblas\r\n\r\nVec type and operations should be usable for small projects",
+      "prerelease": true,
+      "published_at": "2024-08-05T23:04:40Z",
+      "html_url": "https://github.com/johan0A/zig-linear-algebra/releases/tag/0.0.1",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 6,
+  "owner_following": 2,
+  "owner_created_at": "2021-06-11T13:45:07Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,70 @@
+{
+  "name": "zacho",
+  "owner": "kubkon",
+  "repo": "zacho",
+  "description": "Like otool but written from scratch in Zig",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 46,
+  "forks": 3,
+  "watchers": 3,
+  "updated_at": "2025-11-27T13:01:34Z",
+  "dependencies": [
+    {
+      "name": "zigkit",
+      "url": "https://github.com/kubkon/ZigKit/archive/73336c4bf54238631b95083d3056f11f668f09c6.tar.gz",
+      "hash": "N-V-__8AAFqyAABS4I-SdVGUGsSUFwYaGqg0GBSwS8q7_olQ"
+    }
+  ],
+  "readme": "# zacho\n\n...or Zig's Mach-O parser. This project started off as a dummy scratchpad for reinforcing my\nunderstanding of the Mach-O file format while I was working on the Zig's stage2 Mach-O linker\n(I still am working on it, in case anyone was asking).\n\nMy current vision for `zacho` is for it to be a cross-platform version of `otool` and `pagestuff`\nmacOS utilities. These seem to be very useful when battling the Darwin kernel and `dyld` when those\nrefuse to load your hand-crafter binary, or you just like looking at Mach-O dissected output.\n\n## Usage\n\n```\nUsage: zacho [options] file\n\nGeneral options:\n-c, --code-signature        Print the contents of code signature (if any)\n-d, --dyld-info             Print the contents of dyld rebase and bind opcodes\n-e, --exports-trie          Print export trie (if any)\n-h, --header                Print the Mach-O header\n-i, --indirect-symbol-table Print the indirect symbol table\n-l, --load-commands         Print load commands\n-r, --relocations           Print relocation entries (if any)\n-s, --symbol-table          Print the symbol table\n-u, --unwind-info           Print the contents of (compact) unwind info section (if any)\n-v, --verbose               Print more detailed info for each flag\n--archive-index             Print archive index (if any)\n--string-table              Print the string table\n--data-in-code              Print data-in-code entries (if any)\n--hex-dump=[name]           Dump section contents as bytes\n--string-dump=[name]        Dump section contents as strings\n--verify-memory-layout      Print virtual memory layout and verify there is no overlap\n--help                      Display this help and exit\n```\n\n## Building from source\n\nBuilding from source requires nightly [Zig](https://ziglang.org/download/).\n\n```\n$ git clone https://github.com/kubkon/zacho.git\n$ zig build\n```\n\nAdditionally, on macOS, you will need to provide Foundation and Security frameworks.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1519747?u=242eb0dcd1841303f3f48919c2f5120d35900f50&v=4",
+  "releases": [
+    {
+      "tag_name": "0.1.0",
+      "name": "v0.1.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-07-28T11:12:34Z",
+      "html_url": "https://github.com/kubkon/zacho/releases/tag/0.1.0",
+      "assets": [
+        {
+          "name": "zacho-0.1.0-aarch64-macos.tar.xz",
+          "url": "https://github.com/kubkon/zacho/releases/download/0.1.0/zacho-0.1.0-aarch64-macos.tar.xz",
+          "size": 851960,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zacho-0.1.0-x86_64-linux-musl.tar.gz",
+          "url": "https://github.com/kubkon/zacho/releases/download/0.1.0/zacho-0.1.0-x86_64-linux-musl.tar.gz",
+          "size": 5529600,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "zacho-0.1.0-x86_64-macos.tar.xz",
+          "url": "https://github.com/kubkon/zacho/releases/download/0.1.0/zacho-0.1.0-x86_64-macos.tar.xz",
+          "size": 956732,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zacho-0.1.0-x86_64-windows-gnu.zip",
+          "url": "https://github.com/kubkon/zacho/releases/download/0.1.0/zacho-0.1.0-x86_64-windows-gnu.zip",
+          "size": 1282969,
+          "content_type": "application/zip"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "Systems programmer working on the Zed editor",
+  "owner_company": "@zed-industries",
+  "owner_location": "Warsaw, Poland",
+  "owner_blog": "www.jakubkonka.com",
+  "owner_twitter_username": null,
+  "owner_followers": 852,
+  "owner_following": 97,
+  "owner_created_at": "2012-03-09T11:12:30Z",
+  "license": "MIT",
+  "category": "library"
+}

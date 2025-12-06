@@ -1,0 +1,134 @@
+{
+  "name": "zircon",
+  "owner": "vascocosta",
+  "repo": "zircon",
+  "description": "A simple IRC library written in Zig.",
+  "type": "project",
+  "topics": [
+    "irc",
+    "irc-protocol",
+    "network",
+    "tls",
+    "zig",
+    "zig-lib",
+    "zig-library",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 20,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-09-10T03:41:57Z",
+  "dependencies": [
+    {
+      "name": "tls",
+      "url": "https://github.com/ianic/tls.zig/archive/1b0228642771ba3efddb92279294e734776191e9.tar.gz",
+      "hash": "tls-0.1.0-ER2e0sAOBQDN5xgdTgG-pze9C6_MwSr-xxHDxQMxQFn-"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# zircon\n\nA simple IRC library written in Zig.\n\nThe `zircon` library is easy to use, allowing the creation of either general IRC clients or bots. One of its core concepts is the use of threads for better performance. However this is done behind the scenes in a simple way, with a dedicated thread to write messages to the server, using the main thread to read messages from the server in the main client loop (`zircon.Client.loop`) and providing a callback mechanism to the user code.\n\n# Features\n\n* Multithreaded design\n* Good network performance\n* Simple API (callback based)\n* TLS connection support\n* Minimal dependencies (TLS)\n* Extensive documentation\n\n# Installation\n\n#### Save zircon as a dependency in `build.zig.zon` with zig fetch\n\n```sh\nzig fetch --save git+https://github.com/vascocosta/zircon.git\n```\n\n#### Configure zircon as a module in `build.zig`\n\n```zig\nconst std = @import(\"std\");\n\npub fn build(b: *std.Build) void {\n    const target = b.standardTargetOptions(.{});\n    const optimize = b.standardOptimizeOption(.{});\n\n    const exe = b.addExecutable(.{\n        .name = \"myproject\",\n        .root_source_file = b.path(\"src/main.zig\"),\n        .target = target,\n        .optimize = optimize,\n    });\n\n    const zircon = b.dependency(\"zircon\", .{\n        .target = target,\n        .optimize = optimize,\n    });\n\n    exe.root_module.addImport(\"zircon\", zircon.module(\"zircon\"));\n    exe.linkLibC();\n\n    b.installArtifact(exe);\n\n    const run_cmd = b.addRunArtifact(exe);\n\n    run_cmd.step.dependOn(b.getInstallStep());\n\n    if (b.args) |args| {\n        run_cmd.addArgs(args);\n    }\n    const run_step = b.step(\"run\", \"Run the app\");\n    run_step.dependOn(&run_cmd.step);\n}\n```\n\n#### Import zircon into your code\n\n```zig\nconst zircon = @import(\"zircon\");\n```\n\n# Usage\n\n[API Documentation](https://vascocosta.github.io/zircon/)\n\nBy design, the user isn't required to create any threads for simple applications like a bot. The main client loop runs on the main thread and that loop calls the callback function pointed to by `msg_callback`. One way to use this library is to define this callback in the user code to customise how to reply to incoming IRC messages with your own IRC messages making use of `zircon.Message`. You can think of this callback pattern as something that triggers when a message event happens, letting you react with another message.\n\nBy default this callback you define also runs on the main thread, but you can use the `spawn_thread` callback to override this quite easily, by returning true to automatically enable a worker thread depending on the kind of message received. This is especially useful for creating long running commands in a background thread, without the need to spawn it yourself.\n\nFor more complex use cases, like a general purpose client, you may want to create your own thread(s) to handle user input like commands. However, you should still use the main client loop and its `msg_callback` to handle incoming IRC messages. Make sure you read the two examples below to understand in more detail how `zircon` works in both scenarios...\n\n## Examples\n\n### Simple IRC bot\n\n```zig\nconst std = @import(\"std\");\nconst zircon = @import(\"zircon\");\n\n/// Constants used to configure the bot.\nconst user = \"zirconbot\";\nconst nick = \"zirconbot\";\nconst real_name = \"zirconbot\";\nconst server = \"irc.quakenet.org\";\nconst port = 6667;\nconst tls = false;\nvar join_channels = [_][]const u8{\"#geeks\"};\nconst prefix_char = \"!\";\n\n/// Global Debug Allocator singleton.\nvar debug_allocator = std.heap.DebugAllocator(.{}).init;\n\npub fn main() !void {\n    const allocator = debug_allocator.allocator();\n    defer _ = debug_allocator.deinit();\n\n    // Create a zircon.Client with a given configuration.\n    var client = try zircon.Client.init(allocator, .{\n        .user = user,\n        .nick = nick,\n        .real_name = real_name,\n        .server = server,\n        .port = port,\n        .tls = tls,\n        .channels = &join_channels,\n    });\n    defer client.deinit();\n\n    // Connect to the IRC server and perform registration.\n    try client.connect();\n    try client.register();\n\n    // Enter the main loop that keeps reading incoming IRC messages forever.\n    // The client loop accepts a LoopConfig struct with two optional fields.\n    // These two fields, .msg_callback and .spawn_thread are callback pointers.\n    // You set them to custom functions you define to customise the main loop.\n    // .msg_callback lets you answer any received IRC message with another one.\n    // .spawn_thread lets you tweak if you spawn a thread to run .msg_callback.\n    try client.loop(.{\n        .msg_callback = msgCallback,\n        .spawn_thread = spawnThread,\n    });\n}\n\n/// msgCallback is called by zircon.Client.loop when a new IRC message arrives.\n/// The message parameter holds the IRC message that arrived from the server.\n/// You can switch on the message tagged union to reply based on its kind.\n/// On this example we only care about messages of type JOIN, PRIVMSG or PART.\n/// To reply to each message we finally return another message to the loop.\nfn msgCallback(message: zircon.Message) ?zircon.Message {\n    switch (message) {\n        .JOIN => |msg| {\n            return zircon.Message{\n                .PRIVMSG = .{\n                    .targets = msg.channels,\n                    .text = \"Welcome to the channel!\",\n                },\n            };\n        },\n        .PRIVMSG => |msg| {\n            if (std.mem.indexOf(u8, msg.text, prefix_char) != 0) return null;\n\n            if (Command.parse(msg.prefix, msg.targets, msg.text)) |command| {\n                return command.handle();\n            }\n\n            return null;\n        },\n        .PART => |msg| {\n            if (msg.reason) |msg_reason| {\n                if (std.mem.containsAtLeast(u8, msg_reason, 1, \"goodbye\")) {\n                    return zircon.Message{\n                        .PRIVMSG = .{\n                            .targets = msg.channels,\n                            .text = \"Goodbye for you too!\",\n                        },\n                    };\n                }\n            }\n        },\n        .NICK => |msg| {\n            return zircon.Message{ .PRIVMSG = .{\n                .targets = \"#geeks\",\n                .text = msg.nickname,\n            } };\n        },\n        else => return null,\n    }\n    return null;\n}\n\n/// spawnThread is called by zircon.Client.loop to decide when to spawn a thread.\n/// The message parameter holds the IRC message that arrived from the server.\n/// You can switch on the message tagged union to decide based on its kind.\n/// On this example we only care about messages of type PRIVMSG or PART.\n/// To spawn a thread we return true to the loop or false otherwise.\n/// We should spawn a thread for long running tasks like for instance a bot command.\n/// Otherwise we might block the main thread where zircon.Client.loop is running.\nfn spawnThread(message: zircon.Message) bool {\n    switch (message) {\n        .PRIVMSG => |data| {\n            if (std.ascii.startsWithIgnoreCase(data.text, prefix_char)) {\n                return true;\n            } else {\n                return false;\n            }\n        },\n        .PART => return true,\n        else => return false,\n    }\n}\n\n/// Command encapsulates each command that our IRC bot supports.\npub const Command = struct {\n    name: CommandName,\n    prefix: ?zircon.Prefix,\n    params: []const u8,\n    targets: []const u8,\n\n    pub const CommandName = enum {\n        echo,\n        help,\n        quit,\n    };\n\n    const map = std.StaticStringMap(Command.CommandName).initComptime(.{\n        .{ \"echo\", CommandName.echo },\n        .{ \"help\", CommandName.help },\n        .{ \"quit\", CommandName.quit },\n    });\n\n    pub fn parse(prefix: ?zircon.Prefix, targets: []const u8, text: []const u8) ?Command {\n        var iter = std.mem.tokenizeAny(u8, text, &std.ascii.whitespace);\n        const name = iter.next() orelse return null;\n        if (name.len < 2) return null;\n        return .{\n            .name = map.get(name[1..]) orelse return null,\n            .prefix = prefix,\n            .params = iter.rest(),\n            .targets = targets,\n        };\n    }\n\n    pub fn handle(self: Command) ?zircon.Message {\n        switch (self.name) {\n            .echo => return echo(self.targets, self.params),\n            .help => return help(self.prefix, self.targets),\n            .quit => return quit(self.params),\n        }\n    }\n\n    fn echo(targets: []const u8, params: []const u8) ?zircon.Message {\n        return zircon.Message{\n            .PRIVMSG = .{\n                .targets = targets,\n                .text = params,\n            },\n        };\n    }\n\n    fn help(prefix: ?zircon.Prefix, targets: []const u8) ?zircon.Message {\n        return zircon.Message{\n            .PRIVMSG = .{\n                .targets = if (prefix) |p| p.nick orelse targets else targets,\n                .text = \"This is the help message!\",\n            },\n        };\n    }\n\n    fn quit(params: []const u8) ?zircon.Message {\n        return zircon.Message{\n            .QUIT = .{\n                .reason = params,\n            },\n        };\n    }\n};\n```\n\n#### Build simple IRC bot example\n\n```\ngit clone https://github.com/vascocosta/zircon.git\ncd zircon/examples/simplebot\nzig build -Doptimize=ReleaseSafe\n```\n\n### Simple IRC client\n\n```zig\nconst std = @import(\"std\");\nconst zircon = @import(\"zircon\");\n\n/// Constants used to configure the client.\nconst user = \"zirconclient\";\nconst nick = \"zirconclient\";\nconst real_name = \"zirconclient\";\nconst server = \"irc.quakenet.org\";\nconst port = 6667;\nconst tls = false;\nvar join_channels = [_][]const u8{\"#aviation\"};\n\n/// Global Debug Allocator singleton.\nvar debug_allocator = std.heap.DebugAllocator(.{}).init;\n\npub fn main() !void {\n    const allocator = debug_allocator.allocator();\n    defer _ = debug_allocator.deinit();\n\n    // Create a zircon.Client with a given configuration.\n    var client = try zircon.Client.init(allocator, .{\n        .user = user,\n        .nick = nick,\n        .real_name = real_name,\n        .server = server,\n        .port = port,\n        .tls = tls,\n        .channels = &join_channels,\n    });\n    defer client.deinit();\n\n    // Connect to the IRC server and perform registration.\n    try client.connect();\n    try client.register();\n\n    std.debug.print(\"Connected...\\n\", .{});\n\n    // Spawn a thread to execute clientWorker with our client logic.\n    std.Thread.sleep(6000_000_000);\n    const client_worker = try std.Thread.spawn(.{}, clientWorker, .{&client});\n    client_worker.detach();\n\n    // Enter the main loop that keeps reading incoming IRC messages forever.\n    // The client loop accepts a LoopConfig struct with two optional fields.\n    // These two fields, .msg_callback and .spawn_thread are callback pointers.\n    // You set them to custom functions you define to customise the main loop.\n    // .msg_callback lets you answer any received IRC message with another one.\n    // .spawn_thread lets you tweak if you spawn a thread to run .msg_callback.\n    try client.loop(.{\n        .msg_callback = msgCallback,\n        .spawn_thread = spawnThread,\n    });\n}\n\n/// msgCallback is called by zircon.Client.loop when a new IRC message arrives.\n/// The message parameter holds the IRC message that arrived from the server.\n/// You can switch on the message tagged union to reply based on its kind.\n/// On this example we only care about messages of type JOIN, PART or PRIVMSG.\n/// We print the targets, nick and text of every message of type PRIVMSG.\nfn msgCallback(message: zircon.Message) ?zircon.Message {\n    switch (message) {\n        .JOIN => |msg| {\n            const msg_nick = extractNick(msg.prefix);\n            std.debug.print(\"\\n[{s}] {s} has joined.\\n\", .{ msg.channels, msg_nick });\n        },\n        .PART => |msg| {\n            const msg_nick = extractNick(msg.prefix);\n            std.debug.print(\"\\n[{s}] {s} has left [{s}].\\n\", .{ msg.channels, msg_nick, msg.reason orelse \"\" });\n        },\n        .PRIVMSG => |msg| {\n            const msg_nick = extractNick(msg.prefix);\n            std.debug.print(\"\\n[{s}] <{s}>: {s}\\n\", .{ msg.targets, msg_nick, msg.text });\n        },\n        else => return null,\n    }\n\n    std.debug.print(\"[#] <{s}>: \", .{nick});\n\n    return null;\n}\n\n/// Helper function to extract the nick from a prefix.\nfn extractNick(prefix: ?zircon.Prefix) []const u8 {\n    return if (prefix) |p|\n        if (p.nick) |n| n else \"N/A\"\n    else\n        \"NA\";\n}\n\n/// spawnThread is called by zircon.Client.loop to decide when to spawn a thread.\n/// The message parameter holds the IRC message that arrived from the server.\n/// You can switch on the message tagged union to decide based on its kind.\n/// On this example we don't care about any particular kind of message.\n/// Since this is a more general client, the threading logic happens elsewhere.\n/// To spawn a thread we return true to the loop or false otherwise.\nfn spawnThread(_: zircon.Message) bool {\n    return false;\n}\n\n/// This is where we define the logic of our IRC client (handling commands).\nfn clientWorker(client: *zircon.Client) !void {\n    const allocator = debug_allocator.allocator();\n    const stdin_reader = std.io.getStdIn().reader();\n    while (true) {\n        std.debug.print(\"[#] <{s}>: \", .{nick});\n        const raw_command = try stdin_reader.readUntilDelimiterAlloc(allocator, '\\n', 512);\n        defer allocator.free(raw_command);\n\n        const command = Command.parse(raw_command) orelse continue;\n        switch (command.name) {\n            // /say <#target(s)> <text>\n            .say => {\n                var iter = std.mem.tokenizeAny(u8, command.params, &std.ascii.whitespace);\n                const targets = iter.next() orelse continue;\n                const text = iter.rest();\n                try client.privmsg(targets, text);\n            },\n            // /join <#channel(s)>\n            .join => {\n                try client.join(command.params);\n            },\n            // /part <#channel(s)> [reason]\n            .part => {\n                var iter = std.mem.tokenizeAny(u8, command.params, &std.ascii.whitespace);\n                const channels = iter.next() orelse continue;\n                const reason = iter.rest();\n                try client.part(channels, reason);\n            },\n            // /quit [reason]\n            .quit => try client.quit(command.params),\n        }\n    }\n}\n\n/// Command encapsulates each command that our IRC client supports.\nconst Command = struct {\n    name: CommandName,\n    params: []const u8,\n\n    const CommandName = enum {\n        join,\n        part,\n        quit,\n        say,\n    };\n\n    const map = std.StaticStringMap(Command.CommandName).initComptime(.{\n        .{ \"/join\", CommandName.join },\n        .{ \"/part\", CommandName.part },\n        .{ \"/quit\", CommandName.quit },\n        .{ \"/say\", CommandName.say },\n    });\n\n    fn parse(raw_command: []const u8) ?Command {\n        var iter = std.mem.tokenizeAny(u8, raw_command, &std.ascii.whitespace);\n        const name = iter.next() orelse return null;\n        if (name.len < 2) return null;\n        return .{\n            .name = map.get(name) orelse return null,\n            .params = iter.rest(),\n        };\n    }\n};\n```\n\n#### Build simple IRC client example\n\n```\ngit clone https://github.com/vascocosta/zircon.git\ncd zircon/examples/simpleclient\nzig build -Doptimize=ReleaseSafe\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/5316157?u=841bc7283018fbda1de6edd9e545d5c3177b0f6a&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.6.0",
+      "name": "v0.6.0",
+      "body": "* Add support for the TOPIC, RPL_TOPIC and RPL_NOTOPIC messsages\r\n* Add support for the ERR_CHANOPRIVSNEEDED message\r\n* Add support for the ERR_ERRONEUSNICKNAME message\r\n* Add support for the ERR_NOSUCHCHANNEL message\r\n* Add support for the ERR_NOSUCHNICK message\r\n* Use local path for zircon dep in the examples",
+      "prerelease": false,
+      "published_at": "2025-04-16T20:05:11Z",
+      "html_url": "https://github.com/vascocosta/zircon/releases/tag/v0.6.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.5.4",
+      "name": "v0.5.4",
+      "body": "* Make reason optional\r\n* Update simpleclient example\r\n* Update simplebot example",
+      "prerelease": false,
+      "published_at": "2025-04-13T09:34:39Z",
+      "html_url": "https://github.com/vascocosta/zircon/releases/tag/v0.5.4",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.5.3",
+      "name": "v0.5.3",
+      "body": "* Fix typo",
+      "prerelease": false,
+      "published_at": "2025-04-11T17:17:50Z",
+      "html_url": "https://github.com/vascocosta/zircon/releases/tag/v0.5.3",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.5.2",
+      "name": "v0.5.2",
+      "body": "* Add simpleclient example",
+      "prerelease": false,
+      "published_at": "2025-04-10T17:22:33Z",
+      "html_url": "https://github.com/vascocosta/zircon/releases/tag/v0.5.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.5.1",
+      "name": "v0.5.1",
+      "body": "* Fix typo in ClientError set variant",
+      "prerelease": false,
+      "published_at": "2025-04-08T17:53:27Z",
+      "html_url": "https://github.com/vascocosta/zircon/releases/tag/v0.5.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.5.0",
+      "name": "v0.5.0",
+      "body": "* Parse message prefix\r\n* Add simplebot example",
+      "prerelease": false,
+      "published_at": "2025-04-08T16:26:51Z",
+      "html_url": "https://github.com/vascocosta/zircon/releases/tag/v0.5.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.4.0",
+      "name": "v0.4.0",
+      "body": "* Avoid disconnecting if the connection is already closed\r\n* Refactor error handling to use the ClientError error set",
+      "prerelease": false,
+      "published_at": "2025-04-05T09:32:21Z",
+      "html_url": "https://github.com/vascocosta/zircon/releases/tag/v0.4.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.3.0",
+      "name": "v0.3.0",
+      "body": "* Add support for the NOTICE message\r\n* Add support for the QUIT message",
+      "prerelease": false,
+      "published_at": "2025-04-03T20:01:42Z",
+      "html_url": "https://github.com/vascocosta/zircon/releases/tag/v0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "* Add support for the PART message\r\n* Add support for the NICK message",
+      "prerelease": false,
+      "published_at": "2025-04-01T15:54:47Z",
+      "html_url": "https://github.com/vascocosta/zircon/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "Initial release",
+      "prerelease": false,
+      "published_at": "2025-03-30T22:00:59Z",
+      "html_url": "https://github.com/vascocosta/zircon/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "AKA gluon online. I like technology, computers, programming, solving problems, math, science, motorsport, travelling... Jack of all trades, master of none.",
+  "owner_company": null,
+  "owner_location": "Portugal",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 28,
+  "owner_following": 44,
+  "owner_created_at": "2013-08-26T22:19:34Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,28 @@
+{
+  "name": "zigomponent",
+  "owner": "eltNEG",
+  "repo": "zigomponent",
+  "description": "HTML compoenents in pure zig",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 7,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-11-24T09:05:43Z",
+  "minimum_zig_version": "0.15.0-dev.1145+3ae0ba096",
+  "readme": "# Zigomponents\n\nZigomponents are HTML components written in Zig. The inspiration is derived from [gomponents](https://github.com/maragudk/gomponents). This project currently depends on zig master.\n\n## Building this project\n- Download and install zvm to manage different versions of zig.\n- Run `zvm install master` to install the latest version of zig.\n- Run `zvm use master` to use the latest version of zig.\n- Run `zig build` to build the project.\n\n## Features\n- Features here\n\n## Usage\n- Usage here\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/22221987?u=41d51bdf31d88c51b0710b218946aa4f3ff65787&v=4",
+  "releases": [],
+  "owner_bio": "I solve problems, usually, with <codes />",
+  "owner_company": "prjct.dev",
+  "owner_location": "Infront of my PC",
+  "owner_blog": "https://t.me/eltneg",
+  "owner_twitter_username": "orewoley",
+  "owner_followers": 81,
+  "owner_following": 81,
+  "owner_created_at": "2016-09-15T16:46:45Z",
+  "homepage": "https://zigomp.prjct.dev/",
+  "category": "library"
+}

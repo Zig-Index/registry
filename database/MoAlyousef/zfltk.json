@@ -1,0 +1,157 @@
+{
+  "name": "zfltk",
+  "owner": "MoAlyousef",
+  "repo": "zfltk",
+  "description": "Zig bindings for the FLTK gui library",
+  "type": "project",
+  "topics": [
+    "gui",
+    "zig",
+    "fltk",
+    "zig-package"
+  ],
+  "stars": 74,
+  "forks": 8,
+  "watchers": 6,
+  "updated_at": "2025-11-23T22:33:04Z",
+  "readme": "# zfltk\nA Zig wrapper for the FLTK gui library.\n\n## Building the package from source\n```sh\ngit clone https://github.com/MoAlyousef/zfltk\ncd zfltk\nzig build\n```\n\nTo build the examples, pass `-Dzfltk-build-examples=true` to your `zig build` command.\n\n## Usage\nzfltk supports the zig package manager. To create a new project:\n\n```sh\nmkdir myproject\ncd myproject\nzig init\n```\n\nThis should create `build.zig`, `build.zig.zon` and other files.\n\nYou can add zfltk as a dependency to your project with one of these:\n\n```sh\n## specific release\n# 0.6.0 for zig 0.13\nzig fetch --save=zfltk https://github.com/MoAlyousef/zfltk/archive/refs/tags/pkg0.6.0.zip\n## or main branch\nzig fetch --save=zfltk https://github.com/MoAlyousef/zfltk/archive/refs/heads/main.zip\n```\n\nThis might add something like this in your `build.zig.zon`:\n```zig\n.{\n    ...\n    .dependencies = .{\n        .zfltk = .{\n            .url = \"https://github.com/MoAlyousef/zfltk/archive/refs/tags/pkg0.7.0.zip\",\n            .hash = \"...\",\n        },\n    },\n    ...\n}\n```\n\nYou can add the following to your build.zig:\n```zig\n    const zfltk_dep = b.dependency(\"zfltk\", .{\n        .target = target,\n        .optimize = optimize,\n    });\n    exe.root_module.addImport(\"zfltk\", zfltk_dep.module(\"zfltk\"));\n```\n\nThen you can run:\n```sh\nzig build run\n```\n\n## Dependencies \nzfltk requires a system install of cfltk (which along with fltk will be statically linked to your executable). CMake and a C++ compiler.\nYou can install cfltk using:\n```sh\ngit clone https://github.com/MoAlyousef/cfltk -b fltk1.4 --recurse-submodules --depth=1\ncd cfltk\n./scripts/bootstrap_posix.sh # optionally specify a -DCMAKE_INSTALL_PREFX=/some/path\n```\nThis might require super user privileges if no install prefix is provided since it might install to /usr/local.\nIf you install cfltk into a non-standard search path you would need to supply your executable with an include path and library path:\n```zig\n    exe.addLibraryPath(\"/some/path/include\");\n    exe.addIncludePath(\"/some/path/lib\");\n```\nAlternatively you can supply the zig executable with a search prefix:\n```bash\nzig build --search-prefix /some/path\n```\ncfltk dependencies:\n- Windows: With mingw, no dependencies.\n- MacOS: MacOS SDK.\n- Linux: X11 and OpenGL development headers need to be installed for development. The libraries themselves are available on linux distros with a graphical user interface.\n\nFor Debian-based GUI distributions, that means running:\n```sh\nsudo apt-get install libx11-dev libxext-dev libxft-dev libxinerama-dev libxcursor-dev libxrender-dev libxfixes-dev libpango1.0-dev libpng-dev libgl1-mesa-dev libglu1-mesa-dev\n```\nFor RHEL-based GUI distributions, that means running:\n```sh\nsudo yum groupinstall \"X Software Development\" && yum install pango-devel libXinerama-devel libpng-devel libstdc++-static\n```\nFor Arch-based GUI distributions, that means running:\n```sh\nsudo pacman -S libx11 libxext libxft libxinerama libxcursor libxrender libxfixes libpng pango cairo libgl mesa --needed\n```\nFor Alpine linux:\n```sh\napk add pango-dev fontconfig-dev libxinerama-dev libxfixes-dev libxcursor-dev libpng-dev mesa-gl\n```\nFor nixos:\n```sh\nnix-shell --packages rustc cmake git gcc xorg.libXext xorg.libXft xorg.libXinerama xorg.libXcursor xorg.libXrender xorg.libXfixes libcerf pango cairo libGL mesa pkg-config\n```\n\n## API\nUsing the Zig wrapper (under development):\n```zig\nconst zfltk = @import(\"zfltk\");\nconst app = zfltk.app;\nconst Window = zfltk.window.Window;\nconst Button = zfltk.button.Button;\nconst Box = zfltk.box.Box;\nconst Color = zfltk.enums.Color;\n\nfn butCb(but: *Button, data: ?*anyopaque) void {\n    var box = Box.fromRaw(data.?);\n\n    box.asWidget().setLabel(\"Hello World!\");\n\n    but.asWidget().setColor(Color.fromName(.cyan));\n}\n\npub fn main() !void {\n    try app.init();\n    app.setScheme(.gtk);\n\n    var win = try Window.init(.{\n        .w = 400,\n        .h = 300,\n\n        .label = \"Hello\",\n    });\n    win.freePosition();\n\n    var but = try Button.init(.{\n        .x = 160,\n        .y = 220,\n        .w = 80,\n        .h = 40,\n\n        .label = \"Click me!\",\n    });\n\n    but.asBase().setDownBox(.flat);\n\n    var box = try Box.init(.{\n        .x = 10,\n        .y = 10,\n        .w = 380,\n        .h = 180,\n\n        .boxtype = .up,\n    });\n\n    box.asWidget().setLabelFont(.courier);\n    box.asWidget().setLabelSize(18);\n\n    win.asGroup().end();\n    win.asWidget().show();\n\n    but.asWidget().setCallbackEx(butCb, box);\n    try app.run();\n}\n```\nThe messaging api can also be used:\n```zig\nconst zfltk = @import(\"zfltk\");\nconst app = zfltk.app;\nconst Window = zfltk.window.Window;\nconst Button = zfltk.button.Button;\nconst Box = zfltk.box.Box;\nconst enums = zfltk.enums;\n\npub const Message = enum(usize) {\n    // Can't begin with Zero!\n    first = 1,\n    second,\n};\n\npub fn main() !void {\n    try app.init();\n    app.setScheme(.gtk);\n\n    var win = try Window.init(.{\n        .w = 400,\n        .h = 300,\n\n        .label = \"Hello\",\n    });\n\n    var but1 = try Button.init(.{\n        .x = 100,\n        .y = 220,\n        .w = 80,\n        .h = 40,\n\n        .label = \"Button 1\",\n    });\n\n    var but2 = try Button.init(.{\n        .x = 200,\n        .y = 220,\n        .w = 80,\n        .h = 40,\n\n        .label = \"Button 2\",\n    });\n\n    var mybox = try Box.init(.{\n        .x = 10,\n        .y = 10,\n        .w = 380,\n        .h = 180,\n\n        .boxtype = .up,\n    });\n\n    mybox.asWidget().setLabelFont(.courier);\n    mybox.asWidget().setLabelSize(18);\n\n    win.asGroup().end();\n    win.asWidget().show();\n    but1.asWidget().emit(Message, .first);\n    but2.asWidget().emit(Message, .second);\n\n    while (app.wait()) {\n        if (app.recv(Message)) |msg| switch (msg) {\n            .first => mybox.asWidget().setLabel(\"Button 1 Clicked!\"),\n            .second => mybox.asWidget().setLabel(\"Button 2 Clicked!\"),\n        };\n    }\n}\n```\n\nUsing the C Api directly:\n```zig\nconst c = @cImport({\n    @cInclude(\"cfltk/cfl.h\"); // Fl_init_all, Fl_run\n    @cInclude(\"cfltk/cfl_enums.h\"); // Fl_Color_*\n    @cInclude(\"cfltk/cfl_image.h\"); // Fl_register_images\n    @cInclude(\"cfltk/cfl_button.h\"); // Fl_Button\n    @cInclude(\"cfltk/cfl_box.h\"); // Fl_Box\n    @cInclude(\"cfltk/cfl_window.h\"); // Fl_Window\n});\n\n// fltk initizialization of optional functionalities\npub fn fltkInit() void {\n    c.Fl_init_all(); // inits all styles, if needed\n    c.Fl_register_images(); // register image types supported by fltk, if needed\n    _ = c.Fl_lock(); // enable multithreading, if needed\n}\n\n// Button callback\npub fn butCb(w: ?*c.Fl_Widget, data: ?*anyopaque) callconv(.c) void {\n    c.Fl_Box_set_label(@ptrCast(data), \"Hello World!\");\n    c.Fl_Button_set_color(@ptrCast(w), c.Fl_Color_Cyan);\n}\n\npub fn main() !void {\n    fltkInit();\n\n    _ = c.Fl_set_scheme(\"gtk+\");\n    const win = c.Fl_Window_new(100, 100, 400, 300, \"Hello\");\n    const but = c.Fl_Button_new(160, 220, 80, 40, \"Click me!\");\n    const box = c.Fl_Box_new(10, 10, 380, 180, \"\");\n    c.Fl_Box_set_box(box, c.Fl_BoxType_UpBox);\n    c.Fl_Box_set_label_size(box, 18);\n    c.Fl_Box_set_label_font(box, c.Fl_Font_Courier);\n    c.Fl_Window_end(win);\n    c.Fl_Window_show(win);\n    c.Fl_Button_set_callback(but, butCb, box);\n    _ = c.Fl_run();\n}\n```\nYou can also mix and match for any missing functionalities in the Zig wrapper (see examples/mixed.zig).\n\nWidgets also provide a `call` method which allows to call any method that wasn't wrapped yet in the bindings:\n```zig\n    var flex = try Flex.init(.{\n        .w = 400,\n        .h = 300,\n        .orientation = .vertical,\n    });\n\n    flex.call(\"set_margins\", .{10, 20, 10, 20});\n```\n\n![alt_test](screenshots/image.jpg)\n![alt_test](screenshots/editor.jpg)\n\n[video tutorial](https://youtu.be/D2ijlrDStdM)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/37966791?u=10197b48ff764e4a2db111d28319bb63e98d4c0e&v=4",
+  "releases": [
+    {
+      "tag_name": "pkg0.6.0",
+      "name": "pkg0.6.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-08-09T07:49:22Z",
+      "html_url": "https://github.com/MoAlyousef/zfltk/releases/tag/pkg0.6.0",
+      "assets": []
+    },
+    {
+      "tag_name": "pkg0.5.0",
+      "name": "pkg0.5.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-07-30T18:43:46Z",
+      "html_url": "https://github.com/MoAlyousef/zfltk/releases/tag/pkg0.5.0",
+      "assets": []
+    },
+    {
+      "tag_name": "pkg0.4.0",
+      "name": "pkg0.4.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-07-30T07:35:30Z",
+      "html_url": "https://github.com/MoAlyousef/zfltk/releases/tag/pkg0.4.0",
+      "assets": []
+    },
+    {
+      "tag_name": "pkg0.3.0",
+      "name": "pkg0.3.0",
+      "body": "Zig 0.13 compat",
+      "prerelease": false,
+      "published_at": "2024-06-13T21:02:41Z",
+      "html_url": "https://github.com/MoAlyousef/zfltk/releases/tag/pkg0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "pkg0.2.0",
+      "name": "pkg0.2.0",
+      "body": "Zig 0.12 compat.",
+      "prerelease": false,
+      "published_at": "2024-05-08T22:09:01Z",
+      "html_url": "https://github.com/MoAlyousef/zfltk/releases/tag/pkg0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "pkg0.1.0",
+      "name": "pkg0.1.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2023-08-04T19:49:16Z",
+      "html_url": "https://github.com/MoAlyousef/zfltk/releases/tag/pkg0.1.0",
+      "assets": []
+    },
+    {
+      "tag_name": "pkg0.0.9",
+      "name": "pkg0.0.9",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2023-07-19T00:25:03Z",
+      "html_url": "https://github.com/MoAlyousef/zfltk/releases/tag/pkg0.0.9",
+      "assets": []
+    },
+    {
+      "tag_name": "pkg0.0.8",
+      "name": "pkg0.0.8",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2023-07-12T11:23:18Z",
+      "html_url": "https://github.com/MoAlyousef/zfltk/releases/tag/pkg0.0.8",
+      "assets": []
+    },
+    {
+      "tag_name": "pkg0.0.7",
+      "name": "pkg0.0.7",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2023-07-10T01:05:08Z",
+      "html_url": "https://github.com/MoAlyousef/zfltk/releases/tag/pkg0.0.7",
+      "assets": []
+    },
+    {
+      "tag_name": "pkg0.0.6",
+      "name": "pkg0.0.6",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2023-07-02T18:45:00Z",
+      "html_url": "https://github.com/MoAlyousef/zfltk/releases/tag/pkg0.0.6",
+      "assets": []
+    },
+    {
+      "tag_name": "pkg0.0.5",
+      "name": "",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2023-07-02T13:57:03Z",
+      "html_url": "https://github.com/MoAlyousef/zfltk/releases/tag/pkg0.0.5",
+      "assets": []
+    },
+    {
+      "tag_name": "pkg0.0.4",
+      "name": "pkg0.0.4",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2023-07-01T23:37:32Z",
+      "html_url": "https://github.com/MoAlyousef/zfltk/releases/tag/pkg0.0.4",
+      "assets": []
+    },
+    {
+      "tag_name": "pkg0.0.3",
+      "name": "pkg0.0.3",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2023-07-01T02:03:24Z",
+      "html_url": "https://github.com/MoAlyousef/zfltk/releases/tag/pkg0.0.3",
+      "assets": []
+    },
+    {
+      "tag_name": "pkg0.0.2",
+      "name": "pkg0.0.2",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2023-07-01T00:48:40Z",
+      "html_url": "https://github.com/MoAlyousef/zfltk/releases/tag/pkg0.0.2",
+      "assets": []
+    }
+  ],
+  "owner_bio": "MD.",
+  "owner_company": "KAUH",
+  "owner_location": "Jeddah, Saudi Arabia",
+  "owner_blog": "https://neurosrg.com/",
+  "owner_twitter_username": "MoAlyousef",
+  "owner_followers": 134,
+  "owner_following": 51,
+  "owner_created_at": "2018-03-31T23:38:18Z",
+  "license": "MIT",
+  "category": "gui"
+}

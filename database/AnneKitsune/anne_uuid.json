@@ -1,0 +1,36 @@
+{
+  "name": "anne_uuid",
+  "owner": "AnneKitsune",
+  "repo": "anne_uuid",
+  "description": "A zig library to create and handle uuids easily.",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-08-23T02:00:14Z",
+  "dependencies": [
+    {
+      "name": "anne_benchmark",
+      "url": "https://github.com/AnneKitsune/anne_benchmark/archive/refs/tags/1.2.0.zip",
+      "hash": "anne_benchmark-1.0.0-DXcAMkkqAAD7fyiMrvBgFZQBcKODPmv-yfHTqO3aKdNd"
+    }
+  ],
+  "minimum_zig_version": "0.15.0-dev.1380+e98aeeb73",
+  "readme": "# Zig Uuid\n\nA super simple library providing C-compatible randomly-generated 128 bit unique identifiers.\n\nUsage (zig):\n1. Add the module to the imports of your module.\n2. Create a uuid: `Uuid.new()`\n3. Check if two uuids are the same: `Uuid.eql(other_uuid)`\n\nUsage (C):\n1. Include `anne_uuid.h`\n2. Link against `anne_uuid.a`\n3. Create a uuid: `uuid_new()`\n4. Check if two uuids are the same: `uuid_eql(first, second)`\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/4755185?u=758b06e7f8ee6db8837014dcd854b1e9df898d34&v=4",
+  "releases": [],
+  "owner_bio": "I Press Keys on my Keyboard.",
+  "owner_company": null,
+  "owner_location": "Quebec, Canada",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 90,
+  "owner_following": 6,
+  "owner_created_at": "2013-06-21T02:30:22Z",
+  "license": "AGPL-3.0",
+  "category": "library"
+}

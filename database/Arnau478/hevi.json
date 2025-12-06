@@ -1,0 +1,280 @@
+{
+  "name": "hevi",
+  "owner": "Arnau478",
+  "repo": "hevi",
+  "description": "Hex viewer",
+  "type": "project",
+  "topics": [
+    "binary",
+    "hex",
+    "hex-viewer",
+    "zig",
+    "zig-package",
+    "hexdump",
+    "zig-program"
+  ],
+  "stars": 284,
+  "forks": 10,
+  "watchers": 4,
+  "updated_at": "2025-11-13T09:09:22Z",
+  "dependencies": [
+    {
+      "name": "ziggy",
+      "url": "git+https://github.com/kristoff-it/ziggy#4353b20ef2ac750e35c6d68e4eb2a07c2d7cf901",
+      "hash": "ziggy-0.1.0-kTg8v5pABgDztlefWHceH-Sh8tVveguFC61QkmLkIRaA"
+    },
+    {
+      "name": "pennant",
+      "url": "git+https://github.com/Arnau478/pennant#df76de01bcf06eb1dcb40dbf04f7c219c3a35a7d",
+      "hash": "pennant-0.1.0-MwI8MLhIAACFrJKPC3xmueUoBNGzlM0layBrNNLtNvOB"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "<div align=\"center\">\n    <h1 align=\"center\">hevi</h1>\n    <h3>a hex viewer</h3>\n</div>\n\n![ci status](https://github.com/Arnau478/hevi/actions/workflows/ci.yml/badge.svg)\n\n![example image](web/example.png)\n\n## What is hevi?\nHevi (pronounced like \"heavy\") is a hex viewer, just like `xxd` or `hexdump`.\n\n## Features\n### Parsers\nHevi can parse things like ELF or PE files and give you syntax-highlighting.\n![parser example](web/parser.png)\n\n### Custom color palettes\nYou can specify custom color palettes. Color palettes can use standard ANSI colors or truecolor.\n\n## Usage\nThe command should be used as `hevi <file> [flags]`. The flags are described [below](#flags).\n\n### Flags\n| Flag(s)                          | Description                                             |\n| -------------------------------- | ------------------------------------------------------- |\n| `-h`/`--help`                    | Show a help message                                     |\n| `-v`/`--version`                 | Show version information                                |\n| `--color`/`--no-color`           | Enable or disable colored output                        |\n| `--lowercase`/`--uppercase`      | Toggle between lowercase and uppercase hex              |\n| `--size`/`--no-size`             | Enable or disable the line showing the size at the end  |\n| `--offset`/`--no-offset`         | Enable or disable showing the offset                    |\n| `--ascii`/`--no-ascii`           | Enable or disable ASCII interpretation                  |\n| `--skip-lines`/`--no-skip-lines` | Enable or disable skipping of identical lines           |\n| `--raw`                          | Raw format (disables most features)                     |\n| `--show-palette`                 | Show the current color palette in a table               |\n| `--parser`                       | Specify the parser to use. For a list use `hevi --help` |\n\n### Environment variables\nThe `NO_COLOR` variable is supported, and disables color (see <https://no-color.org/>) printing. Note that it can be overwritten by an explicit `--color`.\n\n### Config file\nThe config file is a [ziggy](https://ziggy-lang.io) file. The following fields are available:\n```zig\ncolor: bool,\nuppercase: bool,\nshow_size: bool,\nshow_offset: bool,\nshow_ascii: bool,\nskip_lines: bool,\nraw: bool,\npalette: Palette,\n```\n\nAll fields are optional.\n\n**Note**: for the `palette` field you must specify all styles!\n\n#### Example config\n```zig\n.color = true,\n.skip_lines = false,\n.palette = Palette{\n    .normal = @color(\"yellow\"),\n    .normal_alt = @color(\"yellow::dim\"),\n    .normal_accent = @color(\"yellow:bright_black:bold\"),\n    .c1 = @color(\"red\"),\n    .c1_alt = @color(\"red::dim\"),\n    .c1_accent = @color(\"red:bright_black:bold\"),\n    .c2 = @color(\"green\"),\n    .c2_alt = @color(\"green::dim\"),\n    .c2_accent = @color(\"green:bright_black:bold\"),\n    .c3 = @color(\"blue\"),\n    .c3_alt = @color(\"blue::dim\"),\n    .c3_accent = @color(\"blue:bright_black:bold\"),\n    .c4 = @color(\"cyan\"),\n    .c4_alt = @color(\"cyan::dim\"),\n    .c4_accent = @color(\"cyan:bright_black:bold\"),\n    .c5 = @color(\"magenta\"),\n    .c5_alt = @color(\"magenta::dim\"),\n    .c5_accent = @color(\"magenta:bright_black:bold\"),\n},\n```\n\n#### Location\n\nThe config file is located at:\n| OS                                     | Path                                                                                             |\n| -------------------------------------- | ------------------------------------------------------------------------------------------------ |\n| Linux, MacOS, FreeBSD, OpenBSD, NetBSD | `$XDG_CONFIG_HOME/hevi/config.ziggy` or if the env doesn't exist `$HOME/.config/hevi/config.ziggy` |\n| Windows                                | `%APPDATA%/hevi/config.ziggy`                                                                     |\n| Other                                  | Not supported. No config file will be read                                                       |\n\n#### Precedence\nHevi has a precedence for configuration and it is:\n1. Flags\n2. Environment variables\n3. Config file\n4. Defaults\n\n## About\nIt is written in [zig](https://github.com/ziglang/zig), in an attempt to simplify hex viewers.\n\n## Installation\n\n### Some Linux package managers\nIf your package manager is in the following list (and preferably in green), you can simply install it from there:\n\n[![Packaging status](https://repology.org/badge/vertical-allrepos/hevi.svg)](https://repology.org/project/hevi/versions)\n\n### Homebrew\n\nYou can install [hevi](https://formulae.brew.sh/formula/hevi) with [brew](https://brew.sh/):\n\n```sh\n$ brew install hevi\n```\n\n### Nix\nThere is a nix flake you can use. You can also try hevi without installing it:\n\n```sh\n$ nix shell github:Arnau478/hevi\n```\n\n### X-CMD\n\nIf you are a user of [x-cmd](https://x-cmd.com), you can run:\n\n```sh\n$ x install hevi\n```\n\n### Other platforms\nYou can download a binary from the [releases](https://github.com/Arnau478/hevi/releases/) page. You can also clone the repository and compile it with `zig build`.\n\n## Contribute\nContributions are welcome! Even if you don't want to write code, you can help a lot creating new issues or testing this software.\n\n## License\nSee [LICENSE](LICENSE)\n\nSPDX-License-Identifier: GPL-3.0-or-later\n\n[![License: GPL-3.0-or-later](https://img.shields.io/badge/License-GPL--3.0--or--later-blue.svg)](https://spdx.org/licenses/GPL-3.0-or-later.html)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/61841960?u=c1dcfda9814c623e89cd61b036254934505e5744&v=4",
+  "releases": [
+    {
+      "tag_name": "v1.1.0",
+      "name": "v1.1.0",
+      "body": "This release adds a few (non-breaking) changes to the v1.0.0 release.\r\n\r\n## What's Changed\r\n- Added `-` special filename, which represents stdin\r\n- QOI file format parser\r\n- Flag to force building a PIE (position-independent executable)\r\n- On Windows, if ANSI escape sequences are disabled, try to enable them\r\n\r\n**Full Changelog**: https://github.com/Arnau478/hevi/compare/v1.0.0...v1.1.0\r\n\r\n## New Contributors\r\n- @tranzystorekk",
+      "prerelease": false,
+      "published_at": "2024-08-21T13:11:04Z",
+      "html_url": "https://github.com/Arnau478/hevi/releases/tag/v1.1.0",
+      "assets": [
+        {
+          "name": "hevi-x86-windows.exe",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v1.1.0/hevi-x86-windows.exe",
+          "size": 429056,
+          "content_type": "application/x-msdownload"
+        },
+        {
+          "name": "hevi-x86-linux",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v1.1.0/hevi-x86-linux",
+          "size": 131524,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "hevi-x86_64-windows.exe",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v1.1.0/hevi-x86_64-windows.exe",
+          "size": 375296,
+          "content_type": "application/x-msdownload"
+        },
+        {
+          "name": "hevi-aarch64-linux",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v1.1.0/hevi-aarch64-linux",
+          "size": 133680,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "hevi-aarch64-windows.exe",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v1.1.0/hevi-aarch64-windows.exe",
+          "size": 359936,
+          "content_type": "application/x-msdownload"
+        },
+        {
+          "name": "hevi-x86_64-linux",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v1.1.0/hevi-x86_64-linux",
+          "size": 137448,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "hevi-aarch64-macos",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v1.1.0/hevi-aarch64-macos",
+          "size": 163776,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "hevi-x86_64-macos",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v1.1.0/hevi-x86_64-macos",
+          "size": 135519,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.0.0",
+      "name": "v1.0.0",
+      "body": "Finally, hevi is **1.0.0** :tada:\r\n\r\nIt's been a long time since the last release, and a lot of things have changed, to the point where it's a stable and fully-featured tool.\r\n\r\n## Changelog\r\nBelow is a **non-exhaustive** list of the most important changes that come with this release.\r\n- Binary file parsers, which cause the dump to be syntax-highlighted\r\n- Expose `hevi` as a zig module\r\n- [ziggy](https://ziggy-lang.io) config files\r\n- `NO_COLOR` environment variable\r\n- Custom color palettes with truecolor support\r\n- Skipping lines when they're exactly the same as the surrounding ones\r\n- Better error logging\r\n- Option to dump data \"raw\" (no decorations of any kind)\r\n- `--show-palette` flag to preview custom color palettes\r\n\r\n**Full Changelog**: https://github.com/Arnau478/hevi/compare/v0.2.0...v1.0.0\r\n\r\n## New contributors\r\n- @Reokodoku\r\n\r\n---\r\n\r\nThanks to anyone who has used hevi, opened an issue, or contributed to its development in any other way.",
+      "prerelease": false,
+      "published_at": "2024-07-04T18:26:25Z",
+      "html_url": "https://github.com/Arnau478/hevi/releases/tag/v1.0.0",
+      "assets": [
+        {
+          "name": "hevi-x86-windows.exe",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v1.0.0/hevi-x86-windows.exe",
+          "size": 429056,
+          "content_type": "application/x-msdownload"
+        },
+        {
+          "name": "hevi-x86_64-windows.exe",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v1.0.0/hevi-x86_64-windows.exe",
+          "size": 376320,
+          "content_type": "application/x-msdownload"
+        },
+        {
+          "name": "hevi-aarch64-windows.exe",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v1.0.0/hevi-aarch64-windows.exe",
+          "size": 359936,
+          "content_type": "application/x-msdownload"
+        },
+        {
+          "name": "hevi-aarch64-linux",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v1.0.0/hevi-aarch64-linux",
+          "size": 136704,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "hevi-aarch64-macos",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v1.0.0/hevi-aarch64-macos",
+          "size": 164672,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "hevi-x86-linux",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v1.0.0/hevi-x86-linux",
+          "size": 134596,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "hevi-x86_64-linux",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v1.0.0/hevi-x86_64-linux",
+          "size": 140296,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "hevi-x86_64-macos",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v1.0.0/hevi-x86_64-macos",
+          "size": 136531,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "0.2.0 release",
+      "body": "The second release!\r\n# Changelog\r\n- Custom argument parser -- no longer using `clap`\r\n- Now `--color`/`--no-color` defaults to what the program guesses (instead of a hard-coded value)\r\n- A big part of the code was refactored to accommodate some new features (plus, it's cleaner now)\r\n- New `--offset`/`--no-offset` and `--ascii`/`--no-ascii` flags\r\n- Better `--help`/`-h` flag\r\n- Added a usage section in the README.md\r\n- New screenshot for the README.md\r\n- Split into multiple files for modularity reasons\r\n\r\n**Full Changelog**: https://github.com/Arnau478/hevi/compare/v0.1.0...v0.2.0",
+      "prerelease": true,
+      "published_at": "2023-12-07T13:02:41Z",
+      "html_url": "https://github.com/Arnau478/hevi/releases/tag/v0.2.0",
+      "assets": [
+        {
+          "name": "hevi-x86_64-windows.exe",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v0.2.0/hevi-x86_64-windows.exe",
+          "size": 72704,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "hevi-x86_64-linux",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v0.2.0/hevi-x86_64-linux",
+          "size": 63992,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "hevi-x86-windows.exe",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v0.2.0/hevi-x86-windows.exe",
+          "size": 89088,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "hevi-aarch64-linux",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v0.2.0/hevi-aarch64-linux",
+          "size": 61112,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "hevi-x86-linux",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v0.2.0/hevi-x86-linux",
+          "size": 66660,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "hevi-aarch64-windows.exe",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v0.2.0/hevi-aarch64-windows.exe",
+          "size": 68608,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "hevi-x86_64-macos",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v0.2.0/hevi-x86_64-macos",
+          "size": 106992,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "hevi-aarch64-macos",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v0.2.0/hevi-aarch64-macos",
+          "size": 114792,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "0.1.0 release",
+      "body": "This is the first release of hevi. It has some issues, but otherwise works well.",
+      "prerelease": true,
+      "published_at": "2023-11-12T19:52:10Z",
+      "html_url": "https://github.com/Arnau478/hevi/releases/tag/v0.1.0",
+      "assets": [
+        {
+          "name": "hevi-aarch64-linux",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v0.1.0/hevi-aarch64-linux",
+          "size": 62104,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "hevi-aarch64-macos",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v0.1.0/hevi-aarch64-macos",
+          "size": 142088,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "hevi-aarch64-windows",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v0.1.0/hevi-aarch64-windows",
+          "size": 73728,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "hevi-x86_64-linux",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v0.1.0/hevi-x86_64-linux",
+          "size": 66200,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "hevi-x86_64-macos",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v0.1.0/hevi-x86_64-macos",
+          "size": 111864,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "hevi-x86_64-windows",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v0.1.0/hevi-x86_64-windows",
+          "size": 76800,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "hevi-x86-linux",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v0.1.0/hevi-x86-linux",
+          "size": 65984,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "hevi-x86-windows",
+          "url": "https://github.com/Arnau478/hevi/releases/download/v0.1.0/hevi-x86-windows",
+          "size": 92672,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "Low-level Zig programmer that loves kernel and compiler development",
+  "owner_company": "Universitat Politècnica de València",
+  "owner_location": "País valencià",
+  "owner_blog": "arnauc.me",
+  "owner_twitter_username": "arnau478",
+  "owner_followers": 54,
+  "owner_following": 27,
+  "owner_created_at": "2020-03-05T16:33:19Z",
+  "homepage": "https://arnau478.github.io/hevi/",
+  "license": "GPL-3.0",
+  "category": "library"
+}

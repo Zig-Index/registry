@@ -1,0 +1,40 @@
+{
+  "name": "zig-plutosvg",
+  "owner": "JacobCrabill",
+  "repo": "zig-plutosvg",
+  "description": "Zig build of PlutoSVG",
+  "type": "project",
+  "topics": [
+    "svg",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-09-19T22:24:11Z",
+  "dependencies": [
+    {
+      "name": "plutovg",
+      "url": "https://github.com/sammycage/plutovg/archive/refs/tags/v1.0.0.tar.gz",
+      "hash": "N-V-__8AABt5DwAlC69cGd2MBdqvlbvpWTC0yDIsbgha3g9Y"
+    },
+    {
+      "name": "plutosvg",
+      "url": "https://github.com/sammycage/plutosvg/archive/9c3d6d701e3957a6bc61251f45852bfdf9cde3e9.tar.gz",
+      "hash": "N-V-__8AAE23BABBp4a-9A49LViXGvy9XpI_thZU1Rfwg9pl"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/5885545?u=7b2899754fd8ece26d7e42bb2a765b48f7c64407&v=4",
+  "releases": [],
+  "owner_bio": "Assembling and managing complex software systems",
+  "owner_company": null,
+  "owner_location": "Bend, OR",
+  "owner_blog": "http://jcrabill.dev",
+  "owner_twitter_username": null,
+  "owner_followers": 58,
+  "owner_following": 15,
+  "owner_created_at": "2013-11-08T05:02:12Z",
+  "category": "library"
+}

@@ -1,0 +1,32 @@
+{
+  "name": "fuse.zig",
+  "owner": "PondWader",
+  "repo": "fuse.zig",
+  "description": "FUSE filesystem daemon library in pure Zig.",
+  "type": "project",
+  "topics": [
+    "fuse",
+    "zig",
+    "zig-package",
+    "fuse-libraries",
+    "libfuse"
+  ],
+  "stars": 2,
+  "forks": 1,
+  "watchers": 0,
+  "updated_at": "2025-10-26T13:14:39Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# fuse.zig\n\nZig FUSE daemon library.\n\nCreate and mount userspace file systems in Linux with Zig. Learn more about FUSE on [the Linux kernel website](https://www.kernel.org/doc/html/next/filesystems/fuse.html).\n\n### Notes\n\n- This library is only targetted at Linux for now but I'm open to contributions for other platforms.\n\n### Examples\n\n[hello.zig](./examples/hello.zig) - a simple \"Hello world\" file system with read and write examples.\n\nTo run an example, clone this repository and run `zig build example-<name> -- <args>` e.g. `mkdir /tmp/hello && zig build example-hello -- /tmp/hello`.\n\n## Installing\n\n1. Fetch fuse.zig:\n\n```\nzig fetch --save \"git+https://github.com/PondWader/fuse.zig#main\"\n```\n\n2. Add a `fusez` import in your `build.zig`:\n\n```zig\nconst fusez = b.dependency(\"fusez\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\nexe.root_module.addImport(\"fusez\", fusez.module(\"fusez\"));\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/66561610?u=f66db130d8e9830aa6170d53696a609aba87ac17&v=4",
+  "releases": [],
+  "owner_bio": "🧙‍♀️",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "https://pondwader.xyz",
+  "owner_twitter_username": null,
+  "owner_followers": 19,
+  "owner_following": 6,
+  "owner_created_at": "2020-06-07T14:41:11Z",
+  "license": "MIT",
+  "category": "library"
+}

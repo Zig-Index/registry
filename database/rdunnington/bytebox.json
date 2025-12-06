@@ -1,0 +1,31 @@
+{
+  "name": "bytebox",
+  "owner": "rdunnington",
+  "repo": "bytebox",
+  "description": "Standalone WebAssembly VM.",
+  "type": "project",
+  "topics": [
+    "zig",
+    "wasm",
+    "zig-package",
+    "wasm-interpreter",
+    "wasi"
+  ],
+  "stars": 120,
+  "forks": 6,
+  "watchers": 3,
+  "updated_at": "2025-12-05T19:18:02Z",
+  "minimum_zig_version": "0.13.0",
+  "readme": "# Bytebox\n\n<div align=\"center\">\n<a href=https://webassembly.org/><img src=\"https://avatars.githubusercontent.com/u/11578470?s=200&v=4\" alt=\"Markdown Logo\" width=\"150\"/></a>\n\nBytebox is a WebAssembly VM.\n</div>\n\n# Getting started\n\n### Requirements\nBytebox currently builds with [Zig 0.15.x](https://ziglang.org/download) to avoid churn on zig master.\n\nTo run the tests:\n* `wasm-tools` is required to run the wasm testsuite. You can install it via the rust toolchain `cargo install wasm-tools` or directly from the [release page](https://github.com/bytecodealliance/wasm-tools/releases).\n* `python3` is required to run the wasi testsuite. You may need to run `python3 -m pip install -r test/wasi/wasi-testsuite/test-runner/requirements.txt` to ensure the wasi test runner has all the necessary dependencies installed.\n\n## Run Tests\n\n```sh\ngit clone --recurse-submodules https://github.com/rdunnington/bytebox.git\ncd bytebox\nzig build test-unit # run builtin zig unit tests\nzig build test-wasm # run official wasm spec testsuite\nzig build test-wasi # run official wasi spec testsuite\nzig build test-mem64 # run memory64 compat test\nzig build test # run all of the above in parallel (output will not be pretty!)\n```\n\n## Usage\n\nYou can use the standalone runtime to load and execute WebAssembly programs:\n```sh\nzig build run -- <file> [function] [function args]...\n```\n\nOr embed Bytebox in your own programs:\n\n```zig\n// build.zig\nconst std = @import(\"std\");\n\npub fn build(b: *std.build.Builder) void {\n    const exe = b.addExecutable(\"my_program\", \"src/main.zig\");\n    exe.addPackage(std.build.Pkg{\n        .name = \"bytebox\",\n        .source = .{ .path = \"bytebox/src/core.zig\" }, // submodule in the root dir\n    });\n    exe.setTarget(b.standardTargetOptions(.{}));\n    exe.setBuildMode(b.standardReleaseOptions());\n    exe.install();\n    const run = exe.run();\n    const step = b.step(\"run\", \"runs my_program\");\n    step.dependOn(&run.step);\n}\n\n// main.zig\nconst std = @import(\"std\");\nconst bytebox = @import(\"bytebox\");\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    var allocator: std.mem.Allocator = gpa.allocator();\n\n    const wasm_data: []u8 = try std.fs.cwd().readFileAlloc(allocator, \"example.wasm\", 1024 * 128);\n    defer allocator.free(wasm_data);\n\n    const module_def = try bytebox.createModuleDefinition(allocator, .{});\n    defer module_def.destroy();\n    try module_def.decode(wasm_data);\n\n    const module_instance = try bytebox.createModuleInstance(.Stack, module_def, allocator);\n    defer module_instance.destroy();\n    try module_instance.instantiate(.{});\n}\n```\n\nInter-language FFI is also supported. See `src/bytebox.h` for an overview in C. To use bytebox as a static library, link with the built library in `zig-out/lib/`. Note that Zig assumes a default stack size of 8MB, so you'll need to ensure the same in your program.\n\n# Status\n\nThis project is still in the alpha stage.\n\n| Legend | Meaning |\n| --- | --- |\n|✅|Implemented|\n|❌|TODO|\n|💀|Not planned/Removed from spec|\n\n## [WebAssembly](https://webassembly.github.io/spec/core/index.html) support:\n\n| Status | Feature |\n| --- | --- |\n|✅|WebAssembly 1.0|\n|✅|Sign extension instructions|\n|✅|Non-trapping float-to-int conversion|\n|✅|Multiple values|\n|✅|Reference types|\n|✅|Table instructions|\n|✅|Multiple tables|\n|✅|Bulk memory and table instructions|\n|✅|Vector instructions|\n\n## [WASI Preview 1](https://github.com/WebAssembly/WASI/tree/main) support:\n\n| Status | Feature |\n| --- | --- |\n|✅|args_get|\n|✅|args_sizes_get|\n|✅|environ_get|\n|✅|environ_sizes_get|\n|✅|clock_res_get|\n|✅|clock_time_get|\n|✅|fd_advise|\n|✅|fd_allocate|\n|✅|fd_close|\n|✅|fd_datasync|\n|✅|fd_fdstat_get|\n|✅|fd_fdstat_set_flags|\n|💀|fd_fdstat_set_rights|\n|✅|fd_filestat_get|\n|✅|fd_filestat_set_size|\n|✅|fd_filestat_set_times|\n|✅|fd_pread|\n|✅|fd_prestat_get|\n|✅|fd_prestat_dir_name|\n|✅|fd_pwrite|\n|✅|fd_read|\n|✅|fd_readdir|\n|✅|fd_renumber|\n|✅|fd_seek|\n|❌|fd_sync|\n|✅|fd_tell|\n|✅|fd_write|\n|✅|path_create_directory|\n|✅|path_filestat_get|\n|✅|path_filestat_set_times|\n|❌|path_link|\n|✅|path_open|\n|❌|path_readlink|\n|✅|path_remove_directory|\n|❌|path_rename|\n|✅|path_symlink|\n|✅|path_unlink_file|\n|❌|poll_oneoff|\n|✅|proc_exit|\n|💀|proc_raise|\n|❌|sched_yield|\n|✅|random_get|\n|❌|sock_accept|\n|❌|sock_recv|\n|❌|sock_send|\n|❌|sock_shutdown|\n\n### Roadmap\nThese tasks must be completed to enter alpha:\n* API ergonomics pass\n* Documentation\n* General TODO/code cleanup\n* Crash hardening/fuzzing\n\nTo enter beta:\n* No breaking API changes after this point\n* Performance competitive with other well-known interpreters (e.g. [micro-wasm-runtime](https://github.com/bytecodealliance/wasm-micro-runtime), [wasm3](https://github.com/wasm3/wasm3))\n\nTo have a 1.0 release:\n* Tested with a wide variety of wasm programs\n* Successfully used in other beta-quality projects\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/4075241?u=2836bad05d6163e19510d195ed8afeacc126d18a&v=4",
+  "releases": [],
+  "owner_company": "Riot Games",
+  "owner_location": "Seattle",
+  "owner_blog": "rdunnington.github.io",
+  "owner_twitter_username": null,
+  "owner_followers": 37,
+  "owner_following": 14,
+  "owner_created_at": "2013-04-06T05:36:43Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,964 @@
+{
+  "name": "microzig",
+  "owner": "ZigEmbeddedGroup",
+  "repo": "microzig",
+  "description": "MicroZig is a toolbox for building embedded applications in Zig.",
+  "type": "project",
+  "topics": [
+    "ziglang",
+    "zig-package",
+    "zig",
+    "embedded",
+    "hal"
+  ],
+  "stars": 1921,
+  "forks": 156,
+  "watchers": 24,
+  "updated_at": "2025-12-06T14:54:56Z",
+  "dependencies": [
+    {
+      "name": "core",
+      "url": "core"
+    },
+    {
+      "name": "drivers",
+      "url": "drivers"
+    },
+    {
+      "name": "boxzer",
+      "url": "git+https://codeberg.org/mattnite/boxzer.git#4021540de4b07c11102dd4d46383ce0066f838bb",
+      "hash": "boxzer-0.1.0--ed-MPrnAAAQAwXnfMJuSkgAsw4FseHEHKcn7OMKXGZS"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# ![MicroZig Logo](design/logo-text-auto.svg)\n\n> **NOTE:** This is in development; breaks in the API are bound to happen.\n\n## What version of Zig to use\n\nZig 0.15.1\n\n## Getting Started With MicroZig\n\nGo to [microzig.tech](https://microzig.tech)!\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/80392719?v=4",
+  "releases": [
+    {
+      "tag_name": "0.14.4",
+      "name": "0.14.4",
+      "body": "**Full Changelog**: https://github.com/ZigEmbeddedGroup/microzig/compare/0.14.3...0.14.4",
+      "prerelease": false,
+      "published_at": "2025-10-04T06:21:23Z",
+      "html_url": "https://github.com/ZigEmbeddedGroup/microzig/releases/tag/0.14.4",
+      "assets": [
+        {
+          "name": "rtt.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.4/rtt.tar.gz",
+          "size": 8721,
+          "content_type": "raw"
+        },
+        {
+          "name": "riscv32common.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.4/riscv32common.tar.gz",
+          "size": 4171,
+          "content_type": "raw"
+        },
+        {
+          "name": "package-metadata.json",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.4/package-metadata.json",
+          "size": 21747,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_tools_uf2.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.4/mz_tools_uf2.tar.gz",
+          "size": 6721,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_tools_regz.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.4/mz_tools_regz.tar.gz",
+          "size": 72963,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_tools_espimage.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.4/mz_tools_espimage.tar.gz",
+          "size": 6024,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_sim_aviron.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.4/mz_sim_aviron.tar.gz",
+          "size": 1567947,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_wch_ch32v.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.4/mz_port_wch_ch32v.tar.gz",
+          "size": 174708,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_stmicro_stm32.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.4/mz_port_stmicro_stm32.tar.gz",
+          "size": 96858,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_raspberrypi_rp2xxx.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.4/mz_port_raspberrypi_rp2xxx.tar.gz",
+          "size": 174485,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_nxp_lpc.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.4/mz_port_nxp_lpc.tar.gz",
+          "size": 108202,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_nordic_nrf5x.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.4/mz_port_nordic_nrf5x.tar.gz",
+          "size": 18339,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_microchip_avr.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.4/mz_port_microchip_avr.tar.gz",
+          "size": 4729,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_microchip_atsam.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.4/mz_port_microchip_atsam.tar.gz",
+          "size": 1723,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_mcx.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.4/mz_port_mcx.tar.gz",
+          "size": 3631,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_gigadevice_gd32.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.4/mz_port_gigadevice_gd32.tar.gz",
+          "size": 54980,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_espressif_esp.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.4/mz_port_espressif_esp.tar.gz",
+          "size": 746759,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_drivers.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.4/mz_drivers.tar.gz",
+          "size": 402737,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_core.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.4/mz_core.tar.gz",
+          "size": 57979,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_buildinternals.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.4/mz_buildinternals.tar.gz",
+          "size": 4474,
+          "content_type": "raw"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.15.0",
+      "name": "0.15.0",
+      "body": "## What's Changed\r\n* Zig 0.15.1 by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/651\r\n* svd: Parse access type in case-insensitive manner by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/664\r\n* nrf5x: Use RTC for timekeeping, track overflows for extra bits by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/662\r\n* MicroZig 0.15.0 by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/667\r\n* build_system: Increase eval quota to avoid compile error by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/665\r\n* printer: Refactor annotation api and testing by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/668\r\n* Fix website publishing CI pipeline by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/669\r\n* Try fixing publication again by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/670\r\n\r\n\r\n**Full Changelog**: https://github.com/ZigEmbeddedGroup/microzig/compare/0.14.3...0.15.0",
+      "prerelease": false,
+      "published_at": "2025-09-04T19:51:37Z",
+      "html_url": "https://github.com/ZigEmbeddedGroup/microzig/releases/tag/0.15.0",
+      "assets": [
+        {
+          "name": "rtt.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.15.0/rtt.tar.gz",
+          "size": 8725,
+          "content_type": "raw"
+        },
+        {
+          "name": "riscv32common.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.15.0/riscv32common.tar.gz",
+          "size": 4171,
+          "content_type": "raw"
+        },
+        {
+          "name": "package-metadata.json",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.15.0/package-metadata.json",
+          "size": 20368,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_tools_uf2.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.15.0/mz_tools_uf2.tar.gz",
+          "size": 6860,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_tools_regz.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.15.0/mz_tools_regz.tar.gz",
+          "size": 73272,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_tools_espimage.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.15.0/mz_tools_espimage.tar.gz",
+          "size": 6064,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_sim_aviron.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.15.0/mz_sim_aviron.tar.gz",
+          "size": 1568409,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_wch_ch32v.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.15.0/mz_port_wch_ch32v.tar.gz",
+          "size": 174710,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_stmicro_stm32.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.15.0/mz_port_stmicro_stm32.tar.gz",
+          "size": 96955,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_raspberrypi_rp2xxx.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.15.0/mz_port_raspberrypi_rp2xxx.tar.gz",
+          "size": 174732,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_nxp_lpc.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.15.0/mz_port_nxp_lpc.tar.gz",
+          "size": 108311,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_nordic_nrf5x.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.15.0/mz_port_nordic_nrf5x.tar.gz",
+          "size": 19352,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_microchip_avr.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.15.0/mz_port_microchip_avr.tar.gz",
+          "size": 4728,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_microchip_atsam.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.15.0/mz_port_microchip_atsam.tar.gz",
+          "size": 1723,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_mcx.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.15.0/mz_port_mcx.tar.gz",
+          "size": 3631,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_gigadevice_gd32.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.15.0/mz_port_gigadevice_gd32.tar.gz",
+          "size": 54980,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_espressif_esp.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.15.0/mz_port_espressif_esp.tar.gz",
+          "size": 746772,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_drivers.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.15.0/mz_drivers.tar.gz",
+          "size": 402739,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_core.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.15.0/mz_core.tar.gz",
+          "size": 57611,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_buildinternals.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.15.0/mz_buildinternals.tar.gz",
+          "size": 4470,
+          "content_type": "raw"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.14.3",
+      "name": "0.14.3",
+      "body": "## What's Changed\r\n* nrf52: Implement writev_blocking for i2cdma by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/636\r\n* build_system: `stack` option in `Target` by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/640\r\n* rp2xxx: Remove SchmittTrigger, use  Enabled by @Gnyblast in https://github.com/ZigEmbeddedGroup/microzig/pull/635\r\n* rp2xxx: Fix pins.zig and examples by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/643\r\n* I2c interface by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/642\r\n* cortex_m+hazard3+rp2xxx: Ram vector table refactor by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/641\r\n* drivers: sensors: Add TLV493D sensor driver by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/638\r\n* rp2xxx: rom refactoring and support for rp2350 by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/647\r\n* I2C_Device: Make is_reserved return an AddressError by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/648\r\n* rp2xxx: Add set_interrupts_enabled and non blocking read to uart hal by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/644\r\n* ATDF nested register groups by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/650\r\n* General bug fixing by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/652\r\n* drivers: Add MPU-6050 driver by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/654\r\n* Clock device refactor by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/655\r\n* rp2xxx: add fpu and dcp support by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/653\r\n* STM32F103 Small APIS and changes by @RecursiveError in https://github.com/ZigEmbeddedGroup/microzig/pull/639\r\n* feat: add nxp mcx port by @rmrt1n in https://github.com/ZigEmbeddedGroup/microzig/pull/649\r\n* Overhaul i2c_device interfaces, implement, update some drivers by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/645\r\n* rp2xxx: Set entry point symbol for flashless targets by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/659\r\n* Miscellaneous cleanup by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/656\r\n* drivers: TLV493d: Fixup a bit, disable frame checking and reset by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/660\r\n* Set and use default baud rate for UART by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/661\r\n* 0.14.3 Release by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/663\r\n\r\n## New Contributors\r\n* @Gnyblast made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/635\r\n* @rmrt1n made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/649\r\n\r\n**Full Changelog**: https://github.com/ZigEmbeddedGroup/microzig/compare/0.14.2...0.14.3",
+      "prerelease": false,
+      "published_at": "2025-09-01T23:07:04Z",
+      "html_url": "https://github.com/ZigEmbeddedGroup/microzig/releases/tag/0.14.3",
+      "assets": [
+        {
+          "name": "rtt.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.3/rtt.tar.gz",
+          "size": 8721,
+          "content_type": "raw"
+        },
+        {
+          "name": "riscv32common.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.3/riscv32common.tar.gz",
+          "size": 4171,
+          "content_type": "raw"
+        },
+        {
+          "name": "package-metadata.json",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.3/package-metadata.json",
+          "size": 21745,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_tools_uf2.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.3/mz_tools_uf2.tar.gz",
+          "size": 6721,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_tools_regz.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.3/mz_tools_regz.tar.gz",
+          "size": 72956,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_tools_espimage.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.3/mz_tools_espimage.tar.gz",
+          "size": 6024,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_sim_aviron.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.3/mz_sim_aviron.tar.gz",
+          "size": 1567947,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_wch_ch32v.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.3/mz_port_wch_ch32v.tar.gz",
+          "size": 174706,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_stmicro_stm32.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.3/mz_port_stmicro_stm32.tar.gz",
+          "size": 96854,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_raspberrypi_rp2xxx.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.3/mz_port_raspberrypi_rp2xxx.tar.gz",
+          "size": 174483,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_nxp_lpc.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.3/mz_port_nxp_lpc.tar.gz",
+          "size": 108200,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_nordic_nrf5x.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.3/mz_port_nordic_nrf5x.tar.gz",
+          "size": 18336,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_microchip_avr.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.3/mz_port_microchip_avr.tar.gz",
+          "size": 4726,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_microchip_atsam.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.3/mz_port_microchip_atsam.tar.gz",
+          "size": 1721,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_mcx.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.3/mz_port_mcx.tar.gz",
+          "size": 3630,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_gigadevice_gd32.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.3/mz_port_gigadevice_gd32.tar.gz",
+          "size": 54978,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_espressif_esp.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.3/mz_port_espressif_esp.tar.gz",
+          "size": 746756,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_drivers.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.3/mz_drivers.tar.gz",
+          "size": 402737,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_core.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.3/mz_core.tar.gz",
+          "size": 57979,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_buildinternals.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.3/mz_buildinternals.tar.gz",
+          "size": 4471,
+          "content_type": "raw"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.14.2",
+      "name": "0.14.2",
+      "body": "## What's Changed\r\n* Support timeouts in i2c datagram devices by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/566\r\n* esp32 Trap Dispatch Improvement by @Uthedris in https://github.com/ZigEmbeddedGroup/microzig/pull/570\r\n* cleanup redundant returns by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/573\r\n* Add write_then_read to Datagram_Device by @cswank in https://github.com/ZigEmbeddedGroup/microzig/pull/574\r\n* Add writev_then_readv to the test Datagram_Device by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/575\r\n* Clock_Device: Allow providing sleep function to avoid polling by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/576\r\n* drivers: Add ICM-20948 9dof sensor driver by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/572\r\n* rp2xxx: pio: Fix some exported types by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/577\r\n* Linter for MicroZig by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/579\r\n* Improve code style consistency by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/580\r\n* ESP32-C3 spi and WS2812 driver by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/581\r\n* Driver for the mlx90640 thermal imaging camera by @cswank in https://github.com/ZigEmbeddedGroup/microzig/pull/578\r\n* nRF52x: HAL: Add SPIM by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/584\r\n* esp: fix spi driver connect and disconnect methods for dynamic dispatch by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/586\r\n* Cortex m priority fixes. by @Uthedris in https://github.com/ZigEmbeddedGroup/microzig/pull/587\r\n* linter: Skip deleted files by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/590\r\n* drivers: Add support for magnetometer in ICM-20948 driver by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/591\r\n* Stm32f1 adc by @RecursiveError in https://github.com/ZigEmbeddedGroup/microzig/pull/582\r\n* drivers: Cleanup ICM-20948 driver by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/592\r\n* allow for PRs from forks to run linting checks by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/594\r\n* RP2xxx: Fix overflow when PIO programs contain 32 instructions by @piotrfila in https://github.com/ZigEmbeddedGroup/microzig/pull/599\r\n* Fix deprecated tokenize->tokenizeAny in PIO assembler by @cortex in https://github.com/ZigEmbeddedGroup/microzig/pull/598\r\n* Linker script generation update by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/588\r\n* nrf5x: micro:bit support by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/600\r\n* Regz Wizard: UI to explore generated code by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/596\r\n* image -> img by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/603\r\n* Fix devlog section links by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/605\r\n* Deduplicate linter comments by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/606\r\n* Remove linter test funcs by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/607\r\n* Add pico2 arm flashless target board by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/604\r\n* Avoid windows builds of regz wizard for now by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/610\r\n* add legend for monorepo by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/608\r\n* Remove `docs/`, move relevant documentation to website by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/611\r\n* Add clock management and configuration for STM32F103 by @RecursiveError in https://github.com/ZigEmbeddedGroup/microzig/pull/609\r\n* fix stm32f103 i2c driver by @RecursiveError in https://github.com/ZigEmbeddedGroup/microzig/pull/613\r\n* Added RTT by @haydenridd in https://github.com/ZigEmbeddedGroup/microzig/pull/612\r\n* RP2xxx: Add try_lock to spinlocks. by @piotrfila in https://github.com/ZigEmbeddedGroup/microzig/pull/614\r\n* RP2xxx: Add missing rom functions by @piotrfila in https://github.com/ZigEmbeddedGroup/microzig/pull/615\r\n* CH32F003 - Flash to start 0x0 by @burgrp in https://github.com/ZigEmbeddedGroup/microzig/pull/618\r\n* Refactor GPtimer  API and  add Counter and PWM  for STM32F1xx by @RecursiveError in https://github.com/ZigEmbeddedGroup/microzig/pull/619\r\n* core: Update panic handler and main() error handling by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/621\r\n* regz: optional enum in `set_enum_type` patch by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/624\r\n* esp: ESP32-C3 flashless target by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/627\r\n* STM32F1xxx Low-level timer APIs by @RecursiveError in https://github.com/ZigEmbeddedGroup/microzig/pull/625\r\n* tools: Add printer tool by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/622\r\n* Housekeeping by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/626\r\n* STM32: Apply RCC to all examples by @RecursiveError in https://github.com/ZigEmbeddedGroup/microzig/pull/628\r\n* Several fixes and cleanups for RP2xxx by @ikskuh in https://github.com/ZigEmbeddedGroup/microzig/pull/630\r\n* Fix a bunch of typos on stm32 hal/examples by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/629\r\n* bump to 0.14.2 by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/631\r\n\r\n## New Contributors\r\n* @cswank made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/574\r\n* @cortex made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/598\r\n\r\n**Full Changelog**: https://github.com/ZigEmbeddedGroup/microzig/compare/0.14.1...0.14.2",
+      "prerelease": false,
+      "published_at": "2025-07-21T23:30:13Z",
+      "html_url": "https://github.com/ZigEmbeddedGroup/microzig/releases/tag/0.14.2",
+      "assets": [
+        {
+          "name": "rtt.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.2/rtt.tar.gz",
+          "size": 8721,
+          "content_type": "raw"
+        },
+        {
+          "name": "riscv32common.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.2/riscv32common.tar.gz",
+          "size": 4171,
+          "content_type": "raw"
+        },
+        {
+          "name": "package-metadata.json",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.2/package-metadata.json",
+          "size": 20531,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_tools_uf2.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.2/mz_tools_uf2.tar.gz",
+          "size": 6734,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_tools_regz.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.2/mz_tools_regz.tar.gz",
+          "size": 72505,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_tools_espimage.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.2/mz_tools_espimage.tar.gz",
+          "size": 6024,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_sim_aviron.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.2/mz_sim_aviron.tar.gz",
+          "size": 1567947,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_wch_ch32v.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.2/mz_port_wch_ch32v.tar.gz",
+          "size": 174680,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_stmicro_stm32.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.2/mz_port_stmicro_stm32.tar.gz",
+          "size": 90075,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_raspberrypi_rp2xxx.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.2/mz_port_raspberrypi_rp2xxx.tar.gz",
+          "size": 170525,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_nxp_lpc.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.2/mz_port_nxp_lpc.tar.gz",
+          "size": 108200,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_nordic_nrf5x.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.2/mz_port_nordic_nrf5x.tar.gz",
+          "size": 17441,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_microchip_avr.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.2/mz_port_microchip_avr.tar.gz",
+          "size": 4728,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_microchip_atsam.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.2/mz_port_microchip_atsam.tar.gz",
+          "size": 1721,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_gigadevice_gd32.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.2/mz_port_gigadevice_gd32.tar.gz",
+          "size": 54979,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_espressif_esp.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.2/mz_port_espressif_esp.tar.gz",
+          "size": 746532,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_drivers.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.2/mz_drivers.tar.gz",
+          "size": 392276,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_core.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.2/mz_core.tar.gz",
+          "size": 57828,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_buildinternals.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.2/mz_buildinternals.tar.gz",
+          "size": 4369,
+          "content_type": "raw"
+        },
+        {
+          "name": "microzig.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.2/microzig.tar.gz",
+          "size": 266929,
+          "content_type": "raw"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.14.1",
+      "name": "0.14.1",
+      "body": "## What's Changed\r\n* update to 0.14.0 by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/518\r\n* esp: hal: i2c (part 2) by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/513\r\n* WCH CH32V: add system clock init by @ghostiam in https://github.com/ZigEmbeddedGroup/microzig/pull/520\r\n* WCH CH32V: add chip ch32v305xb and fix 307xc by @ghostiam in https://github.com/ZigEmbeddedGroup/microzig/pull/521\r\n* WCH CH32V: examples: replace busyloop with busy_delay by @ghostiam in https://github.com/ZigEmbeddedGroup/microzig/pull/519\r\n* WCH CH32V: fix cpu startup by @ghostiam in https://github.com/ZigEmbeddedGroup/microzig/pull/522\r\n* basic f1 HAL by @RecursiveError in https://github.com/ZigEmbeddedGroup/microzig/pull/431\r\n* WCH CH32: add support for all CH32V series and refactor MCU definitions. by @ghostiam in https://github.com/ZigEmbeddedGroup/microzig/pull/523\r\n* Add support for SVD dimIndex parsing by @zovko in https://github.com/ZigEmbeddedGroup/microzig/pull/508\r\n* WCH CH32V: build: add linker script generator that places .srodata and .rodata in FLASH. by @ghostiam in https://github.com/ZigEmbeddedGroup/microzig/pull/526\r\n* Aviron: Fix ELF loading by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/525\r\n* [rp2xxx] Better dma interface by @vesim987 in https://github.com/ZigEmbeddedGroup/microzig/pull/517\r\n* Read vector from mtvec not vtor when starting core 1 on riscv core. by @Uthedris in https://github.com/ZigEmbeddedGroup/microzig/pull/529\r\n* WCH CH32V: cpus: refactoring by @ghostiam in https://github.com/ZigEmbeddedGroup/microzig/pull/528\r\n* WCH CH32V: fix build 🤯 by @ghostiam in https://github.com/ZigEmbeddedGroup/microzig/pull/532\r\n* Regz svd cluster by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/530\r\n* build regz in release-safe by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/537\r\n* Rename `CPUOptions` to `CPU_Options` by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/538\r\n* Use atpack directly for atsamd register schema by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/539\r\n* get raspberry pi pico SVDs from pico-sdk by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/541\r\n* Rp2350 support improvement by @Uthedris in https://github.com/ZigEmbeddedGroup/microzig/pull/540\r\n* Fixes to rp2xxx HAL pwm.zig  by @Uthedris in https://github.com/ZigEmbeddedGroup/microzig/pull/542\r\n* Add rp2040 ram image (flashless) target board by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/535\r\n* Rp2040 atomics by @Uthedris in https://github.com/ZigEmbeddedGroup/microzig/pull/545\r\n* Add ram_image boolean to mz.Target and expose via microzig.config by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/544\r\n* first fragments of STM32F1 USB-FS HAL by @RecursiveError in https://github.com/ZigEmbeddedGroup/microzig/pull/543\r\n* Restore the microzig_flash_start section for ARM by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/551\r\n* esp: Add atomic intrinsics by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/548\r\n* Introduce `HAL_Options` by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/549\r\n* Fix `cpu.interrupt.is_enabled` for Cortex M by @Corendos in https://github.com/ZigEmbeddedGroup/microzig/pull/550\r\n* esp: join cpu and add rom functions by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/552\r\n* Rp2350 hal additions by @Uthedris in https://github.com/ZigEmbeddedGroup/microzig/pull/546\r\n* esp: enable cache by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/553\r\n* rp2xxx: Cleanup gpio hal by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/556\r\n* nrf5x: Add working blinky example by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/554\r\n* update USB + LL CDC example by @RecursiveError in https://github.com/ZigEmbeddedGroup/microzig/pull/555\r\n* nrf52xx: Basic GPIO hal by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/557\r\n* nRF52xxx: Add UART hal + examples by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/558\r\n* Fix bug in rp2350 hazard3's set_handler by @Uthedris in https://github.com/ZigEmbeddedGroup/microzig/pull/559\r\n* nRF5x: Add basic timer support by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/560\r\n* 0.14.1 by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/563\r\n* nRF5x: Add i2c hal + datagram device by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/561\r\n* Fixes to interrupt handling by @Uthedris in https://github.com/ZigEmbeddedGroup/microzig/pull/562\r\n* nRF52: Add clock device by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/564\r\n* improve STM32 usb by @RecursiveError in https://github.com/ZigEmbeddedGroup/microzig/pull/568\r\n* Actually releasing 0.14.1 by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/569\r\n\r\n## New Contributors\r\n* @ghostiam made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/520\r\n* @zovko made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/508\r\n* @Corendos made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/550\r\n\r\n**Full Changelog**: https://github.com/ZigEmbeddedGroup/microzig/compare/0.14.0...0.14.1",
+      "prerelease": false,
+      "published_at": "2025-05-27T19:00:07Z",
+      "html_url": "https://github.com/ZigEmbeddedGroup/microzig/releases/tag/0.14.1",
+      "assets": [
+        {
+          "name": "riscv32common.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.1/riscv32common.tar.gz",
+          "size": 4171,
+          "content_type": "raw"
+        },
+        {
+          "name": "package-metadata.json",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.1/package-metadata.json",
+          "size": 19976,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_tools_uf2.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.1/mz_tools_uf2.tar.gz",
+          "size": 6732,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_tools_regz.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.1/mz_tools_regz.tar.gz",
+          "size": 72512,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_tools_espimage.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.1/mz_tools_espimage.tar.gz",
+          "size": 6024,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_sim_aviron.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.1/mz_sim_aviron.tar.gz",
+          "size": 1567918,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_wch_ch32v.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.1/mz_port_wch_ch32v.tar.gz",
+          "size": 174954,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_stmicro_stm32.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.1/mz_port_stmicro_stm32.tar.gz",
+          "size": 63910,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_raspberrypi_rp2xxx.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.1/mz_port_raspberrypi_rp2xxx.tar.gz",
+          "size": 168375,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_nxp_lpc.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.1/mz_port_nxp_lpc.tar.gz",
+          "size": 108193,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_nordic_nrf5x.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.1/mz_port_nordic_nrf5x.tar.gz",
+          "size": 12250,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_microchip_avr.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.1/mz_port_microchip_avr.tar.gz",
+          "size": 4716,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_microchip_atsam.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.1/mz_port_microchip_atsam.tar.gz",
+          "size": 1691,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_gigadevice_gd32.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.1/mz_port_gigadevice_gd32.tar.gz",
+          "size": 54965,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_espressif_esp.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.1/mz_port_espressif_esp.tar.gz",
+          "size": 743736,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_drivers.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.1/mz_drivers.tar.gz",
+          "size": 374592,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_core.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.1/mz_core.tar.gz",
+          "size": 56874,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_buildinternals.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.1/mz_buildinternals.tar.gz",
+          "size": 4068,
+          "content_type": "raw"
+        },
+        {
+          "name": "microzig.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.1/microzig.tar.gz",
+          "size": 270133,
+          "content_type": "raw"
+        },
+        {
+          "name": "foundationlibc.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.1/foundationlibc.tar.gz",
+          "size": 10447,
+          "content_type": "raw"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.14.0",
+      "name": "0.14.0",
+      "body": "## What's Changed\r\n* Supporting non-contiguous registers by @taylorh140 in https://github.com/ZigEmbeddedGroup/microzig/pull/357\r\n* rp2xxx: enable all riscv features by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/358\r\n* Foundation libc by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/362\r\n* Move time types (Absolute, Duration, Deadline) from rp2xxx HAL into mdf by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/360\r\n* rp2xxx: hal: gpio: Fix rp2350 GPIO reg access by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/364\r\n* Add microzig_flash_end to linker script by @arkadiuszwojcik in https://github.com/ZigEmbeddedGroup/microzig/pull/363\r\n* Add Stepper motor driver by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/359\r\n* Fix usb_cdc on rp2350 by @patryk4815 in https://github.com/ZigEmbeddedGroup/microzig/pull/367\r\n* Mmio: toggle() now supports enum type fields; add ..._one() variants by @marnix in https://github.com/ZigEmbeddedGroup/microzig/pull/371\r\n* Add microzig.config.board_name by @marnix in https://github.com/ZigEmbeddedGroup/microzig/pull/372\r\n* Enable 'unwind_tables' for all platforms (for #370) by @marnix in https://github.com/ZigEmbeddedGroup/microzig/pull/373\r\n* Rewrite STM32 blinky to easily add other boards/chips. by @marnix in https://github.com/ZigEmbeddedGroup/microzig/pull/374\r\n* STM32F303: First HAL fragments (depends on #371) by @marnix in https://github.com/ZigEmbeddedGroup/microzig/pull/375\r\n* regz+rp2xxx: `add_interrupt` patch by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/378\r\n* Add Support for non-constant stride field arrays. (STM32) by @taylorh140 in https://github.com/ZigEmbeddedGroup/microzig/pull/377\r\n* STM32F3DISCOVERY: Working blinky by @marnix in https://github.com/ZigEmbeddedGroup/microzig/pull/379\r\n* WCH: Add support for CH32V307 chip and CH32V307V-R1-1v0 board by @pigmoral in https://github.com/ZigEmbeddedGroup/microzig/pull/383\r\n* rp2xxx: hal: spi: Inline & pub-ify get_regs by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/385\r\n* rp2xxx: examples: Fix name of 'generic' examples by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/386\r\n* Fix rp2xxx UART0_TX available pins by @piotrfila in https://github.com/ZigEmbeddedGroup/microzig/pull/380\r\n* rp2040: Add spi slave example by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/391\r\n* drivers: stepper: Implement start_brake, stop, & expose motor_steps by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/393\r\n* Add basic support to semihosting by @RecursiveError in https://github.com/ZigEmbeddedGroup/microzig/pull/384\r\n* rp2040: Fix extab section getting put before .text by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/394\r\n* doc: add link to SYCL Badge by @coolaj86 in https://github.com/ZigEmbeddedGroup/microzig/pull/397\r\n* Interrupt refactor by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/369\r\n* avr: update example to use core.experimental by @oliverpool in https://github.com/ZigEmbeddedGroup/microzig/pull/401\r\n* regz: generate enums attached to parent by @oliverpool in https://github.com/ZigEmbeddedGroup/microzig/pull/404\r\n* rp2350: Fix GlobalConfig for uart, rename func to match rp2040 by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/403\r\n* Update to 0.14.0 by @ikskuh in https://github.com/ZigEmbeddedGroup/microzig/pull/399\r\n* Minor bugfix in i2c driver for rp2xxx by @haydenridd in https://github.com/ZigEmbeddedGroup/microzig/pull/409\r\n* Use .ptr for interfaces to match zig idiom by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/410\r\n* rp2xxx: pio: Check for sideset/delay collisions by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/411\r\n* Regz Binary Value Bugfix by @haydenridd in https://github.com/ZigEmbeddedGroup/microzig/pull/412\r\n* examples: rp2xxx: interrupts: Cleanup and clarify cleaning behaviour by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/414\r\n* import microzig as microzig by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/413\r\n* (Re)Add support for multiple interrupt calling conventions by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/417\r\n* Fix hazard3 CSR bug and compile errors by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/418\r\n* ESP32-C3 better support by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/415\r\n* add build date to website by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/421\r\n* examples: Add 'example' option to only build matches by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/422\r\n* RP2xxx I2c slave by @Uthedris in https://github.com/ZigEmbeddedGroup/microzig/pull/419\r\n* Fix typo in utf8ToUtf16Le alias by @hryx in https://github.com/ZigEmbeddedGroup/microzig/pull/425\r\n* Spin lock management by @Uthedris in https://github.com/ZigEmbeddedGroup/microzig/pull/424\r\n* HID: report descriptor for boot keyboard by @hryx in https://github.com/ZigEmbeddedGroup/microzig/pull/426\r\n* Drivers: Add TMP117 temperature driver by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/423\r\n* Need more branch quota in Mmio by @Uthedris in https://github.com/ZigEmbeddedGroup/microzig/pull/430\r\n* Fixed race condition in RP2xxx i2c_slave by @Uthedris in https://github.com/ZigEmbeddedGroup/microzig/pull/428\r\n* Fix ADC FIFO control and status register name typo by @eboskma in https://github.com/ZigEmbeddedGroup/microzig/pull/434\r\n* esp32-c3: interrupts and clock configuration by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/435\r\n* usb: zig fmt by @hryx in https://github.com/ZigEmbeddedGroup/microzig/pull/437\r\n* esp32c3: Add usb serial jtag logger by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/436\r\n* Fix RP2xxx get_cpu_id call by @Uthedris in https://github.com/ZigEmbeddedGroup/microzig/pull/443\r\n* Set more build.zig.zon fingerprints and re-enable wch examples by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/438\r\n* RP2XXX add GPIO set drive strength by @arkadiuszwojcik in https://github.com/ZigEmbeddedGroup/microzig/pull/440\r\n* regz: Give default values to padding and reserved bits fields by @Uthedris in https://github.com/ZigEmbeddedGroup/microzig/pull/429\r\n* RP2XXX DMA code refactor by @arkadiuszwojcik in https://github.com/ZigEmbeddedGroup/microzig/pull/442\r\n* Fix PR website building gh action by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/448\r\n* examples: rp2xxx: Make examples more consistent by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/447\r\n* RP2XXX USB - replace rom.memcpy with @memcpy by @arkadiuszwojcik in https://github.com/ZigEmbeddedGroup/microzig/pull/432\r\n* Add cpu and zig_target options directly to a `microzig.Target` by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/450\r\n* HID: basic keyboard support by @hryx in https://github.com/ZigEmbeddedGroup/microzig/pull/449\r\n* Fix licenses by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/456\r\n* Release 0.14.0 by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/451\r\n* Fixup stepper by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/459\r\n* build system: implement `get_emitted_docs()` for `Firmware` by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/461\r\n* Update boxzer to use new hashing format by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/463\r\n* Migrate aviron by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/464\r\n* drivers: Add 28byj/uln2003 stepper motor driver by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/457\r\n* Multicore aware mutex for rp2xxx by @Uthedris in https://github.com/ZigEmbeddedGroup/microzig/pull/444\r\n* rename aviron package to simulators_aviron by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/466\r\n* Make github action for running driver unit tests by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/467\r\n* Remove unmaintained clutter (Nix stuff) by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/468\r\n* update package naming scheme by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/482\r\n* Add time hal for esp32c3 by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/439\r\n* Further cleanup by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/484\r\n* esp: Add GPIO device to hal by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/483\r\n* esp: gpio: Convert pin to enum by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/487\r\n* RP2xxx RAM based vector table by @Uthedris in https://github.com/ZigEmbeddedGroup/microzig/pull/427\r\n* esp: Add dumb stepper motor example by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/488\r\n* esp: systimer and system hal by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/485\r\n* Atomics support for RP2040 by @arkadiuszwojcik in https://github.com/ZigEmbeddedGroup/microzig/pull/495\r\n* esp: Improve GPIO hal by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/490\r\n* add @alignCast PCF8574 driver by @RecursiveError in https://github.com/ZigEmbeddedGroup/microzig/pull/492\r\n* Make sure ram_vectors are properly aligned. by @Uthedris in https://github.com/ZigEmbeddedGroup/microzig/pull/493\r\n* zig fmt everything/test in ci by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/494\r\n* Spinlocks code refactor - IRQ disable version by @arkadiuszwojcik in https://github.com/ZigEmbeddedGroup/microzig/pull/496\r\n* CYW43xx driver - part 1 by @arkadiuszwojcik in https://github.com/ZigEmbeddedGroup/microzig/pull/489\r\n* esp: Fix some gpio enum tag names by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/497\r\n* Add SH1106 driver by @hryx in https://github.com/ZigEmbeddedGroup/microzig/pull/501\r\n* RISCV32 common module by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/503\r\n* padding and reserve field cleanup by @Uthedris in https://github.com/ZigEmbeddedGroup/microzig/pull/486\r\n* [drivers] More user friendly SSD1306 init function by @vesim987 in https://github.com/ZigEmbeddedGroup/microzig/pull/502\r\n* Pass vtor to core1 rp2xxx by @Uthedris in https://github.com/ZigEmbeddedGroup/microzig/pull/499\r\n* [drivers] Add PCA9685 PWM driver by @vesim987 in https://github.com/ZigEmbeddedGroup/microzig/pull/507\r\n* Regz offset comments by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/506\r\n* Cortex m33/m55 system control block updates. by @Uthedris in https://github.com/ZigEmbeddedGroup/microzig/pull/505\r\n* esp: hal: gpio: Add various fixes and features by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/509\r\n* esp: hal: i2c by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/500\r\n* Update website by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/510\r\n* update hashes so packages aren't fetched every time by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/511\r\n* update package names by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/512\r\n* fix env var usage by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/514\r\n* shorten website header by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/515\r\n* esp: fix interrupt handler by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/516\r\n\r\n## New Contributors\r\n* @patryk4815 made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/367\r\n* @pigmoral made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/383\r\n* @piotrfila made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/380\r\n* @coolaj86 made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/397\r\n* @oliverpool made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/401\r\n* @eboskma made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/434\r\n\r\n**Full Changelog**: https://github.com/ZigEmbeddedGroup/microzig/compare/0.13.2...0.14.0",
+      "prerelease": false,
+      "published_at": "2025-05-27T18:59:47Z",
+      "html_url": "https://github.com/ZigEmbeddedGroup/microzig/releases/tag/0.14.0",
+      "assets": [
+        {
+          "name": "riscv32common.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.0/riscv32common.tar.gz",
+          "size": 4171,
+          "content_type": "raw"
+        },
+        {
+          "name": "package-metadata.json",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.0/package-metadata.json",
+          "size": 18883,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_tools_uf2.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.0/mz_tools_uf2.tar.gz",
+          "size": 6729,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_tools_regz.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.0/mz_tools_regz.tar.gz",
+          "size": 60010,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_tools_espimage.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.0/mz_tools_espimage.tar.gz",
+          "size": 6022,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_sim_aviron.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.0/mz_sim_aviron.tar.gz",
+          "size": 1567991,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_wch_ch32v.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.0/mz_port_wch_ch32v.tar.gz",
+          "size": 166273,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_stmicro_stm32.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.0/mz_port_stmicro_stm32.tar.gz",
+          "size": 1133134,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_raspberrypi_rp2xxx.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.0/mz_port_raspberrypi_rp2xxx.tar.gz",
+          "size": 579326,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_nxp_lpc.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.0/mz_port_nxp_lpc.tar.gz",
+          "size": 108193,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_nordic_nrf5x.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.0/mz_port_nordic_nrf5x.tar.gz",
+          "size": 2067,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_microchip_avr.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.0/mz_port_microchip_avr.tar.gz",
+          "size": 28903,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_microchip_atsam.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.0/mz_port_microchip_atsam.tar.gz",
+          "size": 98292,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_gigadevice_gd32.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.0/mz_port_gigadevice_gd32.tar.gz",
+          "size": 54965,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_port_espressif_esp.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.0/mz_port_espressif_esp.tar.gz",
+          "size": 739950,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_drivers.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.0/mz_drivers.tar.gz",
+          "size": 368847,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_core.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.0/mz_core.tar.gz",
+          "size": 56646,
+          "content_type": "raw"
+        },
+        {
+          "name": "mz_buildinternals.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.0/mz_buildinternals.tar.gz",
+          "size": 3852,
+          "content_type": "raw"
+        },
+        {
+          "name": "microzig.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.0/microzig.tar.gz",
+          "size": 269993,
+          "content_type": "raw"
+        },
+        {
+          "name": "foundationlibc.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.14.0/foundationlibc.tar.gz",
+          "size": 10446,
+          "content_type": "raw"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.13.2",
+      "name": "0.13.2",
+      "body": "## What's Changed\r\n* Add regz/uf2 release build option by @EliSauder in https://github.com/ZigEmbeddedGroup/microzig/pull/335\r\n* Allow direct usage of microzig by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/337\r\n* Cleanup Old/Extra Files by @EliSauder in https://github.com/ZigEmbeddedGroup/microzig/pull/333\r\n* Removed Extracted for-extraction folder by @EliSauder in https://github.com/ZigEmbeddedGroup/microzig/pull/342\r\n* regz and stm32: Support array fields in registers by @marnix in https://github.com/ZigEmbeddedGroup/microzig/pull/343\r\n* Added watchdog timer API for both RP2040 and RP2350 by @haydenridd in https://github.com/ZigEmbeddedGroup/microzig/pull/338\r\n* Fix USB CDC stability issue when sending data by @arkadiuszwojcik in https://github.com/ZigEmbeddedGroup/microzig/pull/345\r\n* pio: Assembler: fix issue in diag when tokenizer has index on newline by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/347\r\n* Fix error handling in rp2xxx pio assembler by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/346\r\n* [rp2xxx] Add initial riscv support for the rp2350 chip by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/348\r\n* add an example of how to use MicroZig without HAL by @lcp5y3 in https://github.com/ZigEmbeddedGroup/microzig/pull/344\r\n* Update CI workflow with job dependencies by @EliSauder in https://github.com/ZigEmbeddedGroup/microzig/pull/340\r\n* Add regz and uf2 releases to the github deploy action by @EliSauder in https://github.com/ZigEmbeddedGroup/microzig/pull/339\r\n* fixing register so there is 32 bits by @freiguy1 in https://github.com/ZigEmbeddedGroup/microzig/pull/349\r\n* explicitly disable build-id for rp2xxx bootrom by @Jan200101 in https://github.com/ZigEmbeddedGroup/microzig/pull/350\r\n* rp2xxx: Add support for assembling RP2350-specific PIO by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/320\r\n* support \"extends\" from embassy data. by @taylorh140 in https://github.com/ZigEmbeddedGroup/microzig/pull/351\r\n* Generate standalone files for Regz by default by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/353\r\n* Update version and webpage to reference 0.13.2 by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/354\r\n\r\n## New Contributors\r\n* @EliSauder made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/335\r\n* @lcp5y3 made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/344\r\n* @Jan200101 made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/350\r\n\r\n**Full Changelog**: https://github.com/ZigEmbeddedGroup/microzig/compare/0.13.1...0.13.2",
+      "prerelease": false,
+      "published_at": "2025-01-18T19:24:38Z",
+      "html_url": "https://github.com/ZigEmbeddedGroup/microzig/releases/tag/0.13.2",
+      "assets": [
+        {
+          "name": "boxzer-out.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.13.2/boxzer-out.tar.gz",
+          "size": 2960602,
+          "content_type": "raw"
+        },
+        {
+          "name": "regz-x86_64-windows.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.13.2/regz-x86_64-windows.tar.gz",
+          "size": 4463217,
+          "content_type": "raw"
+        },
+        {
+          "name": "regz-x86_64-macos.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.13.2/regz-x86_64-macos.tar.gz",
+          "size": 1447126,
+          "content_type": "raw"
+        },
+        {
+          "name": "regz-x86_64-linux-musl.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.13.2/regz-x86_64-linux-musl.tar.gz",
+          "size": 5650368,
+          "content_type": "raw"
+        },
+        {
+          "name": "regz-aarch64-windows.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.13.2/regz-aarch64-windows.tar.gz",
+          "size": 4006937,
+          "content_type": "raw"
+        },
+        {
+          "name": "regz-aarch64-macos.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.13.2/regz-aarch64-macos.tar.gz",
+          "size": 1392662,
+          "content_type": "raw"
+        },
+        {
+          "name": "regz-aarch64-linux.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.13.2/regz-aarch64-linux.tar.gz",
+          "size": 5424397,
+          "content_type": "raw"
+        },
+        {
+          "name": "uf2-x86_64-windows.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.13.2/uf2-x86_64-windows.tar.gz",
+          "size": 576829,
+          "content_type": "raw"
+        },
+        {
+          "name": "uf2-x86_64-macos.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.13.2/uf2-x86_64-macos.tar.gz",
+          "size": 130310,
+          "content_type": "raw"
+        },
+        {
+          "name": "uf2-x86_64-linux-musl.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.13.2/uf2-x86_64-linux-musl.tar.gz",
+          "size": 612539,
+          "content_type": "raw"
+        },
+        {
+          "name": "uf2-aarch64-windows.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.13.2/uf2-aarch64-windows.tar.gz",
+          "size": 440216,
+          "content_type": "raw"
+        },
+        {
+          "name": "uf2-aarch64-macos.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.13.2/uf2-aarch64-macos.tar.gz",
+          "size": 120705,
+          "content_type": "raw"
+        },
+        {
+          "name": "uf2-aarch64-linux.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.13.2/uf2-aarch64-linux.tar.gz",
+          "size": 598146,
+          "content_type": "raw"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.13.1",
+      "name": "0.13.1",
+      "body": "## What's Changed\r\n* Fix github page pathing and list site contents by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/280\r\n* adding NVIC registers for cortex m0+, fixing little bug with stringToEnum by @freiguy1 in https://github.com/ZigEmbeddedGroup/microzig/pull/281\r\n* Integrates driver framework by @ikskuh in https://github.com/ZigEmbeddedGroup/microzig/pull/246\r\n* Use program origin when computing label addresses by @tomasz-lisowski in https://github.com/ZigEmbeddedGroup/microzig/pull/287\r\n* Combine .sbss section with .bss. by @nosuz in https://github.com/ZigEmbeddedGroup/microzig/pull/288\r\n* Build system rewrite by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/259\r\n* Port for WCH CH32V series (CH32V003, CH32V103, and CH32V203) by @nosuz in https://github.com/ZigEmbeddedGroup/microzig/pull/286\r\n* stm32: Merge chip flash memory bank regions by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/282\r\n* Comptime USB endpoints number by @arkadiuszwojcik in https://github.com/ZigEmbeddedGroup/microzig/pull/284\r\n* Add helpers for reading from PIO RX FIFO and for PIO SM pin configuration by @tomasz-lisowski in https://github.com/ZigEmbeddedGroup/microzig/pull/289\r\n* Regz patching by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/290\r\n* Update packaging to include root package by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/291\r\n* Build system bug fix by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/292\r\n* USB CDC - improve writing and implement reading (almost) by @arkadiuszwojcik in https://github.com/ZigEmbeddedGroup/microzig/pull/293\r\n* cortex_m: Add core peripherals by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/295\r\n* Add cortex m7 register definitions by @devBoi76 in https://github.com/ZigEmbeddedGroup/microzig/pull/294\r\n* Fix USB CDC receive code by @arkadiuszwojcik in https://github.com/ZigEmbeddedGroup/microzig/pull/299\r\n* Fixed building error for WCH CH32V by @nosuz in https://github.com/ZigEmbeddedGroup/microzig/pull/298\r\n* rp2xxx: Make pio.Irq.get_irq_regs public by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/300\r\n* Updated PR #223 for current HEAD and extended it for other WCH's CH32V series. by @nosuz in https://github.com/ZigEmbeddedGroup/microzig/pull/302\r\n* Fix depend_on_microzig option in add_app_import by @MatthiasPortzel in https://github.com/ZigEmbeddedGroup/microzig/pull/305\r\n* rp2xxx: improve RP2350 port by @vesim987 in https://github.com/ZigEmbeddedGroup/microzig/pull/264\r\n* Add PIO support to rp2350 by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/306\r\n* core: Fix wrong cpu name for cortex m0 plus by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/308\r\n* add hd44780 driver + rppico example by @RecursiveError in https://github.com/ZigEmbeddedGroup/microzig/pull/301\r\n* build-system: Fix bug in `add_firmware` by @tact1m4n3 in https://github.com/ZigEmbeddedGroup/microzig/pull/309\r\n* Fix NVIC level IRQ control for RP2040 by @haydenridd in https://github.com/ZigEmbeddedGroup/microzig/pull/310\r\n* [RP2xxx] USB driver refactory work by @arkadiuszwojcik in https://github.com/ZigEmbeddedGroup/microzig/pull/312\r\n* RTC Support for RP2040 by @haydenridd in https://github.com/ZigEmbeddedGroup/microzig/pull/317\r\n* [RP2xxx] Update pins helper to create pins as comptime-available data instead of zero-sized-types by @MatthiasPortzel in https://github.com/ZigEmbeddedGroup/microzig/pull/303\r\n* Update rtc example with pin config refactor by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/319\r\n* Switch out Regz datastructures for SQLite by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/316\r\n* Get website ready for 0.13.1 release by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/321\r\n* revert deletion of url prefix by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/322\r\n* build website after collecting download contents by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/323\r\n* list contents of website before publishing by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/324\r\n* build website as part of metadata script by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/325\r\n* Fix website publishing by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/326\r\n* Minor fixes to IRQ + example to utilize microzig.cpu interface by @haydenridd in https://github.com/ZigEmbeddedGroup/microzig/pull/327\r\n* workflows: Run unit tests on more ports by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/318\r\n* Get esp32 examples building again by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/307\r\n* Directly generate enums by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/328\r\n* Refactor Actions by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/329\r\n* Check that stm32 code is up to date by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/330\r\n* Update stm32 generated code and properly set up data dependency as lazy by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/331\r\n* bump version by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/332\r\n\r\n## New Contributors\r\n* @tact1m4n3 made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/259\r\n* @devBoi76 made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/294\r\n\r\n**Full Changelog**: https://github.com/ZigEmbeddedGroup/microzig/compare/0.13.0...0.13.1",
+      "prerelease": false,
+      "published_at": "2024-12-23T23:35:49Z",
+      "html_url": "https://github.com/ZigEmbeddedGroup/microzig/releases/tag/0.13.1",
+      "assets": [
+        {
+          "name": "boxzer-out.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.13.1/boxzer-out.tar.gz",
+          "size": 2897097,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.13.0",
+      "name": "0.13.0",
+      "body": "## What's Changed\r\n* support bundling only specific boards by @tobiaskohlbau in https://github.com/ZigEmbeddedGroup/microzig/pull/166\r\n* fix documentation for patch tool by @tobiaskohlbau in https://github.com/ZigEmbeddedGroup/microzig/pull/165\r\n* Fixes CI Badge in README.md by @ikskuh in https://github.com/ZigEmbeddedGroup/microzig/pull/164\r\n* hal: dma: Cast channel index in claim_unused_channel by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/170\r\n* Fix requirements.txt and update README by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/172\r\n* Better readme by @ikskuh in https://github.com/ZigEmbeddedGroup/microzig/pull/173\r\n* rp2040: Fix DMA not respecting transfer_size_bytes by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/176\r\n* rp2040: Add support for PIO's jmp_pin by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/174\r\n* usb: unify handling of length parameters by @tobiaskohlbau in https://github.com/ZigEmbeddedGroup/microzig/pull/177\r\n* Update to zig master, move uf2 and regz to monorepo by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/178\r\n* Fix reference to design document in README by @tomasz-lisowski in https://github.com/ZigEmbeddedGroup/microzig/pull/184\r\n* Fix setting pull direction in pinConfig by @MatthiasPortzel in https://github.com/ZigEmbeddedGroup/microzig/pull/189\r\n* Some predefined registers for Cortex M by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/190\r\n* bump versions by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/192\r\n* fix regz output for sycl-badge by @jacobly0 in https://github.com/ZigEmbeddedGroup/microzig/pull/193\r\n* Properly export startup logic for espressif-riscv by @DNedic in https://github.com/ZigEmbeddedGroup/microzig/pull/199\r\n* Linking and linker relaxation fixes by @DNedic in https://github.com/ZigEmbeddedGroup/microzig/pull/200\r\n* USB driver: support chunked data by @arkadiuszwojcik in https://github.com/ZigEmbeddedGroup/microzig/pull/201\r\n* Complete Gd32f103 Support by @asterix24 in https://github.com/ZigEmbeddedGroup/microzig/pull/203\r\n* Fix RP2040 multicore HAL and re-enable example by @MatthiasPortzel in https://github.com/ZigEmbeddedGroup/microzig/pull/207\r\n* Use app provided panic handler if it exists by @MatthiasPortzel in https://github.com/ZigEmbeddedGroup/microzig/pull/209\r\n* Updated to zig 0.13.0 by @biom4st3r in https://github.com/ZigEmbeddedGroup/microzig/pull/198\r\n* Enable atsamd51j19 fpu by @jacobly0 in https://github.com/ZigEmbeddedGroup/microzig/pull/196\r\n* rp2040: remove redendant code in I2C.apply() by @hryx in https://github.com/ZigEmbeddedGroup/microzig/pull/212\r\n* Basic support for ATmega32u4 by @biom4st3r in https://github.com/ZigEmbeddedGroup/microzig/pull/195\r\n* fixup! enable atsamd51j19 fpu (#196) by @vesim987 in https://github.com/ZigEmbeddedGroup/microzig/pull/218\r\n* fix(rp2040) apply broken codegen workaround to both busy loop by @vesim987 in https://github.com/ZigEmbeddedGroup/microzig/pull/219\r\n* USB CDC ACM support + code refactor by @arkadiuszwojcik in https://github.com/ZigEmbeddedGroup/microzig/pull/211\r\n* Fix mmio toggle by @akiroz in https://github.com/ZigEmbeddedGroup/microzig/pull/157\r\n* Strip Unused Symbols at Link Time by @haydenridd in https://github.com/ZigEmbeddedGroup/microzig/pull/225\r\n* feat(regz) Improve schema detection and make it easier to use as library by @vesim987 in https://github.com/ZigEmbeddedGroup/microzig/pull/217\r\n* fix(avr5): fix building blinking examples by @vesim987 in https://github.com/ZigEmbeddedGroup/microzig/pull/226\r\n* feat(build): Enable working examples for stm32 and gd32 by @vesim987 in https://github.com/ZigEmbeddedGroup/microzig/pull/227\r\n* RP2040 SPI HAL Improvements by @haydenridd in https://github.com/ZigEmbeddedGroup/microzig/pull/222\r\n* RP2040 I2C Refactor by @haydenridd in https://github.com/ZigEmbeddedGroup/microzig/pull/213\r\n* Initial ESP32-C3 GPIO HAL driver by @DNedic in https://github.com/ZigEmbeddedGroup/microzig/pull/216\r\n* RP2040 Uart Refactor by @haydenridd in https://github.com/ZigEmbeddedGroup/microzig/pull/228\r\n* Add GPIO Config to SPI Example by @haydenridd in https://github.com/ZigEmbeddedGroup/microzig/pull/233\r\n* Code generator for stm32 based on embassy-rs/stm32-data by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/235\r\n* Update some of the getting started details. by @taylorh140 in https://github.com/ZigEmbeddedGroup/microzig/pull/238\r\n* Fix rp2040 gpio_clock example. by @eugenepentland in https://github.com/ZigEmbeddedGroup/microzig/pull/237\r\n* Update website and zine (Zig 0.13) and fix broken links by @MatthiasPortzel in https://github.com/ZigEmbeddedGroup/microzig/pull/229\r\n* RP2040 Clock Control Refactor by @haydenridd in https://github.com/ZigEmbeddedGroup/microzig/pull/239\r\n* Generate enums for stm32 by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/240\r\n* bsp => port by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/241\r\n* ESP 32 blinky example - typo fix by @RokKos in https://github.com/ZigEmbeddedGroup/microzig/pull/243\r\n* RP2350 Initial Support by @haydenridd in https://github.com/ZigEmbeddedGroup/microzig/pull/244\r\n* RP2 writev/readv implementation by @ikskuh in https://github.com/ZigEmbeddedGroup/microzig/pull/254\r\n* Support I2C and SPI functions in the pins abstraction by @MatthiasPortzel in https://github.com/ZigEmbeddedGroup/microzig/pull/262\r\n* add UART Control Flow to rppico by @RecursiveError in https://github.com/ZigEmbeddedGroup/microzig/pull/260\r\n* Generated STM32 targets with FPU by @Copper280z in https://github.com/ZigEmbeddedGroup/microzig/pull/255\r\n* Fixed RP2xxx usb reset register masks by @eugenepentland in https://github.com/ZigEmbeddedGroup/microzig/pull/265\r\n* Register Map Implementation for Cortex M33 by @Dolphindalt in https://github.com/ZigEmbeddedGroup/microzig/pull/257\r\n* add uart example by @RecursiveError in https://github.com/ZigEmbeddedGroup/microzig/pull/266\r\n* Deploy website to github pages by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/268\r\n* Fix working directory in publish action by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/269\r\n* Fix github action version by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/270\r\n* Clean out website for redesign by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/271\r\n* Minor fix build.zig for GD32 examples to make correct binary format files. by @nosuz in https://github.com/ZigEmbeddedGroup/microzig/pull/273\r\n* Improve packaging and website publication by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/275\r\n* Ignore error if release doesn't have artifact by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/276\r\n* Fix page deploy again by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/277\r\n* Change release tag pattern by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/278\r\n* Update boxzer and fix metadata location by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/279\r\n\r\n## New Contributors\r\n* @tobiaskohlbau made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/166\r\n* @Grazfather made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/170\r\n* @tomasz-lisowski made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/184\r\n* @MatthiasPortzel made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/189\r\n* @DNedic made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/199\r\n* @arkadiuszwojcik made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/201\r\n* @asterix24 made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/203\r\n* @biom4st3r made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/198\r\n* @hryx made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/212\r\n* @akiroz made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/157\r\n* @haydenridd made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/225\r\n* @taylorh140 made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/238\r\n* @eugenepentland made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/237\r\n* @RokKos made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/243\r\n* @RecursiveError made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/260\r\n* @Copper280z made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/255\r\n* @Dolphindalt made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/257\r\n* @nosuz made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/273\r\n\r\n**Full Changelog**: https://github.com/ZigEmbeddedGroup/microzig/compare/0.11.0...0.13.0",
+      "prerelease": false,
+      "published_at": "2024-11-07T07:56:42Z",
+      "html_url": "https://github.com/ZigEmbeddedGroup/microzig/releases/tag/0.13.0",
+      "assets": [
+        {
+          "name": "boxzer-out.tar.gz",
+          "url": "https://github.com/ZigEmbeddedGroup/microzig/releases/download/0.13.0/boxzer-out.tar.gz",
+          "size": 2714412,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "microzig-0.12.1",
+      "name": "microzig-0.12.1",
+      "body": "## What's Changed\r\n* Fix reference to design document in README by @tomasz-lisowski in https://github.com/ZigEmbeddedGroup/microzig/pull/184\r\n* Fix setting pull direction in pinConfig by @MatthiasPortzel in https://github.com/ZigEmbeddedGroup/microzig/pull/189\r\n* Some predefined registers for Cortex M by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/190\r\n* bump versions by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/192\r\n* fix regz output for sycl-badge by @jacobly0 in https://github.com/ZigEmbeddedGroup/microzig/pull/193\r\n\r\n## New Contributors\r\n* @tomasz-lisowski made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/184\r\n* @MatthiasPortzel made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/189\r\n\r\n**Full Changelog**: https://github.com/ZigEmbeddedGroup/microzig/compare/microzig-0.12.0...microzig-0.12.1",
+      "prerelease": false,
+      "published_at": "2024-05-15T07:39:30Z",
+      "html_url": "https://github.com/ZigEmbeddedGroup/microzig/releases/tag/microzig-0.12.1",
+      "assets": []
+    },
+    {
+      "tag_name": "microzig-0.12.0",
+      "name": "MicroZig 0.12.0",
+      "body": "We are now going to be making tarball releases of MicroZig! This one can be found at [https://downloads.microzig.tech/microzig-0.12.0/](https://downloads.microzig.tech/microzig-0.12.0/)\r\n\r\nFor versioning numbers, there's the version of MicroZig, and then each module gets its own version. MicroZig's version will consist of `0.<zig minor version>.<patch>` and we'll follow general semantic versioning practices for the modules. Hence why our first release is `0.12.0` and all the modules are versioned at `0.0.0`. We'll try to release on every PR, bumping the patch number.\r\n\r\n## What's Changed\r\n* Freshen things up by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/6\r\n* Create LinkerscriptStep by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/7\r\n* add stm32f103 registers and reorganize by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/9\r\n* Microzig as pkg by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/10\r\n* Support STM32F3DISCOVERY board by @marnix in https://github.com/ZigEmbeddedGroup/microzig/pull/11\r\n* calculate end-of-stack value from chip configs by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/12\r\n* add packages to your embedded app by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/13\r\n* Add interrupt declaration to cortex-m microcontrollers by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/14\r\n* no need to make the interrupt the .Naked calling convention by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/15\r\n* interrupt generation for chips by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/16\r\n* cortex-m3 set to thumb isa by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/17\r\n* register arrays and clusters, nrf52 as well by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/19\r\n* instantiate vector table in start.zig by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/22\r\n* use register code generated by regz by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/23\r\n* After #23 repair Reset on stm32, lpc1768 by @marnix in https://github.com/ZigEmbeddedGroup/microzig/pull/24\r\n* stm32f3discovery/stm32f303 Initial UART1 support, including @panic() by @marnix in https://github.com/ZigEmbeddedGroup/microzig/pull/20\r\n* Diverse fixes by @MasterQ32 in https://github.com/ZigEmbeddedGroup/microzig/pull/25\r\n* Brings AVR up to date (blink builds and blinks again! by @MasterQ32 in https://github.com/ZigEmbeddedGroup/microzig/pull/27\r\n* Greatly simplifies the package logic by using a proxy-to-root package. by @MasterQ32 in https://github.com/ZigEmbeddedGroup/microzig/pull/28\r\n* Avr interrupt overloading by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/29\r\n* panic exporting is no longer needed. by @MasterQ32 in https://github.com/ZigEmbeddedGroup/microzig/pull/30\r\n* use interrupt calling convention for avr by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/31\r\n* use the 'Signal' calling convention by default on AVR for ISRs by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/32\r\n* fix missing vector table on ARM by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/34\r\n* Initial I2C support by @marnix in https://github.com/ZigEmbeddedGroup/microzig/pull/26\r\n* Add initial support for the stm32f4discovery eval board  by @rbino in https://github.com/ZigEmbeddedGroup/microzig/pull/35\r\n* Avr fixes by @MasterQ32 in https://github.com/ZigEmbeddedGroup/microzig/pull/36\r\n* More improvements by @MasterQ32 in https://github.com/ZigEmbeddedGroup/microzig/pull/37\r\n* Add initial support for the stm32f429idiscovery eval board by @rbino in https://github.com/ZigEmbeddedGroup/microzig/pull/38\r\n* Implements a generic gpio button driver with basic debouncing. by @MasterQ32 in https://github.com/ZigEmbeddedGroup/microzig/pull/41\r\n* Readme by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/40\r\n* Add Uart to STM32F4Discovery and rework uart-sync example by @rbino in https://github.com/ZigEmbeddedGroup/microzig/pull/43\r\n* Improve STM32F407 Uart and introduce GPIO Alternate Function by @rbino in https://github.com/ZigEmbeddedGroup/microzig/pull/44\r\n* Create LICENSE by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/46\r\n* Add vesim to LICENSE file by @vesim987 in https://github.com/ZigEmbeddedGroup/microzig/pull/47\r\n* add hal package option by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/48\r\n* cortex-m0plus cpu and fix for missing hal by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/49\r\n* Master update by @MasterQ32 in https://github.com/ZigEmbeddedGroup/microzig/pull/51\r\n* Adds logo by @MasterQ32 in https://github.com/ZigEmbeddedGroup/microzig/pull/50\r\n* update to master by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/52\r\n* Add support for multiple clock domains by @rbino in https://github.com/ZigEmbeddedGroup/microzig/pull/53\r\n* pin: omit board/chip namespace when parsing and saving the pin name by @rbino in https://github.com/ZigEmbeddedGroup/microzig/pull/55\r\n* uart: allow selecting the tx/rx pins by @rbino in https://github.com/ZigEmbeddedGroup/microzig/pull/54\r\n* pin: remove erroneous access to slice length by @rbino in https://github.com/ZigEmbeddedGroup/microzig/pull/56\r\n* stm32f407: use the correct bus frequency to calculate usartdiv by @rbino in https://github.com/ZigEmbeddedGroup/microzig/pull/57\r\n* I2C improvements by @rbino in https://github.com/ZigEmbeddedGroup/microzig/pull/58\r\n* fix colliding ISRs by making sure they each get memoized by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/60\r\n* generate registers with known cpu by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/63\r\n* add hal or app level clock configuration by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/62\r\n* changing linker memory locations for stm32f103c8 by @freiguy1 in https://github.com/ZigEmbeddedGroup/microzig/pull/65\r\n* Stm32f303 target speed trivial check by @marnix in https://github.com/ZigEmbeddedGroup/microzig/pull/66\r\n* move linux builds to buildkite by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/67\r\n* only manage in-repo once it gets complicated by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/68\r\n* update github actions to reflect default branch name fix by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/69\r\n* Gd32v Support by @kassane in https://github.com/ZigEmbeddedGroup/microzig/pull/21\r\n* improve build api by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/70\r\n* Asciidoc by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/71\r\n* Make the microzig package public to allow it to be passed as dependency. by @kuon in https://github.com/ZigEmbeddedGroup/microzig/pull/73\r\n* Add comment about microzig.config by @kuon in https://github.com/ZigEmbeddedGroup/microzig/pull/74\r\n* use stage1 until stage3 is ready by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/75\r\n* Allow to specify VectorTable in app and hal. by @vesim987 in https://github.com/ZigEmbeddedGroup/microzig/pull/76\r\n* Fixes #72 by @r4gus in https://github.com/ZigEmbeddedGroup/microzig/pull/77\r\n* remove pointless discard by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/80\r\n* Add executable methods and fix recursive call by @kuon in https://github.com/ZigEmbeddedGroup/microzig/pull/79\r\n* Revert \"Add executable methods and fix recursive call\" by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/81\r\n* ATSAME51J20A chip by @r4gus in https://github.com/ZigEmbeddedGroup/microzig/pull/78\r\n* Revert \"Revert \"Add executable methods and fix recursive call\"\" by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/82\r\n* added param to panic function by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/83\r\n* Much improves the panic function, now prints a stack trace more often. by @MasterQ32 in https://github.com/ZigEmbeddedGroup/microzig/pull/86\r\n* Adds microzig.initializeSystemMemories by @MasterQ32 in https://github.com/ZigEmbeddedGroup/microzig/pull/87\r\n* STM3240G-eval board by @hollmmax in https://github.com/ZigEmbeddedGroup/microzig/pull/84\r\n* add arduino uno board by @PhilippWendel in https://github.com/ZigEmbeddedGroup/microzig/pull/89\r\n* Update README.adoc by @MasterQ32 in https://github.com/ZigEmbeddedGroup/microzig/pull/90\r\n* Makes executable files never stripped, we want that sweet debug info.… by @MasterQ32 in https://github.com/ZigEmbeddedGroup/microzig/pull/91\r\n* stdlib: allow app to override the zig os layer by @ConnorRigby in https://github.com/ZigEmbeddedGroup/microzig/pull/93\r\n* catchup to self hosted by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/96\r\n* Adds social media preview. by @MasterQ32 in https://github.com/ZigEmbeddedGroup/microzig/pull/98\r\n* Use `root.std_options` to override log behaviour by @aoldershaw in https://github.com/ZigEmbeddedGroup/microzig/pull/99\r\n* Initial partial SPI support by @marnix in https://github.com/ZigEmbeddedGroup/microzig/pull/97\r\n* Catchup to changes introduced by ziglang/zig#14498 by @PhilippWendel in https://github.com/ZigEmbeddedGroup/microzig/pull/101\r\n* Update to latest zig with modules by @vesim987 in https://github.com/ZigEmbeddedGroup/microzig/pull/102\r\n* Regz rewrite by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/103\r\n* fix typo for interrupt creation function by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/104\r\n* Auto pr by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/106\r\n* fix yaml by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/107\r\n* automerge and PR description by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/108\r\n* Add rest of hardware support libraries by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/109\r\n* new for loop syntax and remove import-module.zig by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/110\r\n* Mimic new stdlib build API by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/111\r\n* add check for void for microzig.hal by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/112\r\n* Fix typos by @jimt in https://github.com/ZigEmbeddedGroup/microzig/pull/113\r\n* Update to latest zig master by @vesim987 in https://github.com/ZigEmbeddedGroup/microzig/pull/114\r\n* improvements from working on RP2040 by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/115\r\n* specify which version of zig to use by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/116\r\n* fix link by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/117\r\n* Updated parts of gpio and pin to reflect code changes from regz rewrite by @PhilippWendel in https://github.com/ZigEmbeddedGroup/microzig/pull/120\r\n* update to new usage of build api by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/122\r\n* function to check if the thread of execution is in an ISR on Cortex M by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/123\r\n* Abstract USB device implementation by @r4gus in https://github.com/ZigEmbeddedGroup/microzig/pull/124\r\n* Updated code to regz rewrite and added fix for i2c on ATmega328P by @PhilippWendel in https://github.com/ZigEmbeddedGroup/microzig/pull/125\r\n* rename disable/enable interrupt functions by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/126\r\n* interrupt enable/disable for riscv and air by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/127\r\n* update to zig master: use @memset, @memcpy builtin by @binarycraft007 in https://github.com/ZigEmbeddedGroup/microzig/pull/128\r\n* When adding an option, set it as app module dependency by @kuon in https://github.com/ZigEmbeddedGroup/microzig/pull/129\r\n* Fix @call parameter for zig 0.11 by @burgrp in https://github.com/ZigEmbeddedGroup/microzig/pull/130\r\n* update pr creation step by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/131\r\n* Runs zig fmt by @MasterQ32 in https://github.com/ZigEmbeddedGroup/microzig/pull/133\r\n* Update to master and add system registers for cortex-m by @vesim987 in https://github.com/ZigEmbeddedGroup/microzig/pull/134\r\n* FileSource -> LazyPath by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/136\r\n* anyopaque to u8 by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/137\r\n* build against 0.11.0 by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/138\r\n* Update README.adoc by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/139\r\n* Fixing issues in Build to achieve v0.11.0 compatibility by @FranciscoLlobet in https://github.com/ZigEmbeddedGroup/microzig/pull/140\r\n* Fix minor typo in README by @L1ucas in https://github.com/ZigEmbeddedGroup/microzig/pull/141\r\n* Microzig Generation 2 Build Interface  by @MasterQ32 in https://github.com/ZigEmbeddedGroup/microzig/pull/144\r\n* add umm allocator by @vesim987 in https://github.com/ZigEmbeddedGroup/microzig/pull/148\r\n* Corrected Cortex-M ABI by @Ardelean-Calin in https://github.com/ZigEmbeddedGroup/microzig/pull/149\r\n* Change the HAL API to snake_case() from camelCase() by @marnix in https://github.com/ZigEmbeddedGroup/microzig/pull/151\r\n* doc: add getting started tip by @kodesoul in https://github.com/ZigEmbeddedGroup/microzig/pull/156\r\n* Update dependencies and add paths by @jacobly0 in https://github.com/ZigEmbeddedGroup/microzig/pull/158\r\n* packed struct => extern struct for USB by @sreehax in https://github.com/ZigEmbeddedGroup/microzig/pull/159\r\n* Update uf2 dependency by @jacobly0 in https://github.com/ZigEmbeddedGroup/microzig/pull/160\r\n* support bundling only specific boards by @tobiaskohlbau in https://github.com/ZigEmbeddedGroup/microzig/pull/166\r\n* fix documentation for patch tool by @tobiaskohlbau in https://github.com/ZigEmbeddedGroup/microzig/pull/165\r\n* Fixes CI Badge in README.md by @MasterQ32 in https://github.com/ZigEmbeddedGroup/microzig/pull/164\r\n* hal: dma: Cast channel index in claim_unused_channel by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/170\r\n* Fix requirements.txt and update README by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/172\r\n* Better readme by @MasterQ32 in https://github.com/ZigEmbeddedGroup/microzig/pull/173\r\n* rp2040: Fix DMA not respecting transfer_size_bytes by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/176\r\n* rp2040: Add support for PIO's jmp_pin by @Grazfather in https://github.com/ZigEmbeddedGroup/microzig/pull/174\r\n* usb: unify handling of length parameters by @tobiaskohlbau in https://github.com/ZigEmbeddedGroup/microzig/pull/177\r\n* Update to zig master, move uf2 and regz to monorepo by @mattnite in https://github.com/ZigEmbeddedGroup/microzig/pull/178\r\n\r\n## New Contributors\r\n* @marnix made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/11\r\n* @MasterQ32 made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/25\r\n* @rbino made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/35\r\n* @vesim987 made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/47\r\n* @freiguy1 made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/65\r\n* @kassane made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/21\r\n* @kuon made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/73\r\n* @r4gus made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/77\r\n* @hollmmax made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/84\r\n* @PhilippWendel made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/89\r\n* @ConnorRigby made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/93\r\n* @aoldershaw made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/99\r\n* @jimt made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/113\r\n* @binarycraft007 made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/128\r\n* @burgrp made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/130\r\n* @FranciscoLlobet made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/140\r\n* @L1ucas made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/141\r\n* @Ardelean-Calin made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/149\r\n* @kodesoul made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/156\r\n* @jacobly0 made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/158\r\n* @sreehax made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/159\r\n* @tobiaskohlbau made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/166\r\n* @Grazfather made their first contribution in https://github.com/ZigEmbeddedGroup/microzig/pull/170\r\n\r\n**Full Changelog**: https://github.com/ZigEmbeddedGroup/microzig/commits/microzig-0.12.0",
+      "prerelease": false,
+      "published_at": "2024-04-26T04:39:09Z",
+      "html_url": "https://github.com/ZigEmbeddedGroup/microzig/releases/tag/microzig-0.12.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "A group of people dedicated to improve the Zig Embedded Experience",
+  "owner_location": null,
+  "owner_blog": "https://microzig.tech/",
+  "owner_twitter_username": null,
+  "owner_created_at": "2021-03-10T10:28:09Z",
+  "homepage": "http://microzig.tech/",
+  "license": "Zlib",
+  "category": "embedded"
+}

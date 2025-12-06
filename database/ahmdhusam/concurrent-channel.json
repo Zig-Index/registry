@@ -1,0 +1,33 @@
+{
+  "name": "concurrent-channel",
+  "owner": "ahmdhusam",
+  "repo": "concurrent-channel",
+  "description": "A thread-safe communication channel for concurrent programming in Zig.",
+  "type": "project",
+  "topics": [
+    "zig-library",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2024-10-28T14:31:43Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.11.0",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/28365338?v=4",
+  "releases": [],
+  "owner_company": "Vooteam",
+  "owner_location": "Egypt  ",
+  "owner_blog": "https://www.linkedin.com/in/ahmdhusam/",
+  "owner_twitter_username": null,
+  "owner_followers": 9,
+  "owner_following": 16,
+  "owner_created_at": "2017-05-03T20:33:04Z",
+  "category": "library"
+}

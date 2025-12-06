@@ -1,0 +1,121 @@
+{
+  "name": "flags",
+  "owner": "joegm",
+  "repo": "flags",
+  "description": "An effortless command-line argument parser for Zig.",
+  "type": "project",
+  "topics": [
+    "command-line-arguments-parser",
+    "library",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 63,
+  "forks": 13,
+  "watchers": 3,
+  "updated_at": "2025-11-19T11:45:59Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# flags\n\nAn effortless command-line argument parser for Zig.\n\nSimply declare a struct and flags will inspect the fields at compile-time to determine how arguments are parsed:\n\n```zig\npub fn main() !void {\n    var debug_allocator = std.heap.DebugAllocator(.{}).init;\n    defer _ = debug_allocator.deinit();\n    const gpa = debug_allocator.allocator();\n\n    const args = try std.process.argsAlloc(gpa);\n    defer std.process.argsFree(gpa, args);\n\n    const cli = flags.parse(\n        args,\n        \"my-program\",\n\n        struct {\n            username: []const u8,\n        },\n\n        .{},\n    );\n\n    try std.io.getStdOut().writer().print(\"Hello, {s}!\\n\", .{cli.username});\n}\n\nconst std = @import(\"std\");\nconst flags = @import(\"flags\");\n```\n\n## Features\n\n- Zero allocations.\n- Cross platform.\n- Single-function, declarative API.\n- Multi-level subcommands.\n- Automatic help message generation at comptime.\n- Customisable terminal coloring.\n\n## Getting Started\n\nflags is intended to be used with the latest Zig release. If flags is out of date, please open an issue.\n\nTo import flags to your project, run the following command:\n\n```\nzig fetch --save git+https://github.com/joegm/flags\n```\n\nThen set up the dependency in your `build.zig`:\n\n```zig\n    const flags_dep = b.dependency(\"flags\", .{\n        .target = target,\n        .optimize = optimize,\n    })\n\n    exe.root_module.addImport(\"flags\", flags_dep.module(\"flags\"));\n```\n\nSee the [examples](examples/) for basic usage.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/96927121?u=76bdb4ec8aaf61aa94e6bb19193cdd221a3d0198&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.10.0",
+      "name": "v0.10.0",
+      "body": "- Add customisable terminal coloring!\r\n- Remove overriding of stdout/stderr writers\r\n- Simplify diagnostics",
+      "prerelease": false,
+      "published_at": "2024-10-11T21:48:35Z",
+      "html_url": "https://github.com/joegm/flags/releases/tag/v0.10.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.9.0",
+      "name": "v0.9.0",
+      "body": "- Reworked API with improved error handling.\r\n- Removed trailing argument parsing temporarily while I work on a better implementation.\r\n- Switch characters can now be digits.",
+      "prerelease": false,
+      "published_at": "2024-09-17T18:49:34Z",
+      "html_url": "https://github.com/joegm/flags/releases/tag/v0.9.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.8.0",
+      "name": "v0.8.0",
+      "body": "Added usage expression generation + small bug fix.\r\n",
+      "prerelease": false,
+      "published_at": "2024-08-19T20:06:18Z",
+      "html_url": "https://github.com/joegm/flags/releases/tag/v0.8.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.7.0",
+      "name": "v0.7.0",
+      "body": "- Make subcommands a field of the struct, allowing \"global\" options.\r\n- Improve help message to include positional arguments and subcommands.",
+      "prerelease": false,
+      "published_at": "2024-08-10T22:24:52Z",
+      "html_url": "https://github.com/joegm/flags/releases/tag/v0.7.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.6.0",
+      "name": "v0.6.0",
+      "body": "- Big overhaul to how positional arguments are parsed.\r\n  - positionals can be defined in a 'positional' field a la tigerbeetles lib\r\n  - trailing positionals can be collected via buffer or allocator.\r\n- float types can now be parsed",
+      "prerelease": false,
+      "published_at": "2024-07-30T18:29:46Z",
+      "html_url": "https://github.com/joegm/flags/releases/tag/v0.6.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.5.0",
+      "name": "v0.5.0",
+      "body": "- Supports 'help' declaration for a free-form description of your command.\r\n- Supports 'full_help' to override all auto-generated help with a hand-crafted one.\r\n- Commands are now detected in kebab-case (`build_exe: struct {...},` => `$ mycommand build-exe ...`).\r\n- All arguments after a `--` will be treated as positional arguments, not flags.",
+      "prerelease": false,
+      "published_at": "2024-05-28T20:22:43Z",
+      "html_url": "https://github.com/joegm/flags/releases/tag/v0.5.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.4.0",
+      "name": "v0.4.0",
+      "body": "Renamed the library to 'flags', standardized some internal terminology and did some general cleanup.",
+      "prerelease": false,
+      "published_at": "2024-05-23T19:52:55Z",
+      "html_url": "https://github.com/joegm/flags/releases/tag/v0.4.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.3.0",
+      "name": "v0.3.0",
+      "body": "Big one! Added subcommands, help message generation, and a few more minor updates to examples.",
+      "prerelease": false,
+      "published_at": "2024-05-22T20:05:17Z",
+      "html_url": "https://github.com/joegm/flags/releases/tag/v0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "Notes:\r\n- Positional arguments are now returned separately from the Config struct.\r\n- Enum values are now parsed in kebab-case\r\n- User can now modify the maximum number of positional arguments via a public declaration in the root file (a la std_options).",
+      "prerelease": false,
+      "published_at": "2024-05-17T15:06:20Z",
+      "html_url": "https://github.com/joegm/flags/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "First ever release! Still figuring out Zig's package management.",
+      "prerelease": false,
+      "published_at": "2024-05-15T20:31:43Z",
+      "html_url": "https://github.com/joegm/flags/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "joegm.github.io",
+  "owner_twitter_username": null,
+  "owner_followers": 5,
+  "owner_following": 2,
+  "owner_created_at": "2021-12-31T22:21:21Z",
+  "license": "MIT",
+  "category": "library"
+}

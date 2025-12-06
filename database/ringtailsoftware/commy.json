@@ -1,0 +1,194 @@
+{
+  "name": "commy",
+  "owner": "ringtailsoftware",
+  "repo": "commy",
+  "description": "A serial monitor for Mac, Linux and Windows",
+  "type": "project",
+  "topics": [
+    "serial",
+    "serial-communication",
+    "serialmonitor",
+    "uart",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 46,
+  "forks": 4,
+  "watchers": 1,
+  "updated_at": "2025-10-29T23:00:18Z",
+  "dependencies": [
+    {
+      "name": "serial",
+      "url": "git+https://github.com/ZigEmbeddedGroup/serial.git#fbd7389ff8bbc9fa362aa74081588755b5d028a0",
+      "hash": "serial-0.0.1-PoeRzF60AAAN8Iu0yXTIX-t3DVzsnmN7vWHKM2HA2Zbq"
+    },
+    {
+      "name": "zvterm",
+      "url": "git+https://github.com/ringtailsoftware/zvterm.git#05cee2f1d00c7b4cec0eb9f7beef0b48918b748b",
+      "hash": "zvterm-0.0.1-VuAjA4JnAwAqsAyUTtgA60fx5WNSOnnO68VHq2kCdl0s"
+    },
+    {
+      "name": "yazap",
+      "url": "git+https://github.com/ringtailsoftware/yazap.git#37b6b4f762b126f1152d04b34fd3d6f7fd4e174d",
+      "hash": "yazap-0.6.3-Z1t-Emb0AQCKoKkKWhi58ITdjRDlX-WNUnuGayIuBhad"
+    }
+  ],
+  "readme": "# Commy, a serial monitor\n\nCommy is a small console utility for communicating with tty, UART or COM port devices. It runs on Mac, Linux and Windows. Windows support is experimental (bug reports appreciated).\n\nDoes (some of) the same things as [tio](https://github.com/tio/tio), [minicom](https://en.wikipedia.org/wiki/Minicom), [screen](https://www.gnu.org/software/screen/), [miniterm.py](https://github.com/pyserial/pyserial/blob/master/serial/tools/miniterm.py), [zcom](https://github.com/ZigEmbeddedGroup/zcom), [PuTTY](https://www.putty.org/), etc.\n\nCommy incorporates a VT220/xterm/ECMA-48 terminal emulator for consistency whether running in [Windows Terminal](https://github.com/microsoft/terminal), [XTerm](https://en.wikipedia.org/wiki/Xterm) or [Terminal.app](https://en.wikipedia.org/wiki/Terminal_(macOS)).\n\n![Mac, Windows, Linux](https://github.com/ringtailsoftware/commy/actions/workflows/build.yml/badge.svg)\n\n![](demo.gif)\n\n# Build from source\n\nUse zig 0.15.2\n\n```shell\nzig build\nzig-out/bin/commy -h\n```\n\nThe binary is:\n\n```shell\nzig-out/bin/commy\n```\n\nCopy it to a directory in your path for easy access:\n\n```shell\nsudo cp zig-out/bin/commy /usr/local/bin\n```\n\nOr if you prefer, let zig install it in your home directory (assuming `~/.local/bin` is in your `$PATH`):\n\n```shell\nzig build -Doptimize=ReleaseSafe --prefix ~/.local\n```\n\n`commy` is a single statically linked binary. No further runtime files are required.\nYou may install it on another system by simply copying the binary. It can be cross compiled using zig's `-Dtarget`\n\n```shell\nzig build -Dtarget=x86_64-windows\n```\n\n# Typical use\n\nList available serial ports\n\n```shell\ncommy -l\n\n/dev/cu.usbmodem1124101\n/dev/cu.usbmodem1124203\n```\n\nConnect to a port\n\n```shell\ncommy /dev/cu.usbmodem1124203 115200\n```\n\nCommy will try to find available ports which match so connecting to `/dev/ttyUSB0` can be written as:\n\n```shell\ncommy USB0 115200\n```\n\nThe status bar at the top shows keyboard shortcuts. Press `ctrl-b` then `q`, `\\` or `x` to quit.\n\nLog data received from a device (only received data will be logged, unless local echo is enabled):\n\n```shell\ncommy /dev/cu.usbmodem1124203 115200 -o log.txt\n```\n\nEnable local echo of sent data, used for devices which do not echo back characters they receive:\n\n```shell\ncommy /dev/cu.usbmodem1124203 115200 -e\n```\n\n# Scrollback\n\nCommy supports moving back and forwards in terminal history. However, unlike some serial monitors, it stores screen updates rather than lines of incoming text. This means that a terminal UI can be rewound and replayed in time visually. To enter scrollback, press `ctrl-b`, then use up/down/pageup/pagedown to move through terminal history.\n\nTo run commy with a longer scrollback history, use a larger `-b <value>`.\n\n![](scrollback.gif)\n\n# Why use Commy?\n\nIt tells you how to quit.\n\nCommy does what I use GNU `screen` for, but it's better in two important respects. First, it is slightly smaller; and secondly it has the words \"ctrl-b and quit\" inscribed in large friendly letters on its cover.\n\n# Help text\n\n    Usage: commy [ARGS] [OPTIONS]\n\n    Args:\n        port                                          serial port file\n        speed                                         baudrate\n\n    Options:\n        -v, --version                                 Version\n        -l, --list                                    List available serial ports\n        -e, --echo                                    Enable local echo\n        -o, --output=<output>                         Log to file\n        -p, --parity=<parity>                         Parity\n                                                        values: { none, even, odd, mark, space }\n        -w, --wordsize=<wordsize>                     wordsize\n                                                        values: { five, six, seven, eight }\n        -s, --stop=<stop>                             stop\n                                                        values: { one, two }\n        -f, --flow=<flow>                             flow\n                                                        values: { none, software, hardware }\n        -b, --buffer=<buffer>                         Scrollback buffer size\n        -h, --help                                    Print this help and exit\n\n# Testing\n\nIf no serial device is available, commy can connect to a Linux serial terminal inside docker. From here, any standard linux terminal software can be used.\n\n```shell\ncd linux-test\n./lincommy.sh\n```\n\nThis will build commy, then build a docker container and start it. Inside the container `socat` will create a virtual serial port and bind it to `bash`. commy will then connect to the virtual serial port. Quitting commy will close down the docker container.\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/20110944?u=93548b94fa9de08e939a35745a2affd82408e198&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.0.2",
+      "name": "v0.0.2",
+      "body": "## Changelog\n* bc67e3b6c7e13a86dece8036e02a1c77fd2e1486 Add scrollback support\n\n\n---\nReleased by [GoReleaser](https://github.com/goreleaser/goreleaser).\n",
+      "prerelease": false,
+      "published_at": "2024-12-17T14:25:42Z",
+      "html_url": "https://github.com/ringtailsoftware/commy/releases/tag/v0.0.2",
+      "assets": [
+        {
+          "name": "commy_Linux_arm64.tar.gz",
+          "url": "https://github.com/ringtailsoftware/commy/releases/download/v0.0.2/commy_Linux_arm64.tar.gz",
+          "size": 75736,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "commy_Linux_x86_64.tar.gz",
+          "url": "https://github.com/ringtailsoftware/commy/releases/download/v0.0.2/commy_Linux_x86_64.tar.gz",
+          "size": 67267,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "commy_Windows_x86_64.zip",
+          "url": "https://github.com/ringtailsoftware/commy/releases/download/v0.0.2/commy_Windows_x86_64.zip",
+          "size": 108563,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "commy_0.0.2_checksums.txt",
+          "url": "https://github.com/ringtailsoftware/commy/releases/download/v0.0.2/commy_0.0.2_checksums.txt",
+          "size": 459,
+          "content_type": "text/plain; charset=utf-8"
+        },
+        {
+          "name": "commy_Darwin_arm64.tar.gz",
+          "url": "https://github.com/ringtailsoftware/commy/releases/download/v0.0.2/commy_Darwin_arm64.tar.gz",
+          "size": 65917,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "commy_Darwin_x86_64.tar.gz",
+          "url": "https://github.com/ringtailsoftware/commy/releases/download/v0.0.2/commy_Darwin_x86_64.tar.gz",
+          "size": 63390,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.0.1",
+      "name": "v0.0.1",
+      "body": "## Changelog\n* 54e799598bbde21f515ce4278338b13acf3b6230 Goreleaser config\n* 10a9f4bd151df2a10b55626d6381d9798c16c636 Remove automated release\n* cc62a6ca297d09efa3c6860f5cb3b8a93c44749e Update readme\n\n\n---\nReleased by [GoReleaser](https://github.com/goreleaser/goreleaser).\n",
+      "prerelease": false,
+      "published_at": "2024-12-16T15:08:30Z",
+      "html_url": "https://github.com/ringtailsoftware/commy/releases/tag/v0.0.1",
+      "assets": [
+        {
+          "name": "commy_Darwin_arm64.tar.gz",
+          "url": "https://github.com/ringtailsoftware/commy/releases/download/v0.0.1/commy_Darwin_arm64.tar.gz",
+          "size": 63780,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "commy_Linux_arm64.tar.gz",
+          "url": "https://github.com/ringtailsoftware/commy/releases/download/v0.0.1/commy_Linux_arm64.tar.gz",
+          "size": 73394,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "commy_0.0.1_checksums.txt",
+          "url": "https://github.com/ringtailsoftware/commy/releases/download/v0.0.1/commy_0.0.1_checksums.txt",
+          "size": 459,
+          "content_type": "text/plain; charset=utf-8"
+        },
+        {
+          "name": "commy_Linux_x86_64.tar.gz",
+          "url": "https://github.com/ringtailsoftware/commy/releases/download/v0.0.1/commy_Linux_x86_64.tar.gz",
+          "size": 65655,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "commy_Darwin_x86_64.tar.gz",
+          "url": "https://github.com/ringtailsoftware/commy/releases/download/v0.0.1/commy_Darwin_x86_64.tar.gz",
+          "size": 61253,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "commy_Windows_x86_64.zip",
+          "url": "https://github.com/ringtailsoftware/commy/releases/download/v0.0.1/commy_Windows_x86_64.zip",
+          "size": 107346,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "release",
+      "name": "",
+      "body": "Latest binaries",
+      "prerelease": false,
+      "published_at": "2025-06-28T00:05:24Z",
+      "html_url": "https://github.com/ringtailsoftware/commy/releases/tag/release",
+      "assets": [
+        {
+          "name": "commy-x86_64-windows.exe",
+          "url": "https://github.com/ringtailsoftware/commy/releases/download/release/commy-x86_64-windows.exe",
+          "size": 435712,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "commy-x86_64-macos",
+          "url": "https://github.com/ringtailsoftware/commy/releases/download/release/commy-x86_64-macos",
+          "size": 124081,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "commy-x86_64-linux",
+          "url": "https://github.com/ringtailsoftware/commy/releases/download/release/commy-x86_64-linux",
+          "size": 118368,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "commy-x86-linux",
+          "url": "https://github.com/ringtailsoftware/commy/releases/download/release/commy-x86-linux",
+          "size": 113804,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "commy-aarch64-windows.exe",
+          "url": "https://github.com/ringtailsoftware/commy/releases/download/release/commy-aarch64-windows.exe",
+          "size": 407040,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "commy-aarch64-macos",
+          "url": "https://github.com/ringtailsoftware/commy/releases/download/release/commy-aarch64-macos",
+          "size": 153320,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "commy-aarch64-linux",
+          "url": "https://github.com/ringtailsoftware/commy/releases/download/release/commy-aarch64-linux",
+          "size": 117504,
+          "content_type": "binary/octet-stream"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "@tobyjaffey@mastodon.me.uk",
+  "owner_company": "Ringtail Software Ltd",
+  "owner_location": "UK",
+  "owner_blog": "http://www.ringtailsoftware.co.uk",
+  "owner_twitter_username": null,
+  "owner_followers": 39,
+  "owner_following": 8,
+  "owner_created_at": "2016-06-23T13:40:30Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,29 @@
+{
+  "name": "zig-utilities",
+  "owner": "Ang3lERR404",
+  "repo": "zig-utilities",
+  "description": "Utilities for zig, in a smol, convenient file",
+  "type": "project",
+  "topics": [
+    "utilities",
+    "zig",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2024-06-11T20:08:52Z",
+  "readme": "# Utils.zig\nA smol utility library before skill issues were found :D\n\n# ***IN THE ENTIRE STANDARD LIBRARY FOR ZIG***\n=~=\n> W h y\\\n> a r e\\\n> y o u\\\n> l i k e\\\n> t h i s",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/170934839?u=6aae8917058c5f96419d828aaf67b2c053bff4c3&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 1,
+  "owner_following": 3,
+  "owner_created_at": "2024-05-27T09:51:02Z",
+  "license": "GPL-3.0",
+  "category": "library"
+}

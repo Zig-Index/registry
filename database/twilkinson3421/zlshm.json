@@ -1,0 +1,54 @@
+{
+  "name": "zlshm",
+  "owner": "twilkinson3421",
+  "repo": "zlshm",
+  "description": "A simple shared library for reading from shared memory on Windows",
+  "type": "project",
+  "topics": [
+    "binary",
+    "shared-library",
+    "windows",
+    "zig-library",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-02-10T13:36:32Z",
+  "dependencies": [
+    {
+      "name": "zigwin32",
+      "url": "https://github.com/marlersoft/zigwin32/archive/e8739b32a33ce48a3286aba31918b26a9dfc6ef0.tar.gz",
+      "hash": "1220219ca4acfa5804ca39945f92554e93507b077c03605b7a4c1c0401f0c7121339"
+    }
+  ],
+  "readme": "# zlshm\n\nA simple shared library for reading from shared memory on Windows. Support for Linux is planned in the future.\n\n## Usage\n\nUse the provided `.dll` library, which can be found in the releases seciton.\n\nThis library was originally written for use\nwith Deno's _ffi_ functionality, but can be used with any language that supports loading shared lirbaries.\n\n## Symbols\n\n### `open`\n\nOpens a shared memory file. Returns a windows `HANDLE` to the file.\n\n| Argument | Type   | Description                                                                        |\n| -------- | ------ | ---------------------------------------------------------------------------------- |\n| name     | string | The name of the shared memory file to open. This must be null-terminated UTF-16LE. |\n| log_err  | bool   | Whether to log errors to stderr.                                                   |\n\n### `close`\n\nCloses a shared memory file. Returns the return code of `CloseHandle`.\n\n| Argument | Type     | Description                                      |\n| -------- | -------- | ------------------------------------------------ |\n| handle   | `HANDLE` | The `HANDLE` of the shared memory file to close. |\n\n### `read`\n\nReads data from a shared memory file. Returns -1 if `MapViewOfFile` fails,\notherwise the return code of `UnmapViewOfFile`.\n\n| Argument | Type     | Description                                                                         |\n| -------- | -------- | ----------------------------------------------------------------------------------- |\n| handle   | `HANDLE` | The `HANDLE` of the shared memory file to read from.                                |\n| buf      | pointer  | The buffer to read the data into.                                                   |\n| len      | usize    | The number of bytes to map. Must be less than or equal to the length of the buffer. |\n| log_err  | bool     | Whether to log errors to stderr.                                                    |\n\n## Building\n\nThis library is written and built using Zig version _0.14.0-dev.2577+271452d22_ (_2024.11.0-mach_).\nRun `zig build` to build the library locally (requires Zig to be installed). If you are not using Windows,\nyou should add `-Dtarget=x86_64-windows` to the build command (Obviously you will require Windows to use the library).\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/88404826?u=99ec4f0ce645c577004ef0cbf1b7bac5066b3bd0&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.3.0",
+      "name": "ZLSHM 0.3.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-02-08T03:32:59Z",
+      "html_url": "https://github.com/twilkinson3421/zlshm/releases/tag/v0.3.0",
+      "assets": [
+        {
+          "name": "zlshm.dll",
+          "url": "https://github.com/twilkinson3421/zlshm/releases/download/v0.3.0/zlshm.dll",
+          "size": 526336,
+          "content_type": "application/x-msdownload"
+        }
+      ]
+    }
+  ],
+  "owner_company": null,
+  "owner_location": "United Kingdom",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 0,
+  "owner_following": 0,
+  "owner_created_at": "2021-08-03T20:31:38Z",
+  "license": "0BSD",
+  "category": "library"
+}

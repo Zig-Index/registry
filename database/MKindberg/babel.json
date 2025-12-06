@@ -1,0 +1,189 @@
+{
+  "name": "babel",
+  "owner": "MKindberg",
+  "repo": "babel",
+  "description": "A library for building language servers in Zig",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 3,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-10-07T18:21:55Z",
+  "readme": "# babel\nA framework for writing, or at least prototyping, language servers in Zig.\nIt allows you to register callbacks that will be called when notifications or\nrequests are received. In addition to this it will also keep track of and automatically\nupdate the documents being edited.\n\n## Usage\n\n### Creating the server\n```zig\nconst std = @import(\"std\");\nconst lsp = @import(\"lsp\");\nconst builtin = @import(\"builtin\");\n\n// Set the global log function to lsp.log in order to use the lsp protocol\n// for logging\npub const std_options = std.Options{ .log_level = if (builtin.mode == .Debug) .debug else .info, .logFn = lsp.log };\n\n// File specific state\nconst State = struct {\n    fn init() State {\n        return .{};\n    }\n};\n// Create an alias for the server type. An instance of State will be available\n// in each callback.\nconst Lsp = lsp.Lsp(State);\n\npub fn main() !u8 {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    const allocator = gpa.allocator();\n    // Information about the server that will be passed to the client.\n    const server_data = lsp.types.ServerData{\n        .serverInfo = .{ .name = \"server_name\", .version = \"0.1.0\" },\n    };\n\n    var server = Lsp.init(allocator, server_data);\n    defer server.deinit();\n\n    // Register wanted callbacks. They need to be registered before the server starts.\n    server.registerDocOpenCallback(handleOpenDoc);\n    server.registerDocCloseCallback(handleCloseDoc);\n    server.registerDocChangeCallback(handleChangeDoc);\n    server.registerHoverCallback(handleHover);\n\n    // Start the server, it will run until it gets a shutdown signal from the client.\n    const res = server.start();\n\n    return res;\n}\n\n// All callbacks take one parameter which is a struct containing an arena\n// allocator that's freed when the callback returns, the current document\n// and state, and any additional data that might be useful.\n// The return values are just aliases for regular types and it doesn't matter\n// if the alias or real type is used.\nfn handleOpenDoc(p: Lsp.OpenDocumentParameters) Lsp.CloseDocumentReturn {\n    std.log.info(\"Opened {s}\", .{p.context.document.uri});\n    // The file local state should be initialized when a document is opened.\n    p.context.state = State.init();\n}\n\n// Most resources related to the document will be freed automatically, but the\n// user provided state needs to be handled manually.\nfn handleCloseDoc(p: Lsp.CloseDocumentParameters) Lsp.CloseDocumentReturn {\n    // Deinitialize the state when the file is closed.\n    p.context.state.deinit();\n}\n\n// An example of additional data that can be included in the parameters struct\n// is the changes that triggered a changeDocument event.\nfn handleChangeDoc(p: Lsp.ChangeDocumentParameters) void {\n    for (p.changes) |change| {\n        std.log.info(\"New text: {s}\", .{change.text});\n    }\n}\n\n// Callbacks handling requests will have a non-void return value that will\n// be sent back to the client after the callback returns.\nfn handleHover(p: Lsp.HoverParameters) ?[]const u8 {\n    // A document provides some helper function that can be useful.\n    std.log.info(\"Hovering the word {s} at {d}:{d}\", .{ p.context.document.getWord(p.position, \"\\n .,\"), p.position.line, p.position.character });\n}\n```\n\n### Build the server\n```zig\nconst std = @import(\"std\");\n\npub fn build(b: *std.Build) void {\n    // Build the server\n    const exe = b.addExecutable(.{\n        .name = \"server_name\",\n        .root_source_file = b.path(\"src/main.zig\"),\n    });\n\n    // Add the dependency towards babel\n    const babel = b.dependency(\"babel\", .{});\n\n    // Allow the server to import the lsp module from babel\n    const lsp = babel.module(\"lsp\");\n    exe.root_module.addImport(\"lsp\", lsp);\n\n    b.installArtifact(exe);\n}\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/6180175?u=165a41977bbfc17e0f28d37e4af84d901e6662e8&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.10.0",
+      "name": "v0.10.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-03-11T20:47:40Z",
+      "html_url": "https://github.com/MKindberg/babel/releases/tag/v0.10.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.9.0",
+      "name": "v0.9.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-01-06T17:35:59Z",
+      "html_url": "https://github.com/MKindberg/babel/releases/tag/v0.9.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.8.4",
+      "name": "v0.8.4",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-01-01T15:25:52Z",
+      "html_url": "https://github.com/MKindberg/babel/releases/tag/v0.8.4",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.8.3",
+      "name": "v0.8.3",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-12-24T21:50:21Z",
+      "html_url": "https://github.com/MKindberg/babel/releases/tag/v0.8.3",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.8.2",
+      "name": "v0.8.2",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-10-21T18:45:09Z",
+      "html_url": "https://github.com/MKindberg/babel/releases/tag/v0.8.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.8.1",
+      "name": "v0.8.1",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-10-02T18:39:32Z",
+      "html_url": "https://github.com/MKindberg/babel/releases/tag/v0.8.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.8.0",
+      "name": "v0.8.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-10-01T18:48:18Z",
+      "html_url": "https://github.com/MKindberg/babel/releases/tag/v0.8.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.7.3",
+      "name": "v0.7.3",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-08-04T19:12:22Z",
+      "html_url": "https://github.com/MKindberg/babel/releases/tag/v0.7.3",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.7.2",
+      "name": "v0.7.2",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-08-03T20:42:18Z",
+      "html_url": "https://github.com/MKindberg/babel/releases/tag/v0.7.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.7.1",
+      "name": "v0.7.1",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-07-18T07:58:30Z",
+      "html_url": "https://github.com/MKindberg/babel/releases/tag/v0.7.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.7.0",
+      "name": "v0.7.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-07-12T17:04:08Z",
+      "html_url": "https://github.com/MKindberg/babel/releases/tag/v0.7.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.6.0",
+      "name": "v0.6.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-06-27T18:08:10Z",
+      "html_url": "https://github.com/MKindberg/babel/releases/tag/v0.6.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.5.0",
+      "name": "v0.5.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-06-23T20:03:31Z",
+      "html_url": "https://github.com/MKindberg/babel/releases/tag/v0.5.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.4.0",
+      "name": "v0.4.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-06-22T07:27:11Z",
+      "html_url": "https://github.com/MKindberg/babel/releases/tag/v0.4.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.3.1",
+      "name": "v0.3.1",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-06-21T22:00:48Z",
+      "html_url": "https://github.com/MKindberg/babel/releases/tag/v0.3.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.3.0",
+      "name": "v0.3.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-06-16T13:26:16Z",
+      "html_url": "https://github.com/MKindberg/babel/releases/tag/v0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-06-16T11:08:19Z",
+      "html_url": "https://github.com/MKindberg/babel/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v.0.1.0",
+      "name": "v0.1.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-06-16T07:41:22Z",
+      "html_url": "https://github.com/MKindberg/babel/releases/tag/v.0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 3,
+  "owner_following": 2,
+  "owner_created_at": "2013-12-13T17:30:25Z",
+  "license": "MIT",
+  "category": "library"
+}

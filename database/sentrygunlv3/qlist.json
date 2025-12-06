@@ -1,0 +1,37 @@
+{
+  "name": "qlist",
+  "owner": "sentrygunlv3",
+  "repo": "qlist",
+  "description": "",
+  "type": "project",
+  "topics": [
+    "data-format",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-11-05T16:59:15Z",
+  "readme": "# QList\n\nsimple data format that is parsed to a hashmap\\\nthe Q is short for quick because the format is supposed to be quick/easy to write and parse\n\nbasic types:\n\n```qlist\n/ comment\ni my_int 100\nf my_float 10.0\ns my_str hello\nb my_bool t\n```\n\ncomplex types:\n\n```qlist\n/ multiline string marked with a uppercase S\n/ and a linecount after the name\nS multi_line_str 3\nhello\ni am multiline\n(third line here)\n/ ends before this comment\n```\n\n## format\n\n> [!NOTE]\n> the type, name and value/line count are seperated with singlular spaces\n\nthe type of a field is at the front so the parser can easily tell the type or if a line is a comment with a single switch statement\n\nafter the type is the name of the field\n\nthen from the name to the end of line is the value\\\nunless its multiline then the linecount is after the name and the value begins on the next line\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/77799529?u=3aee459fca0eee92add3e2d3d3d295d787e24776&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.0",
+      "name": "test release",
+      "body": "",
+      "prerelease": true,
+      "published_at": "2025-11-05T14:42:39Z",
+      "html_url": "https://github.com/sentrygunlv3/qlist/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 0,
+  "owner_following": 1,
+  "owner_created_at": "2021-01-21T17:07:31Z",
+  "license": "LGPL-3.0",
+  "category": "library"
+}

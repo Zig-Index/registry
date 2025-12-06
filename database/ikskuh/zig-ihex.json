@@ -1,0 +1,31 @@
+{
+  "name": "zig-ihex",
+  "owner": "ikskuh",
+  "repo": "zig-ihex",
+  "description": "An intel hex loader written in Zig",
+  "type": "project",
+  "topics": [
+    "zig",
+    "ziglang",
+    "intel-hex",
+    "ihex",
+    "zig-package"
+  ],
+  "stars": 3,
+  "forks": 3,
+  "watchers": 1,
+  "updated_at": "2025-08-31T06:04:54Z",
+  "readme": "# Zig Intel Hex parser\n\nA loader for the [Intel Hex](https://en.wikipedia.org/wiki/Intel_HEX) format used in embedded\ndevelopment.\n\n## Features\n- Supports all 6 record types\n- Raw record parser (`parseRaw`)\n- User-friendly preprocessor (`parseData`)\n- Pedantic and lax parsing\n\n## Example\n\n```zig\nfn processData(x: void, offset: u32, data: []const u8) !void {\n    std.debug.warn(\"read slice @ 0x{x}: {x}\\n\", .{ offset, data });\n}\n\npub fn main() !void {\n    var file = try std.fs.cwd().openFile(\"data/example.ihex\", .{ .read = true, .write = false });\n    defer file.close();\n\n    const entry_point = try ihex.parseData(file.reader(), ihex.ParseMode{ .pedantic = true }, {}, error{}, processData);\n    if (entry_point) |ep| {\n        std.debug.warn(\"entry point: 0x{x}\\n\", .{ep});\n    }\n}\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/3932972?u=2893028da897d46ed12f55aa05a935a80e7c119b&v=4",
+  "releases": [],
+  "owner_bio": "Hacker, Dad & Demoscener from southern germany, loves lowlevel and oldschool stuff",
+  "owner_company": null,
+  "owner_location": "Stuttgart - Germany",
+  "owner_blog": "https://random-projects.net/",
+  "owner_twitter_username": "ikskuh",
+  "owner_followers": 473,
+  "owner_following": 72,
+  "owner_created_at": "2013-03-21T16:08:06Z",
+  "license": "MIT",
+  "category": "library"
+}

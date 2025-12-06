@@ -1,0 +1,29 @@
+{
+  "name": "typ",
+  "owner": "peterhellberg",
+  "repo": "typ",
+  "description": "A small Zig ⚡ module, as a convenience for me when writing WebAssembly plugins for Typst",
+  "type": "project",
+  "topics": [
+    "module",
+    "typesetting",
+    "typst",
+    "zig-package"
+  ],
+  "stars": 16,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-11-11T05:24:00Z",
+  "readme": "# typ :printer:\n\nA small [Zig](https://ziglang.org/) ⚡ module, as a convenience for me when writing WebAssembly\n[plugins](https://typst.app/docs/reference/foundations/plugin/) for [Typst](https://typst.app/)\n\n> [!NOTE]\n> Initially based on the [hello.zig](https://github.com/astrale-sharp/wasm-minimal-protocol/blob/master/examples/hello_zig/hello.zig)\n> example in [wasm-minimal-protocol](https://github.com/astrale-sharp/wasm-minimal-protocol/)\n\n## Requirements\n\nYou will want to have a fairly recent [Zig](https://ziglang.org/download/#release-master)\nas well as the [Typst CLI](https://github.com/typst/typst?tab=readme-ov-file#installation)\n\n> [!IMPORTANT]\n> I had to `rustup default 1.79.0` when compiling the latest `typst`\n> as there were some breaking change in `1.80.0`\n\n> [!TIP]\n> Some of the software that I have installed for a pretty\n> nice **Typst** workflow in [Neovim](https://neovim.io/):\n>\n> - https://github.com/nvarner/typst-lsp\n> - https://github.com/kaarmu/typst.vim\n> - https://github.com/chomosuke/typst-preview.nvim\n\n## Usage\n\nUse `zig fetch` to add a `.typ` to the `.dependencies` in your `build.zig.zon`\n\n```console\nzig fetch --save https://github.com/peterhellberg/typ/archive/refs/tags/v0.1.0.tar.gz\n```\n\n> [!NOTE]\n> You should now be able to update your `build.zig` as described below.\n\n#### `build.zig`\n```zig\nconst std = @import(\"std\");\n\npub fn build(b: *std.Build) void {\n    const target = b.resolveTargetQuery(.{\n        .cpu_arch = .wasm32,\n        .os_tag = .freestanding,\n    });\n\n    const hello = b.addExecutable(.{\n        .name = \"hello\",\n        .root_module = b.createModule(.{\n            .root_source_file = b.path(\"hello.zig\"),\n            .strip = true,\n            .target = target,\n            .optimize = .ReleaseSmall,\n        }),\n    });\n\n    const typ = b.dependency(\"typ\", .{}).module(\"typ\");\n\n    hello.root_module.addImport(\"typ\", typ);\n    hello.entry = .disabled;\n    hello.rdynamic = true;\n\n    b.installArtifact(hello);\n}\n```\n\n#### `hello.zig`\n```zig\nconst typ = @import(\"typ\");\n\nexport fn hello() i32 {\n    const msg = \"*Hello* from `hello.wasm` written in Zig!\";\n\n    return typ.str(msg);\n}\n\nexport fn echo(len: usize) i32 {\n    var res = typ.alloc(u8, len * 2) catch return 1;\n    defer typ.free(res);\n\n    typ.write(res.ptr);\n\n    for (0..len) |i| {\n        res[i + len] = res[i];\n    }\n\n    return typ.ok(res);\n}\n```\n\n#### `hello.typ`\n```typst\n#set page(width: 10cm, height: 10cm)\n#set text(font: \"Inter\")\n\n== A WebAssembly plugin for Typst\n\n#line(length: 100%)\n\n#emph[Typst is capable of interfacing with plugins compiled to WebAssembly.]\n\n#line(length: 100%)\n\n#let p = plugin(\"zig-out/bin/hello.wasm\")\n\n#eval(str(p.hello()), mode: \"markup\")\n\n#eval(str(p.echo(bytes(\"1+2\"))), mode: \"code\")\n```\n\n#### Expected output\n\n![hello.png](https://github.com/user-attachments/assets/a1cd9c86-ef94-4d1f-a44c-b958475f79b0)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/565124?u=9933200ccff1d65f1635b4ca59876e2794b6985b&v=4",
+  "releases": [],
+  "owner_company": "Code7 Interactive and Athega",
+  "owner_location": "Stockholm, Sweden",
+  "owner_blog": "https://c7.se",
+  "owner_twitter_username": "peterhellberg",
+  "owner_followers": 417,
+  "owner_following": 66,
+  "owner_created_at": "2011-01-14T18:42:34Z",
+  "license": "MIT",
+  "category": "library"
+}

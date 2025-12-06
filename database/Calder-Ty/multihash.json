@@ -1,0 +1,62 @@
+{
+  "name": "multihash",
+  "owner": "Calder-Ty",
+  "repo": "multihash",
+  "description": "Zig Multihash implementation",
+  "type": "project",
+  "topics": [
+    "multiformats",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 6,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-04-16T02:35:54Z",
+  "minimum_zig_version": "0.12.0",
+  "readme": "# Multihash\nA Library for creating, serializing and deserializing [multihashes](https://multiformats.io/multihash/).\n\n# Contents:\n\n## multihash\n\n`multihash` is the package for creating, serializing and deserializing multihashes. Exposes two structs:\n`Multihash`, and `UnsignedVarInt`.\n\n### Examples:\n```zig\n// Bytes for MultiHash\nconst input = [_]u8{\n    0x12, 0x20, 0x41, 0xdd, 0x7b, 0x64, 0x43, 0x54, 0x2e, 0x75, 0x70,\n    0x1a, 0xa9, 0x8a, 0x0c, 0x23, 0x59, 0x51, 0xa2, 0x8a, 0x0d, 0x85,\n    0x1b, 0x11, 0x56, 0x4d, 0x20, 0x02, 0x2a, 0xb1, 0x1d, 0x25, 0x89,\n    0xa8,\n};\n\nconst result = try Multihash.deserialize(&input, testing.allocator);\ndefer result.deinit();\n```\n\n## pkghash\n\n`pkghash` is a tool for generating hashes for zig packages. It is forked from the pkghash utility\nin [zap](https://github.com/zigzap/zap). The main purpose of forking was to add the ability to\nspecify the exact files that would be included in the hash.\n\n### usage\n```\nUsage: pkghash [options]\n\nOptions: \n  -h --help           Print this help and exit.\n  -g --git            Use git ls-files\n  -f --file <file list>           List Files to include in hash. Directories are included recursively. Does not work with `-g`\n\nSub-options: \n  --allow-directory : calc hash even if no build.zig is present\n                      applies in no-git mode only\n\nSub-options for --git: \n  --tag=<tag>          : specify git tag to use in template\n                         defaults to tag pointing to HEAD\n  --template=<file.md> : specify markdown template to render\n```\n\n### Example:\n```bash\npkghash -f LICENSE src/* README.md build.zig build.zig.zon\n```\n\n# Acknowledgments\nPortion of this code use code licensed by others:\n\nmain.zig: Copyright (c) 2023 Rene Schallner, MIT License\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/10226626?u=67f87505ccaee56f767cf8dcf8727fffe3bb51f9&v=4",
+  "releases": [
+    {
+      "tag_name": "0.12.1",
+      "name": "0.12.1",
+      "body": "## [0.12.1]\n\n### Added\n\n### Changed\n\n- FIX: `pkghash` no longer generates different hashes when passing files with leading `./`\n\n### Removed\n\n---\n\n`hash: 122068532b6582d05e910145cc73839cf7719577be191fad3060875068ee6f04204d`\n\n[0.12.1]: https://github.com/Calder-Ty/multihash/compare/0.1.0...0.12.1\n",
+      "prerelease": false,
+      "published_at": "2024-05-19T00:58:32Z",
+      "html_url": "https://github.com/Calder-Ty/multihash/releases/tag/0.12.1",
+      "assets": [
+        {
+          "name": "multihash-0.12.1.tar.gz",
+          "url": "https://github.com/Calder-Ty/multihash/releases/download/0.12.1/multihash-0.12.1.tar.gz",
+          "size": 14147,
+          "content_type": "application/x-gtar"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.1.0",
+      "name": "0.1.0",
+      "body": "# 0.1.0\r\n\r\nInitial Release of multihash package and pkghash tool.\r\n\r\n`hash: 12202404b2fa906043bd0e4f2621110319ff74cd85635657113120572112a1674665`\r\n\r\nLink to tar.xz file can be found below.\r\n\r\n**Full Changelog**: https://github.com/Calder-Ty/multihash/commits/0.1.0\r\n",
+      "prerelease": false,
+      "published_at": "2024-05-12T04:27:52Z",
+      "html_url": "https://github.com/Calder-Ty/multihash/releases/tag/0.1.0",
+      "assets": [
+        {
+          "name": "multihash-0.1.0.tar.gz",
+          "url": "https://github.com/Calder-Ty/multihash/releases/download/0.1.0/multihash-0.1.0.tar.gz",
+          "size": 13715,
+          "content_type": "application/x-gtar"
+        }
+      ]
+    }
+  ],
+  "owner_company": null,
+  "owner_location": "Stuck in a Text Editor",
+  "owner_blog": "calder-ty.com",
+  "owner_twitter_username": null,
+  "owner_followers": 14,
+  "owner_following": 11,
+  "owner_created_at": "2014-12-17T23:28:52Z",
+  "license": "MIT",
+  "category": "library"
+}

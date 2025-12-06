@@ -1,0 +1,42 @@
+{
+  "name": "llvm-zig",
+  "owner": "kassane",
+  "repo": "llvm-zig",
+  "description": "LLVM bindings written in Zig",
+  "type": "project",
+  "topics": [
+    "ffi-bindings",
+    "llvm-c",
+    "zig-package",
+    "llvm-c-api",
+    "zig",
+    "llvm",
+    "llvm-bindings",
+    "libclang"
+  ],
+  "stars": 50,
+  "forks": 7,
+  "watchers": 0,
+  "updated_at": "2025-12-04T07:17:40Z",
+  "dependencies": [
+    {
+      "name": "test_runner",
+      "url": "git+https://gist.github.com/karlseguin/c6bea5b35e4e8d26af6f81c22cb5d76b#eb15512d6ae49663fa9df6c7a9725b20dab43edd",
+      "hash": "N-V-__8AAHMkAAC4CUVVTX0UMBJXtfOubskbF9EJ7X6qAGYR"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# LLVM bindings for Zig\n\nThe purpose of this repository is to learn about the [`llvm`][llvm] compiler\ninfrastructure and practice some [`zig`][zig].\n\n### Requirement\n\n- [zig v0.14.0](https://ziglang.org/download) or higher.\n\n\n### How to use\n\nMake your project using\n```console\nzig init\n```\nAdd this llvm-zig module\nin `build.zig.zon`:\n```console\nzig fetch --save=llvm git+https://github.com/kassane/llvm-zig\n```\nin `build.zig`:\n\n```zig\n// [...]\n    const llvm_dep = b.dependency(\"llvm\", .{ // <== as declared in build.zig.zon\n        .target = target, // the same as passing `-Dtarget=<...>` to the library's build.zig script\n        .optimize = optimize, // ditto for `-Doptimize=<...>`\n    });\n    const llvm_mod = llvm_dep.module(\"llvm\"); // <== get llvm bindings module\n    // and/or\n    const clang_mod = llvm_dep.module(\"clang\"); // <== get clang bindings module\n    /// your executable config\n    exe.root_module.addImport(\"llvm\", llvm_mod); // <== add llvm module\n    exe.root_module.addImport(\"clang\", clang_mod); // <== add clang module\n// [...]\n```\n\n### License\n\nThis project is licensed under the [MIT](LICENSE) license.\n\n\n[llvm]: https://llvm.org\n[zig]: https://ziglang.org\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/6756180?u=d6f3a7066e4d3a99cc18ce3af2fd4b2fa754eec7&v=4",
+  "releases": [],
+  "owner_bio": "Software developer 👨‍🦽",
+  "owner_company": null,
+  "owner_location": "Bahia, Brazil",
+  "owner_blog": "https://kassane.github.io",
+  "owner_twitter_username": "TheuCatarino",
+  "owner_followers": 145,
+  "owner_following": 34,
+  "owner_created_at": "2014-02-22T13:35:59Z",
+  "license": "MIT",
+  "category": "library"
+}

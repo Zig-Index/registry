@@ -1,0 +1,49 @@
+{
+  "name": "argh",
+  "owner": "dayvster",
+  "repo": "argh",
+  "description": "A modern, minimal argument parser for Zig.",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-lib",
+    "zig-library",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 15,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-11-25T10:04:36Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# argh\n\nA modern, minimal argument parser for Zig.\n\n[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)\n[![zig 0.15](https://img.shields.io/badge/zig-0.15-f7a41d?logo=zig)](https://ziglang.org/)\n\n---\n\n\n\n**argh** is a simple, flexible argument parser for Zig projects. It supports:\n- Long and short flags/options (e.g. `--help`, `-h`)\n- Short options for all option types (e.g. `-n 5` for `--number 5`)\n- Positional arguments with min/max count\n- Required arguments\n- Mutually exclusive groups\n- Helpful error and help messages\n- Configurable help formatting (flat/simple/complex grouping; defaults to flat)\n- Grouped help output (see `printHelpWithOptions(.simple_grouped)`)\n- Type-safe int/float/bool options with min/max constraints\n- Memory-safe: all allocations are freed, no leaks\n- Fully documented API with Zig doc comments\n## Usage Example: Short Options and Grouped Help\n\n```zig\nconst argh = @import(\"argh\");\nconst std = @import(\"std\");\n\npub fn main() !void {\n  var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);\n  defer arena.deinit();\n  const allocator = arena.allocator();\n  const args = try std.process.argsAlloc(allocator);\n  defer std.process.argsFree(allocator, args);\n\n  var parser = argh.Parser.init(allocator, args);\n  try parser.addFlag(\"-h\", \"--help\", \"Show help message\");\n  try parser.addOption(\"--name\", \"-n\", \"world\", \"Name to greet\");\n  try parser.addIntOption(\"--count\", \"-c\", 1, \"How many times\", 1, 10);\n  try parser.addOption(\"--loud\", \"-L\", \"false\", \"Loud greeting\");\n  parser.options.getPtr(\"--loud\").?.typ = .bool;\n  try parser.parse();\n\n  if (parser.flagPresent(\"--help\")) {\n    parser.printHelpWithOptions(.simple_grouped);\n    return;\n  }\n  const name = parser.getOption(\"--name\") orelse \"world\";\n  const count = try parser.getOptionInt(\"--count\") orelse 1;\n  const loud = try parser.getOptionBool(\"--loud\") orelse false;\n  for (0..count) |_| {\n    if (loud) {\n      std.debug.print(\"HELLO, {s}!\\n\", .{name});\n    } else {\n      std.debug.print(\"Hello, {s}.\\n\", .{name});\n    }\n  }\n}\n```\n\nThis example demonstrates:\n- Short and long options for all types\n- Type-safe int and bool option access\n- Grouped help output\n- Memory safety via arena allocator\n\n## Roadmap\n\nCurious about what's next? See planned and potential features in the [Roadmap](./ROADMAP.md).\n\n\n## Features\n\n- Simple, declarative API\n- Long and short flags/options (e.g. `--help`, `-h`)\n- Type-safe int/float options with min/max constraints\n- Positional arguments with min/max count constraints\n- Required arguments\n- Mutually exclusive groups\n- Helpful error and help messages\n- Configurable help output style (see `HelpStyle`)\n- Fully documented API (Zig doc comments)\n\n## Installation\n\nInstall with Zig's package manager:\n\n```sh\nzig fetch --save git+https://github.com/dayvster/argh\n```\n\nThen add to your `build.zig`:\n\n```zig\nconst argh_pkg = b.dependency(\"argh\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\n\n// const exe = b.addExecutable(...); ...\n\n// make sure to place this after creating your executable\nexe.root_module.addImport(\"argh\", argh_pkg.module(\"argh\"));\n```\n\n## Quick Example\n\n```zig\nconst std = @import(\"std\");\nconst argparse = @import(\"argh\");\n\npub fn main() !void {\n  var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);\n  defer arena.deinit();\n  const allocator = arena.allocator();\n  const args = try std.process.argsAlloc(allocator);\n  defer std.process.argsFree(allocator, args);\n\n  var parser = argparse.Parser.init(allocator, args);\n  try parser.addFlag(\"-h\", \"--help\", \"Show help message\");\n  try parser.addOptionWithShort(\"--name\", \"-n\", \"World\", \"Name to greet\");\n  try parser.addPositionalWithCount(\"input\", \"Input files\", 1, 2); // min/max count\n  try parser.parse();\n\n  if (parser.errors.items.len > 0) {\n    parser.printErrors();\n    parser.printHelp(); // prints help in flat style by default\n    return;\n  }\n  if (parser.flagPresent(\"-h\") or parser.flagPresent(\"--help\")) {\n    parser.printHelp(); // prints help in flat style by default\n    return;\n  }\n  const name = parser.getOption(\"--name\") orelse \"World\";\n  std.debug.print(\"Hello, {s}!\\n\", .{ name });\n  for (parser.positionals.items) |pos| {\n    if (pos.value) |val| std.debug.print(\"Input: {s}\\n\", .{val});\n  }\n}\n```\n\n## Example: Type-safe int/float options\n\n```zig\nconst std = @import(\"std\");\nconst argparse = @import(\"argh\");\n\npub fn main() !void {\n  var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);\n  defer arena.deinit();\n  const allocator = arena.allocator();\n  const args = try std.process.argsAlloc(allocator);\n  defer std.process.argsFree(allocator, args);\n\n  var parser = argparse.Parser.init(allocator, args);\n  try parser.addIntOption(\"--count\", 5, \"How many times\", 1, 10);\n  try parser.addFloatOption(\"--ratio\", 0.5, \"A ratio\", 0.0, 1.0);\n  try parser.parse();\n\n  if (parser.errors.items.len > 0) {\n  parser.printErrors();\n  parser.printHelp(); // prints help in flat style by default\n  return;\n  }\n\n  const count = try parser.getOptionInt(\"--count\") orelse 5;\n  const ratio = try parser.getOptionFloat(\"--ratio\") orelse 0.5;\n\n  std.debug.print(\"count: {d}\\n\", .{count});\n  std.debug.print(\"ratio: {:.2}\\n\", .{ratio});\n}\n```\n\n## Usage\n\n- **Flags:**\n  - `try parser.addFlag(\"-h\", \"--help\", \"Show help message\");`\n- **Options:**\n  - `try parser.addOptionWithShort(\"--name\", \"-n\", \"World\", \"Name to greet\");`\n- **Positional Arguments:**\n  - `try parser.addPositional(\"input\", \"Input file\", true, null);`\n- **Required Arguments:**\n  - `try parser.setRequired(\"--name\");`\n- **Mutually Exclusive Groups:**\n  - `try parser.addMutexGroup(\"group1\", &[_][]const u8{ \"--foo\", \"--bar\" });`\n\n## Help Style\n\nBy default, `parser.printHelp()` prints help in the flat style.\nTo use a different style, use `printHelpWithOptions`:\n\n```zig\nparser.printHelpWithOptions(argparse.Parser.HelpStyle.simple_grouped);\nparser.printHelpWithOptions(argparse.Parser.HelpStyle.complex_grouped);\n```\n\n## Advanced Features\n\n- Short and long flags/options\n- Required and default values\n- Mutually exclusive argument groups\n- Automatic help and error output\n- Simple, no-macro API\n\n## Why argh?\n\n- **Minimal:** No macros, no codegen, no dependencies.\n- **Clear:** Easy to read, easy to debug.\n- **Flexible:** Supports most CLI patterns out of the box.\n- **Modern:** Designed for Zig 0.15+.\n\n## Contributing\n\nPull requests and issues are welcome! Please keep code and documentation clear and minimal.\n\n## License\n\nMIT\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/4529373?u=e0c1a6ee81f0947e0c88518b927a93377733ba9a&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.15",
+      "name": "v0.15",
+      "body": "Initial public release. See README for features.",
+      "prerelease": false,
+      "published_at": "2025-09-28T16:41:05Z",
+      "html_url": "https://github.com/dayvster/argh/releases/tag/v0.15",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Work hard, study well and eat and sleep plenty. That's the Turtle Hermit way to learn.",
+  "owner_company": null,
+  "owner_location": "Graz, Austria",
+  "owner_blog": "https://dayvster.com/",
+  "owner_twitter_username": "dayvsterdev",
+  "owner_followers": 29,
+  "owner_following": 5,
+  "owner_created_at": "2013-05-25T21:34:02Z",
+  "license": "MIT",
+  "category": "library"
+}

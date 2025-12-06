@@ -1,0 +1,107 @@
+{
+  "name": "uuid-zig",
+  "owner": "r4gus",
+  "repo": "uuid-zig",
+  "description": "A UUID library written in Zig",
+  "type": "project",
+  "topics": [
+    "guid",
+    "rfc4122",
+    "uuid",
+    "uuid-v4",
+    "uuidv4",
+    "zig",
+    "zig-lang",
+    "ziglang",
+    "uuidv7",
+    "uuid-v7"
+  ],
+  "stars": 41,
+  "forks": 8,
+  "watchers": 3,
+  "updated_at": "2025-12-06T14:47:35Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz"
+    }
+  ],
+  "minimum_zig_version": "0.12.0",
+  "readme": "# UUID Zig\n\n![GitHub](https://img.shields.io/github/license/r4gus/uuid-zig?style=flat-square)\n![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/r4gus/uuid-zig/main.yml?style=flat-square)\n![GitHub all releases](https://img.shields.io/github/downloads/r4gus/uuid-zig/total?style=flat-square)\n<noscript><a href=\"https://liberapay.com/r4gus/donate\"><img alt=\"Donate using Liberapay\" src=\"https://liberapay.com/assets/widgets/donate.svg\"></a></noscript>\n\nUniversally Unique IDentifiers (UUIDs) are 128 bit long IDs that do not require a central\nregistration process.\n\nVersions:\n\n| Zig version | uuid-zig version |\n|:-----------:|:----------------:|\n| 13.0        | 0.2.0, 0.2.1         |\n| 14.x        | 0.3.0, 0.3.1, 0.3.2  |\n| 15.x        | 0.4.0                |\n\nTo add the `uuid-zig` package to your `build.zig.zon` run:\n\n```\n# Replace <VERSION TAG> with the version you want to use\nzig fetch --save https://github.com/r4gus/uuid-zig/archive/refs/tags/<VERSION TAG>.tar.gz\n\n// e.g., zig fetch --save https://github.com/r4gus/uuid-zig/archive/refs/tags/0.4.0.tar.gz\n```\n\nThen import the UUID module within your `build.zig`, e.g.:\n\n```zig\n// ...\nconst uuid_dep = b.dependency(\"uuid\", .{\n    .target = target,\n    .optimize = optimize,\n});\n// ...\n\nconst exe: *Compile = b.addExecutable(.{\n    // ...\n    .root_module: ?*Module = b.createModule(.{\n        .imports: []const Import = &.{\n            // ...\n            .{ .name: []const u8 = \"uuid\", .module: *Module = uuid_dep.module(\"uuid\") },\n            // ...\n        },\n    }),\n});\n// ...\n```\n\n## Getting started\n\nTo generate a version 4 (random) UUID you can use:\n\n```zig\nconst uuid = @import(\"uuid\");\n\nconst id = uuid.v4.new();\n```\n\nYou can serialize a UUID into a URN:\n\n```zig\nconst uuid = @import(\"uuid\");\n\nconst id = uuid.v7.new();\n\nconst urn = uuid.urn.serialize(id);\n```\n\nYou can also parse URNs (UUID strings):\n\n```zig\nconst uuid = @import(\"uuid\");\n\nconst id = try uuid.urn.deserialize(\"6ba7b811-9dad-11d1-80b4-00c04fd430c8\");\n```\n\n## Which UUID version should I use?\n\nConsider version 4 (`v4`) UUIDs if you just need unique identifiers and version 7 (`v7`)\nif you want to use UUIDs as database keys or need to sort them.\n\n### Supported versions\n\n* `v4` - UUIDs using random data.\n* `v7` - UUIDs using a Epoch timestamp in combination with random data.\n\n## Encoding\n\nThis library encodes UUIDs in big-endian format, e.g. `00112233-4455-6677-8899-aabbccddeeff`\nis encoded as `00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff` where `00` is the least and\n`ff` is the most significant byte (see [RFC4122 4.1.2 Layout and Byte Order](https://datatracker.ietf.org/doc/html/rfc4122#section-4.1.2)).\n\n## C Library\n\nRun `zig build -Doptimize=ReleaseFast` to build the C-Library. You will find the library in `zig-out/lib` and the header in `zig-out/include`.\n\nYou can find a C-example in the examples folder.\n\n## Benchmark\n\nTo run a simple benchmark execute:\n\n```\nzig build bench -- 10000000 v7\n```\n\nExample: ThinkPad X1 Yoga 3rd with an i7-8550U\n\n```\nv4: 10000000 UUIDs in 134.057ms\nv7: 10000000 UUIDs in 399.558ms\n```\n\nExample: Macbook Pro with M3 Pro\n\n```\nv4: 10000000 UUIDs in 1.666s\nv7: 10000000 UUIDs in 546.736ms\n```\n\n## References\n\n* [RFC4122: A Universally Unique IDentifier (UUID) URN Namespace](https://datatracker.ietf.org/doc/html/rfc4122)\n* [New UUID Formats: draft-peabody-dispatch-new-uuid-format-04](https://datatracker.ietf.org/doc/html/draft-peabody-dispatch-new-uuid-format)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/25912761?u=03c61d1386a1628b528c35971c59d99c0c5ee8b2&v=4",
+  "releases": [
+    {
+      "tag_name": "0.4.0",
+      "name": "0.4.0",
+      "body": "- Updated package to support Zig compiler version [0.15.1](https://ziglang.org/download/0.15.1/release-notes.html)\r\n    - The updates have mainly to do with the new IO interface\r\n- The benchmarks show a significant improvement in speed when compiling with 0.15.1",
+      "prerelease": false,
+      "published_at": "2025-08-23T16:47:56Z",
+      "html_url": "https://github.com/r4gus/uuid-zig/releases/tag/0.4.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.3.2",
+      "name": "0.3.2",
+      "body": "## What's Changed\r\n* add a serializeZ method to urn by @jcollie in https://github.com/r4gus/uuid-zig/pull/11\r\n\r\n## New Contributors\r\n* @jcollie made their first contribution in https://github.com/r4gus/uuid-zig/pull/11\r\n\r\n**Full Changelog**: https://github.com/r4gus/uuid-zig/compare/0.3.1...0.3.2",
+      "prerelease": false,
+      "published_at": "2025-08-10T07:24:24Z",
+      "html_url": "https://github.com/r4gus/uuid-zig/releases/tag/0.3.2",
+      "assets": []
+    },
+    {
+      "tag_name": "0.3.1",
+      "name": "0.3.1",
+      "body": "- removed old dependency",
+      "prerelease": false,
+      "published_at": "2025-03-20T09:16:19Z",
+      "html_url": "https://github.com/r4gus/uuid-zig/releases/tag/0.3.1",
+      "assets": []
+    },
+    {
+      "tag_name": "0.3.0",
+      "name": "0.3.0",
+      "body": "## What's Changed\r\n* Update README.md by @xfxpositions in https://github.com/r4gus/uuid-zig/pull/5\r\n* Fix breaking zig change in 0.14.0; renamed std.rand.Random -> std.Random by @MFAshby in https://github.com/r4gus/uuid-zig/pull/8\r\n* Fix breaking zig change in 0.14.0; added `.fingerprint`\r\n* Use new build.zig.zon to improve cache speed by @zewenn in https://github.com/r4gus/uuid-zig/pull/9\r\n* Fixed test-runner\r\n* Added Github test-workflow\r\n* Added C-Library (generation of v4 and v7 UUIDs, plus creation of URNs from UUIDs)\r\n\r\n## New Contributors\r\n* @xfxpositions made their first contribution in https://github.com/r4gus/uuid-zig/pull/5\r\n* @MFAshby made their first contribution in https://github.com/r4gus/uuid-zig/pull/8\r\n* @zewenn made their first contribution in https://github.com/r4gus/uuid-zig/pull/9\r\n\r\n**Full Changelog**: https://github.com/r4gus/uuid-zig/compare/0.2.1...0.3.0\r\n\r\n## Getting Started\r\n\r\n```\r\nzig fetch --save https://github.com/r4gus/uuid-zig/archive/refs/tags/0.3.0.tar.gz\r\n```",
+      "prerelease": false,
+      "published_at": "2025-03-10T07:52:04Z",
+      "html_url": "https://github.com/r4gus/uuid-zig/releases/tag/0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.2.1",
+      "name": "",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-06-08T09:23:34Z",
+      "html_url": "https://github.com/r4gus/uuid-zig/releases/tag/0.2.1",
+      "assets": []
+    },
+    {
+      "tag_name": "0.2.0",
+      "name": "0.2.0",
+      "body": "**Full Changelog**: https://github.com/r4gus/uuid-zig/compare/0.1.0...0.2.0",
+      "prerelease": false,
+      "published_at": "2024-05-01T16:30:35Z",
+      "html_url": "https://github.com/r4gus/uuid-zig/releases/tag/0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.1.0",
+      "name": "0.1.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2023-08-25T11:23:04Z",
+      "html_url": "https://github.com/r4gus/uuid-zig/releases/tag/0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Maybe we meet @ Zigtoberfest (https://zigtoberfest.de) or Software You Can Love (https://softwareyoucan.love)",
+  "owner_company": null,
+  "owner_location": "Germany",
+  "owner_blog": "https://zigtoberfest.de",
+  "owner_twitter_username": null,
+  "owner_followers": 57,
+  "owner_following": 27,
+  "owner_created_at": "2017-02-20T22:05:23Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,77 @@
+{
+  "name": "later",
+  "owner": "theodore-s-beers",
+  "repo": "later",
+  "description": "Unicode Collation Algorithm implementation in Zig",
+  "type": "project",
+  "topics": [
+    "zig-package",
+    "unicode",
+    "unicode-collation",
+    "zig"
+  ],
+  "stars": 12,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-12-05T19:18:55Z",
+  "minimum_zig_version": "0.15.2",
+  "readme": "# later – Unicode collation in Zig\n\nThis is a Zig implementation of the\n[Unicode Collation Algorithm](https://www.unicode.org/reports/tr10/), using no\ndependencies beyond the standard library. `later` passes the conformance tests\nfor both the Default Unicode Collation Element Table (DUCET) and the root\ncollation order of the Common Locale Data Repository (CLDR). You can verify this\nby running the tests:\n\n```sh\nzig build test --release=safe\n```\n\n## Usage example\n\n```zig\nconst std = @import(\"std\");\nconst later = @import(\"later\");\n\ntest \"sort multilingual list of names\" {\n    const alloc = std.testing.allocator;\n\n    var coll = try later.Collator.initDefault(alloc);\n    defer coll.deinit();\n\n    var input = [_][]const u8{\n        \"چنگیز\",\n        \"Éloi\",\n        \"Ötzi\",\n        \"Melissa\",\n        \"صدام\",\n        \"Mélissa\",\n        \"Overton\",\n        \"Elrond\",\n    };\n\n    const expected = [_][]const u8{\n        \"Éloi\",\n        \"Elrond\",\n        \"Melissa\",\n        \"Mélissa\",\n        \"Ötzi\",\n        \"Overton\",\n        \"چنگیز\",\n        \"صدام\",\n    };\n\n    std.mem.sortUnstable([]const u8, &input, &coll, later.collateComparator);\n    try std.testing.expectEqualSlices([]const u8, &expected, &input);\n}\n```\n\n## Further notes\n\n`later` is based on my somewhat more mature UCA implementation in Rust,\n[feruca](https://github.com/theodore-s-beers/feruca). I wanted to learn Zig\nproperly, and Unicode collation is a good, non-trivial problem to solve toward\nthat end. Perhaps this collator will also be of use to others in the Zig\ncommunity.\n\nIt's worth noting that a substantial part of the work of implementing the UCA is\ngenerating maps from Unicode data files. We need to be able to determine\nquickly, for a given code point, its canonical decomposition, combining class,\ncollation weights, and more. I built the maps for `later` in a separate\nrepository, [uca-maps-zig](https://github.com/theodore-s-beers/uca-maps-zig).\nThey're serialized in simple custom binary formats (see `src/bin`) and loaded\non-demand in collation.\n\nAnother part of the fun in this project was implementing UTF-8\ndecoding/validation and Unicode form NFD normalization. It turns out the\nalgorithms are well established, and they work nicely, and they aren't all that\ndifficult to code. We stand on the shoulders of giants!\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/32523293?u=efb1809b3ae5663f417f7bb9319c1030e1a9b182&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.2.2",
+      "name": "v0.2.2",
+      "body": "In this patch release:\r\n\r\n- Updated the library to conform to Zig 0.15. There were breaking changes to the std lib, for example with `ArrayList`.\r\n- Did some refactoring, mostly to reduce redundancy, though perhaps with a slight performance benefit (a couple of \"cold paths\" were removed).\r\n- Simplified processing of sort keys, in particular at the quaternary level, which is better viewed as a modified re-run of the primary level.\r\n\r\nFull changelog: https://github.com/theodore-s-beers/later/compare/v0.2.1...v0.2.2",
+      "prerelease": false,
+      "published_at": "2025-12-04T02:21:17Z",
+      "html_url": "https://github.com/theodore-s-beers/later/releases/tag/v0.2.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.1",
+      "name": "v0.2.1",
+      "body": "In this patch release:\r\n\r\n- I was persuaded to switch back to an approach whereby all allocation fallibility is \"handled\" throughout the library's code, and it can then be disregarded (i.e., caught to panic) at the top level. Collation logic lives under a function called `collateFallible`, which is then wrapped by `collate`. Users who prefer to allow for allocation failure can do so—though it has some frustrating implications. I understand that this is fundamental to the design of the Zig language.\r\n\r\nFull changelog: https://github.com/theodore-s-beers/later/compare/v0.2.0...v0.2.1",
+      "prerelease": false,
+      "published_at": "2025-07-21T13:45:36Z",
+      "html_url": "https://github.com/theodore-s-beers/later/releases/tag/v0.2.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "In this minor version release:\r\n\r\n- The `Collator` API is a bit simpler, since `init` no longer requires `try`. Rather, if the modest initial allocations fail, it will panic.\r\n- The \"panic on allocation failure\" approach is now followed throughout the library, simplifying many code paths. `Collator` makes as few allocations as possible but needs a certain amount of memory—between 1.7 and 1.8 MiB total, when running the UCA conformance tests—and if that isn't available, there isn't much that we can do.\r\n\r\nFull changelog: https://github.com/theodore-s-beers/later/compare/v0.1.1...v0.2.0",
+      "prerelease": false,
+      "published_at": "2025-07-20T15:54:51Z",
+      "html_url": "https://github.com/theodore-s-beers/later/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.1",
+      "name": "v0.1.1",
+      "body": "In this patch release:\r\n\r\n- We switch to a faster method of looking up a code point's canonical combining class.\r\n- The conformance test function is made a bit more efficient.\r\n- Various little details in the code are cleaned up.\r\n\r\nFull changelog: https://github.com/theodore-s-beers/later/compare/v0.1.0...v0.1.1",
+      "prerelease": false,
+      "published_at": "2025-07-18T03:44:55Z",
+      "html_url": "https://github.com/theodore-s-beers/later/releases/tag/v0.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "This is an initial release of the library, to facilitate adding it as a dependency.",
+      "prerelease": false,
+      "published_at": "2025-07-12T12:47:37Z",
+      "html_url": "https://github.com/theodore-s-beers/later/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Research software engineer, Persian and Arabic philologist",
+  "owner_company": null,
+  "owner_location": "Haverford",
+  "owner_blog": "https://www.theobeers.com/",
+  "owner_twitter_username": "theodorebeers",
+  "owner_followers": 56,
+  "owner_following": 31,
+  "owner_created_at": "2017-10-04T18:02:20Z",
+  "license": "MIT",
+  "category": "library"
+}

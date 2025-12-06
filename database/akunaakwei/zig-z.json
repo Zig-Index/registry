@@ -1,0 +1,34 @@
+{
+  "name": "zig-z",
+  "owner": "akunaakwei",
+  "repo": "zig-z",
+  "description": "zlib packaged for zig",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-07-19T17:51:50Z",
+  "dependencies": [
+    {
+      "name": "z",
+      "url": "https://github.com/madler/zlib/archive/refs/tags/v1.3.1.tar.gz",
+      "hash": "N-V-__8AAB0eQwD-0MdOEBmz7intriBReIsIDNlukNVoNu6o"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# zlib\r\nThis is zlib packaged for the Zig build system.",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/11787994?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 0,
+  "owner_following": 2,
+  "owner_created_at": "2015-04-03T16:34:07Z",
+  "license": "Zlib",
+  "category": "library"
+}

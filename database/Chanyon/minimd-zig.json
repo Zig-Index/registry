@@ -1,0 +1,44 @@
+{
+  "name": "minimd-zig",
+  "owner": "Chanyon",
+  "repo": "minimd-zig",
+  "description": "simple markdown parser",
+  "type": "project",
+  "topics": [
+    "markdown-parser",
+    "ziglang",
+    "markdown",
+    "zig",
+    "markdown-zig",
+    "zig-package"
+  ],
+  "stars": 4,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-04-27T01:38:51Z",
+  "dependencies": [
+    {
+      "name": "uuid",
+      "url": "https://github.com/Chanyon/zig-uuid/archive/c2ab7370004843db38094c708e82d191b2912399.tar.gz",
+      "hash": "1220489b65502b948fe79024279030958dda2a6c2af218a6399fb2650d412585f14a"
+    },
+    {
+      "name": "string",
+      "url": "https://github.com/JakubSzark/zig-string/archive/9ce0b13e6b0008796907bf9713eb0c1aac2b1ad7.tar.gz",
+      "hash": "12208fa7e4afc8a9c2b267f034d4d7b69952ac5bf39e48449e0a54dcbaae2309f54e"
+    }
+  ],
+  "readme": "### simple-markdown-parse\r\n---\r\n### Markdown Grammar\r\n- headline\r\n  ```\r\n    # heading1 => <h1></h1>\r\n    ## heading2 => <h2></h2>\r\n    ### heading3 => <h3></h3>\r\n    #### heading4 => <h4></h4>\r\n    ##### heading5 => <h5></h5>\r\n    ###### heading6 => <h6></h6>\r\n  ```\r\n- paragraph\r\n  ```\r\n    hello world\r\n    <p>hello world</p>\r\n  ```\r\n- strong\r\n  ```\r\n    **test** => <strong>test</strong>\r\n    *test* => <em>test</em>\r\n    ***test*** => <strong><em>test</em></strong>\r\n    __hello__ => <strong>test</strong>\r\n  ```\r\n- blockquote\r\n  ```\r\n    > hello => <blockquote>hello</blockquote>\r\n\r\n    > hello\r\n    >\r\n    >> world \r\n    => <blockquote>hello<blockquote>world</blockquote></blockquote> \r\n  ```\r\n- separation line\r\n  ```\r\n    --- => <hr>\r\n  ```\r\n- link\r\n  ```\r\n    [link](https://github.com/) => <a href=\"https://github.com/\">link</a>\r\n    <https://github.com> => <a href=\"https://github.com/\">https://github.com</a>\r\n  ```\r\n- image\r\n  ```\r\n    ![img](/assets/img/philly-magic-garden.jpg)\r\n    => <img src=\"/assets/img/philly-magic-garden.jpg\" alt=\"img\">\r\n\r\n    [![image](/assets/img/ship.jpg)](https://github.com/Chanyon)\r\n    => <a href=\"https://github.com/Chanyon\"><img src=\"/assets/img/ship.jpg\" alt=\"image\"></a>\"\r\n  ```\r\n- delete line\r\n  ```\r\n    ~~test~~ => <p><s>test</s></p>\r\n    hello~~test~~world => <p>hello<s>test</s>world</p>\r\n  ```\r\n- code\r\n  ```\r\n  `test` => <code>test</code>\r\n  `` `test` `` => <code> `test` </code>\r\n  =```\r\n    {\r\n     \"width\": \"100px\",\r\n     \"height\": \"100px\",\r\n    \"fontSize\": \"16px\",\r\n    \"color\": \"#ccc\",\r\n    }\r\n   =```\r\n   => <pre><code><br>{<br>  \"width\": \"100px\",<br>  \"height\": \"100px\",<br>  \"fontSize\": \"16px\",<br>  \"color\": \"#ccc\",<br>}<br></code></pre>\r\n  ```\r\n\r\n- footnote\r\n  ```\r\n  test[^1]\r\n  [^1]: ooooo\r\n  =>  <p>test<a id=\"src-1\" href=\"#target-1\">[1]</a></p>\r\n  <section>\r\n  <p><a id=\"target-1\" href=\"#src-1\">[^1]</a>:  ooo</p>\r\n  </section>\r\n  ```\r\n- task list\r\n  ```\r\n  - [ ] task one\r\n  - [x] task two\r\n  ```\r\n- table\r\n  ```\r\n  | Syntax      | Description | Test |\r\n  | :---------- | ----------: | :-----: |\r\n  | Header      | Title       |  will |\r\n  | Paragraph   | Text        |  why  |\r\n  ```\r\n\r\n- unordered list\r\n  ```\r\n  - test\r\n    - test2\r\n        - test3\r\n    - test4\r\n  - test5\r\n  - test6\r\n  ```\r\n- ordered list\r\n  ```\r\n  1. test\r\n    1. test2\r\n        1. test3\r\n    2. test4\r\n  2. test5\r\n  3. test6\r\n  ```\r\n- escape characters\r\n  ```\r\n   \\[\\]\r\n   \\<test\\>\r\n   \\*test\\* \\! \\# \\~ \\-\r\n   \\_ test \\_ \\(\\)\r\n  ```\r\n\r\n### DONE\r\n- [x] 无序列表\r\n- [x] 有序列表\r\n- [x] 表格语法\r\n- [x] 内嵌HTML\r\n- [x] 脚注(footnote)\r\n- [x] task list \r\n- [x] 转义字符\r\n- [x] html tag inline style\r\n- [X] 代码块高亮 \\```c ```\r\n- [x] 标题目录",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/40350332?u=3996bfc5a1fdbe66baa0657aa47f67ad2ee2cf94&v=4",
+  "releases": [],
+  "owner_bio": "Have lots of fun.",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 12,
+  "owner_following": 48,
+  "owner_created_at": "2018-06-18T06:05:04Z",
+  "license": "MPL-2.0",
+  "category": "library"
+}

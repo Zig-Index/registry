@@ -1,0 +1,48 @@
+{
+  "name": "chrono-zig",
+  "owner": "nandisomnath",
+  "repo": "chrono-zig",
+  "description": "The chrono library for zig",
+  "type": "project",
+  "topics": [
+    "chrono",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-12-05T19:18:48Z",
+  "dependencies": [
+    {
+      "name": "iana_time_zone",
+      "url": "https://github.com/nandisomnath/iana-time-zone/archive/refs/tags/v0.1.0.tar.gz",
+      "hash": "iana_time_zone-0.1.0-5RFTZ2fdAQAcD2HYWeRaRuhnHnotlLnu_v3vPIiMGdg4"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "Chrono: Timezone-aware date and time handling\n========================================\n\n\n\nChrono aims to provide all functionality needed to do correct operations on dates and times in the\n[proleptic Gregorian calendar](https://en.wikipedia.org/wiki/Proleptic_Gregorian_calendar):\n\n* The `DateTime` type is timezone-aware\n  by default, with separate timezone-naive types.\n* Operations that may produce an invalid or ambiguous date and time return `Option` or `MappedLocalTime`\n* Configurable parsing and formatting with an `strftime` inspired date and time formatting syntax.\n* The `Local` timezone works with the current timezone of the OS.\n* Types and operations are implemented to be reasonably efficient.\n\nTimezone data is not shipped with chrono by default to limit binary sizes. Use the companion crate\n[Chrono-TZ](https://crates.io/crates/chrono-tz) or [`tzfile`](https://crates.io/crates/tzfile) for\nfull timezone support.\n\n## Documentation\n\n[`Experimental`](https://nandisomnath.github.io/chrono-zig),  Documentation is not fully prepared.\n\n<!-- See [docs.rs](https://docs.rs/chrono/latest/chrono/) for the API reference. -->\n\n## Limitations\n\n* Only the proleptic Gregorian calendar (i.e. extended to support older dates) is supported.\n* Date types are limited to about +/- 262,000 years from the common epoch.\n* Time types are limited to nanosecond accuracy.\n* Leap seconds can be represented, but Chrono does not fully support them.\n* No `deprecated` functions are no longer maintained.\n\n## Module features\n\n\n\n## Zig version requirements\n\nThe Minimum Supported Zig Version is currently **Zig 0.14.0**.\n\n\n## License\n\nThis project is licensed under \n* [MIT License](https://opensource.org/licenses/MIT)\n\n\n## Disclaimer\n\nThis project is a port of the rust version of\n[`Chrono`](https://github.com/chronotope/chrono).  \nIf the rust version have any bug that can have in this project.\n\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/123479436?u=187ac40541f2e42c63e1546e5a78cc452e7002f1&v=4",
+  "releases": [
+    {
+      "tag_name": "0.1.0",
+      "name": "0.1.0",
+      "body": "**Full Changelog**: https://github.com/nandisomnath/chrono-zig/commits/0.1.0",
+      "prerelease": true,
+      "published_at": "2025-07-14T06:45:14Z",
+      "html_url": "https://github.com/nandisomnath/chrono-zig/releases/tag/0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "I am a computer lover",
+  "owner_company": null,
+  "owner_location": "India",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 3,
+  "owner_following": 4,
+  "owner_created_at": "2023-01-24T14:31:55Z",
+  "homepage": "https://nandisomnath.github.io/chrono-zig/",
+  "license": "MIT",
+  "category": "library"
+}

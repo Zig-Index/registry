@@ -1,0 +1,28 @@
+{
+  "name": "hamt",
+  "owner": "SimonLSchlee",
+  "repo": "hamt",
+  "description": "HAMT and StencilArrays implementation in Zig",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2024-11-25T10:11:26Z",
+  "minimum_zig_version": "0.13.0",
+  "readme": "\n# HAMT and StencilArrays\n\nA work-in-progress implementation of HAMTs (Hash Array Mapped Tries)\nand StencilArrays (StencilVectors) in Zig.\n\nBased on the ideas presented in theses papers:\n\n- [Ideal Hash Trees (Bagwell, Phil  2001)](https://infoscience.epfl.ch/record/64398)\n- [Runtime and Compiler Support for HAMTs](https://www-old.cs.utah.edu/plt/publications/dls21-tzf.pdf)\n\n## Description\n\nHAMTs are bitwise tries that have a compact memory layout, they are useful\ndata structures that can be used as a key-value mapping, they also can be\nused as a persistent data structure, which means that old versions keep\nworking and different versions can share nodes, this can be useful to\nimplement things like undo, or wherever it is helpful to keep old versions\nof a value, without having to create full copies manually.\n\nThis implementation contains dynamic variants for runtime usage with both\npointer and index support, imperative and persistent (old versions stay valid)\nbehavior based on user configuration.\n\nIt also has simplified static implementations that can be modified at comptime\nwithout needing an allocator and then frozen and queried at runtime.\n\nIf you have ideas for improvements, feel free to open an issue.\n\n## Docs\nhttps://simonlschlee.github.io/hamt/\n\n## Examples\n\nTake a look at `src/example.zig` for some example code, you can run this after\ncloning this repository by running `zig run src/example.zig`, the documentation\nalso contains usage examples in the form of doc-tests.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/32989557?u=618d16bec3913e352735b3c01c7b12bf588d5adf&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 8,
+  "owner_following": 2,
+  "owner_created_at": "2017-10-21T21:05:24Z",
+  "homepage": "https://simonlschlee.github.io/hamt/",
+  "license": "MIT",
+  "category": "library"
+}

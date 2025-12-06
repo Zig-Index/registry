@@ -1,0 +1,62 @@
+{
+  "name": "brotli",
+  "owner": "zig-devel",
+  "repo": "brotli",
+  "description": "",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-library",
+    "zig-package",
+    "brotli"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-10-31T07:45:27Z",
+  "dependencies": [
+    {
+      "name": "brotli",
+      "url": "https://github.com/google/brotli/archive/028fb5a23661f123017c060daa546b55cf4bde29.tar.gz",
+      "hash": "N-V-__8AAJudKgCQCuIiH6MJjAiIJHfg_tT_Ew-0vZwVkCo_"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# [brotli](https://github.com/google/brotli)@v1.2.0 [![Build and test library](https://github.com/zig-devel/brotli/actions/workflows/library.yml/badge.svg)](https://github.com/zig-devel/brotli/actions/workflows/library.yml)\n\nGeneric-purpose lossless compression algorithm.\n\n## Usage\n\nInstall library:\n\n```sh\nzig fetch --save https://github.com/zig-devel/brotli/archive/refs/tags/1.2.0-0.tar.gz\n```\n\nStatically link with `mod` module:\n\n```zig\nconst brotli = b.dependency(\"brotli\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\nmod.linkLibrary(brotli.artifact(\"brotlicommon\"));\nmod.linkLibrary(brotli.artifact(\"brotlidec\")); // if decoder required\nmod.linkLibrary(brotli.artifact(\"brotlienc\")); // if encoder required\n```\n\n## License\n\nAll code in this repo is dual-licensed under [0BSD](./LICENSES/0BSD.txt) OR [MIT](./LICENSES/MIT.txt).\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/235410832?v=4",
+  "releases": [
+    {
+      "tag_name": "1.2.0-0",
+      "name": "1.2.0-0",
+      "body": "Update upstream to 1.2.0.\r\n\r\n**Full Changelog**: https://github.com/zig-devel/brotli/compare/1.1.0-1...1.2.0-0\r\n**Release checks**: https://github.com/zig-devel/brotli/actions/runs/18966128471",
+      "prerelease": false,
+      "published_at": "2025-10-31T07:59:12Z",
+      "html_url": "https://github.com/zig-devel/brotli/releases/tag/1.2.0-0",
+      "assets": []
+    },
+    {
+      "tag_name": "1.1.0-1",
+      "name": "1.1.0-1",
+      "body": "Fix the Windows build. Update build and CI configs.\r\n\r\n**Full Changelog**: https://github.com/zig-devel/brotli/compare/1.1.0-0...1.1.0-1\r\n**Release checks**: https://github.com/zig-devel/brotli/actions/runs/18964849163",
+      "prerelease": false,
+      "published_at": "2025-10-31T07:29:03Z",
+      "html_url": "https://github.com/zig-devel/brotli/releases/tag/1.1.0-1",
+      "assets": []
+    },
+    {
+      "tag_name": "1.1.0-0",
+      "name": "1.1.0-0",
+      "body": "Initial release. Adds static library build, basic test and CI on Linux.\r\n\r\n**Full Changelog**: https://github.com/zig-devel/brotli/commits/1.1.0-0\r\n**Release checks**: https://github.com/zig-devel/brotli/actions/runs/18244069730",
+      "prerelease": false,
+      "published_at": "2025-10-04T12:09:06Z",
+      "html_url": "https://github.com/zig-devel/brotli/releases/tag/1.1.0-0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "An opinionated collection of C/C++ libraries builded by the Zig build system.",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2025-10-01T00:33:09Z",
+  "category": "library"
+}

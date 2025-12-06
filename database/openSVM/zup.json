@@ -1,0 +1,29 @@
+{
+  "name": "zup",
+  "owner": "openSVM",
+  "repo": "zup",
+  "description": "zig api server",
+  "type": "project",
+  "topics": [
+    "bunjs",
+    "high-load",
+    "high-performance",
+    "nodejs",
+    "zig",
+    "zig-http",
+    "zig-package"
+  ],
+  "stars": 6,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-08-23T13:46:36Z",
+  "readme": "# Zup Server\n\nA high-performance HTTP and WebSocket server framework written in Zig, designed for building scalable web applications with built-in parallel computing capabilities via SPICE integration.\n\n## Features\n\n- 🚀 Multi-threaded HTTP server with automatic CPU core detection\n- 🔌 WebSocket support with automatic upgrade handling\n- 💪 Keep-alive connection support for improved performance\n- 🔄 Integration with SPICE for parallel computing tasks\n- 📊 Built-in benchmarking tools\n- 🧪 Comprehensive test suite\n\n## Installation\n\n1. Ensure you have Zig 0.11.0 or later installed\n2. Clone the repository:\n```bash\ngit clone https://github.com/yourusername/zup.git\ncd zup\n```\n\n## Building\n\nBuild the project using Zig's build system:\n\n```bash\nzig build\n```\n\nThis will create the following executables in `zig-out/bin/`:\n- `server`: The main server executable\n- `example-server`: An example server implementation\n- `benchmark`: Benchmarking tool\n\n## Usage\n\n### Running the Server\n\nStart the server on localhost:8080:\n\n```bash\nzig build run\n```\n\nOr run directly:\n\n```bash\n./zig-out/bin/server\n```\n\n### Example Server\n\nRun the example server implementation:\n\n```bash\nzig build example\n```\n\n### Running Tests\n\nRun the test suite:\n\n```bash\nzig build test\n```\n\nRun framework-specific tests:\n\n```bash\nzig build test-framework\n```\n\n### Benchmarking\n\nRun HTTP benchmarks:\n\n```bash\nzig build bench\n```\n\n## API Documentation\n\n### HTTP Server\n\nThe core server provides a simple interface for handling HTTP requests:\n\n```zig\nconst std = @import(\"std\");\nconst Server = @import(\"main.zig\").Server;\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    const address = try std.net.Address.parseIp(\"127.0.0.1\", 8080);\n    var server = try Server.init(allocator, address);\n    defer server.deinit();\n\n    try server.start();\n}\n```\n\n### WebSocket Support\n\nThe server automatically handles WebSocket upgrades and provides a simple message-based API:\n\n```zig\n// WebSocket frame handling example\nconst ws = @import(\"websocket.zig\");\n\n// Echo server implementation\nwhile (true) {\n    const frame = try ws.readMessage(stream);\n    defer allocator.free(frame.payload);\n\n    switch (frame.opcode) {\n        .text, .binary => try ws.writeMessage(stream, frame.payload),\n        .close => break,\n        else => {},\n    }\n}\n```\n\n### Framework Module\n\nThe framework module provides additional utilities for building web applications:\n\n```zig\nconst framework = @import(\"framework\");\n\n// Initialize router\nvar router = try framework.Router.init(allocator);\ndefer router.deinit();\n\n// Add routes\ntry router.get(\"/\", handleRoot);\ntry router.post(\"/api/data\", handleData);\n```\n\n## Performance\n\nThe server is designed for high performance:\n- Multi-threaded architecture utilizing all available CPU cores\n- Keep-alive connection support\n- Efficient WebSocket implementation\n- Integration with SPICE for parallel computing tasks\n\n## Contributing\n\nContributions are welcome! Please feel free to submit a Pull Request.\n\n## License\n\nThis project is licensed under the MIT License - see the LICENSE file for details.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/193787365?v=4",
+  "releases": [],
+  "owner_bio": "Data explorer for all SVM based network (Solana L1, L2s, rollups, solana network extensions)",
+  "owner_location": "Japan",
+  "owner_blog": "https://opensvm.com",
+  "owner_twitter_username": null,
+  "owner_created_at": "2025-01-05T10:35:51Z",
+  "category": "library"
+}

@@ -1,0 +1,44 @@
+{
+  "name": "vk-kickstart",
+  "owner": "mikastiv",
+  "repo": "vk-kickstart",
+  "description": "Vulkan initialization library",
+  "type": "project",
+  "topics": [
+    "helpers-library",
+    "vulkan",
+    "vulkan-library",
+    "zig",
+    "ziglang",
+    "initialization",
+    "zig-package"
+  ],
+  "stars": 10,
+  "forks": 3,
+  "watchers": 1,
+  "updated_at": "2025-11-07T13:55:02Z",
+  "dependencies": [
+    {
+      "name": "vulkan",
+      "url": "git+https://github.com/Snektron/vulkan-zig.git#c9c4dae70356766f0954ae7d2b8aba4d1dd53a2a",
+      "hash": "vulkan-0.0.0-r7Ytx6hBAwBUnt0XA-uOkR2hda4fAHFhQITNTgJpnFkY"
+    },
+    {
+      "name": "vulkan_headers",
+      "url": "git+https://github.com/KhronosGroup/Vulkan-Headers#2efaa559ff41655ece68b2e904e2bb7e7d55d265",
+      "hash": "N-V-__8AAHJA9gFKBbs8IT77D4EY1at4fNYuOXttm2Q2crQC"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# `vk-kickstart`\n\nA Zig library to help with Vulkan initialization inspired by [vk-bootstrap](https://github.com/charles-lunarg/vk-bootstrap)\n\nThe minimum required version is Vulkan 1.1\n\nThis library helps with:\n- Instance creation\n- Setting up debug environment (validation layers and debug messenger)\n- Physical device selection based on a set of criteria\n- Enabling physical device extensions\n- Device creation\n- Swapchain creation\n- Getting queues\n\n## Setting up\n\nAdd vk-kickstart:\n```\nzig fetch --save https://github.com/Mikastiv/vk-kickstart/archive/<COMMIT_HASH>.tar.gz\n```\n\nThen update your build file with the following:\n```zig\n// Provide the Vulkan registry\nconst registry = b.dependency(\"vulkan_headers\", .{}).path(\"registry/vk.xml\");\nconst vk_kickstart = b.dependency(\"vk_kickstart\", .{\n    .registry = registry,\n    // Verbose output\n    .verbose = true,\n});\n\n// Import vk-kickstart\nexe.root_module.addImport(\"vk-kickstart\", vk_kickstart.module(\"vk-kickstart\"));\nexe.root_module.addImport(\"vulkan\", vk_kickstart.module(\"vulkan\"));\n ```\n\nYou can then import `vk-kickstart` as a module and vulkan-zig\n```zig\nconst vkk = @import(\"vk-kickstart\");\nconst vk = @import(\"vulkan\");\n```\n\nSee [build.zig](example/build.zig) for an example\n\n## How to use\n\nFor a code example, see [main.zig](example/src/main.zig)\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/39000560?u=68501b6b1c7f9a0112d6b9fa3adf3df8c8be1c3e&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Canada",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 50,
+  "owner_following": 32,
+  "owner_created_at": "2018-05-05T07:30:01Z",
+  "category": "library"
+}

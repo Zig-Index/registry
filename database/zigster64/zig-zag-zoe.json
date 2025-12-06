@@ -1,0 +1,46 @@
+{
+  "name": "zig-zag-zoe",
+  "owner": "zigster64",
+  "repo": "zig-zag-zoe",
+  "description": "Multiplayer TicTacToe - in Zig - using HTMX for that zero-javascript experience",
+  "type": "project",
+  "topics": [
+    "game",
+    "htmx",
+    "multiplayer-game",
+    "tictactoe",
+    "tictactoe-game",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 26,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-12-05T19:18:22Z",
+  "dependencies": [
+    {
+      "name": "httpz",
+      "url": "git+https://github.com/zigster64/http.zig#master",
+      "hash": "12206d8d2a7f2535a7d48872eaf43911ead71ba05456f97363ae25e4f057a985975f"
+    },
+    {
+      "name": "zts",
+      "url": "git+https://github.com/zigster64/zts#main",
+      "hash": "122097f35c2d1aa158464a2c6e30f76ca09f747596881cba3f86627195135dcbe70e"
+    }
+  ],
+  "readme": "# zig-zag-zoe\nMultiplayer TicTacToe - in Zig - using HTMX for that zero-javascript experience\n\nOnline demo here\nhttp://zig-zag-zoe.com\n\n.. (running on a t4g-nano instance on AWS - Linux ARM64, using less than 2mb memory for the whole container)\n\n** Uses Latest Zig 0.12.0 official release **\n\n\n![screenshot](https://github.com/zigster64/zig-zag-zoe/blob/main/src/images/zzz-screenshot.jpg)\n\n# Install\n\nGet Zig - https://ziglang.org/download/\n\nZigZagZoe now tracks :\n- Zig 0.12.dev from nightly builds\n\nLast successful build / test using 0.12.0-dev.2139+e025ad7b4\n\n- http.zig #blocking branch with .hash = \"1220b9cb100296f9ecbea1d5d335a074884e978c2f4fa9781cdeec47e2d222119b65\",\n\n\nIs not currently working with the non-blocking / async branch of http.zig\n\n\n```\ngit clone https://github.com/zigster64/zig-zag-zoe.git\ncd zig-zag-zoe\nzig build\n```\n\n# Build and Run\n\n```\nzig build\n\n.. or\n\nzig build run\n```\n\nNow point your browsers at http://localhost:3000\n\n.. or the equivalent address on the local network\n\nOn boot, the system will print a list of valid URLs that should be able to find the game.\n\nNote that for multi-user play, you must bring up multiple browser tabs. Works best if you \nspawn a couple of new windows from the browser, and shrink them so they can sit side by side.\n\n\n# How to Play\n\nPlease visit teh Wiki / User Manual at\n\nhttps://github.com/zigster64/zig-zag-zoe/wiki/Zig-Zag-Zoe-%E2%80%90-Zero-Wing-Edition\n\n\n## Bugs\n\nThere are a few lingering bugs that I havent got around to fixing yet.\n\nAudio support on iOS + Safari is a lost cause - can fix it, but it requires a lot of JS code, and I figure that is outside the\nscope of a nice clean Zig application that Im trying to build here.\n\nAlso appreciate any other thrashing / trying to break the application, as it all helps make the Zig http ecosystem much \nmore robust.  Thanks.\n\n## Contributions\n\nYep, thats cool.  Just go through the regular channels\n\n- raise an issue\n- post a PR\n\nIf you have questions or RFCs - you can either post them as an issue here, or discuss on Zig discord.\n\nDont be too sad if it takes > 48hr for me to respond though ... will do my best.\n\n## More Modes and Gameplay ideas\n\nThinking up some new random modes to add to make the game harder - ideas most welcome.\n\n- Poison square ... make the grid square permanently unusable\n- Skip ... skip the next player's turn, they miss out\n- Reverso ... like uno reverso, reverses the order in which players take turns\n- Team Play ... allow multiple users to collab as a team\n- Exotic Victory Conditions ... Not just lines, but other shapes to allow victory\n\n\n# Whats Interesting, from a Code point of view ?\n\nThis code is interesting, and worth a read for the following reasons :\n\n- Its all written in Zig. http://ziglang.org.  Fast / Safe / Easy to read  - pick all 3\n- It uses the excellent http.zig library https://github.com/karlseguin/http.zig to do all the web stuff. I have had exactly zero issues using this lib.\n- Single file binary, which includes the game, a web server, all assets such as HTML, images and audio.  1 file - no litter on your filesystem\n- Generated docker image = 770Kb (compressed) All it has is the compiled executable (2.5MB), which includes only a single binary, nothing else.\n- Run stats - in ReleaseFast mode running a 2 player game, uses less than 2MB RAM to run, and hardly any CPU. Its pretty resource efficient.\n- Its about as simple as doing the same thing in Go, there is really nothing too nasty required in the code.  \n- The router, and all the HTML contents is part of the Game object ... the implications of this are that it is possible to create 'web components' using this\nzig/htmx approach that are all self contained, and can be imported into other projects, without having to know about connecting up routes, or pulling in content. Interesting.\n- Uses SSE / Event Streams to keep it all realtime with pub/sub updates for multiple players. Is simple, and it works, and requires only a trivial amount of code to do.\n- Demonstrates how to do threading, thread conditions / signalling, and using mutexes to make object updates thread safe. Its a bit tricky to do cleanly still, but I guess that concurrency was never meant to be easy. Its certainly no harder than doing the some concurrency in Go\n- No websockets needed\n- There is pretty much NO JAVASCRIPT on the frontend. It uses HTMX https://htmx.org ... which is an alternative approach to web clients, where the frontend is pure hypertext, and everything is done on the backend\n- There is a tiny bit of JS, to play some audio, and to update the session ID, but im still thinking up a way of getting rid of that as well.\n- Uses std.fmt.print() as the templating engine.  I didnt know before, but you can use named tags inside the comptime format string, and use those to reference fields in the args param. \n\n\nActually makes for a half decent templating tool, without having to find and import a templating lib.\n\nie\n```\nresponse.print(\"I can use {[name]s} and {[address]s} in a fmt.print statement, and it references fields from the struct passed \", .{\n  .name = \"Johnny Ziggy\",\n  .address = \"22 Zig Street, Zigville, 90210\"\n});\n```\n\nThats pretty good - dont really need a templating engine to do most things like that then, can just use std.fmt.print.\n\nIn fact, this is better than using a template engine, because you can store the HTML in actual `.html` files ... which means your editor goes into full HTML mode!\n\nOtherwise, need to come up with yet another JSX like thing, and then write a bunch of editor tooling to understand it.  Yuk !\n\nKeep it simple I reckon, just use std.fmt, and just use `.html` files.\n\n\nNot sure if its worth adding a templating lib - at least to do loops and some basic flow control, because its often much much better to take the full power of a real language instead, and just emit formatted fragments.\n\nGo has a pretty comprehensive and well done Text Templating tool in the stdlib, but its quite a pain to use and impossible to debug when thing do go wrong, compared to doing the hard stuff in a real language.\n\n\n## HTMX thoughts\n\nYeah, its pretty cool, worth adding to your toolbelt. Not sure its really a 'replacement' for SPA type apps - I think it might be painful for larger apps. Not sure, havnt tried yet.\n\nWhat it is 100% excellent for though is for doing apps where there is a lot of shared state between users. (Like a turn based game !) In that case, doing everything on the server, and not having any state\nat all on the frontend to sync, is really ideal.  Its a good fit to this sort of problem.\n\nIts super robust. You can do horrible things like reboot the backend, or hard refresh the front end(s) ... and it maintains state without a hiccup, and without needing any exception handling code at all. \nVery nice. It would be a nightmare doing this in react.\n\nThere are some very complex things you could do with a turn-based-multiplayer-game type of model though (doesnt have to be a game even) And being able to do that without touching JS, or\nwriting a tonne of code to synch state on the frontends is really nice.\n\nIts also a reasonable model for doing shared state between GUI frontends, just using the HTTP/SSE protocol too. Its just HTTP requests, so the networking is totally portable.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/72305366?u=cf46defe1dc7db6770201913a79150fbcbddb6ff&v=4",
+  "releases": [],
+  "owner_bio": "Half Stack Dev.\r\n\r\nI’m into minimalist code and tools.\r\n\r\n\r\n",
+  "owner_company": null,
+  "owner_location": "Outback Australia, middle of nowhere",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 53,
+  "owner_following": 56,
+  "owner_created_at": "2020-10-03T12:46:34Z",
+  "homepage": "http://zig-zag-zoe.com",
+  "license": "MIT",
+  "category": "library"
+}

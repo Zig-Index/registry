@@ -1,0 +1,50 @@
+{
+  "name": "zig-ultracdc",
+  "owner": "jedisct1",
+  "repo": "zig-ultracdc",
+  "description": "UltraCDC, a fast content-defined chunking algorithm for data deduplication.",
+  "type": "project",
+  "topics": [
+    "cdc",
+    "chunking",
+    "deduplication",
+    "zig",
+    "zig-package",
+    "ultracdc"
+  ],
+  "stars": 3,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-11-04T21:23:19Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.16.0",
+  "readme": "# UltraCDC\n\nA Zig implementation of UltraCDC, a fast content-defined chunking algorithm for data deduplication.\n\n## What is this?\n\nContent-defined chunking (CDC) splits data into variable-sized pieces based on the data itself, not arbitrary boundaries. This makes it useful for deduplication: if you change one paragraph in a document, only that chunk changes, not everything after it.\n\nUltraCDC is a CDC algorithm from a 2022 IEEE paper that's both fast and stable. This implementation can process data at around 2.7 GB/s, making it practical for real-world use.\n\n## Building\n\nYou'll need Zig 0.16 or later.\n\n```bash\nzig build -Doptimize=ReleaseFast\n```\n\n## Using the CLI\n\nThe `ultracdc` tool analyzes how well your files would deduplicate:\n\n```bash\n# Basic usage\nzig-out/bin/ultracdc file1.dat file2.dat\n\n# With custom chunk sizes\nzig-out/bin/ultracdc --min-size 4096 --max-size 262144 backup.tar\n```\n\nIt will show you:\n\n- How many chunks it found\n- How many are unique\n- The deduplication ratio (potential storage savings)\n\n## Using as a library\n\n```zig\nconst ultracdc = @import(\"ultracdc\");\n\n// Use default options (8KB min, 64KB normal, 128KB max)\nconst options = ultracdc.ChunkerOptions{};\n\n// Find the first chunk boundary\nconst cutpoint = ultracdc.UltraCDC.find(options, data, data.len);\n\n// Process the chunk\nconst chunk = data[0..cutpoint];\n```\n\n## How it works\n\nUltraCDC uses a sliding window over your data and looks at the \"fingerprint\" of each window using hamming distance. When it finds a fingerprint that matches a pattern, it makes a cut. The algorithm is designed to:\n\n- Cut at the same places even if you insert or delete data elsewhere\n- Avoid creating tiny or huge chunks\n- Handle low-entropy data (like runs of zeros) without slowing down\n\n## Testing\n\n```bash\nzig build test\n```\n\nThe tests cover edge cases like minimum-size data, low-entropy detection, and maximum chunk size enforcement.\n\n## Performance\n\n```bash\nzig build bench-find\n```\n\n## Reference\n\nThe algorithm comes from:\n\n- [Zhou, Wang, Xia, and Zhang. \"UltraCDC: A Fast and Stable Content-Defined Chunking Algorithm.\" IEEE, 2022.](https://ieeexplore.ieee.org/document/9894295)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/124872?v=4",
+  "releases": [
+    {
+      "tag_name": "0.1.0",
+      "name": "0.1.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-10-30T19:24:17Z",
+      "html_url": "https://github.com/jedisct1/zig-ultracdc/releases/tag/0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Get my public keys here: https://sk.tl/7CPRo8kn",
+  "owner_company": null,
+  "owner_location": "Antibes, France",
+  "owner_blog": "https://primulinus.tpopsite.com",
+  "owner_twitter_username": "jedisct1",
+  "owner_followers": 4074,
+  "owner_following": 194,
+  "owner_created_at": "2009-09-09T10:20:57Z",
+  "license": "MIT",
+  "category": "library"
+}

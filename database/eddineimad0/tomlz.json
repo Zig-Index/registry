@@ -1,0 +1,32 @@
+{
+  "name": "tomlz",
+  "owner": "eddineimad0",
+  "repo": "tomlz",
+  "description": "A Toml Parser written in zig",
+  "type": "project",
+  "topics": [
+    "parser",
+    "toml",
+    "toml-parser",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 4,
+  "forks": 2,
+  "watchers": 1,
+  "updated_at": "2025-05-06T09:52:40Z",
+  "minimum_zig_version": "0.14.0",
+  "readme": "A TOML parser written in zig that targets v1.0 specs of TOML.\n\n## Supported zig versions\n✅ [0.14.0](https://ziglang.org/documentation/0.14.0/)\n\n## Test suite coverage\n[toml-test](https://github.com/toml-lang/toml-test) is a language-agnostic test suite to verify the correctness of TOML parsers and writers.\n\nThe parser fails 2 tests in the invalid set that involves dotted keys, the 2 tests expect the parser to reject a niche confusing use case of toml dotted keys however they are accepted by the parser. this might get fixed in the future but for now it's not a priority.\n\n## Usage\n```zig\nconst std = @import(\"std\");\nconst toml = @import(\"tomlz\");\nconst io = std.io;\nvar gpa: std.heap.DebugAllocator(.{}) = .init;\n\npub fn main() !void {\n    defer std.debug.assert(gpa.deinit() == .ok);\n    const allocator = gpa.allocator();\n\n    // the toml parser takes an allocator and uses it internally\n    for all allocations.\n    var p = toml.Parser.init(allocator);\n    // when done deinit the parser to free all allocated resources.\n    defer p.deinit();\n\n\n    const toml_input =\n        \\\\message = \"Hello, World!\"\n    ;\n    // the TOML parser accepts a io.StreamSource as an input source.\n    // the StreamSource should live as long as the parser.\n    var toml_stream = io.StreamSource{\n        .const_buffer = io.FixedBufferStream([]const u8){\n            .buffer = src,\n            .pos = 0,\n        },\n    };\n\n    // use parse to start parsing the input source.\n    var parsed = p.parse(&toml_stream) catch {\n        std.log.err(\"The stream isn't a valid TOML document, {}\\n\",.{err});\n        // handle error.\n    };\n\n    // parsed is of type toml.TomlTable which is an alias to\n    // std.StringHashMap(TomlValue).\n    // toml.TomlValue type is a union with the following fields:\n    // pub const TomlValue = union(TomlType) {\n    //     Boolean: bool,\n    //     Integer: i64,\n    //     Float: f64,\n    //     String: []const u8,\n    //     Array: []TomlValue,\n    //     Table: TomlTable,\n    //     TablesArray: []TomlTable,\n    //     DateTime: DateTime,\n    // };\n    // aside from DateTime all other types are standard zig types.\n    // all data returned by the parser is owned by the parser and\n    // will be freed once deinit is called or if parse() is called again,\n    // consider cloning anything you need to outlive the parser.\n\n\n    var iter = parsed.iterator();\n    while (iter.next()) |pair| {\n        // the key is of type []const u8.\n        std.debug.print(\"\\n{s} => \", .{pair.key_ptr.*});\n        switch (pair.value_ptr.*) {\n            // ... do whatever\n        }\n    }\n}\n```\n\n## Build options\nThe build.zig file contains various options that can be used to customize\nthe behaviour of the parser when building, check it out for more details.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/61315998?v=4",
+  "releases": [],
+  "owner_bio": "Embedded/Cyber Security Engineer.",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 7,
+  "owner_following": 15,
+  "owner_created_at": "2020-02-21T11:33:18Z",
+  "license": "MIT",
+  "category": "parser"
+}

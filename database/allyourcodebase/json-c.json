@@ -1,0 +1,32 @@
+{
+  "name": "json-c",
+  "owner": "allyourcodebase",
+  "repo": "json-c",
+  "description": "json-c ported to the zig build system",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 3,
+  "forks": 0,
+  "watchers": 2,
+  "updated_at": "2025-08-05T16:16:44Z",
+  "dependencies": [
+    {
+      "name": "upstream",
+      "url": "git+https://github.com/json-c/json-c?ref=json-c-0.18-20240915#41a55cfcedb54d9c1874f2f0eb07b504091d7e37",
+      "hash": "12208b714ab345c47972d351d67d6dc000d752256fa2f121665842df31d0fb4ac13f"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# `build.zig` for json-c\n\nProvides a package to be used by the zig package manager for C programs.\n\n## Status\n\nFor now the hard-coded config assumes linux.\n\n| Refname  | json-c version         | Zig `0.15.0-dev` | Zig `0.14.x` | Zig `0.13.x` | Zig `0.12.x` |\n|----------|------------------------|------------------|--------------|--------------|--------------|\n| `0.18+2` | `json-c-0.18-20240915` | ✅               | ✅           | ❌           | ❌           |\n| `0.18+1` | `json-c-0.18-20240915` | ❌               | ✅           | ❌           | ❌           |\n| `0.18`   | `json-c-0.18-20240915` | ❌               | ❌           | ✅           | ✅           |\n| `0.17`   | `json-c-0.17-20230812` | ❌               | ❌           | ✅           | ✅           |\n\n## Use\n\nAdd the dependency in your `build.zig.zon` by running the following command:\n```bash\nzig fetch --save git+https://github.com/allyourcodebase/json-c#master\n```\n\nThen, in your `build.zig`:\n```zig\nconst jsonc = b.dependency(\"jsonc\", { .target = target, .optimize = optimize });\nconst libjsonc = jsonc.artifact(\"json-c\");\n// wherever needed:\nexe.linkLibrary(libjsonc);\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
+  "releases": [],
+  "owner_bio": "...are belong to Ziguanas, but we'd also be delighted to give them back!",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2023-09-28T21:29:33Z",
+  "license": "MIT",
+  "category": "library"
+}

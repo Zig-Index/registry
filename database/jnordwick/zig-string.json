@@ -1,0 +1,35 @@
+{
+  "name": "zig-string",
+  "owner": "jnordwick",
+  "repo": "zig-string",
+  "description": "Zig string library that includes small string optimization on the stack",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 9,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2024-12-27T03:07:17Z",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/2364380?u=2d87eaabadae63a75f0a940dbb08283dbb7a4126&v=4",
+  "releases": [
+    {
+      "tag_name": "0.1",
+      "name": "Initial Proof of Concept for Small String Optimization in Zig",
+      "body": "This is just a small trial release. The API needs some clean up, but this will be used in the coming months for some hash keys and logging values and I'll wait until real world use to figure out how to clean it up. Right now it relies on the caller getting the slice (and it provides a number of methods for that) and calling the std.mem functions. This is usually fine, but there are some instances I can already see where they should be integrated into the String itself (eg, you want to split on multiple indexes it would be a pain to crate an array of them instead of having a split routine in the string). Those will probably be added in some way when needed.",
+      "prerelease": true,
+      "published_at": "2024-04-09T09:59:06Z",
+      "html_url": "https://github.com/jnordwick/zig-string/releases/tag/0.1",
+      "assets": []
+    }
+  ],
+  "owner_company": "Black Sheep Capital",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 16,
+  "owner_following": 3,
+  "owner_created_at": "2012-09-17T18:05:53Z",
+  "license": "BSD-2-Clause",
+  "category": "library"
+}

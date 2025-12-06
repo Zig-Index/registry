@@ -1,0 +1,48 @@
+{
+  "name": "async_zocket",
+  "owner": "Thomvanoorschot",
+  "repo": "async_zocket",
+  "description": "This repository contains a basic, non-blocking WebSocket client written in the Zig programming language. It leverages the xev event loop for asynchronous operations and is able to run non-blocking on a single thread.",
+  "type": "project",
+  "topics": [
+    "eventloop",
+    "libuv",
+    "libxev",
+    "non-blocking",
+    "websockets",
+    "wss",
+    "ziglang",
+    "zig-package",
+    "tcp-client",
+    "websocket-client"
+  ],
+  "stars": 9,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-12-04T09:21:19Z",
+  "dependencies": [
+    {
+      "name": "libxev",
+      "url": "https://github.com/mitchellh/libxev/archive/main.tar.gz",
+      "hash": "libxev-0.0.0-86vtc87kEgBxgbJ1RI1R6Elynb7zydCgNR8dt3uw01My"
+    },
+    {
+      "name": "boring_tls",
+      "url": "https://github.com/Thomvanoorschot/boring_tls/archive/main.tar.gz",
+      "hash": "boring_tls-0.0.1-QM_9thFoAACIlp-uVSmoePInIrh7Rd1RPLHs_eTNBTyo"
+    }
+  ],
+  "minimum_zig_version": "0.15.0-dev.483+837e0f9c3",
+  "readme": "<p align=\"center\">\n  <img src=\"logo.png\" alt=\"Project Logo\" width=\"500\" />\n</p>\n\n# AsyncZocket\n\n## Overview\n\nAsyncZocket is a comprehensive WebSocket library for the Zig programming language, providing both client and server implementations. Built on the `xev` event loop library for high-performance asynchronous I/O operations, it offers a robust foundation for real-time communication applications. The library supports the full WebSocket protocol (RFC 6455) and can handle multiple concurrent connections efficiently on a single thread.\n\n## Features\n\n### Core WebSocket Support\n*   **Full RFC 6455 Compliance:** Complete implementation of the WebSocket protocol specification\n*   **Frame Types:** Support for Text, Binary, Close, Ping, and Pong frames\n*   **Proper Masking:** Client-side frame masking and server-side unmasking\n*   **Control Frame Handling:** Automatic Ping/Pong responses and proper Close handshake\n\n### Client Implementation\n*   **Non-blocking Client:** Asynchronous WebSocket client with connection queuing\n*   **Connection Management:** Automatic reconnection and connection state tracking\n*   **Write Queuing:** Buffers write operations before connection establishment\n*   **Flexible Configuration:** Configurable host, port, and path parameters\n\n### Server Implementation\n*   **High-Performance Server:** Multi-client server with configurable connection limits\n*   **Connection Pooling:** Efficient management of concurrent client connections\n*   **Callback-Based API:** Event-driven architecture with customizable handlers\n\n### Technical Features\n*   **Asynchronous I/O:** Built entirely on `xev` for non-blocking operations\n*   **Memory Efficient:** Smart buffer management and connection pooling\n*   **Single-Threaded:** Efficient event-loop based concurrency model\n\n## Getting Started\n\n### Installation\n\nUse fetch:\n```\nzig fetch --save https://github.com/Thomvanoorschot/async_zocket/archive/main.tar.gz\n```\n\nOr add AsyncZocket to your `build.zig.zon`:\n\n```zig\n.dependencies = .{\n    .async_zocket = .{\n        .url = \"https://github.com/thomvanoorschot/async_zocket/archive/main.tar.gz\",\n        .hash = \"...\", // Update with actual hash\n    },\n},\n```\n\n### Basic Client Usage\n\n```zig\nconst std = @import(\"std\");\nconst AsyncZocket = @import(\"async_zocket\");\nconst xev = @import(\"xev\");\n\n// Initialize event loop\nvar loop = try xev.Loop.init(.{});\ndefer loop.deinit();\n\n// Define message callback\nconst wrapperStruct = struct {\n    const Self = @This();\n    fn read_callback(context: *anyopaque, payload: []const u8) !void {\n        // You can access the context by casting it to the correct type\n        // const self = @as(*Self, @ptrCast(context));\n        // self.read_callback(self.callback_context, payload);\n        std.log.info(\"read_callback: {s}\\n\", .{payload});\n        _ = context;\n    }\n};\nvar ws = wrapperStruct{};\n\n// Create and connect client\nvar client = try AsyncZocket.Client.init(\n    std.heap.page_allocator,\n    &loop,\n    .{\n        .host = \"127.0.0.1\",\n        .port = 8080,\n        .path = \"/ws\",\n        .use_tls = true\n    },\n    wrapperStruct.read_callback,\n    @ptrCast(&ws)\n);\n\ntry client.connect();\n\n// Send a message\ntry client.write(\"Hello, WebSocket!\");\n\n// Run event loop\ntry loop.run(.until_done);\n```\n\n### Basic Server Usage\n\n```zig\nconst std = @import(\"std\");\nconst AsyncZocket = @import(\"async_zocket\");\nconst xev = @import(\"xev\");\n\n// Initialize event loop\nvar loop = try xev.Loop.init(.{});\ndefer loop.deinit();\n\n// Define callbacks\nconst wrapperStruct = struct {\n    const Self = @This();\n    fn accept_callback(\n        _: ?*anyopaque,\n        _: *xev.Loop,\n        _: *xev.Completion,\n        cc: *ClientConnection,\n    ) xev.CallbackAction {\n        cc.read();\n        return .rearm;\n    }\n    fn read_callback(\n        context: ?*anyopaque,\n        payload: []const u8,\n    ) void {\n        _ = context;\n        std.log.info(\"read_callback: {s}\", .{payload});\n        std.heap.page_allocator.free(payload);\n    }\n};\nvar ws = wrapperStruct{};\n\n// Create and start server\nvar server = try AsyncZocket.Server.init(\n    std.heap.page_allocator,\n    &loop,\n    .{\n        .host = \"127.0.0.1\",\n        .port = 8081,\n        .max_connections = 10,\n    },\n    @ptrCast(&ws),\n    wrapperStruct.accept_callback,\n    wrapperStruct.read_callback,\n);\n\nserver.accept();\n\n// Run event loop\ntry loop.run(.until_done);\n```\n\n## API Reference\n\n### Client\n\n- `Client.init()` - Initialize a new WebSocket client\n- `client.connect()` - Connect to the WebSocket server\n- `client.write()` - Send a text message\n- `client.read()` - Start reading incoming messages\n- `client.deinit()` - Clean up client resources\n\n### Server\n\n- `Server.init()` - Initialize a new WebSocket server\n- `server.accept()` - Start accepting client connections\n- `server.returnConnection()` - Return a closed connection to the pool\n- `server.deinit()` - Clean up server resources\n\n### Configuration\n\n**ClientConfig:**\n- `host: []const u8` - Server hostname or IP address\n- `port: u16` - Server port number\n- `path: []const u8` - WebSocket endpoint path\n- `use_tls: bool` - Encrypts traffic\n\n**ServerOptions:**\n- `host: []const u8` - Server hostname or IP address\n- `port: u16` - Server port number\n- `max_connections: u31` - Maximum concurrent connections (default: 1024)\n\n## Project Status\n\n🚀 **Production Ready** - The library implements a complete WebSocket solution with both client and server capabilities.\n\n**Implemented Features:**\n- Full WebSocket protocol (RFC 6455) compliance\n- Client and server implementations\n- All frame types (Text, Binary, Control frames)\n- Proper masking and unmasking\n- Connection management and pooling\n- Asynchronous I/O with xev\n- SSL/TLS support \n\n\n## Requirements\n\n- **Zig 0.15.0-dev** or later\n\n## Contributing\n\nContributions are welcome! Please feel free to submit pull requests, report bugs, or suggest features.\n\n## License\n\nThis project is licensed under the MIT License - see the LICENSE file for details.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/11627921?u=220d24a7bb3626cdc85b33d30c2886583d85b7d3&v=4",
+  "releases": [],
+  "owner_company": "Bending the Rules",
+  "owner_location": "Breda, the Netherlands",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 54,
+  "owner_following": 4,
+  "owner_created_at": "2015-03-24T09:20:23Z",
+  "license": "MIT",
+  "category": "library"
+}

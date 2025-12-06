@@ -1,0 +1,51 @@
+{
+  "name": "zig-base91",
+  "owner": "jedisct1",
+  "repo": "zig-base91",
+  "description": "Base91 encoding for Zig.",
+  "type": "project",
+  "topics": [
+    "base64",
+    "base91",
+    "codec",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 5,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-10-21T16:21:20Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# Base91 for Zig\n\nAn implementation of the Base91 encoding scheme written in Zig.\n\nIt enables you to convert binary data to a Base91-encoded string and vice versa.\n\n## Overview\n\n- **Space Efficiency:** Base91 produces shorter encoded strings compared to Base64, which can be advantageous when minimizing data size is a priority.\n- **Performance Trade-Off:** Although Base91 is more space-efficient, its encoding/decoding operations are generally slower than those of Base64. This trade-off should be considered based on your application’s requirements.\n\n## Considerations\n\n- **When to Use:** Opt for Base91 when reducing the size of encoded data is critical, such as in bandwidth-constrained environments or when storing large volumes of encoded data.\n- **When to Avoid:** If your application is performance-sensitive and the encoding/decoding speed is paramount, Base64 might be a more suitable alternative.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/124872?v=4",
+  "releases": [
+    {
+      "tag_name": "0.1.1",
+      "name": "0.1.1",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-10-21T16:23:22Z",
+      "html_url": "https://github.com/jedisct1/zig-base91/releases/tag/0.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "0.0.0",
+      "name": "Initial release",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-03-13T12:05:01Z",
+      "html_url": "https://github.com/jedisct1/zig-base91/releases/tag/0.0.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Get my public keys here: https://sk.tl/7CPRo8kn",
+  "owner_company": null,
+  "owner_location": "Antibes, France",
+  "owner_blog": "https://primulinus.tpopsite.com",
+  "owner_twitter_username": "jedisct1",
+  "owner_followers": 4074,
+  "owner_following": 194,
+  "owner_created_at": "2009-09-09T10:20:57Z",
+  "license": "MIT",
+  "category": "library"
+}

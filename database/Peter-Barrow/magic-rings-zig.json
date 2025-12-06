@@ -1,0 +1,56 @@
+{
+  "name": "magic-rings-zig",
+  "owner": "Peter-Barrow",
+  "repo": "magic-rings-zig",
+  "description": "",
+  "type": "project",
+  "topics": [
+    "ringbuffer",
+    "shared-memory",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-08-12T20:04:47Z",
+  "dependencies": [
+    {
+      "name": "known_folders",
+      "url": "git+https://github.com/ziglibs/known-folders.git#ab5cf5feb936fa3b72c95d3ad0c0c67791937ba1",
+      "hash": "known_folders-0.0.0-Fy-PJtTTAADUOhGKM0sxzG4eMkNQxRvx9e5dfHVyaeA3"
+    },
+    {
+      "name": "zigwin32",
+      "url": "git+https://www.github.com/marlersoft/zigwin32.git#d21b419d808215e1f82605fdaddc49750bfa3bca",
+      "hash": "zigwin32-25.0.28-preview-AAAAAI0J-wP-8_KKo4Yjr33XLhVhlJmeagGUedByaOnX"
+    },
+    {
+      "name": "shared_memory",
+      "url": "git+https://github.com/Peter-Barrow/shared-memory-zig/?ref=HEAD#6fb17cea5946c716b17666023a4d649fe7d09945",
+      "hash": "shared_memory-0.3.2-5YGFvJrEAADITAvp0mM5eWboTM_j3kQuVrkVpxtakQTy"
+    }
+  ],
+  "readme": "# Magic-Rings-Zig\n\n**Magic-Rings-Zig** is a high-performance ring buffer library for Zig that implements *magic ring buffers* with advanced struct-of-arrays support. It provides seamless wraparound access without modulo arithmetic and supports both single-field and multi-field ring buffers optimized for columnar data processing.\n\nThe library supports Linux, FreeBSD (via `memfd_create` or `shm_open`/`shm_unlink`), and Windows platforms with cross-platform shared memory capabilities for inter-process communication, built on top of [shared-memory-zig](https://github.com/Peter-Barrow/shared-memory-zig).\n\n**STATUS: Stable Core with Active Development** - The core functionality is stable and battle-tested, with ongoing development of advanced features. Built and tested with Zig 0.14.0, tracking subsequent releases.\n\n## Key Features\n\n- **Magic Ring Buffers**: Eliminates wraparound handling via virtual memory mapping\n- **Multi-Field Ring Buffers**: Struct-of-arrays processing for columnar data\n- **Custom Headers**: Extensible metadata support for application-specific needs\n- **Cross-Platform**: Linux, FreeBSD, and Windows support with shared memory\n- **Zero-Copy Operations**: Direct memory access with CPU cache efficiency\n- **Type Safety**: Compile-time type checking for both elements and headers\n\n## How Magic Ring Buffers Work\n\nA typical ring buffer requires modulo arithmetic for every access:\n\n```\nTraditional Ring Buffer:\n+---+---+---+---+---+---+---+---+---+---+\n| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | <-- Buffer slots (indices)\n+---+---+---+---+---+---+---+---+---+---+\n                  ^               ^\n                  |               |\n                HEAD             TAIL\n```\n\nThe *magic ring buffer* uses virtual memory mapping to create a seamless view:\n\n```\nVirtual Memory Layout:\n+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |\n+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n  \\__________ First Mapping __________/   \\_____________Mirror ____________/\n```\n\nWhile maintaining a single physical memory allocation:\n\n```\nPhysical Memory Mapping:\n+---+---+---+---+---+---+---+---+---+---+\n| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |\n+---+---+---+---+---+---+---+---+---+---+\n  \\__________ Original Buffer ________/\n```\n\nThis allows contiguous access across the buffer boundary without special wraparound handling.\n\n## Installation\n\nCreate a `build.zig.zon` file:\n\n```zig\n.{\n    .name = \"my-project\",\n    .version = \"0.0.0\",\n    .dependencies = .{\n        .magic_rings = .{\n            .url = \"https://github.com/Peter-Barrow/magic-rings-zig/archive/<git-ref-here>.tar.gz\",\n            .hash = \"...\",\n        },\n    },\n}\n```\n\nAdd to your `build.zig`:\n\n```zig\nconst magic_rings = b.dependency(\"magic_rings\", .{});\nexe.root_module.addImport(\"magic_rings\", magic_rings.module(\"magic_rings\"));\n```\n\n## Usage Examples\n\n### Basic Magic Ring Buffer\n\n```zig\nconst std = @import(\"std\");\nconst magic_rings = @import(\"magic_rings\");\n\n// Create a ring buffer for u64 values with custom header\nconst Header = struct { sample_rate: f64, channels: u32 };\nconst Ring = magic_rings.MagicRingWithHeader(u64, Header);\n\nvar gpa = std.heap.GeneralPurposeAllocator(.{}){};\nconst allocator = gpa.allocator();\n\n// Create a new ring buffer\nvar ring = try Ring.create(\"my_buffer\", 1024, allocator);\ndefer ring.close() catch {};\n\n// Set custom header fields\nring.header.sample_rate = 44100.0;\nring.header.channels = 2;\n\n// Push data\n_ = ring.push(42);\n_ = ring.push(123);\n\n// Get slices that seamlessly wrap around\nconst data = ring.sliceFromTail(2); // [42, 123]\n\n// Push bulk data\nconst values = [_]u64{ 1, 2, 3, 4, 5 };\n_ = ring.pushValues(&values);\n```\n\n### Multi-Field Ring Buffer (Struct-of-Arrays)\n\n```zig\n// Define a point structure\nconst Point = struct {\n    x: f64,\n    y: f64,\n    timestamp: u64,\n};\n\n// Create multi-field ring buffer\nconst MultiRing = magic_rings.MultiMagicRing(Point, struct {});\nvar multi = try MultiRing.create(\"points\", 1000, allocator);\ndefer multi.close() catch {};\n\n// Push complete structs (gets decomposed into separate field buffers)\nconst point = Point{ .x = 1.5, .y = 2.5, .timestamp = 12345 };\n_ = multi.push(point);\n\n// Access individual fields efficiently\nconst x_values = multi.sliceField(.x, 0, 10);     // Get 10 x coordinates\nconst recent_timestamps = multi.sliceFieldToHead(.timestamp, 5); // Last 5 timestamps\n\n// Get synchronized slices across all fields\nconst recent_data = multi.sliceToHead(5);\n// recent_data.x contains last 5 x values\n// recent_data.y contains last 5 y values  \n// recent_data.timestamp contains last 5 timestamps\n\n// Push columnar data efficiently\nconst columnar_data = MultiRing.Slice{\n    .x = &[_]f64{ 1.0, 2.0, 3.0 },\n    .y = &[_]f64{ 4.0, 5.0, 6.0 },\n    .timestamp = &[_]u64{ 100, 101, 102 },\n};\n_ = multi.pushSlice(columnar_data);\n```\n\n### Shared Memory Between Processes\n\n```zig\n// Process 1: Create and write\nvar ring = try Ring.create(\"/shared_buffer\", 1024, null);\n_ = ring.push(42);\n\n// Process 2: Open and read  \nvar ring2 = try Ring.open(\"/shared_buffer\", null);\nconst value = ring2.valueAt(0); // 42\n```\n\n## Performance Benefits\n\n### Single-Field Buffers\n- **Zero modulo arithmetic** for wraparound access\n- **Contiguous memory access** improves CPU cache performance\n- **Direct slicing** across buffer boundaries without copying\n\n### Multi-Field Buffers  \n- **Struct-of-Arrays layout** for better cache locality when processing specific fields\n- **SIMD-friendly** memory patterns for vectorized operations\n- **Reduced memory waste** from struct padding and alignment\n- **Efficient columnar processing** for data analysis workloads\n\n## Use Cases\n\n- **High-frequency data streams** (audio processing, sensor data, network packets)\n- **Inter-process communication** with shared circular buffers\n- **Real-time systems** requiring predictable, low-latency access  \n- **Time-series data processing** with efficient columnar access\n- **Logging systems** with circular log buffers\n- **Scientific computing** with large datasets requiring efficient field access\n\n## Platform Support\n\n| Platform | Shared Memory | Anonymous Memory |\n|----------|---------------|------------------|\n| Linux    | `shm_open` / `memfd_create` | `memfd_create` |\n| FreeBSD  | `shm_open` | `memfd_create` |  \n| Windows  | `CreateFileMapping` | `CreateFileMapping` |\n\n## API Reference\n\n### MagicRingWithHeader(T, H)\n- `create(name, length, allocator)` - Create new ring buffer\n- `open(name, allocator)` - Open existing ring buffer  \n- `close()` - Clean up resources\n- `push(value)` - Add single element\n- `pushValues(slice)` - Add multiple elements\n- `slice(start, stop)` - Get range with wraparound\n- `sliceFromTail(count)` - Get oldest elements\n- `sliceToHead(count)` - Get newest elements\n- `valueAt(index)` - Get element at logical index\n\n### MultiMagicRing(T, H)\n- All single-field operations plus:\n- `sliceField(field, start, stop)` - Access specific field\n- `pushField(field, value)` - Push to specific field\n- `push(struct_value)` - Push complete struct (decomposed)\n- `pushSlice(columnar_data)` - Efficient bulk columnar insert\n\n## Contributing\n\nContributions are welcome! Please ensure:\n- Code follows Zig style conventions\n- Tests pass on all supported platforms  \n- Documentation is updated for new features\n- Performance-critical paths are benchmarked\n\n## License\n\nMIT\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/24245170?u=b3792e0c9ee9f1ce51ebb59186ae44c0323ec4e7&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.0",
+      "name": "Initial Release",
+      "body": "*Magic ring buffers*, for zig",
+      "prerelease": false,
+      "published_at": "2025-07-26T17:25:02Z",
+      "html_url": "https://github.com/Peter-Barrow/magic-rings-zig/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 5,
+  "owner_following": 4,
+  "owner_created_at": "2016-11-29T09:33:01Z",
+  "license": "MIT",
+  "category": "library"
+}

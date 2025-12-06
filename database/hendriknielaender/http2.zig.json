@@ -1,0 +1,49 @@
+{
+  "name": "http2.zig",
+  "owner": "hendriknielaender",
+  "repo": "http2.zig",
+  "description": "🌐 HTTP/2 server for zig",
+  "type": "project",
+  "topics": [
+    "http-server",
+    "http2",
+    "zig",
+    "zig-library",
+    "zig-package"
+  ],
+  "stars": 33,
+  "forks": 3,
+  "watchers": 1,
+  "updated_at": "2025-12-05T19:18:30Z",
+  "dependencies": [
+    {
+      "name": "libxev",
+      "url": "https://github.com/mitchellh/libxev/archive/main.tar.gz",
+      "hash": "libxev-0.0.0-86vtc87kEgBxgbJ1RI1R6Elynb7zydCgNR8dt3uw01My"
+    }
+  ],
+  "minimum_zig_version": "0.13.0",
+  "readme": "> [!WARNING]  \n> Still work in progress.\n\n<h1 align=\"center\">\n   <img src=\"docs/images/logo.png\" width=\"40%\" height=\"40%\" alt=\"http2.zig logo\" title=\"http2.zig logo\">\n</h1>\n\n<div align=\"center\">\n\n**A high-performance HTTP/2 protocol implementation in Zig**\n\nCross-platform • Zero allocations\n\n[![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/hendriknielaender/http2.zig/blob/HEAD/LICENSE)\n[![Zig 0.14.0](https://img.shields.io/badge/zig-0.14.0-orange.svg)](https://ziglang.org)\n[![libxev](https://img.shields.io/badge/powered%20by-libxev-brightgreen.svg)](https://github.com/mitchellh/libxev)\n\n</div>\n\n---\n\n## Features\n\n- 🌍 **Cross-platform** support via libxev (io_uring, kqueue, epoll)\n- 💾 **Zero runtime allocations** - all memory allocated at compile time\n- 🔒 **Lock-free** atomic operations for maximum concurrency\n- 📦 **Simple API** - just configure and run\n- ✅ **HTTP/2 RFC 7540** compliant\n\n## Quick Start\n\n### Installation\n\nAdd http2.zig to your `build.zig.zon`:\n\n```zig\n.{\n    .name = \"my-project\",\n    .version = \"1.0.0\",\n    .dependencies = .{\n        .http2 = .{\n            .url = \"https://github.com/hendriknielaender/http2.zig/archive/main.tar.gz\",\n            .hash = \"1220...\", // Use `zig fetch` to get the hash\n        },\n    },\n}\n```\n\nImport in your `build.zig`:\n\n```zig\nconst http2_dep = b.dependency(\"http2\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\nexe.root_module.addImport(\"http2\", http2_dep.module(\"http2\"));\n```\n\n### Hello World Server\n\n```zig\nconst std = @import(\"std\");\nconst http2 = @import(\"http2\");\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    // Initialize the HTTP/2 system\n    try http2.init(allocator);\n    defer http2.deinit();\n\n    // Configure and create server\n    const config = http2.Server.Config{\n        .address = try std.net.Address.resolveIp(\"127.0.0.1\", 3000),\n        .max_connections = 1000,\n    };\n\n    var server = try http2.Server.init(allocator, config);\n    defer server.deinit();\n\n    std.log.info(\"HTTP/2 server listening on {}\", .{config.address});\n\n    // Run the server\n    try server.run();\n}\n```\n\n## Performance\n\nTBD\n\n## API Reference\n\n### Server Configuration\n\n```zig\npub const Server.Config = struct {\n    /// Address to bind to\n    address: std.net.Address,\n    \n    /// Maximum concurrent connections (default: 1000)\n    max_connections: u32 = 1000,\n    \n    /// Buffer size per connection (default: 32KB)\n    buffer_size: u32 = 32 * 1024,\n};\n```\n\n### Server Methods\n\n```zig\n// Create a new server\npub fn init(allocator: Allocator, config: Config) !Server\n\n// Clean up server resources\npub fn deinit(self: *Server) void\n\n// Run the server event loop (blocks)\npub fn run(self: *Server) !void\n\n// Stop the server\npub fn stop(self: *Server) void\n\n// Get server statistics\npub fn getStats(self: *Server) ServerStats\n```\n\n### Statistics\n\n```zig\npub const ServerStats = struct {\n    total_connections: u64,\n    active_connections: u32,\n    requests_processed: u64,\n};\n```\n\n## Building\n\n### Requirements\n\n- Zig 0.14.0 or later\n- libxev (included as dependency)\n\n### Build Commands\n\n```bash\n# Build the library\nzig build\n\n# Run tests\nzig build test\n\n# Build with optimizations\nzig build -Doptimize=ReleaseFast\n```\n\n### Running Examples\n\n```bash\n# Run the hello world example\nzig build run-hello\n\n# Run the benchmark server\ncd benchmarks && zig build run\n```\n\n### Benchmarking\n\n```bash\ncd benchmarks\n./bench.sh\n```\n\n## Protocol Compliance\n\nhttp2.zig implements core HTTP/2 features:\n\n- ✅ HTTP/2 Connection Preface\n- ✅ Binary Frame Protocol\n- ✅ Stream Multiplexing\n- ✅ Flow Control\n- ✅ HPACK Header Compression\n- ✅ Error Handling with GOAWAY frames\n- ✅ SETTINGS frame exchange\n- ✅ PING frame handling\n\n## Contributing\n\nContributions are welcome! Please ensure:\n\n1. All tests pass\n2. No runtime allocations are introduced\n3. Performance benchmarks show no regression\n\nAreas for contribution:\n- Additional frame type implementations\n- Enhanced HPACK optimization\n- More comprehensive examples\n- Performance improvements\n\n## License\n\nMIT License - see [LICENSE](LICENSE) for details.\n\n## Acknowledgments\n\n- Built with [libxev](https://github.com/mitchellh/libxev) by Mitchell Hashimoto\n- Inspired by [TigerBeetle](https://tigerbeetle.com)'s zero-allocation principles\n- HTTP/2 Specification - [RFC 7540](https://tools.ietf.org/html/rfc7540)\n- HPACK Specification - [RFC 7541](https://tools.ietf.org/html/rfc7541)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/51416554?u=77d5ff88d269c348985295baa6bd915873b09249&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.0.1",
+      "name": "v0.0.1",
+      "body": "## What's Changed\r\n* feat: refactor http2 lib by @hendriknielaender in https://github.com/hendriknielaender/http2.zig/pull/33\r\n* feat: use async io by @hendriknielaender in https://github.com/hendriknielaender/http2.zig/pull/36\r\n\r\n**Full Changelog**: https://github.com/hendriknielaender/http2.zig/commits/v0.0.1",
+      "prerelease": true,
+      "published_at": "2025-06-15T16:27:19Z",
+      "html_url": "https://github.com/hendriknielaender/http2.zig/releases/tag/v0.0.1",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Software developer (zig, go & TypeScript)\r\nI like using Neovim. Currently learning rust.",
+  "owner_company": "@Taxdoo ",
+  "owner_location": "Hamburg",
+  "owner_blog": "double-trouble.dev",
+  "owner_twitter_username": null,
+  "owner_followers": 59,
+  "owner_following": 277,
+  "owner_created_at": "2019-06-05T17:02:09Z",
+  "license": "MIT",
+  "category": "library"
+}

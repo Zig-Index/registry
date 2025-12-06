@@ -1,0 +1,41 @@
+{
+  "name": "zlugify",
+  "owner": "zigzedd",
+  "repo": "zlugify",
+  "description": "[MIRROR] Generate ASCII slugs from unicode strings.",
+  "type": "project",
+  "topics": [
+    "ascii",
+    "emoji",
+    "normalization",
+    "slug",
+    "slugify",
+    "transliteration",
+    "unicode",
+    "unidecode",
+    "utf8",
+    "zig"
+  ],
+  "stars": 2,
+  "forks": 2,
+  "watchers": 1,
+  "updated_at": "2025-05-29T08:37:05Z",
+  "dependencies": [
+    {
+      "name": "anyascii",
+      "url": "https://code.zeptotech.net/zedd/anyascii.zig/archive/v1.2.0.tar.gz",
+      "hash": "anyascii-1.2.0-rvK7q3iGFABchFPwDMdB5tpj716jR3mukBiuMT-PdD5-"
+    }
+  ],
+  "readme": "<h1 align=\"center\">\n\tzlugify\n</h1>\n\n<p align=\"center\">\n\tGenerate ASCII slugs from unicode strings\n</p>\n\nzlugify is part of [_zedd_](https://code.zeptotech.net/zedd), a collection of useful libraries for zig.\n\n## zlugify\n\n_zlugify_ is a library to generate slugs from all types of UTF-8 encoded strings. It uses [anyascii.zig](https://code.zeptotech.net/zedd/anyascii.zig) to convert UTF-8 encoded strings into ASCII-only strings.\n\n## Versions\n\nzlugify 1.1.0 is made and tested with zig 0.14.0.\n\n## How to use\n\n### Install\n\nIn your project directory:\n\n```shell\n$ zig fetch --save https://code.zeptotech.net/zedd/zlugify/archive/v1.1.0.tar.gz\n```\n\nIn `build.zig`:\n\n```zig\n// Add zlugify dependency.\nconst zlugify = b.dependency(\"zlugify\", .{\n\t.target = target,\n\t.optimize = optimize,\n});\nexe.root_module.addImport(\"zlugify\", zlugify.module(\"zlugify\"));\n```\n\n### Examples\n\nThese examples are highly inspired from the test cases that you can find at the end of [`lib.zig`](https://code.zeptotech.net/zedd/zlugify/src/branch/main/src/lib.zig).\n\n#### trim and normalize\n\n```zig\nconst slugify = @import(\"zlugify\").slugify;\n\nconst slug = try slugify(allocator, \"   This is a test.\\t\\n\");\ndefer allocator.free(slug);\ntry std.testing.expectEqualStrings(\"this-is-a-test\", slug);\n```\n\n#### remove diacritics and unnecessary spaces\n\n```zig\nconst slugify = @import(\"zlugify\").slugify;\n\nconst slug = try slugify(allocator, \"SôMÈThing   \\t    ÉLSÈ\");\ndefer allocator.free(slug);\ntry std.testing.expectEqualStrings(\"something-else\", slug);\n```\n\n#### convert non-latin characters\n\n```zig\nconst slugify = @import(\"zlugify\").slugify;\n\nconst slug = try slugify(allocator, \"埼玉 県\");\ndefer allocator.free(slug);\ntry std.testing.expectEqualStrings(\"qiyu-xian\", slug);\n```\n\n#### convert ascii-like characters\n\n```zig\nconst slugify = @import(\"zlugify\").slugify;\n\nconst slug = try slugify(allocator, \"𝒔𝒍𝒖𝒈𝒊𝒇𝒚 𝒂 𝒔𝒕𝒓𝒊𝒏𝒈\");\ndefer allocator.free(slug);\ntry std.testing.expectEqualStrings(\"slugify-a-string\", slug);\n```\n\n#### convert emojis\n\n```zig\nconst slugify = @import(\"zlugify\").slugify;\n\nconst slug = try slugify(allocator, \"hello 🦊\");\ndefer allocator.free(slug);\ntry std.testing.expectEqualStrings(\"hello-fox\", slug);\n```\n\n#### customized separator\n\n```zig\nconst slugifySeparator = @import(\"zlugify\").slugify;\n\nconst slug = try slugifySeparator(allocator, \"tôi yêu những chú kỳ lân\", '_');\ndefer allocator.free(slug);\ntry std.testing.expectEqualStrings(\"toi_yeu_nhung_chu_ky_lan\", slug);\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/184568612?v=4",
+  "releases": [],
+  "owner_bio": "Zig libraries.",
+  "owner_location": null,
+  "owner_blog": "https://code.zeptotech.net/zedd",
+  "owner_twitter_username": null,
+  "owner_created_at": "2024-10-10T22:10:33Z",
+  "homepage": "https://code.zeptotech.net/zedd/zlugify",
+  "license": "MIT",
+  "category": "library"
+}

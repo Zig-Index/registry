@@ -1,0 +1,39 @@
+{
+  "name": "flatbufferz",
+  "owner": "travisstaloch",
+  "repo": "flatbufferz",
+  "description": "a flatbuffers codegen library in zig",
+  "type": "project",
+  "topics": [
+    "flatbuffers",
+    "zig-package"
+  ],
+  "stars": 48,
+  "forks": 6,
+  "watchers": 3,
+  "updated_at": "2025-11-09T14:20:16Z",
+  "dependencies": [
+    {
+      "name": "flagset",
+      "url": "git+https://github.com/travisstaloch/flagset#c1de60ade2dd5e24c6841fa9afdd84b3a4ea146b",
+      "hash": "flagset-0.0.1-AVmOhUEjAQDogE2tnogzQYXAXov1p3JYF-6HEwMyMlnz"
+    },
+    {
+      "name": "flatbuffers",
+      "url": "https://github.com/google/flatbuffers/archive/refs/tags/v24.3.25.tar.gz",
+      "hash": "N-V-__8AAICVwQDg5EEAUNQOpspLcEVsKnHij6ZXPH18Rl5C"
+    }
+  ],
+  "readme": ":warning: This project is in its early early stages. Beware of bugs and missing features. :warning:\n\n# About\n\nGenerate zig code from flatbuffer schema files which can de/serialize flatbuffer messages. Depends on packaged flatc to parse .fbs files.\n\nCI tested weekly with latest zig version.\n\nThis project depends on packaged `flatc` compiler @v23.3.3, built with zig using [a fork of google/flatbuffers](https://github.com/travisstaloch/flatbuffers).\n\n# Usage\n\n## Fetch\nTo generate code from a flatbuffers file in your build.zig:\n\n```console\n$ zig fetch --save git+https://github.com/travisstaloch/flatbufferz\n```\n\n## Gen Step\n```zig\n// build.zig\nconst std = @import(\"std\");\n\npub fn build(b: *std.Build) !void {\n    const target = b.standardTargetOptions(.{});\n    const optimize = b.standardOptimizeOption(.{});\n    const exe = b.addExecutable(.{\n        .name = \"my-app\",\n        .root_source_file = b.path(\"src/main.zig\"),\n        .target = target,\n        .optimize = optimize,\n    });\n    const fbz_dep = b.dependency(\"flatbufferz\", .{\n        .target = target,\n        .optimize = optimize,\n    });\n    const gen_step = try @import(\"flatbufferz\").GenStep.create(\n        b,\n        fbz_dep.artifact(\"flatc-zig\"),\n        &.{\"src/myschema.fbs\"},\n        &.{},\n        \"flatc-zig\",\n    );\n    exe.root_module.addImport(\"generated\", gen_step.module);\n    exe.root_module.addImport(\"flatbufferz\", fbz_dep.module(\"flatbufferz\"));\n}\n\n```\n\n\n## Manual Generation\n\nRun packaged flatc\n```console\nzig build flatc -- <flatc args>\n```\n\n### compile from .fbs files\nUse `flatc-zig` to generate zig files from schema (.fbs) files:\n```console\nzig-out/bin/flatc-zig -o gen -I examples/includes examples/test.fbs\n```\n\n### compile from .bfbs files\nOptionally use packaged `flatc` to generate a binary schema (.bfbs) from a schema (.fbs) files:\n```console\nzig build flatc -- -b --schema --bfbs-comments --bfbs-builtins --bfbs-gen-embed -I examples/includes -o gen/examples examples/test.fbs\n```\nUse `flatc-zig` to generate zig files from binary schema (.bfbs) files:\n```\nzig-out/bin/flatc-zig -o gen gen/examples/test.bfbs\n```\n\n### use compiled zig files\nEither of these create the following in gen/\n```console\n$ find gen/ -name \"*.fb.zig\"\ngen/Race.fb.zig\ngen/People/X.fb.zig\ngen/People/Foo.fb.zig\ngen/People/Person.fb.zig\n```\n\nYou can now import these files into your zig application as in [gen-step](#gen-step).  The compiled .fb.zig files depend on the same \"flatbufferz\" module.\n\n```zig\n// build.zig\nconst flatbufferz_dep = b.dependency(\"flatbufferz\", .{\n    .target = target,\n    .optimize = optimize,\n});\nexe.root_module.addImport(\"generated\", b.createModule(.{\n    .root_source_file = b.path(\"src/my_generated.fb.zig\"),\n    .imports = &.{.{ .name = \"flatbufferz\", .module = flatbufferz_dep.module(\"flatbufferz\") }},\n}));\n```\n\n\n# Tools\nConvert .bfbs to .fbs.\n```console\nzig-out/bin/flatc-zig gen/test.bfbs --bfbs-to-fbs\n```\n:warning: warning: --bfbs-to-fbs doesn't produce valid .fbs files. In its current state, it is more of a binary schema debugging tool. ",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1562827?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 68,
+  "owner_following": 32,
+  "owner_created_at": "2012-03-22T00:22:23Z",
+  "license": "MIT",
+  "category": "library"
+}

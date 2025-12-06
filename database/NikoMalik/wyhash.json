@@ -1,0 +1,42 @@
+{
+  "name": "wyhash",
+  "owner": "NikoMalik",
+  "repo": "wyhash",
+  "description": "wyhash implementation in zig",
+  "type": "project",
+  "topics": [
+    "wyhash",
+    "zig",
+    "zig-lib",
+    "zig-package",
+    "ziglang",
+    "zig-wyhash"
+  ],
+  "stars": 3,
+  "forks": 0,
+  "watchers": 2,
+  "updated_at": "2025-10-26T01:52:44Z",
+  "readme": "# WYHASH - Zig Implementation\n\n![Github Repo Issues](https://img.shields.io/github/issues/NikoMalik/wyhash?style=flat) ![GitHub Repo stars](https://img.shields.io/github/stars/NikoMalik/wyhash?style=social)\n\n\n\n🚀 Overview\n\nWyhash is a fast, high-quality, portable non-cryptographic hash function known for its exceptional speed and randomness quality. \nThis repository provides a native Zig implementation of Wyhash.Project is also open for people to add to and improve. Please check the issues to view requested features\n\n\nWhy Wyhash?\n\n- ✅ Extremely fast performance across different architectures\n- ✅ High-quality randomness and strong avalanche effect\n- ✅ Minimal code size and efficient memory usage\n- ✅ Used in databases, networking, and high-performance applications\n\n\n\n# 🛠 Basic Usage\n\n```zig\nconst wyhash = @import(\"wyhash\");\nconst std = @import(\"std\");\n\npub fn main() !void {\n    const r: u64 = 0x001020120;\n\n    const res = wyhash._whash(\"🔥Hello World!\", r);\n    std.debug.print(\"wyhash(\\\"🔥Hello World!\\\", {}) = {}\\n\", .{ r, res });\n}\n\n```\n\n# 📦 Installation\n\n*Add this to your build.zig.zon*\n\n```zig\n.dependencies = .{\n    .wyhash = .{\n        .url = \"https://github.com/NikoMalik/wyhash/archive/refs/heads/main.tar.gz\",\n        //the correct hash will be suggested by zig\n    }\n}\n\n```\n\n*And add this to you build.zig*\n\n```zig\n    const wyhash = b.dependency(\"wyhash\", .{\n        .target = target,\n        .optimize = optimize,\n    });\n    exe_mod.addImport(\"wyhash\", wyhash.module(\"wyhash\"));\n\n\n```\nYou can then import the library into your code like this\n\n```zig\nconst wyhash = @import(\"wyhash\")\n```\n\n\n#  📦 Installation/2\n\n```bash\n\ngit clone https://github.com/NikoMalik/wyhash.git\nmv wyhash /path/to/your/project/directory\n```\n\n\n\n\n\n# 🔥 Benchmarks\n\nWyhash is one of the fastest hash functions available. Benchmarks against MurmurHash3, XXHash, and CityHash show superior performance in most cases.\n\n\n\n# 👥 Credits\n\nOriginal Wyhash: Wang Yi\n\nRepo: https://github.com/wangyi-fudan/wyhash\n\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/123812634?u=afb2f373cdc1f34d75dec0860fbfa55d8f23d8fc&v=4",
+  "releases": [
+    {
+      "tag_name": "0.0.0",
+      "name": "v0.0.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-01-31T18:42:28Z",
+      "html_url": "https://github.com/NikoMalik/wyhash/releases/tag/0.0.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "no",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": "Niko__Malik",
+  "owner_followers": 37,
+  "owner_following": 187,
+  "owner_created_at": "2023-01-28T12:13:33Z",
+  "license": "MIT",
+  "category": "library"
+}

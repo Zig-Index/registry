@@ -1,0 +1,40 @@
+{
+  "name": "zdist",
+  "owner": "Jafagervik",
+  "repo": "zdist",
+  "description": "String distance library in zig",
+  "type": "project",
+  "topics": [
+    "distance-calculation",
+    "strings",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-02-03T12:05:42Z",
+  "minimum_zig_version": "0.11.0",
+  "readme": "# Zdist\n\nString distance library written in zig\n\n## Algorithms\n\n- [x] Hamming distance\n- [ ] Levenshtein distance\n- [ ] Longest common subsequence (LCS) distance\n- [ ] Jaro-Winkler distance\n\n## Usage\n\n```zig\nconst std = @import(\"std\");\nconst zdist =  @import(\"zdist\");\n\npub fn main() !void {\n    const a_str = \"abcdef\";\n    const b_str = \"cdefgh\";\n\n    const distance = zdist.lcs_distance(a_str, b_str);\n\n    std.debug.println(\"Distance between {s} and {s} is: {d}\\n\", .{a_str, b_str, distance});\n}\n```\n\n## Install (Per 0.14 beta)\n\nRun this command in the parent directory of your project\n\n```sh\nzig fetch --save https://github.com/Jafagervik/zdist/tarball/v0.1.0\n```\n\nOr alternatively use master or another version\n\nThen add these lines to build.zig before b.installArtifact(exe)\n\n```zig\nconst zdist = b.dependency(\"zdist\", .{});\n\nexe.root_module.addImport(\"zdist\", zdist.module(\"zdist\"));\n\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/20770505?u=2d5adbbef816d352e9795404545139d672eaedb7&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "**Full Changelog**: https://github.com/Jafagervik/zdist/commits/v0.1.0",
+      "prerelease": false,
+      "published_at": "2025-02-03T10:15:57Z",
+      "html_url": "https://github.com/Jafagervik/zdist/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "AI, HPC and proglang enthusiast. Currentlyorking in telecom\r\nPrev. Head of Development for FaceIt\r\nPrevious Software Developer for Revolve NTNU",
+  "owner_company": "Gintel",
+  "owner_location": "Trondheim, Norway",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 10,
+  "owner_following": 50,
+  "owner_created_at": "2016-08-01T10:25:28Z",
+  "license": "MIT",
+  "category": "library"
+}

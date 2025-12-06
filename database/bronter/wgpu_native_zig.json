@@ -1,0 +1,322 @@
+{
+  "name": "wgpu_native_zig",
+  "owner": "bronter",
+  "repo": "wgpu_native_zig",
+  "description": "Zig bindings for wgpu-native",
+  "type": "project",
+  "topics": [
+    "wgpu-native",
+    "zig-package"
+  ],
+  "stars": 88,
+  "forks": 21,
+  "watchers": 5,
+  "updated_at": "2025-12-04T23:03:55Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    },
+    {
+      "name": "wgpu_android_aarch64_debug",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-android-aarch64-debug.zip",
+      "hash": "N-V-__8AAPQyVxT6i7mm0AzaidOZmgXO0JlVRTK4cIzdhiIJ"
+    },
+    {
+      "name": "wgpu_android_aarch64_release",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-android-aarch64-release.zip",
+      "hash": "N-V-__8AAH5jwgMJj3SR-h6LEpl2nU1rEwl4tS6ZGvV4Kr_A"
+    },
+    {
+      "name": "wgpu_android_armv7_debug",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-android-armv7-debug.zip",
+      "hash": "N-V-__8AAPrsHxCJ4mgD4JYP4LlWrV8cgHLPzAdz5HePfW-0"
+    },
+    {
+      "name": "wgpu_android_armv7_release",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-android-armv7-release.zip",
+      "hash": "N-V-__8AAHKm5wI40Gj43wFTj6iZnGz9id_y087a-jnfQBRi"
+    },
+    {
+      "name": "wgpu_android_x86_debug",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-android-i686-debug.zip",
+      "hash": "N-V-__8AAMD9TBCN2rrJG9dqTyQh0Wv9MWisv3bSIdoMH_VG"
+    },
+    {
+      "name": "wgpu_android_x86_release",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-android-i686-release.zip",
+      "hash": "N-V-__8AAFwDIQNZ003uYMHrFbiexqSqI3sVgpXB2W4DLoqq"
+    },
+    {
+      "name": "wgpu_android_x86_64_debug",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-android-x86_64-debug.zip",
+      "hash": "N-V-__8AAAAjNBQaSprsYmeSlIDJWQg-jZHiUxxIMHylLp7E"
+    },
+    {
+      "name": "wgpu_android_x86_64_release",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-android-x86_64-release.zip",
+      "hash": "N-V-__8AALxtxANPhha93qENJNdLw9ZAaHUXp2_X8QBskpOM"
+    },
+    {
+      "name": "wgpu_ios_aarch64_debug",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-ios-aarch64-debug.zip",
+      "hash": "N-V-__8AAJj1lQlJYBWH3qMo3USVJcGKJ1ithSzQ-u04QUxa"
+    },
+    {
+      "name": "wgpu_ios_aarch64_release",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-ios-aarch64-release.zip",
+      "hash": "N-V-__8AALh8YgKjs1OKvnTlaRqB_euceGNN_TfX1HLMrnNi"
+    },
+    {
+      "name": "wgpu_ios_aarch64_simulator_debug",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-ios-aarch64-simulator-debug.zip",
+      "hash": "N-V-__8AAABClgk_Seuqe9XuxYUDDZe9T9aOYuhd4JhXTeg9"
+    },
+    {
+      "name": "wgpu_ios_aarch64_simulator_release",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-ios-aarch64-simulator-release.zip",
+      "hash": "N-V-__8AAAgFYgLavBRZjHgkULhWRweVNw-VeLMxcxRHZYF1"
+    },
+    {
+      "name": "wgpu_ios_x86_64_simulator_debug",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-ios-x86_64-simulator-debug.zip",
+      "hash": "N-V-__8AAKCSXgkyBFHn1Uwy1Sop2KeA6XwmrVs2_C8cru8M"
+    },
+    {
+      "name": "wgpu_ios_x86_64_simulator_release",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-ios-x86_64-simulator-release.zip",
+      "hash": "N-V-__8AAPBFWQJxhwRTeBxlztWVNalvobmyX_zEoF24X_S6"
+    },
+    {
+      "name": "wgpu_linux_aarch64_debug",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-linux-aarch64-debug.zip",
+      "hash": "N-V-__8AALSbGhS93ZKwkkKk-yN3BzFl6iBPh9etfftVkhSk"
+    },
+    {
+      "name": "wgpu_linux_aarch64_release",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-linux-aarch64-release.zip",
+      "hash": "N-V-__8AAC42tgMsCqChk-HZ0n7dyD1HT29f6QM0UTCdj_iF"
+    },
+    {
+      "name": "wgpu_linux_x86_64_debug",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-linux-x86_64-debug.zip",
+      "hash": "N-V-__8AAHS_-BNtAmT4hK9geZG361RETmD2lG0fk2gyDYh-"
+    },
+    {
+      "name": "wgpu_linux_x86_64_release",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-linux-x86_64-release.zip",
+      "hash": "N-V-__8AALK1sQPqMGESXUOHBpzwDj1GMf_nYBdfbjewJ9kH"
+    },
+    {
+      "name": "wgpu_macos_aarch64_debug",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-macos-aarch64-debug.zip",
+      "hash": "N-V-__8AACj6lQmZEGeyjdn2CCD0as1hGMvrAUBsoTuBu_cR"
+    },
+    {
+      "name": "wgpu_macos_aarch64_release",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-macos-aarch64-release.zip",
+      "hash": "N-V-__8AAGDGYgIAQ6tOKxxonhabDmuFj9Y35AKvPwynW_UO"
+    },
+    {
+      "name": "wgpu_macos_x86_64_debug",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-macos-x86_64-debug.zip",
+      "hash": "N-V-__8AAOCufAlp1bMuFqQCd152bYQLNu-tjLdu9edJ8b4e"
+    },
+    {
+      "name": "wgpu_macos_x86_64_release",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-macos-x86_64-release.zip",
+      "hash": "N-V-__8AAFi6YgLHU9dEEx9n190MvnIZaCq5SVMg8BX7zD87"
+    },
+    {
+      "name": "wgpu_windows_aarch64_msvc_debug",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-windows-aarch64-msvc-debug.zip",
+      "hash": "N-V-__8AACUsDR0QuXpFRCjd-TcdKredsnN5Uiy6thaqghfy"
+    },
+    {
+      "name": "wgpu_windows_aarch64_msvc_release",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-windows-aarch64-msvc-release.zip",
+      "hash": "N-V-__8AAEmpwwOechqvtlmAlMzCIbnIzIgSYcfEUWhSZ7Cj"
+    },
+    {
+      "name": "wgpu_windows_x86_msvc_debug",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-windows-i686-msvc-debug.zip",
+      "hash": "N-V-__8AAP8AIx3OgW8N8DkBj5JMcJUkcy7iHLuOH--fY3IX"
+    },
+    {
+      "name": "wgpu_windows_x86_msvc_release",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-windows-i686-msvc-release.zip",
+      "hash": "N-V-__8AAMn2lQPoxD9cdgm97Fvxqes4Jlvwct-GWDgsws5k"
+    },
+    {
+      "name": "wgpu_windows_x86_64_msvc_debug",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-windows-x86_64-msvc-debug.zip",
+      "hash": "N-V-__8AADEvMB0uTuAXXabR4Fw-2LjtJfoSP8vux2m_eDok"
+    },
+    {
+      "name": "wgpu_windows_x86_64_msvc_release",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-windows-x86_64-msvc-release.zip",
+      "hash": "N-V-__8AAG8mAQR0Vg9K8e0Ln46g_UJq1HqtXwif_Uvt1_ZE"
+    },
+    {
+      "name": "wgpu_windows_x86_64_gnu_debug",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-windows-x86_64-gnu-debug.zip",
+      "hash": "N-V-__8AAFICSxIMF7kdKvI3pTwiLWmIxjSopWIadDt9yUpp"
+    },
+    {
+      "name": "wgpu_windows_x86_64_gnu_release",
+      "url": "https://github.com/gfx-rs/wgpu-native/releases/download/v25.0.2.1/wgpu-windows-x86_64-gnu-release.zip",
+      "hash": "N-V-__8AAMZ8DwPtTjIxd_0zIGEoJwriDQY-Ykx8ldVc_7N0"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# wgpu_native_zig\nZig bindings for [wgpu-native](https://github.com/gfx-rs/wgpu-native)\n\nThis package exposes two modules: `wgpu-c` and `wgpu`.\n\n`wgpu-c` is just `wgpu.h` (and by extension `webgpu.h`) run through `translate-c`, so as close to wgpu-native's original C API as is possible in Zig.\n\n`wgpu` is a module full of pure Zig bindings for `libwgpu_native`, it does not import any C code and instead relies on `extern fn` declarations to hook up to `wgpu-native`.\n\n## Adding this package to your build\nAdd the package to your dependencies, either with:\n```sh\nzig fetch --save https://github.com/bronter/wgpu_native_zig/archive/refs/tags/v6.5.0.tar.gz\n```\nor by manually adding to your `build.zig.zon`:\n```zig\n.{\n    // ...other stuff\n    .dependencies = .{\n        // ...other dependencies\n        .wgpu_native_zig = .{\n            // You can either use a commit hash:\n            .url=\"https://github.com/bronter/wgpu_native_zig/archive/<commit_hash>.tar.gz\",\n            // or a tagged release:\n            // .url = \"https://github.com/bronter/wgpu_native_zig/archive/refs/tags/v6.5.0.tar.gz`\n            .hash=\"<dependency hash>\"\n        }\n    }\n}\n```\nThen, in `build.zig` add:\n```zig\n    const wgpu_native_dep = b.dependency(\"wgpu_native_zig\", .{});\n\n    // Add module to your exe (wgpu-c can also be added like this, just pass in \"wgpu-c\" instead)\n    exe.root_module.addImport(\"wgpu\", wgpu_native_dep.module(\"wgpu\"));\n    // Or, add to your lib similarly:\n    lib.root_module.addImport(\"wgpu\", wgpu_native_dep.module(\"wgpu\"));\n```\n\n### Building on Windows\nWindows x86_64 has two options for ABI: GNU and MSVC. For i686 and aarch64, only the MSVC option is available.\nIf you need to specify the build target, you can do that with:\n```zig\nconst target = b.standardTargetOptions(.{\n    .default_target = .{\n        // If not specified, defaults to the GNU abi\n        .abi = .msvc,\n    }\n});\n```\nOr, specify it with your build command. For example, the triangle example in this repository can be run like so:\n```sh\nzig build run-triangle-example -Dtarget=x86_64-windows-msvc\n```\nEither way, pass the resolved target to the dependency like so:\n```zig\nconst wgpu_native_dep = b.dependency(\"wgpu_native_zig\", .{\n  .target = target\n});\n```\n\nWhen using static linking with MSVC, you might encounter duplicate symbol errors. If so, try\n```zig\nif (target.result.abi == .msvc) {\n  // \"exe\" here is the *std.Build.Step.Compile from b.addExecutable() (or b.addTest())\n  exe.bundle_compiler_rt = false;\n  exe.bundle_ubsan_rt = false;\n}\n```\nAn example of using `wgpu-native-zig` with static linking on Windows can be found at [wgpu-native-zig-windows-test](https://github.com/bronter/wgpu-native-zig-windows-test).\n\n### Dynamic linking\nDynamic linking can be made to work, though it is a bit messy to use.\nWhen you initialize your `wgpu_native_dep`, add the option for dynamic linking like so:\n```zig\nconst wgpu_native_dep = b.dependency(\"wgpu_native_zig\", .{\n  // Defaults to .static if you don't specify\n  .link_mode = .dynamic\n});\n```\nThen add the following with your install step dependencies:\n```zig\nconst lib_dir = wgpu_native_dep.namedWriteFiles(\"lib\").getDirectory();\n\n// This would also work with .so files on linux\nconst dll_path = lib_dir.join(b.allocator, \"wgpu_native.dll\") catch return;\n\n// addInstallBinFile puts the dll in the same directory as your executable\nconst install_dll = b.addInstallBinFile(dll_path, \"wgpu_native.dll\");\n\n// Make sure that the dll is installed when the install step is run\nb.getInstallStep().dependOn(&install_dll.step);\n```\n\n\n## How the `wgpu` module differs from `wgpu-c`\n* Names are shortened to remove redundancy.\n  * For example `wgpu.WGPUSurfaceDescriptor` becomes `wgpu.SurfaceDescriptor`\n* C pointers (`[*c]`) are replaced with more specific pointer types.\n  * For example `[*c]const u8` is replaced with `?[*:0]const u8`.\n* Pointers to opaque structs are made explicit (and only optional when they need to be).\n  * For example `wgpu.WGPUAdapter` from `webgpu.h` would instead be expressed as `*wgpu.Adapter` or `?*wgpu.Adapter`, depending on the context.\n* Methods are expressed as decls inside of structs\n  * For example \n    ```zig\n    wgpu.wgpuInstanceCreateSurface(instance: WGPUInstance, descriptor: [*c]const WGPUSurfaceDescriptor) WGPUSurface\n    ``` \n    becomes\n    ```zig\n    Instance.createSurface(self: *Instance, descriptor: *const SurfaceDescriptor) ?*Surface\n    ```\n* Certain asynchronous methods such as requestAdapter and requestDevice are provided with wrapper methods.\n  * For example, requesting an adapter with a callback looks something like\n    ```zig\n    fn handleRequestAdapter(\n        status: RequestAdapterStatus,\n        adapter: ?*Adapter,\n        message: StringView,\n        userdata1: ?*anyopaque,\n        userdata2: ?*anyopaque\n    ) callconv(.C) void {\n        switch(status) {\n            .success => {\n                const ud_adapter: **Adapter = @ptrCast(@alignCast(userdata1));\n                ud_adapter.* = adapter.?;\n            },\n            else => {\n              std.log.err(\"{s}\\n\", .{message.toSlice()});\n            }\n        }\n        const completed: *bool = @ptrCast(@alignCast(userdata2));\n        completed.* = true;\n    }\n    var adapter_ptr: ?*Adapter = null;\n    var completed = false;\n    const request_adapter_info = RequestAdapterInfo {\n        .callback = handleRequestAdapter,\n        .userdata1 = @ptrCast(&adapter_ptr),\n        .userdata2 = @ptrCast(&completed),\n    }\n    const ra_future = instance.requestAdapter(null, request_adapter_info);\n\n    // There is currently no way to use a `Future`,\n    // it's supposed to be passed into `Instance.waitAny()`,\n    // which is unimplemented as of `wgpu_native` v24.0.3.1.\n    _ = ra_future; \n\n    instance.processEvents();\n    while(!completed) {\n      std.Thread.sleep(200_000_000);\n      instance.processEvents();\n    }\n    ```\n    whereas the non-callback version looks like\n    ```zig\n    // The wrapper methods use polling, so 200_000_000 is the polling interval in nanoseconds.\n    const response = instance.requestAdapterSync(null, 200_000_000);\n\n    const adapter_ptr: ?*Adapter = switch (response.status) {\n        .success => response.adapter,\n        else => blk: {\n            std.log.err(\"{s}\\n\", .{response.message});\n            break :blk null;\n        }\n    };\n    ```\n* Chained structs are provided with inline functions for constructing them, which come in two forms depending on whether or not the chained struct is likely to always be required.\n  * For required chained structs, you can either write them explicitely:\n    ```zig\n    SurfaceDescriptor{\n        .next_in_chain = @ptrCast(&SurfaceDescriptorFromXlibWindow {\n            .chain = ChainedStruct {\n                .s_type = SType.surface_descriptor_from_xlib_window,\n            },\n            .display = display,\n            .window = window,\n        }),\n        .label = \"xlib_surface_descriptor\",\n    };\n    ```\n    or use a function to construct them:\n    ```zig\n    // Here the descriptors from SurfaceDescriptor and SurfaceDescriptorFromXlibWindow have been merged,\n    // so just pass in an anonymous struct with the things that you need; default values will take care of the rest.\n    surfaceDescriptorFromXlibWindow(.{\n        .label = \"xlib_surface_descriptor\",\n        .display = display,\n        .window = window\n    });\n    ```\n  * For optional chained structs, you can either write them explicitely like in the example above, or you can use a method of the parent struct instance to add them, for example:\n    ```zig\n    &(SurfaceConfiguration {\n      .device = device,\n      // other stuff\n    }).withDesiredMaxFrameLatency(2);\n    ```\n* `WGPUBool` is replaced with `bool` whenever possible.\n  * This pretty much means, it is replaced with `bool` in the parameters and return values of methods, but not in structs or the parameters/return values of procs (which are supposed to be function pointers to things returned by `wgpuGetProcAddress`).\n\n## TODO\n* Test this on other machines with different OS/CPU. Currently only tested on x86_64-linux-gnu and x86_64-windows (msvc and gnu); zig version 0.14.0.\n* Cleanup/organization: \n  * If types are only tied to a specific opaque struct, they should be decls inside that struct.\n  * The associated Procs struct should probably be a decl of the opaque struct as well.\n  * There are many things that seem to be in the wrong file.\n    * For example a lot of what is in `pipeline.zig` is actually only used by `Device`, and should probably be in `device.zig` instead.\n  * Since pointers to opaque structs are made explicit, it would be more consistent if pointers to callback functions are explicit as well.\n* Port [wgpu-native-examples](https://github.com/samdauwe/webgpu-native-examples) using wrapper code, as a basic form of documentation.\n* Custom-build `wgpu-native`; provided all the necessary tools/dependencies are present.\n* Bindgen using [the webgpu-headers yaml](https://github.com/webgpu-native/webgpu-headers/blob/main/webgpu.yml)?\n* The proc definitions are mainly there since they are also present in the webgpu headers and I didn't fully understand what they were for when I started working on this project. However, I know better now and they aren't really used for anything currently. They're supposed to be used with `wgpuGetProcAddress` but it's [unimplemented in `wgpu-native`](https://github.com/gfx-rs/wgpu-native/issues/223). They are a pain to update by hand, so maybe they should be removed for now and made optional once we have a working bindings generator? Like the bindgen could put them in a separate `wgpu-procs` module.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/12648711?v=4",
+  "releases": [
+    {
+      "tag_name": "v6.5.0",
+      "name": "v6.5.0",
+      "body": "Fixes an issue with `BindGroupEntryExtras` trying to declare an array of opaque structs rather than an array of pointers.",
+      "prerelease": false,
+      "published_at": "2025-07-17T01:10:16Z",
+      "html_url": "https://github.com/bronter/wgpu_native_zig/releases/tag/v6.5.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v6.4.0",
+      "name": "v6.4.0",
+      "body": "Remove the `pub` keyword for `pub const _x = @import(\"x.zig\")` in `root.zig`. Don't want to export the same thing again under a weird name.",
+      "prerelease": false,
+      "published_at": "2025-07-12T20:27:27Z",
+      "html_url": "https://github.com/bronter/wgpu_native_zig/releases/tag/v6.4.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v6.3.0",
+      "name": "v6.3.0",
+      "body": "Removes usage of `usingnamespace` (#29 , #30 ). The changes should be backwards-compatible since the exports shouldn't have changed; only the way that they're exported has been changed.",
+      "prerelease": false,
+      "published_at": "2025-07-12T19:00:38Z",
+      "html_url": "https://github.com/bronter/wgpu_native_zig/releases/tag/v6.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v6.2.0",
+      "name": "v6.2.0",
+      "body": "Fix \"unknown-length pointer to opaque not allowed\" issue with `Instance.enumerateAdapters()`.",
+      "prerelease": false,
+      "published_at": "2025-06-30T08:32:58Z",
+      "html_url": "https://github.com/bronter/wgpu_native_zig/releases/tag/v6.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v6.1.0",
+      "name": "v6.1.0",
+      "body": "Updates defaults for BindGroupLayoutEntry to be more specific about binding usage: https://github.com/bronter/wgpu_native_zig/commit/d2aac5b4fd509760fd725752d1214c32311825f0",
+      "prerelease": false,
+      "published_at": "2025-06-24T14:22:26Z",
+      "html_url": "https://github.com/bronter/wgpu_native_zig/releases/tag/v6.1.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v6.0.0",
+      "name": "v6.0.0 - wgpu-native v25.0.2.1",
+      "body": "API changes for `wgpu-native` v24.x.x.x and v25.0.2.1\r\nDiff to previous:\r\nhttps://github.com/bronter/wgpu_native_zig/compare/5.x...6.x",
+      "prerelease": false,
+      "published_at": "2025-06-11T04:00:20Z",
+      "html_url": "https://github.com/bronter/wgpu_native_zig/releases/tag/v6.0.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v5.1.0",
+      "name": "v5.1.0",
+      "body": "Adds some defaults to BindGroupLayoutEntry as per https://github.com/bronter/wgpu_native_zig/pull/18/files",
+      "prerelease": false,
+      "published_at": "2025-04-25T04:55:35Z",
+      "html_url": "https://github.com/bronter/wgpu_native_zig/releases/tag/v5.1.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v5.0.0",
+      "name": "v5.0.0",
+      "body": "Fixes an issue with the `freeMembers` method of SurfaceCapabilities (#15)",
+      "prerelease": false,
+      "published_at": "2025-04-01T22:17:57Z",
+      "html_url": "https://github.com/bronter/wgpu_native_zig/releases/tag/v5.0.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v4.0.0",
+      "name": "v4.0.0",
+      "body": "Some minor fixes to the public API as per https://github.com/bronter/wgpu_native_zig/pull/13/files",
+      "prerelease": false,
+      "published_at": "2025-03-16T21:46:32Z",
+      "html_url": "https://github.com/bronter/wgpu_native_zig/releases/tag/v4.0.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v3.0.1",
+      "name": "v3.0.1",
+      "body": "Update build script for Zig 0.14.0 (no added features or breaking changes, just moving some things around to avoid using deprecated fields).",
+      "prerelease": false,
+      "published_at": "2025-03-12T00:15:07Z",
+      "html_url": "https://github.com/bronter/wgpu_native_zig/releases/tag/v3.0.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v3.0.0",
+      "name": "v3.0.0",
+      "body": "Change package name and dependency hash format to be compatible with Zig 0.14.0",
+      "prerelease": false,
+      "published_at": "2025-03-11T23:50:36Z",
+      "html_url": "https://github.com/bronter/wgpu_native_zig/releases/tag/v3.0.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v2.1.1",
+      "name": "v2.1.1",
+      "body": "Change package name to use underscores instead of dashes, that way it shows up correctly when installed through `zig fetch`",
+      "prerelease": false,
+      "published_at": "2025-03-07T22:53:08Z",
+      "html_url": "https://github.com/bronter/wgpu_native_zig/releases/tag/v2.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v2.1.0",
+      "name": "v2.1.0",
+      "body": "Enables additional targets:\r\n- android-aarch64\r\n- android-armv7\r\n- android-x86\r\n- android-x86_64\r\n- ios-aarch64\r\n- ios-aarch64-simulator\r\n- ios-x86_64-simulator\r\n- windows-aarch64-msvc",
+      "prerelease": false,
+      "published_at": "2025-02-27T04:44:03Z",
+      "html_url": "https://github.com/bronter/wgpu_native_zig/releases/tag/v2.1.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v2.0.0",
+      "name": "v2.0.0 - wgpu-native 22.1.0.5",
+      "body": "This updates the bindings to be compatible with wgpu-native 22.1.0.5: https://github.com/bronter/wgpu-native-zig/pull/9\r\nAdditionally, the compiler version requirement has been bumped to `0.14.0-dev.2577+271452d22`, due to a linker error with the previous version, which was resolved in 0.14: https://github.com/ziglang/zig/issues/15107 ",
+      "prerelease": false,
+      "published_at": "2025-02-17T13:12:13Z",
+      "html_url": "https://github.com/bronter/wgpu_native_zig/releases/tag/v2.0.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.0.0",
+      "name": "v1.0.0",
+      "body": "Initial version of `wgpu-native-zig`.\r\nBindings for `wgpu-native` version `0.19.4.1`",
+      "prerelease": false,
+      "published_at": "2025-02-17T12:30:29Z",
+      "html_url": "https://github.com/bronter/wgpu_native_zig/releases/tag/v1.0.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Software developer who dabbles in many different things.",
+  "owner_company": null,
+  "owner_location": "Tishomingo, OK",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 5,
+  "owner_following": 3,
+  "owner_created_at": "2015-05-28T19:01:01Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,41 @@
+{
+  "name": "boring_tls",
+  "owner": "Thomvanoorschot",
+  "repo": "boring_tls",
+  "description": "A memory-safe TLS/SSL library for Zig, providing both client and server implementations built on Google's BoringSSL for secure, high-performance encrypted communications.",
+  "type": "project",
+  "topics": [
+    "boringssl",
+    "https",
+    "ssl",
+    "tls",
+    "wss",
+    "zig",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 7,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-11-23T05:14:32Z",
+  "dependencies": [
+    {
+      "name": "boringssl",
+      "url": "https://github.com/Thomvanoorschot/boringssl/archive/main.tar.gz",
+      "hash": "boringssl-0.20250514.0-zK0prLy1xAfRpqIBYbl48gYSlA95NLt3WrmR06bVT57a"
+    }
+  ],
+  "minimum_zig_version": "0.15.0-dev.483+837e0f9c3",
+  "readme": "# BoringTLS\n\n## Introduction\n\nBoringTLS was created because I needed a TLS implementation for a TCP/HTTP client/server other than the one in the standard library. I could not find anything that worked easily so I created this library. It has been tested with the libxev TCP connection and works as expected. \n\n## Overview\n\nBoringTLS is a comprehensive TLS/SSL library for the Zig programming language, providing both client and server implementations. Built on Google's BoringSSL cryptographic library, it offers a robust foundation for secure communication applications. The library provides a high-level, memory-safe Zig interface to TLS functionality while leveraging the battle-tested security of BoringSSL underneath.\n\n## Getting Started\n\n### Example\nThe package is probably to be used for some sort of network traffic protocol. An example implementation can be found\nin another project of mine; https://github.com/Thomvanoorschot/async_zocket.\nThis project show the TLS server/client being used in a Websocket server/client.\n\n### Installation\n\nUse fetch:\n```\nzig fetch --save https://github.com/Thomvanoorschot/boring_tls/archive/main.tar.gz\n```\n\nAdd BoringTLS to your `build.zig.zon`:\n\n```zig\n.dependencies = .{\n    .boring_tls = .{\n        .url = \"https://github.com/Thomvanoorschot/boring_tls/archive/main.tar.gz\",\n        .hash = \"...\", // Update with actual hash\n    },\n},\n```\n\n### Basic Client Usage\n\n```zig\nconst std = @import(\"std\");\nconst BoringTLS = @import(\"boring_tls\");\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    // Create TLS client\n    var client = try BoringTLS.tls_client.TlsClient.init(\"example.com\", .{\n        .verify_certificate = true,\n    });\n    defer client.deinit();\n\n    // Start TLS handshake\n    if (try client.startHandshake()) |handshake_data| {\n        // Send handshake_data to server over your transport\n        std.log.info(\"Handshake data: {} bytes\", .{handshake_data.len});\n    }\n\n    // Process server response (example)\n    const server_response = \"...\"; // Data received from server\n    if (try client.processIncoming(server_response)) |decrypted_data| {\n        std.log.info(\"Received: {s}\", .{decrypted_data});\n    }\n\n    // Send encrypted data\n    const message = \"Hello, secure world!\";\n    if (try client.processOutgoing(message)) |encrypted_data| {\n        // Send encrypted_data to server over your transport\n        std.log.info(\"Sending {} encrypted bytes\", .{encrypted_data.len});\n    }\n}\n```\n\n### Basic Server Usage\n\n```zig\nconst std = @import(\"std\");\nconst BoringTLS = @import(\"boring_tls\");\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    // Create TLS server with certificate and key files\n    var server = try BoringTLS.tls_server.TlsServer.init(\n        \"server.crt\",  // Path to certificate file\n        \"server.key\"   // Path to private key file\n    );\n    defer server.deinit();\n\n    // Process client connection (example)\n    const client_data = \"...\"; // Data received from client\n    if (try server.processIncoming(client_data)) |decrypted_data| {\n        std.log.info(\"Client sent: {s}\", .{decrypted_data});\n        \n        // Send response\n        const response = \"Hello, client!\";\n        if (try server.processOutgoing(response)) |encrypted_response| {\n            // Send encrypted_response back to client\n            std.log.info(\"Sending {} encrypted bytes\", .{encrypted_response.len});\n        }\n    }\n}\n```\n\n## API Reference\n\n### TLS Client\n\n**TlsClient**\n- `TlsClient.init(hostname, options)` - Initialize a new TLS client\n- `client.startHandshake()` - Begin TLS handshake, returns initial handshake data\n- `client.processIncoming(data)` - Process encrypted data from server, returns decrypted data\n- `client.processOutgoing(data)` - Encrypt data for sending, returns encrypted data\n- `client.isHandshakeComplete()` - Check if TLS handshake is complete\n- `client.deinit()` - Clean up client resources\n\n**TlsClientOptions**\n- `verify_certificate: bool` - Enable/disable certificate verification (default: true)\n\n### TLS Server\n\n**TlsServer**\n- `TlsServer.init(cert_file, key_file)` - Initialize server with certificate and key files\n- `server.processIncoming(data)` - Process encrypted data from client, returns decrypted data\n- `server.processOutgoing(data)` - Encrypt data for sending, returns encrypted data\n- `server.isHandshakeComplete()` - Check if TLS handshake is complete\n- `server.deinit()` - Clean up server resources\n\n\n\n## Project Status\n\n**Production Ready** - The library provides complete TLS client and server functionality.\n\n## Requirements\n\n- **Zig 0.15.0-dev** or later\n- **BoringSSL** (automatically built version 0.20250514.0 as dependency)\n\n## Building\n\nThe project uses Zig's build system and automatically compiles BoringSSL as a static library:\n\n```bash\nzig build\n```\n\nThe build process:\n1. Compiles BoringSSL crypto and SSL libraries\n2. Creates the BoringTLS Zig module\n3. Links everything together for easy integration\n\n## Contributing\n\nContributions are welcome! Please feel free to submit pull requests, report bugs, or suggest features.\n\n## License\n\nThis project is licensed under the MIT License - see the LICENSE file for details.\n\n## Acknowledgments\n\n- Built on [BoringSSL](https://boringssl.googlesource.com/boringssl/) by Google",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/11627921?u=220d24a7bb3626cdc85b33d30c2886583d85b7d3&v=4",
+  "releases": [],
+  "owner_company": "Bending the Rules",
+  "owner_location": "Breda, the Netherlands",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 54,
+  "owner_following": 4,
+  "owner_created_at": "2015-03-24T09:20:23Z",
+  "license": "MIT",
+  "category": "library"
+}

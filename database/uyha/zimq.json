@@ -1,0 +1,44 @@
+{
+  "name": "zimq",
+  "owner": "uyha",
+  "repo": "zimq",
+  "description": "Zig binding for ZeroMQ",
+  "type": "project",
+  "topics": [
+    "bindings",
+    "zeromq",
+    "zig",
+    "zig-package",
+    "zmq",
+    "libzmq"
+  ],
+  "stars": 30,
+  "forks": 4,
+  "watchers": 2,
+  "updated_at": "2025-11-24T06:26:29Z",
+  "dependencies": [
+    {
+      "name": "libzmq",
+      "url": "https://github.com/zeromq/libzmq/archive/34f7fa22022bed9e0e390ed3580a1c83ac4a2834.tar.gz",
+      "hash": "N-V-__8AAHUzRQAL7Ikh0_T9Nw0RdIaq1ntd_qhYGJA9AvC6"
+    },
+    {
+      "name": "libsodium",
+      "url": "git+https://github.com/jedisct1/libsodium#7f7873c21b5819f45927ecd344ac047ffb8b1a00",
+      "hash": "N-V-__8AAJ2dYwDtsWQvo58_eb7kC8QOJVIwwRjulq-rbWMV"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "<!-- markdownlint-disable no-inline-html -->\n# Zig binding for ZeroMQ\n\n<!--toc:start-->\n- [Zig binding for ZeroMQ](#zig-binding-for-zeromq)\n  - [How to use](#how-to-use)\n  - [Example](#example)\n  - [Binding map](#binding-map)\n<!--toc:end-->\n\nA ZeroMQ wrapper that covers nearly 100% of ZeroMQ's API (skipped functions are\nto be deprecated or superseded).\n\n## How to use\n\n1. Run the following command to add this project as a dependency\n\n   ```sh\n   zig fetch --save git+https://github.com/uyha/zimq.git\n   ```\n\n1. In your `build.zig`, add the following\n\n   ```zig\n   const zimq = b.dependency(\"zimq\", .{\n       .target = target,\n       .optimize = optimize,\n   });\n   // Replace `exe` with your actual library or executable\n   exe.root_module.addImport(\"zimq\", zimq.module(\"zimq\"));\n   ```\n\n## Example\n\n```zig\npub fn main() !void {\n    const context: *zimq.Context = try .init();\n    defer context.deinit();\n\n    const pull: *zimq.Socket = try .init(context, .pull);\n    defer pull.deinit();\n\n    const push: *zimq.Socket = try .init(context, .push);\n    defer push.deinit();\n\n    try pull.bind(\"inproc://#1\");\n    try push.connect(\"inproc://#1\");\n\n    try push.sendSlice(\"hello\", .{});\n\n    var buffer: zimq.Message = .empty();\n    _ = try pull.recvMsg(&buffer, .{});\n\n    std.debug.print(\"{s}\\n\", .{buffer.slice()});\n}\n\nconst std = @import(\"std\");\nconst zimq = @import(\"zimq\");\n```\n\n## Binding map\n\nAll the binding functions live in the `zimq` module.\n\n<details>\n  <summary>Context</summary>\n\n- [ ] ~~`zmq_ctx_get`~~ (`zmq_ctx_get_ext` is used instead)\n- [X] `zmq_ctx_get_ext` -> `Context.get`\n- [X] `zmq_ctx_new` -> `Context.init`\n- [ ] ~~`zmq_ctx_set`~~ (`zmq_ctx_set_ext` is used instead)\n- [X] `zmq_ctx_set_ext` -> `Context.set`\n- [X] `zmq_ctx_shutdown` -> `Context.shutdown`\n- [X] `zmq_ctx_term` -> `Context.deinit`\n\n</details>\n\n<details>\n  <summary>Socket</summary>\n\n- [X] `zmq_bind` -> `Socket.bind`\n- [X] `zmq_close` -> `Socket.deinit`\n- [X] `zmq_connect` -> `Socket.connect`\n- [X] `zmq_connect_peer` -> `Socket.connectPeer`\n- [X] `zmq_disconnect` -> `Socket.disconnect`\n- [X] `zmq_getsockopt` -> `Socket.get`\n- [X] `zmq_recv` -> `Socket.recv`\n- [ ] ~~`zmq_recvmsg`~~ (to be deprecated, `zmq_msg_recv` is used instead)\n- [X] `zmq_msg_recv` -> `Socket.recvMsg`\n- [X] `zmq_send` -> `Socket.sendBuffer`\n- [X] `zmq_send_const` -> `Socket.sendConst`\n- [ ] ~~`zmq_sendmsg`~~ (to be deprecated, `zmq_msg_send` is used instead)\n- [X] `zmq_msg_send` -> `Socket.sendMsg`\n- [X] `zmq_setsockopt` -> `Socket.set`\n- [X] `zmq_socket` -> `Socket.init`\n- [X] `zmq_socket_monitor` -> `Socket.monitor`\n- [X] `zmq_socket_monitor_versioned` -> `Socket.monitorVersioned`\n- [X] `zmq_socket_monitor_pipes_stats` -> `Socket.pipesStats`\n- [X] `zmq_unbind` -> `Socket.unbind`\n\n</details>\n\n<details>\n  <summary>Message</summary>\n\n- [X] `zmq_msg_close` -> `Message.deinit`\n- [X] `zmq_msg_copy` -> `Message.copy`\n- [X] `zmq_msg_data` -> `Message.data` (`Message.slice` provides better access to\nthe underlying data)\n- [X] `zmq_msg_get` -> `Message.get`\n- [X] `zmq_msg_gets` -> `Message.gets`\n- [X] `zmq_msg_init` -> `Message.empty`\n- [X] `zmq_msg_init_buffer` -> `Message.withBuffer`\n- [X] `zmq_msg_init_data` -> `Message.withData`\n- [X] `zmq_msg_init_size` -> `Message.withSize`\n- [X] `zmq_msg_more` -> `Message.more`\n- [X] `zmq_msg_move` -> `Message.move`\n- [X] `zmq_msg_routing_id` -> `Message.getRoutingId`\n- [ ] `zmq_msg_set` (currently useless)\n- [X] `zmq_msg_set_routing_id` -> `Message.setRoutingId`\n- [X] `zmq_msg_size` -> `Message.size`\n\n</details>\n\n<details>\n  <summary>Polling</summary>\n\n- [X] `zmq_poll` -> `poll.poll`\n- [X] `zmq_ppoll` -> `poll.ppoll`\n\n</details>\n\n<details>\n  <summary>Poller</summary>\n\n- [X] `zmq_poller_new` -> `Poller.init`\n- [X] `zmq_poller_destroy` -> `Poller.deinit`\n- [X] `zmq_poller_size` -> `Poller.size`\n- [X] `zmq_poller_add` -> `Poller.add`\n- [X] `zmq_poller_modify` -> `Poller.modify`\n- [X] `zmq_poller_remove` -> `Poller.remove`\n- [X] `zmq_poller_add_fd` -> `Poller.add_fd`\n- [X] `zmq_poller_modify_fd` -> `Poller.modify_fd`\n- [X] `zmq_poller_remove_fd` -> `Poller.remove_fd`\n- [X] `zmq_poller_wait` -> `Poller.wait`\n- [X] `zmq_poller_wait_all` -> `Poller.wait_all`\n- [X] `zmq_poller_fd` -> `Poller.fd`\n\n</details>\n\n<details>\n  <summary>Proxy</summary>\n\n- [x] `zmq_proxy` -> `proxy`\n- [x] `zmq_proxy_steerable` -> `proxySteerable`\n\n</details>\n\n<details>\n  <summary>Timer</summary>\n\n- [X] `zmq_timers_new` -> `Timers.init`\n- [X] `zmq_timers_destroy` -> `Timers.deinit`\n- [X] `zmq_timers_add` -> `Timers.add`\n- [X] `zmq_timers_cancel` -> `Timers.cancel`\n- [X] `zmq_timers_set_interval` -> `Timers.setInterval`\n- [X] `zmq_timers_reset` -> `Timers.reset`\n- [X] `zmq_timers_timeout` -> `Timers.timeout`\n- [X] `zmq_timers_execute` -> `Timers.execute`\n\n</details>\n\n<details>\n  <summary>Runtime inspection</summary>\n\n- [X] `zmq_has` -> `has`\n- [X] `zmq_version` -> `version`\n\n</details>\n\n<details>\n  <summary>Atomic Counter</summary>\n\n- [X] `zmq_atomic_counter_dec` -> `AtomicCounter.dec`\n- [X] `zmq_atomic_counter_destroy` -> `AtomicCounter.deinit`\n- [X] `zmq_atomic_counter_inc` -> `AtomicCounter.inc`\n- [X] `zmq_atomic_counter_new` -> `AtomicCounter.init`\n- [X] `zmq_atomic_counter_set` -> `AtomicCounter.set`\n- [X] `zmq_atomic_counter_value` -> `AtomicCounter.value`\n\n</details>\n\n<details>\n  <summary>Utilities</summary>\n\n- [X] `zmq_errno` -> `errno`\n- [X] `zmq_strerror` -> `strerror`\n\n</details>\n\n<details>\n  <summary>Curve</summary>\n\n- [X] `zmq_curve_keypair` -> `curve.keyPair`\n- [X] `zmq_curve_public` -> `curve.publicKey`\n\n</details>\n\n<details>\n  <summary>Z85</summary>\n\n- [X] `zmq_z85_encode` -> `z85.encode`\n- [X] `zmq_z85_decode` -> `z85.decode`\n\n</details>\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/8091245?u=cfdcc9a998db848f9a9f0d6481233544845fef31&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Helsinki, Finland",
+  "owner_blog": null,
+  "owner_twitter_username": "hachanuy",
+  "owner_followers": 16,
+  "owner_following": 7,
+  "owner_created_at": "2014-07-07T14:29:34Z",
+  "license": "MIT",
+  "category": "library"
+}

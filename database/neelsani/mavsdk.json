@@ -1,0 +1,63 @@
+{
+  "name": "mavsdk",
+  "owner": "neelsani",
+  "repo": "mavsdk",
+  "description": "",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-06-01T20:18:50Z",
+  "dependencies": [
+    {
+      "name": "curl",
+      "url": "git+https://github.com/neelsani/curl#b356c9479a91dc65b0fc92b5b81f7beedeb8bb85",
+      "hash": "curl-8.13.0-mFDAWCjtAACUBwsX6xOgrLmd-R8qwgvAZ9glaoTP3P2s"
+    },
+    {
+      "name": "mavlink_c",
+      "url": "git+https://github.com/neelsani/mavlink-c#a9e6f4e1aa74f3fc1440e96629a0087fbf0bad2d",
+      "hash": "mavlink_c-0.0.0-JclvXuMPAAAxtDkME9wnFZDt7zPRR6MwhfYFsKdfl3h3"
+    },
+    {
+      "name": "jsoncpp",
+      "url": "git+https://github.com/neelsani/jsoncpp#b569eacef88251d0e92960e86225ceb1cbbd28f8",
+      "hash": "jsoncpp-0.0.0-sio8ws0XAACblYQ_hjajR3CcOmxAeVerkmP4-zXInhrl"
+    },
+    {
+      "name": "tinyxml2",
+      "url": "git+https://github.com/neelsani/tinyxml2#258e77df1e127d78b2b01d6add4100dc2c5d2246",
+      "hash": "tinyxml2-0.0.0-IuMDpzoTAAAIIKkdjE32XvJtFjgUaWiojPG0oMT-HRfD"
+    },
+    {
+      "name": "libevents",
+      "url": "git+https://github.com/neelsani/libevents#eb02ff2c59759ef2fb780e57682f37f97d748070",
+      "hash": "libevents-0.0.0-R6E_ATMbAACJNSNZydTbpxP0NoQi1vNoV4iuJ1I9vcKd"
+    },
+    {
+      "name": "liblzma",
+      "url": "git+https://github.com/neelsani/liblzma#4ce0f19f06a6f350682cfdb77053bc4ac19969ff",
+      "hash": "liblzma-0.0.0-t425Wd4WAAAk4SM8wtJ_FJpCErz_mpm71UCZv43dNNtd"
+    },
+    {
+      "name": "upstream",
+      "url": "git+https://github.com/mavlink/MAVSDK#b1b219808572b328481179a183f7f7226079eab2",
+      "hash": "N-V-__8AABx2PAIXvUCURzs1PV-zvD1g87xEiUaW9iug2ATf"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# MAVSDK Zig Build Integration\n\nZig build system integration for [MAVSDK](https://mavsdk.mavlink.io/) - the official SDK for MAVLink-compatible systems.\n\n## Quick Start\n\n1. Add to your project:\n```bash\nzig fetch --save git+https://github.com/neelsani/mavsdk\n```\n2. Add to you build.zig\n\n```zig\nconst mavsdk_dep = b.dependency(\"mavsdk\", .{\n    .target = target,\n    .optimize = optimize,\n});\nconst lib = mavsdk_dep.artifact(\"mavsdk\");\n\n//then link it to your exe\n\nexe.linkLibrary(lib);\n```",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/59120225?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Atlanta, GA",
+  "owner_blog": "neels.dev/",
+  "owner_twitter_username": null,
+  "owner_followers": 2,
+  "owner_following": 4,
+  "owner_created_at": "2019-12-21T16:18:48Z",
+  "category": "library"
+}

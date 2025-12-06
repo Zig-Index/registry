@@ -1,0 +1,34 @@
+{
+  "name": "passprompt",
+  "owner": "eltNEG",
+  "repo": "passprompt",
+  "description": "A simple Zig library for secure password input from the terminal with customizable display options",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-11-02T07:12:35Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# PassPrompt\n\nA simple Zig library for secure password input from the terminal with customizable display options.\n\n## Installation\nFetch this dependency by running the following command in your project:\n```\nzig fetch --save git+https://github.com/eltNEG/passprompt#master\n```\n\nThen in your `build.zig`:\n\n```zig\nconst passprompt_dep = b.dependency(\"passprompt\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\nexe.root_module.addImport(\"passprompt\", passprompt_dep.module(\"passprompt\"));\n```\n\n## Usage\n\n```zig\npub fn main() !void {\n    var buffer: [256]u8 = undefined;\n\n    // Get password with asterisk masking\n    const size = try passprompt.get(&buffer, \"Enter password: \", '*');\n    const password = buffer[0..size];\n\n    // Get password with no display (completely hidden)\n    var buffer2: [256]u8 = undefined;\n    const size2 = try passprompt.get(&buffer2, \"Enter secret: \", null);\n    const secret = buffer2[0..size2];\n\n    // Check if passwords match\n    const match = std.mem.eql(u8, password, secret);\n    std.debug.print(\"Passwords match: {}\\n\", .{match});\n}\n```\n\n## API Reference\n\n### `get(buffer: []u8, msg: []const u8, display: ?u8) !usize`\n\nPrompts the user for password input.\n\n**Parameters:**\n- `buffer`: Byte slice to store the input password\n- `msg`: Prompt message to display to the user\n- `display`: Optional character to display instead of the actual input\n  - `'*'` - Show asterisks for each character\n  - `'#'` - Show hash symbols for each character\n  - `null` - Completely hide input (no visual feedback)\n\n**Returns:**\n- `usize`: Number of characters entered (excluding newline)\n\n**Errors:**\n- Returns error if terminal control operations fail\n\n## License\n- MIT License\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/22221987?u=41d51bdf31d88c51b0710b218946aa4f3ff65787&v=4",
+  "releases": [],
+  "owner_bio": "I solve problems, usually, with <codes />",
+  "owner_company": "prjct.dev",
+  "owner_location": "Infront of my PC",
+  "owner_blog": "https://t.me/eltneg",
+  "owner_twitter_username": "orewoley",
+  "owner_followers": 81,
+  "owner_following": 81,
+  "owner_created_at": "2016-09-15T16:46:45Z",
+  "category": "library"
+}

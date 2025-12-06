@@ -1,0 +1,62 @@
+{
+  "name": "ansi-escape.zig",
+  "owner": "hendriknielaender",
+  "repo": "ansi-escape.zig",
+  "description": "ANSI escape codes for manipulating the terminal",
+  "type": "project",
+  "topics": [
+    "ansi",
+    "ansi-escape-codes",
+    "terminal",
+    "zig",
+    "zig-library",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 5,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-10-12T19:04:22Z",
+  "readme": "<h1 align=\"center\">\n   <img src=\"ansi-escape.png\" width=\"40%\" height=\"40%\" alt=\"ansi-escape.zig logo\" title=\"ansi-escape.zig logo\">\n</h1>\n\n<div align=\"center\">A minimalistic Zig library for working with ANSI escape sequences. This library provides utilities for cursor control, screen manipulation, and terminal resetting through a simple and efficient API.<br></br></div>\n<div align=\"center\">\n   \n[![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/hendriknielaender/ansi-escape.zig/blob/HEAD/LICENSE)\n![Zig Version](https://img.shields.io/badge/zig-0.15.1-orange.svg)\n![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/hendriknielaender/ansi-escape.zig)\n[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/hendriknielaender/ansi-escape.zig/blob/HEAD/CONTRIBUTING.md)\n</div>\n\n## Features\n\n- Cursor positioning and movement\n- Screen and line erasure\n- Terminal reset operations\n- Easy-to-use, lightweight API\n\n## Installation\n\n1. Run the following command to fetch the ansi-escape.zig package:\n   ```shell\n   zig fetch https://github.com/hendriknielaender/ansi-escape.zig/archive/<COMMIT>.tar.gz --save\n   ```\n   Using `zig fetch` simplifies managing dependencies by automatically handling the package hash, ensuring your `build.zig.zon` file is up to date.\n\n2. Add the module in `build.zig`:\n\n   ```diff\n   const std = @import(\"std\");\n\n   pub fn build(b: *std.Build) void {\n       const target = b.standardTargetOptions(.{});\n       const optimize = b.standardOptimizeOption(.{});\n\n   +   const opts = .{ .target = target, .optimize = optimize };\n   +   const ansi_module = b.dependency(\"ansi-escape\", opts).module(\"ansi-escape\");\n\n       const exe = b.addExecutable(.{\n           .name = \"test\",\n           .root_module = b.createModule(.{\n               .root_source_file = b.path(\"src/main.zig\"),\n   +           .imports = &.{\n   +               .{ .name = \"ansi-escape\", .module = ansi_module },\n   +           },\n           }),\n       });\n       b.installArtifact(exe);\n       ...\n   }\n   ```\n\n## Quick Start\n\n```zig\nconst std = @import(\"std\");\nconst ansi = @import(\"ansi-escape\").ansi;\n\npub fn main() !void {\n    // Use buffered writer for better performance (required in Zig 0.15.1+)\n    var stdout_buffer: [1024]u8 = undefined;\n    var stdout_writer = std.fs.File.stdout().writer(&stdout_buffer);\n    const stdout = &stdout_writer.interface;\n\n    // Print initial lines\n    try stdout.print(\"Line 1\\nLine 2\\nLine 3\\n\", .{});\n    try stdout.flush(); // Don't forget to flush!\n\n    // Move up one line, clear it, and replace it\n    try ansi.cursor.up(stdout, 1);\n    try ansi.erase.line(stdout);\n    try stdout.print(\"Updated Line 2\\n\", .{});\n    try stdout.flush();\n\n    // Hide cursor, wait for user, and then restore\n    try ansi.cursor.hide(stdout);\n    try stdout.flush();\n    std.Thread.sleep(1_000_000_000); // 1 second\n    try ansi.cursor.show(stdout);\n    try stdout.flush();\n}\n```\n\n## API Reference\n\nThe `ansi-escape.zig` library is organized into four main components, accessible through `ansi.*`:\n\n### 🎯 Cursor Control (`ansi.cursor`)\n\nControl cursor position and visibility:\n\n```zig\n// Position cursor at specific coordinates (0-based)\ntry ansi.cursor.to(writer, column, row);       // Move to specific position\ntry ansi.cursor.to(writer, column, null);      // Move to column on current row\n\n// Relative movement\ntry ansi.cursor.up(writer, count);             // Move up N lines\ntry ansi.cursor.down(writer, count);           // Move down N lines\ntry ansi.cursor.forward(writer, count);        // Move right N columns\ntry ansi.cursor.backward(writer, count);       // Move left N columns\ntry ansi.cursor.move(writer, x, y);            // Move relative (+ right/down, - left/up)\n\n// Line navigation\ntry ansi.cursor.next_line(writer, count);      // Move to beginning of next line(s)\ntry ansi.cursor.prev_line(writer, count);      // Move to beginning of previous line(s)\ntry ansi.cursor.left(writer);                  // Move to leftmost column\n\n// Visibility and state\ntry ansi.cursor.hide(writer);                  // Hide cursor\ntry ansi.cursor.show(writer);                  // Show cursor\ntry ansi.cursor.save(writer);                  // Save current position\ntry ansi.cursor.restore(writer);               // Restore saved position\n```\n\n### 📜 Scrolling (`ansi.scroll`)\n\nScroll terminal content:\n\n```zig\ntry ansi.scroll.up(writer, count);             // Scroll content up N lines\ntry ansi.scroll.down(writer, count);           // Scroll content down N lines\n```\n\n### 🧹 Erasing (`ansi.erase`)\n\nClear parts of the screen or lines:\n\n```zig\n// Screen operations\ntry ansi.erase.screen(writer);                 // Clear entire screen + scrollback\n\n// Directional clearing\ntry ansi.erase.up(writer, count);              // Clear above cursor N times\ntry ansi.erase.down(writer, count);            // Clear below cursor N times\n\n// Line operations\ntry ansi.erase.line(writer);                   // Clear entire current line\ntry ansi.erase.line_start(writer);             // Clear from cursor to line start\ntry ansi.erase.line_end(writer);               // Clear from cursor to line end\ntry ansi.erase.lines(writer, count);           // Clear N lines above cursor\n```\n\n### 🔄 Reset (`ansi.clear`)\n\nReset terminal to default state:\n\n```zig\ntry ansi.clear.screen(writer);                 // Full terminal reset (RIS)\n```\n\n### Usage Pattern\n\nAll functions accept any writer that implements the standard Zig writer interface:\n\n```zig\nconst std = @import(\"std\");\nconst ansi = @import(\"ansi-escape\").ansi;\n\npub fn main() !void {\n    var stdout_buffer: [1024]u8 = undefined;\n    var stdout_writer = std.fs.File.stdout().writer(&stdout_buffer);\n    const writer = &stdout_writer.interface;\n\n    // Use any ansi function with the writer\n    try ansi.cursor.to(writer, 10, 5);\n    try ansi.erase.line(writer);\n    try writer.flush(); // Remember to flush!\n}\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/51416554?u=77d5ff88d269c348985295baa6bd915873b09249&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.3.0",
+      "name": "v0.3.0",
+      "body": "## What's Changed\r\n* chore: upgrade to zig 0.15.1 by @hendriknielaender in https://github.com/hendriknielaender/ansi-escape.zig/pull/4\r\n\r\n**Full Changelog**: https://github.com/hendriknielaender/ansi-escape.zig/compare/v0.2.1...v0.3.0",
+      "prerelease": false,
+      "published_at": "2025-08-24T21:06:19Z",
+      "html_url": "https://github.com/hendriknielaender/ansi-escape.zig/releases/tag/v0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "# v0.2.0 :tada:\r\n\r\n### Changelog\r\n\r\n- :sparkles: **Single Escape** for `cursor.next_line()` & `cursor.prev_line()`  \r\n- :broom: **Erase Screen** now clears scrollback (`\\x1B[2J\\x1B[3J`)  \r\n- :memo: **Improved Docs**: added documentation comments throughout the API  \r\n\r\nEnjoy the new release!\r\n\r\n\r\n**Full Changelog**: https://github.com/hendriknielaender/ansi-escape.zig/compare/v0.1.0...v0.2.0",
+      "prerelease": false,
+      "published_at": "2025-01-06T20:22:55Z",
+      "html_url": "https://github.com/hendriknielaender/ansi-escape.zig/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "# 🎉 ansi-escape.zig v0.1.0 Released! 🎉\r\n\r\nThrilled to announce the **first release** of `ansi-escape.zig`! 🚀 This library provides a robust and efficient interface for generating ANSI escape codes in Zig, making terminal manipulation easier than ever. Whether you're developing CLI tools, terminal applications, or dynamic text interfaces, `ansi-escape.zig` has got you covered. \r\n\r\n## 🛠️ Features\r\n\r\n- **Cursor Control** 🖱️\r\n  - Move the cursor to specific positions.\r\n  - Relative cursor movements (up, down, left, right).\r\n  - Hide and show the cursor.\r\n  - Save and restore cursor positions.\r\n\r\n- **Screen Manipulation** 🖥️\r\n  - Clear the entire screen or specific sections.\r\n  - Erase lines or parts of lines.\r\n  - Scroll the terminal content up or down.\r\n\r\n- **Terminal Reset** 🔄\r\n  - Reset the terminal to its power-on state.\r\n\r\n\r\n**Full Changelog**: https://github.com/hendriknielaender/ansi-escape.zig/commits/v0.1.0",
+      "prerelease": false,
+      "published_at": "2025-01-05T17:08:29Z",
+      "html_url": "https://github.com/hendriknielaender/ansi-escape.zig/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Software developer (zig, go & TypeScript)\r\nI like using Neovim. Currently learning rust.",
+  "owner_company": "@Taxdoo ",
+  "owner_location": "Hamburg",
+  "owner_blog": "double-trouble.dev",
+  "owner_twitter_username": null,
+  "owner_followers": 59,
+  "owner_following": 277,
+  "owner_created_at": "2019-06-05T17:02:09Z",
+  "homepage": "https://hendriknielaender.github.io/ansi-escape.zig",
+  "license": "MIT",
+  "category": "library"
+}

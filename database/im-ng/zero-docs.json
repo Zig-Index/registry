@@ -1,0 +1,31 @@
+{
+  "name": "zero-docs",
+  "owner": "im-ng",
+  "repo": "zero-docs",
+  "description": "Brief documentation to get start with zero framework",
+  "type": "project",
+  "topics": [
+    "framework",
+    "web",
+    "zig",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-11-24T04:25:05Z",
+  "readme": "# zero-docs\n\nTo install dependencies:\n\n```bash\nbun install\n```\n\nTo run:\n\n```bash\nbun run index.ts\n```\n\nThis project was created using `bun init` in bun v1.3.1. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/2039564?u=254167699886eef3c68d1bda198d7c8697928bc0&v=4",
+  "releases": [],
+  "owner_bio": "A lone wolf with coding habit..",
+  "owner_company": "Software Engineer",
+  "owner_location": "Coimbatore",
+  "owner_blog": null,
+  "owner_twitter_username": "nagendhiran_",
+  "owner_followers": 3,
+  "owner_following": 14,
+  "owner_created_at": "2012-07-25T09:57:32Z",
+  "homepage": "https://im-ng.github.io/zero-docs/",
+  "category": "web"
+}

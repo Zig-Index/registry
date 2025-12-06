@@ -1,0 +1,38 @@
+{
+  "name": "zig-comsupp",
+  "owner": "akunaakwei",
+  "repo": "zig-comsupp",
+  "description": "comsupp for zig",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-08-26T15:54:28Z",
+  "dependencies": [
+    {
+      "name": "reactos",
+      "url": "https://github.com/reactos/reactos/archive/refs/tags/0.4.15-release.tar.gz",
+      "hash": "N-V-__8AACBhuBkqVdxuRiSf6_ltclNxKQg9aU0fnSm9wgml"
+    },
+    {
+      "name": "patch",
+      "url": "https://github.com/akunaakwei/zig-patch/archive/799ade2cd8954a38aba3d730de1a69891aa68234.tar.gz",
+      "hash": "patch-2.6.1-po1jORRvAAD4_gRpqMKvC00UPblvIpkxvnJdDpG4-DMY"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/11787994?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 0,
+  "owner_following": 2,
+  "owner_created_at": "2015-04-03T16:34:07Z",
+  "license": "Zlib",
+  "category": "library"
+}

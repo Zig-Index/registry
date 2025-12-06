@@ -1,0 +1,25 @@
+{
+  "name": "znh",
+  "owner": "jnordwick",
+  "repo": "znh",
+  "description": "Zig Microbenchmarking Harness: for generating microbenchmarks in zig, but way inferior to JMH",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2024-10-19T16:43:04Z",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/2364380?u=2d87eaabadae63a75f0a940dbb08283dbb7a4126&v=4",
+  "releases": [],
+  "owner_company": "Black Sheep Capital",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 16,
+  "owner_following": 3,
+  "owner_created_at": "2012-09-17T18:05:53Z",
+  "license": "BSD-2-Clause",
+  "category": "library"
+}

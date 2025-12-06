@@ -1,0 +1,45 @@
+{
+  "name": "lscolors",
+  "owner": "ziglibs",
+  "repo": "lscolors",
+  "description": "A zig library for colorizing paths according to LS_COLORS",
+  "type": "project",
+  "topics": [
+    "zig",
+    "ziglang",
+    "zig-package",
+    "ls-colors"
+  ],
+  "stars": 18,
+  "forks": 1,
+  "watchers": 2,
+  "updated_at": "2025-11-21T09:43:31Z",
+  "dependencies": [
+    {
+      "name": "ansi_term",
+      "url": "git+https://github.com/ziglibs/ansi_term?ref=v0.1.0#d88bc63e91e2c1cd2e60aaf51196860375c78042",
+      "hash": "ansi_term-0.1.0-_baAy9djAABNQdiVAt7Iwk4wlBh2kL-UAxEDd3wDs-09"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# lscolors\n\n![CI](https://github.com/ziglibs/zig-lscolors/workflows/CI/badge.svg)\n\nA zig library for colorizing paths according to the `LS_COLORS`\nenvironment variable. Designed to work with Zig 0.14.0.\n\n## Quick Example\n\n```zig\nconst std = @import(\"std\");\n\nconst LsColors = @import(\"lscolors\").LsColors;\n\npub fn main() !void {\n    var gpa: std.heap.DebugAllocator(.{}) = .init;\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    var lsc = try LsColors.fromEnv(allocator);\n    defer lsc.deinit();\n\n    var dir = try std.fs.cwd().openDir(\".\", .{ .iterate = true });\n    defer dir.close();\n\n    var iterator = dir.iterate();\n    while (try iterator.next()) |itm| {\n        std.log.info(\"{}\", .{try lsc.styled(itm.name)});\n    }\n}\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/65570835?v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "first tagged release",
+      "prerelease": false,
+      "published_at": "2025-03-13T14:55:19Z",
+      "html_url": "https://github.com/ziglibs/lscolors/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Community-driven library development",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2020-05-18T21:45:12Z",
+  "license": "MIT",
+  "category": "library"
+}

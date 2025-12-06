@@ -1,0 +1,67 @@
+{
+  "name": "zig-function-overloading",
+  "owner": "fig-eater",
+  "repo": "zig-function-overloading",
+  "description": "Explicit function overloading for the Zig programming language",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 6,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-03-05T09:21:19Z",
+  "minimum_zig_version": "0.13.0",
+  "readme": "# Explicit Function Overloading for Zig\n\nSimple one-file, no-dependency, explicit function overloading for zig.\nThis all runs during compile time so running overloaded functions shouldn't have\nany runtime overhead.\n\n## Install\n\n### Using Zig Package Manager\n\nRun `zig fetch --save https://github.com/fig-eater/zig-function-overloading/archive/refs/heads/main.tar.gz`\nwithin your project directory. Run this again if you ever want to update the dependency.\n\nThen add an import to the module which needs overloading to your `build.zig`\n\nThis code is an example of how you might do this:\n\n```zig\n\nconst overloading_dependency = b.dependency(\"overloading\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\n// in a default project `compile_step` might be `lib` or `exe`.\n// replace the first \"overloading\" here to avoid namespace conflicts or to change the name of the import for your project.\ncompile_step.root_module.addImport(\"overloading\", overloading_dependency.module(\"overloading\"));\n\n```\n\n### Manually\n\nDownload [src/overloading.zig](./src/overloading.zig) and save in your project.\n\nImport directly using `@import(\"path/to/overloading.zig\")`\n\n*or*\n\nSee [build.zig](./build.zig) for an example of how to use this as a local\nmodule.\n\n## Usage\n\n- Import the `overloading` module or `overloading.zig` if saved locally.\n- Call `overloading.make` with a tuple of functions, `make` will return a function which when\ncalled will call a function in the tuple with corresponding argument types.\n- All functions passed in the tuple must have the same return type.\n- Functions in the tuple cannot have the same arguments as others in the tuple.\n- If a function takes no arguments, pass `{}` into the overloaded function to call it.\n- If a function takes multiple arguments pass the arguments in a tuple.\n- If a function takes void as it's only argument pass in `.{{}}` into the overloaded function to call it\n\nExample:\n```zig\nconst std = @import(\"std\");\nconst overloading = @import(\"overloading\");\n\nfn addNoArgs() u32 {\n    return 0;\n}\nfn addU32(a: u32) u32 {\n    return a;\n}\nfn addU8Slice(as: []const u8) u32 {\n    var total: u32 = 0;\n    for (as) |a| total +|= a;\n    return total;\n}\nfn addOptionalU32(a: ?u32) u32 {\n    return if (a) |a_val| return a_val else 0;\n}\nfn addPtrU32(a_ptr: *u32) u32 {\n    return a_ptr.*;\n}\nfn addU32I32(a: u32, b: i32) u32 {\n    return a + @as(u32, @intCast(b));\n}\n\nfn printNoArgs() void {\n    std.debug.print(\"no args\\n\", .{});\n}\nfn printVoid(_: void) void {\n    std.debug.print(\"void\\n\", .{});\n}\nfn printU32(a: u32) void {\n    std.debug.print(\"{d}\\n\", .{a});\n}\nfn printU8Slice(a: []const u8) void {\n    std.debug.print(\"{s}\\n\", .{a});\n}\nfn printU32U32(a: u32, b: u32) void {\n    std.debug.print(\"{d} {d}\\n\", .{ a, b });\n}\n\nconst myAdd = overloading.make(.{\n    addNoArgs,\n    addU32,\n    addU8Slice,\n    addOptionalU32,\n    addPtrU32,\n    addU32I32,\n});\n\nconst myPrint = overloading.make(.{\n    printNoArgs,\n    printVoid,\n    printU32,\n    printU8Slice,\n    printU32U32,\n});\n\npub fn main() void {\n    const optional_with_val: ?u32 = 555;\n    const optional_with_null: ?u32 = null;\n    var a: u32 = 5;\n    _ = myAdd({}); // returns 0\n    _ = myAdd(2); // returns 2\n    _ = myAdd(\"abc\"); // returns 294\n    _ = myAdd(optional_with_val); // returns 555\n    _ = myAdd(optional_with_null); // returns 0\n    _ = myAdd(&a); // returns 5\n    _ = myAdd(.{ 5, 20 }); // returns 25\n\n    myPrint({}); // prints \"no args\"\n    myPrint(.{{}}); // prints \"void\"\n    myPrint(2); // prints \"2\"\n    myPrint(\"hello\"); // prints \"hello\"\n    myPrint(.{ 3, 4 }); // prints \"3 4\"\n}\n```\nSee [example.zig](src/example.zig) for another example.\n\n## License\n\nLicensed under the Unlicense see included [LICENSE](./LICENSE) file or\nhttps://unlicense.org\nAttribution to fig / fig-eater / groakgames is appreciated but not required.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/86081585?u=36575ac62001f09c6674215a2f2f8163a90b1ae8&v=4",
+  "releases": [
+    {
+      "tag_name": "1.0.3",
+      "name": "1.0.3 release for zig 0.13.0 - Better Documentation Examples",
+      "body": "changes:\r\n- More diverse examples within documentation, showing overloading with functions that take in differing argument types.",
+      "prerelease": false,
+      "published_at": "2024-06-24T17:21:12Z",
+      "html_url": "https://github.com/fig-eater/zig-function-overloading/releases/tag/1.0.3",
+      "assets": []
+    },
+    {
+      "tag_name": "1.0.2",
+      "name": "1.0.2 release for zig 0.13.0 - Type Checking Fixes",
+      "body": "changes:\r\n- Pointers and arrays passed into overloaded functions should work as expected. (along with other \r\n- modified build to be cleaner and each step separated out into individual functions\r\n- added tests for type conversions and a general use case",
+      "prerelease": false,
+      "published_at": "2024-06-24T06:35:56Z",
+      "html_url": "https://github.com/fig-eater/zig-function-overloading/releases/tag/1.0.2",
+      "assets": []
+    },
+    {
+      "tag_name": "1.0.1",
+      "name": "1.0.1 release for zig 0.13.0 - Documentation fixes",
+      "body": "Changes:\r\n- Updated usage text: calling overloaded functions with multiple arguments was documented incorrectly, now it correctly shows the call happening with the arguments in a tuple.\r\n- Fixed misspellings",
+      "prerelease": false,
+      "published_at": "2024-06-22T02:34:45Z",
+      "html_url": "https://github.com/fig-eater/zig-function-overloading/releases/tag/1.0.1",
+      "assets": []
+    },
+    {
+      "tag_name": "1.0.0",
+      "name": "1.0.0 release for zig 0.13.0",
+      "body": "Explicit function overloading for zig. Intended for use with zig 0.13.0\r\n\r\nSimple one-file, no-dependency, explicit function overloading for zig.\r\nThis all runs during compile time so running overloaded functions shouldn't have\r\nany runtime overhead.\r\n\r\nSee [README.md](./README.md) for install, usage, and example.",
+      "prerelease": false,
+      "published_at": "2024-06-21T01:47:10Z",
+      "html_url": "https://github.com/fig-eater/zig-function-overloading/releases/tag/1.0.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "I make games & tools",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "https://thefig.cafe",
+  "owner_twitter_username": null,
+  "owner_followers": 2,
+  "owner_following": 0,
+  "owner_created_at": "2021-06-17T21:09:51Z",
+  "license": "Unlicense",
+  "category": "library"
+}

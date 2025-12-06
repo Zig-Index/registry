@@ -1,0 +1,30 @@
+{
+  "name": "Zig-Golden-Syrup",
+  "owner": "MinervasRefuge",
+  "repo": "Zig-Golden-Syrup",
+  "description": "A Zig implementation of the Syrup/Preserves serialization format/s.",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package",
+    "ziglang",
+    "serialization"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-11-13T06:06:17Z",
+  "minimum_zig_version": "0.14.0",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/196515647?u=2c134188189e44aac60d84030abe9cfa8cf8e8bb&v=4",
+  "releases": [],
+  "owner_bio": "Checkout my Codeberg page for an up-to date view of my active projects!",
+  "owner_company": null,
+  "owner_location": "Adelaide, South Australia",
+  "owner_blog": "https://codeberg.org/MinervasRefuge",
+  "owner_twitter_username": null,
+  "owner_followers": 3,
+  "owner_following": 2,
+  "owner_created_at": "2025-01-26T08:26:37Z",
+  "license": "BSD-3-Clause",
+  "category": "library"
+}

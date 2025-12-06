@@ -1,0 +1,119 @@
+{
+  "name": "zig-kangarootwelve",
+  "owner": "jedisct1",
+  "repo": "zig-kangarootwelve",
+  "description": "Kangarootwelve implementation in Zig.",
+  "type": "project",
+  "topics": [
+    "kangarootwelve",
+    "turboshake",
+    "zig-package",
+    "fast",
+    "hash",
+    "k12",
+    "keccak",
+    "parallel",
+    "sha3",
+    "zig"
+  ],
+  "stars": 6,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-11-25T20:46:25Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# KangarooTwelve for Zig\n\nA pure Zig implementation of the KangarooTwelve cryptographic hash function with support for both sequential and parallel processing.\n\n## About KangarooTwelve\n\nKangarooTwelve is a fast, secure cryptographic hash function based on Keccak (SHA-3). It uses a tree-hashing mode on top of TurboSHAKE, providing both high security and excellent performance, especially on large inputs. K12 supports arbitrary-length output and optional customization strings.\n\nThis implementation follows the specification from [RFC9861](https://www.rfc-editor.org/info/rfc9861) and provides both KT128 (based on TurboSHAKE128) and KT256 (based on TurboSHAKE256).\n\n## Security\n\nKangarooTwelve inherits its security foundation from over 15 years of intensive cryptanalysis of the Keccak permutation, the same primitive underlying SHA-3. This is not a new untested algorithm, but rather a performance-optimized variant of one of the most scrutinized cryptographic primitives in history.\n\n### Proven Cryptographic Foundation\n\nKeccak underwent rigorous analysis during the SHA-3 competition (2008-2012), where it was evaluated by the world's leading cryptographers before being selected by NIST as the SHA-3 standard. The scrutiny hasn't stopped: cryptanalysts continue to study Keccak-based functions, with the most recent significant analysis published at CRYPTO 2024. After all these years of analysis, Keccak's security remains solid.\n\nKangarooTwelve uses the Keccak-p[1600,12] permutation with 12 rounds, exactly half the 24 rounds used in SHA-3. This design choice was made by the original Keccak team themselves, who leveraged their deep understanding of the permutation's security properties. Any cryptanalysis of Keccak directly applies to understanding K12's security.\n\n### Security Strength and Margin\n\nK12 provides 128-bit security strength, equivalent to AES-128 and SHAKE128, which is sufficient for virtually all applications. For post-quantum security, K12 achieves NIST's security level 2 when using at least 256-bit outputs.\n\nThe current state of cryptanalysis shows attacks reaching 6 rounds of the Keccak permutation, leaving K12's 12 rounds with a substantial security margin. While this margin is smaller than SHA-3's (which has 24 rounds), it reflects a deliberate engineering trade-off: K12 sacrifices some conservative margin for significantly better performance, while maintaining strong practical security.\n\n### Standardization\n\nThe KangarooTwelve draft was proposed in 2016 and underwent 8 years of public scrutiny before being standardized as RFC 9861 in 2025.\n\n## Installation\n\nAdd this package to your `build.zig.zon`:\n\n```zig\n.dependencies = .{\n    .kangarootwelve = .{\n        .url = \"https://github.com/jedisct1/zig-kangarootwelve/archive/refs/tags/v0.0.4.tar.gz\",\n        .hash = \"...\",\n    },\n},\n```\n\nThen in your `build.zig`:\n\n```zig\nconst kangarootwelve = b.dependency(\"kangarootwelve\", .{\n    .target = target,\n    .optimize = optimize,\n});\nexe.root_module.addImport(\"kangarootwelve\", kangarootwelve.module(\"kangarootwelve\"));\n```\n\n## Usage\n\n### Basic Hashing\n\n```zig\nconst std = @import(\"std\");\nconst kangarootwelve = @import(\"kangarootwelve\");\nconst KT128 = kangarootwelve.KT128;\n\nvar output: [32]u8 = undefined;\nconst message = \"Hello, KangarooTwelve!\";\n\n// Hash with no customization string\ntry KT128.hash(message, null, &output);\n\n// Or with a customization string\ntry KT128.hash(message, \"my-app-v1\", &output);\n```\n\n### Variable Output Length\n\n```zig\nconst KT128 = kangarootwelve.KT128;\n\n// 64-byte output\nvar output: [64]u8 = undefined;\ntry KT128.hash(message, null, &output);\n\n// Any output length you need\nvar large_output: [128]u8 = undefined;\ntry KT128.hash(message, null, &large_output);\n```\n\n### Parallel Hashing\n\nFor large inputs (>3-10MB depending on CPU count), parallel processing can significantly improve performance:\n\n```zig\nconst KT128 = kangarootwelve.KT128;\nconst allocator = std.heap.page_allocator;\nconst large_data = try allocator.alloc(u8, 100 * 1024 * 1024); // 100MB\ndefer allocator.free(large_data);\n\nvar output: [32]u8 = undefined;\ntry KT128.hashParallel(large_data, null, &output, allocator);\n```\n\nThe implementation automatically adjusts the threshold for parallel processing based on CPU count (3MB for 8+ cores, 5MB for 4-7 cores, 10MB for 1-3 cores).\n\n### Using KT256\n\n```zig\nconst KT256 = kangarootwelve.KT256;\nvar output: [64]u8 = undefined;\ntry KT256.hash(message, null, &output);\n```\n\n## API\n\n### `KT128`\n\nA struct providing KangarooTwelve with 128-bit security based on TurboSHAKE128.\n\n#### `hash(message: []const u8, customization: ?[]const u8, out: []u8) !void`\n\nHashes a message using sequential processing with SIMD optimizations.\n\n- `message`: Input data to hash\n- `customization`: Optional customization string (can be `null`)\n- `out`: Output buffer of any length\n\n#### `hashParallel(message: []const u8, customization: ?[]const u8, out: []u8, allocator: std.mem.Allocator) !void`\n\nHashes a message with parallel chunk processing. Automatically uses sequential processing for smaller inputs to avoid thread pool overhead.\n\n- `message`: Input data to hash\n- `customization`: Optional customization string (can be `null`)\n- `out`: Output buffer of any length\n- `allocator`: Memory allocator for thread pool and intermediate buffers\n\n### `KT256`\n\nSame API as `KT128`, but uses TurboSHAKE256 internally for 256-bit security.\n\n## Performance\n\nThe implementation includes optimizations for both small and large inputs:\n\n- Small inputs (≤8KB): Single-pass processing with no chunking overhead\n- Medium inputs (8KB - ~10MB): Sequential chunked processing with SIMD acceleration\n- Large inputs (>~3-10MB depending on CPU count): Parallel processing with dynamic thread pool sizing\n\nBenchmark your specific use case with:\n\n```bash\nzig build bench\n```\n\nThis runs benchmarks on various input sizes and compares sequential vs parallel performance.\n\n## Building and Testing\n\nBuild the library:\n```bash\nzig build\n```\n\nRun tests:\n```bash\nzig build test\n```\n\nRun benchmarks:\n```bash\nzig build bench\n```\n\nBuild with optimizations:\n```bash\nzig build -Doptimize=ReleaseFast\n```\n\n## Benchmarks\n\n```sh\nzig run -O ReleaseFast --zig-lib-dir lib lib/std/crypto/benchmark.zig\n```\n\n### Apple M3\n\n```text\n           sha256:       3209 MiB/s\n           blake3:       2124 MiB/s\n            kt128:       3548 MiB/s\n  blake3-parallel:      10538 MiB/s\n   kt128-parallel:      13619 MiB/s\n```\n\n### AMD Zen 4\n\n```text\n          sha256:       1547 MiB/s\n           kt128:       4452 MiB/s\n          blake3:       5013 MiB/s\n blake3-parallel:      15664 MiB/s\n  kt128-parallel:      27498 MiB/s\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/124872?v=4",
+  "releases": [
+    {
+      "tag_name": "0.3.1",
+      "name": "0.3.1",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-11-25T15:38:33Z",
+      "html_url": "https://github.com/jedisct1/zig-kangarootwelve/releases/tag/0.3.1",
+      "assets": []
+    },
+    {
+      "tag_name": "0.3.0",
+      "name": "0.3.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-11-22T07:45:36Z",
+      "html_url": "https://github.com/jedisct1/zig-kangarootwelve/releases/tag/0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.2.0",
+      "name": "0.2.0",
+      "body": "New API aligned with the standard Zig crypto library conventions.",
+      "prerelease": false,
+      "published_at": "2025-10-15T22:25:46Z",
+      "html_url": "https://github.com/jedisct1/zig-kangarootwelve/releases/tag/0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.1.0",
+      "name": "0.1.0",
+      "body": "Added an incremental API.",
+      "prerelease": false,
+      "published_at": "2025-10-15T22:11:37Z",
+      "html_url": "https://github.com/jedisct1/zig-kangarootwelve/releases/tag/0.1.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.0.5",
+      "name": "0.0.5",
+      "body": "Cleanups, smaller code size, etc.",
+      "prerelease": false,
+      "published_at": "2025-10-15T20:44:23Z",
+      "html_url": "https://github.com/jedisct1/zig-kangarootwelve/releases/tag/0.0.5",
+      "assets": []
+    },
+    {
+      "tag_name": "0.0.4",
+      "name": "0.0.4",
+      "body": "Massive performance improvement.",
+      "prerelease": false,
+      "published_at": "2025-10-15T18:10:14Z",
+      "html_url": "https://github.com/jedisct1/zig-kangarootwelve/releases/tag/0.0.4",
+      "assets": []
+    },
+    {
+      "tag_name": "0.0.3",
+      "name": "0.0.3",
+      "body": "Added benchmarks, and the threshold was tweaked.",
+      "prerelease": false,
+      "published_at": "2025-10-15T09:47:38Z",
+      "html_url": "https://github.com/jedisct1/zig-kangarootwelve/releases/tag/0.0.3",
+      "assets": []
+    },
+    {
+      "tag_name": "0.0.2",
+      "name": "0.0.2",
+      "body": "Added multi-threaded mode.",
+      "prerelease": false,
+      "published_at": "2025-10-14T15:38:20Z",
+      "html_url": "https://github.com/jedisct1/zig-kangarootwelve/releases/tag/0.0.2",
+      "assets": []
+    },
+    {
+      "tag_name": "0.0.1",
+      "name": "0.0.1",
+      "body": "Initial public release.",
+      "prerelease": false,
+      "published_at": "2025-10-13T08:40:28Z",
+      "html_url": "https://github.com/jedisct1/zig-kangarootwelve/releases/tag/0.0.1",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Get my public keys here: https://sk.tl/7CPRo8kn",
+  "owner_company": null,
+  "owner_location": "Antibes, France",
+  "owner_blog": "https://primulinus.tpopsite.com",
+  "owner_twitter_username": "jedisct1",
+  "owner_followers": 4074,
+  "owner_following": 194,
+  "owner_created_at": "2009-09-09T10:20:57Z",
+  "license": "MIT",
+  "category": "library"
+}

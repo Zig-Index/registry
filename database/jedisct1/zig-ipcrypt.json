@@ -1,0 +1,61 @@
+{
+  "name": "zig-ipcrypt",
+  "owner": "jedisct1",
+  "repo": "zig-ipcrypt",
+  "description": "A Zig implementation of the IP address encryption and obfuscation methods specified in the ipcrypt document.",
+  "type": "project",
+  "topics": [
+    "address",
+    "encryption",
+    "ip",
+    "ipcrypt",
+    "ipcrypt2",
+    "obfuscation",
+    "zig",
+    "zig-package",
+    "ipcipher"
+  ],
+  "stars": 5,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-12-05T14:02:45Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# zig-ipcrypt\n\nA Zig implementation of the IP address encryption and obfuscation methods specified in the [ipcrypt document](https://datatracker.ietf.org/doc/draft-denis-ipcrypt/) (\"Methods for IP Address Encryption and Obfuscation\").\n\n## Overview\n\nThis library implements four variants of IP address encryption as specified in the ipcrypt draft:\n\n1. **Deterministic** (`Deterministic`): Format-preserving encryption using AES-128\n2. **Prefix-preserving** (`Pfx`): Maintains network prefix relationships using dual AES-128\n3. **Non-deterministic with KIASU-BC** (`Nd`): Uses an 8-byte tweak\n4. **Non-deterministic with AES-XTS** (`Ndx`): Uses a 16-byte tweak\n\n## Tradeoffs\n\nEach variant offers different tradeoffs between security, performance, and format preservation:\n\n### Deterministic\n\n- **Pros**:\n  - Format-preserving (output is a valid IP address)\n  - Smallest output size (16 bytes)\n  - Fastest performance (single AES-128 operation)\n- **Cons**:\n  - Reveals repeated inputs (same input always produces same output)\n  - No protection against correlation attacks\n  - Network structure is completely scrambled\n\n### Prefix-preserving (ipcrypt-pfx)\n\n- **Pros**:\n  - Preserves network prefix relationships (addresses from same subnet share encrypted prefix)\n  - Enables network-level analytics while protecting individual addresses\n  - Maintains native address sizes (4 bytes for IPv4, 16 bytes for IPv6)\n  - Deterministic (allows duplicate detection)\n- **Cons**:\n  - Reveals network structure (by design, for analytics)\n  - Slower than other deterministic methods (bit-by-bit processing)\n  - Requires 32-byte key (two AES-128 keys)\n  - Same input always produces same output\n\n### Non-deterministic with KIASU-BC\n\n- **Pros**:\n  - Resists correlation attacks (same input produces different outputs)\n  - Moderate output size (24 bytes)\n  - Good performance (AES-128 with tweak modification)\n- **Cons**:\n  - Not format-preserving\n  - 8-byte tweak has lower collision resistance than 16-byte tweak\n  - Birthday bound of 2^32 operations per (key,ip)\n\n### Non-deterministic with AES-XTS\n\n- **Pros**:\n  - Resists correlation attacks\n  - Highest collision resistance (16-byte tweak)\n  - Birthday bound of 2^64 operations per (key,ip)\n- **Cons**:\n  - Not format-preserving\n  - Largest output size (32 bytes)\n  - Requires two AES-128 keys\n  - Slightly slower performance (two sequential AES operations)\n\n## Key and Tweak Sizes\n\n| Variant       | Key Size                              | Tweak Size          | Output Size                                   |\n| ------------- | ------------------------------------- | ------------------- | --------------------------------------------- |\n| Deterministic | 16 bytes (128 bits)                   | None                | 16 bytes (format-preserving)                  |\n| Pfx           | 32 bytes (256 bits, two AES-128 keys) | None                | 4 bytes (IPv4) or 16 bytes (IPv6)             |\n| Nd            | 16 bytes (128 bits)                   | 8 bytes (64 bits)   | 24 bytes (8-byte tweak + 16-byte ciphertext)  |\n| Ndx           | 32 bytes (256 bits, two AES-128 keys) | 16 bytes (128 bits) | 32 bytes (16-byte tweak + 16-byte ciphertext) |\n\n## Usage\n\n### Deterministic Encryption\n\n```zig\nconst ipcrypt = @import(\"ipcrypt\");\n\n// Initialize with a 16-byte key\nconst key = [_]u8{0x2b} ** 16;\nconst deterministic = ipcrypt.Deterministic.init(key);\n\n// Convert IP address to Ip16 format\nconst ip = try ipcrypt.Ip16.fromString(\"192.0.2.1\");\n\n// Encrypt\nconst encrypted = deterministic.encrypt(ip);\n\n// Decrypt\nconst decrypted = deterministic.decrypt(encrypted);\n```\n\n### Prefix-Preserving Encryption\n\n```zig\nconst ipcrypt = @import(\"ipcrypt\");\n\n// Initialize with a 32-byte key (two AES-128 keys)\nconst key = [_]u8{0x01, 0x23, ...}; // 32 bytes, K1 != K2\nconst pfx = try ipcrypt.Pfx.init(key);\n\n// Convert IP address to Ip16 format\nconst ip = try ipcrypt.Ip16.fromString(\"10.0.0.47\");\n\n// Encrypt - preserves network prefix\nconst encrypted = pfx.encrypt(ip);\n// Result: IPs from same network share encrypted prefix\n\n// Decrypt\nconst decrypted = pfx.decrypt(encrypted);\n```\n\n### Non-deterministic Encryption (KIASU-BC)\n\n```zig\nconst ipcrypt = @import(\"ipcrypt\");\n\n// Initialize with a 16-byte key\nconst key = [_]u8{0x2b} ** 16;\nconst nd = ipcrypt.Nd.init(key);\n\n// Convert IP address to Ip16 format\nconst ip = try ipcrypt.Ip16.fromString(\"2001:db8::1\");\n\n// Encrypt with random tweak\nconst encrypted = nd.encrypt(ip);\n\n// Encrypt with specific tweak\nconst tweak = [_]u8{0x2b} ** 8;\nconst encrypted_with_tweak = nd.encryptWithTweak(ip, tweak);\n\n// Decrypt\nconst decrypted = nd.decrypt(encrypted);\n```\n\n### Non-deterministic Encryption (AES-XTS)\n\n```zig\nconst ipcrypt = @import(\"ipcrypt\");\n\n// Initialize with a 32-byte key\nconst key = [_]u8{0x2b} ** 32;\nconst ndx = ipcrypt.Ndx.init(key);\n\n// Convert IP address to Ip16 format\nconst ip = try ipcrypt.Ip16.fromString(\"2001:db8::1\");\n\n// Encrypt with random tweak\nconst encrypted = ndx.encrypt(ip);\n\n// Encrypt with specific tweak\nconst tweak = [_]u8{0x2b} ** 16;\nconst encrypted_with_tweak = ndx.encryptWithTweak(ip, tweak);\n\n// Decrypt\nconst decrypted = ndx.decrypt(encrypted);\n```\n\n## Building\n\nAdd this to your `build.zig.zon`:\n\n```zig\n.{\n    .name = \"ipcrypt\",\n    .url = \"https://github.com/yourusername/zig-ipcrypt/archive/refs/tags/v0.1.0.tar.gz\",\n    .hash = \"1220...\",\n}\n```\n\nThen in your `build.zig`:\n\n```zig\nconst ipcrypt = b.dependency(\"ipcrypt\", .{\n    .target = target,\n    .optimize = optimize,\n});\nexe.addModule(\"ipcrypt\", ipcrypt.module(\"ipcrypt\"));\n```\n\n## License\n\nISC License\n\n## References\n\n- [ipcrypt specification](https://github.com/jedisct1/draft-denis-ipcrypt)\n- [AES-128](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197.pdf)\n- [KIASU-BC](https://eprint.iacr.org/2014/831)\n- [AES-XTS](https://standards.ieee.org/ieee/1619/2041/)\n- [Sum of PRPs](https://link.springer.com/chapter/10.1007/3-540-45539-6_34) (Security basis for ipcrypt-pfx)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/124872?v=4",
+  "releases": [
+    {
+      "tag_name": "0.1.1",
+      "name": "0.1.1",
+      "body": "Added support for ipcrypt-pfx",
+      "prerelease": false,
+      "published_at": "2025-09-10T18:37:21Z",
+      "html_url": "https://github.com/jedisct1/zig-ipcrypt/releases/tag/0.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "0.1.0",
+      "name": "0.1.0",
+      "body": "Initial public release.\r\n\r\nSee https://github.com/jedisct1/draft-denis-ipcrypt?tab=readme-ov-file#known-implementations for implementations in other languages.",
+      "prerelease": false,
+      "published_at": "2025-04-17T11:30:08Z",
+      "html_url": "https://github.com/jedisct1/zig-ipcrypt/releases/tag/0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Get my public keys here: https://sk.tl/7CPRo8kn",
+  "owner_company": null,
+  "owner_location": "Antibes, France",
+  "owner_blog": "https://primulinus.tpopsite.com",
+  "owner_twitter_username": "jedisct1",
+  "owner_followers": 4074,
+  "owner_following": 194,
+  "owner_created_at": "2009-09-09T10:20:57Z",
+  "category": "library"
+}

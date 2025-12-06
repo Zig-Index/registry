@@ -1,0 +1,32 @@
+{
+  "name": "zig-args",
+  "owner": "ikskuh",
+  "repo": "zig-args",
+  "description": "Simple-to-use argument parser with struct-based config",
+  "type": "project",
+  "topics": [
+    "zig",
+    "ziglang",
+    "option-parser",
+    "option-parsing",
+    "zig-package"
+  ],
+  "stars": 288,
+  "forks": 32,
+  "watchers": 7,
+  "updated_at": "2025-12-04T08:55:07Z",
+  "minimum_zig_version": "0.14.0-dev.2801+4d8c24c6c",
+  "readme": "# Zig Argument Parser\nSimple-to-use argument parser with struct-based config\n\n## Features\n- Automatic option generation from a config struct\n- Familiar *look & feel*:\n    - Everything after the first `--` is assumed to be a positional argument\n    - A single `-` is interpreted as a positional argument which can be used as the stdin/stdout file placeholder\n    - Short options with no argument can be combined into a single argument: `-dfe`\n    - Long options can use either `--option=value` or `--option value` syntax (use `--option=--` if you need `--` as a long option argument)\n    - verbs (sub-commands), with verb specific options. Non-verb specific (global) options can come before or after the\n      verb on the command line. Non-verb option arguments are processed *before* determining verb.  (see `demo_verb.zig`)\n- Integrated support for primitive types:\n    - All integer types (signed & unsigned)\n    - Floating point types\n    - Booleans (takes optional argument. If no argument given, the bool is set, otherwise, one of `yes`, `true`, `y`, `no`, `false`, `n` is interpreted)\n    - Strings\n    - Enumerations\n\n## Use in your project\n\nAdd the dependency in your `build.zig.zon` by running the following command:\n```bash\nzig fetch --save=args git+https://github.com/ikskuh/zig-args#master\n```\n\nAdd it to your exe in `build.zig`:\n```zig\nexe.root_module.addImport(\"args\", b.dependency(\"args\", .{ .target = target, .optimize = optimize }).module(\"args\"));\n```\n\nThen you can import it from your code:\n```zig\nconst argsParser = @import(\"args\");\n```\n\n## Example\n\n```zig\nconst options = argsParser.parseForCurrentProcess(struct {\n    // This declares long options for double hyphen\n    output: ?[]const u8 = null,\n    @\"with-offset\": bool = false,\n    @\"with-hexdump\": bool = false,\n    @\"intermix-source\": bool = false,\n    numberOfBytes: ?i32 = null,\n    signed_number: ?i64 = null,\n    unsigned_number: ?u64 = null,\n    mode: enum { default, special, slow, fast } = .default,\n\n    // This declares short-hand options for single hyphen\n    pub const shorthands = .{\n        .S = \"intermix-source\",\n        .b = \"with-hexdump\",\n        .O = \"with-offset\",\n        .o = \"output\",\n    };\n}, argsAllocator, .print) catch return 1;\ndefer options.deinit();\n\nstd.debug.print(\"executable name: {?s}\\n\", .{options.executable_name});\n\nstd.debug.print(\"parsed options:\\n\", .{});\ninline for (std.meta.fields(@TypeOf(options.options))) |fld| {\n    std.debug.print(\"\\t{s} = {any}\\n\", .{\n        fld.name,\n        @field(options.options, fld.name),\n    });\n}\n\nstd.debug.print(\"parsed positionals:\\n\", .{});\nfor (options.positionals) |arg| {\n    std.debug.print(\"\\t'{s}'\\n\", .{arg});\n}\n```\n\n## Versions\n\n- Branch [master](https://github.com/ikskuh/zig-args/tree/master) tracks Zig master\n- Branch [0.13.x](https://github.com/ikskuh/zig-args/tree/zig-0.13.x) tracks Zig 0.13.0\n- Tag [0.9.0](https://github.com/ikskuh/zig-args/tree/zig-0.9.0) tracks Zig 0.9.0\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/3932972?u=2893028da897d46ed12f55aa05a935a80e7c119b&v=4",
+  "releases": [],
+  "owner_bio": "Hacker, Dad & Demoscener from southern germany, loves lowlevel and oldschool stuff",
+  "owner_company": null,
+  "owner_location": "Stuttgart - Germany",
+  "owner_blog": "https://random-projects.net/",
+  "owner_twitter_username": "ikskuh",
+  "owner_followers": 473,
+  "owner_following": 72,
+  "owner_created_at": "2013-03-21T16:08:06Z",
+  "license": "MIT",
+  "category": "library"
+}

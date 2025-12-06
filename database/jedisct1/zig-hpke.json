@@ -1,0 +1,37 @@
+{
+  "name": "zig-hpke",
+  "owner": "jedisct1",
+  "repo": "zig-hpke",
+  "description": "HPKE implementation for Zig.",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package",
+    "hpke",
+    "crypto"
+  ],
+  "stars": 17,
+  "forks": 4,
+  "watchers": 2,
+  "updated_at": "2025-08-05T20:15:41Z",
+  "dependencies": [
+    {
+      "name": "bounded_array",
+      "url": "https://github.com/jedisct1/zig-bounded-array/archive/refs/tags/0.1.0.tar.gz",
+      "hash": "bounded_array-0.1.0-VF2RKidJAABQywm1YzfjMMwuog59V7gFdG_CXPWumthx"
+    }
+  ],
+  "readme": "# HPKE for Zig\n\n`zig-hpke` is an implementation of the [Hybrid Public Key Encryption](https://www.rfc-editor.org/rfc/rfc9180.html) (HPKE) scheme.\n\n## Usage\n\n### Bounded arrays\n\nThis code heavily relies on the `BoundedArray` type: a type to store small, variable-sized slices whose maximum size is known.\n\nKeys are typically represented using that type, whose raw slice can be accessed with the `constSlice()` function (for a constant slice), or `slice()` (for a mutable slice).\n\n### Suite instantiation\n\n```zig\nconst suite = try Suite.init(\n    primitives.Kem.X25519HkdfSha256.id,\n    primitives.Kdf.HkdfSha256.id,\n    primitives.Aead.Aes128Gcm.id,\n);\n```\n\n### Key pair creation\n\n```zig\nconst kp = try suite.generateKeyPair();\n```\n\n### Client: creation and encapsulation of the shared secret\n\nA _client_ initiates a connexion by sending an encrypted secret; a _server_ accepts an encrypted secret from a client, and decrypts it, so that both parties can eventually agree on a shared secret.\n\n```zig\nvar client_ctx_and_encapsulated_secret =\n    try suite.createClientContext(server_kp.public_key.slice(), \"info\", null, null);\n\nvar client_ctx = client_ctx_and_encapsulated_secret.client_ctx;\n\nvar encapsulated_secret = client_ctx_and_encapsulated_secret.encapsulated_secret;\n```\n\n* `encapsulated_secret.encapsulated` needs to be sent to the server. `encapsulated_secret.encapsulated.secret` must remain secret.\n* `client_ctx` can be used to encrypt/decrypt messages exchanged with the server.\n\nTo improve misuse resistance, this implementation uses distinct types for the client and the server context: `ClientContext` for the client, and `ServerContext` for the server.\n\n### Server: decapsulation of the shared secret\n\n```zig\nvar server_ctx =\n    try suite.createServerContext(encapsulated_secret.encapsulated.constSlice(), server_kp, \"info\", null);\n```\n\n* `server_ctx` can be used to encrypt/decrypt messages exchanged with the client\n* The last parameter is an optional pre-shared key.\n\n### Encryption of a message from the client to the server\n\nA message can be encrypted by the client for the server:\n\n```zig\nclient_ctx.encryptToServer(&ciphertext, message, ad);\n```\n\nNonces are automatically incremented, so it is safe to call this function multiple times within the same context.\n\nLast parameter is optional associated data.\n\nThe ciphertext is `client_ctx.tagLength()` bytes larger than the message.\n\n### Decryption of a ciphertext received by the server\n\nThe server can decrypt a ciphertext sent by the client:\n\n```zig\nvar message2: [message.len]u8 = undefined;\ntry server_ctx.decryptFromClient(&message2, &ciphertext, ad);\n```\n\nLast parameter is optional associated data. The message length is `server_ctx.tagLength()` bytes shorter than the ciphertext.\n\n### Encryption of a message from the server to the client\n\nA message can also be encrypted by the server for the client:\n\n```zig\nserver_ctx.encryptToClient(&ciphertext, message, ad);\n```\n\nNonces are automatically incremented, so it is safe to call this function multiple times within the same context.\n\nLast parameter is optional associated data.\n\n### Decryption of a ciphertext received by the client\n\nThe client can decrypt an encrypted response from the server:\n\n```zig\ntry client_ctx.decryptFromServer(&message2, &ciphertext, ad);\n```\n\nLast parameter is optional associated data.\n\n## Authenticated modes\n\nAuthenticated modes, with or without a PSK are supported.\n\nSee `createAuthenticatedClientContext` and `createAuthenticatedServerContext`.\n\n### Exporter secret\n\nThe exporter secret can be obtained with the `exportedSecret()` function available both in the `ServerContext` and `ClientContext` structures:\n\n```zig\nconst exporter = client_ctx.exporterSecret().constSlice();\n```\n\n### Key derivation\n\n```zig\nconst secret1 = try client_ctx.exportSecret(\"description 1\")\nconst secret2 = try server_ctx.exportSecret(\"description 2\");\n```\n\n### Access the raw cipher interface\n\n```zig\nconst aead = suite.aead;\n```\n\n## That's it!\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/124872?v=4",
+  "releases": [],
+  "owner_bio": "Get my public keys here: https://sk.tl/7CPRo8kn",
+  "owner_company": null,
+  "owner_location": "Antibes, France",
+  "owner_blog": "https://primulinus.tpopsite.com",
+  "owner_twitter_username": "jedisct1",
+  "owner_followers": 4074,
+  "owner_following": 194,
+  "owner_created_at": "2009-09-09T10:20:57Z",
+  "license": "MIT",
+  "category": "crypto"
+}

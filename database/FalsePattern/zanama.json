@@ -1,0 +1,47 @@
+{
+  "name": "zanama",
+  "owner": "FalsePattern",
+  "repo": "zanama",
+  "description": "A Zig to Java FFI bindings generator, inspired by JExtract.",
+  "type": "project",
+  "topics": [
+    "bindings-generator",
+    "gradle-plugin",
+    "java-ffi",
+    "java-panama",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-10-17T00:13:35Z",
+  "dependencies": [
+    {
+      "name": "zanama",
+      "url": "plugin/zig"
+    }
+  ],
+  "minimum_zig_version": "0.14.1",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/30945458?u=28056bd81403336939bd3fc0809f7c8ca5c0fa82&v=4",
+  "releases": [
+    {
+      "tag_name": "0.1.0",
+      "name": "",
+      "body": "_First release._",
+      "prerelease": false,
+      "published_at": "2025-07-31T18:20:43Z",
+      "html_url": "https://github.com/FalsePattern/zanama/releases/tag/0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Writing java (and zig) spaghetti in my idle time",
+  "owner_company": "@GTMEGA ",
+  "owner_location": null,
+  "owner_blog": "https://falsepattern.com",
+  "owner_twitter_username": null,
+  "owner_followers": 71,
+  "owner_following": 8,
+  "owner_created_at": "2017-08-12T04:05:30Z",
+  "homepage": "https://git.falsepattern.com/falsepattern/zanama",
+  "category": "library"
+}

@@ -1,0 +1,28 @@
+{
+  "name": "lua",
+  "owner": "nihjul",
+  "repo": "lua",
+  "description": "Building lua using zig build system. May become a wrapper for zig later",
+  "type": "project",
+  "topics": [
+    "lua",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-10-30T16:46:32Z",
+  "minimum_zig_version": "0.15.2",
+  "readme": "This is Lua 5.4.8, released on 21 May 2025.\n\n# Build\n\nTo build only zig is required for build.\nJust run the below command and it will produce both lua runtime and liblua.a\n```bash\nzig build\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/222862510?v=4",
+  "releases": [],
+  "owner_bio": "Working on signals and processing of them @ TV2 Danmark.\r\n\r\nWork profile, check social for private",
+  "owner_company": "Tv2 Danmark A/S",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 0,
+  "owner_following": 0,
+  "owner_created_at": "2025-07-25T17:46:43Z",
+  "category": "library"
+}

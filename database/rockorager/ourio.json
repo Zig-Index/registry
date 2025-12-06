@@ -1,0 +1,35 @@
+{
+  "name": "ourio",
+  "owner": "rockorager",
+  "repo": "ourio",
+  "description": "An asynchronous IO runtime",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 137,
+  "forks": 4,
+  "watchers": 4,
+  "updated_at": "2025-12-05T20:21:43Z",
+  "dependencies": [
+    {
+      "name": "tls",
+      "url": "git+https://github.com/ianic/tls.zig#57b4c591cecfb52818618b583f9911bbd5ab65fa",
+      "hash": "tls-0.1.0-ER2e0sViBQDhLymDUon4ZS-TAB1y7_CDYxcArN3E8pM5"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# Ourio\n\n<p align=\"center\">\n  <img width=\"128\" height=\"128\" src=\"ouroboros.svg\">\n</p>\n\nOurio (prounounced \"oreo\", think \"Ouroboros\") is an asynchronous IO runtime\nbuilt heavily around the semantics of io_uring. The design is inspired by\n[libxev](https://github.com/mitchellh/libxev), which is in turn inspired by\n[TigerBeetle](https://github.com/tigerbeetle/tigerbeetle).\n\nOurio has only a slightly different approach: it is designed to encourage\nmessage passing approach to asynchronous IO. Users of the library give each task\na Context, which contains a pointer, a callback, *and a message*. The message is\nimplemented as a u16, and generally you should use an enum for it. The idea is\nthat you can minimize the number of callback functions required by tagging tasks\nwith a small amount of semantic meaning in the `msg` field.\n\nOurio has io_uring and kqueue backends. Ourio supports the `msg_ring`\ncapability of io_uring to pass a completion from one ring to another. This\nallows a multithreaded application to implement message passing using io_uring\n(or kqueue, if that's your flavor). Multithreaded applications should plan to\nuse one `Ring` per thread. Submission onto the runtime is not thread safe,\nany message passing must occur using `msg_ring` rather than directly submitting\na task to another\n\nOurio also includes a fully mockable IO runtime to make it easy to unit test\nyour async code.\n\n## Tasks\n\n### Deadlines and Cancelation\n\nEach IO operation creates a `Task`. When scheduling a task on the runtime, the\ncaller receives a pointer to the `Task` at which point they could cancel it, or\nset a deadline.\n\n```zig\n// Timers are always relative time\nconst task = try rt.timer(.{.sec = 3}, .{.cb = onCompletion, .msg = 0});\n\n// If the deadline expired, the task will be sent to the onCompletion callback\n// with a result of error.Canceled. Deadlines are always absolute time\ntry task.setDeadline(rt, .{.sec = std.time.timestamp() + 3});\n\n// Alternatively, we can hold on to the pointer for the task while it is with\n// the runtime and cancel it. The Context we give to the cancel function let's\n// us know the result of the cancelation, but we will also receive a message\n// from the original task with error.Canceled. We can ignore the cancel result\n// by using the default context value\ntry task.cancel(rt, .{});\n```\n\n### Passing tasks between threads\n\nSay we `accept` a connection in one thread, and want to send the file descriptor\nto another for handling.\n\n```zig\n// Spawn a thread with a queue of 16 entries. When this function returns, the\n// the thread is idle and waiting to receive tasks via msgRing\nconst thread = main_rt.spawnThread(16);\nconst target_task = try main_rt.getTask();\ntarget_task.* {\n    .userdata = &foo,\n    .msg = @intFromEnum(Msg.some_message),\n    .cb = Worker.onCompletion,\n    .req = .{ .userfd = fd },\n};\n\n// Send target_task from the main_rt thread to the thread Ring. The\n// thread_rt Ring will then // process the task as a completion, ie\n// Worker.onCompletion will be called with this task. That thread can then\n// schedule a recv, a write, etc on the file descriptor it just received. Or do\n// arbitrary work\n_ = try main_rt.msgRing(&thread.ring, target_task, .{});\n```\n\n### Multiple Rings on the same thread\n\nYou can have multiple Rings in a single thread. One could be a priority\nRing, or handle specific types of tasks, etc. Poll any `Ring` from any other\n`Ring`.\n\n```zig\nconst fd = rt1.backend.pollableFd();\n_ = try rt2.poll(fd, .{\n    .cb = onCompletion, \n    .msg = @intFromEnum(Msg.rt1_has_completions)}\n);\n\n```\n\n## Example\n\nAn example implementation of an asynchronous writer to two file descriptors:\n\n```zig\nconst std = @import(\"std\");\nconst io = @import(\"ourio\");\nconst posix = std.posix;\n\npub const MultiWriter = struct {\n    fd1: posix.fd_t,\n    fd1_written: usize = 0,\n\n    fd2: posix.fd_t,\n    fd2_written: usize = 0,\n\n    buf: std.ArrayListUnmanaged(u8),\n\n    pub const Msg = enum { fd1, fd2 };\n\n    pub fn init(fd1: posix.fd_t, fd2: posix.fd_t) MultiWriter {\n        return .{ .fd1 = fd1, .fd2 = fd2 };\n    }\n\n    pub fn write(self: *MultiWriter, gpa: Allocator, bytes: []const u8) !void {\n        try self.buf.appendSlice(gpa, bytes);\n    }\n\n    pub fn flush(self: *MultiWriter, rt: *io.Ring) !void {\n        if (self.fd1_written < self.buf.items.len) {\n            _ = try rt.write(self.fd1, self.buf.items[self.fd1_written..], .{\n                .ptr = self,\n                .msg = @intFromEnum(Msg.fd1),\n                .cb = MultiWriter.onCompletion,\n            });\n        }\n\n        if (self.fd2_written < self.buf.items.len) {\n            _ = try rt.write(self.fd2, self.buf.items[self.fd2_written..], .{\n                .ptr = self,\n                .msg = @intFromEnum(Msg.fd2),\n                .cb = MultiWriter.onCompletion,\n            });\n        }\n    }\n\n    pub fn onCompletion(rt: *io.Ring, task: io.Task) anyerror!void {\n        const self = task.userdataCast(MultiWriter);\n        const result = task.result.?;\n\n        const n = try result.write;\n        switch (task.msgToEnum(MultiWriter.Msg)) {\n            .fd1 => self.fd1_written += n,\n            .fd2 => self.fd2_written += n,\n        }\n\n        const len = self.buf.items.len;\n\n        if (self.fd1_written < len or self.fd2_written < len) \n\t    return self.flush(rt);\n\n        self.fd1_written = 0;\n        self.fd2_written = 0;\n        self.buf.clearRetainingCapacity();\n    }\n};\n\npub fn main() !void {\n    var gpa: std.heap.DebugAllocator(.{}) = .init;\n    var rt: io.Ring = try .init(gpa.allocator(), 16);\n    defer rt.deinit();\n\n    // Pretend I created some files\n    const fd1: posix.fd_t = 5;\n    const fd2: posix.fd_t = 6;\n\n    var mw: MultiWriter = .init(fd1, fd2);\n    try mw.write(gpa.allocator(), \"Hello, world!\");\n    try mw.flush(&rt);\n\n    try rt.run(.until_done);\n}\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/476352?u=aff432b811e969bae9d2f71a01510895e4bf469e&v=4",
+  "releases": [],
+  "owner_company": "Sourcegraph",
+  "owner_location": "St. Paul, MN",
+  "owner_blog": "https://rockorager.dev",
+  "owner_twitter_username": "rockorager",
+  "owner_followers": 232,
+  "owner_following": 5,
+  "owner_created_at": "2010-11-10T20:36:25Z",
+  "license": "MIT",
+  "category": "library"
+}

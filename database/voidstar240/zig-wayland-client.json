@@ -1,0 +1,26 @@
+{
+  "name": "zig-wayland-client",
+  "owner": "voidstar240",
+  "repo": "zig-wayland-client",
+  "description": "A Zig native wayland client library",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2024-10-13T03:21:37Z",
+  "readme": "# Zig Wayland Client\nA zig native wayland client library. This library is not designed to identically\nreplicate the functionality of the lib-wayland-client library from the mainline\nwayland project. This is instead a new take on interfacing with wayland by\nfocusing on the primitives of the wayland protocol.\n\nFor in depth usage information see `window_app` in the `examples/` directory.\nThe core wayland protocol isn't particularly useful on its own so the\n`window_app` example uses the `XDG Shell` and `XDG Decoration` protocol\nextensions to create a proper desktop style window. For the example to work your\ncompositor will have to support at least `XDG Shell`. If your compositor doesn't\nsupport `XDG Decoration` the content will still show, but the window won't have\ndecorations (this is the case with GNOME/Mutter).\n\n## Installation\n```\nzig fetch --save git+https://github.com/voidstar240/zig-wayland-client\n```\n\n## Contribution\nThis project is by no means complete, however it is usable. If you encounter\nany bugs or have any suggestions please create an issue. If you are a developer\nand want to improve the project feel free to create a pull request with your\nchanges.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/87042451?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 4,
+  "owner_following": 6,
+  "owner_created_at": "2021-07-06T20:55:30Z",
+  "license": "MIT",
+  "category": "library"
+}

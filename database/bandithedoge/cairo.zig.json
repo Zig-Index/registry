@@ -1,0 +1,64 @@
+{
+  "name": "cairo.zig",
+  "owner": "bandithedoge",
+  "repo": "cairo.zig",
+  "description": "Cairo packaged for Zig",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 6,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-10-08T09:19:06Z",
+  "dependencies": [
+    {
+      "name": "cairo",
+      "url": "https://www.cairographics.org/releases/cairo-1.18.4.tar.xz",
+      "hash": "N-V-__8AAFW9nwOvQAmLG664NOHF67FmS00qy_Lhg72aEv9Q"
+    },
+    {
+      "name": "pixman",
+      "url": "https://github.com/bandithedoge/pixman/archive/28698cec3be55d668df7895f447e78a1a899e55a.tar.gz",
+      "hash": "pixman-0.0.0-9hepuP4HAABpFJXcFsgmuPOzQrHzX7fs88Fn4D8TuBUV"
+    },
+    {
+      "name": "freetype",
+      "url": "https://github.com/allyourcodebase/freetype/archive/9d847affbd224cf6a7303ad6d98715e3675ef78c.tar.gz",
+      "hash": "freetype-2.13.3-C3-WdeyJAAD9z8BeYYQ8N3gNlPI9NvHRxg5039S5vhz7"
+    },
+    {
+      "name": "zlib",
+      "url": "https://github.com/allyourcodebase/zlib/archive/61e7df7e996ec5a5f13a653db3c419adb340d6ef.tar.gz",
+      "hash": "zlib-1.3.1-ZZQ7lbYMAAB1hTSOKSXAKAgHsfDcyWNH_37ojw5WSpgR"
+    },
+    {
+      "name": "libpng",
+      "url": "https://github.com/allyourcodebase/libpng/archive/d512607515687aa60b975d6a191aef9a692dac87.zip",
+      "hash": "libpng-1.6.50-oiaFGt4qAAB_vzrtvz9hA7_UiBW4arSaMVGc7ekKMCZ2"
+    },
+    {
+      "name": "fontconfig",
+      "url": "pkg/fontconfig"
+    },
+    {
+      "name": "expat",
+      "url": "https://github.com/allyourcodebase/libexpat/archive/2f2954d71f91142359fbbb158145bda7d36783d7.tar.gz",
+      "hash": "libexpat-2.7.1-y_akI-g7AABOKMRAFAL1BU60IqpRNHZXrUB_2Hu16Vsl"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# [Cairo](https://cairographics.org/) packaged for Zig\n\nThis repo builds Cairo using Zig's build system and C compiler frontend. Its primary use is to simplify cross-compiling and static linking for [zigplug](https://github.com/bandithedoge/zigplug).\n\n**These are not language bindings.** You still have to use Cairo's C headers to do anything useful with this in your own projects.\n\nSeveral packages in the `pkg/` directory were copied from [Ghostty](https://github.com/ghostty-org/ghostty/tree/main/pkg).\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/26331682?u=6f0c4b28b9b42076cc148c5356cc05022180525f&v=4",
+  "releases": [],
+  "owner_bio": "nix is pretty cool i guess",
+  "owner_company": null,
+  "owner_location": "Poland",
+  "owner_blog": "http://bandithedoge.com",
+  "owner_twitter_username": null,
+  "owner_followers": 24,
+  "owner_following": 27,
+  "owner_created_at": "2017-03-10T17:33:38Z",
+  "license": "MIT",
+  "category": "library"
+}

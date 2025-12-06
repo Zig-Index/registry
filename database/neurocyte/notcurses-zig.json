@@ -1,0 +1,60 @@
+{
+  "name": "notcurses-zig",
+  "owner": "neurocyte",
+  "repo": "notcurses-zig",
+  "description": "Zig bindings and packaging for notcurses",
+  "type": "project",
+  "topics": [
+    "tui",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 12,
+  "forks": 2,
+  "watchers": 1,
+  "updated_at": "2025-10-24T16:33:54Z",
+  "dependencies": [
+    {
+      "name": "notcurses",
+      "url": "https://github.com/neurocyte/notcurses/archive/82365801e2042b1b9c62d199df5958f1d87f9fd0.tar.gz",
+      "hash": "1220c8101b67a8431e735b5431ddbc03ad455f7d37aeed0ee6294fda7c29ec168848"
+    },
+    {
+      "name": "gpm",
+      "url": "https://github.com/neurocyte/gpm-zig/archive/83c9013bf31ad6cde34889256687214cca06759a.tar.gz",
+      "hash": "1220f78de7693cd6c339dfb766ee82a975c8d3ae2c843c8ca3c8b2b38f442f6f4054"
+    },
+    {
+      "name": "libdeflate",
+      "url": "https://github.com/neurocyte/libdeflate-zig/archive/03a3e8de186200c9df6ca8a2ea0a5754e6028dd8.tar.gz",
+      "hash": "12208fc009d1b8382dca9991ab993064fbec7116fa418cd130df4a6e53fbe19d5bac"
+    },
+    {
+      "name": "libunistring",
+      "url": "https://github.com/neurocyte/libunistring-zig/archive/5116e80515290accaf1f90572450747001cb5fd4.tar.gz",
+      "hash": "12202241e0e3ec3c2a115407ea69e5055117c4f5186b616026e2008a319c4ac596a2"
+    },
+    {
+      "name": "ncurses",
+      "url": "https://github.com/neurocyte/ncurses-zig/archive/96273d44192ae4ff765562f876ae50151c1da928.tar.gz",
+      "hash": "12202635a796b1b96cab4b063b1d4cb6745527be6eb3d22bcaff35a37881780bc36b"
+    },
+    {
+      "name": "ffmpeg",
+      "url": "https://github.com/andrewrk/ffmpeg/archive/4a1cdff5ee438e016853b4803ac40c3f8f0c3f53.tar.gz",
+      "hash": "1220e83c39e5c912c0c908b92c72ef4ba972db65dfb6ca97f06249101c4afb1da697"
+    }
+  ],
+  "readme": "# Zig bindings and package for notcurses\n\nThis package provides build scripts and basic (WIP) bindings for building notcurses applications in Zig.\n\nSee `src/ncinputtest.zig` for a basic example application.\n\nShould generally build with zig nightly.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1552770?u=5c42562ca7bf8db5e586c5f373541572957629fe&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 127,
+  "owner_following": 3,
+  "owner_created_at": "2012-03-19T13:04:13Z",
+  "license": "MIT",
+  "category": "tui"
+}

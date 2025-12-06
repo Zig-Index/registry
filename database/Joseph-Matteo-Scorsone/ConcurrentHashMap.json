@@ -1,0 +1,35 @@
+{
+  "name": "ConcurrentHashMap",
+  "owner": "Joseph-Matteo-Scorsone",
+  "repo": "ConcurrentHashMap",
+  "description": "Hashmap that avoids the use of a Mutex until the need for resizing for better concurrency with the use of atomic values.",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-07-02T09:47:12Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# ConcurrentHashMap\nHashmap that avoids the use of a Mutex until the need for resizing for better concurrency with the use of atomic values.\n\n## Features\n\n- **Thread-Safe Operations**: Employs atomic operations for `put`, `get`, `remove`, and iteration, ensuring safe concurrent access.\n- **Generic Types**: Supports any key and value types via Zig's compile-time type system, with customizable hash and equality functions.\n- **Dynamic Resizing**: Automatically resizes the hashmap when the load factor exceeds 0.75, maintaining performance under high load.\n- **Minimal Locking**: Avoids the use of mutexes until resizing is necessary, enhancing concurrency.\n\n## Installation\n\n1. Written with Zig 0.14.0\n2. Clone this repository:\n   ```git clone https://github.com/Joseph-Matteo-Scorsone/ConcurrentHashMap.git```\n\n3. Integrate in build.zig\n```\n   const concurrent_HashMap = b.createModule(.{\n        .root_source_file = b.path(\"ConcurrentHashMap/src/concurrentHashMap.zig\"),\n   });\n   exe_mod.addImport(\"concurrent_HashMap\", concurrent_HashMap);\n```\n\n### Make sure \"ConcurrentHashMap/src/concurrentHashMap.zig\" is the actual path to the cloned repository.\n\n# Example\n```\nconst std = @import(\"std\");\nconst ConcurrentHashMap = @import(\"concurrent_HashMap\").ConcurrentHashMap;\n\npub fn main() !void {\n    const allocator = std.heap.page_allocator;\n    var map = try ConcurrentHashMap(u64, u64, std.hash_map.AutoContext(u64)).init(allocator, 16, .{});\n    defer map.deinit();\n\n    try map.put(1, 100);\n    try map.put(2, 200);\n    try map.put(3, 300);\n\n    var iter = map.iterator();\n    defer iter.deinit();\n\n    while (iter.next()) |entry| {\n        std.debug.print(\"Key: {any}, Value: {any}\\n\", .{entry.key, entry.value});\n    }\n}\n\n```\n\n# API\n## Initialization\n\n### `ConcurrentHashMap(comptime K: type, comptime V: type).init(allocator: *Allocator, initial_capacity: usize) !ConcurrentHashMap(K, V)`\nInitializes a new concurrent hash map.\n\n- **Parameters**:\n  - `K`: Key type (must be hashable)\n  - `V`: Value type\n  - `allocator`: Memory allocator\n  - `initial_capacity`: Starting size of the hashmap\n\n- **Returns**: Initialized `ConcurrentHashMap(K, V)`\n- **Errors**: May fail if allocation fails\n\n---\n\n## Deinitialization\n\n### `deinit(self: *ConcurrentHashMap(K, V)) void`\nFrees all resources used by the hashmap.\n\n---\n\n## Insertion\n\n### `put(self: *ConcurrentHashMap(K, V), key: K, value: V) !void`\nInserts or updates a key-value pair.\n\n- **Returns**: `!void`\n- **Errors**: May fail if allocation during resize fails\n\n---\n\n## Retrieval\n\n### `get(self: *ConcurrentHashMap(K, V), key: K) ?V`\nFetches the value associated with a key.\n\n- **Returns**: \n  - `?V`: Value if present\n  - `null`: If key is not in map\n\n---\n\n## Removal\n\n### `remove(self: *ConcurrentHashMap(K, V), key: K) bool`\nRemoves a key-value pair.\n\n- **Returns**: \n  - `true` if key was present and removed\n  - `false` if key was not found\n\n---\n\n## Iteration\n\n### `iterator(self: *ConcurrentHashMap(K, V)) Iterator`\nReturns an iterator to traverse the map safely (not thread-safe during concurrent writes).\n\n#### Iterator Methods:\n- `next(self: *Iterator) ?struct { key: K, value: V }`\n\n---\n\n## Size\n\n### `count(self: *ConcurrentHashMap(K, V)) usize`\nReturns the current number of elements in the hashmap.\n\n---\n\n## Capacity\n\n### `capacity(self: *ConcurrentHashMap(K, V)) usize`\nReturns the current number of total slots in the hashmap.\n\n---\n\n# Testing\n## To run the test suite:\n\n```zig build test```\nEnsure that all tests pass to verify the correctness of the implementation.\n\n# Contributing\nContributions are welcome! If you have suggestions, bug reports, or enhancements, please open an issue or submit a pull request.\n\n# License\nThis project is licensed under the MIT License. See the LICENSE file for details.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/91394235?u=a7054fed41f025734e701fdf2fe3fa492c64ca3f&v=4",
+  "releases": [],
+  "owner_bio": "I'm a Quantitative Engineer following the dopamine.",
+  "owner_company": null,
+  "owner_location": "NY",
+  "owner_blog": null,
+  "owner_twitter_username": "ScorEnterprises",
+  "owner_followers": 49,
+  "owner_following": 15,
+  "owner_created_at": "2021-09-25T21:48:59Z",
+  "license": "MIT",
+  "category": "library"
+}

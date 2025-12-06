@@ -1,0 +1,45 @@
+{
+  "name": "azem",
+  "owner": "thuvasooriya",
+  "repo": "azem",
+  "description": "awesome zig enabled micro-mouse maze simulator",
+  "type": "project",
+  "topics": [
+    "maze",
+    "micromouse",
+    "simulation",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 1,
+  "watchers": 0,
+  "updated_at": "2025-10-17T21:53:22Z",
+  "dependencies": [
+    {
+      "name": "dvui",
+      "url": "https://github.com/david-vanderson/dvui/archive/7cdcf937f41490b70e96f4abe80d8e61a858ec96.tar.gz",
+      "hash": "dvui-0.4.0-dev-AQFJmUCT1QAYkkYKaevIYepio5OH9VNUa4_8Cpp1qPkV"
+    },
+    {
+      "name": "mach_objc",
+      "url": "git+https://github.com/foxnne/mach-objc#10d375670486f4c2c2c47b6b8bef9bcf42b52160",
+      "hash": "mach_objc-0.0.0-hSeUK_8vDQBaxz9sPYM0OavNriFU6NE2UUITDTFod4SX"
+    }
+  ],
+  "minimum_zig_version": "0.15.2",
+  "readme": "# azem\n\n> [!WARNING]\n> this project is in alpha and very much a WIP.\n> expect memory leaks, inconsistencies, and missing features.\n>\n> initial goals revolve around micromouse simulation, maze solving algorithm testing, benchmarking\n>\n> enabling other simulation options via extensions and enhanced api is planned.\n\n> [!TIP]\n> you can try azem in your web browser now!\n>\n> go to [thuvasooriya.me/azem](https://thuvasooriya.me/azem)\n\n<img src=\"https://i.imgur.com/QKS7g1v.png\" alt=\"azem running in macos native build\" width=\"500\">\n\n## getting started\n\nit's zig.\nyou know the drill.\n\n```bash\ngit clone https://github.com/thuvasooriya/azem.git && cd azem\n\nzig build # will build for your platform and run the exe\n\nzig build web # to run on web browser! yeah i know awesome right\n```\n\n## why\n\ni'm a **very** openionated person, that's one of the reasons i love open-source. if something is itchy, then you can go break some stuff. when i was trying out [mms simulator](https://github.com/mackorone/mms) (which is awesome and props to mack for providing executables for all platforms, god what a legend), i wanted to make some changes. then i found out it uses qt for the gui. hmm... (long pause and a deep sigh). cpp i can bite down but qt... i just couldn't.\n\naktually... i wanted to try doing something cool in zig language. so here we are.\n\nmuch of the initial app architectural decisions were also inspired from [pixi](https://github.com/foxnne/pixi/tree/dvui) (another awesome zig project by an awesome person).\nthe architecture is constantly evolving. this is almost the 4th rewrite of this application. this will evolve with dvui and zig so don't expect a finish line anytime soon.\n\n> [!TIP]\n> if you haven't figured already, azem is just the letter `m` on the word \"maze\" cycled to the back. i'm still not sure how i want to pronounce it, will get back on that.\n\n## plan\n\n### next\n\n- [ ] render detailed maze: numbering, detected, goal\n- [ ] reorganize azem theme to be modular and extensible\n- [ ] implement settings\n- [ ] render mouse\n- [ ] introduce wall following\n- [ ] stats : time, speed\n- [ ] introduce better algorithms\n- [ ] don't trigger github action when src files/index.html are not changed\n- [ ] brainstorm\n  - [ ] input and output files\n    - [ ] maze text files\n    - [ ] compressed representations?\n  - [ ] file management dependency\n  - [ ] mms compatibile api\n  - [ ] better debugging during mouse run\n  - [ ] accurate simulation params\n    - [ ] turn rate\n    - [ ] slip\n    - [ ] disturbances\n    - [ ] sensor errors\n  - [ ] simulate sensor inputs\n  - [ ] remote debugging with actual mc and sensors\n- [ ] optimizations\n  - [ ] try to utilize browser fonts instead of embedding fonts in web build\n  - [ ] better keyboard navigation\n  - [ ] proper snappy animations\n  - [ ] optimize in memory representations\n  - [ ] intuitive ui/ux\n    - [ ] no need to show maze name if sidebar is not collapsed\n- [ ] app packaging for mac\n- [ ] windows packaging?\n- [ ] incremental, hot reloading with algorithms\n- [ ] set up donations\n\n- [ ] moving popup windows have undefined behavior when going through title bar\n- [ ] how to make truely native multiple windows\n- [ ] adding native float window attribute on macos\n\n### done\n\n- [x] basic theme\n- [x] basic maze loading and rendering\n- [x] native builds (tested in mac)\n- [x] web wasm builds\n- [x] console logging\n\n## big thanks to\n\n- [ZSF : zig is super awesome](https://ziglang.org/zsf/) (for better or for worse i'm still living off my parents, if you can please go [donate them](https://ziglang.org/zsf/))\n- mackorone : for creating the awesome piece of software that is [mms](https://github.com/mackorone/mms)\n- david-vanderson : [dvui is awesome](https://github.com/david-vanderson/dvui) and david can get you out of any tough spot\n- [foxnne : pixi codebase rocks](https://github.com/foxnne/pixi/tree/dvui)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/74165167?u=6f4c3b1ba878d99ea2139feb0c1f1b0403c7dd94&v=4",
+  "releases": [],
+  "owner_bio": "reading electronics and telecom engineering @ university of moratuwa w/ chips, robots, n automation",
+  "owner_company": null,
+  "owner_location": "Sri Lanka",
+  "owner_blog": "thuvasooriya.me",
+  "owner_twitter_username": "thuvasooriya",
+  "owner_followers": 25,
+  "owner_following": 71,
+  "owner_created_at": "2020-11-09T02:58:29Z",
+  "homepage": "http://www.thuvasooriya.me/azem/",
+  "license": "MIT",
+  "category": "library"
+}

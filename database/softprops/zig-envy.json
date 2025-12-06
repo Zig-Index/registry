@@ -1,0 +1,59 @@
+{
+  "name": "zig-envy",
+  "owner": "softprops",
+  "repo": "zig-envy",
+  "description": "parse env variables into zig structs",
+  "type": "project",
+  "topics": [
+    "environment-variables",
+    "zig",
+    "zigdex-lib",
+    "zig-package"
+  ],
+  "stars": 6,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2024-07-14T07:45:09Z",
+  "minimum_zig_version": "0.13.0",
+  "readme": "<h1 align=\"center\">\n    envy\n</h1>\n\n<div align=\"center\">\n    deserialize environment variables into typesafe structs\n</div>\n\n---\n\n[![Main](https://github.com/softprops/zig-envy/actions/workflows/main.yml/badge.svg)](https://github.com/softprops/zig-envy/actions/workflows/main.yml) ![License Info](https://img.shields.io/github/license/softprops/zig-envy) ![Release](https://img.shields.io/github/v/release/softprops/zig-envy) [![Zig Support](https://img.shields.io/badge/zig-0.12.0-black?logo=zig)](https://ziglang.org/documentation/0.12.0/)\n\n## 🍬 features\n\n- fail fast on faulty application configuration\n- supports parsable std lib types out of the box\n- fail at compile time for unsupported field types\n\n## examples\n\n```zig\nconst std = @import(\"std\");\nconst envy = @import(\"envy\");\n\nconst Config = struct {\n    foo: u16,\n    bar: bool,\n    baz: []const u8,\n    boom: ?u64\n};\n\npub fn main() !void {\n    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);\n    defer arena.deinit();\n    const allocator = arena.allocator();\n\n    const config = envy.parse(Config, allocator, .{}) catch |err| {\n        std.debug.print(\"error parsing config from env: {any}\", err);\n        return;\n    };\n    std.debug.println(\"config {any}\", .{ config });\n}\n```\n\n## 📼 installing\n\nCreate a new exec project with `zig init-exe`. Copy the echo handler example above into `src/main.zig`\n\nCreate a `build.zig.zon` file to declare a dependency\n\n> .zon short for \"zig object notation\" files are essentially zig structs. `build.zig.zon` is zigs native package manager convention for where to declare dependencies\n\nStarting in zig `0.12.0`, you can use\n\n```sh\nzig fetch --save https://github.com/softprops/zig-envy/archive/refs/tags/v0.2.1.tar.gz\n```\n\nto manually add it as follows\n\n```diff\n.{\n    .name = \"my-app\",\n    .version = \"0.1.0\",\n    .dependencies = .{\n+        // 👇 declare dep properties\n+        .envy = .{\n+            // 👇 uri to download\n+            .url = \"https://github.com/softprops/zig-envy/archive/refs/tags/v0.2.1.tar.gz\",\n+            // 👇 hash verification\n+            .hash = \"{current-hash}\",\n+        },\n    },\n    .paths = .{\"\"},\n}\n```\n\n> the hash below may vary. you can also depend any tag with `https://github.com/softprops/zig-envy/archive/refs/tags/v{version}.tar.gz` or current main with `https://github.com/softprops/zig-envy/archive/refs/heads/main/main.tar.gz`. to resolve a hash omit it and let zig tell you the expected value.\n\nAdd the following in your `build.zig` file\n\n```diff\nconst std = @import(\"std\");\n\npub fn build(b: *std.Build) void {\n    const target = b.standardTargetOptions(.{});\n\n    const optimize = b.standardOptimizeOption(.{});\n+    // 👇 de-reference envy dep from build.zig.zon\n+    const envy = b.dependency(\"envy\", .{\n+        .target = target,\n+        .optimize = optimize,\n+    }).module(\"envy\");\n    var exe = b.addExecutable(.{\n        .name = \"your-exe\",\n        .root_source_file = b.path(\"src/main.zig\"),\n        .target = target,\n        .optimize = optimize,\n    });\n+    // 👇 add the envy module to executable\n+    exe.root_module.addImport(\"envy\", envy);\n\n    b.installArtifact(exe);\n}\n```\n\n## 🥹 for budding ziglings\n\nDoes this look interesting but you're new to zig and feel left out? No problem, zig is young so most us of our new are as well. Here are some resources to help get you up to speed on zig\n\n- [the official zig website](https://ziglang.org/)\n- [zig's one-page language documentation](https://ziglang.org/documentation/0.13.0/)\n- [ziglearn](https://ziglearn.org/)\n- [ziglings exercises](https://github.com/ratfactor/ziglings)\n\n\\- softprops 2023\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/2242?v=4",
+  "releases": [
+    {
+      "tag_name": "v0.2.1",
+      "name": "v0.2.1",
+      "body": "Fix build.zig.zon package name, previously \"env\" and now \"envy.",
+      "prerelease": false,
+      "published_at": "2024-04-24T18:42:07Z",
+      "html_url": "https://github.com/softprops/zig-envy/releases/tag/v0.2.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "Upgrade to zig 0.12.0, current stable\r\n\r\nThe main changes were artifacts of the [0.12.0](https://ziglang.org/download/0.12.0/release-notes.html) and build configuration changes. Because these were both breaking changes the new min supported zig version is 0.12.0. See the readme for the latest install notes.",
+      "prerelease": false,
+      "published_at": "2024-04-20T22:39:32Z",
+      "html_url": "https://github.com/softprops/zig-envy/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "Initial release. See readme for more information\r\n\r\n\r\n## 📼 installing\r\n\r\nAdd the following to your `build.zig.zon` file to declare a dependency\r\n\r\n```zig\r\n.{\r\n    .name = \"my-app\",\r\n    .version = \"0.1.0\",\r\n    .dependencies = .{\r\n        // 👇 declare dep properties\r\n        .envy = .{\r\n            // 👇 uri to download\r\n            .url = \"https://github.com/softprops/zig-envy/archive/refs/tags/v0.1.0.tar.gz\",\r\n            // 👇 hash verification\r\n            .hash = \"1220291df9249a132159b029196dfea159ab3ea5c615aa7b43316f04c01f488c4b4c\",\r\n        }\r\n    }\r\n}\r\n```\r\n\r\nAdd the following in your `build.zig` file\r\n\r\n```zig\r\nconst std = @import(\"std\");\r\n\r\npub fn build(b: *std.Build) void {\r\n    const target = b.standardTargetOptions(.{});\r\n\r\n    const optimize = b.standardOptimizeOption(.{});\r\n    // 👇 de-reference envy dep from build.zig.zon\r\n     const envy = b.dependency(\"envy\", .{\r\n        .target = target,\r\n        .optimize = optimize,\r\n    });\r\n    var exe = b.addExecutable(.{\r\n        .name = \"your-exe\",\r\n        .root_source_file = .{ .path = \"src/main.zig\" },\r\n        .target = target,\r\n        .optimize = optimize,\r\n    });\r\n    // 👇 add the envy module to executable\r\n    exe.addModule(\"envy\", envy.module(\"envy\"));\r\n\r\n    b.installArtifact(exe);\r\n}\r\n```",
+      "prerelease": false,
+      "published_at": "2023-11-22T05:07:47Z",
+      "html_url": "https://github.com/softprops/zig-envy/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "I'm coming in jwt",
+  "owner_company": "https://www.mongodb.com/atlas",
+  "owner_location": "nyc",
+  "owner_blog": "http://lessis.me",
+  "owner_twitter_username": "softprops",
+  "owner_followers": 942,
+  "owner_following": 168,
+  "owner_created_at": "2008-03-05T03:41:51Z",
+  "license": "MIT",
+  "category": "library"
+}

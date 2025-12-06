@@ -1,0 +1,25 @@
+{
+  "name": "localasm",
+  "owner": "InspectorBoat",
+  "repo": "localasm",
+  "description": "Local assembly viewer for zig",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 12,
+  "forks": 1,
+  "watchers": 2,
+  "updated_at": "2025-11-28T15:21:58Z",
+  "readme": "# localasm\n\nWe have godbolt at home - a local assembly output viewer, integrated with the zig build system\n\n# Installation and usage\n\nlocalasm currently only supports 0.14.0-dev.\n\n1\\. Run `zig fetch` to add the localasm package to your `build.zig.zon` manifest:\n\n```sh\nzig fetch --save git+https://github.com/inspectorboat/localasm\n```\n\n2\\. (Optional) Add a special declaration to the root file of the module you would like to analyze:\n\n```zig\npub const functions_to_analyze = .{ square, fib };\n```\nIf this declaration is not present, localasm will instead emit assembly for all functions in the root source file.\n\n3\\. Use localasm to add build steps in your `build.zig` script:\n\n```zig\npub fn build(b: *std.Build) void {\n    const target = b.standardTargetOptions(.{});\n    const optimize = b.standardOptimizeOption(.{});\n\n    const module = b.createModule(.{\n        .root_source_file = b.path(\"src/main.zig\"),\n        .target = target,\n        .optimize = optimize,\n    });\n\n    localasm.addAssemblyOutput(b, module, .{ .target = target });\n    \n    // Optional: Analyze multiple modules\n    const other_module = b.createModule(.{\n        .root_source_file = b.path(\"src/root.zig\"),\n        .target = target,\n        .optimize = optimize,\n    });\n\n    localasm.addAssemblyOutput(b, other_module, .{\n        // Defaults to .ReleaseFast if left out\n        .optimize = .ReleaseSafe,\n        .target = b.graph.host,\n\n        // Enable a step to output raw assembly without cleaning - extremely noisy, off by default\n        .enable_raw_asm_step = true,\n        // Renames the step - defaults to rawasm. Useful if you want to analyze multiple modules (hence multiple addAssemblyOutput calls)\n        .raw_asm_step_name = \"lib_rawasm\",\n        .raw_asm_file_name = \"lib_rawasm.s\",\n\n        // Enable a step to output clean assembly - on by default\n        .enable_clean_asm_step = true,\n        .clean_asm_step_name = \"lib_asm\",\n        .clean_asm_file_name = \"lib_asm.s\",\n\n        // Enable a step that sends cleaned assembly to llvm-mca for analysis - on by default\n        .enable_mca_step = true,\n        .mca_step_name = \"lib_mca\",\n        .mca_file_name = \"lib_mca.txt\",\n    });\n}\n```\n\n4\\. Run `zig build asm` to get your assembly output:\n\n```sh\ncat zig-out\\asm\\asm.s\n\nmain.square:\n\tpush\trbp\n\tmov\trbp, rsp\n\tmov\teax, ecx\n\timul\teax, ecx\n\tpop\trbp\n\tret\n```\n\n5\\. (Optional) Run `zig build mca` to feed the assembly output into llvm-mca:\n\n```sh\ncat zig-out\\asm\\mca.txt\n\nIterations:        100\nInstructions:      2900\nTotal Cycles:      3484\nTotal uOps:        4800\n\nDispatch Width:    6\nuOps Per Cycle:    1.38\nIPC:               0.83\nBlock RThroughput: 8.0\n```\n\nAny arguments passed to `zig build mca` will be forwarded to llvm-mca. For example, use `zig build mca -- --timeline` to enable a timeline view of program execution.\n\nThis step requires llvm-mca to be installed, which can be acquired at [releases.llvm.org](https://releases.llvm.org/).\n\n# Why not just use godbolt?\n\n- Due to zig's lazy analysis, getting non-`export` functions to get emitted is a pain - you have to use a hack like `const foo: *const anyopaque = @ptrCast(&function);`, which gets irritating to type every time. localasm does this for you automatically by wrapping the module you pass into `addAssemblyOutput`, and also filters out the dummy constants emitted.\n- If any code is split into multiple files, has library dependencies, or is part of a larger project, getting it into godbolt can difficult. Integrating with the zig build system solves this.\n- Running locally means you get to use your personal editor setup, which I personally find to be a large improvement to godbolt's rather cramped UI.\n\n# Known limitations\n\n- Currently, only x86 assembly cleanup is suppported. Compiler-explorer has a [repository](https://github.com/compiler-explorer/asm-parser/blob/main/setup.sh) that already handles assembly parsing, but it is written in C++. If anybody would feels inclined to port it to [allyourcodebase](https://github.com/allyourcodebase), please let me know and I will integrate it into this package.",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/116048347?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 1,
+  "owner_following": 1,
+  "owner_created_at": "2022-10-18T02:12:46Z",
+  "category": "library"
+}

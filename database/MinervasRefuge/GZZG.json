@@ -1,0 +1,41 @@
+{
+  "name": "GZZG",
+  "owner": "MinervasRefuge",
+  "repo": "GZZG",
+  "description": "A typed Zig wrapper for the Guile (scheme) C API.",
+  "type": "project",
+  "topics": [
+    "guile",
+    "guile-scheme",
+    "zig",
+    "ziglang",
+    "zig-package"
+  ],
+  "stars": 5,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-11-12T23:28:36Z",
+  "minimum_zig_version": "0.14.0",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/196515647?u=2c134188189e44aac60d84030abe9cfa8cf8e8bb&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "# Changelog\r\n## 0.1.0 - [2025-04-11 Fri]\r\nFirst release, `zig@0.14`.\r\n\r\n### Added\r\n  • `GuileGCAllocator` : Allocator based on Guile exposed GC API\r\n  • `eq`, `eqv`, `equal`, `eqZ`\r\n  • `MultiValue` : (value …) tool\r\n  • `StaticCache` : Static Caching tool for primitives\r\n  • `UnionSCM` : Narrowed type-checking for known return types\r\n  • `catchException`\r\n  • `catchExceptionC`\r\n  • `display`, `displayErr`\r\n  • `newline`, `newlineErr`\r\n  • `eval`\r\n  • `orUndefined`\r\n  • `withContinuationBarrier`\r\n  • `fmt.simpleFormatZ`, `fmt.simpleFormat`\r\n  • `raiseZ`, `lowerZ`\r\n  • internal & external unit tests\r\n  • Guix manifest environment\r\n  • contracts : Zig comptime type checking\r\n\r\n### build.zig\r\n  • Build options\r\n    • `enable_direct_string_access`\r\n    • `enable_comptime_number_creation`\r\n    • `enable_iw_smob`\r\n    • `trust_iw_consts`\r\n    • `has_bytecode_module`\r\n  • Compile options\r\n    • `extract-bytecode`\r\n  • code coverage\r\n  • source cleaner build step\r\n  • system library include path build step\r\n\r\n### Examples\r\n  • `allsorts`\r\n  • `sieve of Eratosthenes`\r\n  • `monte carlo - pi`\r\n\r\n### Containers\r\n  • `Any`\r\n  • `Boolean`\r\n  • `Number`, `Integer`\r\n  • `Character`\r\n  • `String`\r\n  • `Symbol`\r\n  • `Keyword`\r\n  • `PairOf`\r\n  • `Pair`\r\n  • `ListOf`\r\n  • `List`\r\n  • `VectorOf`\r\n  • `Vector`\r\n  • `ByteVector`\r\n  • `HashTableOf`\r\n  • `HashTable`\r\n  • `Port`\r\n  • `ZigIO` : Custom Port\r\n  • `WrapZigIO` : comptime wrapper over common `reader` and `writer` as a Guile `Port`\r\n\r\n### Partial Implemented Containers\r\n  • `Smob` : (Not public)\r\n  • `Thread` : (Not public)\r\n  • `Hook` : (Not public)\r\n  • `Module`\r\n  • `Procedure`\r\n  • `ThunkOf`\r\n  • `ForeignType` : Bundles types into Guile manageable objects\r\n  • `Stack` : (Not public)\r\n  • `Frame` : (Not public)\r\n\r\n### Internal Workings\r\n  • SCM container\r\n  • TC1, TC2, TC3, TC7, TC8\r\n  • GuileClassification : (untested)\r\n  • `FixNum`\r\n  • byte vector layout\r\n  • string layout & encoding\r\n    • Allows comptime static Guile `StringBuf`\r\n  • bytecode extractor and API\r\n  • re-implementation of `jenkinsLookup3Hashword2`\r\n",
+      "prerelease": false,
+      "published_at": "2025-04-11T09:39:10Z",
+      "html_url": "https://github.com/MinervasRefuge/GZZG/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Checkout my Codeberg page for an up-to date view of my active projects!",
+  "owner_company": null,
+  "owner_location": "Adelaide, South Australia",
+  "owner_blog": "https://codeberg.org/MinervasRefuge",
+  "owner_twitter_username": null,
+  "owner_followers": 3,
+  "owner_following": 2,
+  "owner_created_at": "2025-01-26T08:26:37Z",
+  "license": "BSD-3-Clause",
+  "category": "library"
+}

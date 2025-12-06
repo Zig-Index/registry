@@ -1,0 +1,53 @@
+{
+  "name": "zoridor",
+  "owner": "ringtailsoftware",
+  "repo": "zoridor",
+  "description": "A Quoridor game for terminal and web",
+  "type": "project",
+  "topics": [
+    "zig-package",
+    "game",
+    "quoridor",
+    "zig"
+  ],
+  "stars": 13,
+  "forks": 1,
+  "watchers": 2,
+  "updated_at": "2025-09-01T00:24:59Z",
+  "dependencies": [
+    {
+      "name": "mibu",
+      "url": "git+https://github.com/xyaman/mibu.git#b001662c929e2719ee24be585a3120640f946337",
+      "hash": "1220d78664322b50e31a99cfb004b6fa60c43098d95abf7ec60a21ebeaf1c914edaf"
+    },
+    {
+      "name": "yazap",
+      "url": "git+https://github.com/prajwalch/yazap#c2e3122d5dd6192513ba590f229dbc535110efb8",
+      "hash": "122054439ec36ac10987c87ae69f3b041b40b2e451af3fe3ef1fc578b3bad756a800"
+    },
+    {
+      "name": "StaticHttpFileServer",
+      "url": "git+https://github.com/andrewrk/StaticHttpFileServer.git#b65e1a27c9b2d4bb892e5ffd1a76715d6c0557ab",
+      "hash": "1220db11bb50364857ec6047cfcdf0938dea6af3f24d360c6b6a6103364c8e353679"
+    },
+    {
+      "name": "mime",
+      "url": "https://github.com/andrewrk/mime/archive/refs/tags/2.0.1.tar.gz",
+      "hash": "12209083b0c43d0f68a26a48a7b26ad9f93b22c9cff710c78ddfebb47b89cfb9c7a4"
+    }
+  ],
+  "minimum_zig_version": "0.11.0",
+  "readme": "# Zoridor\n\nA terminal and web version of the [Quoridor](https://en.wikipedia.org/wiki/Quoridor) board game\n\n[WASM4](https://wasm4.org/) version on [wasm4 branch](https://github.com/ringtailsoftware/zoridor/tree/wasm4).\n\nPlay on the web at https://ringtailsoftware.github.io/zoridor/\n\nOr play the WASM4 cart at https://ringtailsoftware.github.io/zoridor/cart.html\n\n![](doc/demo.gif)\n\nQuoridor tutorials:\n\n - https://www.youtube.com/watch?v=39T3L6hNfmg\n - https://www.youtube.com/watch?v=FDdm-EgRy9g\n - https://www.youtube.com/watch?v=6ISruhN0Hc0\n\n# Running\n\nGet [Zig](https://ziglang.org/download/)\n\nTerminal version:\n\n    zig build run\n\nWeb version:\n\n    zig build -Dweb=true && zig build serve -- zig-out -p 8000\n\nBrowse to http://localhost:8000\n\n# Development\n\nAuto-rebuild and reload on change\n\n    watchexec -r --stop-signal SIGKILL -e zig,html,css,js,zon -w src 'zig build -Dweb=true && zig build serve -- zig-out -p 8000'\n\n# Terminal mode controls\n\n - You are Player 1. Your objective is to move your red pawn from the top of the board to the bottom of the board\n - Player 2 starts at the bottom and is attempting to reach the top of the board\n - On each turn you can either move your pawn or add one fence piece to the board (you have 10 to start with)\n\n## Moving a pawn\n\n - Use the cursor keys to choose where to move to. Your pawn may only move one square on each turn and cannot move diagonally\n - The \"[ ]\" mark where your pawn will move and is coloured green for a valid move and red for invalid\n - Once you have selected a move, press enter to move the pawn\n\n## Adding a fence\n\n - Press tab to switch from pawn to fence mode\n - Use the cursor keys to choose where to add the fence\n - Fences must not cross other fences, or completely block either player from reaching their goal. An invalid fence position will be shown in red\n - To rotate the fence, press space\n - Once you have positioned the fence, press enter to place it\n\n# Command line options\n\nHelp\n\n    zig build run -- -h\n\nTo watch machine vs machine matches forever:\n\n    zig build run -- -1 machine -2 machine -f\n\nOn exit, a record of all moves is printed in both Glendenning format and base64. The base64 format can be reloaded with `zig build run -- -l jcNJujqxKRY2sA==`\n\n# Theory\n\nFor a comprehensive examination of playing Quoridor, see [Lisa Glendenning's Thesis](https://www.labri.fr/perso/renault/working/teaching/projets/files/glendenning_ugrad_thesis.pdf)\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/20110944?u=93548b94fa9de08e939a35745a2affd82408e198&v=4",
+  "releases": [],
+  "owner_bio": "@tobyjaffey@mastodon.me.uk",
+  "owner_company": "Ringtail Software Ltd",
+  "owner_location": "UK",
+  "owner_blog": "http://www.ringtailsoftware.co.uk",
+  "owner_twitter_username": null,
+  "owner_followers": 39,
+  "owner_following": 8,
+  "owner_created_at": "2016-06-23T13:40:30Z",
+  "license": "MIT",
+  "category": "library"
+}

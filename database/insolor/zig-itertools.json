@@ -1,0 +1,40 @@
+{
+  "name": "zig-itertools",
+  "owner": "insolor",
+  "repo": "zig-itertools",
+  "description": "WIP. Implementation of some useful iterators in Zig. Inspired by Python's itertools module.",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-library",
+    "zigang",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-10-17T07:24:01Z",
+  "minimum_zig_version": "0.14.0",
+  "readme": "# Zig Itertools\n\n[![Zig 0.14.0, 0.14.1, 0.15.1, 0.15.2, master](https://img.shields.io/badge/Zig-0.14.0%20%7C%200.14.1%20%7C%200.15.1%20%7C%200.15.2%20%7C%20master-color?logo=zig&color=%23f3ab20)](https://github.com/ziglang/zig) <!-- see zig tag examples at https://github.com/KurtWagner/what-the-zig -->\n[![zig build test](https://github.com/insolor/zig-collections/actions/workflows/zig-build-test.yml/badge.svg)](https://github.com/insolor/zig-collections/actions/workflows/zig-build-test.yml)\n\n> [!WARNING]  \n> WORK IN PROGRESS\n\nImplementation of some useful data structures in Zig. Inspired by Python's [`itertools`](https://docs.python.org/3/library/itertools.html) module.\n\nImplemented so far:\n\n- `ChainIterator` - \"glues\" two iterator in one, returns their elements in succession\n- `SliceIterator` - iterates over a slice\n- `EmptyIterator` - emits no elements. Implemented only for testing purposes.\n\n## Installation\n\n1. In the root directory of your project, run the following command to add `zig_itertools` to your `build.zig.zon` file (replace 0.0.1 with the latest release number):\n\n    ```bash\n    zig fetch --save https://github.com/insolor/zig-itertools/archive/refs/tags/0.0.1.zip\n    ```\n\n    Replace `main` in the URL with the tag you want to use.\n\n2. Add zig_itertools as a dependency module in your `build.zig` file, example:\n\n    ```zig\n    const zig_itertools = b.dependency(\"zig_itertools\", .{});\n    exe.root_module.addImport(\"zig_itertools\", zig_itertools.module(\"zig_itertools\"));\n    ```\n\nAfter that, you'll be able to import `zig_itertools` namespace from your code:\n\n```zig\nconst zig_itertools = @import(\"zig_itertools\");\nconst ChainIterator = zig_itertools.ChainIterator;\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/2442833?v=4",
+  "releases": [
+    {
+      "tag_name": "0.0.1",
+      "name": "0.0.1",
+      "body": "Initial release, by @insolor\r\n\r\nImplemented so far:\r\n\r\n- `ChainIterator` - \"glues\" two iterator in one, returns their elements in succession\r\n- `SliceIterator` - iterates over a slice\r\n- `EmptyIterator` - emits no elements. Implemented only for testing purposes.\r\n\r\n\r\n**Full Changelog**: https://github.com/insolor/zig-itertools/commits/0.0.1",
+      "prerelease": false,
+      "published_at": "2025-07-27T18:03:57Z",
+      "html_url": "https://github.com/insolor/zig-itertools/releases/tag/0.0.1",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Backend software developer. Founder of the Dwarf Fortress localization project.",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 51,
+  "owner_following": 117,
+  "owner_created_at": "2012-09-28T05:16:56Z",
+  "category": "library"
+}

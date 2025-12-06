@@ -1,0 +1,29 @@
+{
+  "name": "anne_benchmark",
+  "owner": "AnneKitsune",
+  "repo": "anne_benchmark",
+  "description": "A simple benchmark library for zig.",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-09-13T02:49:30Z",
+  "minimum_zig_version": "0.15.0-dev.1380+e98aeeb73",
+  "readme": "# Zig Benchmark Library\n\nA simple benchmark library.\n\nUsing (zig):\n1. Import\n2. `anne_benchmark.benchmark(\"my benchmark\", someFunction);`\n3. Profit!\n\n\nUsing (C):\n1. Include `anne_benchmark.h`\n2. Link against `anne_benchmark.a`\n3. `benchmark_c(\"my benchmark\", some_function);`\n\n\n### Benchmarked function\n\n##### Zig\n```zig\npub fn someFunction(ctx: *anne_benchmark.Context) void {\n    while (ctx.run()) {\n        // do stuff...\n    }\n}\n```\n\n##### C\n```c\nvoid some_function(ctx: *void) {\n    while (benchmark_run(ctx)) {\n        // do stuff...\n    }\n}\n```\n\n### Advanced usage\nSee `src/root.zig`'s `Context.runExplicitTiming()` documentation.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/4755185?u=758b06e7f8ee6db8837014dcd854b1e9df898d34&v=4",
+  "releases": [],
+  "owner_bio": "I Press Keys on my Keyboard.",
+  "owner_company": null,
+  "owner_location": "Quebec, Canada",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 90,
+  "owner_following": 6,
+  "owner_created_at": "2013-06-21T02:30:22Z",
+  "license": "AGPL-3.0",
+  "category": "library"
+}

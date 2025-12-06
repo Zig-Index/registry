@@ -1,0 +1,37 @@
+{
+  "name": "raylib-lists",
+  "owner": "RomaricKc1",
+  "repo": "raylib-lists",
+  "description": "List widget for Raylib-zig.",
+  "type": "project",
+  "topics": [
+    "raylib-zig",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-08-11T22:01:56Z",
+  "dependencies": [
+    {
+      "name": "raylib_zig",
+      "url": "git+https://github.com/Not-Nik/raylib-zig?ref=devel#5013830647196ba938a3a25a36b8245606e9a9cd",
+      "hash": "raylib_zig-5.6.0-dev-KE8REM0tBQAHVn9Xjqlgu9l1qgfTmP8aJa1kLhD584bV"
+    }
+  ],
+  "minimum_zig_version": "0.15.0-dev.847+850655f06",
+  "readme": "# Raylib List widget lib\nList widget for [Raylib-zig](https://github.com/Not-Nik/raylib-zig).\n\nExample usage here -> [ZISTORY](https://github.com/RomaricKc1/zistory).\n\nTested on Zig version `0.15.0-dev.936+fc2c1883b`, `0.14.1`.\n\n> [!NOTE]\n> This is configured to work on `wayland`. If you are on `x11`, you'll need to change the display `backend`.\n\nIn the raylib dependency.\n\n```zig\nconst raylib_dep = b.dependency(\"raylib_zig\", .{\n    .target = target,\n    .optimize = optimize,\n    .linux_display_backend = .X11,\n});\n```\n\n# Usage\n\nThe project must have been created using `zig init`.\n\nRun this to add it to your `build.zig.zon`:\n\n```\nzig fetch --save git+https://github.com/RomaricKc1/raylib-lists/\n```\n\nAnd add these lines to your `build.zig` file:\n\n```zig\nconst rl_lists_dep = b.dependency(\"raylib_lists\", .{\n    .target = target,\n    .optimize = optimize,\n});\nconst rl_lists = rl_lists_dep.module(\"raylib_lists\"); // lists widget\n```\nNow add the modules to your target:\n\n```zig\nexe.root_module.addImport(\"rl_lists\", rl_lists);\n```\nyou can then import it in your code.\n\n```zig\nconst rl_lists = @import(\"rl_lists\");\n```\n\n# Checkout another widget\n- [Raylib-bar_chart](https://github.com/RomaricKc1/raylib-bar_chart)\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/45500198?u=f8ed918a3913f7270320b20f4ed8b9c180a1b7f1&v=4",
+  "releases": [],
+  "owner_bio": "[🇷 🇪 🇩 🇦 🇨 🇹 🇪 🇩 ] ",
+  "owner_company": null,
+  "owner_location": "France ",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 32,
+  "owner_following": 10,
+  "owner_created_at": "2018-11-30T22:10:19Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,30 @@
+{
+  "name": "zcli",
+  "owner": "lepton9",
+  "repo": "zcli",
+  "description": "CLI argument parser",
+  "type": "project",
+  "topics": [
+    "argument-parser",
+    "command-line",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-11-14T13:00:03Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# zcli\n\nCommand Line Argument parser for Zig\n\n[![Zig](https://img.shields.io/badge/v0.15.2(stable)-orange?logo=Zig&logoColor=Orange&label=Zig&labelColor=Orange)](https://ziglang.org/download/)\n[![Licence](https://img.shields.io/badge/MIT-silver?label=License)](https://github.com/lepton9/zcli/blob/master/LICENSE)\n\n## Features\n\n- Subcommands, options, positional arguments\n- Compile-time CLI definition validation\n- Help generation\n- User error handling\n- Shell completion generation (bash, zsh, fish)\n- Suggestions for typos\n\n## Usage\n```\nzig fetch --save git+https://github.com/lepton9/zcli\n```\n\nIn `build.zig`\n\n``` zig\nconst zcli = b.dependency(\"zcli\", .{ .target = target, .optimize = optimize });\nconst zcli_mod = zcli.module(\"zcli\");\n\n// Add optional version info\nconst version = @import(\"build.zig.zon\").version;\n@import(\"zcli\").addVersionInfo(b, zcli_mod, version);\n\nexe.root_module.addImport(\"zcli\", zcli_mod);\n```\n\n## Defining the CLI\n\n```zig\nconst zcli = @import(\"zcli\");\n\nconst app: zcli.CliApp = .{\n    .config = .{\n        .name = \"demo\",\n        .description = null,  // About text\n        .suggestions = false, // Turn on suggestions for typos\n        .auto_help = true,    // Handle '--help' option\n        .auto_version = true, // Handle '--version' option\n        .help_max_width = 80, // Max amount of text on a line},\n    .commands = &[_]zcli.Cmd{\n        .{ .name = \"command\", .desc = \"Description\", .options = null, .positionals = null },\n    },\n    .options = &[_]zcli.Opt{\n        .{ .long_name = \"option\", .short_name = \"o\", .desc = \"Description\", .arg = .{ .name = \"arg\" } },\n        .{ .long_name = \"version\", .short_name = \"V\", .desc = \"Print version\" },\n        .{ .long_name = \"help\", .short_name = \"h\", .desc = \"Print help\" },\n    },\n    .positionals = &[_]zcli.PosArg{\n        .{ .name = \"positional\", .desc = \"Description\", .required = true, .multiple = false },\n    },\n};\n```\n<details>\n<summary>Generated help text</summary>\n\n```\n$ demo --help\nUsage: demo [command] [options]\n\nCommands:\n\n  command                Description\n\nOptions:\n\n  -o, --option   <arg>   Description\n  -V, --version          Print version\n  -h, --help             Print help\n```\n</details>\n\n## Example\n\n```zig\nconst std = @import(\"std\");\nconst zcli = @import(\"zcli\");\n\nconst app: zcli.CliApp = .{\n    // ...\n};\n\npub fn main() !void {\n    const allocator = std.heap.page_allocator;\n    const cli: *zcli.Cli = try zcli.parseArgs(allocator, &app);\n    defer cli.deinit(allocator);\n\n    // Find options\n    if (cli.find_opt(\"option\")) |option| {\n        std.debug.print(\n            \"Option '{s}' value was: '{s}'\\n\",\n            .{ option.name, option.value.?.string },\n        );\n    }\n\n    // Generate shell completion scripts\n    var buffer: [4096]u8 = undefined;\n    const completions = try zcli.complete.getCompletion(\n        &buffer,\n        &app,\n        app.name,\n        \"bash\",\n    );\n}\n```\n\nHandling the CLI parsing errors yourself:\n\n```zig\n// ...\n\npub fn main() !void {\n    const allocator = std.heap.page_allocator;\n\n    const args = try std.process.argsAlloc(allocator);\n    defer std.process.argsFree(allocator, args);\n\n    const cli: *zcli.Cli = try zcli.parseFrom(allocator, &app, args);\n    defer cli.deinit(allocator);\n}\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/122417289?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 2,
+  "owner_following": 3,
+  "owner_created_at": "2023-01-11T01:49:43Z",
+  "license": "MIT",
+  "category": "library"
+}

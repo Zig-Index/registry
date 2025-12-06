@@ -1,0 +1,72 @@
+{
+  "name": "Zig-PSP",
+  "owner": "zPSP-Dev",
+  "repo": "Zig-PSP",
+  "description": "A project to bring the Zig Programming Language to the Sony PlayStation Portable!",
+  "type": "project",
+  "topics": [
+    "zig",
+    "psp",
+    "psp-sdk",
+    "zig-package"
+  ],
+  "stars": 106,
+  "forks": 10,
+  "watchers": 8,
+  "updated_at": "2025-12-04T05:22:26Z",
+  "dependencies": [
+    {
+      "name": "zPBPTool",
+      "url": "git+https://github.com/zPSP-Dev/zPBPTool.git#b5fbd5e13a7925def1810a40dbda4954755aa2f0",
+      "hash": "zPBPTool-0.0.0-p6Zf3yUtAAAsJBah176cgutdV1KciOBKU6l7GoKZvarr"
+    },
+    {
+      "name": "zSFOTool",
+      "url": "git+https://github.com/zPSP-Dev/zSFOTool.git#cda98b6f5fa970e42eed596c557a8bd328537a14",
+      "hash": "zSFOTool-0.0.0-liqp5RA3AAAxZ09q9C5h5kgBhNq-gC2BpxO6vSlbGI9m"
+    },
+    {
+      "name": "libzpsp",
+      "url": "git+https://github.com/zPSP-Dev/libzpsp#836d9cd94809071996cc788b429961f128de843e",
+      "hash": "libzpsp-0.0.0-NAgUb598BQBMsjLg55ZXDzHlzeZ2fg3TbgZUfgaoeerR"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "<h1 align=\"center\">Zig-PSP</h1>\n<p align=\"center\">A project to bring Zig to the Sony PlayStation Portable</p>\n\n## Why Zig on the PSP?\n\nIn the PSP programming community, many libraries, tools, and other features are written in C or C++, which as we know has its problems with writing clean, reusable, and high quality code. Given that the core objectives of Zig as a language are to allow us to create well-designed and reusable software, Zig seems like a perfect fit for integrating older PSP libraries while striving to develop higher quality software!\n\n## Special Thanks\n\nSpecial thanks is given to the [Rust-PSP team](https://github.com/overdrivenpotato/rust-psp) whose efforts influenced and helped to get this project off the ground. No harm is intended, and it's thanks to you Rustaceans that fellow Ziguanas can program for the PSP.\n\n## Usage\n\nCurrently, using Zig-PSP is rather straight forward - one must use the psp folder in their project's src folder in order to have the PSP's function definitions, alongside with some custom utilities I have created. One also must include the tools/ folder to use the post-build tools. To build a PSP app, use the included `build.zig` script to generate a PSP executable! (EBOOT.PBP / app.prx) This script is well commented for explanation and documentation.\n\nFor a main.zig file one should include something like:\n\n```zig\nconst psp = @import(\"psp/utils/psp.zig\");\n\ncomptime {\n    asm(psp.module_info(\"Zig PSP App\", 0, 1, 0));\n}\n\npub fn main() !void {\n    psp.utils.enableHBCB();\n    psp.debug.screenInit();\n\n    psp.debug.print(\"Hello from Zig!\");\n}\n```\n\nA quick call to `zig build` will build your program and should emit an EBOOT.PBP and app.prx in your root. These are the two PSP executable formats - .prx for debugging, and .PBP for running normally.\n\nOne can run a .PBP file on their PSP (assuming CFW is installed) by adding their application to `PSP_DRIVE:/PSP/GAME/YourAppName/EBOOT.PBP` and it will be available under the Games->Memory Stick list in the PSP's XMB.\n\n## EBOOT Customization\nIn order to customize the EBOOT, one can look into the `build.zig` file and modify the constant fields to change their application icon, background, and even add animations or sounds to the EBOOT on the XMB screen.\n\n## Comparisons To C/C++\nWhen comparing Zig code to C/C++, it would be rather apparent that by default, Zig is much smaller and tightly knit. LLVM is an excellent backend which produces some very small code, and Zig is an example of that. Without the weight of the entire C standard library needing to be imported, a simple naive Hello World, as seen above, generates in 10,195 bytes, compared to the C/C++ size of 68,098 bytes. That's an 85% reduction in size! With a few structural changes, as seen in `hello-min.zig` sample, that size can get down to 6,674 bytes! That's 90.2% smaller!  \n\nHopefully in the future, one could reference track the functions used in the SDK for imports, and dynamically generate module import information. This way, the PSP applications could go as small as 3,200 bytes for a hello world! This repository is distributed as part of a template, allowing one to customize their module imports, meaning that full release applications built with small tweaks to the toolchain NIDS directory could result in extraordinarily small executables for release applications!\n\n## Documentation\n\nCurrently Zig-PSP does not include documentation of the PSPSDK in the SDK's .zig files - but rather they are [well documented in C](http://psp.jim.sh/pspsdk-doc/). It is planned to add documentation in the future to resolve this\n\n## Debugging\n\nIf one has an installed copy of the legacy PSPSDK, one can use PSPLink - a USB debugging software, to connect their PSP to their computer and run debugging functions on the application. With legacy PSPSDK, you'll also have access to psp-gdb, a PSP-specific version of GDB to use as well. PSP-GDB with Zig is untested at the moment, but in theory should work.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/69380057?v=4",
+  "releases": [
+    {
+      "tag_name": "v0.5",
+      "name": "Zig-PSP v0.5",
+      "body": "In this update, many changes were made to stabilize the toolchain and provide an adequate user experience. It also helped to squash bugs, and improve quality of life.\r\n\r\nMajor Changes:\r\n- Fix to SFO tool that made PBP files not bootable (alignment)\r\n- Code size reduction for default applications\r\n- Standard library support for most file operations (std.io, std.fs, std.debug.warn)\r\n- Cleaned up error messages\r\n- Safety compatibility layer for Zig\r\n- Updated for Zig master branch (no LLD dependency!)\r\n\r\nA corresponding release has been made for the [Zig-PSP Template repository](https://github.com/zPSP-Dev/Zig-PSP-Template/releases/tag/v0.5)",
+      "prerelease": false,
+      "published_at": "2020-10-17T08:06:49Z",
+      "html_url": "https://github.com/zPSP-Dev/Zig-PSP/releases/tag/v0.5",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.4.1",
+      "name": "Zig-PSP!",
+      "body": "This update is a quick patch that removes the LLD dependency. This toolchain is meant to be used with Zig master-branch / v0.7.0.",
+      "prerelease": false,
+      "published_at": "2020-10-04T23:11:29Z",
+      "html_url": "https://github.com/zPSP-Dev/Zig-PSP/releases/tag/v0.4.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.4",
+      "name": "Zig-PSP!",
+      "body": "Welcome to the first release of the Zig-PSP toolchain! This toolchain is meant to be used with Zig master-branch / v0.7.0, and (for now) has a dependency on LLVM's linker, LLD. Zig-PSP is a repository that contains all the tools and APIs needed to make an application in Zig for the PSP. It also has the ability to generate a standalone library which can be linked to any C applications using a clang toolchain. Zig-PSP is User Mode complete, and allows programmers to develop for the Sony PSP to make homebrew games, applications, and more!\r\n\r\nTo get started, all you need is an up-to-date Zig install, and LLD. Then, you can make a repository based on [this template](https://github.com/zPSP-Dev/Zig-PSP-Template) in order to get a ready environment for PSP development!",
+      "prerelease": false,
+      "published_at": "2020-09-30T21:54:34Z",
+      "html_url": "https://github.com/zPSP-Dev/Zig-PSP/releases/tag/v0.4",
+      "assets": []
+    }
+  ],
+  "owner_bio": "A team for ze PSP?",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2020-08-08T06:04:15Z",
+  "category": "library"
+}

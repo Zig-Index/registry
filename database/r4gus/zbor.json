@@ -1,0 +1,222 @@
+{
+  "name": "zbor",
+  "owner": "r4gus",
+  "repo": "zbor",
+  "description": "CBOR parser written in Zig",
+  "type": "project",
+  "topics": [
+    "cbor",
+    "zig",
+    "ziglang",
+    "encoder-decoder",
+    "rfc-8949",
+    "parsing",
+    "zig-package"
+  ],
+  "stars": 51,
+  "forks": 7,
+  "watchers": 1,
+  "updated_at": "2025-12-06T14:39:29Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# zbor - Zig CBOR\n\n![GitHub](https://img.shields.io/github/license/r4gus/zbor?style=flat-square)\n![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/r4gus/zbor/main.yml?style=flat-square)\n![GitHub all releases](https://img.shields.io/github/downloads/r4gus/zbor/total?style=flat-square)\n<noscript><a href=\"https://liberapay.com/r4gus/donate\"><img alt=\"Donate using Liberapay\" src=\"https://liberapay.com/assets/widgets/donate.svg\"></a></noscript>\n\nThe Concise Binary Object Representation (CBOR) is a data format whose design \ngoals include the possibility of extremely small code size, fairly small \nmessage size, and extensibility without the need for version negotiation\n([RFC8949](https://www.rfc-editor.org/rfc/rfc8949.html#abstract)). It is used\nin different protocols like the Client to Authenticator Protocol \n[CTAP2](https://fidoalliance.org/specs/fido-v2.0-ps-20190130/fido-client-to-authenticator-protocol-v2.0-ps-20190130.html#ctap2-canonical-cbor-encoding-form) \nwhich is a essential part of FIDO2 authenticators/ Passkeys.\n\nI have utilized this library in several projects throughout the previous year, primarily in conjunction with my [FIDO2 library](https://github.com/r4gus/fido2). I'd consider it stable. \nWith the introduction of [Zig version `0.11.0`](https://ziglang.org/download/), this library will remain aligned with the most recent stable release. If you have any problems or want\nto share some ideas feel free to open an issue or write me a mail, but please be kind.\n\n## Getting started\n\nVersions\n| Zig version | zbor version |\n|:-----------:|:------------:|\n| 0.13.0      | 0.15 |\n| 0.14.x      | 0.16.x, 0.17.x, 0.18.x |\n| 0.15.x      | 0.19.0, 0.20.0 |\n\nFirst add this library as a dependency to your `build.zig.zon` file:\n\n```bash\n# Replace <VERSION TAG> with the version you want to use\nzig fetch --save https://github.com/r4gus/zbor/archive/refs/tags/<VERSION TAG>.tar.gz\n```\n\nthen within you `build.zig` add the following code:\n\n```zig\n// First fetch the dependency...\nconst zbor_dep = b.dependency(\"zbor\", .{\n    .target = target,\n    .optimize = optimize,\n});\nconst zbor_module = zbor_dep.module(\"zbor\");\n\n// If you have a module that has zbor as a dependency...\nconst your_module = b.addModule(\"your-module\", .{\n    .root_source_file = .{ .path = \"src/main.zig\" },\n    .imports = &.{\n        .{ .name = \"zbor\", .module = zbor_module },\n    },\n});\n\n// Or as a dependency for a executable...\nexe.root_module.addImport(\"zbor\", zbor_module);\n```\n\n## Usage\n\nThis library lets you inspect and parse CBOR data without having to allocate\nadditional memory.\n\n### Inspect CBOR data\n\nTo inspect CBOR data you must first create a new `DataItem`.\n\n```zig\nconst cbor = @import(\"zbor\");\n\nconst di = DataItem.new(\"\\x1b\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xff\") catch {\n    // handle the case that the given data is malformed\n};\n```\n\n`DataItem.new()` will check if the given data is well-formed before returning a `DataItem`. The data is well formed if it's syntactically correct. \n\nTo check the type of the given `DataItem` use the `getType()` function.\n\n```zig\nstd.debug.assert(di.getType() == .Int);\n```\n\nPossible types include `Int` (major type 0 and 1) `ByteString` (major type 2), `TextString` (major type 3), `Array` (major type 4), `Map` (major type 5), `Tagged` (major type 6) and `Float` (major type 7).\n\nBased on the given type you can the access the underlying value.\n\n```zig\nstd.debug.assert(di.int().? == 18446744073709551615);\n```\n\nAll getter functions return either a value or `null`. You can use a pattern like `if (di.int()) |v| v else return error.Oops;` to access the value in a safe way. If you've used `DataItem.new()` and know the type of the data item, you should be safe to just do `di.int().?`.\n\nThe following getter functions are supported:\n* `int` - returns `?i65`\n* `string` - returns `?[]const u8`\n* `array` - returns `?ArrayIterator`\n* `map` - returns `?MapIterator`\n* `simple` - returns `?u8`\n* `float` - returns `?f64`\n* `tagged` - returns `?Tag`\n* `boolean` - returns `?bool`\n\n#### Iterators\n\nThe functions `array` and `map` will return an iterator. Every time you\ncall `next()` you will either get a `DataItem`/ `Pair` or `null`.\n\n```zig\nconst di = DataItem.new(\"\\x98\\x19\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\x09\\x0a\\x0b\\x0c\\x0d\\x0e\\x0f\\x10\\x11\\x12\\x13\\x14\\x15\\x16\\x17\\x18\\x18\\x18\\x19\");\n\nvar iter = di.array().?;\nwhile (iter.next()) |value| {\n  _ = value;\n  // doe something\n}\n```\n\n### Encoding and decoding\n\n#### Serialization\n\nYou can serialize Zig objects into CBOR using the `stringify()` function.\n\n```zig\nconst allocator = std.testing.allocator;\nvar str = std.Io.Writer.Allocating.init(allocator);\ndefer str.deinit();\n\nconst Info = struct {\n    versions: []const []const u8,\n};\n\nconst i = Info{\n    .versions = &.{\"FIDO_2_0\"},\n};\n\ntry stringify(i, .{}, &str.writer);\n```\n\n> Note: Compile time floats are always encoded as single precision floats (f32). Please use `@floatCast`\n> before passing a float to `stringify()`.\n\nThe `stringify()` function is convenient but also adds extra overhead. If you want full control\nover the serialization process you can use the following functions defined in `zbor.build`: `writeInt`,\n`writeByteString`, `writeTextString`, `writeTag`, `writeSimple`, `writeArray`, `writeMap`. For more\ndetails check out the [manual serialization example](examples/manual_serialization.zig) and the\ncorresponding [source code](src/builder.zig).\n\n##### Stringify Options\n\nYou can pass options to the `stringify` function to influence its behavior. Without passing any\noptions, `stringify` will behave as follows:\n\n* Enums will be serialized to their textual representation\n* `u8` slices will be serialized to byte strings\n* For structs and unions:\n    * `null` fields are skipped by default\n    * fields of type `std.mem.Allocator` are always skipped.\n    * the names of fields are serialized to text strings\n\nYou can modify that behavior by changing the default options, e.g.:\n\n```zig\nconst EcdsaP256Key = struct {\n    /// kty:\n    kty: u8 = 2,\n    /// alg:\n    alg: i8 = -7,\n    /// crv:\n    crv: u8 = 1,\n    /// x-coordinate\n    x: [32]u8,\n    /// y-coordinate\n    y: [32]u8,\n\n    pub fn new(k: EcdsaP256.PublicKey) @This() {                                                                                                                                         \n        const xy = k.toUncompressedSec1();\n        return .{\n            .x = xy[1..33].*,\n            .y = xy[33..65].*,\n        };\n    }\n};\n\n//...\n\ntry stringify(k, .{ .field_settings = &.{\n    .{ .name = \"kty\", .field_options = .{ .alias = \"1\", .serialization_type = .Integer } },\n    .{ .name = \"alg\", .field_options = .{ .alias = \"3\", .serialization_type = .Integer } },\n    .{ .name = \"crv\", .field_options = .{ .alias = \"-1\", .serialization_type = .Integer } },\n    .{ .name = \"x\", .field_options = .{ .alias = \"-2\", .serialization_type = .Integer } },\n    .{ .name = \"y\", .field_options = .{ .alias = \"-3\", .serialization_type = .Integer } },\n} }, &str.writer);\n```\n\nHere we define a alias for every field of the struct and tell `serialize` that it should treat\nthose aliases as integers instead of text strings.\n\n__See `Options` and `FieldSettings` in `src/parse.zig` for all available options!__\n\n#### Deserialization\n\nYou can deserialize CBOR data into Zig objects using the `parse()` function.\n\n```zig\nconst e = [5]u8{ 1, 2, 3, 4, 5 };\nconst di = DataItem.new(\"\\x85\\x01\\x02\\x03\\x04\\x05\");\n\nconst x = try parse([5]u8, di, .{});\n\ntry std.testing.expectEqualSlices(u8, e[0..], x[0..]);\n```\n\n##### Parse Options\n\nYou can pass options to the `parse` function to influence its behaviour.\n\nThis includes:\n\n* `allocator` - The allocator to be used. This is required if your data type has any pointers, slices, etc.\n* `duplicate_field_behavior` - How to handle duplicate fields (`.UseFirst`, `.Error`).\n    * `.UseFirst` - Use the first field.\n    * `.Error` - Return an error if there are multiple fields with the same name.\n* `ignore_unknown_fields` - Ignore unknown fields (default is `true`).\n* `field_settings` - Lets you specify aliases for struct fields. Examples on how to use `field_settings` can be found in the _examples_ directory and within defined tests.\n* `ignore_override` - Flag to break infinity loops. This has to be set to `true` if you override the behavior using `cborParse` or `cborStringify`.\n\n#### Builder\n\nYou can also dynamically create CBOR data using the `Builder`.\n\n```zig\nconst allocator = std.testing.allocator;\n\nvar b = try Builder.withType(allocator, .Map);\ntry b.pushTextString(\"a\");\ntry b.pushInt(1);\ntry b.pushTextString(\"b\");\ntry b.enter(.Array);\ntry b.pushInt(2);\ntry b.pushInt(3);\n//try b.leave();            <-- you can leave out the return at the end\nconst x = try b.finish();\ndefer allocator.free(x);\n\n// { \"a\": 1, \"b\": [2, 3] }\ntry std.testing.expectEqualSlices(u8, \"\\xa2\\x61\\x61\\x01\\x61\\x62\\x82\\x02\\x03\", x);\n```\n\n##### Commands\n\n- The `push*` functions append a data item\n- The `enter` function takes a container type and pushes it on the builder stack\n- The `leave` function leaves the current container. The container is appended to the wrapping container\n- The `finish` function returns the CBOR data as owned slice\n\n#### Overriding stringify\n\nYou can override the `stringify` function for structs and tagged unions by implementing `cborStringify`.\n\n```zig\nconst Foo = struct {\n    x: u32 = 1234,\n    y: struct {\n        a: []const u8 = \"public-key\",\n        b: u64 = 0x1122334455667788,\n    },\n\n    pub fn cborStringify(self: *const @This(), options: Options, out: *std.Io.Writer) !void {\n\n        // First stringify the 'y' struct\n        const allocator = std.testing.allocator;\n        var o = std.Io.Writer.Allocating.init(allocator);\n        defer o.deinit();\n        try stringify(self.y, options, &o.writer);\n\n        // Then use the Builder to alter the CBOR output\n        var b = try build.Builder.withType(allocator, .Map);\n        try b.pushTextString(\"x\");\n        try b.pushInt(self.x);\n        try b.pushTextString(\"y\");\n        try b.pushByteString(o.written());\n        const x = try b.finish();\n        defer allocator.free(x);\n\n        try out.writeAll(x);\n    }\n};\n```\n\nThe `StringifyOptions` can be used to indirectly pass an `Allocator` to the function.\n\nPlease make sure to set `ignore_override` to `true` when calling recursively into `stringify(self)` to prevent infinite loops.\n\n#### Overriding parse\n\nYou can override the `parse` function for structs and tagged unions by implementing `cborParse`. This is helpful if you have aliases for your struct members.\n\n```zig\nconst EcdsaP256Key = struct {\n    /// kty:\n    kty: u8 = 2,\n    /// alg:\n    alg: i8 = -7,\n    /// crv:\n    crv: u8 = 1,\n    /// x-coordinate\n    x: [32]u8,\n    /// y-coordinate\n    y: [32]u8,\n\n    pub fn cborParse(item: DataItem, options: Options) !@This() {\n        _ = options;\n        return try parse(@This(), item, .{\n            .ignore_override = true, // prevent infinite loops\n            .field_settings = &.{\n                .{ .name = \"kty\", .field_options = .{ .alias = \"1\" } },\n                .{ .name = \"alg\", .field_options = .{ .alias = \"3\" } },\n                .{ .name = \"crv\", .field_options = .{ .alias = \"-1\" } },\n                .{ .name = \"x\", .field_options = .{ .alias = \"-2\" } },\n                .{ .name = \"y\", .field_options = .{ .alias = \"-3\" } },\n            },\n        });\n    }\n};\n```\n\nThe `Options` can be used to indirectly pass an `Allocator` to the function.\n\nPlease make sure to set `ignore_override` to `true` when calling recursively into `parse(self)` to prevent infinite loops.\n\n#### Structs with fields of type `std.mem.Allocator`\n\nIf you have a struct with a field of type `std.mem.Allocator` you have to override the `stringify` \nfuncation for that struct, e.g.:\n\n```zig\npub fn cborStringify(self: *const @This(), options: cbor.StringifyOptions, out: *std.Io.Writer) !void {\n    _ = options;\n\n    try cbor.stringify(self, .{\n        .ignore_override = true,\n        .field_settings = &.{\n            .{ .name = \"allocator\", .options = .{ .skip = true } },\n        },\n    }, out);\n}\n```\n\nWhen using `parse` make sure you pass a allocator to the function. The passed allocator will be assigned\nto the field of type `std.mem.Allocator`.\n\n#### Indefinite-length Data Items\n\nCBOR supports the serialization of many container types in two formats, definite and indefinite. For definite-length data items, the length is directly encoded into the data-items header. In contrast, indefinite-length data items are terminated by a break-byte `0xff`.\n\nZbor currently supports indefinite-length encoding for both arrays and maps. The default serialization type for both types remains definite to support backwards compatibility. One can control the serialization type for arrays and maps via the serialization options. The two fields in question are `array_serialization_type` and `map_serialization_type`.\n\n##### Indefinite-length Arrays\n\nThis is an example for serializing a array as indefinite-length map:\n```zig\nconst array = [_]u16{ 500, 2 };\n\nvar arr = std.Io.Writer.Allocating.init(allocator);\ndefer arr.deinit();\n\ntry stringify(\n    array,\n    .{\n        .allocator = allocator,\n        .array_serialization_type = .ArrayIndefinite,\n    },\n    &arr.writer,\n);\n```\n\nFor the de-serialization of indefinite-length arrays you don't have to do anything special. The `parse` function will automatically detect the encoding type for you.\n\n##### Indefinite-length Maps\n\nThis is an example for serializing a struct as indefinite-length map:\n```zig\nconst allocator = std.testing.allocator;\n\nconst S = struct {\n    Fun: bool,\n    Amt: i16,\n};\n\nconst s = S{\n    .Fun = true,\n    .Amt = -2,\n};\n\nvar arr = std.Io.Writer.Allocating.init(allocator);\ndefer arr.deinit();\n\ntry stringify(\n    s,\n    .{\n        .allocator = allocator,\n        .map_serialization_type = .MapIndefinite,\n    },\n    &arr.writer,\n);\n```\n\nFor the de-serialization of indefinite-length maps you don't have to do anything special. The `parse` function will automatically detect the encoding type for you.\n\n### ArrayBackedSlice\n\nThis library offers a convenient function named ArrayBackedSlice, which enables you to create a wrapper for an array of any size and type. This wrapper implements the cborStringify and cborParse methods, allowing it to seamlessly replace slices (e.g., []const u8) with an array.\n\n```zig\ntest \"ArrayBackedSlice test\" {\n    const allocator = std.testing.allocator;\n\n    const S64B = ArrayBackedSlice(64, u8, .Byte);\n    var x = S64B{};\n    try x.set(\"\\x01\\x02\\x03\\x04\");\n\n    var str = std.Io.Writer.Allocating.init(allocator);\n    defer str.deinit();\n\n    try stringify(x, .{}, &str.writer);\n    try std.testing.expectEqualSlices(u8, \"\\x44\\x01\\x02\\x03\\x04\", str.written());\n\n    const di = try DataItem.new(str.written());\n    const y = try parse(S64B, di, .{});\n\n    try std.testing.expectEqualSlices(u8, \"\\x01\\x02\\x03\\x04\", y.get());\n}\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/25912761?u=03c61d1386a1628b528c35971c59d99c0c5ee8b2&v=4",
+  "releases": [
+    {
+      "tag_name": "0.20.1",
+      "name": "0.20.1",
+      "body": "Minor extension:\r\n\r\n- Added `BufferTooSmall` to `StringifyError`",
+      "prerelease": false,
+      "published_at": "2025-09-15T21:41:36Z",
+      "html_url": "https://github.com/r4gus/zbor/releases/tag/0.20.1",
+      "assets": []
+    },
+    {
+      "tag_name": "0.20.0",
+      "name": "0.20.0",
+      "body": "This release introduces **BREAKING CHANGES** due to Writergate.\r\n\r\n- Replaced `std.ArrayList(u8)` with `std.Io.Writer.Allocating`\r\n- Replaced `std.ArrayList(N)` with `std.ArrayListUnmanaged`\r\n- The writer used by `stringify` is no longer `anytype` but `*std.Io.Writer`",
+      "prerelease": false,
+      "published_at": "2025-08-24T11:00:35Z",
+      "html_url": "https://github.com/r4gus/zbor/releases/tag/0.20.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.19.0",
+      "name": "0.19.0",
+      "body": "Updated package to support Zig compiler version [0.15.1](https://ziglang.org/download/0.15.1/release-notes.html)",
+      "prerelease": false,
+      "published_at": "2025-08-23T18:11:15Z",
+      "html_url": "https://github.com/r4gus/zbor/releases/tag/0.19.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.18.0",
+      "name": "0.18.0",
+      "body": "## What's Changed\r\n* Support indefinite-length arrays by @emiflake in https://github.com/r4gus/zbor/pull/29\r\n* Support indefinite-length maps\r\n\r\n## New Contributors\r\n* @emiflake made their first contribution in https://github.com/r4gus/zbor/pull/29\r\n\r\n**Full Changelog**: https://github.com/r4gus/zbor/compare/0.17.3...0.18.0",
+      "prerelease": false,
+      "published_at": "2025-06-15T09:51:47Z",
+      "html_url": "https://github.com/r4gus/zbor/releases/tag/0.18.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.17.3",
+      "name": "0.17.3",
+      "body": "## What's Changed\r\n* Changed the build.zig filename to builder.zig. The zig buildrunner in… by @Thomvanoorschot in https://github.com/r4gus/zbor/pull/28\r\n\r\n## New Contributors\r\n* @Thomvanoorschot made their first contribution in https://github.com/r4gus/zbor/pull/28\r\n\r\n**Full Changelog**: https://github.com/r4gus/zbor/compare/0.17.2...0.17.3",
+      "prerelease": false,
+      "published_at": "2025-05-12T09:14:18Z",
+      "html_url": "https://github.com/r4gus/zbor/releases/tag/0.17.3",
+      "assets": []
+    },
+    {
+      "tag_name": "0.17.2",
+      "name": "0.17.2",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-03-30T21:47:06Z",
+      "html_url": "https://github.com/r4gus/zbor/releases/tag/0.17.2",
+      "assets": []
+    },
+    {
+      "tag_name": "0.17.1",
+      "name": "0.17.1",
+      "body": "Support for a wider range of `Writer`s thanks to @kj4tmp.",
+      "prerelease": false,
+      "published_at": "2025-03-25T10:52:32Z",
+      "html_url": "https://github.com/r4gus/zbor/releases/tag/0.17.1",
+      "assets": []
+    },
+    {
+      "tag_name": "0.17.0",
+      "name": "0.17.0",
+      "body": "* The option `from_callback` has been renamed to `ignore_override`. This is a __breaking change__!\r\n* `build.zig` and `build.zig.zon` have been updated for Zig v0.14.0\r\n\r\nUse this release in you project:\r\n\r\n```bash\r\nzig fetch --save https://github.com/r4gus/zbor/archive/refs/tags/0.17.0.tar.gz\r\n```",
+      "prerelease": false,
+      "published_at": "2025-03-10T09:57:46Z",
+      "html_url": "https://github.com/r4gus/zbor/releases/tag/0.17.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.16.0",
+      "name": "0.16.0",
+      "body": "Supports Zig version 0.14.0 (to be released soon)",
+      "prerelease": false,
+      "published_at": "2025-01-26T12:13:14Z",
+      "html_url": "https://github.com/r4gus/zbor/releases/tag/0.16.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.15.2",
+      "name": "0.15.2",
+      "body": "Added `build.writeFloat()` and `isFloat16` `isFloat32`, `isFloat64`, `getFloat16`, `getFloat32`, and `getFloat64`.",
+      "prerelease": false,
+      "published_at": "2024-08-04T13:02:20Z",
+      "html_url": "https://github.com/r4gus/zbor/releases/tag/0.15.2",
+      "assets": []
+    },
+    {
+      "tag_name": "0.15.1",
+      "name": "0.15.1",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-08-04T08:18:30Z",
+      "html_url": "https://github.com/r4gus/zbor/releases/tag/0.15.1",
+      "assets": []
+    },
+    {
+      "tag_name": "0.15.0",
+      "name": "0.15.0",
+      "body": "Tracking Zig 0.13.0\r\n\r\nHash: `12209a78f8c31b6d65d2249082dc824da4a191f6f7be6a1c1740fc093b765c5ebeea`",
+      "prerelease": false,
+      "published_at": "2024-07-04T13:10:16Z",
+      "html_url": "https://github.com/r4gus/zbor/releases/tag/0.15.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.14.1",
+      "name": "",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-06-08T20:33:45Z",
+      "html_url": "https://github.com/r4gus/zbor/releases/tag/0.14.1",
+      "assets": []
+    },
+    {
+      "tag_name": "0.14.0",
+      "name": "0.14.0",
+      "body": "This library now offers a convenient function named ArrayBackedSlice, which enables you to create a wrapper for an array of any size and type. This wrapper implements the cborStringify and cborParse methods, allowing it to seamlessly replace slices (e.g., []const u8) with an array.",
+      "prerelease": false,
+      "published_at": "2024-05-20T12:34:36Z",
+      "html_url": "https://github.com/r4gus/zbor/releases/tag/0.14.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.13.1",
+      "name": "0.13.1",
+      "body": "More support for manual serialization.\r\n\r\n`zig.build.zon`:\r\n```zig\r\n.dependencies = .{\r\n        .zbor = .{\r\n            .url = \"https://github.com/r4gus/zbor/archive/refs/tags/0.13.1.tar.gz\",\r\n            .hash = \"122051750f4d7ecc9b705f1bbea1d431956306c74dafa4e9b625b11a34fab4c06933\",\r\n        },\r\n},\r\n```",
+      "prerelease": false,
+      "published_at": "2024-04-21T14:35:32Z",
+      "html_url": "https://github.com/r4gus/zbor/releases/tag/0.13.1",
+      "assets": []
+    },
+    {
+      "tag_name": "0.13.0",
+      "name": "0.13.0",
+      "body": "Migrated from Zig 0.11.0 to [0.12.0](https://ziglang.org/download/0.12.0/release-notes.html).",
+      "prerelease": false,
+      "published_at": "2024-04-20T23:14:45Z",
+      "html_url": "https://github.com/r4gus/zbor/releases/tag/0.13.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.12.3",
+      "name": "0.12.3",
+      "body": "two bug fixes.\r\n\r\nUse this to get started:\r\n\r\n```zig\r\n// build.zig.zon\r\n.{\r\n    .name = \"your-project\",\r\n    .version = \"0.1.0\",\r\n\r\n    .dependencies = .{\r\n        .zbor = .{\r\n            .url = \"https://github.com/r4gus/zbor/archive/refs/tags/0.12.3.tar.gz\",\r\n            .hash = \"1220bbea0285a5d555320b00dde5ced378254c8be144d155d8f886ab4a4e9a855881\", \r\n        },\r\n    },\r\n}\r\n```",
+      "prerelease": false,
+      "published_at": "2024-01-20T18:20:50Z",
+      "html_url": "https://github.com/r4gus/zbor/releases/tag/0.12.3",
+      "assets": []
+    },
+    {
+      "tag_name": "0.12.2",
+      "name": "",
+      "body": "```zig\r\n// build.zig.zon\r\n.{\r\n    .name = \"your-project\",\r\n    .version = \"0.1.0\",\r\n\r\n    .dependencies = .{\r\n        .zbor = .{\r\n            .url = \"https://github.com/r4gus/zbor/archive/refs/tags/0.12.2.tar.gz\",\r\n            .hash = \"12206bbb8acbd91940b4e4d5cc2b3ea9c889de0f15b696cacb46c9208dcaa83bf8a6\",\r\n        },\r\n    },\r\n}\r\n```",
+      "prerelease": false,
+      "published_at": "2023-12-03T12:48:35Z",
+      "html_url": "https://github.com/r4gus/zbor/releases/tag/0.12.2",
+      "assets": []
+    },
+    {
+      "tag_name": "0.12.1",
+      "name": "",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2023-12-03T12:18:46Z",
+      "html_url": "https://github.com/r4gus/zbor/releases/tag/0.12.1",
+      "assets": []
+    },
+    {
+      "tag_name": "0.12.0",
+      "name": "",
+      "body": "This introduces breaking changes as the default behavior for `stringify` has slightly changed:\r\n\r\n* Enums will be serialized to their textual representation\r\n* `u8` slices will be serialized to byte strings\r\n* For structs and unions:\r\n    * `null` fields are skipped by default\r\n    * fields of type `std.mem.Allocator` are always skipped.\r\n    * the names of fields are serialized to text strings (you have to explicitly tell `stringify` to treat the name of a field as integer)\r\n\r\nAlso, `stringify` and `parse` now use the same `Options`.",
+      "prerelease": false,
+      "published_at": "2023-12-03T11:15:18Z",
+      "html_url": "https://github.com/r4gus/zbor/releases/tag/0.12.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Maybe we meet @ Zigtoberfest (https://zigtoberfest.de) or Software You Can Love (https://softwareyoucan.love)",
+  "owner_company": null,
+  "owner_location": "Germany",
+  "owner_blog": "https://zigtoberfest.de",
+  "owner_twitter_username": null,
+  "owner_followers": 57,
+  "owner_following": 27,
+  "owner_created_at": "2017-02-20T22:05:23Z",
+  "license": "MIT",
+  "category": "library"
+}

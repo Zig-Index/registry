@@ -1,0 +1,33 @@
+{
+  "name": "mini-parser",
+  "owner": "Operachi061",
+  "repo": "mini-parser",
+  "description": "A very-minimal command-line parser",
+  "type": "project",
+  "topics": [
+    "argument-parsing",
+    "command-line",
+    "command-line-parser",
+    "minimal",
+    "zig",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 20,
+  "forks": 0,
+  "watchers": 2,
+  "updated_at": "2025-07-28T20:59:32Z",
+  "minimum_zig_version": "0.15.0-dev.208+8acedfd5b",
+  "readme": "# mini-parser\nmini-parser is a very-minimal parser for the [Zig](https://ziglang.org) language.\n\n## Example\n```zig\nconst std = @import(\"std\");\nconst mini_parser = @import(\"mini-parser\");\nconst debug = std.debug;\nconst posix = std.posix;\n\nconst usage =\n    \\\\Usage: example [OPTIONS]\n    \\\\\n    \\\\Options:\n    \\\\  --help,       -h    Display help list\n    \\\\  --text=TEXT,  -t    Print the text\n    \\\\  --bool,       -b    Enable the boolean\n    \\\\\n;\n\npub fn main() !void {\n    var i: usize = 0;\n    while (std.os.argv.len > i) : (i += 1) {\n        var args: usize = 1;\n\n        blk: while (true) {\n            const parser = try mini_parser.init(i, args, &.{\n                .{ .long = \"help\", .short = 'h', .type = .boolean },\n                .{ .long = \"text\", .short = 't', .type = .argument },\n                .{ .long = \"bool\", .short = 'b', .type = .boolean },\n            });\n\n            switch (parser.arg) {\n                0 => {\n                    debug.print(\"no argument was given.\\n\", .{});\n                    posix.exit(0);\n                },\n                1 => {\n                    debug.print(\"argument '{s}' does not exist.\\n\", .{parser.val});\n                    posix.exit(0);\n                },\n                'h' => {\n                    debug.print(\"{s}\\n\", .{usage});\n                    posix.exit(0);\n                },\n                't' => {\n                    debug.print(\"Text: {s}\\n\", .{parser.val});\n                },\n                'b' => {\n                    debug.print(\"Enabled boolean!\\n\", .{});\n                },\n                else => {},\n            }\n\n            if (args != parser.args) {\n                args = parser.args;\n                continue :blk;\n            }\n\n            break;\n        }\n    }\n}\n```\n\n## Installation\n\nFetch mini-parser package to `build.zig.zon`:\n```sh\nzig fetch --save git+https://github.com/Operachi061/mini-parser\n```\n\nThen add following to `build.zig`:\n```zig\nconst mini_parser = b.dependency(\"mini_parser\", .{});\nexe.root_module.addImport(\"mini-parser\", mini_parser.module(\"mini-parser\"));\n```\n\nAfter building, test it via:\n```sh\n./example -tb foo --help\n```\n\n## Unlicense\nThis project is based on the [UNLICENSE](https://github.com/Operachi061/mini-parser/blob/main/UNLICENSE).\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/81317803?u=0f34298f825510e10b07ba9102fbe7ee5e1a8075&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "bartlomiej_litwin.codeberg.page",
+  "owner_twitter_username": null,
+  "owner_followers": 5,
+  "owner_following": 16,
+  "owner_created_at": "2021-03-24T15:49:14Z",
+  "license": "Unlicense",
+  "category": "library"
+}

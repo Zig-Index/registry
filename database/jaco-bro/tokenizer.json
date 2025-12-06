@@ -1,0 +1,67 @@
+{
+  "name": "tokenizer",
+  "owner": "jaco-bro",
+  "repo": "tokenizer",
+  "description": "BPE tokenizer for LLMs in Pure Zig",
+  "type": "project",
+  "topics": [
+    "bpe-tokenizer",
+    "pcre2",
+    "regex",
+    "tokenizer",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 5,
+  "forks": 3,
+  "watchers": 4,
+  "updated_at": "2025-09-10T20:08:12Z",
+  "dependencies": [
+    {
+      "name": "pcre2",
+      "url": "https://github.com/PCRE2Project/pcre2/archive/refs/tags/pcre2-10.45.tar.gz",
+      "hash": "1220c927731a4b31f5ebf8b4f33f0efe6fa1561cdcf026f39cbee512e08ad24fb785"
+    }
+  ],
+  "readme": "# Tokenizer\nBPE tokenizer implemented entirely in Zig.\n\nExample integration with LLMs at [nnx-lm](https://pypi.org/project/nnx-lm).\n\n## Requirement\nzig v0.13.0\n\n## Install\n```bash\ngit clone https://github.com/jaco-bro/tokenizer\ncd tokenizer\nzig build exe --release=fast\n```\n\n## Usage\n- `zig-out/bin/tokenizer_exe [--model MODEL_NAME] COMMAND INPUT` \n- `zig build run -- [--model MODEL_NAME] COMMAND INPUT` \n\n```bash\nzig build run -- --encode \"hello world\"\nzig build run -- --decode \"{14990, 1879}\"\nzig build run -- --model \"phi-4-4bit\" --encode \"hello world\"\nzig build run -- --model \"phi-4-4bit\" --decode \"15339 1917\"\n```\n\n## Python (optional)\nTokenizer is also pip-installable for use from Python:\n```bash\npip install tokenizerz\npython\n```\n\nUsage:\n```python\n>>> import tokenizerz\n>>> tokenizer = tokenizerz.Tokenizer()\nDirectory 'Qwen2.5-Coder-0.5B' created successfully.\nDL% UL%  Dled  Uled  Xfers  Live Total     Current  Left    Speed\n100 --  6866k     0     1     0   0:00:01  0:00:01 --:--:-- 4904k\nDownload successful.\n>>> tokens = tokenizer.encode(\"Hello, world!\")\n>>> print(tokens)\n[9707, 11, 1879, 0]\n>>> tokenizer.decode(tokens)\n'Hello, world!'\n```\n\nShell:\n```bash\nbpe --encode \"hello world\"\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/201527030?u=a4a8eb095cb003fc096a6f0c5e1b83b6d2317d65&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.0.2",
+      "name": "BPE tokenizer in pure Zig, with a Python API.",
+      "body": "See it in action at [nnx-lm](https://github.com/jaco-bro/nnx-lm)!",
+      "prerelease": false,
+      "published_at": "2025-05-09T21:29:03Z",
+      "html_url": "https://github.com/jaco-bro/tokenizer/releases/tag/v0.0.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.2-alpha",
+      "name": "pip install tokenizerz==0.0.1",
+      "body": "A minimal BPE tokenizer written in Zig, now available as a Python package via `pip install`.  \r\n\r\n**Key Features**:  \r\n- Zig-native implementation with PCRE2 regex support (compiled during `pip install` using [ziglang](https://pypi.org/project/ziglang/0.13.0.post1/)).  \r\n- Python API: Simple `encode()`/`decode()` interface and CLI tool (`bpe --encode/decode`).  \r\n- Supports both tiktoken and huggingface models.\r\n\r\n**Install**:  \r\n```bash  \r\npip install tokenizerz==0.0.1\r\n```  \r\n\r\n**Usage**:  \r\n```python  \r\nimport tokenizerz  \r\ntokens = tokenizerz.encode(\"Hello, world!\")  # [9707, 11, 1879, 0]  \r\ntext = tokenizerz.decode(tokens)             # \"Hello, world!\"  \r\n```  ",
+      "prerelease": false,
+      "published_at": "2025-04-20T06:48:05Z",
+      "html_url": "https://github.com/jaco-bro/tokenizer/releases/tag/v0.0.2-alpha",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.1",
+      "name": "BPE tokenizer in zig",
+      "body": "Works.",
+      "prerelease": false,
+      "published_at": "2025-04-19T04:38:47Z",
+      "html_url": "https://github.com/jaco-bro/tokenizer/releases/tag/v0.0.1",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "https://jaco-bro.github.io/blog",
+  "owner_twitter_username": null,
+  "owner_followers": 9,
+  "owner_following": 28,
+  "owner_created_at": "2025-03-03T03:49:47Z",
+  "homepage": "https://github.com/jaco-bro/nnx-lm",
+  "license": "Apache-2.0",
+  "category": "library"
+}

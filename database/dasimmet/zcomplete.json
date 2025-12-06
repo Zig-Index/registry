@@ -1,0 +1,51 @@
+{
+  "name": "zcomplete",
+  "owner": "dasimmet",
+  "repo": "zcomplete",
+  "description": "a python argcomplete inspired completion engine for zig-clap",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-09-28T08:59:11Z",
+  "dependencies": [
+    {
+      "name": "known_folders",
+      "url": "git+https://github.com/ziglibs/known-folders.git#ab5cf5feb936fa3b72c95d3ad0c0c67791937ba1",
+      "hash": "known_folders-0.0.0-Fy-PJtTTAADUOhGKM0sxzG4eMkNQxRvx9e5dfHVyaeA3"
+    },
+    {
+      "name": "zware",
+      "url": "git+https://github.com/dasimmet/zware.git#26811b4ace2da008692a50c57890c947fe3471a0",
+      "hash": "zware-0.0.1-ZA7j6bDqBAASgfb2NNKprRccSGh4vhNeV9M5o0iC5TSa"
+    },
+    {
+      "name": "clap",
+      "url": "git+https://github.com/Hejsil/zig-clap.git#5289e0753cd274d65344bef1c114284c633536ea",
+      "hash": "clap-0.11.0-oBajB-HnAQDPCKYzwF7rO3qDFwRcD39Q0DALlTSz5H7e"
+    },
+    {
+      "name": "bytebox",
+      "url": "git+https://github.com/rdunnington/bytebox.git#5c8753ba11c394e4d642dddbb459edcd7c97ac26",
+      "hash": "bytebox-0.0.1-SXc2seA2DwAUHbrqTMz_mAQQGqO0EVPYmZ89YZn4KsTi"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# zcomplete\n\na python argcomplete inspired shell completion engine for zig argument parsers.\n\nTraditionally, [bash-completion](https://github.com/scop/bash-completion/)\nworks by command line programs shipping their own `bash` code to handle\nsuggestions when users type the command and hit `<TAB>` on the keyboard.\n\nSince these scripts are:\n\n- `bash` specific\n- maintained separately from the binary and might not match the behaviour\n  of it.\n\nZcomplete instead works like this:\n\n- Generate a separate `.wasm` version of your program's argument parser\n- embed the `.wasm` in a special `zcomplete.wasm` ELF section using a linker script\n- provides a generic tool called `zcomp` that needs to be installed in `PATH`\n  once, along with a simple `zcomplete.bash` completion script.\n- when pressing `<TAB>` in bash, `zcomp` will try to \n  extract and instanciate the `zcomplete.wasm` section with a [Webassembly Runtime](https://github.com/malcolmstill/zware),\n  then pass in the current command line and the current arg to be completed.\n- evaluate the response and generate bash completion\n- SUCCESS!\n\n## Zcomplete vs argcomplete\n\nPython's [argcomplete](https://pypi.org/project/argcomplete/) works\nby running the actual python script until the `argparse` instance is created,\nand uses the contained info to generate the completion suggestions.\nIt's main shortcomings are:\n\n- needs to run the actual python script. We cannot do that on a native binary\n  safely. It uses a `PYTHON_ARGCOMPLETE_OK` magic string to determine a\n  script's eligibility for completion.\n- May take longer than bearable by users on each `<TAB>` press,\n  since starting python and reading all source code is slow.\n\n## TODOs\n\nThis project is in a Proof-of-concept stage. It barely generates \nuseful completion for itself.\n\n### Support other shells than `bash`\n\n- [`zsh`](https://github.com/zsh-users/zsh-completions)\n- [`fish`](https://fishshell.com/docs/current/completions.html)\n- [`powershell`](https://learn.microsoft.com/en-us/powershell/scripting/learn/shell/tab-completion?view=powershell-7.5)\n\n### Povide completion for file paths in the filesystem\n\n- Offer a way for `.wasm` to query filesystem files?\n- report back valid extensions or magic numbers from `.wasm` to `zcomp`?\n\n### Alternatives if embedding in ELF is not an option.\n\n- Embedded Windows Resource files?\n- MachO?\n- Support `.wasm` separate from the binary?\n  This needs a reasonably fast way of associating a binary and the `.wasm`.\n  Optionally, a single `.wasm` core could serve completions for multiple\n  binaries, like and `zcomplete` could use the `.wasm` files like a plugin system.\n\n### make a non-mvp target it work with zig master\n\nat the moment we set an explicit generic target (which means only `mvp`\nwasm features are on):\n\n```zig\n.target = b.resolveTargetQuery(.{\n    .cpu_arch = .wasm32,\n    .os_tag = .freestanding,\n    .abi = .none,\n    .cpu_model = .{\n        .explicit = std.Target.Cpu.Model.generic(.wasm32),\n    },\n}),\n```\n\nzware works always with 0.14.0, on master with only `wasm32-freestanding`\nit fails. Maybe only `mvp` wasm32 should be supported, but this is the\nerror:\n\n```\nerror: ValidatorCallIndirectNoTable\n/home/dasimmet/.cache/zig/p/zware-0.0.1-ZA7j6X3jBABhBIltmAF9N6OP7VTsgFP3O1xPkgiaCY_t/src/module/parser.zig:384:68: 0x11c7aec in next (zcomp)\n                if (tableidx >= self.module.tables.list.items.len) return error.ValidatorCallIndirectNoTable;\n                                                                   ^\n/home/dasimmet/.cache/zig/p/zware-0.0.1-ZA7j6X3jBABhBIltmAF9N6OP7VTsgFP3O1xPkgiaCY_t/src/module/parser.zig:63:16: 0x11d9292 in parseFunction (zcomp)\n        while (try self.next()) |instr| {\n               ^\n/home/dasimmet/.cache/zig/p/zware-0.0.1-ZA7j6X3jBABhBIltmAF9N6OP7VTsgFP3O1xPkgiaCY_t/src/module.zig:798:9: 0x11d973a in readFunction (zcomp)\n        return parser.parseFunction(funcidx, locals, code);\n        ^\n/home/dasimmet/.cache/zig/p/zware-0.0.1-ZA7j6X3jBABhBIltmAF9N6OP7VTsgFP3O1xPkgiaCY_t/src/module.zig:686:33: 0x11d9e27 in decodeCodeSection (zcomp)\n            const parsed_code = try self.readFunction(module, locals, function_index_start + i);\n                                ^\n/home/dasimmet/.cache/zig/p/zware-0.0.1-ZA7j6X3jBABhBIltmAF9N6OP7VTsgFP3O1xPkgiaCY_t/src/module.zig:174:22: 0x11dade0 in decodeSection (zcomp)\n            .Code => try self.decodeCodeSection(module),\n                     ^\n/home/dasimmet/.cache/zig/p/zware-0.0.1-ZA7j6X3jBABhBIltmAF9N6OP7VTsgFP3O1xPkgiaCY_t/src/module.zig:106:25: 0x11dba05 in decode (zcomp)\n                else => return err,\n                        ^\n/home/dasimmet/repos/zig/zcomplete/src/zcomp.zig:69:5: 0x11fc840 in complete (zcomp)\n    try module.decode();\n    ^\n\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/2773256?u=609e5b7eac1f972a0854a240741c5c8deca85518&v=4",
+  "releases": [],
+  "owner_bio": "@ziglang enthusiast",
+  "owner_company": "ANNAX GmbH",
+  "owner_location": "Munich, Germany",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 7,
+  "owner_following": 4,
+  "owner_created_at": "2012-11-11T19:52:46Z",
+  "license": "MIT",
+  "category": "library"
+}

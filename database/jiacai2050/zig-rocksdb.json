@@ -1,0 +1,59 @@
+{
+  "name": "zig-rocksdb",
+  "owner": "jiacai2050",
+  "repo": "zig-rocksdb",
+  "description": "RocksDB binding for Zig",
+  "type": "project",
+  "topics": [
+    "rocksdb",
+    "zig",
+    "zig-lib",
+    "zig-library",
+    "zig-package",
+    "rocksdb-zig"
+  ],
+  "stars": 6,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-12-04T09:06:27Z",
+  "dependencies": [
+    {
+      "name": "rocksdb",
+      "url": "https://github.com/facebook/rocksdb/archive/refs/tags/v9.0.0.zip",
+      "hash": "N-V-__8AAFP4XwK9j5T9X8qzIforQz8PabM9avP8XMVI3dp5"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/3848910?u=60f91a765c4ad95cb3a5a5b41d19ca12ee71a65d&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "## What's Changed\r\n* feat: Update CI workflows to use Zig 0.14 and refresh dependencies by @jiacai2050 in https://github.com/jiacai2050/zig-rocksdb/pull/3\r\n* fix: support Zig 0.15 by @jiacai2050 in https://github.com/jiacai2050/zig-rocksdb/pull/4\r\n\r\n\r\n**Full Changelog**: https://github.com/jiacai2050/zig-rocksdb/compare/v0.1.0...v0.2.0",
+      "prerelease": false,
+      "published_at": "2025-09-20T07:12:12Z",
+      "html_url": "https://github.com/jiacai2050/zig-rocksdb/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-10-27T14:35:46Z",
+      "html_url": "https://github.com/jiacai2050/zig-rocksdb/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Rust developer at day and Zig at night.\r\n\r\n\r\nHost of @EmacsTalk and @RustTalk.\r\n",
+  "owner_company": "@zigcc",
+  "owner_location": "/home/mars",
+  "owner_blog": "https://en.liujiacai.net/",
+  "owner_twitter_username": "liujiacai",
+  "owner_followers": 1017,
+  "owner_following": 125,
+  "owner_created_at": "2013-03-13T01:33:15Z",
+  "homepage": "https://jiacai2050.github.io/zig-rocksdb/",
+  "license": "MIT",
+  "category": "library"
+}

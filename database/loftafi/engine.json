@@ -1,0 +1,49 @@
+{
+  "name": "engine",
+  "owner": "loftafi",
+  "repo": "engine",
+  "description": "A simple GUI wrapper for building cross platform GUI apps.",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-12-02T05:02:09Z",
+  "dependencies": [
+    {
+      "name": "sdl",
+      "url": "git+https://github.com/castholm/SDL.git#f103a1439670c35be756d4491b296a6e3ccffaed",
+      "hash": "sdl-0.3.2+3.2.26-7uIn9BNgfwHaS0qXiSIBLkJf8Jfrh5P6gSWdQvtnvxEp"
+    },
+    {
+      "name": "sdl_ttf",
+      "url": "git+https://github.com/loftafi/SDL_ttf.git#119d2eec127c4ca9de159939c95f5f3b55794155",
+      "hash": "sdl_ttf-3.2.26-9xyaiOgVBwA6HIB5v3N8mf-hRpDwexBaJ2vFckQeqZNH"
+    },
+    {
+      "name": "zigimg",
+      "url": "git+https://github.com/zigimg/zigimg.git#f5783e87627cbd9e0b45fad112e9f73503914f36",
+      "hash": "zigimg-0.1.0-8_eo2vBrFQBhsrLpexdcDQY-zrlzkyFZfKuYX-Nry6KN"
+    },
+    {
+      "name": "resources",
+      "url": "git+https://github.com/loftafi/resources.git#09fe6e0dd0fec98096cd63fba15286e3441359d2",
+      "hash": "resources-0.4.0-J0GwIySNAQBvdKL1b7tFxAq7qevZ0CCdIuRkjom8Qnsv"
+    }
+  ],
+  "minimum_zig_version": "0.15.2",
+  "readme": "# Engine\n\nThis zig module provides a lightweight GUI api based around SDL3\nand SDL3 TTF.\n\nThis code is released under the terms of the MIT license. This\ncode is useful for my purposes. No warrantee is given or implied\nthat this library will be suitable for your purpose and no warantee\nis given or implied that this code is free from defects.\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/199742861?u=f3dc58206cc40c5e6ef5f95258d934e8a11f9e69&v=4",
+  "releases": [],
+  "owner_bio": "Go • Zig • Rust",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 2,
+  "owner_following": 2,
+  "owner_created_at": "2025-02-18T09:25:35Z",
+  "category": "library"
+}

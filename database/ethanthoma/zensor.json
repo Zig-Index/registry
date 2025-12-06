@@ -1,0 +1,31 @@
+{
+  "name": "zensor",
+  "owner": "ethanthoma",
+  "repo": "zensor",
+  "description": "Zig tensor library",
+  "type": "project",
+  "topics": [
+    "machine-learning",
+    "tensor",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 22,
+  "forks": 0,
+  "watchers": 2,
+  "updated_at": "2025-12-05T19:18:36Z",
+  "minimum_zig_version": "0.14.0",
+  "readme": "<h3 align=\"center\">\n    Zensor, a zig tensor library\n</h3>\n\nA zig tensor library. Correctness first, speed second.\n\nThis library promises compile-time type and shape checking.\n\n**Very WIP**\n\n## Example Usage:\n```zig \nconst std = @import(\"std\");\n\nconst T = u32;\nconst Tensor = @import(\"zensor\").Tensor(T);\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    const allocator = gpa.allocator();\n\n    var compiler = zensor.Compiler.init(allocator);\n    defer compiler.deinit();\n\n    const filename = \"./examples/numpy.npy\";\n\n    const a = try zensor.Tensor(.Int64, .{3}).from_numpy(&compiler, filename);\n\n    const b = try zensor.Tensor(.Int64, .{3}).full(&compiler, 4);\n\n    const c = try a.mul(b);\n\n    const d = try c.sum(0);\n\n    std.debug.print(\"{}\\n\", .{d});\n}\n```\n\nResults in:\n```\n❯ zig build run\nTensor(\n        type: dtypes.Int64,\n        shape: [1],\n        length: 1,\n        data: [56, ]\n)\n```\n\n## Install\n\nFetch the library:\n```bash\nzig fetch --save git+https://github.com/ethanthoma/zensor.git#main\n```\n\nAdd to your `build.zig`:\n```zig\n    const zensor = b.dependency(\"zensor\", .{\n        .target = target,\n        .optimize = optimize,\n    }).module(\"zensor\");\n    exe.root_module.addImport(\"zensor\", zensor);\n```\n\n## Examples\n\nExamples can be found in `./examples`. You can run these via:\n```bash\nzig build NAME_OF_EXAMPLE\n```\nAssuming you have cloned the source.\n\n## Tests\n\nIf you want to run the tests after cloning the source. Simply run:\n```bash\nzig build test\n```\n\n## Design\n\nLet's take an example op:\n```zig\nconst a = try zensor.Tensor(.Int64, .{3}).from_numpy(&compiler, filename); // [ 1, 4, 9 ]\n\nconst b = try zensor.Tensor(.Int64, .{3}).full(&compiler, 4); // [ 4, 4, 4 ]\n\nconst c = try a.mul(b); // [ 4, 16, 36 ]\n\nstd.debug.print(\"C = A.mul(B) = {}\\n\", .{c});\n```\n\nThis library converts all tensor operations into an AST:\n```\n0 Store RuntimeBuffer(ptr=@139636592083200, dtype=dtypes.Int64, shape={ 3 })\n1 ┗━Mul\n2   ┣━Load RuntimeBuffer(ptr=@139636592082944, dtype=dtypes.Int64, shape={ 3 })\n3   ┗━Const 4\n```\n\nWhen you want to execute your operations, like when you `print` the tensor or `realize` it,\nthe AST is split into schedules:\n```\nSchedule{\n        status: NotRun\n        topological sort: [4]ast.Nodes{Load, Const, Mul, Store},\n        global buffers: [(0, true), (1, false)],\n        dependencies count: 0,\n        AST:\n        0 Store RuntimeBuffer(ptr=@139636592083200, dtype=dtypes.Int64, shape={ 3 })\n        1 ┗━Mul\n        2   ┣━Load RuntimeBuffer(ptr=@139636592082944, dtype=dtypes.Int64, shape={ 3 })\n        3   ┗━Const 4\n}\n```\nThis is done so that it will generate a single kernel if you don't need intermediate results.\n\nThe current status is `NotRun`. The idea is that if the buffers and kernel are the \nsame (i.e., used in a previous step somewhere), we can just reuse the results and not rerun the kernel.\n\nWhen running, we convert the AST into IR:\n```\nstep op name          type             input            arg\n   0 DEFINE_GLOBAL    Pointer          []               (0, true)\n   1 DEFINE_GLOBAL    Pointer          []               (1, false)\n   2 CONST            Int              []               4\n   3 CONST            Int              []               0\n   4 CONST            Int              []               3\n   5 LOOP             Int              [3, 4]           None\n   6 LOAD             Int              [1, 5]           None\n   7 ALU              Int              [6, 2]           ALU.Mul\n   8 STORE                             [0, 5, 7]        None\n   9 ENDLOOP                           [5]              None\n```\nThis IR is based on the tinygrad IR (at some point) but will likely be changed into full SSA.\n\nWe convert the IR into bytecode (only x86 atm):\n```\npush Rbp\nmov Rbp, Rsp\npush { 0, 0, 0, 0 }\nlabel_0x9:\nmov R8, qword ptr [Rdi + 0x8]\nmov R9, qword ptr [Rbp + 0x-8]\nmov R8, qword ptr [R8 + R9 * 8]\nmov R10, { 4, 0, 0, 0 }\nmov R11, R8\nimul R11, R10\nmov R8, qword ptr [Rdi + 0x0]\nmov R9, qword ptr [Rbp + 0x-8]\nmov qword ptr [R8 + R9 * 8], R11\nmov R10, qword ptr [Rbp + 0x-8]\ninc R10\nmov qword ptr [Rbp + 0x-8], R10\nmov R11, R11\nmov R11, { 3, 0, 0, 0 }\ncmp R10, R11\njl 0x9\nleave\nret\n```\n\nAnd finally, executed:\n```\nTensor(\n        type: dtypes.Int64,\n        shape: [3],\n        length: 3,\n        data: [4, 16, 36, ]\n)\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/4424467?u=8760b7b7dc6d94175732847502a1a94a7c83cc51&v=4",
+  "releases": [],
+  "owner_bio": "Graduate student in Computer Science.  Focus on machine learning and natural language processing.",
+  "owner_company": "@STASER-Lab ",
+  "owner_location": "Vancouver, BC",
+  "owner_blog": "www.ethanthoma.com",
+  "owner_twitter_username": "EthanBThoma",
+  "owner_followers": 26,
+  "owner_following": 18,
+  "owner_created_at": "2013-05-14T05:28:32Z",
+  "license": "MIT",
+  "category": "library"
+}

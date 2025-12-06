@@ -1,0 +1,48 @@
+{
+  "name": "elfutils",
+  "owner": "allyourcodebase",
+  "repo": "elfutils",
+  "description": "elfutils ported to the zig build system ",
+  "type": "project",
+  "topics": [
+    "zig-package",
+    "zig"
+  ],
+  "stars": 0,
+  "forks": 3,
+  "watchers": 2,
+  "updated_at": "2025-10-30T12:54:29Z",
+  "dependencies": [
+    {
+      "name": "elfutils",
+      "url": "git+https://github.com/Techatrix/elfutils?ref=elfutils-0.192#0f3b436b7e4fc4d310be79a62e40a115fdc482d0",
+      "hash": "N-V-__8AAIQGJAEXcr6-lFXTMBDHeC3iKepWTJ81xkih2e9T"
+    },
+    {
+      "name": "zlib",
+      "url": "git+https://github.com/allyourcodebase/zlib#61e7df7e996ec5a5f13a653db3c419adb340d6ef",
+      "hash": "zlib-1.3.1-ZZQ7lbYMAAB1hTSOKSXAKAgHsfDcyWNH_37ojw5WSpgR"
+    },
+    {
+      "name": "zstd",
+      "url": "git+https://github.com/allyourcodebase/zstd.git?ref=1.5.7#01327d49cbc56dc24c20a167bb0055d7fc23de84",
+      "hash": "zstd-1.5.7-KEItkJ8vAAC5_rRlKmLflYQ-eKXbAIQBWZNmmJtS18q0"
+    },
+    {
+      "name": "argp_standalone",
+      "url": "git+https://github.com/allyourcodebase/argp-standalone.git#514aa8f007ffeb603aa483b61c6af992340987c6",
+      "hash": "argp_standalone-1.5.0-dev-m1pQhx1-AAC5ta_wRlN8kbJfUEHD-hDo5DmSMYlfzsDd"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "[![CI](https://github.com/allyourcodebase/elfutils/actions/workflows/ci.yaml/badge.svg)](https://github.com/allyourcodebase/elfutils/actions)\n\n# elfutils\n\nThis is [elfutils](https://sourceware.org/elfutils/), packaged for [Zig](https://ziglang.org/).\n\n## Installation\n\nFirst, update your `build.zig.zon`:\n\n```\n# Initialize a `zig build` project if you haven't already\nzig init\nzig fetch --save git+https://github.com/allyourcodebase/elfutils.git\n```\n\nYou can then import `elfutils` in your `build.zig` with:\n\n```zig\nconst elfutils_dependency = b.dependency(\"elfutils\", .{\n    .target = target,\n    .optimize = optimize,\n});\nconst libelf = elfutils_dependency.artifact(\"elf\");\nconst libdw = elfutils_dependency.artifact(\"dw\");\nconst libasm = elfutils_dependency.artifact(\"asm\");\n\nyour_exe.linkLibrary(libelf);\nyour_exe.linkLibrary(libdw);\nyour_exe.linkLibrary(libasm);\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
+  "releases": [],
+  "owner_bio": "...are belong to Ziguanas, but we'd also be delighted to give them back!",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2023-09-28T21:29:33Z",
+  "license": "GPL-3.0",
+  "category": "library"
+}

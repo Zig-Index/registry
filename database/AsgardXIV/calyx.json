@@ -1,0 +1,32 @@
+{
+  "name": "calyx",
+  "owner": "AsgardXIV",
+  "repo": "calyx",
+  "description": "A Zig library for interacting with FFXIV game data.",
+  "type": "project",
+  "topics": [
+    "ffxiv",
+    "final-fantasy-xiv",
+    "zig",
+    "ziglang",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-07-19T16:04:33Z",
+  "minimum_zig_version": "0.14.0",
+  "readme": "# Calyx\n\nA Zig library for interacting with game files from Final Fantasy XIV. \n<br/>It aims to offer features and functionality available in other languages to interact with FFXIV to Zig developers.\n\n## State of the project\nCalyx is still very early in development and the API surface is not stable. Contributions are appreciated.\n\n## Current Features\n* SqPack\n  * Mounting SqPack\n  * Discovering and accessing repositories, categories and chunks\n  * Index1 and Index2 exploration\n  * Game path parsing and hashing\n  * Retrieving files via game path or index hash\n     * Standard, Texture and Model\n* Excel\n  * Load the root.exl and lookup sheets via id\n  * Load sheets\n  * Retrieve or iterate rows\n  * Retrieve column data\n\n## Future Plans\n* Type safe Excel access (using EXDSchema or SaintCoinach defs or similar)\n* Game file format support (Models, Textures, Skeletons etc) both reading and writing\n\n## Using the Library\n1. Add Calyx to your build.zig.zon\n```\nzig fetch --save git+https://github.com/AsgardXIV/calyx\n```\n\n2. Add the dependency to your project, for example:\n```zig\nconst calyx_dependency = b.dependency(\"calyx\", .{\n  .target = target,\n  .optimize = optimize,\n});\n\nexe_mod.addImport(\"calyx\", calyx_dependency.module(\"calyx\"));\n```\n\n3. Use the library\n```zig\n // Init Calyx\nconst calyx = @import(\"calyx\");\nconst game = try calyx.GameData.init(allocator, .{});\ndefer game.deinit();\n\n// Read a game file\nconst swine_head_model = try game.getFileContents(allocator, \"chara/equipment/e6023/model/c0101e6023_met.mdl\");\ndefer allocator.free(swine_head_model);\ntry std.io.getStdOut().writer().print(\"Swine Head model length: {d} bytes\\n\", .{swine_head_model.len});\n\n// Read from Excel\nconst sheet = try game.getSheet(\"Item\");\nconst wind_up_raha = try sheet.getRow(23992);\nconst wind_up_raha_name = try wind_up_raha.getRowColumnValue(9);\ntry std.io.getStdOut().writer().print(\"Item Name: {s}\\n\", .{wind_up_raha_name.string});\n```\n\n## Developing Locally\nSome development requires a locally installed copy of FFXIV. You should set the `FFXIV_GAME_PATH` environment variable so Calyx can discover the location.\n\n1. Running the sample: `zig build sample`\n2. Running the unit tests: `zig build test`\n3. Running the integration tests: `zig build integrationTest`\n4. Generating the docs: `zig build docs`\n\n## Alternatives\nNot using Zig?\n* C#\n  * [Lumina](https://github.com/NotAdam/Lumina)\n  * [SaintCoinach](https://github.com/xivapi/SaintCoinach)\n  * [xivModdingFramework](https://github.com/TexTools/xivModdingFramework)\n* Rust\n  * [Physis](https://github.com/redstrate/Physis)\n \n## Acknowledgements\nCalyx is frequently based on the work done by other projects, particularly those listed in the `Alternatives` section. \n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/95163444?u=11a2f97fa5c2f742393f54d6979b8ac868ff992d&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "https://asgard.io",
+  "owner_twitter_username": "AsgardXIV",
+  "owner_followers": 31,
+  "owner_following": 0,
+  "owner_created_at": "2021-11-28T08:11:10Z",
+  "homepage": "https://asgardxiv.github.io/calyx/",
+  "license": "MIT",
+  "category": "library"
+}

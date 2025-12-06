@@ -1,0 +1,572 @@
+{
+  "name": "libsodium",
+  "owner": "jedisct1",
+  "repo": "libsodium",
+  "description": "A modern, portable, easy to use crypto library.",
+  "type": "project",
+  "topics": [
+    "crypto",
+    "cryptography",
+    "c",
+    "zig-package"
+  ],
+  "stars": 13217,
+  "forks": 1831,
+  "watchers": 372,
+  "updated_at": "2025-12-06T14:55:11Z",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/124872?v=4",
+  "releases": [
+    {
+      "tag_name": "1.0.20-RELEASE",
+      "name": "1.0.20",
+      "body": "This point release includes all the changes from 1.0.19-stable, mainly addressing compilation issues and improvements to the .NET packages.\r\n\r\n - Building with `zig build` now requires Zig 0.12.\r\n - When using the traditional build system, -O3 is used instead of -Ofast.\r\n - Improved detection of the compiler flags required on aarch64.\r\n - Improved compatibility with custom build systems on aarch64.\r\n - apple-xcframework: VisionOS packages are not built if Xcode doesn't include that SDK.\r\n - `crypto_kdf_hkdf_sha512_statebytes()` was added.\r\n - When using Visual Studio, runtime CPU feature detection is now enabled on Windows/aarch64.\r\n - There were issues with C++ guards affecting usage of libsodium using Swift on Windows. This has been fixed.\r\n - Emscripten: `crypto_aead_aegis*()` functions are now exported in JavaScript builds\r\n - Emscripten: unsupported `--memory-init-file` option has been removed.\r\n - apple-xcframework: the minimal deployment target can be set to iOS 11+.\r\n - .NET packages now include precompiled libraries for Windows/arm64, iOS, TvOS and Catalyst.\r\n - .NET precompiled libraries now work on any CPUs, using only runtime feature detection.\r\n - SYSV assembly should not be used when targeting Windows (reported by @meiyese, thanks!)\r\n - Compatibility issues with LLVM 18 and AVX512 have been addressed.\r\n - GitHub attestation build provenance are now added to NuGet packages.\r\n - JavaScript tests can now use Bun as an alternative to Node.",
+      "prerelease": false,
+      "published_at": "2024-05-25T13:50:27Z",
+      "html_url": "https://github.com/jedisct1/libsodium/releases/tag/1.0.20-RELEASE",
+      "assets": [
+        {
+          "name": "libsodium-1.0.20-mingw.tar.gz",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.20-RELEASE/libsodium-1.0.20-mingw.tar.gz",
+          "size": 1097829,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "libsodium-1.0.20-mingw.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.20-RELEASE/libsodium-1.0.20-mingw.tar.gz.minisig",
+          "size": 324,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libsodium-1.0.20-mingw.tar.gz.sig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.20-RELEASE/libsodium-1.0.20-mingw.tar.gz.sig",
+          "size": 566,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libsodium-1.0.20-msvc.zip",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.20-RELEASE/libsodium-1.0.20-msvc.zip",
+          "size": 19827338,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "libsodium-1.0.20-msvc.zip.minisig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.20-RELEASE/libsodium-1.0.20-msvc.zip.minisig",
+          "size": 320,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libsodium-1.0.20-msvc.zip.sig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.20-RELEASE/libsodium-1.0.20-msvc.zip.sig",
+          "size": 566,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libsodium-1.0.20.tar.gz",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.20-RELEASE/libsodium-1.0.20.tar.gz",
+          "size": 1925167,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "libsodium-1.0.20.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.20-RELEASE/libsodium-1.0.20.tar.gz.minisig",
+          "size": 318,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libsodium-1.0.20.tar.gz.sig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.20-RELEASE/libsodium-1.0.20.tar.gz.sig",
+          "size": 566,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "1.0.19-RELEASE",
+      "name": "1.0.19",
+      "body": "This release includes all the changes from `1.0.18-stable`, as well as two additions:\r\n\r\n - New AEADs: AEGIS-128L and AEGIS-256 are now available in the `crypto_aead_aegis128l_*()` and `crypto_aead_aegis256_*()` namespaces. AEGIS is a family of authenticated ciphers for high-performance applications, leveraging hardware AES acceleration on `x86_64` and `aarch64`. In addition to performance, AEGIS ciphers have unique properties making them easier and safer to use than AES-GCM. They can also be used as high-performance MACs.\r\n - The HKDF key derivation mechanism, required by many standard protocols, is now available in the `crypto_kdf_hkdf_*()` namespace. It is implemented for the SHA-256 and SHA-512 hash functions.\r\n - The `osx.sh` build script was renamed to `macos.sh`.\r\n - Support for android-mips was removed.\r\n\r\nFrom 1.0.18-stable:\r\n\r\n - Visual Studio: support for Windows/ARM64 builds has been added.\r\n - Visual Studio: AVX512 implementations are enabled on supported CPUs.\r\n - Visual Studio: an MSVC 2022 solution was added.\r\n - Apple XCFramework: support for VisionOS was added.\r\n - Apple XCFranework: support for Catalyst was added.\r\n - Apple XCFramework: building the simulators is now optional.\r\n - iOS: bitcode is not generated any more, as it was deprecated by Apple.\r\n - watchOS: support for arm64 was added.\r\n - The Zig toolchain can now be used as a modern build system to replace autoconf/automake/libtool/make/ccache and the compiler. This enables faster compilation times, easier cross compilation, and static libraries optimized for any CPU.\r\n - The Zig toolchain is now the recommended way to compile `libsodium` to WebAssembly/WASI(X).\r\n - libsodium can now be added as a dependency to Zig projects.\r\n - Memory fences were added to remove some gadgets that could be used alongside speculative loads.\r\n - The AES-GCM implementation was completely rewritten. It is now faster, and also available on aarch64, including Windows/ARM64.\r\n - Compatibility with CET instrumentation / IBT / Shadow Stack was added.\r\n - Emscripten: the `crypto_pwhash_*()` functions have been removed from Sumo builds, as they reserve a substantial amount of JavaScript memory, even when not used.\r\n - Benchmarks now use `CLOCK_MONOTONIC` if possible.\r\n - WebAssembly: tests can now run using Bun, WasmEdge, Wazero, wasm3 and wasmer-js. Support for WAVM and Lucet have been removed, as these projects have reached EOL.\r\n - .NET: the minimum supported macOS version is now 1.0.15; this matches Microsoft guidelines.\r\n - .NET: all the packages are now built using Zig, on all platforms. This allows us to easily match Microsoft's requirements, including supported glibc versions. However, on x86_64, targets are expected to support at least the AVX instruction set.\r\n - .NET: packages for ARM64 are now available.\r\n - C23 `memset_explicit()` is now used, when available.\r\n - Compilation now uses `-Ofast` or `-O3` instead of `-O2` by default.\r\n - Portability improvements to help compile libsodium to modern game consoles.\r\n - JavaScript: a default `unhandledRejection` handler is not set any more.\r\n - Slightly faster 25519 operations.\r\n - OpenBSD: leverage `MAP_CONCEAL`.",
+      "prerelease": false,
+      "published_at": "2023-09-13T13:53:37Z",
+      "html_url": "https://github.com/jedisct1/libsodium/releases/tag/1.0.19-RELEASE",
+      "assets": [
+        {
+          "name": "libsodium-1.0.19-mingw.tar.gz",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.19-RELEASE/libsodium-1.0.19-mingw.tar.gz",
+          "size": 1069658,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "libsodium-1.0.19-mingw.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.19-RELEASE/libsodium-1.0.19-mingw.tar.gz.minisig",
+          "size": 324,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libsodium-1.0.19-mingw.tar.gz.sig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.19-RELEASE/libsodium-1.0.19-mingw.tar.gz.sig",
+          "size": 566,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libsodium-1.0.19-msvc.zip",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.19-RELEASE/libsodium-1.0.19-msvc.zip",
+          "size": 19784509,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "libsodium-1.0.19-msvc.zip.minisig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.19-RELEASE/libsodium-1.0.19-msvc.zip.minisig",
+          "size": 320,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libsodium-1.0.19-msvc.zip.sig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.19-RELEASE/libsodium-1.0.19-msvc.zip.sig",
+          "size": 566,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libsodium-1.0.19.tar.gz",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.19-RELEASE/libsodium-1.0.19.tar.gz",
+          "size": 1945523,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "libsodium-1.0.19.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.19-RELEASE/libsodium-1.0.19.tar.gz.minisig",
+          "size": 318,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libsodium-1.0.19.tar.gz.sig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.19-RELEASE/libsodium-1.0.19.tar.gz.sig",
+          "size": 566,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "1.0.18-RELEASE",
+      "name": "1.0.18",
+      "body": " - Enterprise versions of Visual Studio are now supported.\r\n - Visual Studio 2019 is now supported.\r\n - 32-bit binaries for Visual Studio 2010 are now provided.\r\n - A test designed to trigger an OOM condition didn't work on Linux systems with memory overcommit turned on. It has been removed in order to fix Ansible builds.\r\n - Emscripten: `print` and `printErr` functions are overridden to send\r\nerrors to the console, if there is one.\r\n - Emscripten: `UTF8ToString()` is now exported since `Pointer_stringify()`\r\nhas been deprecated.\r\n - Libsodium version detection has been fixed in the CMake recipe.\r\n - Generic hashing got a 10% speedup on AVX2.\r\n - New target: WebAssembly/WASI (compile with `dist-builds/wasm32-wasi.sh`).\r\n - New functions to map a hash to an edwards25519 point or get a random point:\r\n`core_ed25519_from_hash()` and `core_ed25519_random()`.\r\n - `crypto_core_ed25519_scalar_mul()` has been implemented for `scalar*scalar (mod L)` multiplication.\r\n - Support for the Ristretto group has been implemented for interoperability with wasm-crypto.\r\n - Improvements have been made to the test suite.\r\n - Portability improvements have been made.\r\n - `getentropy()` is now used on systems providing this system call.\r\n - `randombytes_salsa20` has been renamed to `randombytes_internal`.\r\n - Support for NativeClient has been removed.\r\n - Most `((nonnull))` attributes have been relaxed to allow 0-length inputs\r\nto be `NULL`.\r\n - The `-ftree-vectorize` and `-ftree-slp-vectorize` compiler switches are\r\nnow used, if available, for optimized builds.\r\n\r\n![IMG_1495](https://user-images.githubusercontent.com/124872/58669328-1bd91a00-833c-11e9-8d6b-9e51e9e3be4e.jpg)\r\n",
+      "prerelease": false,
+      "published_at": "2019-05-30T21:02:19Z",
+      "html_url": "https://github.com/jedisct1/libsodium/releases/tag/1.0.18-RELEASE",
+      "assets": [
+        {
+          "name": "libsodium-1.0.18-mingw.tar.gz",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.18-RELEASE/libsodium-1.0.18-mingw.tar.gz",
+          "size": 1038204,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "libsodium-1.0.18-mingw.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.18-RELEASE/libsodium-1.0.18-mingw.tar.gz.minisig",
+          "size": 317,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libsodium-1.0.18-mingw.tar.gz.sig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.18-RELEASE/libsodium-1.0.18-mingw.tar.gz.sig",
+          "size": 566,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libsodium-1.0.18-msvc.zip",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.18-RELEASE/libsodium-1.0.18-msvc.zip",
+          "size": 43211773,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "libsodium-1.0.18-msvc.zip.minisig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.18-RELEASE/libsodium-1.0.18-msvc.zip.minisig",
+          "size": 313,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libsodium-1.0.18-msvc.zip.sig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.18-RELEASE/libsodium-1.0.18-msvc.zip.sig",
+          "size": 566,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libsodium-1.0.18.tar.gz",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.18-RELEASE/libsodium-1.0.18.tar.gz",
+          "size": 1919817,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "libsodium-1.0.18.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.18-RELEASE/libsodium-1.0.18.tar.gz.minisig",
+          "size": 311,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libsodium-1.0.18.tar.gz.sig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.18-RELEASE/libsodium-1.0.18.tar.gz.sig",
+          "size": 566,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "1.0.16",
+      "name": "1.0.16",
+      "body": "- Signatures computations and verifications are now way faster on 64-bit platforms with compilers supporting 128-bit arithmetic (gcc, clang, icc). This includes the WebAssembly target.\r\n- New low-level APIs for computations over edwards25519: `crypto_scalarmult_ed25519()`,  `crypto_scalarmult_ed25519_base()`, `crypto_core_ed25519_is_valid_point()`, `crypto_core_ed25519_add()`,\r\n`crypto_core_ed25519_sub()` and `crypto_core_ed25519_from_uniform()` (elligator representative to point).\r\n- `crypto_sign_open()`, `crypto_sign_verify_detached() and `crypto_sign_edwards25519sha512batch_open` now reject public keys in non-canonical form in addition to low-order points.\r\n- The library can be built with `ED25519_NONDETERMINISTIC` defined in order to use synthetic nonces for EdDSA. This is disabled by default.\r\n- Webassembly: `crypto_pwhash_*()` functions are now included in non-sumo builds.\r\n- `sodium_stackzero()` was added to wipe content off the stack.\r\n- Android: support new SDKs where unified headers have become the default.\r\n- The Salsa20-based PRNG example is now thread-safe on platforms with support for thread-local storage, optionally mixes bits from RDRAND.\r\n- CMAKE: static library detection on Unix systems has been improved (thanks to @BurningEnlightenment, @nibua-r, @mellery451)\r\n- Argon2 and scrypt are slightly faster on Linux.",
+      "prerelease": false,
+      "published_at": "2017-12-13T14:59:45Z",
+      "html_url": "https://github.com/jedisct1/libsodium/releases/tag/1.0.16",
+      "assets": [
+        {
+          "name": "libsodium-1.0.16.tar.gz",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.16/libsodium-1.0.16.tar.gz",
+          "size": 1910835,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "libsodium-1.0.16.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.16/libsodium-1.0.16.tar.gz.minisig",
+          "size": 311,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libsodium-1.0.16.tar.gz.sig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.16/libsodium-1.0.16.tar.gz.sig",
+          "size": 566,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "1.0.15",
+      "name": "1.0.15",
+      "body": " - The default password hashing algorithm is now Argon2id. The `pwhash_str_verify()` function can still verify Argon2i hashes without any changes, and `pwhash()` can still compute Argon2i hashes as well.\r\n - The aes128ctr primitive was removed. It was slow, non-standard, not authenticated, and didn't seem to be used by any opensource project.\r\n - Argon2id required at least 3 passes like Argon2i, despite a minimum of `1` as defined by the `OPSLIMIT_MIN` constant. This has been fixed.\r\n - The secretstream construction was slightly changed to be consistent with forthcoming variants.\r\n - The Javascript and Webassembly versions have been merged, and the module now returns a `.ready` promise that will resolve after the Webassembly code is loaded and compiled.\r\n - Note that due to these incompatible changes, the library version major was bumped up.",
+      "prerelease": false,
+      "published_at": "2017-10-01T15:30:17Z",
+      "html_url": "https://github.com/jedisct1/libsodium/releases/tag/1.0.15",
+      "assets": [
+        {
+          "name": "libsodium-1.0.15.tar.gz",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.15/libsodium-1.0.15.tar.gz",
+          "size": 1866057,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "libsodium-1.0.15.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.15/libsodium-1.0.15.tar.gz.minisig",
+          "size": 311,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libsodium-1.0.15.tar.gz.sig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.15/libsodium-1.0.15.tar.gz.sig",
+          "size": 566,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "1.0.14",
+      "name": "1.0.14",
+      "body": " - iOS binaries should now be compatible with WatchOS and TVOS.\r\n - WebAssembly is now officially supported. Special thanks to @facekapow and @pepyakin who helped to make it happen.\r\n - Internal consistency checks failing and primitives used with dangerous/out-of-bounds/invalid parameters used to call abort(3). Now, a custom handler *that doesn't return* can be set with the `set_sodium_misuse()` function. It still aborts by default or if the handler ever returns. This is not a replacement for non-fatal, expected runtime errors. This handler will be only called in unexpected situations due to potential bugs in the library or in language bindings.\r\n - `*_MESSAGEBYTES_MAX` macros (and the corresponding `_messagebytes_max()` symbols) have been added to represent the maximum message size that can be safely handled by a primitive. Language bindings are encouraged to check user inputs against these maximum lengths.\r\n - The test suite has been extended to cover more edge cases.\r\n - `crypto_sign_ed25519_pk_to_curve25519()` now rejects points that are not on the curve, or not in the main subgroup.\r\n - Further changes have been made to ensure that smart compilers will not optimize out code that we don't want to be optimized.\r\n - Visual Studio solutions are now included in distribution tarballs.\r\n - The `sodium_runtime_has_*` symbols for CPU features detection are now defined as weak symbols, i.e. they can be replaced with an application-defined implementation. This can be useful to disable AVX* when temperature/power consumption is a concern.\r\n - `crypto_kx_*()` now aborts if called with no non-NULL pointers to store keys to.\r\n - SSE2 implementations of `crypto_verify_*()` have been added.\r\n - Passwords can be hashed using a specific algorithm with the new `crypto_pwhash_str_alg()` function.\r\n - Due to popular demand, base64 encoding (`sodium_bin2base64()`) and decoding (`sodium_base642bin()`) have been implemented.\r\n - A new `crypto_secretstream_*()` API was added to safely encrypt files and multi-part messages.\r\n - The `sodium_pad()` and `sodium_unpad()` helper functions have been added in order to add & remove padding.\r\n - An AVX512 optimized implementation of Argon2 has been added (written by Ondrej Mosnáček, thanks!)\r\n - The `crypto_pwhash_str_needs_rehash()` function was added to check if a password hash string matches the given parameters, or if it needs an update.\r\n - The library can now be compiled with recent versions of emscripten/binaryen that don't allow multiple variables declarations using a single `var` statement.\r\n",
+      "prerelease": false,
+      "published_at": "2017-09-21T23:21:36Z",
+      "html_url": "https://github.com/jedisct1/libsodium/releases/tag/1.0.14",
+      "assets": [
+        {
+          "name": "libsodium-1.0.14.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.14/libsodium-1.0.14.tar.gz.minisig",
+          "size": 311,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libsodium-1.0.14.tar.gz.sig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.14/libsodium-1.0.14.tar.gz.sig",
+          "size": 566,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libsodium-1.0.14.tar.gz",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.14/libsodium-1.0.14.tar.gz",
+          "size": 1876526,
+          "content_type": "application/x-gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "1.0.13",
+      "name": "1.0.13",
+      "body": "- Javascript: the sumo builds now include all symbols. They were previously limited to symbols defined in minimal builds.\r\n- The public `crypto_pwhash_argon2i_MEMLIMIT_MAX` constant was incorrectly defined on 32-bit platforms. This has been fixed.\r\n- Version 1.0.12 didn't compile on OpenBSD/i386 using the base gcc compiler. This has been fixed.\r\n- The Android compilation scripts have been updated for NDK r14b.\r\n- armv7s-optimized code was re-added to iOS builds.\r\n- An AVX2 optimized implementation of the Argon2 round function was added.\r\n- The Argon2id variant of Argon2 has been implemented. The high-level `crypto_pwhash_str_verify()` function automatically detects the algorithm and can verify both Argon2i and Argon2id hashed passwords.\r\nThe default algorithm for newly hashed passwords remains Argon2i in this version to avoid breaking compatibility with verifiers running libsodium <= 1.0.12.\r\n- A `crypto_box_curve25519xchacha20poly1305_seal*()` function set was implemented.\r\n- scrypt was removed from minimal builds.\r\n- libsodium is now available on NuGet.",
+      "prerelease": false,
+      "published_at": "2017-07-15T18:26:18Z",
+      "html_url": "https://github.com/jedisct1/libsodium/releases/tag/1.0.13",
+      "assets": [
+        {
+          "name": "libsodium-1.0.13.tar.gz",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.13/libsodium-1.0.13.tar.gz",
+          "size": 1895139,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "libsodium-1.0.13.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.13/libsodium-1.0.13.tar.gz.minisig",
+          "size": 311,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "1.0.12",
+      "name": "1.0.12",
+      "body": " - Ed25519ph was implemented, adding a multi-part signature API (`crypto_sign_init()`, `crypto_sign_update()`, `crypto_sign_final_*()`).\r\n - New constants and related accessors have been added for Scrypt and Argon2.\r\n - XChaCha20 has been implemented. Like XSalsa20, this construction extends the ChaCha20 cipher to accept a 192-bit nonce. This makes it safe to use ChaCha20 with random nonces.\r\n - `crypto_secretbox`, `crypto_box` and `crypto_aead` now offer variants leveraging XChaCha20.\r\n - SHA-2 is about 20% faster, which also gives a speed boost to signature and signature verification.\r\n - AVX2 implementations of Salsa20 and ChaCha20 have been added. They are twice as fast as the SSE2 implementations. The speed gain is even more significant on Windows, that previously didn't use vectorized implementations.\r\n - New high-level API: `crypto_kdf`, to easily derive one or more subkeys from a master key.\r\n - Siphash with a 128-bit output has been implemented, and is available as `crypto_shorthash_siphashx_*`.\r\n - New `*_keygen()` helpers functions have been added to create secret keys for all constructions. This improves code clarity and can prevent keys from being partially initialized.\r\n - A new `randombytes_buf_deterministic()` function was added to deterministically fill a memory region with pseudorandom data. This function can especially be useful to write reproducible tests.\r\n - A `crypto_kx_*()` API was added to compute shared session keys.\r\n - AVX2 detection is more reliable.\r\n - The pthreads library is not required any more when using MingW.\r\n - `contrib/Findsodium.cmake` was added as an example to include libsodium in a project using cmake.\r\n - Compatibility with gcc 2.x has been restored.\r\n - Minimal builds can be checked using `sodium_library_minimal()`.\r\n - The `--enable-opt` compilation switch has become compatible with more platforms.\r\n - Android builds are now using clang on platforms where it is available.\r\n\r\n![Pie from PIE](https://download.libsodium.org/libsodium/awesome/pie.jpg)",
+      "prerelease": false,
+      "published_at": "2017-03-13T08:27:54Z",
+      "html_url": "https://github.com/jedisct1/libsodium/releases/tag/1.0.12",
+      "assets": [
+        {
+          "name": "libsodium-1.0.12.tar.gz",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.12/libsodium-1.0.12.tar.gz",
+          "size": 1887284,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "libsodium-1.0.12.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.12/libsodium-1.0.12.tar.gz.minisig",
+          "size": 311,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "1.0.11",
+      "name": "1.0.11",
+      "body": "- `sodium_init()` is now thread-safe, and can be safely called multiple times.\n- Android binaries now properly support 64-bit Android, targeting platform 24, but without breaking compatibility with platforms 16 and 21.\n- Better support for old gcc versions.\n- On FreeBSD, core dumps are disabled on regions allocated with sodium allocation functions.\n- AVX2 detection was fixed, resulting in faster BLAKE2b hashing on platforms where it was not properly  detected.\n- The Sandy2x Curve25519 implementation was not as fast as expected on some platforms. This has been fixed.\n- The NativeClient target was improved. Most notably, it now supports optimized implementations, and uses `pepper_49` by default.\n- The library can be compiled with recent Emscripten versions. Changes have been made to produce smaller code, and the default heap size was reduced in the standard version.\n- The code can now be compiled on SLES11 service pack 4.\n- Decryption functions can now accept a NULL pointer for the output. This checks the MAC without writing the decrypted message.\n- `crypto_generichash_final()` now returns `-1` if called twice.\n- Support for Visual Studio 2008 was improved.\n",
+      "prerelease": false,
+      "published_at": "2016-07-31T16:13:08Z",
+      "html_url": "https://github.com/jedisct1/libsodium/releases/tag/1.0.11",
+      "assets": [
+        {
+          "name": "libsodium-1.0.11.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.11/libsodium-1.0.11.tar.gz.minisig",
+          "size": 311,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libsodium-1.0.11.tar.gz",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.11/libsodium-1.0.11.tar.gz",
+          "size": 1846782,
+          "content_type": "application/x-gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "1.0.10",
+      "name": "1.0.10",
+      "body": "- This release only fixes a compilation issue reported with some older gcc versions. There are no functional changes over the previous release.\n",
+      "prerelease": false,
+      "published_at": "2016-04-04T20:01:34Z",
+      "html_url": "https://github.com/jedisct1/libsodium/releases/tag/1.0.10",
+      "assets": [
+        {
+          "name": "libsodium-1.0.10.tar.gz",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.10/libsodium-1.0.10.tar.gz",
+          "size": 1827211,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "libsodium-1.0.10.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.10/libsodium-1.0.10.tar.gz.minisig",
+          "size": 311,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "1.0.9",
+      "name": "1.0.9",
+      "body": "- The Javascript target now includes a `--sumo` option to include all the symbols of the original C library.\n- A detached API was added to the ChaCha20-Poly1305 and AES256-GCM implementations.\n- The Argon2i password hashing function was added, and is accessible directly and through a new, high-level `crypto_pwhash` API. The scrypt function remains available as well.\n- A speed-record AVX2 implementation of BLAKE2b was added (thanks to Samuel Neves).\n- The library can now be compiled using C++Builder (thanks to @jcolli44)\n- Countermeasures for Ed25519 signatures malleability have been added to match the irtf-cfrg-eddsa draft (note that malleability is irrelevant to the standard definition of signature security). Signatures with a small-order `R` point are now also rejected.\n- Some implementations are now slightly faster when using the Clang compiler.\n- The HChaCha20 core function was implemented (`crypto_core_hchacha20()`).\n- No-op stubs were added for all AES256-GCM public functions even when compiled on non-Intel platforms.\n- `crypt_generichash_blake2b_statebytes()` was added.\n- New macros were added for the IETF variant of the ChaCha20-Poly1305 construction.\n- The library can now be compiled on Minix.\n- HEASLR is now enabled on MinGW builds.\n",
+      "prerelease": false,
+      "published_at": "2016-04-02T15:14:19Z",
+      "html_url": "https://github.com/jedisct1/libsodium/releases/tag/1.0.9",
+      "assets": [
+        {
+          "name": "libsodium-1.0.9.tar.gz",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.9/libsodium-1.0.9.tar.gz",
+          "size": 1827277,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "libsodium-1.0.9.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.9/libsodium-1.0.9.tar.gz.minisig",
+          "size": 310,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "1.0.8",
+      "name": "1.0.8",
+      "body": "```\n\n           *             ,\n                       _/^\\_\n                      <     >\n     *                 /.-.\\         *\n              *        `/&\\`                   *\n                      ,@.*;@,\n                     /_o.I %_\\    *\n        *           (`'--:o(_@;\n                   /`;--.,__ `')             *\n                  ;@`o % O,*`'`&\\ \n            *    (`'--)_@ ;o %'()\\      *\n                 /`;--._`''--._O'@;\n                /&*,()~o`;-.,_ `\"\"`)\n     *          /`,@ ;+& () o*`;-';\\\n               (`\"\"--.,_0 +% @' &()\\\n               /-.,_    ``''--....-'`)  *\n          *    /@%;o`:;'--,.__   __.'\\\n              ;*,&(); @ % &^;~`\"`o;@();         *\n              /(); o^~; & ().o@*&`;&%O\\\n              `\"=\"==\"\"==,,,.,=\"==\"===\"`\n           __.----.(\\-''#####---...___...-----._\n         '`         \\)_`\"\"\"\"\"`\n                 .--' ')\n               o(  )_-\\\n                 `\"\"\"` `\n```\n- Handle the case where the CPU supports AVX, but we are running on an hypervisor with AVX disabled/not supported.\n- Faster (2x) `scalarmult_base()` when using the ref10 implementation.\n",
+      "prerelease": false,
+      "published_at": "2015-12-25T15:04:38Z",
+      "html_url": "https://github.com/jedisct1/libsodium/releases/tag/1.0.8",
+      "assets": [
+        {
+          "name": "libsodium-1.0.8.tar.gz",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.8/libsodium-1.0.8.tar.gz",
+          "size": 1794750,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "libsodium-1.0.8.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.8/libsodium-1.0.8.tar.gz.minisig",
+          "size": 310,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "1.0.7",
+      "name": "1.0.7",
+      "body": "- More functions whose return value should be checked have been tagged with `__attribute__ ((warn_unused_result))`: `crypto_box_easy()`, `crypto_box_detached()`, `crypto_box_beforenm()`, `crypto_box()`, and `crypto_scalarmult()`.\n- Sandy2x, the fastest Curve25519 implementation ever, has been merged in, and is automatically used on CPUs supporting the AVX instructions set.\n- An SSE2 optimized implementation of Poly1305 was added, and is twice as fast as the portable one.\n- An SSSE3 optimized implementation of ChaCha20 was added, and is twice as fast as the portable one.\n- Faster `sodium_increment()` for common nonce sizes.\n- New helper functions have been added: `sodium_is_zero()` and  `sodium_add()`.\n- `sodium_runtime_has_aesni()` now properly detects the CPU flag when  compiled using Visual Studio.\n",
+      "prerelease": false,
+      "published_at": "2015-12-08T16:07:52Z",
+      "html_url": "https://github.com/jedisct1/libsodium/releases/tag/1.0.7",
+      "assets": [
+        {
+          "name": "libsodium-1.0.7.tar.gz",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.7/libsodium-1.0.7.tar.gz",
+          "size": 1808032,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "libsodium-1.0.7.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.7/libsodium-1.0.7.tar.gz.minisig",
+          "size": 310,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "1.0.6",
+      "name": "1.0.6",
+      "body": "- Optimized implementations of Blake2 have been added for modern Intel platforms. crypto_generichash() is now faster than MD5 and SHA1 implementations while being far more secure.\n- Functions for which the return value should be checked have been tagged with `__attribute__ ((warn_unused_result))`. This will intentionally break code compiled with `-Werror` that didn't bother checking critical return values.\n- The `crypto_sign_edwards25519sha512batch_*()` functions have been tagged as deprecated.\n- Undocumented symbols that were exported, but were only useful for internal purposes have been removed or made private:\n  `sodium_runtime_get_cpu_features()`, the implementation-specific `crypto_onetimeauth_poly1305_donna()` symbols, `crypto_onetimeauth_poly1305_set_implementation()`, `crypto_onetimeauth_poly1305_implementation_name()` and `crypto_onetimeauth_pick_best_implementation()`.\n- `sodium_compare()` now works as documented, and compares numbers in little-endian format instead of behaving like `memcmp()`.\n- The previous changes should not break actual applications, but to be safe, the library version major was incremented.\n- `sodium_runtime_has_ssse3()` and `sodium_runtime_has_sse41()` have been added.\n- The library can now be compiled with the CompCert compiler.\n",
+      "prerelease": false,
+      "published_at": "2015-11-01T22:50:09Z",
+      "html_url": "https://github.com/jedisct1/libsodium/releases/tag/1.0.6",
+      "assets": [
+        {
+          "name": "libsodium-1.0.6.tar.gz",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.6/libsodium-1.0.6.tar.gz",
+          "size": 1791565,
+          "content_type": "application/x-gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "1.0.5",
+      "name": "1.0.5",
+      "body": "This release only fixes compilation issues on some platforms.\n\nIf 1.0.4 compiled and installed fine on your system, upgrading to this version is not required.\nThere are no functional changes.\n- Compilation issues on some platforms were fixed: missing alignment directives were added (required at least on RHEL-6/i386), a workaround for a VRP bug on gcc/armv7 was added, and the library can now be compiled with the SunPro compiler.\n- Javascript target: io.js is not supported any more. Use nodejs.\n",
+      "prerelease": false,
+      "published_at": "2015-10-24T20:59:59Z",
+      "html_url": "https://github.com/jedisct1/libsodium/releases/tag/1.0.5",
+      "assets": [
+        {
+          "name": "libsodium-1.0.5.tar.gz",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.5/libsodium-1.0.5.tar.gz",
+          "size": 1787478,
+          "content_type": "application/x-gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "1.0.4",
+      "name": "1.0.4",
+      "body": "- Support for AES256-GCM has been added. This requires a CPU with the aesni and pclmul extensions, and is accessible via the `crypto_aead_aes256gcm_*()` functions.\n- The Javascript target doesn't use `eval()` any more, so that the library can be used in Chrome packaged applications.\n- QNX and CloudABI are now supported.\n- Support for NaCl has finally been added.\n- ChaCha20 with an extended (96 bit) nonce and a 32-bit counter has been implemented as `crypto_stream_chacha20_ietf()`, `crypto_stream_chacha20_ietf_xor()` and `crypto_stream_chacha20_ietf_xor_ic()`. An IETF-compatible version of ChaCha20Poly1305 is available as `crypto_aead_chacha20poly1305_ietf_npubbytes()`, `crypto_aead_chacha20poly1305_ietf_encrypt()` and `crypto_aead_chacha20poly1305_ietf_decrypt()`.\n- The `sodium_increment()` helper function has been added, to increment an arbitrary large number (such as a nonce).\n- The `sodium_compare()` helper function has been added, to compare arbitrary large numbers (such as nonces, in order to prevent replay attacks).\n",
+      "prerelease": false,
+      "published_at": "2015-10-18T14:25:23Z",
+      "html_url": "https://github.com/jedisct1/libsodium/releases/tag/1.0.4",
+      "assets": [
+        {
+          "name": "libsodium-1.0.4.tar.gz",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.4/libsodium-1.0.4.tar.gz",
+          "size": 1787241,
+          "content_type": "application/x-gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "1.0.3",
+      "name": "1.0.3",
+      "body": "- In addition to `sodium_bin2hex()`, `sodium_hex2bin()` is now a\n  constant-time function.\n- `crypto_stream_xsalsa20_ic()` has been added.\n- `crypto_generichash_statebytes()`, `crypto_auth_*_statebytes()` and `crypto_hash_*_statebytes()` have been added in order to retrieve the size of structures keeping states from foreign languages.\n- The JavaScript target doesn't require `/dev/urandom` or an external `randombytes()` implementation any more. Other minor Emscripten-related improvements have been made in order to support libsodium.js\n- Custom `randombytes` implementations do not need to provide their own implementation of `randombytes_uniform()` any more. `randombytes_stir()` and `randombytes_close()` can also be `NULL` pointers if they are not required.\n- On Linux, `getrandom(2)` is being used instead of directly accessing `/dev/urandom`, if the kernel supports this system call.\n- `crypto_box_seal()` and `crypto_box_seal_open()` have been added.\n- A solutions for Visual Studio 2015 was added.\n",
+      "prerelease": false,
+      "published_at": "2015-05-09T14:13:53Z",
+      "html_url": "https://github.com/jedisct1/libsodium/releases/tag/1.0.3",
+      "assets": [
+        {
+          "name": "libsodium-1.0.3.tar.gz",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.3/libsodium-1.0.3.tar.gz",
+          "size": 1679664,
+          "content_type": "application/x-gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "1.0.1",
+      "name": "1.0.1",
+      "body": "- DLL_EXPORT was renamed SODIUM_DLL_EXPORT in order to avoid\n  collisions with similar macros defined by other libraries.\n- sodium_bin2hex() is now constant-time.\n- crypto_secretbox_detached() now supports overlapping input and output\n  regions.\n- NaCl's donna_c64 implementation of curve25519 was reading an extra byte\n  past the end of the buffer containing the base point. This has been\n  fixed.\n",
+      "prerelease": false,
+      "published_at": "2014-11-21T04:54:51Z",
+      "html_url": "https://github.com/jedisct1/libsodium/releases/tag/1.0.1",
+      "assets": [
+        {
+          "name": "libsodium-1.0.1.tar.gz",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.1/libsodium-1.0.1.tar.gz",
+          "size": 1651848,
+          "content_type": "application/x-gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "1.0.0",
+      "name": "1.0.0",
+      "body": "- The API and ABI are now stable. New features will be added, but backward-compatibility is guaranteed through all the 1.x.y releases.\n- crypto_sign() properly works with overlapping regions again. Thanks to @pysiak for reporting this regression introduced in version 0.6.1.\n- The test suite has been extended.\n",
+      "prerelease": false,
+      "published_at": "2014-09-24T17:06:48Z",
+      "html_url": "https://github.com/jedisct1/libsodium/releases/tag/1.0.0",
+      "assets": [
+        {
+          "name": "libsodium-1.0.0.tar.gz",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.0/libsodium-1.0.0.tar.gz",
+          "size": 1538797,
+          "content_type": "application/x-gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.7.1",
+      "name": "0.7.1 (1.0 RC2)",
+      "body": "This is the second release candidate of Sodium 1.0.\n\nMinor compilation, readability and portability changes have been made and the test suite was improved, but the API is the same as the previous release candidate.\n",
+      "prerelease": false,
+      "published_at": "2014-09-19T21:04:37Z",
+      "html_url": "https://github.com/jedisct1/libsodium/releases/tag/0.7.1",
+      "assets": [
+        {
+          "name": "libsodium-0.7.1.tar.gz",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/0.7.1/libsodium-0.7.1.tar.gz",
+          "size": 1537538,
+          "content_type": "application/x-gzip"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "Get my public keys here: https://sk.tl/7CPRo8kn",
+  "owner_company": null,
+  "owner_location": "Antibes, France",
+  "owner_blog": "https://primulinus.tpopsite.com",
+  "owner_twitter_username": "jedisct1",
+  "owner_followers": 4074,
+  "owner_following": 194,
+  "owner_created_at": "2009-09-09T10:20:57Z",
+  "homepage": "https://libsodium.org",
+  "category": "crypto"
+}

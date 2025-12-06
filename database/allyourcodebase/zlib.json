@@ -1,0 +1,32 @@
+{
+  "name": "zlib",
+  "owner": "allyourcodebase",
+  "repo": "zlib",
+  "description": "zlib ported to the zig build system",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 62,
+  "forks": 12,
+  "watchers": 4,
+  "updated_at": "2025-11-29T13:41:52Z",
+  "dependencies": [
+    {
+      "name": "zlib",
+      "url": "https://github.com/madler/zlib/archive/refs/tags/v1.3.1.tar.gz",
+      "hash": "N-V-__8AAB0eQwD-0MdOEBmz7intriBReIsIDNlukNVoNu6o"
+    }
+  ],
+  "minimum_zig_version": "0.15.2",
+  "readme": "# zlib\n\nThis is [zlib](https://www.zlib.net/),\npackaged for [Zig](https://ziglang.org/).\n\n## How to use it\n\nFirst, update your `build.zig.zon`:\n\n```\nzig fetch --save https://github.com/allyourcodebase/zlib/archive/refs/tags/1.3.1.tar.gz\n```\n\nNext, add this snippet to your `build.zig` script:\n\n```zig\nconst zlib_dep = b.dependency(\"zlib\", .{\n    .target = target,\n    .optimize = optimize,\n});\nyour_compilation.linkLibrary(zlib_dep.artifact(\"z\"));\n```\n\nThis will provide zlib as a static library to `your_compilation`.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
+  "releases": [],
+  "owner_bio": "...are belong to Ziguanas, but we'd also be delighted to give them back!",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2023-09-28T21:29:33Z",
+  "license": "MIT",
+  "category": "library"
+}

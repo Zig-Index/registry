@@ -1,0 +1,152 @@
+{
+  "name": "zargs",
+  "owner": "kioz-wang",
+  "repo": "zargs",
+  "description": "Comptime Argparse for Zig! Let's start to build your command line!",
+  "type": "project",
+  "topics": [
+    "argument-parser",
+    "command-line",
+    "zig",
+    "zig-package",
+    "ziglang",
+    "positional-arguments",
+    "subcommands",
+    "clap-rs",
+    "cli"
+  ],
+  "stars": 26,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-10-11T12:51:54Z",
+  "dependencies": [
+    {
+      "name": "zterm",
+      "url": "git+https://github.com/kioz-wang/zterm#5a47f9a17285125fe35cb878759e01647899d814",
+      "hash": "zterm-0.14.4-buNfZ2o2BABFTy1TcC-Ecc2dytTdrX-fa1m98pioOQn-"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# zargs\n\n> other language: [中文简体](README.zh-CN.md)\n\nAnother Comptime-argparse for Zig! Let's start to build your command line!\n\n![badge x86_64-linux](https://gist.githubusercontent.com/kioz-wang/ba3b3d2a170d085a3598421203a4988b/raw/027e2590a6ade0e6db60a725a01d651c33bea83a/ci-badge.zargs.x86_64-linux.svg)\n![badge aarch64-linux](https://gist.githubusercontent.com/kioz-wang/ba3b3d2a170d085a3598421203a4988b/raw/027e2590a6ade0e6db60a725a01d651c33bea83a/ci-badge.zargs.aarch64-linux.svg)\n![badge x86_64-windows](https://gist.githubusercontent.com/kioz-wang/ba3b3d2a170d085a3598421203a4988b/raw/027e2590a6ade0e6db60a725a01d651c33bea83a/ci-badge.zargs.x86_64-windows.svg)\n![badge x86_64-macos](https://gist.githubusercontent.com/kioz-wang/ba3b3d2a170d085a3598421203a4988b/raw/027e2590a6ade0e6db60a725a01d651c33bea83a/ci-badge.zargs.x86_64-macos.svg)\n![badge aarch64-macos](https://gist.githubusercontent.com/kioz-wang/ba3b3d2a170d085a3598421203a4988b/raw/027e2590a6ade0e6db60a725a01d651c33bea83a/ci-badge.zargs.aarch64-macos.svg)\n\n![asciicast](.asset/demo.gif)\n\n```zig\nconst std = @import(\"std\");\nconst zargs = @import(\"zargs\");\nconst Command = zargs.Command;\nconst Arg = zargs.Arg;\nconst Ranges = zargs.Ranges;\nconst ztype = @import(\"ztype\");\nconst String = ztype.String;\n\npub fn main() !void {\n    // Like Py3 argparse, https://docs.python.org/3.13/library/argparse.html\n    const remove = Command.new(\"remove\")\n        .about(\"Remove something\")\n        .alias(\"rm\").alias(\"uninstall\").alias(\"del\")\n        .opt(\"verbose\", u32, .{ .short = 'v' })\n        .optArg(\"count\", u32, .{ .short = 'c', .argName = \"CNT\", .default = 9 })\n        .posArg(\"name\", String, .{});\n\n    // Like Rust clap, https://docs.rs/clap/latest/clap/\n    const cmd = Command.new(\"demo\").requireSub(\"action\")\n        .about(\"This is a demo intended to be showcased in the README.\")\n        .author(\"KiozWang\")\n        .homepage(\"https://github.com/kioz-wang/zargs\")\n        .arg(Arg.opt(\"verbose\", u32).short('v').help(\"help of verbose\"))\n        .arg(Arg.optArg(\"logfile\", ?ztype.OpenLazy(.fileCreate, .{ .read = true })).long(\"log\").help(\"Store log into a file\"))\n        .sub(Command.new(\"install\")\n            .about(\"Install something\")\n            .arg(Arg.optArg(\"count\", u32).default(10)\n                .short('c').short('n').short('t')\n                .long(\"count\").long(\"cnt\")\n                .ranges(Ranges(u32).new().u(5, 7).u(13, null)).choices(&.{ 10, 11 }))\n            .arg(Arg.posArg(\"name\", String).rawChoices(&.{ \"gcc\", \"clang\" }))\n            .arg(Arg.optArg(\"output\", String).short('o').long(\"out\"))\n            .arg(Arg.optArg(\"vector\", ?@Vector(3, i32)).long(\"vec\")))\n        .sub(remove);\n\n    var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;\n    const allocator = gpa.allocator();\n\n    var args = cmd.config(.{ .style = .classic }).parse(allocator) catch |e|\n        zargs.exitf(e, 1, \"\\n{s}\\n\", .{cmd.usageString()});\n    defer cmd.destroy(&args, allocator);\n    if (args.logfile) |logfile| std.debug.print(\"Store log into {}\\n\", .{logfile});\n    switch (args.action) {\n        .install => |a| {\n            std.debug.print(\"Installing {s}\\n\", .{a.name});\n        },\n        .remove => |a| {\n            std.debug.print(\"Removing {s}\\n\", .{a.name});\n            std.debug.print(\"{any}\\n\", .{a});\n        },\n    }\n    std.debug.print(\"Success to do {s}\\n\", .{@tagName(args.action)});\n}\n```\n\n## Background\n\nAs a system level programming language, there should be an elegant solution for parsing command line arguments.\n\n`zargs` draws inspiration from the API styles of [Py3 argparse](https://docs.python.org/3.13/library/argparse.html) and [Rust clap](https://docs.rs/clap/latest/clap/). It provides all parameter information during editing, reflects the parameter structure and parser at compile time, along with everything else needed, and supports dynamic memory allocation for parameters at runtime.\n\n## Installation\n\n### fetch\n\nGet the latest version:\n\n```bash\nzig fetch --save git+https://github.com/kioz-wang/zargs\n```\n\nTo fetch a specific version (e.g., `v0.14.3`):\n\n```bash\nzig fetch --save https://github.com/kioz-wang/zargs/archive/refs/tags/v0.14.3.tar.gz\n```\n\n#### Version Notes\n\n> See https://github.com/kioz-wang/zargs/releases\n\nThe version number follows the format `vx.y.z[-alpha.n]`:\n- **x**: Currently fixed at 0. It will increment to 1 when the project stabilizes. Afterward, it will increment by 1 for any breaking changes.\n- **y**: Represents the supported Zig version. For example, `vx.14.z` supports [Zig 0.14.0](https://github.com/ziglang/zig/releases/tag/0.14.0).\n- **z**: Iteration version, indicating releases with new features or significant changes (see [milestones](https://github.com/kioz-wang/zargs/milestones)).\n- **n**: Minor version, indicating releases with fixes or minor updates.\n\n### Importing Core Module\n\nIn your `build.zig`, use `addImport` (for example):\n\n```zig\nconst exe = b.addExecutable(.{\n    .name = \"your_app\",\n    .root_source_file = b.path(\"src/main.zig\"),\n    .target = b.standardTargetOptions(.{}),\n    .optimize = b.standardOptimizeOption(.{}),\n});\nexe.root_module.addImport(\"zargs\", b.dependency(\"zargs\", .{}).module(\"zargs\"));\nb.installArtifact(exe);\n\nconst run_cmd = b.addRunArtifact(exe);\nrun_cmd.step.dependOn(b.getInstallStep());\nif (b.args) |args| {\n    run_cmd.addArgs(args);\n}\n\nconst run_step = b.step(\"run\", \"Run the app\");\nrun_step.dependOn(&run_cmd.step);\n```\n\nAfter importing in your source code, you will gain access to the following features:\n\n- Command and argument builders: `Command`, `Arg`\n- Versatile iterator support: `TokenIter`\n- Convenient exit functions: `exit`, `exitf`\n\n> See the [documentation](#APIs) for details.\n\n```zig\nconst zargs = @import(\"zargs\");\n```\n\n### Importing other modules\n\nIn addition to the core module `zargs`, I also exported the `fmt` and `par` modules.\n\n#### fmt\n\n`any`, which provides a more flexible and powerful formatting scheme.\n\n`stringify`, if a class contains a method such as `fname(self, writer)`, then you can obtain a compile-time string like this:\n\n```zig\npub fn getString(self: Self) *const [stringify(self, “fname”).count():0]u8 {\n    return stringify(self, “fname”).literal();\n}\n```\n\n`comptimeUpperString` converts a compile-time string to uppercase.\n\n#### par\n\n`any`, parses the string into any type instance you want.\n\nFor `struct`, you need to implement `pub fn parse(s: String, a_maybe: ?Allocator) ?Self`. For `enum`, the default parser is `std.meta.stringToEnum`, but if `parse` is implemented, it will be used instead.\n\n`destroy`, releases the parsed type instance.\n\nSafe release: for instances where no memory allocation occurred during parsing, no actual release action is performed. For `struct` and `enum`, actual release actions are performed only when `pub fn destroy(self: Self, a: Allocator) void` is implemented.\n\n#### ztype\n\nProvides `String`, `LiteralString` and `checker`.\n\nProvides the wrappers of some struct in `std`:\n- `Open/OpenLazy(...)`: `std.fs.File/Dir`\n    - See [ex-06](examples/ex-06.copy.zig) for usage\n- `...`\n\n## Features\n\n### Options, Arguments, Subcommands\n\n#### Terminology\n\n- Option (`opt`)\n    - Single Option (`singleOpt`)\n        - Boolean Option (`boolOpt`), `T == bool`\n        - Accumulative Option (`repeatOpt`), `@typeInfo(T) == .int`\n    - Option with Argument (`argOpt`)\n        - Option with Single Argument (`singleArgOpt`), T, `?T`\n        - Option with Fixed Number of Arguments (`arrayArgOpt`), `[n]T`\n        - Option with Variable Number of Arguments (`multiArgOpt`), `[]T`\n- Argument (`arg`)\n    - Option Argument (`optArg`) (equivalent to Option with Argument)\n    - Positional Argument (`posArg`)\n        - Single Positional Argument (`singlePosArg`), T, `?T`\n        - Fixed Number of Positional Arguments (`arrayPosArg`), `[n]T`\n- Subcommand (`subCmd`)\n\n#### Matching and Parsing\n\nMatching and parsing are driven by an iterator. For options, the option is always matched first, and if it takes an argument, the argument is then parsed. For positional arguments, parsing is attempted directly.\n\nFor arguments, T must be the smallest parsable unit: `[]const u8` -> T\n\n- `.int`\n- `.float`\n- `.bool`\n    - `true`: 'y', 't', \"yes\", \"true\" (case insensitive)\n    - `false`: 'n', 'f', \"no\", \"false\" (case insensitive)\n- `.enum`: Uses `std.meta.stringToEnum` by default, but `parse` method takes priority\n- `.struct`: Struct with `parse` method\n- `.vector`\n    - Only supports base types of `.int`, `.float`, and `.bool`\n    - `@Vector{1,1}`: `[\\(\\[\\{][ ]*1[ ]*[;:,][ ]*1[ ]*[\\)\\]\\}]`\n    - `@Vector{true,false}`: `[\\(\\[\\{][ ]*y[ ]*[;:,][ ]*no[ ]*[\\)\\]\\}]`\n\nIf type T has no associated default parser or `parse` method, you can specify a custom parser (`.parseFn`) for the parameter. Obviously, single-option parameters cannot have parsers as it would be meaningless.\n\n#### Default Values and Optionality\n\nOptions and arguments can be configured with default values (`.default`). Once configured, the option or argument becomes optional.\n\n- Even if not explicitly configured, single options always have default values: boolean options default to `false`, and accumulative options default to `0`.\n- Options or arguments with an optional type `?T` cannot be explicitly configured: they are forced to default to `null`.\n\n> Single options, options with a single argument of optional type, or single positional arguments of optional type are always optional.\n\nDefault values must be determined at comptime. For `argOpt` and `posArg`, if the value cannot be determined at comptime (e.g., `std.fs.cwd()` at `Windows`), you can configure the default input (`.rawDefault`), which will determine the default value in the perser.\n\n#### Value Ranges\n\nValue ranges (`.ranges`, `.choices`) can be configured for arguments, which are validated after parsing.\n\n> Default values are not validated (intentional feature? 😄)\n\nIf constructing value ranges is cumbersome, `.rawChoices` can be used to filter values before parsing.\n\n##### Ranges\n\nWhen `T` implements compare, value `.ranges` can be configured for the argument.\nChoices\n\n> See [helper](src/helper.zig).Compare.compare\n\n##### Choices\n\nWhen `T` implements equal, value `.choices` can be configured for the argument.\n\n> See [helper](src/helper.zig).Compare.equal\n\n#### Callbacks\n\nA callback (`.callbackFn`) can be configured, which will be executed after matching and parsing.\n\n#### Subcommands\n\nA command cannot have both positional arguments and subcommands simultaneously.\n\n#### Representation\n\nFor the parser, except for accumulative options and options with a variable number of arguments, no option can appear more than once.\n\nOptions are further divided into short options and long options:\n- **Short Option**: `-v`\n- **Long Option**: `--verbose`\n\nOptions with a single argument can use a connector to link the option and the argument:\n- **Short Option**: `-o=hello`, `-o hello`\n- **Long Option**: `--output=hello`, `--output hello`\n\n> Dropping the connector or whitespace for short options is not allowed, as it results in poor readability!\n\nFor options with a fixed number of arguments, connectors cannot be used, and all arguments must be provided at once. For example, with a long option:\n```bash\n--files f0 f1 f2 # [3]const T\n```\n\nOptions with a variable number of arguments are similar to options with a single argument but can appear multiple times, e.g.:\n```bash\n--file f0 -v --file=f1 --greet # []const T\n```\n\nMultiple short options can share a prefix, but if an option takes an argument, it must be placed last, e.g.:\n```bash\n-Rns\n-Rnso hello\n-Rnso=hello\n```\n\nOnce a positional argument appears, the parser informs the iterator to only return positional arguments, even if the arguments might have an option prefix, e.g.:\n```bash\n-o hello a b -v # -o is an option with a single argument, so a, b, -v are all positional arguments\n```\n\nAn option terminator can be used to inform the iterator to only return positional arguments, e.g.:\n```bash\n--output hello -- a b -v\n```\n\nDouble quotes can be used to avoid iterator ambiguity, e.g., to pass a negative number `-1`, double quotes must be used:\n```bash\n--num \\\"-1\\\"\n```\n\n> Since the shell removes double quotes, escape characters are also required! If a connector is used, escaping is unnecessary: `--num=\"-1\"`.\n\n### Compile-Time Command Construction\n\nAs shown in the example at the beginning of the article, command construction can be completed in a single line of code through chaining.\n\nOf course, if needed, you can also build it step by step. Simply declare it as `comptime var cmd = Command.new(...)`.\n\n#### CallBackFn for Command\n\n```zig\nconst install = Command.new(\"install\");\nconst _demo = Command.new(\"demo\").requireSub(\"action\")\n    .sub(install.callBack(struct {\n        fn f(_: *install.Result()) void {\n            std.debug.print(\"CallBack of {s}\\n\", .{install.name});\n        }\n    }.f));\nconst demo = _demo.callBack(struct {\n    fn f(_: *_demo.Result()) void {\n        std.debug.print(\"CallBack of {s}\\n\", .{_demo.name});\n    }\n}.f);\n```\n\n### Compile-Time Parser Generation\n\n```zig\nconst args = try cmd.parse(allocator);\ndefer cmd.destroy(&args, allocator);\n```\n\nSimply call `parse` to generate the parser and argument structure. This method internally creates a system iterator, which is destroyed after use.\n\nAdditionally, `parseFrom` supports passing a custom iterator and optionally avoids using a memory allocator. If no allocator is used, there is no need to defer destroy.\n\n#### Retrieving Remaining Command-Line Arguments\n\nWhen the parser has completed its task, if you still need to handle the remaining arguments manually, you can call the iterator's `nextAllBase` method.\n\nIf further parsing of the arguments is required, you can use the `parseAny` function.\n\n#### Versatile iterators\n\nFlexible for real and test scenarios\n\n- System iterator (`init`): get real command line arguments.\n- General iterator (`initGeneral`): splits command line arguments from a one-line string.\n- Line iterator (`initLine`): same as regular iterator, but you can specify delimiters.\n- List iterator (`initList`): iterates over a list of strings.\n\nShort option prefixes (`-`), long option prefixes (`--`), connectors (`=`), option terminators (`--`) can be customized for iterators (see [ex-05](examples/ex-05.custom_config.zig)).\n\n### Compile-Time Usage and Help Generation\n\n```zig\n_ = cmd.usageString();\n_ = cmd.helpString();\n```\n\n## APIs\n\nSee https://kioz-wang.github.io/zargs/#doc\n\n## Examples\n\n### builtin\n\n> Look at [here](examples/)\n\nTo build all examples:\n\n```bash\nzig build examples\n```\n\nTo list all examples (all step prefixed `ex-` are examples):\n\n```bash\nzig build -l\n```\n\nTo execute an example:\n\n```bash\nzig build ex-01.add -- -h\n```\n\n### more\n\n> Welcome to submit PRs to link your project that use `zargs`!\n\nMore real-world examples are coming!\n\n- [zpacker](https://github.com/kioz-wang/zpacker/blob/master/src/main.zig)\n- [zterm](https://github.com/kioz-wang/zterm/blob/master/cli/main.zig)\n\n## License\n\n[MIT](LICENSE) © Kioz Wang\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/49008623?u=72e6810e849306e72523d98e69869211dcaf1405&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.15.0-alpha.0",
+      "name": "v0.15.0-alpha.0",
+      "body": "## What's Changed\r\n* Fix: [Command]修复对指定了`parseFn`的无`parse`方法结构体仍编译错误的问题 by @kioz-wang in https://github.com/kioz-wang/zargs/pull/69\r\n* Feature: 使用`.rawDefault`在运行时确认默认值；默认解析器支持`std.fs.File/Dir` by @kioz-wang in https://github.com/kioz-wang/zargs/pull/70\r\n* Feature: `posArg` supports `.rawDefault`; export `ztype` module; Refactor: `destroy` by @kioz-wang in https://github.com/kioz-wang/zargs/pull/74\r\n* Feature: [ztype] `Open(...)` supports stdio, so also supports pipe in Linux by @kioz-wang in https://github.com/kioz-wang/zargs/pull/75\r\n* Feature: [ztype] 调整目录结构；新增`OpenLazy`在需要时打开或创建文件 by @kioz-wang in https://github.com/kioz-wang/zargs/pull/76\r\n* Kioz wang/issue78 by @kioz-wang in https://github.com/kioz-wang/zargs/pull/83\r\n* Build: Upgrade to Zig 0.15.1 by @npc1054657282 in https://github.com/kioz-wang/zargs/pull/84\r\n\r\n## New Contributors\r\n* @npc1054657282 made their first contribution in https://github.com/kioz-wang/zargs/pull/84\r\n\r\n**Full Changelog**: https://github.com/kioz-wang/zargs/compare/v0.14.8...v0.15.0-alpha.0",
+      "prerelease": false,
+      "published_at": "2025-10-11T12:51:01Z",
+      "html_url": "https://github.com/kioz-wang/zargs/releases/tag/v0.15.0-alpha.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.14.8",
+      "name": "v0.14.8",
+      "body": "## What's Changed\r\n* API\r\n  * `exit` and `exitf`\r\n    * very useful in callback function (See [zpacker](https://github.com/kioz-wang/zpacker/blob/master/src/main.zig))\r\n  * rename in `Arg`\r\n    * `raw_choices` to `rawChoices`\r\n  * export modules: `fmt`, `par`\r\n    * remove `parseAny`, use `@import(\"par\").any` instead\r\n  * rename in `Command`\r\n    * `setConfig` to `config`\r\n    * `usage` to `usageString`\r\n    * `help` to `helpString`\r\n* Feature\r\n  * support `Vector` type\r\n  * colorful usage and help message\r\n    * depends [zterm](https://github.com/kioz-wang/zterm)\r\n\r\n\r\n**Full Changelog**: https://github.com/kioz-wang/zargs/compare/v0.14.7...v0.14.8",
+      "prerelease": false,
+      "published_at": "2025-07-29T18:06:11Z",
+      "html_url": "https://github.com/kioz-wang/zargs/releases/tag/v0.14.8",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.14.7",
+      "name": "v0.14.7",
+      "body": "- CI: support multiple platforms\r\n- Fix: don't free memory of `[]const u8` literal set by `.default` call",
+      "prerelease": false,
+      "published_at": "2025-04-18T15:59:09Z",
+      "html_url": "https://github.com/kioz-wang/zargs/releases/tag/v0.14.7",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.14.6",
+      "name": "v0.14.6",
+      "body": "Feature:\r\n\r\n- support to alias for short and long prefix of options (call `.short` or `.long` multiple times)\r\n- support to alias for command (call `.alias`)\r\n- `.callBack` of command would return `Self` instead (this is more friendly)\r\n- support to set `TokenIter`'s config from command (call `.setConfig`, see examples/ex-05.custom_config.zig)\r\n- show all of enum literal in certain cases\r\n\r\nFix:\r\n\r\n- remove `.strip = true` from `build.zig`",
+      "prerelease": false,
+      "published_at": "2025-04-05T18:29:45Z",
+      "html_url": "https://github.com/kioz-wang/zargs/releases/tag/v0.14.6",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.14.5",
+      "name": "v0.14.5",
+      "body": "- BugFix: 对解析后的值，检查是否在 `choices` 和 `ranges` 的并集中\r\n  - Bug: 当确认值不在 `ranges` 中后，就不再检查 `choices` 了\r\n- Feature: `raw_choices` 将在解析前检查原始字符串\r\n- README: 新增了一个 gif",
+      "prerelease": false,
+      "published_at": "2025-03-28T09:04:29Z",
+      "html_url": "https://github.com/kioz-wang/zargs/releases/tag/v0.14.5",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.14.4",
+      "name": "v0.14.4",
+      "body": "- 现在可以为参数（`arg`）配置 `ranges` 和 `choices`\r\n- 优化了 help 的格式，现可显示默认值和取值范围\r\n- 单参数选项（`singleArgOpt`）和单位置参数（`singlePosArg`），现可配置为可选类型（`?T`）",
+      "prerelease": false,
+      "published_at": "2025-03-26T18:16:09Z",
+      "html_url": "https://github.com/kioz-wang/zargs/releases/tag/v0.14.4",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.14.3",
+      "name": "v0.14.3",
+      "body": "- 简化 APIs，`parse`方法将在内部使用用完即销的系统迭代器（减少使用者心智负担）\r\n- 更新 README，增加版本号说明\r\n- `Meta` 增加别名为 `Arg`，便于使用者理解",
+      "prerelease": false,
+      "published_at": "2025-03-19T07:23:14Z",
+      "html_url": "https://github.com/kioz-wang/zargs/releases/tag/v0.14.3",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.14.2",
+      "name": "v0.14.2",
+      "body": "- [API] 实现链式调用 APIs，且原有 APIs 风格保留\r\n- [Build][examples] 简化 step 名\r\n- [Fix] 修复 `parseAlloc` 后资源无法完全释放的问题\r\n- [Misc] 优化 Usage 和 Help 格式化\r\n- [Misc] 优化编译时和运行时错误日志",
+      "prerelease": false,
+      "published_at": "2025-03-19T04:49:48Z",
+      "html_url": "https://github.com/kioz-wang/zargs/releases/tag/v0.14.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.14.1",
+      "name": "v0.14.1",
+      "body": "- Fix: remove warn when build from `zig fetch`",
+      "prerelease": false,
+      "published_at": "2025-03-12T07:02:22Z",
+      "html_url": "https://github.com/kioz-wang/zargs/releases/tag/v0.14.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.14.0",
+      "name": "v0.14.0",
+      "body": "- Bugfix: adapted to Zig 0.14.0\r\n- Feature: support to set `callBackFn` for the `Command`\r\n- Typo: correct \"destory\" to \"destroy\"\r\n- API: rename `Iter` to `TokenIter`; public `parser.any` as `parseAny`",
+      "prerelease": false,
+      "published_at": "2025-03-12T06:30:20Z",
+      "html_url": "https://github.com/kioz-wang/zargs/releases/tag/v0.14.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.13.1",
+      "name": "v0.13.1",
+      "body": "- pub `parser` type, its `any` function is very useful\r\n- keep debug status when `reinit` a token iter\r\n- fix `nextAllBase` losing the first remaining token\r\n- improved examples' build\r\n\r\n---\r\n\r\n![image](https://github.com/user-attachments/assets/1379fb4c-7a61-408c-9a67-6d56849d5304)\r\n",
+      "prerelease": false,
+      "published_at": "2025-03-07T15:39:57Z",
+      "html_url": "https://github.com/kioz-wang/zargs/releases/tag/v0.13.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.13.0",
+      "name": "v0.13.0",
+      "body": "# Hello World\r\n\r\nThis is the first release and only support [zig 0.13.0](https://github.com/ziglang/zig/releases/tag/0.13.0)\r\n\r\n## builtin help\r\n\r\n<img src=\"https://github.com/user-attachments/assets/52171c43-1a64-4966-936b-e64e01dd5f0b\" width=\"300px\">\r\n\r\n## run example\r\n\r\n![image](https://github.com/user-attachments/assets/cfe64088-944a-48f1-8153-40b75ceb54df)\r\n",
+      "prerelease": false,
+      "published_at": "2025-03-04T15:12:51Z",
+      "html_url": "https://github.com/kioz-wang/zargs/releases/tag/v0.13.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 8,
+  "owner_following": 12,
+  "owner_created_at": "2019-03-28T00:38:40Z",
+  "homepage": "https://kioz-wang.github.io/zargs/",
+  "license": "MIT",
+  "category": "cli"
+}

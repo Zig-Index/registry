@@ -1,0 +1,28 @@
+{
+  "name": "wavefront-obj",
+  "owner": "ziglibs",
+  "repo": "wavefront-obj",
+  "description": "A parser for wavefront object files",
+  "type": "project",
+  "topics": [
+    "wavefront-obj",
+    "3d-format",
+    "ziglang",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 5,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-01-15T21:34:10Z",
+  "readme": "# wavefront-obj\nA parser for wavefront object files\n\n## Dependencies\nRequires package [`zlm`](https://github.com/ziglibs/zlm) to be present.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/65570835?v=4",
+  "releases": [],
+  "owner_bio": "Community-driven library development",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2020-05-18T21:45:12Z",
+  "license": "MIT",
+  "category": "library"
+}

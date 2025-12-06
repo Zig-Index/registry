@@ -1,0 +1,57 @@
+{
+  "name": "zimdjson",
+  "owner": "EzequielRamis",
+  "repo": "zimdjson",
+  "description": "Parsing gigabytes of JSON per second. Zig port of simdjson with fundamental features.",
+  "type": "project",
+  "topics": [
+    "json",
+    "json-parser",
+    "simd",
+    "zig",
+    "zig-package",
+    "ziglang",
+    "simdjson",
+    "zig-library"
+  ],
+  "stars": 152,
+  "forks": 4,
+  "watchers": 4,
+  "updated_at": "2025-12-06T05:49:50Z",
+  "dependencies": [
+    {
+      "name": "parse_number_fxx",
+      "url": "https://github.com/nigeltao/parse-number-fxx-test-data/archive/55d79b184b7d8fac2e143e89dc19b766ec4e54b8.tar.gz",
+      "hash": "N-V-__8AACBIdhAWVvf7hKnMY8ipBn3kNaIe-6ctQddchTVC"
+    },
+    {
+      "name": "simdjson",
+      "url": "https://github.com/simdjson/simdjson/archive/refs/tags/v3.10.1.tar.gz",
+      "hash": "N-V-__8AAP3gugBlcehtzstAJiwgQGMwxp3kYs98-Rbb1Iqa"
+    },
+    {
+      "name": "yyjson",
+      "url": "https://github.com/ibireme/yyjson/archive/refs/tags/0.10.0.tar.gz",
+      "hash": "N-V-__8AAKmVZgBC79tIB3maNh7YdYQE39JZZXV4Es5Ye-oP"
+    },
+    {
+      "name": "rapidjson",
+      "url": "https://github.com/EzequielRamis/rapidjson/archive/bf11b43f8eac3173ca88f82430917ad919feee2b.tar.gz",
+      "hash": "N-V-__8AAOiaNQDzwFr-sTlIRWyxtJgAqqpN_6WJAQvck3Pr"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# zimdjson\n\n> JSON is everywhere on the Internet. Servers spend a _lot_ of time parsing it. We need a fresh approach.\n\nWelcome to zimdjson: a high-performance JSON parser that takes advantage of SIMD vector instructions, based on the paper [Parsing Gigabytes of JSON per Second](https://arxiv.org/abs/1902.08318).\n\nThe majority of the source code is based on the C++ implementation https://github.com/simdjson/simdjson with the addition of some fundamental features like:\n\n- Streaming support which can handle arbitrarily large documents with O(1) of memory usage.\n- An ergonomic, [Serde](https://serde.rs)-like deserialization interface thanks to Zig's compile-time reflection. See [Reflection-based JSON](#reflection-based-json).\n- More efficient memory usage.\n\n## Getting started\n\nInstall the zimdjson library by running the following command in your project root:\n\n```\nzig fetch --save git+https://github.com/ezequielramis/zimdjson#0.1.1\n```\n\nThen write the following in your `build.zig`:\n\n```zig\nconst zimdjson = b.dependency(\"zimdjson\", .{});\nexe.root_module.addImport(\"zimdjson\", zimdjson.module(\"zimdjson\"));\n```\n\nAs an example, download a sample file called [`twitter.json`](https://github.com/simdjson/simdjson-data/blob/master/jsonexamples/twitter.json).\n\nThen execute the following:\n\n```zig\nconst std = @import(\"std\");\nconst zimdjson = @import(\"zimdjson\");\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}).init;\n    const allocator = gpa.allocator();\n\n    var parser = zimdjson.ondemand.StreamParser(.default).init;\n    defer parser.deinit(allocator);\n\n    const file = try std.fs.cwd().openFile(\"twitter.json\", .{});\n    defer file.close();\n\n    const document = try parser.parseFromReader(allocator, file.reader().any());\n\n    const metadata_count = try document.at(\"search_metadata\").at(\"count\").asUnsigned();\n    std.debug.print(\"{} results.\", .{metadata_count});\n}\n```\n\n```\n> zig build run\n\n100 results.\n```\n\nTo see how the streaming parser above handles multi-gigabyte JSON documents with minimal memory usage, download one of [these dumps](https://www.edsm.net/en/nightly-dumps) or play it with a file of your choice.\n\n## Requirements\n\nCurrently, targets with Linux, Windows, or macOS operating systems and CPUs with SIMD capabilities are supported. Missing targets can be added by contributing.\n\n## Documentation\n\nThe most recent documentation can be found in https://zimdjson.ramis.ar.\n\n## Reflection-based JSON\n\nAlthough the provided interfaces are simple enough, it is expected to have unnecessary boilerplate when deserializing lots of data structures. Thank to Zig's compile-time reflection, we can eliminate it:\n\n```zig\nconst std = @import(\"std\");\nconst zimdjson = @import(\"zimdjson\");\n\nconst Film = struct {\n    name: []const u8,\n    year: u32,\n    characters: []const []const u8, // we could also use std.ArrayListUnmanaged([]const u8)\n};\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}).init;\n    const allocator = gpa.allocator();\n\n    var parser = zimdjson.ondemand.FullParser(.default).init;\n    defer parser.deinit(allocator);\n\n    const json =\n        \\\\{\n        \\\\  \"name\": \"Esperando la carroza\",\n        \\\\  \"year\": 1985,\n        \\\\  \"characters\": [\n        \\\\    \"Mamá Cora\",\n        \\\\    \"Antonio\",\n        \\\\    \"Sergio\",\n        \\\\    \"Emilia\",\n        \\\\    \"Jorge\"\n        \\\\  ]\n        \\\\}\n    ;\n\n    const document = try parser.parseFromSlice(allocator, json);\n\n    const film = try document.as(Film, allocator, .{});\n    defer film.deinit();\n\n    try std.testing.expectEqualDeep(\n        Film{\n            .name = \"Esperando la carroza\",\n            .year = 1985,\n            .characters = &.{\n                \"Mamá Cora\",\n                \"Antonio\",\n                \"Sergio\",\n                \"Emilia\",\n                \"Jorge\",\n            },\n        },\n        film.value,\n    );\n}\n```\n\nThis is just a simple example, but this way of deserializing is as powerful as [Serde](https://serde.rs), so there is a lot of more features we can use, such as:\n\n- Deserializing data structures from the Zig Standard Library.\n- Renaming fields.\n- Using different union representations.\n- Custom handling unknown fields.\n\nTo see all available options it offers checkout its [reference](https://zimdjson.ramis.ar/#zimdjson.ondemand.Parser.schema).\n\nTo see all supported Zig Standard Library's data structures checkout [this list](https://zimdjson.ramis.ar/#zimdjson.ondemand.Parser.schema.std).\n\nTo see how it can be really used checkout the [test suite](https://github.com/ezequielramis/zimdjson/blob/main/tests/schema.zig) for more examples.\n\n## Performance\n\n> [!NOTE]\n> As a rule of thumb, do not trust any benchmark — always verify it yourself. There may be biases that favor a particular candidate, including mine.\n\nThe following picture represents parsing speed in GB/s of similar tasks presented in the paper [On-Demand JSON: A Better Way to Parse\nDocuments?](https://arxiv.org/pdf/2312.17149), where the first three tasks iterate over `twitter.json` and the others iterate over a 626MB JSON file called `systemsPopulated.json` from [these dumps](https://www.edsm.net/en/nightly-dumps).\n\n![](./docs/assets/bench_ondemand_find_tweet.png)\n\nOk, it seems the benchmark got borked but it is not, because of how cache works on small files and how the streaming parser happily ended finding out the tweet in the middle of the file.\n\nLet's get rid of that task to see better the other results.\n\n![](./docs/assets/bench_ondemand.png)\n\nThe following picture corresponds to a second simple benchmark, representing parsing speed in GB/s for near-complete parsing of the `twitter.json` file with reflection-based parsers (`serde_json`, `std.json`).\n\n![](./docs/assets/bench_schema.png)\n\n**Note**: If you look closely, you'll notice that \"zimdjson (On-Demand, Unordered)\" is the slowest of all. This is, unfortunately, a behaviour that also occurs with `simdjson` when object keys are unordered. If you do not know the order, it can be mitigated by using an schema. Thanks to the [glaze library author](https://github.com/stephenberry/glaze) for pointing this out.\n\nAll benchmarks were run on a 3.30GHz Intel Skylake processor.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/44057100?u=1780372d2ff3bae82157036e962b5afd52134cd9&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Buenos Aires, Argentina",
+  "owner_blog": "ramis.ar/en",
+  "owner_twitter_username": null,
+  "owner_followers": 16,
+  "owner_following": 6,
+  "owner_created_at": "2018-10-11T10:48:14Z",
+  "homepage": "https://zimdjson.ramis.ar",
+  "license": "MIT",
+  "category": "library"
+}

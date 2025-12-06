@@ -1,0 +1,39 @@
+{
+  "name": "quix",
+  "owner": "wllfaria",
+  "repo": "quix",
+  "description": "Cross platform terminal manipulation library written in zig.",
+  "type": "project",
+  "topics": [
+    "terminal",
+    "tui",
+    "zig",
+    "zig-package",
+    "cross-platform"
+  ],
+  "stars": 4,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-03-31T17:46:40Z",
+  "dependencies": [
+    {
+      "name": "quix_winapi",
+      "url": "git+https://github.com/wllfaria/quix-winapi#5e149c5e67052092b10d199d9bff209107010b52",
+      "hash": "quix_winapi-0.0.0-XdkcUxuXAAB35R_wCoL9y6j_6W4BetWYchgdnJG3CGn9"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# Quix\n\nQuix is a terminal manipulation library written in zig.\n\n![Quix running example](./extras/gifs/read_event.gif \"Quix running example\")\n\n## Table of Contents\n- [Quix](#Quix)\n    - [Table of Contents](#table-of-contents)\n    - [Getting Started](#getting-started)\n    - [License](#License)\n\n## Getting Started\n\nAdd quix as a dependency using `zig fetch`:\n\n```sh\nzig fetch --save git+https://github.com/wllfaria/quix.git\n```\n\nUpdate your `build.zig` to include quix:\n\n```zig\nconst quix = b.dependency(\"quix\", .{\n    .target = target,\n    .optimize = optimize,\n});\n```\n\n<details>\n  <summary>Example build.zig.</summary>\n\n  ```zig\nconst std = @import(\"std\");\n\npub fn build(b: *std.Build) void {\n    const target = b.standardTargetOptions(.{});\n    const optimize = b.standardOptimizeOption(.{});\n\n    const quix = b.dependency(\"quix\", .{\n        .target = target,\n        .optimize = optimize,\n    });\n\n    const app_mod = b.createModule(.{\n        .root_source_file = b.path(\"src/main.zig\"),\n        .target = target,\n        .optimize = optimize,\n    });\n    app_mod.addImport(\"quix\", quix.module(\"quix\"));\n\n    const app = b.addExecutable(.{\n        .name = \"my_app\",\n        .root_module = app_mod,\n    });\n\n    b.installArtifact(app);\n\n    const run_cmd = b.addRunArtifact(app);\n    run_cmd.step.dependOn(b.getInstallStep());\n    if (b.args) |args| {\n        run_cmd.addArgs(args);\n    }\n\n    const run_step = b.step(\"run\", \"Run the app\");\n    run_step.dependOn(&run_cmd.step);\n\n    const exe_unit_tests = b.addTest(.{ .root_module = app_mod });\n    const run_exe_unit_tests = b.addRunArtifact(exe_unit_tests);\n\n    const test_step = b.step(\"test\", \"Run unit tests\");\n    test_step.dependOn(&run_exe_unit_tests.step);\n}\n  ```\n</details>\n\nModify your `src/main.zig` to look like this:\n\n```zig\nconst quix = @import(\"quix\");\n\npub fn main() !void {\n    const styled = quix.style.new(\"Hello from quix!\\n\")\n        .foreground(.White)\n        .background(.DarkRed)\n        .bold();\n\n    try quix.style.printStyled(styled);\n}\n```\n\n_You can also check the [examples](./examples) directory for different and more\nadvanced examples._\n\n## License\n\nThis project, `quix` and all its sub-libraries are licensed under the MIT\nlicense - see the [LICENSE](https://github.com/wllfaria/quix/blob/main/LICENSE)\nfile for details.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/43209783?u=61b3226443347bff321168e50feec54e003c5d80&v=4",
+  "releases": [],
+  "owner_bio": "Brazilian puter boy doing silly puter things",
+  "owner_company": null,
+  "owner_location": "Brazil",
+  "owner_blog": "https://wiru.st",
+  "owner_twitter_username": null,
+  "owner_followers": 48,
+  "owner_following": 19,
+  "owner_created_at": "2018-09-12T13:35:41Z",
+  "license": "MIT",
+  "category": "tui"
+}

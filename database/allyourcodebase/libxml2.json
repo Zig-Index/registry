@@ -1,0 +1,48 @@
+{
+  "name": "libxml2",
+  "owner": "allyourcodebase",
+  "repo": "libxml2",
+  "description": "libxml2 ported to the zig build system ",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 4,
+  "forks": 3,
+  "watchers": 2,
+  "updated_at": "2025-11-12T20:13:02Z",
+  "dependencies": [
+    {
+      "name": "libxml2",
+      "url": "https://download.gnome.org/sources/libxml2/2.15/libxml2-2.15.1.tar.xz",
+      "hash": "N-V-__8AAPCbSwEcttmGC8VZFtoJxaP06X_upd7O13NMUkIf"
+    },
+    {
+      "name": "zlib",
+      "url": "git+https://github.com/allyourcodebase/zlib.git#61e7df7e996ec5a5f13a653db3c419adb340d6ef",
+      "hash": "zlib-1.3.1-ZZQ7lbYMAAB1hTSOKSXAKAgHsfDcyWNH_37ojw5WSpgR"
+    },
+    {
+      "name": "libiconv",
+      "url": "git+https://github.com/allyourcodebase/libiconv.git#d86666233f4e0045b586060260e8a6093f5cdd8d",
+      "hash": "libiconv-1.18.0-p9sJwWnqAAAAD_T5JHJ8v9OrgUtLGT6ov322zOnkUkv5"
+    },
+    {
+      "name": "win_iconv",
+      "url": "git+https://github.com/allyourcodebase/win-iconv.git#497c381e41437856527b7a00b66e75af3f1f7dcc",
+      "hash": "win_iconv-0.0.10--19NP7MRAAD3CC0z2Jp2YTy649Q724cYYaR9uL7v7NCh"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "[![CI](https://github.com/allyourcodebase/libxml2/actions/workflows/ci.yaml/badge.svg)](https://github.com/allyourcodebase/libxml2/actions)\n\n# libxml2\n\nThis is [libxml2](https://gitlab.gnome.org/GNOME/libxml2), packaged for [Zig](https://ziglang.org/).\n\n## Installation\n\nFirst, update your `build.zig.zon`:\n\n```\n# Initialize a `zig build` project if you haven't already\nzig init\nzig fetch --save git+https://github.com/allyourcodebase/libxml2.git#2.15.1\n```\n\nYou can then import `libxml2` in your `build.zig` with:\n\n```zig\nconst libxml2_dependency = b.dependency(\"libxml2\", .{\n    .target = target,\n    .optimize = optimize,\n\n    // libxml2 will try to link to iconv on macOS by default which will\n    // fail when cross-compiling. You may disable iconv support for or\n    // link against GNU libiconv which is licensed under LGPL.\n\n    // disable iconv support on all targets\n    // .iconv = false,\n\n    // disable iconv support when compiling to macOS\n    // .iconv = !target.result.os.tag.isDarwin(),\n\n    // disable iconv support when cross-compiling to macOS\n    // .iconv = !(target.query.isNativeOs() and target.result.os.tag.isDarwin()),\n\n    // Use GNU libiconv on macOS which is licensed under LGPL.\n    // .@\"iconv-impl\" = if (target.result.os.tag.isDarwin()) else null,\n});\nyour_exe.linkLibrary(libxml2_dependency.artifact(\"xml\"));\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
+  "releases": [],
+  "owner_bio": "...are belong to Ziguanas, but we'd also be delighted to give them back!",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2023-09-28T21:29:33Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,40 @@
+{
+  "name": "z_impact",
+  "owner": "scemino",
+  "repo": "z_impact",
+  "description": "A 2d game engine written in ZIG",
+  "type": "project",
+  "topics": [
+    "gamedev",
+    "zig-package"
+  ],
+  "stars": 24,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-10-03T21:16:42Z",
+  "dependencies": [
+    {
+      "name": "sokol",
+      "url": "git+https://github.com/floooh/sokol-zig.git#c18be7b9668f05a84c918db0813c970025480fd9",
+      "hash": "sokol-0.1.0-pb1HK42WLQCphk4zdd8fVfw5COyd95iN4-abmBhlt87J"
+    },
+    {
+      "name": "sdl",
+      "url": "git+https://github.com/ikskuh/SDL.zig.git#424ff5f9245ef352e4c508c77ddaeed2f46bd605",
+      "hash": "SDL2-0.0.0-yMCQigakBADGJHtb2ljt13P_cCnG8Y819HRnIibNVPFk"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "[![build](https://github.com/scemino/z_impact/actions/workflows/main.yml/badge.svg)](https://github.com/scemino/z_impact/actions/workflows/main.yml)\n\n    ███████╗    ██╗███╗   ███╗██████╗  █████╗  ██████╗████████╗\n    ╚══▓▓▓╔╝    ▓▓║▓▓▓▓╗ ▓▓▓▓║▓▓╔══▓▓╗▓▓╔══▓▓╗▓▓╔════╝╚══▓▓╔══╝\n      ▒▒▒╔╝     ▒▒║▒▒╔▒▒▒▒╔▒▒║▒▒▒▒▒▒╔╝▒▒▒▒▒▒▒║▒▒║        ▒▒║   \n     ░░░╔╝      ░░║░░║╚░░╔╝░░║░░╔═══╝ ░░╔══░░║░░║        ░░║   \n    ░░░░░░░╗    ░░║░░║ ╚═╝ ░░║░░║     ░░║  ░░║╚░░░░░░╗   ░░║   \n    ╚══════╝    ╚═╝╚═╝     ╚═╝╚═╝     ╚═╝  ╚═╝ ╚═════╝   ╚═╝   \n\n    ░░░░▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓██████████████▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒░░░░╗\n    ╚═════════════════════════════════════════════════════════╝\n                                                           \nZ impact is a ZIG game engine for creating 2d action games. It's well suited\nfor jump'n'runs, twin stick shooters, top-down dungeon crawlers and others with \na focus on pixel art.\n\nThis is NOT a general purpose game engine akin to Godot, Unreal or Unity. At\nthis stage, it is also quite experimental and lacking documentation. Expect\nproblems.\n\nZ impact is more a framework than it is a library, meaning that you have to\nadhere to a structure, in code and file layout, that is prescribed by the \nengine. You do not call Z impact, Z impact _calls you_.\n\nGames made with Z impact can be compiled for Linux, macOS, Windows (through the usual hoops) and for the web with WASM. There are currently two \"platform backends\": SDL2 & Sokol and different renderers: for SDL2 platform: OpenGL and for sokol: one renderer by OS: OpenGL (Linux), Metal (mac OS), Direct-X (Windows).\n\nZ impact is a port of the orginal game engine [high_impact](https://github.com/phoboslab/high_impact/tree/master) made by phoboslab.\n\n## Examples\n\n- [Biolab Disaster](https://github.com/scemino/z_biolab): A jump'n'gun \nplatformer, displaying many of Z impacts capabilities.\n- [Drop](https://github.com/scemino/z_impact/tree/main/samples/zdrop): A minimal arcade game with\nrandomly generated levels\n\n\n## Compiling\n\nTo compile and run the sample game Drop\n\n### Linux - Windows - macOS\n\nSDL2 platform + OpenGL renderer\n\n```shell\nzig build run\n```\n\nSDL2 platform + software renderer\n\n```shell\nzig build -Dplatform=sdl_soft run\n```\n\nsokol platform\n```shell\nzig build -Dplatform=sokol run\n```\n\n### WEB\n\n```shell\nzig build -Dtarget=wasm32-emscripten run \n```\n\n## Documentation\n\nThere's not much at the moment. Most of Z impact's functionality is \ndocumented in the header files with this README giving a general overview.\nIt's best to read [the blog post](https://phoboslab.org/log/2024/08/high_impact)\nfor an overview and the source for all the details.\n\n\n## Assets\n\nAt this time, Z impact can only load images in QOI format and sounds & music \nin QOA format. The tools to convert PNG to QOI and WAV to QOA are bundled in \nthis repository and can be integrated in your build step.\n\nGame levels can be loaded from .json files. A tile editor to create these levels\nis part of Z impact: `weltmeister.html` which can be launched with a simple\ndouble click from your local copy.\n\n## Libraries used\n\n- Sokol App, Audio and Time: https://github.com/floooh/sokol-zig\n- stb_image.h and stb_image_write.h https://github.com/nothings/stb\n- QOI Image Format: https://github.com/phoboslab/qoi\n- QOA Audio Format: https://github.com/phoboslab/qoa\n- SDL.zig: https://github.com/ikskuh/SDL.zig\n\n## License\n\nAll Z impact code is MIT Licensed, though some of the libraries \ncome with their own (permissive) license. Check the header files.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/643384?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "https://scemino.github.io/",
+  "owner_twitter_username": "engge_the_game",
+  "owner_followers": 37,
+  "owner_following": 12,
+  "owner_created_at": "2011-02-28T20:37:08Z",
+  "license": "MIT",
+  "category": "library"
+}

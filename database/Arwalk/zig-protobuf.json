@@ -1,0 +1,129 @@
+{
+  "name": "zig-protobuf",
+  "owner": "Arwalk",
+  "repo": "zig-protobuf",
+  "description": "a protobuf 3 implementation for zig.",
+  "type": "project",
+  "topics": [
+    "zig",
+    "protobuf",
+    "zig-package"
+  ],
+  "stars": 358,
+  "forks": 49,
+  "watchers": 8,
+  "updated_at": "2025-12-05T07:20:16Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# zig-protobuf\n\n<img src=\"logo.svg\" width=\"50%\">\n\n\n## State of the implementation\n\nThis repository, so far, only aims at implementing [protocol buffers version 3](https://developers.google.com/protocol-buffers/docs/proto3#simple).\n\nThis project is mature enough to be used in production.\n\njson encoding/decoding is considered a beta feature.\n\n## Branches\n\nThere are 2 branches you can use for your development.\n\n* `master` is the branch with current developments, working with the latest stable release of zig.\n* `zig-master` is a branch that merges the developments in master, but works with the latest-ish master version of zig. \n\n## How to use\n\n1. Add `protobuf` to your `build.zig.zon`.  \n    ```sh\n    zig fetch --save \"git+https://github.com/Arwalk/zig-protobuf#master\"\n    ```\n1. Use the `protobuf` module. In your `build.zig`'s build function, add the dependency as module before\n`b.installArtifact(exe)`.\n    ```zig\n    pub fn build(b: *std.Build) !void {\n        // first create a build for the dependency\n        const protobuf_dep = b.dependency(\"protobuf\", .{\n            .target = target,\n            .optimize = optimize,\n        });\n\n        // and lastly use the dependency as a module\n        exe.root_module.addImport(\"protobuf\", protobuf_dep.module(\"protobuf\"));\n    }\n    ```\n\n## Generating .zig files out of .proto definitions\n\nYou can do this programatically as a compilation step for your application. The following snippet shows how to create a `zig build gen-proto` command for your project.\n\n```zig\nconst protobuf = @import(\"protobuf\");\n\npub fn build(b: *std.Build) !void {\n    // first create a build for the dependency\n    const protobuf_dep = b.dependency(\"protobuf\", .{\n        .target = target,\n        .optimize = optimize,\n    });\n    \n    ...\n\n    const gen_proto = b.step(\"gen-proto\", \"generates zig files from protocol buffer definitions\");\n\n    const protoc_step = protobuf.RunProtocStep.create(protobuf_dep.builder, target, .{\n        // out directory for the generated zig files\n        .destination_directory = b.path(\"src/proto\"),\n        .source_files = &.{\n            \"protocol/all.proto\",\n        },\n        .include_directories = &.{},\n    });\n\n    gen_proto.dependOn(&protoc_step.step);\n}\n```\n\n-------\n\nThe zig-protobuf logo is licensed under the Attribution 4.0 International (CC BY 4.0).\n\nThe logo is inspired by the [official mascots](https://github.com/ziglang/logo?tab=readme-ov-file#official-mascots) of the Zig programming language, themselves licensed under the Attribution 4.0 International (CC BY 4.0)\n\nOriginal art by vivisector.\n\n-------\n\nIf you're really bored, you can buy me a coffee here.\n\n[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/N4N7VMS4F)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/4776412?v=4",
+  "releases": [
+    {
+      "tag_name": "v3.0.1",
+      "name": "v3.0.1",
+      "body": "## Important part\r\n\r\n* Evolution of the build system\r\n  * RunProtoc has one less parameter (that was actually useless in the first place)\r\n  * protoc is recovered using lazy dependencies in build.zig.zon, making it more secure and with no dependencies such as unzip or curl\r\n\r\n## What's Changed\r\n* docs(generated-code): Added documentation to generated code by @Arwalk in https://github.com/Arwalk/zig-protobuf/pull/134\r\n* docs(readme): Update link to latest release by @Arwalk in https://github.com/Arwalk/zig-protobuf/pull/136\r\n* Escape union description table field name by @Arwalk, @mochalins in https://github.com/Arwalk/zig-protobuf/pull/129\r\n* Add basic benchmarking by @Arwalk in https://github.com/Arwalk/zig-protobuf/pull/135\r\n* Create CONTRIBUTING.md, add Pull Request Etiquette by @menduz in https://github.com/Arwalk/zig-protobuf/pull/126\r\n* use build.zig.zon to download protoc by @menduz in https://github.com/Arwalk/zig-protobuf/pull/138\r\n\r\n\r\n**Full Changelog**: https://github.com/Arwalk/zig-protobuf/compare/v3.0.0...v3.0.1",
+      "prerelease": false,
+      "published_at": "2025-10-05T20:41:03Z",
+      "html_url": "https://github.com/Arwalk/zig-protobuf/releases/tag/v3.0.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v3.0.0",
+      "name": "v3.0.0 : Zig 0.15.1 support",
+      "body": "## New major version\r\n\r\nThis new version is now compatible with 0.15.1. Sorry for the delay in supporting the latest release of zig.\r\n\r\nPlease note that the API has changed a lot, as zig 0.15.1 has removed ArrayListManaged and other patterns that we used before. The API is aligned with the changes in the zig std lib.\r\n\r\nThe tests are always a good starting point to view how the library works now. If you truly need help, ping @Arwalk in the zig discord, or create a discussion. Avoid issues for requests for help, thank you in advance.\r\n\r\n## What's Changed\r\n* Update workflows by @Arwalk in https://github.com/Arwalk/zig-protobuf/pull/54\r\n* Fix message when missing unzip dependency by @randall-fulton in https://github.com/Arwalk/zig-protobuf/pull/99\r\n* 98 Protobuf Generation Step errors on Windows due to missing curl and unzip by @Arwalk in https://github.com/Arwalk/zig-protobuf/pull/100\r\n* Type name includes the outermost type by @aaumar25 in https://github.com/Arwalk/zig-protobuf/pull/102\r\n* Remove usingnamespace mixin by @Arwalk in https://github.com/Arwalk/zig-protobuf/pull/103\r\n* 0.15.1 to master by @menduz, @mochalins, @Arwalk  in https://github.com/Arwalk/zig-protobuf/pull/130\r\n\r\n## New Contributors\r\n* @randall-fulton made their first contribution in https://github.com/Arwalk/zig-protobuf/pull/99\r\n* @aaumar25 made their first contribution in https://github.com/Arwalk/zig-protobuf/pull/102\r\n* @mochalins made their first contribution https://github.com/Arwalk/zig-protobuf/pull/130\r\n\r\n\r\n**Full Changelog**: https://github.com/Arwalk/zig-protobuf/compare/v2.1.0...v3.0.0",
+      "prerelease": false,
+      "published_at": "2025-09-24T18:13:46Z",
+      "html_url": "https://github.com/Arwalk/zig-protobuf/releases/tag/v3.0.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v2.1.0",
+      "name": "v2.1.0",
+      "body": "## Important\r\n\r\nThis release will be the last dedicated to zig 0.13.0. \r\n\r\n## What's Changed\r\n* Explicit error types by @42LM in https://github.com/Arwalk/zig-protobuf/pull/90\r\n* Adjust readme: use `zig fetch` in `## How to use` by @42LM in https://github.com/Arwalk/zig-protobuf/pull/89\r\n* Switch remove else clause by @42LM in https://github.com/Arwalk/zig-protobuf/pull/91\r\n* Self referential type support by @Arwalk in https://github.com/Arwalk/zig-protobuf/pull/73\r\n\r\n## New Contributors\r\n* @42LM made their first contribution in https://github.com/Arwalk/zig-protobuf/pull/90\r\n\r\n**Full Changelog**: https://github.com/Arwalk/zig-protobuf/compare/v2.0.0...v2.1.0",
+      "prerelease": false,
+      "published_at": "2025-03-24T14:41:47Z",
+      "html_url": "https://github.com/Arwalk/zig-protobuf/releases/tag/v2.1.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v2.0.0",
+      "name": "v2.0.0",
+      "body": "## IMPORTANT BREAKING CHANGE\r\n\r\nAn encoding error was identified for `int32` protobuf fields. Any other fields (`sint32`, `uint32`, ...) are not concerned.\r\n\r\n### The problem\r\n\r\nI assumed wrongly that protobuf would chooses the smallest representation for int32 fields, but the specification is clear: int32 fields are actually encoded as int64 fields in the wire format. This means that negative values are encoded with 10 bytes, not 5. Sadly, zig-protobuf was encoding with 5 bytes, which meant that other (and more correct) implementations of protobuf would not decode them as their actual values.\r\n\r\n### If you have `int32` fields in your proto messages\r\n\r\n#### If your software only communicates with another zig-protobuf implementation\r\n\r\nUpdate zig-protobuf to this version or up on all your systems.\r\n\r\n#### If your software sends `int32` data to another implementation\r\n\r\nCheck if your messages have used negative values, ensure the other system did not have any problem.\r\nIf negative values were never used, you do not have any problem. Update zig-protobuf asap.\r\n\r\n#### If your software receives `int32` from another implementation\r\n\r\nNegatives values would have not been properly decoded and an error would have been returned. You probably would have noticed already.\r\n\r\n#### If you have saved to disk/database encoded protobuf data with `int32` fields that could contain negative values\r\n\r\nfirst: backup everything.\r\n\r\nthen let's say you have this .proto file\r\n\r\n```protobuf\r\nmessage AnExample{\r\n  int32 a_field = 1;\r\n}\r\n```\r\n\r\n1. Create a new recovery .protofile with equivalent fields but `int32` are now `int64`\r\n\r\n```protobuf\r\nmessage AnExampleForRecovery{\r\n  int64 a_field = 1;\r\n}\r\n```\r\n\r\n2. read from disk/database the data using the **old** zig-protobuf, and save it back using the new recovery message.\r\n3. update zig-protobuf\r\n4. read from disk/database with the fixed zig-protobuf and the new recovery message, save it with your original .proto message\r\n\r\n#### If you don't know what to do\r\n\r\nI'll do my best to give some support for people who could have been affected. I can be contacted in the discussions on this repository, or you can find me on the official zig discord server.\r\n\r\n## Changelog\r\n\r\nNote: json is a work in progress subject, consider it beta.\r\n\r\n### What's Changed\r\n* Change std.debug.print -> std.log.warn by @Detegr in https://github.com/Arwalk/zig-protobuf/pull/51\r\n* JSON (de)serialization by @librolibro in https://github.com/Arwalk/zig-protobuf/pull/49\r\n* Allow for external protoc by @BonusPlay in https://github.com/Arwalk/zig-protobuf/pull/66\r\n* 56 Errors with `Unknown field received in ....` by @Arwalk in https://github.com/Arwalk/zig-protobuf/pull/63\r\n* fix: memory leak when decoding Lists of Bytes by @kantai-chris in https://github.com/Arwalk/zig-protobuf/pull/68\r\n* Fix: prevent unsafe cast on decoding by @AlpaGit  in https://github.com/Arwalk/zig-protobuf/pull/72\r\n* #74 `dupe()` methods fail to compile by @Arwalk in https://github.com/Arwalk/zig-protobuf/pull/75\r\n* fix: Convert OOB enums from panics to runtime errors by @hans-tvs in https://github.com/Arwalk/zig-protobuf/pull/76\r\n* 84 `encode()` fails to compile by @Arwalk in https://github.com/Arwalk/zig-protobuf/pull/85\r\n* Fix integer encoding by @Arwalk in https://github.com/Arwalk/zig-protobuf/pull/86\r\n\r\n### New Contributors\r\n* @Detegr made their first contribution in https://github.com/Arwalk/zig-protobuf/pull/51\r\n* @librolibro made their first contribution in https://github.com/Arwalk/zig-protobuf/pull/49\r\n* @BonusPlay made their first contribution in https://github.com/Arwalk/zig-protobuf/pull/66\r\n* @kantai-chris made their first contribution in https://github.com/Arwalk/zig-protobuf/pull/68\r\n\r\n**Full Changelog**: https://github.com/Arwalk/zig-protobuf/compare/v1.0.6...v2.0.0",
+      "prerelease": false,
+      "published_at": "2025-01-28T12:17:06Z",
+      "html_url": "https://github.com/Arwalk/zig-protobuf/releases/tag/v2.0.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.0.6",
+      "name": "v1.0.6",
+      "body": "This releases fixes the build system for zig 0.13.0.\r\n\r\n## What's Changed\r\n* Update build.zig for Zig 0.13.0 by @hans-tvs in https://github.com/Arwalk/zig-protobuf/pull/46\r\n\r\n## New Contributors\r\n* @hans-tvs made their first contribution in https://github.com/Arwalk/zig-protobuf/pull/46\r\n\r\n## Additional Thanks\r\n@Natoandro\r\n@HendrikJanssen\r\n\r\n\r\n**Full Changelog**: https://github.com/Arwalk/zig-protobuf/compare/v1.0.5...v1.0.6",
+      "prerelease": false,
+      "published_at": "2024-06-15T20:16:19Z",
+      "html_url": "https://github.com/Arwalk/zig-protobuf/releases/tag/v1.0.6",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.0.5",
+      "name": "v1.0.5",
+      "body": "This release brings support for zig 0.13.0.\r\n\r\nNo functionality changes.",
+      "prerelease": false,
+      "published_at": "2024-06-07T21:14:53Z",
+      "html_url": "https://github.com/Arwalk/zig-protobuf/releases/tag/v1.0.5",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.0.4",
+      "name": "v1.0.4",
+      "body": "## What's Changed\r\n* Update for zig 0.12.0 by @malcolmstill in https://github.com/Arwalk/zig-protobuf/pull/45\r\n\r\n## New Contributors\r\n* @malcolmstill made their first contribution in https://github.com/Arwalk/zig-protobuf/pull/45\r\n\r\n**Full Changelog**: https://github.com/Arwalk/zig-protobuf/compare/v1.0.3...v1.0.4",
+      "prerelease": false,
+      "published_at": "2024-04-21T15:39:22Z",
+      "html_url": "https://github.com/Arwalk/zig-protobuf/releases/tag/v1.0.4",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.0.3",
+      "name": "v1.0.3",
+      "body": "## What's Changed\r\n* docs: add missing 'paths' field to `build.zig.zon` example in README by @hendriknielaender in https://github.com/Arwalk/zig-protobuf/pull/31\r\n* Updating to latest zig by @Arwalk in https://github.com/Arwalk/zig-protobuf/pull/36\r\n* Fix README Typo by @jcalabro in https://github.com/Arwalk/zig-protobuf/pull/38\r\n* Update to latest zig and build.zig.zon requirements. by @Arwalk in https://github.com/Arwalk/zig-protobuf/pull/42\r\n\r\n## New Contributors\r\n* @hendriknielaender made their first contribution in https://github.com/Arwalk/zig-protobuf/pull/31\r\n\r\n**Full Changelog**: https://github.com/Arwalk/zig-protobuf/compare/v1.0.2...v1.0.3",
+      "prerelease": false,
+      "published_at": "2024-03-13T21:01:39Z",
+      "html_url": "https://github.com/Arwalk/zig-protobuf/releases/tag/v1.0.3",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.0.2",
+      "name": "v1.0.2",
+      "body": "## What's Changed\r\n* add `.dupe(allocator)` to every message and default values by @menduz in https://github.com/Arwalk/zig-protobuf/pull/23\r\n* feature: self contained, auto installing protoc and programatic usage from `build.zig`, enable zig package manager by @menduz in https://github.com/Arwalk/zig-protobuf/pull/26\r\n* chore: update to latest Zig in master (0.12.0-dev.1695+e4977f3e8) by @NefixEstrada in https://github.com/Arwalk/zig-protobuf/pull/28\r\n* Update to latest zig + fix `zig build test` first pass by @Arwalk in https://github.com/Arwalk/zig-protobuf/pull/29\r\n\r\n## New Contributors\r\n* @NefixEstrada made their first contribution in https://github.com/Arwalk/zig-protobuf/pull/28\r\n\r\n**Full Changelog**: https://github.com/Arwalk/zig-protobuf/compare/v1.0.1...v1.0.2",
+      "prerelease": false,
+      "published_at": "2023-12-28T12:55:07Z",
+      "html_url": "https://github.com/Arwalk/zig-protobuf/releases/tag/v1.0.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.0.1",
+      "name": "v1.0.1 Update to latest zig compiler",
+      "body": "This is a minor release representing compatibility with the latest used version of zig to compile this project, which is `0.12.0-dev.293+f33bb0228`\r\n\r\nCompilation fix in #24 by @jcalabro . ",
+      "prerelease": false,
+      "published_at": "2023-09-09T18:29:00Z",
+      "html_url": "https://github.com/Arwalk/zig-protobuf/releases/tag/v1.0.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.0.0",
+      "name": "v1.0.0",
+      "body": "### First release\r\n\r\nThis is zig-protobuf's first complete release.\r\n\r\nThis implementation of protocol buffers should be able to handle every scalar type. See README for usage.\r\n\r\nAn enormous thank to @menduz for making this possible.",
+      "prerelease": false,
+      "published_at": "2023-08-01T16:50:36Z",
+      "html_url": "https://github.com/Arwalk/zig-protobuf/releases/tag/v1.0.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": "France",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 23,
+  "owner_following": 12,
+  "owner_created_at": "2013-06-22T17:20:52Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,55 @@
+{
+  "name": "resources",
+  "owner": "loftafi",
+  "repo": "resources",
+  "description": "A minimalist zig module for collecting files into a resource bundle.",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-12-03T22:55:30Z",
+  "dependencies": [
+    {
+      "name": "praxis",
+      "url": "git+https://github.com/loftafi/praxis.git#d36cedfcd43071a144dcefd7cadc28ccdc7fa108",
+      "hash": "praxis-0.4.2-FPf2NYbHBgDZl3Wyn59xUjsn4PFKPfOE8rw9RaVkOdRR"
+    },
+    {
+      "name": "zstbi",
+      "url": "git+https://github.com/zig-gamedev/zstbi#2c4b3100ccb7aed90ecc9439030899764e2a8d47",
+      "hash": "zstbi-0.11.0-dev-L0Ea_yaWBwAHwFoCuyjkFyaiSsbjt4UOrkntR0c_nmzz"
+    },
+    {
+      "name": "zigimg",
+      "url": "git+https://github.com/zigimg/zigimg.git#f5783e87627cbd9e0b45fad112e9f73503914f36",
+      "hash": "zigimg-0.1.0-8_eo2vBrFQBhsrLpexdcDQY-zrlzkyFZfKuYX-Nry6KN"
+    },
+    {
+      "name": "plutosvg",
+      "url": "git+https://github.com/JacobCrabill/zig-plutosvg#518e00df9412df30eea6a1934a7edd2658cdd2d9",
+      "hash": "plutosvg-0.0.6-LyMxgbMuAADqe6_HVbOOBTtsmMVlb-ar-iOc7pRrPQYc"
+    },
+    {
+      "name": "zg",
+      "url": "git+https://codeberg.org/loftafi/zg.git#2f02c3b16c073d0bd3d9368a66ce272a574f75a3",
+      "hash": "zg-0.15.1-oGqU3J1DtAJhPKw_pU5s8kHGVYDk1leZm4TtO1cvMihq"
+    }
+  ],
+  "minimum_zig_version": "0.15.2",
+  "readme": "# Resources\n\nThis zig module supports loading, searching, and bundling resources\ninto a bundle for distribution.\n\n## Example usage\n\n```zig\n// Load a repository folder of files (with metadata files)\nvar bucket = try Resources.create(allocator);\ndefer bucket.destroy();\n_ = bucket.load_directory(folder) catch |e| {\n    std.debug.print(\"error {any} while loading {s}\\n\", .{ e, folder });\n    return Error.FailedReadingRepo;\n};\n\n// Load a resource bundle of files.\nbucket.load_bundle(\"/path/to/bundle\");\n\n// Search for a resource by filename or word in a filename\nvar results: std.ArrayListUnmanaged(*Resource) = .empty.\ndefer results.deinit(allocator);\ntry bucket.search(keywords.items, .any, &results);\nfor (results.items) |resource| {\n    std.debug.print(\" {d}  {s}\\n\", .{resource.uid, sentence});\n}\n\n// Load a file from the resource bucket\nconst data = resources.read_data(resource, allocator) catch |e| {\n    if (e == error.OutOfMemory) return error.OutOfMemory;\n    if (e == error.FileNotFound) return error.ResourceNotFound;\n    return error.ResourceReadError;\n};\n\n// Save the contents of a list of resources into a bundle\nbuket.save_bundle(\"/path/to/bundle\", results);\n\n```\n\n## Unicode filenames\n\nOn mac, some files may accidentally become NFD. You can convert all filenames\nto NFD usinc convmv:\n\n    convmv -r -f utf8 -t utf8 --nfc --notest .\n\n## License\n\nThis code is released under the terms of the MIT license. This\ncode is useful for my purposes. No warrantee is given or implied\nthat this library will be suitable for your purpose and no warantee\nis given or implied that this code is free from defects.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/199742861?u=f3dc58206cc40c5e6ef5f95258d934e8a11f9e69&v=4",
+  "releases": [],
+  "owner_bio": "Go • Zig • Rust",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 2,
+  "owner_following": 2,
+  "owner_created_at": "2025-02-18T09:25:35Z",
+  "license": "MIT",
+  "category": "library"
+}

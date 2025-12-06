@@ -1,0 +1,29 @@
+{
+  "name": "dbuz",
+  "owner": "0xCatPKG",
+  "repo": "dbuz",
+  "description": "D-Bus client library written in pure zig",
+  "type": "project",
+  "topics": [
+    "dbus",
+    "zig-package",
+    "zig",
+    "ziglang"
+  ],
+  "stars": 2,
+  "forks": 2,
+  "watchers": 0,
+  "updated_at": "2025-11-28T07:31:57Z",
+  "minimum_zig_version": "0.14.1",
+  "readme": "# DBuz - Pure Zig D-Bus client library\n\nThis library is more like a pet project and practice for me to learn Zig. It provides a simple interface to interact with D-Bus offloading multiple tasks to the zig's comptime.\n\n## Installation\n\n```sh\n$ zig fetch --save git+https://github.com/0xCatPKG/dbuz\n```\n\nThen in your build.zig file, do something like\n```zig\nconst std = @import(\"std\");\n\npub fn build(b: *std.Build) void {\n\n    const target = b.standardTargetOptions(.{});\n    const optimize = b.standardOptimizeOption(.{});\n\n    const dbuz = b.dependency(\"dbuz\", .{\n        .target = target,\n        .optimize = optimize,\n    });\n\n    // ...\n\n    exe_mod.addImport(\"dbuz\", dbuz.module(\"dbuz\"));\n    // ...\n}\n```\n\n## Usage\n\n### Simple example\n\n```zig\nconst std = @import(\"std\");\nconst dbuz = @import(\"dbuz\");\n\npub fn main() !void {\n    const allocator = std.heap.page_allocator;\n\n    /// Create connection to D-Bus session bus\n    const connection = try dbuz.connect(allocator, .{});\n    defer connection.deinit();\n\n    const poll_cond, const poll_thread =\n    try dbuz.spawnPollingThread(connection, allocator);\n\n    defer allocator.destroy(poll_cond);\n    defer poll_thread.join();\n    defer poll_cond.* = false;\n\n    std.posix.nanosleep(0, std.time.ns_per_ms * 25); // Sleep for some time to avoid busy loop\n\n    std.debug.print('My unique name is: {?s}\\n', .{connection.unique_name});\n}\n```\n\n## Handling method calls and signals\n\nInformation about handling method calls and signals in dbuz may be found in\n[Interfaces](docs/Interfaces.md) and [MatchGroups](docs/MatchGroups.md)\n\n## Serialization rules\ndbuz serializes native types using compile time reflection. Following mapping exists:\n| DBus signature symbol | Native type | Notes |\n| --- | --- | --- |\n| `y` | u/i1..8 | Any int with less or equal to 8 bits is serialized as a byte |\n| `b` | bool | Boolean type |\n| `n` | i9..16 | Any int with less or equal to 16 bits is serialized as a short |\n| `q` | u9..16 | Any int with less or equal to 16 bits is serialized as a short |\n| `i` | i17..32 | Any int with less or equal to 32 bits is serialized as an int |\n| `u` | u17..32 | Any int with less or equal to 32 bits is serialized as an unsigned int |\n| `x` | i33..64 | Any int with less or equal to 64 bits is serialized as a long |\n| `t` | u33..64 | Any int with less or equal to 64 bits is serialized as an unsigned long |\n| `d` | f1..64 | All floats must be less than or equal to 64 bits |\n| `h` | std.fs.File, std.fs.Dir | Out of band data, uses .handle as file descriptor |\n| `s` | DBusString | String type |\n| `o` | DBusObjectPath | Object path type |\n| `g` | DBusSignature | Signature type |\n| `a` | []T | All pointers passed to de/serialization must be slices |\n| `()` | struct{...} | All structs except tuples are serialized recursively according to their field native types, tuples are serialized as sequence of values |\n| `{}` | struct{...} | All structs are serialized as dicts, if they have following declarations: put, getOrPut, getOrPutAdapted, get, iterator, KV |\n| `v` | union(enum) {...} | All union types are serialized as a variants. Duplicate types are unchecked illegal behavior |\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/42083774?u=7754da8e1ffe339eaacfe19ee33ad9de3166f7d5&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "file://localhost",
+  "owner_twitter_username": null,
+  "owner_followers": 3,
+  "owner_following": 4,
+  "owner_created_at": "2018-08-04T04:44:43Z",
+  "category": "library"
+}

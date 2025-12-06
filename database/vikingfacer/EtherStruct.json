@@ -1,0 +1,44 @@
+{
+  "name": "EtherStruct",
+  "owner": "vikingfacer",
+  "repo": "EtherStruct",
+  "description": "Packed Structs for tcp/ip packets",
+  "type": "project",
+  "topics": [
+    "ethernet-protocol",
+    "netwoking",
+    "serializing-data",
+    "zig-package",
+    "ziglang",
+    "zig"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-11-30T22:35:36Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "\n![ci](https://github.com/vikingfacer/EtherStruct/actions/workflows/ci.yaml/badge.svg)\n\n![API doc](https://vikingfacer.github.io/EtherStruct)\n\n# EtherStruct\nThis module provides structures and functions to work with network packets\ny converting bytes into packed structures for Ethernet, IP, TCP, UDP\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/25182174?u=b8732a826682cb2d68022c5ed050670174575416&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.0.1",
+      "name": "",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-12-05T00:20:01Z",
+      "html_url": "https://github.com/vikingfacer/EtherStruct/releases/tag/v0.0.1",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Live Laugh love.",
+  "owner_company": null,
+  "owner_location": "Eastern Mass ",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 3,
+  "owner_following": 6,
+  "owner_created_at": "2017-01-17T18:06:58Z",
+  "homepage": "https://vikingfacer.github.io/EtherStruct/",
+  "license": "BSD-2-Clause",
+  "category": "library"
+}

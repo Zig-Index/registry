@@ -1,0 +1,89 @@
+{
+  "name": "ziggy",
+  "owner": "kristoff-it",
+  "repo": "ziggy",
+  "description": "A data serialization language for expressing clear API messages, config files, etc.",
+  "type": "project",
+  "topics": [
+    "serialization-format",
+    "zig-package"
+  ],
+  "stars": 496,
+  "forks": 37,
+  "watchers": 7,
+  "updated_at": "2025-12-05T19:18:31Z",
+  "dependencies": [
+    {
+      "name": "known_folders",
+      "url": "git+https://github.com/ziglibs/known-folders#bafef170a73c064dc706fcfbdc2e406a35681a9c",
+      "hash": "known_folders-0.0.0-Fy-PJovNAAAtqbaXgBhV6G-Z4-WNo7P0Rov-x-npZq21"
+    },
+    {
+      "name": "lsp_kit",
+      "url": "git+https://github.com/zigtools/lsp-kit#c46ac866dda11ab58e4ba71ed0d8ba21f43e81db",
+      "hash": "lsp_kit-0.1.0-bi_PL98yCgBfW3T4iLkfV5VOXc__pOpOsQsX1tRmpqAG"
+    }
+  ],
+  "minimum_zig_version": "0.16.0-dev.1236+26db54d69",
+  "readme": "# Ziggy\nA data serialization language for expressing clear API messages, config files, etc.\n\n\n## Examples and documentation\nSee the official website: https://ziggy-lang.io\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1950733?u=4c433986c229d3bff345521171a121c84014917e&v=4",
+  "releases": [
+    {
+      "tag_name": "0.0.1",
+      "name": "First Release",
+      "body": "",
+      "prerelease": true,
+      "published_at": "2024-03-20T17:58:54Z",
+      "html_url": "https://github.com/kristoff-it/ziggy/releases/tag/0.0.1",
+      "assets": [
+        {
+          "name": "aarch64-linux.tar.xz.test.xz",
+          "url": "https://github.com/kristoff-it/ziggy/releases/download/0.0.1/aarch64-linux.tar.xz.test.xz",
+          "size": 1113972,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "aarch64-macos.tar.xz",
+          "url": "https://github.com/kristoff-it/ziggy/releases/download/0.0.1/aarch64-macos.tar.xz",
+          "size": 286820,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/ziggy/releases/download/0.0.1/aarch64-windows.zip",
+          "size": 1127824,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.xz",
+          "url": "https://github.com/kristoff-it/ziggy/releases/download/0.0.1/x86_64-linux-musl.tar.xz",
+          "size": 1165492,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "x86_64-macos.tar.xz",
+          "url": "https://github.com/kristoff-it/ziggy/releases/download/0.0.1/x86_64-macos.tar.xz",
+          "size": 323652,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/ziggy/releases/download/0.0.1/x86_64-windows.zip",
+          "size": 1492709,
+          "content_type": "application/zip"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "vp of community @ziglang • curator of software you can love (https://sycl.it)",
+  "owner_company": "@ziglang",
+  "owner_location": "Milan, Italy",
+  "owner_blog": "https://kristoff.it",
+  "owner_twitter_username": null,
+  "owner_followers": 1291,
+  "owner_following": 22,
+  "owner_created_at": "2012-07-10T15:27:34Z",
+  "homepage": "https://ziggy-lang.io",
+  "license": "MIT",
+  "category": "library"
+}

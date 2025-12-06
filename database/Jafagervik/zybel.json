@@ -1,0 +1,61 @@
+{
+  "name": "zybel",
+  "owner": "Jafagervik",
+  "repo": "zybel",
+  "description": "AI/ML library in the making, all written in zig",
+  "type": "project",
+  "topics": [
+    "ai",
+    "ml",
+    "zig-package",
+    "zig-library",
+    "dl",
+    "dnn"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-01-31T03:39:50Z",
+  "minimum_zig_version": "0.13.0",
+  "readme": "> [!WARNING]\n> **zybel** is still WIP. **Breaking changes** may occur\n\n# Zinyn - ML and AI made possible for fun\n\n## Goal\n\nCreate a framework for training DNNs in Zig (using hardware accelerators)\nand compare results\n\n## Why?\n\nTo quote a wise man: \"For the joy of programming!\"\n\n## Features\n\n- [x] Generic tensor using comptime\n- [x] Binops such as add, sub, mul, div\n- [x] General tensor ops (clamp, reshape, sum, min, max...)\n- [x] SGD optimizer\n- [x] Common loss functions such as mse and mae + 3 more\n- [ ] Activation functions\n- [ ] Simple layers\n- [ ] Autograd\n- [ ] Computational graph\n- [ ] Hardware acceleration support\n\n## Install (Per 0.14 beta)\n\nRun this command in the parent directory of your project\n\n```sh\nzig fetch --save git+https://github.com/Jafagervik/zybel.git\n```\n\nThen add these lines to build.zig before b.installArtifact(exe)\n\n```zig\nconst zybel = b.dependency(\"zybel\", .{});\n\nexe.root_module.addImport(\"zybel\", zybel.module(\"zybel\"));\n\n```\n\n## Example\n\n```zig\nconst std = @import(\"std\");\n\nconst zb = @import(\"zybel\");\nconst Tensor = zb.Tensor;\nconst TF32 = Tensor(f32);\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    const allocator = gpa.allocator();\n    defer _ = gpa.deinit();\n\n    // Creates a F32 Tensor of shape (1, 3, 3)\n    var t: TF32 = try TF32.ones(allocator, &[_]u32{ 1, 3, 3 });\n    defer t.deinit();\n\n    std.debug.print(\"First value is {d:.2}\\n\", .{t.getFirst()});\n\n    bon.setVal(0, 2.0);\n\n    std.debug.print(\"First value is now {d:.2}\\n\", .{t.getFirst()});\n\n    // Prints input about the tensor\n    t.print();\n\n    std.debug.print(\"Sum is {d:.2}\\n\", .{t.sum()});\n}\n```\n\n### Contribute\n\nHell yea! Feel free to add suggestions/corrections. I am a mere mortal, not a god\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/20770505?u=2d5adbbef816d352e9795404545139d672eaedb7&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.0.3",
+      "name": "v0.0.3",
+      "body": "Made another release today due to having completed easy matmul for these tensors\r\n\r\n\r\n**Full Changelog**: https://github.com/Jafagervik/zybel/compare/v0.0.2...v0.0.3",
+      "prerelease": false,
+      "published_at": "2025-01-27T18:22:31Z",
+      "html_url": "https://github.com/Jafagervik/zybel/releases/tag/v0.0.3",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.2",
+      "name": "v0.0.2",
+      "body": "**Great news!**: Most general ops for tensors are now supported. Still more \r\nto be done, but feeling hopeful about moving to more graph specific stuff\r\n\r\n\r\n**Full Changelog**: https://github.com/Jafagervik/zinyn/compare/v0.0.1...v0.0.2",
+      "prerelease": false,
+      "published_at": "2025-01-27T13:24:37Z",
+      "html_url": "https://github.com/Jafagervik/zybel/releases/tag/v0.0.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.1",
+      "name": "v0.0.1",
+      "body": "**Full Changelog**: https://github.com/Jafagervik/zinyn/commits/v0.0.1\r\n\r\nTest of release ",
+      "prerelease": false,
+      "published_at": "2025-01-25T22:01:57Z",
+      "html_url": "https://github.com/Jafagervik/zybel/releases/tag/v0.0.1",
+      "assets": []
+    }
+  ],
+  "owner_bio": "AI, HPC and proglang enthusiast. Currentlyorking in telecom\r\nPrev. Head of Development for FaceIt\r\nPrevious Software Developer for Revolve NTNU",
+  "owner_company": "Gintel",
+  "owner_location": "Trondheim, Norway",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 10,
+  "owner_following": 50,
+  "owner_created_at": "2016-08-01T10:25:28Z",
+  "license": "MIT",
+  "category": "library"
+}

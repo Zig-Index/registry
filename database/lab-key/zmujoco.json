@@ -1,0 +1,38 @@
+{
+  "name": "zmujoco",
+  "owner": "lab-key",
+  "repo": "zmujoco",
+  "description": "A Thin Zig Wrapper For MuJoCo ",
+  "type": "project",
+  "topics": [
+    "mujoco",
+    "physics",
+    "robotics",
+    "zig-package",
+    "zmujoco"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-11-01T22:48:34Z",
+  "dependencies": [
+    {
+      "name": "lib_zmujoco",
+      "url": "libs/mujoco"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "<h1>\n  <a href=\"#\"><img alt=\"zMuJoCo\" src=\"zmujoco.png\" width=\"100%\"/></a>\n</h1>\n\n<p>\n  </a>\n  </a>\n  <a href=\"https://github.com/lab-key/zmujoco/blob/main/LICENSE\" alt=\"License\">\n    <img src=\"https://img.shields.io/github/license/lab-key/zmujoco\">\n  </a>\n</p>\n\n\n# About\n\nThis repository contains the Zig bindings for the MuJoCo C API.\n\nZig version 0.15.x\n\nMuJoCo version 3.3.8\n\n**MuJoCo** stands for **Mu**lti-**Jo**int dynamics with **Co**ntact. It is a\ngeneral purpose physics engine that aims to facilitate research and development\nin robotics, biomechanics, graphics and animation, machine learning, and other\nareas which demand fast and accurate simulation of articulated structures\ninteracting with their environment.\n\n\n\nhttps://github.com/user-attachments/assets/995fb256-6474-4927-a30c-a30a0602bb2f\n\nRobotic Dog\n\n\n\nhttps://github.com/user-attachments/assets/aac1e3ff-62da-447c-983c-6e3ec61d6b01\n\n2D Self-Learning Agent. Works in 3D enviroments. Using a framework I am working on & integrating here as well. Coming soon.\n\n***For more higher level and a ( *little bit of a* ) Desktop app making framework checkout [phyzx] ( Still early stages )***\n\nThis repository contains a thin wrapper for MuJoCo allowing for easier integration into other projects and direct programmatic usage of the C API.\n\nMuJoCo has a C API and is intended for researchers and developers. The runtime\nsimulation module is tuned to maximize performance and operates on low-level\ndata structures that are preallocated by the built-in XML compiler. \n\nMuJoCo further exposes a large number of utility functions for computing\nphysics-related quantities.\n\n## Getting Started\n\nYou should be able to just:\n\n```\ngit clone https://github.com/lab-key/zmujoco.git\n# Everything in the examples directory gets built automatically\nzig build\n# So you can just\n./zig-out/bin/control_model # Or load_model - until I integrate everything properly...\n```\n\nThis repository is already setup so you don't really need the `setup.zig` & `cleanup.zig` it uses my [mujoco] `dev` branch as a git submodule to allow for updates.\nIn case you want to setup your own `zmujoco` basically you need to convert the `CMakeLists.txt` from [mujoco] into a `build.zig` and then configure everything into a Zig module. You can check the `setup.zig` there for some ideas as well.\n\n## TODO\n\n1. Examples & Tests \n\n2. A nice clean way to integrate or point to third party modelfiles. \n\n3. All the demos and most things I am internally working on are done very ' dirty ' with direct C interop need to either properly wrap it or reprogram it..\n\n## Documentation\n\nAll the documenatation is in the docs/ directory.\n\nI highly recommend you look at the tests directory as well as it contains a lot of examples as does the phyzx[link] project.\n\nMuJoCo's documentation can be found at [mujoco.readthedocs.io]. Upcoming\nfeatures due for the next release can be found in the [changelog] in the\n\"latest\" branch.\n\n## Citation\n\nIf you use MuJoCo for published research, please cite:\n\n```\n@inproceedings{todorov2012mujoco,\n  title={MuJoCo: A physics engine for model-based control},\n  author={Todorov, Emanuel and Erez, Tom and Tassa, Yuval},\n  booktitle={2012 IEEE/RSJ International Conference on Intelligent Robots and Systems},\n  pages={5026--5033},\n  year={2012},\n  organization={IEEE},\n  doi={10.1109/IROS.2012.6386109}\n}\n```\n\n## License and Disclaimer\n\nCopyright 2021 DeepMind Technologies Limited.\n\nBox collision code ([`engine_collision_box.c`](https://github.com/google-deepmind/mujoco/blob/main/src/engine/engine_collision_box.c))\nis Copyright 2016 Svetoslav Kolev.\n\nReStructuredText documents, images, and videos in the `doc` directory are made\navailable under the terms of the Creative Commons Attribution 4.0 (CC BY 4.0)\nlicense. You may obtain a copy of the License at\nhttps://creativecommons.org/licenses/by/4.0/legalcode.\n\nSource code is licensed under the Apache License, Version 2.0. You may obtain a\ncopy of the License at https://www.apache.org/licenses/LICENSE-2.0.\n\nThis is not an officially supported Google product.\n\n[mujoco]: https://github.com/lab-key/mujoco\n[phyzx]: https://github.com/lab-key/phyzx\n[build from source]: https://mujoco.readthedocs.io/en/latest/programming#building-mujoco-from-source\n[Getting Started]: https://mujoco.readthedocs.io/en/latest/programming#getting-started\n[Unity]: https://unity.com/\n[releases page]: https://github.com/google-deepmind/mujoco/releases\n[mujoco.readthedocs.io]: https://mujoco.readthedocs.io\n[changelog]: https://mujoco.readthedocs.io/en/latest/changelog.html\n[Python bindings]: https://mujoco.readthedocs.io/en/stable/python.html#python-bindings\n[PyPI]: https://pypi.org/project/mujoco/\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/238103222?u=492d6add4a6a4d97e8bc2f418c46064c85938866&v=4",
+  "releases": [],
+  "owner_bio": "Oh you don't wanna know",
+  "owner_company": null,
+  "owner_location": "London - Officially",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 1,
+  "owner_following": 0,
+  "owner_created_at": "2025-10-14T21:53:28Z",
+  "license": "Apache-2.0",
+  "category": "physics"
+}

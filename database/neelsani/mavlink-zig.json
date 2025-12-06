@@ -1,0 +1,41 @@
+{
+  "name": "mavlink-zig",
+  "owner": "neelsani",
+  "repo": "mavlink-zig",
+  "description": "MAVLink protocol implementation in Zig",
+  "type": "project",
+  "topics": [
+    "mavlink",
+    "zig-package"
+  ],
+  "stars": 4,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-11-20T05:28:00Z",
+  "dependencies": [
+    {
+      "name": "xml",
+      "url": "git+https://github.com/ianprime0509/zig-xml#c0bda4f35ea61cfb7845337adfa255c86c67fd13",
+      "hash": "xml-0.1.0-ZTbP35VkAgAp2cDlvsPuL7SWVZWwPg-V99LmVRSHbCtL"
+    },
+    {
+      "name": "mavlink_defs",
+      "url": "git+https://github.com/mavlink/mavlink#eb5c415b73084caac66164d9c1cb983f9c6418f5",
+      "hash": "N-V-__8AABL_FABlrfLZmIuIP3wyiky-s0yXccGaOMIIxa8_"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# MAVLink Zig Library ✈️\n\n[![Zig Version](https://img.shields.io/badge/Zig-0.14.0-%23f7a41d.svg)](https://ziglang.org/)\n[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)\n[![Build Status](https://github.com/neelsani/mavlink-zig/actions/workflows/build.yaml/badge.svg)](https://github.com/neelsani/mavlink-zig/actions)\n\nA lightweight, zero-dependency, zero-allocation MAVLink v2.0 protocol implementation in Zig, designed for embedded systems and high-performance applications.\n\n## What is MAVLink? 🚁\n\nMAVLink (Micro Air Vehicle Link) is a lightweight messaging protocol for communicating with drones, robotics systems, and other autonomous vehicles. Key features:\n\n- **Binary protocol** optimized for limited bandwidth\n- **Standardized message set** for common drone operations\n- **Extensible** through custom message definitions\n- **Widely adopted** by major autopilots (PX4, ArduPilot) and ground stations\n\nThis library brings MAVLink to Zig with full type safety and no runtime overhead.\n\n## Features ✨\n\n- 🚀 Full MAVLink v2.0 protocol support\n- ⚡ Zero allocations during packet processing\n- 🔒 End-to-end type safety with compile-time message validation\n- 🔋 Suitable for resource-constrained systems (embedded friendly)\n- 🔄 Automatic dialect generation from official XML definitions\n- ✨ 100% Pure Zig - no C dependencies\n\n## Installation\n\n### As a Dependency\n\nAdd to your project using Zig's package manager:\n\n```sh\n# For stable Zig releases (recommended for production):\nzig fetch --save https://github.com/neelsani/mavlink-zig/archive/refs/tags/vX.Y.Z.tar.gz\n\n# For Zig master branch compatibility:\nzig fetch --save git+https://github.com/neelsani/mavlink-zig\n```\n\nThen add the following to `build.zig`:\n\n```zig\nconst mavlink = b.dependency(\"mavlink\", .{});\nexe.root_module.addImport(\"mavlink\", mavlink.module(\"mavlink\"));\n```\n\n## Build\n\n### Build and Test\n\n```sh\n#build lib and examples\nzig build -Dexamples=true --summary all\n\n#run tests\nzig build test --summary all\n```\n\n### Generate Definitions\n\n```sh\n#use ardupilot from fetched dialects\nzig build genv2 -Ddialect_to_use=ardupilotmega.xml --summary all\n\n#use all of the dialects from fetched dialects\nzig build genv2 -Ddialect_to_use=all --summary all\n\n#use ardupilot from the specified xml defintions dir and store the generated zig files in the out dir\nzig build genv2 -Ddialect_to_use=ardupilotmega.xml -Dmavlink_xml_def_dir=<path/to/mavlink/xml/dir> -Ddialect_out_dir=<path/to/output> --summary all\n```\n\n## Usage / Examples 🚀\n\n### 📂 Where to Find Examples\n\n- All sample code is located in the [`examples/`](examples/) directory.\n- Each subfolder contains a self-contained example.\n\n### ▶️ Running an Example\n\nTo run an individual example, use Zig's build system. Replace `<name of example folder>` with the specific example you want to run. For instance, to run the `net` example:\n\n```sh\nzig build net\n```\n\n### ✨ Minimal Example\n\nHere’s a minimal example of how to parse a MAVLink heartbeat message using the library:\n\n```zig\nconst std = @import(\"std\"); // Import Zig’s standard library\nconst net = std.net; // Bring networking APIs into scope\nconst mavlink = @import(\"mavlink\"); // Import the MAVLink library\n\nconst D = mavlink.dialects.common; // Alias the “common” dialect for convenience\n\npub fn main() !void {\n    // Establish a TCP connection to the MAVLink endpoint (e.g., SITL at 127.0.0.1:8888)\n    const conn = try net.tcpConnectToAddress(try net.Address.parseIp4(\"127.0.0.1\", 8888));\n    defer conn.close(); // Ensure the connection is closed on exit\n\n    // -----------------------------------------------------------------------\n    // Build a HEARTBEAT message, acting as a Ground Control Station (GCS)\n    // -----------------------------------------------------------------------\n    const hb = D.messages.HEARTBEAT{\n        .type = .MAV_TYPE_GCS, // Identify as GCS\n        .autopilot = .MAV_AUTOPILOT_INVALID, // Not a flight controller\n        .base_mode = D.enums.MAV_MODE_FLAG.toInt(.MAV_MODE_FLAG_AUTO_ENABLED),\n        // Armed in AUTO mode\n        .custom_mode = 0, // No custom mode flags\n        .system_status = .MAV_STATE_STANDBY, // Standby state\n        .mavlink_version = 3, // MAVLink v2.0 identifier\n    };\n\n    // Prepare a buffer large enough for any v2 packet\n    var buf: [mavlink.v2.MAVLINK_MAX_PACKET_SIZE]u8 = undefined;\n\n    // Serialize the HEARTBEAT into the buffer slice, get the byte count\n    const len = try mavlink.v2.writeMessageToSlice(buf[0..], hb);\n\n    // Send the serialized packet over the TCP connection\n    try conn.writer().writeAll(buf[0..len]);\n\n    // -----------------------------------------------------------------------\n    // Initialize the MAVLink v2 parser for incoming data\n    // -----------------------------------------------------------------------\n    var parser = mavlink.v2.init();\n\n    // A temporary read buffer for incoming TCP data\n    var readBuf: [512]u8 = undefined;\n\n    // Continuously read incoming bytes and feed them to the parser\n    while (true) {\n        const n = try conn.reader().read(&readBuf); // Read up to `readBuf.len` bytes\n        for (readBuf[0..n]) |b| { // Iterate each received byte\n            if (parser.parseChar(b)) |msg| { // If a full MAVLink message is parsed\n                // Check if it’s a ATTITUDE response\n                if (msg.msgid == D.messages.ATTITUDE.MSG_ID) {\n                    // Deserialize the payload into a HEARTBEAT struct\n                    const reply = try mavlink.serde.deserialize(D.messages.ATTITUDE, msg.payload[0..msg.len]);\n                    // Print the received heartbeat in debug output\n                    std.debug.print(\"GCS got ATTITUDE: {any}\\n\", .{reply});\n                }\n            }\n        }\n    }\n}\n```\n\n> **Note:**  \n> For more complete and advanced examples, check out the [`examples/`](examples/) directory.\n\n### 📖 API Reference\n\nFor detailed documentation and the full API reference, visit:  \n[http://mavlink-zig.neels.dev/](http://mavlink-zig.neels.dev/)\n\n---\n\n## Acknowledgements\n\n- [mavlink](https://mavlink.io/en/) — Protocol specification\n- [zig-xml](https://github.com/ianprime0509/zig-xml) — the XML parsing library used by the code generator to transform MAVLink XML definitions into Zig code.\n- [rust-mavlink](https://github.com/mavlink/rust-mavlink) - mavlink in rust\n\n## Support\n\nFor support, email neel@neels.dev.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/59120225?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Atlanta, GA",
+  "owner_blog": "neels.dev/",
+  "owner_twitter_username": null,
+  "owner_followers": 2,
+  "owner_following": 4,
+  "owner_created_at": "2019-12-21T16:18:48Z",
+  "homepage": "http://mavlink-zig.neels.dev/",
+  "license": "MIT",
+  "category": "library"
+}

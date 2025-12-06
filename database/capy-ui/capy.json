@@ -1,0 +1,75 @@
+{
+  "name": "capy",
+  "owner": "capy-ui",
+  "repo": "capy",
+  "description": "💻Build one codebase and get native UI on Windows, Linux and Web",
+  "type": "project",
+  "topics": [
+    "zig",
+    "gui",
+    "ui",
+    "zig-package",
+    "ziglang",
+    "cross-platform",
+    "linux",
+    "windows",
+    "cross-platform-gui",
+    "gui-library"
+  ],
+  "stars": 2431,
+  "forks": 89,
+  "watchers": 31,
+  "updated_at": "2025-12-06T17:37:40Z",
+  "dependencies": [
+    {
+      "name": "macos_sdk",
+      "url": "https://github.com/mitchellh/zig-build-macos-sdk/archive/a4ea24f105902111633c6ae9f888b676ac5e36df.tar.gz",
+      "hash": "12209cc9ee372456eda52b71cf9ae77dcc707fa42c9f9d68996b5bf7495b53229c2e"
+    },
+    {
+      "name": "zigimg",
+      "url": "git+https://github.com/zigimg/zigimg#74caab5edd7c5f1d2f7d87e5717435ce0f0affa1",
+      "hash": "zigimg-0.1.0-8_eo2nWlEgCddu8EGLOM_RkYshx3sC8tWv-yYA4-htS6"
+    }
+  ],
+  "minimum_zig_version": "0.14.1",
+  "readme": "<a href=\"https://capy-ui.org\">\n    <p align=\"center\">\n        <picture>\n            <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://capy-ui.org/img/capy_big2_dark.png\">\n            <img src=\"https://capy-ui.org/img/capy_big2.png\" alt=\"Capy UI\" height=\"200px\">\n        </picture>\n    </p>\n</a>\n\n**As of now, Capy is NOT ready for use in production as I'm still making breaking changes**\n\n**Capy targets Zig version `0.14.1`, the plan is to return to [Nominated Zig versions](https://machengine.org/docs/nominated-zig/)\nonce a new one is published**\n\n---\n\n[![Code Coverage](https://img.shields.io/codecov/c/github/capy-ui/capy?style=for-the-badge)](https://app.codecov.io/gh/capy-ui/capy)\n[![MPL-2.0 License](https://img.shields.io/github/license/capy-ui/capy?style=for-the-badge)](https://github.com/capy-ui/capy/blob/master/LICENSE)\n\n![the glorius software in action](https://raw.githubusercontent.com/zenith391/bottom-zig-gui/main/.github/screenshot.png)\n\n## Introduction\n\nCapy is a **GUI library for Zig**. It is mainly intended for creating applications using native controls from the operating system.\nCapy is a declarative UI library aiming to be easy to write for and versatile.\n\nIt has been made with the goal to empower standalone UI applications, integration in games or any other rendering process is a non-goal.\n\n## Features\n- Use Zig for frontend and backend\n- Accessibility: compatibility with almost all accessibility tools\n- Cross-platform\n- Uses the target OS toolkit\n- Cross-compilable from any platform to any other platform\n- *Tiny* executables - Every [example](https://github.com/capy-ui/capy/tree/master/examples)'s size < 2MB, which is smaller than 'hello world' in Go\n\n## Getting Started\n\nIf you're starting a new project, simply clone [capy-template](https://github.com/capy-ui/capy-template) and follow build instructions.\n\nOtherwise or for more information, please look in the [docs](https://capy-ui.org/docs/getting-started/installation).\n\nYou can ask questions and receive updates on the [#capy-ui Matrix channel](https://matrix.to/#/#capy-ui:matrix.org) or on the\nZig Discord Server (in the #gui-dev channel).\n\n## Usage\n\nA simple application using capy:\n\n```zig\nconst capy = @import(\"capy\");\nconst std = @import(\"std\");\npub usingnamespace capy.cross_platform;\n\npub fn main() !void {\n    try capy.init();\n    defer capy.deinit();\n\n    var window = try capy.Window.init();\n    try window.set(\n        capy.column(.{ .spacing = 10 }, .{ // have 10px spacing between each column's element\n            capy.row(.{ .spacing = 5 }, .{ // have 5px spacing between each row's element\n                capy.button(.{ .label = \"Save\", .onclick = @ptrCast(&buttonClicked) }),\n                capy.button(.{ .label = \"Run\",  .onclick = @ptrCast(&buttonClicked) })\n            }),\n            // 'expanded' means the widget will take all the space it can\n            // in the parent container\n            capy.expanded(\n                capy.textArea(.{ .text = \"Hello World!\" })\n            )\n        })\n    );\n\n    window.setPreferredSize(800, 600);\n    window.show();\n    capy.runEventLoop();\n}\n\nfn buttonClicked(button: *capy.Button) !void {\n    std.log.info(\"You clicked the button with text {s}\", .{button.getLabel()});\n}\n```\n\nIt is easy to add something like a button or a text area. The example can already be used to notice a widget's parameters are usually enclosed in anonymous\nstructs (`.{ .label = \"Save\" }`). You can also see that simply wrapping a widget with `capy.Expanded( ... )` will tell it to take all the space it can.\n\n## Contributing\nContributing can be as simple as opening an issue and detailling what bug you encountered or what feature you wish to have.  \nIf you want to help the project more directly, you can fork the project and then create a pull request.\n\n## Supported platforms\n\nA platform is considered supported only if it can be built to from every other OS.\n\nLegends:\n- ✅ Working and can be cross-compile from all platforms supported by Zig\n- 🧪 Experimental\n- 🏃 Planned\n\n### Desktop\n\n✅ Windows x86_64  \n✅ Windows i386\n\n🏃 macOS M1  \n🏃 macOS x86_64  \n\n✅ Linux x86_64  \n✅ Linux i386  \n✅ Linux aarch64 (PinePhone, PineBook...)  \n\n✅ FreeBSD x86_64  \n\n### Mobile\n\n🧪 Android  \n🏃 iOS\n\n### Web\n\n✅ WebAssembly\n\nNote: As there's no \"official\" GUI library for Linux, GTK 4 has been chosen as it is the one\nthat works and can be configured on the most distros. It's also the reason Libadwaita won't\nbe adopted, as it's meant for GNOME and GNOME only by disallowing styling and integration\nwith other DEs.\n\n\n\n## Supported components\nFor now, not every platform supports the same components. So here's a list of the ones that are supported:\n\n|                  |win32|macOS|GTK|Android|wasm|\n|------------------|-----|-----|---|-----|-----|\n|Button            |✅|✅|✅|✅|✅|\n|Canvas            |❌|❌|✅|✅|✅|\n|CheckBox          |✅|❌|✅|❌|❌|\n|Dropdown          |✅|❌|✅|❌|❌|\n|Image             |❌|❌|✅|❌|✅|\n|Label             |✅|✅|✅|✅|✅|\n|Menu              |❌|❌|❌|❌|❌|\n|Navigation        |❌|❌|❌|❌|❌|\n|NavigationSidebar |❌|❌|✅|❌|❌|\n|Scrollable        |✅|❌|✅|❌|❌|\n|Slider            |✅|❌|✅|❌|✅|\n|Tabs              |✅|❌|✅|❌|❌|\n|TextArea          |✅|❌|✅|❌|❌|\n|TextField         |✅|❌|✅|✅|✅|\n|Window            |✅|✅|✅|✅|✅\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/110254452?v=4",
+  "releases": [
+    {
+      "tag_name": "v0.3.0",
+      "name": "0.3.0",
+      "body": "[Release Notes](https://capy-ui.org/blog/capy-0.3/)\r\n\r\n**Commit Changelog**: https://github.com/capy-ui/capy/compare/v0.2.0...v0.3.0\r\n",
+      "prerelease": true,
+      "published_at": "2023-02-12T09:39:34Z",
+      "html_url": "https://github.com/capy-ui/capy/releases/tag/v0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "0.2.0",
+      "body": "# What's Changed\r\n\r\n## General\r\n* Add FreeBSD support by @zigster64 in https://github.com/zenith391/zgt/pull/6\r\n* Fix memory leak in calculator example by @iddev5 in https://github.com/zenith391/zgt/pull/7\r\n* Fix overflow in containers.zig by @frmdstryr in https://github.com/zenith391/zgt/pull/11\r\n* Add fn to create ImageData from png buffer using `@embedFile` by @frmdstryr in https://github.com/zenith391/zgt/pull/13\r\n* Add `zgt.Scrollable` which takes any component and makes it scrollable by adding scroll bars by @zenith391 \r\n* Add `zgt.Tabs` as tab view (*note: this component is not done yet*)\r\n* Add `readOnly` property to `TextField`\r\n* Most widgets now use the peer's `getPreferredSize`, that is they are now of the correct size.\r\n* Add mouse motion event\r\n* Add `Window.getChild` to get the child widget of the window\r\n* Add `Window.setIcon` to set the icon (takes an `ImageData`)\r\n* Add `Container.getAs` as a shorthand for Container.get(...).as(...)\r\n* Expose animation lerp function as `zgt.lerp`, this is a lerp function for ints, floats and structs that have a `lerp()` function\r\n* In `Row` and `Column`, spacing between elements can now be controlled with `.spacing` (e.g. `Row(.{ .spacing = 10 }, ...)` for a spacing of 10 pixels)\r\n* Added mobile device 'emulation' by passing `ZGT_MOBILE_EMULATED` environment variable, this works similarly to Chrome and Firefox mobile emulation (that is, it only changes the size of the window)\r\n* Many fixes in layouting code now allow centering elements.\r\n\r\n## gtk backend\r\n* Add window icon / icon name by @frmdstryr in https://github.com/zenith391/zgt/pull/15\r\n* Fix `Container.resize()`: sizes on the gtk backend are consistent with other backends.\r\n\r\n## win32 backend\r\n* Added `TextField` peer\r\n* Added support for building for i386-windows\r\n* Fix Windows build by @marler8997 in https://github.com/zenith391/zgt/pull/4\r\n\r\n**Note that the win32 backend is still basically pre-alpha and doesn't have feature parity with the gtk backend yet (although it might be reached by 0.2.1)**\r\n\r\n## WebAssembly backend\r\n* Small fixes to make WASM backend compile with examples/demo by @TapioT in https://github.com/zenith391/zgt/pull/5\r\n* Added a dev server: WebAssembly apps can now be 'run' with a web server embedded in build.zig, this helps reduce dev time\r\n\r\n## C API\r\nSome efforts have been started towards exporting zgt API to C. This will allow zgt to be used in **any** language with an FFI (given the C ABI is the *lingua franca* of programming languages).  \r\nCurrently it is still at an early stage and only supports windows and buttons.\r\nSee `c_examples/zgt_app.c`\r\n\r\n**Full Changelog**: https://github.com/zenith391/zgt/compare/0.1.0...0.2.0",
+      "prerelease": true,
+      "published_at": "2022-07-18T22:05:13Z",
+      "html_url": "https://github.com/capy-ui/capy/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.1.0",
+      "name": "0.1.0",
+      "body": "The first release of zgt.\r\n\r\nThis initial implementation has buttons, labels, text fields, canvas and containers.\r\n\r\nThe following backends are implemented:\r\n- GTK3, used for Linux (as of this release, it is the only 100% complete backend)\r\n- win32 (80% complete, misses a few features)\r\n- WebAssembly (20% complete)\r\n- OpenGL ES (0%, doesn't work)",
+      "prerelease": true,
+      "published_at": "2022-01-01T00:16:12Z",
+      "html_url": "https://github.com/capy-ui/capy/releases/tag/0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Working towards making a better native GUI toolkit, simpler than HTML/CSS/JS",
+  "owner_location": null,
+  "owner_blog": "https://capy-ui.org",
+  "owner_twitter_username": "capy_gui",
+  "owner_created_at": "2022-07-29T17:42:07Z",
+  "homepage": "https://capy-ui.org",
+  "license": "MPL-2.0",
+  "category": "gui"
+}

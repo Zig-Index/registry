@@ -1,0 +1,120 @@
+{
+  "name": "ziglua",
+  "owner": "natecraddock",
+  "repo": "ziglua",
+  "description": "Zig bindings for the Lua C API",
+  "type": "project",
+  "topics": [
+    "binding",
+    "lua",
+    "zig",
+    "lua-bindings",
+    "library",
+    "package",
+    "zig-package"
+  ],
+  "stars": 425,
+  "forks": 58,
+  "watchers": 10,
+  "updated_at": "2025-12-05T20:15:50Z",
+  "dependencies": [
+    {
+      "name": "lua51",
+      "url": "https://www.lua.org/ftp/lua-5.1.5.tar.gz",
+      "hash": "N-V-__8AABAhDAAIlXL7OA-0Z5sWQh_FOFGoImvOvJzkRGOg"
+    },
+    {
+      "name": "lua52",
+      "url": "https://www.lua.org/ftp/lua-5.2.4.tar.gz",
+      "hash": "N-V-__8AALg2DgDVsrOXOPBkTZ7Vt0MZc_Gha5N--G1M-FiH"
+    },
+    {
+      "name": "lua53",
+      "url": "https://www.lua.org/ftp/lua-5.3.6.tar.gz",
+      "hash": "N-V-__8AALihEACTeiI1Me9rP-qPZT3BNTELDoSAXn76FIhw"
+    },
+    {
+      "name": "lua54",
+      "url": "https://www.lua.org/ftp/lua-5.4.8.tar.gz",
+      "hash": "N-V-__8AAKEzFAAA695b9LXBhUSVK5MAV_VKSm1mEj3Acbze"
+    },
+    {
+      "name": "luajit",
+      "url": "https://github.com/LuaJIT/LuaJIT/archive/c525bcb9024510cad9e170e12b6209aedb330f83.tar.gz",
+      "hash": "N-V-__8AACcgQgCuLYTPzCp6pnBmFJHyG77RAtM13hjOfTaG"
+    },
+    {
+      "name": "luau",
+      "url": "https://github.com/luau-lang/luau/archive/refs/tags/0.653.tar.gz",
+      "hash": "N-V-__8AAFB1kwDHb7dLmDsOv91rOkqorfDB_2nJtqnp4F-b"
+    }
+  ],
+  "readme": "# Ziglua\n[![shield showing current tests status](https://github.com/natecraddock/ziglua/actions/workflows/tests.yml/badge.svg)](https://github.com/natecraddock/ziglua/actions/workflows/tests.yml)\n[![Discord](https://img.shields.io/discord/1196908820140671077?style=flat&logo=discord)](https://discord.com/invite/XpZqDFvAtK)\n\nZig bindings for the [Lua C API](https://www.lua.org/manual/5.4/manual.html#4). Ziglua currently supports the latest releases of Lua 5.1, 5.2, 5.3, 5.4, and [Luau](https://luau-lang.org).\n\nZiglua can be used in two ways, either\n* **embedded** to statically embed the Lua VM in a Zig program,\n* or as a shared **module** to create Lua libraries that can be loaded at runtime in other Lua-based software.\n\nIn both cases, Ziglua will compile Lua from source and link against your Zig code making it easy to create software that integrates with Lua without requiring any system Lua libraries.\n\nZiglua `main` is kept up to date with Zig `master`. See the [`zig-0.13.0`](https://github.com/natecraddock/ziglua/tree/zig-0.13.0) branch for Zig 0.13.0 support.\n\n## Documentation\nDocs are a work in progress and are automatically generated. Most functions and public declarations are documented:\n* [Ziglua Docs](https://natecraddock.github.io/ziglua/#ziglua.lib.Lua)\n\nSee [docs.md](https://github.com/natecraddock/ziglua/blob/main/docs.md) for more general information on Ziglua and how it differs from the C API.\n\nExample code is included in the [examples](https://github.com/natecraddock/ziglua/tree/main/examples) directory.\n* Run an example with `zig build run-example-<name>`\n* Install an example with `zig build install-example-<name>`\n\n## Why use Ziglua?\nIn a nutshell, Ziglua is a simple wrapper around the C API you would get by using Zig's `@cImport()`. Ziglua aims to mirror the [Lua C API](https://www.lua.org/manual/5.4/manual.html#4) as closely as possible, while improving ergonomics using Zig's features. For example:\n\n* Zig error unions to require failure state handling\n* Null-terminated slices instead of C strings\n* Type-checked enums for parameters and return values\n* Compiler-enforced checking of optional pointers\n* Better types in many cases (e.g. `bool` instead of `int`)\n* Comptime convenience functions to make binding creation easier\n\nNearly every function in the C API is exposed in Ziglua. Additional convenience functions like `toAny` and `pushAny` use comptime reflection to make the API easier to use.\n\n## Integrating Ziglua in your project\n\nRun `zig fetch --save git+https://github.com/natecraddock/ziglua` to add the most recent commit of ziglua to your `build.zig.zon` file.\n\nAdd a `#<tag>` to the url to use a specific tagged release or commit like `zig fetch --save git+https://github.com/natecraddock/ziglua#0.3.0`\n\nThen in your `build.zig` file you can use the dependency.\n\n```zig\npub fn build(b: *std.Build) void {\n    // ... snip ...\n\n    const lua_dep = b.dependency(\"zlua\", .{\n        .target = target,\n        .optimize = optimize,\n    });\n\n    // ... snip ...\n\n    // add the zlua module and lua artifact\n    exe.root_module.addImport(\"zlua\", lua_dep.module(\"zlua\"));\n\n}\n```\n\nThis will compile the Lua C sources and link with your project.\n\nThere are currently three additional options that can be passed to `b.dependency()`:\n\n* `.lang`: Set the Lua language to build and embed. Defaults to `.lua54`. Possible values are `.lua51`, `.lua52`, `.lua53`, `.lua54`, and `luau`.\n* `.shared`: Defaults to `false` for embedding in a Zig program. Set to `true` to dynamically link the Lua source code (useful for creating shared modules).\n* `luau_use_4_vector`: defaults to false. Set to true to use 4-vectors instead of the default 3-vector in Luau.\n* `lua_user_h`: defaults to null. Provide a path to an additional header file for the Lua compilation. Must be set to to `examples/user.h` in order to run the multithreaded example.\n\nFor example, here is a `b.dependency()` call that and links against a shared Lua 5.2 library:\n\n```zig\nconst zlua = b.dependency(\"zlua\", .{\n    .target = target,\n    .optimize = optimize,\n    .lang = .lua52,\n    .shared = true,\n});\n``````\n\nThe `zlua` module will now be available in your code. Here is a simple example that pushes and inspects an integer on the Lua stack:\n\n```zig\nconst std = @import(\"std\");\nconst zlua = @import(\"zlua\");\n\nconst Lua = zlua.Lua;\n\npub fn main() anyerror!void {\n    // Create an allocator\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    const allocator = gpa.allocator();\n    defer _ = gpa.deinit();\n\n    // Initialize the Lua vm\n    var lua = try Lua.init(allocator);\n    defer lua.deinit();\n\n    // Add an integer to the Lua stack and retrieve it\n    lua.pushInteger(42);\n    std.debug.print(\"{}\\n\", .{try lua.toInteger(1)});\n}\n```\n\n## Contributing\nPlease make suggestions, report bugs, and create pull requests. Anyone is welcome to contribute!\n\nI only use a subset of the Lua API through Ziglua, so if there are parts that aren't easy to use or understand, please fix it yourself or let me know!\n\nThank you to the [Lua](https://lua.org) team for creating such a great language!\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/7967463?u=73a5dd5bf1ba7ddffe4949073329a6fa7ce829b1&v=4",
+  "releases": [
+    {
+      "tag_name": "0.6.0",
+      "name": "v0.6.0 – Zig 0.15.2",
+      "body": "This release targets Zig version 0.15.2.\r\n\r\n## What's Changed\r\n* Fix(CI): Update CI to the Zig 0.16.0 development cycle. by @robbielyman in https://github.com/natecraddock/ziglua/pull/178\r\n* fix: avoid std.meta.Tuple by @robbielyman in https://github.com/natecraddock/ziglua/pull/177\r\n* Add fnRegsFromStruct for comptime-generation of Lua function registrations by @nurpax in https://github.com/natecraddock/ziglua/pull/179\r\n* fix(build): make patch utility work with zig 0.15.2 by @bfredl in https://github.com/natecraddock/ziglua/pull/180\r\n* fix(build): define LUAJIT_OS for windows to build PE Object by @robbielyman in https://github.com/natecraddock/ziglua/pull/183\r\n\r\n\r\n**Full Changelog**: https://github.com/natecraddock/ziglua/compare/0.5.0...0.6.0",
+      "prerelease": false,
+      "published_at": "2025-11-25T04:25:27Z",
+      "html_url": "https://github.com/natecraddock/ziglua/releases/tag/0.6.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.5.0",
+      "name": "0.5.0 – Zig 0.14.0",
+      "body": "this release, Ziglua 0.5.0, targets Zig version 0.14.0.\r\n\r\n## What's Changed\r\n* Fix breaking change for signature of alignedAlloc by @robbielyman in https://github.com/natecraddock/ziglua/pull/149\r\n* Implement toTuple and custom functions for toAny and pushAny by @axdank in https://github.com/natecraddock/ziglua/pull/123\r\n* Refactor code to decl literals by @sea-grass in https://github.com/natecraddock/ziglua/pull/151\r\n* Add compileError when a function is used where it is not supported by @sea-grass in https://github.com/natecraddock/ziglua/pull/152\r\n* Support both zig-0.14 and zig-0.15-dev in main by @nurpax in https://github.com/natecraddock/ziglua/pull/154\r\n* Breaking change for the type of sanitize_c (again) by @e0328eric in https://github.com/natecraddock/ziglua/pull/156\r\n* fix(build): add -DLUA_BUILD_AS_DLL if building shared + Windows by @robbielyman in https://github.com/natecraddock/ziglua/pull/150\r\n* improvement(build): add -Dlibrary_name for change name *.dll, *.so, *… by @yiv1 in https://github.com/natecraddock/ziglua/pull/157\r\n* Add build option to provide an additional header file to the Lua compilation by @hubidubi13 in https://github.com/natecraddock/ziglua/pull/159\r\n* Cross build luajit to aarch64-linux from x86 host by @fallenwood in https://github.com/natecraddock/ziglua/pull/160\r\n* fix: update to latest Zig post Writergate by @robbielyman in https://github.com/natecraddock/ziglua/pull/163\r\n* Cross build from aarch64 to x86_64-linux-gnu by @fallenwood in https://github.com/natecraddock/ziglua/pull/165\r\n* Support zig 0.14 by @nurpax in https://github.com/natecraddock/ziglua/pull/169\r\n* fix: Transition from `ArrayList` to `ArrayListUnmanaged` by @robbielyman in https://github.com/natecraddock/ziglua/pull/174\r\n* feat: toNumeric and checkNumeric by @robbielyman in https://github.com/natecraddock/ziglua/pull/173\r\n\r\n## New Contributors\r\n* @sea-grass made their first contribution in https://github.com/natecraddock/ziglua/pull/151\r\n* @e0328eric made their first contribution in https://github.com/natecraddock/ziglua/pull/156\r\n* @yiv1 made their first contribution in https://github.com/natecraddock/ziglua/pull/157\r\n* @hubidubi13 made their first contribution in https://github.com/natecraddock/ziglua/pull/159\r\n* @fallenwood made their first contribution in https://github.com/natecraddock/ziglua/pull/160\r\n\r\n**Full Changelog**: https://github.com/natecraddock/ziglua/compare/0.4.0...0.5.0",
+      "prerelease": false,
+      "published_at": "2025-09-08T20:14:30Z",
+      "html_url": "https://github.com/natecraddock/ziglua/releases/tag/0.5.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.4.0",
+      "name": "v0.4.0",
+      "body": "## Highlights\r\n* The package and module are renamed from ziglua to zlua. This is to follow Zig conventions to not include the word \"zig\" in the name to avoid redundancy. The repo is still called ziglua.\r\n* Improved documentation.\r\n* Lua version updates: Lua 5.4.7 and Luau 0.653.\r\n* Added zlua.define() function to generate Lua Language Server type annotation files.\r\n* zlua.wrap() now supports functions that return error unions.\r\n\r\n## What's Changed\r\n* fix: replace `lua_yield` with what it expands to to avoid macro typecheck error by @robbielyman in https://github.com/natecraddock/ziglua/pull/88\r\n* Fix example code in the README by @oakmac in https://github.com/natecraddock/ziglua/pull/90\r\n* Invert the argExpected condition to match Lua docs by @luchak in https://github.com/natecraddock/ziglua/pull/98\r\n* Luals docgen by @VisenDev in https://github.com/natecraddock/ziglua/pull/99\r\n* use lua_objlen for luajit in rawLen function by @axdank in https://github.com/natecraddock/ziglua/pull/100\r\n* Add a method to set the Luau interrupt callback by @luchak in https://github.com/natecraddock/ziglua/pull/97\r\n* remove const qualifier if required by @axdank in https://github.com/natecraddock/ziglua/pull/102\r\n* Remove @cImport in favor of translateC by @luchak in https://github.com/natecraddock/ziglua/pull/96\r\n* add missing path by @VisenDev in https://github.com/natecraddock/ziglua/pull/103\r\n* build fixes for zig dev 0.14.0-dev.1820+ea527f7a8 by @nurpax in https://github.com/natecraddock/ziglua/pull/105\r\n* fix: remove `Lua.equal` with compile error for lua 5.2, 5.3, 5.4 by @robbielyman in https://github.com/natecraddock/ziglua/pull/118\r\n* Update Ziglua to support the latest commit of Zig master by @darltrash in https://github.com/natecraddock/ziglua/pull/119\r\n* expose `c` as build module and fix `exportFn` by @axdank in https://github.com/natecraddock/ziglua/pull/121\r\n* Update Luau to 0.653 by @noxabellus in https://github.com/natecraddock/ziglua/pull/122\r\n* Fix build break for zig 0.14.0-dev.2596 by @nurpax in https://github.com/natecraddock/ziglua/pull/131\r\n* fix generation of lj_folddef.h in luajit build by @bfredl in https://github.com/natecraddock/ziglua/pull/133\r\n* update ziglua to work with zig 0.14.0-dev.3259+0779e847f by @nurpax in https://github.com/natecraddock/ziglua/pull/134\r\n* fix(docs): update docs.yml to use newer upload-artifact action by @robbielyman in https://github.com/natecraddock/ziglua/pull/135\r\n* fix(build)!: update to zig 0.14.0 by @robbielyman in https://github.com/natecraddock/ziglua/pull/136\r\n* deps: update to new hash by @rockorager in https://github.com/natecraddock/ziglua/pull/141\r\n* readme: change dependency name from ziglua to lua_wrapper by @robbielyman in https://github.com/natecraddock/ziglua/pull/140\r\n* fix(build)!: lua_wrapper -> zlua by @robbielyman in https://github.com/natecraddock/ziglua/pull/142\r\n* fix pushAutoFunction to use lowercased pointer size by @challengee in https://github.com/natecraddock/ziglua/pull/144\r\n* Make dependencies lazy by @natecraddock in https://github.com/natecraddock/ziglua/pull/145\r\n* Add .gitattributes by @natecraddock in https://github.com/natecraddock/ziglua/pull/146\r\n\r\n## New Contributors\r\n* @oakmac made their first contribution in https://github.com/natecraddock/ziglua/pull/90\r\n* @luchak made their first contribution in https://github.com/natecraddock/ziglua/pull/98\r\n* @darltrash made their first contribution in https://github.com/natecraddock/ziglua/pull/119\r\n* @noxabellus made their first contribution in https://github.com/natecraddock/ziglua/pull/122\r\n* @rockorager made their first contribution in https://github.com/natecraddock/ziglua/pull/141\r\n* @challengee made their first contribution in https://github.com/natecraddock/ziglua/pull/144\r\n\r\n**Full Changelog**: https://github.com/natecraddock/ziglua/compare/0.3.0...0.4.0",
+      "prerelease": false,
+      "published_at": "2025-04-28T15:18:44Z",
+      "html_url": "https://github.com/natecraddock/ziglua/releases/tag/0.4.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.3.0",
+      "name": "Ziglua 0.3.0",
+      "body": "Auto generated release notes this time! I figured it would be good to make an official release targeting Zig 0.13.0.\r\n\r\nThe biggest changes are support for Luau, preliminary LuaJIT support, major restructuring of the code in the repository, and various fixes. Documentation is still a work in progress.\r\n\r\n## What's Changed\r\n* Be able to compile with latest zig by @davidgranstrom in https://github.com/natecraddock/ziglua/pull/28\r\n* Add Luau support by @natecraddock in https://github.com/natecraddock/ziglua/pull/36\r\n* Remove vendored code and update to latest module api by @natecraddock in https://github.com/natecraddock/ziglua/pull/43\r\n* Simplify the structure of the library by @natecraddock in https://github.com/natecraddock/ziglua/pull/46\r\n* Expose Luau bytecode loading API, add example by @nurpax in https://github.com/natecraddock/ziglua/pull/38\r\n* Add support for tagged userdata and userdata destructors by @nurpax in https://github.com/natecraddock/ziglua/pull/45\r\n* Expose Luau 3-vectors support by @nurpax in https://github.com/natecraddock/ziglua/pull/41\r\n* Add support for user atoms and namecalls by @nurpax in https://github.com/natecraddock/ziglua/pull/48\r\n* Add preliminary LuaJIT support by @natecraddock in https://github.com/natecraddock/ziglua/pull/53\r\n* Combine all library files into a single lib.zig by @natecraddock in https://github.com/natecraddock/ziglua/pull/54\r\n* Added comptime convenience functions by @VisenDev in https://github.com/natecraddock/ziglua/pull/55\r\n* Enums and slices support by @VisenDev in https://github.com/natecraddock/ziglua/pull/60\r\n* fix: update to latest zig by @ryleelyman in https://github.com/natecraddock/ziglua/pull/65\r\n* Parsing memory fixes by @VisenDev in https://github.com/natecraddock/ziglua/pull/63\r\n* Fix and simplify library opening by @natecraddock in https://github.com/natecraddock/ziglua/pull/68\r\n* Add support for tagged unions, vectors and arrays in pushAny and toAny by @T1nk3r1 in https://github.com/natecraddock/ziglua/pull/66\r\n* Many changes to String and Bytes functions by @natecraddock in https://github.com/natecraddock/ziglua/pull/72\r\n* Make Lua an opqaque by @natecraddock in https://github.com/natecraddock/ziglua/pull/73\r\n* build: update to latest zig by @theoparis in https://github.com/natecraddock/ziglua/pull/76\r\n* update outdated LazyPath constructors by @bfredl in https://github.com/natecraddock/ziglua/pull/82\r\n\r\n## New Contributors\r\n* @davidgranstrom made their first contribution in https://github.com/natecraddock/ziglua/pull/28\r\n* @natecraddock made their first contribution in https://github.com/natecraddock/ziglua/pull/36\r\n* @nurpax made their first contribution in https://github.com/natecraddock/ziglua/pull/38\r\n* @VisenDev made their first contribution in https://github.com/natecraddock/ziglua/pull/55\r\n* @T1nk3r1 made their first contribution in https://github.com/natecraddock/ziglua/pull/66\r\n* @theoparis made their first contribution in https://github.com/natecraddock/ziglua/pull/76\r\n* @bfredl made their first contribution in https://github.com/natecraddock/ziglua/pull/82\r\n\r\n**Full Changelog**: https://github.com/natecraddock/ziglua/compare/0.2.0...0.3.0",
+      "prerelease": false,
+      "published_at": "2024-06-14T23:16:15Z",
+      "html_url": "https://github.com/natecraddock/ziglua/releases/tag/0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.2.0",
+      "name": "Ziglua 0.2.0",
+      "body": "With a [Zig release last week](https://ziglang.org/download/0.11.0/release-notes.html), I figured this would be a good time to tag a release. Ziglua 0.2.0 supports Zig 0.11.0. There have been several changes since the last release, including fixes from several contributors.\r\n\r\nThe biggest change in this release is officially supporting the new Zig package manager. Goodbye submodules! Instructions are in the readme. There have also been several updates to the Ziglua API and documentation.\r\n\r\nSee [the changelog](https://github.com/natecraddock/ziglua/blob/main/changelog.md#020) for full details.",
+      "prerelease": false,
+      "published_at": "2023-08-11T03:49:31Z",
+      "html_url": "https://github.com/natecraddock/ziglua/releases/tag/0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.1.0",
+      "name": "0.1.0",
+      "body": "See the changelog for details: https://github.com/natecraddock/ziglua/blob/master/changelog.md#010",
+      "prerelease": true,
+      "published_at": "2022-10-29T03:34:49Z",
+      "html_url": "https://github.com/natecraddock/ziglua/releases/tag/0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "ziguana & hiker",
+  "owner_company": null,
+  "owner_location": "Utah",
+  "owner_blog": "https://nathancraddock.com",
+  "owner_twitter_username": null,
+  "owner_followers": 83,
+  "owner_following": 7,
+  "owner_created_at": "2014-06-23T17:34:42Z",
+  "license": "MIT",
+  "category": "library"
+}

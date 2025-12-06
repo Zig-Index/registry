@@ -1,0 +1,33 @@
+{
+  "name": "zig-wgpu-native",
+  "owner": "TheOnlySilverClaw",
+  "repo": "zig-wgpu-native",
+  "description": "Zig bindings for the wgpu-native graphics API",
+  "type": "project",
+  "topics": [
+    "bindings",
+    "webgpu",
+    "wgpu",
+    "wgpu-native",
+    "zig-library",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-12-01T16:52:53Z",
+  "minimum_zig_version": "0.15.0",
+  "readme": "Zig bindings for the [wgpu-native](https://github.com/gfx-rs/wgpu-native) graphics API.",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/6529548?u=7c11d86a2154ebb34d9c5a5154903858aa6c338f&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Nürnberg, Germany",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 8,
+  "owner_following": 3,
+  "owner_created_at": "2014-01-28T22:22:16Z",
+  "homepage": "https://codeberg.org/Silverclaw/zig-wgpu-native",
+  "license": "BSD-3-Clause",
+  "category": "library"
+}

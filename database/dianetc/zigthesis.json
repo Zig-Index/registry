@@ -1,0 +1,27 @@
+{
+  "name": "zigthesis",
+  "owner": "dianetc",
+  "repo": "zigthesis",
+  "description": "A property-based testing library for zig. ",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 7,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-05-08T12:57:07Z",
+  "minimum_zig_version": "0.12.0-dev.2637+3da6043e2",
+  "readme": "# Zigthesis\n\nA  **small** library for falsifying a hypothesis.\n\nThe primary entry point into the library is the `falsify` function.\n\nIf this sounds eerily familiar to you, it should! Inspiration for this library was \ntaken directly from the initial commits of the very popular [Hypothesis library](https://github.com/HypothesisWorks/hypothesis) \n\nSimilar to falsify in Hypothesis, you give it a predicate and a specification for how to generate arguments to\nthat predicate, and it gives you a counterexample.\n\nCurrently, test cases can be added in `tests/test_falsify.zig`. Get started by building and running test examples via:\n\n```bash\nzig build\nzig build test\n```\n\nAn example test and output, \n\n```zig\nfn weirdDistributive(x: i32, y: i32, z: i32) bool {\n    return (x + y) * z == x * (y + z);\n}\ntry zigthesis.falsify(weirdDistributive, \"weird distributive\");\n```\n\nOutput:\n```\nweird distributive             failed for { 1, 1, 0 }\n```\n\nZigthesis will return a success, if no falsifying test case was found within MAX_DURATION_MS (currently set at 5 seconds).\n\n\nINITIAL REMARK: This is tiny and doesn't do much for now. Next steps would be to make a simple foundation for generating and testing properties with:\n1. ~~Floats~~\n2. ~~Arrays (of floats/integers)~~\n3. ~~Vectors~~\n4. ~~Strings~~\n5. ~~User Defined Struct~~\n6. enums, slices, pointers etc.\n\n## STATUS:\n\n- Currently `main.zig` only has an empty main function. This is confusing. Is there a way refactor to make this more intuitive?\n\n- Implemented a [bad shrinking](https://propertesting.com/book_shrinking.html) mechanism. More thought needs to be put into this. Currently shrinking in zigthesis is treated as a [post-facto process](https://dianetc.github.io/musings/initial_shrinking/). We must \"integrate\" shrinking into the generation process instead of afterwards in order to get minimizing falsifying cases. My next obvious step was to have the generator produce not just a plain value, but a structure (call it a sample) that contains both the generated value and a (possibly lazy) tree of shrink candidates. That way, if a property fails, we can traverse the tree to quickly locate a minimal failing case. This is easier said than done though. \n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/46408633?u=b1f5d2c2c52da7bcbdfde430599a5f4192c6bb53&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Boston",
+  "owner_blog": "dianetc.github.io",
+  "owner_twitter_username": null,
+  "owner_followers": 5,
+  "owner_following": 5,
+  "owner_created_at": "2019-01-05T23:35:56Z",
+  "license": "MIT",
+  "category": "library"
+}

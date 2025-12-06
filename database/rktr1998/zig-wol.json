@@ -1,0 +1,1036 @@
+{
+  "name": "zig-wol",
+  "owner": "rktr1998",
+  "repo": "zig-wol",
+  "description": "Wake-on-lan CLI written in Zig.",
+  "type": "project",
+  "topics": [
+    "command-line",
+    "wake-on-lan",
+    "ziglang",
+    "wol",
+    "zig",
+    "cli",
+    "zig-package"
+  ],
+  "stars": 31,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-12-04T09:21:36Z",
+  "dependencies": [
+    {
+      "name": "clap",
+      "url": "git+https://github.com/Hejsil/zig-clap#5289e0753cd274d65344bef1c114284c633536ea",
+      "hash": "clap-0.11.0-oBajB-HnAQDPCKYzwF7rO3qDFwRcD39Q0DALlTSz5H7e"
+    }
+  ],
+  "minimum_zig_version": "0.15.2",
+  "readme": "![GitHub License](https://img.shields.io/github/license/rktr1998/zig-wol)\n\n# Zig-wol\n\nWritten in the [Zig](https://github.com/ziglang/zig) programming language, [zig-wol](https://github.com/rktr1998/zig-wol) is a CLI utility for sending wake-on-lan magic packets to wake up a computer in a LAN given its MAC address.\n\n## Features\n\n- Send WOL magic packets to wake up devices on the LAN.\n- Cross-platform support for windows, macos and linux for both x86_64 and aarch64 architectures.\n\n## Installation\n\nPre-compiled binaries of [zig-wol](https://github.com/rktr1998/zig-wol) are distributed with [releases](https://github.com/rktr1998/zig-wol/releases): download the binary for your architecture and operating system and you are good to go!\n\n### Install latest on Windows using PowerShell\n\n```pwsh\nInvoke-RestMethod \"https://raw.githubusercontent.com/rktr1998/zig-wol/refs/heads/main/install/install-latest-on-windows.ps1\" | Invoke-Expression\n```\n\nThis command downloads the latest release for your processor architecture and **installs** the program at `C:\\Users\\%username%\\.zig-wol`. To **uninstall** zig-wol, simply delete this folder.\n\n### Install latest on Linux\n\n```sh\nbash <(curl -sSL https://raw.githubusercontent.com/rktr1998/zig-wol/refs/heads/main/install/install-latest-on-linux.sh)\n```\n\nThis command downloads the latest release for your processor architecture and **installs** the program at `/home/$USER/.zig-wol`. To **uninstall** zig-wol, simply delete this folder.\n\n### Install latest on MacOS\n\n```sh\nbash <(curl -sSL https://raw.githubusercontent.com/rktr1998/zig-wol/refs/heads/main/install/install-latest-on-macos.sh)\n```\n\nThis command downloads the latest release for your processor architecture and **installs** the program at `/home/$USER/.zig-wol`. To **uninstall** zig-wol, simply delete this folder.\n\n## Usage\n\nWake a machine on your LAN by broadcasting the magic packet: replace `<MAC>` with the target MAC (e.g. `9A-63-A1-FF-8B-4C`).\n\n```sh\nzig-wol wake <MAC>\n```\n\nCreate an alias for a MAC, list all aliases or remove one.\n\n```sh\nzig-wol alias <NAME> <MAC> --broadcast <ADDR>   # create an alias and set its broadcast\nzig-wol wake <NAME>                             # wake a machine by alias\n```\n\nThe optional `--broadcast` (e.g. 192.168.0.255) is important if there are multiple network interfaces. Setting the correct subnet broadcast address ensures the OS chooses the right network interface. If not specified, 255.255.255.255 is used.\n\nUse `zig-wol status` to ping all machines by their FQDN (if defined on alias creation) and display the status.\n\n```sh\n🟢  office-server\n🔴  workstation-A\n🟢  video-server\n🟢  workstation-B\n🔴  coffee-machine\n```\n\nRun `zig-wol help` to display all subcommands and `zig-wol <subcommand> --help` to display specific options.\n\n## Build\n\n### Prerequisites\n\n- [Zig (v0.15.1)](https://ziglang.org/download/) installed on your system.\n\n### 1. Clone the Repository\n\n```sh\ngit clone https://github.com/rktr1998/zig-wol.git\ncd zig-wol\n```\n\n### 2. Build the Application\n\n```sh\nzig build\n```\n\nThis command compiles the source code and places the executable in the `zig-out/bin/` directory.\n\n## As a library\n\nIt is possible to use the wake-on-lan functionality of this project as a library.\n\n```sh\nzig fetch --save=wol git+https://github.com/rktr1998/zig-wol\n```\n\nAdd the wol module from the fetched dependency in build.zig.\n\n```c\nconst wol_module = b.dependency(\"wol\", .{}).module(\"wol\");\nexe.root_module.addImport(\"wol\", wol_module); // e.g. add it to an exe\n```\n\nImport the module in Zig.\n\n```c\nconst wol = @import(\"wol\");\n```\n\n## Remote wake-on-lan\n\nUsing the subcommand **relay** it is possible to make zig-wol work as a beacon that listens on `--listen_address` for inbound wake-on-lan magic packets and relays them to a `--relay_address`.\nThe parameters --listen_port and --relay_port are optional and default to port 9 if unspecified, it is recomended to specify two different port numbers.\n\n```sh\nzig-wol relay --listen_address 192.168.0.10 --listen_port 9999 --relay_address 192.168.0.255 --relay_port 9\n```\n\nA realistic example usage, using the command above as a reference, is to have a home LAN comprised of one or more powerful machines that need to be woken remotely and an always-on low-power machine, like a raspberry-pi, that runs the `zig-wol relay` repeater.\nEnable port-forwarding in the router settings to forward inbound traffic from some specific port of choice to 9999/udp of the raspberry-pi, then zig-wol relay service relays the magic packets on the local subnet broadcast allowing to wake the other machines from outside the LAN, provided the router public address is known.\n\n![relay-diagram](docs/assets/relay-diagram.png)\n\n### As a service on Linux\n\nEnsure you have zig-wol and set net permissions to the binary.\n\n```sh\nsudo chmod +x /home/USERNAME/.zig-wol/zig-wol\nsudo setcap 'cap_net_bind_service=+ep' /home/USERNAME/.zig-wol/zig-wol\n```\n\nFirewall rules (based on the example above).\n\n```sh\nsudo ufw allow in proto udp to any port 9999\nsudo ufw allow out proto udp to any port 9\nsudo ufw reload\n```\n\nCreate the service file, set the USERNAME and addresses accordingly.\n\n```sh\nsudo tee /etc/systemd/system/zig-wol.service > /dev/null <<EOF\n[Unit]\nDescription=zig-wol\nAfter=network-online.target\nWants=network-online.target\nStartLimitBurst=5\nStartLimitIntervalSec=60s\n\n[Service]\nType=simple\nUser=USERNAME\nAmbientCapabilities=CAP_NET_BIND_SERVICE\nCapabilityBoundingSet=CAP_NET_BIND_SERVICE\nWorkingDirectory=/home/USERNAME/.zig-wol\nExecStartPre=/bin/sleep 5\nExecStart=/home/USERNAME/.zig-wol/zig-wol relay \\\\\n  --listen_address=192.168.0.10 --listen_port=9999 \\\\\n  --relay_address=192.168.0.255 --relay_port=9\nRestart=on-failure\nRestartSec=10s\n\n[Install]\nWantedBy=multi-user.target\nEOF\n\n```\n\nReload, enable and start the service.\n\n```sh\nsudo systemctl daemon-reload\nsudo systemctl enable zig-wol.service\nsudo systemctl start zig-wol.service\n```\n\nMonitor the service.\n\n```sh\nsudo systemctl status zig-wol.service\nsudo journalctl -u zig-wol.service -f\n```\n\n## License\n\nThis project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/104195271?u=de5b224a9f8dc938cb86fda7e53918486fb12070&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.6.5",
+      "name": "v0.6.5",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-11-08T11:03:04Z",
+      "html_url": "https://github.com/rktr1998/zig-wol/releases/tag/v0.6.5",
+      "assets": [
+        {
+          "name": "zig-wol-aarch64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.5/zig-wol-aarch64-linux.tar.gz",
+          "size": 1285614,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-macos.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.5/zig-wol-aarch64-macos.tar.gz",
+          "size": 289851,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.5/zig-wol-x86_64-windows.tar.gz",
+          "size": 1196192,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.5/zig-wol-aarch64-windows.tar.gz",
+          "size": 1148314,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-macos.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.5/zig-wol-x86_64-macos.tar.gz",
+          "size": 314355,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.5/zig-wol-x86_64-linux.tar.gz",
+          "size": 1320952,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.6.4",
+      "name": "v0.6.4",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-10-11T18:18:39Z",
+      "html_url": "https://github.com/rktr1998/zig-wol/releases/tag/v0.6.4",
+      "assets": [
+        {
+          "name": "zig-wol-x86_64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.4/zig-wol-x86_64-linux.tar.gz",
+          "size": 1320703,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-macos.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.4/zig-wol-x86_64-macos.tar.gz",
+          "size": 314182,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.4/zig-wol-x86_64-windows.tar.gz",
+          "size": 1195898,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.4/zig-wol-aarch64-windows.tar.gz",
+          "size": 1148104,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.4/zig-wol-aarch64-linux.tar.gz",
+          "size": 1285255,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-macos.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.4/zig-wol-aarch64-macos.tar.gz",
+          "size": 289574,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.6.3",
+      "name": "v0.6.3",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-09-06T14:12:21Z",
+      "html_url": "https://github.com/rktr1998/zig-wol/releases/tag/v0.6.3",
+      "assets": [
+        {
+          "name": "zig-wol-x86_64-macos.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.3/zig-wol-x86_64-macos.tar.gz",
+          "size": 313419,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-macos.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.3/zig-wol-aarch64-macos.tar.gz",
+          "size": 288633,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.3/zig-wol-x86_64-windows.tar.gz",
+          "size": 1195009,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.3/zig-wol-x86_64-linux.tar.gz",
+          "size": 1316644,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.3/zig-wol-aarch64-linux.tar.gz",
+          "size": 1280890,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.3/zig-wol-aarch64-windows.tar.gz",
+          "size": 1145236,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.6.1",
+      "name": "v0.6.1",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-08-25T21:19:29Z",
+      "html_url": "https://github.com/rktr1998/zig-wol/releases/tag/v0.6.1",
+      "assets": [
+        {
+          "name": "zig-wol-aarch64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.1/zig-wol-aarch64-linux.tar.gz",
+          "size": 1293695,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.1/zig-wol-aarch64-windows.tar.gz",
+          "size": 1169307,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-macos.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.1/zig-wol-x86_64-macos.tar.gz",
+          "size": 315384,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.1/zig-wol-x86_64-windows.tar.gz",
+          "size": 1217004,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-macos.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.1/zig-wol-aarch64-macos.tar.gz",
+          "size": 289770,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.1/zig-wol-x86_64-linux.tar.gz",
+          "size": 1323173,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.6.0",
+      "name": "v0.6.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-08-23T23:23:31Z",
+      "html_url": "https://github.com/rktr1998/zig-wol/releases/tag/v0.6.0",
+      "assets": [
+        {
+          "name": "zig-wol-x86_64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.0/zig-wol-x86_64-linux.tar.gz",
+          "size": 1316223,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.0/zig-wol-aarch64-linux.tar.gz",
+          "size": 1285011,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.0/zig-wol-x86_64-windows.tar.gz",
+          "size": 1209748,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-macos.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.0/zig-wol-aarch64-macos.tar.gz",
+          "size": 288656,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-macos.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.0/zig-wol-x86_64-macos.tar.gz",
+          "size": 313179,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.6.0/zig-wol-aarch64-windows.tar.gz",
+          "size": 1164426,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.5.2",
+      "name": "v0.5.2",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-08-23T21:48:24Z",
+      "html_url": "https://github.com/rktr1998/zig-wol/releases/tag/v0.5.2",
+      "assets": [
+        {
+          "name": "zig-wol-aarch64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.5.2/zig-wol-aarch64-linux.tar.gz",
+          "size": 1359755,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.5.2/zig-wol-x86_64-windows.tar.gz",
+          "size": 1280468,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-macos.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.5.2/zig-wol-x86_64-macos.tar.gz",
+          "size": 308624,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-macos.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.5.2/zig-wol-aarch64-macos.tar.gz",
+          "size": 288068,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.5.2/zig-wol-x86_64-linux.tar.gz",
+          "size": 1382955,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.5.2/zig-wol-aarch64-windows.tar.gz",
+          "size": 1226790,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.5.1",
+      "name": "v0.5.1",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-08-23T20:15:28Z",
+      "html_url": "https://github.com/rktr1998/zig-wol/releases/tag/v0.5.1",
+      "assets": [
+        {
+          "name": "zig-wol-aarch64-macos.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.5.1/zig-wol-aarch64-macos.tar.gz",
+          "size": 272789,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.5.1/zig-wol-aarch64-linux.tar.gz",
+          "size": 1270617,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-macos.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.5.1/zig-wol-x86_64-macos.tar.gz",
+          "size": 293211,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.5.1/zig-wol-x86_64-linux.tar.gz",
+          "size": 1296765,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.5.1/zig-wol-x86_64-windows.tar.gz",
+          "size": 1194499,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.5.1/zig-wol-aarch64-windows.tar.gz",
+          "size": 1143122,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.4.3",
+      "name": "v0.4.3",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-07-17T19:59:20Z",
+      "html_url": "https://github.com/rktr1998/zig-wol/releases/tag/v0.4.3",
+      "assets": [
+        {
+          "name": "zig-wol-aarch64-macos.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.4.3/zig-wol-aarch64-macos.tar.gz",
+          "size": 266207,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.4.3/zig-wol-aarch64-windows.tar.gz",
+          "size": 1081942,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.4.3/zig-wol-x86_64-linux.tar.gz",
+          "size": 1223036,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-macos.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.4.3/zig-wol-x86_64-macos.tar.gz",
+          "size": 287126,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.4.3/zig-wol-aarch64-linux.tar.gz",
+          "size": 1193013,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.4.3/zig-wol-x86_64-windows.tar.gz",
+          "size": 1134431,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.4.2",
+      "name": "v0.4.2",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-06-18T22:07:32Z",
+      "html_url": "https://github.com/rktr1998/zig-wol/releases/tag/v0.4.2",
+      "assets": [
+        {
+          "name": "zig-wol-x86_64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.4.2/zig-wol-x86_64-windows.tar.gz",
+          "size": 105137,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.4.2/zig-wol-aarch64-linux.tar.gz",
+          "size": 102405,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-macos.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.4.2/zig-wol-x86_64-macos.tar.gz",
+          "size": 106612,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.4.2/zig-wol-aarch64-windows.tar.gz",
+          "size": 99412,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-macos.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.4.2/zig-wol-aarch64-macos.tar.gz",
+          "size": 111536,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.4.2/zig-wol-x86_64-linux.tar.gz",
+          "size": 96687,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.4.1",
+      "name": "v0.4.1",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-06-09T20:37:11Z",
+      "html_url": "https://github.com/rktr1998/zig-wol/releases/tag/v0.4.1",
+      "assets": [
+        {
+          "name": "zig-wol-aarch64-macos.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.4.1/zig-wol-aarch64-macos.tar.gz",
+          "size": 111535,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.4.1/zig-wol-x86_64-windows.tar.gz",
+          "size": 105133,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.4.1/zig-wol-aarch64-linux.tar.gz",
+          "size": 102398,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.4.1/zig-wol-x86_64-linux.tar.gz",
+          "size": 96688,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.4.1/zig-wol-aarch64-windows.tar.gz",
+          "size": 99412,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-macos.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.4.1/zig-wol-x86_64-macos.tar.gz",
+          "size": 106610,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.4.0",
+      "name": "v0.4.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-06-09T15:06:19Z",
+      "html_url": "https://github.com/rktr1998/zig-wol/releases/tag/v0.4.0",
+      "assets": [
+        {
+          "name": "zig-wol-aarch64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.4.0/zig-wol-aarch64-windows.tar.gz",
+          "size": 99414,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-macos.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.4.0/zig-wol-aarch64-macos.tar.gz",
+          "size": 111541,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.4.0/zig-wol-x86_64-linux.tar.gz",
+          "size": 96694,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.4.0/zig-wol-x86_64-windows.tar.gz",
+          "size": 105138,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.4.0/zig-wol-aarch64-linux.tar.gz",
+          "size": 102405,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-macos.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.4.0/zig-wol-x86_64-macos.tar.gz",
+          "size": 106615,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.3.1",
+      "name": "v0.3.1",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-06-08T20:04:25Z",
+      "html_url": "https://github.com/rktr1998/zig-wol/releases/tag/v0.3.1",
+      "assets": [
+        {
+          "name": "zig-wol-aarch64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.3.1/zig-wol-aarch64-linux.tar.gz",
+          "size": 102520,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-linux.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.3.1/zig-wol-aarch64-linux.zip",
+          "size": 102518,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-x86_64-windows.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.3.1/zig-wol-x86_64-windows.zip",
+          "size": 106477,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-x86_64-linux.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.3.1/zig-wol-x86_64-linux.zip",
+          "size": 98218,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-aarch64-windows.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.3.1/zig-wol-aarch64-windows.zip",
+          "size": 99260,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-x86_64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.3.1/zig-wol-x86_64-windows.tar.gz",
+          "size": 105375,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.3.1/zig-wol-aarch64-windows.tar.gz",
+          "size": 99803,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.3.1/zig-wol-x86_64-linux.tar.gz",
+          "size": 98209,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.3.0",
+      "name": "v0.3.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-04-25T22:19:33Z",
+      "html_url": "https://github.com/rktr1998/zig-wol/releases/tag/v0.3.0",
+      "assets": [
+        {
+          "name": "zig-wol-x86_64-linux.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.3.0/zig-wol-x86_64-linux.zip",
+          "size": 98359,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-x86_64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.3.0/zig-wol-x86_64-linux.tar.gz",
+          "size": 98339,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.3.0/zig-wol-aarch64-linux.tar.gz",
+          "size": 102628,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.3.0/zig-wol-aarch64-windows.tar.gz",
+          "size": 100047,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-windows.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.3.0/zig-wol-aarch64-windows.zip",
+          "size": 99588,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-aarch64-linux.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.3.0/zig-wol-aarch64-linux.zip",
+          "size": 102620,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-x86_64-windows.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.3.0/zig-wol-x86_64-windows.zip",
+          "size": 106632,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-x86_64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.3.0/zig-wol-x86_64-windows.tar.gz",
+          "size": 105736,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.2.3",
+      "name": "v0.2.3",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-04-25T19:56:49Z",
+      "html_url": "https://github.com/rktr1998/zig-wol/releases/tag/v0.2.3",
+      "assets": [
+        {
+          "name": "zig-wol-aarch64-windows.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.2.3/zig-wol-aarch64-windows.zip",
+          "size": 97146,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-x86_64-linux.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.2.3/zig-wol-x86_64-linux.zip",
+          "size": 96021,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-x86_64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.2.3/zig-wol-x86_64-windows.tar.gz",
+          "size": 103474,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.2.3/zig-wol-x86_64-linux.tar.gz",
+          "size": 96075,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.2.3/zig-wol-aarch64-windows.tar.gz",
+          "size": 97274,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-linux.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.2.3/zig-wol-aarch64-linux.zip",
+          "size": 100892,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-x86_64-windows.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.2.3/zig-wol-x86_64-windows.zip",
+          "size": 103987,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-aarch64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.2.3/zig-wol-aarch64-linux.tar.gz",
+          "size": 100010,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.2.2",
+      "name": "v0.2.2",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-04-24T19:58:00Z",
+      "html_url": "https://github.com/rktr1998/zig-wol/releases/tag/v0.2.2",
+      "assets": [
+        {
+          "name": "zig-wol-aarch64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.2.2/zig-wol-aarch64-linux.tar.gz",
+          "size": 97945,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-linux.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.2.2/zig-wol-aarch64-linux.zip",
+          "size": 97947,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-aarch64-windows.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.2.2/zig-wol-aarch64-windows.zip",
+          "size": 96824,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-x86_64-linux.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.2.2/zig-wol-x86_64-linux.zip",
+          "size": 93187,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-aarch64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.2.2/zig-wol-aarch64-windows.tar.gz",
+          "size": 96969,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.2.2/zig-wol-x86_64-windows.tar.gz",
+          "size": 103427,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-windows.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.2.2/zig-wol-x86_64-windows.zip",
+          "size": 103751,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-x86_64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.2.2/zig-wol-x86_64-linux.tar.gz",
+          "size": 93169,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-04-05T14:20:17Z",
+      "html_url": "https://github.com/rktr1998/zig-wol/releases/tag/v0.2.0",
+      "assets": [
+        {
+          "name": "zig-wol-aarch64-linux.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.2.0/zig-wol-aarch64-linux.zip",
+          "size": 100063,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-aarch64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.2.0/zig-wol-aarch64-linux.tar.gz",
+          "size": 100029,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.2.0/zig-wol-x86_64-windows.tar.gz",
+          "size": 104174,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-windows.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.2.0/zig-wol-x86_64-windows.zip",
+          "size": 104684,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-aarch64-windows.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.2.0/zig-wol-aarch64-windows.zip",
+          "size": 98646,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-x86_64-linux.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.2.0/zig-wol-x86_64-linux.zip",
+          "size": 94268,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-aarch64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.2.0/zig-wol-aarch64-windows.tar.gz",
+          "size": 99072,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.2.0/zig-wol-x86_64-linux.tar.gz",
+          "size": 94224,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.2",
+      "name": "v0.1.2",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-03-13T20:57:52Z",
+      "html_url": "https://github.com/rktr1998/zig-wol/releases/tag/v0.1.2",
+      "assets": [
+        {
+          "name": "zig-wol-aarch64-windows.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.2/zig-wol-aarch64-windows.zip",
+          "size": 15132,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-aarch64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.2/zig-wol-aarch64-linux.tar.gz",
+          "size": 14663,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.2/zig-wol-aarch64-windows.tar.gz",
+          "size": 15172,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-linux.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.2/zig-wol-aarch64-linux.zip",
+          "size": 14754,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-x86_64-windows.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.2/zig-wol-x86_64-windows.zip",
+          "size": 16921,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-x86_64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.2/zig-wol-x86_64-linux.tar.gz",
+          "size": 14807,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.2/zig-wol-x86_64-windows.tar.gz",
+          "size": 16848,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-linux.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.2/zig-wol-x86_64-linux.zip",
+          "size": 14859,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.1",
+      "name": "v0.1.1",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-03-05T19:47:45Z",
+      "html_url": "https://github.com/rktr1998/zig-wol/releases/tag/v0.1.1",
+      "assets": [
+        {
+          "name": "zig-wol-aarch64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.1/zig-wol-aarch64-linux.tar.gz",
+          "size": 944727,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-linux.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.1/zig-wol-aarch64-linux.zip",
+          "size": 944974,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-aarch64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.1/zig-wol-aarch64-windows.tar.gz",
+          "size": 834635,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-windows.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.1/zig-wol-aarch64-windows.zip",
+          "size": 834315,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-x86_64-linux.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.1/zig-wol-x86_64-linux.zip",
+          "size": 971155,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-x86_64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.1/zig-wol-x86_64-windows.tar.gz",
+          "size": 851117,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-windows.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.1/zig-wol-x86_64-windows.zip",
+          "size": 856405,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-x86_64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.1/zig-wol-x86_64-linux.tar.gz",
+          "size": 971223,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-03-01T22:44:09Z",
+      "html_url": "https://github.com/rktr1998/zig-wol/releases/tag/v0.1.0",
+      "assets": [
+        {
+          "name": "zig-wol-aarch64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.0/zig-wol-aarch64-linux.tar.gz",
+          "size": 804321,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-windows.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.0/zig-wol-x86_64-windows.zip",
+          "size": 744822,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-x86_64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.0/zig-wol-x86_64-windows.tar.gz",
+          "size": 740976,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-windows.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.0/zig-wol-aarch64-windows.zip",
+          "size": 615385,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-x86_64-macos.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.0/zig-wol-x86_64-macos.tar.gz",
+          "size": 395049,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-x86_64-linux.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.0/zig-wol-x86_64-linux.tar.gz",
+          "size": 815852,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-linux.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.0/zig-wol-aarch64-linux.zip",
+          "size": 804081,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-x86_64-linux.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.0/zig-wol-x86_64-linux.zip",
+          "size": 816142,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-x86_64-macos.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.0/zig-wol-x86_64-macos.zip",
+          "size": 396232,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-aarch64-windows.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.0/zig-wol-aarch64-windows.tar.gz",
+          "size": 613400,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-wol-aarch64-macos.zip",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.0/zig-wol-aarch64-macos.zip",
+          "size": 318883,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zig-wol-aarch64-macos.tar.gz",
+          "url": "https://github.com/rktr1998/zig-wol/releases/download/v0.1.0/zig-wol-aarch64-macos.tar.gz",
+          "size": 317177,
+          "content_type": "application/gzip"
+        }
+      ]
+    }
+  ],
+  "owner_company": null,
+  "owner_location": "Basel",
+  "owner_blog": "https://www.linkedin.com/in/riccardotorreggiani/",
+  "owner_twitter_username": null,
+  "owner_followers": 7,
+  "owner_following": 27,
+  "owner_created_at": "2022-04-22T08:27:38Z",
+  "homepage": "https://rktr1998.github.io/zig-wol/",
+  "license": "MIT",
+  "category": "cli"
+}

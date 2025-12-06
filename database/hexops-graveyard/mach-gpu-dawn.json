@@ -1,0 +1,1341 @@
+{
+  "name": "mach-gpu-dawn",
+  "owner": "hexops-graveyard",
+  "repo": "mach-gpu-dawn",
+  "description": "Google's Dawn WebGPU implementation, cross-compiled with Zig into a single static library",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 149,
+  "forks": 16,
+  "watchers": 6,
+  "updated_at": "2025-07-28T13:01:36Z",
+  "dependencies": [
+    {
+      "name": "xcode_frameworks",
+      "url": "https://pkg.machengine.org/xcode-frameworks/122b43323db27b2082a2d44ed2121de21c9ccf75.tar.gz",
+      "hash": "12205d131983601cdb3500f38e9d8adaed5574fb0211b8b39291d2e9b90c6555ce59"
+    },
+    {
+      "name": "direct3d_headers",
+      "url": "https://pkg.machengine.org/direct3d-headers/9417c58f11628b7072f0c63b687282de83592891.tar.gz",
+      "hash": "12203594c3c97220742be1cc5343547bb25d8947e77bd52c50ef713da676d6f6d31f"
+    },
+    {
+      "name": "vulkan_headers",
+      "url": "https://pkg.machengine.org/vulkan-headers/ae4bb705e6cad613825d9e7d8ffc29ca595f54cb.tar.gz",
+      "hash": "122058b98f7d2ac86597363d0c0515c30aea392c605d5976c600196bd2c5b08b95d6"
+    },
+    {
+      "name": "x11_headers",
+      "url": "https://pkg.machengine.org/x11-headers/22bb51a939722a819bf52aba100ac6c25acfbaff.tar.gz",
+      "hash": "1220ddf168c855cf69b4f8c5284403106a3c681913e34453df10cc5a588d9bd1d005"
+    }
+  ],
+  "readme": "## Deprecated\n\nThis project has been deprecated and is no longer maintained.\n\nRationale: https://github.com/hexops/mach/issues/1166\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/121257957?v=4",
+  "releases": [
+    {
+      "tag_name": "release-9c05275",
+      "name": "Automatic release of main @ 9c05275",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2024-07-08T04:13:09Z",
+      "html_url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/tag/release-9c05275",
+      "assets": [
+        {
+          "name": "libdawn_aarch64-linux-musl_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-9c05275/libdawn_aarch64-linux-musl_release-fast.a.gz",
+          "size": 11666484,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-musl_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-9c05275/aarch64-linux-musl_release-fast.tar.gz",
+          "size": 12010604,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-musl_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-9c05275/libdawn_aarch64-linux-musl_debug.a.gz",
+          "size": 11666477,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-musl_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-9c05275/aarch64-linux-musl_debug.tar.gz",
+          "size": 12011137,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-musl_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-9c05275/libdawn_x86_64-linux-musl_release-fast.a.gz",
+          "size": 11633603,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-musl_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-9c05275/x86_64-linux-musl_release-fast.tar.gz",
+          "size": 11991011,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-musl_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-9c05275/libdawn_x86_64-linux-musl_debug.a.gz",
+          "size": 11633596,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-musl_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-9c05275/x86_64-linux-musl_debug.tar.gz",
+          "size": 11990647,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-gnu_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-9c05275/libdawn_aarch64-linux-gnu_release-fast.a.gz",
+          "size": 11671719,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-gnu_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-9c05275/aarch64-linux-gnu_release-fast.tar.gz",
+          "size": 12017115,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-gnu_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-9c05275/libdawn_x86_64-linux-gnu_release-fast.a.gz",
+          "size": 11631090,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-gnu_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-9c05275/x86_64-linux-gnu_release-fast.tar.gz",
+          "size": 11986744,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-gnu_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-9c05275/libdawn_x86_64-linux-gnu_debug.a.gz",
+          "size": 11631083,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-gnu_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-9c05275/x86_64-linux-gnu_debug.tar.gz",
+          "size": 11987109,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-gnu_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-9c05275/libdawn_aarch64-linux-gnu_debug.a.gz",
+          "size": 11671712,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-gnu_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-9c05275/aarch64-linux-gnu_debug.tar.gz",
+          "size": 12017478,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-macos-none_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-9c05275/libdawn_x86_64-macos-none_debug.a.gz",
+          "size": 9613793,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "x86_64-macos-none_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-9c05275/x86_64-macos-none_debug.tar.gz",
+          "size": 9759732,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-macos-none_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-9c05275/libdawn_x86_64-macos-none_release-fast.a.gz",
+          "size": 9613800,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "x86_64-macos-none_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-9c05275/x86_64-macos-none_release-fast.tar.gz",
+          "size": 9759728,
+          "content_type": "application/x-gtar"
+        }
+      ]
+    },
+    {
+      "tag_name": "release-d0a1e11",
+      "name": "Automatic release of main @ d0a1e11",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2024-06-02T21:17:18Z",
+      "html_url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/tag/release-d0a1e11",
+      "assets": [
+        {
+          "name": "libdawn_aarch64-linux-gnu_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-d0a1e11/libdawn_aarch64-linux-gnu_debug.a.gz",
+          "size": 11684406,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-gnu_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-d0a1e11/aarch64-linux-gnu_debug.tar.gz",
+          "size": 12031038,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-musl_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-d0a1e11/libdawn_x86_64-linux-musl_release-fast.a.gz",
+          "size": 11643966,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-musl_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-d0a1e11/x86_64-linux-musl_release-fast.tar.gz",
+          "size": 12002850,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-macos-none_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-d0a1e11/libdawn_x86_64-macos-none_debug.a.gz",
+          "size": 9613793,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "x86_64-macos-none_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-d0a1e11/x86_64-macos-none_debug.tar.gz",
+          "size": 9759732,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-gnu_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-d0a1e11/libdawn_x86_64-linux-gnu_debug.a.gz",
+          "size": 11643084,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "libdawn_aarch64-linux-musl_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-d0a1e11/libdawn_aarch64-linux-musl_debug.a.gz",
+          "size": 11676271,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-gnu_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-d0a1e11/x86_64-linux-gnu_debug.tar.gz",
+          "size": 11998619,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "aarch64-linux-musl_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-d0a1e11/aarch64-linux-musl_debug.tar.gz",
+          "size": 12024633,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-gnu_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-d0a1e11/libdawn_x86_64-linux-gnu_release-fast.a.gz",
+          "size": 11643091,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-gnu_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-d0a1e11/x86_64-linux-gnu_release-fast.tar.gz",
+          "size": 11998707,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-musl_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-d0a1e11/libdawn_aarch64-linux-musl_release-fast.a.gz",
+          "size": 11676278,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-musl_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-d0a1e11/aarch64-linux-musl_release-fast.tar.gz",
+          "size": 12024432,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-gnu_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-d0a1e11/libdawn_aarch64-linux-gnu_release-fast.a.gz",
+          "size": 11684413,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-gnu_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-d0a1e11/aarch64-linux-gnu_release-fast.tar.gz",
+          "size": 12031093,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-musl_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-d0a1e11/libdawn_x86_64-linux-musl_debug.a.gz",
+          "size": 11643959,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-musl_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-d0a1e11/x86_64-linux-musl_debug.tar.gz",
+          "size": 12000754,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "dawn_x86_64-windows-gnu_debug.lib.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-d0a1e11/dawn_x86_64-windows-gnu_debug.lib.gz",
+          "size": 20213448,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "x86_64-windows-gnu_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-d0a1e11/x86_64-windows-gnu_debug.tar.gz",
+          "size": 20550661,
+          "content_type": "application/x-gtar"
+        }
+      ]
+    },
+    {
+      "tag_name": "release-cdd4a1a",
+      "name": "Automatic release of main @ cdd4a1a",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2024-03-09T04:21:54Z",
+      "html_url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/tag/release-cdd4a1a",
+      "assets": [
+        {
+          "name": "libdawn_aarch64-macos-none_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-cdd4a1a/libdawn_aarch64-macos-none_debug.a.gz",
+          "size": 10167579,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "aarch64-macos-none_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-cdd4a1a/aarch64-macos-none_debug.tar.gz",
+          "size": 10301694,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "headers.json.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-cdd4a1a/headers.json.gz",
+          "size": 58116,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libdawn_aarch64-macos-none_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-cdd4a1a/libdawn_aarch64-macos-none_release-fast.a.gz",
+          "size": 10167586,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "aarch64-macos-none_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-cdd4a1a/aarch64-macos-none_release-fast.tar.gz",
+          "size": 10301673,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-macos-none_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-cdd4a1a/libdawn_x86_64-macos-none_release-fast.a.gz",
+          "size": 9735890,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-macos-none_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-cdd4a1a/x86_64-macos-none_release-fast.tar.gz",
+          "size": 9881063,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-macos-none_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-cdd4a1a/libdawn_x86_64-macos-none_debug.a.gz",
+          "size": 9735883,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "libdawn_x86_64-linux-musl_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-cdd4a1a/libdawn_x86_64-linux-musl_release-fast.a.gz",
+          "size": 11818962,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-macos-none_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-cdd4a1a/x86_64-macos-none_debug.tar.gz",
+          "size": 9881062,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "x86_64-linux-musl_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-cdd4a1a/x86_64-linux-musl_release-fast.tar.gz",
+          "size": 12171745,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-musl_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-cdd4a1a/libdawn_aarch64-linux-musl_release-fast.a.gz",
+          "size": 11925850,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-musl_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-cdd4a1a/aarch64-linux-musl_release-fast.tar.gz",
+          "size": 12279591,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-musl_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-cdd4a1a/libdawn_aarch64-linux-musl_debug.a.gz",
+          "size": 11925843,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-musl_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-cdd4a1a/aarch64-linux-musl_debug.tar.gz",
+          "size": 12279640,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-musl_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-cdd4a1a/libdawn_x86_64-linux-musl_debug.a.gz",
+          "size": 11818955,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-musl_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-cdd4a1a/x86_64-linux-musl_debug.tar.gz",
+          "size": 12171731,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-gnu_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-cdd4a1a/libdawn_aarch64-linux-gnu_release-fast.a.gz",
+          "size": 11937645,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-gnu_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-cdd4a1a/aarch64-linux-gnu_release-fast.tar.gz",
+          "size": 12296487,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-gnu_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-cdd4a1a/libdawn_aarch64-linux-gnu_debug.a.gz",
+          "size": 11937638,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "release-a0ca56a",
+      "name": "Automatic release of main @ a0ca56a",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2024-03-09T04:00:22Z",
+      "html_url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/tag/release-a0ca56a",
+      "assets": []
+    },
+    {
+      "tag_name": "release-49cb3ad",
+      "name": "Automatic release of main @ 49cb3ad",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2024-03-09T03:43:30Z",
+      "html_url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/tag/release-49cb3ad",
+      "assets": []
+    },
+    {
+      "tag_name": "release-1cce80c",
+      "name": "Automatic release of main @ 1cce80c",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2024-02-02T01:52:08Z",
+      "html_url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/tag/release-1cce80c",
+      "assets": [
+        {
+          "name": "libdawn_aarch64-macos-none_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-1cce80c/libdawn_aarch64-macos-none_debug.a.gz",
+          "size": 10271915,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "aarch64-macos-none_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-1cce80c/aarch64-macos-none_debug.tar.gz",
+          "size": 10407671,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "headers.json.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-1cce80c/headers.json.gz",
+          "size": 58116,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libdawn_aarch64-macos-none_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-1cce80c/libdawn_aarch64-macos-none_release-fast.a.gz",
+          "size": 10271922,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "aarch64-macos-none_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-1cce80c/aarch64-macos-none_release-fast.tar.gz",
+          "size": 10407659,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-musl_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-1cce80c/libdawn_aarch64-linux-musl_release-fast.a.gz",
+          "size": 11938309,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "libdawn_aarch64-linux-musl_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-1cce80c/libdawn_aarch64-linux-musl_debug.a.gz",
+          "size": 11938302,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-musl_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-1cce80c/aarch64-linux-musl_debug.tar.gz",
+          "size": 12288763,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-musl_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-1cce80c/libdawn_x86_64-linux-musl_release-fast.a.gz",
+          "size": 11813664,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-musl_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-1cce80c/aarch64-linux-musl_release-fast.tar.gz",
+          "size": 12288763,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "x86_64-linux-musl_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-1cce80c/x86_64-linux-musl_release-fast.tar.gz",
+          "size": 12177435,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-gnu_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-1cce80c/libdawn_x86_64-linux-gnu_release-fast.a.gz",
+          "size": 11812171,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-gnu_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-1cce80c/x86_64-linux-gnu_release-fast.tar.gz",
+          "size": 12172918,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-musl_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-1cce80c/libdawn_x86_64-linux-musl_debug.a.gz",
+          "size": 11813657,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "libdawn_x86_64-linux-gnu_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-1cce80c/libdawn_x86_64-linux-gnu_debug.a.gz",
+          "size": 11812164,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-musl_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-1cce80c/x86_64-linux-musl_debug.tar.gz",
+          "size": 12177043,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "x86_64-linux-gnu_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-1cce80c/x86_64-linux-gnu_debug.tar.gz",
+          "size": 12173126,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-gnu_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-1cce80c/libdawn_aarch64-linux-gnu_debug.a.gz",
+          "size": 11951721,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-gnu_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-1cce80c/aarch64-linux-gnu_debug.tar.gz",
+          "size": 12304559,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-gnu_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-1cce80c/libdawn_aarch64-linux-gnu_release-fast.a.gz",
+          "size": 11951728,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "release-f331c1c",
+      "name": "Automatic release of main @ f331c1c",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2024-01-13T10:06:45Z",
+      "html_url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/tag/release-f331c1c",
+      "assets": [
+        {
+          "name": "libdawn_aarch64-macos-none_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-f331c1c/libdawn_aarch64-macos-none_debug.a.gz",
+          "size": 10271935,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "aarch64-macos-none_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-f331c1c/aarch64-macos-none_debug.tar.gz",
+          "size": 10407677,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "headers.json.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-f331c1c/headers.json.gz",
+          "size": 58116,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libdawn_aarch64-macos-none_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-f331c1c/libdawn_aarch64-macos-none_release-fast.a.gz",
+          "size": 10271942,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "aarch64-macos-none_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-f331c1c/aarch64-macos-none_release-fast.tar.gz",
+          "size": 10407684,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-musl_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-f331c1c/libdawn_x86_64-linux-musl_debug.a.gz",
+          "size": 11811578,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-musl_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-f331c1c/x86_64-linux-musl_debug.tar.gz",
+          "size": 12174255,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-musl_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-f331c1c/libdawn_aarch64-linux-musl_debug.a.gz",
+          "size": 11928427,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-musl_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-f331c1c/aarch64-linux-musl_debug.tar.gz",
+          "size": 12286501,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-gnu_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-f331c1c/libdawn_x86_64-linux-gnu_release-fast.a.gz",
+          "size": 11810936,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-gnu_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-f331c1c/x86_64-linux-gnu_release-fast.tar.gz",
+          "size": 12168907,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-musl_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-f331c1c/libdawn_aarch64-linux-musl_release-fast.a.gz",
+          "size": 11928434,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-musl_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-f331c1c/aarch64-linux-musl_release-fast.tar.gz",
+          "size": 12286051,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-musl_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-f331c1c/libdawn_x86_64-linux-musl_release-fast.a.gz",
+          "size": 11811585,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "libdawn_x86_64-linux-gnu_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-f331c1c/libdawn_x86_64-linux-gnu_debug.a.gz",
+          "size": 11810929,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-musl_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-f331c1c/x86_64-linux-musl_release-fast.tar.gz",
+          "size": 12174346,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "x86_64-linux-gnu_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-f331c1c/x86_64-linux-gnu_debug.tar.gz",
+          "size": 12168890,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-gnu_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-f331c1c/libdawn_aarch64-linux-gnu_release-fast.a.gz",
+          "size": 11949009,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-gnu_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-f331c1c/aarch64-linux-gnu_release-fast.tar.gz",
+          "size": 12300993,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-gnu_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-f331c1c/libdawn_aarch64-linux-gnu_debug.a.gz",
+          "size": 11949002,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "release-c181959",
+      "name": "Automatic release of main @ c181959",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2024-01-13T08:30:50Z",
+      "html_url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/tag/release-c181959",
+      "assets": [
+        {
+          "name": "libdawn_aarch64-macos-none_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-c181959/libdawn_aarch64-macos-none_debug.a.gz",
+          "size": 10271935,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "aarch64-macos-none_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-c181959/aarch64-macos-none_debug.tar.gz",
+          "size": 10407653,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "headers.json.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-c181959/headers.json.gz",
+          "size": 58116,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libdawn_aarch64-macos-none_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-c181959/libdawn_aarch64-macos-none_release-fast.a.gz",
+          "size": 10271942,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "aarch64-macos-none_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-c181959/aarch64-macos-none_release-fast.tar.gz",
+          "size": 10407659,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-musl_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-c181959/libdawn_x86_64-linux-musl_release-fast.a.gz",
+          "size": 11811585,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-musl_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-c181959/x86_64-linux-musl_release-fast.tar.gz",
+          "size": 12174345,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-musl_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-c181959/libdawn_aarch64-linux-musl_release-fast.a.gz",
+          "size": 11928434,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-musl_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-c181959/aarch64-linux-musl_release-fast.tar.gz",
+          "size": 12286349,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-musl_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-c181959/libdawn_aarch64-linux-musl_debug.a.gz",
+          "size": 11928427,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-musl_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-c181959/aarch64-linux-musl_debug.tar.gz",
+          "size": 12286361,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-gnu_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-c181959/libdawn_x86_64-linux-gnu_release-fast.a.gz",
+          "size": 11810936,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-gnu_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-c181959/x86_64-linux-gnu_release-fast.tar.gz",
+          "size": 12169058,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-gnu_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-c181959/libdawn_aarch64-linux-gnu_release-fast.a.gz",
+          "size": 11949009,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-gnu_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-c181959/aarch64-linux-gnu_release-fast.tar.gz",
+          "size": 12300939,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-musl_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-c181959/libdawn_x86_64-linux-musl_debug.a.gz",
+          "size": 11811578,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "libdawn_aarch64-linux-gnu_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-c181959/libdawn_aarch64-linux-gnu_debug.a.gz",
+          "size": 11949002,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-musl_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-c181959/x86_64-linux-musl_debug.tar.gz",
+          "size": 12174384,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "aarch64-linux-gnu_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-c181959/aarch64-linux-gnu_debug.tar.gz",
+          "size": 12300967,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-gnu_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-c181959/libdawn_x86_64-linux-gnu_debug.a.gz",
+          "size": 11810929,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "release-7f76d81",
+      "name": "Automatic release of main @ 7f76d81",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2024-01-13T08:20:09Z",
+      "html_url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/tag/release-7f76d81",
+      "assets": [
+        {
+          "name": "libdawn_x86_64-macos-none_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-7f76d81/libdawn_x86_64-macos-none_release-fast.a.gz",
+          "size": 9834973,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-macos-none_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-7f76d81/x86_64-macos-none_release-fast.tar.gz",
+          "size": 9994125,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-macos-none_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-7f76d81/libdawn_x86_64-macos-none_debug.a.gz",
+          "size": 9834966,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-macos-none_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-7f76d81/x86_64-macos-none_debug.tar.gz",
+          "size": 9994117,
+          "content_type": "application/x-gtar"
+        }
+      ]
+    },
+    {
+      "tag_name": "release-5fe7543",
+      "name": "Automatic release of main @ 5fe7543",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2023-11-01T02:07:43Z",
+      "html_url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/tag/release-5fe7543",
+      "assets": []
+    },
+    {
+      "tag_name": "release-16b234c",
+      "name": "Automatic release of main @ 16b234c",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2023-10-25T07:04:22Z",
+      "html_url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/tag/release-16b234c",
+      "assets": [
+        {
+          "name": "libdawn_aarch64-macos-none_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-16b234c/libdawn_aarch64-macos-none_debug.a.gz",
+          "size": 10271969,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "aarch64-macos-none_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-16b234c/aarch64-macos-none_debug.tar.gz",
+          "size": 10407601,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "headers.json.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-16b234c/headers.json.gz",
+          "size": 58117,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libdawn_aarch64-macos-none_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-16b234c/libdawn_aarch64-macos-none_release-fast.a.gz",
+          "size": 10271976,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "aarch64-macos-none_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-16b234c/aarch64-macos-none_release-fast.tar.gz",
+          "size": 10407621,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-musl_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-16b234c/libdawn_x86_64-linux-musl_release-fast.a.gz",
+          "size": 11826806,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-musl_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-16b234c/x86_64-linux-musl_release-fast.tar.gz",
+          "size": 12189891,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-gnu_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-16b234c/libdawn_aarch64-linux-gnu_release-fast.a.gz",
+          "size": 11964714,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-gnu_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-16b234c/aarch64-linux-gnu_release-fast.tar.gz",
+          "size": 12316901,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-musl_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-16b234c/libdawn_aarch64-linux-musl_release-fast.a.gz",
+          "size": 11937662,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-musl_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-16b234c/aarch64-linux-musl_release-fast.tar.gz",
+          "size": 12293362,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-musl_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-16b234c/libdawn_x86_64-linux-musl_debug.a.gz",
+          "size": 11826799,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-musl_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-16b234c/x86_64-linux-musl_debug.tar.gz",
+          "size": 12189880,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-gnu_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-16b234c/libdawn_x86_64-linux-gnu_debug.a.gz",
+          "size": 11824703,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-gnu_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-16b234c/x86_64-linux-gnu_debug.tar.gz",
+          "size": 12183699,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-gnu_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-16b234c/libdawn_x86_64-linux-gnu_release-fast.a.gz",
+          "size": 11824710,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-gnu_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-16b234c/x86_64-linux-gnu_release-fast.tar.gz",
+          "size": 12183699,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-musl_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-16b234c/libdawn_aarch64-linux-musl_debug.a.gz",
+          "size": 11944832,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-musl_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-16b234c/aarch64-linux-musl_debug.tar.gz",
+          "size": 12298308,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-macos-none_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-16b234c/libdawn_x86_64-macos-none_debug.a.gz",
+          "size": 9834941,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "release-6273d7f",
+      "name": "Automatic release of main @ 6273d7f",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2023-10-25T06:21:31Z",
+      "html_url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/tag/release-6273d7f",
+      "assets": [
+        {
+          "name": "libdawn_aarch64-macos-none_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-6273d7f/libdawn_aarch64-macos-none_debug.a.gz",
+          "size": 10271969,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "aarch64-macos-none_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-6273d7f/aarch64-macos-none_debug.tar.gz",
+          "size": 10407613,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "headers.json.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-6273d7f/headers.json.gz",
+          "size": 58117,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libdawn_aarch64-macos-none_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-6273d7f/libdawn_aarch64-macos-none_release-fast.a.gz",
+          "size": 10271976,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "aarch64-macos-none_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-6273d7f/aarch64-macos-none_release-fast.tar.gz",
+          "size": 10407602,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-musl_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-6273d7f/libdawn_aarch64-linux-musl_debug.a.gz",
+          "size": 11944832,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-musl_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-6273d7f/aarch64-linux-musl_debug.tar.gz",
+          "size": 12298308,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-musl_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-6273d7f/libdawn_x86_64-linux-musl_release-fast.a.gz",
+          "size": 11823838,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-musl_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-6273d7f/x86_64-linux-musl_release-fast.tar.gz",
+          "size": 12186148,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-gnu_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-6273d7f/libdawn_x86_64-linux-gnu_debug.a.gz",
+          "size": 11824703,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-gnu_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-6273d7f/x86_64-linux-gnu_debug.tar.gz",
+          "size": 12183683,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-gnu_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-6273d7f/libdawn_aarch64-linux-gnu_debug.a.gz",
+          "size": 11964707,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-gnu_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-6273d7f/aarch64-linux-gnu_debug.tar.gz",
+          "size": 12316909,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-gnu_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-6273d7f/libdawn_x86_64-linux-gnu_release-fast.a.gz",
+          "size": 11824710,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-gnu_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-6273d7f/x86_64-linux-gnu_release-fast.tar.gz",
+          "size": 12183676,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-musl_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-6273d7f/libdawn_aarch64-linux-musl_release-fast.a.gz",
+          "size": 11937662,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-musl_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-6273d7f/aarch64-linux-musl_release-fast.tar.gz",
+          "size": 12293624,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-gnu_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-6273d7f/libdawn_aarch64-linux-gnu_release-fast.a.gz",
+          "size": 11964714,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-gnu_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-6273d7f/aarch64-linux-gnu_release-fast.tar.gz",
+          "size": 12316852,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-macos-none_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-6273d7f/libdawn_x86_64-macos-none_debug.a.gz",
+          "size": 9834941,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "release-06bc1ed",
+      "name": "Automatic release of main @ 06bc1ed",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2023-10-20T04:32:37Z",
+      "html_url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/tag/release-06bc1ed",
+      "assets": [
+        {
+          "name": "libdawn_aarch64-macos-none_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-06bc1ed/libdawn_aarch64-macos-none_debug.a.gz",
+          "size": 10271999,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "aarch64-macos-none_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-06bc1ed/aarch64-macos-none_debug.tar.gz",
+          "size": 10407637,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "headers.json.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-06bc1ed/headers.json.gz",
+          "size": 58117,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libdawn_aarch64-macos-none_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-06bc1ed/libdawn_aarch64-macos-none_release-fast.a.gz",
+          "size": 10272006,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "aarch64-macos-none_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-06bc1ed/aarch64-macos-none_release-fast.tar.gz",
+          "size": 10407624,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-musl_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-06bc1ed/libdawn_aarch64-linux-musl_release-fast.a.gz",
+          "size": 11944839,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-musl_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-06bc1ed/aarch64-linux-musl_release-fast.tar.gz",
+          "size": 12298340,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-musl_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-06bc1ed/libdawn_aarch64-linux-musl_debug.a.gz",
+          "size": 11944832,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-musl_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-06bc1ed/aarch64-linux-musl_debug.tar.gz",
+          "size": 12298318,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-gnu_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-06bc1ed/libdawn_aarch64-linux-gnu_release-fast.a.gz",
+          "size": 11964714,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-gnu_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-06bc1ed/aarch64-linux-gnu_release-fast.tar.gz",
+          "size": 12316885,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_aarch64-linux-gnu_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-06bc1ed/libdawn_aarch64-linux-gnu_debug.a.gz",
+          "size": 11964707,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "aarch64-linux-gnu_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-06bc1ed/aarch64-linux-gnu_debug.tar.gz",
+          "size": 12316874,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-musl_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-06bc1ed/libdawn_x86_64-linux-musl_debug.a.gz",
+          "size": 11826799,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-musl_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-06bc1ed/x86_64-linux-musl_debug.tar.gz",
+          "size": 12189880,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-gnu_debug.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-06bc1ed/libdawn_x86_64-linux-gnu_debug.a.gz",
+          "size": 11824703,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-gnu_debug.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-06bc1ed/x86_64-linux-gnu_debug.tar.gz",
+          "size": 12183721,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-linux-gnu_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-06bc1ed/libdawn_x86_64-linux-gnu_release-fast.a.gz",
+          "size": 11824710,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux-gnu_release-fast.tar.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-06bc1ed/x86_64-linux-gnu_release-fast.tar.gz",
+          "size": 12183719,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libdawn_x86_64-macos-none_release-fast.a.gz",
+          "url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/download/release-06bc1ed/libdawn_x86_64-macos-none_release-fast.a.gz",
+          "size": 9834985,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "release-dd0fcff",
+      "name": "Automatic release of main @ dd0fcff",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2023-10-18T17:38:11Z",
+      "html_url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/tag/release-dd0fcff",
+      "assets": []
+    },
+    {
+      "tag_name": "release-ee2fb50",
+      "name": "Automatic release of main @ ee2fb50",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2023-10-17T05:39:08Z",
+      "html_url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/tag/release-ee2fb50",
+      "assets": []
+    },
+    {
+      "tag_name": "release-515d166",
+      "name": "Automatic release of main @ 515d166",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2023-10-17T05:38:34Z",
+      "html_url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/tag/release-515d166",
+      "assets": []
+    },
+    {
+      "tag_name": "release-03c0ff9",
+      "name": "Automatic release of main @ 03c0ff9",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2023-10-17T02:41:19Z",
+      "html_url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/tag/release-03c0ff9",
+      "assets": []
+    },
+    {
+      "tag_name": "release-3690dfb",
+      "name": "Automatic release of main @ 3690dfb",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2023-10-04T03:32:28Z",
+      "html_url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/tag/release-3690dfb",
+      "assets": []
+    },
+    {
+      "tag_name": "release-84b156d",
+      "name": "Automatic release of main @ 84b156d",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2023-09-24T21:28:24Z",
+      "html_url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/tag/release-84b156d",
+      "assets": []
+    },
+    {
+      "tag_name": "release-76cdf24",
+      "name": "Automatic release of main @ 76cdf24",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2023-09-24T16:56:15Z",
+      "html_url": "https://github.com/hexops-graveyard/mach-gpu-dawn/releases/tag/release-76cdf24",
+      "assets": []
+    }
+  ],
+  "owner_bio": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2022-12-22T18:58:23Z",
+  "homepage": "https://machengine.org/pkg/mach-gpu-dawn",
+  "category": "library"
+}

@@ -1,0 +1,56 @@
+{
+  "name": "shader_compiler",
+  "owner": "Games-by-Mason",
+  "repo": "shader_compiler",
+  "description": "Glslang ported to be usable via Zig's build system.",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 61,
+  "forks": 9,
+  "watchers": 3,
+  "updated_at": "2025-11-29T11:49:42Z",
+  "dependencies": [
+    {
+      "name": "glslang",
+      "url": "git+https://github.com/Games-By-Mason/glslang-zig#800e71c1db09bc242ecc7e9fecfad58a2ac958f2",
+      "hash": "glslang-1.4.309-eMn68IvGCQDg1sEYYzGKGS1oWPJPclgb7D4IVbPo1OIm"
+    },
+    {
+      "name": "structopt",
+      "url": "git+https://github.com/Games-By-Mason/structopt#d2cba72809f3aa41464e2597371ea45078bfada3",
+      "hash": "structopt-1.0.0-OgtKAng7AQDBL7zVfz0Rz4asvZdmOpjrLS2039TH-owI"
+    }
+  ],
+  "minimum_zig_version": "0.16.0-dev.1484+d0ba6642b",
+  "readme": "# Shader Compiler\n\nA command line tool that compiles GLSL shaders to SPIRV, and optimizes them using [glslang-zig](https://github.com/Games-by-Mason/glslang-zig).\n\nRemap is also supported (results in better compression), SPIRV is validated before results are written.\n\nGenerated docs available [here](https://docs.gamesbymason.com/shader_compiler/), you can generate up to date docs yourself with `zig build docs`.\n\n# Zig Version\n\n[`main`](https://github.com/Games-by-Mason/shader_compiler/tree/main) loosely tracks Zig master. For support for Zig 0.14.0, use [v1.0.0](https://github.com/Games-by-Mason/shader_compiler/releases/tag/v0.1.0).\n\n# Usage\n\nNote that the initial compile will take quite while as it's building the shader C++ implementation of the shader compiler. Once this finishes it will be cached.\n\nExample usage:\n```sh\nzig build run -- --target Vulkan-1.3 --optimize-perf input.glsl output.spv\n```\n\nExample usage from Zig's build system:\n\n```zig\nconst compile_shader = b.addRunArtifact(shader_compiler_exe);\ncompile_shader.addArg(\"--scalar-block-layout\");\ncompile_shader.addArgs(&.{\n    \"--target\", \"Vulkan-1.3\",\n});\nswitch (optimize) {\n    .Debug => {},\n    .ReleaseSafe, .ReleaseFast => compile_shader.addArgs(&.{\n        \"--optimize-perf\",\n    }),\n    .ReleaseSmall => compile_shader.addArgs(&.{\n        \"--optimize-perf\",\n        \"--optimize-size\",\n    }),\n}\ncompile_shader.addFileArg(b.path(path));\nreturn compile_shader.addOutputFileArg(\"compiled.spv\");\n```\n\n# `GL_ARB_shading_language_include`\n\n`glslang` supports `#include` via the [`GL_ARB_shading_language_include`](https://registry.khronos.org/OpenGL/extensions/ARB/ARB_shading_language_include.txt) extension. You can enable it in your shaders like this:\n\n```glsl\n#extension GL_ARB_shading_language_include : require\n```\n\nYou will also need to specify at least one include path via `--include-path`. Multiple can be specified by passing the arg more than once. If calling via Zig's build system, use '--write-deps' for proper caching behavior.\n\nCommand line:\n```\nzig build run -- --target Vulkan-1.3 --include-path include shader.vert shader.spv\n```\n\nZig build system:\n```zig\ncompile_shader.addArg(\"--include-path\");\ncompile_shader.addDirectoryArg(b.path(\"include\"));\ncompile_shader.addArg(\"--write-deps\");\n_ = compile_shader.addDepFileOutputArg(\"deps.d\");\n```\n\nYou can now include files in your shaders:\n```glsl\n#include \"foo.glsl\"\n```\n\nFor details on inclusion syntax and path resolution, see the [extension specification](https://registry.khronos.org/OpenGL/extensions/ARB/ARB_shading_language_include.txt).\n\n# Usage as a library\n\nSee `root.zig` for calling the compiler directly from Zig.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/174537044?v=4",
+  "releases": [
+    {
+      "tag_name": "v1.1.0",
+      "name": "v1.1.0",
+      "body": "This is the last release to target Zig 0.15.1.\r\n\r\n## What's Changed\r\n* Fix: update deprecated u29 usage to std.mem.Alignment by @DoctorQuark in https://github.com/Games-by-Mason/shader_compiler/pull/9\r\n* Update Zig by @DialecticalMaterialist in https://github.com/Games-by-Mason/shader_compiler/pull/11\r\n* [Adds support for debug symbols](https://github.com/Games-by-Mason/shader_compiler/commit/5b78f7230917d0d75352ec8a32dbe3bc727cef82)\r\n* [Adds support for default version, and preamble](https://github.com/Games-by-Mason/shader_compiler/commit/acd89633bcb07bdd2f49d2d383f46795d48fbfdd)\r\n* [Fixes bug that broke some shader includes on Windows](https://github.com/Games-by-Mason/shader_compiler/commit/e430852c379d64db8ca29d618cfcc337429d8660)\r\n* [Fixes bug that lead to outputting unoptimized code](https://github.com/Games-by-Mason/shader_compiler/commit/dbb7d42a646aefaa22902a3d37a950fc66bc0a74)\r\n* [Allows setting defines from the command line](https://github.com/Games-by-Mason/shader_compiler/commit/13dbfba253511757b55fa8ec35399c4814482089)\r\n* [Add stage argument](https://github.com/Games-by-Mason/shader_compiler/commit/8cab09de7de957c778e3cd47980cda30414ce7b5)\r\n* [Fixes bug where warnings weren't shown if compilation succeeded](https://github.com/Games-by-Mason/shader_compiler/commit/be315000d9a5c17ab9491c8655470afc0bfb3d89)\r\n* [Makes it possible to use shader compiler as a library](https://github.com/Games-by-Mason/shader_compiler/commit/6ec4975fdf41e88102de8351edd2cd1936a30c3c)\r\n* [Fixes output paths with separators on Windows](https://github.com/Games-by-Mason/shader_compiler/commit/c24b915eb66369b8bd3115a96508ca5c9a445497)\r\n\r\n## New Contributors\r\n* @DoctorQuark made their first contribution in https://github.com/Games-by-Mason/shader_compiler/pull/9\r\n* @DialecticalMaterialist made their first contribution in https://github.com/Games-by-Mason/shader_compiler/pull/11\r\n\r\n**Full Changelog**: https://github.com/Games-by-Mason/shader_compiler/compare/v0.1.0...v1.1.0",
+      "prerelease": false,
+      "published_at": "2025-11-29T11:47:35Z",
+      "html_url": "https://github.com/Games-by-Mason/shader_compiler/releases/tag/v1.1.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v1.0.0",
+      "body": "This release targets Zig v0.14.0. Thanks to everyone who contributed! :)\r\n\r\n## What's Changed\r\n* GL_ARB_shading_language_include by @MasonRemaley in https://github.com/Games-by-Mason/shader_compiler/pull/3\r\n* avoid usingnamespace by @andrewrk in https://github.com/Games-by-Mason/shader_compiler/pull/4\r\n* update to new structopt API by @andrewrk in https://github.com/Games-by-Mason/shader_compiler/pull/6\r\n* --optimize-size instead of --optimize-small in zig build example in the readme by @rpkak in https://github.com/Games-by-Mason/shader_compiler/pull/7\r\n* Add options for validator by @antlilja in https://github.com/Games-by-Mason/shader_compiler/pull/8\r\n\r\n## New Contributors\r\n* @MasonRemaley made their first contribution in https://github.com/Games-by-Mason/shader_compiler/pull/3\r\n* @andrewrk made their first contribution in https://github.com/Games-by-Mason/shader_compiler/pull/4\r\n* @rpkak made their first contribution in https://github.com/Games-by-Mason/shader_compiler/pull/7\r\n* @antlilja made their first contribution in https://github.com/Games-by-Mason/shader_compiler/pull/8\r\n\r\n**Full Changelog**: https://github.com/Games-by-Mason/shader_compiler/commits/v0.14.0",
+      "prerelease": false,
+      "published_at": "2025-04-23T23:04:13Z",
+      "html_url": "https://github.com/Games-by-Mason/shader_compiler/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "",
+  "owner_location": null,
+  "owner_blog": "https://gamesbymason.com/",
+  "owner_twitter_username": null,
+  "owner_created_at": "2024-07-02T21:36:16Z",
+  "license": "MIT",
+  "category": "library"
+}

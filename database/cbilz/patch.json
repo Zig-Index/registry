@@ -1,0 +1,31 @@
+{
+  "name": "patch",
+  "owner": "cbilz",
+  "repo": "patch",
+  "description": "Zig package for applying patches to files",
+  "type": "project",
+  "topics": [
+    "build-system",
+    "diff",
+    "git",
+    "patch",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 3,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-06-01T22:39:22Z",
+  "readme": "# Zig package for applying patches to files\n\nWork in progress. Feedback is welcome!\n\n## Goal\n\nThis project will provide a Zig package for applying diffs in Git and unified\nformats to directory trees or individual files. It will be free of system\ndependencies by default while allowing integration with Git or GNU patch when\nneeded.\n\n## Motivation\n\nOne use case for this package will be to enable building C and C++ projects from\npristine tarballs while applying patches for the host system, bug fixes, or\nother reasons. This approach is more transparent to dependents compared to\nbuilding from a forked version of the upstream source.\n\n## Rationale\n\nThe package will expose **outputs as artifacts** (via `b.addNamedLazyPath(...)`)\nand accept **inputs as options** (via `b.option(LazyPath, ...)`), following [the\nintended\napproach](https://github.com/ziglang/zig/pull/18778#issuecomment-1925660119).\n\nInternally, the package will use **`std.Build.Step.Run`** instead of custom build\nsteps in preparation for the [separation of the build runner from the configure\nprocess](https://github.com/ziglang/zig/issues/20981).\n\nBy default, the package will use its **own `patch` implementation** to help\ndependents reduce their system dependencies. Every system dependency removed\nmakes it easier to onboard new contributors.\n\nHowever, there will also be options (via `b.systemIntegrationOption(...)`) to\n[**use the system packages**](https://github.com/ziglang/zig/pull/18778) Git or\nGNU patch when appropriate, such as when packaging or when build times or\ncompatibility are of concern.\n\n## Next steps\n\n1. Complete implementation and review resource management:\n    - Ensure a small number of file descriptors are open at any time.\n    - Delete temporary directories on exit.\n    - Clean up output directories in case of errors.\n2. Create a test build step.\n3. Add additional test cases to check the following behaviors:\n    - Correct handling of quote wrapped paths.\n    - Correct handling of patches with junk text between a hunk and the next\n      header.\n    - Rejection of invalid paths (both wrapped and unwrapped).\n    - Rejection of empty patches.\n    - Rejection of patches without any headers.\n    - Rejection of invalid headers.\n    - Rejection of invalid hunks.\n    - Rejection of multiple changes to the same file within a single Git patch.\n4. Fix bugs.\n5. Implement the remaining characteristics described in the\n   [Rationale](#Rationale).\n6. Update this README.\n7. Tag a release.\n\n## Requirements\n\nUses Zig 0.14.0-dev.3462+edabcf619.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/23480513?u=384bad1c3274ee468ff1d738a53904a02c2a7624&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 0,
+  "owner_following": 0,
+  "owner_created_at": "2016-11-15T15:05:21Z",
+  "license": "MIT",
+  "category": "library"
+}

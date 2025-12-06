@@ -1,0 +1,30 @@
+{
+  "name": "wardrobe",
+  "owner": "edqx",
+  "repo": "wardrobe",
+  "description": "Zig Multipart Form Data library",
+  "type": "project",
+  "topics": [
+    "form-data",
+    "household-appliance",
+    "http",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-10-10T19:52:37Z",
+  "readme": "# Wardrobe\n\nA lightweight, simple [HTTP `multipart/form-data`](https://www.rfc-editor.org/rfc/rfc7578) library for Zig.\n\nSupports both reading and writing form data payloads.\n\n**If you are using Zig master, check out the [0.16.0](https://github.com/edqx/wardrobe/tree/zig-0.16.0) branch.**\n\n## Writing Usage\n\n### Boundary\nTo start writing form data, you need to create a boundary string for your application. The spec requires\na certain number of bytes of entropy, so Wardrobe helps by giving you a helper struct for creating\nboundaries:\n```zig\nconst boundary: wardrobe.Boundary = .entropy(\"MyApplicationBoundary\", random);\n```\n\n`random` is an interface instance of `std.Random`, for example:\n```zig\nvar prng = std.Random.DefaultPrng.init(@intCast(std.time.microTimestamp()));\n\nconst boundary: wardrobe.Boundary = .entropy(\"MyApplicationBoundary\", prng.random());\n```\n\nIf you want to pass in a boundary, you can also use `wardrobe.Boundary.buffer`:\n\n```zig\nconst boundary: wardrobe.Boundary = .buffer(\"----MyApplicationBoundaryRANDOMBYTES\");\n```\n\nTo access the generated boundary, use `boundary.slice()`.\n\n#### Content-Type\nFor the HTTP Content-Type header value for a boundary, use `boundary.contentType()`. This returns a slice in the format\n`multipart/form-data; boundary=<boundary>`\n\n### Write Stream\nCreating a write stream just needs an underlying writer to write to:\n```zig\nconst write_stream = wardrobe.writeStream(boundary, http_request.writer());\n```\n\nUsing decl literals, you can write this in one line:\n```zig\nconst write_stream = wardrobe.writeStream(.entropy(\"MyApplicationBoundary\", prng.random()), http_request.writer());\n```\n\nGiven a write stream, you have the following functions to write form data sections:\n```zig\npub fn writer(self: *WriteStream) Writer;\n\npub fn beginTextEntry(self: *WriteStream, name: []const u8) !void;\npub fn beginFileEntry(self: *WriteStream, name: []const u8, content_type: []const u8, file_name: []const u8) !void;\n\npub fn endEntry(self: *WriteStream) !void;\npub fn endEntries(self: *WriteStream) !void;\n```\n\nThere are runtime assertions to make sure you call functions in the right order. You can follow\nthis pseudocode to know which functions to call:\n\n```\nfor each entry:\n    write_stream.beginTextEntry() or write_stream.beginFileEntry()\n    write entry data with write_stream.writer()\n    write_stream.endEntry()\n\nwrite_stream.endEntries();\n```\n\n## Reading Usage\n\n### Boundary\nGiven a 'Content-Type' header, you can use `Boundary.parseContentType` to get a boundary object:\n```zig\nconst boundary = try wardrobe.Boundary.parseContentType(\"multipart/form-data; boundary=------Boundary\");\n```\n\nThe function returns `error.Invalid` if the header is not valid for `multipart/form-data`, or if the boundary\nis too long.\n\n### Scanner\nGiven a reader, you can iterate through the form data entries of a body. Note that there's no guarantee that the reader\nonly reads what is necessary, it may overflow.\n\nThe Scanner API takes an allocator, but the allocations are only temporary.\n\n```zig\nvar scanner = try scanner(allocator, boundary, reader);\ndefer scanner.deinit();\n\nwhile (try scanner.nextEntry()) |entry| {\n    const data = scanner.reader().readAllAlloc(allocator, std.math.maxInt(usize));\n    defer std.testing.allocator.free(data);\n}\n``` \n\n`scanner.reader()` returns a reader that gives EOF upon the end of the current active entry's data.\n\nThe returned entry has the following signature:\n```zig\npub const Scanner.Entry = struct {\n    name: []const u8,\n    file_name: ?[]const u8,\n    content_type: ?[]const u8,\n};\n```\n\n### Parser\nSometimes, it may be useful to parse an entire response body or slice at once. Wardrobe provides utility functions\nin `wardrobe.parse`:\n```zig\nconst entries = try wardrobe.parse.fromSlice(allocator, boundary, slice);\n// or try wardrobe.parse.fromReader(allocator, boundary, reader);\n// or try wardrobe.parse.fromScanner(allocator, boundary, scanner);\ndefer wardrobe.parse.deinitEntries(entries);\n```\n\nThe entries returned is the same entry struct as in [Scanner.Entry](#scanner), but also has a `data: []const u8` field\nfor accessing the whole parsed data.\n\nSince you own all of the data and entries returned, you can use `wardrobe.parse.deinitEntries`\n(or `parse.Entry.deinit` for individual entries) to clean-up.\n\n### License\nAll Wardrobe code is under the MIT license.",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/60631511?u=639fba5272efcca7f8326dcd8ac430073b556726&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "United Kingdom",
+  "owner_blog": "https://esma.rocks",
+  "owner_twitter_username": null,
+  "owner_followers": 37,
+  "owner_following": 3,
+  "owner_created_at": "2020-02-03T23:35:35Z",
+  "license": "MIT",
+  "category": "library"
+}

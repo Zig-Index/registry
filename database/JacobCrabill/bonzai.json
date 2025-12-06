@@ -1,0 +1,29 @@
+{
+  "name": "bonzai",
+  "owner": "JacobCrabill",
+  "repo": "bonzai",
+  "description": "Simple Behavior Tree library in Zig",
+  "type": "project",
+  "topics": [
+    "behavior-tree",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-11-10T14:18:50Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# Bonzai: Simple Behavior Tree Library in Zig\n\nBonzai is a general-purpose behavior tree library allowing you to define, register, and create\ncustom node types, instantiate trees, and tick them from your application. Import it the same way\nyou would any Zig package:\n\n```zig\nconst bonzai = b.dependency(\"bonzai\", .{ .target = target, .optimize = optimize });\nmy_mod.addImport(\"bonzai\", bonzai.module(\"bonzai\"));\n```\n\n## Features\n\nBonzai uses an object-oriented approach (using vtables), which has some pros and cons over a\nstatic-dispatch approach. The vtable approach means that (by some metrics) it is easier to \"extend\"\nthe base types which Bonzai provides, while keeping the architecture as simple as possible. Besides,\nbehavior trees are data structures that map perfectly to OOP.\n\nCustom Context struct types may be given to your trees, providing access to arbitrary shared\nread/write data from your custom node types. The Tree also supports a global key/value Blackboard\nfor read/write access to primitive data types, and each Node has its own private Blackboard as well.\n\nTrees may be defined in JSON, including specifying Blackboard values for both nodes and the overall\ntree. This can be useful for reuse of parameterizeable node types such as a timed delay or a node\nthat ticks up to a retry count.\n\n## Use\n\nBonzai is built around a generic `Node` type and a `Factory` to register and instantiate specific\nnode implementations. While Bonzai has a few basic node types included (such as Sequence, Fallback,\nInverter), it is expected that users will implement their own nodes for their own use case.\n\nSee `DummyAction.zig` and `src/tests/test.zig` for an example of implementing a Stateful Action node\nmaking use of a custom Context data type, registering it with the Factory, loading it via JSON, and\nmaking use of it from within a Tree.\n\n### Example\n\nTree definition (JSON):\n\n```json\n{\n  \"root\": {\n    \"kind\": \"Sequence\",\n    \"name\": \"root\",\n    \"children\": [\n      {\n        \"kind\": \"Inverter\",\n        \"name\": \"inverter-1\",\n        \"child\": {\n          \"kind\": \"AlwaysFailure\",\n          \"name\": \"!failure\"\n        }\n      },\n      {\n        \"kind\": \"AlwaysSuccess\",\n        \"name\": \"success!\"\n      },\n      {\n        \"kind\": \"DummyAction\",\n        \"name\": \"do-stuff\",\n        \"params\": {\n          \"max_ticks\": 3,\n          \"some_value\": 1.234,\n          \"hello\": \"world\",\n          \"ok\": true\n        }\n      }\n    ]\n  },\n  \"params\": {\n    \"some-global-value\": \"Hello, Bonzai!\"\n  }\n}\n```\n\nLoading and ticking a JSON-defined tree:\n\n```zig\ntest \"[Tree] Tick tree with lgoger\" {\n    const alloc = std.testing.allocator;\n\n    // Create the global Context struct with custom data\n    var custom_context = CustomContext{\n        .num_ticks = 4,\n        .some_other_data = \"Hello, bonzai!\",\n    };\n    var ctx = try bonzai.Context.create(alloc, @ptrCast(&custom_context));\n    defer ctx.deinit();\n\n    // Initialize the Factory\n    var factory = try bonzai.Factory.init(alloc);\n    defer factory.deinit();\n\n    // Register the built-in and custom Node types\n    try bonzai.registerBuiltinTypes(&factory);\n    try factory.registerNode(\"DummyAction\", DummyAction.create);\n\n    const json = @embedFile(\"json/test-dummy-action.json\");\n\n    // Instantiate a new Tree from a JSON string\n    var tree = try factory.loadFromJson(ctx, json);\n    defer tree.deinit();\n\n    var logger = bonzai.loggers.StdoutLogger.init();\n\n    // Add a simple logger to show the progress of the tree\n    try tree.addLogger(alloc, &logger.logger);\n\n    // Tick the tree to completion\n    for (1..custom_context.num_ticks) |_| {\n        try std.testing.expectEqual(.running, tree.tick());\n    }\n    try std.testing.expectEqual(.success, tree.tick());\n}\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/5885545?u=7b2899754fd8ece26d7e42bb2a765b48f7c64407&v=4",
+  "releases": [],
+  "owner_bio": "Assembling and managing complex software systems",
+  "owner_company": null,
+  "owner_location": "Bend, OR",
+  "owner_blog": "http://jcrabill.dev",
+  "owner_twitter_username": null,
+  "owner_followers": 58,
+  "owner_following": 15,
+  "owner_created_at": "2013-11-08T05:02:12Z",
+  "category": "library"
+}

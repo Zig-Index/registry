@@ -1,0 +1,38 @@
+{
+  "name": "webview-zig",
+  "owner": "thechampagne",
+  "repo": "webview-zig",
+  "description": "⚡ Zig binding & wrapper for a tiny cross-platform webview library to build modern cross-platform GUIs.",
+  "type": "project",
+  "topics": [
+    "library",
+    "webview",
+    "zig",
+    "ziglang",
+    "zig-package"
+  ],
+  "stars": 154,
+  "forks": 20,
+  "watchers": 4,
+  "updated_at": "2025-12-05T23:14:21Z",
+  "dependencies": [
+    {
+      "name": "webview",
+      "url": "https://github.com/webview/webview/archive/refs/tags/0.12.0.tar.gz",
+      "hash": "122000cad401fdc8175c1c82be38a906f0ea3c8a9e2a85f2670e5c69f224407db464"
+    }
+  ],
+  "readme": "# webview-zig\n\n[![](https://img.shields.io/github/v/tag/thechampagne/webview-zig?label=version)](https://github.com/thechampagne/webview-zig/releases/latest) [![](https://img.shields.io/github/license/thechampagne/webview-zig)](https://github.com/thechampagne/webview-zig/blob/main/LICENSE)\n\nZig binding for a tiny cross-platform **webview** library to build modern cross-platform GUIs.\n\n<p align=\"center\">\n<img src=\"https://raw.githubusercontent.com/thechampagne/webview-zig/main/.github/assets/screenshot.png\"/>\n</p>\n\n### Requirements\n - [Zig Compiler](https://ziglang.org/) - **0.13.0**\n - Unix\n   - [GTK3](https://gtk.org/) and [WebKitGTK](https://webkitgtk.org/)\n - Windows\n   - [WebView2 Runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2/)\n - macOS\n   - [WebKit](https://webkit.org/)\n\n### Usage\n\n```\nzig fetch --save https://github.com/thechampagne/webview-zig/archive/refs/heads/main.tar.gz\n```\n\n`build.zig.zon`:\n```zig\n.{\n    .dependencies = .{\n        .webview = .{\n            .url = \"https://github.com/thechampagne/webview-zig/archive/refs/heads/main.tar.gz\" ,\n          //.hash = \"12208586373679a455aa8ef874112c93c1613196f60137878d90ce9d2ae8fb9cd511\",\n        },\n    },\n}\n```\n`build.zig`:\n```zig\nconst webview = b.dependency(\"webview\", .{\n    .target = target,\n    .optimize = optimize,\n});\nexe.root_module.addImport(\"webview\", webview.module(\"webview\"));\nexe.linkLibrary(webview.artifact(\"webviewStatic\")); // or \"webviewShared\" for shared library\n// exe.linkSystemLibrary(\"webview\"); to link with installed prebuilt library without building\n```\n\n### API\n\n```zig\nconst WebView = struct {\n\n    const WebViewVersionInfo = struct {\n        version: struct {\n            major: c_uint,\n            minor: c_uint,\n            patch: c_uint,\n        },\n        version_number: [32]c_char,\n        pre_release: [48]c_char,\n        build_metadata: [48]c_char,\n    };\n\n    const DispatchCallback = *const fn (?*anyopaque, ?*anyopaque) callconv(.c) void;\n\n    const BindCallback = *const fn ([*:0]const u8, [*:0]const u8, ?*anyopaque) callconv(.c) void;\n\n    const WindowSizeHint = enum(c_uint) {\n        none,\n        min,\n        max,\n        fixed\n    };\n\n    const NativeHandle = enum(c_uint) {\n        ui_window,\n        ui_widget,\n        browser_controller\n    };\n\n    const WebViewError = error {\n        MissingDependency,\n        Canceled,\n        InvalidState,\n        InvalidArgument,\n        Unspecified,\n        Duplicate,\n        NotFound,\n    };\n\n    fn create(debug: bool, window: ?*anyopaque) WebView;\n\n    fn run(self: WebView) WebViewError!void;\n\n    fn terminate(self: WebView) WebViewError!void;\n    \n    fn dispatch(self: WebView, func: DispatchCallback, arg: ?*anyopaque) WebViewError!void;\n    \n    fn getWindow(self: WebView) ?*anyopaque;\n\n    fn getNativeHandle(self: WebView, kind: NativeHandle) ?*anyopaque;\n    \n    fn setTitle(self: WebView, title: [:0]const u8) WebViewError!void;\n    \n    fn setSize(self: WebView, width: i32, height: i32, hint: WindowSizeHint) WebViewError!void;\n    \n    fn navigate(self: WebView, url: [:0]const u8) WebViewError!void;\n    \n    fn setHtml(self: WebView, html: [:0]const u8) WebViewError!void;\n    \n    fn init(self: WebView, js: [:0]const u8) WebViewError!void;\n    \n    fn eval(self: WebView, js: [:0]const u8) WebViewError!void;\n    \n    fn bind(self: WebView, name: [:0]const u8, func: BindCallback, arg: ?*anyopaque) WebViewError!void;\n    \n    fn unbind(self: WebView, name: [:0]const u8) WebViewError!void;\n    \n    fn ret(self: WebView ,seq: [:0]const u8, status: i32, result: [:0]const u8) WebViewError!void;\n    \n    fn version() *const WebViewVersionInfo;\n\n    fn destroy(self: WebView) WebViewError!void;\n}\n```\n\n### References\n - [webview](https://github.com/webview/webview/tree/0.12.0) - **0.12.0**\n\n### License\n\nThis repo is released under the [MIT License](https://github.com/thechampagne/webview-zig/blob/main/LICENSE).\n\nThird party code:\n - [external/WebView2](https://github.com/thechampagne/webview-zig/tree/main/external/WebView2) licensed under the [BSD-3-Clause License](https://github.com/thechampagne/webview-zig/tree/main/external/WebView2/LICENSE).\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/13811862?u=8fb45acee0a9068a5f2f48a95fc18d2b9cc66bb6&v=4",
+  "releases": [],
+  "owner_bio": "I write useless code with many languages",
+  "owner_company": null,
+  "owner_location": "Localhost",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 42,
+  "owner_following": 2,
+  "owner_created_at": "2015-08-15T17:24:42Z",
+  "license": "MIT",
+  "category": "library"
+}

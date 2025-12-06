@@ -1,0 +1,55 @@
+{
+  "name": "cuid2-zig",
+  "owner": "typesafe",
+  "repo": "cuid2-zig",
+  "description": "Next generation guids. Secure, collision-resistant ids optimized for horizontal scaling and performance.",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-11-10T14:03:06Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# Cuid2\n\nSecure, collision-resistant ids optimized for horizontal scaling and performance. Next generation UUIDs.\n\nNeed unique ids in your app? Forget UUIDs and GUIDs which often collide in large apps. Use Cuid2, instead.\n\nThis is a port of the JavaScript library [@paralleldrive/cuid2](https://github.com/paralleldrive/cuid2), rewritten in Zig. For more detailed information about Cuid2, please refer to the [original documentation](https://github.com/paralleldrive/cuid2/blob/main/README.md).\n\n## Installation\n\nAdd the `cuid2` dependency by running:\n\n```bash\n> zig fetch --save https://github.com/typesafe/cuid2-zig/archive/refs/tags/v0.0.1-beta.tar.gz\n```\n\nor adding this to your `build.zig.zon` dependencies directly:\n\n```zig\n.cuid2 = .{\n    .url = \"https://github.com/typesafe/cuid2-zig/archive/refs/tags/v0.0.1-beta.tar.gz\",\n    .hash = \"1220f30bd9592e230ebd976590b7d8130c613801291c781d20b4ace6d26031a990d4\",\n},\n```\n\nThen, add the module to your application in `build.zig`:\n\n```zig\nconst std = @import(\"std\");\n\npub fn build(b: *std.Build) void {\n\n    // ...\n\n    const cuid2 = b.dependency(\"cuid2\", .{});\n    exe.root_module.addImport(\"cuid2\", cuid2.module(\"cuid2\"));\n\n    // ...\n\n}\n```\n\n## Usage\n\n`cuid2-zig` requires no memory allocations and is very simple to use. Simply specify the identifier length (a `comptime` value in range `[2,32]`),\ninitialize it and generate ids:\n\n```zig\nconst length = 24; // comptime\n\nvar generator = Cuid2(length).init(.{});\n\n// `next` returns a fixed-size array of 24 base36 bytes\nconst id = generator.next();\n```\n\nYou can also specify a custom random function in the `init` options:\n\n```zig\nconst std = @import(\"std\");\n\npub const cuid2 = @import(\"cuid2\");\n\npub fn main() !void {\n    var generator = cuid2.Cuid2(24).init(.{ .random = customRandom });\n\n    std.debug.print(\"generated id '{s}'\\n\", .{generator.next()});\n}\n\nfn customRandom() f64 {\n    // or any other implementation, `std.rand.DefaultCsprng`, ...\n    return std.crypto.random.float(f64);\n}\n```\n\nThe random function must return a `f64` value in range `[0,1)`. The default implementation uses `std.rand.DefaultPrng` with a `std.time.microTimestamp()` seed.\n\n\n## Test Results\n\nRunning the histogram test will generate 100k `Cuid2(24)` identifiers, check for collisions and output the following histograms.\n\nAn even distribution of the actual value of the ids:\n\n```\n█████████████████████████████████████░░░ 5022\n█████████████████████████████████████░░░ 5004\n█████████████████████████████████████░░░ 5014\n█████████████████████████████████████░░░ 5068\n█████████████████████████████████████░░░ 4982\n████████████████████████████████████░░░░ 4905\n█████████████████████████████████████░░░ 4970\n█████████████████████████████████████░░░ 5064\n█████████████████████████████████████░░░ 4997\n████████████████████████████████████░░░░ 4854\n█████████████████████████████████████░░░ 5014\n█████████████████████████████████████░░░ 5071\n██████████████████████████████████████░░ 5104\n█████████████████████████████████████░░░ 5023\n█████████████████████████████████████░░░ 4951\n█████████████████████████████████████░░░ 4999\n█████████████████████████████████████░░░ 4988\n█████████████████████████████████████░░░ 5025\n████████████████████████████████████░░░░ 4882\n█████████████████████████████████████░░░ 5063\nmin 4854 (2.92%) max: 5104 (2.08%)\n```\n\nAn even distribution of the base36 charaters:\n\n```\n█████████████████████████████████████░░░ 0: 63935\n█████████████████████████████████████░░░ 1: 63459\n█████████████████████████████████████░░░ 2: 63798\n█████████████████████████████████████░░░ 3: 64271\n█████████████████████████████████████░░░ 4: 64251\n█████████████████████████████████████░░░ 5: 64323\n█████████████████████████████████████░░░ 6: 63661\n█████████████████████████████████████░░░ 7: 64111\n█████████████████████████████████████░░░ 8: 63795\n█████████████████████████████████████░░░ 9: 64155\n█████████████████████████████████████░░░ a: 63895\n█████████████████████████████████████░░░ b: 63837\n█████████████████████████████████████░░░ c: 63472\n█████████████████████████████████████░░░ d: 63812\n█████████████████████████████████████░░░ e: 63686\n█████████████████████████████████████░░░ f: 63340\n█████████████████████████████████████░░░ g: 63823\n█████████████████████████████████████░░░ h: 63913\n█████████████████████████████████████░░░ i: 64122\n█████████████████████████████████████░░░ j: 63838\n█████████████████████████████████████░░░ k: 64381\n█████████████████████████████████████░░░ l: 64116\n█████████████████████████████████████░░░ m: 63973\n█████████████████████████████████████░░░ n: 63820\n█████████████████████████████████████░░░ o: 63887\n█████████████████████████████████████░░░ p: 63825\n█████████████████████████████████████░░░ q: 63731\n█████████████████████████████████████░░░ r: 63533\n█████████████████████████████████████░░░ s: 63831\n█████████████████████████████████████░░░ t: 64405\n█████████████████████████████████████░░░ u: 64109\n█████████████████████████████████████░░░ v: 63586\n█████████████████████████████████████░░░ w: 63622\n█████████████████████████████████████░░░ x: 63615\n█████████████████████████████████████░░░ y: 63787\n█████████████████████████████████████░░░ z: 64282\nmin 63340 (0.86%) max: 64405 (0.81%)\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/123269?v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "**Full Changelog**: https://github.com/typesafe/cuid2-zig/compare/v0.0.1...v0.1.0",
+      "prerelease": false,
+      "published_at": "2025-09-27T13:43:02Z",
+      "html_url": "https://github.com/typesafe/cuid2-zig/releases/tag/v0.1.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.1",
+      "name": "v0.0.1",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-06-07T17:59:20Z",
+      "html_url": "https://github.com/typesafe/cuid2-zig/releases/tag/v0.0.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.1-beta",
+      "name": "v0.0.1-beta",
+      "body": "",
+      "prerelease": true,
+      "published_at": "2024-06-05T17:57:36Z",
+      "html_url": "https://github.com/typesafe/cuid2-zig/releases/tag/v0.0.1-beta",
+      "assets": []
+    }
+  ],
+  "owner_company": "Element 80 BV",
+  "owner_location": "Belgium",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 16,
+  "owner_following": 6,
+  "owner_created_at": "2009-09-04T14:20:58Z",
+  "license": "MIT",
+  "category": "library"
+}

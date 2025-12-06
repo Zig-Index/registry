@@ -1,0 +1,40 @@
+{
+  "name": "lumi",
+  "owner": "Lumi-Engine",
+  "repo": "lumi",
+  "description": "The main Lumi engine repo",
+  "type": "project",
+  "topics": [
+    "gamedev",
+    "gamedev-framework",
+    "gamedev-library",
+    "gamedevelopment",
+    "zig",
+    "zig-lang",
+    "zig-language",
+    "zig-lib",
+    "zig-library",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2024-02-19T16:09:57Z",
+  "dependencies": [
+    {
+      "name": "mach_glfw",
+      "url": "git+https://github.com/hexops/mach-glfw#63da35e57c3695a787b927e69e4140eb74ffc234",
+      "hash": "1220fda87b59df6353864651cdd3943f1159d8d517a45cd67bed493fe6c0a0c78c17"
+    }
+  ],
+  "readme": "<p align=center>\n    <img src=\"https://codeberg.org/lumi-engine/lumi-design/raw/branch/main/2023/lumi_codeberg_banner.svg\" />\n</p>\n\nLumi Engine is a 2D game engine which aims to provide a performant, flexible and easy game development environment.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/160516989?v=4",
+  "releases": [],
+  "owner_bio": "We are building a game engine",
+  "owner_location": "Ukraine",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2024-02-19T16:04:03Z",
+  "license": "BSD-3-Clause",
+  "category": "library"
+}

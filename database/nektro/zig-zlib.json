@@ -1,0 +1,27 @@
+{
+  "name": "zig-zlib",
+  "owner": "nektro",
+  "repo": "zig-zlib",
+  "description": "",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-07-22T19:44:31Z",
+  "readme": "# zig-zlib\nzlib wrapper for Zig.\n\nhttps://www.zlib.net/\n\nzlib version: 1.2.11\n\n## License\nMIT\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/5464072?u=a84ae9f68c3b0567fe276def3ab932d2f2f6703f&v=4",
+  "releases": [],
+  "owner_bio": "29. Local trans witch who prefers to do her magic with a keyboard. she/her.",
+  "owner_company": null,
+  "owner_location": "San Francisco, CA, USA",
+  "owner_blog": "https://mlog.nektro.net/",
+  "owner_twitter_username": "nektro",
+  "owner_followers": 576,
+  "owner_following": 254,
+  "owner_created_at": "2013-09-15T16:41:53Z",
+  "license": "MIT",
+  "category": "library"
+}

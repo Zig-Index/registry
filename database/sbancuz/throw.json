@@ -1,0 +1,33 @@
+{
+  "name": "throw",
+  "owner": "sbancuz",
+  "repo": "throw",
+  "description": "Zig library to add metadata to errors",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-02-24T09:41:39Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.11.0",
+  "readme": "# Throw a fit\n\nA zig library to add some metadata to an error. \n\n\n## Install\n>[!warning]\n>This is a joke of a library, use it at your own risk!\n\n```sh\nzig fetch --save  git+https://github.com/sbancuz/throw\n```\n\n```zig\n// build.zig\nconst throw = b.dependency(\"throw\", .{\n\t.target = target,\n\t.optimize = optimize,\n});\nexe.root_module.addImport(\"throw\", throw.module(\"throw\"));\n```\n\n## Example\n\n```zig\nconst throw = @import(\"throw\");\nconst std = @import(\"std\");\n\nconst metadata = struct {\n\tbar: usize = 20,\n};\n\nfn foo() !void {\n\ttry throw.fit(error.Sad, metadata{ .bar = 24 });\n}\n\npub fn main() void {\n\tfoo() catch {\n\t\tconst r = throw.reason(metadata);\n\t\tstd.debug.print(\"ERROR! {}\\n\", .{r});\n\t\t// >> ERROR! 24\\n\n\t};\n}\n\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/43883450?u=ff08a844f38d004c5152edbc7709931c9cd34f66&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 3,
+  "owner_following": 4,
+  "owner_created_at": "2018-10-05T13:10:35Z",
+  "category": "library"
+}

@@ -1,0 +1,31 @@
+{
+  "name": "zig-uuid",
+  "owner": "dmgk",
+  "repo": "zig-uuid",
+  "description": "Fast, allocation-free v4 UUIDs in Zig",
+  "type": "project",
+  "topics": [
+    "zig",
+    "ziglang",
+    "zig-package",
+    "uuid",
+    "uuid-generator",
+    "uuidv4"
+  ],
+  "stars": 21,
+  "forks": 11,
+  "watchers": 1,
+  "updated_at": "2025-08-27T12:14:26Z",
+  "readme": "# Fast, allocation-free v4 UUIDs in Zig\n\n## Example\n\n```zig\nconst std = @import(\"std\");\nconst UUID = @import(\"uuid.zig\").UUID;\n\npub fn main() !void {\n    // generate\n    const uuid1 = UUID.init();\n    std.debug.print(\"{}\\n\", .{uuid1});\n\n    // parse\n    const uuid2 = try UUID.parse(\"3df6f0e4-f9b1-4e34-ad70-33206069b995\");\n    std.debug.print(\"{}\\n\", .{uuid2});\n}\n```\n\n```\n$ zig run example.zig \n78c33481-4c67-4202-ba8d-11ee1dfaad24\n3df6f0e4-f9b1-4e34-ad70-33206069b995\n```\n\n### Tests\n```bash\nzig test uuid.zig\n```\n```bash\nTest [3/3] test.check to_string works... \nFirst  call to_string 851d0256-c62c-43b0-bf15-71da00bafb30 \nSecond call to_string 851d0256-c62c-43b0-bf15-71da00bafb30 \nAll 3 tests passed.\n```",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/5332688?u=1b3c4998816719d133b428fdf8bfb3207fa5ab58&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Ecuador",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 64,
+  "owner_following": 30,
+  "owner_created_at": "2013-08-28T19:07:19Z",
+  "license": "0BSD",
+  "category": "library"
+}

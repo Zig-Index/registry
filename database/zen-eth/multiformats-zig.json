@@ -1,0 +1,50 @@
+{
+  "name": "multiformats-zig",
+  "owner": "zen-eth",
+  "repo": "multiformats-zig",
+  "description": "Zig implementation of the multiformats https://github.com/multiformats/multiformats.",
+  "type": "project",
+  "topics": [
+    "multibase",
+    "multicodec",
+    "multiformats",
+    "multihash",
+    "zig",
+    "multiaddr",
+    "multiaddress",
+    "cid",
+    "zig-package"
+  ],
+  "stars": 8,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-10-27T14:18:24Z",
+  "dependencies": [
+    {
+      "name": "peer_id",
+      "url": "git+https://github.com/blockblaz/peer-id#2066600a1b9e0196dc35722f8ce544a3ca44fad6",
+      "hash": "peer_id-0.0.0-IgmND5VeAACon_XsphKZcYuOFn7SgmpBluBi2ieRFDya"
+    }
+  ],
+  "minimum_zig_version": "0.11.0",
+  "readme": "[![build](https://github.com/zen-eth/multiformats-zig/actions/workflows/check.yml/badge.svg?branch=main)](https://github.com/zen-eth/multiformats-zig/actions/workflows/check.yml)\n\n# Multiformats zig \nThis is the zig implementation of the multiformats [spec](https://github.com/multiformats/multiformats).\n\n## Build\n```bash\ngit clone --recurse-submodules git@github.com:zen-eth/multiformats-zig.git\ncd multiformats-zig\nzig build test --summary all\n```\n\n## Generate the code\n```bash\nzig build-exe src/generate.zig\n./generate\n```\n\n## Add to your project\n```bash\nzig fetch --save https://github.com/zen-eth/multiformats-zig/archive/main.tar.gz\n```\n\n## Usage\n```zig\nconst multiformats = @import(\"multiformats-zig\");\n```\n\n## Benchmark\n```bash\ngit clone --recurse-submodules git@github.com:zen-eth/multiformats-zig.git\ncd multiformats-zig\nzig build bench --release=fast -Dcode=7\n```\ntip: The `code` parameter in the command can refer to the declaration in the `MultiBaseCodec.fromCode()` in the source file `src/multibase.zig`.\n\n## License\nMIT\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/190158618?v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "## What's Changed\r\n* build(deps): Bump actions/cache from 3 to 4 by @dependabot[bot] in https://github.com/zen-eth/multiformats-zig/pull/2\r\n* build(deps): Bump actions/checkout from 3 to 4 by @dependabot[bot] in https://github.com/zen-eth/multiformats-zig/pull/1\r\n* perf base32 encode by @thinkAfCod in https://github.com/zen-eth/multiformats-zig/pull/14\r\n* refactor: adjust varint decode logic by @thinkAfCod in https://github.com/zen-eth/multiformats-zig/pull/16\r\n\r\n## New Contributors\r\n* @dependabot[bot] made their first contribution in https://github.com/zen-eth/multiformats-zig/pull/2\r\n* @thinkAfCod made their first contribution in https://github.com/zen-eth/multiformats-zig/pull/14\r\n\r\n**Full Changelog**: https://github.com/zen-eth/multiformats-zig/commits/v0.1.0",
+      "prerelease": false,
+      "published_at": "2025-08-15T08:28:49Z",
+      "html_url": "https://github.com/zen-eth/multiformats-zig/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "An open source organization that builds Ethereum public goods",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2024-11-30T04:26:27Z",
+  "license": "MIT",
+  "category": "library"
+}

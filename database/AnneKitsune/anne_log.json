@@ -1,0 +1,29 @@
+{
+  "name": "anne_log",
+  "owner": "AnneKitsune",
+  "repo": "anne_log",
+  "description": "Simple scoped zig file logger",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-08-24T03:09:21Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# Simple zig logging library to file\n\nThis is a minimalist scoped logger. It is opiniated in design:\n1. We only support file output.\n2. We only provide `info` and `err`. Info is for general information and what would be considered \"warnings\". It is also for *recoverable* errors. Err is for errors where unexpected loss of functionality occurs.\n3. The output file is in tsv-like format. The exception is that some messages are multiline (like stacktraces for errors).\n\n### Usage\n1. Add to your build.zig.zon.\n2. Add the module to your module.\n3. Link against the library.\n4. Use the following code example as a template:\n```zig\nvar logger = try Log.init(.{});\ndefer logger.deinit();\n\nconst root_scope = logger.scope(\"root\");\nroot_scope.info(\"abc\", .{});\nroot_scope.err(\"some mean error\", .{});\n```\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/4755185?u=758b06e7f8ee6db8837014dcd854b1e9df898d34&v=4",
+  "releases": [],
+  "owner_bio": "I Press Keys on my Keyboard.",
+  "owner_company": null,
+  "owner_location": "Quebec, Canada",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 90,
+  "owner_following": 6,
+  "owner_created_at": "2013-06-21T02:30:22Z",
+  "license": "AGPL-3.0",
+  "category": "library"
+}

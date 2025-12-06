@@ -1,0 +1,39 @@
+{
+  "name": "zigStructPrint",
+  "owner": "Durobot",
+  "repo": "zigStructPrint",
+  "description": "Small library to pretty-print Zig structs (and arrays)",
+  "type": "project",
+  "topics": [
+    "zig",
+    "ziglang",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2024-10-10T07:01:19Z",
+  "minimum_zig_version": "0.12.0-dev.3097+5c0766b6c",
+  "readme": "zigStructPrint\n\nSmall library to pretty-print Zig structs (and arrays)\n\n**zigStructPrint** is licensed under under [the MIT License](https://en.wikipedia.org/w/index.php?title=MIT_License&useskin=vector) and available from https://github.com/Durobot/zigStructPrint\n\nPlease note that only Zig **0.14.0-dev.1421+f87dd43c1** (give or take) and up is supported because of [this breaking change](https://github.com/ziglang/zig/commit/0fe3fd01ddc2cd49c6a2b939577d16b9d2c65ea9) in the Zig standard library. If you need zigStructPrint for an earlier version of Zig, get [this version](https://github.com/Durobot/zigStructPrint/releases/tag/v0.1-beta) instead.\n\nTo use, either drop [zsp.zig](https://github.com/Durobot/zigStructPrint/blob/main/src/zsp.zig) into your project, or, if you prefer Zig package manager:\n\n1. In `build.zig.zon`, in `.dependencies`, add\n\n   ```zig\n   .zigStructPrint =\n   .{\n       .url = \"https://github.com/Durobot/zigStructPrint/archive/<COMMIT HASH, 40 HEX DIGITS>.tar.gz\",\n       .hash = \"<ZIG PACKAGE HASH, 68 HEX DIGITS>\" // Use arbitrary hash, get correct hash from the error \n   }\n   ```\n\n2. In `build.zig`, in `pub fn build`, before `b.installArtifact(exe);`, add\n\n   ```zig\n   const zsp = b.dependency(\"zigStructPrint\",\n   .{\n       .target = target,\n       .optimize = optimize,\n   });\n   exe.root_module.addImport(\"zigStructPrint\", zsp.module(\"zigStructPrint\"));\n   ```\n\nBuild with `zig build`, as you normally do.\n\nActually printing out your struct:\n\n```zig\nconst zsp = @import(\"zigStructPrint\");\n. . .\nconst MyStruct = struct\n{\n    a: i8 = -10,\n    b: u32 = 10,\n    c: [3]u8 = [_]u8 { 1, 2, 3 },\n    d: [2]Nested = .{ .{ .f = 10.0, .g = \"Hello\" }, .{ .f = -20.0, .g = \"Bye\" }, },\n    e: [3]Color = .{ .red, .green, .yellow },\n\n    const Nested = struct { f: f32, g: []const u8 };\n    const Color = enum { red, yellow, green };\n};\nconst ms = MyStruct {};\nzsp.printStruct(ms, true, 0); // try `false` to get full type names\n```\n\nAnd the output is:\n\n```zig\n{\n    a: i8 = -10\n    b: u32 = 10\n    c: [3]u8 = [ 1, 2, 3, ]\n    d: [2]Nested = [ { f: f32 = 10, g: []const u8 = \"Hello\", }, { f: f32 = -20, g: []const u8 = \"Bye\", }, ]\n    e: [3]Color = [ red, green, yellow, ]\n}\n```",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/22280250?u=110d0be2f4ea1ffb652f8fdf0956dd42c0b81232&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1-beta",
+      "name": "Last version supporting Zig older than 0.14.0-dev.1421+f87dd43c1",
+      "body": "This is the last version to support Zig older than 0.14.0-dev.1421+f87dd43c1, such as Zig **0.12.0**, **0.12.1**, **0.13.0**, and **0.14.0-dev.91+a154d8da8**.\r\n\r\nThe reason to stop supporting them is because of the [breaking change](https://github.com/ziglang/zig/commit/0fe3fd01ddc2cd49c6a2b939577d16b9d2c65ea9) in Zig standard library, in std.builtin.Type - its fields were renamed.\r\n\r\nIf you need to use **zigStructPrint** with the current dev build of Zig (0.14.0-dev.1421+f87dd43c1 or later), do not use this version. Get the latest version instead.",
+      "prerelease": false,
+      "published_at": "2024-10-10T06:57:06Z",
+      "html_url": "https://github.com/Durobot/zigStructPrint/releases/tag/v0.1-beta",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": "Chisinau, Republic of Moldova",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 10,
+  "owner_following": 3,
+  "owner_created_at": "2016-09-18T18:41:24Z",
+  "license": "MIT",
+  "category": "library"
+}

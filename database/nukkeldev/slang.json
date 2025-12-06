@@ -1,0 +1,62 @@
+{
+  "name": "slang",
+  "owner": "nukkeldev",
+  "repo": "slang",
+  "description": " slang, built with zig. ",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 6,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-10-09T12:46:22Z",
+  "dependencies": [
+    {
+      "name": "upstream",
+      "url": "git+https://github.com/shader-slang/slang?ref=master#359066147c0abc4ca6ad2902cc3a817383d4bd28",
+      "hash": "N-V-__8AACPPzAHDUkFROw3uBZIHARsTbSA7mIa_VcQiZVx-"
+    },
+    {
+      "name": "miniz",
+      "url": "git+https://github.com/nukkeldev/miniz?ref=3.0.2#2f7ffaae4d7447e24a1b595cc34dc8ca368534db",
+      "hash": "miniz-3.1.0-8ko5WW9SAADH7UT9Ibp2vdlaSxESxVtHMcHfJab_LsKz"
+    },
+    {
+      "name": "lua",
+      "url": "git+https://github.com/allyourcodebase/lua?ref=main#5a5a4135cbb8991f27c01bce341fd93134dbecd1",
+      "hash": "lua-5.4.7-zqrcyuUjAAA4YBuZ47elrKT7DSeNx9c3K9XE2YlCoiSz"
+    },
+    {
+      "name": "lz4",
+      "url": "git+https://github.com/allyourcodebase/lz4.git?ref=1.10.0-5#873969ee73aecb3c35203feaf0b5727b9d02b864",
+      "hash": "lz4-1.10.0-5-ewyzw7YNAADOUkQ7M9fjW005oGzxt9b6m0uPd_kQC48z"
+    },
+    {
+      "name": "unordered_dense",
+      "url": "git+https://github.com/nukkeldev/unordered_dense?ref=main#cf753df70a06f0f9d50f8cce5dd0ac471532c746",
+      "hash": "unordered_dense-4.5.0-devel-D3sDXJ4RAAAwnA1yMYcDt-H-pqceEqTHVDQAkYrwH-5y"
+    },
+    {
+      "name": "spirv_headers",
+      "url": "git+https://github.com/nukkeldev/SPIRV-Headers.git?ref=main#1f5c79a9b5005767c940c8e57f814e7bc14904e0",
+      "hash": "spirv_headers-1.5.5-a720Q1cSAADAcvswkM5WE2r2nwI-QewshAeApT7vDtFv"
+    }
+  ],
+  "minimum_zig_version": "0.14.1",
+  "readme": "# slang\n\n[slang](https://github.com/shader-slang/slang) built with [Zig](https://ziglang.org/).\n\n## Installation\n\nAdd to `build.zig.zon` with:\n```\nzig fetch --save git+https://github.com/nukkeldev/slang\n```\nOptionally suffix the url with `#<ref>` to use a commit with a tag or a branch:\n```\nzig fetch --save git+https://github.com/nukkeldev/slang#main\n```\n\n## TODO\n\n### Minimum required for `libslang` (Incomplete)\n\n- [x] Dependencies packaged with Zig\n  - [x] `unordered_dense`: nukkeldev\n  - [x] `lz4`: AYC\n  - [x] `lua`: AYC\n  - [x] `miniz`: nukkeldev\n  - [x] `SPIRV-headers`: nukkeldev\n- [ ] Package tools\n  - [ ] `slang-capability-generator`\n  - [ ] `slang-embed`\n  - [ ] `slang-fiddle`\n  - [ ] `slang-lookup-generator`\n  - [ ] `slang-spirv-embed-generator`\n- [ ] Add CI\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/110308379?u=4870c6abe2cc07d6a93751560c6a483dd990a32d&v=4",
+  "releases": [],
+  "owner_bio": "18-year-old developer; zig dev",
+  "owner_company": null,
+  "owner_location": "United States",
+  "owner_blog": "nukkel.dev",
+  "owner_twitter_username": null,
+  "owner_followers": 5,
+  "owner_following": 21,
+  "owner_created_at": "2022-07-30T20:15:34Z",
+  "homepage": "https://github.com/shader-slang/slang",
+  "license": "MIT",
+  "category": "library"
+}

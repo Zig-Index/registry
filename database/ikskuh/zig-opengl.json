@@ -1,0 +1,33 @@
+{
+  "name": "zig-opengl",
+  "owner": "ikskuh",
+  "repo": "zig-opengl",
+  "description": "OpenGL binding generator based on the opengl registry",
+  "type": "project",
+  "topics": [
+    "zig",
+    "gamedev",
+    "opengl-loader",
+    "zig-package",
+    "ziglang",
+    "opengl",
+    "opengl-es"
+  ],
+  "stars": 121,
+  "forks": 18,
+  "watchers": 3,
+  "updated_at": "2025-12-04T19:49:32Z",
+  "readme": "# Zig OpenGL Binding\n\nThis is a pragmatic binding to different OpenGL versions.\n\nIt uses the official [OpenGL Registry](https://github.com/KhronosGroup/OpenGL-Registry) by Khronos to generate the Zig code.\n\nRight now, it does minimal adjustments like removing the `gl` prefix from functions or the `GL_` prefix from constants. Everything else is the same as the C API.\n\nThere is a single non-OpenGL function exported:\n\n```zig\npub fn load(load_ctx: anytype, get_proc_address: fn(@TypeOf(load_ctx), [:0]const u8) ?*FunctionPointer) !void {\n```\n\nThis function will load all OpenGL entry points with the help of `get_proc_address`. It receives the `load_ctx` as well as the function name.\n\n**NOTE:** Please do not reference `zig-opengl` as a submodule or a package. Generate a binding and copy the output of that into your repository and update the file on demand. The OpenGL Registry is just too huge to be used conveniently.\n\nCloning submodules is required, so use `--recursive`:\n\n```bash\ngit clone --recursive https://github.com/ikskuh/zig-opengl.git\n```\n\n## Example\n\nThis example uses [ZWL](https://github.com/Aransentin/ZWL/) by @Aransentin.\n\n```zig\nconst zwl = @import(\"zwl\");\n\nconst Platform = zwl.Platform(…);\n\npub fn initAndDraw(window: Platform.Window) !void {\n  try gl.load(window.platform, Platform.getOpenGlProcAddress);\n\n  while(true) {\n    gl.clearColor(1, 0, 1, 1);\n    gl.clear(gl.COLOR_BUFFER_BIT);\n\n    try window.present();\n  }\n}\n```\n\n### Usage with mach-glfw\n\nThere is an example of `mach-glfw` + `zig-opengl` usage available here: https://github.com/hexops/mach-glfw-opengl-example\n\n## Pregenerated Loaders\n\nThis repository contains pre-generated bindings for all extension-free OpenGL versions.\n\n## Generating your own loader\n\n### From source\n\nTo generate your own loader, you have to clone this repository and build the generator with `dotnet`:\n\n```sh-session\nuser@machine:~/zig-opengl$ dotnet run\nUsage: generator <registry> <result> <api_version> [<extension>] [<extension>] ...\nuser@machine:~/zig-opengl$ dotnet run OpenGL-Registry/xml/gl.xml gl3v3.zig GL_VERSION_3_3\nFinal API has 344 commands and 818 enums types.\nuser@machine:~/zig-opengl$\n```\n\n```sh-session\ndotnet run \\\n  OpenGL-Registry/xml/gl.xml \\ # path to the opengl registry\n  my_binding.zig             \\ # path to the generated file\n  GL_VERSION_3_3             \\ # feature level, options listed below\n  …                            # Add your extensions here, each as a single arg. Or let them out, you don't need extensions\n```\n\nPossible feature levels (at the time of writing) are:\n\n- `GL_VERSION_1_0`\n- `GL_VERSION_1_1`\n- `GL_VERSION_1_2`\n- `GL_VERSION_1_3`\n- `GL_VERSION_1_4`\n- `GL_VERSION_1_5`\n- `GL_VERSION_2_0`\n- `GL_VERSION_2_1`\n- `GL_VERSION_3_0`\n- `GL_VERSION_3_1`\n- `GL_VERSION_3_2`\n- `GL_VERSION_3_3`\n- `GL_VERSION_4_0`\n- `GL_VERSION_4_1`\n- `GL_VERSION_4_2`\n- `GL_VERSION_4_3`\n- `GL_VERSION_4_4`\n- `GL_VERSION_4_5`\n- `GL_VERSION_4_6`\n- `GL_VERSION_ES_CM_1_0`\n- `GL_ES_VERSION_2_0`\n- `GL_ES_VERSION_3_0`\n- `GL_ES_VERSION_3_1`\n- `GL_ES_VERSION_3_2`\n- `GL_SC_VERSION_2_0`\n\n## Contribution\n\nThis library uses a small C# script that generates the Zig bindings. It is located in `src/Generator.cs`\n\n## What is missing right now?\n\n- Option to specify `core` or `compatibility` profile.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/3932972?u=2893028da897d46ed12f55aa05a935a80e7c119b&v=4",
+  "releases": [],
+  "owner_bio": "Hacker, Dad & Demoscener from southern germany, loves lowlevel and oldschool stuff",
+  "owner_company": null,
+  "owner_location": "Stuttgart - Germany",
+  "owner_blog": "https://random-projects.net/",
+  "owner_twitter_username": "ikskuh",
+  "owner_followers": 473,
+  "owner_following": 72,
+  "owner_created_at": "2013-03-21T16:08:06Z",
+  "license": "EUPL-1.2",
+  "category": "library"
+}

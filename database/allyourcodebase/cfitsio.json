@@ -1,0 +1,41 @@
+{
+  "name": "cfitsio",
+  "owner": "allyourcodebase",
+  "repo": "cfitsio",
+  "description": "Zig build of CFITSIO library.",
+  "type": "project",
+  "topics": [
+    "cfitsio",
+    "fits",
+    "fits-files",
+    "fits-image",
+    "fitsio",
+    "zig",
+    "zig-lang",
+    "zig-language",
+    "zig-library",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 1,
+  "watchers": 0,
+  "updated_at": "2024-07-24T11:00:42Z",
+  "dependencies": [
+    {
+      "name": "cfitsio",
+      "url": "https://github.com/HEASARC/cfitsio/archive/cfitsio4_4_1_20240617.tar.gz",
+      "hash": "1220d9b5104c0d9cd8158f52ce64d891eb76a083b43962aed62c611addb920e5a9bb"
+    }
+  ],
+  "minimum_zig_version": "0.13.0",
+  "readme": "# cfitsio\n\n[![CI][ci-shd]][ci-url]\n[![LC][lc-shd]][lc-url]\n\n## Zig build of [cfitsio library](https://github.com/HEASARC/cfitsio).\n\n### :rocket: Usage\n\n- Add `cfitsio` dependency to `build.zig.zon`.\n\n```sh\nzig fetch --save https://github.com/allyourcodebase/cfitsio/archive/<git_tag_or_commit_hash>.tar.gz\n```\n\n- Use `cfitsio` dependency in `build.zig`.\n\n```zig\nconst cfitsio_dep = b.dependency(\"cfitsio\", .{\n    .target = target,\n    .optimize = optimize,\n});\nconst cfitsio_mod = cfitsio_dep.module(\"cfitsio\");\n<compile>.root_module.addImport(\"cfitsio\", cfitsio_mod);\n```\n\n<!-- MARKDOWN LINKS -->\n\n[ci-shd]: https://img.shields.io/github/actions/workflow/status/allyourcodebase/cfitsio/ci.yaml?branch=main&style=for-the-badge&logo=github&label=CI&labelColor=black\n[ci-url]: https://github.com/allyourcodebase/cfitsio/blob/main/.github/workflows/ci.yaml\n[lc-shd]: https://img.shields.io/github/license/allyourcodebase/cfitsio.svg?style=for-the-badge&labelColor=black\n[lc-url]: https://github.com/allyourcodebase/cfitsio/blob/main/LICENSE\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
+  "releases": [],
+  "owner_bio": "...are belong to Ziguanas, but we'd also be delighted to give them back!",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2023-09-28T21:29:33Z",
+  "license": "MIT",
+  "category": "library"
+}

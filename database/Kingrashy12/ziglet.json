@@ -1,0 +1,119 @@
+{
+  "name": "ziglet",
+  "owner": "Kingrashy12",
+  "repo": "ziglet",
+  "description": "A concise and powerful CLI builder for Zig.",
+  "type": "project",
+  "topics": [
+    "cli-builder",
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-12-06T01:37:54Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# Ziglet\n\nA concise and powerful CLI builder for Zig.\n\n## ✨ Features\n\n- Add and organize custom commands with ease\n- Execute commands with `parse` built into Ziglet\n- Minimal dependencies, maximum speed\n- Built in Zig for clarity, performance, and control\n\n## 📚 How to Use\n\n1. Fetch the package:\n\n```bash\nzig fetch --save git+https://github.com/Kingrashy12/ziglet\n```\n\n2. Add the module to your `build.zig`:\n\n```zig\n  // Add the ziglet dependency\n  const ziglet = b.dependency(\"ziglet\", .{});\n\n  // Add the ziglet module to the executable\n  exe.root_module.addImport(\"ziglet\", ziglet.module(\"ziglet\"));\n```\n\n3. Import and use in your code:\n\n### Basic Usage\n\n```zig\nconst std = @import(\"std\");\nconst ziglet = @import(\"ziglet\");\nconst CommandContext = ziglet.BuilderTypes.CommandContext;\nconst CLIBuilder = ziglet.CLIBuilder;\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}).init;\n    defer _ = gpa.deinit();\n\n    const allocator = gpa.allocator();\n\n    const argv = try std.process.argsAlloc(allocator);\n    defer std.process.argsFree(allocator, argv);\n\n    var cli = CLIBuilder.init(allocator, \"my-cli\", \"0.1.0\", \"A simple CLI example\");\n    defer cli.deinit();\n\n    // Add a command with options\n    cli.addCommand(.{\n        .name = \"greet\",\n        .description = \"Greet someone\",\n        .action = greet,\n        .options = cli.defOptions(&.{.{\n            .name = \"name\",\n            .alias = \"n\",\n            .type = .string,\n            .required = true,\n            .description = \"Name to greet\",\n        }}),\n    });\n\n    try cli.parse(argv, null);\n}\n\nfn greet(ctx: CommandContext) !void {\n    const name = ctx.options.get(\"name\");\n\n    if (name) |n| {\n        std.debug.print(\"Hello, {s}!\\n\", .{n.string});\n    }\n}\n```\n\n### Global Options\n\nZiglet supports global options that apply to all commands:\n\n```zig\n// ... (same setup as above)\n\nvar cli = CLIBuilder.init(allocator, \"example-cli\", \"1.0.0\", \"A CLI with global options\");\ndefer cli.deinit();\n\n// Enable global options (adds --help and --version automatically)\ncli.setGlobalOptions();\n\n// Add a global option\ncli.option(.{\n    .alias = \"v\",\n    .name = \"verbose\",\n    .type = .bool,\n    .description = \"Enable verbose output\",\n});\n\n// Add commands that can access global options\ncli.addCommand(.{\n    .name = \"greet\",\n    .description = \"Greet someone\",\n    .action = greet,\n    .options = cli.defOptions(&.{.{\n        .name = \"name\",\n        .alias = \"n\",\n        .type = .string,\n        .required = true,\n        .description = \"Name to greet\",\n    }}),\n});\n\ntry cli.parse(args, null);\n\n// In your action function, access both global and command options\nfn greet(ctx: CommandContext) !void {\n    const verbose = ctx.options.get(\"verbose\");\n    const name = ctx.options.get(\"name\");\n\n    if (verbose) |v| if (v.bool) {\n        std.debug.print(\"Verbose mode enabled.\\n\", .{});\n    }\n\n    if (name) |n| {\n        std.debug.print(\"Hello, {s}!\\n\", .{n.string});\n    }\n}\n```\n\n### Factory Pattern (Fluent API)\n\nFor a more fluent and readable way to build commands:\n\n```zig\n// ... (same setup as above)\n\nvar cli = CLIBuilder.init(allocator, \"my-cli\", \"0.1.0\", \"Factory builder example\");\ndefer cli.deinit();\n\ncli.setGlobalOptions();\n\n// Global option\n_ = cli.option(.{\n    .alias = \"v\",\n    .name = \"verbose\",\n    .type = .bool,\n    .description = \"Enable verbose output\",\n});\n\n// Build commands using fluent API\nconst greet_cmd = cli.command(\"greet\", \"Greet someone\")\n    .option(.{\n        .alias = \"n\",\n        .name = \"name\",\n        .required = true,\n        .type = .string,\n        .description = \"Name to greet\",\n    })\n    .action(greet)\n    .finalize();\n\nconst calc_cmd = cli.command(\"calc\", \"Calculate sum of two numbers\")\n    .option(.{\n        .alias = \"a\",\n        .name = \"a\",\n        .required = true,\n        .type = .number,\n        .description = \"First number\",\n    })\n    .option(.{\n        .alias = \"b\",\n        .name = \"b\",\n        .required = true,\n        .type = .number,\n        .description = \"Second number\",\n    })\n    .action(calc)\n    .finalize();\n\n// Command without options\n_ = cli.command(\"status\", \"Show status\")\n    .action(status)\n    .finalize();\n\n// Parse with factory commands\ntry cli.parse(argv, &.{ greet_cmd, calc_cmd });\n\nfn greet(ctx: CommandContext) !void {\n    const name = ctx.options.get(\"name\");\n    std.debug.print(\"Greeting someone.\\n\", .{});\n\n    if (name) |n| {\n        std.debug.print(\"Hello, {s}!\\n\", .{n.string});\n    }\n}\n\nfn calc(ctx: CommandContext) !void {\n    const a_opt = ctx.options.get(\"a\");\n    const b_opt = ctx.options.get(\"b\");\n\n    if (a_opt) |a| if (b_opt) |b| {\n        const sum = a.number + b.number;\n        std.debug.print(\"Sum: {d}\\n\", .{sum});\n    }\n}\n\nfn status(ctx: CommandContext) !void {\n    _ = ctx;\n    std.debug.print(\"System status: All good!\\n\", .{});\n}\n```\n\n## 📖 Examples\n\nFor runnable examples, see the [examples/](examples/) directory:\n\n- [`examples/plain.zig`](examples/plain.zig) - Comprehensive example with multiple commands, global options, and different option types\n- [`examples/factory.zig`](examples/factory.zig) - Demonstrates the fluent factory pattern for building commands\n\n## 🤝 Contributing\n\nWant to make Ziglet even snappier? Feel free to open issues, suggest features, or submit pull requests. Let’s build something sharp together.\n\n## 📄 License\n\nMIT – free to use, modify, and share.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/113741914?u=c484731fa0c310a94c76ea3c30599fcd93eb5c02&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.6.0",
+      "name": "v0.6.0",
+      "body": "## 📢 Release Notes: Version 0.6.0\r\n\r\n### ⚠️ BREAKING CHANGES\r\n\r\n* **Memory Management:** The signature of the `formatBytes` function has changed.\r\n    * It now requires a **`std.mem.Allocator`** parameter for dynamic memory allocation.\r\n    * The type of the `bytes` parameter has been changed from `u64` to `usize`.\r\n    * **Action Required:** Callers of `formatBytes` must now **manually free** the returned string slice using the provided allocator to prevent memory leaks.\r\n\r\n### 🛠️ Fixed\r\n\r\n* **Critical Memory Safety Fix:** The `formatBytes` utility function has been corrected to properly allocate the formatted string in memory provided by the caller's allocator. This resolves a serious bug where the function was previously returning a **dangling pointer** (a reference to a local, temporary stack buffer) which would lead to unpredictable behavior, corruption, or crashes.\r\n\r\nThis change ensures the utility is robust and adheres to best practices for memory management in Zig.",
+      "prerelease": false,
+      "published_at": "2025-12-06T01:40:27Z",
+      "html_url": "https://github.com/Kingrashy12/ziglet/releases/tag/v0.6.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.5.0",
+      "name": "v0.5.0",
+      "body": "### ✨ New Feature\r\n\r\n  * Added a new **formatting utility function** to `utils/format.zig` to provide enhanced text rendering options.\r\n\r\n### 🛠️ Improvements & Bug Fixes\r\n\r\n  * **Linux Stability Fix:** Resolved a critical bug where the CLI builder could crash on certain Linux environments due to improper initialization of the `types.Value` variable. The `value` is now correctly initialized to `.undefined`.\r\n  * **Cleaner Help Output:** The `Options:` section in the generated help message is now only displayed if the command actually defines options, resulting in cleaner and more relevant output for simple commands.",
+      "prerelease": false,
+      "published_at": "2025-12-05T10:23:30Z",
+      "html_url": "https://github.com/Kingrashy12/ziglet/releases/tag/v0.5.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.4.0",
+      "name": "v0.4.0",
+      "body": "### Release Notes\r\n\r\n##### Breaking Changes\r\n\r\n- **CLI Builder API**: Renamed the `ActionArg` struct to `CommandContext` for improved clarity and consistency. This update impacts all action function signatures, type exports, and related example code.  \r\n  **Migration**: Replace all instances of `ActionArg` with `CommandContext` in your codebase to ensure compatibility.",
+      "prerelease": false,
+      "published_at": "2025-12-01T04:40:33Z",
+      "html_url": "https://github.com/Kingrashy12/ziglet/releases/tag/v0.4.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.3.1",
+      "name": "v0.3.1",
+      "body": "# **Release Notes — v0.3.1**\r\n\r\nThis patch release focuses on stabilizing the CLI’s parsing logic and ensuring safer memory handling across core components.\r\n\r\n### **Changes**\r\n\r\n#### ✅ Improved resource cleanup in `cli_builder.zig`\r\n\r\n* Reorganized `defer` statements to guarantee consistent deallocation.\r\n* Ensures all allocated buffers and option structures are safely released, even on early returns or parsing failures.\r\n\r\n#### ✅ Added robust `errdefer` logic in `parser.zig`\r\n\r\n* Implemented `errdefer` blocks to clean up temporary containers and option maps when errors occur.\r\n* Reduces risk of memory leaks during option parsing, argument slicing, and command handling.",
+      "prerelease": false,
+      "published_at": "2025-12-01T03:57:20Z",
+      "html_url": "https://github.com/Kingrashy12/ziglet/releases/tag/v0.3.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "## v0.2.0 - 2025-10-25\r\n\r\nThis release introduces several improvements and refactors to enhance Ziglet's functionality and maintainability.\r\n\r\n**Changes:**\r\n\r\n*   **Refactor:** The `stdout` module has been renamed to `terminal` for clarity.\r\n*   **Memory Management:** Added an `allocator` field to the `ActionArg` struct to improve memory management.\r\n*   **Utility Functions:** Introduced the `cli_utils.zig` module with utility functions (`takeBool`, `takeString`, `takeNumber`) for safer and more convenient value extraction in CLI action functions.\r\n*   **Deprecation Removal:** Removed the deprecated `install.zig` file and its related features.\r\n*   **Parser Improvements:** Enhanced the parser with improved boolean option handling.",
+      "prerelease": false,
+      "published_at": "2025-10-25T11:14:34Z",
+      "html_url": "https://github.com/Kingrashy12/ziglet/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.4",
+      "name": "v0.1.4",
+      "body": "# Release Notes - Ziglet v0.1.4\r\n\r\n## 🚀 What's New in Ziglet v0.1.4\r\n\r\nZiglet v0.1.4, packed with powerful new features that make building CLI applications in Zig even more delightful!\r\n\r\n### ✨ New Features\r\n\r\n**🌍 Global Options Support**\r\n\r\n- Automatically add `--help` and `--version` flags to all your commands\r\n- Define global options that work across your entire CLI application\r\n- No more repetitive option definitions!\r\n\r\n**🏭 Fluent Factory Pattern**\r\n\r\n- Build commands with an elegant, chainable API: `command().option().action().finalize()`\r\n- More readable and maintainable command definitions\r\n- Perfect for complex CLI applications\r\n\r\n**🎯 Enhanced Option Types**\r\n\r\n- Support for `bool`, `string`, and `number` option types\r\n- Type-safe option parsing and validation\r\n- Better error handling and user experience\r\n\r\n**📚 Improved Help System**\r\n\r\n- Command-specific help with `command --help`\r\n- Beautiful, formatted help output\r\n- Clear usage instructions for each command\r\n\r\n### 🔧 Developer Experience Improvements\r\n\r\n- **Option Validation**: Automatic validation of required options\r\n- **Global Option Merging**: Seamlessly combine global and command-specific options\r\n- **Better Error Messages**: More helpful feedback when things go wrong\r\n\r\n### 📖 Examples & Documentation\r\n\r\nComprehensive examples have been added showing:\r\n\r\n- Basic CLI setup with commands and options\r\n- Global options configuration\r\n- Factory pattern for advanced use cases\r\n\r\nCheck out the `examples/` directory for runnable code samples!\r\n\r\n### ⚠️ Breaking Changes\r\n\r\nThis release includes some breaking changes to improve the API:\r\n\r\n- Action handlers now use `ActionArg` struct instead of separate parameters\r\n- `parse()` method signature updated for factory pattern support\r\n- Option definitions use the more structured `CLIOption` format\r\n\r\n**Migration Guide**: Update your action functions to accept `ActionArg` and use the new option access pattern. See the updated README.md for examples.\r\n\r\n### 🎉 Get Started\r\n\r\n```bash\r\nzig fetch --save git+https://github.com/Kingrashy12/ziglet\r\n```\r\n\r\nThen check out the new examples in the `examples/` directory!\r\n\r\n---\r\n\r\n**Full changelog**: See [CHANGELOG.md](CHANGELOG.md) for complete technical details.\r\n\r\nThank you for using Ziglet! Your feedback would help build better tools 🐣\r\n",
+      "prerelease": false,
+      "published_at": "2025-09-25T22:45:22Z",
+      "html_url": "https://github.com/Kingrashy12/ziglet/releases/tag/v0.1.4",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.3",
+      "name": "",
+      "body": "## v0.1.3 - CLI Flags & Compatibility  \r\n\r\n### New Features & Improvements  \r\n- **Added short/long flag support**: CLI options now accept both `-o` (short) and `--output` (long) forms. (#1) [@ciathefed]  \r\n- **Refactored `install.zig`**: Fixed deprecated functions and integrated the new flag system. (#1) [@ciathefed]  \r\n\r\n### Breaking Changes  \r\n- **`Option.flag` → `Option.long`**: The `Option.flag` field is now renamed to `Option.long`, with an optional `Option.short` field.  \r\n  - **Migration**: Update any code referencing `Option.flag`.  \r\n\r\n### Other  \r\n- Version bumped to `v0.1.3`. [@Kingrashy12]  ",
+      "prerelease": false,
+      "published_at": "2025-08-13T02:48:23Z",
+      "html_url": "https://github.com/Kingrashy12/ziglet/releases/tag/v0.1.3",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.2",
+      "name": "v0.1.2",
+      "body": "## What's New in v0.1.1\r\n\r\n-  marked `bufPrintC` as deprecated\r\n- Added `printColored`, `printColoredInfo`, `printError` and `clearConsole`",
+      "prerelease": false,
+      "published_at": "2025-08-06T10:17:49Z",
+      "html_url": "https://github.com/Kingrashy12/ziglet/releases/tag/v0.1.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.1",
+      "name": "v0.1.1",
+      "body": "# What's New in v0.1.1\r\n\r\nThis release enhances the `ziglet` library by improving its build system to make it more versatile and easier to integrate into other Zig projects. Key changes include:\r\n\r\n- **Added Module Support**: Introduced a Zig module (`ziglet`) in the `build.zig` script, allowing users to import the library using `@import(\"ziglet\")` in their projects.\r\n- **Static and Dynamic Library Builds**: Updated the build script to support both static (`.a`) and dynamic (`.so`/`.dll`) library outputs, providing flexibility for different linking scenarios.",
+      "prerelease": false,
+      "published_at": "2025-07-13T13:28:49Z",
+      "html_url": "https://github.com/Kingrashy12/ziglet/releases/tag/v0.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "## Initial Release ",
+      "prerelease": false,
+      "published_at": "2025-07-13T13:07:36Z",
+      "html_url": "https://github.com/Kingrashy12/ziglet/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": "Lagos, Nigeria",
+  "owner_blog": null,
+  "owner_twitter_username": "Kingrashy12",
+  "owner_followers": 2,
+  "owner_following": 5,
+  "owner_created_at": "2022-09-17T01:49:03Z",
+  "license": "MIT",
+  "category": "library"
+}

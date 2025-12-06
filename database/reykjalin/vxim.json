@@ -1,0 +1,34 @@
+{
+  "name": "vxim",
+  "owner": "reykjalin",
+  "repo": "vxim",
+  "description": "Immediate mode framework for https://github.com/rockorager/libvaxis",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-11-03T00:06:53Z",
+  "dependencies": [
+    {
+      "name": "vaxis",
+      "url": "git+https://github.com/rockorager/libvaxis#cfa6311448755cf18684c09697d20b7a7622e578",
+      "hash": "vaxis-0.5.1-BWNV_IcuCQCjrYTHNe3-ArhtpwLzRfgI2mBu0yKT7IZl"
+    }
+  ],
+  "minimum_zig_version": "0.15.0",
+  "readme": "# vxim\n\nvxim is currently an experiment to make an immediate-mode framework for [libvaxis](https://github.com/rockorager/libvaxis). If it turns out to be viable &mdash; and it's very promising so far! &mdash; I plan to use this for writing the TUI for my editor project: [Fönn](https://tangled.org/@reykjalin.org/fn).\n\n## Demo\n\n![](assets/demo.gif)\n\nCode for the recording is in [src/demo.zig](./src/demo.zig).\n\n## Features\n\nThe framework isn't very feature complete, and likely won't be for some time. I plan to add widgets as I need them while working on [Fönn](https://tangled.org/@reykjalin.org/fn), but contributions are welcome!\n\nCurrent widgets included:\n  * `button`\n  * `text`\n  * `window`\n  * `padding`\n  * `menuBar`\n\nAll widgets handle mouse events and focus automatically. They have some minor customization options, but for the most part they're pretty limited at the moment.\n\n## Contributing\n\nContributions are welcome through [GitHub pull requests](https://github.com/reykjalin/vxim), [Tangled pulls](https://tangled.org/@reykjalin.org/vxim), or email patches.\n\n## Implementation details\n\nThe implementation of `vxim` draws heavily from [DVUI](https://github.com/david-vanderson/dvui), but with a distinct flavor that fits better with how `libvaxis` works.\n\nThe biggest difference is that `vxim` does not render frames in a continuous loop, queue up events, and then send them all at once to the update function. Instead, the update function you pass to `vxim` will only get called when the terminal receives an event you've subscribed to.\n\nThis means `vxim` doesn't operate on a \"frame\", and as such isn't like (most?) other immediate mode UI libraries, like DVUI, Dear Imgui, and others. Instead it's entirely event based and connected to interactions with the terminal. That said, using `vxim` still feels like using a regular immediate mode library.\n\n### Widget IDs\n\nEvery focusable widget must have an ID. Unlike DVUI &mdash; which uses [@src()](https://ziglang.org/documentation/0.15.2/#toc-src) and the widget hierarchy to generate widget IDs &mdash; you can make up a type for your widget IDs and pass it to `vxim`. It'll then be used by all the widget functions in `vxim`.\n\nI recommend a simple enum:\n\n```zig\nenum Widget {\n  AppWindow,\n  OkButton,\n  CancelButton,\n}\n```\n\nbut you can go as crazy with this as you'd like.\n\n### Mouse focus and clicks\n\nTo handle clicks properly, without them bleeding through elements stacked on top of one another, I borrowed the concept of what I've called \"mouse focus\" from DVUI &mdash; a different name, but same concept.\n\nWhenever a mouse click is performed each widget will receive a `.mouse_focus` event. If a widget receives this event it'll be set as the currently mouse-focused widget. Once the `.mouse_focus` event has been sent, it'll be immediately followed by the `.mouse` click event.\n\nWhat this does is ensure that the last element drawn in the update loop will be mouse-focused by the time we send the `.mouse` click event on the next call to the update function. Clicks are only processed for the element that currently has mouse focus.\n\n#### Known bugs with mouse focus and clicks\n\nThere is currently [a bug](https://tangled.org/@reykjalin.org/vxim/issues/8) in the implementation that means you must subscribe to `.mouse_focus` by including it in your event struct so that the event gets delivered to all the widgets you're using. If you don't, focus won't be handled correctly and clicks won't be delivered at all. This should be a compile-time error, but it currently is not.\n\nI plan to fix this soon.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/13835680?u=0ed8bc9bec4c852eeed4f9b933e77e629caf4cc1&v=4",
+  "releases": [],
+  "owner_company": "@Shopify",
+  "owner_location": "Canada",
+  "owner_blog": "https://thorlaksson.com",
+  "owner_twitter_username": null,
+  "owner_followers": 11,
+  "owner_following": 3,
+  "owner_created_at": "2015-08-17T15:18:03Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,42 @@
+{
+  "name": "glslang-zig",
+  "owner": "Games-by-Mason",
+  "repo": "glslang-zig",
+  "description": "Glslang ported to the Zig build system.",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 12,
+  "forks": 7,
+  "watchers": 1,
+  "updated_at": "2025-11-19T19:59:34Z",
+  "dependencies": [
+    {
+      "name": "glslang",
+      "url": "https://github.com/KhronosGroup/glslang/archive/7200bc12a8979d13b22cd52de80ffb7d41939615.tar.gz",
+      "hash": "N-V-__8AAP4lXQKz3tL4vtQfkU_xbsKoxat8ehi0lpR9s7-3"
+    }
+  ],
+  "minimum_zig_version": "0.15.0-dev.1145+3ae0ba096",
+  "readme": "# Glslang Zig\n\nGlslang ported to the Zig build system. If you're compiling shaders from the build system, see also [shader_compiler](https://github.com/Games-by-Mason/shader_compiler).\n\nContributions or bug reports are welcome if behavior differs from official build system.\n\n# Zig Version\n\n[`main`](https://github.com/Games-by-Mason/glslang-zig/tree/main) loosely tracks Zig master. For support for Zig 0.14.0, use [v1.0.0](https://github.com/Games-by-Mason/glslang-zig/releases/tag/v1.0.0).\n\n## Usage\n\nSee [glslang-zig](https://github.com/Games-by-Mason/glslang-zig) for example usage.\n\n## Version\n\nSee [build.zig.zon](build.zig.zon) for current version info.\n\n## Known Differences\n\n* The official build process has a web target for the `glslang` artifact, but this project does not. Contributions are welcome.\n* The official build process symlinks `glslang` to `glslangValidator`. This build outputs `glslangValidator` instead of `glslang` and does not provide a symlink because the library artifact is already named `glslang`.\n* The tests are not built.\n* Compiler flags for exceptions, rtti, etc are not configurable (see [build.zig](build.zig) for current values.)\n\n## How To Change the Glslang Version\n\nThe version of glslang is set in [build.zig.zon](build.zig.zon).\n\nGlslang depends on SPIRV-Headers, and SPIRV-Tools. When changing the glslang version you may need to update these dependencies, to find out if this is necessary check your glslang's `known-good.json`.\n\nGlslang and SPIRV-Tools' official build processes generate headers at compile time. These are cached in the `generated` directory, and can be regenerated via the official build processes.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/174537044?v=4",
+  "releases": [
+    {
+      "tag_name": "v1.0.0",
+      "name": "v1.0.0",
+      "body": "This release targets Zig v0.14.0. Thanks for the contributions! :)\r\n\r\n## What's Changed\r\n* avoid deprecated C macro API in build script by @andrewrk in https://github.com/Games-by-Mason/glslang-zig/pull/2\r\n\r\n## New Contributors\r\n* @andrewrk made their first contribution in https://github.com/Games-by-Mason/glslang-zig/pull/2\r\n\r\n**Full Changelog**: https://github.com/Games-by-Mason/glslang-zig/commits/v1.0.0",
+      "prerelease": false,
+      "published_at": "2025-07-23T22:12:57Z",
+      "html_url": "https://github.com/Games-by-Mason/glslang-zig/releases/tag/v1.0.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "",
+  "owner_location": null,
+  "owner_blog": "https://gamesbymason.com/",
+  "owner_twitter_username": null,
+  "owner_created_at": "2024-07-02T21:36:16Z",
+  "license": "MIT",
+  "category": "library"
+}

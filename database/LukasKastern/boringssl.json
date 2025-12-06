@@ -1,0 +1,76 @@
+{
+  "name": "boringssl",
+  "owner": "LukasKastern",
+  "repo": "boringssl",
+  "description": "boringssl packaged with Zig",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-10-29T09:26:04Z",
+  "dependencies": [
+    {
+      "name": "boringssl",
+      "url": "https://github.com/google/boringssl/archive/5622da92e1e7bacb5d0785ff5650a5a23b143b84.tar.gz",
+      "hash": "N-V-__8AALNPTAg4NYYxg9JBYM-yGB8-T1iza-OvymI1uPJY"
+    },
+    {
+      "name": "nasm",
+      "url": "git+https://github.com/sno2/nasm.git#31622af89d7e90af49d2e610d7dcdf36f8e23c7a",
+      "hash": "nasm-2.16.3-B_NnpU5KAADHG19LPMfgWVyyYyQLDt8S2x3UFOLQfjiN"
+    },
+    {
+      "name": "patch",
+      "url": "git+https://github.com/akunaakwei/zig-patch.git#799ade2cd8954a38aba3d730de1a69891aa68234",
+      "hash": "patch-2.6.1-po1jORRvAAD4_gRpqMKvC00UPblvIpkxvnJdDpG4-DMY"
+    },
+    {
+      "name": "googletest",
+      "url": "git+https://github.com/LukasKastern/googletest.git?ref=boringssl#84916a2eefd59e970ad79c8f067c678d8a72a8fb",
+      "hash": "googletest-1.15.2-WJyzm3oNAAB198ZoHl_qz-Dwizz6U9JGkjGyofBVZnDj"
+    }
+  ],
+  "readme": "# BoringSSL\r\n\r\nThis is [BoringSSL](https://github.com/google/boringssl), packaged for Zig.\r\n\r\n## Installation\r\n\r\nFirst, update your `build.zig.zon`:\r\n\r\n```\r\n# Initialize a `zig build` project if you haven't already\r\nzig init\r\nzig fetch --save git+https://github.com/lukaskastern/boringssl.git\r\n```\r\n\r\nYou can then import `boringssl` in your `build.zig` with:\r\n\r\n```zig\r\nconst boringssl_dependency = b.dependency(\"boringssl\", .{\r\n    .target = target,\r\n    .optimize = optimize,\r\n});\r\nyour_exe.linkLibrary(boringssl_dependency.artifact(\"bcm\"));\r\nyour_exe.linkLibrary(boringssl_dependency.artifact(\"ssl\"));\r\nyour_exe.linkLibrary(boringssl_dependency.artifact(\"crypto\"));\r\n```\r\n\r\nAnd use the library like this:\r\n```zig\r\nconst ssl = @cImport({\r\n    @cInclude(\"openssl/ssl.h\");\r\n});\r\n\r\nconst ctx = ssl.EVP_CIPHER_CTX_new();\r\n...\r\n...\r\n```\r\n\r\n## Notes\r\n\r\n### Windows support:\r\nAt the moment only x86_64-windows-gnu is functional. MSVC doesn't work!\r\n\r\nGNU doesn't seem an official target by boringssl for windows which is why we need the [patch](patches/p256_gnuc.patch).\r\n\r\n### Zig Version\r\nThe target zig version is 0.15.2\r\n\r\n\r\n## Updating upstream boringssl\r\nWe build boringssl by utilizing the [sources.json](https://github.com/google/boringssl/blob/main/gen/sources.json) it provides.\r\n\r\nThis file is used to generate the build graph. Sadly I haven't found a way to access it directly from the dependency.\r\n\r\nMeaning it has to be manually copied into [sources.json](sources.json) in this repository.\r\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/40829791?u=f48144616bcec0bd3c477560229ab2fbd15d456b&v=4",
+  "releases": [
+    {
+      "tag_name": "0.15.2-0.20250514.0",
+      "name": "0.15.2-0.20250514.0",
+      "body": "## What's Changed\r\n* feat: Upgrade to 0.15.2 by @LukasKastern in https://github.com/LukasKastern/boringssl/pull/6\r\n\r\n\r\n**Full Changelog**: https://github.com/LukasKastern/boringssl/compare/0.14.0-0.20250514.0...0.15.2-0.20250514.0",
+      "prerelease": false,
+      "published_at": "2025-10-29T09:25:27Z",
+      "html_url": "https://github.com/LukasKastern/boringssl/releases/tag/0.15.2-0.20250514.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.14.0-0.20250514.0",
+      "name": "0.14.0-0.20250514.0",
+      "body": "## What's Changed\r\n* fix: CI by @LukasKastern in https://github.com/LukasKastern/boringssl/pull/2\r\n* feat: Nasm by @LukasKastern in https://github.com/LukasKastern/boringssl/pull/4\r\n\r\n## New Contributors\r\n* @LukasKastern made their first contribution in https://github.com/LukasKastern/boringssl/pull/2\r\n\r\n**Full Changelog**: https://github.com/LukasKastern/boringssl/compare/0.20250514.0...0.14.0-0.20250514.0",
+      "prerelease": false,
+      "published_at": "2025-10-29T08:38:38Z",
+      "html_url": "https://github.com/LukasKastern/boringssl/releases/tag/0.14.0-0.20250514.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.20250514.0",
+      "name": "0.20250514.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-06-02T11:03:02Z",
+      "html_url": "https://github.com/LukasKastern/boringssl/releases/tag/0.20250514.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": "Germany",
+  "owner_blog": "https://lukaskastern.com",
+  "owner_twitter_username": null,
+  "owner_followers": 5,
+  "owner_following": 18,
+  "owner_created_at": "2018-07-04T12:40:21Z",
+  "license": "Zlib",
+  "category": "library"
+}

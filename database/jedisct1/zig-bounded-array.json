@@ -1,0 +1,45 @@
+{
+  "name": "zig-bounded-array",
+  "owner": "jedisct1",
+  "repo": "zig-bounded-array",
+  "description": "BoundedArray module for Zig.",
+  "type": "project",
+  "topics": [
+    "array",
+    "arrayvec",
+    "bounded",
+    "zig",
+    "zig-lib",
+    "zig-package",
+    "ziglang",
+    "boundedarray",
+    "tinyvec"
+  ],
+  "stars": 18,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-11-22T10:45:01Z",
+  "readme": "# BoundedArray for Zig\n\nA `BoundedArray` is a structure containing a fixed-size array, as well as the length currently being used.\n\nIt can be used as a variable-length array that can be freely resized up to the size of the backing array.\n\nIf you're looking for a Zig equivalent to Rust's super useful `ArrayVec`, this is it.\n\nIt is useful to pass around small arrays whose exact size is only known at runtime, but whose maximum size is known at comptime, without requiring an `Allocator`.\n\nBounded arrays are easier and safer to use than maintaining buffers and active lengths separately, or involving structures that include pointers.\n\nThey can also be safely copied like any value, as they don't use any internal pointers.\n\n```zig\nvar actual_size = 32;\nvar a = try BoundedArray(u8, 64).init(actual_size);\nvar slice = a.slice(); // a slice of the 64-byte array\nvar a_clone = a; // creates a copy - the structure doesn't use any internal pointers\n```\n\n`BoundedArray` is an extremely convenient structure, which (IMHO) greatly contributes to making code using small arrays safe and simple.\n\nUnfortunately, it has been removed from the standard library in Zig 0.15.\n\nIf you want the convenience of `BoundedArray` back, add this repository as a dependency:\n\n```sh\nzig fetch --save https://github.com/jedisct1/zig-bounded-array/archive/refs/tags/0.1.0.tar.gz\n```\n\nIn `build.zig`:\n\n```zig\nconst bounded_array = b.dependency(\"bounded_array\", .{});\n...\nx.addImport(\"bounded_array\", bounded_array.module(\"bounded_array\"));\n```\n\nAnd finally, in your application:\n\n```zig\nconst BoundedArray = @import(\"bounded_array\").BoundedArray;\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/124872?v=4",
+  "releases": [
+    {
+      "tag_name": "0.1.0",
+      "name": "0.1.0",
+      "body": "`BoundedArray` must not die.",
+      "prerelease": false,
+      "published_at": "2025-08-05T19:43:28Z",
+      "html_url": "https://github.com/jedisct1/zig-bounded-array/releases/tag/0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Get my public keys here: https://sk.tl/7CPRo8kn",
+  "owner_company": null,
+  "owner_location": "Antibes, France",
+  "owner_blog": "https://primulinus.tpopsite.com",
+  "owner_twitter_username": "jedisct1",
+  "owner_followers": 4074,
+  "owner_following": 194,
+  "owner_created_at": "2009-09-09T10:20:57Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,89 @@
+{
+  "name": "tardy",
+  "owner": "tardy-org",
+  "repo": "tardy",
+  "description": "An asynchronous runtime for writing applications and services. Supports io_uring, epoll, kqueue, and poll for I/O. ",
+  "type": "project",
+  "topics": [
+    "async",
+    "net",
+    "runtime",
+    "zig",
+    "zig-package",
+    "epoll",
+    "io-uring",
+    "kqueue",
+    "coroutines",
+    "tardy"
+  ],
+  "stars": 249,
+  "forks": 21,
+  "watchers": 5,
+  "updated_at": "2025-12-05T19:18:40Z",
+  "minimum_zig_version": "0.14.0",
+  "readme": "# tardy\n\ntardy *(def: delaying or delayed beyond the right or expected time; late.)* is an asynchronous runtime for writing applications and services in Zig.\nMost of the code for this project originated in [zzz](https://github.com/tardy-org/zzz), a performance oriented networking framework.\n\n- tardy utilizes the latest Asynchronous APIs while minimizing allocations.\n- tardy natively supports Linux, Mac, BSD, and Windows.\n- tardy is configurable, allowing you to optimize the runtime for your specific use-case.\n\n[![Discord](https://img.shields.io/discord/1294761432922980392?logo=discord)](https://discord.gg/FP9Xb7WGPK)\n\n## Summary\ntardy is a thread-local, I/O driven runtime for Zig, providing the core implementation for asynchronous libraries and services.\n- Per-thread Runtime isolation for minimal contention\n- Native async I/O (io_uring, epoll, kqueue, poll, etc.)\n- Asynchronous `Socket`s and `File`s.\n- Coroutines (internally called Frames).\n\n## Installing\nCompatible Zig Version: `0.14.0`\n\nLatest Release: `0.3.0`\n```\nzig fetch --save git+https://github.com/tardy-org/tardy#v0.3.0\n```\n\nYou can then add the dependency in your `build.zig` file:\n```zig\nconst tardy = b.dependency(\"tardy\", .{\n    .target = target,\n    .optimize = optimize,\n}).module(\"tardy\");\n\nexe_mod.addImport(\"tardy\", tardy);\n```\n\n## Building and Running Examples\n- NOTE: by default build/install step uses `-Dexample=none` , meaning it wont build any examples\n\n- List available examples\n```sh\nzig build --help\n```\n\n- Build/run a specific example\n```sh\nzig build -Dexample=[nameOfExample]\n```\n```sh\nzig build run -Dexample=[nameOfExample]\n```\n\n- Build all examples\n```sh\nzig build -Dexample=all\n```\n\n## TCP Example\nA basic multi-threaded TCP echo server.\n\n```zig\nconst std = @import(\"std\");\nconst log = std.log.scoped(.@\"tardy/example/echo\");\n\nconst Pool = @import(\"tardy\").Pool;\nconst Runtime = @import(\"tardy\").Runtime;\nconst Task = @import(\"tardy\").Task;\nconst Tardy = @import(\"tardy\").Tardy(.auto);\nconst Cross = @import(\"tardy\").Cross;\n\nconst Socket = @import(\"tardy\").Socket;\nconst Timer = @import(\"tardy\").Timer;\n\nconst AcceptResult = @import(\"tardy\").AcceptResult;\nconst RecvResult = @import(\"tardy\").RecvResult;\nconst SendResult = @import(\"tardy\").SendResult;\n\nfn echo_frame(rt: *Runtime, server: *const Socket) !void {\n    const socket = try server.accept(rt);\n    defer socket.close_blocking();\n\n    // you can use the standard Zig Reader/Writer if you want!\n    const reader = socket.reader(rt);\n    const writer = socket.writer(rt);\n\n    log.debug(\n        \"{d} - accepted socket [{}]\",\n        .{ std.time.milliTimestamp(), socket.addr },\n    );\n\n    try rt.spawn(.{ rt, server }, echo_frame, 1024 * 16);\n\n    var buffer: [1024]u8 = undefined;\n    while (true) {\n        const recv_length = reader.read(&buffer) catch |e| {\n            log.err(\"Failed to recv on socket | {}\", .{e});\n            return;\n        };\n\n        writer.writeAll(buffer[0..recv_length]) catch |e| {\n            log.err(\"Failed to send on socket | {}\", .{e});\n            return;\n        };\n\n        log.debug(\"Echoed: {s}\", .{buffer[0..recv_length]});\n    }\n}\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    const allocator = gpa.allocator();\n    defer _ = gpa.deinit();\n\n    // tardy by default is \n    // - multithreaded\n    // - unbounded in terms of spawnable tasks\n    var tardy = try Tardy.init(allocator, .{});\n    defer tardy.deinit();\n\n    const server = try Socket.init(.{ .tcp = .{ .host = \"127.0.0.1\", .port = 9862 } });\n    try server.bind();\n    try server.listen(256);\n\n    try tardy.entry(\n        &server,\n        struct {\n            fn start(rt: *Runtime, tcp_server: *const Socket) !void {\n                try rt.spawn(.{ rt, tcp_server }, echo_frame, 1024 * 1024 * 4);\n            }\n        }.start,\n    );\n}\n```\n\nThere exist a lot more examples, highlighting a variety of use cases and features [here](https://github.com/tardy-org/tardy/tree/main/examples). For an example of tardy in use, you can check out any of the projects in the [ecosystem](#ecosystem).\n\n## Ecosystem\n- [zzz](https://github.com/tardy-org/zzz): a framework for writing performant and reliable networked services.\n- [secsock](https://github.com/tardy-org/secsock): Async TLS for the Tardy Socket.\n\n## Contribution\nWe use Nix Flakes for managing the development environment. Nix Flakes provide a reproducible, declarative approach to managing dependencies and development tools.\n\n### Prerequisites\n - Install [Nix](https://nixos.org/download/)\n```bash \nsh <(curl -L https://nixos.org/nix/install) --daemon\n```\n - Enable [Flake support](https://nixos.wiki/wiki/Flakes) in your Nix config (`~/.config/nix/nix.conf`): `experimental-features = nix-command flakes`\n\n### Getting Started\n1. Clone this repository:\n```bash\ngit clone https://github.com/tardy-org/tardy.git\ncd tardy\n```\n\n2. Enter the development environment:\n```bash\nnix develop\n```\n\nThis will provide you with a shell that contains all of the necessary tools and dependencies for development.\n\nOnce you are inside of the development shell, you can update the development dependencies by:\n1. Modifying the `flake.nix`\n2. Running `nix flake update`\n3. Committing both the `flake.nix` and the `flake.lock`\n\n### License\nUnless you explicitly state otherwise, any contribution intentionally submitted for inclusion in tardy by you, shall be licensed as MPL2.0, without any additional terms or conditions.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/196498040?v=4",
+  "releases": [
+    {
+      "tag_name": "v0.3.0",
+      "name": "v0.3.0",
+      "body": "This is the v0.3.0 release of Tardy and will be the next stable release! This supports Zig 0.14.\r\n\r\nThere has been a lot of work pretty much across the entire library since the `v0.2.0` release. The API is also closer to being fully stabilized, I feel like this pattern right now is good at expressing intent and making it easy to consume. \r\n\r\nWe now utilize coroutines (Frames) instead of callbacks, allowing for better locality of behavior w/ concurrency. We have also provided better underlying types, such as `File`, `Dir` and `Socket` for interacting with the Runtime. These types also expose a Reader and Writer, allowing for better interop with libraries not designed around Tardy.\r\n\r\nThe `busy_loop` backend has now been replaced with `poll`, allowing for better performance on Windows (Would still love to have IOCP) and other POSIX-compliant platforms. A lot of bugs have been fixed across all of the Async backends, providing better stability.\r\n\r\nWe have also launched `e2e`, the seeded randomized tester. It generates random `File` and `Socket` operations that run on a thread, ensuring that concurrency is working correctly and that tasks are not blocking each other. It has already caught and helped solve various bugs (e889a43c63c2a894f28fd4d1150ccf587ebb0ec0, c2421b956faa5fae33f041c3f38430547b2c5ad8).\r\n\r\n## Changelist:\r\n- Socket now provides an `init_with_address` fn, allowing creating with just a std.net.Address and a Kind.\r\n- io_uring backend now properly handles INTR signals by just re-queuing job,\r\n- Reader and Writer interfaces provided for the Socket and File type, allowing for better integration with other libraries that aren't natively built for Tardy.\r\n- Callbacks removed in favor of Coroutines (called Frames internally), allowing for much nicer composition across the board.\r\n- New Filesystem API (including the new File and Dir struct that have pretty good inter-op with the standard library equivalents)\r\n- New Socket API (including the new Socket struct). This officially supports TCP, UDP and Unix. It also properly supports getting address information about sockets now.\r\n- Switch from the busy_loop to poll on POSIX-compliant systems, providing better cross-platform support.\r\n- Support for unlimited max tasks for workloads with an unknown number of maximum tasks. This is supported through changes to the underlying Pool implementation.\r\n- Switched AsyncIO struct to utilize a VTable approach, better standardizing the implementation.\r\n- Async I/O implementations now provide the runtime with a list of Async capabilities. If an action is queued that is not supported by the Async I/O backend, it is handled through a non-blocking yielding loop.\r\n- Stream abstraction for I/O.\r\n- EXPERIMENTAL: improved performance on SPSC channel.\r\n- EXPERIMENTAL: SPSC minimum channel size is now 2.\r\n- EXPERIMENTAL: Added triggers, allowing for tasks to suspend until they are woken up by a different task in the future.\r\n- EXPERIMENTAL: Added a SPSC Channel, allowing for crosstask and crossthread communication.\r\n\r\n## What's Changed\r\n* Async Overhaul (Frames + Poll) by @mookums in https://github.com/tardy-org/tardy/pull/7\r\n* library only compiles when the zig compiler versions match by @Torbatti in https://github.com/tardy-org/tardy/pull/8\r\n* Add Reader/Writer Interfaces to File and Socket by @mookums in https://github.com/tardy-org/tardy/pull/11\r\n* Fix E2E CI issue with TCP Chain on MacOS by @mookums in https://github.com/tardy-org/tardy/pull/17\r\n\r\n## New Contributors\r\n* @Torbatti made their first contribution in https://github.com/tardy-org/tardy/pull/8\r\n\r\n**Full Changelog**: https://github.com/tardy-org/tardy/compare/v0.2.1...v0.3.0",
+      "prerelease": false,
+      "published_at": "2025-03-12T05:19:22Z",
+      "html_url": "https://github.com/tardy-org/tardy/releases/tag/v0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.3.0-rc2",
+      "name": "v0.3.0-rc2",
+      "body": "This is the second release candidate for version 0.3.0 of Tardy. This will be the last release before Zig 0.14. v0.3.0 will be delayed until Zig 0.14 comes.\r\n\r\nChanges with v0.3.0-rc2:\r\n- `Socket` now provides an `init_with_address` fn, allowing creating with just a `std.net.Address` and a `Kind`.\r\n- `io_uring` backend now properly handles INTR signals by just re-queuing job,\r\n- `Reader` and `Writer` interfaces provided for the `Socket` and `File` type, allowing for better integration with other libraries that aren't natively built for Tardy.\r\n- _EXPERIMENTAL_: improved performance on SPSC channel.\r\n- _EXPERIMENTAL_: SPSC minimum channel size is now 2.\r\n\r\nBelow are the changes that v0.3.0-rc1 introduced:\r\n- Callbacks removed in favor of Coroutines (called Frames internally), allowing for much nicer composition across the board.\r\n- New Filesystem API (including the new `File` and `Dir` struct that have pretty good inter-op with the standard library equivalents)\r\n- New Socket API (including the new `Socket` struct). This officially supports TCP, UDP and Unix. It also properly supports getting address information about sockets now.\r\n- Switch from the `busy_loop` to `poll` on POSIX-compliant systems, providing better cross-platform support.\r\n- Support for unlimited max tasks for workloads with an unknown number of maximum tasks. This is supported through changes to the underlying Pool implementation.\r\n-  Switched `AsyncIO` struct to utilize a `VTable` approach, better standardizing the implementation.\r\n- Async I/O implementations now provide the runtime with a list of Async capabilities. If an action is queued that is not supported by the Async I/O backend, it is handled through a non-blocking yielding loop.\r\n- `Stream` abstraction for I/O.\r\n- _EXPERIMENTAL_: Added triggers, allowing for tasks to suspend until they are woken up by a different task in the future.\r\n- _EXPERIMENTAL_: Added a SPSC Channel, allowing for crosstask and crossthread communication.\r\n\r\n## What's Changed\r\n* Add Reader/Writer Interfaces to File and Socket by @mookums in https://github.com/mookums/tardy/pull/11\r\n\r\n**Full Changelog**: https://github.com/mookums/tardy/compare/v0.3.0-rc1...v0.3.0-rc2",
+      "prerelease": true,
+      "published_at": "2025-02-20T02:55:34Z",
+      "html_url": "https://github.com/tardy-org/tardy/releases/tag/v0.3.0-rc2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.3.0-rc1",
+      "name": "v0.3.0-rc1",
+      "body": "This is the first release candidate for version 0.3.0 of Tardy. This will ideally be a good place for development to stabilize around Frames and is intended to be a bug-fixing point before the official 0.3.0 release.\r\n\r\nThis changes a lot in general about the runtime that will be detailed below.\r\n- Callbacks removed in favor of Coroutines (called Frames internally), allowing for much nicer composition across the board.\r\n- New Filesystem API (including the new `File` and `Dir` struct that have pretty good inter-op with the standard library equivalents)\r\n- New Socket API (including the new `Socket` struct). This officially supports TCP, UDP and Unix. It also properly supports getting address information about sockets now.\r\n- Switch from the `busy_loop` to `poll` on POSIX-compliant systems, providing better cross-platform support.\r\n- Support for unlimited max tasks for workloads with an unknown number of maximum tasks. This is supported through changes to the underlying Pool implementation.\r\n-  Switched `AsyncIO` struct to utilize a `VTable` approach, better standardizing the implementation.\r\n- Async I/O implementations now provide the runtime with a list of Async capabilities. If an action is queued that is not supported by the Async I/O backend, it is handled through a non-blocking yielding loop.\r\n- `Stream` abstraction for I/O.\r\n- _EXPERIMENTAL_: Added triggers, allowing for tasks to suspend until they are woken up by a different task in the future.\r\n- _EXPERIMENTAL_: Added a SPSC Channel, allowing for crosstask and crossthread communication.\r\n\r\n## What's Changed\r\n* Async Overhaul (Frames + Poll) by @mookums in https://github.com/mookums/tardy/pull/7\r\n* library only compiles when the zig compiler versions match by @Torbatti in https://github.com/mookums/tardy/pull/8\r\n\r\n## New Contributors\r\n* @Torbatti made their first contribution in https://github.com/mookums/tardy/pull/8\r\n\r\n**Full Changelog**: https://github.com/mookums/tardy/compare/v0.2.1...v0.3.0-rc1",
+      "prerelease": true,
+      "published_at": "2025-02-02T23:01:48Z",
+      "html_url": "https://github.com/tardy-org/tardy/releases/tag/v0.3.0-rc1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.1",
+      "name": "v0.2.1",
+      "body": "This is a hotfix that ensures that `tardy` works using all Async I/O backends. Namely, this fixes the `busy_loop` implementation.\r\n\r\n**Full Changelog**: https://github.com/mookums/tardy/compare/v0.2.0...v0.2.1",
+      "prerelease": false,
+      "published_at": "2024-12-21T09:05:44Z",
+      "html_url": "https://github.com/tardy-org/tardy/releases/tag/v0.2.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "This update focused on cleaning up a variety of sharp edges as well as various features.\r\n\r\n- Added `queue_connect` for connecting to different sockets. (42e61e33e7188c372ac24fadc11a5ae5e7485cc7)\r\n- Added an abstracted `wrap` and `unwrap` allowing for more complex types to be converted to an integer representation. (e54daaee8639a10bf5f120fb9f4d6c20ebf2ae46)\r\n- Added `entry_in_new_thread` allowing for the runtime to be started and managed in a different thread, making embedding of Tardy in applications easier. (9207187c0f9cfbe2c2987edf5fb2d3c5a13e9c94)\r\n- Added proper error handling with callbacks being handed a result type, allowing for errors to be standardized and captured directly without having to determine from integer types. (9d0b3983980136a8a812fe1ab73e5598bd6b5c64)\r\n- Fixed a race condition that would sometimes occur within the `aio.append` during startup. (32b89f28ef6b0b2fc9d4aded5f5e19f70025de92)\r\n- Made `io_uring` flags conditional on kernel version. (a4144a3f8b39b2513565021c977fe74c78333c9e)\r\n\r\n**Full Changelog**: https://github.com/mookums/tardy/compare/v0.1.0...v0.2.0",
+      "prerelease": false,
+      "published_at": "2024-12-18T04:10:13Z",
+      "html_url": "https://github.com/tardy-org/tardy/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "This is an initial release of Tardy. Supported OSes include Mac, Linux and Windows.\r\n\r\nThis provides:\r\n- Support for `io_uring`\r\n- Support for `epoll`\r\n- Support for `kqueue`\r\n- Support for POSIX Fallback `busy_loop`\r\n- Filesystem Operations (through `runtime.fs`)\r\n- Network Operations (through `runtime.net`)\r\n\r\n**Full Changelog**: https://github.com/mookums/tardy/commits/v0.1.0",
+      "prerelease": false,
+      "published_at": "2024-11-10T09:25:57Z",
+      "html_url": "https://github.com/tardy-org/tardy/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Asynchronous runtime, written in Zig, and a variety of supporting libraries in the ecosystem.",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2025-01-26T03:07:56Z",
+  "license": "MPL-2.0",
+  "category": "library"
+}

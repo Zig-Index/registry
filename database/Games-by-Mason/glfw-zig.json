@@ -1,0 +1,87 @@
+{
+  "name": "glfw-zig",
+  "owner": "Games-by-Mason",
+  "repo": "glfw-zig",
+  "description": "GLFW ported to the Zig build system.",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 6,
+  "forks": 3,
+  "watchers": 1,
+  "updated_at": "2025-06-12T01:41:10Z",
+  "dependencies": [
+    {
+      "name": "glfw",
+      "url": "https://github.com/glfw/glfw/archive/refs/tags/3.4.tar.gz",
+      "hash": "N-V-__8AAL40TADEbrysYHBl-UIZO4KiG4chP8pLDVDINGH4"
+    },
+    {
+      "name": "wayland",
+      "url": "https://gitlab.freedesktop.org/wayland/wayland/-/archive/1.23.0/wayland-1.23.0.tar.gz",
+      "hash": "N-V-__8AAHioGABnssAnKMhn9JEkNUXymmrtMYo-qsWg_lYt"
+    },
+    {
+      "name": "xkbcommon",
+      "url": "https://github.com/xkbcommon/libxkbcommon/archive/refs/tags/xkbcommon-1.7.0.tar.gz",
+      "hash": "N-V-__8AAChdSQASMUbYBG5J5NN5HWyxe-g7jivrVbdKgOL5"
+    },
+    {
+      "name": "libX11",
+      "url": "https://gitlab.freedesktop.org/xorg/lib/libx11/-/archive/libX11-1.8.9/libx11-libX11-1.8.9.tar.gz",
+      "hash": "N-V-__8AANwVxQAhXoDWAoFpFNWYPxZqjM5uaeKNMjUgvRF-"
+    },
+    {
+      "name": "xorgproto",
+      "url": "https://gitlab.freedesktop.org/xorg/proto/xorgproto/-/archive/xorgproto-2024.1/xorgproto-xorgproto-2024.1.tar.gz",
+      "hash": "N-V-__8AAJkAZgCO0RI9CmCz9GB-r604Mcghuo2rp7BoteNP"
+    },
+    {
+      "name": "libXcursor",
+      "url": "https://gitlab.freedesktop.org/xorg/lib/libxcursor/-/archive/libXcursor-1.2.2/libxcursor-libXcursor-1.2.2.tar.gz",
+      "hash": "N-V-__8AAOUrAgAt_2PLUv1ruydKCuvBdYn-UTBSDMKHAwWf"
+    },
+    {
+      "name": "libXrandr",
+      "url": "https://gitlab.freedesktop.org/xorg/lib/libxrandr/-/archive/libXrandr-1.5.4/libxrandr-libXrandr-1.5.4.tar.gz",
+      "hash": "N-V-__8AAFo1AgAoJp29fLlLfpunfbO5_7FhzG5OGgu05F-P"
+    },
+    {
+      "name": "libXrender",
+      "url": "https://gitlab.freedesktop.org/xorg/lib/libxrender/-/archive/libXrender-0.9.11/libxrender-libXrender-0.9.11.tar.gz",
+      "hash": "N-V-__8AAIgqBADq3IrEpbWw1sprA4telMV_mfVkS57jcqJq"
+    },
+    {
+      "name": "libXinerama",
+      "url": "https://gitlab.freedesktop.org/xorg/lib/libxinerama/-/archive/libXinerama-1.1.5/libxinerama-libXinerama-1.1.5.tar.gz",
+      "hash": "N-V-__8AABiEAADcPn-GxyBtnWwS3SKta2ID33PyDP4-1K88"
+    },
+    {
+      "name": "libXi",
+      "url": "https://gitlab.freedesktop.org/xorg/lib/libxi/-/archive/libXi-1.8.1/libxi-libXi-1.8.1.tar.gz",
+      "hash": "N-V-__8AAExxDQCnTtueNOb2mzc6YIkQlEoae5kdd7AzIsrC"
+    },
+    {
+      "name": "libXext",
+      "url": "https://gitlab.freedesktop.org/xorg/lib/libxext/-/archive/libXext-1.3.6/libxext-libXext-1.3.6.tar.gz",
+      "hash": "N-V-__8AAKbaBwCHCqin8ym--Sq1JjkgGknUDDGABcfOD5Ax"
+    },
+    {
+      "name": "libXfixes",
+      "url": "https://gitlab.freedesktop.org/xorg/lib/libxfixes/-/archive/libXfixes-6.0.1/libxfixes-libXfixes-6.0.1.tar.gz",
+      "hash": "N-V-__8AAE0GAQANT3I-eBEAsjhOjUozMQrbDAoSL8FczRwQ"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# GLFW Zig\n\nGLFW ported to the Zig build system.\n\nContributions or bug reports are welcome if behavior differs from official build system.\n\nA notable addition to the official options is `provide_headers`, which fetches all windowing headers not already provided by Zig from the official sources, enabling cross compilation. macOS frameworks are not provided. This option defaults to true.\n\n## Version\n\nSee [build.zig.zon](build.zig.zon) for current version info.\n\n## Known Differences\n\n* The library is always called libglfw3, in contrast with the official build process which sometimes names it libglfw3 and sometimes names it libglfw.\n* Tests, documentation, and examples are not built.\n* Some mingw build workarounds are not ported.\n* The official build process gives shared library artifacts an icon, that is not done here.\n\n## Known Issues\n\nMicrosoft shuffled the button layouts for some of their controllers in a recent firmware update breaking existing mappings on Linux. This has been [patched](https://github.com/mdqinc/SDL_GameControllerDB/pull/764) in `SDL_GameControllerDB`, which GLFW should pull in on the next release.\n\nIn the mean time, you can manually apply the patch at runtime:\n```zig\nif (c.glfwUpdateGamepadMappings(\n    \\\\030000005e040000120b00000f050000,Xbox Series Controller,a:b0,b:b1,back:b6,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b8,leftshoulder:b4,leftstick:b9,lefttrigger:a2,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b10,righttrigger:a5,rightx:a3,righty:a4,start:b7,x:b2,y:b3,platform:Linux,\n    \\\\030000005e040000120b000015050000,Xbox Series Controller,a:b0,b:b1,back:b6,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b8,leftshoulder:b4,leftstick:b9,lefttrigger:a2,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b10,righttrigger:a5,rightx:a3,righty:a4,start:b7,x:b2,y:b3,platform:Linux,\n) != c.GLFW_TRUE) {\n    log.warn(\"glfwUpdateGamepadMappings failed\", .{});\n}\n```\n\n## How To Change the GLFW Version\n\nThe version of GLFW is set in [build.zig.zon](build.zig.zon).\n\nThe official build process for GLFW generates some files at build time. These have been cached in `generated`, when changing GLFW versions you may have to regenerate them via the official build process.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/174537044?v=4",
+  "releases": [],
+  "owner_bio": "",
+  "owner_location": null,
+  "owner_blog": "https://gamesbymason.com/",
+  "owner_twitter_username": null,
+  "owner_created_at": "2024-07-02T21:36:16Z",
+  "license": "MIT",
+  "category": "library"
+}

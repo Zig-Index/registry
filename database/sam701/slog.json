@@ -1,0 +1,37 @@
+{
+  "name": "slog",
+  "owner": "sam701",
+  "repo": "slog",
+  "description": "Structured logging for Zig",
+  "type": "project",
+  "topics": [
+    "logging",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 8,
+  "forks": 1,
+  "watchers": 2,
+  "updated_at": "2025-12-04T08:49:03Z",
+  "dependencies": [
+    {
+      "name": "zeit",
+      "url": "git+https://github.com/rockorager/zeit.git?ref=zig-0.15#ed2ca60db118414bda2b12df2039e33bad3b0b88",
+      "hash": "zeit-0.6.0-5I6bk0J9AgCVa0nnyL0lNY9Xa9F68hHq-ZarhuXNV-Jb"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# Structured Logging for Zig\n[![Zig Docs](https://img.shields.io/badge/docs-zig-%23f7a41d)](https://sam701.github.io/slog)\n\n`slog` is a configurable, structured logging package for Zig with support for hierarchical loggers.\n![img](./doc/log-output.png)\n\n## Usage\nAdd `slog` to your `build.zig.zon`\n```\nzig fetch --save git+https://github.com/sam701/slog\n```\n\nExample code:\n```zig\nconst std = @import(\"std\");\nconst slog = @import(\"slog\");\n\npub fn main() !void {\n    var log = try slog.initRootLogger(std.heap.page_allocator, .{});\n    defer log.deinit();\n\n    var log2 = try log.initChildLogger(\"mod1\");\n    var log3 = try log2.initChildLogger(\"mod2\");\n    var log4 = try log3.initChildLogger(\"mod3\");\n\n    log.info(\"Hello slog!\", .{ .field1 = \"value1\", .field2 = \"value1\", .rate = 30 });\n    log2.trace(\"Hello slog!\", .{ .field1 = \"value1\", .field2 = \"value2\", .rate = 30 });\n    log2.debug(\"Hello slog!\", .{ .field1 = \"value1\", .field2 = \"value3\", .rate = 30 });\n    log2.info(\"Hello slog!\", .{ .field1 = \"value1\", .field2 = \"value4\", .rate = 30e2 });\n    log3.warn(\"Hello slog!\", .{ .field1 = \"value1\", .field2 = \"value5\", .rate = 30.34534 });\n    log3.err(\"Hello slog!\", .{ .field1 = \"value1\", .field2 = \"value6\", .rate = 30, .active = true, .metadata = null });\n    log4.err(\"Hello slog!\", .{ .field1 = \"value1\", .field2 = \"value6\", .rate = 30, .active = true, .metadata = null });\n}\n```\n\n\n## Environment Variables\n* `ZIG_LOG` - configures log level, e.g. `info,mod1=debug,mod2.mod3=warn`.\n* `ZIG_LOG_COLORS` - configures color scheme for text logger, e.g. `timestamp=31;1,logger=33`.\n\n## Dependencies\n* [zeit](https://github.com/rockorager/zeit?tab=readme-ov-file) - a great date and time library for Zig\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/7078566?u=bc7208f733dce14a1f0b8246f6824d60e5e2b46c&v=4",
+  "releases": [],
+  "owner_bio": "I enjoy creating simple, reliable systems",
+  "owner_company": null,
+  "owner_location": "Munich, Germany",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 28,
+  "owner_following": 1,
+  "owner_created_at": "2014-03-27T07:11:09Z",
+  "license": "MIT",
+  "category": "library"
+}

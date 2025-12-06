@@ -1,0 +1,49 @@
+{
+  "name": "xterm256.zig",
+  "owner": "zhuyadong",
+  "repo": "xterm256.zig",
+  "description": "print text with xterm256 style",
+  "type": "project",
+  "topics": [
+    "xterm",
+    "xterm256",
+    "zig",
+    "zig-package",
+    "color",
+    "print"
+  ],
+  "stars": 4,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-11-04T06:08:38Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.11.0",
+  "readme": "[中文](README.CN.md) | [English](README.md)\n# Print Text with `xterm256` Colors and Styles\n## Install\nIn the project root directory:\n```shell\nzig fetch \"git+https://github.com/zhuyadong/xterm256.zig\" --save=xterm256\n```\nIf you want to install a specific version:\n```shell\nzig fetch \"git+https://github.com/zhuyadong/xterm256.zig#<ref id>\" --save=xterm256\n```\n\n## Usage Examples\n```zig\nconst xterm = @import(\"xterm256\");\n\n// Print \"Hello\" in red\nxterm.print(.{.fg = .red}, \"Hello\", .{});\n\n// Print \"Hello\" in red with a white background\nxterm.print(.{.fg = .{.r=5}, .bg = .white}, \"Hello\", .{});\n\n// Print \"Hello\" with color number 222\nxterm.print(.{.fg = .x222}, \"Hello\", .{});\n\n// Print \"Hello\" in bold red\nxterm.print(.{.fg = .red, .style = .{.bold}}, \"Hello\", .{});\n\n// If there is a `prefix`, only the `prefix` part will be colored\nxterm.print(.{.fg = .red, .prefix=\"error:\"}, \" something wrong.\", .{});\n\n// Save the sequence to print \"Hello\" in red to buf\nvar buf: [128]u8 = undefined;\n_ = try xterm.bufPrint(&buf, .{.fg = .red}, \"Hello\", .{});\n\n// Complex style\nconst complexStyle = .{\n    .fg = .x222,\n    .bg = .{.b = 5, .g = 5},\n    .style = .{.bold, .underline},\n    .prefix = \"complex:\",\n};\nxterm.print(complexStyle, \"Hello\", .{});\n```\n## Style Definition Format\n```zig\n.{\n    .fg = <color>,\n    .bg = <color>,\n    .style = .{.style1, .style2 ...},\n    .prefix=\"prefix text\"\n}\n```\nWhere `<color>` can be one of the following formats:\n- .<color_name>\n- .{.r=[0,5], .g=[0-5], .b=[0-5]}\n- .{.gray=[0-23]}\n> In the `rgb` format, you can omit 1-2 of `r`, `g`, `b`\n\n`<color_name>` includes the following items:\n- .x[16-255]\n- .black\n- .red\n- .green\n- .yellow\n- .blue\n- .magenta\n- .cyan\n- .white\n- .bright_black\n- .bright_red\n- .bright_green\n- .bright_yellow\n- .bright_blue\n- .bright_magenta\n- .bright_cyan\n- .bright_white\n\n`style` includes the following items:\n- .bold\n- .italic\n- .underline\n- .slowblink\n- .rapidblink\n- .reverse\n- .invisible\n- .strikethrough",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/910428?v=4",
+  "releases": [
+    {
+      "tag_name": "0.1.0",
+      "name": "0.1.0",
+      "body": "support zig 0.15",
+      "prerelease": false,
+      "published_at": "2025-11-04T06:09:27Z",
+      "html_url": "https://github.com/zhuyadong/xterm256.zig/releases/tag/0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 13,
+  "owner_following": 9,
+  "owner_created_at": "2011-07-12T14:44:51Z",
+  "license": "MIT",
+  "category": "library"
+}

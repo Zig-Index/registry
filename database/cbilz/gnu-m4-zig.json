@@ -1,0 +1,37 @@
+{
+  "name": "gnu-m4-zig",
+  "owner": "cbilz",
+  "repo": "gnu-m4-zig",
+  "description": "GNU M4 packaged for Zig",
+  "type": "project",
+  "topics": [
+    "gnu",
+    "gnu-m4",
+    "m4",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-02-26T17:19:23Z",
+  "dependencies": [
+    {
+      "name": "upstream",
+      "url": "https://ftp.gnu.org/gnu/m4/m4-1.4.19.tar.xz",
+      "hash": "12207769ba0b098874a3b113332c662ce6ebc31050d454f51f59a9a7806249d3e136"
+    }
+  ],
+  "readme": "# GNU M4 packaged for Zig\n\nWork in progress.\n\n## Goal\n\nThis project aims to provide a Zig package for GNU M4 that runs on Linux, macOS\nand Windows without system dependencies. The longer-term goal is to extract a\nreusable Zig library for compiling projects that rely on Autotools and Gnulib.\n\n## Status\n\nCompiles and appears to run correctly on my Linux system when built in\n`ReleaseFast` or `ReleaseSmall` mode. However, with safety checks enabled, the\nexecutable hits an illegal instruction immediately on startup, presumably due to\nundefined behavior.\n\n## Next steps\n\n1. Fix the illegal instruction issue.\n2. Port the test suite and integrate it as a build step.\n3. Implement those configuration checks that do not depend on preprocessing,\n   compilation or execution of probing code. Exclude any unused or redundant\n   checks.\n4. Implement a `LazyValue` system to allow other build steps to pass\n   configuration values to `ConfigHeader`.\n5. Implement remaining configuration checks, again excluding unused or redundant\n   ones.\n6. Extract a reusable configuration library for projects using Autotools or\n   Gnulib.\n\n## Requirements\n\n- Uses Zig 0.14.0-dev.3367+1cc388d52.\n\n## Limitations\n\n- Native language support is disabled.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/23480513?u=384bad1c3274ee468ff1d738a53904a02c2a7624&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 0,
+  "owner_following": 0,
+  "owner_created_at": "2016-11-15T15:05:21Z",
+  "license": "MIT",
+  "category": "library"
+}

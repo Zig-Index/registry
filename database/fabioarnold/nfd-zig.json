@@ -1,0 +1,30 @@
+{
+  "name": "nfd-zig",
+  "owner": "fabioarnold",
+  "repo": "nfd-zig",
+  "description": "OS-native file dialogs on Linux, macOS and Windows ",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package",
+    "native",
+    "file-dialog"
+  ],
+  "stars": 61,
+  "forks": 16,
+  "watchers": 1,
+  "updated_at": "2025-10-25T12:06:14Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# nfd-zig\n\n`nfd-zig` is a Zig binding to the library [nativefiledialog](https://github.com/mlabbe/nativefiledialog) which provides a convenient cross-platform interface to opening file dialogs on Linux, macOS and Windows.\n\nThis library has been tested on Windows 10, macOS 11.1 and Linux.\n\n## Usage\n\nYou can run a demo with `zig build run`. The demo's source is in `src/demo.zig`.\n\nIf you want to add the library to your own project...\n\n- Add the `nfd` dependency to your `build.zig.zon`\n  ```zig\n  .{\n    .dependencies = .{\n      .nfd = .{ .path = \"libs/nfd-zig\" }, // Assuming nfd-zig is available in the local directory. Use .url otherwise.\n    }\n  }\n  ```\n- Add the import in your `build.zig`:\n  ```zig\n  const nfd = b.dependency(\"nfd\", .{});\n  const nfd_mod = nfd.module(\"nfd\");\n  exe.root_module.addImport(\"nfd\", nfd_mod);\n  ```\n\n## Screenshot\n\n![Open dialog on Windows 10](https://raw.githubusercontent.com/mlabbe/nativefiledialog/67345b80ebb429ecc2aeda94c478b3bcc5f7888e/screens/open_win.png)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/473672?u=650e05a51a6013964860bda90c3fcd2733b0776c&v=4",
+  "releases": [],
+  "owner_company": "@TigerBeetle",
+  "owner_location": "Darmstadt, Germany",
+  "owner_blog": "https://fabioarnold.de",
+  "owner_twitter_username": "captainhorst",
+  "owner_followers": 97,
+  "owner_following": 28,
+  "owner_created_at": "2010-11-09T07:21:23Z",
+  "license": "MIT",
+  "category": "library"
+}

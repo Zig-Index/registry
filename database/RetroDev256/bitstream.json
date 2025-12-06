@@ -1,0 +1,29 @@
+{
+  "name": "bitstream",
+  "owner": "RetroDev256",
+  "repo": "bitstream",
+  "description": "Simple bit reading and bit writing for std.Io.Writer and std.Io.Reader",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-library",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-09-24T03:18:59Z",
+  "readme": "# BitStream\n\nUltra simple bit reading / bit writing for std.Io.Reader and std.Io.Writer.\n\n```zig\nconst BitStream = @import(\"BitStream\");\n\n// Initialize a BitStream:\nvar bit_stream: BitStream = .init;\n\n// Read one bit from a std.Io.Reader:\nconst read_bit: u1 = try bit_stream.read(reader);\n\n// Write one bit to a std.Io.Writer:\ntry bit_stream.write(writer, read_bit);\n\n// Flush bit buffer to the writer (pads with undefined bits)\ntry bit_stream.flush(writer);\n\n// This field is the current bit buffer:\n_ = bit_stream.buffer; // u8\n\n// This field is the number of bits in the buffer:\n_ = bit_stream.bits; // u3\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/54503497?u=9d9d0b184b1981963f74dd066693c77e6c9b0e38&v=4",
+  "releases": [],
+  "owner_bio": "Zig, Rust, C, C++, C#, HTML, JS, CSS, x86 ASM",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "https://alloc.dev",
+  "owner_twitter_username": null,
+  "owner_followers": 30,
+  "owner_following": 0,
+  "owner_created_at": "2019-08-25T13:57:51Z",
+  "license": "MIT",
+  "category": "library"
+}

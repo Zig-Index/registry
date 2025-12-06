@@ -1,0 +1,25 @@
+{
+  "name": "SlotMap",
+  "owner": "Games-by-Mason",
+  "repo": "SlotMap",
+  "description": "A high performance associative container with persistent keys.",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 9,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-11-11T09:26:04Z",
+  "minimum_zig_version": "0.15.0",
+  "readme": "# SlotMap\nA high performance associative container. Returns a unique persistent key for each added item.\n\nUseful for managing objects with runtime known lifetimes, such as entities in a video game,\nsince keys are never \"dangling.\"\n\nPersistent keys are implemented as indices paired with bit generation counters. Saturated\ngeneration counters are not reused, which means that after creating and destroying\n`capacity * @intFromEnum(Generation.invalid)` entries the slot map will run out of unique keys and\nreturn `error.Overflow` on `put`.\n\nInspired by [SergeyMakeev/slot_map](https://github.com/SergeyMakeev/slot_map).\n\nDocumentation available [here](https://docs.gamesbymason.com/slot_map/), you can generate up to date docs yourself with `zig build docs`.\n\n# Example\n```zig\nvar slots: SlotMap(u8, []const u8) = try .init(gpa, 100);\ndefer slots.deinit(gpa);\n\nconst key = slots.put(\"hello, world!\");\nconst value = slots.get(key).?;\n\nslots.remove(key);\nassert(!slots.exists(key));\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/174537044?v=4",
+  "releases": [],
+  "owner_bio": "",
+  "owner_location": null,
+  "owner_blog": "https://gamesbymason.com/",
+  "owner_twitter_username": null,
+  "owner_created_at": "2024-07-02T21:36:16Z",
+  "license": "MIT",
+  "category": "library"
+}

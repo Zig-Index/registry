@@ -1,0 +1,29 @@
+{
+  "name": "jaysan",
+  "owner": "lawrence-laz",
+  "repo": "jaysan",
+  "description": "A fast json serializer",
+  "type": "project",
+  "topics": [
+    "json",
+    "json-serializer",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 12,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-07-11T15:59:01Z",
+  "readme": "<h1 align=\"center\">\n  <img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/JSON_vector_logo.svg/160px-JSON_vector_logo.svg.png\" width=\"64\"><br>\n  Jayさん\n  <br>\n</h1>\n\nJaysan is a fast json library written in Zig. Currently supports serialization only.\n\n```zig\nvar gpa = std.heap.GeneralPurposeAllocator(.{}){};\n\nconst Foo = struct {\n    foo: i32,\n    bar: []const u8,\n};\n\nconst string = try json.stringifyAlloc(\n    gpa.allocator(),\n    Foo{\n        .foo = 123,\n        .bar = \"Hello, world!\",\n    },\n);\n\n// {\"foo\":123,\"bar\":\"Hello, world!\"}\n```\n\n```md\nBenchmark 1: zig-stdjson\n  Time (mean ± σ):     141.9 ms ±   1.1 ms    [User: 140.4 ms, System: 1.0 ms]\n  Range (min … max):   140.1 ms … 144.1 ms    20 runs\n\nBenchmark 2: zig-jaysan\n  Time (mean ± σ):      46.8 ms ±   1.3 ms    [User: 46.2 ms, System: 0.4 ms]\n  Range (min … max):    43.1 ms …  49.2 ms    61 runs\n\nBenchmark 3: rust-serde\n  Time (mean ± σ):      46.9 ms ±   0.9 ms    [User: 45.8 ms, System: 0.9 ms]\n  Range (min … max):    45.9 ms …  50.9 ms    62 runs\n\nSummary\n  zig-jaysan\n    1.00 ± 0.03 times faster than rust-serde\n    3.03 ± 0.09 times faster than zig-stdjson\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/8823448?u=c43514c86f8b4de329fb0bb8bd6046a2d7d1ee7e&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Lithuania, Vilnius",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 19,
+  "owner_following": 41,
+  "owner_created_at": "2014-09-18T17:21:29Z",
+  "license": "MIT",
+  "category": "library"
+}

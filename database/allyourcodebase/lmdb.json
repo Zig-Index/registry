@@ -1,0 +1,71 @@
+{
+  "name": "lmdb",
+  "owner": "allyourcodebase",
+  "repo": "lmdb",
+  "description": "Lmdb using the zig build system",
+  "type": "project",
+  "topics": [
+    "lmdb",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 6,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-09-23T14:35:58Z",
+  "dependencies": [
+    {
+      "name": "lmdb",
+      "url": "https://github.com/LMDB/lmdb/archive/14d6629bc8a9fe40d8a6bee1bf71c45afe7576b6.tar.gz",
+      "hash": "N-V-__8AABzgCAC6yX-gYcngpmRFF74ZANIAhphOalO6yoyI"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# lmdb\n[Lmdb](https://github.com/LMDB/lmdb/tree/mdb.master/libraries/liblmdb) using the [Zig](https://ziglang.org/) build system\n\n## Usage\n\nFirst, update your `build.zig.zon`:\n\n```elvish\n# Initialize a `zig build` project if you haven't already\nzig init\n# Support for `lmdb` starts with v0.9.31 and future releases\nzig fetch --save https://github.com/allyourcodebase/lmdb/archive/refs/tags/0.9.31+2.tar.gz\n# For latest git commit\nzig fetch --save https://github.com/allyourcodebase/lmdb/archive/refs/heads/main.tar.gz\n```\n\nImport `lmdb` dependency into `build.zig` as follows:\n\n```zig\n    const lmdb_dep = b.dependency(\"lmdb\", .{\n        .target = target,\n        .optimize = optimize,\n        .strip = true,\n        .lto = true,\n        .linkage = .static,\n    });\n```\n\nUsing `lmdb` artifacts and module in your project\n```zig\n    const exe = b.addExecutable(.{\n        .name = exe_name,\n        .root_source_file = b.path(\"src/main.zig\"),\n        .target = target,\n        .optimize = optimize,\n        .strip = strip,\n    });\n    exe.want_lto = lto;\n\n    const liblmdb = lmdb_dep.artifact(\"lmdb\");\n    const lmdb_module = lmdb_dep.module(\"lmdb\");\n\n    exe.root_module.addImport(\"mdb\", lmdb_module);\n    exe.linkLibrary(liblmdb);\n```\n\n## Supported on Linux, macOS and Windows\n- Zig 0.16.0-dev\n- Zig 0.15.1\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
+  "releases": [
+    {
+      "tag_name": "0.9.31+3",
+      "name": "0.9.31+3",
+      "body": "## What's Changed\r\n* Update Zig toolchain and lmdb by @bernardassan in https://github.com/allyourcodebase/lmdb/pull/10\r\n\r\n\r\n**Full Changelog**: https://github.com/allyourcodebase/lmdb/compare/0.9.31+2...0.9.31+3",
+      "prerelease": false,
+      "published_at": "2025-09-23T14:37:01Z",
+      "html_url": "https://github.com/allyourcodebase/lmdb/releases/tag/0.9.31%2B3",
+      "assets": []
+    },
+    {
+      "tag_name": "0.9.31+2",
+      "name": "0.9.31+2",
+      "body": "## What's Changed\r\n* fix(build): avoid lto use without lld by @RonaldZielaznicki in https://github.com/allyourcodebase/lmdb/pull/2\r\n* Detect the target os tag when setting is_macos and is_windows by @Ultra-Code in https://github.com/allyourcodebase/lmdb/pull/4\r\n* Fix running of test and tools on windows and macos by @Ultra-Code in https://github.com/allyourcodebase/lmdb/pull/6\r\n* Fixes for Zig 0.14.0 by @Ultra-Code in https://github.com/allyourcodebase/lmdb/pull/9\r\n\r\n## New Contributors\r\n* @RonaldZielaznicki made their first contribution in https://github.com/allyourcodebase/lmdb/pull/2\r\n\r\n**Full Changelog**: https://github.com/allyourcodebase/lmdb/compare/0.9.31...0.9.31+2",
+      "prerelease": false,
+      "published_at": "2025-03-14T09:57:09Z",
+      "html_url": "https://github.com/allyourcodebase/lmdb/releases/tag/0.9.31%2B2",
+      "assets": []
+    },
+    {
+      "tag_name": "0.9.31+1",
+      "name": "LTO and Cross Compilation fixes",
+      "body": "fixed issues with lto and cross compilation across different systems",
+      "prerelease": false,
+      "published_at": "2024-12-05T16:06:17Z",
+      "html_url": "https://github.com/allyourcodebase/lmdb/releases/tag/0.9.31%2B1",
+      "assets": []
+    },
+    {
+      "tag_name": "0.9.31",
+      "name": "A working build of lmdb using the zig build system",
+      "body": "Build liblmdb, lmdb tools and unit test with the zig build system\r\nCI across Linux, macOS and Window\r\nexport a Zig module for access to the liblmdb interface when using in your project",
+      "prerelease": false,
+      "published_at": "2024-09-30T11:11:17Z",
+      "html_url": "https://github.com/allyourcodebase/lmdb/releases/tag/0.9.31",
+      "assets": []
+    }
+  ],
+  "owner_bio": "...are belong to Ziguanas, but we'd also be delighted to give them back!",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2023-09-28T21:29:33Z",
+  "license": "BSD-3-Clause",
+  "category": "library"
+}

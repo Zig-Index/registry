@@ -1,0 +1,121 @@
+{
+  "name": "jzignet",
+  "owner": "greenfork",
+  "repo": "jzignet",
+  "description": "Zig library to connect Janet and Zig together",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package",
+    "janet"
+  ],
+  "stars": 64,
+  "forks": 7,
+  "watchers": 2,
+  "updated_at": "2025-11-20T07:26:20Z",
+  "minimum_zig_version": "0.14.0",
+  "readme": "# Jzignet\n\n[Zig](https://ziglang.org/) is a general-purpose programming language and\ntoolchain for maintaining robust, optimal, and reusable software.\n\n[Janet](https://janet-lang.org/) is a functional and imperative programming\nlanguage and bytecode interpreter. It is a lisp-like language, but lists are\nreplaced by other data structures (arrays, tables (hash table), struct\n(immutable hash table), tuples). The language also supports bridging to native\ncode written in C, meta-programming with macros, and bytecode assembly.\n\n[Jzignet](https://git.sr.ht/~greenfork/jzignet) - Zig library to connect Janet\nand Zig together.\n\nYou can:\n* Embed Janet programs into Zig\n* Write Janet modules in Zig\n* Write bindings in Zig for a C library to be used as a Janet module\n\nWhy use these bindings, besides obvious reasons such as connecting together two\nwonderful languages:\n* You don't need to care about conversion between Zig and C. But you have full\n  access to C internals if you need to.\n* Plenty of tests which are great examples and guarantee minimal regressions\n  when updating.\n* Idiomatic Zig code - everything is typed, names are properly cased,\n  operations on types use methods instead of prefixed global functions.\n\nCurrently supported versions:\n* Zig 0.15.2\n* Janet 1.37.1\n\nRepository is available at [sourcehut](https://git.sr.ht/~greenfork/jzignet)\nand at [GitHub](https://github.com/greenfork/jzignet).\n\n## How to use\n\nIf you want to just start using it, jump to the examples. Copy them or look\nat the source code, it is heavily commented.\n\n* [Embed Janet into Zig](examples/embed_janet.zig) --\n  run this example with `zig build run-embed_janet`.\n  For a more in-depth overview of this use case you can take a look at\n  @iacore's [blog post](https://www.1a-insec.net/blog/16-buy-janet-get-gc-free/)\n  as well as the [example repository](https://git.envs.net/iacore/janet-zig-test).\n\nWARNING: examples are currently **not working**:\n\n* [Write Janet module in Zig](examples/zig_module) -- the template is broken\n  and needs some investigation on how to fix it.\n\nWrite bindings in Zig for a C library to be used as a Janet module - this\nis very close to \"Write Janet module in Zig\" example, you just need to\nknow how to wrap a C library in Zig, this repository is a perfect example\nfor this.\n\n## How to include as a dependency (with zon)\n\n1. Make sure your project has a `build.zig.zon` then run the following command for Zig to add\n   jzignet as a dependency.\n\n```bash\nzig fetch --save https://github.com/greenfork/jzignet/archive/0.8.0.tar.gz\n```\n\n2. Add this to `build.zig`.\n\n```zig\n    const jzignet = b.dependency(\"jzignet\", .{ .target=target, .optimize=optimize });\n\n    // your executable defined here\n    // const exe = ...;\n\n    exe.addModule(\"jzignet\", jzignet.module(\"jzignet\"));\n    exe.linkLibrary(jzignet.artifact(\"jzignet\"));\n```\n\n3. Use in your Zig code\n\n```zig\nconst jzignet = @import(\"jzignet\");\n```\n\n## How to include as a dependency (with git submodule)\n\nCurrently you can include jzignet as a git submodule. Janet is bundled as\na single C source amalgamation file and is compiled directly into this\nlibrary.\n\n1. Include git submodule into your library, assuming further that `libpath` is\n   the directory where this library is installed\n\n```shell\ngit submodule add https://github.com/greenfork/jzignet libpath\n```\n\n2. Include the library in `build.zig`\n\n```zig\n    const jzignet = b.anonymousDependency(\"lib/jzignet\", @import(\"lib/jzignet/build.zig\"), .{});\n\n    // your executable defined here\n    // const exe = ...;\n\n    exe.addModule(\"jzignet\", jzignet.module(\"jzignet\"));\n    exe.linkLibrary(jzignet.artifact(\"jzignet\"));\n```\n\n3. Use in your Zig code\n\n```zig\nconst jzignet = @import(\"jzignet\");\n```\n\n## Differences with C API\n\n### Naming\n* `janet_` prefix is mostly not present.\n* Every type is a Zig struct and corresponding functions are called as\n  methods, for example, `janet_table_get(table, key)` becomes `table.get(key)`.\n* **All** bindings have idiomatic Zig naming even when Janet uses different\n  ones, for example `arity` and `fixarity` are `arity` and `fixArity` in Zig.\n* Functions like `janet_table` are available as `Table.init`, please consult\n  the source code for that.\n\n### Semantics\n* Function return types return error sets as well as optional values where it\n  makes sense to do so, for example, `table.get` returns `?Janet` and `pcall`\n  returns `Signal.Error!void`.\n* All types are wrapped into structs. Most of the types support this natively\n  since they are structs in C too, others (Tuple, Struct, String, Keyword,\n  Symbol) cannot be represented as structs directly and they are wrappers\n  with a `ptr` or `slice` field containing the original value.\n* All functions that have a type at the end, for example, `janet_get_number`,\n  instead use this signature: `get(comptime T: type, ...)`. Currently these\n  functions exist: `get`, `opt`, `wrap`, `Janet.unwrap`.\n* When you need to supply a pointer to the array and a length in the C version,\n  in Zig version you need to supply just a slice since it has both the pointer\n  and the length, so it's one parameter instead of two. For example,\n  ```c\n  int janet_dobytes(JanetTable *env, const uint8_t *bytes, int32_t len, const char *sourcePath, Janet *out);\n  ```\n\n  becomes\n  ```zig\n  pub fn doBytes(env: *Environment, bytes: []const u8, source_path: [:0]const u8) !Janet\n  ```\n* Abstracts are fully typed, no *void pointers to @ptrCast. Take a look at\n  tests for examples with abstracts, they are generally reworked to make\n  them easier to use.\n* All functions returning `Signal` instead return `void` on `OK` and return\n  error otherwise with the specified signal, signature is `Signal.Error!void`.\n* `doString` and `doBytes` are aliases and return `!Janet` directly instead of\n  accepting a reference for the return value.\n* `string`, `keyword`, `symbol`, `nil` top-level functions are the only ones to\n  create these types and they do what you want.\n* `Environment` type introduced which is internally a `Table` but allows\n  conceptually different operations such as defining values and executing code.\n\n## Completeness\n\nBindings are not complete 100% but all the generally useful things are there.\nIf you need any specific part of the API, feel free to contribute or just\nask (and you shall receive).\n\n## Q'n'A\n\nQ: What's with the name?\n\nA: \"janet\".replace(\"a\", \"zig\")\n\nQ: I hate that name.\n\nA: Yes, I know.\n\n## License\n\nMIT, see LICENSE file.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/20167110?u=70635fef82a2bf53478a1c3e4011ae7e09adf302&v=4",
+  "releases": [
+    {
+      "tag_name": "0.8.0",
+      "name": "0.8.8",
+      "body": "* Zig updated to 0.15.2\r\n\r\nThank you @glfmn !",
+      "prerelease": false,
+      "published_at": "2025-11-11T18:19:51Z",
+      "html_url": "https://github.com/greenfork/jzignet/releases/tag/0.8.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.7.6",
+      "name": "0.7.6",
+      "body": "Zig was upgraded to 0.14.1\r\n\r\nThanks @NTBBloodbath for contributing!",
+      "prerelease": false,
+      "published_at": "2025-08-29T04:44:48Z",
+      "html_url": "https://github.com/greenfork/jzignet/releases/tag/0.7.6",
+      "assets": []
+    },
+    {
+      "tag_name": "0.7.5",
+      "name": "",
+      "body": "Upgrade Janet to 1.37.1",
+      "prerelease": false,
+      "published_at": "2025-02-13T19:45:04Z",
+      "html_url": "https://github.com/greenfork/jzignet/releases/tag/0.7.5",
+      "assets": []
+    },
+    {
+      "tag_name": "0.7.4",
+      "name": "",
+      "body": "Update Zig to 0.13.0",
+      "prerelease": false,
+      "published_at": "2024-08-16T12:45:42Z",
+      "html_url": "https://github.com/greenfork/jzignet/releases/tag/0.7.4",
+      "assets": []
+    },
+    {
+      "tag_name": "0.7.2",
+      "name": "0.7.2",
+      "body": "## What's Changed\r\n* Add janet_parser_* bindings by @iacore in https://github.com/greenfork/jzignet/pull/12",
+      "prerelease": false,
+      "published_at": "2024-02-08T17:26:28Z",
+      "html_url": "https://github.com/greenfork/jzignet/releases/tag/0.7.2",
+      "assets": []
+    },
+    {
+      "tag_name": "0.7.1",
+      "name": "jzignet 0.7.1",
+      "body": "- Library fixes\r\n- Janet update to 1.31.0-e3f4142d\r\n\r\nThanks @iacore for contributing.",
+      "prerelease": false,
+      "published_at": "2023-10-13T05:22:12Z",
+      "html_url": "https://github.com/greenfork/jzignet/releases/tag/0.7.1",
+      "assets": []
+    },
+    {
+      "tag_name": "0.7.0",
+      "name": "jzignet 0.7.0",
+      "body": "Updated versions:\r\n- Zig 0.11.0\r\n- Janet 1.31.0\r\n\r\nAdded zon as a new way to add a dependency.\r\n\r\nThanks @iacore for contributing.",
+      "prerelease": false,
+      "published_at": "2023-09-25T18:54:23Z",
+      "html_url": "https://github.com/greenfork/jzignet/releases/tag/0.7.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.6.0",
+      "name": "jzigner 0.6.0",
+      "body": "Update Janet to 1.23.0 🔥 ",
+      "prerelease": false,
+      "published_at": "2022-07-24T03:23:31Z",
+      "html_url": "https://github.com/greenfork/jzignet/releases/tag/0.6.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.4.0",
+      "name": "Jzignet 0.4.0",
+      "body": "Updated to Zig 0.9.0!",
+      "prerelease": false,
+      "published_at": "2021-12-21T00:48:16Z",
+      "html_url": "https://github.com/greenfork/jzignet/releases/tag/0.4.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.3.0",
+      "name": "Jzignet 0.3.0",
+      "body": "All changes are most probably breaking.\r\n\r\n* Janet was upgraded to 1.19.0.\r\n* Major overhaul of C API.\r\n* Module example is fully automated and native to jpm.\r\n\r\n### C API\r\n\r\n* Functions were moved into structs to be \"methods\":\r\n  * `continue` into Fiber\r\n  * `continueSignal` into Fiber\r\n  * `step` into Fiber\r\n  * `stackstrace` into Fiber\r\n  * `pcall` into Function\r\n  * `call` into Function\r\n  * `tryInit` into TryState\r\n  * `try` into TryState\r\n  * `restore` into TryState\r\n* `wrap` function overhaul:\r\n  * All the functions which are applicable to data structures are moved into\r\n    these structures, for example `wrapTable` is moved into `Table.wrap()`.\r\n  * All the named wrap functions are now with a signature\r\n    `wrap(comptime T: type, value: T) Janet` so you can use it like\r\n    `wrap(i32, 3)`.\r\n  * `wrapNumberSafe` is renamed to `numberSafe`.\r\n* `unwrap` function overhaul:\r\n  * All the functions except for abstract have changed their signature to\r\n    `unwrap(janet: Janet, comptime T: type) !T` so you can use it like\r\n    `try Janet.unwrap(i32)`.\r\n* `string` function and corresponding for keyword and symbol are moved into\r\n  their data structures into functions `init`.\r\n* `stringv` function and corresponding for keyword and symbol are moved into\r\n  Janet into functions `string`, `keyword` and `symbol`.\r\n* `symbolGen` function is moved into `Symbol.gen`.\r\n* `abstract` function is moved into `Abstract.init` and `Abstract.initVoid`.\r\n* Introduce new `Environment` struct which is same as `Table` but only allows\r\n  operations specific to environment manipulation.\r\n* More data structures now have `init` or `initN` functions where `initN`\r\n  initializes with supplied data for collection data structures.\r\n* `Signal` return value is transformed into `Signal.Error!void` where\r\n  `Signal.Error` is anything but `ok` signal.\r\n* Functions such as `pcall` only take `[]const Janet` instead of both pointer\r\n  and argument length.\r\n* `doString` and `doBytes` functions always return `Janet` value instead of\r\n  accepting a pointer `*Janet` as an argument.\r\n* `printf` -> `print`, `eprintf` -> `eprint`.\r\n* `registerAbstractType` is removed in favor of just `register`.\r\n* Marshal/unmarshal type-specific functions live inside `MarshalContext`.\r\n* `getType` and `optType` functions are reworked to receive type as the\r\n  very first argument.\r\n* \"View\" functions are moved inside `Janet` struct and now return a corresponding\r\n  view data structure instead of getting the view from parameters by reference.\r\n* `getAbstractType` is moved inside `Janet`.\r\n* `in`, `get`, `next`, `getIndex` functions have their return type changed\r\n  `Janet`->`?Janet`.\r\n* `JanetType` is now `Janet.Type`.\r\n* `fixarity` renamed to `fixArity`.\r\n\r\nBig thanks to @GrayJack for his https://github.com/GrayJack/janetrs library which was an inspiration for this release.",
+      "prerelease": false,
+      "published_at": "2021-11-28T11:56:23Z",
+      "html_url": "https://github.com/greenfork/jzignet/releases/tag/0.3.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 37,
+  "owner_following": 8,
+  "owner_created_at": "2016-06-27T12:25:14Z",
+  "homepage": "https://git.sr.ht/~greenfork/jzignet",
+  "license": "MIT",
+  "category": "library"
+}

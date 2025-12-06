@@ -1,0 +1,43 @@
+{
+  "name": "zorm",
+  "owner": "Tony-ArtZ",
+  "repo": "zorm",
+  "description": "A Zig ORM with custom schema support",
+  "type": "project",
+  "topics": [
+    "database",
+    "mongodb",
+    "mongodb-atlas",
+    "orm",
+    "orm-library",
+    "orms",
+    "pgadmin4",
+    "postgres",
+    "postgresql",
+    "sql"
+  ],
+  "stars": 34,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-12-05T19:18:51Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# ZORM\n\n![ZORM Header](./assets/ZormHeader.png)\n\n> **Note:** ZORM is a work in progress (WIP).\n>\n> **For schema syntax highlighting and LSP support, check out the [ZORM VSCode Extension](https://marketplace.visualstudio.com/items?itemName=TonyArtZ.zorm) and [the Github repo](https://github.com/Tony-ArtZ/zorm-lsp).**\n\nZORM is a Zig ORM library with a custom schema file support. You can define your schema in a readable .zorm file and let the zorm-generator generate the necessary typings for you.\n\nCurrently ZORM only supports `Postgres` and `Sqlite3`. More functionality and backends are being worked on.\n\n## Features\n\n- Static library for embedding in Zig projects\n- Generator tool to convert `.zorm` schema files to Zig code\n- Supports both SQLite and PostgreSQL backends\n- Easily extensible and integrates with Zig build system\n\n## Getting Started\n\n### 1. Add as Dependency\n\nAdd ZORM to your `build.zig.zon` using :\n\n```sh\nzig fetch --save git+https://github.com/Tony-ArtZ/zorm\n```\n\n### 2. Add ZORM to your build.zig\n\n```zig\nconst zorm_dep = b.dependency(\"zorm\", .{\n    .target = target,\n    .optimize = optimize,\n});\nconst zorm_mod = zorm_dep.module(\"zorm\");\n\nconst exe = b.addExecutable(.{\n    .name = \"zorm_test\",\n    .root_module = exe_mod,\n});\n\nexe.root_module.addImport(\"zorm\", zorm_mod);\n```\n\n### 3. Generating the schema\n\nYou have two options to generate Zig code from your `.zorm` schema:\n\n#### Option 1: Build and run the generator executable\n\n1. Add Generator Artifact to your build step:\n\n```zig\nconst generator = zorm_dep.artifact(\"zorm-generator\");\nb.installArtifact(generator);\n```\n\n2. Run the generator with your schema and output paths:\n\n```sh\n./zig-out/bin/zorm-generator <input_schema_path> <output_path?>\n```\n\n#### Option 2: Use the generator programmatically in Zig\n\nImport and call the generator in your Zig code:\n\n```zig\nconst zorm = @import(\"zorm\");\ntry zorm.generator.generateSchema(\n    allocator,         // std.mem.Allocator\n    schema_path,       // []const u8\n    output_path        // []const u8\n);\n```\n\n> **Important:** When building your executable, make sure to link the appropriate C library headers for your backend (SQLite or PostgreSQL). For SQLite, link `-lsqlite3`; for PostgreSQL, link `-lpq` and ensure the headers are available. This is required for successful compilation and runtime.\n\n## Schema Definition (`schema.zorm`)\n\nDefine your data models and backend in a `.zorm` file. For example:\n\n```zorm\n[config]\nbackend postgres\n\nmodel User {\n  id     Int     @id\n  name   String\n  email  String  @unique\n  age    Int?\n}\n```\n\n- The `[config]` section specifies the backend (`postgres` or `sqlite`).\n- Each `model` defines a table with fields and attributes (e.g., `@id`, `@unique`).\n- Optional fields use `?` (e.g., `Int?`).\n\nSee `examples/schema.zorm` for a complete example.\n\n## Example Usage\n\nSee the [`examples/`](examples/) directory for a full working example. Here is a minimal usage:\n\n```zig\nconst std = @import(\"std\");\nconst zorm = @import(\"zorm\");\nconst schema = @import(\"generated_schema.zig\"); // Generated from schema.zorm\nconst SQLITE = zorm.SQLITE;\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    // Initialize SQLite backend\n    var db = SQLITE.init(allocator);\n    defer db.disconnect();\n\n    try db.connect(\"test.db\");\n    try db.createTable(schema.UserMeta);\n\n    const user = schema.User{\n        .id = \"1\",\n        .name = \"John Doe\",\n        .email = \"john@example.com\",\n        .age = \"30\",\n    };\n    try db.insert(schema.User, user);\n    std.debug.print(\"User inserted successfully!\\n\", .{});\n}\n```\n\n- The example above uses SQLite, but you can switch to PostgreSQL by changing the backend and connection string.\n- The generated schema file provides types and metadata for your models.\n- You can switch to PostgreSQL by using `const PG = zorm.pg.PG;` and updating the backend initialization and connection string.\n- The generated schema file will provide types like `User` and `UserMeta`.\n\n## More Examples\n\n- See [`examples/example.zig`](examples/example.zig) for a complete example.\n- See [`examples/query_builder_example.zig`](examples/query_builder_example.zig) for a sample query builder example.\n- See [`examples/schema.zorm`](examples/schema.zorm) for a sample schema definition.\n\n## Roadmap & Status\n\n- ZORM is a **work in progress**. Features and APIs may change.\n- Contributions and feedback are welcome!\n\n## License\n\nMIT\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/39452102?u=d42200d2ad4412fb41539907bb2811cef1b33b4a&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 19,
+  "owner_following": 9,
+  "owner_created_at": "2018-05-20T05:37:40Z",
+  "license": "MIT",
+  "category": "database"
+}

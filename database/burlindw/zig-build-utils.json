@@ -1,0 +1,28 @@
+{
+  "name": "zig-build-utils",
+  "owner": "burlindw",
+  "repo": "zig-build-utils",
+  "description": "A collection of common utilities for Zig build scripts inspired by the build scripts used by Zig and ZLS.",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package",
+    "zig-tools"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-01-20T01:43:07Z",
+  "readme": "# zig-build-utils\n\nA collection of common utilities for Zig build scripts inspired by the build\nscripts used by [Zig](https://github.com/ziglang/zig) and [ZLS](https://github.com/zigtools/zls).\n\n## How to use\n\nRun the following command from a project's root to add `zig-build-utils` as\nas dependency:\n\n```sh\nzig fetch --save git+https://github.com/burlindw/zig-build-utils.git\n```\n\nImport `build-utils` in `build.zig`. It is not necessary to call `std.Build.dependency()`\nas there are no exported modules or artifacts.\n\n```zig\nconst std = @import(\"std\");\nconst utils = @import(\"build-utils\");\n\npub fn build(b: *std.Build) void {\n    const target = b.standardTargetOptions(.{});\n    const optimize = b.standardOptimizeOption(.{});\n\n    // Get the project version using a combination of the 'build.zig.zon'\n    // manifest file, the git history, and git tags.\n    const version = utils.getBuildVersion(b);\n\n    const exe = b.addExecutable(.{\n        .name = \"example\",\n        .target = target,\n        .optimize = optimize,\n        .version = version,\n        .root_source_file = b.path(\"src/main.zig\"),\n    });\n    b.installArtifact(exe);\n\n    // Compress the binary (and any associated pdb, h, or lib files) into\n    // a zip file or tarball (depending on the target) and install it in the\n    // prefix directory. The subdirectory within the prefix directory and\n    // the layout within the archive are both configurable.\n    utils.installArchivedArtifact(exe, .{});\n}\n```\n\n\n\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/62223917?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 0,
+  "owner_following": 0,
+  "owner_created_at": "2020-03-16T00:05:56Z",
+  "license": "MIT",
+  "category": "library"
+}

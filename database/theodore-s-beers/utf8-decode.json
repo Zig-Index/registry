@@ -1,0 +1,30 @@
+{
+  "name": "utf8-decode",
+  "owner": "theodore-s-beers",
+  "repo": "utf8-decode",
+  "description": "A classic UTF-8 decoder, now in Zig",
+  "type": "project",
+  "topics": [
+    "text-processing",
+    "unicode",
+    "utf8",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-07-22T23:27:37Z",
+  "minimum_zig_version": "0.14.1",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/32523293?u=efb1809b3ae5663f417f7bb9319c1030e1a9b182&v=4",
+  "releases": [],
+  "owner_bio": "Research software engineer, Persian and Arabic philologist",
+  "owner_company": null,
+  "owner_location": "Haverford",
+  "owner_blog": "https://www.theobeers.com/",
+  "owner_twitter_username": "theodorebeers",
+  "owner_followers": 56,
+  "owner_following": 31,
+  "owner_created_at": "2017-10-04T18:02:20Z",
+  "category": "library"
+}

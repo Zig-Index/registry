@@ -1,0 +1,37 @@
+{
+  "name": "zenolith",
+  "owner": "zenolith-ui",
+  "repo": "zenolith",
+  "description": "The GUI engine to end them all! Mirror of https://git.mzte.de/zenolith/zenolith",
+  "type": "project",
+  "topics": [
+    "gui",
+    "retained-mode-gui",
+    "widget",
+    "widget-toolkit",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 41,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-10-31T14:09:20Z",
+  "dependencies": [
+    {
+      "name": "statspatch",
+      "url": "git+https://git.mzte.de/LordMZTE/statspatch.git#fe27cf710f1db156acb8be4365d1a1a6365c6d95",
+      "hash": "1220c9e5c5d1fff2f7d1f5d02b235f832ef122c00bec0dc5ecf1c80995048addead9"
+    }
+  ],
+  "readme": "![Logo](assets/logo.svg)\n\n# Zenolith\n\nZenolith is my attempt at a retained-mode, platform-agnostic, zig-native GUI engine.\n\n**[Join the Matrix room here!](https://matrix.to/#/#zenolith:mzte.de)**\n\nWarning: Zenolith is in an extremely early stage! Many important features such as text editing\nare not yet implemented. Expect breaking changes!\n\n## Attention GitHub users!\n\nZenolith is mirrored on GitHub to make it easier to discover, however, this mirror is read-only!\nDo not open issues or pull requests on GitHub!\nAll development happens on [MZTE Git](https://git.mzte.de/zenolith/zenolith).\n\n## Contributing\n\nPull requests are always welcome! If you'd like to fix a bug, improve documentation or implement\na feature on the TODO list below, go ahead!\nIf you'd like to suggest a new feature or design change, please open an issue first to discuss it!\n\n**All commits must follow [Conventional Commits](https://www.conventionalcommits.org/)!**\n\n## TODO\n\n- [x] Painter API\n  - [x] Rectangles\n  - [x] Textures\n  - [x] Text\n    - [x] Multi-Color chunks\n    - [x] Multi-Font chunks\n  - [ ] Triangles\n  - [ ] Matrix Transformations?\n  - [ ] Drawing of partial widgets\n    - [ ] stencils?\n- [x] Widgets\n  - [x] Box (FlowBox-like algorithm)\n  - [x] Button\n  - [x] Label\n    - [x] Word Wrapping\n    - [x] Character Wrapping\n    - [ ] Ellipsization\n  - [ ] Text Edit\n    - [ ] Single Line\n    - [ ] Multi Line\n  - [ ] Tabbed Pane\n  - [ ] Split Pane\n  - [ ] Scrolled Pane\n- [x] Focus System\n- [x] Theming\n  - [x] Built-in themes\n- [ ] Layout overflow handling\n- [x] Logo\n- [x] Treevents (Tree-Bound, downwards events)\n- [x] Backevents (Tree-Bound, upwards events)\n- [x] Platform events (Platform event loop events)\n  - [x] Wrap Backevents\n- [x] Attreebutes (Tree-Bound, inhereted widget properties)\n- [ ] Documentation\n  - [x] In-Code\n  - [ ] Book\n  - [ ] Examples\n- [ ] CI/CD\n- [x] [SDL2 Backend](https://git.mzte.de/zenolith/zenolith-sdl2)\n- [ ] Mach Backend\n- [ ] TUI Backend\n- [ ] WASM Backend\n- [ ] Lazy rendering of subtrees\n\n## Gallery\n\n![Early Test GUI](assets/early-test-gui.png)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/152073653?v=4",
+  "releases": [],
+  "owner_bio": "The GUI engine to end them all!",
+  "owner_location": null,
+  "owner_blog": "https://git.mzte.de/zenolith",
+  "owner_twitter_username": null,
+  "owner_created_at": "2023-11-26T13:07:33Z",
+  "homepage": "https://git.mzte.de/zenolith/zenolith",
+  "license": "GPL-3.0",
+  "category": "gui"
+}

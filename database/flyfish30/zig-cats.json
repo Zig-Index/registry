@@ -1,0 +1,74 @@
+{
+  "name": "zig-cats",
+  "owner": "flyfish30",
+  "repo": "zig-cats",
+  "description": "A category theory and functional programing library for Zig language",
+  "type": "project",
+  "topics": [
+    "category-theory",
+    "functional-programming",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 64,
+  "forks": 4,
+  "watchers": 2,
+  "updated_at": "2025-12-06T05:17:01Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# zig-cats\nA category theory and functional programing library for Zig language.\n\nThis library implements some basic data types and functional programming concepts in Haskell, especially the important typeclass in Haskell. Based on Haskell type classes and type combinators, more complex data type construction methods can be implemented. Based on these foundations, we can use the functional programming style to write programs in Zig language, using high-level abstractions to implement complex programs without runtime overhead.\n\nWith the help of Zig language's strict type constraints and inference capabilities, type reflection, and compile-time calculations, the use of functional programming style can expose problems as early as possible in the compilation stage, making it easier to reduce errors and write correct programs when designing large and complex programs.\n\nThe design and implementation of this library also attempts to explore the boundaries of Zig language's expressiveness and abstraction capabilities. This is a beneficial and bold attempt to combine Zig language with functional programming ideas for good architecture design, which enables the system-level programming language Zig to use some beneficial research results in functional programming.\n\nThe library defines type classes such as SemiGroup, Monoid, Functor, Applicative, Monad, and some commonly used data types such as Identity, Constant, AllBool, AnyBool, SumNumb, ProductNumb, Maybe, array, ArrayList, State, etc., and implements instances of the above type classes. In addition, it also implements combinators of some functors, such as Compose, Product, Coproduct. All these type classes support pure data types and impure data types.\n\n## current supported feature list\n- [x] SemiGroup\n- [x] Monoid\n\n- [x] Functor\n- [x] Natural Transformation\n- [x] Applicative Functor\n- [x] Monad\n- [x] Free Monad\n\n- [x] Compose\n- [x] Product\n- [x] Coproduct\n\n- [ ] Foldable\n- [ ] Traversable\n- [x] Fixed Point Type\n- [x] Catamorphism\n\n## install and integrated to your project\nDownload and add zig-cats as a dependency by running the following command in your project root:\n```bash\nzig fetch --save git+https://github.com/flyfish30/zig-cats.git\n```\nThen add zig-cats as a dependency in your build.zig, add the module to your module as you would normally:\n```\n    const zig_cats = b.dependency(\"zig_cats\", .{\n        .target = target,\n        .optimize = optimize,\n    });\n    exe.root_module.addImport(\"zig-cats\", zig_cats.module(\"zcats\"));\n```\nNow you can reference types and functions in zig-cats by use @import(\"zig-cats\") in your source code.\n```zig\nconst zcats = @import(\"zig-cats\");\n\nconst Functor = zcats.Functor;\nconst Applicative = zcats.Applicative;\nconst Monad = zcats.Monad;\nconst NatTrans = zcats.NatTrans;\n```\n\n## build and run or test\nThe zig-cats is a standard zig project. In this project root directory, you can use bellow command to build it.\n```bash\nzig build\n# add --release=fast to build release version\nzig build --release=fast\n```\nor use bellow command to build and run its sample, this command will check whether the output of sample is correct.\n```bash\nzig build run\n```\nOf course, you can run the executable directly by using bellow command:\n```bash\nzig-out/bin/zcats-sample\n```\nYou can use bellow command to test this project.\n```bash\nzig build test\n```\n\n## use Functor\nThe zig-cats has implemented some functor instances, you can use them directly through the following zig code:\n```zig\n    const allocator = testing.allocator;\n    const ArrayFunctor = Functor(ArrayList);\n    const array_functor = ArrayFunctor.InstanceImpl{ .allocator = allocator };\n\n    var array_a = ArrayList(u32).init(allocator);\n    defer array_a.deinit();\n\n    try array_a.appendSlice(&[_]u32{ 0, 1, 2, 3 });\n    // The function add10 has been defined in other place.\n    array_a = try array_functor.fmap(.InplaceMap, add10, array_a);\n    // array_a should be { 10, 11, 12, 13 }\n\n    array_a.clearRetainingCapacity();\n    try array_a.appendSlice(&[_]u32{ 10, 20, 30, 40 });\n    const array_f64 = try array_functor.fmap(.NewValMap, mul_pi_f64, array_a);\n    defer array_f64.deinit();\n    // array_a should be { 31.4, 62.8, 94.2, 125.6 }\n```\n## use Monad\nThe zig-cats has implemented some monad instances, you can use them directly through the following zig code:\n```zig\n    const allocator = testing.allocator;\n    const ArrayListMonad = Monad(ArrayList);\n    const array_monad = ArrayListMonad.InstanceImpl{ .allocator = allocator };\n    const ArrayListMImpl = @TypeOf(array_monad);\n\n    var array_a = ArrayList(f64).init(allocator);\n    defer array_a.deinit();\n    try array_a.appendSlice(&[_]f64{ 10, 20, 30, 40 });\n    const array_binded = try array_monad.bind(f64, u32, array_a, struct {\n        fn f(impl: *const ArrayListMImpl, a: f64) ArrayListMonad.MbType(u32) {\n            var arr_b = try ArrayList(u32).initCapacity(impl.allocator, 2);\n            arr_b.appendAssumeCapacity(@intFromFloat(@ceil(a * 4.0)));\n            arr_b.appendAssumeCapacity(@intFromFloat(@ceil(a * 9.0)));\n            return arr_b;\n        }\n    }.f);\n    defer array_binded.deinit();\n    // array_binded should be { 40, 90, 80, 180, 120, 270, 160, 360 }\n```\n\n## Examples of zig-cats\nThe zig-cats library has complete example code that shows the detail usage of zig-cats' Monoid, Functor, Applicative, Monad, etc. \nFor details, please refer to https://github.com/flyfish30/zig-cats/tree/main/sample.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/7820420?u=af91af61f187dab0afcee6f7163c98ac3ee3432e&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.4.1",
+      "name": "A minor release for update README.md and build.zig.zon",
+      "body": "Fixes bug #1, and update version number in build.zig.zon.",
+      "prerelease": false,
+      "published_at": "2025-06-06T04:13:09Z",
+      "html_url": "https://github.com/flyfish30/zig-cats/releases/tag/v0.4.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.4.0",
+      "name": "Add SemiGroup, Monoid, Free Monad, State, add some utility types. ",
+      "body": "This release is an important release version. Add more type classes such as SemiGroup, Monoid, add more type class instance, such as Free Monad, State, Numb, AllBool, AnyBool, SumNumb, ProductNumb. add CI workflow for zig-cats.\r\nUpdate the README.md file for introduce zig-cats.\r\n\r\n**Full Changelog**: https://github.com/flyfish30/zig-cats/compare/v0.1.1...v0.4.0",
+      "prerelease": false,
+      "published_at": "2025-06-05T01:47:09Z",
+      "html_url": "https://github.com/flyfish30/zig-cats/releases/tag/v0.4.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.1",
+      "name": "Add complete unit test for Functor|Applicative|Monad and Compose|Product|Coproduct",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-09-14T12:53:10Z",
+      "html_url": "https://github.com/flyfish30/zig-cats/releases/tag/v0.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "Add support Functor/Applicative/Monad and some samples.",
+      "body": "",
+      "prerelease": true,
+      "published_at": "2024-09-10T14:56:12Z",
+      "html_url": "https://github.com/flyfish30/zig-cats/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": "ShenZhen of GuangDong of China",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 37,
+  "owner_following": 3,
+  "owner_created_at": "2014-06-07T00:56:16Z",
+  "license": "GPL-3.0",
+  "category": "library"
+}

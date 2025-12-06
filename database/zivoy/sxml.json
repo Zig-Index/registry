@@ -1,0 +1,39 @@
+{
+  "name": "sxml",
+  "owner": "zivoy",
+  "repo": "sxml",
+  "description": " A thin wrapper and build system for sxml",
+  "type": "project",
+  "topics": [
+    "xml",
+    "xml-parser",
+    "zig",
+    "zig-library",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-10-21T02:11:49Z",
+  "dependencies": [
+    {
+      "name": "sxml_upstream",
+      "url": "git+https://github.com/capmar/sxml#91176b4c62ef7c6342804e02fc440b2e82326469",
+      "hash": "N-V-__8AAKxuAAA279MVMfp8UknZp5HC3wmWSShvbRgitYy3"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# sxml-zig\n\nThis is [sxml](https://github.com/capmar/sxml/) packaged using the Zig build system.\n\nA thin zig wrapper is also included.\n\nThis project requires Zig version `0.15.1` or higher.\n\n## Options\n\nYou can set these options when importing as a dependency with `b.dependency(\"sxml\", .{ option=value })` or when building directly with `zig build -Doption=value`.\n\n| Option Name | Default | Description                                     |\n|-------------|:-------:|-------------------------------------------------|\n| dynamic     | false   | Build the library as a shared (dynamic) library |\n| pie         | false   | Enable position indepentent code                |\n| strip       | false   | Strip out debug data                            |\n\n## Usage\n\nAdd to build.zig.zon by running\n\n```bash\nzig fetch --save git+https://github.com/zivoy/sxml\n```\n\nThen if using if with a Zig project you can use\n\n```zig\nconst sxml = b.dependency(\"sxml\", .{ });\nmod.addImport(\"xml\", sxml.module(\"sxml\"));\n```\n\nOr if you are need to just link the original project you can use\n\n```zig\nconst sxml = b.dependency(\"sxml\", .{ .dynamic=false });\nmod.linkLibrary(sxml.artifact(\"sxml\"));\n```\n\n---\n\nContributions welcome, open PR\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/16857861?v=4",
+  "releases": [],
+  "owner_bio": "sudo rm -rf /etc/bio.life",
+  "owner_company": null,
+  "owner_location": "import gps; gps.jamLocation()",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 9,
+  "owner_following": 19,
+  "owner_created_at": "2016-01-23T22:38:42Z",
+  "license": "MIT",
+  "category": "library"
+}

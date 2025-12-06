@@ -1,0 +1,147 @@
+{
+  "name": "zenvars",
+  "owner": "Jafagervik",
+  "repo": "zenvars",
+  "description": "Parse .env files into Zig structs",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 4,
+  "forks": 1,
+  "watchers": 0,
+  "updated_at": "2025-09-03T18:11:14Z",
+  "minimum_zig_version": "0.14.0",
+  "readme": "# Zenvars - Parse .env files into Zig structs\n\nA zero-dependency module for parsing .env files into zig structs in under 150 lines of Zig\n\n![CI](https://github.com/Jafagervik/zenvars/actions/workflows/ci.yml/badge.svg)\n![](https://img.shields.io/badge/language-zig-%23ec915c)\n[![License: Zlib](https://img.shields.io/badge/License-Zlib-lightgrey.svg)](https://opensource.org/licenses/Zlib)\n\n## Zig Compatibility\n\n| Zenvars Version | Supported Zig Version |\n|-----------------|------------------------|\n| ≤ 1.1           | 0.14.x                 |\n| ≥ 1.2           | 0.15.x                 |\n\n## Install\n\nFirst to install, run:\n```sh \nzig fetch --save git+https://github.com/Jafagervik/zenvars#v1.2.0\n```\nSwap out version with any of the newer versions\n\nAdd the zenvars module to your `build.zig` file this:\n\n```zig \nconst target = b.standardTargetOptions(.{});\nconst optimize = b.standardOptimizeOption(.{});\n\nconst zenvars_dep = b.dependency(\"zenvars\", .{});\nconst zenvars = zstb_dep.module(\"zenvars\");\n\nconst exe_mod = b.createModule(.{\n    .root_source_file = b.path(\"path/to/your/main/source/file\"),\n    .target = target,\n    .optimize = optimize,\n});\n\nexe_mod.addImport(\"zenvars\", zenvars);\n```\n\n## Usage\n\nGiven you have a `.env` file somewhere like this\n```dosini\n# COMMENT will not be parsed\nname=Me\nage=42#0 \nmale=\npi=3.14\n```\n\n> [!NOTE]\n> Keys can have empty values. in that case, the default value of the struct will be used\n\n> [!NOTE]\n> Comments starts with #, so everything to the rightside will be ignored\n\n> [!NOTE]\n> The keys are case insensitive, so you could have a key `NICK_NAME` in your env file\n> This will then map to field `nick_name` in your struct\n\nNow, you can simply use it as is shown in the example below:\n\n```zig \nconst std = @import(\"std\");\nconst zenvars = @import(\"zenvars\");\n\n// Default values are necessary\npub const EnvVars = struct {\n    name: []const u8 = \"none\", \n    age: ?i32 = null,\n    male: bool = false,\n    pi: f32 = 3.0,\n    tell_me: bool = false,\n};\n\npub fn main() !void {\n    // IMPORTANT: An arena allocator is needed for now\n    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);\n    defer arena.deinit();\n    const alloc = arena.allocator();\n\n    const envs = try zenvars.parse(alloc, EnvVars, .{.filepath=\"/path/to/your/.env\"});\n    // Or you might want to let the program find it \n    _ = try zenvars.parse(alloc, EnvVars, .{});\n    // You can even show the path if you'd like\n    _ = try zenvars.parse(alloc, EnvVars, .{ .show_path = true });\n\n    std.debug.print(\"name={s} age={d} male={} pi={d} tell_me={}\\n\", .{ p.name, p.age, p.male, p.pi, p.tell_me });\n}\n```\n\n## Functions and Types\n\n`parse(allocator: std.mem.Allocator, comptime T: type, opts: Options)` \n\n```zig\nconst Options = struct {\n    /// If set, this will try to open the file at that specific location, otherwise\n    filepath: ?[]const u8 = null,\n    /// If true, the full path to the `.env` file will be printed\n    show_path: bool = false,\n};\n```\n\n> [!NOTE]\n> `show_path` is best used when `filepath` is not set\n\n\n## Supported types\n\n* Floats (all kinds)\n* Integers (all kinds)\n* Strings ([]const u8 for now)\n* Bools\n* Enums\n* Optional values\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/20770505?u=2d5adbbef816d352e9795404545139d672eaedb7&v=4",
+  "releases": [
+    {
+      "tag_name": "v1.1.0",
+      "name": "Zenvars v1.1.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-08-18T21:03:20Z",
+      "html_url": "https://github.com/Jafagervik/zenvars/releases/tag/v1.1.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.0.0",
+      "name": "Zenvars v1.0.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-08-18T08:38:23Z",
+      "html_url": "https://github.com/Jafagervik/zenvars/releases/tag/v1.0.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.3.0",
+      "name": "Zenvars v0.3.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-08-17T12:46:10Z",
+      "html_url": "https://github.com/Jafagervik/zenvars/releases/tag/v0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "Zenvars v0.2.0",
+      "body": "This release adds support for setting enum values!",
+      "prerelease": false,
+      "published_at": "2025-08-16T14:18:22Z",
+      "html_url": "https://github.com/Jafagervik/zenvars/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "Zenvars v0.1.0",
+      "body": "Notable changes:\r\n\r\n- Empty values supported now: `KEY=`.  The default value of the struct will be used instead\r\n- Keys are now case insensitive, so you could have `NAME=John` in your env-file, and the field `name` in your struct would be set to John",
+      "prerelease": false,
+      "published_at": "2025-08-14T13:37:01Z",
+      "html_url": "https://github.com/Jafagervik/zenvars/releases/tag/v0.1.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.5",
+      "name": "Zenvars v0.0.5",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-08-14T12:13:12Z",
+      "html_url": "https://github.com/Jafagervik/zenvars/releases/tag/v0.0.5",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.4",
+      "name": "Release v0.0.4",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-08-14T11:37:02Z",
+      "html_url": "https://github.com/Jafagervik/zenvars/releases/tag/v0.0.4",
+      "assets": [
+        {
+          "name": "libzenvars.a",
+          "url": "https://github.com/Jafagervik/zenvars/releases/download/v0.0.4/libzenvars.a",
+          "size": 4424,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.0.3",
+      "name": "Release v0.0.3",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-08-14T11:22:51Z",
+      "html_url": "https://github.com/Jafagervik/zenvars/releases/tag/v0.0.3",
+      "assets": [
+        {
+          "name": "libzenvars.a",
+          "url": "https://github.com/Jafagervik/zenvars/releases/download/v0.0.3/libzenvars.a",
+          "size": 4424,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.0.2",
+      "name": "Release v0.0.2",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-08-14T11:20:33Z",
+      "html_url": "https://github.com/Jafagervik/zenvars/releases/tag/v0.0.2",
+      "assets": [
+        {
+          "name": "libzstb.a",
+          "url": "https://github.com/Jafagervik/zenvars/releases/download/v0.0.2/libzstb.a",
+          "size": 4420,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.0.1",
+      "name": "Release v0.0.1",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-08-14T11:15:24Z",
+      "html_url": "https://github.com/Jafagervik/zenvars/releases/tag/v0.0.1",
+      "assets": [
+        {
+          "name": "libzenvars.a",
+          "url": "https://github.com/Jafagervik/zenvars/releases/download/v0.0.1/libzenvars.a",
+          "size": 3896,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "AI, HPC and proglang enthusiast. Currentlyorking in telecom\r\nPrev. Head of Development for FaceIt\r\nPrevious Software Developer for Revolve NTNU",
+  "owner_company": "Gintel",
+  "owner_location": "Trondheim, Norway",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 10,
+  "owner_following": 50,
+  "owner_created_at": "2016-08-01T10:25:28Z",
+  "license": "Zlib",
+  "category": "library"
+}

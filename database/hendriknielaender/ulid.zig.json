@@ -1,0 +1,77 @@
+{
+  "name": "ulid.zig",
+  "owner": "hendriknielaender",
+  "repo": "ulid.zig",
+  "description": "Zig Universally Unique Lexicographically Sortable Identifier",
+  "type": "project",
+  "topics": [
+    "ulid",
+    "ulid-generator",
+    "zig",
+    "zig-library",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 4,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-11-05T21:55:14Z",
+  "dependencies": [
+    {
+      "name": "zbench",
+      "url": "git+https://github.com/hendriknielaender/zBench?ref=main#3268a23da82231f1bd2c064de7fdf6fb7056126f",
+      "hash": "zbench-0.11.2-YTdc7zolAQDlBF9i0ywXIvDjafL3Kg27S-aFUq6dU5zy"
+    }
+  ],
+  "minimum_zig_version": "0.16.0",
+  "readme": "# ulid.zig\n[![Zig](https://img.shields.io/badge/-Zig-F7A41D?style=flat&logo=zig&logoColor=white)](https://ziglang.org/)\n![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/hendriknielaender/ulid.zig/unit-test.yml)\n[![GitHub Release](https://img.shields.io/github/v/release/hendriknielaender/ulid.zig)](https://github.com/hendriknielaender/ulid.zig/releases)\n![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/hendriknielaender/ulid.zig)\n\n\nA **Universally Unique Lexicographically Sortable Identifier (ULID)** implementation for Zig, providing a robust and efficient way to generate unique identifiers that are both time-based and random.\n\n## Why ULID?\n\nUUID can be suboptimal for many uses-cases because:\n\n- It isn't the most character efficient way of encoding 128 bits of randomness\n- UUID v1/v2 is impractical in many environments, as it requires access to a unique, stable MAC address\n- UUID v3/v5 requires a unique seed and produces randomly distributed IDs, which can cause fragmentation in many data structures\n- UUID v4 provides no other information than randomness which can cause fragmentation in many data structures\n\n## Features\n\n- 128-bit compatibility with UUID\n- 1.21e+24 unique ULIDs per millisecond\n- Lexicographically sortable!\n- Canonically encoded as a 26 character string, as opposed to the 36 character UUID\n- Uses Crockford's base32 for better efficiency and readability (5 bits per character)\n- Case insensitive\n- No special characters (URL safe)\n- Monotonic sort order (correctly detects and handles the same millisecond)\n\n## Test Coverage\n- ULID Generation: Validates timestamp and randomness.\n- Encoding: Ensures ULIDs are correctly encoded into Base32 strings.\n- Decoding: Confirms accurate decoding from Base32 strings.\n- Monotonicity: Tests that ULIDs generated within the same millisecond are monotonically increasing.\n- Overflow Handling: Checks proper error handling when randomness overflows.\n- Edge Cases: Validates behavior with maximum ULID values and invalid inputs.\n\n## Specification\nFor detailed information on the ULID specification, refer to the [ULID Specification](https://github.com/ulid/spec).\n\n## Usage\nThis library provides an implementation of ULID (Universally Unique Lexicographically Sortable Identifier) generation and decoding in Zig.\n\n### Generating a ULID\nYou can generate a new ULID as a 26-character Crockford's Base32 string:\n\n```zig\nconst ulid = try Ulid.generate();\nstd.debug.print(\"Generated ULID: {s}\\n\", .{ulid});\n```\nThis will output a unique, lexicographically sortable string.\n\n### Decoding a ULID\nTo decode a ULID string into its components (timestamp and randomness):\n```zig\nconst ulid_str = \"01AN4Z07BY79KA1307SR9X4MV3\";\nvar decoded_ulid: Ulid = undefined;\ntry Ulid.decode(ulid_str[0..], &decoded_ulid);\nstd.debug.print(\"Decoded ULID: timestamp={d}, randomness={d}\\n\", .{decoded_ulid.timestamp, decoded_ulid.randomness});\n```\n\n### Monotonic ULID Generation\nTo generate ULIDs with guaranteed monotonicity within the same millisecond, use the `UlidGenerator`:\n```zig\nvar generator = Ulid.monotonic_factory();\nconst ulid = try generator.generate(null); // Passing `null` uses the current timestamp.\nstd.debug.print(\"Generated monotonic ULID: {s}\\n\", .{ulid});\n```\nThis will ensure that if multiple ULIDs are generated in the same millisecond, their randomness will be incremented to preserve order.\n\n### Handling Errors\nThis library defines several error types for ULID encoding/decoding, such as:\n\n- `invalid_length` – when the provided ULID string is not 26 characters long.\n- `invalid_character` – when the ULID string contains invalid Base32 characters.\n- `overflow` – when the timestamp exceeds the maximum allowable value (48 bits).\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/51416554?u=77d5ff88d269c348985295baa6bd915873b09249&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.0.4",
+      "name": "v0.0.4",
+      "body": "## What's Changed\r\n* Update for zig 0.16 by @agagniere in https://github.com/hendriknielaender/ulid.zig/pull/9\r\n\r\n## New Contributors\r\n* @agagniere made their first contribution in https://github.com/hendriknielaender/ulid.zig/pull/9\r\n\r\n**Full Changelog**: https://github.com/hendriknielaender/ulid.zig/compare/v0.0.3...v0.0.4",
+      "prerelease": false,
+      "published_at": "2025-11-05T21:56:03Z",
+      "html_url": "https://github.com/hendriknielaender/ulid.zig/releases/tag/v0.0.4",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.3",
+      "name": "v0.0.3",
+      "body": "## What's Changed\r\n* chore: upgrade to zig version 0.15.1 by @hendriknielaender in https://github.com/hendriknielaender/ulid.zig/pull/7\r\n\r\n**Full Changelog**: https://github.com/hendriknielaender/ulid.zig/compare/v0.0.2...v0.0.3",
+      "prerelease": false,
+      "published_at": "2025-08-22T20:18:51Z",
+      "html_url": "https://github.com/hendriknielaender/ulid.zig/releases/tag/v0.0.3",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.2",
+      "name": "v0.0.2",
+      "body": "**Full Changelog**: https://github.com/hendriknielaender/ulid.zig/compare/v0.0.1...v0.0.2",
+      "prerelease": false,
+      "published_at": "2024-10-29T18:02:40Z",
+      "html_url": "https://github.com/hendriknielaender/ulid.zig/releases/tag/v0.0.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.1",
+      "name": "v0.0.1",
+      "body": "**Full Changelog**: https://github.com/hendriknielaender/ulid.zig/commits/v0.0.1",
+      "prerelease": false,
+      "published_at": "2024-10-28T20:09:40Z",
+      "html_url": "https://github.com/hendriknielaender/ulid.zig/releases/tag/v0.0.1",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Software developer (zig, go & TypeScript)\r\nI like using Neovim. Currently learning rust.",
+  "owner_company": "@Taxdoo ",
+  "owner_location": "Hamburg",
+  "owner_blog": "double-trouble.dev",
+  "owner_twitter_username": null,
+  "owner_followers": 59,
+  "owner_following": 277,
+  "owner_created_at": "2019-06-05T17:02:09Z",
+  "license": "MIT",
+  "category": "library"
+}

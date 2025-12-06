@@ -1,0 +1,607 @@
+{
+  "name": "zine",
+  "owner": "kristoff-it",
+  "repo": "zine",
+  "description": "Fast, Scalable, Flexible Static Site Generator (SSG)",
+  "type": "project",
+  "topics": [
+    "ssg",
+    "static-site-generator",
+    "zig-package"
+  ],
+  "stars": 1214,
+  "forks": 77,
+  "watchers": 16,
+  "updated_at": "2025-12-06T11:17:57Z",
+  "dependencies": [
+    {
+      "name": "afl_kit",
+      "url": "git+https://github.com/kristoff-it/zig-afl-kit#8ef04d1db48650345dca68da1e1b8f2615125c40",
+      "hash": "afl_kit-0.1.0-NdJ3cvscAACLEvjZTB017IAks_Uq5ux1qpA-klDe384Y"
+    },
+    {
+      "name": "lsp_kit",
+      "url": "git+https://github.com/zigtools/lsp-kit#4835b9d3d3cf732fe1830189d81f331c68fb3e77",
+      "hash": "lsp_kit-0.1.0-bi_PL18tCgAMyrZ0tgn_0PXnGEvxGWeNkkRygfe9pX9u"
+    },
+    {
+      "name": "scripty",
+      "url": "git+https://github.com/kristoff-it/scripty#50dbab8945440089384f26ec165d870c29555247",
+      "hash": "scripty-0.1.0-LKK5O7v4AADWWXuFcTJky_5sY12tmw3kRi3k2wkpfxAX"
+    },
+    {
+      "name": "tracy",
+      "url": "git+https://github.com/kristoff-it/tracy#67d2d89e351048c76fc6d161e0ac09d8a831dc60",
+      "hash": "tracy-0.0.0-4Xw-1pwwAABTfMgoDP1unCbZDZhJEfict7XCBGF6IdIn"
+    },
+    {
+      "name": "mime",
+      "url": "git+https://github.com/kristoff-it/mime#a2ed0cba3b1463217168034ffed8c1604e72598d",
+      "hash": "mime-3.0.0-zwmL--0gAAByELrj57sRm2EFBRzjKLFrMgHQcs7sFZev"
+    },
+    {
+      "name": "wuffs",
+      "url": "git+https://github.com/allyourcodebase/wuffs#5822dc06c75b30d53082debf68c90193cb2b2608",
+      "hash": "wuffs-0.4.0-alpha.9+3837.20240914-3CHJgcMFAACyPvxsC7b48pJv9dPkPa4pSrB2VFbCXTfK"
+    },
+    {
+      "name": "frameworks",
+      "url": "git+https://github.com/hexops/xcode-frameworks.git#8a1cfb373587ea4c9bb1468b7c986462d8d4e10e",
+      "hash": "N-V-__8AALShqgXkvqYU6f__FrA22SMWmi2TXCJjNTO1m8XJ"
+    },
+    {
+      "name": "superhtml",
+      "url": "git+https://github.com/kristoff-it/superhtml#8cb16babb0c66b6512d6aeb4cbc37ed90641d980",
+      "hash": "superhtml-0.4.0-Y7MdPJTWDQBJJoaCLlBYLGrjhAnmWAtVhVGelveq3O-s"
+    },
+    {
+      "name": "zeit",
+      "url": "git+https://github.com/sam701/zeit?ref=zig-0.15#46583c4695bade6841a558c0ce5648426b556214",
+      "hash": "zeit-0.6.0-5I6bk0J9AgCVa0nnyL0lNY9Xa9F68hHq-ZarhuXNV-Jb"
+    },
+    {
+      "name": "flow_syntax",
+      "url": "git+https://github.com/neurocyte/flow-syntax#6992eddeb9a4a013886db0cbca2156686d01efe4",
+      "hash": "flow_syntax-0.6.0-X8jOoWgVAQBBTuGGE9r1ECSDFzi8z6_XNCW1oF5B4fL8"
+    },
+    {
+      "name": "ziggy",
+      "url": "git+https://github.com/kristoff-it/ziggy#4353b20ef2ac750e35c6d68e4eb2a07c2d7cf901",
+      "hash": "ziggy-0.1.0-kTg8v5pABgDztlefWHceH-Sh8tVveguFC61QkmLkIRaA"
+    },
+    {
+      "name": "supermd",
+      "url": "git+https://github.com/kristoff-it/supermd#530ac6c337c9a9511560fba3181db10d1fe23ef1",
+      "hash": "supermd-0.1.0-3Mco3GyYWACe4ptEKIrZUhizWGwXhbmtKtjNopG8f76y"
+    }
+  ],
+  "minimum_zig_version": "0.15.0",
+  "readme": "<h1 align=\"center\">Zine</h1>\n<h3 align=\"center\"><em>Fast, Scalable, Flexible Static Site Generator (SSG)</em></h3>\n<p align=\"center\">Zine is pronounced like in <a href=\"https://en.wikipedia.org/wiki/Zine\">fan<em>zine</em></a></a>.</p>\n\n## Development Status\nZine is still a young project, not yet at feature parity with more popular\nalternatives (e.g. Hugo), but it's perfectly able to handle a personal website\nwith a blog.\n\n## Getting Started\nGo to https://zine-ssg.io to get started.\n\n## GitHub Actions\nIf you plan to build your website with GitHub Actions, take a look at [kristoff-it/setup-zine](https://github.com/marketplace/actions/setup-zine), the official\nGitHub Action to get access to Zine in your runner.\n\nWe also have more complete guides at https://zine-ssg.io/docs/.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1950733?u=4c433986c229d3bff345521171a121c84014917e&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.11.2",
+      "name": "v0.11.2",
+      "body": "This release fixes some bugs that were discovered since the last and should not require\r\nany change for existing websites.\r\n\r\nThe next release will merge a new version of Ziggy (the data language used in SuperMD\r\nfrontmatters) that instead will require you to change your content files, so brace for\r\nupcoming impact :^) In exchange though, the Ziggy language has improved a lot and you\r\nwill finally be able to get great code intelligence, which will help you get your\r\nfrontmatters right more easily. More on that in the next release.\r\n\r\nFull release notes: https://zine-ssg.io/log/#v0.11.2",
+      "prerelease": false,
+      "published_at": "2025-11-21T14:05:48Z",
+      "html_url": "https://github.com/kristoff-it/zine/releases/tag/v0.11.2",
+      "assets": [
+        {
+          "name": "aarch64-linux-musl.tar.xz",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.11.2/aarch64-linux-musl.tar.xz",
+          "size": 8981180,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "aarch64-macos.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.11.2/aarch64-macos.zip",
+          "size": 10459881,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.11.2/aarch64-windows.zip",
+          "size": 10354046,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.xz",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.11.2/x86_64-linux-musl.tar.xz",
+          "size": 9224924,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "x86_64-macos.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.11.2/x86_64-macos.zip",
+          "size": 10345622,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.11.2/x86_64-windows.zip",
+          "size": 10520306,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.11.1",
+      "name": "v0.11.1",
+      "body": "https://zine-ssg.io/log/#v0.11.1",
+      "prerelease": false,
+      "published_at": "2025-07-26T14:08:18Z",
+      "html_url": "https://github.com/kristoff-it/zine/releases/tag/v0.11.1",
+      "assets": [
+        {
+          "name": "aarch64-linux-musl.tar.xz",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.11.1/aarch64-linux-musl.tar.xz",
+          "size": 8202228,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "aarch64-macos.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.11.1/aarch64-macos.zip",
+          "size": 9236849,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.11.1/aarch64-windows.zip",
+          "size": 9172586,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.xz",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.11.1/x86_64-linux-musl.tar.xz",
+          "size": 8438912,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "x86_64-macos.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.11.1/x86_64-macos.zip",
+          "size": 9137963,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.11.1/x86_64-windows.zip",
+          "size": 9322025,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.11.0",
+      "name": "v0.11.0",
+      "body": "https://zine-ssg.io/log/#v0.11.0",
+      "prerelease": false,
+      "published_at": "2025-07-24T15:13:17Z",
+      "html_url": "https://github.com/kristoff-it/zine/releases/tag/v0.11.0",
+      "assets": [
+        {
+          "name": "aarch64-linux-musl.tar.xz",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.11.0/aarch64-linux-musl.tar.xz",
+          "size": 8200208,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "aarch64-macos.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.11.0/aarch64-macos.zip",
+          "size": 9237878,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.11.0/aarch64-windows.zip",
+          "size": 9166770,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.xz",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.11.0/x86_64-linux-musl.tar.xz",
+          "size": 8432748,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "x86_64-macos.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.11.0/x86_64-macos.zip",
+          "size": 9142190,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.11.0/x86_64-windows.zip",
+          "size": 9320754,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.10.4",
+      "name": "v0.10.4",
+      "body": "Release notes: https://zine-ssg.io/log/#v0.10.4",
+      "prerelease": false,
+      "published_at": "2025-07-16T17:36:14Z",
+      "html_url": "https://github.com/kristoff-it/zine/releases/tag/v0.10.4",
+      "assets": [
+        {
+          "name": "aarch64-linux-musl.tar.xz",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.4/aarch64-linux-musl.tar.xz",
+          "size": 8189776,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "aarch64-macos.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.4/aarch64-macos.zip",
+          "size": 9238630,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.4/aarch64-windows.zip",
+          "size": 9161805,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.xz",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.4/x86_64-linux-musl.tar.xz",
+          "size": 8429824,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "x86_64-macos.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.4/x86_64-macos.zip",
+          "size": 9143772,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.4/x86_64-windows.zip",
+          "size": 9322269,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.10.3",
+      "name": "v0.10.3",
+      "body": "Release notes: https://zine-ssg.io/log/#v0.10.3",
+      "prerelease": false,
+      "published_at": "2025-07-07T19:00:09Z",
+      "html_url": "https://github.com/kristoff-it/zine/releases/tag/v0.10.3",
+      "assets": [
+        {
+          "name": "aarch64-linux-musl.tar.xz",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.3/aarch64-linux-musl.tar.xz",
+          "size": 8124040,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "aarch64-macos.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.3/aarch64-macos.zip",
+          "size": 8939544,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.3/aarch64-windows.zip",
+          "size": 8892034,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.xz",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.3/x86_64-linux-musl.tar.xz",
+          "size": 8353016,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "x86_64-macos.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.3/x86_64-macos.zip",
+          "size": 8846292,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.3/x86_64-windows.zip",
+          "size": 9025628,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.10.2",
+      "name": "v0.10.2",
+      "body": "Full Changelog: https://zine-ssg.io/log/#v0.10.2\r\n",
+      "prerelease": false,
+      "published_at": "2025-04-22T18:03:06Z",
+      "html_url": "https://github.com/kristoff-it/zine/releases/tag/v0.10.2",
+      "assets": [
+        {
+          "name": "aarch64-linux-musl.tar.xz",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.2/aarch64-linux-musl.tar.xz",
+          "size": 8100544,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "aarch64-macos.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.2/aarch64-macos.zip",
+          "size": 8937207,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.2/aarch64-windows.zip",
+          "size": 8893505,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.xz",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.2/x86_64-linux-musl.tar.xz",
+          "size": 8332984,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "x86_64-macos.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.2/x86_64-macos.zip",
+          "size": 8843614,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.2/x86_64-windows.zip",
+          "size": 9028558,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.10.1",
+      "name": "v0.10.1",
+      "body": "Changes: https://zine-ssg.io/log/#v0.10.1",
+      "prerelease": false,
+      "published_at": "2025-04-10T17:33:11Z",
+      "html_url": "https://github.com/kristoff-it/zine/releases/tag/v0.10.1",
+      "assets": [
+        {
+          "name": "aarch64-linux-musl.tar.xz",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.1/aarch64-linux-musl.tar.xz",
+          "size": 8097432,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "aarch64-macos.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.1/aarch64-macos.zip",
+          "size": 8940972,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.1/aarch64-windows.zip",
+          "size": 8892446,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.xz",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.1/x86_64-linux-musl.tar.xz",
+          "size": 8330196,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "x86_64-macos.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.1/x86_64-macos.zip",
+          "size": 8841130,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.1/x86_64-windows.zip",
+          "size": 9030718,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.10.0",
+      "name": "v0.10.0",
+      "body": "Changes: https://zine-ssg.io/log/#v0.10.0",
+      "prerelease": false,
+      "published_at": "2025-04-08T19:17:30Z",
+      "html_url": "https://github.com/kristoff-it/zine/releases/tag/v0.10.0",
+      "assets": [
+        {
+          "name": "aarch64-linux-musl.tar.xz",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.0/aarch64-linux-musl.tar.xz",
+          "size": 8061208,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "aarch64-macos.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.0/aarch64-macos.zip",
+          "size": 8912674,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.0/aarch64-windows.zip",
+          "size": 8873611,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.xz",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.0/x86_64-linux-musl.tar.xz",
+          "size": 8290136,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "x86_64-macos.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.0/x86_64-macos.zip",
+          "size": 8820221,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.0/x86_64-windows.zip",
+          "size": 9012838,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.10.0-preview",
+      "name": "v0.10.0-preview",
+      "body": "This is a preview release of standalone Zine that will be used to create the first draft of the setup-zine GitHub Action.\r\n\r\nIf you decide to try out this preview version, beware that the official Zine documentation has not been updated yet.",
+      "prerelease": true,
+      "published_at": "2025-04-01T17:08:30Z",
+      "html_url": "https://github.com/kristoff-it/zine/releases/tag/v0.10.0-preview",
+      "assets": [
+        {
+          "name": "aarch64-linux-musl.tar.xz",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.0-preview/aarch64-linux-musl.tar.xz",
+          "size": 7442864,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "aarch64-macos.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.0-preview/aarch64-macos.zip",
+          "size": 8727588,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.0-preview/aarch64-windows.zip",
+          "size": 8615101,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.xz",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.0-preview/x86_64-linux-musl.tar.xz",
+          "size": 7643668,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "x86_64-macos.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.0-preview/x86_64-macos.zip",
+          "size": 8634281,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.10.0-preview/x86_64-windows.zip",
+          "size": 8754827,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.9.0",
+      "name": "v0.9.0",
+      "body": "I'm working on a new standalone version of Zine!\r\nMore info & v0.9.0 release notes: https://zine-ssg.io/log/#v0.9.0",
+      "prerelease": false,
+      "published_at": "2025-03-11T14:57:08Z",
+      "html_url": "https://github.com/kristoff-it/zine/releases/tag/v0.9.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.8.0",
+      "name": "v0.8.0",
+      "body": "https://zine-ssg.io/log/#v0.8.0",
+      "prerelease": false,
+      "published_at": "2024-10-28T19:32:27Z",
+      "html_url": "https://github.com/kristoff-it/zine/releases/tag/v0.8.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.7.2",
+      "name": "v0.7.2",
+      "body": "https://zine-ssg.io/log/#v0.7.2",
+      "prerelease": false,
+      "published_at": "2024-10-25T16:45:04Z",
+      "html_url": "https://github.com/kristoff-it/zine/releases/tag/v0.7.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.7.1",
+      "name": "v0.7.1",
+      "body": "https://zine-ssg.io/log/#v0.7.1",
+      "prerelease": false,
+      "published_at": "2024-10-16T18:50:17Z",
+      "html_url": "https://github.com/kristoff-it/zine/releases/tag/v0.7.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.7.0",
+      "name": "v0.7.0",
+      "body": "https://zine-ssg.io/log/#v0.7.0",
+      "prerelease": false,
+      "published_at": "2024-10-11T17:10:43Z",
+      "html_url": "https://github.com/kristoff-it/zine/releases/tag/v0.7.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.6.1",
+      "name": "v0.6.1",
+      "body": "https://zine-ssg.io/log/#v0.6.1",
+      "prerelease": false,
+      "published_at": "2024-09-07T15:10:54Z",
+      "html_url": "https://github.com/kristoff-it/zine/releases/tag/v0.6.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.6.0",
+      "name": "v0.6.0",
+      "body": "https://zine-ssg.io/log/#v0.6.0",
+      "prerelease": false,
+      "published_at": "2024-09-06T15:52:53Z",
+      "html_url": "https://github.com/kristoff-it/zine/releases/tag/v0.6.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.5.1",
+      "name": "v0.5.1",
+      "body": "https://zine-ssg.io/log/#v0.5.1",
+      "prerelease": false,
+      "published_at": "2024-09-04T22:32:00Z",
+      "html_url": "https://github.com/kristoff-it/zine/releases/tag/v0.5.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.4.2",
+      "name": "v0.4.2",
+      "body": "Fixes a bug that prevented users from accessing `$loop` the intended way.",
+      "prerelease": false,
+      "published_at": "2024-08-29T23:34:45Z",
+      "html_url": "https://github.com/kristoff-it/zine/releases/tag/v0.4.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.4.1",
+      "name": "v0.4.1",
+      "body": "Fixes a bug in the new SuperMD code that prevented links from being analyzed if nested inside styling elements.",
+      "prerelease": false,
+      "published_at": "2024-08-29T18:37:10Z",
+      "html_url": "https://github.com/kristoff-it/zine/releases/tag/v0.4.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.4.0",
+      "name": "v0.4.0",
+      "body": "**The SuperMD update!**\r\n\r\n**With this release Zine is now at a point where the development experience is representative of what the final product will look like.**\r\n\r\nError messages need to be improved and a lot of developer tooling is still missing, so take that into account, but the core authoring process is now mostly there.\r\n\r\n**Zine is also now featureful enough to begin the porting process for the official Zig website!**\r\n\r\nSee the full changelog on the official website: https://zine-ssg.io/log/",
+      "prerelease": false,
+      "published_at": "2024-08-29T18:08:57Z",
+      "html_url": "https://github.com/kristoff-it/zine/releases/tag/v0.4.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "vp of community @ziglang • curator of software you can love (https://sycl.it)",
+  "owner_company": "@ziglang",
+  "owner_location": "Milan, Italy",
+  "owner_blog": "https://kristoff.it",
+  "owner_twitter_username": null,
+  "owner_followers": 1291,
+  "owner_following": 22,
+  "owner_created_at": "2012-07-10T15:27:34Z",
+  "homepage": "https://zine-ssg.io",
+  "license": "MIT",
+  "category": "library"
+}

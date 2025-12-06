@@ -1,0 +1,35 @@
+{
+  "name": "zkinder",
+  "owner": "TheHonestHare",
+  "repo": "zkinder",
+  "description": "A pattern matching library for zig",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-library",
+    "zig-package"
+  ],
+  "stars": 4,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-06-08T08:01:43Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.11.0",
+  "readme": "A library that implements pattern matching in fully userland zig. Tested on zig version 0.14.0-dev.1391+e084c46ed but should probably work on master\n\n## Code example\n```zig\nconst ki = @import(\"zkinder\");\nconst bind = ki.bind;\nconst __ = ki.__;\n\nconst thing: struct {\n    age: u32,\n    birth: u64,\n    pos: struct { x: u8, y: u8 } \n} = .{.age = 3, .birth = 2, .pos = .{.x = 90, .y = 20}};\n\nconst m = ki.match(&thing);\n// bind puts the value of the variable in the result\nconst res = m.arm(.{.age = 3, .birth = bind(\"hello\"), .pos = .{.x = bind(\"x\"), .y = 20}});\ntry std.testing.expectEqual(2, res.?.hello);\ntry std.testing.expectEqual(90, res.?.x);\n\nconst res2 = m.arm(.{.age = 3, .birth = bind(\"hello\"), .pos = bind(\"pos\")});\ntry std.testing.expectEqual(2, res2.?.hello);\ntry std.testing.expectEqual(90, res2.?.pos.x);\ntry std.testing.expectEqual(20, res2.?.pos.y);\n\n// this arm doesn't match because age = 2, will return null\nconst res3 = m.arm(.{.age = 2, .birth = bind(\"hello\"), .pos = bind(\"pos\")});\ntry std.testing.expectEqual(null, res3);\n\n// __ will match on anything\nconst res4 = m.arm(.{.age = __, .birth = __, .pos = .{.x = __, .y = bind(\"y\")}});\ntry std.testing.expectEqual(20, res4.?.y);\n```\n## Current features:\n- arbitrary nested patterns\n  - structs\n  - union(enum) (TODO: more testing)\n  - enums (TODO: more testing)\n  - ints, floats, bools (TODO: more testing)\n  - optionals (TODO: more testing)\n    - match on double optionals using `nonnull`\n  - arrays\n    - can even match on a subarray using `ref_rest` (see \"custom array matchers\")\n  - single item pointers (patterns match on the child type)\n  - slices\n    - support same features as arrays, plus different length patterns\n- `matching` for no exhaustive checking, single arm\n- extracting values out via `bind`\n- matching aginst anything via `__`\n- matching on integer ranges via `range`\n- extracting values out only if it matches a predicate with `bind_if`\n- support for creating your own match predicates\n  - both `bind` and `__` use no special casing, you could implement yourself\n  - any custom matcher must be of type `fn (comptime type) CustomMatcher`\n  - the impl will take in this type, pass in the type it needs to bind to and collect all the needed captures\n  - TODO: make like 10x more ergonomic\n## Planned features:\n- matching on vectors, others maybe?\n- optimize this so its not just willy nilly checking basically\n- exhaustive patterns (hardmode)\n- unreachable pattern errors (if I feel like it)\n- more helper match predicates such as `partial`, `ref`,\n- safety check for ensuring a match only ever matches on one branch\n\n## Custom matchers:\nA custom matcher is any function of the form `fn (comptime type) Matcher`, where the input is the type it is being matched against. `bind(<name>)` and `__` are both custom matchers implementable you could just as easily implement\n\nFor example, in the pattern,\n\n`.{.age = 2, .birth = __, .pos = __}`\n\n`__` is actually a function which will take the types of `thing.birth` and `thing.pos` respectively. \n\n`Matcher` is defined as such:\n```zig\npub const Matcher = struct {\n    captures: type,\n    tryBind: fn (self: Matcher, val_ptr: anytype, out_ptr: anytype) bool,\n};\n```\n`captures` is a struct type where each field is an output the matcher produces. This is needed for features like `bind`. All fields are combined, using comptime, into one giant struct that is returned from the arm.\n\n`tryBind` is where all the magic happens.\n- `self` allows you to access the `captures` field\n- `val_ptr` is a pointer to the field being matched against. The fields type will be the same type that was passed into the custom matcher.\n- `out_ptr` lets you write to the `out` of the arm, if you had any captures. For example, `out_ptr.hello = 2` would write 2 to the `hello` field of the output. You can only write to fields that were already declared as captures\n- return `true` if the value in `val_ptr` matches whatever criteria you want, or `false` if not\n\n## Custom array matchers:\nThese are similar to custom matchers, but they only work in array or slice patterns. `ref_rest(<name>)` is a custom array matcher. Instead of having to have a pattern for the entire length of the array, you can match over part of it.\n\nYou can only have custom array matcher per array/slice pattern\n\n```test \"match: arrays\" {\n    const list = [_]u8{ 0, 9, 100, 140 };\n    const m = comptime match(&list);\n    const res = m.arm(.{ 0, 9, 100, bind(\"num\") });\n    const res2 = m.arm(.{ ref_rest(\"first2\"), 100, 140 });\n    const res3 = m.arm(.{ bind(\"head\"), ref_rest(\"tail\") });\n    const res4 = m.arm(.{ 1, ref_rest(\"tail\") });\n    const res5 = m.arm(.{ 0, ref_rest(\"middle\"), 140 });\n\n    try std.testing.expectEqual(140, res.?.num);\n    try std.testing.expectEqualSlices(u8, &.{ 0, 9 }, res2.?.first2);\n    try std.testing.expectEqual(0, res3.?.head);\n    try std.testing.expectEqualSlices(u8, &.{ 9, 100, 140 }, res3.?.tail);\n    try std.testing.expectEqual(null, res4);\n    try std.testing.expectEqualSlices(u8, &.{ 9, 100 }, res5.?.middle);\n}\n```\n\nTo make your own, you need a thing of type `fn (comptime type, comptime ?usize) SubSliceMatcher`. The first parameter is the child type of the array or slice, and the second is the length of the array, or null if it is a slice\nSubSliceMatcher has a `captures` field similar to a custom matcher, as well as a `tryBind` fn. The only difference is that instead of `val_ptr`, it will take `subslice`,\n\nIf the matched against type is an array, `subslice` will be a pointer to the subarray that is not matched against in the rest of the pattern\nIf the matched againt type is a slice, `subslice` will be the subslice that is not matched against in the rest of the pattern\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/131738078?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 0,
+  "owner_following": 0,
+  "owner_created_at": "2023-04-25T04:13:55Z",
+  "category": "library"
+}

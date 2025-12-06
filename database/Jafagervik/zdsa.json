@@ -1,0 +1,85 @@
+{
+  "name": "zdsa",
+  "owner": "Jafagervik",
+  "repo": "zdsa",
+  "description": "Data structures in zig",
+  "type": "project",
+  "topics": [
+    "zig-package",
+    "dsa",
+    "zig"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-02-02T15:48:50Z",
+  "minimum_zig_version": "0.13.0",
+  "readme": "# ZDSA - Zig Data structures and algorithms\n\n## Goal\n\nTo create a simple collection of DSAs for further use\nAll should be generic\n\n## Usage\n\n```zig\nconst std = @import(\"std\");\nconst zdsa =  @import(\"zdsa\");\nconst Stack = zdsa.Stack;\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    var stack = Stack(i32).init(allocator);\n    defer stack.deinit();\n\n    try stack.push(1);\n    try stack.push(2);\n    try stack.push(3);\n\n    const popped = try stack.pop();\n\n    stack.clear();\n}\n```\n\nFor more, see tests or example folders\n\n## Road to 1.0\n\n- [x] Stack\n- [x] Queue\n- [ ] Priority Queue\n- [x] Dequeue\n- [x] Singly Linked List\n- [x] LRU Cache\n- [x] Doubly Linked List\n- [ ] Binary Tree\n\n## Install (Per 0.14 beta)\n\nRun this command in the parent directory of your project\n\n```sh\nzig fetch --save https://github.com/Jafagervik/zdsa/tarball/v0.6.0\n```\n\nOr alternatively use master or another version\n\nThen add these lines to build.zig before b.installArtifact(exe)\n\n```zig\nconst zdsa = b.dependency(\"zdsa\", .{});\n\nexe.root_module.addImport(\"zdsa\", zdsa.module(\"zdsa\"));\n\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/20770505?u=2d5adbbef816d352e9795404545139d672eaedb7&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.6.0",
+      "name": "v0.6.0",
+      "body": "LRU Cache\r\n\r\n**Full Changelog**: https://github.com/Jafagervik/zdsa/compare/v0.5.0...v0.6.0",
+      "prerelease": false,
+      "published_at": "2025-02-02T15:41:38Z",
+      "html_url": "https://github.com/Jafagervik/zdsa/releases/tag/v0.6.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.5.0",
+      "name": "v0.5.0",
+      "body": "Doubly link list and updates to stack and queue function names\r\n\r\n**Full Changelog**: https://github.com/Jafagervik/zdsa/compare/v0.4.0...v0.5.0",
+      "prerelease": false,
+      "published_at": "2025-01-29T22:48:10Z",
+      "html_url": "https://github.com/Jafagervik/zdsa/releases/tag/v0.5.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.4.0",
+      "name": "v0.4.0",
+      "body": "**Full Changelog**: https://github.com/Jafagervik/zdsa/compare/v0.3.0...v0.4.0",
+      "prerelease": false,
+      "published_at": "2025-01-29T21:25:34Z",
+      "html_url": "https://github.com/Jafagervik/zdsa/releases/tag/v0.4.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.3.0",
+      "name": "v0.3.0",
+      "body": "0.3.0 includes a dequeue structure. examples may be found in the tests\r\n\r\n**Full Changelog**: https://github.com/Jafagervik/zdsa/compare/v0.2.0...v0.3.0",
+      "prerelease": false,
+      "published_at": "2025-01-29T20:32:00Z",
+      "html_url": "https://github.com/Jafagervik/zdsa/releases/tag/v0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "0.2.0 now includes queue, as well as more tests covering both stack and queue\r\n\r\n**Full Changelog**: https://github.com/Jafagervik/zdsa/compare/v0.1.0...v0.2.0",
+      "prerelease": false,
+      "published_at": "2025-01-29T20:19:01Z",
+      "html_url": "https://github.com/Jafagervik/zdsa/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "0.1.0 contains a general stack implementeation, just an abstraction over\r\nstd.Arraylist, but with methods constraining it to a simple stack\r\n\r\n\r\n**Full Changelog**: https://github.com/Jafagervik/zdsa/commits/v0.1.0",
+      "prerelease": false,
+      "published_at": "2025-01-29T19:56:56Z",
+      "html_url": "https://github.com/Jafagervik/zdsa/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "AI, HPC and proglang enthusiast. Currentlyorking in telecom\r\nPrev. Head of Development for FaceIt\r\nPrevious Software Developer for Revolve NTNU",
+  "owner_company": "Gintel",
+  "owner_location": "Trondheim, Norway",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 10,
+  "owner_following": 50,
+  "owner_created_at": "2016-08-01T10:25:28Z",
+  "license": "MIT",
+  "category": "library"
+}

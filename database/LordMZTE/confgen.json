@@ -1,0 +1,37 @@
+{
+  "name": "confgen",
+  "owner": "LordMZTE",
+  "repo": "confgen",
+  "description": "A universal template engine and real-time configuration file generator - mirror of https://mzte.de/git/LordMZTE/confgen",
+  "type": "project",
+  "topics": [
+    "lua",
+    "template-engine",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 3,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-09-13T12:32:14Z",
+  "dependencies": [
+    {
+      "name": "zig_args",
+      "url": "git+https://git.mzte.de/mirrors/zig-args.git#8ae26b44a884ff20dca98ee84c098e8f8e94902f",
+      "hash": "args-0.0.0-CiLiqojRAACGzDRO7A9dw7kWSchNk29caJZkXuMCb0Cn"
+    }
+  ],
+  "readme": "# Confgen\n\nConfgen is a tool to generate config files using a custom template language.\n\nThe system is backed by a Lua runtime that is used to configure the tool.\n\n## Installation\n\nYou can find binaries built on a Debian box in the releases tab, or build yourself like any other\nZig project.\n\n### Nix\n\nThis project includes a Nix flake you can depend on. Additionally, the Confgen derivation as well as\nderivations of other projects of mine are automatically built and pushed to an attic cache at\n`https://nix.mzte.de/mzte` on every commit.\n\n## Usage\n\nStart by creating `confgen.lua` in your dotfiles. It should look something like this:\n\n```lua\n-- add your config files\ncg.addString(\"my_config.cfg\", [[config template here]])\ncg.addFile(\"my_other_config.cfg\")\ncg.addFile(\"my_other_config.cfg\", \"out.cfg\") -- with output path\ncg.addPath(\".config\") -- add a whole path recursively\n\n-- set options to be used in config files\ncg.opt.test_option = \"42\"\n```\n\nNext, add some templates. confgen will detect if a file is a template by its extension and copy it otherwise.\nThis is what a template looks like:\n\n```cfg\nI'm a confgen template!\n<! if some_condition then !> # any lua statement\nsome option: <% opt.test_option %> # a lua expression\n<! end !> # close the if block\nmore config stuff\n```\n\nTemplate files end with the `.cgt` extension. If a file that has been added has this extension, confgen will evaluate the template and put that into the output directory (without the `.cgt` extension), otherwise, it will be copied.\n\nFor example, if you want to add a file called `stuff.cfg` to the output as a template, you'd call the template file `stuff.cfg.cgt`.\n\nWith the above `confgen.lua`, this template\n\n```\n<! for i = 0,5 do !><% i %><! end !>\n\n<% opt.test_option %>\n```\n\nwould result in this output.\n\n```\n12345\n\n42\n```\n\nLastly, run confgen, providing the output directory as an argument:\n\n```bash\nconfgen confgen.lua out_dir\n```\n\n## ConfgenFS\n\nConfgenFS provides an alternative to the `confgen` CLI tool. It takes a path to a confgen file\nas well as a mountpoint:\n```bash\n# Mount config at ~/confgenfs\nconfgenfs /path/to/confgen.lua ~/confgenfs\n```\n\nThis mounts a FUSE3 filesystem containing all the config files. The advantage of this is that\nthe templates will be generated when the file is opened and not ahead of time.\n\nAdditionally, the filesystem will contain \"meta-files\" inside `_cgfs/`, currently only `_cgfs/eval`\nand `_cgfs/opts.json`.\nYou can write some Lua code to the former file, and it will be evaluated in the global Lua context.\nThis allows for dynamic configurations, here's a practical example:\n\n`.config/waybar/config.cgt`:\n```json\n{\n    \"modules-left\": [\n        <! if opt.compositor == \"river\" then !>\n        \"river/tags\", \"river/window\"\n        <! elseif opt.compositor == \"hyprland\" then !>\n        \"hyprland/workspaces\", \"hyprland/window\"\n        <! end !>\n    ]\n}\n```\n\nYour hyprland and river configs could set the compositor option on startup:\n```bash\n# For river:\necho 'cg.opt.compositor = \"river\"' >~/confgenfs/_cgfs/eval\n\n# For hyprland:\necho 'cg.opt.compositor = \"hyprland\"' >~/confgenfs/_cgfs/eval\n```\n\nAnd when waybar is started afterwards, it would work without manual configuration changes (assuming a symlink `~/confgenfs/.config/waybar -> ~/.config/waybar`).\n\nAfter starting river, we can see the final config:\n```bash\n$ cat ~/confgenfs/.config/waybar/config\n{\n    \"modules-left\": [\n\n        \"river/tags\", \"river/window\"\n\n    ]\n}\n```\n\n## Building\n\n### Linux\n\n- install the LuaJIT and FUSE3 library and the 0.15 version of Zig\n- `zig build -Drelease-fast -p ~/.local`\n\n### Mac\n\nThis is untested, but it should work theoretically.\n\n### Windows\n\nno lol\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/28735087?u=83e89bc2affe28833dab6d7f7b568a90cc946982&v=4",
+  "releases": [],
+  "owner_company": "@Anvilcraft",
+  "owner_location": "Germany Thuringia",
+  "owner_blog": "https://mzte.de",
+  "owner_twitter_username": "LordMZTE",
+  "owner_followers": 34,
+  "owner_following": 40,
+  "owner_created_at": "2017-05-16T15:31:26Z",
+  "homepage": "https://mzte.de/git/LordMZTE/confgen",
+  "license": "GPL-3.0",
+  "category": "library"
+}

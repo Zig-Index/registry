@@ -1,0 +1,48 @@
+{
+  "name": "wayland",
+  "owner": "allyourcodebase",
+  "repo": "wayland",
+  "description": "wayland ported to the zig build system ",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 12,
+  "forks": 1,
+  "watchers": 2,
+  "updated_at": "2025-12-05T19:18:43Z",
+  "dependencies": [
+    {
+      "name": "wayland",
+      "url": "git+https://gitlab.freedesktop.org/wayland/wayland.git?ref=1.24#736d12ac67c20c60dc406dc49bb06be878501f86",
+      "hash": "N-V-__8AAGoeGQBEn6KguTJUXrCE0tIRrrXfQX7hYHoKCJwZ"
+    },
+    {
+      "name": "libffi",
+      "url": "git+https://codeberg.org/vezel/libffi.git#3aac158d09755844f1d9892e86512e9afbbd6c37",
+      "hash": "libffi-3.5.2-7_tEtNc5FwAWDaCWKtJ6Mh4eEWn8poybcaMRLhIOtag8"
+    },
+    {
+      "name": "libexpat",
+      "url": "git+https://github.com/allyourcodebase/libexpat.git?ref=2.7.1-1#472c1db660c813a952f235cb394f5997d2e83fe1",
+      "hash": "libexpat-2.7.1-1-y_akI-w7AABhqRN54g--MNNIR-zA1X2WZ36ZPriY84sb"
+    },
+    {
+      "name": "libxml2",
+      "url": "git+https://github.com/allyourcodebase/libxml2.git?ref=2.15.1#532cdc21c1c25b2f3f63ed355392b80cc405cbe0",
+      "hash": "libxml2-2.15.1-qHdjhi9MAADPDiXFeNsWnUmr03JdmfAnVMNmcnL28rzM"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "[![CI](https://github.com/allyourcodebase/wayland/actions/workflows/ci.yaml/badge.svg)](https://github.com/allyourcodebase/wayland/actions)\n\n# Wayland\n\nThis is [Wayland](https://gitlab.freedesktop.org/wayland/wayland), packaged for [Zig](https://ziglang.org/).\n\n## Installation\n\nFirst, update your `build.zig.zon`:\n\n```\n# Initialize a `zig build` project if you haven't already\nzig init\nzig fetch --save git+https://github.com/allyourcodebase/wayland.git#1.24.0-2\n```\n\nYou can then import `wayland` in your `build.zig` with:\n\n```zig\nconst wayland = b.dependency(\"wayland\", .{\n    .target = target,\n    .optimize = optimize,\n});\nconst wayland_server = wayland.artifact(\"wayland-server\");\nconst wayland_client = wayland.artifact(\"wayland-client\");\nconst wayland_egl = wayland.artifact(\"wayland-egl\");\nconst wayland_cursor = wayland.artifact(\"wayland-cursor\");\n\n// Makes sure we get `wayland-scanner` for the host platform even when cross-compiling\nconst wayland_host = b.dependency(\"wayland\", .{\n    .target = b.host,\n    .optimize = std.builtin.OptimizeMode.Debug,\n});\nconst wayland_scanner = wayland_host.artifact(\"wayland-scanner\");\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
+  "releases": [],
+  "owner_bio": "...are belong to Ziguanas, but we'd also be delighted to give them back!",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2023-09-28T21:29:33Z",
+  "license": "MIT",
+  "category": "library"
+}

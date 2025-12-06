@@ -1,0 +1,38 @@
+{
+  "name": "zig-fsrs",
+  "owner": "egegungordu",
+  "repo": "zig-fsrs",
+  "description": "Zig implementation of FSRS",
+  "type": "project",
+  "topics": [
+    "fsrs",
+    "spaced-repetition-algorithm",
+    "zig",
+    "zig-library",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2024-07-15T18:28:52Z",
+  "dependencies": [
+    {
+      "name": "vaxis",
+      "url": "git+https://github.com/rockorager/libvaxis#dff7681c30c655b7b30a4af08abf6a7f98de975f",
+      "hash": "122060d57f28049b543c6c61b0d18ecde4e8b09eba886d5b08c71dc29ccebc2ff1a4"
+    }
+  ],
+  "minimum_zig_version": "0.13.0",
+  "readme": "# zig-fsrs\n\nThis is an implementation of [FSRS-4.5](https://github.com/open-spaced-repetition/fsrs4anki/wiki/The-Algorithm) in Zig.  \nThis project is on zig 0.13.0\n\n```zig\nconst std = @import(\"std\");\nconst fsrs = @import(\"zig-fsrs\");\nconst Card = fsrs.Card;\n\npub fn main() !void {\n    var f = fsrs.FSRS.init(.{});\n    const initial_card = fsrs.Card.init();\n    var now = std.time.timestamp();\n\n    // schedule the initial card\n    var s = f.schedule(initial_card, now);\n\n    // good was selected on new card\n    const updated_card = s.select(.Good).card;\n\n    std.debug.print(\"initial card:\\n{}\\n\\n\", .{initial_card});\n    std.debug.print(\"after first rep (good):\\n{}\\n\\n\", .{updated_card});\n}\n```\n\n## Getting Started\n\n### 1. Add zig-fsrs to your own zig project:\n\nFetch zig-fsrs:\n\n```shell\nzig fetch --save git+https://github.com/egegungordu/zig-fsrs\n```\n\n### 2. Add zig-fsrs to your `build.zig` file:\n\n```zig\nconst zig_fsrs = b.dependency(\"zig-fsrs\", .{});\nexe.root_module.addImport(\"zig-fsrs\", zig_fsrs.module(\"zig-fsrs\"));\n```\n\nNow you can import zig-fsrs in your code:\n\n```zig\nconst fsrs = @import(\"zig-fsrs\");\n```\n\n## Basic Usage\n\n### 1. Create a new FSRS instance\n\n```zig\nvar f = fsrs.FSRS.init(.{});\n```\n\nThe parameters are optional. The parameters are:\n\n| Parameter         | Type    | Default Value                                                                                                                             |\n| ----------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------- |\n| request_retention | f32     | 0.9                                                                                                                                       |\n| maximum_interval  | i32     | 36500                                                                                                                                     |\n| w                 | [17]f32 | { 0.4872, 1.4003, 3.7145, 13.8206, 5.1618, 1.2298, 0.8975, 0.031, 1.6474, 0.1367, 1.0461, 2.1072, 0.0793, 0.3246, 1.587, 0.2272, 2.8755 } |\n\n### 2. Create a new card\n\n```zig\nconst initial_card = fsrs.Card.init();\n```\n\n### 3. Schedule the card\n\n```zig\nconst review_time = std.time.timestamp();\nvar scheduled_cards = f.schedule(initial_card, review_time);\n```\n\n`schedule()` will return a `ScheduledCards` struct which contains the possible\ncards given the rating. To select a card, use the `select` method, which\nwill return a `ReviewedCard` struct.\n\n```zig\nconst good = scheduled_cards.select(.Good);\nconst new_card = good.card;\n```\n\n### Card fields\n\n| Field          | Type  | Description                                                                 |\n| -------------- | ----- | --------------------------------------------------------------------------- |\n| state          | State | The state of the card. Can be `New`, `Learning`, `Review`, or `Relearning`. |\n| reps           | i32   | The number of repetitions of the card.                                      |\n| lapses         | i32   | The number of times the card was remembered incorrectly.                    |\n| stability      | f32   | A measure of how well the card is remembered.                               |\n| difficulty     | f32   | The inherent difficulty of the card content.                                |\n| elapsed_days   | i64   | The number of elapsed days since the card was last reviewed.                |\n| scheduled_days | i64   | The next scheduled days for the card.                                       |\n| due            | i64   | The due date for the next review.                                           |\n| last_review    | i64   | The last review date of the card.                                           |\n\n## Examples\n\nTo run the examples:\n\n```shell\nzig build example -Dexample=example_name\n```\n\nCheck out the [examples](examples) directory for more examples.\n\n## Development\n\n```shell\ngit clone https://github.com/egegungordu/zig-fsrs.git\ncd zig-fsrs\n```\n\nTo run the tests:\n\n```shell\nzig build test --summary all\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/24779436?u=468cbd690b20521c63491f7d3bd8ef0e89ee4703&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Tokyo, Japan",
+  "owner_blog": "ege.fyi",
+  "owner_twitter_username": "eggngrd",
+  "owner_followers": 18,
+  "owner_following": 53,
+  "owner_created_at": "2016-12-26T16:37:03Z",
+  "license": "MIT",
+  "category": "library"
+}

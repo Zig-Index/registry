@@ -1,0 +1,50 @@
+{
+  "name": "cmdtest",
+  "owner": "pyk",
+  "repo": "cmdtest",
+  "description": "CLI testing for Zig",
+  "type": "project",
+  "topics": [
+    "cli",
+    "testing",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 5,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-11-17T07:08:52Z",
+  "minimum_zig_version": "0.15.2",
+  "readme": "### cmdtest\n\nCLI testing for Zig.\n\n### Installation\n\n1. Fetch the latest release:\n\n   ```shell\n   zig fetch --save=cmdtest https://github.com/pyk/cmdtest/archive/v0.2.0.tar.gz\n   ```\n\n   This updates `build.zig.zon`.\n\n2. Write your test file. Example: `test/mycli.zig`.\n\n   ```zig\n    const std = @import(\"std\");\n    const cmdtest = @import(\"cmdtest\");\n    const testing = std.testing;\n\n    test \"via exe name\" {\n        const argv = &[_][]const u8{\"mycli\"};\n        var result = try cmdtest.run(.{ .argv = argv });\n        defer result.deinit();\n\n        try testing.expectEqualStrings(\"project-exe\\n\", result.stderr);\n    }\n\n    test \"via path\" {\n        const argv = &[_][]const u8{\"./zig-out/bin/mycli\"};\n        var result = try cmdtest.run(.{ .argv = argv });\n        defer result.deinit();\n\n        try testing.expectEqualStrings(\"project-exe\\n\", result.stderr);\n    }\n   ```\n\n3. Register the test in `build.zig`:\n\n   ```zig\n    const std = @import(\"std\");\n    const cmdtest = @import(\"cmdtest\");\n\n    pub fn build(b: *std.Build) void {\n        const target = b.standardTargetOptions(.{});\n\n        // Your CLI\n        const cli = b.addExecutable(.{\n            .name = \"mycli\",\n            .root_module = b.createModule(.{\n                .root_source_file = b.path(\"src/main.zig\"),\n                .target = target,\n            }),\n        });\n        b.installArtifact(cli);\n\n        // Register new test\n        const cli_test = cmdtest.add(b, .{\n            .name = \"mycli\",\n            .test_file = b.path(\"test/mycli.zig\"),\n        });\n\n        const test_step = b.step(\"test\", \"Run tests\");\n        test_step.dependOn(&cli_test.step);\n    }\n   ```\n\n4. Run the tests:\n\n   ```shell\n   zig build test --summary all\n   ```\n\nSee minimal Zig project\n[cmdtest-example](https://github.com/pyk/cmdtest-example).\n\n### Usage\n\nThere are only 2 functions:\n\n- `add(b, options)` registers a CLI test step in `build.zig`. `zig build test`\n  will run the tests.\n- `run(options)` spawns a child process, captures stdout and stderr (up to a\n  limit), waits for the child to finish, and returns a `RunResult`.\n\nBasic run and stdout assertion:\n\n```zig\nconst std = @import(\"std\");\nconst cmdtest = @import(\"cmdtest\");\nconst testing = std.testing;\n\ntest \"echo\" {\n    const argv = &[_][]const u8{\"echo\", \"hello\"};\n    var result = try cmdtest.run(.{ .argv = argv });\n    defer result.deinit();\n\n    try testing.expectEqualStrings(\"hello\\n\", result.stdout);\n}\n```\n\nWrite to stdin and capture stdout:\n\n```zig\nconst std = @import(\"std\");\nconst cmdtest = @import(\"cmdtest\");\nconst testing = std.testing;\n\ntest \"cat\" {\n    const argv = &[_][]const u8{\"cat\"};\n    const input = \"a\\nb\\n\";\n    var result = try cmdtest.run(.{ .argv = argv, .stdin = input });\n    defer result.deinit();\n\n    try testing.expectEqualStrings(input, result.stdout);\n}\n```\n\nLimit how many stdin bytes are sent:\n\n```zig\nconst payload = large_slice; // some []const u8\nvar result = try cmdtest.run(.{\n  .argv = argv,\n  .stdin = payload,\n  .max_stdin_bytes = 1024, // truncate to 1 KiB\n});\ndefer result.deinit();\n```\n\nAnd you can do much more:\n\n- Automatically discover built artifacts.\n- Capture `stderr` output.\n- Limit how much output is captured.\n- Run with a custom working directory.\n- Run with a custom environment map.\n- Handle exit status and signals.\n- Detect spawn errors.\n\nSee [src/test_exe.zig](./src/test_exe.zig).\n\nSome additional notes about the usage of `allocator`:\n\n- `run` uses `testing.allocator` by default.\n- You can pass a different allocator in `RunOptions.allocator` to control where\n  captured buffers are allocated.\n\n### Development\n\nInstall the Zig toolchain via mise (optional):\n\n```shell\nmise trust\nmise install\n```\n\nRun tests:\n\n```bash\nzig build test --summary all\n```\n\nBuild library:\n\n```bash\nzig build\n```\n\n### License\n\nSee [LICENSE](./LICENSE).\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/2213646?u=a3fbef318b9ef3be210d4515e59455bd03b72a69&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0 (Crimson Compass)",
+      "body": "### Summary\r\n\r\nThis release renames the package from `exetest` to `cmdtest` to better reflect the project's purpose: simpler, ergonomic testing helpers for command-line applications for Zig.\r\n\r\nThe new name more clearly communicates the package intent: testing command-line interfaces.\r\n\r\n### What changed\r\n\r\n- Renamed the package name from `exetest` to `cmdtest`.\r\n- Updated build outputs and package naming to match the new name.\r\n\r\n### Migration notes\r\n- Reinstall the `cmdtest` using the following command: \r\n    ```shell\r\n    zig fetch --save=cmdtest https://github.com/pyk/cmdtest/archive/v0.2.0.tar.gz\r\n    ```\r\n- If you previously depended on `exetest`, update scripts and CI to use `cmdtest` instead.\r\n- No API behavior change. Only the package name was changed to improve clarity.",
+      "prerelease": false,
+      "published_at": "2025-11-07T04:39:11Z",
+      "html_url": "https://github.com/pyk/cmdtest/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0 (Steady Echo)",
+      "body": "What’s included:\r\n- A small, ergonomic Zig library for testing CLI applications.\r\n- Two simple, well-documented core functions:\r\n  - `add`: register test binaries in a project's `build.zig`.\r\n  - `run`: invoke and collect output of any installed executable from tests.\r\n- A minimal example of Zig project that uses exetest: [exetest-example](https://github.com/pyk/exetest-example)\r\n- Focus on performance and developer ergonomics so you can write fast, reproducible integration tests.\r\n\r\nMy goals:\r\n- Makes integration testing command-line programs in Zig straightforward.\r\n- Works with binaries produced by your `build.zig` or any system-installed executable.\r\n- Keeps test harness code minimal and idiomatic for Zig projects.\r\n",
+      "prerelease": false,
+      "published_at": "2025-11-06T16:13:05Z",
+      "html_url": "https://github.com/pyk/cmdtest/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "https://pyk.sh",
+  "owner_twitter_username": "sepyke",
+  "owner_followers": 366,
+  "owner_following": 77,
+  "owner_created_at": "2012-08-24T19:47:26Z",
+  "homepage": "https://pyk.sh/docs/cmdtest",
+  "license": "Apache-2.0",
+  "category": "cli"
+}

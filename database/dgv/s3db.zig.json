@@ -1,0 +1,38 @@
+{
+  "name": "s3db.zig",
+  "owner": "dgv",
+  "repo": "s3db.zig",
+  "description": "Zig wrapper of SQLite/Go extension that stores tables in an S3-compatible object store",
+  "type": "project",
+  "topics": [
+    "sqlite-extension",
+    "zig-library",
+    "sqlite",
+    "s3",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-07-01T03:30:31Z",
+  "dependencies": [
+    {
+      "name": "sqlite",
+      "url": "git+https://github.com/vrischmann/zig-sqlite?ref=master#be8b4965b46fc1a7a819bf3cba09f370c0e9c64c",
+      "hash": "sqlite-3.48.0-F2R_a9GLDgAXT-c49TfkFMt6yPOMQAYfp4ig8bRNdZs4"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# s3db.zig\n[![zig version](https://img.shields.io/badge/0.14.1-orange?style=flat&logo=zig&label=Zig&color=%23eba742)](https://ziglang.org/download/)\n[![reference Zig](https://img.shields.io/badge/deps%20-1-orange?color=%23eba742)](https://github.com/dgv/s3db.zig/blob/main/build.zig.zon)\n[![build](https://github.com/dgv/s3db.zig/actions/workflows/build.yml/badge.svg)](https://github.com/dgv/s3db.zig/actions/workflows/build.yml)\n[![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](https://opensource.org/licenses/MIT)\n\nZig wrapper lib/sample for SQLite/Go extension that stores tables in an S3-compatible object store\n\n## usage\n_build.zig_\n```zig\n...\nexe.root_module.addImport(\"s3db\", b.dependency(\"s3db\", .{}).module(\"s3db\"));\nb.installArtifact(exe);\n```\n_import_\n```zig\nconst s3db = @import(\"s3db\");\n...\nvar db = try s3db.init(.{\n    .mode = s3db.Db.Mode{ .Memory = {} },\n    .open_flags = .{ .write = true },\n});\ndefer db.deinit();\n\ntry db.exec(\"CREATE VIRTUAL TABLE user USING s3db (columns='id integer primary key, age integer, name text')\", .{}, .{});\n...\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/89275?u=af53cab5b5331a17b260df81cdbce32546150a19&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Curitiba, Brazil",
+  "owner_blog": "https://dgv.dev.br",
+  "owner_twitter_username": "dgvargas",
+  "owner_followers": 48,
+  "owner_following": 0,
+  "owner_created_at": "2009-05-27T19:23:11Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,44 @@
+{
+  "name": "zig-boringssl",
+  "owner": "akunaakwei",
+  "repo": "zig-boringssl",
+  "description": "boringssl packaged for zig",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-11-02T16:59:22Z",
+  "dependencies": [
+    {
+      "name": "boringssl",
+      "url": "https://boringssl.googlesource.com/boringssl/+archive/1ad43d606ab97bb1c8d51890881ea6195d8950df.tar.gz",
+      "hash": "N-V-__8AAICIUgzgxruEkguNOJuYjwGwpYxl-gZNAhOHQvgB"
+    },
+    {
+      "name": "patch",
+      "url": "https://github.com/akunaakwei/zig-patch/archive/799ade2cd8954a38aba3d730de1a69891aa68234.tar.gz",
+      "hash": "patch-2.6.1-po1jORRvAAD4_gRpqMKvC00UPblvIpkxvnJdDpG4-DMY"
+    },
+    {
+      "name": "nasm",
+      "url": "https://github.com/akunaakwei/zig-nasm/archive/2e5733c69d9ebf4bebc421b8b614a0f676319d14.tar.gz",
+      "hash": "nasm-2.16.3-CqMl9NOQAADy6HiXPZg6rYdDUAVaxQt9gDFlZRCHSW3q"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# boringssl\r\nThis is boringssl packaged for the Zig build system.",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/11787994?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 0,
+  "owner_following": 2,
+  "owner_created_at": "2015-04-03T16:34:07Z",
+  "license": "Zlib",
+  "category": "library"
+}

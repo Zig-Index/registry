@@ -1,0 +1,59 @@
+{
+  "name": "CoreX",
+  "owner": "griush",
+  "repo": "CoreX",
+  "description": "CoreX Framework",
+  "type": "project",
+  "topics": [
+    "game-development",
+    "game-engine",
+    "gamedev",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-05-23T08:12:02Z",
+  "dependencies": [
+    {
+      "name": "zigglgen",
+      "url": "git+https://github.com/castholm/zigglgen#d5f381759825ee0bac29bc294d47aa05be4ab7b5",
+      "hash": "zigglgen-0.4.0-bmyqLX_gLQDFXilQ5VQ9fJeOHKU1RFrggOzRqTGBX79W"
+    },
+    {
+      "name": "zm",
+      "url": "git+https://github.com/griush/zm#3abba8c5a5b5c93e7374bffbd6740e687fb18f7d",
+      "hash": "zm-0.3.0-cLX-WQvNAADFZdfz6P8uKShdAL7gUncyKthhdtxWRieo"
+    },
+    {
+      "name": "zigimg",
+      "url": "git+https://github.com/griush/zigimg#ff8495b0d945b7655a5df99f4d6236458312ef0d",
+      "hash": "122093b0307892ad5e0c60ebd70d5c39e5b3ae2dbe21e0e9d7007327954406d91515"
+    },
+    {
+      "name": "zaudio",
+      "url": "git+https://github.com/zig-gamedev/zaudio#1012b105627e28827f558b79e533575ef65a4965",
+      "hash": "zaudio-0.11.0-dev-_M-91mJkPwB7NWGKgDvdpl3xyjkk301Tp6ubbsleUvVK"
+    },
+    {
+      "name": "zglfw",
+      "url": "git+https://github.com/zig-gamedev/zglfw#c337cb3d3f984468ea7a386335937a5d555fc024",
+      "hash": "zglfw-0.10.0-dev-zgVDNMacIQA-k7kNSfwUc9Lfzx-bb_wklVm25K-p8Tr7"
+    }
+  ],
+  "minimum_zig_version": "0.15.0-dev.621+a63f7875f",
+  "readme": "# CoreX\nCoreX framework\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/57322933?v=4",
+  "releases": [],
+  "owner_bio": "19 years old. Computer Engineering student at UPC.",
+  "owner_company": null,
+  "owner_location": "Barcelona, Spain",
+  "owner_blog": "grius.dev",
+  "owner_twitter_username": null,
+  "owner_followers": 22,
+  "owner_following": 14,
+  "owner_created_at": "2019-11-03T15:08:21Z",
+  "license": "MIT",
+  "category": "game-engine"
+}

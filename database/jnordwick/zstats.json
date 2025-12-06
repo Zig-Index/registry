@@ -1,0 +1,52 @@
+{
+  "name": "zstats",
+  "owner": "jnordwick",
+  "repo": "zstats",
+  "description": "",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 2,
+  "updated_at": "2024-10-19T16:12:36Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.11.0",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/2364380?u=2d87eaabadae63a75f0a940dbb08283dbb7a4126&v=4",
+  "releases": [
+    {
+      "tag_name": "0.2",
+      "name": "exponential partiall added",
+      "body": "",
+      "prerelease": true,
+      "published_at": "2024-02-15T19:05:04Z",
+      "html_url": "https://github.com/jnordwick/zstats/releases/tag/0.2",
+      "assets": []
+    },
+    {
+      "tag_name": "0.1",
+      "name": "help debug and doc",
+      "body": "help debug and doc",
+      "prerelease": true,
+      "published_at": "2024-02-15T00:13:53Z",
+      "html_url": "https://github.com/jnordwick/zstats/releases/tag/0.1",
+      "assets": []
+    }
+  ],
+  "owner_company": "Black Sheep Capital",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 16,
+  "owner_following": 3,
+  "owner_created_at": "2012-09-17T18:05:53Z",
+  "license": "BSD-2-Clause",
+  "category": "library"
+}

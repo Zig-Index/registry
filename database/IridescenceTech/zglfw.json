@@ -1,0 +1,27 @@
+{
+  "name": "zglfw",
+  "owner": "IridescenceTech",
+  "repo": "zglfw",
+  "description": "A thin, idiomatic wrapper for GLFW. Written in Zig, for Zig!",
+  "type": "project",
+  "topics": [
+    "zig",
+    "glfw",
+    "opengl",
+    "zig-package"
+  ],
+  "stars": 136,
+  "forks": 31,
+  "watchers": 4,
+  "updated_at": "2025-12-06T02:12:12Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "<h1 align=\"center\">zGLFW</h1>\n<p align=\"center\">A thin, idiomatic wrapper for GLFW. Written in Zig, for Zig!</p>\n\n# Why write a wrapper?\nWhile Zig is PERFECTLY capable of simply `@cImport`ing glfw3.h and using it in your application, I think it lacks a lot of cleanliness and succinctness that can be expressed with Zig. I decided to write this wrapper to provide GLFW with a nicer interface, error handling options, and quality of life changes (for example `[]const u8` instead of `[*c]const u8`). It also uses nicely named constants in place of `#define`s.\n\nzGLFW is NOT 100% tested. I am happy to fix any errors that may arise, and I will accept contributions! Errors that arise from GLFW will be printed to `stderr`.\n\n# Examples\n\n```zig\nconst std = @import(\"std\");\nconst glfw = @import(\"glfw\");\n\npub fn main() !void {\n    var major: i32 = 0;\n    var minor: i32 = 0;\n    var rev: i32 = 0;\n\n    glfw.getVersion(&major, &minor, &rev);\n    std.debug.print(\"GLFW {}.{}.{}\\n\", .{ major, minor, rev });\n\n    //Example of something that fails with GLFW_NOT_INITIALIZED - but will continue with execution\n    //var monitor: ?*glfw.Monitor = glfw.getPrimaryMonitor();\n\n    try glfw.init();\n    defer glfw.terminate();\n    std.debug.print(\"GLFW Init Succeeded.\\n\", .{});\n\n    var window: *glfw.Window = try glfw.createWindow(800, 640, \"Hello World\", null, null);\n    defer glfw.destroyWindow(window);\n\n    while (!glfw.windowShouldClose(window)) {\n        if (glfw.getKey(window, glfw.KeyEscape) == glfw.Press) {\n            glfw.setWindowShouldClose(window, true);\n        }\n\n        glfw.pollEvents();\n    }\n}\n```\n\n# Note\n\nThis library does not compile or wrap GLFW the library into the zig build system. This wrapper can be used in tandem with other projects like [glfw.zig](https://github.com/tiawl/glfw.zig) which will compile the GLFW code directly in Zig.\n\n# Documentation\n\nI would suggest you look into the `glfw.zig` file themselves, as most of the changes are simple syntactically, but I have made some comments in cases where it may be different than you expect. Obviously [GLFW's Documentation](https://www.glfw.org/documentation.html) should cover most things that you want to know.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/13420428?v=4",
+  "releases": [],
+  "owner_bio": "A technology company based around graphics and game development.",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2015-07-20T15:43:19Z",
+  "category": "library"
+}

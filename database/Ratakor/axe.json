@@ -1,0 +1,57 @@
+{
+  "name": "axe",
+  "owner": "Ratakor",
+  "repo": "axe",
+  "description": "A logging library for zig",
+  "type": "project",
+  "topics": [
+    "log",
+    "logging",
+    "zig-package",
+    "zig"
+  ],
+  "stars": 12,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-11-25T14:26:33Z",
+  "dependencies": [
+    {
+      "name": "zeit",
+      "url": "git+https://github.com/rockorager/zeit?ref=zig-0.15#ed2ca60db118414bda2b12df2039e33bad3b0b88",
+      "hash": "zeit-0.6.0-5I6bk0J9AgCVa0nnyL0lNY9Xa9F68hHq-ZarhuXNV-Jb"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# Axe 🪓\n\nA fully customizable logging library for the Zig programming language.\n\n![](screenshot.png)\n\n## Features\n\n- Drop-in replacement for `std.Options.LogFn`\n- Minimal (less than 1000 LOC)\n- Extremely fast performance with intensive use of comptime\n- Parallel file logging with support for stderr & custom writers\n- Full custom format support with sane defaults & [JSON](https://github.com/ratakor/axe/blob/master/example/example.zig#L93) support\n- Source location support with `axe.logAt(@src(), ...)`\n- Built-in time support with [zeit](https://github.com/rockorager/zeit)\n- Built-in colors support\n  - Automatic tty detection\n  - Windows support\n  - NO\\_COLOR & CLICOLOR\\_FORCE environment variables support\n- Built-in thread safety with multiple mutex interface available\n\n## Installation\n\nAdd it to an existing project with this command:\n```sh\nzig fetch --save git+https://github.com/Ratakor/axe\n```\nThen add the module to build.zig.\n```zig\nconst axe = b.dependency(\"axe\", .{}).module(\"axe\");\nexe.root_module.addImport(\"axe\", axe);\n```\n\n# Usage\n\n```zig\nconst std = @import(\"std\");\nconst axe = @import(\"axe\").Axe(.{\n    // Config goes here.\n    .mutex = .{ .function = .progress_stderr },\n});\n\n// Replace the default logFn.\npub const std_options: std.Options = .{\n    .logFn = axe.log,\n};\n\npub fn main() !void {\n    const allocator = std.heap.page_allocator;\n    try axe.init(allocator, null, null);\n    defer axe.deinit(allocator);\n\n    std.log.debug(\"Hello {s}!\", .{ \"World\" });\n    axe.infoAt(@src(), \"Some info with source location\", .{});\n}\n```\n\nCheck [example.zig](example/example.zig) for more!\n\n# Docs\n\nSee the [API Documentation](https://ratakor.github.io/axe).\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/45130910?u=98d12d5c1a112c02784ea30ddb734d1a6d109213&v=4",
+  "releases": [
+    {
+      "tag_name": "0.7.0",
+      "name": "0.7.0",
+      "body": "## What's Changed\r\n* Allow building with Zig 0.15 by @agagniere in https://github.com/Ratakor/axe/pull/1\r\n* Remove `buffering` option as it is now included in the Writer interface\r\n* Add flake.nix\r\n\r\n## New Contributors\r\n* @agagniere made their first contribution in https://github.com/Ratakor/axe/pull/1\r\n\r\n**Full Changelog**: https://github.com/Ratakor/axe/compare/0.6.1...0.7.0",
+      "prerelease": false,
+      "published_at": "2025-08-22T13:52:59Z",
+      "html_url": "https://github.com/Ratakor/axe/releases/tag/0.7.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.6.1",
+      "name": "0.6.1",
+      "body": "Update to zig 0.14.0.\r\n\r\n**Full Changelog**: https://github.com/Ratakor/axe/compare/0.6.0...0.6.1",
+      "prerelease": false,
+      "published_at": "2025-08-22T13:12:15Z",
+      "html_url": "https://github.com/Ratakor/axe/releases/tag/0.6.1",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "https://ratakor.neocities.org",
+  "owner_twitter_username": null,
+  "owner_followers": 20,
+  "owner_following": 11,
+  "owner_created_at": "2018-11-17T20:18:12Z",
+  "homepage": "https://ratakor.github.io/axe/",
+  "license": "MIT",
+  "category": "library"
+}

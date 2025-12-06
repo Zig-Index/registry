@@ -1,0 +1,410 @@
+{
+  "name": "zf",
+  "owner": "natecraddock",
+  "repo": "zf",
+  "description": "a commandline fuzzy finder and zig module designed for filtering filepaths",
+  "type": "project",
+  "topics": [
+    "zig",
+    "cli",
+    "unix",
+    "fuzzy",
+    "fuzzy-search",
+    "library",
+    "zig-package",
+    "zig-library"
+  ],
+  "stars": 573,
+  "forks": 22,
+  "watchers": 3,
+  "updated_at": "2025-12-06T02:07:13Z",
+  "dependencies": [
+    {
+      "name": "vaxis",
+      "url": "https://github.com/rockorager/libvaxis/archive/7dbb9fd3122e4ffad262dd7c151d80d863b68558.tar.gz",
+      "hash": "vaxis-0.5.1-BWNV_LosCQAGmCCNOLljCIw6j6-yt53tji6n6rwJ2BhS"
+    }
+  ],
+  "minimum_zig_version": "0.15.2",
+  "readme": "# zf\n\n[![shield showing current tests status](https://github.com/natecraddock/zf/actions/workflows/tests.yml/badge.svg)](https://github.com/natecraddock/zf/actions/workflows/tests.yml) [![Packaging status](https://repology.org/badge/tiny-repos/zf.svg)](https://repology.org/project/zf/versions)\n\nzf is a fuzzy finder that excels at filtering filepaths:\n\n* [because filenames are usually unique](https://nathancraddock.com/blog/in-search-of-a-better-finder/#data-collection), matches on filenames are prioritized\n* when the query resembles a file path, zf [uses heuristics for a more accurate match](#strict-path-matching)\n\nThe goal of zf is to be more accurate than other fuzzy finders when filtering filepaths, but it also functions as a general-purpose fuzzy finder.\n\nzf is also available as an allocation-free library for fuzzy filtering. [See the docs for more info](https://github.com/natecraddock/zf/blob/main/doc/lib.md).\n\n[Try zf online!](https://nathancraddock.com/zf-playground/)\n\n## Demo\n\nhttps://user-images.githubusercontent.com/7967463/225198950-a6ab568f-644f-40a1-b202-c12a35aeaed8.mp4\n\n## Features\n\n* fuzzy matching algorithm designed for file paths\n* refine search results with whitespace separated query terms\n* smartcase (case insensitive unless the query contains uppercase letters)\n* multiselect to output multiple selected lines\n* preview window\n* Zig and C libraries for the zf ranking algorithm\n\n## Docs\n\n* [Usage Documentation](https://github.com/natecraddock/zf/blob/main/doc/zf.md)\n* [Library Documentation](https://github.com/natecraddock/zf/blob/main/doc/lib.md)\n\n## Why use zf?\n\nzf was designed knowing that a frequent use case for fuzzy finders is filtering filepaths. It also works great for any arbitrary string, but it is especially good at filtering filepaths with precision.\n\nSpecifically,\n\n* Matches on filenames are prioritized over filepath matches\n* Matches on the beginning of a word are prioritized over matches in the middle of a word\n* Non-sequential character matches are penalized\n* Strict path matching offers even more precision\n\nHere are some concrete examples.\n\n### Filename priority\n\nThe query is matched first on the filename and then on the path if the filename doesn't match. This example comes from Blender's source code, and was my original inspiration for designing zf.\n\n```text\n> make\n./GNUmakefile\n./source/blender/makesdna/DNA_genfile.h\n./source/blender/makesdna/intern/dna_genfile.c\n./source/blender/makesrna/intern/rna_cachefile.c\n./source/blender/makesdna/DNA_curveprofile_types.h\n```\n\nFzf and fzy both rank `source/blender/makesdna/DNA_genfile.h` first in the results, with `GNUmakefile` 10 items down the list.\n\n### Space-separated tokens\n\nBut not every filename is unique. Sometimes there are codebases where there are many files with the same or similar names, like an `__init__.py` in Python, or `.c` and `.h` file pairs in C. In zf each space separated query term is used to narrow down the results. Imagine searching for an `__init__.py` file in a Python project.\n\n```text\n> init\n./__init__.py\n./ui/__init__.py\n./data/__init__.py\n./config/__init__.py\n```\n\nAt this point you can either move the selection down with <kdb>Down</kbd> or `c-n` to find\n`./config/__init__.py`, or you can add a new token to the query string.\n\n```text\n> init c\n./config/__init__.py\n```\n\nTreating the query string as a sequence of tokens makes filtering more\nefficient.\n\n### Strict path matching\n\nThis feature is a \"do what I mean\" feature, more easily used than explained. When the query looks like a path (contains at least one path separator) strict path matching is enabled.\n\nPath segments are the portions of a path delimited by path separators. `foo/bar` has segments `foo` and `bar`. With strict path matching the path segments of the query token must not span across path segments in the candidate. As an example, the query `foo/` would match `foo/bar/` but not `fo/obar/` because the characters `\"foo\"` must appear in a single path segment.\n\nThis is useful for narrowing down results when you know the exact path structure of your files. With the following paths\n\n```\n./app/models/foo/bar/baz.rb\n./app/models/foo/bar-baz.rb\n./app/models/foo-bar-baz.rb\n./app/monsters/dungeon/foo/bar/baz.rb\n```\n\nStrict path matching ensures that the intended path structure is found.\n\n```\n> a/m/f/b/baz\n./app/models/foo/bar/baz.rb\n```\n\nIn other fuzzy finders the string `app/monsters/dungeon/foo/bar/baz.rb` is also included in the results. Strict path matching prevents this because there is a slash between `onsters/dungeon` and nothing in the query matches the `dungeon` segment.\n\nTo end strict path matching, just add a space to start a new query token.\n\n## Installation\n\n### Arch Linux\n\nAn [AUR package](https://aur.archlinux.org/packages/zf/) is available.\n\n### Void Linux\n\nInstall from official repository\n\n```\nsudo xbps-install zf\n```\n\n### macOS\n\nInstall with Homebrew\n\n```\nbrew install zf\n```\n\n### Nix\n\n```\nnix-env --install zf\n```\n\n### Nix Flakes\n\n```\nnix profile install nixpkgs#zf\n```\n\n### Binaries\n\nEach [release](https://github.com/natecraddock/zf/releases/latest) has binaries attached for macOS and Linux.\n\n### Building from source\n\nFor compatibility with system package managers, zf targets the latest stable release of Zig.\n\n```\ngit clone https://github.com/natecraddock/zf\ncd zf\nzig build -Doptimize=ReleaseSafe --summary all\n```\n\nThe executable will be created in `./zig-out/bin/zf`. For debug builds omit `-Doptimize=ReleaseSafe`.\n\n## Integrations\n\nWould you like to use zf in an editor? Try one of the following plugins\n\n* [zf.vim](https://github.com/ratfactor/zf.vim): zf integrated with vim for\n  fuzzy file finding. Similar to fzf.vim.\n* [telescope-zf-native.nvim](https://github.com/natecraddock/telescope-zf-native.nvim)\n  a neovim [telescope](https://github.com/nvim-telescope/telescope.nvim)\n  extension to override the default Lua sorter with zf.\n\n## Contributing\n\nI am open to contributions of all kinds, but be aware that I want to keep zf small and easy to maintain.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/7967463?u=73a5dd5bf1ba7ddffe4949073329a6fa7ce829b1&v=4",
+  "releases": [
+    {
+      "tag_name": "0.10.2",
+      "name": "0.10.2",
+      "body": "zg (a dependency of libvaxis) was transferred to a new repo and libvaxis would fail to build. Update to the new libvaxis",
+      "prerelease": false,
+      "published_at": "2024-11-12T20:54:03Z",
+      "html_url": "https://github.com/natecraddock/zf/releases/tag/0.10.2",
+      "assets": [
+        {
+          "name": "zf-0.10.2-aarch64-linux.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.10.2/zf-0.10.2-aarch64-linux.tar.xz",
+          "size": 580396,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.10.2-aarch64-macos.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.10.2/zf-0.10.2-aarch64-macos.tar.xz",
+          "size": 141348,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.10.2-x86_64-linux.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.10.2/zf-0.10.2-x86_64-linux.tar.xz",
+          "size": 605512,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.10.2-x86_64-macos.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.10.2/zf-0.10.2-x86_64-macos.tar.xz",
+          "size": 160392,
+          "content_type": "application/x-xz"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.10.1",
+      "name": "0.10.1",
+      "body": "A small bugfix release to fix the keybindings so that <kbd>ctrl-p</kbd> moves the selection up\r\n* Fixed by @joshdpark in https://github.com/natecraddock/zf/pull/67 (their first contribution)\r\n\r\nAdditionally:\r\n* adds libVaxis as a lazyDependency by @OndraVoves in https://github.com/natecraddock/zf/pull/66 (their first contribution)\r\n* adds Void Linux install instruction by @tranzystorekk in https://github.com/natecraddock/zf/pull/65\r\n\r\nThanks for the contributions!",
+      "prerelease": false,
+      "published_at": "2024-10-29T03:33:58Z",
+      "html_url": "https://github.com/natecraddock/zf/releases/tag/0.10.1",
+      "assets": [
+        {
+          "name": "zf-0.10.1-aarch64-linux.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.10.1/zf-0.10.1-aarch64-linux.tar.xz",
+          "size": 580680,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.10.1-aarch64-macos.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.10.1/zf-0.10.1-aarch64-macos.tar.xz",
+          "size": 141332,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.10.1-x86_64-linux.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.10.1/zf-0.10.1-x86_64-linux.tar.xz",
+          "size": 606200,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.10.1-x86_64-macos.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.10.1/zf-0.10.1-x86_64-macos.tar.xz",
+          "size": 160472,
+          "content_type": "application/x-xz"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.10.0",
+      "name": "zf 0.10.0",
+      "body": "This release adds support for an fzf inspired `--preview` option, updates the Zig module API, and rewrites the UI to use [libvaxis](https://github.com/rockorager/libvaxis/).\r\n\r\n## Preview\r\n\r\nThe `--preview` option can be used to run a command for the currently selected line. The stdout of the command is collected and displayed in a preview window on the right. `{}` characters in the command will be substituted with the current line.\r\n\r\nThe `--preview-width` option can be used to set the width of the preview window as a percent. Values from 20% to 80% are accepted, with or without the percent sign.\r\n\r\nAs an example\r\n\r\n```\r\nfd -tf | zf --preview 'cat {}'\r\n```\r\n\r\nwill pipe a list of files to `zf` and use `cat` to display the contents of the currently selected file on the right of the window.\r\n\r\n## Zig Module API\r\n\r\nZf can be used as a [Zig module](https://github.com/natecraddock/zf/blob/main/doc/lib.md) to add fuzzy matching to your project. The API was simplified in this release.\r\n\r\nRather than accept boolean parameters, the options are now in a struct passed to the function.\r\n\r\nThis means\r\n\r\n```zig\r\nzf.rank(string, token, false, false);\r\nzf.rank(string, token, false, true);\r\n```\r\n\r\nIs now written as\r\n\r\n```zig\r\nzf.rank(string, token, .{});\r\nzf.rank(string, token, .{ .plain = true });\r\n```\r\n\r\nThis makes the default case simpler, and also makes the boolean parameters clear at the call site.\r\n\r\nThe `case_sensitive` parameter was also named to `to_lower` for more clarity. See [the library docs](https://github.com/natecraddock/zf/blob/main/doc/lib.md) for more information.\r\n\r\n## Other Changes\r\n\r\n* The UI was completely rewritten to use [libvaxis](https://github.com/rockorager/libvaxis/) instead of my own custom terminal rendering code.\r\n* The env variable `ZF_PROMPT` no longer supports terminal escape sequences. It was difficult to support this when rewriting to use libvaxis. Support for this feature may return in the future if there is interest.\r\n* Adds an option to `zig build` to compile as a PIE executable. This should be useful for package mainainers. Use `zig build -Dpie` to enable this option\r\n  * This was contributed by @tranzystorekk (their first contribution) in https://github.com/natecraddock/zf/pull/64. Thanks!\r\n* Zf no longer does unicode normalization of the input.",
+      "prerelease": false,
+      "published_at": "2024-10-02T02:13:23Z",
+      "html_url": "https://github.com/natecraddock/zf/releases/tag/0.10.0",
+      "assets": [
+        {
+          "name": "zf-0.10.0-aarch64-linux.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.10.0/zf-0.10.0-aarch64-linux.tar.xz",
+          "size": 579808,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.10.0-aarch64-macos.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.10.0/zf-0.10.0-aarch64-macos.tar.xz",
+          "size": 141116,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.10.0-x86_64-linux.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.10.0/zf-0.10.0-x86_64-linux.tar.xz",
+          "size": 604704,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.10.0-x86_64-macos.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.10.0/zf-0.10.0-x86_64-macos.tar.xz",
+          "size": 159920,
+          "content_type": "application/x-xz"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.9.2",
+      "name": "zf 0.9.2",
+      "body": "This release supports both Zig 0.12.1 and 0.13.0.\r\n\r\nNo changes since the last release. Just tagging a new version so package managers can build with the newest releases of Zig.",
+      "prerelease": false,
+      "published_at": "2024-06-23T03:05:48Z",
+      "html_url": "https://github.com/natecraddock/zf/releases/tag/0.9.2",
+      "assets": [
+        {
+          "name": "zf-0.9.2-aarch64-linux.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.9.2/zf-0.9.2-aarch64-linux.tar.xz",
+          "size": 653444,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.9.2-x86_64-linux.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.9.2/zf-0.9.2-x86_64-linux.tar.xz",
+          "size": 675024,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.9.2-aarch64-macos.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.9.2/zf-0.9.2-aarch64-macos.tar.xz",
+          "size": 177692,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.9.2-x86_64-macos.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.9.2/zf-0.9.2-x86_64-macos.tar.xz",
+          "size": 194384,
+          "content_type": "application/x-xz"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.9.1",
+      "name": "zf 0.9.1",
+      "body": "A small release to fix two potential crashes\r\n\r\n* **fix**: fix crash when input is invalid utf8\r\n  ([50e3a8](https://github.com/natecraddock/zf/commit/50e3a8))\r\n\r\n  zf incorrectly assumed that the input was valid utf-8 encoded unicode. Now the input is validated before normalization.\r\n\r\n* **fix**: avoid integer overflow when selecting line down\r\n  ([0456b7](https://github.com/natecraddock/zf/commit/0456b7))",
+      "prerelease": false,
+      "published_at": "2024-02-07T03:02:46Z",
+      "html_url": "https://github.com/natecraddock/zf/releases/tag/0.9.1",
+      "assets": [
+        {
+          "name": "zf-0.9.1-aarch64-linux.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.9.1/zf-0.9.1-aarch64-linux.tar.xz",
+          "size": 675040,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.9.1-aarch64-macos.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.9.1/zf-0.9.1-aarch64-macos.tar.xz",
+          "size": 174444,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.9.1-x86_64-linux.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.9.1/zf-0.9.1-x86_64-linux.tar.xz",
+          "size": 704588,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.9.1-x86_64-macos.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.9.1/zf-0.9.1-x86_64-macos.tar.xz",
+          "size": 191624,
+          "content_type": "application/x-xz"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.9.0",
+      "name": "zf 0.9.0",
+      "body": "This is a smaller release. The main goal of this is to have a stable version of zf that targets Zig 0.11.0. There are also improvements to support the new Zig package manager, refactorings, and small fixes.\r\n\r\nI originally planned to include a UI preview feature in this release, but I ran into some issues with in release builds and I haven't had time to debug properly. So that will be postponed until the next release of zf. But a lot of refactoring and code to support a UI preview is already included in this release.\r\n\r\nAnd although this news is months old, zf is now available in [nix](https://search.nixos.org/packages?channel=23.05&show=zf&from=0&size=50&sort=relevance&type=packages&query=zf).\r\n\r\nSee the [changelog](https://github.com/natecraddock/zf/blob/main/CHANGELOG.md#090) for full details.",
+      "prerelease": false,
+      "published_at": "2023-09-30T15:13:41Z",
+      "html_url": "https://github.com/natecraddock/zf/releases/tag/0.9.0",
+      "assets": [
+        {
+          "name": "zf-0.9.0-aarch64-linux.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.9.0/zf-0.9.0-aarch64-linux.tar.xz",
+          "size": 674520,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.9.0-aarch64-macos.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.9.0/zf-0.9.0-aarch64-macos.tar.xz",
+          "size": 174320,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.9.0-x86_64-linux.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.9.0/zf-0.9.0-x86_64-linux.tar.xz",
+          "size": 704468,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.9.0-x86_64-macos.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.9.0/zf-0.9.0-x86_64-macos.tar.xz",
+          "size": 191476,
+          "content_type": "application/x-xz"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.8.0",
+      "name": "zf 0.8.0",
+      "body": "This release adds multiselect to the UI, improves the strict path matching feature added in the previous release, and improves the highlighting logic to be more accurate. The library API has also been updated.\r\n\r\nSee the [changelog](https://github.com/natecraddock/zf/blob/master/CHANGELOG.md) for full details.",
+      "prerelease": false,
+      "published_at": "2023-03-15T22:02:13Z",
+      "html_url": "https://github.com/natecraddock/zf/releases/tag/0.8.0",
+      "assets": [
+        {
+          "name": "zf-0.8.0-aarch64-linux.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.8.0/zf-0.8.0-aarch64-linux.tar.xz",
+          "size": 420404,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.8.0-aarch64-macos.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.8.0/zf-0.8.0-aarch64-macos.tar.xz",
+          "size": 167676,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.8.0-x86_64-linux.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.8.0/zf-0.8.0-x86_64-linux.tar.xz",
+          "size": 456100,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.8.0-x86_64-macos.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.8.0/zf-0.8.0-x86_64-macos.tar.xz",
+          "size": 190068,
+          "content_type": "application/x-xz"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.7.0",
+      "name": "zf 0.7.0",
+      "body": "The headline feature of this release is strict path matching, another way that zf is optimized for filtering filepaths with accuracy and precision.\r\n\r\nWith strict path matching, when a query token contains a `/` character, any other characters after the slash must appear in a single path segment. As an example, the query `/foo` would match `/foo/bar/` but not `/fo/obar` because the characters `\"foo\"` must appear in a single path segment.\r\n\r\nThis is useful for narrowing down results when you know the exact path structure of your files. As a more complex example, with the following paths\r\n\r\n```\r\napp/models/foo/bar/baz.rb\r\napp/models/foo/bar-baz.rb\r\napp/models/foo-bar-baz.rb\r\napp/monsters/dungeon/foo/bar/baz.rb\r\n```\r\n\r\nThe query `a/m/f/b/baz` filters to only `app/models/foo/bar/baz.rb` whereas in previous versions of zf the string `app/monsters/dungeon/foo/bar/baz.rb` is also included in the results. To end strict path matching, just add a space to start a new token.\r\n\r\nThis release also includes many fixes, refactors, optimizations, unicode support, and a few other small features.\r\n\r\nSee the [changelog](https://github.com/natecraddock/zf/blob/master/CHANGELOG.md) for more details.",
+      "prerelease": false,
+      "published_at": "2023-02-11T21:53:16Z",
+      "html_url": "https://github.com/natecraddock/zf/releases/tag/0.7.0",
+      "assets": [
+        {
+          "name": "zf-0.7.0-aarch64-linux.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.7.0/zf-0.7.0-aarch64-linux.tar.xz",
+          "size": 372588,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.7.0-aarch64-macos.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.7.0/zf-0.7.0-aarch64-macos.tar.xz",
+          "size": 147916,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.7.0-x86_64-linux.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.7.0/zf-0.7.0-x86_64-linux.tar.xz",
+          "size": 413156,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.7.0-x86_64-macos.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.7.0/zf-0.7.0-x86_64-macos.tar.xz",
+          "size": 172100,
+          "content_type": "application/x-xz"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.6.0",
+      "name": "zf 0.6.0",
+      "body": "This release is focused on small optimizations, refactors, and using zf as a library. Because zf is now packaged as a Zig library, it makes sense to switch back to semantic versioning which makes this version 0.6.0 rather than 0.6. This release also updates the source code to support Zig 0.10.0.\r\n\r\nWhile refactoring zf to be more easily consumed by a library, I designed the library to require zero allocations and be passed external slices of memory. Alongside this I also added a restriction to zf as a cli tool. The number of space-separated tokens in the query is now limited to 16. This seems like a safe upper limit, but can be raised if needed.\r\n\r\nSee the [changelog](https://github.com/natecraddock/zf/blob/master/CHANGELOG.md) for more details.",
+      "prerelease": false,
+      "published_at": "2022-12-10T23:16:36Z",
+      "html_url": "https://github.com/natecraddock/zf/releases/tag/0.6.0",
+      "assets": [
+        {
+          "name": "zf-0.6.0-aarch64-linux.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.6.0/zf-0.6.0-aarch64-linux.tar.xz",
+          "size": 228556,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.6.0-aarch64-macos.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.6.0/zf-0.6.0-aarch64-macos.tar.xz",
+          "size": 60784,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.6.0-x86_64-linux.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.6.0/zf-0.6.0-x86_64-linux.tar.xz",
+          "size": 252280,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.6.0-x86_64-macos.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.6.0/zf-0.6.0-x86_64-macos.tar.xz",
+          "size": 78728,
+          "content_type": "application/x-xz"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.5",
+      "name": "zf 0.5",
+      "body": "This smaller release fixes a few bugs and adds support for a few environment variables. A long time coming (I've been focused on other projects), I'm finally back to work on zf. The next release will be focused on utf-8 unicode support.\r\n\r\nSee the [changelog](https://github.com/natecraddock/zf/blob/master/CHANGELOG.md) for more details.",
+      "prerelease": false,
+      "published_at": "2022-07-02T21:43:38Z",
+      "html_url": "https://github.com/natecraddock/zf/releases/tag/0.5",
+      "assets": [
+        {
+          "name": "zf-0.5-x86_64-macos.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.5/zf-0.5-x86_64-macos.tar.xz",
+          "size": 76124,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.5-x86_64-linux.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.5/zf-0.5-x86_64-linux.tar.xz",
+          "size": 56928,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.5-aarch64-macos.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.5/zf-0.5-aarch64-macos.tar.xz",
+          "size": 57948,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "zf-0.5-aarch64-linux.tar.xz",
+          "url": "https://github.com/natecraddock/zf/releases/download/0.5/zf-0.5-aarch64-linux.tar.xz",
+          "size": 210240,
+          "content_type": "application/x-xz"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.4",
+      "name": "zf 0.4",
+      "body": "This release includes many refactors and cleanups to the code. Flicker in drawing the UI has been resolved, and work has begun on macOS support. And finally, the algorithm for matching on filenames has received an update and should be even more precise.\r\n\r\nSee the [changelog](https://github.com/natecraddock/zf/blob/master/CHANGELOG.md) for more details.",
+      "prerelease": false,
+      "published_at": "2022-03-14T23:43:35Z",
+      "html_url": "https://github.com/natecraddock/zf/releases/tag/0.4",
+      "assets": []
+    },
+    {
+      "tag_name": "0.3",
+      "name": "zf 0.3",
+      "body": "This release improves the ranking algorithm, adds two new commandline options, fixes a few bugs, and optimizes the TUI drawing code. Shell completion scripts are now provided for bash, zsh, and fish.\r\n\r\nSee the [changelog](https://github.com/natecraddock/zf/blob/master/CHANGELOG.md) for more details. ",
+      "prerelease": false,
+      "published_at": "2022-02-21T23:11:15Z",
+      "html_url": "https://github.com/natecraddock/zf/releases/tag/0.3",
+      "assets": []
+    },
+    {
+      "tag_name": "0.2",
+      "name": "zf 0.2",
+      "body": "This release fixes a few minor bugs, optimizes drawing the terminal user interface, and introduces a number of new features:\r\n\r\nSee the [changelog](https://github.com/natecraddock/zf/blob/master/CHANGELOG.md) for more details.",
+      "prerelease": false,
+      "published_at": "2022-02-06T01:44:26Z",
+      "html_url": "https://github.com/natecraddock/zf/releases/tag/0.2",
+      "assets": []
+    }
+  ],
+  "owner_bio": "ziguana & hiker",
+  "owner_company": null,
+  "owner_location": "Utah",
+  "owner_blog": "https://nathancraddock.com",
+  "owner_twitter_username": null,
+  "owner_followers": 83,
+  "owner_following": 7,
+  "owner_created_at": "2014-06-23T17:34:42Z",
+  "license": "MIT",
+  "category": "cli"
+}

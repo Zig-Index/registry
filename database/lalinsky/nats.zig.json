@@ -1,0 +1,34 @@
+{
+  "name": "nats.zig",
+  "owner": "lalinsky",
+  "repo": "nats.zig",
+  "description": "A Zig client library for NATS",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 38,
+  "forks": 2,
+  "watchers": 1,
+  "updated_at": "2025-11-19T04:57:14Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# NATS.zig\n\nA Zig client library for NATS, the cloud-native messaging system.\n\n## Development Status\n\nThis library is mostly feature-complete but lacks production testing. The API is functional and covers the core NATS and JetStream features, but may still undergo changes based on feedback.\n\n**Testers are welcome!** If you're interested in testing the library in your projects, please report any issues or feedback. The goal is to be as feature complete as the official NATS client libraries. It is based on the NATS C and Go libraries.\n\n⚠️ **Note:** While the library is mostly finished, the API may still change before the 1.0 release. Use at your own discretion in production environments.\n\n## Installation\n\n1) Add nats.zig as a dependency in your `build.zig.zon`:\n\n```bash\nzig fetch --save \"git+https://github.com/lalinsky/nats.zig\"\n```\n\n2) In your `build.zig`, add the `nats` module as a dependency to your program:\n\n```zig\nconst nats = b.dependency(\"nats\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\n// the executable from your call to b.addExecutable(...)\nexe.root_module.addImport(\"nats\", nats.module(\"nats\"));\n```\n\n## Examples\n\n### Connect\n\n```zig\nvar nc = nats.Connection.init(allocator, .{});\ndefer nc.deinit();\n\ntry nc.connect(\"nats://localhost:4222\");\n```\n\n### Publish message\n\n```zig\ntry nc.publish(\"hello\", \"Hello, NATS!\");\n```\n\n### Subscribe synchronously\n\n```zig\n// Create synchronous subscription\nvar counter: u32 = 0;\nconst sub = try nc.subscribeSync(\"hello\");\n\n// Wait for message with 5 second timeout\nwhile (true) {\n    var msg = sub.nextMsg(5000) catch |err| {\n        if (err == error.Timeout) continue;\n        return err;\n    };\n    defer msg.deinit();\n\n    counter += 1;\n    std.debug.print(\"Message #{d}: {s}\\n\", .{ counter, msg.data });\n}\n```\n\n### Subscribe asynchronously (with callback)\n\n```zig\n// Define message handler\nfn messageHandler(msg: *nats.Message, counter: *u32) void {\n    defer msg.deinit();\n\n    counter.* += 1;\n    std.debug.print(\"Message #{d}: {s}\\n\", .{ counter.*, msg.data });\n}\n\n// Subscribe with callback handler\nvar counter: u32 = 0;\nconst sub = try nc.subscribe(\"hello\", messageHandler, .{&counter});\n```\n\n### Send request and wait for reply\n\n```zig\n// Send request and wait for reply with 5 second timeout\nconst reply = try nc.request(\"help\", \"need assistance\", 5000);\ndefer reply.deinit();\n\nstd.debug.print(\"Received reply: {s}\\n\", .{reply.data});\n```\n\n### Send request and wait for multiple replies\n\n```zig\n// Request multiple responses from different responders\nvar messages = try nc.requestMany(\"services.status\", \"ping all\", 5000, .{\n    .max_messages = 10,    // Stop after 10 responses\n    .stall_ms = 100,       // Stop if no new responses for 100ms\n});\n\nwhile (messages.pop()) |msg| {\n    defer msg.deinit();\n    std.debug.print(\"Response: {s}\\n\", .{msg.data});\n}\n```\n\n### Handle requests\n\n```zig\n// Define request handler\nfn echoHandler(msg: *nats.Message, context: *MyContext) !void {\n    defer msg.deinit();\n    \n    // Send reply\n    try msg.reply(msg.data);\n}\n\n// Subscribe to handle requests\nvar context = MyContext{};\nconst sub = try nc.subscribe(\"echo\", echoHandler, .{&context});\n```\n\n### JetStream Stream Management\n\n```zig\n// Create JetStream context\nvar js = nc.jetstream(.{});\ndefer js.deinit();\n\n// Create a stream\nconst stream_config = nats.StreamConfig{\n    .name = \"ORDERS\",\n    .subjects = &.{\"orders.*\"},\n    .retention = .limits,\n    .storage = .file,\n    .max_msgs = 1000,\n};\n\nvar stream_info = try js.addStream(stream_config);\ndefer stream_info.deinit();\n```\n\n### JetStream Consumer Management\n\n```zig\n// Create a durable consumer\nconst consumer_config = nats.ConsumerConfig{\n    .durable_name = \"order_processor\", \n    .ack_policy = .explicit,\n    .deliver_policy = .all,\n};\n\nvar consumer_info = try js.addConsumer(\"ORDERS\", consumer_config);\ndefer consumer_info.deinit();\n```\n\n### JetStream Push Subscriptions\n\n```zig\n// Push subscription with callback handler\nfn orderHandler(js_msg: *nats.JetStreamMessage, count: *u32) !void {\n    defer js_msg.deinit();\n    count.* += 1;\n    try js_msg.ack(); // Acknowledge message\n    std.debug.print(\"Order: {s}\\n\", .{js_msg.data});\n}\n\nvar processed: u32 = 0;\nvar push_sub = try js.subscribe(\"orders.*\", orderHandler, .{&processed}, .{\n    .stream = \"ORDERS\",\n    .durable = \"order_processor\",\n});\ndefer push_sub.deinit();\n```\n\n### JetStream Pull Subscriptions\n\n```zig\n// Pull subscription (fetch messages manually)\nvar pull_sub = try js.pullSubscribe(\"orders.*\", \"batch_processor\", .{\n    .stream = \"ORDERS\",\n});\ndefer pull_sub.deinit();\n\nvar batch = try pull_sub.fetch(10, 5000); // Fetch up to 10 msgs, 5s timeout\ndefer batch.deinit();\nfor (batch.messages) |js_msg| {\n    try js_msg.ack();\n}\n```\n\n## Building\n\n```bash\n# Build the library\nzig build\n\n# Build examples\nzig build examples\n```\n\n## Testing\n\nThe project includes both unit tests and end-to-end tests:\n\n```bash\n# Run all tests (unit + e2e)\nzig build test\n\n# Run only unit tests\nzig build test-unit\n\n# Run only end-to-end tests\nzig build test-e2e\n```\n\nThe end-to-end tests automatically start and stop the required NATS servers using Docker Compose.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/220839?u=76f817358cb458727e81dd4ec11188d343becc9e&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Trenčín, Slovakia",
+  "owner_blog": "https://lalinsky.com",
+  "owner_twitter_username": null,
+  "owner_followers": 297,
+  "owner_following": 27,
+  "owner_created_at": "2010-03-11T19:55:55Z",
+  "license": "Apache-2.0",
+  "category": "library"
+}

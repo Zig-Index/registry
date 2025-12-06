@@ -1,0 +1,310 @@
+{
+  "name": "tokenuze",
+  "owner": "bfactory-ai",
+  "repo": "tokenuze",
+  "description": "A CLI tool that summarizes token and cost usage from various LLM providers",
+  "type": "project",
+  "topics": [
+    "ai-agent-tools",
+    "cli",
+    "token",
+    "usage-analytics",
+    "zig-package"
+  ],
+  "stars": 3,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-12-03T15:18:43Z",
+  "minimum_zig_version": "0.16.0-dev.1456+16fc083f2",
+  "readme": "# Tokenuze\n\nTokenuze is a CLI tool that summarizes token and cost usage from various LLM providers.\nIt scans session logs, aggregates token counts, and reports pricing.\nThe output is a table or JSON, suitable for dashboards.\n\n## Requirements\n- Zig 0.16.0-dev.1456+16fc083f2 or newer (if building from source)\n- `sqlite3` in your `PATH` (for Zed and Crush providers)\n- Network access to fetch remote pricing / uploading stats (optional)\n\n## Supported Providers\n- [Amp](https://ampcode.com/): `~/.local/share/amp/threads`\n- [Claude Code](https://www.claude.com/product/claude-code): `~/.claude/projects`\n- [Codex CLI](https://developers.openai.com/codex/cli/): `~/.codex/sessions`\n- [Crush](https://github.com/charmbracelet/crush): `.crush/crush.db` (project-based, recursively crawled)\n- [Gemini CLI](https://geminicli.com/): `~/.gemini/tmp`\n- [Opencode](https://opencode.ai/): `~/.local/share/opencode/storage/session`\n- [Zed](https://zed.dev/): `~/.local/share/zed/threads/threads.db`\n\n## Installation\n\n- **Prebuilt binaries:** grab the latest release from the [Releases page](https://github.com/bfactory-ai/tokenuze/releases) and put `tokenuze` on your `PATH`.\n- **Build from source:** requires Zig 0.16.0-dev.1456+16fc083f2 or newer\n\n```bash\ngit clone https://github.com/bfactory-ai/tokenuze.git\ncd tokenuze\nzig build --release=fast  # binary will be in zig-out/bin/\n```\n\n## Quick Start\n```bash\ntokenuze --upload  # upload usage across all supported models\ntokenuze --upload --agent gemini --agent opencode  # request specific agents\ntokenuze --since 20250101 --until 20250107  # filter a specific date range\ntokenuze --sessions --since 20250101  # print per-session table (default)\ntokenuze --sessions --since 20250101 --json --pretty  # print per-session JSON\ntokenuze --help  # display all usage options\n```\n\n### JSON Output Sample\n\n<details>\n\n```json\n{\n  \"daily\": [\n    {\n      \"date\": \"Nov 25, 2025\",\n      \"isoDate\": \"2025-11-25\",\n      \"inputTokens\": 248291670,\n      \"cachedInputTokens\": 236782489,\n      \"outputTokens\": 1188464,\n      \"reasoningOutputTokens\": 749903,\n      \"totalTokens\": 249489543,\n      \"costUSD\": 55.88007429999999,\n      \"models\": {\n        \"gemini-2.5-flash\": {\n          \"inputTokens\": 10992,\n          \"cachedInputTokens\": 0,\n          \"outputTokens\": 10,\n          \"reasoningOutputTokens\": 79,\n          \"totalTokens\": 11032,\n          \"costUSD\": 0.0033225999999999998,\n          \"pricingAvailable\": true,\n          \"isFallback\": false\n        },\n        \"gemini-3-pro-preview\": {\n          \"inputTokens\": 5664,\n          \"cachedInputTokens\": 10521,\n          \"outputTokens\": 1738,\n          \"reasoningOutputTokens\": 2048,\n          \"totalTokens\": 16781,\n          \"costUSD\": 0.0342882,\n          \"pricingAvailable\": true,\n          \"isFallback\": false\n        },\n        \"gpt-5.1-codex\": {\n          \"inputTokens\": 248275014,\n          \"cachedInputTokens\": 236771968,\n          \"outputTokens\": 1186716,\n          \"reasoningOutputTokens\": 747776,\n          \"totalTokens\": 249461730,\n          \"costUSD\": 55.842463499999994,\n          \"pricingAvailable\": true,\n          \"isFallback\": false\n        }\n      },\n      \"missingPricing\": []\n    }\n  ],\n  \"totals\": {\n    \"inputTokens\": 248291670,\n    \"cachedInputTokens\": 236782489,\n    \"outputTokens\": 1188464,\n    \"reasoningOutputTokens\": 749903,\n    \"totalTokens\": 249489543,\n    \"costUSD\": 55.88007429999999,\n    \"missingPricing\": []\n  }\n}\n```\n\nMissing pricing entries are listed under `missing_pricing`.\n\n</details>\n\n\n## Extending\nTo add a new provider:\n1. Create a new file in `src/providers/` and use the `provider.makeProvider` factory.\n2. Implement a parser for the provider's log format that emits `model.TokenUsageEvent` objects.\n3. Use helpers in `src/providers/provider.zig` for common tasks like JSON parsing and timestamp handling.\n4. Register the provider in `src/root.zig` and expose a `loadPricingData` function for fallback pricing.\n5. Add test fixtures in a new `fixtures/<provider>` directory and write unit tests in your provider's file.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/125416817?v=4",
+  "releases": [
+    {
+      "tag_name": "0.6.0",
+      "name": "tokenuze 0.6.0",
+      "body": "## What's Changed\r\n* feat(cli): add --sessions flag for session-level output by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/40\r\n* feat: integrate zed editor usage collection by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/39\r\n* feat(render): display session activity in local timezone by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/41\r\n* feat(crush): add support for crush usage tracking by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/42\r\n* feat(pricing): calculate token costs and resolve model rates by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/43\r\n* feat(amp): implement usage data provider by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/44\r\n* refactor(model): implement session sorting by last activity by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/45\r\n\r\n\r\n**Full Changelog**: https://github.com/bfactory-ai/tokenuze/compare/0.5.0...0.6.0",
+      "prerelease": false,
+      "published_at": "2025-12-03T04:46:04Z",
+      "html_url": "https://github.com/bfactory-ai/tokenuze/releases/tag/0.6.0",
+      "assets": [
+        {
+          "name": "tokenuze-macos-aarch64.tar.gz",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.6.0/tokenuze-macos-aarch64.tar.gz",
+          "size": 591289,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "tokenuze-linux-x86_64.tar.gz",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.6.0/tokenuze-linux-x86_64.tar.gz",
+          "size": 647459,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "tokenuze-windows-x86_64.zip",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.6.0/tokenuze-windows-x86_64.zip",
+          "size": 651527,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.5.0",
+      "name": "tokenuze 0.5.0",
+      "body": "## What's Changed\r\n* feat(opencode): add opencode usage tracking support by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/37\r\n\r\n\r\n**Full Changelog**: https://github.com/bfactory-ai/tokenuze/compare/0.4.4...0.5.0",
+      "prerelease": false,
+      "published_at": "2025-11-30T14:21:14Z",
+      "html_url": "https://github.com/bfactory-ai/tokenuze/releases/tag/0.5.0",
+      "assets": [
+        {
+          "name": "tokenuze-macos-aarch64.tar.gz",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.5.0/tokenuze-macos-aarch64.tar.gz",
+          "size": 516560,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "tokenuze-linux-x86_64.tar.gz",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.5.0/tokenuze-linux-x86_64.tar.gz",
+          "size": 570758,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "tokenuze-windows-x86_64.zip",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.5.0/tokenuze-windows-x86_64.zip",
+          "size": 551722,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.4.4",
+      "name": "tokenuze 0.4.4",
+      "body": "## What's Changed\r\n* perf: introduce pricing cache to avoid redundant loading by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/35\r\n* perf(provider): use threads for processing session files by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/36\r\n\r\n\r\n**Full Changelog**: https://github.com/bfactory-ai/tokenuze/compare/0.4.3...0.4.4",
+      "prerelease": false,
+      "published_at": "2025-11-25T14:48:22Z",
+      "html_url": "https://github.com/bfactory-ai/tokenuze/releases/tag/0.4.4",
+      "assets": [
+        {
+          "name": "tokenuze-macos-aarch64.tar.gz",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.4.4/tokenuze-macos-aarch64.tar.gz",
+          "size": 502429,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "tokenuze-linux-x86_64.tar.gz",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.4.4/tokenuze-linux-x86_64.tar.gz",
+          "size": 553611,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "tokenuze-windows-x86_64.zip",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.4.4/tokenuze-windows-x86_64.zip",
+          "size": 530494,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.4.3",
+      "name": "tokenuze 0.4.3",
+      "body": "## What's Changed\r\n* refactor(codex): store token count status as boolean by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/31\r\n* refactor(gemini): process model and timestamp during field parsing by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/32\r\n* refactor(claude): consolidate record processing context by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/33\r\n* refactor(provider): stream usage events using event sink interface by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/34\r\n\r\n\r\n**Full Changelog**: https://github.com/bfactory-ai/tokenuze/compare/0.4.2...0.4.3",
+      "prerelease": false,
+      "published_at": "2025-11-25T07:15:30Z",
+      "html_url": "https://github.com/bfactory-ai/tokenuze/releases/tag/0.4.3",
+      "assets": [
+        {
+          "name": "tokenuze-macos-aarch64.tar.gz",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.4.3/tokenuze-macos-aarch64.tar.gz",
+          "size": 500130,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "tokenuze-linux-x86_64.tar.gz",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.4.3/tokenuze-linux-x86_64.tar.gz",
+          "size": 554654,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "tokenuze-windows-x86_64.zip",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.4.3/tokenuze-windows-x86_64.zip",
+          "size": 531196,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.4.2",
+      "name": "tokenuze 0.4.2",
+      "body": "## What's Changed\r\n* fix(gemini): correctly calculate total usage tokens by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/30\r\n\r\n\r\n**Full Changelog**: https://github.com/bfactory-ai/tokenuze/compare/0.4.1...0.4.2",
+      "prerelease": false,
+      "published_at": "2025-11-19T05:39:23Z",
+      "html_url": "https://github.com/bfactory-ai/tokenuze/releases/tag/0.4.2",
+      "assets": [
+        {
+          "name": "tokenuze-macos-aarch64.tar.gz",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.4.2/tokenuze-macos-aarch64.tar.gz",
+          "size": 502371,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "tokenuze-linux-x86_64.tar.gz",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.4.2/tokenuze-linux-x86_64.tar.gz",
+          "size": 557966,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "tokenuze-windows-x86_64.zip",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.4.2/tokenuze-windows-x86_64.zip",
+          "size": 532567,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.4.1",
+      "name": "tokenuze 0.4.1",
+      "body": "## What's Changed\r\n* refactor: streamline runtime phases by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/26\r\n* feat(http): add streaming response handling by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/27\r\n* refactor(providers): share more parsing utilities by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/28\r\n* refactor(provider): use streaming json readers by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/29\r\n\r\n\r\n**Full Changelog**: https://github.com/bfactory-ai/tokenuze/compare/0.4.0...0.4.1",
+      "prerelease": false,
+      "published_at": "2025-11-12T23:10:48Z",
+      "html_url": "https://github.com/bfactory-ai/tokenuze/releases/tag/0.4.1",
+      "assets": [
+        {
+          "name": "tokenuze-linux-x86_64.tar.gz",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.4.1/tokenuze-linux-x86_64.tar.gz",
+          "size": 557845,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "tokenuze-macos-aarch64.tar.gz",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.4.1/tokenuze-macos-aarch64.tar.gz",
+          "size": 502313,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "tokenuze-windows-x86_64.zip",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.4.1/tokenuze-windows-x86_64.zip",
+          "size": 532216,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.4.0",
+      "name": "tokenuze 0.4.0",
+      "body": "## What's Changed\r\n* feat(cli): add dynamic log level control by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/21\r\n* feat: add --table option for usage summary by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/22\r\n* feat(model): implement flexible model pricing resolution by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/23\r\n* feat(cli): introduce --json flag for output format by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/24\r\n* feat: hide cache usage fields if totals are zero by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/25\r\n\r\n\r\n**Full Changelog**: https://github.com/bfactory-ai/tokenuze/compare/0.3.0...0.4.0",
+      "prerelease": false,
+      "published_at": "2025-11-10T05:18:46Z",
+      "html_url": "https://github.com/bfactory-ai/tokenuze/releases/tag/0.4.0",
+      "assets": [
+        {
+          "name": "tokenuze-macos-aarch64.tar.gz",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.4.0/tokenuze-macos-aarch64.tar.gz",
+          "size": 507505,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "tokenuze-linux-x86_64.tar.gz",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.4.0/tokenuze-linux-x86_64.tar.gz",
+          "size": 561884,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "tokenuze-windows-x86_64.zip",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.4.0/tokenuze-windows-x86_64.zip",
+          "size": 533298,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.3.0",
+      "name": "tokenuze 0.3.0",
+      "body": "## What's Changed\r\n* refactor(session): pre-scan directory and use indices for worker tasks by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/14\r\n* refactor(pricing): move remote pricing logic to core by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/15\r\n* refactor(cli): implement data-driven option parsing by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/16\r\n* refactor: extract identity resolution functions by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/17\r\n* refactor: centralize token usage json writing by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/18\r\n* feat(session_provider): support date suffix model aliases by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/19\r\n* refactor(providers): decouple session parsing logic by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/20\r\n\r\n\r\n**Full Changelog**: https://github.com/bfactory-ai/tokenuze/compare/0.2.0...0.3.0",
+      "prerelease": false,
+      "published_at": "2025-11-07T15:50:15Z",
+      "html_url": "https://github.com/bfactory-ai/tokenuze/releases/tag/0.3.0",
+      "assets": [
+        {
+          "name": "tokenuze-macos-aarch64.tar.gz",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.3.0/tokenuze-macos-aarch64.tar.gz",
+          "size": 492519,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "tokenuze-linux-x86_64.tar.gz",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.3.0/tokenuze-linux-x86_64.tar.gz",
+          "size": 545554,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "tokenuze-windows-x86_64.zip",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.3.0/tokenuze-windows-x86_64.zip",
+          "size": 519979,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.2.0",
+      "name": "tokenuze 0.2.0",
+      "body": "## What's Changed\r\n* feat(upload): include local timezone offset in upload payload by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/12\r\n* feat: implement --tz option for timezone offset by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/13\r\n\r\n\r\n**Full Changelog**: https://github.com/bfactory-ai/tokenuze/compare/0.1.0...0.2.0",
+      "prerelease": false,
+      "published_at": "2025-11-06T13:20:00Z",
+      "html_url": "https://github.com/bfactory-ai/tokenuze/releases/tag/0.2.0",
+      "assets": [
+        {
+          "name": "tokenuze-macos-aarch64.tar.gz",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.2.0/tokenuze-macos-aarch64.tar.gz",
+          "size": 489617,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "tokenuze-linux-x86_64.tar.gz",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.2.0/tokenuze-linux-x86_64.tar.gz",
+          "size": 547317,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "tokenuze-windows-x86_64.zip",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.2.0/tokenuze-windows-x86_64.zip",
+          "size": 518104,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.1.0",
+      "name": "tokenuze 0.1.0",
+      "body": "## What's Changed\r\n* feat: add support for gemini session usage by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/1\r\n* feat: add support for Claude session usage tracking by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/2\r\n* fix(claude): align usage totals with ccusage by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/3\r\n* test: verify token usage parsing for all providers by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/4\r\n* refactor(allocator): separate shared and thread-local allocators by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/5\r\n* feat(cli): implement help output by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/6\r\n* ci: add github actions workflows by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/7\r\n* feat: calculate and display combined input tokens by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/8\r\n* feat(cli): add --version flag to display build version by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/9\r\n* feat: track and report token usage by session by @arrufat in https://github.com/bfactory-ai/tokenuze/pull/11\r\n\r\n\r\n**Full Changelog**: https://github.com/bfactory-ai/tokenuze/commits/0.1.0",
+      "prerelease": false,
+      "published_at": "2025-11-06T03:43:53Z",
+      "html_url": "https://github.com/bfactory-ai/tokenuze/releases/tag/0.1.0",
+      "assets": [
+        {
+          "name": "tokenuze-macos-aarch64.tar.gz",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.1.0/tokenuze-macos-aarch64.tar.gz",
+          "size": 486882,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "tokenuze-linux-x86_64.tar.gz",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.1.0/tokenuze-linux-x86_64.tar.gz",
+          "size": 544699,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "tokenuze-windows-x86_64.zip",
+          "url": "https://github.com/bfactory-ai/tokenuze/releases/download/0.1.0/tokenuze-windows-x86_64.zip",
+          "size": 515309,
+          "content_type": "application/zip"
+        }
+      ]
+    }
+  ],
+  "owner_bio": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2023-02-15T00:14:07Z",
+  "license": "MIT",
+  "category": "cli"
+}

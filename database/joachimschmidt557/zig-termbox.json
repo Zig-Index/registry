@@ -1,0 +1,39 @@
+{
+  "name": "zig-termbox",
+  "owner": "joachimschmidt557",
+  "repo": "zig-termbox",
+  "description": "A termbox implementation in zig",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 3,
+  "forks": 2,
+  "watchers": 2,
+  "updated_at": "2025-04-04T18:07:52Z",
+  "dependencies": [
+    {
+      "name": "wcwidth",
+      "url": "git+https://github.com/joachimschmidt557/zig-wcwidth?ref=v0.1.0#4f5c8efa838da57c9e1b14506138936964835999",
+      "hash": "wcwidth-0.1.0-A4Aa6obmAAC40epfTYwhsdITDO3M6dHEWf6C0jeGMWrV"
+    },
+    {
+      "name": "ansi_term",
+      "url": "git+https://github.com/ziglibs/ansi_term?ref=v0.1.0#d88bc63e91e2c1cd2e60aaf51196860375c78042",
+      "hash": "ansi_term-0.1.0-_baAy9djAABNQdiVAt7Iwk4wlBh2kL-UAxEDd3wDs-09"
+    }
+  ],
+  "readme": "# zig-termbox\n\ntermbox-inspired library for creating terminal user interfaces\n\nWorks with Zig 0.14.0.\n\n## Concepts\n\n`termbox` is a *double-buffered* terminal library. This means that\nwhen you call functions to draw on the screen, you are not actually\nsending data to the terminal, but instead act on an intermediate data\nstructure called the *back buffer*. Only when you call\n`Termbox.present`, the terminal is actually updated to reflect the\nstate of the *back buffer*.\n\nAn advantage of this design is that repeated calls to\n`Termbox.present` only update the parts of the terminal interface that\nhave actually changed since the last call. `termbox` achieves this by\ntracking the current state of the terminal in the internal *front\nbuffer*.\n\n## Examples\n\n```zig\nconst std = @import(\"std\");\n\nconst termbox = @import(\"termbox\");\nconst Termbox = termbox.Termbox;\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    var t = try Termbox.init(allocator);\n    defer t.shutdown() catch {};\n\n    var anchor = t.back_buffer.anchor(1, 1);\n    try anchor.writer().print(\"Hello {s}!\", .{\"World\"});\n\n    anchor.move(1, 2);\n    try anchor.writer().print(\"Press any key to quit\", .{});\n\n    try t.present();\n\n    _ = try t.pollEvent();\n}\n```\n\nFurther examples can be found in the `examples` subdirectory.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/28556218?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Germany",
+  "owner_blog": "www.josch557.de",
+  "owner_twitter_username": null,
+  "owner_followers": 80,
+  "owner_following": 13,
+  "owner_created_at": "2017-05-09T06:23:23Z",
+  "license": "MIT",
+  "category": "library"
+}

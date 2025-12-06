@@ -1,0 +1,2497 @@
+{
+  "name": "pawnocchio",
+  "owner": "JonathanHallstrom",
+  "repo": "pawnocchio",
+  "description": "chess engine, goal is to make it strong. currently plays good chess",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 35,
+  "forks": 2,
+  "watchers": 4,
+  "updated_at": "2025-11-23T15:41:40Z",
+  "readme": "<div align=\"center\">\n\n<img\n  width=\"250\"\n  alt=\"Pawnocchio Logo\"\n  src=\"assets/main_pawnocchio-A.png\">\n \n<h3>pawnocchio</h3>\n<b>Strongest UCI chess engine written in zig</b>\n\n<p align=\"center\">\n<a href=\"https://www.runpod.io/\">\n<img\n        alt=\"Runpod Logo\"\n        src=\"https://img.shields.io/badge/RUNPOD-Honorable%20Sponsor-blue?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB+CAMAAADC38VzAAAAAXNSR0IArs4c6QAAAnZQTFRFAAAAZzq3aDu3aDy4aTy4aT24aT+5aj23aj64akC5az25az+3az+5a0C4a0G6bEC5bEG4bEG5bEG6bEO7bUC6bUG4bUG5bUK5bUK6bkK6bkO5bkO6bkS6bkS7bkW6bkW7b0O5b0O7b0S5b0S6b0S7b0W6b0W7b0e7cEa6cEa7cEe7cUW8cUa7cUa8cUe7cUi8cke7cki9c0q8c0q9dEy+dE29dUq8dUu9dUy8dUy9dUy+dU2+dU6+dky9dk6+d029d02/d0++d0+/d1C/eE+/eFG/eVLAelLAelPAelTAe1TAe1bBfFPBfFTAfFXBfFfCfVXBfVbCfVfCfVjBflfCfljBflnCf1fDf1nBf1nDf1vDgFnCgFzCgVrDgVzCgVzDgV3Dgl3Dgl7Dgl7Egl/Fg17Dg2HEhGLGhWDFhWHFhWLEhWPGhmDFhmHFh2PFh2TGiGXHiWXGimfHimjHimnHi2jIi2rIi2rJjGnIjGrIjWvIjWvJjmvKjm3Kjm7Kj2zJj2/KkG7KkG/JkG/LkW/KkXHKknLLk3PLk3TLk3TMlHTLlHXMlXbNlXfNlnXMl3rOmHjNmHnNmHnOmHvPmXnNmXvOmXvPmnrOm33Qm3/QnH/QnYLQnoHRnoLRn4TRn4TSoITRoITSooXSoobSoobTpIrTpIrVpYrUp4zUp43Vp47VqI3VqI7WqY/VqY/WqZDWqZHXqpDXqpHXq5LXrJPXrJPYrJTXrZXYrZXZrpXYr5jYsJjasJnZsJnasZnasZrasZvasprasprbspzas53btJ7ctqHcuKPduaTduaTeuaXduaXeuqXfuqbeu6fevKjevKjfvKnfVCfTLwAAAAF0Uk5TAEDm2GYAAAQmSURBVGje7ZrlexQxEIczK3DAwsFhLQWKu7tLcWuhuLu7OxR3irsVd3d31/+ID7S93Fomu8lCeW6+3W2S94lNZn4JIXnH1gAAaBOCRN7XIMeMlQExS0CMKaUPSEemgp1VvSgRuRMcTWn6WArymwruFhr+UzSzDmAsNEMgcibgLbxRCPI08FrR/X6Z+cCLqY0ue0d2Au+mtXvuBbkO/Jqe/osP+RrEmD4Hz6wBwiyERI4BkYZCHgMIHJpfLBIzuu0Fd3MiG7lELFFpwUY+FNzLyBc2s5RQoho+yUYOFNtLfSEbuUcsUuvJRv7QxDLrIbZJA8Hr5xYbOVvwZGawkecFT+YoxMjWF8usifGzYpHGW6rpbgBNAvBAe6mm1yepigrqAAvziVDkNKrlu0mgKH/meLHEsW1LN1xXoY+2U/SnktRpoKm+kBViOtPffKK+y/10OPpvKiHkSLJnr6RdME9cG1OJipbBDeeW3V5aU/idwWq7NVrEVGqVCRpbeoPBB+7rsBmvmVpZSggh/XJ+jbBWmB8JIee4tosPWG4Nz1ix2mSDzTWeubueznThPhRUca7zc5jh1mN9G9vjRajiiJ5m24c0w35VK5NQMbQRDV9o6DJmxTfdEyzk1shc4VDMpEYnBlX5USuDWo7h79ic6Kg9FEZiG7hS39AVAAidwSdiiQ5QaMSRQb7KzOJJOFuCExRgrBz1aZB5o5oi4y3ikRnW5M0SkD8Ui3xglzFad14xkcyCgIMCdBSF7OCQG9u7tkUikPMcE3KnXOucX+RZFxXA0Y+X8ccsBF6gAA3lCKasUHCKN+Q4lsjCOJ/38SN3sJUdZlTwng/5jhlooCLtyjzMwigNCxN2DcEieyOFM1y0txaDXIFW67Ai200W8gY2M+DJnhjOogCPLsmhtfVwRqbwiaFcGdJce+QsXgWWM7E/bkWe0EEuFCDiHEbLg5rzD/4s2lPun+Crnx6hcCfKvAdBQSmZsWxgUGp8w38DagQGTfwbPU2yzbDj0LwMTYxD49A4NA79Z6Bxh///QavEoWio6guawF9bJYSUCxqaTAj5HjT0MyGEDA4Wmn1NMJS3XjUf0OE5NT9FgoKGPlKpbaYWCHSXSTkYr0uH2l361JO7kKraq0EvI/Kg2lNH3WuTKgnq/tw3TQa0F1M/LS/a4RfHqLbXDZFQ9RJSn2a9VOSIHBZwKPFdsVB3oSOF856jkn9oSf7blSwdA3WZ/+Oe7pGmIyJ8R+hUzzdmjb1CG/u5Gvya4AUa/ujzFnS3zgtVDwq47x3tJkiGUAeYFzMfepSMbx6HWuKu8F9EcFDjqdDXCpvp1qOP0Qgd5qhbhb/LoA49wxaaLuUFSvXcmC76n0LH7VLsdvYG0SyPK0NXiTxbopsGcgQAgLqIyLV2AM3p380AupC8YL8BYUWSSGLrJw0AAAAASUVORK5CYII=&logoWidth=20&style=for-the-badge&labelColor=black\"\n>\n</a>\n</p>\n<br>\n<br>\n\n|         Version         | Release Date | [CCRL 40/15][ccrl 40/15] | [CCRL Blitz][ccrl Blitz] | [CEGT 40/20][cegt 40/20] | [ipman r9 list][ipman 10+1] | [Chess324 Top15][324top15] |\n|:-----------------------:|:------------:|:------------------------:|:------------------------:|:------------------------:|:---------------------------:|:---------------------------:|\n| [1.8][v1.8]             |  2025-07-22  |           3564 (#20)     |           3697 (#16)     |           3544 (#18)     |             3517            |          3680 (#12)         |\n| [1.7][v1.7]             |  2025-05-31  |           3528           |           3642           |           3491           |             3448            |\n| [1.6.1][v1.6.1]         |  2025-05-15  |           3500*          |           3622           |           3440*          |\n| [1.6][v1.6]             |  2025-04-27  |           3490           |           3600*          |           3433           |\n| [1.5][v1.5]             |  2025-04-18  |           3450*          |           3500           |           3350           |\n| [1.4.1][v1.4.1]         |  2025-04-05  |           3425           |           3450*          |\n| [1.3.1415][v1.3.1415]   |  2025-03-14  |           3365           |           3401           |\n| [1.3][v1.3]             |  2025-03-07  |           3201           |\n| [1.2][v1.2]             |  2025-02-21  |           3120           |\n| [1.1][v1.1]             |  2025-01-24  |           2432           |\n| [1.0][v1.0]             |  2025-01-20  |           2100*          |\n\n</div>\n*estimated\n\n## Features\nSupports FRC, also known as Chess960\n### Search\nThe search is a standard alpha-beta search with the following enhancements:\n- Iterative deepening\n- Quiescence search\n- Aspiration windows\n- Principal variation search\n- Transposition table\n  - Move ordering\n  - Cutoffs\n  - Static evaluation correction\n- MVV and SEE ordering of captures\n- History Heuristic (standard history, 1 ply conthist, and noisy history) \n- Reverse futility pruning\n- Null move pruning\n- Razoring\n- Mate distance pruning\n- History pruning\n- Singular extensions\n  - Double extension\n  - Multicut\n  - Negative extensions\n- Correction history\n\n### Evaluation\nThe evaluation is done using a neural net trained entirely on self play games from zero knowledge using the excellent open source [bullet](https://github.com/jw1912/bullet) neural network trainer.\nThe architecture of the network is (768x8hm -> 1280)x2 -> 1x8\n\n## Build instructions\n1. Get the network with `git submodule update --init --depth 1`\n2. Install zig (0.14.0)\n3. `zig build --release=fast --prefix <installation path>` (for example `--prefix ~/.local` will put pawnocchio in `~/.local/bin/pawnocchio`)\nThe Makefile is only intended to be used for testing on Openbench.\n\n## Licensing\n - The code is licensed under the GPLv3 license. Full text can be found in LICENSE in the project root\n - The assets are licensed under the CC-BY-ND 4.0 license. Full text can be found in assets/LICENSE\n\n## Credit\n - [Pyrrhic](https://github.com/JonathanHallstrom/Pyrrhic/tree/patch-1) by [Andrew Grant](https://github.com/AndyGrant) for tablebase probing, under the MIT license.\n - [Jackal](https://github.com/TomaszJaworski777/Jackal) by [snekkers](https://github.com/TomaszJaworski777) for inspiration styling this readme\n\n[v1.0]:https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.0\n[v1.1]:https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.1\n[v1.2]:https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.2\n[v1.3]:https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.3\n[v1.3.1415]:https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.3.1415\n[v1.4]:https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.4\n[v1.4.1]:https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.4.1\n[v1.5]:https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.5\n[v1.6]:https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.6\n[v1.6.1]:https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.6.1\n[v1.7]:https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.7\n[v1.7.2]:https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.7.2\n[v1.8]:https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.8\n\n[324top15]:https://e4e6.com/324/\n[ccrl 40/15]:https://www.computerchess.org.uk/ccrl/4040/cgi/compare_engines.cgi?family=pawnocchio\n[ccrl Blitz]:https://www.computerchess.org.uk/ccrl/404/cgi/compare_engines.cgi?family=pawnocchio\n[cegt 40/20]:http://www.cegt.net/40_40%20Rating%20List/40_40%20SingleVersion/rangliste.html\n[ipman 10+1]:https://ipmanchess.yolasite.com/r9-7945hx.php\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/84847878?u=43834a25253b0004351d14e586a90a4d3bff3b25&v=4",
+  "releases": [
+    {
+      "tag_name": "v1.9-hce",
+      "name": "pawnocchio v1.9-hce",
+      "body": "Another [UBC](https://e4e6.com/) release, about 100 elo stronger than v1.7.2-hce.",
+      "prerelease": true,
+      "published_at": "2025-09-18T21:17:53Z",
+      "html_url": "https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.9-hce",
+      "assets": [
+        {
+          "name": "pawnocchio-1.9-hce-linux-aarch64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.9-hce/pawnocchio-1.9-hce-linux-aarch64",
+          "size": 1047288,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.9-hce-macos-aarch64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.9-hce/pawnocchio-1.9-hce-macos-aarch64",
+          "size": 1076320,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.9-hce-macos-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.9-hce/pawnocchio-1.9-hce-macos-x86_64",
+          "size": 1040538,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.9-hce-windows-aarch64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.9-hce/pawnocchio-1.9-hce-windows-aarch64.exe",
+          "size": 1205248,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.9-hce-linux-x86_64_znver3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.9-hce/pawnocchio-1.9-hce-linux-x86_64_znver3",
+          "size": 1082368,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.9-hce-linux-x86_64_v4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.9-hce/pawnocchio-1.9-hce-linux-x86_64_v4",
+          "size": 1082496,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.9-hce-linux-x86_64_v2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.9-hce/pawnocchio-1.9-hce-linux-x86_64_v2",
+          "size": 1055744,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.9-hce-linux-x86_64_znver5",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.9-hce/pawnocchio-1.9-hce-linux-x86_64_znver5",
+          "size": 1101952,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.9-hce-linux-x86_64_znver2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.9-hce/pawnocchio-1.9-hce-linux-x86_64_znver2",
+          "size": 1071232,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.9-hce-linux-x86_64_znver1",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.9-hce/pawnocchio-1.9-hce-linux-x86_64_znver1",
+          "size": 1071232,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.9-hce-linux-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.9-hce/pawnocchio-1.9-hce-linux-x86_64",
+          "size": 1058176,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.9-hce-linux-x86_64_v3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.9-hce/pawnocchio-1.9-hce-linux-x86_64_v3",
+          "size": 1085568,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.9-hce-linux-x86_64_znver4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.9-hce/pawnocchio-1.9-hce-linux-x86_64_znver4",
+          "size": 1101952,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.9-hce-windows-x86_64_znver4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.9-hce/pawnocchio-1.9-hce-windows-x86_64_znver4.exe",
+          "size": 1292288,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.9-hce-windows-x86_64_znver5.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.9-hce/pawnocchio-1.9-hce-windows-x86_64_znver5.exe",
+          "size": 1292288,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.9-hce-windows-x86_64_v4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.9-hce/pawnocchio-1.9-hce-windows-x86_64_v4.exe",
+          "size": 1274880,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.9-hce-windows-x86_64_znver1.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.9-hce/pawnocchio-1.9-hce-windows-x86_64_znver1.exe",
+          "size": 1269248,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.9-hce-windows-x86_64_v2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.9-hce/pawnocchio-1.9-hce-windows-x86_64_v2.exe",
+          "size": 1252352,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.9-hce-windows-x86_64_znver2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.9-hce/pawnocchio-1.9-hce-windows-x86_64_znver2.exe",
+          "size": 1269248,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.9-hce-windows-x86_64_v3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.9-hce/pawnocchio-1.9-hce-windows-x86_64_v3.exe",
+          "size": 1283072,
+          "content_type": "application/x-msdos-program"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.8.1",
+      "name": "pawnocchio v1.8.1",
+      "body": "Fixed handling of fens in the Shredder GUI and added tbhits output. No strength change from v1.8",
+      "prerelease": false,
+      "published_at": "2025-07-25T18:14:12Z",
+      "html_url": "https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.8.1",
+      "assets": [
+        {
+          "name": "pawnocchio-1.8.1-linux-aarch64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8.1/pawnocchio-1.8.1-linux-aarch64",
+          "size": 16712128,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.8.1-linux-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8.1/pawnocchio-1.8.1-linux-x86_64",
+          "size": 16725832,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.8.1-linux-x86_64_v2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8.1/pawnocchio-1.8.1-linux-x86_64_v2",
+          "size": 16728648,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.8.1-linux-x86_64_v3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8.1/pawnocchio-1.8.1-linux-x86_64_v3",
+          "size": 16743112,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.8.1-linux-x86_64_v4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8.1/pawnocchio-1.8.1-linux-x86_64_v4",
+          "size": 16736968,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.8.1-linux-x86_64_znver1",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8.1/pawnocchio-1.8.1-linux-x86_64_znver1",
+          "size": 16725576,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.8.1-linux-x86_64_znver2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8.1/pawnocchio-1.8.1-linux-x86_64_znver2",
+          "size": 16725448,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.8.1-linux-x86_64_znver3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8.1/pawnocchio-1.8.1-linux-x86_64_znver3",
+          "size": 16749384,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.8.1-linux-x86_64_znver4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8.1/pawnocchio-1.8.1-linux-x86_64_znver4",
+          "size": 16773320,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.8.1-linux-x86_64_znver5",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8.1/pawnocchio-1.8.1-linux-x86_64_znver5",
+          "size": 16773320,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.8.1-macos-aarch64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8.1/pawnocchio-1.8.1-macos-aarch64",
+          "size": 16735312,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.8.1-macos-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8.1/pawnocchio-1.8.1-macos-x86_64",
+          "size": 16713789,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.8.1-windows-aarch64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8.1/pawnocchio-1.8.1-windows-aarch64.exe",
+          "size": 16965120,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.8.1-windows-x86_64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8.1/pawnocchio-1.8.1-windows-x86_64.exe",
+          "size": 17027584,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.8.1-windows-x86_64_v2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8.1/pawnocchio-1.8.1-windows-x86_64_v2.exe",
+          "size": 17027072,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.8.1-windows-x86_64_v3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8.1/pawnocchio-1.8.1-windows-x86_64_v3.exe",
+          "size": 17047040,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.8.1-windows-x86_64_v4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8.1/pawnocchio-1.8.1-windows-x86_64_v4.exe",
+          "size": 17034240,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.8.1-windows-x86_64_znver1.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8.1/pawnocchio-1.8.1-windows-x86_64_znver1.exe",
+          "size": 17030144,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.8.1-windows-x86_64_znver2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8.1/pawnocchio-1.8.1-windows-x86_64_znver2.exe",
+          "size": 17030144,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.8.1-windows-x86_64_znver3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8.1/pawnocchio-1.8.1-windows-x86_64_znver3.exe",
+          "size": 17052160,
+          "content_type": "application/x-msdos-program"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.8",
+      "name": "pawnocchio v1.8",
+      "body": "STC vs 1.7.2\r\n```\r\nElo   | 121.26 +- 1.93 (95%)\r\nConf  | 10.0+0.10s Threads=1 Hash=16MB\r\nGames | N: 40000 W: 17874 L: 4454 D: 17672\r\nPenta | [24, 974, 6344, 10874, 1784]\r\n```\r\nhttp://verdict.shaheryarsohail.com/test/832/\r\nLTC vs 1.7.2\r\n```\r\nElo   | 119.23 +- 3.36 (95%)\r\nConf  | 40.0+0.40s Threads=1 Hash=128MB\r\nGames | N: 10000 W: 4296 L: 993 D: 4711\r\nPenta | [0, 179, 1560, 3040, 221]\r\n```\r\nhttp://verdict.shaheryarsohail.com/test/833/\r\n\r\nNew net, lots of search changes",
+      "prerelease": false,
+      "published_at": "2025-07-22T15:58:01Z",
+      "html_url": "https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.8",
+      "assets": [
+        {
+          "name": "pawnocchio-1.8-linux-aarch64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8/pawnocchio-1.8-linux-aarch64",
+          "size": 16704704,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.8-linux-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8/pawnocchio-1.8-linux-x86_64",
+          "size": 16722760,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.8-linux-x86_64_v2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8/pawnocchio-1.8-linux-x86_64_v2",
+          "size": 16718920,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.8-linux-x86_64_v3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8/pawnocchio-1.8-linux-x86_64_v3",
+          "size": 16740552,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.8-linux-x86_64_v4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8/pawnocchio-1.8-linux-x86_64_v4",
+          "size": 16735048,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.8-linux-x86_64_znver1",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8/pawnocchio-1.8-linux-x86_64_znver1",
+          "size": 16720840,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.8-linux-x86_64_znver2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8/pawnocchio-1.8-linux-x86_64_znver2",
+          "size": 16720840,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.8-linux-x86_64_znver3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8/pawnocchio-1.8-linux-x86_64_znver3",
+          "size": 16747848,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.8-linux-x86_64_znver4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8/pawnocchio-1.8-linux-x86_64_znver4",
+          "size": 16771912,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.8-linux-x86_64_znver5",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8/pawnocchio-1.8-linux-x86_64_znver5",
+          "size": 16771912,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.8-macos-aarch64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8/pawnocchio-1.8-macos-aarch64",
+          "size": 16734944,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.8-macos-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8/pawnocchio-1.8-macos-x86_64",
+          "size": 16705359,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.8-windows-aarch64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8/pawnocchio-1.8-windows-aarch64.exe",
+          "size": 16964608,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.8-windows-x86_64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8/pawnocchio-1.8-windows-x86_64.exe",
+          "size": 17040384,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.8-windows-x86_64_v2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8/pawnocchio-1.8-windows-x86_64_v2.exe",
+          "size": 17044992,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.8-windows-x86_64_v3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8/pawnocchio-1.8-windows-x86_64_v3.exe",
+          "size": 17069568,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.8-windows-x86_64_v4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8/pawnocchio-1.8-windows-x86_64_v4.exe",
+          "size": 17059840,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.8-windows-x86_64_znver1.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8/pawnocchio-1.8-windows-x86_64_znver1.exe",
+          "size": 17046016,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.8-windows-x86_64_znver2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8/pawnocchio-1.8-windows-x86_64_znver2.exe",
+          "size": 17046016,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.8-windows-x86_64_znver3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.8/pawnocchio-1.8-windows-x86_64_znver3.exe",
+          "size": 17077760,
+          "content_type": "application/x-msdos-program"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.7.2-hce",
+      "name": "pawnocchio v1.7.2-hce",
+      "body": "Another HCE release! Mostly for [UBC](https://e4e6.com/). Around 120 Elo stronger than v1.4.9",
+      "prerelease": true,
+      "published_at": "2025-06-17T18:35:18Z",
+      "html_url": "https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.7.2-hce",
+      "assets": [
+        {
+          "name": "pawnocchio-1.7.2-hce-macos-aarch64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2-hce/pawnocchio-1.7.2-hce-macos-aarch64",
+          "size": 468400,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.2-hce-macos-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2-hce/pawnocchio-1.7.2-hce-macos-x86_64",
+          "size": 458397,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.2-hce-linux-aarch64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2-hce/pawnocchio-1.7.2-hce-linux-aarch64",
+          "size": 429680,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.2-hce-linux-x86_64_znver5",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2-hce/pawnocchio-1.7.2-hce-linux-x86_64_znver5",
+          "size": 459640,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.2-hce-linux-x86_64_znver4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2-hce/pawnocchio-1.7.2-hce-linux-x86_64_znver4",
+          "size": 459640,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.2-hce-linux-x86_64_znver3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2-hce/pawnocchio-1.7.2-hce-linux-x86_64_znver3",
+          "size": 455032,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.2-hce-linux-x86_64_znver2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2-hce/pawnocchio-1.7.2-hce-linux-x86_64_znver2",
+          "size": 442488,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.2-hce-linux-x86_64_znver1",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2-hce/pawnocchio-1.7.2-hce-linux-x86_64_znver1",
+          "size": 442488,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.2-hce-linux-x86_64_v4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2-hce/pawnocchio-1.7.2-hce-linux-x86_64_v4",
+          "size": 454392,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.2-hce-linux-x86_64_v3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2-hce/pawnocchio-1.7.2-hce-linux-x86_64_v3",
+          "size": 452600,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.2-hce-linux-x86_64_v2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2-hce/pawnocchio-1.7.2-hce-linux-x86_64_v2",
+          "size": 439288,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.2-hce-linux-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2-hce/pawnocchio-1.7.2-hce-linux-x86_64",
+          "size": 440056,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.2-hce-windows-aarch64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2-hce/pawnocchio-1.7.2-hce-windows-aarch64.exe",
+          "size": 630784,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.2-hce-windows-x86_64_znver5.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2-hce/pawnocchio-1.7.2-hce-windows-x86_64_znver5.exe",
+          "size": 678400,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.2-hce-windows-x86_64_znver4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2-hce/pawnocchio-1.7.2-hce-windows-x86_64_znver4.exe",
+          "size": 678400,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.2-hce-windows-x86_64_znver3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2-hce/pawnocchio-1.7.2-hce-windows-x86_64_znver3.exe",
+          "size": 677376,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.2-hce-windows-x86_64_znver2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2-hce/pawnocchio-1.7.2-hce-windows-x86_64_znver2.exe",
+          "size": 663552,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.2-hce-windows-x86_64_znver1.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2-hce/pawnocchio-1.7.2-hce-windows-x86_64_znver1.exe",
+          "size": 663552,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.2-hce-windows-x86_64_v4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2-hce/pawnocchio-1.7.2-hce-windows-x86_64_v4.exe",
+          "size": 673792,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.2-hce-windows-x86_64_v3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2-hce/pawnocchio-1.7.2-hce-windows-x86_64_v3.exe",
+          "size": 673280,
+          "content_type": "application/x-msdos-program"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.7.2",
+      "name": "pawnocchio v1.7.2",
+      "body": "fixes two bugs related to multithreading, zero strength change.",
+      "prerelease": false,
+      "published_at": "2025-06-15T14:13:35Z",
+      "html_url": "https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.7.2",
+      "assets": [
+        {
+          "name": "pawnocchio-1.7.2-linux-x86_64_znver3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2/pawnocchio-1.7.2-linux-x86_64_znver3",
+          "size": 20204424,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.2-linux-x86_64_v4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2/pawnocchio-1.7.2-linux-x86_64_v4",
+          "size": 19960112,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.2-linux-x86_64_znver2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2/pawnocchio-1.7.2-linux-x86_64_znver2",
+          "size": 20069872,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.2-linux-x86_64_znver4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2/pawnocchio-1.7.2-linux-x86_64_znver4",
+          "size": 20244952,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.2-linux-x86_64_znver5",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2/pawnocchio-1.7.2-linux-x86_64_znver5",
+          "size": 20244952,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.2-linux-x86_64_v3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2/pawnocchio-1.7.2-linux-x86_64_v3",
+          "size": 19965344,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.2-linux-x86_64_v2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2/pawnocchio-1.7.2-linux-x86_64_v2",
+          "size": 19932112,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.2-linux-aarch64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2/pawnocchio-1.7.2-linux-aarch64",
+          "size": 20223904,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.2-linux-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2/pawnocchio-1.7.2-linux-x86_64",
+          "size": 19927552,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.2-macos-aarch64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2/pawnocchio-1.7.2-macos-aarch64",
+          "size": 16453392,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.2-windows-x86_64_znver4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2/pawnocchio-1.7.2-windows-x86_64_znver4.exe",
+          "size": 16843264,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.2-windows-x86_64_v3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2/pawnocchio-1.7.2-windows-x86_64_v3.exe",
+          "size": 16811520,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.2-windows-x86_64_v4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2/pawnocchio-1.7.2-windows-x86_64_v4.exe",
+          "size": 16801280,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.2-macos-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2/pawnocchio-1.7.2-macos-x86_64",
+          "size": 16449644,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.2-windows-x86_64_znver5.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2/pawnocchio-1.7.2-windows-x86_64_znver5.exe",
+          "size": 16843264,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.2-windows-x86_64_znver2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2/pawnocchio-1.7.2-windows-x86_64_znver2.exe",
+          "size": 16794112,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.2-windows-x86_64_znver1.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2/pawnocchio-1.7.2-windows-x86_64_znver1.exe",
+          "size": 16794112,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.2-linux-x86_64_znver1",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2/pawnocchio-1.7.2-linux-x86_64_znver1",
+          "size": 20069824,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.2-windows-x86_64_v2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2/pawnocchio-1.7.2-windows-x86_64_v2.exe",
+          "size": 16794112,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.2-windows-x86_64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.2/pawnocchio-1.7.2-windows-x86_64.exe",
+          "size": 16796160,
+          "content_type": "application/x-msdos-program"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.7.1",
+      "name": "pawnocchio v1.7.1",
+      "body": "very minor release, just disabling the logo on startup as this seems to have been causing issues for some users.",
+      "prerelease": false,
+      "published_at": "2025-06-02T14:59:21Z",
+      "html_url": "https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.7.1",
+      "assets": [
+        {
+          "name": "pawnocchio-1.7.1-macos-aarch64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.1/pawnocchio-1.7.1-macos-aarch64",
+          "size": 16469888,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.1-macos-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.1/pawnocchio-1.7.1-macos-x86_64",
+          "size": 16453820,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.1-linux-aarch64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.1/pawnocchio-1.7.1-linux-aarch64",
+          "size": 20246808,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.1-linux-x86_64_znver5",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.1/pawnocchio-1.7.1-linux-x86_64_znver5",
+          "size": 20273384,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.1-linux-x86_64_znver4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.1/pawnocchio-1.7.1-linux-x86_64_znver4",
+          "size": 20273392,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.1-linux-x86_64_znver3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.1/pawnocchio-1.7.1-linux-x86_64_znver3",
+          "size": 20232120,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.1-linux-x86_64_znver2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.1/pawnocchio-1.7.1-linux-x86_64_znver2",
+          "size": 20091840,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.1-linux-x86_64_znver1",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.1/pawnocchio-1.7.1-linux-x86_64_znver1",
+          "size": 20091728,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.1-linux-x86_64_v4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.1/pawnocchio-1.7.1-linux-x86_64_v4",
+          "size": 19983424,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.1-linux-x86_64_v3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.1/pawnocchio-1.7.1-linux-x86_64_v3",
+          "size": 19988088,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.1-linux-x86_64_v2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.1/pawnocchio-1.7.1-linux-x86_64_v2",
+          "size": 19960312,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.1-linux-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.1/pawnocchio-1.7.1-linux-x86_64",
+          "size": 19948552,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.1-windows-aarch64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.1/pawnocchio-1.7.1-windows-aarch64.exe",
+          "size": 16717312,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.1-windows-x86_64_znver5.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.1/pawnocchio-1.7.1-windows-x86_64_znver5.exe",
+          "size": 16847360,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.1-windows-x86_64_znver4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.1/pawnocchio-1.7.1-windows-x86_64_znver4.exe",
+          "size": 16847360,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.1-windows-x86_64_znver3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.1/pawnocchio-1.7.1-windows-x86_64_znver3.exe",
+          "size": 16833024,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.1-windows-x86_64_znver2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.1/pawnocchio-1.7.1-windows-x86_64_znver2.exe",
+          "size": 16798720,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.1-windows-x86_64_znver1.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.1/pawnocchio-1.7.1-windows-x86_64_znver1.exe",
+          "size": 16798720,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.1-windows-x86_64_v4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.1/pawnocchio-1.7.1-windows-x86_64_v4.exe",
+          "size": 16806912,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.1-windows-x86_64_v3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7.1/pawnocchio-1.7.1-windows-x86_64_v3.exe",
+          "size": 16817152,
+          "content_type": "application/x-msdos-program"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.7",
+      "name": "pawnocchio v1.7",
+      "body": "STC vs 1.6.1\r\n```\r\nElo   | 51.98 +- 7.42 (95%)\r\nConf  | 8.0+0.08s Threads=1 Hash=16MB\r\nGames | N: 3010 W: 1086 L: 639 D: 1285\r\nPenta | [18, 217, 652, 536, 82]\r\n```\r\nhttps://pyronomy.pythonanywhere.com/test/2891/\r\n\r\nLTC vs 1.6.1\r\n```\r\nElo   | 53.31 +- 5.52 (95%)\r\nConf  | 40.0+0.40s Threads=1 Hash=128MB\r\nGames | N: 4000 W: 1379 L: 770 D: 1851\r\nPenta | [5, 239, 930, 794, 32]\r\n```\r\nhttps://pyronomy.pythonanywhere.com/test/2890/\r\n\r\nSTC 2v1 Thread odds\r\n```\r\nElo   | 91.70 +- 12.07 (95%)\r\nConf  | 8.0+0.08s Threads=2 Hash=128MB\r\nGames | N: 1004 W: 376 L: 117 D: 511\r\nPenta | [4, 32, 195, 243, 28]\r\n```\r\nhttps://pyronomy.pythonanywhere.com/test/2901/\r\n\r\nSTC 4v1 Thread odds\r\n```\r\nElo   | 158.69 +- 11.25 (95%)\r\nConf  | 8.0+0.08s Threads=4 Hash=128MB\r\nGames | N: 1006 W: 485 L: 55 D: 466\r\nPenta | [0, 6, 113, 332, 52]\r\n```\r\nhttps://pyronomy.pythonanywhere.com/test/2903/\r\n\r\nNew bigger net, SPSA tune, score normalization, and some minor search improvements. Also made an effort to make the engine scale better to more threads.",
+      "prerelease": false,
+      "published_at": "2025-05-31T17:38:08Z",
+      "html_url": "https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.7",
+      "assets": [
+        {
+          "name": "pawnocchio-1.7.0-windows-x86_64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7/pawnocchio-1.7.0-windows-x86_64.exe",
+          "size": 16803840,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.0-windows-x86_64_v3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7/pawnocchio-1.7.0-windows-x86_64_v3.exe",
+          "size": 16820224,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.0-windows-x86_64_v2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7/pawnocchio-1.7.0-windows-x86_64_v2.exe",
+          "size": 16800768,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.0-windows-x86_64_v4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7/pawnocchio-1.7.0-windows-x86_64_v4.exe",
+          "size": 16809984,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.0-windows-x86_64_znver1.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7/pawnocchio-1.7.0-windows-x86_64_znver1.exe",
+          "size": 16802304,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.0-windows-x86_64_znver2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7/pawnocchio-1.7.0-windows-x86_64_znver2.exe",
+          "size": 16802304,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.0-windows-x86_64_znver3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7/pawnocchio-1.7.0-windows-x86_64_znver3.exe",
+          "size": 16836096,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.0-windows-x86_64_znver4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7/pawnocchio-1.7.0-windows-x86_64_znver4.exe",
+          "size": 16850944,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.0-windows-x86_64_znver5.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7/pawnocchio-1.7.0-windows-x86_64_znver5.exe",
+          "size": 16850944,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.0-windows-aarch64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7/pawnocchio-1.7.0-windows-aarch64.exe",
+          "size": 16720896,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.7.0-linux-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7/pawnocchio-1.7.0-linux-x86_64",
+          "size": 19948552,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.0-linux-x86_64_v3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7/pawnocchio-1.7.0-linux-x86_64_v3",
+          "size": 19988080,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.0-linux-x86_64_v2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7/pawnocchio-1.7.0-linux-x86_64_v2",
+          "size": 19960304,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.0-linux-x86_64_znver1",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7/pawnocchio-1.7.0-linux-x86_64_znver1",
+          "size": 20091728,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.0-linux-x86_64_v4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7/pawnocchio-1.7.0-linux-x86_64_v4",
+          "size": 19983416,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.0-linux-x86_64_znver2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7/pawnocchio-1.7.0-linux-x86_64_znver2",
+          "size": 20091832,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.0-linux-x86_64_znver4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7/pawnocchio-1.7.0-linux-x86_64_znver4",
+          "size": 20273384,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.0-linux-x86_64_znver3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7/pawnocchio-1.7.0-linux-x86_64_znver3",
+          "size": 20232120,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.0-linux-aarch64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7/pawnocchio-1.7.0-linux-aarch64",
+          "size": 20246800,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.7.0-linux-x86_64_znver5",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.7/pawnocchio-1.7.0-linux-x86_64_znver5",
+          "size": 20273384,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.6.1",
+      "name": "pawnocchio v1.6.1",
+      "body": "now with proper pv support, and a slight strength gain",
+      "prerelease": false,
+      "published_at": "2025-05-15T22:06:56Z",
+      "html_url": "https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.6.1",
+      "assets": [
+        {
+          "name": "pawnocchio-1.6.1-windows-x86_64_znver5.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6.1/pawnocchio-1.6.1-windows-x86_64_znver5.exe",
+          "size": 13656064,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.6.1-windows-x86_64_znver4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6.1/pawnocchio-1.6.1-windows-x86_64_znver4.exe",
+          "size": 13656064,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.6.1-windows-x86_64_znver3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6.1/pawnocchio-1.6.1-windows-x86_64_znver3.exe",
+          "size": 13641728,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.6.1-windows-x86_64_znver2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6.1/pawnocchio-1.6.1-windows-x86_64_znver2.exe",
+          "size": 13610496,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.6.1-windows-x86_64_znver1.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6.1/pawnocchio-1.6.1-windows-x86_64_znver1.exe",
+          "size": 13610496,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.6.1-windows-x86_64_v4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6.1/pawnocchio-1.6.1-windows-x86_64_v4.exe",
+          "size": 13614080,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.6.1-windows-x86_64_v3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6.1/pawnocchio-1.6.1-windows-x86_64_v3.exe",
+          "size": 13626880,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.6.1-windows-x86_64_v2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6.1/pawnocchio-1.6.1-windows-x86_64_v2.exe",
+          "size": 13606400,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.6.1-windows-x86_64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6.1/pawnocchio-1.6.1-windows-x86_64.exe",
+          "size": 13609472,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.6.1-windows-aarch64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6.1/pawnocchio-1.6.1-windows-aarch64.exe",
+          "size": 13524480,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.6.1-macos-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6.1/pawnocchio-1.6.1-macos-x86_64",
+          "size": 13267845,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.6.1-macos-aarch64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6.1/pawnocchio-1.6.1-macos-aarch64",
+          "size": 13281920,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.6.1-linux-x86_64_znver5",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6.1/pawnocchio-1.6.1-linux-x86_64_znver5",
+          "size": 17081392,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.6.1-linux-x86_64_znver4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6.1/pawnocchio-1.6.1-linux-x86_64_znver4",
+          "size": 17081400,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.6.1-linux-x86_64_znver3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6.1/pawnocchio-1.6.1-linux-x86_64_znver3",
+          "size": 17044480,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.6.1-linux-x86_64_znver2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6.1/pawnocchio-1.6.1-linux-x86_64_znver2",
+          "size": 16914040,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.6.1-linux-x86_64_znver1",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6.1/pawnocchio-1.6.1-linux-x86_64_znver1",
+          "size": 16914048,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.6.1-linux-x86_64_v4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6.1/pawnocchio-1.6.1-linux-x86_64_v4",
+          "size": 16792456,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.6.1-linux-x86_64_v3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6.1/pawnocchio-1.6.1-linux-x86_64_v3",
+          "size": 16799720,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.6.1-linux-x86_64_v2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6.1/pawnocchio-1.6.1-linux-x86_64_v2",
+          "size": 16783400,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.6",
+      "name": "pawnocchio v1.6",
+      "body": "new bigger net, and tuned search!\r\nestimated 3500 40/15 and 3600 Blitz",
+      "prerelease": false,
+      "published_at": "2025-04-27T20:20:56Z",
+      "html_url": "https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.6",
+      "assets": [
+        {
+          "name": "pawnocchio-1.6-windows-x86_64_znver5.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6/pawnocchio-1.6-windows-x86_64_znver5.exe",
+          "size": 13625344,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.6-windows-x86_64_znver4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6/pawnocchio-1.6-windows-x86_64_znver4.exe",
+          "size": 13625344,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.6-windows-x86_64_znver3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6/pawnocchio-1.6-windows-x86_64_znver3.exe",
+          "size": 13613056,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.6-windows-x86_64_znver2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6/pawnocchio-1.6-windows-x86_64_znver2.exe",
+          "size": 13583872,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.6-windows-x86_64_znver1.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6/pawnocchio-1.6-windows-x86_64_znver1.exe",
+          "size": 13583872,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.6-windows-x86_64_v4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6/pawnocchio-1.6-windows-x86_64_v4.exe",
+          "size": 13584384,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.6-windows-x86_64_v3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6/pawnocchio-1.6-windows-x86_64_v3.exe",
+          "size": 13598208,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.6-windows-x86_64_v2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6/pawnocchio-1.6-windows-x86_64_v2.exe",
+          "size": 13577728,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.6-windows-x86_64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6/pawnocchio-1.6-windows-x86_64.exe",
+          "size": 13581312,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.6-windows-aarch64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6/pawnocchio-1.6-windows-aarch64.exe",
+          "size": 13502976,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.6-macos-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6/pawnocchio-1.6-macos-x86_64",
+          "size": 13245599,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.6-macos-aarch64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6/pawnocchio-1.6-macos-aarch64",
+          "size": 13263552,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.6-linux-x86_64_znver5",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6/pawnocchio-1.6-linux-x86_64_znver5",
+          "size": 16897984,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.6-linux-x86_64_znver4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6/pawnocchio-1.6-linux-x86_64_znver4",
+          "size": 16897984,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.6-linux-x86_64_znver3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6/pawnocchio-1.6-linux-x86_64_znver3",
+          "size": 16858136,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.6-linux-x86_64_znver2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6/pawnocchio-1.6-linux-x86_64_znver2",
+          "size": 16732312,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.6-linux-x86_64_znver1",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6/pawnocchio-1.6-linux-x86_64_znver1",
+          "size": 16732424,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.6-linux-x86_64_v4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6/pawnocchio-1.6-linux-x86_64_v4",
+          "size": 16605072,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.6-linux-x86_64_v3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6/pawnocchio-1.6-linux-x86_64_v3",
+          "size": 16616528,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.6-linux-x86_64_v2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.6/pawnocchio-1.6-linux-x86_64_v2",
+          "size": 16591376,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.5",
+      "name": "pawnocchio v1.5",
+      "body": "Elo   | 58.21 +- 12.42 (95%)\r\nConf  | 40.0+0.40s Threads=1 Hash=128MB\r\nGames | N: 1000 W: 349 L: 183 D: 468\r\nPenta | [0, 72, 217, 184, 27]\r\nhttps://pyronomy.pythonanywhere.com/test/2291/\r\n\r\nrewritten from scratch! progtests pending but around +80 stc +60 ltc compared to 1.4.1\r\nestimated 3450 40/15",
+      "prerelease": false,
+      "published_at": "2025-04-18T11:36:21Z",
+      "html_url": "https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.5",
+      "assets": [
+        {
+          "name": "pawnocchio-1.5-linux-aarch64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.5/pawnocchio-1.5-linux-aarch64",
+          "size": 5661648,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.5-linux-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.5/pawnocchio-1.5-linux-x86_64",
+          "size": 5403552,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.5-linux-x86_64_v2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.5/pawnocchio-1.5-linux-x86_64_v2",
+          "size": 5404624,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.5-linux-x86_64_v3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.5/pawnocchio-1.5-linux-x86_64_v3",
+          "size": 5418976,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.5-linux-x86_64_v4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.5/pawnocchio-1.5-linux-x86_64_v4",
+          "size": 5413400,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.5-linux-x86_64_znver1",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.5/pawnocchio-1.5-linux-x86_64_znver1",
+          "size": 5530976,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.5-linux-x86_64_znver2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.5/pawnocchio-1.5-linux-x86_64_znver2",
+          "size": 5530920,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.5-linux-x86_64_znver3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.5/pawnocchio-1.5-linux-x86_64_znver3",
+          "size": 5650936,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.5-linux-x86_64_znver4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.5/pawnocchio-1.5-linux-x86_64_znver4",
+          "size": 5694280,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.5-linux-x86_64_znver5",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.5/pawnocchio-1.5-linux-x86_64_znver5",
+          "size": 5694288,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.5-macos-aarch64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.5/pawnocchio-1.5-macos-aarch64",
+          "size": 2196992,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.5-macos-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.5/pawnocchio-1.5-macos-x86_64",
+          "size": 2204690,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.5-windows-aarch64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.5/pawnocchio-1.5-windows-aarch64.exe",
+          "size": 2394624,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.5-windows-x86_64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.5/pawnocchio-1.5-windows-x86_64.exe",
+          "size": 2471936,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.5-windows-x86_64_v2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.5/pawnocchio-1.5-windows-x86_64_v2.exe",
+          "size": 2468864,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.5-windows-x86_64_v3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.5/pawnocchio-1.5-windows-x86_64_v3.exe",
+          "size": 2481152,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.5-windows-x86_64_v4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.5/pawnocchio-1.5-windows-x86_64_v4.exe",
+          "size": 2466816,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.5-windows-x86_64_znver1.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.5/pawnocchio-1.5-windows-x86_64_znver1.exe",
+          "size": 2470400,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.5-windows-x86_64_znver2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.5/pawnocchio-1.5-windows-x86_64_znver2.exe",
+          "size": 2470400,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.5-windows-x86_64_znver3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.5/pawnocchio-1.5-windows-x86_64_znver3.exe",
+          "size": 2492928,
+          "content_type": "application/x-msdos-program"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.4.9",
+      "name": "pawnocchio v1.4.9",
+      "body": "Piece Square Table only version of pawnocchio!\r\n\r\nWhole engine has been rewritten from scratch, and I'm releasing one version before adding NNUE back in, mostly for [UBC](https://e4e6.com/). \r\n\r\nStrength should be right around 3000 elo",
+      "prerelease": true,
+      "published_at": "2025-04-16T18:48:36Z",
+      "html_url": "https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.4.9",
+      "assets": [
+        {
+          "name": "pawnocchio-1.4.9-linux-aarch64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.9/pawnocchio-1.4.9-linux-aarch64",
+          "size": 3960808,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4.9-linux-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.9/pawnocchio-1.4.9-linux-x86_64",
+          "size": 3703248,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4.9-linux-x86_64_v2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.9/pawnocchio-1.4.9-linux-x86_64_v2",
+          "size": 3708832,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4.9-linux-x86_64_v3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.9/pawnocchio-1.4.9-linux-x86_64_v3",
+          "size": 3728584,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4.9-linux-x86_64_v4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.9/pawnocchio-1.4.9-linux-x86_64_v4",
+          "size": 3714168,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4.9-linux-x86_64_znver1",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.9/pawnocchio-1.4.9-linux-x86_64_znver1",
+          "size": 3834176,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4.9-linux-x86_64_znver2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.9/pawnocchio-1.4.9-linux-x86_64_znver2",
+          "size": 3834080,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4.9-linux-x86_64_znver3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.9/pawnocchio-1.4.9-linux-x86_64_znver3",
+          "size": 3941848,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4.9-linux-x86_64_znver4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.9/pawnocchio-1.4.9-linux-x86_64_znver4",
+          "size": 3975272,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4.9-linux-x86_64_znver5",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.9/pawnocchio-1.4.9-linux-x86_64_znver5",
+          "size": 3975264,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4.9-macos-aarch64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.9/pawnocchio-1.4.9-macos-aarch64",
+          "size": 570320,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4.9-macos-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.9/pawnocchio-1.4.9-macos-x86_64",
+          "size": 581081,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4.9-windows-aarch64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.9/pawnocchio-1.4.9-windows-aarch64.exe",
+          "size": 777728,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.4.9-windows-x86_64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.9/pawnocchio-1.4.9-windows-x86_64.exe",
+          "size": 847360,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.4.9-windows-x86_64_v2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.9/pawnocchio-1.4.9-windows-x86_64_v2.exe",
+          "size": 845312,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.4.9-windows-x86_64_v3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.9/pawnocchio-1.4.9-windows-x86_64_v3.exe",
+          "size": 856576,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.4.9-windows-x86_64_v4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.9/pawnocchio-1.4.9-windows-x86_64_v4.exe",
+          "size": 847360,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.4.9-windows-x86_64_znver1.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.9/pawnocchio-1.4.9-windows-x86_64_znver1.exe",
+          "size": 846336,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.4.9-windows-x86_64_znver2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.9/pawnocchio-1.4.9-windows-x86_64_znver2.exe",
+          "size": 846336,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.4.9-windows-x86_64_znver3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.9/pawnocchio-1.4.9-windows-x86_64_znver3.exe",
+          "size": 865280,
+          "content_type": "application/x-msdos-program"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.4.1",
+      "name": "pawnocchio v1.4.1",
+      "body": "Bugfix!\r\n\r\nThere shouldn't be any strength difference, just hopefully no more timeouts.",
+      "prerelease": false,
+      "published_at": "2025-04-05T11:01:37Z",
+      "html_url": "https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.4.1",
+      "assets": [
+        {
+          "name": "pawnocchio-1.4.1-linux-aarch64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.1/pawnocchio-1.4.1-linux-aarch64",
+          "size": 5225616,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4.1-linux-x86",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.1/pawnocchio-1.4.1-linux-x86",
+          "size": 4551804,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4.1-linux-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.1/pawnocchio-1.4.1-linux-x86_64",
+          "size": 5136352,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4.1-linux-x86_64_v2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.1/pawnocchio-1.4.1-linux-x86_64_v2",
+          "size": 5146424,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4.1-linux-x86_64_v3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.1/pawnocchio-1.4.1-linux-x86_64_v3",
+          "size": 5176152,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4.1-linux-x86_64_v4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.1/pawnocchio-1.4.1-linux-x86_64_v4",
+          "size": 5169368,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4.1-linux-x86_64_znver1",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.1/pawnocchio-1.4.1-linux-x86_64_znver1",
+          "size": 5225696,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4.1-linux-x86_64_znver2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.1/pawnocchio-1.4.1-linux-x86_64_znver2",
+          "size": 5225592,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4.1-linux-x86_64_znver3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.1/pawnocchio-1.4.1-linux-x86_64_znver3",
+          "size": 5390344,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4.1-linux-x86_64_znver4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.1/pawnocchio-1.4.1-linux-x86_64_znver4",
+          "size": 5495112,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4.1-linux-x86_64_znver5",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.1/pawnocchio-1.4.1-linux-x86_64_znver5",
+          "size": 5495104,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4.1-macos-aarch64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.1/pawnocchio-1.4.1-macos-aarch64",
+          "size": 2130272,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4.1-macos-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.1/pawnocchio-1.4.1-macos-x86_64",
+          "size": 2130300,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4.1-windows-aarch64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.1/pawnocchio-1.4.1-windows-aarch64.exe",
+          "size": 2338816,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.4.1-windows-x86.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.1/pawnocchio-1.4.1-windows-x86.exe",
+          "size": 2458112,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.4.1-windows-x86_64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.1/pawnocchio-1.4.1-windows-x86_64.exe",
+          "size": 2411520,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.4.1-windows-x86_64_v2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.1/pawnocchio-1.4.1-windows-x86_64_v2.exe",
+          "size": 2405376,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.4.1-windows-x86_64_v3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.1/pawnocchio-1.4.1-windows-x86_64_v3.exe",
+          "size": 2432512,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.4.1-windows-x86_64_v4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.1/pawnocchio-1.4.1-windows-x86_64_v4.exe",
+          "size": 2415616,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.4.1-windows-x86_64_znver1.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4.1/pawnocchio-1.4.1-windows-x86_64_znver1.exe",
+          "size": 2411008,
+          "content_type": "application/x-msdos-program"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.4",
+      "name": "pawnocchio v1.4",
+      "body": "# WARNING: USE 1.4.1, THIS VERSION IS BUGGY\r\nElo   | 129.86 +- 4.64 (95%)\r\nConf  | 8.0+0.08s Threads=1 Hash=16MB\r\nGames | N: 10026 W: 4717 L: 1135 D: 4174\r\nPenta | [20, 346, 1522, 2282, 843]\r\nhttps://pyronomy.pythonanywhere.com/test/1796/\r\nElo   | 124.86 +- 5.90 (95%)\r\nConf  | 40.0+0.40s Threads=1 Hash=128MB\r\nGames | N: 5002 W: 2237 L: 513 D: 2252\r\nPenta | [1, 154, 761, 1290, 295]\r\nhttps://pyronomy.pythonanywhere.com/test/1791/\r\n\r\nNew net, (768hm->1024)x2->1x8 and some search improvements\r\nNow around 3375-3425 CCRL 40/15 and 3425-3475 CCRL Blitz\r\nNext proper release will probably take a while to land.",
+      "prerelease": true,
+      "published_at": "2025-03-28T11:19:14Z",
+      "html_url": "https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.4",
+      "assets": [
+        {
+          "name": "pawnocchio-1.4-linux-x86_64_znver3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4/pawnocchio-1.4-linux-x86_64_znver3",
+          "size": 5385336,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4-linux-x86_64_znver4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4/pawnocchio-1.4-linux-x86_64_znver4",
+          "size": 5488104,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4-linux-x86_64_znver5",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4/pawnocchio-1.4-linux-x86_64_znver5",
+          "size": 5488096,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4-macos-aarch64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4/pawnocchio-1.4-macos-aarch64",
+          "size": 2130272,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4-linux-x86_64_v4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4/pawnocchio-1.4-linux-x86_64_v4",
+          "size": 5164296,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4-linux-aarch64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4/pawnocchio-1.4-linux-aarch64",
+          "size": 5219312,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4-linux-x86_64_znver2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4/pawnocchio-1.4-linux-x86_64_znver2",
+          "size": 5219680,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4-linux-x86_64_znver1",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4/pawnocchio-1.4-linux-x86_64_znver1",
+          "size": 5219728,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4-windows-x86_64_znver2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4/pawnocchio-1.4-windows-x86_64_znver2.exe",
+          "size": 2411008,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.4-macos-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4/pawnocchio-1.4-macos-x86_64",
+          "size": 2130346,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4-linux-x86_64_v2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4/pawnocchio-1.4-linux-x86_64_v2",
+          "size": 5140480,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4-windows-x86.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4/pawnocchio-1.4-windows-x86.exe",
+          "size": 2458112,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.4-linux-x86_64_v3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4/pawnocchio-1.4-linux-x86_64_v3",
+          "size": 5170744,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4-windows-x86_64_v2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4/pawnocchio-1.4-windows-x86_64_v2.exe",
+          "size": 2405376,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.4-linux-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4/pawnocchio-1.4-linux-x86_64",
+          "size": 5129648,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.4-windows-x86_64_znver5.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4/pawnocchio-1.4-windows-x86_64_znver5.exe",
+          "size": 2473984,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.4-windows-aarch64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4/pawnocchio-1.4-windows-aarch64.exe",
+          "size": 2338304,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.4-windows-x86_64_znver3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4/pawnocchio-1.4-windows-x86_64_znver3.exe",
+          "size": 2450944,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.4-windows-x86_64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4/pawnocchio-1.4-windows-x86_64.exe",
+          "size": 2411008,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.4-windows-x86_64_v4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.4/pawnocchio-1.4-windows-x86_64_v4.exe",
+          "size": 2415616,
+          "content_type": "application/x-msdos-program"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.3.1415",
+      "name": "pawnocchio v1.3.1415",
+      "body": "Happy pi day!\r\n\r\nElo   | 213.81 +- 10.16 (95%)\r\nConf  | 8.0+0.08s Threads=1 Hash=16MB\r\nGames | N: 3006 W: 1860 L: 213 D: 933\r\nPenta | [2, 35, 294, 658, 514]\r\nhttps://pyronomy.pythonanywhere.com/test/1512/\r\n\r\nElo   | 196.42 +- 16.09 (95%)\r\nConf  | 40.0+0.40s Threads=1 Hash=128MB\r\nGames | N: 1006 W: 581 L: 66 D: 359\r\nPenta | [1, 9, 107, 246, 140]\r\nhttps://pyronomy.pythonanywhere.com/test/1513/\r\n\r\nNew net, (768hm->768)x2->1x8 and some search improvements, notably rfp improving.\r\nNow around 3250-3350 CCRL 40/15 and 3300-3400 CCRL Blitz",
+      "prerelease": false,
+      "published_at": "2025-03-14T20:10:24Z",
+      "html_url": "https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.3.1415",
+      "assets": [
+        {
+          "name": "pawnocchio-1.3.1415-windows-x86_64_znver5.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3.1415/pawnocchio-1.3.1415-windows-x86_64_znver5.exe",
+          "size": 2071040,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.3.1415-windows-x86_64_znver4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3.1415/pawnocchio-1.3.1415-windows-x86_64_znver4.exe",
+          "size": 2071040,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.3.1415-windows-x86_64_znver3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3.1415/pawnocchio-1.3.1415-windows-x86_64_znver3.exe",
+          "size": 2058752,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.3.1415-windows-x86_64_znver2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3.1415/pawnocchio-1.3.1415-windows-x86_64_znver2.exe",
+          "size": 2020352,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.3.1415-windows-x86_64_znver1.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3.1415/pawnocchio-1.3.1415-windows-x86_64_znver1.exe",
+          "size": 2020352,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.3.1415-windows-x86_64_v4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3.1415/pawnocchio-1.3.1415-windows-x86_64_v4.exe",
+          "size": 2020864,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.3.1415-windows-x86_64_v3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3.1415/pawnocchio-1.3.1415-windows-x86_64_v3.exe",
+          "size": 2039808,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.3.1415-windows-x86_64_v2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3.1415/pawnocchio-1.3.1415-windows-x86_64_v2.exe",
+          "size": 2004480,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.3.1415-windows-x86_64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3.1415/pawnocchio-1.3.1415-windows-x86_64.exe",
+          "size": 2010624,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.3.1415-windows-x86.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3.1415/pawnocchio-1.3.1415-windows-x86.exe",
+          "size": 2045952,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.3.1415-windows-aarch64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3.1415/pawnocchio-1.3.1415-windows-aarch64.exe",
+          "size": 1928192,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.3.1415-macos-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3.1415/pawnocchio-1.3.1415-macos-x86_64",
+          "size": 1727157,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.3.1415-macos-aarch64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3.1415/pawnocchio-1.3.1415-macos-aarch64",
+          "size": 1718112,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.3.1415-linux-x86_64_znver5",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3.1415/pawnocchio-1.3.1415-linux-x86_64_znver5",
+          "size": 5106384,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.3.1415-linux-x86_64_znver4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3.1415/pawnocchio-1.3.1415-linux-x86_64_znver4",
+          "size": 5106376,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.3.1415-linux-x86_64_znver3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3.1415/pawnocchio-1.3.1415-linux-x86_64_znver3",
+          "size": 5069184,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.3.1415-linux-x86_64_znver2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3.1415/pawnocchio-1.3.1415-linux-x86_64_znver2",
+          "size": 4913328,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.3.1415-linux-x86_64_znver1",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3.1415/pawnocchio-1.3.1415-linux-x86_64_znver1",
+          "size": 4914200,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.3.1415-linux-x86_64_v4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3.1415/pawnocchio-1.3.1415-linux-x86_64_v4",
+          "size": 4954360,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.3.1415-linux-x86_64_v3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3.1415/pawnocchio-1.3.1415-linux-x86_64_v3",
+          "size": 4945488,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.3",
+      "name": "pawnocchio v1.3",
+      "body": "Elo   | 104.24 +- 8.93 (95%)\r\nConf  | 8.0+0.08s Threads=1 Hash=16MB\r\nGames | N: 3000 W: 1339 L: 465 D: 1196\r\nPenta | [20, 156, 493, 592, 239]\r\nhttps://pyronomy.pythonanywhere.com/test/1416/\r\n\r\nElo   | 110.60 +- 14.38 (95%)\r\nConf  | 40.0+0.40s Threads=1 Hash=128MB\r\nGames | N: 1000 W: 439 L: 131 D: 430\r\nPenta | [6, 33, 175, 219, 67]\r\nhttps://pyronomy.pythonanywhere.com/test/1421/\r\n\r\nBetter NNUE, now (768hm->640)x2->1x8, added corrhist, new pext movegen\r\nNow around 3100-3200 CCRL Blitz",
+      "prerelease": false,
+      "published_at": "2025-03-07T22:44:38Z",
+      "html_url": "https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.3",
+      "assets": [
+        {
+          "name": "pawnocchio-1.3-windows-x86_64_znver5.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3/pawnocchio-1.3-windows-x86_64_znver5.exe",
+          "size": 1867264,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.3-windows-x86_64_znver4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3/pawnocchio-1.3-windows-x86_64_znver4.exe",
+          "size": 1867264,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.3-windows-x86_64_znver3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3/pawnocchio-1.3-windows-x86_64_znver3.exe",
+          "size": 1850880,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.3-windows-x86_64_znver2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3/pawnocchio-1.3-windows-x86_64_znver2.exe",
+          "size": 1815552,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.3-windows-x86_64_znver1.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3/pawnocchio-1.3-windows-x86_64_znver1.exe",
+          "size": 1815552,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.3-windows-x86_64_v4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3/pawnocchio-1.3-windows-x86_64_v4.exe",
+          "size": 1834496,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.3-windows-x86_64_v3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3/pawnocchio-1.3-windows-x86_64_v3.exe",
+          "size": 1835008,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.3-windows-x86_64_v2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3/pawnocchio-1.3-windows-x86_64_v2.exe",
+          "size": 1802240,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.3-windows-x86_64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3/pawnocchio-1.3-windows-x86_64.exe",
+          "size": 1808896,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.3-windows-x86.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3/pawnocchio-1.3-windows-x86.exe",
+          "size": 1844224,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.3-windows-aarch64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3/pawnocchio-1.3-windows-aarch64.exe",
+          "size": 1726976,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio-1.3-macos-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3/pawnocchio-1.3-macos-x86_64",
+          "size": 1522446,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.3-macos-aarch64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3/pawnocchio-1.3-macos-aarch64",
+          "size": 1521200,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.3-linux-x86_64_znver5",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3/pawnocchio-1.3-linux-x86_64_znver5",
+          "size": 4891184,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.3-linux-x86_64_znver4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3/pawnocchio-1.3-linux-x86_64_znver4",
+          "size": 4891176,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.3-linux-x86_64_znver3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3/pawnocchio-1.3-linux-x86_64_znver3",
+          "size": 4859776,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.3-linux-x86_64_znver2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3/pawnocchio-1.3-linux-x86_64_znver2",
+          "size": 4709688,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.3-linux-x86_64_znver1",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3/pawnocchio-1.3-linux-x86_64_znver1",
+          "size": 4712040,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.3-linux-x86_64_v4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3/pawnocchio-1.3-linux-x86_64_v4",
+          "size": 4735088,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio-1.3-linux-x86_64_v3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.3/pawnocchio-1.3-linux-x86_64_v3",
+          "size": 4715072,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.2",
+      "name": " pawnocchio v1.2",
+      "body": "Elo   | 514.19 +- 25.04 (95%)\r\nConf  | 8.0+0.08s Threads=1 Hash=16MB\r\nGames | N: 3014 W: 2777 L: 60 D: 177\r\nPenta | [0, 2, 64, 163, 1278]\r\nhttps://pyronomy.pythonanywhere.com/test/1281/\r\n\r\nElo   | 563.87 +- 52.00 (95%)\r\nConf  | 40.0+0.40s Threads=1 Hash=128MB\r\nGames | N: 1014 W: 950 L: 12 D: 52\r\nPenta | [0, 1, 12, 49, 445]\r\nhttps://pyronomy.pythonanywhere.com/test/1284/\r\n\r\nAdded NNUE along with various search improvements\r\nEstimated around 3050-3150 CCRL blitz",
+      "prerelease": false,
+      "published_at": "2025-02-21T14:18:46Z",
+      "html_url": "https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.2",
+      "assets": [
+        {
+          "name": "pawnocchio_linux_aarch",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.2/pawnocchio_linux_aarch",
+          "size": 5079960,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_x86",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.2/pawnocchio_linux_x86",
+          "size": 4409108,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.2/pawnocchio_linux_x86_64",
+          "size": 4974608,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_x86_64_v2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.2/pawnocchio_linux_x86_64_v2",
+          "size": 4964736,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_x86_64_v3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.2/pawnocchio_linux_x86_64_v3",
+          "size": 5001176,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_x86_64_v4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.2/pawnocchio_linux_x86_64_v4",
+          "size": 5014928,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_zen1",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.2/pawnocchio_linux_zen1",
+          "size": 5067904,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_zen2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.2/pawnocchio_linux_zen2",
+          "size": 5067344,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_zen3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.2/pawnocchio_linux_zen3",
+          "size": 5171624,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_zen4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.2/pawnocchio_linux_zen4",
+          "size": 5187472,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_zen5",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.2/pawnocchio_linux_zen5",
+          "size": 5187480,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_macos_aarch",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.2/pawnocchio_macos_aarch",
+          "size": 2137464,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_macos_x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.2/pawnocchio_macos_x86_64",
+          "size": 2157920,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_windows_aarch.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.2/pawnocchio_windows_aarch.exe",
+          "size": 2346496,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio_windows_x86.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.2/pawnocchio_windows_x86.exe",
+          "size": 2473984,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio_windows_x86_64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.2/pawnocchio_windows_x86_64.exe",
+          "size": 2426880,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio_windows_x86_64_v2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.2/pawnocchio_windows_x86_64_v2.exe",
+          "size": 2418688,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio_windows_x86_64_v3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.2/pawnocchio_windows_x86_64_v3.exe",
+          "size": 2436096,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio_windows_x86_64_v4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.2/pawnocchio_windows_x86_64_v4.exe",
+          "size": 2427392,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio_windows_zen1.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.2/pawnocchio_windows_zen1.exe",
+          "size": 2419712,
+          "content_type": "application/x-msdos-program"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.1",
+      "name": "pawnocchio v1.1",
+      "body": "Elo   | 166.40 +- 11.10 (95%)\r\nConf  | 8.0+0.08s Threads=1 Hash=16MB\r\nGames | N: 3022 W: 1749 L: 403 D: 870\r\nPenta | [24, 113, 365, 511, 498]\r\nhttps://pyronomy.pythonanywhere.com/test/1095/\r\n\r\nElo   | 216.35 +- 20.41 (95%)\r\nConf  | 60.0+0.60s Threads=1 Hash=128MB\r\nGames | N: 1000 W: 639 L: 86 D: 275\r\nPenta | [3, 27, 79, 196, 195]\r\nhttps://pyronomy.pythonanywhere.com/test/1096/\r\n\r\nAdded null move pruning, late move pruning, and fixed a bug in eval.\r\nEstimated around 2400-2500 CCRL blitz",
+      "prerelease": false,
+      "published_at": "2025-01-24T15:27:51Z",
+      "html_url": "https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.1",
+      "assets": [
+        {
+          "name": "pawnocchio_linux_aarch",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.1/pawnocchio_linux_aarch",
+          "size": 4085328,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_x86",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.1/pawnocchio_linux_x86",
+          "size": 3414136,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.1/pawnocchio_linux_x86_64",
+          "size": 3983048,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_x86_64_v2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.1/pawnocchio_linux_x86_64_v2",
+          "size": 3978064,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_x86_64_v3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.1/pawnocchio_linux_x86_64_v3",
+          "size": 3925256,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_x86_64_v4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.1/pawnocchio_linux_x86_64_v4",
+          "size": 3914912,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_zen1",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.1/pawnocchio_linux_zen1",
+          "size": 4023336,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_zen2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.1/pawnocchio_linux_zen2",
+          "size": 4023768,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_zen3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.1/pawnocchio_linux_zen3",
+          "size": 4124632,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_zen4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.1/pawnocchio_linux_zen4",
+          "size": 4171736,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_zen5",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.1/pawnocchio_linux_zen5",
+          "size": 4171720,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_macos_aarch",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.1/pawnocchio_macos_aarch",
+          "size": 1314360,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_macos_x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.1/pawnocchio_macos_x86_64",
+          "size": 1324253,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_windows_aarch.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.1/pawnocchio_windows_aarch.exe",
+          "size": 1517056,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio_windows_x86.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.1/pawnocchio_windows_x86.exe",
+          "size": 1616384,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio_windows_x86_64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.1/pawnocchio_windows_x86_64.exe",
+          "size": 1596416,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio_windows_x86_64_v2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.1/pawnocchio_windows_x86_64_v2.exe",
+          "size": 1590784,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio_windows_x86_64_v3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.1/pawnocchio_windows_x86_64_v3.exe",
+          "size": 1589248,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio_windows_x86_64_v4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.1/pawnocchio_windows_x86_64_v4.exe",
+          "size": 1576960,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio_windows_zen1.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.1/pawnocchio_windows_zen1.exe",
+          "size": 1573888,
+          "content_type": "application/x-msdos-program"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.0",
+      "name": "pawnocchio v1.0",
+      "body": "Elo   | 284.85 +- 13.52 (95%)\r\nConf  | 8.0+0.08s Threads=1 Hash=16MB\r\nGames | N: 3000 W: 2210 L: 185 D: 605\r\nPenta | [5, 33, 198, 460, 804]\r\nhttps://pyronomy.pythonanywhere.com/test/1067/\r\n\r\nElo   | 273.61 +- 23.07 (95%)\r\nConf  | 60.0+0.60s Threads=1 Hash=128MB\r\nGames | N: 1000 W: 713 L: 56 D: 231\r\nPenta | [3, 11, 64, 170, 252]\r\nhttps://pyronomy.pythonanywhere.com/test/1068/\r\n\r\nAdded history, late move reductions, reverse futility pruning, aspiration windows, mate distance pruning, tweaked game phase calculation, and improved time management!\r\n\r\nEstimated around 2300-2400 CCRL blitz",
+      "prerelease": false,
+      "published_at": "2025-01-20T19:41:02Z",
+      "html_url": "https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v1.0",
+      "assets": [
+        {
+          "name": "pawnocchio_linux_aarch",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.0/pawnocchio_linux_aarch",
+          "size": 4078280,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_x86",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.0/pawnocchio_linux_x86",
+          "size": 3408768,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.0/pawnocchio_linux_x86_64",
+          "size": 3977128,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_x86_64_v2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.0/pawnocchio_linux_x86_64_v2",
+          "size": 3971304,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_x86_64_v3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.0/pawnocchio_linux_x86_64_v3",
+          "size": 3919168,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_x86_64_v4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.0/pawnocchio_linux_x86_64_v4",
+          "size": 3908792,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_zen1",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.0/pawnocchio_linux_zen1",
+          "size": 4016024,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_zen2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.0/pawnocchio_linux_zen2",
+          "size": 4016456,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_zen3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.0/pawnocchio_linux_zen3",
+          "size": 4117736,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_zen4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.0/pawnocchio_linux_zen4",
+          "size": 4165272,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_zen5",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.0/pawnocchio_linux_zen5",
+          "size": 4165272,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_macos_aarch",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.0/pawnocchio_macos_aarch",
+          "size": 1314152,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_macos_x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.0/pawnocchio_macos_x86_64",
+          "size": 1324053,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_windows_aarch.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.0/pawnocchio_windows_aarch.exe",
+          "size": 1515520,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio_windows_x86.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.0/pawnocchio_windows_x86.exe",
+          "size": 1614848,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio_windows_x86_64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.0/pawnocchio_windows_x86_64.exe",
+          "size": 1594880,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio_windows_x86_64_v2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.0/pawnocchio_windows_x86_64_v2.exe",
+          "size": 1589248,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio_windows_x86_64_v3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.0/pawnocchio_windows_x86_64_v3.exe",
+          "size": 1587712,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio_windows_x86_64_v4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.0/pawnocchio_windows_x86_64_v4.exe",
+          "size": 1575424,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio_windows_zen1.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v1.0/pawnocchio_windows_zen1.exe",
+          "size": 1571840,
+          "content_type": "application/x-msdos-program"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.9",
+      "name": "pawnocchio v0.9",
+      "body": "first release!\r\n\r\n~2100 elo ",
+      "prerelease": false,
+      "published_at": "2025-01-12T13:31:23Z",
+      "html_url": "https://github.com/JonathanHallstrom/pawnocchio/releases/tag/v0.9",
+      "assets": [
+        {
+          "name": "pawnocchio_linux_aarch",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v0.9/pawnocchio_linux_aarch",
+          "size": 3975192,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_x86",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v0.9/pawnocchio_linux_x86",
+          "size": 3334360,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v0.9/pawnocchio_linux_x86_64",
+          "size": 3835560,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_x86_64_v2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v0.9/pawnocchio_linux_x86_64_v2",
+          "size": 3830696,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_x86_64_v3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v0.9/pawnocchio_linux_x86_64_v3",
+          "size": 3809600,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_x86_64_v4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v0.9/pawnocchio_linux_x86_64_v4",
+          "size": 3802808,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_zen1",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v0.9/pawnocchio_linux_zen1",
+          "size": 3917048,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_zen2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v0.9/pawnocchio_linux_zen2",
+          "size": 3917576,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_zen3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v0.9/pawnocchio_linux_zen3",
+          "size": 4000024,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_zen4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v0.9/pawnocchio_linux_zen4",
+          "size": 4010968,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_linux_zen5",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v0.9/pawnocchio_linux_zen5",
+          "size": 4010984,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_macos_aarch",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v0.9/pawnocchio_macos_aarch",
+          "size": 1278760,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_macos_x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v0.9/pawnocchio_macos_x86_64",
+          "size": 1292594,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "pawnocchio_windows_aarch.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v0.9/pawnocchio_windows_aarch.exe",
+          "size": 1496064,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio_windows_x86.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v0.9/pawnocchio_windows_x86.exe",
+          "size": 1600000,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio_windows_x86_64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v0.9/pawnocchio_windows_x86_64.exe",
+          "size": 1567232,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio_windows_x86_64_v2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v0.9/pawnocchio_windows_x86_64_v2.exe",
+          "size": 1561088,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio_windows_x86_64_v3.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v0.9/pawnocchio_windows_x86_64_v3.exe",
+          "size": 1566720,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio_windows_x86_64_v4.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v0.9/pawnocchio_windows_x86_64_v4.exe",
+          "size": 1553408,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "pawnocchio_windows_zen1.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/v0.9/pawnocchio_windows_zen1.exe",
+          "size": 1553408,
+          "content_type": "application/x-msdos-program"
+        }
+      ]
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 16,
+  "owner_following": 7,
+  "owner_created_at": "2021-05-26T11:15:04Z",
+  "license": "GPL-3.0",
+  "category": "library"
+}

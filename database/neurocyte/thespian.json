@@ -1,0 +1,47 @@
+{
+  "name": "thespian",
+  "owner": "neurocyte",
+  "repo": "thespian",
+  "description": "thespian: an actor library for Zig, C & C++ applications",
+  "type": "project",
+  "topics": [
+    "actor-model",
+    "cpp",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 23,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-11-27T02:03:42Z",
+  "dependencies": [
+    {
+      "name": "cbor",
+      "url": "git+https://github.com/neurocyte/cbor?ref=master#7d2eeb68c8a2fb3f4d6baad6cc04c521b92974c0",
+      "hash": "cbor-1.0.0-RcQE_AswAQAPlqBCZXYQf9DZXn-0Ubt8Mk03ZcJWcsAG"
+    },
+    {
+      "name": "asio",
+      "url": "git+https://github.com/neurocyte/asio#0f1cbf24e5fb6fabe7078a20b76452f42e24a0df",
+      "hash": "asio-1.30.2-tLhDd0SB4QB1041_DEW_1cvEw8eMfBYLAwjN_G53Fn66"
+    },
+    {
+      "name": "tracy",
+      "url": "git+https://github.com/neurocyte/zig-tracy#67070c146104d93fd3bed5091738f22e33e13bce",
+      "hash": "zig_tracy-0.0.3-5-cp3Ht3AAAfHqShKfTK7waFK3Wjd3l2NheiqxvRRAdo"
+    }
+  ],
+  "readme": "# Thespian\nFast & flexible actors for Zig, C & C++ applications\n\nTo build:\n```\n./zig build\n```\n\nSee `tests/*` for many interesting examples.\n\nSee DeepWiki for more documentation: [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/neurocyte/thespian)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1552770?u=5c42562ca7bf8db5e586c5f373541572957629fe&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 127,
+  "owner_following": 3,
+  "owner_created_at": "2012-03-19T13:04:13Z",
+  "homepage": "https://deepwiki.com/neurocyte/thespian",
+  "license": "MIT",
+  "category": "library"
+}

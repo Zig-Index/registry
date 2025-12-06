@@ -1,0 +1,58 @@
+{
+  "name": "curl",
+  "owner": "allyourcodebase",
+  "repo": "curl",
+  "description": "curl ported to the zig build system ",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 8,
+  "forks": 6,
+  "watchers": 2,
+  "updated_at": "2025-12-04T23:50:44Z",
+  "dependencies": [
+    {
+      "name": "curl",
+      "url": "git+https://github.com/curl/curl?ref=curl-8_15_0#cfbfb65047e85e6b08af65fe9cdbcf68e9ad496a",
+      "hash": "N-V-__8AAHMjEAGr7410xUlFlTLfZMGyrDdMAWCCm7vhcwff"
+    },
+    {
+      "name": "zlib",
+      "url": "git+https://github.com/allyourcodebase/zlib#61e7df7e996ec5a5f13a653db3c419adb340d6ef",
+      "hash": "zlib-1.3.1-ZZQ7lbYMAAB1hTSOKSXAKAgHsfDcyWNH_37ojw5WSpgR"
+    },
+    {
+      "name": "zstd",
+      "url": "git+https://github.com/allyourcodebase/zstd?ref=1.5.7#01327d49cbc56dc24c20a167bb0055d7fc23de84",
+      "hash": "zstd-1.5.7-KEItkJ8vAAC5_rRlKmLflYQ-eKXbAIQBWZNmmJtS18q0"
+    },
+    {
+      "name": "brotli",
+      "url": "git+https://github.com/hexops/brotli#10961426f03016e273f4f4653eae907e9e2339b6",
+      "hash": "N-V-__8AAKgyIgAxeJp8Y2TC-ZFkwRg2Ybtf6RStczbMIkA5"
+    },
+    {
+      "name": "openssl",
+      "url": "git+https://github.com/allyourcodebase/openssl#cad7ccba47e42fa608ca655ec14ae33202df86e1",
+      "hash": "openssl-3.3.2-TC9C3Wa3ZACgB1hZbrLOQCK9XccIBaW_F3imFfIeYP06"
+    },
+    {
+      "name": "mbedtls",
+      "url": "git+https://github.com/allyourcodebase/mbedtls.git#68d5872dca0faa3e2a09d3329c73bd8779cc34e6",
+      "hash": "mbedtls-3.6.4-E4NUR24VAADBF5pt-No-Z90DjozkzySYAgq6eDFy9Xdy"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "[![CI](https://github.com/allyourcodebase/curl/actions/workflows/ci.yaml/badge.svg)](https://github.com/allyourcodebase/curl/actions)\n\n# curl\n\nThis is [curl](https://github.com/curl/curl), packaged for [Zig](https://ziglang.org/).\n\n## Installation\n\n> [!WARNING]\n>\n> Curl depends on https://github.com/allyourcodebase/openssl which currently doesn't work on macOS. Consider using a different ssl implementation.\n\n### Standalone library (libcurl) and command-line tool (curl)\n\n```bash\ngit clone https://github.com/allyourcodebase/curl\ncd curl\nzig build -Doptimize=ReleaseFast\n```\n\nThe library and CLI tool can be found in the newly created `./zig-out` directory. The `zig build run` build step may be used to directly run curl.\n\n#### Avoid system dependencies\n\nBy default, curl requires some system dependencies that have not been ported to the zig build system yet. These dependencies may be either manually installed on the host system or disabled with the following build command:\n\n```bash\n# Windows\nzig build -Doptimize=ReleaseFast -Dlibpsl=false -Dlibssh2=false -Dlibidn2=false -Dnghttp2=false\n# Posix\nzig build -Doptimize=ReleaseFast -Dlibpsl=false -Dlibssh2=false -Dlibidn2=false -Dnghttp2=false -Ddisable-ldap\n```\n\n### Zig Build System\n\nFirst, update your `build.zig.zon`:\n\n```\n# Initialize a `zig build` project if you haven't already\nzig init\nzig fetch --save git+https://github.com/allyourcodebase/curl.git\n```\n\nYou can then import curl in your `build.zig` with:\n\n```zig\nconst curl_dependency = b.dependency(\"curl\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\n// A custom `artifact` function is provided because the build system\n// provides no way to differentiate between the library (libcurl) and\n// the command-line tool (curl) since they are both named \"curl\" in\n// the build system.\n// See https://github.com/ziglang/zig/issues/20377\nconst curlExe = @import(\"curl\").artifact(curl_dependency, .exe);\nconst libCurl = @import(\"curl\").artifact(curl_dependency, .lib);\n\nyour_exe.root_module.linkLibrary(libCurl);\n```\n\n#### Avoid system dependencies\n\nBy default, curl requires some system dependencies that have not been ported to the zig build system yet. These dependencies may be either manually installed on the host system or disabled with the following change to the `build.zig`:\n\n```zig\nconst curl_dependency = b.dependency(\"curl\", .{\n    .target = target,\n    .optimize = optimize,\n    .libpsl = false,\n    .libssh2 = false,\n    .libidn2 = false,\n    .nghttp2 = false,\n    .@\"disable-ldap\" = true,\n});\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
+  "releases": [],
+  "owner_bio": "...are belong to Ziguanas, but we'd also be delighted to give them back!",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2023-09-28T21:29:33Z",
+  "license": "MIT",
+  "category": "library"
+}

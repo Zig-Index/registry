@@ -1,0 +1,50 @@
+{
+  "name": "fltk",
+  "owner": "timsurber",
+  "repo": "fltk",
+  "description": "FLTK built with zig",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-10-07T20:13:53Z",
+  "dependencies": [
+    {
+      "name": "fltk",
+      "url": "https://github.com/fltk/fltk/releases/download/release-1.4.4/fltk-1.4.4-source.tar.gz",
+      "hash": "N-V-__8AAHXabQGMcsjcykXANFOORO1KlKyEeD66HKuQI3T2"
+    },
+    {
+      "name": "zlib",
+      "url": "https://github.com/allyourcodebase/zlib/archive/refs/tags/1.3.1.tar.gz",
+      "hash": "zlib-1.3.1-AAAAACEMAAA0qyoSrfgBb_p25ItL4yRf_TBRk-26TYMF"
+    },
+    {
+      "name": "libpng",
+      "url": "https://github.com/allyourcodebase/libpng/archive/refs/heads/main.zip",
+      "hash": "libpng-1.6.50-oiaFGt4qAAB_vzrtvz9hA7_UiBW4arSaMVGc7ekKMCZ2"
+    },
+    {
+      "name": "libjpeg",
+      "url": "https://github.com/timsurber/libjpeg/archive/refs/tags/9f.zip",
+      "hash": "libjpeg-9.6.0-amT3U_ERAAA98tsTqQud6cjW_qxb6r2trEls6qJosP2I"
+    }
+  ],
+  "minimum_zig_version": "0.14.1",
+  "readme": "#  Zig build for [Fast Light Tool Kit (FLTK)](https://github.com/fltk/fltk). \nThe Fast Light Tool Kit (FLTK) is a cross-platform C++ GUI toolkit for UNIX®/Linux® (X11 or Wayland), Microsoft® Windows®, and macOS®.\n\nThis allows to build FLTK with the Zig build system. You can easily cross-compile an FLTK application on Linux for Windows without setting up a cross-compile toolchain\n\nAll dependencies except platform specific system libraries are statically linked. \n\nThese are not language bindings.\n\n## Supported Features\n\nLegends:\n- ✅ Working\n- 🏃 Planned\n\nPlatform support status:\n\n- ✅ Linux (X11 and Wayland)\n- ✅ Windows (WinAPI)\n- 🏃 Mac OSX (Cocoa)\n\nSupported Features:\n- ✅ All FLTK basic features\n- ✅ Image support\n- ❌ Drawing with Cairo\n- ❌ OpenGL\n\n### Usage\n\nRequired dependencies for compiling for Linux on Debian based Systems\n```libx11-dev libxext-dev libxrender-dev libwayland-dev libcairo2-dev wayland-protocols libxkbcommon-dev libxft-dev libpango1.0-dev```\n\nSee example usage here:\nhttps://github.com/timsurber/fltk_zig_example\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/138802321?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 0,
+  "owner_following": 0,
+  "owner_created_at": "2023-07-06T15:32:59Z",
+  "license": "MIT",
+  "category": "library"
+}

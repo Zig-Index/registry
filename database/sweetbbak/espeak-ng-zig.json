@@ -1,0 +1,32 @@
+{
+  "name": "espeak-ng-zig",
+  "owner": "sweetbbak",
+  "repo": "espeak-ng-zig",
+  "description": "rhasspy phonemize fork of espeak-ng built using the Zig build system",
+  "type": "project",
+  "topics": [
+    "espeak",
+    "espeak-ng",
+    "phonemes",
+    "tts",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-01-24T06:03:40Z",
+  "minimum_zig_version": "0.11.0",
+  "readme": "The [rhasspy/espeak-ng](https://github.com/rhasspy/espeak-ng) library packaged for the Zig build system.\n\nThis build doesn't compile any of the async, audio or ucd tools and features.\nIt is mainly used for phonemizing text.\n\n# Changes in Fork\n\nAdd espeak_TextToPhonemesWithTerminator function that allows getting phonemes with punctuation type back (see python_test.py)\n\nadd to your project:\n\n```sh\nzig fetch --save https://github.com/sweetbbak/espeak-ng-zig/archive/refs/heads/main.zip\n```\n\n```zig\n    const espeak = b.dependency(\"espeak\", .{\n        .target = target,\n        .optimize = optimize,\n        .strip = true,\n        .pie = true,\n    });\n\n    // link with the output artifact\n    exe.linkLibrary(espeak.artifact(\"espeak-ng\"));\n\n    // allow the headers to be included in your project\n    const espeak_include = espeak.path(\"include\");\n    exe.addIncludePath(espeak_include);\n```\n\nimport in your executable:\n\n```zig\n// provides  encoding.h   espeak_ng.h   speak_lib.h\nconst c = @cImport({\n    @cInclude(\"speak_lib.h\");\n});\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/75046310?u=e0a002e26044e9b9e6f861148d04ed0b3fb8fcaf&v=4",
+  "releases": [],
+  "owner_bio": "swizzling your bits",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "sweetbabyalaska@gmail.com",
+  "owner_twitter_username": null,
+  "owner_followers": 118,
+  "owner_following": 151,
+  "owner_created_at": "2020-11-25T21:32:06Z",
+  "category": "library"
+}

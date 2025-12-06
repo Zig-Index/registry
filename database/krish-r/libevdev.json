@@ -1,0 +1,34 @@
+{
+  "name": "libevdev",
+  "owner": "krish-r",
+  "repo": "libevdev",
+  "description": "libevdev ported to the zig build system",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-11-27T17:21:22Z",
+  "dependencies": [
+    {
+      "name": "libevdev",
+      "url": "git+https://gitlab.freedesktop.org/libevdev/libevdev/?ref=libevdev-1.13.5#f3a9c2038d54c95abedc58df2ff16738da355289",
+      "hash": "N-V-__8AAOg0DACi0vkbzCunxejgukP-CTSofNSA1aYajKy2"
+    }
+  ],
+  "minimum_zig_version": "0.16.0-dev.1484+d0ba6642b",
+  "readme": "# libevdev\n\nThis is [libevdev](https://www.freedesktop.org/software/libevdev/doc/latest/), packaged for [Zig](https://ziglang.org/).\n\n**NOTE**: This repository includes only basic build functionality (still a WIP, not thoroughly tested yet).\n\n## Dependencies\n\n* Python3\n\n## Usage\n\n* Update your `build.zig.zon`:\n\n```\nzig fetch --save git+https://github.com/krish-r/libevdev.git\n```\n\n* Add the following snippet to your `build.zig` script:\n\n```zig\nconst dep_optimize = b.option(std.builtin.OptimizeMode, \"dep-optimize\", \"optimization mode\") orelse .ReleaseFast;\n\nconst libevdev = b.dependency(\"libevdev\", .{\n    .target = target,\n    .optimize = dep_optimize,\n});\nyour_compilation.linkLibrary(libevdev.artifact(\"evdev\"));\n```\n\nThis will provide libevdev as a shared library to `your_compilation`.\n\n\n## Credits\n\n- [libevdev](https://gitlab.freedesktop.org/libevdev/libevdev)\n- [All Your Codebase](https://github.com/allyourcodebase)\n- [Ziggit](https://ziggit.dev)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/54745129?u=4979fbbcbbdd0760fd20ddb765d8053639626db0&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Chennai, India",
+  "owner_blog": "https://kr90.dev/",
+  "owner_twitter_username": null,
+  "owner_followers": 1,
+  "owner_following": 0,
+  "owner_created_at": "2019-08-31T14:20:00Z",
+  "license": "MIT",
+  "category": "library"
+}

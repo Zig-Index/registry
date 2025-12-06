@@ -1,0 +1,96 @@
+{
+  "name": "zig-config",
+  "owner": "Niek-HM",
+  "repo": "zig-config",
+  "description": "A Zig parser for .env, .ini, and .toml files with variable substitution, type-safe accessors, and merging support",
+  "type": "project",
+  "topics": [
+    "zig-library",
+    "zig-package",
+    "dotenv",
+    "ini",
+    "toml",
+    "config",
+    "utilities"
+  ],
+  "stars": 10,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-11-10T07:15:10Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.14.1",
+  "readme": "# zig-config\n\nA lightweight configuration loader for `.env`, `.ini`, and `.toml` files written in Zig.  \nIt supports variable substitution, typed access, merging, and exporting to environment maps.\n\n## Features\n\n✅ Parse `.env`, `.ini`, and `.toml` formats  \n✅ Access config values as `[]const u8`, `i64`, `f64`, `bool`, or arrays  \n✅ Variable substitution (`${VAR}`, `${VAR:-default}`, etc.)  \n✅ Merging with control over overwrite behavior  \n✅ Load from file, buffer, or environment  \n✅ Write back to `.env`, `.ini`, `.toml`  \n✅ Fully tested, memory-safe, leak-free  \n✅ No dependencies\n\n## Example\n\n```zig\nconst std = @import(\"std\");\nconst Config = @import(\"zig-config\").Config;\n\npub fn main() !void {\n    const allocator = std.heap.page_allocator;\n    var cfg = try Config.loadEnvFile(\"config.env\", allocator);\n    defer cfg.deinit();\n\n    const port = try cfg.getAs(i64, \"PORT\", allocator);\n    defer port.deinit();\n\n    const debug = try cfg.getAs(bool, \"DEBUG\", allocator);\n    defer debug.deinit();\n\n    const host = try cfg.getAs([]const u8, \"HOST\", allocator);\n    defer host.deinit();\n\n    std.debug.print(\"Running on {s}:{d} (debug = {})\", .{ host, port, debug });\n}\n```\n\n## Variable Substitution\n\nSupports:\n\n- `${VAR}` → error if `VAR` missing\n- `${VAR:-default}` → fallback if missing or empty\n- `${VAR-default}` → fallback if missing\n- `${VAR:+alt}` → use `alt` if set and not empty\n- `${VAR+alt}` → use `alt` if set\n\nNested substitutions and circular reference detection are supported.\n\n## Merging Configs\n\n```zig\nvar merged = try config.merge(&other, allocator, .overwrite);\ndefer merged.deinit();\n```\n\n`MergeBehavior` options:\n\n- `.overwrite` → always use new value  \n- `.skip_existing` → keep existing  \n- `.error_on_conflict` → fail on duplicate keys\n\n## Supported Formats\n\n- `.env`: simple `KEY=value`, comments `#` or `;`\n- `.ini`: `[section]` headers + key/value\n- `.toml`: full support for strings, arrays, inline tables, booleans, numbers\n\n## Writing Files\n\n```zig\ntry config.writeEnvFile(\"output.env\");\ntry config.writeIniFile(\"output.ini\", allocator);\ntry config.writeTomlFile(\"output.toml\");\n```\n\n## Typed Access\n\n```zig\nconst db_port = try config.getAs(i64, \"database.port\", allocator);\nconst features = try config.getAs([]bool, \"ENABLED_FLAGS\", allocator);\n```\n\nArrays supported: `[]i64`, `[]f64`, `[]bool`, `[][]const u8`\n\n## Roadmap\n✅ Short-term goals (v0.3.x)\n- [x] Full TOML support (date-time)\n- [ ] `.json` config input support\n- [ ] `.env.example` validation (check for missing/extra keys)\n- [ ] Null-delimited `EnvMap` export for subprocesses\n- [ ] Improve write serialization (preserve formatting where possible)\n- [ ] CLI tool: merge, diff, validate, and export config\n\n🔭 Long-term goals (v0.4+)\n- [ ] Live config reloading (file watching API)\n- [ ] SQLite-backed config store (persistent, reloadable)\n- [ ] Secrets injection from .secrets.env or Vault-compatible store\n- [ ] Typed schema validation (define required fields, expected types)\n- [ ] `YAML` support",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/56038147?u=5fa7f269cd05fb5a392d5c0d8ad7b6febb1dd37e&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.3.0",
+      "name": "Refactor of codebase - fix leaks, config tree and more",
+      "body": "# zig-config v0.3.0 – Structured Values, Memory Safety, and Type Power\r\n\r\n### Highlights\r\n✅ Typed Value Representation (`Value` Union)\r\nThe internal config representation now supports structured and typed values:\r\n\r\n- `.string`, `.int`, `.float`, `.bool`, `.list`, `.table`\r\n- All formats (`TOML`, `INI`, `.env`) are parsed into `Value` trees\r\n\r\nThis enables accurate type access, lossless round-tripping, and safer merging.\r\n\r\n---\r\n### Type-Safe Accessors (`getAs`)\r\nYou can now retrieve config values in a fully type-safe manner:\r\n\r\n```zig\r\ntry cfg.getAs(i64, \"max_connections\", allocator);\r\ntry cfg.getAs([][]const u8, \"env_list\", allocator);\r\ntry cfg.getAs(bool, \"database\", allocator);\r\n```\r\n\r\nSupported types:\r\n- Scalars: `i64`, `f64`, `bool`, `[]const u8`\r\n- Lists: `[]T` where `T` is any supported scalar or string\r\n- Structs: Nested TOML or INI sections map to Zig structs\r\n\r\n---\r\n\r\n### `OwnedValue(T)` for Memory Safety\r\nAll `getAs(...)` values are returned in a heap-allocated `OwnedValue(T)` wrapper with:\r\n\r\n- Proper deep copies for nested values (e.g. `[][]const u8`)\r\n- Auto-deallocation via `.deinit()`\r\n- No double-frees or use-after-frees\r\n\r\nThis makes config access both ergonomic and safe in long-lived applications and CLI tools.\r\n\r\n---\r\n\r\n### Expanded TOML Support\r\n- Arrays of integers, strings, booleans\r\n- Inline tables and nested sections\r\n- Multiline strings, empty arrays\r\n- Variable substitution (`${VAR}` and fallbacks)\r\n- Full support for scalar parsing and preservation of types\r\n\r\n---\r\n\r\n### Improved Substitution & Parsing\r\n- Advanced variable expansion: `${VAR:-default}`, `${VAR+alt}`, etc.\r\n- Supports recursive substitution with cycle detection\r\n- System environment fallback during substitution\r\n\r\n---\r\n\r\n### Test & Validation\r\n- Most major TOML/INI/env feature is covered by tests\r\n- Memory leak checks ensure all allocations from getAs and parseX are freed\r\n- All tests pass under zig test with leak sanitizer enabled\r\n\r\n\r\n### Upcoming in v0.4.0\r\nPlanned features for the next release:\r\n- TOML datetime support\r\n- Expanded testing (Might still be some errors in writing)\r\n- Support for more filetypes\r\n- Memory improvements. (There are dupes etc that are not needed).",
+      "prerelease": false,
+      "published_at": "2025-07-18T22:54:53Z",
+      "html_url": "https://github.com/Niek-HM/zig-config/releases/tag/v0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "Release v0.2.0 - Full TOML support",
+      "body": "# 📦 zig-config v0.2.0\r\nA major update with full TOML support, JSON input support, validation enhancements, and improved environment integration. This release prepares the library for broader use across CLI tools, apps, and deployment environments.\r\n\r\n## New Features\r\n- ✅ TOML parsing: Now supports strings, multiline strings, inline tables, arrays, booleans, numbers, and substitution (`${VAR}`).\r\n- ✅ writeTomlFile: Serialize config values back to `.toml` files with escaping and section awareness.\r\n- ✅ Variable substitution: Added support for `:-`, `-`, `:+`, `+` operators.\r\n- ✅ Unescape/Escape support: Handles TOML escape sequences (`\\n`, `\\u1234`, etc.).\r\n- ✅ Typed accessors: Clean support for `[]bool`, `[]i64`, `[][]const u8`, and more.\r\n- ✅ Merge with environment: Load values from `std.process.getEnvVarOwned(...)`.\r\n- ✅ Null-delimited environment export: Preliminary support for POSIX subprocess environments.\r\n- ✅ Section handling: Fully supports `[section.key]` flattening and round-trip fidelity.\r\n\r\n## Testing & Quality\r\n- ✅ 100% test coverage across `.env`, `.ini`, and `.toml`\r\n- ✅ Full memory safety (no leaks or use-after-free)\r\n- ✅ Variable resolution is robust and circular-safe\r\n\r\n## What's Next (v0.3 roadmap)\r\n✅ Short-term goals (v0.2.x)\r\n- [x] Full TOML support (multiline strings, arrays, inline tables, escaping, substitution)\r\n- [ ] `.json` config input support\r\n- [ ] `.env.example` validation (check for missing/extra keys)\r\n- [ ] Null-delimited `EnvMap` export for subprocesses\r\n- [ ] Improve write serialization (preserve formatting where possible)\r\n- [ ] Preserve typed values across formats (e.g. `true` instead of `\"true\"`)\r\n- [ ] CLI tool: merge, diff, validate, and export config\r\n\r\n🔭 Long-term goals (v0.3+)\r\n- [ ] Live config reloading (file watching API)\r\n- [ ] SQLite-backed config store (persistent, reloadable)\r\n- [ ] Secrets injection from .secrets.env or Vault-compatible store\r\n- [ ] Typed schema validation (define required fields, expected types)\r\n- [ ] `YAML` support\r\n\r\n**Full Changelog**: https://github.com/Niek-HM/zig-config/compare/v0.1.3...v0.2.0",
+      "prerelease": false,
+      "published_at": "2025-07-06T13:32:15Z",
+      "html_url": "https://github.com/Niek-HM/zig-config/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.3",
+      "name": "Release v0.1.3 - Env variables",
+      "body": "### ✨ Added\r\n- **System environment variable integration**\r\n  - `Config.fromEnvMap(allocator)` loads current process environment\r\n  - Variable substitution can now resolve from the system environment via `std.process.getEnvVarOwned`\r\n  - Supports fallback resolution order: raw config → resolved config → process environment\r\n- **Enhanced variable substitution:**\r\n  - Added support for advanced shell-like substitution patterns:\r\n    - `${VAR}`, `${VAR:-fallback}`, `${VAR-default}`, `${VAR:+alt}`, `${VAR+alt}`\r\n  - Added **nested substitutions** like `${A:-${B:-fallback}}`\r\n  - Circular reference detection in substitutions\r\n  - Escaped dollar signs (`\\$`) now render as literal `$`\r\n- **System environment merging**\r\n  - New `merge()` behavior supports merging with system environment config:\r\n    - Conflict resolution strategies: `.overwrite`, `.skip_existing`, `.error_on_conflict`\r\n  - Full test coverage for new substitution logic and env merging\r\n- **Memory safety**\r\n  - Dynamic values loaded from the system environment are now duplicated and freed correctly\r\n  - No memory leaks reported under Zig's general purpose allocator\r\n\r\n### 🔄 Changed\r\nRefactored internal substitution logic to support fallback chaining and memory-aware `ResolvedValue` struct\r\n\r\n### 🧹 Fixed\r\n- Prevented double frees when substituting values from different origins (raw, resolved, env)\r\n- Corrected ownership of env-resolved values to avoid leaks",
+      "prerelease": false,
+      "published_at": "2025-06-25T17:07:49Z",
+      "html_url": "https://github.com/Niek-HM/zig-config/releases/tag/v0.1.3",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.2",
+      "name": "Release v0.1.2 - Extended Variable Substitution & Improved Error Handling",
+      "body": "## Highlights\r\n\r\n- Full support for .env and .ini formats\r\n- Variable substitution now supports:\r\n  - `${VAR}`, `${VAR:-fallback}`, `${VAR-fallback}`, `${VAR:+val}`, `${VAR+val}`\r\n  - Escaped dollar signs (`\\$`)\r\n- Full test coverage including edge cases and memory safety\r\n- Clean error handling and memory safety\r\n- Merge behavior: `.overwrite`, `.skip_existing`, `.error_on_conflict`\r\n- `writeEnvFile` and `writeIniFile` for serialization\r\n\r\n\r\n## 🚧 Planned\r\n\r\n### 1. Process Environment Integration\r\n- [ ] Load from `std.process.getEnvMap()`\r\n- [ ] Merge behavior for `.env` vs. process variables\r\n- [ ] Export merged config as process env block\r\n\r\n### 2. Subprocess Launching\r\n- [ ] Provide helper to launch subprocesses with config-derived environment\r\n\r\n### 3. Zigmod / Gyro Support\r\n- [ ] Add support for package managers (`gyro`, `zigmod`)\r\n\r\n### 4. Advanced Interpolation\r\n- [ ] Support nested substitution `${A:-${B:-fallback}}`\r\n- [ ] Support erroring on circular references\r\n\r\n### 5. API Improvements\r\n- [ ] Generic accessor: `get(T: type, key, allocator) ?T`\r\n- [ ] `.getOrDefault()` overloads\r\n\r\n### 6. Fuzz and Stress Testing\r\n- [ ] Add fuzz tests for `.env` and `.ini` parsers\r\n\r\n---\r\n\r\n## 🤝 Ideas Welcome\r\nWant to see something else in `zig-config`? Feel free to open an [issue](https://github.com/Niek-HM/zig-config/issues) or contribute via PR.",
+      "prerelease": false,
+      "published_at": "2025-06-24T00:00:20Z",
+      "html_url": "https://github.com/Niek-HM/zig-config/releases/tag/v0.1.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.1",
+      "name": "Release v0.1.1 – Expanded the configs range and tests",
+      "body": "## Highlights:\r\n- ✅ Fixed memory leaks\r\nNo leaks when duping something\r\n\r\n- ✅ Merging\r\nMerge multiple configs\r\n\r\n- ✅ Config has listing (.has)\r\nRetrieve if the config contains a certain variable.\r\n\r\n## New tests added:\r\n- load env\r\n- load ini and get section\r\n- merge configs\r\n- test for mem leaks *disabled atm",
+      "prerelease": false,
+      "published_at": "2025-06-22T11:45:19Z",
+      "html_url": "https://github.com/Niek-HM/zig-config/releases/tag/v0.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "zig-config v0.1.0",
+      "body": "zig-config v0.1.0 Release Notes\r\n\r\n# 🚀 zig-config v0.1.0\r\n\r\nZig-based configuration file parser and serializer for `.env` and `.ini` formats.\r\n\r\n✨ Features\r\n\r\n- Unified `Config` API for `.env` and `.ini` files\r\n- Type-safe getters:\r\n  - `getInt(key)`\r\n  - `getFloat(key)`\r\n  - `getBool(key)`\r\n- Section support for `[section.key]` in `.ini` files\r\n- Write `.ini` back to file with `writeIniFile()`\r\n- Utility helpers:\r\n  - `debugPrint()` to inspect contents\r\n  - `listKeys()` and `listSections()`\r\n- Well-documented and beginner-friendly source\r\n\r\n📦 Usage\r\n\r\n```zig\r\nconst config = @import(\"zig-config\");\r\nconst allocator = std.heap.page_allocator;\r\n\r\n// Load .env\r\nvar cfg = try config.Config.loadEnvFile(\".env\", allocator);\r\ndefer cfg.deinit();\r\n\r\n// Access typed values\r\nif (cfg.getInt(\"PORT\")) |port| {\r\n    std.debug.print(\"Port = {}\r\n\", .{port});\r\n}\r\n```\r\n\r\n📥 Install (with Zigmod)\r\n\r\n```toml\r\n[[dependencies]]\r\nname = \"zig-config\"\r\nurl = \"https://github.com/NiekHM/zig-config\"\r\ntag = \"v0.1.0\"\r\n```\r\n\r\n",
+      "prerelease": false,
+      "published_at": "2025-06-22T09:18:35Z",
+      "html_url": "https://github.com/Niek-HM/zig-config/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Hi, I am still a student and currently do some work on UpWork, hope to see you there.",
+  "owner_company": null,
+  "owner_location": "Netherlands",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 2,
+  "owner_following": 1,
+  "owner_created_at": "2019-10-01T15:25:07Z",
+  "license": "MIT",
+  "category": "library"
+}

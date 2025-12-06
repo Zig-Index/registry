@@ -1,0 +1,222 @@
+{
+  "name": "zabi",
+  "owner": "Raiden1411",
+  "repo": "zabi",
+  "description": "Interact with ethereum and EVM based chains via Zig!",
+  "type": "project",
+  "topics": [
+    "abi",
+    "ethereum",
+    "web3",
+    "zig",
+    "zabi",
+    "evm",
+    "optimism",
+    "blockchain",
+    "zig-package"
+  ],
+  "stars": 106,
+  "forks": 13,
+  "watchers": 2,
+  "updated_at": "2025-12-06T00:12:54Z",
+  "dependencies": [
+    {
+      "name": "c_kzg_4844",
+      "url": "./pkg/c-kzg-4844"
+    }
+  ],
+  "readme": "<br/>\n\n<p align=\"center\">\n    <picture>\n      <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://raw.githubusercontent.com/Raiden1411/zabi/main/.github/zabi.svg\">\n      <img alt=\"ZAbi logo\" src=\"https://raw.githubusercontent.com/Raiden1411/zabi/main/.github/zabi.svg\" width=\"auto\" height=\"150\">\n    </picture>\n</p>\n\n<p align=\"center\">\n  A zig library to interact with EVM blockchains \n<p>\n\n<p align=\"center\">\n  <picture>\n    <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://codecov.io/github/Raiden1411/zabi/graph/badge.svg\">\n    <img alt=\"ZAbi logo\" src=\"https://codecov.io/github/Raiden1411/zabi/graph/badge.svg\" width=\"auto\" height=\"25\">\n  </picture>\n<p>\n\n### Overview\nZabi aims to add support for interacting with ethereum or any compatible EVM based chain. \n\n\n### Zig Versions\nZabi will follow the master branch of ziglang as best as possible.\n\n\n### Installing Zig\nYou can install the latest version of zig [here](https://ziglang.org/download/) or you can also use a version manager like [zvm](https://www.zvm.app/guides/install-zvm/) to manage your zig version.\n\n\n### Integration\nIn the `build.zig.zon` file, add the following to the dependencies object.\n\n```zig\n.zabi = .{\n    .url = \"https://github.com/Raiden1411/zabi/archive/VERSION_NUMBER.tar.gz\",\n}\n```\n\nThe compiler will produce a hash mismatch error, add the `.hash` field to `build.zig.zon`\nwith the hash the compiler tells you it found.\nYou can also use `zig fetch` to automatically do the above steps.\n\n```bash\nzig fetch --save https://github.com/Raiden1411/zabi/archive/VERSION_NUMBER.tar.gz \nzig fetch --save git+https://github.com/Raiden1411/zabi.git#LATEST_COMMIT\n```\n\nTo install zabi with the latest zig version you can install it like so\n\n```bash\nzig fetch --save git+https://github.com/Raiden1411/zabi.git#zig_version_0.14.0\n```\n\nThen in your `build.zig` file add the following to the `exe` section for the executable where you wish to have `zabi` available.\n\n```zig\nconst zabi_module = b.dependency(\"zabi\", .{}).module(\"zabi\");\n// for exe, lib, tests, etc.\nexe.root_module.addImport(\"zabi\", zabi_module);\n```\n\nNow in the code, you can import components like this:\n\n```zig\nconst zabi = @import(\"zabi\");\nconst meta = zabi.meta;\nconst encoder = zabi.encoder;\n```\n\nZabi is a modular library meaning that you can import separete modules if you just need some components of zabi.\n\n```zig\nconst zabi = b.dependency(\"zabi\", .{});\n// for exe, lib, tests, etc.\nexe.root_module.addImport(\"zabi-evm\", zabi.module(\"zabi-evm\"));\n```\n\nNow in the code, you can import components like this:\n\n```zig\nconst zabi_evm = @import(\"zabi-evm\");\n```\n\nCurrently these are all of the modules available for you to use in `zabi`:\n- zabi -> contains all modules.\n- zabi-abi -> contains all abi types and eip712.\n- zabi-ast -> contains a solidity tokenizer, parser and Ast.\n- zabi-clients -> contains all supported RPC clients and a block explorer clients.\n- zabi-crypto -> contains the signer used in zabi as well BIP32 and BIP39\n- zabi-decoding -> contains all decoding methods supported.\n- zabi-encoding -> contains all encoding methods supported.\n- zabi-evm -> contains the EVM interpreter.\n- zabi-human -> contains a custom human readable abi parser.\n- zabi-meta -> contains all of the meta programming utils used in zabi.\n- zabi-types -> contains all of the types used in zabi.\n- zabi-utils -> contains all of the utils used in zabi as well as the custom cli parser data generator.\n\n\n### Example Usage\nYou can check of the examples in the example/ folder but for a simple introduction you can checkout the bellow example.\n\n```zig\nconst args_parser = @import(\"zabi\").utils.args;\nconst std = @import(\"std\");\nconst clients = @import(\"zabi\").clients;\n\nconst HttpProvider = clients.Provider.HttpProvider;\nconst Wallet = clients.Wallet;\n\nconst CliOptions = struct {\n    priv_key: [32]u8,\n    url: []const u8,\n};\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n\n    var iter = try std.process.argsWithAllocator(gpa.allocator());\n    defer iter.deinit();\n\n    const parsed = args_parser.parseArgs(CliOptions, gpa.allocator(), &iter);\n\n    const uri = try std.Uri.parse(parsed.url);\n    var provider = try HttpProvider.init(.{\n        .allocator = gpa.allocator(),\n        .network_config = .{ .endpoint = .{ .uri = uri } },\n    });\n    defer provider.deinit();\n\n    var wallet = try Wallet.init(parsed.priv_key, gpa.allocator(), &provider.provider, false);\n    defer wallet.deinit();\n\n    const message = try wallet.signEthereumMessage(\"Hello World\");\n\n    const hexed = try message.toHex(wallet.allocator);\n    defer gpa.allocator().free(hexed);\n\n    std.debug.print(\"Ethereum message: {s}\\n\", .{hexed});\n}\n```\n\n\n### Features\n\n- Json RPC with support for http/s, ws/s and ipc connections.\n- EVM Interpreter that you can use to run contract bytecode.\n- Wallet instances and contract instances to use for interacting with nodes/json rpc.\n- Wallet nonce manager that uses a json rpc as a source of truth.\n- BlockExplorer support. Only the free methods from those api endpoints are supported.\n- Custom Secp256k1 ECDSA signer using only Zig and implementation of RFC6979 nonce generator.\n- Custom Schnorr signer. BIP0340 and ERC-7816 are both supported.\n- Custom JSON Parser that can be used to deserialize and serialized RPC data at runtime.\n- Custom solidity tokenizer and parser generator.\n- Ability to translate solidity source code to zig.\n- ABI to zig types.\n- Support for EIP712.\n- Support for EIP3074 authorization message. Also supports EIP7702 transactions.\n- Parsing of human readable ABIs into zig types with custom Parser and Lexer.\n- HD Wallet and Mnemonic passphrases.\n- RLP Encoding/Decoding.\n- SSZ Encoding/Decoding.\n- ABI Encoding/Decoding with support for Log topics encoding and decoding.\n- Parsing of encoded transactions and serialization of transaction objects.\n- Support for all transaction types and the new EIP4844 KZG commitments.\n- Support for OPStack and ENS.\n- Custom meta programming functions to translate ABI's into zig types.\n- Support for interacting with test chains such as Anvil or Hardhat.\n- Custom cli args parser that translates commands to zig types and can be used to pass data to methods.\n- Custom data generator usefull for fuzzing.\n\nAnd a lot more yet to come...\n\n### Goal\nThe goal of zabi is to be one of the best library to use by the ethereum ecosystem and to expose to more people to the zig programming language.\n\n\n### Contributing\nContributions to Zabi are greatly appreciated! If you're interested in contributing to ZAbi, feel free to create a pull request with a feature or a bug fix. \\\nYou can also read the [contributing guide](/.github/CONTRIBUTING.md) **before submitting a pull request**\n\n\n### Sponsors\nIf you find Zabi useful or use it for work, please consider supporting development on [GitHub Sponsors]( https://github.com/sponsors/Raiden1411) or sending crypto to [zzabi.eth](https://etherscan.io/name-lookup-search?id=zzabi.eth) or interacting with the [drip](https://www.drips.network/app/projects/github/Raiden1411/zabi?exact) platform where 40% of the revenue gets sent to zabi's dependencies. Thank you 🙏\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/67233402?u=b2d0a0f2845314092f58c8d47c21c3f12f060bff&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.18.0",
+      "name": "v0.18.0",
+      "body": "## What's Changed\r\n* feat: implement some async clients by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/150\r\n\r\n\r\n**Full Changelog**: https://github.com/Raiden1411/zabi/compare/v.0.17.0...v0.18.0",
+      "prerelease": false,
+      "published_at": "2025-06-03T19:50:28Z",
+      "html_url": "https://github.com/Raiden1411/zabi/releases/tag/v0.18.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v.0.17.0",
+      "name": "v.0.17.0",
+      "body": "**Full Changelog**: https://github.com/Raiden1411/zabi/compare/v0.16.1...v.0.17.0",
+      "prerelease": false,
+      "published_at": "2025-05-19T12:43:18Z",
+      "html_url": "https://github.com/Raiden1411/zabi/releases/tag/v.0.17.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.16.1",
+      "name": "v0.16.1",
+      "body": "## What's Changed\r\n* ast: implement missing nodes for the formatter by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/147\r\n\r\n\r\n**Full Changelog**: https://github.com/Raiden1411/zabi/compare/v0.16.0...v0.16.1",
+      "prerelease": false,
+      "published_at": "2025-03-03T12:08:43Z",
+      "html_url": "https://github.com/Raiden1411/zabi/releases/tag/v0.16.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.16.0",
+      "name": "v0.16.0",
+      "body": "## What's Changed\r\n* ast: add support for parsing solidity assembly by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/142\r\n* ast: add support for a solidity format writer (part 1) by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/143\r\n* ast: extend support for the solidity formatter by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/145\r\n\r\n\r\n**Full Changelog**: https://github.com/Raiden1411/zabi/compare/v0.15.7...v0.16.0",
+      "prerelease": false,
+      "published_at": "2025-02-21T14:49:49Z",
+      "html_url": "https://github.com/Raiden1411/zabi/releases/tag/v0.16.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.15.7",
+      "name": "v0.15.7",
+      "body": "## What's Changed\r\n* build: add new examples build command by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/129\r\n* chore: update CONTRIBUTING.md by @marko03kostic in https://github.com/Raiden1411/zabi/pull/137\r\n* chore: update tests and update env parser by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/138\r\n* chore: more updates to CONTRIBUTING.md by @marko03kostic in https://github.com/Raiden1411/zabi/pull/139\r\n* build: update test runner to include the file names by @marko03kostic in https://github.com/Raiden1411/zabi/pull/140\r\n* ast: allow parsing of multiple state modifiers by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/141\r\n\r\n## New Contributors\r\n* @marko03kostic made their first contribution in https://github.com/Raiden1411/zabi/pull/137\r\n\r\n**Full Changelog**: https://github.com/Raiden1411/zabi/compare/v0.15.6...v0.15.7",
+      "prerelease": false,
+      "published_at": "2025-01-05T10:18:58Z",
+      "html_url": "https://github.com/Raiden1411/zabi/releases/tag/v0.15.7",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.15.6",
+      "name": "v0.15.6",
+      "body": "## What's Changed\r\n* chore: fix some typos in comment by @deterclosed in https://github.com/Raiden1411/zabi/pull/124\r\n* evm: extend evm support by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/125\r\n\r\n## New Contributors\r\n* @deterclosed made their first contribution in https://github.com/Raiden1411/zabi/pull/124\r\n\r\n**Full Changelog**: https://github.com/Raiden1411/zabi/compare/v0.15.5...v0.15.6",
+      "prerelease": false,
+      "published_at": "2024-12-21T09:43:26Z",
+      "html_url": "https://github.com/Raiden1411/zabi/releases/tag/v0.15.6",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.15.5",
+      "name": "v0.15.5",
+      "body": "## What's Changed\r\n* wasm: make the evm interpreter compile to wasm by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/123\r\n\r\n\r\n**Full Changelog**: https://github.com/Raiden1411/zabi/compare/v0.15.4...v0.15.5",
+      "prerelease": false,
+      "published_at": "2024-12-06T22:00:14Z",
+      "html_url": "https://github.com/Raiden1411/zabi/releases/tag/v0.15.5",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.15.4",
+      "name": "v0.15.4",
+      "body": "## What's Changed\r\n* build: readd coverage support by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/120\r\n* encoder: refactor abi encode api by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/121\r\n* feat: implement custom websocket client by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/122\r\n\r\n\r\n**Full Changelog**: https://github.com/Raiden1411/zabi/compare/v0.15.3...v0.15.4",
+      "prerelease": false,
+      "published_at": "2024-11-30T22:15:39Z",
+      "html_url": "https://github.com/Raiden1411/zabi/releases/tag/v0.15.4",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.15.3",
+      "name": "v0.15.3",
+      "body": "## What's Changed\r\n* encoder: refactor abi log topic encoding by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/117\r\n* crypto: add support for schnorr signing by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/118\r\n* build: update benchmark runner to use tests instead by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/119\r\n\r\n\r\n**Full Changelog**: https://github.com/Raiden1411/zabi/compare/v0.15.2...v0.15.3",
+      "prerelease": false,
+      "published_at": "2024-11-16T14:31:35Z",
+      "html_url": "https://github.com/Raiden1411/zabi/releases/tag/v0.15.3",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.15.2",
+      "name": "v0.15.2",
+      "body": "## What's Changed\r\n* chore: some library cleanup by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/114\r\n* docs: Update README.md for spelling mistakes by @roninjin10 in https://github.com/Raiden1411/zabi/pull/115\r\n* encoder: refactor abi encoder implementation by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/116\r\n\r\n## New Contributors\r\n* @roninjin10 made their first contribution in https://github.com/Raiden1411/zabi/pull/115\r\n\r\n**Full Changelog**: https://github.com/Raiden1411/zabi/compare/v0.15.1...v0.15.2",
+      "prerelease": false,
+      "published_at": "2024-11-10T09:25:50Z",
+      "html_url": "https://github.com/Raiden1411/zabi/releases/tag/v0.15.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.15.1",
+      "name": "v0.15.1",
+      "body": "## What's Changed\r\n* feat: add support for eip7702 transaction type and authorization utils by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/109\r\n* chore: update docs by @Adminixtrator in https://github.com/Raiden1411/zabi/pull/110\r\n* chore: update ci runners by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/111\r\n* decoder: refactor rlp implementation by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/112\r\n* rlp: refactor rlp encode interface by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/113\r\n\r\n## New Contributors\r\n* @Adminixtrator made their first contribution in https://github.com/Raiden1411/zabi/pull/110\r\n\r\n**Full Changelog**: https://github.com/Raiden1411/zabi/compare/v0.15.0...v0.15.1",
+      "prerelease": false,
+      "published_at": "2024-11-02T11:53:30Z",
+      "html_url": "https://github.com/Raiden1411/zabi/releases/tag/v0.15.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.15.0",
+      "name": "v0.15.0",
+      "body": "## What's Changed\r\n* evm: implement a new stack for the interpreter by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/106\r\n* crypto: add nfkd normalization to mnemonic wordlists by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/107\r\n* build: convert zabi to be a more modular library by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/108\r\n\r\n\r\n**Full Changelog**: https://github.com/Raiden1411/zabi/compare/v0.14.2...v0.15.0",
+      "prerelease": false,
+      "published_at": "2024-10-24T09:48:24Z",
+      "html_url": "https://github.com/Raiden1411/zabi/releases/tag/v0.15.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.14.2",
+      "name": "v0.14.2",
+      "body": "## What's Changed\r\n* human_readable: update parser usage and evm interpreter bug fixes by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/105\r\n\r\n\r\n**Full Changelog**: https://github.com/Raiden1411/zabi/compare/v0.14.1...v0.14.2",
+      "prerelease": false,
+      "published_at": "2024-10-07T16:22:37Z",
+      "html_url": "https://github.com/Raiden1411/zabi/releases/tag/v0.14.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.14.1",
+      "name": "v0.14.1",
+      "body": "## What's Changed\r\n* feat: add hability to translate solidity to zig by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/104\r\n\r\n\r\n**Full Changelog**: https://github.com/Raiden1411/zabi/compare/v0.14.0...v0.14.1",
+      "prerelease": false,
+      "published_at": "2024-09-26T21:50:24Z",
+      "html_url": "https://github.com/Raiden1411/zabi/releases/tag/v0.14.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.14.0",
+      "name": "v0.14.0",
+      "body": "## What's Changed\r\n* rlp: update api by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/97\r\n* feat: add a nonce_manager to use with wallet client by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/98\r\n* build: experimental wasm32-freestanding support by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/99\r\n* wallet: add support for eip3074 auth actions by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/100\r\n* build: add custom dotenv parser by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/101\r\n* feat: add support for solidity tokenizer by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/102\r\n* ast_sol: add solidity parser and AST by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/103\r\n\r\n\r\n**Full Changelog**: https://github.com/Raiden1411/zabi/compare/v0.13.1...v0.14.0",
+      "prerelease": false,
+      "published_at": "2024-09-23T15:10:23Z",
+      "html_url": "https://github.com/Raiden1411/zabi/releases/tag/v0.14.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.13.1",
+      "name": "v0.13.1",
+      "body": "## What's Changed\r\n* chains: add default configs for different networks by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/92\r\n* build: update to latest zig by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/93\r\n* op_stack: update wallets and tests by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/94\r\n* tests: move tests to dedicated folder by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/95\r\n* feat: add explicit error sets across the library by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/96\r\n\r\n\r\n**Full Changelog**: https://github.com/Raiden1411/zabi/compare/v0.13.0...v0.13.1",
+      "prerelease": false,
+      "published_at": "2024-09-02T23:31:38Z",
+      "html_url": "https://github.com/Raiden1411/zabi/releases/tag/v0.13.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.13.0",
+      "name": "v0.13.0",
+      "body": "## What's Changed\r\n* docs: Add way to generate documentation based on `doc_comments`. by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/90\r\n* clients: support for adding full chain config by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/91\r\n\r\n\r\n**Full Changelog**: https://github.com/Raiden1411/zabi/compare/v0.12.5...v0.13.0",
+      "prerelease": false,
+      "published_at": "2024-08-27T23:14:22Z",
+      "html_url": "https://github.com/Raiden1411/zabi/releases/tag/v0.13.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.12.5",
+      "name": "v0.12.5",
+      "body": "## What's Changed\r\n* docs: update README.md by @eltociear in https://github.com/Raiden1411/zabi/pull/88\r\n* clients: update the `init` method on clients by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/89\r\n\r\n## New Contributors\r\n* @eltociear made their first contribution in https://github.com/Raiden1411/zabi/pull/88\r\n\r\n**Full Changelog**: https://github.com/Raiden1411/zabi/compare/v0.12.4...v0.12.5",
+      "prerelease": false,
+      "published_at": "2024-08-19T20:50:24Z",
+      "html_url": "https://github.com/Raiden1411/zabi/releases/tag/v0.12.5",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.12.4",
+      "name": "v0.12.4",
+      "body": "## What's Changed\r\n* anvil: rework on how to start the proccess and add all supported arguments by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/87\r\n\r\n\r\n**Full Changelog**: https://github.com/Raiden1411/zabi/compare/v0.12.3...v0.12.4",
+      "prerelease": false,
+      "published_at": "2024-08-17T12:25:47Z",
+      "html_url": "https://github.com/Raiden1411/zabi/releases/tag/v0.12.4",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.12.3",
+      "name": "v0.12.3",
+      "body": "## What's Changed\r\n* tests: update client tests to re-use anvil by @Raiden1411 in https://github.com/Raiden1411/zabi/pull/86\r\n\r\n\r\n**Full Changelog**: https://github.com/Raiden1411/zabi/compare/v0.12.2...v0.12.3",
+      "prerelease": false,
+      "published_at": "2024-08-13T21:34:19Z",
+      "html_url": "https://github.com/Raiden1411/zabi/releases/tag/v0.12.3",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "https://www.zabi.sh/",
+  "owner_twitter_username": "0xraiden_",
+  "owner_followers": 47,
+  "owner_following": 0,
+  "owner_created_at": "2020-06-21T15:08:30Z",
+  "homepage": "https://zabi.sh",
+  "license": "MIT",
+  "category": "library"
+}

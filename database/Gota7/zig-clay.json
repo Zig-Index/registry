@@ -1,0 +1,34 @@
+{
+  "name": "zig-clay",
+  "owner": "Gota7",
+  "repo": "zig-clay",
+  "description": "Bindings for Clay UI library in Zig.",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 21,
+  "forks": 3,
+  "watchers": 1,
+  "updated_at": "2025-10-06T09:32:09Z",
+  "dependencies": [
+    {
+      "name": "clay_src",
+      "url": "git+https://github.com/nicbarker/clay#c9e1a63378ecfba448ecd42796838264b10adafb",
+      "hash": "122051848fc0b06aac52586cd63a202d602a37c63c9cf0bd4c4e6ce6d13f5cef44d4"
+    }
+  ],
+  "readme": "# zig-clay\n\nTweaked bindings for the [clay](https://github.com/nicbarker/clay) C UI library.\n\n## Features\n\n* Zig 0.13.0 compatibility.\n* Naming conventions follow zig standards.\n* Callbacks are more zig-like.\n* Config structures have default initializations.\n* Code is very similar to how it looks in C.\n\n## Usage\n\nThe main difference between this and the C API is the lack of macros.\nTo get around this, a different approach was taken to emulate the feel of the C API:\n\n```zig\nconst layout = clay.beginLayout();\nif (clay.child(&.{\n    clay.id(\"OuterContainer\"),\n    clay.rectangle(.{ .color = .{ .r = 43, .g = 41, .b = 51, .a = 255 } }),\n    clay.layout(.{\n        .layout_direction = .top_to_bottom,\n        .sizing = .{\n            .width = clay.sizingGrow(.{}),\n            .height = clay.sizingGrow(.{}),\n        },\n        .padding = .{ .x = 16, .y = 16 },\n        .child_gap = 16,\n    }),\n\n    // More config here.\n})) |outer_container| {\n    defer outer_container.end();\n    clay.text(\"Hello World!\", .{\n        .font_id = 0,\n        .font_size = 24,\n        .text_color = .{ .r = 255, .g = 255, .b = 255, .a = 255 },\n    });\n\n    // More child elements here.\n}\n\n// ...\n\nconst commands = layout.end();\n```\n\nC version for comparison:\n```c\nClay_BeginLayout();\nCLAY(\n    CLAY_ID(\"OuterContainer\"),\n    CLAY_RECTANGLE({ .color = { 43, 41, 51, 255 } }),\n    CLAY_LAYOUT({\n        .layoutDirection = CLAY_TOP_TO_BOTTOM,\n        .sizing = { .width = CLAY_SIZING_GROW(), .height = CLAY_SIZING_GROW() },\n        .padding = { 16, 16 },\n        .childGap = 16\n    })\n\n    // More config here.\n) {\n    CLAY_TEXT(\"Hello World!\", CLAY_TEXT_CONFIG({\n        .fontId = 0,\n        .fontSize = 24,\n        .textColor = { 255, 255, 255, 255 }\n    }));\n\n    // More child elements here.\n}\n\n// ...\n\nClay_RenderCommandArray renderCommands = Clay_EndLayout();\n```\n\nWhile not as frequent, sometimes control flow is required during element configuration.\nIn this scenario, manual configuration should be done:\n\n```zig\nif (clay.childManualControlFlow()) |sidebar_button| {\n    defer sidebar_button.end();\n\n    sidebar_button.config(clay.layout(sidebar_button_layout));\n    clay.onHover(handle_sidebar_interaction, @ptrFromInt(i));\n    if (clay.hovered())\n        sidebar_button.config(clay.rectangle(.{\n            .color = .{ .r = 120, .g = 120, .b = 120, .a = 255 },\n            .corner_radius = clay.cornerRadius(8),\n        }));\n\n    // More config here.\n\n    sidebar_button.endConfig();\n\n    // Children.\n    clay.text(document.title, .{\n        .font_id = font_id_body_16,\n        .font_size = 20,\n        .text_color = color_white,\n    });\n\n    // More child elements here.\n}\n```\n\nIn this scenario, care should be taken that the order is:\n\n1. Call `childManualControlFlow()`\n2. Config (calls to `.config()`)\n3. Call `.endConfig()`\n4. Child elements\n5. Call `.end()`\n\n## Getting Started\n\nThe `example` folder has an example of a working project.\nOther than the syntatical differences seen above, usage of the zig API should be fairly 1-to-1 with the C library.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/22335998?u=f5cf38fa26e2a66eb662b111f554a4b9d2624dc0&v=4",
+  "releases": [],
+  "owner_bio": "Hello, this is Gota7! I mostly work on zig wrapper libraries as well as game dev projects. I used to make modding tools.",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 79,
+  "owner_following": 5,
+  "owner_created_at": "2016-09-21T02:53:18Z",
+  "license": "MIT",
+  "category": "library"
+}

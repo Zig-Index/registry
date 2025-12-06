@@ -1,0 +1,34 @@
+{
+  "name": "zexpress",
+  "owner": "ahmdhusam",
+  "repo": "zexpress",
+  "description": "An HTTP/1.1 server library for the Zig programming language",
+  "type": "project",
+  "topics": [
+    "zig-library",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2024-10-28T14:31:24Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.11.0",
+  "readme": "# ZExpress Web Server\n\nAn HTTP/1.1 server library for the Zig programming language. Designed with a focus on simplicity and efficiency, ZExpress uses the Chain of Responsibility design pattern, allowing for a dynamic chain of handlers to process requests.\n\n## Installation\n\nThe Zig build system has the concept of modules, which are other source files written in Zig. Let’s make use of a module.\n\n1. Create a new Zig project:\n\n```shell\nzig init\n```\n\n2. Add ZExpress as a dependency in your `build.zig.zon` file:\n\n```shell\nzig fetch --save git+https://github.com/ahmdhusam/zexpress.git\n```\n\n3. Update your `build.zig` file to include ZExpress:\n\n```zig\npub fn build(b: *std.Build) void {\n    // ... existing code ...\n\n    const exe = b.addExecutable(.{\n        .name = \"your-project-name\",\n        .root_source_file = .{ .path = \"src/main.zig\" },\n        .target = target,\n        .optimize = optimize,\n    });\n\n    // Add ZExpress as a module\n    const zexpress_module = b.dependency(\"zexpress\", .{\n        .target = target,\n        .optimize = optimize,\n    }).module(\"zexpress\");\n    exe.root_module.addImport(\"zexpress\", zexpress_module);\n\n    b.installArtifact(exe);\n    // ... existing code ...\n}\n```\n\n## Usage Example\n\nHere's a simple example demonstrating how to use ZExpress:\n\n```zig\nconst std = @import(\"std\");\nconst zexpress = @import(\"zexpress\");\n\nvar STORAGE: std.AutoHashMap(u64, u8) = undefined;\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n\n    const allocator = gpa.allocator();\n\n    STORAGE = std.AutoHashMap(u64, u8).init(allocator);\n\n    const app = try zexpress.Server.init(allocator, .{ .reuse_port = true });\n    defer app.deinit();\n\n    try app.use(\"/users\", zexpress.Handler.init(&.{getMiddleware}, getHandler));\n    // TODO: Name it set until the implementation of methods routers.\n    try app.use(\"/users/set\", .{ .middlewares = &.{setMiddleware}, .handlerFn = setHandler });\n\n    // New route with named parameter\n    try app.use(\"/users/:userId\", .{ .middlewares = &.{}, .handlerFn = getUserHandler });\n\n    try app.listen(8080, errorHandler);\n}\n\nconst UserModel = struct { userId: u64, health: u8 };\n\nfn errorHandler(err: anyerror, req: *zexpress.Req, res: *zexpress.Res) void {\n    _ = req;\n\n    // Has the responsibility to handle all errors.\n    switch (err) {\n        else => |errValue| {\n            const errName = @errorName(errValue);\n            const message = std.mem.replaceOwned(u8, res.allocator, errName, \"_\", \" \") catch unreachable;\n\n            _ = res.json(.{ .status = res._status.toNumber(), .message = message }) catch unreachable;\n        },\n    }\n}\n\nfn setMiddleware(req: *zexpress.Req, res: *zexpress.Res) !void {\n    if (req.method != .POST) {\n        _ = res.status(.Not_Found);\n        return error.Not_Found;\n    }\n\n    const body = try req.bodyAs(*const UserModel);\n\n    if (body.health > 100) {\n        _ = res.status(.Bad_Request);\n        return error.health_should_be_less_than_or_eql_100;\n    }\n}\n\nfn setHandler(req: *zexpress.Req, res: *zexpress.Res) !void {\n    const body = try req.bodyAs(*const UserModel);\n\n    try STORAGE.put(body.userId, body.health);\n\n    _ = try res.status(.Ok).json(.{ .message = \"The health was successfully stored.\" });\n}\n\nfn getMiddleware(req: *zexpress.Req, res: *zexpress.Res) !void {\n    if (req.method != .GET) {\n        _ = res.status(.Not_Found);\n        return error.Not_Found;\n    }\n}\n\nfn getHandler(req: *zexpress.Req, res: *zexpress.Res) !void {\n    // It's optional to run the deinit method.\n    var list = std.ArrayList(UserModel).init(req.allocator);\n\n    var usersIter = STORAGE.iterator();\n\n    while (usersIter.next()) |user| {\n        try list.append(.{ .userId = user.key_ptr.*, .health = user.value_ptr.* });\n    }\n\n    _ = try res.status(.Ok).json(.{ .data = try list.toOwnedSlice() });\n}\n\nfn getUserHandler(req: *zexpress.Req, res: *zexpress.Res) !void {\n    const userId = try std.fmt.parseInt(u64, req.params.get(\"userId\").?, 10);\n\n    if (STORAGE.get(userId)) |health| {\n        _ = try res.status(.Ok).json(.{ .data = .{ .userId = userId, .health = health } });\n    } else {\n        _ = res.status(.Not_Found);\n        return error.User_Not_Found;\n    }\n}\n```\n\nThis example sets up a simple server with three routes:\n- `GET /users`: Retrieves all users and their health.\n- `POST /users/set`: Sets a user's health.\n- `GET /users/:userId`: Retrieves a specific user's health using a named parameter.\n\nTo run the example:\n\n1. Save the code in `src/main.zig`\n2. Run `zig build run`\n\nThe server will start on port 8080. You can test it using curl or any HTTP client.\n\nExample requests:\n\n```shell\n# Get all users\ncurl http://localhost:8080/users\n\n# Set a user's health\ncurl -X POST -H \"Content-Type: application/json\" -d '{\"userId\": 1, \"health\": 100}' http://localhost:8080/users/set\n\n# Get a specific user's health\ncurl http://localhost:8080/users/1\n```\n\nIn the last example, `1` is the `:userId` parameter, which can be accessed in the handler using `req.params.get(\"userId\")`.\n\n\n## Features\n\n- Simple and efficient HTTP/1.1 server\n- Middleware support\n- JSON request and response handling\n- Error handling\n\n## Contributing\n\nContributions are welcome! Please feel free to submit a Pull Request.\n\n## License\n\nThis project is licensed under the MIT License.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/28365338?v=4",
+  "releases": [],
+  "owner_company": "Vooteam",
+  "owner_location": "Egypt  ",
+  "owner_blog": "https://www.linkedin.com/in/ahmdhusam/",
+  "owner_twitter_username": null,
+  "owner_followers": 9,
+  "owner_following": 16,
+  "owner_created_at": "2017-05-03T20:33:04Z",
+  "category": "library"
+}

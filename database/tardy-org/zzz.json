@@ -1,0 +1,72 @@
+{
+  "name": "zzz",
+  "owner": "tardy-org",
+  "repo": "zzz",
+  "description": "A framework for writing performant and reliable networked services.",
+  "type": "project",
+  "topics": [
+    "http",
+    "https",
+    "tls",
+    "zig",
+    "zzz",
+    "zig-package",
+    "http-server",
+    "tardy"
+  ],
+  "stars": 678,
+  "forks": 31,
+  "watchers": 13,
+  "updated_at": "2025-12-05T19:18:36Z",
+  "dependencies": [
+    {
+      "name": "tardy",
+      "url": "git+https://github.com/tardy-org/tardy?ref=v0.3.0#cd454060f3b6006368d53c05ab96cd16c73c34de",
+      "hash": "tardy-0.3.0-69wrgi7PAwDFhO7m0aXae6N15s2b28VIOrnRrSHHake6"
+    },
+    {
+      "name": "secsock",
+      "url": "git+https://github.com/tardy-org/secsock?ref=v0.1.0#263dcd630e32c7a5c7a0522a8d1fd04e39b75c24",
+      "hash": "secsock-0.0.0-p0qurf09AQD95s1NQF2MGpBqMmFz7cKZWibsgv_SQBAr"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# zzz\n![zzz logo](./docs/img/zzz.png)\n\n\n## Installing\nCompatible Zig Version: `0.14.0`\n\nCompatible [tardy](https://github.com/tardy-org/tardy) Version: `v0.3.0`\n\nLatest Release: `0.3.0`\n```\nzig fetch --save git+https://github.com/tardy-org/zzz#v0.3.0\n```\n\nYou can then add the dependency in your `build.zig` file:\n```zig\nconst zzz = b.dependency(\"zzz\", .{\n    .target = target,\n    .optimize = optimize,\n}).module(\"zzz\");\n\nexe.root_module.addImport(zzz);\n```\n\n## zzz?\nzzz is a framework for writing performant and reliable networked services in Zig. It supports both HTTP and HTTPS.\n\nzzz currently supports Linux, Mac and Windows. Linux is currently the recommended target for deployments.\n\n> [!IMPORTANT]\n> zzz is currently **alpha** software and there is still a lot changing at a fairly quick pace and certain places where things are less polished.\n\nIt focuses on modularity and portability, allowing you to swap in your own implementations for various things. Consumers can provide an async implementation, allowing for maximum flexibility. This allows for use in standard servers as well as embedded/bare metal domains.\n\nFor more information, look here:\n1. [Getting Started](./docs/getting_started.md)\n2. [HTTPS](./docs/https.md)\n\n## Optimization\nzzz is **very** fast. Through a combination of methods, such as allocation at start up and avoiding thread contention, we are able to extract tons of performance out of a fairly simple implementation. zzz is quite robust currently but is still early stage software. It's currently been running in production, serving my [site](https://muki.gg).\n\nWith the recent migration to [tardy](https://github.com/tardy-org/tardy), zzz is about as fast as gnet, the fastest plaintext HTTP server according to [TechEmpower](https://www.techempower.com/benchmarks/#hw=ph&test=plaintext&section=data-r22), while consuming only ~22% of the memory that gnet requires.\n\n![benchmark (request per sec)](./docs/benchmark/req_per_sec_ccx63_24.png)\n\n[Raw Data](./docs/benchmark/request_ccx63_24.csv)\n\n![benchmark (peak memory)](./docs/benchmark/peak_memory_ccx63_24.png)\n\n[Raw Data](./docs/benchmark/memory_ccx63_24.csv)\n\nOn the CCX63 instance on Hetzner with 2000 max connections, we are 70.9% faster than [zap](https://github.com/zigzap/zap) and 83.8% faster than [http.zig](https://github.com/karlseguin/http.zig). We also utilize less memory, using only ~3% of the memory used by zap and ~1.6% of the memory used by http.zig.\n\nzzz can be configured to utilize minimal memory while remaining performant. The provided `minram` example only uses 256 kB!\n\n## Features\n- Built on top of [Tardy](https://github.com/tardy-org/tardy), an asynchronous runtime.\n- [Modular Asynchronous Implementation](https://muki.gg/post/modular-async)\n    - `io_uring` for Linux (>= 5.1.0).\n    - `epoll` for Linux (>= 2.5.45).\n    - `kqueue` for BSD & Mac.\n    - `poll` for Linux, Mac and Windows.\n- Layered Router, including Middleware\n- Single and Multithreaded Support\n- TLS using [secsock](https://github.com/tardy-org/secsock) \n- Memory Pooling for minimal allocations \n\n## Contribution\nUnless you explicitly state otherwise, any contribution intentionally submitted for inclusion in zzz by you, shall be licensed as MPL2.0, without any additional terms or conditions.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/196498040?v=4",
+  "releases": [
+    {
+      "tag_name": "v0.3.0-rc1",
+      "name": "v0.3.0-rc1",
+      "body": "This is the first release candidate for v0.3.0. This is meant to provide some time to do bugfixes, add any critical features, and generally battle-test before the full release.\r\n\r\n- Added Middleware!\r\n- Better CI testing across all supported platforms\r\n- Support for serving pre-encoded files (such as a gzipped js bundle)\r\n- Usage of Tardy v0.2.1, allowing for richer error handling from the I/O layer and fixing race condition related to Async I/O start up\r\n- Removal of Context Allocation within hot path.\r\n- Removal of invalid assert within `serve_fs_dir`\r\n- Added a ZeroCopyBuffer, eliding a full buffer copy on the hot path\r\n- Removal of forced inline, allow compiler to optimize as it wants\r\n- Added Support for binding to Unix Sockets (on Linux, BSD and Darwin)\r\n- Files are now streamed into the socket (at the I/O layer) using Tardy, improving `serve_fs_dir` performance.\r\n- Added additional common MIME types\r\n- Fixed errors regarding Request struct not being fully cleared.\r\n## What's Changed\r\n* Router Additions by @mookums in https://github.com/mookums/zzz/pull/13\r\n* Fix typo in README.md by @Madeorsk in https://github.com/mookums/zzz/pull/20\r\n* Compile-time routes definition by @Madeorsk in https://github.com/mookums/zzz/pull/19\r\n\r\n## New Contributors\r\n* @Madeorsk made their first contribution in https://github.com/mookums/zzz/pull/20\r\n\r\n**Full Changelog**: https://github.com/mookums/zzz/compare/v0.2.0...v0.3.0-rc1",
+      "prerelease": true,
+      "published_at": "2025-01-04T02:59:14Z",
+      "html_url": "https://github.com/tardy-org/zzz/releases/tag/v0.3.0-rc1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "This release provides a tighter integration with the Tardy runtime. \r\n\r\n- The `zzz.Server` will no longer create its own runtime with Tardy, meaning that the runtime must be created and provided to the Server during initialization. **All examples have been updated to highlight this change so feel free to consult them!**\r\n- Routes now have a context that can be passed into them. This will give you a reasonable way to pass additional context state into handlers. The `basic` example has been updated to highlight this use case.\r\n- `kqueue` support inherited from Tardy, meaning that BSD & Mac now have a proper aio system to use with zzz.\r\n- Fix issues with `resolveIP` on BSD platforms.\r\n- Removed support for multiple protocols, `zzz` is better off supporting only HTTP/HTTPS and for other protocols to build directly off of Tardy and can share a runtime if needed.\r\n- First Pass SSE implementation through the use of the Tardy Channels. This allows you to stream data from the server to the client.\r\n- Asynchronous Filesystem Serving, allowing files to be sent in a non-blocking way. This has a pretty appreciable performance boost when compared to previous filesystem serving example.\r\n\r\n## What's Changed\r\n* Tighter Tardy Integration by @mookums in https://github.com/mookums/zzz/pull/11\r\n\r\n\r\n**Full Changelog**: https://github.com/mookums/zzz/compare/v0.1.0...v0.2.0",
+      "prerelease": false,
+      "published_at": "2024-11-11T07:46:43Z",
+      "html_url": "https://github.com/tardy-org/zzz/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "This is an initial release of zzz. Supported OSes include Mac, Linux and Windows.\r\n\r\nThis provides:\r\n- HTTP/1.1 Server implementation\r\n- Partial TLS Support through BearSSL\r\n- `io_uring` support\r\n- `epoll` support\r\n- `busy_loop` (nonblocking fd polling) support\r\n\r\n\r\n**Full Changelog**: https://github.com/mookums/zzz/commits/v0.1.0",
+      "prerelease": false,
+      "published_at": "2024-10-22T21:02:34Z",
+      "html_url": "https://github.com/tardy-org/zzz/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Asynchronous runtime, written in Zig, and a variety of supporting libraries in the ecosystem.",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2025-01-26T03:07:56Z",
+  "license": "MPL-2.0",
+  "category": "library"
+}

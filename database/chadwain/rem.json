@@ -1,0 +1,38 @@
+{
+  "name": "rem",
+  "owner": "chadwain",
+  "repo": "rem",
+  "description": "An HTML parsing library, written in Zig.",
+  "type": "project",
+  "topics": [
+    "zig",
+    "html",
+    "dom",
+    "zig-package"
+  ],
+  "stars": 128,
+  "forks": 14,
+  "watchers": 2,
+  "updated_at": "2025-12-04T08:46:16Z",
+  "dependencies": [
+    {
+      "name": "named_character_references",
+      "url": "git+https://github.com/squeek502/named-character-references.git#ff84f2ef5199e0a5091d13d44c13f51ac9433e3d",
+      "hash": "named_character_references-0.1.0-dTxagvKDBQBIUZJON6GwaPomhxlrp77NJS_ekr77AFdN"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# rem\nrem is an HTML5 parser written in [Zig](https://ziglang.org).\n\n## About\n### Features\n- [x] An HTML5 parser consisting of a tokenizer (complete) and a tree constructor (works \"well enough\")\n- [x] A minimal DOM implementation\n- [x] HTML fragment parsing\n- [x] Tested by [html5lib-tests](https://github.com/chadwain/html5lib-tests)\n\n### Things to be improved\n- [ ] Better DOM functionality\n- [ ] Support for more character encodings\n- [ ] Support for Javascript\n\n### Why create this?\n* To understand what it takes \"implement\" HTML, even if just a small portion of it. As I discovered, even just trying to parse an HTML file _correctly_ can be quite challenging.\n* To learn more about web standards in general. Reading the HTML spec naturally causes (or rather, forces) one to learn about DOM (especially), SVG, CSS, and many others.\n* For use in other projects, and to be useful to others.\n\n### Lastly...\nrem is still a work in progress. Not all the features of a fully-capable HTML5 parser are implemented.\n\n## Get the code\nClone the repository like this:\n```\ngit clone --recursive --config core.autocrlf=false https://github.com/chadwain/rem.git\n```\n\n**Using the Zig Package Manager**\n```\nzig fetch --save https://github.com/chadwain/rem/archive/refs/heads/master.tar.gz\n```\n\nThere are no dependencies other than a Zig compiler. Note that this library is only compatible with Zig version 0.15.1 or newer.\n\n## Use the code\nHere's an example of using the parser. You can see the output of this program by running `zig build example`.\n\n```zig\nconst std = @import(\"std\");\nconst rem = @import(\"rem\");\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer std.debug.assert(gpa.deinit() == .ok);\n    const allocator = gpa.allocator();\n\n    // This is the text that will be read by the parser.\n    // Since the parser accepts Unicode codepoints, the text must be decoded before it can be used.\n    const input = \"<!doctype html><html><h1 style=bold>Your text goes here!</h1>\";\n    const decoded_input = &rem.util.utf8DecodeStringComptime(input);\n\n    // Create the DOM in which the parsed Document will be created.\n    var dom = rem.Dom{ .allocator = allocator };\n    defer dom.deinit();\n\n    // Create the HTML parser.\n    var parser = try rem.Parser.init(&dom, decoded_input, allocator, .report, false);\n    defer parser.deinit();\n\n    // This causes the parser to read the input and produce a Document.\n    try parser.run();\n\n    // `errors` returns the list of parse errors that were encountered while parsing.\n    // Since we know that our input was well-formed HTML, we expect there to be 0 parse errors.\n    const errors = parser.errors();\n    std.debug.assert(errors.len == 0);\n\n    // We can now print the resulting Document to the console.\n    var buffer: [1024]u8 = undefined;\n    var stdout_writer = std.fs.File.stdout().writer(&buffer);\n    const stdout = &stdout_writer.interface;\n    const document = parser.getDocument();\n    try rem.util.printDocument(stdout, document, &dom, allocator);\n    try stdout.flush();\n}\n```\n\n## Test the code\nrem uses [html5lib-tests](https://github.com/html5lib/html5lib-tests) as a test suite. Specifically, it tests against the 'tokenizer' and 'tree-construction' tests from that suite. \n\n`zig build test-tokenizer` will run the 'tokenizer' tests.\n`zig build test-tree-construction` will run the 'tree-construction' tests in 2 ways: with scripting disabled, then with scripting enabled.\nThe expected results are as follows:\n- tokenizer: All tests pass.\n- tree-construction (scripting disabled): Some tests are skipped because they rely on HTML features that aren't yet implemented in this library (specifically, templates). All other tests pass.\n- tree-construction (scripting enabled): Similar to testing with scripting off, but in addition, some entire test files are skipped because they would cause panics.\n\n## License\n### GPL-3.0-only\nCopyright (C) 2021-2023 Chadwain Holness\n\nrem is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 3.\n\nThis library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License along with this library.  If not, see <https://www.gnu.org/licenses/>.\n\n## References\n[HTML Parsing Specification](https://html.spec.whatwg.org/multipage/parsing.html)\n\n[DOM Specification](https://dom.spec.whatwg.org/)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/39384757?u=768e910508b1b299442a6fa729ccd1e515e0069f&v=4",
+  "releases": [],
+  "owner_bio": "Most interested in systems programming. Mainly using Zig.",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 8,
+  "owner_following": 0,
+  "owner_created_at": "2018-05-17T18:27:40Z",
+  "license": "GPL-3.0",
+  "category": "library"
+}

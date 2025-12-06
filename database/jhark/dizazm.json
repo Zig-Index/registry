@@ -1,0 +1,43 @@
+{
+  "name": "dizazm",
+  "owner": "jhark",
+  "repo": "dizazm",
+  "description": "A command-line tool for Windows that disassembles symbols in PE files.",
+  "type": "project",
+  "topics": [
+    "asm",
+    "windows",
+    "x86-64",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-06-09T12:50:42Z",
+  "dependencies": [
+    {
+      "name": "flags",
+      "url": "git+https://github.com/joegm/flags#0e2491d8e6d2be38dc0c2ce8e103469886e468bb",
+      "hash": "flags-0.10.0-a_9h3kR2AABNAfaPGRyOOGmWsfv12Hk6JQPTX4MM446s"
+    },
+    {
+      "name": "capstone",
+      "url": "git+https://github.com/allyourcodebase/capstone#6035a194bea8472c463345b86c3ef9333490ecfe",
+      "hash": "capstone-5.0.1-tmNUgTRHAAC1nFVy0colCWwUSRm05SWdD-4kU5MK4ZpH"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# dizazm\n\nA command-line tool for Windows that disassembles symbols in PE files.\n\nUses [Capstone](https://www.capstone-engine.org/) and [dbghelp.dll](https://learn.microsoft.com/en-us/windows/win32/debug/debug-help-library).\n\n## Requirements\n\n- Windows.\n- Zig compiler (version 0.14.0)\n\n## Building\n\n```sh\nzig build\n```\n\n## Usage\n\n```\nUsage: dizazm [-s | --symbol <symbol>] [-a | --address <address>]\n              [-l | --length <length>] [-b | --bytes] [-h | --help] <IMAGE_PATH>\n\nDisassembles a specified symbol from a Portable Executable (PE) file (.exe, .dll).\n\nExample:\n  dizazm -s CreateFileW kernel32.dll\n\nOptions:\n\n  -s, --symbol  The name of the symbol to disassemble\n  -a, --address The address to disassemble (e.g., 0x1000)\n  -l, --length  Number of bytes to disassemble\n  -b, --bytes   Print raw instruction bytes\n  -h, --help    Show this help and exit\n\nArguments:\n\n  <IMAGE_PATH>\n\n```\n\nNote: For dbghelp support you will need to place dbghelp.dll (and optionally symsrv.dll) in the same directory as dizazm.exe. You can get these from the [Windows Debugging Tools](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/debugger-download-tools). The DLL is loaded on demand, so dizazm will work without it, but only be able to find symbols in the export table.\n\nIf symsrv.dll is made available then you may also specify a symbol path via `_NT_SYMBOL_PATH` see [Using SymSrv](https://learn.microsoft.com/en-us/windows/win32/debug/using-symsrv).\n\nE.g. `_NT_SYMBOL_PATH=\"srv*https://msdl.microsoft.com/download/symbols\"`.\n\n## License\n\nThis project is licensed under the ISC License - see the [LICENSE](LICENSE) file for details. ",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1906851?u=e16e2a91382fe98962b66edd01045cfd7a08fb53&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 1,
+  "owner_following": 4,
+  "owner_created_at": "2012-06-29T17:45:06Z",
+  "license": "ISC",
+  "category": "library"
+}

@@ -1,0 +1,35 @@
+{
+  "name": "libjpeg",
+  "owner": "timsurber",
+  "repo": "libjpeg",
+  "description": "libjpeg packaged for zig",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-10-08T09:25:22Z",
+  "dependencies": [
+    {
+      "name": "libjpeg",
+      "url": "https://pub.sortix.org/mirror/libjpeg/jpegsrc.v9f.tar.gz",
+      "hash": "N-V-__8AAB8MRQC7z9yHiE9h4hkpythIQIYO9BkbbEAO27AL"
+    }
+  ],
+  "minimum_zig_version": "0.14.1",
+  "readme": "# libjpeg\nThis is [libjpeg](https://ijg.org/) packaged for zig.\n\n## How to use it\n\nFirst, update your `build.zig.zon`:\n\n```\nzig fetch --save https://github.com/timsurber/libjpeg/archive/refs/heads/main.zip\n```\n\nNext, add this snippet to your `build.zig` script:\n\n```zig\n\nconst libjpeg_dep = b.dependency(\"libjpeg\", .{\n    .target = target,\n    .optimize = optimize,\n});\nyour_compilation.linkLibrary(libjpeg_dep.artifact(\"jpeg\"));\n```\n\nThis will provide libjpeg as a static library to `your_compilation`.",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/138802321?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 0,
+  "owner_following": 0,
+  "owner_created_at": "2023-07-06T15:32:59Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,33 @@
+{
+  "name": "lz4",
+  "owner": "allyourcodebase",
+  "repo": "lz4",
+  "description": "lz4 ported to the zig build system",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 9,
+  "forks": 1,
+  "watchers": 2,
+  "updated_at": "2025-11-14T15:35:44Z",
+  "dependencies": [
+    {
+      "name": "lz4",
+      "url": "git+https://github.com/lz4/lz4.git?ref=v1.10.0#ebb370ca83af193212df4dcbadcc5d87bc0de2f0",
+      "hash": "N-V-__8AAJqFGQCAYVWzZWCL3-wqB2UCxRqBJ68dgAtVEtPu"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "[![CI](https://github.com/allyourcodebase/lz4/actions/workflows/ci.yaml/badge.svg)](https://github.com/allyourcodebase/lz4/actions)\n\n# lz4\n\nThis is [lz4](https://github.com/lz4/lz4), packaged for [Zig](https://ziglang.org/).\n\n## Installation\n\nFirst, update your `build.zig.zon`:\n\n```\n# Initialize a `zig build` project if you haven't already\nzig init\nzig fetch --save git+https://github.com/allyourcodebase/lz4.git#1.10.0-6\n```\n\nYou can then import `lz4` in your `build.zig` with:\n\n```zig\nconst lz4_dependency = b.dependency(\"lz4\", .{\n    .target = target,\n    .optimize = optimize,\n});\nyour_exe.linkLibrary(lz4_dependency.artifact(\"lz4\"));\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
+  "releases": [],
+  "owner_bio": "...are belong to Ziguanas, but we'd also be delighted to give them back!",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2023-09-28T21:29:33Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,85 @@
+{
+  "name": "zterm",
+  "owner": "kioz-wang",
+  "repo": "zterm",
+  "description": "A Zig implementation of console_codes (4). Let's start to print colorful message anywhere!",
+  "type": "project",
+  "topics": [
+    "cli",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-09-11T06:41:56Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# zterm\n\nA Zig implementation of [console_codes (4)](https://www.man7.org/linux/man-pages/man4/console_codes.4.html).\n\n<img src=\".asset/color-test.png\" alt=\"color-test\" width=\"600\"/>\n\n## Features\n\n- No memory allocator needed\n- Generate attributes containing multiple styles (e.g. bold, italic) and colors (including foreground/background)\n  - Comptime constructor\n  - Use `.value(v, fmt)` to wrap any value for formatting, enforcing strict attribute handling (applied before output and reset after)\n    - `fmt` is a single fmt for `v`, and no `{}` enclosed\n  - Use `.fprint(writer, fmt, args)` to incrementally apply an attribute before output\n    - `fmt` is a string contains some `fmt`\n- Move cursor to/at a position\n- Get the position of current cursor\n- Support [`NO_COLOR`](https://no-color.org/) (also, support `NO_STYLE`!)\n  - Check environments at runtime\n  - Get literal string (ignore environments, comptime) by `toString()`\n- Get window size\n\n### Plans\n\n> See [issues](https://github.com/kioz-wang/zterm/issues?q=is%3Aissue%20state%3Aopen%20label%3Aenhancement).\n\n- [ ] Cross-platform: windows, macos\n- [ ] Read the key, text, password and etc\n\n### APIs\n\n> See https://kioz-wang.github.io/zterm/#doc\n\n## Installation\n\n### fetch\n\nGet the latest version:\n\n```bash\nzig fetch --save git+https://github.com/kioz-wang/zterm\n```\n\nTo fetch a specific version (e.g., `v0.14.1`):\n\n```bash\nzig fetch --save https://github.com/kioz-wang/zterm/archive/refs/tags/v0.14.1.tar.gz\n```\n\n#### Version Notes\n\n> See https://github.com/kioz-wang/zterm/releases\n\nThe version number follows the format `vx.y.z[-alpha.n]`:\n- **x**: Currently fixed at 0. It will increment to 1 when the project stabilizes. Afterward, it will increment by 1 for any breaking changes.\n- **y**: Represents the supported Zig version. For example, `vx.14.z` supports [Zig 0.14.0](https://github.com/ziglang/zig/releases/tag/0.14.0).\n- **z**: Iteration version, indicating releases with new features or significant changes (see [milestones](https://github.com/kioz-wang/zterm/milestones)).\n- **n**: Minor version, indicating releases with fixes or minor updates.\n\n### import\n\nUse `addImport` in your `build.zig` (e.g.):\n\n```zig\nconst exe_mod = b.createModule(.{\n    .root_source_file = b.path(\"src/main.zig\"),\n    .target = target,\n    .optimize = optimize,\n});\nexe_mod.addImport(\"Term\", b.dependency(\"zterm\", .{}).module(\"Term\"));\nconst exe = b.addExecutable(.{\n    .name = \"your_app_name\",\n    .root_module = exe_mod,\n});\nexe.linkLibC();\nb.installArtifact(exe);\n\nconst run_cmd = b.addRunArtifact(exe);\nrun_cmd.step.dependOn(b.getInstallStep());\nif (b.args) |args| {\n    run_cmd.addArgs(args);\n}\n\nconst run_step = b.step(\"run\", \"Run the app\");\nrun_step.dependOn(&run_cmd.step);\n```\n\nAfter importing the `Term`, you could get a terminal `getStd` by:\n\n```zig\nconst term = @import(\"Term\").getStd();\n```\n\n## Examples\n\nSee builtin demo: `zig build run -- -h`\n\n> Welcome to submit PRs to link your project that use `zterm`!\n\nMore real-world examples are coming!\n\n- [zargs's Style Config](https://github.com/kioz-wang/zargs/blob/master/src/command/Config.zig)\n- [zterm_cli](https://github.com/kioz-wang/zterm_cli): Demos of this project\n\n## License\n\n[MIT](LICENSE) © Kioz Wang\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/49008623?u=72e6810e849306e72523d98e69869211dcaf1405&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.15.0",
+      "name": "v0.15.0",
+      "body": "## What's Changed\r\n* update to zig 0.15.1\r\n\r\n## New Contributors\r\n* @npc1054657282 made their first contribution in https://github.com/kioz-wang/zterm/pull/22\r\n\r\n**Full Changelog**: https://github.com/kioz-wang/zterm/compare/v0.14.4...v0.15.0",
+      "prerelease": false,
+      "published_at": "2025-09-11T06:43:44Z",
+      "html_url": "https://github.com/kioz-wang/zterm/releases/tag/v0.15.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.14.4",
+      "name": "v0.14.4",
+      "body": "**Full Changelog**: https://github.com/kioz-wang/zterm/compare/v0.14.3...v0.14.4",
+      "prerelease": false,
+      "published_at": "2025-07-28T19:36:12Z",
+      "html_url": "https://github.com/kioz-wang/zterm/releases/tag/v0.14.4",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.14.4-alpha.0",
+      "name": "v0.14.4-alpha.0",
+      "body": "**Full Changelog**: https://github.com/kioz-wang/zterm/compare/v0.14.3...v0.14.4-alpha.0\r\n\r\n- [attr] use function `forceNoColor/Style` to skip environment check\r\n- [attr] adjust some predefined instances\r\n- adjust version strategy\r\n\r\n",
+      "prerelease": false,
+      "published_at": "2025-07-27T14:16:27Z",
+      "html_url": "https://github.com/kioz-wang/zterm/releases/tag/v0.14.4-alpha.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.14.3",
+      "name": "v0.14.3",
+      "body": "## What's Changed\r\n* Feature: enhanced `attr`, simplify `cursor`\r\n\r\n\r\n**Full Changelog**: https://github.com/kioz-wang/zterm/compare/v0.14.2...v0.14.3",
+      "prerelease": false,
+      "published_at": "2025-05-19T14:24:10Z",
+      "html_url": "https://github.com/kioz-wang/zterm/releases/tag/v0.14.3",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.14.2",
+      "name": "v0.14.2",
+      "body": "## What's Changed\r\n* Feature: create RGB color from hex-string or u24 by @kioz-wang in https://github.com/kioz-wang/zterm/pull/10\r\n* Feature: [Attribute] disable color by `NO_COLOR` and style by `NO_STYLE` by @kioz-wang in https://github.com/kioz-wang/zterm/pull/13\r\n* Misc: [build] add new private module: `zterm_cli` by @kioz-wang in https://github.com/kioz-wang/zterm/pull/14\r\n* Feature: get position of cursor and size of window by @kioz-wang in https://github.com/kioz-wang/zterm/pull/15\r\n\r\n**Full Changelog**: https://github.com/kioz-wang/zterm/compare/v0.14.1...v0.14.2",
+      "prerelease": false,
+      "published_at": "2025-05-07T01:09:53Z",
+      "html_url": "https://github.com/kioz-wang/zterm/releases/tag/v0.14.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.14.1",
+      "name": "v0.14.1",
+      "body": "# Hello `zterm`!\r\n\r\n- No memory allocator needed\r\n- Generate attributes containing multiple styles (e.g. bold, italic) and colors (including foreground/background)\r\n  - Fully generatable at compile time\r\n  - Can be wrapped around any value needing formatting\r\n  - Wrappable to standard output to apply attributes to every `print` call\r\n- Cursor position control (absolute & relative)",
+      "prerelease": false,
+      "published_at": "2025-04-17T15:29:18Z",
+      "html_url": "https://github.com/kioz-wang/zterm/releases/tag/v0.14.1",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 8,
+  "owner_following": 12,
+  "owner_created_at": "2019-03-28T00:38:40Z",
+  "homepage": "https://kioz-wang.github.io/zterm/",
+  "license": "MIT",
+  "category": "cli"
+}

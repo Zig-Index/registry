@@ -1,0 +1,87 @@
+{
+  "name": "zig-lamp",
+  "owner": "jinzhongjia",
+  "repo": "zig-lamp",
+  "description": "Improve the zig experience in neovim",
+  "type": "project",
+  "topics": [
+    "neovim",
+    "neovim-lua-plugin",
+    "neovim-plugin",
+    "zig",
+    "zig-library",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 31,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-11-13T23:48:48Z",
+  "minimum_zig_version": "0.15.1",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/41784264?u=d300cf8becbfebb495634687c971048a63c07d2a&v=4",
+  "releases": [
+    {
+      "tag_name": "0.0.6",
+      "name": "0.0.6",
+      "body": "# Release Notes: 0.0.5 → 0.0.6\r\n\r\n## Changes (1 commits)\r\n\r\n### ✨ New Features\r\n\r\n- feat(zls): add comprehensive ZLS configuration support (dcd2af8)\r\n\r\n### 👥 Contributors\r\n\r\n- jinzhongjia (1 commits)\r\n",
+      "prerelease": false,
+      "published_at": "2025-09-14T15:05:28Z",
+      "html_url": "https://github.com/jinzhongjia/zig-lamp/releases/tag/0.0.6",
+      "assets": []
+    },
+    {
+      "tag_name": "0.0.5",
+      "name": "0.0.5",
+      "body": "# Release Notes: 0.0.4 → 0.0.5\r\n\r\n## Changes (18 commits)\r\n\r\n### ✨ New Features\r\n\r\n- feat: improve code readability and formatting (ee697fd)\r\n- feat(core): improve ZON formatting and wrap_j2zon output (2b4c275)\r\n- feat: add syntax highlighting for info panel and refactor module structure (c01e6fb)\r\n\r\n### 📝 Other Changes\r\n\r\n- refactor(build): update Zig version compatibility to 0.15.1 (826c9cb)\r\n- refactor(docs): update README with streamlined project description and features (8977f18)\r\n- refactor(core): improve ZON formatting allocation (a541688)\r\n- refactor(build): optimize module configuration in build system (03c5ad7)\r\n- refactor(build): simplify library initialization for Zig versions (1658c30)\r\n- refactor(core): improve ZON parsing and file handling in zig-lamp (6c04e0d)\r\n- refactor(ci): update Zig CI matrix versions (8a5709c)\r\n- refactor(core): improve utility and formatting modules (d27e7ed)\r\n- refactor(build): improve build system command handling (ed8dd07)\r\n- refactor(build): improve Zig build system and compatibility (ee5562a)\r\n- refactor(zls): improve ZLS setup and launch for Neovim LSP (58ed839)\r\n- refactor(core): enhance platform and error handling modules (59a298d)\r\n- refactor(core): restructure project into core, zig, zls, pkg modules (#12) (65ec111)\r\n- refactor(cmd): improve command handling logic and code readability (3a4f29a)\r\n- update get_hash function (890ecbd)\r\n\r\n### 👥 Contributors\r\n\r\n- jinzhongjia (18 commits)",
+      "prerelease": false,
+      "published_at": "2025-09-14T10:34:13Z",
+      "html_url": "https://github.com/jinzhongjia/zig-lamp/releases/tag/0.0.5",
+      "assets": []
+    },
+    {
+      "tag_name": "0.0.4",
+      "name": "0.0.4",
+      "body": "feat: fully macos support\r\n\r\n**Full Changelog**: https://github.com/jinzhongjia/zig-lamp/compare/0.0.3...0.0.4",
+      "prerelease": false,
+      "published_at": "2025-03-19T08:53:48Z",
+      "html_url": "https://github.com/jinzhongjia/zig-lamp/releases/tag/0.0.4",
+      "assets": []
+    },
+    {
+      "tag_name": "0.0.3",
+      "name": "0.0.3",
+      "body": "## What's Changed\r\n* feat: use smpallocator to get better performance by @jinzhongjia in https://github.com/jinzhongjia/zig-lamp/pull/11\r\n\r\n\r\n**Full Changelog**: https://github.com/jinzhongjia/zig-lamp/compare/0.0.2...0.0.3",
+      "prerelease": false,
+      "published_at": "2025-03-16T09:34:56Z",
+      "html_url": "https://github.com/jinzhongjia/zig-lamp/releases/tag/0.0.3",
+      "assets": []
+    },
+    {
+      "tag_name": "0.0.2",
+      "name": "v0.0.2",
+      "body": "## What's Changed\r\n* update: support `0.14.0` by @jinzhongjia in https://github.com/jinzhongjia/zig-lamp/pull/10\r\n\r\n\r\n**Full Changelog**: https://github.com/jinzhongjia/zig-lamp/compare/0.0.1...0.0.2",
+      "prerelease": false,
+      "published_at": "2025-03-09T09:01:08Z",
+      "html_url": "https://github.com/jinzhongjia/zig-lamp/releases/tag/0.0.2",
+      "assets": []
+    },
+    {
+      "tag_name": "0.0.1",
+      "name": "v0.0.1",
+      "body": "This version is just for zig `0.13.0`, the later version will be provided to `0.14.0`",
+      "prerelease": false,
+      "published_at": "2025-03-05T14:52:55Z",
+      "html_url": "https://github.com/jinzhongjia/zig-lamp/releases/tag/0.0.1",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Programming is like building blocks",
+  "owner_company": null,
+  "owner_location": "Singapore",
+  "owner_blog": "https://blog.nvimer.org",
+  "owner_twitter_username": null,
+  "owner_followers": 81,
+  "owner_following": 18,
+  "owner_created_at": "2018-07-27T10:00:34Z",
+  "category": "library"
+}

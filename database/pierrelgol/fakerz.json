@@ -1,0 +1,30 @@
+{
+  "name": "fakerz",
+  "owner": "pierrelgol",
+  "repo": "fakerz",
+  "description": "zig port of python faker package",
+  "type": "project",
+  "topics": [
+    "faker",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 3,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-10-27T14:49:09Z",
+  "minimum_zig_version": "0.15.2",
+  "readme": "# fakerz\n\nA simple Zig library for generating fake data for testing. If you've ever needed random strings, test data, or placeholder values in your Zig projects, this is for you.\n\n## Quick Start\n\nAdd fakerz to your project:\n\n```bash\nzig fetch --save git+https://github.com/pierrelgol/fakerz#main\n```\n\nThen in your `build.zig`, add it as a dependency:\n\n```zig\nconst fakerz_dep = b.dependency(\"fakerz\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\nconst fakerz = fakerz_dep.module(\"fakerz\");\nexe.root_module.addImport(\"fakerz\", fakerz);\n```\n\n## Example\n\n```zig\nconst std = @import(\"std\");\nconst fakerz = @import(\"fakerz\");\n\npub fn main() !void {\n    var prng = std.Random.DefaultPrng.init(12345);\n    const rand = prng.random();\n\n    // Generate a random string of 20 letters\n    var username: [20]u8 = undefined;\n    fakerz.text.string.alpha(rand, &username);\n    std.debug.print(\"Username: {s}\\n\", .{username});\n\n    // Generate random digits for a fake ID\n    var id: [10]u8 = undefined;\n    fakerz.text.string.digit(rand, &id);\n    std.debug.print(\"ID: {s}\\n\", .{id});\n\n    // Generate random hex for a fake session token\n    var token: [32]u8 = undefined;\n    fakerz.text.string.hex(rand, &token);\n    std.debug.print(\"Token: {s}\\n\", .{token});\n\n    // Mix things up with alphanumeric\n    var password: [16]u8 = undefined;\n    fakerz.text.string.alnum(rand, &password);\n    std.debug.print(\"Password: {s}\\n\", .{password});\n}\n```\n\n## What can you do with it?\n\n### Basic String Generation\n\nFill buffers with different types of characters:\n\n- `alpha()` - Random letters (a-z, A-Z)\n- `upper()` / `lower()` - Uppercase or lowercase only\n- `digit()` - Numbers 0-9\n- `alnum()` - Letters and numbers mixed\n- `hex()` - Hexadecimal characters\n- `ascii()` / `printable()` / `visible()` - Various ASCII ranges\n- `identifier()` - Valid identifier characters (great for variable names)\n- `vowel()` / `consonant()` - Just vowels or consonants\n\n### Special Characters\n\n- `punctuation()` - Punctuation marks\n- `symbol()` - Various symbols\n- `bracket()` / `quote()` - Brackets and quotes\n- `whitespace()` - Spaces, tabs, newlines\n\n### Advanced Patterns\n\n```zig\n// Repeat a pattern\nvar buf: [40]u8 = undefined;\nfakerz.text.string.pattern(rand, &buf, \"Aa#\"); // Repeats \"Aa#Aa#Aa#...\"\n\n// Fill from a custom character set\nfakerz.text.string.fromCharset(rand, &buf, \"!@#$%^&*\");\n\n// Shuffle existing data\nfakerz.text.string.shuffle(rand, &buf);\n\n// Create gradients (useful for test patterns)\nfakerz.text.string.gradientHorizontal(&buf, 'A', 'Z'); // A...Z gradient\n```\n\n### 2D Grids\n\nNeed to generate test data for grids or matrices?\n\n```zig\nconst allocator = std.heap.page_allocator;\nvar grid = try allocator.alloc([]u8, 10);\nfor (grid) |*row| {\n    row.* = try allocator.alloc(u8, 10);\n}\ndefer {\n    for (grid) |row| allocator.free(row);\n    allocator.free(grid);\n}\n\n// Fill with random letters\nfakerz.text.string.fill2D(rand, grid, fakerz.text.byte.alpha);\n\n// Add a border\nfakerz.text.string.border(grid, '*');\n\n// Create gradients\nfakerz.text.string.gradientVertical(grid, 'A', 'Z');\n\n// Shuffle the whole grid (requires a temporary buffer)\nvar buffer: [100]u8 = undefined;\nfakerz.text.string.shuffle2D(rand, grid, &buffer);\n```\n\n### Kind Enum (Type-Safe Generation)\n\nUse the `Kind` enum for more flexibility:\n\n```zig\nconst kind = fakerz.text.string.Kind.alphaNumeric;\nfakerz.text.string.fill(rand, &buf, kind);\n\n// Or generate single bytes\nconst random_vowel = fakerz.text.string.generateByte(rand, .vowel);\n```\n\n## How it Works\n\nAll generation functions take `std.Random` as the first parameter, which means:\n- You control the random seed (great for reproducible tests)\n- No global state\n- Easy to test and mock\n\nMost functions fill buffers you provide, so you control memory allocation. No surprises.\n\n## Building\n\n```bash\n# Build the project\nzig build\n\n# Run tests\nzig build test\n\n# Run the demo\nzig build run\n```\n\n## License\n\nThis project is in early development (v0.0.0). Use at your own risk, but have fun!\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/119697612?u=37a68a08bbf84ef9c713ac3f5ae7f32998c2e54e&v=4",
+  "releases": [],
+  "owner_bio": "What stands in the way becomes the way.",
+  "owner_company": "Thales",
+  "owner_location": "France",
+  "owner_blog": "https://github.com/pierrelgol/pierrelgol",
+  "owner_twitter_username": null,
+  "owner_followers": 41,
+  "owner_following": 102,
+  "owner_created_at": "2022-12-02T18:22:46Z",
+  "license": "MIT",
+  "category": "library"
+}

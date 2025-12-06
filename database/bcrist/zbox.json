@@ -1,0 +1,40 @@
+{
+  "name": "zbox",
+  "owner": "bcrist",
+  "repo": "zbox",
+  "description": "SVG Block Diagram Generator",
+  "type": "project",
+  "topics": [
+    "block-diagram",
+    "blockdiagram",
+    "svg",
+    "zig",
+    "zig-library",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-10-10T04:15:33Z",
+  "dependencies": [
+    {
+      "name": "deep_hash_map",
+      "url": "git+https://github.com/bcrist/zig-deephashmap#ec22725ad1e4ea65488fe7c5bc1f2041d92bf87c",
+      "hash": "deep_hash_map-1.0.1-RLYshCUbAABnDZhPzE87HipEv7FG7ktpMSxLRxWvXuO7"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# ZBox\n\nZBox is a tool for programmatically creating SVG block diagrams in Zig.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/2828351?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "http://magicmoremagic.com",
+  "owner_twitter_username": null,
+  "owner_followers": 8,
+  "owner_following": 0,
+  "owner_created_at": "2012-11-18T17:51:58Z",
+  "license": "MIT",
+  "category": "library"
+}

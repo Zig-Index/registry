@@ -1,0 +1,36 @@
+{
+  "name": "ZigNet",
+  "owner": "SanctumTerra",
+  "repo": "ZigNet",
+  "description": "Raknet implementation for ZigLang.",
+  "type": "project",
+  "topics": [
+    "mcbe",
+    "minecraft",
+    "raknet",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 4,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-12-06T11:35:25Z",
+  "dependencies": [
+    {
+      "name": "BinaryStream",
+      "url": "git+https://github.com/SanctumTerra/BinaryStream?ref=master#9d8aeeefe68a99314cf423cc18b3d6a7cc0ec24f",
+      "hash": "BinaryStream-0.0.0-gn8mmk8wAQBhVdhDnqi81jqGZfZRebG6a4hXFBeoqpF2"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# ZigNet\n\nA high-performance RakNet implementation written in Zig, providing reliable UDP networking with automatic packet ordering, fragmentation, and connection management.\n\n## Features\n\n- 🚀 **High Performance**: Built with Zig for maximum performance and minimal overhead\n- 🔗 **RakNet Protocol**: Full implementation of the RakNet networking protocol\n- 🌐 **Cross-Platform**: Supports Windows, Linux, and macOS (x86_64 and ARM64)\n- 🔄 **Reliable UDP**: Automatic packet acknowledgment, ordering, and retransmission\n- 📦 **Packet Fragmentation**: Handles large packets automatically\n- 🔌 **Easy Integration**: Simple callback-based API\n\n## Quick Start\n\n### Installation\n\nAdd ZigNet to your project:\n\n```bash\nzig fetch --save git+https://github.com/SanctumTerra/ZigNet\n```\n\nThen add it to your `build.zig`:\n\n```zig\nconst zignet_dep = b.dependency(\"ZigNet\", .{});\nexe.root_module.addImport(\"ZigNet\", zignet_dep.module(\"Raknet\"));\n```\n\n### Basic Server Example\n\n```zig\nconst std = @import(\"std\");\nconst ZigNet = @import(\"ZigNet\");\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    // Create and configure server\n    var server = try ZigNet.Server.init(.{\n        .allocator = allocator,\n    });\n    defer server.deinit();\n\n    // Set up callbacks\n    server.setConnectCallback(onConnect, null);\n    server.setDisconnectCallback(onDisconnect, null);\n\n    // Start the server\n    try server.start();\n    \n    ZigNet.Logger.INFO(\"Server started! Listening for connections...\", .{});\n    \n    // Keep server running\n    std.time.sleep(std.time.ns_per_s * 30);\n}\n\nfn onConnect(connection: *ZigNet.Connection, context: ?*anyopaque) void {\n    _ = context;\n    ZigNet.Logger.INFO(\"Client connected!\", .{});\n    \n    // Set up packet handler for this connection\n    connection.setGamePacketCallback(onGamePacket, null);\n}\n\nfn onDisconnect(connection: *ZigNet.Connection, context: ?*anyopaque) void {\n    _ = context;\n    ZigNet.Logger.INFO(\"Client disconnected!\", .{});\n}\n\nfn onGamePacket(connection: *ZigNet.Connection, payload: []const u8, context: ?*anyopaque) void {\n    _ = connection;\n    _ = context;\n    ZigNet.Logger.INFO(\"Received packet: {any}\", .{payload});\n    \n    // Echo the packet back to the client\n    // connection.send(payload);\n}\n```\n\n## API Reference\n\n### Server\n\nThe main server class that handles incoming connections and manages the networking.\n\n```zig\nconst server = try ZigNet.Server.init(.{\n    .allocator = allocator,\n    // Add more options as needed\n});\n```\n\n#### Methods\n\n- `init(options: ServerOptions) !Server` - Create a new server instance\n- `start() !void` - Start listening for connections\n- `deinit() void` - Clean up server resources\n- `setConnectCallback(callback: fn(*Connection, ?*anyopaque) void, context: ?*anyopaque) void` - Set connection callback\n- `setDisconnectCallback(callback: fn(*Connection, ?*anyopaque) void, context: ?*anyopaque) void` - Set disconnection callback\n\n### Connection\n\nRepresents a client connection to the server.\n\n#### Methods\n\n- `setGamePacketCallback(callback: fn(*Connection, []const u8, ?*anyopaque) void, context: ?*anyopaque) void` - Set packet handler\n- `send(data: []const u8) !void` - Send data to the client\n\n### Logger\n\nBuilt-in logging system with different log levels.\n\n```zig\nZigNet.Logger.INFO(\"Information message\", .{});\nZigNet.Logger.ERROR(\"Error message\", .{});\nZigNet.Logger.DEBUG(\"Debug message\", .{});\n```\n\n## Building\n\n### Build for Current Platform\n\n```bash\nzig build\n```\n\n### Run Tests\n\n```bash\nzig build test\n```\n\n## Protocol Support\n\nZigNet implements the complete RakNet protocol including:\n\n- **Offline Protocol**: Connection discovery and handshake\n  - UnconnectedPing/Pong\n  - ConnectionRequest1/2\n  - ConnectionReply1/2\n\n- **Online Protocol**: Reliable data transmission\n  - Frame-based packet system\n  - Acknowledgments (ACK/NACK)\n  - Automatic retransmission\n  - Packet ordering and sequencing\n\n## Requirements\n\n- Zig 0.15.0-dev or later\n- Supported platforms: Windows, Linux, macOS\n\n## Contributing\n\nContributions are welcome! Please feel free to submit issues and pull requests.\n\n## License\n\nThis project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.\n\n## Acknowledgments\n\nBased on the RakNet networking library protocol.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/163292251?v=4",
+  "releases": [],
+  "owner_bio": "",
+  "owner_location": "Lithuania",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2024-03-13T10:23:05Z",
+  "license": "MIT",
+  "category": "library"
+}

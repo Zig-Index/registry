@@ -1,0 +1,139 @@
+{
+  "name": "zig-dotenv",
+  "owner": "xcaeser",
+  "repo": "zig-dotenv",
+  "description": "⚡️ Load, parse, and manage environment variables from .env files efficiently in zig.",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 19,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-12-04T08:34:50Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# zig-dotenv\n\n<div>\n\nA powerful Zig library for loading, parsing, and managing environment variables from `.env` files.\n\n[![Version](https://img.shields.io/badge/Zig_Version-0.15.1-orange.svg?logo=zig)](README.md)\n[![MIT](https://img.shields.io/badge/License-MIT-lightgrey.svg?logo=cachet)](LICENSE)\n[![Version](https://img.shields.io/badge/dotenv-v0.8.0-green)](https://github.com/xcaeser/zig-dotenv/releases)\n\n</div>\n\n## Docs:\n\n[dotenv reference docs](https://xcaeser.github.io/zig-dotenv)\n\n## ✅ Features\n\n- Load environment variables from `.env` files\n- Append or write `key=value` pairs to `.env` files\n- Type-safe access using enums\n- Modify the **current process environment** (`setenv`, `SetEnvironmentVariable`)\n- Supports comments, quoted values, and whitespace trimming\n- Graceful fallback and silent error modes\n- Clean, testable API\n\n## 🚀 Usage\n\n```zig\nconst std = @import(\"std\");\nconst dotenv = @import(\"dotenv\");\n\npub const EnvKeys = enum {\n    OPENAI_API_KEY,\n    AWS_ACCESS_KEY_ID,\n    COGNITO_CLIENT_SECRET,\n    S3_BUCKET,\n};\n\n\npub fn main() !void {\n    const allocator = std.heap.smp_allocator;\n\n    const env = dotenv.Env(EnvKeys).init(allocator, true);;\n    defer env.deinit();\n\n    try env.load(.{ .filename = \".env.local\", .set_envs_in_process = true });\n\n    const openai = env.key(.OPENAI_API_KEY);\n    std.debug.print(\"OPENAI_API_KEY={s}\\n\", .{openai});\n\n    const aws_key = env.get(\"AWS_ACCESS_KEY_ID\");\n    std.debug.print(\"AWS_ACCESS_KEY_ID={s}\\n\", .{aws_key});\n}\n```\n\n## 📄 Example `.env` File\n\n```dotenv\nOPENAI_API_KEY=sk-your-api-key-here\nAWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE\nS3_BUCKET=\"my-bucket\"\nCOGNITO_CLIENT_SECRET='abcdef123456'\nhome=$HOME\nuser=${USER}\n```\n\n## 📦 Installation\n\n### using `zig fetch`\n\n```bash\nzig fetch --save=dotenv https://github.com/xcaeser/zig-dotenv/archive/v0.8.0.tar.gz\n```\n\n### Add to `build.zig`\n\n```zig\nconst dotenv_dep = b.dependency(\"dotenv\", .{ .target = target, .optimize = optimize });\n\nexe.root_module.addImport(\"dotenv\", dotenv_dep.module(\"dotenv\"));\n\n// Optional: add for unit tests\nexe_unit_tests.root_module.addImport(\"dotenv\", dotenv_dep.module(\"dotenv\"));\n```\n\n## 📚 API Summary\n\n### `Env(EnvKey)` type\n\nA reusable struct for managing environment variables:\n\n| Method                                                  | Description                                      |\n| ------------------------------------------------------- | ------------------------------------------------ |\n| `init(allocator, include_current_process_envs)`         | Initializes a new Env manager                    |\n| `deinit()`                                              | Frees all allocated memory                       |\n| `load(.{ filename, set_envs_inprocess, silent })`       | Loads variables from a `.env` file               |\n| `loadCurrentProcessEnvs()`                              | Loads system variables into the internal env_map |\n| `parse(content)`                                        | Parses raw `.env`-formatted text                 |\n| `get(\"KEY\")`                                            | Get a value by string key (panics if missing)    |\n| `key(.ENUM_KEY)`                                        | Get a value by enum key (panics if missing)      |\n| `setProcessEnv(\"KEY\", \"VALUE\")`                         | Set or unset environment variable                |\n| `writeAllEnvPairs(writer, include_system_vars)`         | Write all variables to a writer                  |\n| `writeEnvPairToFile(\"KEY\", \"VALUE\", optional_filename)` | Append a `key=value` line to a file              |\n\n## 🧪 Testing\n\nRun:\n\n```bash\nzig build test\n```\n\nIncludes tests for parsing, file I/O, process environment setting, and edge cases.\n\n## 🤝 Contributing\n\nIssues and PRs welcome! Star the repo if it helped you.\n\n## 📝 License\n\nMIT – see [LICENSE](LICENSE).\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/8210099?u=fcc6610ade4cd145899e4d5c505bdefc832b7249&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.8.0",
+      "name": "v0.8.0",
+      "body": "v0.8.0 - breaking changes\n\n- updated internals for better idiomatic zig\n- new function: `loadCurrentProcessEnvs` Populates the internal map with all environment variables from the current process\n- Support variable interpolation in values using the format `${OTHER_VAR}`. Interpolated variables are resolved from other parsed values or the current process environment (if not already included during initialization)\n- breaking: renamed boolean flags and removed silent flag\n- improved docs\n\nfull changelog: https://github.com/xcaeser/zig-dotenv/compare/v0.7.1...v0.8.0\n",
+      "prerelease": false,
+      "published_at": "2025-08-28T17:18:45Z",
+      "html_url": "https://github.com/xcaeser/zig-dotenv/releases/tag/v0.8.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.7.1",
+      "name": "v0.7.1",
+      "body": "v0.7.1\n\n- finished move to new zig io\n- fixed issues with previous version's zig io\n- improved docs\n\nfull changelog: https://github.com/xcaeser/zig-dotenv/compare/v0.7.0...v0.7.1\n",
+      "prerelease": false,
+      "published_at": "2025-08-28T12:02:21Z",
+      "html_url": "https://github.com/xcaeser/zig-dotenv/releases/tag/v0.7.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.7.0",
+      "name": "v0.7.0",
+      "body": "v0.7.0\n\n- bump to zig 0.15.1\n\nfull changelog: https://github.com/xcaeser/zig-dotenv/compare/v0.6.3...v0.7.0\n",
+      "prerelease": false,
+      "published_at": "2025-08-24T13:23:40Z",
+      "html_url": "https://github.com/xcaeser/zig-dotenv/releases/tag/v0.7.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.6.3",
+      "name": "v0.6.3",
+      "body": "v0.6.3\n\n- Fixed enum type error\n\nfull changelog: https://github.com/xcaeser/zig-dotenv/compare/v0.6.2...v0.6.3\n",
+      "prerelease": false,
+      "published_at": "2025-06-19T18:21:51Z",
+      "html_url": "https://github.com/xcaeser/zig-dotenv/releases/tag/v0.6.3",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.6.2",
+      "name": "v0.6.2",
+      "body": "v0.6.2\n\n- Enhanced enum validation on struct construction with custom compiler error.\n\nfull changelog: https://github.com/xcaeser/zig-dotenv/compare/v0.6.1...v0.6.2\n",
+      "prerelease": false,
+      "published_at": "2025-06-10T16:51:16Z",
+      "html_url": "https://github.com/xcaeser/zig-dotenv/releases/tag/v0.6.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.6.1",
+      "name": "v0.6.1",
+      "body": "\r\n## v0.6.1 updates in build process\r\n\r\n*Refactor build process to remove static library creation and ensure proper linking of libc\r\n\r\n**Full Changelog**: https://github.com/xcaeser/zig-dotenv/compare/v0.6.0...v0.6.1",
+      "prerelease": false,
+      "published_at": "2025-05-29T09:34:17Z",
+      "html_url": "https://github.com/xcaeser/zig-dotenv/releases/tag/v0.6.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.6.0",
+      "name": "v0.6.0",
+      "body": "Breaking change in load Function.\r\n\r\nPlease read README.md\r\n\r\n**Full Changelog**: https://github.com/xcaeser/zig-dotenv/compare/v0.5.0...v0.6.0",
+      "prerelease": false,
+      "published_at": "2025-05-22T12:17:05Z",
+      "html_url": "https://github.com/xcaeser/zig-dotenv/releases/tag/v0.6.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.5.0",
+      "name": "v0.5.0",
+      "body": "- Added possibility to choose between only loading env variables in memory vs setting them directly in the current process environment (breaking change)\r\n\r\n**Full Changelog**: https://github.com/xcaeser/zig-dotenv/compare/0.4.0...v0.5.0",
+      "prerelease": false,
+      "published_at": "2025-04-03T14:20:40Z",
+      "html_url": "https://github.com/xcaeser/zig-dotenv/releases/tag/v0.5.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.4.0",
+      "name": "v0.4.0",
+      "body": "- introduced `writeEnvPairToFile` to append/create env file with an environment variable\r\n- updated function name of `writeAll` to `writeAllEnvPairs`\r\n- `env.init` now handles directly option to include systems env vars\r\n\r\n**Full Changelog**: https://github.com/xcaeser/zig-dotenv/compare/0.3.0...0.4.0",
+      "prerelease": false,
+      "published_at": "2025-04-03T13:51:02Z",
+      "html_url": "https://github.com/xcaeser/zig-dotenv/releases/tag/0.4.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.3.0",
+      "name": "0.3.0",
+      "body": "Added windows support for env setup.",
+      "prerelease": false,
+      "published_at": "2025-04-01T22:49:17Z",
+      "html_url": "https://github.com/xcaeser/zig-dotenv/releases/tag/0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.2.0",
+      "name": "0.2.0",
+      "body": "- Updated dotenv.zig to handle quotes for environment variables.\r\n- Introduced silent flag to suppress error messages. (breaking change in load function)\r\n- Added initWithProcessEnvs function to initialize Env struct with current process environment variables.\r\n\r\n**Full Changelog**: https://github.com/xcaeser/zig-dotenv/compare/v0.1.0...0.2.0",
+      "prerelease": false,
+      "published_at": "2025-04-01T22:25:15Z",
+      "html_url": "https://github.com/xcaeser/zig-dotenv/releases/tag/0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "Initial release",
+      "prerelease": false,
+      "published_at": "2025-04-01T18:40:32Z",
+      "html_url": "https://github.com/xcaeser/zig-dotenv/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "zig is nice",
+  "owner_company": null,
+  "owner_location": "On my laptop",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 5,
+  "owner_following": 4,
+  "owner_created_at": "2014-07-19T16:33:10Z",
+  "homepage": "https://xcaeser.github.io/zig-dotenv/",
+  "license": "MIT",
+  "category": "library"
+}

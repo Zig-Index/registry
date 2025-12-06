@@ -1,0 +1,30 @@
+{
+  "name": "zig-sieve",
+  "owner": "tensorush",
+  "repo": "zig-sieve",
+  "description": "Zig implementation of SIEVE cache eviction algorithm.",
+  "type": "project",
+  "topics": [
+    "zig-package",
+    "sieve-cache",
+    "zig-library"
+  ],
+  "stars": 10,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-11-28T09:59:32Z",
+  "minimum_zig_version": "0.15.2",
+  "readme": "# zig-sieve\n\n## Zig implementation of [SIEVE cache eviction algorithm](https://cachemon.github.io/SIEVE-website/).\n\n### Usage\n\n1. Add `sieve` dependency to `build.zig.zon`:\n\n```sh\nzig fetch --save git+https://github.com/tensorush/zig-sieve.git\n```\n\n2. Use `sieve` dependency in `build.zig`:\n\n```zig\nconst sieve_dep = b.dependency(\"sieve\", .{\n    .target = target,\n    .optimize = optimize,\n});\nconst sieve_mod = sieve_dep.module(\"sieve\");\n\nconst root_mod = b.createModule(.{\n    .target = target,\n    .optimize = optimize,\n    .imports = &.{\n        .{ .name = \"sieve\", .module = sieve_mod },\n    },\n});\n```\n\n### Benchmarks (MacBook M1 Pro)\n\n- Sequence - the time to cache and retrieve integer values:\n\n```sh\n$ zig build bench -- s\nSequence: 22.958us\n```\n\n- Composite - the time to cache and retrieve composite values:\n\n```sh\n$ zig build bench -- c\nComposite: 37.668us\n```\n\n- Composite (normal) - the time to cache and retrieve normally-distributed composite values:\n\n```sh\n$ zig build bench -- n\nComposite Normal: 108.001us\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/48649707?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 0,
+  "owner_following": 0,
+  "owner_created_at": "2019-03-17T13:48:36Z",
+  "homepage": "https://tensorush.github.io/zig-sieve/",
+  "license": "MIT",
+  "category": "library"
+}

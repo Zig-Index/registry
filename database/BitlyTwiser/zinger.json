@@ -1,0 +1,50 @@
+{
+  "name": "zinger",
+  "owner": "BitlyTwiser",
+  "repo": "zinger",
+  "description": "Simple HTTP request library for Zig applications",
+  "type": "project",
+  "topics": [
+    "http",
+    "http-requests",
+    "zig",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 13,
+  "forks": 0,
+  "watchers": 2,
+  "updated_at": "2025-04-17T10:53:37Z",
+  "readme": "<div align=\"center\"> \n\n<img src=\"/assets/zinger.jpg\" width=\"450\" height=\"500\">\n\n# Zinger\nA Simple HTTP request library \n\n# Contents\n[Usage](#usage) |\n[Make Requests](#make-requests) |\n[GET](#get) |\n[POST](#post) |\n[PUT and DELETE](#put-and-delete) |\n[Supported Requests](#supports) |\n\n</div>\n\n\n## Usage\nAdd Zinger to your Zig project with Zon:\n\n```sh\nzig fetch --save https://github.com/BitlyTwiser/zinger/archive/refs/tags/v0.1.1.tar.gz\n```\n\nAdd the following to build.zig file:\n```zig\n    const zinger = b.dependency(\"zinger\", .{});\n    exe.root_module.addImport(\"zinger\", zinger.module(\"zinger\"));\n```\n\nImport Zinger and you should be set!\n```zig\nconst zinger = @import(\"zinger\").Zinger;\n```\n\nPlease see the examples in the main.zig file or below to view using the package \n\n## Make requests\nAny of the requsts can be made with a body utilizing the optional values. Additionally, any body can be converted to JSON by utilizing the anytype passed into the `json` function call.\n\nThe example in main shows how to make a request and check for errors in the query\n\n### max_append_size\nNote: The std.http.Client.FetchOptions, by default, sets a max body size (if not defined) to: ``` 2 * 1024 * 1024```.\nIf this is enough for your use cases (most general HTTP requests with a smaller JSON body would fit within this allotment), then everything is fine. Overwise, you will need to pass in the alloted/desired amount into Zinger init.\n\nExample:\n```zig\n var z = zinger.Zinger.init(allocator, null);\n\n // OR\n\n// The numerical value here should be carefully considered to avoid over allocation.\nvar z = zinger.Zinger.init(allocator, 1024 * 10);\n```\n\n```zig\n    const allocator = std.heap.page_allocator;\n    var z = zinger.Zinger.init(allocator, null);\n\n    defer z.deinit();\n\n    var headers = [_]std.http.Header{};\n\n    const resp = try z.get(\"<some api>\", null, &headers);\n\n    if (resp.err()) |err_data| {\n        std.debug.print(\"{s}\", .{err_data.phrase});\n    }\n\n    if (resp.err() != null) {\n        try resp.printErr();\n    }\n```\n\nThis is the most *basic* example there is for curating requests. A simple get request, but otherwiese does not display anything as we pass in a null body. (Perhaps useful if all you want to check is the status of the response which is done in the resp.err() check)\n\n## GET\n```zig\n    const allocator = std.heap.page_allocator;\n    var z = zinger.Zinger.init(allocator, 1024 * 2 * 2);\n\n    defer z.deinit();\n\n    var headers = [_]std.http.Header{};\n\n    const resp = try z.get(\"<some api>\", null, &headers);\n\n    if (resp.err()) |err_data| {\n        std.debug.print(\"{s}\", .{err_data.phrase});\n    }\n\n    if (resp.err() != null) {\n        try resp.printErr();\n    }\n\n    // Serialize the JSON data from the body using the json(anytype) method.\n    // Pass any struct type here to marshal the body into the struct.\n    //    Obviously, ensure that the struct attributes match the returned JSON data from the endpoint\n    const json_resp = try resp.json(test_resp_type);\n    std.debug.print(\"{any}\", .{json_resp});\n```\n\n## POST\nYou can denote whatever type you want for the JSON data in a custom struct\n```zig\nconst test_resp_type = struct {\n    test_data: []const u8,\n};\n```\n\n```zig\nfn post(allocator: std.mem.Allocator) !void {\n    // Create Zinger instance for POST\n    var z = zinger.Zinger.init(allocator, null);\n\n    const test_data = struct {\n        example_string: []const u8,\n    }{\n        .example_string = \"testing\",\n    };\n\n    const json_body = std.json.stringifyAlloc(allocator, test_data, .{});\n    defer allocator.free(json_body);\n\n    var headers = [_]std.http.Header{.{ .name = \"content-type\", .value = \"application/json\" }};\n\n    const resp = try z.get(\"<api endpoint>\", test_data, &headers);\n\n    if (resp.err()) |err_data| {\n        std.debug.print(\"{s}\", .{err_data.phrase});\n    }\n\n    if (resp.err() != null) {\n        try resp.printErr();\n    }\n\n    // Serialize the JSON data from the body using the json(anytype) method using the custom struct above\n    const resp_data = struct {\n        example_string: []const u8,\n    }{};\n\n    const json_resp = try resp.json(resp_data);\n    std.debug.print(\"{any}\", .{json_resp});\n}\n```\n\n## PUT and DELETE\n Following the same pattern above, you *can* unclude a body as part of the DELETE/PUT requests. The library is really designed around however the user wants to present the data, attempting to make it as simple as possible to make all the general requests you need.\n\n For PUT/DELETE, simply change the HTTP verb in the above examples and you are set!\n\n PUT/DELETE:\n ```zig\n fn delete(allocator: std.mem.Allocator) !void {\n    // Create Zinger instance for POST\n    // The value for the max_override here is just symbolic for reference,\n    //   this would generally be null unless you *need* to override this value \n    var z = zinger.Zinger.init(allocator, 2048 * 10);\n\n    const test_data = struct {\n        example_string: []const u8,\n    }{\n        .example_string = \"testing\",\n    };\n\n    const json_body = try std.json.stringifyAlloc(allocator, test_data, .{});\n    defer allocator.free(json_body);\n\n    var headers = [_]std.http.Header{.{ .name = \"content-type\", .value = \"application/json\" }};\n\n    var resp = try z.delete(\"<api endpoint>\", json_body, &headers);\n\n    if (resp.err() != null) {\n        try resp.printErr();\n\n        return;\n    }\n\n    // Serialize the JSON data from the body using the json(anytype) method.\n    const json_resp = try resp.json(test_resp_type);\n    std.debug.print(\"{any}\", .{json_resp});\n}\n\nfn put(allocator: std.mem.Allocator) !void {\n    // Create Zinger instance for POST\n    var z = zinger.Zinger.init(allocator, null);\n\n    const test_data = struct {\n        example_string: []const u8,\n    }{\n        .example_string = \"testing\",\n    };\n\n    const json_body = try std.json.stringifyAlloc(allocator, test_data, .{});\n    defer allocator.free(json_body);\n\n    var headers = [_]std.http.Header{.{ .name = \"content-type\", .value = \"application/json\" }};\n\n    var resp = try z.put(\"<api endpoint>\", json_body, &headers);\n\n    if (resp.err()) |err_data| {\n        std.debug.print(\"{s}\", .{err_data.phrase});\n\n        return;\n    }\n\n    // Serialize the JSON data from the body using the json(anytype) method.\n    const json_resp = try resp.json(test_resp_type);\n    std.debug.print(\"{any}\", .{json_resp});\n}\n ```\n\n\n# Supports\nGET, POST, PUT, and DELETE requests\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/46653655?u=49a4249423fa40b6183a98fca414a3ec9b0d4f99&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.1",
+      "name": "Updates",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-12-22T19:22:42Z",
+      "html_url": "https://github.com/BitlyTwiser/zinger/releases/tag/v0.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "Zinger Release Initial",
+      "body": "The initial releae of the Zinger package",
+      "prerelease": false,
+      "published_at": "2024-12-19T15:31:38Z",
+      "html_url": "https://github.com/BitlyTwiser/zinger/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Enjoying the boundless realm of software development.",
+  "owner_company": "RedSparrow Technologies",
+  "owner_location": null,
+  "owner_blog": "https://bitlytwiser.com/",
+  "owner_twitter_username": null,
+  "owner_followers": 6,
+  "owner_following": 8,
+  "owner_created_at": "2019-01-13T17:36:51Z",
+  "license": "Apache-2.0",
+  "category": "library"
+}

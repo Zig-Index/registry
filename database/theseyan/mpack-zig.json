@@ -1,0 +1,80 @@
+{
+  "name": "mpack-zig",
+  "owner": "theseyan",
+  "repo": "mpack-zig",
+  "description": "MessagePack bindings for Zig / msgpack.org[Zig]",
+  "type": "project",
+  "topics": [
+    "messagepack",
+    "mpack",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 15,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-08-12T12:29:56Z",
+  "dependencies": [
+    {
+      "name": "mpack",
+      "url": "https://github.com/ludocode/mpack/releases/download/v1.1.1/mpack-amalgamation-1.1.1.tar.gz",
+      "hash": "122017a6f909181a2b420fa27200cb9097767384907666d9d4d05564f7ab7f167246"
+    },
+    {
+      "name": "zbench",
+      "url": "https://github.com/hendriknielaender/zBench/archive/refs/tags/v0.9.1.tar.gz",
+      "hash": "1220b19e117897a42abc5e58633766a3be92f9ebade400116afea57957bebe41aed0"
+    }
+  ],
+  "minimum_zig_version": "0.13.0",
+  "readme": "# MessagePack for Zig\n\nHigh-level APIs for [MPack](https://github.com/ludocode/mpack), a fast compliant encoder/decoder for the [MessagePack](https://msgpack.org/) binary format.\n\nBuilt and tested with Zig version `0.13.0`.\n\n>  * Simple and easy to use\n>  * Secure against untrusted data\n>  * Lightweight, suitable for embedded\n>  * [Extremely fast](https://github.com/ludocode/schemaless-benchmarks#speed---desktop-pc)\n\n## Table of Contents\n\n- [Installation](#installation)\n- [Usage](#usage)\n- [API](#api)\n  - [`Writer`](#writer)\n  - [`Tree`](#tree)\n  - [`TreeCursor`](#treecursor)\n  - [`Reader`](#reader)\n  - [`Cursor`](#cursor)\n- [Testing](#testing)\n- [Benchmarks](#benchmarks)\n\n## Installation\n\n```bash\n# replace {VERSION} with the latest release eg: v0.1.0\nzig fetch https://github.com/theseyan/mpack-zig/archive/refs/tags/{VERSION}.tar.gz\n```\n\nCopy the hash generated and add mpack-zig to `build.zig.zon`:\n\n```zig\n.{\n    .dependencies = .{\n        .mpack = .{\n            .url = \"https://github.com/theseyan/mpack-zig/archive/refs/tags/{VERSION}.tar.gz\",\n            .hash = \"{HASH}\",\n        },\n    },\n}\n```\n\n## API\n\nAs there is currently no proper documentation, I recommend checking out the [tests](https://github.com/theseyan/mpack-zig/tree/main/test) to refer for examples. The source code is also well-commented.\n\n### `Writer`\n\n> [!NOTE] \n> Zero-allocating API, all writes are flushed to user-provided buffer.\n\nThe simplest way to incrementally write a MessagePack encoded message to a buffer. Writing should always start with `startMap` and end with `finishMap`. Values should always be written immediately after respective keys.\nAfter writing is done, call `deinit` to flush the written bytes to the underlying buffer.\n\nFor pure-Zig code, it can be useful to directly encode a struct (or any supported type) using the `writeAny`/`writeAnyExplicit` methods.\n\nIf you already have a parsed tree of nodes (using `Tree` API), and need to serialize a nested child `Map` node to it's own MessagePack buffer, use the `writeMapNode` method which accepts a `Tree.Node` (internally, it uses the `Writer` and `TreeCursor` APIs).\n\nIt is also possible to write pre-encoded MessagePack object bytes as value to a larger object via `writeEncodedObject`. This is particularly useful when creating a larger structure that embeds smaller encoded structures, wihout having to decode and re-encode everything.\n\n```zig\nconst Writer = mpack.Writer;\n\nvar buffer: [1024]u8 = undefined;\nvar writer = Writer.init(&buffer);\n\ntry writer.startMap(3);\ntry writer.writeString(\"name\");     // Key\n  try writer.writeString(\"Sayan\");  // Value\n\ntry writer.writeString(\"age\");      // Key\n  try writer.writeUint32(100);      // Value\n\ntry writer.writeString(\"location\"); // and so on...\n  try writer.startMap(2);\n    try writer.writeString(\"x\");\n      try writer.writeDouble(123.535);\n    try writer.writeString(\"y\");\n      try writer.writeDouble(1234.1234);\n  try writer.finishMap();\ntry writer.finishMap();\n\n// Flush buffered writes to stream\ntry writer.deinit();\n```\nResults in an encoded message equivalent to the following JSON:\n```json\n{\n  \"name\": \"Sayan\",\n  \"age\": 100,\n  \"location\": {\n    \"x\": 123.535,\n    \"y\": 1234.1234\n  }\n}\n```\n\nThe following `Writer` methods are available:\n- `writeAny` - Serialize any supported data type, including structs, value must be known at comptime.\n- `writeHashMap` - Write a `StringArrayHashMap` as a `Map` value.\n- `writeNumber` - Infer the type of number at comptime.\n- `writeNull`\n- `writeBool`\n- `writeInt8`, `writeInt16`, `writeInt32`, `writeInt64`\n- `writeUint8`, `writeUint16`, `writeUint32`, `writeUint64`\n- `writeFloat`, `writeDouble`\n- `writeNumberExplicit` - Infer the type of number at comptime, but value is runtime-known.\n- `writeString`\n- `writeBytes`\n- `writeExtension` - Read more on [MessagePack Extensions](https://github.com/msgpack/msgpack/blob/master/spec.md#extension-types).\n- `startArray` - Start writing an array. `count` must be known upfront.\n- `startMap` - Start writing a map. `length` must be known upfront.\n- `finishArray`, `finishMap` - Close the last opened array/map.\n- `writeAnyExplicit` - When value is unknown at comptime, but type is known.\n- `writeMapNode` - Encode a parsed `NodeType.Map` node back to binary.\n- `writeEncodedObject` - Write a pre-encoded MessagePack object as value.\n- `stat` - Returns information about underlying buffer.\n\n### `Tree`\n\n> [!NOTE] \n> By default, nodes of the parsed tree are allocated on the heap as required automatically.\n> To avoid dynamic allocations, you can create a re-useable `Pool` with pre-allocated nodes.\n> Strings/Binary/Extension values are zero-copy and point to the original buffer, hence are only valid as long as the buffer lives.\n\nTree-based reader, can be used to read data explicitly and with random access, get a item by path (eg. `parents.mother.children[0].name`), de-serialize a message to a Zig struct, or traverse the tree using `TreeCursor`.\n\n```zig\npub const Tree = struct {\n  pub fn init(allocator: std.mem.Allocator, data: []const u8, pool: ?Pool) !Tree\n  pub fn deinit(self: *Tree) !void\n\n  pub fn getByPath(self: *Tree, path: []const u8) !Node\n  pub fn readAny(self: *Tree, comptime T: type) !struct { value: T, arena: std.heap.ArenaAllocator }\n  pub fn cursor(self: *Tree) !Cursor\n\n  /// A pre-allocated pool of nodes to avoid dynamic allocations in hot paths.\n  pub const Pool = struct {\n    /// Creates a pool of pre-allocated nodes for use with `init`.\n    /// This helps avoid slow dynamic allocations in hot paths.\n    pub fn init(allocator: std.mem.Allocator, size: usize) !Pool\n\n    /// Destroys the pool and frees the underlying memory.\n    pub fn deinit(self: *Pool) void\n  };\n};\n\npub const Node = {\n  pub const NodeType = enum {\n    Null,\n    Bool,\n    Int,\n    Uint,\n    Float,\n    Double,\n    String,\n    Bytes,\n    Array,\n    Map,\n    Extension,\n    Missing\n  };\n\n  pub fn getType(self: Node) NodeType\n  pub fn isValid(self: Node) bool\n  pub fn isNull(self: Node) bool\n  pub fn getBool(self: Node) !bool\n  pub fn getInt(self: Node) !i64\n  pub fn getUint(self: Node) !u64\n  pub fn getFloat(self: Node) !f32\n  pub fn getDouble(self: Node) !f64\n  pub fn getString(self: Node) ![]const u8\n  pub fn getBytes(self: Node) ![]const u8\n  pub fn getExtensionType(self: Node) !i8\n  pub fn getExtensionBytes(self: Node) ![]const u8\n  pub fn getArrayLength(self: Node) !u32\n  pub fn getArrayItem(self: Node, index: u32) !Node\n  pub fn getMapLength(self: Node) !u32\n  pub fn getMapKeyAt(self: Node, index: u32) !Node\n  pub fn getMapValueAt(self: Node, index: u32) !Node\n  pub fn getMapKey(self: Node, key: []const u8) !Node\n};\n```\n\n### `TreeCursor`\n\nA `TreeCursor` can be used to traverse through a tree's nodes in order.\n```zig\nvar cursor = try tree.cursor();\n\n// ... or a cursor starting from any nested Map node\nvar cursor = try TreeCursor.init(nested_map_node);\n```\n\nIt is non-allocating, and returns items one-by-one via the `next` method. When all items are exhausted, `null` is returned.\n\n```zig\npub const TreeCursor = struct {\n  pub const MAX_STACK_DEPTH = 512;\n  pub const Event = union(enum) {\n    // Value events\n    null,\n    bool: bool,\n    int: i64,\n    uint: u64,\n    float: f32,\n    double: f64,\n    string: []const u8,\n    bytes: []const u8,\n    \n    // Container events\n    mapStart: u32,      // Count of map\n    mapEnd,\n    arrayStart: u32,    // Length of array\n    arrayEnd,\n\n    // Extensions\n    extension: struct {\n        type: i8,\n        data: []const u8,\n    },\n  };\n\n  pub fn init(root: Node) TreeCursor\n  pub fn next(self: *TreeCursor) !?Event\n};\n```\n\n### `Reader`\n\n> [!NOTE] \n> Simple, zero-allocating, single-pass reader.\n> Strings/Binary/Extension values are \"views\" into the original buffer, and hence only valid as long as the buffer lives.\n\nSimple primitive reader API that reads tags from the encoded buffer one-by-one. This is the fastest way to traverse through the message but cannot go backwards nor provide random-access. Each read tag advances the reader automatically.\n\nUse the `Tree` API if elements are to be accessed multiple times or random-access is required.\nOtherwise, it is recommended to use the traversing `Cursor` API instead of using this directly.\n\n```zig\npub const Reader = struct {\n  pub const TagType = enum {\n    Null,\n    Bool,\n    Int,\n    Uint,\n    Float,\n    Double,\n    String,\n    Bytes,\n    Array,\n    Map,\n  };\n\n  pub const Tag = struct {\n    pub fn getType(self: *Tag) TagType,\n\n    pub fn isNull(self: *Tag) bool,\n    pub fn getBool(self: *Tag) bool,\n    pub fn getInt(self: *Tag) i64,\n    pub fn getUint(self: *Tag) u64,\n    pub fn getFloat(self: *Tag) f32,\n    pub fn getDouble(self: *Tag) f64,\n    pub fn getStringValue(self: *Tag, reader: *Reader) ![]const u8,\n    pub fn getBinaryBytes(self: *Tag, reader: *Reader) ![]const u8,\n    pub fn getExtensionBytes(self: *Tag, reader: *Reader) ![]const u8\n    pub fn getStringLength(self: *Tag) u32,\n    pub fn getArrayLength(self: *Tag) u32,\n    pub fn getMapLength(self: *Tag) u32,\n    pub fn getBinLength(self: *Tag) u32,\n    pub fn getExtensionLength(self: *Tag) u32,\n    pub fn getExtensionType(self: *Tag) i8\n  }\n\n  pub fn init(data: []const u8) Reader\n  pub fn readTag(self: *Reader) !Tag\n  pub fn finishArray(self: *Reader) void\n  pub fn finishMap(self: *Reader) void\n  pub fn cursor(self: *Reader) Cursor\n  pub fn deinit(self: *Reader) !void\n};\n```\n\n### `Cursor`\n\nCursor based on the `Reader` API. Faster than `TreeCursor` but subject to the same limitations as `Reader`.\n\nThe API is very similar to `TreeCursor`.\n\n```zig\npub const Cursor = struct {\n  pub const MAX_STACK_DEPTH = 512;\n  pub const Event = union(enum) {\n    // Value events\n    null,\n    bool: bool,\n    int: i64,\n    uint: u64,\n    float: f32,\n    double: f64,\n    string: []const u8,\n    bytes: []const u8,\n    \n    // Container events\n    mapStart: u32,      // Count of map\n    mapEnd,\n    arrayStart: u32,    // Length of array\n    arrayEnd,\n\n    // Extensions\n    extension: struct {\n        type: i8,\n        data: []const u8,\n    },\n  };\n\n  pub fn init(reader: *Reader) Cursor\n  pub fn next(self: *Cursor) !?Event\n};\n```\n\n## Testing\n\nUnit tests are present in the `test/` directory.\n\nCurrently, the tests are limited and do not cover everything.\nPRs to improve the quality of these tests are welcome.\n\n```bash\nzig build test\n```\n\n## Benchmarks\n\nBenchmarks are present in `benchmark/` and use the [zBench](https://github.com/hendriknielaender/zBench) library.\n\nRun the benchmarks:\n```bash\nzig build bench\n```\n\nResults on my personal PC (Intel i5-11400H, Debian, 32 GiB RAM):\n```\nbenchmark              runs     total time     time/run (avg ± σ)     (min ... max)                p75        p99        p995      \n-----------------------------------------------------------------------------------------------------------------------------\nexplicit write x 100   65535    625.421ms      9.543us ± 1.091us      (8.976us ... 82.607us)       9.808us    13.675us   15.594us  \nserialize struct x 100 65535    585.208ms      8.929us ± 1.517us      (7.551us ... 52.956us)       9.685us    12.922us   13.962us  \ntree: parse            65535    10.195ms       155ns ± 93ns           (136ns ... 19.05us)          158ns      186ns      188ns     \ntree: parse w/ pool    65535    10.901ms       166ns ± 1.222us        (129ns ... 211.649us)        166ns      247ns      248ns     \ntree: read by path     65535    23.742ms       362ns ± 183ns          (324ns ... 31.989us)         367ns      413ns      526ns     \ntree: cursor iterate   65535    23.694ms       361ns ± 234ns          (328ns ... 35.133us)         363ns      410ns      421ns     \nreader: cursor iterate 65535    11.166ms       170ns ± 41ns           (158ns ... 5.897us)          175ns      187ns      190ns\n```",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/30970706?u=0eda0e38a8d8119e58d975ba82a07d7ae4c68428&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.2.1",
+      "name": "v0.2.1",
+      "body": "- Added support for [MessagePack Extension](https://github.com/msgpack/msgpack/blob/master/spec.md#extension-types) types.\r\n- Added `Writer.writeEncodedObject` function to write a pre-encoded MessagePack object buffer as value to a larger object.\r\n- Minor fixes using `u32` instead of `usize`.",
+      "prerelease": false,
+      "published_at": "2025-01-15T07:13:12Z",
+      "html_url": "https://github.com/theseyan/mpack-zig/releases/tag/v0.2.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "- The tree-based reader API is now `Tree API`, and it's cursor is `TreeCursor`.\r\n- Added primitive, non-allocating, fast `Reader` and `Cursor` APIs.\r\n- Refactor `TreeCursor` for much faster runtimes.\r\n- Add `Tree.Pool` to pre-allocate a pool of nodes to avoid dynamic allocations in hot paths.\r\n- Add benchmarks using `zBench`.\r\n- Minor fixes",
+      "prerelease": false,
+      "published_at": "2025-01-14T21:01:24Z",
+      "html_url": "https://github.com/theseyan/mpack-zig/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.1",
+      "name": "v0.1.1",
+      "body": "**Full Changelog**: https://github.com/theseyan/mpack-zig/compare/v0.1.0...v0.1.1",
+      "prerelease": false,
+      "published_at": "2024-12-22T18:50:01Z",
+      "html_url": "https://github.com/theseyan/mpack-zig/releases/tag/v0.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "Initial release",
+      "prerelease": false,
+      "published_at": "2024-12-07T12:57:14Z",
+      "html_url": "https://github.com/theseyan/mpack-zig/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "computer enthusiast",
+  "owner_company": null,
+  "owner_location": "Agartala, India",
+  "owner_blog": "seyan.co",
+  "owner_twitter_username": "sayanjdas",
+  "owner_followers": 36,
+  "owner_following": 3,
+  "owner_created_at": "2017-08-13T05:59:42Z",
+  "license": "MIT",
+  "category": "library"
+}

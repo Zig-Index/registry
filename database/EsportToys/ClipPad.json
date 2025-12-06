@@ -1,0 +1,182 @@
+{
+  "name": "ClipPad",
+  "owner": "EsportToys",
+  "repo": "ClipPad",
+  "description": "A barebones plaintext scratch pad.",
+  "type": "project",
+  "topics": [
+    "windows",
+    "notepad",
+    "winapi",
+    "zig",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-08-26T23:40:08Z",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/98668553?v=4",
+  "releases": [
+    {
+      "tag_name": "v1.6",
+      "name": "",
+      "body": "- (breaking) changed text input lock toggle from `Ctrl+L` to `Ctrl+I`\r\n- added navigation shortcuts while text input is locked (`I/J/K/L` for arrows, `U/O` for PgUp/PgDn)\r\n- added quick-save shortcut to save current note to the last-opened file without prompt (`Ctrl+Shift+S`)\r\n- added confirmation prompt when closing an unsaved note",
+      "prerelease": false,
+      "published_at": "2025-05-26T18:15:34Z",
+      "html_url": "https://github.com/EsportToys/ClipPad/releases/tag/v1.6",
+      "assets": [
+        {
+          "name": "ClipPad-v1.6.zip",
+          "url": "https://github.com/EsportToys/ClipPad/releases/download/v1.6/ClipPad-v1.6.zip",
+          "size": 10519,
+          "content_type": "application/x-zip-compressed"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.5.1",
+      "name": "",
+      "body": "- fix: files larger than 4GB will no longer be truncated on save due to using legacy 32bit WinAPI calls\r\n- fix: restored smooth zooming behaviour inadvertently removed in v1.5",
+      "prerelease": false,
+      "published_at": "2025-05-24T21:27:26Z",
+      "html_url": "https://github.com/EsportToys/ClipPad/releases/tag/v1.5.1",
+      "assets": [
+        {
+          "name": "ClipPad-v1.5.1.zip",
+          "url": "https://github.com/EsportToys/ClipPad/releases/download/v1.5.1/ClipPad-v1.5.1.zip",
+          "size": 10184,
+          "content_type": "application/x-zip-compressed"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.5",
+      "name": "",
+      "body": "- added: drag-and-drop onto client area to open file\r\n- added: handle smooth scrolling per-line/char",
+      "prerelease": false,
+      "published_at": "2025-05-24T19:38:51Z",
+      "html_url": "https://github.com/EsportToys/ClipPad/releases/tag/v1.5",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.4",
+      "name": "",
+      "body": "- BREAKING: swapped hotkey for text font and text color with each other (now Ctrl-T for text color and Ctrl-Shift-T for text font)\r\n- change to using GDI scaling in manifest",
+      "prerelease": false,
+      "published_at": "2024-09-20T20:40:35Z",
+      "html_url": "https://github.com/EsportToys/ClipPad/releases/tag/v1.4",
+      "assets": [
+        {
+          "name": "ClipPad-v1.4.zip",
+          "url": "https://github.com/EsportToys/ClipPad/releases/download/v1.4/ClipPad-v1.4.zip",
+          "size": 10325,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.3.2",
+      "name": "",
+      "body": "- dpi-aware font\r\n- fullscreen hides scrollbars",
+      "prerelease": false,
+      "published_at": "2024-09-11T16:13:01Z",
+      "html_url": "https://github.com/EsportToys/ClipPad/releases/tag/v1.3.2",
+      "assets": [
+        {
+          "name": "ClipPad-v1.3.2.zip",
+          "url": "https://github.com/EsportToys/ClipPad/releases/download/v1.3.2/ClipPad-v1.3.2.zip",
+          "size": 10500,
+          "content_type": "application/x-zip-compressed"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.2",
+      "name": "",
+      "body": "Added F11 for toggling fullscreen",
+      "prerelease": false,
+      "published_at": "2024-09-09T18:22:18Z",
+      "html_url": "https://github.com/EsportToys/ClipPad/releases/tag/v1.2",
+      "assets": [
+        {
+          "name": "ClipPad-v1.2.zip",
+          "url": "https://github.com/EsportToys/ClipPad/releases/download/v1.2/ClipPad-v1.2.zip",
+          "size": 10193,
+          "content_type": "application/x-zip-compressed"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.1.1",
+      "name": "",
+      "body": "Add text color change shortcut (Ctrl+Shift+T)",
+      "prerelease": false,
+      "published_at": "2024-09-09T13:11:33Z",
+      "html_url": "https://github.com/EsportToys/ClipPad/releases/tag/v1.1.1",
+      "assets": [
+        {
+          "name": "ClipPad-v1.1.1.zip",
+          "url": "https://github.com/EsportToys/ClipPad/releases/download/v1.1.1/ClipPad-v1.1.1.zip",
+          "size": 9959,
+          "content_type": "application/x-zip-compressed"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.1",
+      "name": "",
+      "body": "Added customizable background color. Open color selection menu with Ctrl+K",
+      "prerelease": false,
+      "published_at": "2024-09-09T11:56:42Z",
+      "html_url": "https://github.com/EsportToys/ClipPad/releases/tag/v1.1",
+      "assets": [
+        {
+          "name": "ClipPad-v1.1.zip",
+          "url": "https://github.com/EsportToys/ClipPad/releases/download/v1.1/ClipPad-v1.1.zip",
+          "size": 9907,
+          "content_type": "application/x-zip-compressed"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.0.1",
+      "name": "",
+      "body": "Accumulate smooth scroll counts for better compatibility with high-resolution scroll wheels",
+      "prerelease": false,
+      "published_at": "2024-09-09T09:49:38Z",
+      "html_url": "https://github.com/EsportToys/ClipPad/releases/tag/v1.0.1",
+      "assets": [
+        {
+          "name": "ClipPad-v1.0.1.zip",
+          "url": "https://github.com/EsportToys/ClipPad/releases/download/v1.0.1/ClipPad-v1.0.1.zip",
+          "size": 9797,
+          "content_type": "application/x-zip-compressed"
+        }
+      ]
+    },
+    {
+      "tag_name": "v1.0",
+      "name": "",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-09-08T10:51:00Z",
+      "html_url": "https://github.com/EsportToys/ClipPad/releases/tag/v1.0",
+      "assets": [
+        {
+          "name": "ClipPad-v1.0.zip",
+          "url": "https://github.com/EsportToys/ClipPad/releases/download/v1.0/ClipPad-v1.0.zip",
+          "size": 9558,
+          "content_type": "application/x-zip-compressed"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2022-01-29T21:24:31Z",
+  "license": "GPL-3.0",
+  "category": "library"
+}

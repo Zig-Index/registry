@@ -1,0 +1,212 @@
+{
+  "name": "mvzr",
+  "owner": "mnemnion",
+  "repo": "mvzr",
+  "description": "Minimum Viable Zig Regex",
+  "type": "project",
+  "topics": [
+    "pattern-matching",
+    "regex",
+    "regular-expressions",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 107,
+  "forks": 8,
+  "watchers": 2,
+  "updated_at": "2025-12-02T08:03:25Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# mvzr: The Minimum Viable Zig Regex Library\n\nFinding myself in need of a regular expressions library for a Zig project, and needing it to build regex at runtime, not just comptime, I ended up speedrunning a little library for just that purpose.\n\nThis is that library.  It's a simple bytecode-based VM, inspired by [LPEG](https://www.inf.puc-rio.br/~roberto/docs/peg.pdf).  Under 2000 lines of load-bearing code, no dependencies other than `std`.\n\nThe provided Regex type allows 64 'operations' and 8 unique ASCII character sets.  If you would like more, or less, you can call `SizedRegex(num_ops, num_sets)` to customize the type.\n\n## Installation\n\nDrop the file into your project, or use the Zig build system:\n\n```zig\nzig fetch --save \"https://github.com/mnemnion/mvzr/archive/refs/tags/v0.3.7.tar.gz\"\n```\n\nI'll do my best to keep that URL fresh, but it pays to check over here: ➔\n\nFor the latest release version.\n\n`v0.3.7` is the first version supporting Zig `0.15.1`, if you're still on `0.14`, stick with `v0.3.6`.\n\n## Features\n\n- Zero allocation, comptime and runtime compiling and matching\n- X operations per regex\n- Y character sets per regex\n- Greedy qualifiers: `*`, `+`, `?`\n- Lazy qualifiers: `*?`, `+?`, `??`\n- Possessive/eager qualifiers: `*+`, `++`, `?+`\n- Alternation: `foo|bar|baz`\n- Grouping `foo|(bar|baz)+|quux`\n- Sets: `[abc]`, `[^abc]`, `[a-z]`, `[^a-z]`, `[\\w+-]`, `[\\x04-\\x1b]`\n- Built-in character groups (ASCII): `\\w`, `\\W`, `\\s`, `\\S`, `\\d`, `\\D`\n- Escape sequences: `\\t`, `\\n`, `\\r`, `\\xXX` hex format\n    - Same set as Zig: if you need the weird C ones, use `\\x` format\n- Begin and end `^` and `$`\n- Word boundaries `\\b`, `\\B`\n- `{M}`, `{M,}`, `{M,N}`, `{,N}`\n\n## Limitations and Quirks\n\n- Minimal multibyte / Unicode support\n    - This has improved somewhat.  A regex like `λ?` now matches an optional lambda, not just\n      an optional final byte.  Additionally, ranges of bytes greater than 0x7f are now supported,\n      this (with some care) can match certain sets: for instance `(\\xce[\\x91-\\xa9])+` will match\n      a string of uppercase Greek letters, `\\xc2[\\x80-\\x9f]` matches a C1 control code, and so on.\n      But you'll still need to work at the byte level, and use `\\x` format, to do these tasks.\n- No fancy modifiers (you want case-insensitive, great, lowercase your string)\n- `.` matches any one byte.  `[^\\n\\r]` works fine if that's not what you want\n    - Or split into lines first, divide and conquer\n    - Note: `$` permits a final newline, but `^` must be the beginning of a string, and `$` _only_ matches a final newline.\n- Backtracks (sorry. For this design to work without backtracking, we need async back)\n- Compiler does some best-effort validation but I haven't really pounded on it\n- No capture groups.  Divide and conquer\n\nAs long as you color within the lines, it should be fine.\n\nThis library is not intended for use where an attacker could conceivably control the regex pattern.\n\nMuch like managing your own memory, if you know your tools and are smart about it, you can get a lot done with `mvzr`.\n\n## Interface\n\n`mvzr.Regex` is available at `comptime` or runtime, and returns an `mvzr.Match`, consisting of a `.slice` field containing the match, as well as the `.start` and `.end` locations in the haystack.  This is a borrowed slice, to own it, call `match.toOwnedMatch(allocator)`, and deallocate later with `match.deinit(allocator)`, or just free the `.slice`.\n\nSimilarly, if you need to store a `Regex` or `SizedRegex` for later, call `regex.toOwnedRegex(allocator)`, freeing later with `allocator.destroy(heap_regex)`.\n\n```zig\n// aka SizedRegex(64, 8)\nconst regex: mvzr.Regex = mvzr.compile(patt_str).?;\n// or mvzr.Regex.compile(patt_str)\nconst match: mvzr.Match = regex.match(haystack).?;\nconst match2: mvzr.Match = match(haystack, patt_str).?;\nconst did_match: bool = regex.isMatch(haystack);\nconst iter: mvzr.RegexIterator = regex.iterator(haystack);\n\nwhile (iter.next()) |m| {\n    // ...\n}\n\n// Comptime-only\nconst ops, const sets = mvzr.resourcesNeeded(\"abc?d*[^efgh]++2\");\n\n// I suggest adding the values directly here once they're established\nconst SlimmedDownRegex = mvzr.SizedRegex(ops, sets);\n```\n\n## Compile Errors\n\nIf a regex string is unable to compile, `mvzr` will return `null`.  It will also log an informative error message.  While this is useful, it may not be desirable, so `mvzr` uses a [scoped logger](https://ziglang.org/documentation/0.12.0/std/#std.log) with the scope `.mvzr`, to make it easy for a custom logging function to filter those messages out.\n\n## Bugs\n\nFewer over time, I hope.  The test suite never shrinks.\n\n### Bug Reports\n\nAlways welcome.  Ideally, presented as a failing test block, with a note on expected behavior.\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/231785?u=8a0cdeb97b0a614b0350536ecd6921ee6166c611&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.3.7",
+      "name": "Zig 0.15 compatibility",
+      "body": "Updates build system and format strings to the `0.15` standard.",
+      "prerelease": false,
+      "published_at": "2025-09-24T22:39:38Z",
+      "html_url": "https://github.com/mnemnion/mvzr/releases/tag/v0.3.7",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.3.6",
+      "name": "Bugfix: word breaks on zero-length strings",
+      "body": "Mvzr did not originally account for the case of matching a zero-length\r\nstring, at all.  While it was unclear to me what the semantics of word-\r\nbreak or not-word-break should even be, PCRE2 thinks neither match an\r\nempty string.  So now `mvzr` doesn't either, and also, doesn't try to\r\nread a character from a string which doesn't have one.",
+      "prerelease": false,
+      "published_at": "2025-06-25T22:52:25Z",
+      "html_url": "https://github.com/mnemnion/mvzr/releases/tag/v0.3.6",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.3.5",
+      "name": "Bugfix: spurious 0 value no longer returned",
+      "body": "A recently implemented opcode used for efficiency in {N,M} type\r\npatterns, was returning the index `0` for a null match, instead of\r\nthe index it was testing.  This would result in an invalid slice\r\nwhen creating the match object.  No longer.",
+      "prerelease": false,
+      "published_at": "2025-06-25T22:37:32Z",
+      "html_url": "https://github.com/mnemnion/mvzr/releases/tag/v0.3.5",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.3.4",
+      "name": "bug fix: String may end on p{0,n}",
+      "body": "This special case was not handled correctly in the dispatch loop.\r\nThis has been corrected.",
+      "prerelease": false,
+      "published_at": "2025-04-18T22:18:53Z",
+      "html_url": "https://github.com/mnemnion/mvzr/releases/tag/v0.3.4",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.3.3",
+      "name": "Zig 0.14 compatibility",
+      "body": "Fixup on `build.zig.zon` to follow the new conventions.",
+      "prerelease": false,
+      "published_at": "2025-03-16T02:13:30Z",
+      "html_url": "https://github.com/mnemnion/mvzr/releases/tag/v0.3.3",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.3.2",
+      "name": "Patterns which can match the empty string, do",
+      "body": "A pattern like `\".?\"` or `\".*\"` now matches `\"\"`. Previously this was hard-coded to return `null`.\r\n\r\nFixes #5 ",
+      "prerelease": false,
+      "published_at": "2024-12-12T03:42:25Z",
+      "html_url": "https://github.com/mnemnion/mvzr/releases/tag/v0.3.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.3.1",
+      "name": "Bugfix patch for 0.3.0",
+      "body": "Fixes a couple parsing errors related to grouping multibyte characters.",
+      "prerelease": false,
+      "published_at": "2024-12-01T15:50:36Z",
+      "html_url": "https://github.com/mnemnion/mvzr/releases/tag/v0.3.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.3.0",
+      "name": "Version 0.3.0: Multibye modifiers and high-bit ranges. ",
+      "body": "This release improves multibyte handling.  Codepoints are kept together, such that a regex like `λ+` now matches `\"λλλ\"`, and ranges and bytes expressed with `\\x` syntax can cover the whole `u8` range, not just the ASCII lower portion of it.  With some care this allows for construction of useful character sets, so long as they happen to be dense in the Unicode codepoint spectrum. ",
+      "prerelease": false,
+      "published_at": "2024-12-01T01:52:33Z",
+      "html_url": "https://github.com/mnemnion/mvzr/releases/tag/v0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.5",
+      "name": "Proper ranges of \\xXX-\\xXX",
+      "body": "This corrects a fencepost error, which gave incorrect results for ranges in the form `r\"[\\x01-x3f]\"`.",
+      "prerelease": false,
+      "published_at": "2024-11-30T17:06:22Z",
+      "html_url": "https://github.com/mnemnion/mvzr/releases/tag/v0.2.5",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.4",
+      "name": "Try to match empty string",
+      "body": "This release does a final try to match the empty string, which handles a pattern such as `a*$` matching a string like `\"bbbb\"`. ",
+      "prerelease": false,
+      "published_at": "2024-11-11T18:28:40Z",
+      "html_url": "https://github.com/mnemnion/mvzr/releases/tag/v0.2.4",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.3",
+      "name": "Bug fixes: alt + modifier, Kleene * + subsequent fail",
+      "body": "This release fixes one bug in the regex compiler, and one in the matching runtime.\r\n\r\nUpgrading is recommended.",
+      "prerelease": false,
+      "published_at": "2024-11-10T16:44:45Z",
+      "html_url": "https://github.com/mnemnion/mvzr/releases/tag/v0.2.3",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.2",
+      "name": "Scoped Logging",
+      "body": "Compile errors are now scoped in `.mvzr`, making it practical to filter them out when desired.",
+      "prerelease": false,
+      "published_at": "2024-08-12T20:39:58Z",
+      "html_url": "https://github.com/mnemnion/mvzr/releases/tag/v0.2.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.1",
+      "name": "Regex convenience type now public",
+      "body": "This release makes the Regex type, which is just `SizedRegex(64,8)`, public.\r\n\r\nNo other changes from `v0.2.1`.",
+      "prerelease": false,
+      "published_at": "2024-08-06T19:36:42Z",
+      "html_url": "https://github.com/mnemnion/mvzr/releases/tag/v0.2.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "Add regex.matchPos",
+      "body": "A convenience function which slices the string for you, and adjusts the values in the Match returned to their location in the original haystack string.",
+      "prerelease": false,
+      "published_at": "2024-08-06T18:08:57Z",
+      "html_url": "https://github.com/mnemnion/mvzr/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.2",
+      "name": "Add eager {M,N}+ qualifier",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-07-20T17:45:28Z",
+      "html_url": "https://github.com/mnemnion/mvzr/releases/tag/v0.1.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.1",
+      "name": "Bugfix: character sets",
+      "body": "Correctly handle the case where a hyphen is the final member of the set: adding the character before the hyphen, *and* the hyphen, instead of just adding the hyphen twice.",
+      "prerelease": false,
+      "published_at": "2024-07-20T02:56:36Z",
+      "html_url": "https://github.com/mnemnion/mvzr/releases/tag/v0.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "Version 0.1",
+      "body": "This release adds word boundaries, allows character classes inside character sets, permits a newline to match `$`, and otherwise refactors, fixes, and improves `mvzr`. \r\n\r\nTest coverage is decent, if not yet complete, and it has about as many features as I expect it to.  Taking a look at [this list of features](https://www.regular-expressions.info/refflavors.html), most of what isn't supported is a non-goal for `mvzr`.  There are one or two I might consider. \r\n\r\nAt this point, you might reasonably expect that, using `mvzr`, you're likely to end up with matches for your regular expressions, which resemble what you expect.  If not, please file an issue, and I'll see what I can do. ",
+      "prerelease": false,
+      "published_at": "2024-07-19T20:58:32Z",
+      "html_url": "https://github.com/mnemnion/mvzr/releases/tag/v0.1.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.10",
+      "name": "SizedRegex works, deduplicate character sets",
+      "body": "This release fixes a function-signature problem with the dispatch functions, where they relied on the size of the default `Regex` character sets. \r\n\r\nAlso deduplicates character sets, meaning more patterns fit in the default size.",
+      "prerelease": false,
+      "published_at": "2024-07-18T19:51:34Z",
+      "html_url": "https://github.com/mnemnion/mvzr/releases/tag/v0.0.10",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.9",
+      "name": "Improves group logic, bugfixes, more tests",
+      "body": "Group patterns followed by more pattern now check the next match, giving later alternates a chance to succeed if necessary. ",
+      "prerelease": false,
+      "published_at": "2024-07-18T17:57:06Z",
+      "html_url": "https://github.com/mnemnion/mvzr/releases/tag/v0.0.9",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.8",
+      "name": "Comptime configurable",
+      "body": "It is now possible to set the amount of operations and character sets desired, by using `SizedRegex(ops, charsets)` with, naturally, comptime-known values. \r\n\r\nThe amount needed for a given string can be found with `resourcesNeeded(\"comptime regex string\")`.  I suggest writing these values directly into your program once you know what they are. ",
+      "prerelease": false,
+      "published_at": "2024-07-18T00:31:01Z",
+      "html_url": "https://github.com/mnemnion/mvzr/releases/tag/v0.0.8",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": "Eastern Standard Tribe",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 90,
+  "owner_following": 24,
+  "owner_created_at": "2010-03-27T23:31:39Z",
+  "license": "MIT",
+  "category": "library"
+}

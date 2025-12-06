@@ -1,0 +1,33 @@
+{
+  "name": "zigraylib",
+  "owner": "SimonLSchlee",
+  "repo": "zigraylib",
+  "description": "a fairly minimal raylib zig example codebase using the zig package manager",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 76,
+  "forks": 7,
+  "watchers": 2,
+  "updated_at": "2025-11-11T20:54:36Z",
+  "dependencies": [
+    {
+      "name": "raylib",
+      "url": "git+https://github.com/raysan5/raylib#bbeade636cd8c90e18b7e9e841c20b5f8bd15d94",
+      "hash": "raylib-5.5.0-whq8uGZGzQDi3_L7tJzgEINoZN-HwmOs0zkkc2g7ysIZ"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# zigraylib\nA fairly minimal [raylib](https://www.raylib.com/) [zig](https://ziglang.org/download/) example codebase using the zig package manager.\n\n## install\n```bash\ngit clone https://github.com/SimonLSchlee/zigraylib.git\ncd zigraylib\nzig build run\n```\n\ntested with zig version: `0.14.0`  \nusing raylib commit: https://github.com/raysan5/raylib/tree/bbeade636cd8c90e18b7e9e841c20b5f8bd15d94\n\n## resources\n[raylib cheatsheet](https://www.raylib.com/cheatsheet/cheatsheet.html)  \n[Learn ⚡ Zig Programming Language](https://ziglang.org/learn/)  \n[Zig Community](https://github.com/ziglang/zig/wiki/Community)  \n\n## raygui\n\nIf you want to use raygui checkout the [raygui](https://github.com/SimonLSchlee/zigraylib/tree/raygui) branch.\n\n## code completion\n[zls installation](https://github.com/zigtools/zls/wiki/Installation)\n\n## ideas or improvements?\nLet me know if you have ideas about things that could make this example better.\nI want to keep it fairly minimal, but maybe we can add some more links to useful resources, or point out common problems.\nZiggit topic for discussion: https://ziggit.dev/t/raylib-example-using-the-package-manager/1787\n\n## license\npublic domain or MIT\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/32989557?u=618d16bec3913e352735b3c01c7b12bf588d5adf&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 8,
+  "owner_following": 2,
+  "owner_created_at": "2017-10-21T21:05:24Z",
+  "category": "library"
+}

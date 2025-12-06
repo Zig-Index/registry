@@ -1,0 +1,67 @@
+{
+  "name": "log_to_file",
+  "owner": "reykjalin",
+  "repo": "log_to_file",
+  "description": "Have Zig's `std.log` log to a file instead of to stderr",
+  "type": "project",
+  "topics": [
+    "logging",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 3,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-11-02T05:29:36Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# log_to_file\n\n[API docs](https://reykjalin.srht.site/docs/log_to_file/)\n\nAn easy way to change Zig's default `std.log` functions to write to a file instead of logging to\nstderr.\n\n> [!NOTE]\n> **This is not a logging library!**\n> It offers a function you can pass to Zig's `std_options`'s `.logFn` so `std.log` calls write to a\n> file instead of stderr.\n\n> [!IMPORTANT]\n> **Version 2.0.0 introduced breaking changes**. Read through this readme to see what changed, or\n> check [the changelog](./CHANGELOG.md).\n\n## Usage\n\n> [!IMPORTANT]\n> If the logging function fails to write to the log file, e.g. due to a permissions issue, it will\n> fallback to `std.log.defaultLog()` instead of silently failing.\n\n1. Install the library by running\n   `zig fetch --save https://git.sr.ht/~reykjalin/log_to_file/archive/3.0.0.tar.gz`\n   in your project.\n    * You can also use `zig fetch --save https://github.com/reykjalin/log_to_file/archive/refs/tags/3.0.0.zip` if you prefer.\n2. Add the library as a dependency in your project's `build.zig`:\n\n```zig\npub fn build(b: *std.Build) void {\n    const target = b.standardTargetOptions(.{});\n    const optimize = b.standardOptimizeOption(.{});\n\n    const ltf_dep = b.dependency(\"log_to_file\", .{ .target = target, .optimize = optimize });\n\n    const exe = b.addExecutable(.{\n        .name = \"app\",\n        .root_module = b.createModule(.{\n            .root_source_file = b.path(\"src/main.zig\"),\n            .target = target,\n            .optimize = optimize,\n        }),\n    });\n\n    exe.root_module.addImport(\"log_to_file\", ltf_dep.module(\"log_to_file\"));\n```\n\n3. Set the log function in your main project:\n\n```zig\nconst ltf = @import(\"log_to_file\");\n\npub const std_options: std.Options = .{\n    .logFn = ltf.log_to_file,\n};\n```\n\nNow, whenever you call the `std.log` functions they should be written to a\n`logs/<executable_name>.log` file in your current working directory when you make a `Debug` build,\nand `~/.local/state/logs/<executable_name>.log` in a `Release` build.\n\nFor example, if your executable is called `example` (as is the case with\n[the examples](./examples/README.md)) the logs will be in `./logs/example.log` by default in a\n`Debug` build.\n\n## Configuration\n\n[The examples](./examples/README.md) are a great resource to play with to understand how the\nlibrary works.\n\nIf you'd like to write logs to a different path you can configure that by adding this to your root\nsource file (typically `src/main.zig` or similar):\n\n```zig\nconst ltf = @import(\"log_to_file\");\n\n// Logs will be saved to:\n//   * ./logs/log in Debug mode.\n//   * ~/.local/state/logs/log in Release mode.\npub const log_to_file_options: ltf.Options = .{\n    .log_file_name = \"log\",\n};\n\n// Logs will be saved to:\n//   * ./new-logs/<executable_name>.log in Debug mode.\n//   * ./new-logs/<executable_name>.log in Release mode.\npub const log_to_file_options: ltf.Options = .{\n    .storage_path = \"new-logs\",\n};\n\n// Logs will be saved to:\n//   * /var/logs/<executable_name>.log in Debug mode.\n//   * /var/logs/<executable_name>.log in Release mode.\npub const log_to_file_options: ltf.Options = .{\n    .storage_path = \"/var/logs\",\n};\n\n// Logs will be saved to:\n//   * ./app-logs/app.log in Debug mode.\n//   * ./app-logs/app.log in Release mode.\npub const log_to_file_options: ltf.Options = .{\n    .log_file_name = \"app.log\",\n    .storage_path = \"app-logs\",\n};\n\n// Logs will be saved to:\n//   * /var/logs/app.log in Debug mode.\n//   * /var/logs/app.log in Release mode.\npub const log_to_file_options: ltf.Options = .{\n    .log_file_name = \"app.log\",\n    .storage_path = \"/var/logs\",\n};\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/13835680?u=0ed8bc9bec4c852eeed4f9b933e77e629caf4cc1&v=4",
+  "releases": [
+    {
+      "tag_name": "3.0.0",
+      "name": "v3.0.0",
+      "body": "## Changelog\r\n\r\n* Updated the build file and implementaiton to support Zig 0.15.1 and newer.",
+      "prerelease": false,
+      "published_at": "2025-11-02T05:38:11Z",
+      "html_url": "https://github.com/reykjalin/log_to_file/releases/tag/3.0.0",
+      "assets": []
+    },
+    {
+      "tag_name": "2.1.0",
+      "name": "Version 2.1.0",
+      "body": "* The default, no-config log location is now `~/.local/state/<executable_name>/<executable_name>.log` **in `ReleaseFast`, `ReleaseSmall`, and `ReleaseSafe` modes**.\r\n* If we can't get `<executable_name>` the default location becomes `~/.cache/logs/out.log` **in `ReleaseFast`, `ReleaseSmall`, and `ReleaseSafe` modes**.\r\n",
+      "prerelease": false,
+      "published_at": "2025-04-26T01:10:27Z",
+      "html_url": "https://github.com/reykjalin/log_to_file/releases/tag/2.1.0",
+      "assets": []
+    },
+    {
+      "tag_name": "2.0.0",
+      "name": "Version 2.0.0",
+      "body": "Bug fixes\r\n=========\r\n\r\n* Removed general purpose allocator initialization that was unused. This was optimized away by the Zig compiler, but the code shouldn't be there.\r\n\r\nBreaking changes\r\n================\r\n\r\n* `pub const log_to_file_path` no longer works. Use `pub const log_to_file_options` instead. See [the readme](./README.md) for deatils or take a look at [the examples](./examples/README.md).\r\n* The default, no-config log location is now `./logs/<executable_name>.log` **in `Debug` mode**.\r\n* The default, no-config log location is now `~/.local/logs/<executable_name>.log` **in `ReleaseFast`, `ReleaseSmall`, and `ReleaseSafe` modes**.\r\n\r\nImprovements\r\n============\r\n\r\n* The logging function will now fallback to `std.log.defaultLog()` if it fails to write to the log file.",
+      "prerelease": false,
+      "published_at": "2025-04-23T06:48:28Z",
+      "html_url": "https://github.com/reykjalin/log_to_file/releases/tag/2.0.0",
+      "assets": []
+    },
+    {
+      "tag_name": "1.0.0",
+      "name": "Version 1.0.0",
+      "body": "New Features\r\n============\r\n\r\n* Exposes a `log_to_file` function that can be used to easily swap out\r\n  the std.log function such that it writes logs to a `log` file in your\r\n  current working directory instead of writing to STDOUT.\r\n* Uses the `log_to_file_path` variable, if set in the root file, as the\r\n  log file destination.",
+      "prerelease": false,
+      "published_at": "2024-11-29T19:30:49Z",
+      "html_url": "https://github.com/reykjalin/log_to_file/releases/tag/1.0.0",
+      "assets": []
+    }
+  ],
+  "owner_company": "@Shopify",
+  "owner_location": "Canada",
+  "owner_blog": "https://thorlaksson.com",
+  "owner_twitter_username": null,
+  "owner_followers": 11,
+  "owner_following": 3,
+  "owner_created_at": "2015-08-17T15:18:03Z",
+  "homepage": "https://reykjalin.srht.site/docs/log_to_file/",
+  "license": "BSD-3-Clause",
+  "category": "library"
+}

@@ -1,0 +1,47 @@
+{
+  "name": "mac_address",
+  "owner": "weskoerber",
+  "repo": "mac_address",
+  "description": "A cross-platform library to retrieve the MAC address from your network interfaces without libc.",
+  "type": "project",
+  "topics": [
+    "tools",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 5,
+  "forks": 2,
+  "watchers": 1,
+  "updated_at": "2025-07-31T10:28:00Z",
+  "dependencies": [
+    {
+      "name": "zigwin32",
+      "url": "https://github.com/marlersoft/zigwin32/archive/d21b419d808215e1f82605fdaddc49750bfa3bca.tar.gz",
+      "hash": "zigwin32-25.0.28-preview-AAAAAI0J-wP-8_KKo4Yjr33XLhVhlJmeagGUedByaOnX"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "[![test](https://github.com/weskoerber/mac_address/actions/workflows/test.yaml/badge.svg)](https://github.com/weskoerber/mac_address/actions/workflows/test.yaml)\n[![docs](https://github.com/weskoerber/mac_address/actions/workflows/docs.yaml/badge.svg)](https://github.com/weskoerber/mac_address/actions/workflows/docs.yaml)\n\n# `mac_address`\n\nA cross-platform library to retrieve the MAC address from your network\ninterfaces without `libc`.\n\n## Requirements\n\n- [Zig](https://github.com/ziglang/zig) compiler (`0.14.0` or newer)[^1]\n    - If using Zig `0.12` and `0.13`, use the [`zig-0.12`](https://github.com/weskoerber/mac_address/tree/zig-0.12) branch\n\n## Install\n\nFirst, add the dependency to your `build.zig.zon` using `zig fetch`:\n\n```console\nzig fetch --save git+https://github.com/weskoerber/mac_address#main\n```\n\nThen, import `mac_address` into your `build.zig`:\n\n```zig\nconst std = @import(\"std\");\n\npub fn build(b: *std.Build) void {\n    const target = b.standardTargetOptions(.{});\n    const optimize = b.standardOptimizeOption(.{});\n\n    const mac_address = b.dependency(\"mac_address\", .{\n            .target = target,\n            .optimize = optimize,\n    }).module(\"mac_address\");\n\n    const my_exe = b.addExecutable(.{\n        .name = \"my_exe\",\n        .root_source_file = b.path(\"src/main.zig\"),\n        .target = target,\n        .optimize = optimize,\n    });\n\n    my_exe.root_module.addImport(mac_address);\n}\n```\n\n## Usage\n\nSee the `examples` directory for example usage. Example executables can be\nbuilt by setting the `examples` option to `true` (or `-Dexamples=true` on the\nCLI):\n\n```zig\n    const mac_address = b.dependency(\"mac_address\", .{\n            .target = target,\n            .optimize = optimize,\n            .examples = true,\n    }).module(\"mac_address\");\n```\n\n```console\nzig build -Dexamples=true\n```\n\n## Cross-platform support\n\n| `mac_address` API  | Linux | Windows |\n| ------------------ | ----- | ------- |\n| `getAll`           | ✅    | ✅      |\n| `getAllNoLoopback` | ✅    | ✅      |\n\n- ✅ = supported\n- 📝 = planned\n- ❌ = not supported\n\n---\n\n[^1]: Shameless plug: if you're using a unix-like operating system or WSL on\n    Windows, consider using a Zig compiler version manager I wrote called\n    [zvm](https://github.com/weskoerber/zvm). Once downloaded and in your\n    `PATH`, just run `zvm install 0.12.0` (or `zvm install master` to get the\n    latest nightly).\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/28966224?u=899d7f0c26e0f90d797542eaa9d264f776f0b643&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "## What's Changed\r\n* Add CI by @weskoerber in https://github.com/weskoerber/mac_address/pull/1\r\n* chore(ci): add workflow to deploy docs by @weskoerber in https://github.com/weskoerber/mac_address/pull/4\r\n* add getFirstNoLoopback for Windows by @dbger in https://github.com/weskoerber/mac_address/pull/10\r\n* feat: convert to/from string by @weskoerber in https://github.com/weskoerber/mac_address/pull/7\r\n* Remove `is_loopback` field by @weskoerber in https://github.com/weskoerber/mac_address/pull/11\r\n* chore: use mlugg/setup-zig by @weskoerber in https://github.com/weskoerber/mac_address/pull/14\r\n* chore: exclude devices that don't support ARP by @weskoerber in https://github.com/weskoerber/mac_address/pull/13\r\n\r\n## New Contributors\r\n* @weskoerber made their first contribution in https://github.com/weskoerber/mac_address/pull/1\r\n* @dbger made their first contribution in https://github.com/weskoerber/mac_address/pull/10\r\n\r\n**Full Changelog**: https://github.com/weskoerber/mac_address/commits/v0.1.0",
+      "prerelease": false,
+      "published_at": "2025-05-24T18:57:55Z",
+      "html_url": "https://github.com/weskoerber/mac_address/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": "Tennessee, United States",
+  "owner_blog": "https://www.weskoerber.com",
+  "owner_twitter_username": null,
+  "owner_followers": 8,
+  "owner_following": 33,
+  "owner_created_at": "2017-05-25T21:04:19Z",
+  "homepage": "https://weskoerber.github.io/mac_address/",
+  "license": "MIT",
+  "category": "library"
+}

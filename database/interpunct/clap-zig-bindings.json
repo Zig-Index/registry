@@ -1,0 +1,32 @@
+{
+  "name": "clap-zig-bindings",
+  "owner": "interpunct",
+  "repo": "clap-zig-bindings",
+  "description": "manually written idiomatic zig bindings for CLAP audio API (mirror)",
+  "type": "project",
+  "topics": [
+    "audio",
+    "clap",
+    "library",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 3,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-09-07T02:58:20Z",
+  "minimum_zig_version": "0.14.1",
+  "readme": "# [clap-zig-bindings]\n\nZig bindings for the [CLAP] audio API. This is a full hand-written translation.\nEverything is done to make the most of Zig's type system. Currently covers\n100% of the api as of CLAP version `1.2.2`. This library does not cover draft\nextensions.\n\nFor an example on how to use this library, see the [clap-bindings-example] git\nrepo.\n\nThis is not a plugin framework!\n\n## including as a dependency\n\nUse the `zig fetch` command, ie:\n\n```sh\nzig fetch --save git+https://git.sr.ht/~interpunct/clap-zig-bindings\n```\n\nThen add the following to your `build.zig`:\n\n```zig\nconst clap_bindings = b.dependency(\"clap-bindings\", .{})\nexe.root_module.addImport(\"clap-bindings\", clap_bindings.module(\"clap-bindings\"));\n```\n\nThis library currently targets Zig version `0.13.0`.\n\n## issue tracker\n\nBrowse tickets at <https://todo.sr.ht/~interpunct/clap-zig-bindings>.\n\nIf you have issues and there is no open ticket for them at the page above please\nsend an email with your problems to [my public inbox]. I will look into and make\nany needed tickets for them. This does not require a sourcehut account.\n\n## contributing\n\nPatches and disscussion are are done via email on [my public inbox]. This is\nfuncitonality built in to git. If this workflow is new to you please refer to\n<https://git-send-email.io>. I promise that it is quick and easy to both learn\nand set up.\n\n## license\n\n`clap-zig-bindings` is distributed under LGPLv3, see the LICENSE file.\n\n[clap-zig-bindings]: https://sr.ht/~interpunct/clap-zig-bindings/\n[clap-bindings-example]: https://git.sr.ht/~interpunct/clap-bindings-example\n[CLAP]: https://cleveraudio.org\n[my public inbox]: https://lists.sr.ht/~interpunct/public-inbox\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/188629493?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "https://bio.eva.fish",
+  "owner_twitter_username": null,
+  "owner_followers": 0,
+  "owner_following": 0,
+  "owner_created_at": "2024-11-15T21:53:09Z",
+  "homepage": "https://sr.ht/~interpunct/clap-zig-bindings/",
+  "license": "LGPL-3.0",
+  "category": "audio"
+}

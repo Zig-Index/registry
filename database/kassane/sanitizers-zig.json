@@ -1,0 +1,32 @@
+{
+  "name": "sanitizers-zig",
+  "owner": "kassane",
+  "repo": "sanitizers-zig",
+  "description": "LLVM sanitizers for zig-toolchain",
+  "type": "project",
+  "topics": [
+    "cpp",
+    "cpp-libraries",
+    "llvm-sanitizer",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 7,
+  "forks": 1,
+  "watchers": 2,
+  "updated_at": "2025-09-09T21:52:30Z",
+  "minimum_zig_version": "0.13.0",
+  "readme": "# LLVM Sanitizers for Zig\n\n## Description\n\nThis is a collection of sanitizers for Zig. It is a work in progress.\n\n\n## Requirements\n\n- [Zig](https://ziglang.org/download/) v0.15.0-dev\n\n## Add\n\n- [x] AddressSanitizer\n- [ ] MemorySanitizer\n- [x] UndefinedBehaviorSanitizer\n- [x] LeakSanitizer\n- [x] RealtimeSanitizer (LLVM 20)\n\n## Supported Platforms\n\n- [x] Linux (GNU|Musl)\n- [ ] Windows\n- [ ] macOS\n\n\n## Experimental Real-time Sanitizer (LLVM 20)\n\n> [!NOTE]\n> This is an experimental feature and is not yet ready for production use.\n> Currently, zig master version is LLVM 19. My tests use zig-fork w/ LLVM 20.\n\n```bash\n$ zig build rtsan -Dtests\nReal-time violation: intercepted call to real-time unsafe function `malloc` in real-time context! Stack trace:\n    #0 0x00000102e659  (/home/kassane/sanitizers-llvm/.zig-cache/o/18b7cbe81f65f9f9049547f69b71a77e/test-rtsan+0x102e659)\n    #1 0x00000102bf80  (/home/kassane/sanitizers-llvm/.zig-cache/o/18b7cbe81f65f9f9049547f69b71a77e/test-rtsan+0x102bf80)\n    #2 0x00000102bef5  (/home/kassane/sanitizers-llvm/.zig-cache/o/18b7cbe81f65f9f9049547f69b71a77e/test-rtsan+0x102bef5)\n    #3 0x00000102c23c  (/home/kassane/sanitizers-llvm/.zig-cache/o/18b7cbe81f65f9f9049547f69b71a77e/test-rtsan+0x102c23c)\n    #4 0x00000102cdc1  (/home/kassane/sanitizers-llvm/.zig-cache/o/18b7cbe81f65f9f9049547f69b71a77e/test-rtsan+0x102cdc1)\n    #5 0x0000010891f7  (/home/kassane/sanitizers-llvm/.zig-cache/o/18b7cbe81f65f9f9049547f69b71a77e/test-rtsan+0x10891f7)\n    #6 0x00000102b824  (/home/kassane/sanitizers-llvm/.zig-cache/o/18b7cbe81f65f9f9049547f69b71a77e/test-rtsan+0x102b824)\n    #7 0x00000102b7a2  (/home/kassane/sanitizers-llvm/.zig-cache/o/18b7cbe81f65f9f9049547f69b71a77e/test-rtsan+0x102b7a2)\n    #8 0x00000102b713  (/home/kassane/sanitizers-llvm/.zig-cache/o/18b7cbe81f65f9f9049547f69b71a77e/test-rtsan+0x102b713)\n    #9 0x00000102b42c  (/home/kassane/sanitizers-llvm/.zig-cache/o/18b7cbe81f65f9f9049547f69b71a77e/test-rtsan+0x102b42c)\n    #10 0x00000102b10e  (/home/kassane/sanitizers-llvm/.zig-cache/o/18b7cbe81f65f9f9049547f69b71a77e/test-rtsan+0x102b10e)\n    #11 0x00000102aeaa  (/home/kassane/sanitizers-llvm/.zig-cache/o/18b7cbe81f65f9f9049547f69b71a77e/test-rtsan+0x102aeaa)\n    #12 0x00000102adc8  (/home/kassane/sanitizers-llvm/.zig-cache/o/18b7cbe81f65f9f9049547f69b71a77e/test-rtsan+0x102adc8)\n    #13 0x00000102ae25  (/home/kassane/sanitizers-llvm/.zig-cache/o/18b7cbe81f65f9f9049547f69b71a77e/test-rtsan+0x102ae25)\n    #14 0x77feed58de07  (/usr/lib/libc.so.6+0x25e07) (BuildId: 98b3d8e0b8c534c769cb871c438b4f8f3a8e4bf3)\n    #15 0x77feed58decb  (/usr/lib/libc.so.6+0x25ecb) (BuildId: 98b3d8e0b8c534c769cb871c438b4f8f3a8e4bf3)\n    #16 0x00000102ad74  (/home/kassane/sanitizers-llvm/.zig-cache/o/18b7cbe81f65f9f9049547f69b71a77e/test-rtsan+0x102ad74)\n\nrtsan\n└─ run test-rtsan failure\nerror: the following command exited with error code 1:\n```\n\n### References\n\n- official-doc: https://clang.llvm.org/docs/RealtimeSanitizer.html\n- base: https://github.com/realtime-sanitizer/rtsan",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/6756180?u=d6f3a7066e4d3a99cc18ce3af2fd4b2fa754eec7&v=4",
+  "releases": [],
+  "owner_bio": "Software developer 👨‍🦽",
+  "owner_company": null,
+  "owner_location": "Bahia, Brazil",
+  "owner_blog": "https://kassane.github.io",
+  "owner_twitter_username": "TheuCatarino",
+  "owner_followers": 145,
+  "owner_following": 34,
+  "owner_created_at": "2014-02-22T13:35:59Z",
+  "license": "Apache-2.0",
+  "category": "library"
+}

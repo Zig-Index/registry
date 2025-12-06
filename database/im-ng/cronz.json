@@ -1,0 +1,45 @@
+{
+  "name": "cronz",
+  "owner": "im-ng",
+  "repo": "cronz",
+  "description": "Schedule one or more tasks with crontab expression written in Zig",
+  "type": "project",
+  "topics": [
+    "cron",
+    "cronjob",
+    "zig",
+    "zig-library",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 4,
+  "forks": 1,
+  "watchers": 0,
+  "updated_at": "2025-11-01T03:05:00Z",
+  "dependencies": [
+    {
+      "name": "regex",
+      "url": "git+https://github.com/tiehuis/zig-regex.git#ee759955e59ae292f4074d62308f953feeecac61",
+      "hash": "regex-0.1.3-axC352raAQCBo-WcgB_nFMFmO2d3QLBLpE8-ebizdeX_"
+    },
+    {
+      "name": "zdt",
+      "url": "git+https://codeberg.org/FObersteiner/zdt.git#fa55f4080752ce1c48f2bb392e9513f87b59d8cb",
+      "hash": "zdt-0.8.1-xr0_vABUDwDExZVsT91Qid0tOc_48sI47Xhg6nbFsqqC"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "![cronz](./docs/cronz.webp)\n\nThe purpose of this `zig` library is to enhance the scheduling of the repeatable tasks using the crontab notation with zero allocations once it is set.\n\nThis module prefers crontab notation to provide a clear and concise understanding of task repetition.\n\nCronz even supports the second-level execution. `* * * * * *`\n\nThis `zig` module has few dependencies apart from the std library. Refer to the attribution for more.\n\nAdditionally, it offers a straightforward invocation that allows developers to easily define and manage their scheduling needs.\n\nWith its focus on simple and zero allocation, this library is ideal for applications requiring efficient task management.\n\n### [Example](./examples/basic/main.zig)\n\n```zig\nconst std = @import(\"std\");\nconst Cronz = @import(\"cronz\");\n\nvar allocator: std.mem.Allocator = undefined;\n\npub fn main() !void {\n    var arena_instance = std.heap.ArenaAllocator.init(std.heap.page_allocator);\n    defer arena_instance.deinit();\n    allocator = arena_instance.allocator();\n\n    const cronz = try Cronz.create(allocator);\n\n    // executes tasks on every 0th, 10th, 20th, 30th and 40th second of each minute\n    try cronz.AddCronJob(\"0,10,20,30,40 * * * * *\", \"task-1\", task1);\n\n    //execute tasks on every 2 second\n    try cronz.AddCronJob(\"*/2 * * * * *\", \"task-2\", task2);\n\n    cronz.Run();\n}\n\nfn task1() !void {\n    var msg: []u8 = undefined;\n    msg = try allocator.alloc(u8, 100);\n    msg = try std.fmt.bufPrint(msg, \"Task 1 performed\", .{});\n\n    std.log.debug(\"{d} {s}\", .{ std.time.microTimestamp(), msg });\n}\n\nfn task2() !void {\n    var msg: []u8 = undefined;\n    msg = try allocator.alloc(u8, 100);\n    msg = try std.fmt.bufPrint(msg, \"Task 2  performed\", .{});\n\n    std.log.debug(\"{s}\", .{msg});\n}\n```\n\n![alt](./docs/basic.webp)\n\n### TODOs\n- [x] Hook predefined method signature `fn method() !void`\n- [ ] Hook custom method signatures `fn (comptime T) any returns`\n\n\n### Usage\n\nWe can refer to examples [build.zig.zon](./examples/build.zig.zon) for quick setup\n\nAdd cronz to your build.zig.zon:\n\n```bash\nzig fetch --save https://github.com/im-ng/cronz/archive/refs/heads/main.zip\n```\n\n```zig\n.{\n    .name = .crontasks,\n    .version = \"0.0.1\",\n    .fingerprint = 0xb4e8ff8eb48991fd,\n    .minimum_zig_version = \"0.15.1\",\n    .dependencies = .{\n        .cronz = .{\n          .url = \"git+https://github.com/im-ng/cronz.git#ab0acfc88702ec7a29432\n         568d19086306e6fc87c\",\n          .hash = \"cronz-0.0.1-pdBYEmcvAAB09KLva66o2ANaUqs8hDem1CEq0ksXooF-\",\n        },\n    },\n    .paths = .{\n        \"build.zig\",\n        \"build.zig.zon\",\n        \"src\",\n    },\n    .use_llvm = true,\n}\n\n```\n\nUpdate module depency in [build.zig](./examples/build.zig)\n\n```zig\n//reference cronz module\nconst cronz = b.dependency(\"cronz\", .{});\n\n//import cronz module to your root\nexe.root_module.addImport(\"cronz\", cronz.module(\"cronz\"));\n```\n\nNow start importing as seen in above example.\n\n### Supported Crontab notations\n\n| Format            | What it does?           | Mode |\n| ----------------- | ----------------------- | --- |\n| \\* \\* \\* \\* \\* \\* | Execute on every second | |\n| 1-10 \\* \\* \\* \\* \\* | Execute between 1-10 seconds of each minute| Range |\n| \\* *\\/2  * * * * | Execute on every two minutes | Split |\n| \\* 1,3,5,10 * * * * | Execute on every 1st, 3rd, 5th and 10th Minute| Repeat |\n\nRefer [crontab](https://crontab.guru) for more format support\n\n## 🤝 Attribution\n\n- [zig-regex](github.com/tiehuis/zig-regex.git)\n- [zdt](https://codeberg.org/FObersteiner/zdt.git)\n\n## 📄 License\n\nThis project is licensed under the MIT License - see the LICENSE file for details.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/2039564?u=254167699886eef3c68d1bda198d7c8697928bc0&v=4",
+  "releases": [],
+  "owner_bio": "A lone wolf with coding habit..",
+  "owner_company": "Software Engineer",
+  "owner_location": "Coimbatore",
+  "owner_blog": null,
+  "owner_twitter_username": "nagendhiran_",
+  "owner_followers": 3,
+  "owner_following": 14,
+  "owner_created_at": "2012-07-25T09:57:32Z",
+  "license": "MIT",
+  "category": "library"
+}

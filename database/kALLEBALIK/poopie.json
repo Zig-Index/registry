@@ -1,0 +1,44 @@
+{
+  "name": "poopie",
+  "owner": "kALLEBALIK",
+  "repo": "poopie",
+  "description": "A benchmarking library.",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-02-11T13:55:36Z",
+  "readme": "# Performance Optimizer Observation Platform Inside Executable\n![bench im](/assets/bm.png?raw=true)\n### Usage\n```zig\n    var poopie: Poopie = .{\n        .config = .{\n            .store_result = true,\n            .compare_mode = .slowest,\n        },\n    };\n\n    var sampler = try poopie.createSampler(allocator, .{ .warmups = 100, .samples = 1000 });\n    defer sampler.deinit();\n\n    sampler.start();\n    while (sampler.sample()) : (sampler.store()) {\n        //\n        // Some code to test\n        //\n    }\n    _ = try poopie.collect(allocator, &sampler, .{ .name = \"MyBench\" });\n```\nYou can overwrite poopie settings in each collection if you want\n```zig\n_ = try poopie.collect(allocator, &sampler, .{ .name = \"MyBench\", .compare_mode = .fastest });\n```\nor compare against a specific file\n```zig\n_ = try poopie.collect(allocator, &sampler, .{\n    .name = \"MyBench\",\n    .compare_mode = .file,\n    .compare_file = \"MyBench_10_100070223.1_1726867407409043.json\",\n});\n```\n    \nStores benchmarks in .benchmark folder if ``store_result == true`` (false by default).\n\n#### Prev work\nThis shitty library is just crappy code slapped on top of Andrew's (and contributors) awesome [poop](https://github.com/andrewrk/poop) code.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/18141524?u=29d5e9b0c06599b8f2b92a61296a0e7140b29d7e&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.0.1",
+      "name": "v0.0.1",
+      "body": "- Added max_rss\r\n- Added ability to store a collections name in a buffer.\r\n- Added in/out  file indication",
+      "prerelease": true,
+      "published_at": "2024-09-27T05:42:55Z",
+      "html_url": "https://github.com/kALLEBALIK/poopie/releases/tag/v0.0.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.0",
+      "name": "Initial pre-release",
+      "body": "Initial pre-release",
+      "prerelease": true,
+      "published_at": "2024-09-22T11:35:12Z",
+      "html_url": "https://github.com/kALLEBALIK/poopie/releases/tag/v0.0.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 6,
+  "owner_following": 14,
+  "owner_created_at": "2016-03-29T11:33:22Z",
+  "category": "library"
+}

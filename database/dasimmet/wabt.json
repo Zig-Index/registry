@@ -1,0 +1,54 @@
+{
+  "name": "wabt",
+  "owner": "dasimmet",
+  "repo": "wabt",
+  "description": "WebAssembly Binary Toolkit (wabt) and Binaryen on the zig build system",
+  "type": "project",
+  "topics": [
+    "wabt",
+    "wasm",
+    "wasm2wat",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 8,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-08-19T20:35:18Z",
+  "dependencies": [
+    {
+      "name": "wabt",
+      "url": "git+https://github.com/WebAssembly/wabt.git#3e826ecde1adfba5f88d10d361131405637e65a3",
+      "hash": "N-V-__8AAPcufQAiaPNrsEEAVJVm8qM22IHoAvhZ5s1DmxpG"
+    },
+    {
+      "name": "picosha",
+      "url": "git+https://github.com/okdshin/PicoSHA2.git#27fcf6979298949e8a462e16d09a0351c18fcaf2",
+      "hash": "N-V-__8AALB3AACYCxTG6hB9aer89C8d3Pwn95f2n-agAxdx"
+    },
+    {
+      "name": "wasmc",
+      "url": "git+https://github.com/WebAssembly/wasm-c-api.git#b6dd1fb658a282c64b029867845bc50ae59e1497",
+      "hash": "N-V-__8AACXfBABwtR2r9cJHPvKdfoVwAgIl83uZazZRIn3v"
+    },
+    {
+      "name": "binaryen",
+      "url": "git+https://github.com/WebAssembly/binaryen.git?ref=version_121#353b759b230dff8fb82aeb157aeb6db360d74a49",
+      "hash": "N-V-__8AANPvGQLjUqqO-n8CVrpofknXXN8z1QlfQ5SNP0m0"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# WebAssembly Tools on the zig build system\n\nuses the [Zig](https://ziglang.org/) build system to build WebAssembly's binary\nC tools.\n\n## building\n\n```zig build\nzig build\n```\n\n## add to your zig project\n\n```bash\nzig fetch --save git+https://github.com/dasimmet/wabt.git\n```\n\n## [WebAssembly Binary Toolkit](https://github.com/WebAssembly/wabt.git)\n\n```\n> ./zig-out/bin/wasm2c --help\nusage: wasm2c [options] filename\n\n  Read a file in the WebAssembly binary format, and convert it to\n  a C source file and header.\n```\n\n## [Binaryen](https://github.com/WebAssembly/binaryen.git)\n\n```\n> ./zig-out/bin/wasm-merge --help\n================================================================================\nwasm-merge INFILE1 NAME1 INFILE2 NAME2 [..]\n\nMerge wasm files into one.\n```\n\n## build.zig usage\n\n```zig\nconst wabt = @import(\"wabt\");\n\n// wasm-opt\n\nconst optimized_wasm: LazyPath = wabt.wasm_opt(\n    b.path(\"my.wasm\"),                // source path\n    \"optimized.wasm\",                 // out_basename\n    .{\"--mvp-features\", \"-Oz\", \"-c\"}, // extra args\n);\n\n// wasm2wat\n\nconst my_wat: LazyPath = wabt.wasm2wat(\n    optimized_wasm, // source path\n    \"my.wat\",       // out_basename\n    .{},            // extra args\n);\n```",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/2773256?u=609e5b7eac1f972a0854a240741c5c8deca85518&v=4",
+  "releases": [],
+  "owner_bio": "@ziglang enthusiast",
+  "owner_company": "ANNAX GmbH",
+  "owner_location": "Munich, Germany",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 7,
+  "owner_following": 4,
+  "owner_created_at": "2012-11-11T19:52:46Z",
+  "license": "Apache-2.0",
+  "category": "library"
+}

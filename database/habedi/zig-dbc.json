@@ -1,0 +1,60 @@
+{
+  "name": "zig-dbc",
+  "owner": "habedi",
+  "repo": "zig-dbc",
+  "description": "A design by contract library for Zig",
+  "type": "project",
+  "topics": [
+    "design-by-contract",
+    "zig",
+    "zig-library",
+    "ziglang",
+    "software-correctness",
+    "zig-package"
+  ],
+  "stars": 22,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-10-02T10:11:23Z",
+  "minimum_zig_version": "0.14.1",
+  "readme": "<div align=\"center\">\n  <picture>\n    <img alt=\"Zig-DbC Logo\" src=\"logo.svg\" height=\"20%\" width=\"20%\">\n  </picture>\n<br>\n\n<h2>Zig-DbC</h2>\n\n[![Tests](https://img.shields.io/github/actions/workflow/status/habedi/zig-dbc/tests.yml?label=tests&style=flat&labelColor=282c34&logo=github)](https://github.com/habedi/zig-dbc/actions/workflows/tests.yml)\n[![CodeFactor](https://img.shields.io/codefactor/grade/github/habedi/zig-dbc?label=code%20quality&style=flat&labelColor=282c34&logo=codefactor)](https://www.codefactor.io/repository/github/habedi/zig-dbc)\n[![Zig Version](https://img.shields.io/badge/Zig-0.14.1-orange?logo=zig&labelColor=282c34)](https://ziglang.org/download/)\n[![Docs](https://img.shields.io/github/v/tag/habedi/zig-dbc?label=docs&color=blue&style=flat&labelColor=282c34&logo=read-the-docs)](https://habedi.github.io/zig-dbc/)\n[![Release](https://img.shields.io/github/release/habedi/zig-dbc.svg?label=release&style=flat&labelColor=282c34&logo=github)](https://github.com/habedi/zig-dbc/releases/latest)\n[![License](https://img.shields.io/badge/license-MIT-007ec6?label=license&style=flat&labelColor=282c34&logo=open-source-initiative)](https://github.com/habedi/zig-dbc/blob/main/LICENSE)\n\nA Design by Contract Library for Zig\n\n</div>\n\n---\n\nZig-DbC is a small library that provides a collection of functions to use\n[design by contract](https://en.wikipedia.org/wiki/Design_by_contract) (DbC) principles in Zig programs.\nIt provides a simple and idiomatic API for defining preconditions, postconditions, and invariants that can be\nchecked at runtime.\n\nA common use case for DbC (and by extension Zig-DbC) is adding checks that guarantee the code behaves as intended.\nThis can be especially useful during the implementation of complex data structures and algorithms (like balanced trees\nand graphs) where correctness depends on specific conditions being met.\n\n### Features\n\n- A simple API to define preconditions, postconditions, and invariants\n    - `require` and `ensure` functions check preconditions and postconditions\n    - `requiref` and `ensuref` functions check preconditions and postconditions with formatted error messages\n    - `requireCtx` and `ensureCtx` functions check preconditions and postconditions with a context string\n    - `contract` and `contractWithErrorTolerance` functions check invariants\n- Checks are active in `Debug`, `ReleaseSafe`, and `ReleaseSmall` build modes to catch bugs\n- In `ReleaseFast` mode, all checks are removed at compile time to remove overhead\n\n> [!IMPORTANT]\n> Zig-DbC is in early development, so bugs and breaking API changes are expected.\n> Please use the [issues page](https://github.com/habedi/zig-dbc/issues) to report bugs or request features.\n\n---\n\n### Getting Started\n\nYou can add Zig-DbC to your project and start using it by following the steps below.\n\n#### Installation\n\nRun the following command in the root directory of your project to download Zig-DbC:\n\n```sh\nzig fetch --save=dbc \"https://github.com/habedi/zig-dbc/archive/<branch_or_tag>.tar.gz\"\n```\n\nReplace `<branch_or_tag>` with the desired branch or tag, like `main` (for the development version) or `v0.2.0`\n(for the latest release).\nThis command will download zig-dbc and add it to Zig's global cache and update your project's `build.zig.zon` file.\n\n#### Adding to Build Script\n\nNext, modify your `build.zig` file to make zig-dbc available to your build target as a module.\n\n```zig\nconst std = @import(\"std\");\n\npub fn build(b: *std.Build) void {\n    const target = b.standardTargetOptions(.{});\n    const optimize = b.standardOptimizeOption(.{});\n    const exe = b.addExecutable(.{\n        .name = \"your-zig-program\",\n        .root_source_file = b.path(\"src/main.zig\"),\n        .target = target,\n        .optimize = optimize,\n    });\n\n    // 1. Get the dependency object from the builder\n    const zig_dbc_dep = b.dependency(\"dbc\", .{});\n\n    // 2. Get Zig-DbC's top-level module\n    const zig_dbc_module = zig_dbc_dep.module(\"dbc\");\n\n    // 3. Add the module to your executable so you can @import(\"dbc\")\n    exe.root_module.addImport(\"dbc\", zig_dbc_module);\n\n    b.installArtifact(exe);\n}\n```\n\n#### Using Zig-DbC in Your Code\n\nFinally, you can `@import(\"dbc\")` and start using it in your Zig code.\n\n```zig\nconst std = @import(\"std\");\nconst dbc = @import(\"dbc\");\n\npub fn MyStruct() type {\n    return struct {\n        const Self = @This();\n        field: i32, is_ready: bool,\n\n        // The invariant guarantees that the object's state is always valid.\n        // It's checked automatically by the `contract` function.\n        fn invariant(self: Self) void {\n            dbc.require(.{ self.field > 0, \"Field must always be positive\" });\n        }\n\n        pub fn doSomething(self: *Self) !void {\n            const old = .{ .field = self.field };\n            return dbc.contract(self, old,\n                struct {fn run(ctx: @TypeOf(old), s: *Self) !void {\n                    // Precondition\n                    dbc.require(.{ s.is_ready, \"Struct not ready\" });\n\n                    // ... method logic ...\n                    s.field += 1;\n\n                    // Postcondition\n                    dbc.ensure(.{ s.field > ctx.field, \"Field must increase\" });\n                }}.run);\n        }\n    };\n}\n```\n\n---\n\n### Documentation\n\nYou can find the API documentation for the latest release of Zig-DbC [here](https://habedi.github.io/zig-dbc/).\n\nAlternatively, you can use the `make docs` command to generate the documentation for the current version of Zig-DbC.\nThis will generate HTML documentation in the `docs/api` directory, which you can serve locally with `make serve-docs`\nand view in a web browser.\n\n#### Validators\n\nZig-DbC supports reusable validators in `require` and `ensure` functions by passing as argument either:\n\n- a function with signature `fn(T) bool`, or\n- a struct value with a `run` function with this signature: `pub fn run(self, T) bool`.\n\n### Examples\n\nCheck out the [examples](examples/) directory for example usages of Zig-DbC.\n\n---\n\n### Contributing\n\nSee [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to make a contribution.\n\n### License\n\nZig-DbC is licensed under the MIT License (see [LICENSE](LICENSE)).\n\n### Acknowledgements\n\n* The chain links logo is from [SVG Repo](https://www.svgrepo.com/svg/9153/chain-links).\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/7430969?u=8c0282c3cfae1d00447dc0bc7e4d91da568b1b2d&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.2.0",
+      "name": "",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-08-13T08:59:45Z",
+      "html_url": "https://github.com/habedi/zig-dbc/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-08-11T18:05:36Z",
+      "html_url": "https://github.com/habedi/zig-dbc/releases/tag/v0.1.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0-a1",
+      "name": "",
+      "body": "",
+      "prerelease": true,
+      "published_at": "2025-08-10T18:33:10Z",
+      "html_url": "https://github.com/habedi/zig-dbc/releases/tag/v0.1.0-a1",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": "Stavanger; Norway",
+  "owner_blog": null,
+  "owner_twitter_username": "Hassan_Abedi",
+  "owner_followers": 294,
+  "owner_following": 25,
+  "owner_created_at": "2014-04-28T16:23:07Z",
+  "license": "MIT",
+  "category": "library"
+}

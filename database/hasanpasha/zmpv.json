@@ -1,0 +1,104 @@
+{
+  "name": "zmpv",
+  "owner": "hasanpasha",
+  "repo": "zmpv",
+  "description": "libmpv bindings in zig",
+  "type": "project",
+  "topics": [
+    "libmpv",
+    "mpv",
+    "video",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 9,
+  "forks": 0,
+  "watchers": 2,
+  "updated_at": "2025-10-31T21:11:20Z",
+  "minimum_zig_version": "0.12.0",
+  "readme": "# zmpv\n\n`libmpv` bindings in zig.\n\n## Usage\n\n- first fetch the package into your project:\n\n  ```bash\n  zig fetch --save https://github.com/hasanpasha/zmpv/archive/${DESIRED_COMMOT_HASH}.tar.gz \n  ```\n- import the package in your `build.zig` file:\n\n  ```zig\n  const zmpv_dep = b.dependency(\"zmpv\", .{ .target = target, .optimize = optimize });\n  exe.root_module.addImport(\"zmpv\", zmpv_dep.module(\"zmpv\"));\n  exe.linkSystemLibrary(\"mpv\"); # in linux\n  exe.linkLibC();\n  ```\n\n## Example\n\n```zig\nconst std = @import(\"std\");\nconst zmpv = @import(\"zmpv\");\nconst Mpv = zmpv.Mpv;\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{ .verbose_log = true }){};\n    defer {\n        if (gpa.deinit() == .leak) @panic(\"detected memory leak\");\n    }\n    const allocator = gpa.allocator();\n\n    const args = try std.process.argsAlloc(allocator);\n    defer std.process.argsFree(allocator, args);\n    if (args.len < 2) {\n        std.debug.print(\"usage: {s} [filename]\\n\", .{args[0]});\n        return;\n    }\n\n    const filename = args[1];\n\n    const mpv = try Mpv.create(allocator);\n\n    try mpv.set_option(\"osc\",.{ .Flag = true });\n    try mpv.set_option(\"input-default-bindings\",.{ .Flag = true });\n    try mpv.set_option(\"input-vo-keyboard\",.{ .Flag = true });\n\n    try mpv.initialize();\n    defer mpv.terminate_destroy();\n\n    try mpv.command_async(0, &.{ \"loadfile\", filename });\n\n    try mpv.request_log_messages(.Error);\n\n    try mpv.observe_property(1, \"fullscreen\", .Flag);\n    try mpv.observe_property(2, \"time-pos\", .INT64);\n\n    try mpv.set_property(\"fullscreen\", .{ .Flag = true });\n\n    while (true) {\n        const event = mpv.wait_event(-1);\n        const event_id = event.event_id;\n        switch (event_id) {\n            .Shutdown, .EndFile => break,\n            .LogMessage => {\n                const log = event.data.LogMessage;\n                std.log.debug(\"[{s}] \\\"{s}\\\"\", .{ log.prefix, log.text });\n            },\n            .PropertyChange, .GetPropertyReply => {\n                const property = event.data.PropertyChange;\n\n                if (std.mem.eql(u8, property.name, \"fullscreen\")) {\n                    std.log.debug(\"[fullscreen] {}\", .{property.data.Flag});\n                } else if (std.mem.eql(u8, property.name, \"time-pos\")) {\n                    switch (property.data) {\n                        .INT64 => |time_pos| {\n                            std.log.debug(\"[time-pos] {}\", .{time_pos});\n                        },\n                        else => {},\n                    }\n                }\n            },\n            else => {},\n        }\n    }\n}\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/38372270?u=5dfac45e2fa0a450b6ba45c8da8795b13d4b0681&v=4",
+  "releases": [
+    {
+      "tag_name": "1.2.1",
+      "name": "1.2.1",
+      "body": "## What's Changed\r\n* make `MpvRenderContext`  `params` parameter take a const slice of `MpvRenderParam` by @hasanpasha in https://github.com/hasanpasha/zmpv/pull/17\r\n\r\n\r\n**Full Changelog**: https://github.com/hasanpasha/zmpv/compare/1.2.0...1.2.1\r\n**hash**: 122008334f88a7556e831547c500ccb76d34bdca457f69214d2808fc800b9fc00808",
+      "prerelease": false,
+      "published_at": "2024-08-07T07:27:39Z",
+      "html_url": "https://github.com/hasanpasha/zmpv/releases/tag/1.2.1",
+      "assets": []
+    },
+    {
+      "tag_name": "1.2.0",
+      "name": "1.2.0",
+      "body": "## What's Changed\r\n* Optional `Mpv.create_client*` name parameter by @hasanpasha in https://github.com/hasanpasha/zmpv/pull/13\r\n* revert \"return `*Mpv` instead of `Mpv` in `create*` functions\" by @hasanpasha in https://github.com/hasanpasha/zmpv/pull/16\r\n* Redesign create  helper functions by @hasanpasha in https://github.com/hasanpasha/zmpv/pull/15\r\n* set return error union type explicitly for all functions by @hasanpasha in https://github.com/hasanpasha/zmpv/pull/14\r\n\r\n\r\n**Full Changelog**: https://github.com/hasanpasha/zmpv/compare/1.1.0...1.2.0\r\n**hash**: 122052875fe62aae315c5113ea4ec67dc910902280c2cbe077f171b34a82b413607d",
+      "prerelease": false,
+      "published_at": "2024-08-07T03:49:27Z",
+      "html_url": "https://github.com/hasanpasha/zmpv/releases/tag/1.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "1.1.0",
+      "name": "1.1.0",
+      "body": "**hash**: 12204ebb522fc1ec1416fddebd82e152767f3ba453310ae60ec9222d1375175232e1\r\n**Full Changelog**: https://github.com/hasanpasha/zmpv/compare/1.0.6...1.1.0",
+      "prerelease": false,
+      "published_at": "2024-08-01T22:38:33Z",
+      "html_url": "https://github.com/hasanpasha/zmpv/releases/tag/1.1.0",
+      "assets": []
+    },
+    {
+      "tag_name": "1.0.6",
+      "name": "1.0.6",
+      "body": "**Full Changelog**: https://github.com/hasanpasha/zmpv/compare/1.0.5...1.0.6\r\n**hash**: 122009ec0e4596a783f52029a062fbe6b008301332bd501cf7b201d7bb98d821d6b5",
+      "prerelease": false,
+      "published_at": "2024-06-04T14:59:29Z",
+      "html_url": "https://github.com/hasanpasha/zmpv/releases/tag/1.0.6",
+      "assets": []
+    },
+    {
+      "tag_name": "1.0.5",
+      "name": "1.0.5",
+      "body": "**Full Changelog**: https://github.com/hasanpasha/zmpv/compare/1.0.4...1.0.5\r\n**hash**: 122014f65ef1cc2c6ca3a5df90b7825df7427a91261d54710791f85eecf5ea34ff2e",
+      "prerelease": false,
+      "published_at": "2024-05-29T16:14:42Z",
+      "html_url": "https://github.com/hasanpasha/zmpv/releases/tag/1.0.5",
+      "assets": []
+    },
+    {
+      "tag_name": "1.0.4",
+      "name": "1.0.4",
+      "body": "**Full Changelog**: https://github.com/hasanpasha/zmpv/compare/1.0.2...1.0.4\r\n\r\n**hash**: 1220369b01c17c7a1aab82d30cdbf383ced1ae63014d5209d37e2954bad6b702f0e1",
+      "prerelease": false,
+      "published_at": "2024-05-29T14:43:05Z",
+      "html_url": "https://github.com/hasanpasha/zmpv/releases/tag/1.0.4",
+      "assets": []
+    },
+    {
+      "tag_name": "1.0.2",
+      "name": "1.0.2",
+      "body": "**Full Changelog**: https://github.com/hasanpasha/zmpv/compare/1.0.0...1.0.2\r\n",
+      "prerelease": false,
+      "published_at": "2024-05-27T16:52:59Z",
+      "html_url": "https://github.com/hasanpasha/zmpv/releases/tag/1.0.2",
+      "assets": []
+    },
+    {
+      "tag_name": "1.0.0",
+      "name": "first release",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-05-25T18:33:44Z",
+      "html_url": "https://github.com/hasanpasha/zmpv/releases/tag/1.0.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 7,
+  "owner_following": 16,
+  "owner_created_at": "2018-04-14T07:08:31Z",
+  "license": "LGPL-2.1",
+  "category": "library"
+}

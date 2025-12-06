@@ -1,0 +1,47 @@
+{
+  "name": "fancy-cat",
+  "owner": "freref",
+  "repo": "fancy-cat",
+  "description": "PDF reader for terminal emulators using the Kitty image protocol",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package",
+    "pdf-viewer",
+    "cli"
+  ],
+  "stars": 447,
+  "forks": 16,
+  "watchers": 5,
+  "updated_at": "2025-12-05T05:55:52Z",
+  "dependencies": [
+    {
+      "name": "vaxis",
+      "url": "https://github.com/rockorager/libvaxis/archive/7dbb9fd3122e4ffad262dd7c151d80d863b68558.tar.gz",
+      "hash": "vaxis-0.5.1-BWNV_LosCQAGmCCNOLljCIw6j6-yt53tji6n6rwJ2BhS"
+    },
+    {
+      "name": "fzwatch",
+      "url": "https://github.com/freref/fzwatch/archive/eab2fde9ab2a8fd721d4af67e78308fb6b522a16.tar.gz",
+      "hash": "fzwatch-0.2.2-6qM2ONQzAACLaMFX3DGopE-Y6etVZNn8kDh_4LhmWAMp"
+    },
+    {
+      "name": "fastb64z",
+      "url": "https://github.com/freref/fastb64z/archive/3defc5d33162670c28e42af073cf9bc003017da6.tar.gz",
+      "hash": "fastb64z-1.0.0-x5LyQZ2gAAAYQrdQBKuqfNOY0beaxhunrksEtUOmIjhq"
+    }
+  ],
+  "minimum_zig_version": "0.15.2",
+  "readme": "<h1>\n<p align=\"center\">\n  📑\n  <br>fancy-cat\n</h1>\n  <p align=\"center\">\n    PDF viewer for terminals using the Kitty image protocol\n    <br />\n  </p>\n</p>\n\n![demo](https://github.com/user-attachments/assets/b1edc9d2-3b1f-437d-9b48-c196d22fcbbd)\n\n## Usage\n\n```sh\nfancy-cat <path-to-pdf> <optional-page-number>\n```\n\n### Commands\n\nfancy-cat uses a modal interface similar to Neovim. There are two modes: view mode and command mode. To enter command mode you type `:` by default (this can be changed in the config file).\n\nDocumentation on the available commands can be found [here](./docs/commands.md).\n\n### Configuration\n\nfancy-cat can be configured through a JSON configuration file located in one of several locations (primary `$XDG_CONFIG_HOME/fancy-cat/config.json`, fallback `$HOME/.config/fancy-cat/config.json`, legacy `$HOME/.fancy-cat`). An empty configuration file is automatically created in the primary or fallback location on the first run.\n\nAn example `config.json` and documentation can be found [here](./docs/config.md).\n\n## Installation\n\n`fancy-cat` is available in the following repositories:\n\n[![Packaging status](https://repology.org/badge/vertical-allrepos/fancy-cat.svg?columns=3&header=fancy-cat)](https://repology.org/project/fancy-cat/versions)\n\n## Build Instructions\n\n### Requirements\n\n- Zig version `0.15.2`\n- Terminal emulator with the Kitty image protocol (e.g. Kitty, Ghostty, WezTerm, etc.)\n\n### Build\n\n1. Fetch submodules:\n\n```\ngit submodule update --init --recursive\n```\n\n2. Build the project:\n\n```sh\nzig build --release=small\n```\n\n> [!NOTE]\n> There is a [known issue](https://github.com/freref/fancy-cat/issues/18) with some processors; if the build fails on step 7/10 with the error `LLVM ERROR: Do not know how to expand the result of this operator!` then try the command below instead:\n>\n> ```sh\n> zig build -Dcpu=\"skylake\" --release=small\n> ```\n\n3. Install:\n\n```sh\n# Add to your PATH\n# Linux\nmv zig-out/bin/fancy-cat ~/.local/bin/\n\n# macOS\nmv zig-out/bin/fancy-cat /usr/local/bin/\n```\n\n### Run\n\n```sh\nzig build run -- <path-to-pdf> <optional-page-number>\n```\n\n## Features\n\n- ✅ Filewatch (hot-reload)\n- ✅ Runtime config\n- ✅ Custom keymappings\n- ✅ Modal interface\n- ✅ Commands\n- ✅ Colorize mode (dark-mode)\n- ✅ Status bar\n- ✅ Page navigation (zoom, prev, next, etc.)\n\n## License\n\n[AGPL-3.0-or-later](https://spdx.org/licenses/AGPL-3.0-or-later.html)\n\n## Contributing\n\nContributions are welcome.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/35976402?u=54ccbfc2224f6b1d7a2687366d2d96a1252b1639&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 26,
+  "owner_following": 13,
+  "owner_created_at": "2018-01-30T21:34:30Z",
+  "license": "AGPL-3.0",
+  "category": "cli"
+}

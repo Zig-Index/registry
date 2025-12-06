@@ -1,0 +1,38 @@
+{
+  "name": "qbe-zig-build",
+  "owner": "malcolmstill",
+  "repo": "qbe-zig-build",
+  "description": "QBE (https://c9x.me/compile/) via zig build",
+  "type": "project",
+  "topics": [
+    "compiler-backend",
+    "qbe",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 7,
+  "forks": 3,
+  "watchers": 2,
+  "updated_at": "2025-11-27T09:26:00Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.11.0",
+  "readme": "# QBE via zig\n\nThis repo provides QBE installable / dependable on via the zig package manager. QBE\ncan be invoked either as a binary or a library (with `qbe.emit`, see below).\n\nIf you're looking to generate the QBE intermediate language from zig code programmatically, check out\nhttps://github.com/ciathefed/qbe-zig.\n\n## QBE binary\n\nThe `qbe-zig` provides an artifact `qbe` that some other module can depend on:\n\n```zig\n// Depend on qbe-zig via a build.zig.zon\nconst qbe = b.dependency(\"qbe-zig\", .{ .target = target, .optimize = optimize });\n\n// Extract the `qbe` binary artifact\nconst qbe_bin = qbe.artifact(\"qbe\");\n```\n\n## QBE library\n\nThe upstream QBE repository does not expose a anyway of using QBE as a library.\n`qbe-zig` offers the ability to call QBE as library by more or less duplicating\nthe existing `main.c` as `lib.c` and replacing the `main` function with `libemit`.\n\nA tiny wrapper around `libemit` is then provided via `src/qbe.zig`.\n\nTo use QBE as a library in a zig project, in your `build.zig` have something like:\n\n```zig\n// Depend on qbe-zig via a build.zig.zon\nconst qbe = b.dependency(\"qbe-zig\", .{ .target = target, .optimize = optimize });\n\nconst exe = b.addExecutable(...);\n\n// Link against the static library\nexe.linkLibrary(qbe.artifact(\"qbe-lib\"));\n\n// Expose to your exe code\nexe.root_module.addImport(\"qbe-zig\", qbe.module(\"qbe-zig\"));\n```\n\nIn your zig code import the module:\n\n```zig\nconst qbe = @import(\"qbe-zig\");\n```\n\nCall `emit` where you need:\n\n```zig\nqbe.emit(\"test.ssa\", \"test.s\");\n```\n\nSee `example/` for full example of library usage.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/2567177?u=64617edeb6170b898d7b94b90514950e940c4533&v=4",
+  "releases": [],
+  "owner_bio": "AKA klltkr. ",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "https://mstill.dev/blog",
+  "owner_twitter_username": null,
+  "owner_followers": 121,
+  "owner_following": 214,
+  "owner_created_at": "2012-10-15T20:17:57Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,33 @@
+{
+  "name": "9p-zig",
+  "owner": "dantecatalfamo",
+  "repo": "9p-zig",
+  "description": "9P2000 protocol implemented in zig",
+  "type": "project",
+  "topics": [
+    "9p",
+    "9p2000",
+    "filesystem",
+    "plan9",
+    "protocol",
+    "zig",
+    "zig-library",
+    "zig-package"
+  ],
+  "stars": 5,
+  "forks": 0,
+  "watchers": 2,
+  "updated_at": "2025-09-02T12:14:46Z",
+  "readme": "# 9p-zig\n9P2000 protocol client/server implemented in zig\n\n# Files\n* `src/main.zig` - Test case\n* `src/9p.zig` - Library\n* `u9fs-server.sh` - Test server script\n\n# Example\n## Client\n```zig\nconst std = @import(\"std\");\nconst debug = std.debug;\nconst z9p = @import(\"9p.zig\");\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    var allocator = gpa.allocator();\n\n    // Open connection\n    const stream = try std.net.tcpConnectToHost(allocator, \"127.0.0.1\", 5640);\n    defer stream.close();\n\n    std.debug.print(\"Connected\\n\", .{});\n\n    // Initialize client\n    var client = z9p.simpleClient(allocator, stream.reader(), stream.writer());\n    defer client.deinit();\n\n    // Setup protocol\n    try client.connect(std.math.maxInt(u32));\n\n    // Login to the server with name at endpoint, returning a handle\n    const root = try client.attach(null, \"dante\", \"\");\n    defer root.clunk() catch unreachable;\n    std.debug.print(\"root: {any}\\n\", .{ root });\n\n    // Return a directory handle associated with the root\n    const top_dir = try root.walk(&.{ \"\" });\n    std.debug.print(\"top_dir: {any}\\n\", .{ top_dir });\n\n    // Open the directory for reading\n    try top_dir.open(.{});\n    std.debug.print(\"opened: {any}\\n\", .{ top_dir });\n\n    // Get directory information\n    const stat = try top_dir.stat();\n    defer stat.deinit();\n    std.debug.print(\"stat: {any}\\n\", .{ stat });\n    std.debug.print(\"size: {d}\\n\", .{ stat.length });\n\n    // Example of reading a directory (or file)\n    const buf = try top_dir.reader().readAllAlloc(allocator, 99999);\n    defer allocator.free(buf);\n    std.debug.print(\"reader: {any}\\n\", .{ buf });\n\n    // List files and directories in a directory\n    const files = try top_dir.files();\n    defer files.deinit();\n    for (files.stats) |s| {\n        std.debug.print(\"{s} {s:6} {s:6} {d:8} {s}\\n\", .{ s.mode, s.uid, s.gid, s.length, s.name });\n    }\n\n    // Close a handle, deallocate it\n    try top_dir.clunk();\n\n    // Open another directory\n    const tmp = try root.walk(&.{ \"tmp\" });\n    // Create a file, handle is now associated with the file\n    try tmp.create(\"testing\", .{ .user_read = true, .user_write = true, .group_read = true, .world_read = true }, .{});\n    // Delete the file associated with the handle, deallocate it\n    try tmp.remove();\n\n    const passwd = try root.walk(&.{ \"etc\", \"passwd\" });\n    defer passwd.clunk() catch unreachable;\n    try passwd.open(.{});\n    const pass_data = try passwd.reader().readAllAlloc(allocator, 99999);\n    defer allocator.free(pass_data);\n    std.debug.print(\"/etc/passwd:\\n{s}\\n\", .{ pass_data });\n\n    const new_file = try root.walk(&.{ \"tmp\" });\n    defer new_file.remove() catch unreachable;\n    // Create a file and write to it\n    try new_file.create(\"new_thing.txt\", .{ .user_write = true, .user_read = true }, .{ .perm = .write });\n    const tons_of_data = [_]u8{'a'} ** 10000;\n    try new_file.writer().print(&tons_of_data, .{});\n}\n```\n\n## Server\n\nWIP\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/43040593?u=4fb07e910e5f4e68f47273e9d39fd65b3c60a964&v=4",
+  "releases": [],
+  "owner_company": "@fleetdm",
+  "owner_location": "Ontario, Canada",
+  "owner_blog": "https://blog.lambda.cx",
+  "owner_twitter_username": "dantecatalfamo",
+  "owner_followers": 87,
+  "owner_following": 54,
+  "owner_created_at": "2018-09-06T15:03:12Z",
+  "license": "MIT",
+  "category": "filesystem"
+}

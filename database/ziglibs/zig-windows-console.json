@@ -1,0 +1,28 @@
+{
+  "name": "zig-windows-console",
+  "owner": "ziglibs",
+  "repo": "zig-windows-console",
+  "description": "Zig Windows Console stuff",
+  "type": "project",
+  "topics": [
+    "zig",
+    "console-application",
+    "windows-console",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 8,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-01-02T01:39:20Z",
+  "readme": "# zig-windows-console\r\n\r\nTools for all your Zig + Windows Console needs!\r\n\r\n## Usage\r\n\r\nAdd this to your `build.zig` and check out `examples/events.zig` for a quick, 5 minute primer.\r\n\r\n## Try It!\r\n\r\n```bash\r\n# Build it!\r\nzig build demo\r\n```\r\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/65570835?v=4",
+  "releases": [],
+  "owner_bio": "Community-driven library development",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2020-05-18T21:45:12Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,332 @@
+{
+  "name": "water",
+  "owner": "trevorswan11",
+  "repo": "water",
+  "description": "A zig chess library and engine. ",
+  "type": "project",
+  "topics": [
+    "zig-package",
+    "chess",
+    "zig"
+  ],
+  "stars": 32,
+  "forks": 3,
+  "watchers": 0,
+  "updated_at": "2025-11-29T03:07:21Z",
+  "minimum_zig_version": "0.15.2",
+  "readme": "# water [![Zig](https://img.shields.io/badge/zig-0.15.2-orange)](https://ziglang.org/) [![License](https://img.shields.io/github/license/trevorswan11/water)](LICENSE) [![Last commit](https://img.shields.io/github/last-commit/trevorswan11/water)](https://github.com/trevorswan11/water) [![Formatting](https://github.com/trevorswan11/water/actions/workflows/format.yml/badge.svg)](https://github.com/trevorswan11/water/actions/workflows/format.yml) [![CI](https://github.com/trevorswan11/water/actions/workflows/ci.yml/badge.svg)](https://github.com/trevorswan11/water/actions/workflows/ci.yml)\n\n<p align=\"center\">\n  <img src=\"/.github/resources/logo.png\" alt=\"water logo\" width=\"250\"/>\n</p>\n\n<p align=\"center\">\n  A comprehensive chess suite written in Zig.\n</p>\n\n# Goals\nWater aims to provide a performant chess engine library allowing users to easily architect chess engines by providing a core library and uci interface management scheme.\n\nThe [water engine](https://lichess.org/@/Water-Engine) itself is crafted using this library, with the goals of making:\n- An iterative search engine with Alpha-Beta Pruning, Quiescence, etc.\n- A neural network-powered engine using NNUE\n\n# Getting Started\nFor a quick build of the project, simply run `zig build run --release`.\n\n_Note: The engine communicates through the UCI protocol. You can read more about the standard [here](https://gist.github.com/DOBRO/2592c6dad754ba67e6dcaec8c90165bf)._\n\n## Build Tools\n- [Zig 0.15.2](https://ziglang.org/download/) - other versions _will not_ work due to 'Writergate' and other potentially breaking changes\n- [cloc](https://github.com/AlDanial/cloc) for the cloc step (optional)\n\n## All Build Steps\n| **Step**    | Description                                                                                     |\n|:------------|:------------------------------------------------------------------------------------------------|\n| `build`     | Builds `water`. Pass `--release` for ReleaseFast.                                               |\n| `run`       | Build and run `water`. Pass `--release` for ReleaseFast.                                        |\n| `perft`     | Run the perft suite. Running with `--release` is highly recommended.                            |\n| `bench`     | Run the perft benchmarking suite. Running with `--release` is highly recommended.               |\n| `search`    | Run the search benchmarking suite. Running with `--release` is highly recommended.              |\n| `package`   | Builds the engine executable in ReleaseFast for the triples specified in `build.zig`.           |\n| `test`      | Run all unit tests.                                                                             |\n| `lint`      | Checks formatting of all source files excluding `build.zig`.                                    |\n| `fmt`       | Format all source code excluding `build.zig`.                                                   |\n| `cloc`      | Count the total lines of zig code. Requires [cloc](https://github.com/AlDanial/cloc).           |\n| `docs`      | Generates documentation for the water library using zig's docgen tool.                          |\n\nIt is generally not recommended to run the `perft` suite unless there have been significant changes made to the core library. Generally, the `bench` step is enough for verifying performance and correctness. If you choose to run the `perft` suit, then you will be executing about 50,000 tests which will take many hours to complete on most hardware. These perft tests are epd variants pulled from [pawnocchio](https://github.com/JonathanHallstrom/pawnocchio) as mentioned in the credits below. The [marcel.epd](benchmarks/perft/epd/marcel.epd) file takes up the majority of this step's runtime and should be skipped if looking for a quick yet comprehensive test.\n\n_Note: While the `docs` step is able to emit the correct files, a bug in the standard library prevents reading the emitted docs on some systems. See this [issue](https://github.com/ziglang/zig/issues/24944) for more details._\n\n## Adding Water to Your Project\nTo add water as a dependency to your project, simply run `zig fetch --save git+https://github.com/trevorswan11/water`. This will add water as a dependency to your `build.zig.zon` file.\n\nYou'll then need to explicitly add it as a module in `build.zig`, which might looks like:\n\n```zig\nconst exe = b.addExecutable(.{\n    .name = \"foo\",\n    .root_module = b.createModule(.{\n        .root_source_file = b.path(\"src/main.zig\"),\n\n        .target = target,\n        .optimize = optimize,\n\n        .imports = &.{\n            .{\n                .name = \"water\",\n                .module = b.dependency(\"water\", .{}).module(\"water\"),\n            },\n        },\n    }),\n});\n```\n\nTo confirm the dependency was added successfully, try this out in `main.zig`:\n\n```zig\nconst std = @import(\"std\");\nconst water = @import(\"water\");\n\npub fn main() !void {\n    const allocator = std.heap.page_allocator;\n    var board = try water.Board.init(allocator, .{});\n    defer board.deinit();\n    const diagram = try water.uci.uciBoardDiagram(board, .{});\n    defer allocator.free(diagram);\n    std.debug.print(\"{s}\", .{diagram});\n}\n```\n\nWhen running using `zig build run`, you might see some target feature errors reported by the build system. I believe this is due to a change made with the x86 backend in Zig 0.15.2, but these errors are harmless and should not get in the way of compilation or functionality.\n\n# Contributing\nContributors are always welcome! As this project progresses and the engine improves, it will become increasingly difficult for a single developer to make meaningful improvements or address bugs in a timely manner. Checkout [CONTRIBUTING.md](.github/CONTRIBUTING.md) for the project's guidelines.\n\n# Credits\nWater could not be where it is today without the formative work done by experienced developers in the past. Core references used during development include:\n- [chess-library](https://github.com/Disservin/chess-library) inspired the of rewrite to zig and served as a core pillar for ideas and verifying behavior in the core library.\n- The [zigMemMapper](https://github.com/SuSonicTH/zigMemMapper) project which drove the development of the included memory mapper for tablebase parsing.\n- The [Chess Programming Wiki](https://www.chessprogramming.org/) for obvious reasons, but especially for their explanation and code examples for [NNUE](https://www.chessprogramming.org/NNUE)\n- The [Avalanche](https://github.com/SnowballSH/Avalanche) chess engine which is dubbed 'the first and strongest UCI chess engine written in zig' for providing a huge source of motivation for improvement. The transposition table and classical search/evaluation algorithms are heavily inspired by this project. Though I can confirm that it is still the strongest engine written in Zig, the neural networks from this project are currently used in the water engine.\n- The [pawnocchio](https://github.com/JonathanHallstrom/pawnocchio)  chess engine for their extensive perft test suite which is directly used by the library's `perft` step.\n- The [Pyrrhic](https://github.com/AndyGrant/Pyrrhic) library which will be used as a reference for the included syzygy suite. The syzygy suite is planned to be a faithful rewrite of this library.\n- The legendary [Stockfish](https://github.com/official-stockfish/Stockfish) engine which served as an invaluable resource through all steps of the development process. This engine helped point out critical bugs _early_, and served as my reference point for initial elo estimates for the water engine.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/152287670?u=8d3fa796260ade30c6a284877db2a45ac89ddb59&v=4",
+  "releases": [
+    {
+      "tag_name": "1.0.2",
+      "name": "v1.0.2",
+      "body": "# 1.0.2\r\n- Added Zobrist assertions into movers\r\n- Fixed issue where perft divide would not flush the buffer at depth 1",
+      "prerelease": false,
+      "published_at": "2025-11-05T19:23:46Z",
+      "html_url": "https://github.com/trevorswan11/water/releases/tag/1.0.2",
+      "assets": [
+        {
+          "name": "Water-1.0.2-aarch64-freebsd.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.2/Water-1.0.2-aarch64-freebsd.tar.gz",
+          "size": 623076,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.2-aarch64-linux.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.2/Water-1.0.2-aarch64-linux.tar.gz",
+          "size": 624769,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.2-aarch64-macos.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.2/Water-1.0.2-aarch64-macos.tar.gz",
+          "size": 624518,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.2-aarch64-netbsd.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.2/Water-1.0.2-aarch64-netbsd.tar.gz",
+          "size": 623375,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.2-aarch64-windows.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.2/Water-1.0.2-aarch64-windows.tar.gz",
+          "size": 619311,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.2-loongarch64-linux.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.2/Water-1.0.2-loongarch64-linux.tar.gz",
+          "size": 662400,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.2-powerpc64le-freebsd.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.2/Water-1.0.2-powerpc64le-freebsd.tar.gz",
+          "size": 645309,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.2-powerpc64le-linux.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.2/Water-1.0.2-powerpc64le-linux.tar.gz",
+          "size": 647304,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.2-riscv64-freebsd.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.2/Water-1.0.2-riscv64-freebsd.tar.gz",
+          "size": 784902,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.2-riscv64-linux.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.2/Water-1.0.2-riscv64-linux.tar.gz",
+          "size": 786131,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.2-x86_64-freebsd.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.2/Water-1.0.2-x86_64-freebsd.tar.gz",
+          "size": 636177,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.2-x86_64-linux.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.2/Water-1.0.2-x86_64-linux.tar.gz",
+          "size": 635386,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.2-x86_64-macos.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.2/Water-1.0.2-x86_64-macos.tar.gz",
+          "size": 636858,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.2-x86_64-netbsd.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.2/Water-1.0.2-x86_64-netbsd.tar.gz",
+          "size": 636439,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.2-x86_64-windows.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.2/Water-1.0.2-x86_64-windows.tar.gz",
+          "size": 633763,
+          "content_type": "application/x-gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "1.0.1",
+      "name": "v1.0.1",
+      "body": "Small changes to build system and README instructions to resolve current x86/LLVM backend issues. Release does not change any functionality in the engine or library, just allows seamless integration with other projects.\r\n\r\n# Changelog:\r\n- Updated NNUE dependency resolution technique to be local to the project and not visible by users using this as a library\r\n- Added clarification to README regarding the zig llvm backend",
+      "prerelease": false,
+      "published_at": "2025-10-25T02:14:14Z",
+      "html_url": "https://github.com/trevorswan11/water/releases/tag/1.0.1",
+      "assets": [
+        {
+          "name": "Water-1.0.1-aarch64-freebsd.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.1/Water-1.0.1-aarch64-freebsd.tar.gz",
+          "size": 623045,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.1-aarch64-linux.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.1/Water-1.0.1-aarch64-linux.tar.gz",
+          "size": 624747,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.1-aarch64-macos.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.1/Water-1.0.1-aarch64-macos.tar.gz",
+          "size": 624511,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.1-aarch64-netbsd.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.1/Water-1.0.1-aarch64-netbsd.tar.gz",
+          "size": 623383,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.1-aarch64-windows.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.1/Water-1.0.1-aarch64-windows.tar.gz",
+          "size": 619264,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.1-loongarch64-linux.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.1/Water-1.0.1-loongarch64-linux.tar.gz",
+          "size": 662337,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.1-powerpc64le-freebsd.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.1/Water-1.0.1-powerpc64le-freebsd.tar.gz",
+          "size": 645504,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.1-powerpc64le-linux.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.1/Water-1.0.1-powerpc64le-linux.tar.gz",
+          "size": 647472,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.1-riscv64-freebsd.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.1/Water-1.0.1-riscv64-freebsd.tar.gz",
+          "size": 784028,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.1-riscv64-linux.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.1/Water-1.0.1-riscv64-linux.tar.gz",
+          "size": 785517,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.1-x86_64-freebsd.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.1/Water-1.0.1-x86_64-freebsd.tar.gz",
+          "size": 636038,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.1-x86_64-linux.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.1/Water-1.0.1-x86_64-linux.tar.gz",
+          "size": 635333,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.1-x86_64-macos.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.1/Water-1.0.1-x86_64-macos.tar.gz",
+          "size": 636858,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.1-x86_64-netbsd.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.1/Water-1.0.1-x86_64-netbsd.tar.gz",
+          "size": 636313,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.1-x86_64-windows.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.1/Water-1.0.1-x86_64-windows.tar.gz",
+          "size": 633811,
+          "content_type": "application/x-gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "1.0.0",
+      "name": "v1.0.0",
+      "body": "# We're here!\r\n\r\nEverything except for syzygy tablebase parsing and pgn handling is done! Engine plays around a GM level, but that isn't the big focus here. SPRT results against stockfish elo-limited to 2725 shows:\r\n```\r\nResults of Water vs Stockfish (40/60+0.1, NULL - 1t, 64MB, 8moves_v3.PGN):\r\nElo: 27.85 +/- 23.18, nElo: 29.10 +/- 24.08\r\nLOS: 99.11 %, DrawRatio: 35.75 %, PairsRatio: 1.36\r\nGames: 800, Wins: 375, Losses: 311, Draws: 114, Points: 432.0 (54.00 %)\r\nPtnml(0-2): [68, 41, 143, 55, 93], WL/DD Ratio: 14.89\r\nLLR: -nan (nan%) (-2.94, 2.94) [2725.00, 2740.00]\r\n```\r\n\r\n# Changelog:\r\n- Initial release\r\n- Library\r\n    - 49,548 total perft tests passed\r\n    - Fully cross compatible and usable with engines\r\n    - Relatively performative, see benchmarks for more information\r\n- Engine\r\n    - 800 games played against elo limited stockfish, see benchmarks for specifics\r\n    - Initial estimates place engine somewhere between 2730 and 2775\r\n    - Tests ran at TC=40/60+0.1\r\n    - Crashed once throughout testing, though cause is unknown\r\n",
+      "prerelease": false,
+      "published_at": "2025-10-25T01:46:32Z",
+      "html_url": "https://github.com/trevorswan11/water/releases/tag/1.0.0",
+      "assets": [
+        {
+          "name": "Water-1.0.0-aarch64-freebsd.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.0/Water-1.0.0-aarch64-freebsd.tar.gz",
+          "size": 622806,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.0-aarch64-linux.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.0/Water-1.0.0-aarch64-linux.tar.gz",
+          "size": 624458,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.0-aarch64-macos.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.0/Water-1.0.0-aarch64-macos.tar.gz",
+          "size": 624337,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.0-aarch64-netbsd.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.0/Water-1.0.0-aarch64-netbsd.tar.gz",
+          "size": 623134,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.0-aarch64-windows.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.0/Water-1.0.0-aarch64-windows.tar.gz",
+          "size": 619063,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.0-loongarch64-linux.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.0/Water-1.0.0-loongarch64-linux.tar.gz",
+          "size": 662063,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.0-powerpc64le-freebsd.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.0/Water-1.0.0-powerpc64le-freebsd.tar.gz",
+          "size": 645150,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.0-powerpc64le-linux.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.0/Water-1.0.0-powerpc64le-linux.tar.gz",
+          "size": 647100,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.0-riscv64-freebsd.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.0/Water-1.0.0-riscv64-freebsd.tar.gz",
+          "size": 783714,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.0-riscv64-linux.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.0/Water-1.0.0-riscv64-linux.tar.gz",
+          "size": 785172,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.0-x86_64-freebsd.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.0/Water-1.0.0-x86_64-freebsd.tar.gz",
+          "size": 635831,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.0-x86_64-linux.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.0/Water-1.0.0-x86_64-linux.tar.gz",
+          "size": 635058,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.0-x86_64-macos.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.0/Water-1.0.0-x86_64-macos.tar.gz",
+          "size": 636553,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.0-x86_64-netbsd.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.0/Water-1.0.0-x86_64-netbsd.tar.gz",
+          "size": 636072,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "Water-1.0.0-x86_64-windows.tar.gz",
+          "url": "https://github.com/trevorswan11/water/releases/download/1.0.0/Water-1.0.0-x86_64-windows.tar.gz",
+          "size": 633548,
+          "content_type": "application/x-gzip"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "Computer Engineering student who’s hungry for knowledge.",
+  "owner_company": "Case Western Reserve University",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 8,
+  "owner_following": 14,
+  "owner_created_at": "2023-11-28T13:03:45Z",
+  "homepage": "https://www.pitchhut.com/project/water-chess-library",
+  "license": "GPL-3.0",
+  "category": "library"
+}

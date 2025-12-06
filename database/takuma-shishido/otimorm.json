@@ -1,0 +1,36 @@
+{
+  "name": "otimorm",
+  "owner": "takuma-shishido",
+  "repo": "otimorm",
+  "description": "library for PostgreSQL ORM written in zig 🔥",
+  "type": "project",
+  "topics": [
+    "database",
+    "orm",
+    "postgresql",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-06-21T00:08:22Z",
+  "dependencies": [
+    {
+      "name": "pg",
+      "url": "git+https://github.com/karlseguin/pg.zig?ref=master#adc728df1f19d4ef67d009b80f4cf53aae2bcbd1",
+      "hash": "1220914ac9634b448c910064b2097e7f856e0729a21d78194da8ebfc3cf676723b56"
+    }
+  ],
+  "readme": "# otimorm\n> [!IMPORTANT]\n> **This project is still under development and there are bugs**  \n> If you find a bug, please open an issue. I will fix it as soon as possible.\n\n`otimorm` is an easy-to-use ORM for PostgreSQL that works with the latest version of Zig.  \n\ntested with `0.14.0-dev`\n\n## Code Example\nsee [this](https://github.com/takuma-shishido/otimorm/blob/develop/example/main.zig).\n\n## TODO\n\n- Support for more complex queries\n\n## Credit\n\nThis project was inspired by [zig-orm](https://github.com/aeronavery/zig-orm)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/130330524?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 17,
+  "owner_following": 22,
+  "owner_created_at": "2023-04-10T02:48:35Z",
+  "category": "database"
+}

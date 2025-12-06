@@ -1,0 +1,35 @@
+{
+  "name": "StaticHttpFileServer",
+  "owner": "andrewrk",
+  "repo": "StaticHttpFileServer",
+  "description": "Zig module for serving a directory of files from memory via HTTP",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 64,
+  "forks": 5,
+  "watchers": 3,
+  "updated_at": "2025-11-27T06:50:15Z",
+  "dependencies": [
+    {
+      "name": "mime",
+      "url": "https://github.com/andrewrk/mime/archive/refs/tags/3.0.0.tar.gz",
+      "hash": "mime-3.0.0-zwmL-6wgAADuFwn7gr-_DAQDGJdIim94aDIPa6qO-6GT"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# Simple Static HTTP File Server Zig Module\n\nUpon initialization, this module recursively walks the specified directory and\npermanently caches all file contents to memory. When handling an HTTP request,\nthis module will never touch the file system.\n\nAs part of this process, it will compress the file contents using gzip, and\nthen choose whether to keep the compressed version or uncompressed version\nbased on a configurable compression ratio (defaulting to 95%).\n\nThis module is well-suited for web applications that have a fixed set of\nunchanging assets that have no problem fitting into memory.\n\nI have a\n[similar project for Node.js](https://github.com/andrewrk/connect-static).\n\n## Status\n\nBasic features work, but see the roadmap below for planned enhancements.\n\n## Synopsis\n\nInitialize:\n\n```zig\nconst StaticHttpFileServer = @import(\"StaticHttpFileServer\");\n\nvar static_http_file_server = try StaticHttpFileServer.init(.{\n    .allocator = gpa,\n    .root_dir = tmp.dir,\n});\ndefer static_http_file_server.deinit(gpa);\n```\n\nThen hand off a request to be serviced:\n\n```zig\ntry static_http_file_server.serve(&http_request);\n```\n\nSee also `serve.zig` for a standalone example.\n\n## Roadmap\n\n1. gzip compression\n2. Support more HTTP headers\n   * `ETag`\n   * `If-None-Match`\n   * `If-Modified-Since`\n   * `Accept-Encoding`\n   * `Content-Encoding`\n\n## Testing\n\nStandard unit tests:\n\n```\nzig build test\n```\n\nThere is also this:\n\n```\nzig build serve -- [path]\n```\n\nStarts listening on localhost and serves static files at [path] so you can poke\naround manually.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/106511?u=c581d48499a798bb7d2fd303a760bced4acc5a53&v=4",
+  "releases": [],
+  "owner_bio": "Lead developer & president of Zig Software Foundation",
+  "owner_company": "@ziglang ",
+  "owner_location": "Portland, Oregon",
+  "owner_blog": "https://andrewkelley.me/",
+  "owner_twitter_username": null,
+  "owner_followers": 9718,
+  "owner_following": 187,
+  "owner_created_at": "2009-07-19T09:21:03Z",
+  "license": "MIT",
+  "category": "library"
+}

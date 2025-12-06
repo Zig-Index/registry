@@ -1,0 +1,54 @@
+{
+  "name": "linenoize",
+  "owner": "joachimschmidt557",
+  "repo": "linenoize",
+  "description": "A port of linenoise to zig",
+  "type": "project",
+  "topics": [
+    "zig",
+    "readline",
+    "zig-package"
+  ],
+  "stars": 87,
+  "forks": 18,
+  "watchers": 4,
+  "updated_at": "2025-11-17T18:44:20Z",
+  "dependencies": [
+    {
+      "name": "wcwidth",
+      "url": "git+https://github.com/joachimschmidt557/zig-wcwidth?ref=v0.1.0#4f5c8efa838da57c9e1b14506138936964835999",
+      "hash": "wcwidth-0.1.0-A4Aa6obmAAC40epfTYwhsdITDO3M6dHEWf6C0jeGMWrV"
+    }
+  ],
+  "readme": "# linenoize\n\nA port of [linenoise](https://github.com/antirez/linenoise) to zig\naiming to be a simple readline for command-line applications written\nin zig. It is written in pure zig and doesn't require\nlibc. `linenoize` works with the latest stable zig version (0.14.0).\n\nIn addition to being a full-fledged zig library, `linenoize` also\nserves as a drop-in replacement for linenoise. As a proof of concept,\nthe example application from linenoise can be built with `zig build\nc-example`.\n\n## Features\n\n- Line editing\n- Completions\n- Hints\n- History\n- Multi line mode\n- Mask input mode\n\n### Supported platforms\n\n- Linux\n- macOS\n- Windows\n\n## Add linenoize to a project\n\nAdd linenoize as a dependency to your project:\n```bash\nzig fetch --save git+https://github.com/joachimschmidt557/linenoize.git#v0.1.0\n```\n\nThen add the following code to your `build.zig` file:\n```zig\nconst linenoize = b.dependency(\"linenoize\", .{\n    .target = target,\n    .optimize = optimize,\n}).module(\"linenoise\");\nexe.root_module.addImport(\"linenoize\", linenoize);\n```\n\n## Examples\n\n### Minimal example\n\n```zig\nconst std = @import(\"std\");\nconst Linenoise = @import(\"linenoise\").Linenoise;\n\npub fn main() !void {\n    const allocator = std.heap.page_allocator;\n\n    var ln = Linenoise.init(allocator);\n    defer ln.deinit();\n\n    while (try ln.linenoise(\"hello> \")) |input| {\n        defer allocator.free(input);\n        std.debug.print(\"input: {s}\\n\", .{input});\n        try ln.history.add(input);\n    }\n}\n```\n\n### Example of more features\n\n``` zig\nconst std = @import(\"std\");\nconst Allocator = std.mem.Allocator;\nconst ArrayList = std.ArrayList;\n\nconst log = std.log.scoped(.main);\n\nconst Linenoise = @import(\"linenoise\").Linenoise;\n\nfn completion(allocator: Allocator, buf: []const u8) ![]const []const u8 {\n    if (std.mem.eql(u8, \"z\", buf)) {\n        var result = ArrayList([]const u8).init(allocator);\n        try result.append(try allocator.dupe(u8, \"zig\"));\n        try result.append(try allocator.dupe(u8, \"ziglang\"));\n        return result.toOwnedSlice();\n    } else {\n        return &[_][]const u8{};\n    }\n}\n\nfn hints(allocator: Allocator, buf: []const u8) !?[]const u8 {\n    if (std.mem.eql(u8, \"hello\", buf)) {\n        return try allocator.dupe(u8, \" World\");\n    } else {\n        return null;\n    }\n}\n\nvar debug_allocator: std.heap.DebugAllocator(.{}) = .init;\n\npub fn main() !void {\n    defer _ = debug_allocator.deinit();\n    const allocator = debug_allocator.allocator();\n\n    var ln = Linenoise.init(allocator);\n    defer ln.deinit();\n\n    // Load history and save history later\n    ln.history.load(\"history.txt\") catch log.err(\"Failed to load history\", .{});\n    defer ln.history.save(\"history.txt\") catch log.err(\"Failed to save history\", .{});\n\n    // Set up hints callback\n    ln.hints_callback = hints;\n\n    // Set up completions callback\n    ln.completions_callback = completion;\n\n    // Enable mask mode\n    // ln.mask_mode = true;\n\n    // Enable multiline mode\n    // ln.multiline_mode = true;\n\n    while (try ln.linenoise(\"hellö> \")) |input| {\n        defer allocator.free(input);\n        log.info(\"input: {s}\", .{input});\n        try ln.history.add(input);\n    }\n}\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/28556218?v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.1",
+      "name": "v0.1.1",
+      "body": "## Bug fixes\r\n\r\n term.getColumns() - additional check to make sure the number of columns is never 0 #34 ",
+      "prerelease": false,
+      "published_at": "2025-04-03T07:43:40Z",
+      "html_url": "https://github.com/joachimschmidt557/linenoize/releases/tag/v0.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "Compatible with zig 0.14.0",
+      "prerelease": false,
+      "published_at": "2025-03-08T22:45:07Z",
+      "html_url": "https://github.com/joachimschmidt557/linenoize/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": "Germany",
+  "owner_blog": "www.josch557.de",
+  "owner_twitter_username": null,
+  "owner_followers": 80,
+  "owner_following": 13,
+  "owner_created_at": "2017-05-09T06:23:23Z",
+  "license": "MIT",
+  "category": "library"
+}

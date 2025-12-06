@@ -1,0 +1,36 @@
+{
+  "name": "comptime_allocator",
+  "owner": "qsrmc",
+  "repo": "comptime_allocator",
+  "description": "Zig compile time only allocator",
+  "type": "project",
+  "topics": [
+    "comptime",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-04-21T14:06:45Z",
+  "readme": "# comptime_allocator\n\nBased on [bnl1's work](https://github.com/bnl1/comptime_allocator) and expanded\nupon, this library was made to simplify the use of std lib containers in\ncomptime contexts.\n\n## License\n\nWhile [bnl1's original work](https://github.com/bnl1/comptime_allocator) was\nmade under MIT License, comptime_allocator is licensed under the\n[European Union Public License 1.2](https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12)\nor later.\n\n## Example\n\nDirectly from the tests:\n```zig\nconst allocator = @import(\"comptime_allocator\");\n\ntest \"comptime ArrayList\" {\n    const hello_world = comptime blk: {\n        var array_list = std.ArrayList(u8).init(allocator);\n\n        try array_list.appendSlice(\"Helloo\");\n        try array_list.appendSlice(\"wworld!\");\n\n        try array_list.replaceRange(5, 2, \", \");\n\n        // You cannot use a pointer allocated at compile time during runtime,\n        // but you can copy its content to a static array\n        var out_buf: [array_list.items.len]u8 = undefined;\n        @memcpy(&out_buf, array_list.items);\n        break :blk out_buf;\n    };\n    try std.testing.expectEqualSlices(u8, \"Hello, world!\", &hello_world);\n}\n```\n\n## FAQ\n\n### Why use that allocator?\n\nIt makes using containers from the standard library really easy, therefore\nmaking most dynamic function calls callable in a comptime context.\n\n### Why is this library under a copyleft license?\n\nI hate proprietary software, just thinking that my code could be used in some\nmakes me puke.\n\n### But I can't use it for my own projects >:(\n\nGet over it.\nUse a copyleft license.\nMake the world a better place.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/204596775?v=4",
+  "releases": [
+    {
+      "tag_name": "1.0",
+      "name": "comptime_allocator 1.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-03-23T17:58:05Z",
+      "html_url": "https://github.com/qsrmc/comptime_allocator/releases/tag/1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Software, Tooling and Libraries for the Minecraft ecosystem",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2025-03-23T16:47:05Z",
+  "license": "EUPL-1.2",
+  "category": "library"
+}

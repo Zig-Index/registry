@@ -1,0 +1,72 @@
+{
+  "name": "ublox_parser",
+  "owner": "Orolia2s",
+  "repo": "ublox_parser",
+  "description": "Use a serial port to receive and decode u-blox messages",
+  "type": "project",
+  "topics": [
+    "gnss",
+    "ublox",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 1,
+  "watchers": 2,
+  "updated_at": "2025-08-23T13:18:13Z",
+  "dependencies": [
+    {
+      "name": "libo2s",
+      "url": "git+https://github.com/Orolia2s/libo2s?ref=master#5cbc45755c40707841e1e74de7112908f5e3d1c0",
+      "hash": "libo2s-1.8.2-fUXQWKtiAgCIK_e5V5W97nuHHyvXS8GO04jJtTH5ZLzv"
+    },
+    {
+      "name": "libft",
+      "url": "git+https://github.com/agagniere/Libft?ref=master#a50337f818aef04a2b5fb5e913a44d54378aa89a",
+      "hash": "libft-2.11.0-w6XaroSHBAAKPTYJ8jy50FM6HEAXuoNpDZz228IqPX07"
+    },
+    {
+      "name": "blackmagic",
+      "url": "git+https://github.com/agagniere/blackmagic?ref=master#b6f0922c7a1e9ffbb082fc01b4f8cf222e443548",
+      "hash": "blackmagic-0.4.0-62-rPNntAABzfbIiwdzai4Eh0k21ntNsipTlnXHR2o9c"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# u-blox Messages Parser\n\n## Features\n\n### As an executable\n\n - Display the current serial port configuration in the YAML format\n - Output the ublox messages read on the serial port in the JSON format\n\n### As a C library\n\n - Iterate over all ublox messages read on the serial port\n - Verbose alternatives to termios\n - Extensive documentation\n\n## Usage\n\n### Use in your project\n\nAdd the dependency in your `build.zig.zon` by running the following command:\n```shell\nzig fetch --save git+https://github.com/Orolia2s/ublox_parser#master\n```\n\nThen, in your `build.zig`:\n```zig\nconst ublox = b.dependency(\"ublox_parser\", .{ .target = target, .optimize = optimize }).artifact(\"ublox_parser\");\n\n// wherever needed:\nexe.linkLibrary(ublox);\n```\n\n### Build\n\nrequires [zig](https://ziglang.org/download/) >= 0.14.0\n\n```shell\nzig build\n```\n\n### Test\n\n```shell\nzig build test\n```\n\n### Run\n\n```console\n$ zig build run -- --help\nUsage: ublox_parser [OPTION...] [PATH]\nPrints serial port configuration and ublox messages.\n\n  -f, --file                 Input is not a serial port but a file. Defaults to\n                             false\n  -p, --passive              Do not change the port configuration, only display\n                             it. Defaults to false\n  -?, --help                 Give this help list\n      --usage                Give a short usage message\n  -V, --version              Print program version\n\nReport bugs to <antoine.gagniere@orolia2s.com>.\n```\n\n### Generate documentation\n\n```shell\nzig build doc\nopen doc/html/index.html\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/87361621?v=4",
+  "releases": [
+    {
+      "tag_name": "0.1.2",
+      "name": "0.1.2",
+      "body": "Add the NAV-PVT message.\r\n\r\n**Full Changelog**: https://github.com/Orolia2s/ublox_parser/compare/0.1.1...0.1.2",
+      "prerelease": false,
+      "published_at": "2023-06-02T21:55:03Z",
+      "html_url": "https://github.com/Orolia2s/ublox_parser/releases/tag/0.1.2",
+      "assets": []
+    },
+    {
+      "tag_name": "0.1.1",
+      "name": "0.1.1",
+      "body": "Important fix for when a message with invalid checksum is received.\r\n\r\n**Full Changelog**: https://github.com/Orolia2s/ublox_parser/compare/0.1.0...0.1.1",
+      "prerelease": false,
+      "published_at": "2023-06-02T21:53:16Z",
+      "html_url": "https://github.com/Orolia2s/ublox_parser/releases/tag/0.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "0.1.0",
+      "name": "0.1.0",
+      "body": "## What's Changed\r\n* Set up a Github Workflow by @agagniere in https://github.com/Orolia2s/ublox_parser/pull/1\r\n* Split Github workflow: 1 for unit tests and 1 for documentation by @agagniere in https://github.com/Orolia2s/ublox_parser/pull/2\r\n* Keep implementing serial port helpers by @agagniere in https://github.com/Orolia2s/ublox_parser/pull/3\r\n* Implement the message reception loop by @agagniere in https://github.com/Orolia2s/ublox_parser/pull/4\r\n* Split serial port buffered reader into file input stream and serial port by @agagniere in https://github.com/Orolia2s/ublox_parser/pull/6\r\n* Parse hardware data by @Dragonink  in https://github.com/Orolia2s/ublox_parser/pull/5\r\n* List pitfalls related to the GNSS receiver antenna by @agagniere in https://github.com/Orolia2s/ublox_parser/pull/8\r\n* Implement a way for consumers to subscribe to ublox messages by @agagniere in https://github.com/Orolia2s/ublox_parser/pull/7\r\n* Document the hardware monitoring structure by @agagniere in https://github.com/Orolia2s/ublox_parser/pull/9\r\n* Create a conan package by @agagniere in https://github.com/Orolia2s/ublox_parser/pull/10\r\n\r\n## New Contributors\r\n* @agagniere made their first contribution in https://github.com/Orolia2s/ublox_parser/pull/1\r\n* @Dragonink  made their first contribution in https://github.com/Orolia2s/ublox_parser/pull/5\r\n\r\n**Full Changelog**: https://github.com/Orolia2s/ublox_parser/commits/0.1.0",
+      "prerelease": false,
+      "published_at": "2023-02-23T16:33:29Z",
+      "html_url": "https://github.com/Orolia2s/ublox_parser/releases/tag/0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Open source projects from Safran Trusted 4D Sèvres",
+  "owner_location": "France",
+  "owner_blog": "https://safran-navigation-timing.com/solution/european-projects",
+  "owner_twitter_username": null,
+  "owner_created_at": "2021-07-13T08:03:48Z",
+  "license": "MIT",
+  "category": "library"
+}

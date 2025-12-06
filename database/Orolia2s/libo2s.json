@@ -1,0 +1,35 @@
+{
+  "name": "libo2s",
+  "owner": "Orolia2s",
+  "repo": "libo2s",
+  "description": "Data Structures for C",
+  "type": "project",
+  "topics": [
+    "datastructures",
+    "serial-ports",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-10-27T12:50:17Z",
+  "dependencies": [
+    {
+      "name": "catch2",
+      "url": "git+https://github.com/allyourcodebase/catch2?ref=master#0fe4fd5d1ad256ceff0e118d686280537ff6aab7",
+      "hash": "catch2-3.9.1-UrP6zq4zAAAtcw806u7OMcMcPT-HSXWRHzp9rUJ33Nen"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# Lib O2S\n\nReliable datastructure library for C.\n\nThe [include](include) folder contains the public interface, while the [src](src) folder contains the implementation.\n\n## Data structures\n\n```mermaid\nclassDiagram\n  class A[\"Array\"] {\n    memory\n    push_back()\n    pop_back()\n  }\n  class S[\"String\"] {\n  }\n  class D[\"Deque\"] {\n    memory\n    push_back()\n    push_front()\n    pop_back()\n    pop_front()\n  }\n  class Q[\"Queue\"] {\n    push()\n    pop()\n  }\n  class T[\"Stack\"] {\n    push()\n    pop()\n  }\n  A <|-- S\n  D <|-- T\n  D <|-- Q\n```\n\n### Primary\n- [Array](include/o2s/array.h): Dynamic array\n- [Deque](include/o2s/deque.h): Double-ended queue\n\n### Secondary\n- [String](include/o2s/string.h): Dynamic character array\n- [Queue](include/o2s/queue.h): FIFO\n- [Stack](include/o2s/stack.h): LIFO\n\n## Input/Output\n```mermaid\nclassDiagram\n  class I[\"input stream\"] {\n    buffer\n    accumulate(count)\n  }\n  class S[\"string input stream\"] {\n  }\n  class F[\"file input stream\"] {\n    file descriptor\n  }\n  I <|-- S\n  I <|-- F\n```\n\n- [File Input Stream](include/o2s/file_input_stream.h): Buffered file reader\n- [String Input Stream](include/o2s/string_input_stream.h): Interchangable with a file input stream, to mock / test\n- [Serial Ports](include/o2s/serial.h): Configure and read from serial ports\n\n## Utilities\n- [Logging functions](include/o2s/log.h)\n- [String conversions](include/o2s/to_string.h)\n- [Useful Macros](include/o2s/preprocessing.h)\n- [Timers](include/o2s/timer.h)\n- [Mutex](include/o2s/mutex.h)\n\n# Usage\n\n## Use in your project\n\nAdd the dependency in your `build.zig.zon` by running the following command:\n```shell\nzig fetch --save git+https://github.com/Orolia2s/libo2s#master\n```\n\nThen, in your `build.zig`:\n```zig\nconst libo2s = b.dependency(\"libo2s\", .{ .target = target, .optimize = optimize }).artifact(\"o2s\");\n\n// wherever needed:\nexe.linkLibrary(libo2s);\n```\n\n## Build\n\nrequires [zig](https://ziglang.org/download/) >= 0.14.0\n\n```shell\nzig build\n```\n\n## Test\n\n```shell\nzig build test\n```\n\n## Generate documentation\n\nrequires [doxygen](https://www.doxygen.nl/download.html)\n\n```shell\nzig build doc\nopen doc/html/index.html\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/87361621?v=4",
+  "releases": [],
+  "owner_bio": "Open source projects from Safran Trusted 4D Sèvres",
+  "owner_location": "France",
+  "owner_blog": "https://safran-navigation-timing.com/solution/european-projects",
+  "owner_twitter_username": null,
+  "owner_created_at": "2021-07-13T08:03:48Z",
+  "homepage": "https://orolia2s.github.io/libo2s/",
+  "license": "MIT",
+  "category": "library"
+}

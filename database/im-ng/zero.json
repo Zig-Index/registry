@@ -1,0 +1,128 @@
+{
+  "name": "zero",
+  "owner": "im-ng",
+  "repo": "zero",
+  "description": "Simple, opinionated web framework written in Zig",
+  "type": "project",
+  "topics": [
+    "framework",
+    "web",
+    "zig",
+    "ziglang",
+    "http-server",
+    "zig-library",
+    "zig-package",
+    "api",
+    "rest-api"
+  ],
+  "stars": 8,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-12-03T17:46:15Z",
+  "dependencies": [
+    {
+      "name": "dotenv",
+      "url": "../dotenv"
+    },
+    {
+      "name": "httpz",
+      "url": "../http.zig"
+    },
+    {
+      "name": "metrics",
+      "url": "../metrics.zig"
+    },
+    {
+      "name": "pg",
+      "url": "../pg.zig"
+    },
+    {
+      "name": "zul",
+      "url": "../zul"
+    },
+    {
+      "name": "okredis",
+      "url": "../okredis"
+    },
+    {
+      "name": "zdt",
+      "url": "../zdt"
+    },
+    {
+      "name": "mqttz",
+      "url": "../mqttz"
+    },
+    {
+      "name": "regexp",
+      "url": "../zig-regex"
+    },
+    {
+      "name": "jwt",
+      "url": "../zig-jwt"
+    },
+    {
+      "name": "jwt",
+      "url": "git+https://github.com/im-ng/zig-jwt.git#0c0fd114a9f3a4f4901fc0eac28821feebfb29f9",
+      "hash": "zig_jwt-1.3.3-w3q9SOY0BAAfF6i8vq9S4JJR_rw3QSSm8gFQ_RYx3vRQ"
+    },
+    {
+      "name": "regexp",
+      "url": "git+https://github.com/im-ng/zig-regex.git#ee759955e59ae292f4074d62308f953feeecac61",
+      "hash": "regex-0.1.3-axC352raAQCBo-WcgB_nFMFmO2d3QLBLpE8-ebizdeX_"
+    },
+    {
+      "name": "mqttz",
+      "url": "git+https://github.com/im-ng/mqttz.git#bba199c808200cf51ae9bea86577c646bed627bc",
+      "hash": "mqttz-0.0.0-ywFE_5QMAwAWoMQe29cn9PMnPf6BYSSiJC-BZPCvw70c"
+    },
+    {
+      "name": "pg",
+      "url": "git+https://github.com/im-ng/pg.zig.git#c187af6760d4a923ff4c4020db76aae3c8b8a273",
+      "hash": "pg-0.0.0-Wp_7geUtBgC21DUn8zhRP3jDdWwXk3DjUyjFv7301VtI"
+    },
+    {
+      "name": "okredis",
+      "url": "git+https://github.com/im-ng/zig-okredis.git#f53ad9f03a57d41d89b3ee779aaca608e1e4767f",
+      "hash": "okredis-0.1.0-Cg726vcEBAAjrhwgBJ2cjL4qN3ircjBsX6iTd7wEFiEC"
+    },
+    {
+      "name": "zul",
+      "url": "git+https://github.com/im-ng/zul.git#e770047f208cf4538fcd9fc64550c84fd5492fc4",
+      "hash": "zul-0.0.0-1oDot9yRBwDA_ovd6GC1M_ViW3LarywMaGrH6vcuEjqv"
+    },
+    {
+      "name": "httpz",
+      "url": "git+https://github.com/im-ng/http.zig.git#d21498e2343a4eeab61a57e913f67a3862623d78",
+      "hash": "httpz-0.0.0-PNVzrEnhBgBwAemUFsKHu7IrGXnIEPAo8oI6HtIaoTan"
+    },
+    {
+      "name": "dotenv",
+      "url": "git+https://github.com/im-ng/dotenv#82a53e32b25371ab255f150aee089e5f8ffba8c1",
+      "hash": "dotenv-0.2.2-ikMfwBB3AAC89NhL0EVbn6mRYA5z4fec8PcNKJ-P8m16"
+    },
+    {
+      "name": "zdt",
+      "url": "git+https://codeberg.org/imng/zdt.git#fa55f4080752ce1c48f2bb392e9513f87b59d8cb",
+      "hash": "zdt-0.8.1-xr0_vABUDwDExZVsT91Qid0tOc_48sI47Xhg6nbFsqqC"
+    },
+    {
+      "name": "metriks",
+      "url": "git+https://github.com/im-ng/metrics.zig.git#2011171f3542f213b4742f96ed0934f56218b8a7",
+      "hash": "metriks-0.0.0-sq540f2_AQCTNA7_ZQWKehRfXynKHT_0baiw5RFDv_3W"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "![zero](./static/zero-fmk.png)\n\n`zero` is a strongly opinionated `Zig` web framework built on top of `http.zig` that aims for zero allocations and created to make development easier while keeping performance and observability in mind.\n\n`zero` framework is completely configurable, you may isolate and attach best-in-class `built-in` solutions as you see fit using the 12 Factor App methodology.\n\n`zero` framework has useful features like drop-in support for numerous `databases`, `queuing systems`, and external services, as well as `REST`, `authentication`, `logging`, `metrics`, `observability`, and `scheduling`.\n\n### Zero mascot\n\n![mascot](./static/iguanax128.png)\n\n### What is available? \n\nCheck [feature parity](./feature_parity.md) file to know more upcoming and missing things.\n\n### Pre-requisite \n\n```bash\n❯ zig version\n0.15.1\n```\n\n### How to get started?\n\n[zero-docs](https://im-ng.github.io/zero-docs/) covers all examples and documentations of the `zero` framework.  Take a deep dive into the framework, usage and outcomes of each built-in services and solutions.\n\n- [Basic](https://im-ng.github.io/zero-docs/hello-zero.html)\n- [Authentications](https://im-ng.github.io/zero-docs/authentication.html)\n- [CRUD Operations](https://im-ng.github.io/zero-docs/htmx-crud.html)\n- [Scheduler](https://im-ng.github.io/zero-docs/cronz.html)\n- [Websockets](https://im-ng.github.io/zero-docs/websocket.html)\n- [OnStartup](https://im-ng.github.io/zero-docs/caching.html)\n- [Pub/Sub](https://im-ng.github.io/zero-docs/message-queue-publisher.html)\n- [Data Migrations](https://im-ng.github.io/zero-docs/migrations.html)\n\n### Installation\n\nAdd zero to your build.zig.zon:\n\n```\nzig fetch --save https://github.com/im-ng/zero/archive/refs/heads/main.zip\n```\n\n### Usage\n\n0. Create a new zero fmk application\n\n```bash\nmkdir zero-web-app && cd zero-web-app\nzig init\nzig fetch --save https://github.com/im-ng/zero/archive/refs/heads/main.zip\n\n```\n\n1. Update dependency to load `zero` module\n\n```zig\nconst target = b.standardTargetOptions(.{});\nconst optimize = b.standardOptimizeOption(.{});\n\nconst zero = b.dependency(\"zero\", .{});\n\nconst exe = b.addExecutable(.{\n    .name = \"basic\",\n    .root_module = b.createModule(.{\n        .root_source_file = b.path(\"src/main.zig\"),\n        .target = target,\n        .optimize = optimize,\n    }),\n});\n\nexe.root_module.addImport(\"zero\", zero.module(\"zero\"));\n\nb.installArtifact(exe);\n\nconst run_cmd = b.addRunArtifact(exe);\nrun_cmd.step.dependOn(b.getInstallStep());\nif (b.args) |args| {\n    run_cmd.addArgs(args);\n}\n\nconst run_step = b.step(\"basic\", \"Run basic http server\");\nrun_step.dependOn(&run_cmd.step);\n```\n\n2. Add service configrations `configs/.env` to attach to basic web-app\n\n```bash\ncd zero-web-app\nmkdir configs\ntouch configs/.env\n```\n\n```bash\nAPP_ENV=dev\nAPP_NAME=basic-app\nAPP_VERSION=1.0.0\nLOG_LEVEL=debug\n\n# DB_HOST=localhost\n# DB_USER=user1\n# DB_PASSWORD=password1\n# DB_NAME=demo\n# DB_PORT=5432\n# DB_DIALECT=postgres\n\n# REDIS_HOST=127.0.0.1\n# REDIS_PORT=6379\n# REDIS_USER=redis\n# REDIS_PASSWORD=password\n# REDIS_DB=0\n```\n\n2. Start writing your first zero web-app to serve requests\n\n```zig\nconst std = @import(\"std\");\nconst zero = @import(\"zero\");\n\nconst App = zero.App;\nconst Context = zero.Context;\n\npub const std_options: std.Options = .{\n    .logFn = zero.logger.custom,\n};\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    const allocator = gpa.allocator();\n\n    // create zero App\n    // internally it loads container with db, logs, metrics\n    const app = try App.new(allocator);\n\n    // register routes on app\n    try app.get(\"/json\", jsonResponse);\n\n    // register route to handle db queries\n    // try app.get(\"/user\", dbResponse);\n\n    // register route to handle redis queries\n    // try app.get(\"/redis\", redisResponse);\n\n    // try app.addHttpService(\"auth-service\", \"http://external-service:8081\");\n\n    // try app.get(\"/status\", serviceStatus);\n\n    // start the server by invoking run\n    try app.run();\n}\n\npub fn jsonResponse(ctx: *Context) !void {\n    try ctx.json(.{ .msg = \"hello json!\" });\n}\n\npub fn dbResponse(ctx: *Context) !void {\n    const User = struct {\n        id: i32,\n        name: []const u8,\n    };\n\n    var row = try ctx.SQL.row(ctx.allocator, \"select id, name from users limit 1\", .{}) orelse unreachable;\n    defer row.deinit() catch {};\n\n    const user = try row.to(User, .{});\n    try ctx.json(user);\n}\n\npub fn redisResponse(ctx: *Context) !void {\n    const reply = try ctx.Cache.sendAlloc([]u8, ctx.allocator, .{ \"GET\", \"msg\" });\n    defer ctx.allocator.free(reply);\n\n    try ctx.json(reply);\n}\n\nconst RemoteSvcResponse = struct {\n    msg: []u8,\n};\n\nfn serviceStatus(ctx: *Context) !void {\n    const service = ctx.GetService(\"auth-service\");\n\n    if (service) |basicSvc| {\n        const response = try basicSvc.Get(RemoteSvcResponse, \"/keys\", null, null);\n\n        try ctx.json(response);\n    }\n}\n```\n\n3. Run your new web app.\n\n```\n❯ zig build basic-web-app\n❯ zig build basic\n INFO [03:23:39] Loaded config from file: ./configs/.env\n INFO [03:23:39] config overriden from: ./configs/.dev.env\n INFO [03:23:39] generating database connection string for postgres\n INFO [03:23:39] connected to user1 user to demo database at 'localhost:5432'\n INFO [03:23:39] connecting to redis at '127.0.0.1:6379' on database 0\n INFO [03:23:39] ping status PONG\n INFO [03:23:39] connected to redis at '127.0.0.1:6379' on database 0\n INFO [03:23:39] container is being created\n INFO [03:23:39] basic-web-app app pid 181443\n INFO [03:23:39] warming up the cache entries\n INFO [03:23:41] cache prepared\n INFO [03:23:41] registered static files from directory ./static\n INFO [03:23:41] Starting server on port: 8080\n INFO [03:23:42] 0199d969-d541-7000-b7e6-8f6cc9c93ed4    200 0ms .GET /json\n INFO [03:23:43] 0199d96a-00ed-7000-994d-839cc86b1fdb    200 0ms .GET /metrics\n INFO [03:23:44] 0199d96a-1f88-7000-9dd4-4ed394ef5a68    200 0ms .GET /index.html\n INFO [03:23:44] 0199d96b-0873-7000-b391-28f26e5d963d    200 0ms .GET /test.txt\n INFO [03:23:45] 0199d96b-1412-7000-9eaf-f4f88888053e    200 0ms .GET /\n INFO [05:05:37] 019a149b-abca-7000-b307-fc04282cc334    200 1ms GET http://external-service:8081/json\n INFO [05:05:37] 019a149b-abc9-7000-ae1e-38847fb79210    200 1ms GET /status\n```\n\n### Simple Benchmark\n\nRunning the [zero-basic](./examples/zero-basic/) example with none as `log_level` to preview the framework baseline, but typically we don't use `none` in development environment :)\n\n```bash\n go-wrk -c 100 -d 100 http://localhost:8080/json\nRunning 100s test @ http://localhost:8080/json\n  100 goroutine(s) running concurrently\n8344879 requests in 1m39.643117619s, 1.39GB read\nRequests/sec:\t\t83747.67\nTransfer/sec:\t\t14.30MB\nOverall Requests/sec:\t83430.16\nOverall Transfer/sec:\t14.24MB\nFastest Request:\t84µs\nAvg Req Time:\t\t1.193ms\nSlowest Request:\t19.669ms\nNumber of Errors:\t0\n10%:\t\t\t124µs\n50%:\t\t\t150µs\n75%:\t\t\t164µs\n99%:\t\t\t175µs\n99.9%:\t\t\t176µs\n99.9999%:\t\t176µs\n99.99999%:\t\t176µs\nstddev:\t\t\t743µs\n```\n\n### Attributions\n\nRefer to [Attribution](./attribution.md) file more details.\n\n### 📄 License\n\nThis project is licensed under the Apache License - see the LICENSE file for details.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/2039564?u=254167699886eef3c68d1bda198d7c8697928bc0&v=4",
+  "releases": [],
+  "owner_bio": "A lone wolf with coding habit..",
+  "owner_company": "Software Engineer",
+  "owner_location": "Coimbatore",
+  "owner_blog": null,
+  "owner_twitter_username": "nagendhiran_",
+  "owner_followers": 3,
+  "owner_following": 14,
+  "owner_created_at": "2012-07-25T09:57:32Z",
+  "homepage": "https://im-ng.github.io/zero-docs/",
+  "category": "web"
+}

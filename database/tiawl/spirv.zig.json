@@ -1,0 +1,40 @@
+{
+  "name": "spirv.zig",
+  "owner": "tiawl",
+  "repo": "spirv.zig",
+  "description": "spirv-tools packaged for @ziglang ",
+  "type": "project",
+  "topics": [
+    "binding",
+    "spirv",
+    "spirv-tools",
+    "zig",
+    "ziglang",
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-12-06T10:21:13Z",
+  "dependencies": [
+    {
+      "name": "toolbox",
+      "url": "git+https://github.com/tiawl/toolbox?ref=1.12.6#79c1dffe608a9c4a7dcf11f98f1dc88b9b46e9f5",
+      "hash": "toolbox-1.12.6-kRAu4BJbAAAGPWPltdn1vwY83xau2Zh9015JTQ0MZjyM"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# spirv.zig\n\nThis is a fork of [hexops/spirv-tools][1] which itself is a fork of [KhronosGroup/SPIRV-Tools][2].\n\n## Why this forkception ?\n\nThe intention under this fork is the same as [hexops][7] had when they forked [KhronosGroup/SPIRV-Tools][2]: package the headers for [Zig][4]. So:\n* Unnecessary files have been deleted,\n* The build system has been replaced with `build.zig`.\n\nHowever this repository has subtle differences for maintainability tasks:\n* No shell scripting,\n* A cron runs every day to check [KhronosGroup/SPIRV-Tools][2] and [KhronosGroup/SPIRV-Headers][3]. Then it updates this repository if a new release is available.\n\n## How to use it\n\nThe current usage of this repository is centered around [tiawl/shaderc.zig][3] compilation. But you could use it for your own projects. Headers are here and there are no planned evolution to modify them. See [tiawl/shaderc.zig][3] to see how you can use it. Maybe for your own need, some headers are missing. If it happens, open an issue: this repository is open to potential usage evolution.\n\n## Dependencies\n\nThe [Zig][4] part of this package is relying on the latest [Zig][4] release (0.15.1) and will only be updated for the next one.\n\nHere the repositories' version used by this fork:\n* [KhronosGroup/SPIRV-Tools](https://github.com/tiawl/spirv.zig/blob/trunk/.references/spirv-tools)\n* [KhronosGroup/SPIRV-Headers](https://github.com/tiawl/spirv.zig/blob/trunk/.references/spirv)\n\n## CICD reminder\n\nThese repositories are automatically updated when a new release is available:\n* [tiawl/shaderc.zig][5]\n\nThis repository is automatically updated when a new release is available from these repositories:\n* [KhronosGroup/SPIRV-Tools][2]\n* [KhronosGroup/SPIRV-Headers][3]\n* [microsoft/mimalloc][8]\n* [tiawl/toolbox][6]\n\n## `zig build` options\n\nThese additional options have been implemented for maintainability tasks:\n```\n  -Dfetch   Update .references folder and build.zig.zon then stop execution\n  -Dupdate  Update binding\n```\n\n## License\n\nThis repository is not subject to a unique License:\n\nThe parts of this repository originated from this repository are dedicated to the public domain. See the LICENSE file for more details.\n\n**For other parts, it is subject to the License restrictions their respective owners choosed. By design, the public domain code is incompatible with the License notion. In this case, the License prevails. So if you have any doubt about a file property, open an issue.**\n\n[1]:https://github.com/hexops/spirv-tools\n[2]:https://github.com/KhronosGroup/SPIRV-Tools\n[3]:https://github.com/KhronosGroup/SPIRV-Headers\n[4]:https://github.com/ziglang/zig\n[5]:https://github.com/tiawl/shaderc.zig\n[6]:https://github.com/tiawl/toolbox\n[7]:https://github.com/hexops\n[8]:https://github.com/microsoft/mimalloc\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/57362253?u=519d9e3f04e4833f75c34cb6ceb371670ccddc4b&v=4",
+  "releases": [],
+  "owner_bio": "Starter villain trapped in a while loop",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 11,
+  "owner_following": 2,
+  "owner_created_at": "2019-11-04T15:35:14Z",
+  "license": "Unlicense",
+  "category": "library"
+}

@@ -1,0 +1,74 @@
+{
+  "name": "ziggurat",
+  "owner": "ooyeku",
+  "repo": "ziggurat",
+  "description": "A modern, lightweight HTTP server framework for Zig that prioritizes performance, safety, and developer experience.",
+  "type": "project",
+  "topics": [
+    "http",
+    "zig-library",
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-11-20T02:40:51Z",
+  "readme": "# Ziggurat\n\nA modern, lightweight HTTP server framework for Zig that prioritizes performance, safety, and developer experience.\n\n[Zig 0.15.1](https://ziglang.org) | [MIT License](LICENSE)\n\n\n## Quick Start\n\n```zig\nconst std = @import(\"std\");\nconst ziggurat = @import(\"ziggurat\");\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    // Initialize logger\n    try ziggurat.logger.initGlobalLogger(allocator);\n    \n    // Initialize metrics\n    try ziggurat.metrics.initGlobalMetrics(allocator, 1000); // Keep last 1000 requests\n    defer ziggurat.metrics.deinitGlobalMetrics();\n\n    var builder = ziggurat.ServerBuilder.init(allocator);\n    var server = try builder\n        .host(\"127.0.0.1\")\n        .port(8080)\n        .readTimeout(5000)\n        .writeTimeout(5000)\n        .build();\n    defer server.deinit();\n\n    try server.get(\"/\", handleRoot);\n    try server.start();\n}\n\nfn handleRoot(request: *ziggurat.request.Request) ziggurat.response.Response {\n    _ = request;\n    return ziggurat.text(\"Hello, World!\");\n}\n```\n\n## HTTPS Example\n\nTo enable TLS/HTTPS in your server:\n\n```zig\nvar server = try builder\n    .host(\"127.0.0.1\")\n    .port(443)\n    .enableTls(\"path/to/cert.pem\", \"path/to/key.pem\")\n    .build();\n```\n\n## Examples\n\n1. Todo API - A RESTful API example with JSON handling\n\n   ```bash\n   zig build run-ex1\n   ```\n\n2. Static File Server - File serving with caching and security\n\n   ```bash\n   zig build run-ex2\n   ```\n\n## Documentation\n\n- [Usage Guide](docs/usage.md): Comprehensive guide to using Ziggurat\n- [API Reference](docs/api-reference.md): Detailed API documentation\n- [Examples](examples/): Example applications and use cases\n\n## Requirements\n\n- Zig 0.15.1 or later\n\n## Installation\n\nSee [Usage Guide](docs/usage.md#installation) for more details.\n\n## Contributing\n\nContributions are welcome. Please submit pull requests following the project's code style and including appropriate tests.\n\n## License\n\nThis project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/94309053?u=db839e059711091385a913b6f3fe3e4d1576ab4e&v=4",
+  "releases": [
+    {
+      "tag_name": "v1.0.0",
+      "name": "v1.0.0",
+      "body": "**Full Changelog**: https://github.com/ooyeku/ziggurat/compare/v0.1.3...v1.0.0",
+      "prerelease": false,
+      "published_at": "2025-10-25T22:50:10Z",
+      "html_url": "https://github.com/ooyeku/ziggurat/releases/tag/v1.0.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.3",
+      "name": "v0.1.3",
+      "body": "**Full Changelog**: https://github.com/ooyeku/ziggurat/compare/v0.1.2...v0.1.3",
+      "prerelease": false,
+      "published_at": "2025-09-11T05:48:19Z",
+      "html_url": "https://github.com/ooyeku/ziggurat/releases/tag/v0.1.3",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.2",
+      "name": "v0.1.2",
+      "body": "**Full Changelog**: https://github.com/ooyeku/ziggurat/compare/v0.1.1...v0.1.2",
+      "prerelease": false,
+      "published_at": "2025-05-25T01:13:32Z",
+      "html_url": "https://github.com/ooyeku/ziggurat/releases/tag/v0.1.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.1",
+      "name": "v0.1.1",
+      "body": "## What's Changed\r\n* Dev by @ooyeku in https://github.com/ooyeku/ziggurat/pull/2\r\n\r\n\r\n**Full Changelog**: https://github.com/ooyeku/ziggurat/compare/v0.1.0...v0.1.1",
+      "prerelease": false,
+      "published_at": "2025-05-18T05:20:12Z",
+      "html_url": "https://github.com/ooyeku/ziggurat/releases/tag/v0.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "## What's Changed\r\n* Dev by @ooyeku in https://github.com/ooyeku/ziggurat/pull/1\r\n\r\n\r\n**Full Changelog**: https://github.com/ooyeku/ziggurat/commits/v0.1.0",
+      "prerelease": false,
+      "published_at": "2025-05-14T00:05:32Z",
+      "html_url": "https://github.com/ooyeku/ziggurat/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 5,
+  "owner_following": 8,
+  "owner_created_at": "2021-11-14T16:25:49Z",
+  "license": "MIT",
+  "category": "library"
+}

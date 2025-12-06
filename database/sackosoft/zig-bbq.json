@@ -1,0 +1,51 @@
+{
+  "name": "zig-bbq",
+  "owner": "sackosoft",
+  "repo": "zig-bbq",
+  "description": "A high-performance concurrent ring buffer implementing the Block-based Bounded Queue algorithm (BBQ).",
+  "type": "project",
+  "topics": [
+    "circular-buffer",
+    "circular-queue",
+    "ring-buffer",
+    "zero-dependency",
+    "zig",
+    "zig-library",
+    "zig-package",
+    "lock-free"
+  ],
+  "stars": 4,
+  "forks": 1,
+  "watchers": 0,
+  "updated_at": "2025-09-17T02:59:43Z",
+  "minimum_zig_version": "0.14.1",
+  "readme": "<div align=\"center\">\n\n# zig-bbq\n\n**High-performance, lock-free ring buffer for Zig, based on the BBQ algorithm described in [BBQ: A Block-based Bounded Queue for Exchanging Data and Profiling](https://www.usenix.org/conference/atc22/presentation/wang-jiawei).**\n\n![GitHub License](https://img.shields.io/github/license/sackosoft/zig-bbq)\n![Zig Version](https://img.shields.io/badge/Zig-0.14.1-blue)\n\n<!--\nTODO: Add a visualization, diagram, or demo of BBQ in action.\n-->\n\n</div>\n\n## About\n\n`zig-bbq` implements the **B**lock-based **B**ounded **Q**ueue (BBQ) algorithm; a lock-free threadsafe ring buffer,\ndesigned for high-performance data transfer between threads. BBQ is suitable for both lossless (\"retry-new\") and\nlossy (\"drop-old\") producer-consumer scenarios, making it ideal for message passing, work distribution, profiling,\ntracing, and debugging.\n\n\n## Features\n\n- 🔓 **Lock-free** ring buffer for concurrent producer-consumer scenarios.\n- 🚫 **Zero-dependencies** with property based stress tests and runtime assertions.\n- 📄 **Configurable** block count and block size to enable performance tuning.\n    - The paper describes a tradeoff between throughput and latency.\n- 🔀 **Two Modes** of operation:\n    - `RetryNewQueue`: lossless, blocks producers when full.\n    - `DropOldQueue`: lossy, overwrites oldest unconsumed data when full.\n- ⚡ **High-performance** demonstrated across a range of benchmarks\n    - \"In **single-producer/single-consumer micro-benchmarks, BBQ yields 11.3x to 42.4x higher throughput** than\n      the ringbuffers from Linux kernel, DPDK, Boost, and Folly libraries.\"\n    - \"In **real world scenarios, BBQ achieves up to 1.5x, 50.5x, and 11.1x performance improvements** in\n       benchmarks of DPDK, Linux io_uring, and Disruptor, respectively.\"\n    - Emphasis added, [BBQ - USENIX ATC 2022 - Jiawei Wang et al.](https://www.usenix.org/system/files/atc22-wang-jiawei.pdf)\n\n\n## Zig Version\n\nThe `main` branch targets the latest stable Zig release (currently `0.14.1`).\n\n\n## Installation\n\nIt is recommended that you install `zig-bbq` using `zig fetch`. This will add a `bbq` dependency to your `build.zig.zon` file.\nThe `zig-bbq` project has zero dependencies and is always statically linked. \n\n```bash\nzig fetch --save=bbq git+https://github.com/sackosoft/zig-bbq\n```\n\nNext, in order for your code to import `zig-bbq`, you'll need to update your `build.zig` to do the following:\n\n1. get a reference the `zig-bbq` dependency (installed via `zig fetch`),\n2. get a reference to the `bbq` module within the dependency,\n3. add the module as an import to your executable or library.\n\n```zig\n// (1) Get a reference to the `zig fetch`'ed dependency\nconst bbq_dep = b.dependency(\"bbq\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\n// (2) Get a reference to the language bindings module.\nconst bbq = bbq_dep.module(\"bbq\");\n\n// Set up your library or executable\nconst lib = // ...\nconst exe = // ...\n\n// (3) Add the module as an import to your executable or library.\nmy_exe.root_module.addImport(\"bbq\", bbq);\nmy_lib.root_module.addImport(\"bbq\", bbq);\n```\n\nNow the code in your library or exectable can import and use the BBQ library.\n\n```zig\nconst std = @import(\"std\");\nconst bbq = @import(\"bbq\");\n\npub fn main() !void {\n    std.debug.print(\"{s}\\n\", .{@typeName(RetryNewQueue(u32))});\n}\n\n```\n\n\n## Example Usage\n\n`zig-bbq` is thread-safe and can be safely used by multiple producers and multiple consumers\nconcurrently. The entire API is only four functions: `.init()`, `.deinit()`, `.enqueue()` and `.dequeue()`.\n\n```zig\nconst std = @import(\"std\");\nconst bbq = @import(\"bbq\");\n\npub fn main() !void {\n    const options = bbq.BlockOptions{\n        .block_number = 4,\n        .block_size = 2,\n    };\n\n    var q = try bbq.RetryNewQueue(u32).init(std.heap.page_allocator, options);\n    defer q.deinit();\n\n    const expected: u32 = 42;\n    try q.enqueue(expected);\n    const actual = try q.dequeue();\n    std.debug.assert(expected == actual);\n}\n```\n\n\n## API Overview\n\n| Symbol(s)                | Description                                                                  |\n|--------------------------|------------------------------------------------------------------------------|\n| `RetryNewQueue(T)`       | FIFO queue containing elements of type `T`, blocks producers when full       | \n| `DropOldQueue(T)`        | FIFO queue containing elements of type `T`, overwrites oldest data when full |\n| `.init(allocator, opts)` | Initializes a new instance of the queue                                      |\n| `.enqueue()`             | Used by producers to add data to the queue                                   |\n| `.dequeue()`             | Used by consumers to remove the oldest item from the queue                   |\n| `.deinit()`              | Free resources                                                               |\n| `BlockOptions`           | Set block count and block size                                               |\n\n\n## Credits\n\nThis implementation is based on the BBQ (Block-based Bounded Queue) algorithm described in the research paper:\n\n> **\"BBQ: A Block-based Bounded Queue for Exchanging Data and Profiling\"**  \n> Jiawei Wang, Diogo Behrens, Ming Fu, Lilith Oberhauser, Jonas Oberhauser, Jitang Lei, Geng Chen, Hermann Härtig, Haibo Chen  \n> USENIX Annual Technical Conference (ATC) 2022  \n> [USENIX ATC 2022](https://www.usenix.org/system/files/atc22-wang-jiawei.pdf)\n\n**Important:** This `zig-bbq` implementation is an independent work by Theodore Sackos. The author has no affiliation with\nthe original research paper or its authors. All rights to the original research paper and algorithm design remain with the\noriginal authors and USENIX.\n\nThis implementation is provided under the MIT license and covers only the source code contained in this repository.",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/192897928?v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0 - Stable",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-08-25T18:07:42Z",
+      "html_url": "https://github.com/sackosoft/zig-bbq/releases/tag/v0.1.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.1",
+      "name": "v0.0.1",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-08-21T22:57:06Z",
+      "html_url": "https://github.com/sackosoft/zig-bbq/releases/tag/v0.0.1",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Building stable foundations for modern software.",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2024-12-26T15:40:18Z",
+  "license": "MIT",
+  "category": "library"
+}

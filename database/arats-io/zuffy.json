@@ -1,0 +1,31 @@
+{
+  "name": "zuffy",
+  "owner": "arats-io",
+  "repo": "zuffy",
+  "description": "",
+  "type": "project",
+  "topics": [
+    "zig-package",
+    "logger",
+    "time",
+    "zig",
+    "zoneinfo"
+  ],
+  "stars": 3,
+  "forks": 0,
+  "watchers": 2,
+  "updated_at": "2025-07-26T17:52:16Z",
+  "minimum_zig_version": "0.15.0-dev.383",
+  "readme": "# Zig UFFY library\n\nCurrent Zig UFFY library do offer bunch of extra functionality!\n\nWork in progress...; If somewthing is not working, feel free to contribute or open a issue.\n\nRequire zig version: **0.14.0-dev.850+ddcb7b1c1**\n\n## Usage\n\nInclude the zuffy into the `build.zig.zon` file.\n\n```\nzig fetch --save https://github.com/arats-io/zuffy/archive/refs/tags/v<version>.tar.gz\n\n.dependencies = .{\n    .zuffy = .{\n        .url = \"https://github.com/arats-io/zuffy/archive/refs/tags/v0.1.14.tar.gz\",\n        .hash = \"12201fd38f467e6c64ee7bca53da95863b6c05da77fc51daf0ab22079ede57cbd4e2\",\n    },\n},\n```\n\n## List of modules\n\n### Pools\n\n- [x] Generic Pool\n      Using allocator and the locker\n- [x] Generic Pool Lock & Memory Free\n      Based on on implementation of @kprotty's from https://github.com/kprotty/zap\n- [x] Thread Pool\n      Copied from @kprotty's from https://github.com/kprotty/zap\n\n### Bytes\n\n- [x] Buffer\n- [x] Utf8Buffer (StringBuilder)\n\n---\n\n### Time and Time Zoneinfo\n\n- [x] Time\n- [x] Time Zoneinfo\n\n#### Usage\n\nEnvironment variable `TZ` can be used to calculate a time for a different timezone.\n\n```\nexport TZ='Europe/Tiraspol';\n\n2023 Nov 5th Sun 22:33:05.477603  UTC+03:00\n```\n\nIn case if machine is not having a way to fetch desired zoninfo, the library is considering embeded zip(and gziped) archive with all zone information.\n\n```\nexport TZ='Europe/Tiraspol.zip';\n\n2023 Nov 5th Sun 22:33:05.477603 UTC+03:00\n```\n\n**NOTE**\n\n[time zones info](https://www.iana.org/time-zones) data are embeded (zip and gziped, having 92kb) into the code.\n\n- [x] \\*nix systems\n- [ ] windows systems\n\n---\n\n### Archives\n\n- [x] Zip\n  - [x] archive extraction\n  - [ ] archive creation\n- [ ] More archive formats to be added ...\n\n---\n\n### Lists\n\n- [x] CircularList (FIFO & LIFO)\n- [x] SkipList\n\n---\n\n### Eazy Logger\n\n[zlog](./src/zlog.md)\n\n# Contributing\n\nContributions of all kinds is welcome!\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/55436060?v=4",
+  "releases": [],
+  "owner_company": "arats",
+  "owner_location": "Germany",
+  "owner_blog": "arats.io",
+  "owner_twitter_username": null,
+  "owner_followers": 0,
+  "owner_following": 2,
+  "owner_created_at": "2019-09-17T09:07:43Z",
+  "license": "MIT",
+  "category": "library"
+}

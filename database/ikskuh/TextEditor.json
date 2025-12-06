@@ -1,0 +1,38 @@
+{
+  "name": "TextEditor",
+  "owner": "ikskuh",
+  "repo": "TextEditor",
+  "description": "A backbone for text editors. No rendering, no input, but everything else.",
+  "type": "project",
+  "topics": [
+    "text",
+    "text-editor",
+    "unicode",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 53,
+  "forks": 3,
+  "watchers": 1,
+  "updated_at": "2025-08-29T01:23:07Z",
+  "dependencies": [
+    {
+      "name": "ziglyph",
+      "url": "https://codeberg.org/dude_the_builder/ziglyph/archive/b89d43d1e3fb01b6074bc1f7fc980324b04d26a5.tar.gz",
+      "hash": "12207831bce7d4abce57b5a98e8f3635811cfefd160bca022eb91fe905d36a02cf25"
+    }
+  ],
+  "readme": "# TextEditor\n\nA backend for text editors. It implements the common textbox editing options, but is both rendering and input agnostic.\n\nKeyboard input must be translated into operations like `editor.delete(.right, .word)` to emulate what a typical text box implementation would do when `CTRL DELETE` is pressed.\n\nFor mouse input, the editor component needs to be made aware about the font that is used. For this, an abstract font interface is required.\n\n## API\n\n```zig\nconst TextEditor = @import(\"src/TextEditor.zig\");\n\nfn init(TextEditor.Buffer, initial_text: []const u8) InsertError!TextEditor {\nfn deinit(*TextEditor) void;\nfn setText(*TextEditor, text: []const u8) InsertError!void;\nfn getText(TextEditor) []const u8;\nfn getSubString(editor: TextEditor, start: usize, length: ?usize) []const u8;\nfn setCursor(*TextEditor, offset: usize) SetCursorError!void;\nfn moveCursor(*TextEditor, direction: EditDirection, unit: EditUnit) void;\nfn delete(*TextEditor, direction: EditDirection, unit: EditUnit) void;\nfn insertText(*TextEditor, text: []const u8) InsertError!void;\nfn graphemeCount(TextEditor) usize;\n```\n\n## Common Key Mappings\n\n| Keyboard Input   | Editor Call                          |\n| ---------------- | ------------------------------------ |\n| `Left`           | `editor.moveCursor(.left, .letter)`  |\n| `Right`          | `editor.moveCursor(.right, .letter)` |\n| `Ctrl+Left`      | `editor.moveCursor(.left, .word)`    |\n| `Ctrl+Right`     | `editor.moveCursor(.right, .word)`   |\n| `Home`           | `editor.moveCursor(.left, .line)`    |\n| `End`            | `editor.moveCursor(.right, .line)`   |\n| `Backspace`      | `editor.delete(.left, .letter)`      |\n| `Delete`         | `editor.delete(.right, .letter)`     |\n| `Ctrl+Backspace` | `editor.delete(.left, .word)`        |\n| `Ctrl+Delete`    | `editor.delete(.right, .word)`       |\n| _text input_     | `try editor.insert(\"string\")`        |\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/3932972?u=2893028da897d46ed12f55aa05a935a80e7c119b&v=4",
+  "releases": [],
+  "owner_bio": "Hacker, Dad & Demoscener from southern germany, loves lowlevel and oldschool stuff",
+  "owner_company": null,
+  "owner_location": "Stuttgart - Germany",
+  "owner_blog": "https://random-projects.net/",
+  "owner_twitter_username": "ikskuh",
+  "owner_followers": 473,
+  "owner_following": 72,
+  "owner_created_at": "2013-03-21T16:08:06Z",
+  "license": "MIT",
+  "category": "library"
+}

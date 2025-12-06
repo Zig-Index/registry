@@ -1,0 +1,35 @@
+{
+  "name": "opentelemetry-proto",
+  "owner": "zig-o11y",
+  "repo": "opentelemetry-proto",
+  "description": "Zig type definitions generated from https://github.com/open-telemetry/opentelemetry-proto",
+  "type": "project",
+  "topics": [
+    "opentelemetry",
+    "protobuf",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 4,
+  "forks": 2,
+  "watchers": 0,
+  "updated_at": "2025-11-09T23:14:46Z",
+  "dependencies": [
+    {
+      "name": "protobuf",
+      "url": "git+https://github.com/Arwalk/zig-protobuf?ref=v3.0.1#699ceca5117bbe6b3c11017a3f21a3783f25fa6e",
+      "hash": "protobuf-3.0.0-0e82aqDhJwD5l0ZV3WJ9tcRS0v5SD8ofIQa3mYJQzeor"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "## OpenTelemetry Protobuf Zig\n\n[OpenTelemetry Protobuf definitions](https://github.com/open-telemetry/opentelemetry-proto) packaged for Zig.\n\n---\n\nThis repository checks out the official OpenTelemetry Protobuf definitions in a submodule and contains a Zig build to expose the generated Zig code as a package.\n\n### Import the package\n\nThe following command will checkout the latest avaiable commit on `main`, which _should_ also be the latest tagged version.\n\n```bash\nzig fetch --save \"git+https://github.com/zig-o11y/opentelemetry-proto\"\n```\n\nTo specify a tag, add the ref (e.g. `v1.6.0` tag).\n\n```bash\nzig fetch --save \"git+https://github.com/zig-o11y/opentelemetry-proto#v1.6.0\"\n```\n\nTags in this repository will mirror the tags in the OpenTelemetry official repository.\n\n### Generate the code for a new release\n\nWhen a new tag is added in the upstream repository, there is a build step we can use to update the generated code.\nPick a tag from the upstream repo, say <vX.Y.Z>, and run:\n\n```zig\nzig build update-tag -Dtag=<vX.Y.Z>\n```\n\n### Dependencies\n\nThe marvellous [`zig-protobuf`](https://github.com/Arwalk/zig-protobuf/) library from @Arwalk.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/195921428?v=4",
+  "releases": [],
+  "owner_bio": "Observability made with @ziglang",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2025-01-21T14:22:57Z",
+  "license": "MIT",
+  "category": "library"
+}

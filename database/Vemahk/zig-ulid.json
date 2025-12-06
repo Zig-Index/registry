@@ -1,0 +1,27 @@
+{
+  "name": "zig-ulid",
+  "owner": "Vemahk",
+  "repo": "zig-ulid",
+  "description": "A binary, zero-allocation Ulid implementation written in Zig.",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2024-07-21T01:17:32Z",
+  "minimum_zig_version": "0.12.0",
+  "readme": "# zig-ulid\n\nA binary, zero-alloc [zig](https://ziglang.org/) implementation of [Ulid](https://github.com/ulid/spec).\n\nTested with zig 0.12.0 and 0.13.0.  If not for b.path(), it would probably work for 0.11.0.\n\n## Features\n\n- [x] No allocations\n- [x] To/From String\n- [x] Monotonicity\n\n## Examples\n\n```zig\n\n// Default usage\nconst Ulid = @import(\"ulid\");\nconst id = Ulid.new();\nconst str = id.toString(); // e.g. \"01J0J510YN2KZV7APEE1BQ8BYP\"\nconst copy = try Ulid.parseString(str); // == id\n\nconst epoch_ms: u48 = ulid.timestamp();\nconst random_data: [10]u8 = ulid.data();\n\n// Monotonic\nvar monotonic = Ulid.MonotonicFactory{};\nconst ulid_1 = try monotonic.next(); // e.g. \"01J0JBY3EXAVVZ227VE93QJD2M\"\nconst ulid_2 = try monotonic.next(); // e.g. \"01J0JBY3EXAVVZ227VE93QJD2N\"\n\n// or using the global factory (not recommended but available)\nconst ulid_3 = try Ulid.newMonotonic(); // e.g. \"01J0JC10BFE2CJB7M2SZXX98NH\"\nconst ulid_4 = try Ulid.newMonotonic(); // e.g. \"01J0JC10BFE2CJB7M2SZXX98NJ\"\n\n```\n\n## Use\n\nbuild.zig.zon\n\n```\n.ulid = .{\n    .url = \"https://github.com/Vemahk/zig-ulid/archive/<git_commit_hash>.tar.gz\",\n},\n```\n\nbuild.zig\n\n```zig\n\nconst target = b.standardTargetOptions(.{});\nconst optimize = b.standardOptimizeOption(.{});\n\nconst root = b.path(\"src/main.zig\");\nconst exe = b.addExecutable(.{\n    .name = \"your_project\",\n    .root_source_file = root,\n    .target = target,\n    .optimize = optimize,\n});\n\nconst dep_opts = .{ .target = target, .optimize = optimize };\nconst ulid_mod = b.dependency(\"ulid\", dep_opts).module(\"ulid\");\nexe.root_module.addImport(\"ulid\", ulid_mod);\n\nb.installArtifact(exe);\n\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/4185906?u=2df44f28def8e05351e6d31e98f59eff8e17821d&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Somewhere over the Rainbow",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 2,
+  "owner_following": 0,
+  "owner_created_at": "2013-04-17T23:04:12Z",
+  "license": "MIT",
+  "category": "library"
+}

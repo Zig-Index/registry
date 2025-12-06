@@ -1,0 +1,33 @@
+{
+  "name": "zqueue",
+  "owner": "hgminh95",
+  "repo": "zqueue",
+  "description": "Collections of queues implemented in Zig",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 3,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-08-23T17:09:48Z",
+  "dependencies": [
+    {
+      "name": "zbench",
+      "url": "https://github.com/hendriknielaender/zbench/archive/be4ca3f314a6ed56c7a294ba10f8f6ed3b262920.tar.gz",
+      "hash": "zbench-0.9.2-AAAAAKroAAAlttpa4A4DtAEcB6K0oPrrfVmC29aaDLyl"
+    }
+  ],
+  "readme": "# zqueue\n\nCollections of various queues (spsc, mpmc, broadcast, etc) implemented in Zig\n\n## Usage\n\n## Examples\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/8655647?u=3161e4298ddd0f6a0ce2bf7e289869896c70485a&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "https://hgminh.dev",
+  "owner_twitter_username": null,
+  "owner_followers": 20,
+  "owner_following": 2,
+  "owner_created_at": "2014-09-04T12:46:00Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,34 @@
+{
+  "name": "zigtris",
+  "owner": "ringtailsoftware",
+  "repo": "zigtris",
+  "description": "A minimal terminal Tetris written in Zig",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 26,
+  "forks": 2,
+  "watchers": 1,
+  "updated_at": "2025-11-24T10:36:39Z",
+  "dependencies": [
+    {
+      "name": "mibu",
+      "url": "git+https://github.com/xyaman/mibu.git#be3713ff04e7db3584669e679253ef388e426dc6",
+      "hash": "mibu-0.0.1-dev-Ddr1riTEAAAYAe1TWBT--W8fPUL8UyBE7dy-yNNZ3z5V"
+    }
+  ],
+  "readme": "# Zigtris\n\nA minimal terminal Tetris written in Zig. Tested with Zig 0.15.2\n\n`zig build run`\n\nCursor keys to move, space to drop, `q` to quit.\n\n![](demo.gif)\n\n# Run as a service via ssh\n\n    ./run-as-service.sh\n\n    ssh zigtris@localhost -p 2022\n\n# Notes\n\nSome notes for anyone looking at the code:\n\n - `Display` is a thin wrapper on top of the `mibu` terminal library, it provides a double buffered one pixel per character interface where it only redraws changed pixels on the buffer flip\n - `Stage` is the game stage and provides a square pixel interface on top of `Display` (by printing two chars for each pixel)\n - `Player` holds the `Tetronimo` shapes and movement logic\n - `Debris` holds the list of fallen blocks for hitchecking and completed line detection\n\n# License\n\nMIT\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/20110944?u=93548b94fa9de08e939a35745a2affd82408e198&v=4",
+  "releases": [],
+  "owner_bio": "@tobyjaffey@mastodon.me.uk",
+  "owner_company": "Ringtail Software Ltd",
+  "owner_location": "UK",
+  "owner_blog": "http://www.ringtailsoftware.co.uk",
+  "owner_twitter_username": null,
+  "owner_followers": 39,
+  "owner_following": 8,
+  "owner_created_at": "2016-06-23T13:40:30Z",
+  "license": "MIT",
+  "category": "library"
+}

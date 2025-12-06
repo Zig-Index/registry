@@ -1,0 +1,28 @@
+{
+  "name": "zig-humantime",
+  "owner": "GoNZooo",
+  "repo": "zig-humantime",
+  "description": "Mini library for expressing integer time values in more human readable ways",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2021-09-23T09:52:12Z",
+  "readme": "# zig-humantime\n\nThis library exports two functions to convert human readable time strings into integer values:\n\n```zig\ntest \"1h2m3s\" {\n    const time = comptime seconds(\"1h2m3s\");\n    // @compileLog(time) -> 7446\n    testing.expectEqual(time, 3723);\n}\n\ntest \"2h4m6s\" {\n    const time = comptime seconds(\"2h4m6s\");\n    testing.expectEqual(time, (3600 * 2) + (4 * 60) + 6);\n}\n\ntest \"1h2m3s in milliseconds\" {\n    const format_string = \"1h2m3s\";\n    const time = milliseconds(format_string);\n    // @compileLog(time) -> runtime value\n    testing.expectEqual(time, comptime seconds(format_string) * 1000);\n}\n\ntest \"5d4h3m2s\" {\n    testing.expectEqual(seconds(\"5d4h3m2s\"), 446582);\n}\n```",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1327032?u=85d6d39dae7581ab380ef27670e32892cb83c765&v=4",
+  "releases": [],
+  "owner_bio": "Backend & frontend. Odin, Zig, Haskell, \r\n PureScript, TypeScript, Elixir/Erlang and lots more, check repos.",
+  "owner_company": null,
+  "owner_location": "Pleven, Bulgaria",
+  "owner_blog": "http://severnatazvezda.com/",
+  "owner_twitter_username": null,
+  "owner_followers": 113,
+  "owner_following": 23,
+  "owner_created_at": "2012-01-13T07:32:59Z",
+  "license": "MIT",
+  "category": "library"
+}

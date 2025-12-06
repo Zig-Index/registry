@@ -1,0 +1,44 @@
+{
+  "name": "zargunaught",
+  "owner": "srjilarious",
+  "repo": "zargunaught",
+  "description": "Zig argument parsing library, based on my C++ argunaught library",
+  "type": "project",
+  "topics": [
+    "zig-package",
+    "zig"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-09-17T12:44:22Z",
+  "dependencies": [
+    {
+      "name": "testz",
+      "url": "https://github.com/srjilarious/testz/archive/refs/tags/v1.0.0.tar.gz",
+      "hash": "testz-1.0.0-abaPyR6FCAA9ensC2BcFZDXEKomxnMMXNkcRdUE3lMZ-"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1356248?u=b4e78dd97be59fc9c316238e479cd50e50a2cb9c&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.5.0",
+      "name": "v0.5.0",
+      "body": "# Changes\r\n- Added command groups, so that help text can show related commands together.  When initializing the `ArgParser`, you can pass an array of command groups (excerpt from `examples/basic.zig`:\r\n```zig\r\n.groups = &.{\r\n  .{  \r\n    .name = \"Spells\",\r\n    .description = \"Magical incantations and evocations.\",\r\n    .commands = &.{ \r\n      .{  \r\n        .name = \"transmogrify\",\r\n        .opts = &.{\r\n          .{ \r\n            .longName = \"into\", \r\n            .shortName = \"i\", \r\n              .description = \"[...]\", .maxNumParams = 1 },\r\n            .{ .longName = \"another\", .description = \"Another option for the command.\" },\r\n        }\r\n      },\r\n      .{  \r\n        .name = \"lightning_bolt\", \r\n        .description = \"Creates a blistering bolt of lightning!.\",\r\n      },\r\n    },\r\n  },\r\n  .{  \r\n    .name = \"Production\",\r\n    .description = \"Create new magical implements.\",\r\n    .commands = &.{ \r\n      .{\r\n        .name = \"brew_potion\",\r\n        .description = \"Creates a new potion\",\r\n      },\r\n      .{\r\n        .name = \"write_scroll\",\r\n        .description = \"Creates a new scroll.\",\r\n      },\r\n    },\r\n  },\r\n}\r\n```\r\n- Added checking for ANSI color support on stdout to the printer module.\r\n- Added the ability to set an option with no parameters, a single parameter or multiple parameters by default with the `DefaultValue`  EnumUnion.\r\n\r\n```zig\r\nvar parser = try zargs.ArgParser.init(std.heap.page_allocator, .{ .name = \"Default options\", .opts = &.{\r\n  .{ .longName = \"beta\", .shortName = \"b\", .description = \"\", .default = zargs.DefaultValue.set() },\r\n  .{ .longName = \"gamma\", .shortName = \"g\", .description = \"\", .default = zargs.DefaultValue.param(\"blah\") },\r\n  .{ .longName = \"delta\", .shortName = \"d\", .description = \"\", .default = zargs.DefaultValue.params(&.{ \"boop\", \"blop\", \"bleep\" }) },\r\n} });\r\n```\r\n\r\n- Added ability to prepend `no-` to an option to unset it for the case of a value being default set that a user wants to unset.  For example, you could have an option `stack-trace` that defaults to set, and a user can pass `--no-stack-trace`.\r\n- Added min/max positional args configuration, description for positional args and possible default value, also via `DefaultValue` EnumUnion.\r\n- Added helper methods to `ArgParserResult` to get the (first) parameter of an option result back: `optionValOrDefault`, `optionNumVal`, `optionNumValOrDefault`.\r\n- Added ability to stack multiple options, increasing their count.  This allows for things like `-vvv` where the option `v` would show as having occurred 3 times.\r\n```zig\r\n.{\r\n  .longName = \"verbose\",\r\n  .shortName = \"v\",\r\n  .description = \"log verbosity\",\r\n  .maxOccurences = 5,\r\n  .maxNumParams = 0,\r\n}\r\n```\r\n  Stacked options can be mixed, and the last in the set is also able to receive parameters.  So `-vs` for a `v` and `s` option, or `-vsf temp` for `v`, `s`, and `f` with the parameter `temp`.\r\n",
+      "prerelease": false,
+      "published_at": "2024-12-08T15:57:33Z",
+      "html_url": "https://github.com/srjilarious/zargunaught/releases/tag/v0.5.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": "Boulder, Colorado",
+  "owner_blog": "https://www.walknsqualk.com/",
+  "owner_twitter_username": null,
+  "owner_followers": 2,
+  "owner_following": 1,
+  "owner_created_at": "2012-01-20T01:02:55Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,30 @@
+{
+  "name": "lepto.zig",
+  "owner": "alexnask",
+  "repo": "lepto.zig",
+  "description": "Date and time library for zig, inspired by C++20 std::chrono",
+  "type": "project",
+  "topics": [
+    "zig",
+    "ziglang",
+    "zig-package",
+    "zig-library",
+    "time",
+    "datetime",
+    "timezone"
+  ],
+  "stars": 4,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2023-03-15T18:13:30Z",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/265903?u=a6353bd1505f2acb70acc7f215684168a7c46943&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 167,
+  "owner_following": 24,
+  "owner_created_at": "2010-05-05T20:15:05Z",
+  "category": "library"
+}

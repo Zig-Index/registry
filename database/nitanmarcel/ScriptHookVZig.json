@@ -1,0 +1,58 @@
+{
+  "name": "ScriptHookVZig",
+  "owner": "nitanmarcel",
+  "repo": "ScriptHookVZig",
+  "description": "Write GTA V mods using Zig",
+  "type": "project",
+  "topics": [
+    "gta5",
+    "gtamodding",
+    "scripthookv",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 7,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-08-21T10:54:15Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.11.0",
+  "readme": "# ScriptHookVZig\nDevelop GTA V mods with the help of Zig\n\n- [ScriptHookVZig](#scripthookvzig)\n  - [Requirements](#requirements)\n  - [Usage](#usage)\n    - [Adding to build.zig.zon](#adding-to-buildzigzon)\n    - [Adding to build.zig](#adding-to-buildzig)\n    - [Your first script](#your-first-script)\n  - [Documentation](#documentation)\n  - [Thanks](#thanks)\n  - [LICENSE](#license)\n\n## Requirements\n\n- Zig 0.12.0=>\n- [ScriptHookV v1.0.3179.0](http://www.dev-c.com/gtav/scripthookv/) and it's [requirements](https://gtaforums.com/topic/932648-script-hook-v/)\n\n## Usage\n\n### Adding to build.zig.zon\n\n```zig\nzig fetch git+https://github.com/nitanmarcel/ScriptHookVZig#{LastCommitHash} -- save\n```\n\n### Adding to build.zig\n\n```zig\n    // Shared/Dynamic library is required\n    const lib = b.addSharedLibrary(.{\n        .name = \"{name}\",\n        .root_source_file = b.path(\"src/root.zig\"),\n        .target = target,\n        .optimize = optimize,\n    });\n\n    // Add ScriptHookVZig as a dependency\n    const shvz_dep = b.dependency(\"shvz\", .{});\n\n    // Import is as a module\n    lib.root_module.addImport(\"shvz\", shvz_dep.module(\"shvz\"));\n\n    // Save the dll\n    b.installArtifact(lib);\n    // Copy bin/{name}.dll (zig-0.13.0 and above) / lib/{name}.dll (zig-0.12.0) to the GTA root folder where ScriptHookV.dll is located and rename the library extension to .asi: {name}.dll -> {name}.asi\n```\n\n### Your first script\n\n```zig\n// import the module\nconst shvz = @import(\"shvz\");\n\n// Create the script main function\npub export fn scriptMain() void {}\n\npub const DLL_PROCESS_ATTACH: std.os.windows.DWORD = 1;\npub const DLL_THREAD_ATTACH: std.os.windows.DWORD = 2;\npub const DLL_THREAD_DETACH: std.os.windows.DWORD = 3;\npub const DLL_PROCESS_DETACH: std.os.windows.DWORD = 4;\n\n/// Main entry point. Will be loaded by ScriptHookV.dll\npub fn DllMain(hInstance: std.os.windows.HINSTANCE, reason: std.os.windows.DWORD, lpReserved: std.os.windows.LPVOID) std.os.windows.BOOL {\n    _ = lpReserved;\n\n    switch (reason) {\n        DLL_PROCESS_ATTACH => {\n            // shvz.init() REQUIRED\n            // It handles opening the ScriptHookV.dll library and read symbols from it\n            shvz.init() catch |e| { };\n            // register the script's entry point\n            shvz.main.scriptRegister(hInstance, scriptMain);\n        },\n        DLL_PROCESS_DETACH => {\n            // Unregister the script's entry point\n            // Call this before shvz.deInit() to ensure taht we didn't unloaded ScriptHookV.dll library.\n            shvz.main.scriptUnregister(scriptMain);\n            // call shvz.deInit() REQUIRED\n            // Will close the loaded ScriptHookV.dll library freeing memory\n            shvz.deinit();\n        },\n        else => {},\n    }\n\n    return std.os.windows.TRUE;\n}\n```\n\n## Documentation\n\n- You can find a set of examples (C) and a readme in the [ScriptHookV SDK](http://www.dev-c.com/gtav/scripthookv/) archive and help on [gtaforums](https://gtaforums.com).\n- Natives are documented on [Github Pages](https://nitanmarcel.github.io/ScriptHookVZig/#natives.natives)\n- The example project in here only showcases the setup for this respective zig library.\n\n## Thanks\n\n- [Alexander Blade - Script Hook V](http://www.dev-c.com).\n- Discord Zig - For guiding me with some things.\n- [c2z](https://github.com/lassade/c2z/) - Helped in the translation of over 6000 native methods from ScriptHookV sdk.\n- [alloc8or](https://github.com/alloc8or/gta5-nativedb-data) - Most of the native methods are pulled from his [gta5-nativedb-data repo](https://github.com/alloc8or/gta5-nativedb-data/blob/master/natives.json)\n## LICENSE\n\n- MIT\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/41646249?u=eafb0d26b0f6a583f3faa079723686ff38fb83af&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "## [0.2.0](https://github.com/nitanmarcel/ScriptHookVZig/releases/tag/0.2.0) - 2024-06-15\r\n\r\n<small>[Compare with v0.0.1](https://github.com/nitanmarcel/ScriptHookVZig/compare/v0.0.1...0.2.0)</small>\r\n\r\n### Added\r\n\r\n- Add documentation ([2578064](https://github.com/nitanmarcel/ScriptHookVZig/commit/2578064efeb54f744748ea665e0c0391aefb7e9a) by Marcel Alexandru Nitan).\r\n\r\n### Fixed\r\n\r\n- Fix multiline docs ([7d070da](https://github.com/nitanmarcel/ScriptHookVZig/commit/7d070da74319e6915f0440094b9db6b9cd75a962) by Marcel Alexandru Nitan).\r\n- Fix missing natives ([d8e344d](https://github.com/nitanmarcel/ScriptHookVZig/commit/d8e344d5459ac257dc8d91477f46574c3e8ddec2) by Marcel Alexandru Nitan).\r\n\r\n### Changed\r\n\r\n- Change the symbol reading handling ([05bd62f](https://github.com/nitanmarcel/ScriptHookVZig/commit/05bd62f02ef24f9ad4792af759fbc4ed6231b341) by Marcel Alexandru Nitan).",
+      "prerelease": false,
+      "published_at": "2024-06-15T18:03:25Z",
+      "html_url": "https://github.com/nitanmarcel/ScriptHookVZig/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.1",
+      "name": "v0.0.1",
+      "body": "## [0.0.1](https://github.com/nitanmarcel/ScriptHookVZig/releases/tag/0.0.1) - 2024-06-13\r\n\r\n<small>[Compare with first commit](https://github.com/nitanmarcel/ScriptHookVZig/compare/617e544d00010b84c89beb1888d7e32995b6875d...0.0.1)</small>\r\n\r\n### Added\r\n\r\n- Add documented natives from gta5-nativedb-data ([dbc453a](https://github.com/nitanmarcel/ScriptHookVZig/commit/dbc453a4e586ae4415ae09a2dc4b946b9d4a70a7) by Marcel Alexandru Nitan).\r\n\r\n### Fixed\r\n\r\n- Fix README preview ([231bec3](https://github.com/nitanmarcel/ScriptHookVZig/commit/231bec3aa43fc92d1044e23a8e43346aec0870f3) by Nitan Alexandru Marcel).\r\n",
+      "prerelease": false,
+      "published_at": "2024-06-13T16:57:47Z",
+      "html_url": "https://github.com/nitanmarcel/ScriptHookVZig/releases/tag/v0.0.1",
+      "assets": []
+    }
+  ],
+  "owner_company": "MARCEL'S SECURITY AND SOFTWARE TECHNOLOGIES",
+  "owner_location": null,
+  "owner_blog": "https://msectech.dev/",
+  "owner_twitter_username": null,
+  "owner_followers": 80,
+  "owner_following": 6,
+  "owner_created_at": "2018-07-24T17:50:08Z",
+  "homepage": "https://nitanmarcel.github.io/ScriptHookVZig/",
+  "license": "MIT",
+  "category": "library"
+}

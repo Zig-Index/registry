@@ -1,0 +1,665 @@
+{
+  "name": "liza",
+  "owner": "tensorush",
+  "repo": "liza",
+  "description": "Zig codebase initializer.",
+  "type": "project",
+  "topics": [
+    "zig-package",
+    "cli"
+  ],
+  "stars": 37,
+  "forks": 3,
+  "watchers": 1,
+  "updated_at": "2025-12-02T03:09:34Z",
+  "dependencies": [
+    {
+      "name": "argzon",
+      "url": "git+https://codeberg.org/tensorush/argzon.git#83201eeb255045d988690077317caa1bb565288f",
+      "hash": "argzon-0.5.1-Cl574kamAgA5YibLiGe95oFPEA4HTlvM7ZNZ7fPou8dj"
+    },
+    {
+      "name": "zq",
+      "url": "git+https://codeberg.org/tensorush/zq.git#4d7419df968258b88994ee5531e303b39dc2d18c",
+      "hash": "zq-0.9.0-7XsKhTjuAAA2AAi8EmTixd59PuYcl0a0thWwTvqlxvS9"
+    }
+  ],
+  "minimum_zig_version": "0.15.2",
+  "readme": "# liza\n\n## Zig codebase initializer.\n\n### Usage\n\n#### Executable\n\n- Build from source:\n\n```sh\ngit clone https://codeberg.org/tensorush/liza.git\ncd liza/\nzig build run -- -h\n```\n\n- Download latest release:\n\n```sh\nwget https://github.com/tensorush/liza/releases/latest/download/<archive>\ntar -xf <archive> # Unix\nunzip <archive> # Windows\n./<binary> -h\n```\n\n### Features\n\n- #### [Zig Executable Template (`exe`)](src/templates/exe/):\n    - Public API module creation.\n    - Dependency package usage.\n    - [Build steps](src/templates/exe/build.zig):\n        - `install` (default):\n            - Zig executable installation.\n            - Common build steps execution (see below).\n        - `run`: Zig executable run.\n        - Custom build steps (see below).\n        - Optional build steps (see below).\n    - Common build options exposure (see below).\n\n- #### [Zig Library Template (`lib`)](src/templates/lib/):\n    - Public root module creation.\n    - [Build steps](src/templates/lib/build.zig):\n        - `install` (default):\n            - Zig static library installation.\n            - Common build steps execution (see below).\n        - `run`: Example suite execution.\n        - Custom build steps, except `release` (see below).\n        - Optional build steps (see below).\n    - Common build options exposure (see below).\n\n- #### [Zig Build Template (`bld`)](src/templates/bld/):\n    - Public Translate-C module creation.\n    - Lazy dependency package usage.\n    - Configuration option usage.\n    - [Build steps](src/templates/bld/build.zig):\n        - `install` (default):\n            - C/C++ static library installation.\n            - Common build steps execution (see below).\n\n- #### Common Build Steps:\n    - `test`: Test suite execution.\n    - `fmt`: Formatting check execution.\n\n- #### Custom Build Steps:\n    - `tag`: Next version tag with [Zq](https://codeberg.org/tensorush/zq).\n    - `update`: Dependencies and minimum Zig version update with [Zq](https://codeberg.org/tensorush/zq).\n    - `release`: Archived binary release with Tar (Unix) and Zip (Windows).\n\n- #### Optional Build Steps:\n    - `doc` (`$d`): Documentation emission (`-d`, `doc`).\n    - `cov` (`$c`): [Kcov source code coverage](https://github.com/SimonKagstrom/kcov) generation (`-c`, `cov`).\n    - `lint` (`$l`): [Vale markup prose linting check](https://github.com/errata-ai/vale) execution (`-l`, `lint`).\n    - `spell` (`$s`): [Typos source code spelling check](https://github.com/crate-ci/typos) execution (`-s`, `spell`).\n    - `check` (`$k`): Build compilation check for [ZLS Build-On-Save](https://zigtools.org/zls/guides/build-on-save/) (`-k`, `check`).\n\n- #### Common Build Options:\n    - `-Ddebug`: Test suite execution under [LLDB debugger](https://lldb.llvm.org/).\n    - `-Dstrip`: Compilation without stack trace printing code.\n    - `-Dprofile`: Compilation with [Tracy profiler Zig bindings](https://github.com/Games-by-Mason/tracy_zig) support.\n    - `-Dno-bin -fincremental --watch`: Incremental compilation without binary emission.\n\n- #### [GitHub](src/templates/.github/workflows/ci.yaml) / [Forgejo](src/templates/.forgejo/workflows/ci.yaml) / [Woodpecker](src/templates/.woodpecker/ci.yaml) CI Workflow Template Jobs:\n    - `install`:\n        - Main artifacts' installation.\n        - `test`: Test suite execution.\n        - `fmt`: Formatting check execution.\n        - (**GitHub-only**) `cov` (`$c`): [Kcov source code coverage](https://github.com/SimonKagstrom/kcov) publication to [Codecov](https://docs.codecov.com/docs/github-2-getting-a-codecov-account-and-uploading-coverage#install-the-github-app-integration) (`-c`, `cov`).\n\n- #### [GitHub](src/templates/.github/workflows/cd.yaml) / [Forgejo](src/templates/.forgejo/workflows/cd.yaml) / [Woodpecker](src/templates/.woodpecker/cd.yaml) CD Workflow Template Jobs:\n    - (**`exe`-/`lib`-only**) `emit`→`deploy`: Documentation emission and deployment to [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-with-a-custom-github-actions-workflow) or [Codeberg Pages](https://codeberg.page) (`-d`, `doc`):\n        - (**Woodpecker-only**) [Generate Codeberg access token](https://docs.codeberg.org/advanced/access-token/) with `repository:write` permission and add it as `TOKEN` secret available on `Push` event.\n        - (**Woodpecker-only**) Add email as `EMAIL` secret available on `Push` event.\n\n- #### [GitHub](src/templates/.github/workflows/release.yaml) / [Woodpecker](src/templates/.woodpecker/release.yaml) Release Workflow Jobs:\n    - (**`exe`-only**) `release`: Release publication using [minisign](https://jedisct1.github.io/minisign/):\n      - Generate key pair without password: `minisign -GW`.\n      - Add `./minisign.pub` as `MINISIGN_PUBLIC_KEY` secret (available on `Tag` event in Woodpecker).\n      - Add `~/.minisign/minisign.key` as `MINISIGN_SECRET_KEY` secret (available on `Tag` event in Woodpecker).\n      - (**Woodpecker-only**) [Generate Codeberg access token](https://docs.codeberg.org/advanced/access-token/) with `misc:read` and `repository:write` permissions and add it as `TOKEN` secret available to `woodpeckerci/plugin-release` on `Tag` event.\n\n- #### [MIT License Template](src/templates/LICENSE):\n    - `$y`: Current year.\n    - `$n`: User name.\n\n- #### [`.gitignore` Template](src/templates/.gitignore):\n    - `$c`: [Kcov source code coverage](https://github.com/SimonKagstrom/kcov) artifacts (`-c`, `cov`).\n\n- #### [`.gitattributes`](src/templates/.gitattributes).\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/48649707?v=4",
+  "releases": [
+    {
+      "tag_name": "v0.15.0",
+      "name": "v0.15.0",
+      "body": "Archived binary files can be verified as follows:\n```sh\nminisign -Vm <archive> -p minisign.pub\n```\n\n\n**Full Changelog**: https://github.com/tensorush/liza/compare/v0.13.2...v0.15.0",
+      "prerelease": false,
+      "published_at": "2025-08-25T18:25:30Z",
+      "html_url": "https://github.com/tensorush/liza/releases/tag/v0.15.0",
+      "assets": [
+        {
+          "name": "liza-v0.15.0-x86_64-linux.tar.xz.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.15.0/liza-v0.15.0-x86_64-linux.tar.xz.minisig",
+          "size": 327,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-v0.15.0-aarch64-macos.tar.xz.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.15.0/liza-v0.15.0-aarch64-macos.tar.xz.minisig",
+          "size": 328,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign.pub",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.15.0/minisign.pub",
+          "size": 114,
+          "content_type": "application/x-mspublisher"
+        },
+        {
+          "name": "liza-v0.15.0-x86_64-linux.tar.xz",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.15.0/liza-v0.15.0-x86_64-linux.tar.xz",
+          "size": 166400,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "liza-v0.15.0-x86_64-windows.zip",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.15.0/liza-v0.15.0-x86_64-windows.zip",
+          "size": 217496,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "liza-v0.15.0-x86_64-windows.zip.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.15.0/liza-v0.15.0-x86_64-windows.zip.minisig",
+          "size": 326,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-v0.15.0-aarch64-macos.tar.xz",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.15.0/liza-v0.15.0-aarch64-macos.tar.xz",
+          "size": 156416,
+          "content_type": "application/x-xz"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.13.2",
+      "name": "v0.13.2",
+      "body": "Archived binary files can be verified as follows:\n```sh\nminisign -Vm <archive> -p minisign.pub\n```\n\n\n**Full Changelog**: https://github.com/tensorush/liza/compare/v0.13.1...v0.13.2",
+      "prerelease": false,
+      "published_at": "2025-04-03T13:22:55Z",
+      "html_url": "https://github.com/tensorush/liza/releases/tag/v0.13.2",
+      "assets": [
+        {
+          "name": "minisign.pub",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.13.2/minisign.pub",
+          "size": 114,
+          "content_type": "application/x-mspublisher"
+        },
+        {
+          "name": "liza-v0.13.2-x86_64-linux.tar.xz.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.13.2/liza-v0.13.2-x86_64-linux.tar.xz.minisig",
+          "size": 327,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-v0.13.2-x86_64-windows.zip.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.13.2/liza-v0.13.2-x86_64-windows.zip.minisig",
+          "size": 326,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-v0.13.2-aarch64-macos.tar.xz.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.13.2/liza-v0.13.2-aarch64-macos.tar.xz.minisig",
+          "size": 328,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-v0.13.2-x86_64-windows.zip",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.13.2/liza-v0.13.2-x86_64-windows.zip",
+          "size": 235326,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "liza-v0.13.2-x86_64-linux.tar.xz",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.13.2/liza-v0.13.2-x86_64-linux.tar.xz",
+          "size": 171272,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "liza-v0.13.2-aarch64-macos.tar.xz",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.13.2/liza-v0.13.2-aarch64-macos.tar.xz",
+          "size": 155928,
+          "content_type": "application/x-xz"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.13.1",
+      "name": "v0.13.1",
+      "body": "Archived binary files can be verified as follows:\n```sh\nminisign -Vm <archive> -p minisign.pub\n```\n\n\n**Full Changelog**: https://github.com/tensorush/liza/compare/v0.13.0...v0.13.1",
+      "prerelease": false,
+      "published_at": "2025-04-03T11:32:20Z",
+      "html_url": "https://github.com/tensorush/liza/releases/tag/v0.13.1",
+      "assets": [
+        {
+          "name": "minisign.pub",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.13.1/minisign.pub",
+          "size": 114,
+          "content_type": "application/x-mspublisher"
+        },
+        {
+          "name": "liza-v0.13.0-x86_64-linux.tar.xz.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.13.1/liza-v0.13.0-x86_64-linux.tar.xz.minisig",
+          "size": 327,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-v0.13.0-x86_64-windows.zip",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.13.1/liza-v0.13.0-x86_64-windows.zip",
+          "size": 235379,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "liza-v0.13.0-aarch64-macos.tar.xz.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.13.1/liza-v0.13.0-aarch64-macos.tar.xz.minisig",
+          "size": 328,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-v0.13.0-x86_64-linux.tar.xz",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.13.1/liza-v0.13.0-x86_64-linux.tar.xz",
+          "size": 171304,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "liza-v0.13.0-x86_64-windows.zip.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.13.1/liza-v0.13.0-x86_64-windows.zip.minisig",
+          "size": 326,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-v0.13.0-aarch64-macos.tar.xz",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.13.1/liza-v0.13.0-aarch64-macos.tar.xz",
+          "size": 156036,
+          "content_type": "application/x-xz"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.13.0",
+      "name": "v0.13.0",
+      "body": "Archived binary files can be verified as follows:\n```sh\nminisign -Vm <archive> -p minisign.pub\n```\n\n\n## What's Changed\n* feat: Add add_check step option by @Calder-Ty in https://github.com/tensorush/liza/pull/1\n\n## New Contributors\n* @Calder-Ty made their first contribution in https://github.com/tensorush/liza/pull/1\n\n**Full Changelog**: https://github.com/tensorush/liza/compare/v0.12.0...v0.13.0",
+      "prerelease": false,
+      "published_at": "2025-04-01T17:41:45Z",
+      "html_url": "https://github.com/tensorush/liza/releases/tag/v0.13.0",
+      "assets": [
+        {
+          "name": "liza-v0.13.0-x86_64-windows.zip",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.13.0/liza-v0.13.0-x86_64-windows.zip",
+          "size": 236164,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "minisign.pub",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.13.0/minisign.pub",
+          "size": 114,
+          "content_type": "application/x-mspublisher"
+        },
+        {
+          "name": "liza-v0.13.0-x86_64-windows.zip.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.13.0/liza-v0.13.0-x86_64-windows.zip.minisig",
+          "size": 326,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-v0.13.0-x86_64-linux.tar.xz.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.13.0/liza-v0.13.0-x86_64-linux.tar.xz.minisig",
+          "size": 327,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-v0.13.0-x86_64-linux.tar.xz",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.13.0/liza-v0.13.0-x86_64-linux.tar.xz",
+          "size": 171808,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "liza-v0.13.0-aarch64-macos.tar.xz",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.13.0/liza-v0.13.0-aarch64-macos.tar.xz",
+          "size": 156456,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "liza-v0.13.0-aarch64-macos.tar.xz.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.13.0/liza-v0.13.0-aarch64-macos.tar.xz.minisig",
+          "size": 328,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.12.0",
+      "name": "v0.12.0",
+      "body": "Archived binary files can be verified as follows:\n```sh\nminisign -Vm <archive> -p minisign.pub\n```\n\n\n**Full Changelog**: https://github.com/tensorush/liza/compare/v0.11.0...v0.12.0",
+      "prerelease": false,
+      "published_at": "2025-04-01T09:08:32Z",
+      "html_url": "https://github.com/tensorush/liza/releases/tag/v0.12.0",
+      "assets": [
+        {
+          "name": "minisign.pub",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.12.0/minisign.pub",
+          "size": 114,
+          "content_type": "application/x-mspublisher"
+        },
+        {
+          "name": "liza-v0.12.0-x86_64-linux.tar.xz.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.12.0/liza-v0.12.0-x86_64-linux.tar.xz.minisig",
+          "size": 327,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-v0.12.0-aarch64-macos.tar.xz.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.12.0/liza-v0.12.0-aarch64-macos.tar.xz.minisig",
+          "size": 328,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-v0.12.0-x86_64-windows.zip.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.12.0/liza-v0.12.0-x86_64-windows.zip.minisig",
+          "size": 326,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-v0.12.0-aarch64-macos.tar.xz",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.12.0/liza-v0.12.0-aarch64-macos.tar.xz",
+          "size": 155456,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "liza-v0.12.0-x86_64-linux.tar.xz",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.12.0/liza-v0.12.0-x86_64-linux.tar.xz",
+          "size": 170960,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "liza-v0.12.0-x86_64-windows.zip",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.12.0/liza-v0.12.0-x86_64-windows.zip",
+          "size": 234906,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.11.0",
+      "name": "v0.11.0",
+      "body": "Archived binary files can be verified as follows:\n```sh\nminisign -Vm <archive> -p minisign.pub\n```\n\n\n**Full Changelog**: https://github.com/tensorush/liza/compare/v0.10.0...v0.11.0",
+      "prerelease": false,
+      "published_at": "2025-03-31T10:14:30Z",
+      "html_url": "https://github.com/tensorush/liza/releases/tag/v0.11.0",
+      "assets": [
+        {
+          "name": "liza-v0.11.0-x86_64-linux.tar.xz.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.11.0/liza-v0.11.0-x86_64-linux.tar.xz.minisig",
+          "size": 327,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-v0.11.0-x86_64-windows.zip",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.11.0/liza-v0.11.0-x86_64-windows.zip",
+          "size": 234442,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "liza-v0.11.0-x86_64-linux.tar.xz",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.11.0/liza-v0.11.0-x86_64-linux.tar.xz",
+          "size": 170680,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "liza-v0.11.0-aarch64-macos.tar.xz",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.11.0/liza-v0.11.0-aarch64-macos.tar.xz",
+          "size": 155264,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "liza-v0.11.0-x86_64-windows.zip.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.11.0/liza-v0.11.0-x86_64-windows.zip.minisig",
+          "size": 326,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-v0.11.0-aarch64-macos.tar.xz.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.11.0/liza-v0.11.0-aarch64-macos.tar.xz.minisig",
+          "size": 328,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign.pub",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.11.0/minisign.pub",
+          "size": 114,
+          "content_type": "application/x-mspublisher"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.10.0",
+      "name": "v0.10.0",
+      "body": "Archived binary files can be verified as follows:\n```sh\nminisign -Vm <file> -p minisign.pub\n```\n\n\n**Full Changelog**: https://github.com/tensorush/liza/compare/v0.9.3...v0.10.0",
+      "prerelease": false,
+      "published_at": "2025-03-21T13:20:03Z",
+      "html_url": "https://github.com/tensorush/liza/releases/tag/v0.10.0",
+      "assets": [
+        {
+          "name": "liza-0.10.0-x86_64-linux.tar.xz.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.10.0/liza-0.10.0-x86_64-linux.tar.xz.minisig",
+          "size": 326,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-0.10.0-aarch64-macos.tar.xz.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.10.0/liza-0.10.0-aarch64-macos.tar.xz.minisig",
+          "size": 327,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-0.10.0-x86_64-windows.zip.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.10.0/liza-0.10.0-x86_64-windows.zip.minisig",
+          "size": 325,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-0.10.0-x86_64-linux.tar.xz",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.10.0/liza-0.10.0-x86_64-linux.tar.xz",
+          "size": 1000956,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "liza-0.10.0-x86_64-windows.zip",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.10.0/liza-0.10.0-x86_64-windows.zip",
+          "size": 369150,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "liza-0.10.0-aarch64-macos.tar.xz",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.10.0/liza-0.10.0-aarch64-macos.tar.xz",
+          "size": 224048,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "minisign.pub",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.10.0/minisign.pub",
+          "size": 114,
+          "content_type": "application/x-mspublisher"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.9.3",
+      "name": "v0.9.3",
+      "body": "Archived binary files can be verified as follows:\n```sh\nminisign -Vm <file> -p minisign.pub\n```\n\n\n**Full Changelog**: https://github.com/tensorush/liza/compare/v0.9.2...v0.9.3",
+      "prerelease": false,
+      "published_at": "2025-03-20T12:34:02Z",
+      "html_url": "https://github.com/tensorush/liza/releases/tag/v0.9.3",
+      "assets": [
+        {
+          "name": "liza-0.9.3-x86_64-linux.tar.xz.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.3/liza-0.9.3-x86_64-linux.tar.xz.minisig",
+          "size": 325,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign.pub",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.3/minisign.pub",
+          "size": 114,
+          "content_type": "application/x-mspublisher"
+        },
+        {
+          "name": "liza-0.9.3-aarch64-macos.tar.xz",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.3/liza-0.9.3-aarch64-macos.tar.xz",
+          "size": 224040,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "liza-0.9.3-aarch64-macos.tar.xz.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.3/liza-0.9.3-aarch64-macos.tar.xz.minisig",
+          "size": 326,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-0.9.3-x86_64-linux.tar.xz",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.3/liza-0.9.3-x86_64-linux.tar.xz",
+          "size": 1001180,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "liza-0.9.3-x86_64-windows.zip.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.3/liza-0.9.3-x86_64-windows.zip.minisig",
+          "size": 324,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-0.9.3-x86_64-windows.zip",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.3/liza-0.9.3-x86_64-windows.zip",
+          "size": 369172,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.9.2",
+      "name": "v0.9.2",
+      "body": "Archived binary files can be verified as follows:\n```sh\nminisign -Vm <file> -p minisign.pub\n```\n\n\n**Full Changelog**: https://github.com/tensorush/liza/compare/v0.9.1...v0.9.2",
+      "prerelease": false,
+      "published_at": "2025-03-20T12:34:01Z",
+      "html_url": "https://github.com/tensorush/liza/releases/tag/v0.9.2",
+      "assets": [
+        {
+          "name": "minisign.pub",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.2/minisign.pub",
+          "size": 114,
+          "content_type": "application/x-mspublisher"
+        },
+        {
+          "name": "liza-0.9.2-x86_64-windows.zip.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.2/liza-0.9.2-x86_64-windows.zip.minisig",
+          "size": 324,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-0.9.2-x86_64-windows.zip",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.2/liza-0.9.2-x86_64-windows.zip",
+          "size": 369002,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "liza-0.9.2-x86_64-linux.tar.xz.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.2/liza-0.9.2-x86_64-linux.tar.xz.minisig",
+          "size": 325,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-0.9.2-aarch64-macos.tar.xz",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.2/liza-0.9.2-aarch64-macos.tar.xz",
+          "size": 223928,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "liza-0.9.2-x86_64-linux.tar.xz",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.2/liza-0.9.2-x86_64-linux.tar.xz",
+          "size": 1000548,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "liza-0.9.2-aarch64-macos.tar.xz.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.2/liza-0.9.2-aarch64-macos.tar.xz.minisig",
+          "size": 326,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.9.1",
+      "name": "v0.9.1",
+      "body": "Archived binary files can be verified as follows:\n```sh\nminisign -Vm <file> -p minisign.pub\n```\n\n\n**Full Changelog**: https://github.com/tensorush/liza/compare/v0.9.0...v0.9.1",
+      "prerelease": false,
+      "published_at": "2025-03-19T17:29:51Z",
+      "html_url": "https://github.com/tensorush/liza/releases/tag/v0.9.1",
+      "assets": [
+        {
+          "name": "liza-0.9.1-x86_64-windows.zip.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.1/liza-0.9.1-x86_64-windows.zip.minisig",
+          "size": 324,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-0.9.1-x86_64-linux.tar.xz.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.1/liza-0.9.1-x86_64-linux.tar.xz.minisig",
+          "size": 325,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign.pub",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.1/minisign.pub",
+          "size": 114,
+          "content_type": "application/x-mspublisher"
+        },
+        {
+          "name": "liza-0.9.1-aarch64-macos.tar.xz.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.1/liza-0.9.1-aarch64-macos.tar.xz.minisig",
+          "size": 326,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-0.9.1-x86_64-windows.zip",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.1/liza-0.9.1-x86_64-windows.zip",
+          "size": 368446,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "liza-0.9.1-x86_64-linux.tar.xz",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.1/liza-0.9.1-x86_64-linux.tar.xz",
+          "size": 1000408,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "liza-0.9.1-aarch64-macos.tar.xz",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.1/liza-0.9.1-aarch64-macos.tar.xz",
+          "size": 223840,
+          "content_type": "application/x-xz"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.9.0",
+      "name": "v0.9.0",
+      "body": "Archived binary files can be verified as follows:\n```sh\nminisign -Vm <file> -p minisign.pub\n```\n\n\n**Full Changelog**: https://github.com/tensorush/liza/compare/v0.8.6...v0.9.0",
+      "prerelease": false,
+      "published_at": "2025-03-19T16:15:11Z",
+      "html_url": "https://github.com/tensorush/liza/releases/tag/v0.9.0",
+      "assets": [
+        {
+          "name": "minisign.pub",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.0/minisign.pub",
+          "size": 114,
+          "content_type": "application/x-mspublisher"
+        },
+        {
+          "name": "liza-0.9.0-x86_64-windows.zip.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.0/liza-0.9.0-x86_64-windows.zip.minisig",
+          "size": 324,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-0.9.0-x86_64-linux.tar.xz.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.0/liza-0.9.0-x86_64-linux.tar.xz.minisig",
+          "size": 325,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-0.9.0-x86_64-linux.tar.xz",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.0/liza-0.9.0-x86_64-linux.tar.xz",
+          "size": 1000008,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "liza-0.9.0-aarch64-macos.tar.xz",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.0/liza-0.9.0-aarch64-macos.tar.xz",
+          "size": 223884,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "liza-0.9.0-x86_64-windows.zip",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.0/liza-0.9.0-x86_64-windows.zip",
+          "size": 368452,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "liza-0.9.0-aarch64-macos.tar.xz.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.9.0/liza-0.9.0-aarch64-macos.tar.xz.minisig",
+          "size": 326,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.8.6",
+      "name": "v0.8.6",
+      "body": "Archived binary files can be verified as follows:\r\n\r\n```sh\r\nminisign -Vm <file> -p minisign.pub\r\n```\r\n\r\n**Full Changelog**: https://github.com/tensorush/liza/compare/v0.8.5...v0.8.6",
+      "prerelease": false,
+      "published_at": "2025-03-19T15:39:40Z",
+      "html_url": "https://github.com/tensorush/liza/releases/tag/v0.8.6",
+      "assets": [
+        {
+          "name": "liza-0.8.6-x86_64-linux.tar.xz.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.8.6/liza-0.8.6-x86_64-linux.tar.xz.minisig",
+          "size": 325,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign.pub",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.8.6/minisign.pub",
+          "size": 114,
+          "content_type": "application/x-mspublisher"
+        },
+        {
+          "name": "liza-0.8.6-x86_64-windows.zip.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.8.6/liza-0.8.6-x86_64-windows.zip.minisig",
+          "size": 324,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-0.8.6-x86_64-windows.zip",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.8.6/liza-0.8.6-x86_64-windows.zip",
+          "size": 368176,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "liza-0.8.6-aarch64-macos.tar.xz.minisig",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.8.6/liza-0.8.6-aarch64-macos.tar.xz.minisig",
+          "size": 326,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "liza-0.8.6-x86_64-linux.tar.xz",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.8.6/liza-0.8.6-x86_64-linux.tar.xz",
+          "size": 998756,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "liza-0.8.6-aarch64-macos.tar.xz",
+          "url": "https://github.com/tensorush/liza/releases/download/v0.8.6/liza-0.8.6-aarch64-macos.tar.xz",
+          "size": 222972,
+          "content_type": "application/x-xz"
+        }
+      ]
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 0,
+  "owner_following": 0,
+  "owner_created_at": "2019-03-17T13:48:36Z",
+  "license": "MIT",
+  "category": "cli"
+}

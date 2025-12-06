@@ -1,0 +1,28 @@
+{
+  "name": "jigar",
+  "owner": "alichraghi",
+  "repo": "jigar",
+  "description": "Case convertion library for ziguanas",
+  "type": "project",
+  "topics": [
+    "case-conversion",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 8,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2023-09-30T11:26:03Z",
+  "readme": "# Jigar\n![logo](/media/logo.png)\n\ncase convertion library for ziguanas\n\nsupports: `lower case`, `UPPER CASE`, `MACRO_CASE`, `TRAIN-CASE`, `snake_case`, `snake_Camel`, `Snake_Pascal`, `kebab-case`, `Kebab-Pascal`, `camelCase` and `PascalCase`\n\n### Usage\n\n```zig\nconst jigar = @import(\"jigar\");\n\npub fn main() void {\n\tvar my_hello = \"Hello World\".*;\n\tjigar.snakeCase(&my_hello); // results: hello_world\n}\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/63465728?u=fa21c28d844e96c20c16516a5e993bfd8c535a38&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 164,
+  "owner_following": 63,
+  "owner_created_at": "2020-04-10T16:05:04Z",
+  "license": "MIT",
+  "category": "library"
+}

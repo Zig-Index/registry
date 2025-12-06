@@ -1,0 +1,34 @@
+{
+  "name": "axiom",
+  "owner": "navid-m",
+  "repo": "axiom",
+  "description": "Terminal tables, charts, and other components library for CLIs",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-08-23T21:57:32Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.14.1",
+  "readme": "## Example usage\n\n```zig\nconst axiom = @import(\"axiom\");\n\nvar table = axiom.Table.init(std.heap.page_allocator, .rounded);\ndefer table.deinit();\n\ntry table.addColumn(\"Name\", 10, .left);\ntry table.addColumn(\"Age\", 5, .right);\ntry table.addColumn(\"City\", 12, .center);\ntry table.addRow(&[_][]const u8{ \"Alice\", \"25\", \"New York\" });\ntry table.addRow(&[_][]const u8{ \"Bob\", \"30\", \"Los Angeles\" });\ntry table.printTable();\n```\n\n## Supported constructs\n\n-  Tables\n-  Sparklines\n-  Bar charts\n-  Line charts\n-  Breakdown charts\n-  Trees\n\n## Preview\n\n<img src=\"img/screen_2.png\">\n<img src=\"img/screen_3.png\">\n<img src=\"img/screen.png\">\n\n---\n\nNo warranty. Not ever.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1858451?u=6878810195d1413b96f1ad5f6def1f9cc45c03af&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 3,
+  "owner_following": 0,
+  "owner_created_at": "2012-06-17T08:08:35Z",
+  "license": "GPL-3.0",
+  "category": "library"
+}

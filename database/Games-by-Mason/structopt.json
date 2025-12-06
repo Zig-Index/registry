@@ -1,0 +1,35 @@
+{
+  "name": "structopt",
+  "owner": "Games-by-Mason",
+  "repo": "structopt",
+  "description": "Argument parsing for Zig.",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 14,
+  "forks": 5,
+  "watchers": 1,
+  "updated_at": "2025-11-29T07:30:44Z",
+  "minimum_zig_version": "0.16.0-dev.1484+d0ba6642b",
+  "readme": "# Structopt\n\nThis is the argument parser I use in my engine and various supporting tools.\n\n# Zig Version\n\n[`main`](https://github.com/Games-by-Mason/structopt/tree/main) loosely tracks Zig master. For support for specific Zig versions, see [releases](https://github.com/Games-by-Mason/structopt/releases/).\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/174537044?v=4",
+  "releases": [
+    {
+      "tag_name": "v1.0.0",
+      "name": "v1.0.0",
+      "body": "This release targets Zig v0.14.0. Thanks to those who contributed! :)\r\n\r\n## What's Changed\r\n* update to zig 0.14.0-dev.1495+f29bdd674 by @andrewrk in https://github.com/Games-by-Mason/structopt/pull/6\r\n* fix type coercion failure by @andrewrk in https://github.com/Games-by-Mason/structopt/pull/8\r\n* remove custom stringToEnum() by @travisstaloch in https://github.com/Games-by-Mason/structopt/pull/10\r\n\r\n## New Contributors\r\n* @andrewrk made their first contribution in https://github.com/Games-by-Mason/structopt/pull/6\r\n* @travisstaloch made their first contribution in https://github.com/Games-by-Mason/structopt/pull/10\r\n\r\n**Full Changelog**: https://github.com/Games-by-Mason/structopt/commits/v1.0.0",
+      "prerelease": false,
+      "published_at": "2025-05-01T22:13:22Z",
+      "html_url": "https://github.com/Games-by-Mason/structopt/releases/tag/v1.0.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "",
+  "owner_location": null,
+  "owner_blog": "https://gamesbymason.com/",
+  "owner_twitter_username": null,
+  "owner_created_at": "2024-07-02T21:36:16Z",
+  "license": "MIT",
+  "category": "library"
+}

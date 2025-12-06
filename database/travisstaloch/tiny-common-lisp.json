@@ -1,0 +1,41 @@
+{
+  "name": "tiny-common-lisp",
+  "owner": "travisstaloch",
+  "repo": "tiny-common-lisp",
+  "description": "a toy lisp common lisp compiler",
+  "type": "project",
+  "topics": [
+    "common-lisp",
+    "lisp-interpreter",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-12-04T21:49:46Z",
+  "dependencies": [
+    {
+      "name": "flagset",
+      "url": "git+https://github.com/travisstaloch/flagset#d3e3040d5ee641452d91a41d032d91c3111ab556",
+      "hash": "flagset-0.0.1-AVmOhSIwAQDfvLgGTZVQKb8WTAXp1FEuxxk4C04eRnvy"
+    },
+    {
+      "name": "RegionAllocator",
+      "url": "git+https://codeberg.org/archaistvolts/RegionAllocator/#c34d7108da604082448de3334ec5f715009e1127",
+      "hash": "RegionAllocator-0.0.1-4HCJzSNDAAAlYOBBJOadKS-9bxC3889W9eBz0QBrLQBe"
+    }
+  ],
+  "minimum_zig_version": "0.15.2",
+  "readme": "# Test\n\nrun `zig build test` and then diff output against `sbcl` on files in examples/ and tests/\n\n```\n./tests/run-all.sh\n```\n\n\n# Roadmap\n\n* [ ] start using a test suite\n  * [ ] https://github.com/tgutu/clunit\n    * https://tgutu.github.io/clunit/#clunit_1\n  * [ ] https://gitlab.common-lisp.net/ansi-test/ansi-test\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1562827?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 68,
+  "owner_following": 32,
+  "owner_created_at": "2012-03-22T00:22:23Z",
+  "license": "MIT",
+  "category": "library"
+}

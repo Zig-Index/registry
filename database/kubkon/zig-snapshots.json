@@ -1,0 +1,30 @@
+{
+  "name": "zig-snapshots",
+  "owner": "kubkon",
+  "repo": "zig-snapshots",
+  "description": "Preview Zig's incremental linker state in interactive HTML",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zld",
+    "visualisaton",
+    "zig-package"
+  ],
+  "stars": 45,
+  "forks": 1,
+  "watchers": 2,
+  "updated_at": "2025-05-16T00:28:24Z",
+  "readme": "# zig-snapshots\n\nA tool allowing you to preview a series of snapshots of Zig's incremental linker.\n\n## Usage\n\nYou will need to build Zig's stage2/self-hosted compiler with `-Dlink-snapshot` flag on:\n\n```\n$ zig build -Dlink-snapshot\n```\n\nThen, you can run the compiler either in a fire-and-forget or watch-for-updates manner with\n`--debug-link-snapshot` flag on to generate a snapshot of the linker's state per incremental update,\nall saved in the same JSON output file:\n\n```\n$ zig build-exe hello.zig --watch --debug-link-snapshot\n> update-and-run\n> update-and-run\n> exit\n\n$ file snapshots.json\nsnapshots.json: JSON data\n```\n\nYou should then feed the output JSON file to `zig-snapshots` which will generate an\nHTML file with the linker's state per each incremental update that you can interative with:\n\n```\n$ zig-out/bin/zig-snapshots snapshots.json\n$ open snapshots.html\n```\n\n![zig-snapshots demo](zig_snapshots_demo.png)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1519747?u=242eb0dcd1841303f3f48919c2f5120d35900f50&v=4",
+  "releases": [],
+  "owner_bio": "Systems programmer working on the Zed editor",
+  "owner_company": "@zed-industries",
+  "owner_location": "Warsaw, Poland",
+  "owner_blog": "www.jakubkonka.com",
+  "owner_twitter_username": null,
+  "owner_followers": 852,
+  "owner_following": 97,
+  "owner_created_at": "2012-03-09T11:12:30Z",
+  "license": "MIT",
+  "category": "library"
+}

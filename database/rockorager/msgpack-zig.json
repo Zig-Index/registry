@@ -1,0 +1,38 @@
+{
+  "name": "msgpack-zig",
+  "owner": "rockorager",
+  "repo": "msgpack-zig",
+  "description": "msgpack encoding and decoding in zig | msgpack.org[Zig]",
+  "type": "project",
+  "topics": [
+    "msgpack",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2024-11-14T11:44:41Z",
+  "readme": "# msgpack-zig\n\nmsgpack-zig provides a simple API for encoding and decoding msgpack data. The\nAPI is designed to similar to `std.json`. Msgpack inherently requires less\nallocation than JSON so the return values are slightly different.\n\n> [!IMPORTANT]\n> msgpack-zig uses zig 0.13.0\n\n## Usage\n\n> [!NOTE]\n> Refer to the [documentation](https://rockorager.github.io/msgpack-zig/) for additional usage.\n\nThere are two main functions provided by msgpack-zig:\n\n```zig\n/// Pack a given type as a msgpack Value\npub fn pack(comptime T: type, writer: std.io.AnyWriter) anyerror!void {}\n\n/// Unpack the next msgpack Value from reader as type T\npub fn unpack(comptime T: type, reader: std.io.AnyReader) anyerror!void {}\n```\n\nFor packing, any type which has a function signature `msgpackPack(self: T,\nwriter: std.io.AnyWriter) anyerror!void` will use this function has for packing.\nOtherwise it will be packed using the defaults.\n\nLikewise, unpacking types can implement `msgpackUnpack(writer: std.io.AnyWriter) anyerror!T` to unpack from a stream, or `msgpackUnpackFromValue(value: msgpack.Value) anyerror!T` to unpack from a msgpack.Value.\n\n## Value\n\nmsgpack values are stored internally as a tagged union. Note that we impose a\nlimitation on maps: the keys *must* be strings, similar to JSON (the msgpack\nspecification allows for any msgpack type to be a key).\n\n```zig\npub const Value = union(enum) {\n    i64: i64,\n    u64: u64,\n    f64: f64,\n    nil: void,\n    bool: bool,\n    str: []const u8,\n    bin: []const u8,\n    array: []Value,\n    map: std.StringHashMap(Value),\n    ext: struct {\n        id: i8,\n        data: []const u8,\n    },\n};\n```\n\n## Roadmap\n\n- [ ] Automatic unpacking of `map` to structs\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/476352?u=aff432b811e969bae9d2f71a01510895e4bf469e&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "First release",
+      "prerelease": false,
+      "published_at": "2024-09-05T16:11:53Z",
+      "html_url": "https://github.com/rockorager/msgpack-zig/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": "Sourcegraph",
+  "owner_location": "St. Paul, MN",
+  "owner_blog": "https://rockorager.dev",
+  "owner_twitter_username": "rockorager",
+  "owner_followers": 232,
+  "owner_following": 5,
+  "owner_created_at": "2010-11-10T20:36:25Z",
+  "license": "MIT",
+  "category": "library"
+}

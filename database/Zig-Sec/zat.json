@@ -1,0 +1,45 @@
+{
+  "name": "zat",
+  "owner": "Zig-Sec",
+  "repo": "zat",
+  "description": "The Zig Audit Tool",
+  "type": "project",
+  "topics": [
+    "dependencies",
+    "dependency",
+    "graph",
+    "zig",
+    "zig-package",
+    "ziglang",
+    "cyclonedx",
+    "sbom",
+    "sbom-tool"
+  ],
+  "stars": 4,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-11-05T02:17:35Z",
+  "dependencies": [
+    {
+      "name": "clap",
+      "url": "https://github.com/Hejsil/zig-clap/archive/refs/tags/0.11.0.tar.gz",
+      "hash": "clap-0.11.0-oBajB-HnAQDPCKYzwF7rO3qDFwRcD39Q0DALlTSz5H7e"
+    },
+    {
+      "name": "uuid",
+      "url": "https://github.com/r4gus/uuid-zig/archive/refs/tags/0.4.0.tar.gz",
+      "hash": "uuid-0.4.0-oOieIR2AAAChAUVBY4ABjYI1XN0EbVALmiN0JIlggC3i"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# Zig Audit Tool - ZAT\n\nRequired compiler version: 0.15.1\n\nAfter compiling run _zat -h_.\n\n> This is alpha software. Expect bugs and breaking changes!\n\n## Features\n\n### Dependency Graphs\n\nUse ZAT to create dependency graphs.\n\n```mermaid\n%%{init: {\"flowchart\": {\"htmlLabels\": false}} }%%\ngraph TD;\nc25aabcf9323b699[\"`<a href='https://github.com/Zig-Sec/keylib/archive/refs/tags/0.6.1.tar.gz'>keylib</a>\nv0.6.1`\"]\n    c25aabcf9323b699 --> 32fbe7d2a082bf92\n    c25aabcf9323b699 --> 274758e14a01bde3\n    c25aabcf9323b699 --> d17f50a6219ee8a0\n8ba83cc904d99578[\"`<a href='https://github.com/Zig-Sec/kdbx/archive/refs/tags/0.1.2.tar.gz'>kdbx</a>\nv0.1.2`\"]\n    8ba83cc904d99578 --> 65f99e6f07a316a0\n    8ba83cc904d99578 --> d17f50a6219ee8a0\n    8ba83cc904d99578 --> 7a7a16eec9417569\n32fbe7d2a082bf92[\"`<a href='https://github.com/r4gus/zbor/archive/refs/tags/0.17.2.tar.gz'>zbor</a>\nv0.17.0`\"]\n7a7a16eec9417569[\"`<a href='https://github.com/edqx/dishwasher/archive/refs/tags/1.0.7.tar.gz'>dishwasher</a>\nv2.0.0`\"]\n274758e14a01bde3[\"`<a href='https://github.com/r4gus/hidapi/archive/refs/tags/0.15.0.tar.gz'>hidapi</a>\nv0.15.0`\"]\ndd1692d15d21a6f6[\"`<a href='git@github.com:Zig-Sec/PassKeeZ.git'>passkeez</a>\nv0.5.2`\"]\n    dd1692d15d21a6f6 --> c25aabcf9323b699\n    dd1692d15d21a6f6 --> 8ba83cc904d99578\n    dd1692d15d21a6f6 --> d17f50a6219ee8a0\n    dd1692d15d21a6f6 --> e06b5c5f6286b39a\n65f99e6f07a316a0[\"`<a href='https://github.com/Hejsil/zig-clap/archive/refs/tags/0.10.0.tar.gz'>clap</a>\nv0.10.0`\"]\ne06b5c5f6286b39a[\"`<a href='https://github.com/r4gus/ccdb/archive/refs/tags/0.3.1.tar.gz'>ccdb</a>\nv0.3.2`\"]\n    e06b5c5f6286b39a --> 32fbe7d2a082bf92\n    e06b5c5f6286b39a --> d17f50a6219ee8a0\n    e06b5c5f6286b39a --> 65f99e6f07a316a0\nd17f50a6219ee8a0[\"`<a href='https://github.com/r4gus/uuid-zig/archive/refs/tags/0.3.1.tar.gz'>uuid</a>\nv0.3.0`\"]\n```\n\nThe graph depicted above has been generated using `zat --graph --mermaid --path ~/passkeez-graph.txt`. Mermaid graphs can be added to a Github readme by putting it into a code block of the type `mermaid`.\n\n### Software Bill of Materials (SBOMs)\n\nUser ZAT to create a SBOMs for your Zig packages.\n\nJust run:\n```bash\n$ zat --sbom\n```\n\nTo write the SBOM directly to a file use the `--path <PATH>` option.\n\nIf you want to include additional information about the components specified\nwithin the `build.zig` in your SBOM use the `--components` option.\n\n> `--components` requires a Zig compiler in your system path and will invoke\n> the compiler with a modified `build.zig` that parses the build graph and\n> then outputs the relevant information as Json.\n\n#### Open Source SBOM tools\n\nThe following tools can be used to play with generated SBOMs:\n- [sbom.sh](https://sbom.sh)\n\n### Using the Github dependency submission API\n\nZat helps you with submitting dependencies for your projects on Github.\n\n![Github dependency for Zig-Sec/kdbx](static/github-dep.png)\n\n> Please note that publishing dependencies on Github isn't of much use yet\n> as Github won't cross reference dependencies published via the API. That\n> means for example that packages won't show up within the dependents list \n> of a repository.\n\n#### Manual submission\n\nUse the `--github-dependency` command to create a Json object that describes your packages dependencies. The command expects the following arguments:\n\n- `sha`: The commit SHA associated with the dependency snapshot.\n- `ref`: The repository branch that triggered this snapshot (_Please not that the dependency graph isn't updated if you don't specify the default branch, e.g. 'refs/heads/master'_).\n\n```bash\nzat --github-dependency \\\n    --correlator=\"zatworkflow\" \\\n    --jobid=\"zatid\" \\\n    --sha=\"203eef01dd9ea7f0602c79a0bd3edd60bb1a9e66\" \\\n    --ref=\"refs/heads/master\" \\\n    --minify\n```\n\nFurthermore, the following optional arguments can be used:\n\n- `correlator`: A correlator used to group submitted snapshots, e.g. _GITHUB_WORKFLOW ++ GITHUB_JOB_.\n- `minify`: Output minified Json.\n\nThe resulting Json object can then be submitted via the [REST API endpoint for dependency submission](https://docs.github.com/en/rest/dependency-graph/dependency-submission?apiVersion=2022-11-28). Below one can see a submission for the [Zig-Sec/kdbx](https://github.com/Zig-Sec/kdbx) repository:\n\n```bash\ncurl -L \\\n  -X POST \\\n  -H \"Accept: application/vnd.github+json\" \\\n  -H \"Authorization: Bearer <TOKEN>\" \\\n  -H \"X-GitHub-Api-Version: 2022-11-28\" \\\n  https://api.github.com/repos/Zig-Sec/kdbx/dependency-graph/snapshots \\\n  -d '{\"version\":0,\"job\":{\"id\":\"zatid\",\"correlator\":\"zatworkflow\"},\"sha\":\"9942e370d962a418d2ee26ef34197042b53483b9\",\"ref\":\"refs/heads/master\",\"detector\":{\"name\":\"zat\",\"version\":\"0.1.0\",\"url\":\"https://github.com/Zig-Sec/zat\"},\"manifests\":{\"build.zig.zon\":{\"name\":\"build.zig.zon\",\"file\":{\"source_location\":\"build.zig.zon\"},\"resolved\":{\"clap\":{\"package_url\":\"pkg:github/Hejsil/zig-clap@0.10.0\"},\"dishwasher\":{\"package_url\":\"pkg:github/edqx/dishwasher@2.0.0\"},\"uuid\":{\"package_url\":\"pkg:github/r4gus/uuid-zig@0.3.0\"}}}},\"scanned\":\"2025-09-14T17:26:35\"}'\n```\n\nOne can create a bearer token on Github under `Settings > Developer settings > Personal access tokens`. Make sure you select the `repo` scope. Also, make sure you enable the dependency graph for your repository under `Insights > Dependency graph`.\n\nThe Github API should respond with something like:\n\n```bash\n{\n  \"id\": 34223554,\n  \"created_at\": \"2025-09-14T17:27:46.352Z\",\n  \"result\": \"SUCCESS\",\n  \"message\": \"Dependency results for the repo have been successfully updated.\"\n}\n```\n\n#### Github Action\n\nComing soon...\n\n## Sources of Information\n\nInformation about a package are gathered from the following sources:\n\n- `build.zig.zon`: Package properties, including the version and package dependencies.\n- `build.zig`: Modules, libraries, executables and other resources.\n\n## Thanks\n\nSpecial thanks to the following authors:\n- Hejsil for [clap](https://github.com/Hejsil/zig-clap)\n- nektro for [zig-time](https://github.com/nektro/zig-time)    \n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/175068426?v=4",
+  "releases": [],
+  "owner_bio": "ZigSec - Because we jump from bytes to bytes. ",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2024-07-08T23:35:57Z",
+  "license": "MIT",
+  "category": "library"
+}

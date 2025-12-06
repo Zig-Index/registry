@@ -1,0 +1,25 @@
+{
+  "name": "zva",
+  "owner": "zetaframe",
+  "repo": "zva",
+  "description": "Zig Vulkan Allocator (zva).",
+  "type": "project",
+  "topics": [
+    "zig-package",
+    "vulkan"
+  ],
+  "stars": 3,
+  "forks": 2,
+  "watchers": 1,
+  "updated_at": "2024-08-27T11:59:51Z",
+  "readme": "# Zig Vulkan Allocator (zva)\n\nA zig vulkan memory allocator for use in [zetaframe](https://github.com/zetaframe/zetaframe).\n\nUses Snektron's vulkan bindings.\n\n## Usage\n\nIn `build.zig`:\n```zig\nconst zva = @import(<path to pkg.zig>).Pkg(<path to zva root>, <path to generated vulkan bindings>);\n\nstep.addPackage(zva.pkg);\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/60146383?v=4",
+  "releases": [],
+  "owner_bio": "lightweight zig game framework.",
+  "owner_location": "Earth",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2020-01-21T15:38:36Z",
+  "license": "Apache-2.0",
+  "category": "library"
+}

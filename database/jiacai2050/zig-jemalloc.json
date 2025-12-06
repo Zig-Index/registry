@@ -1,0 +1,34 @@
+{
+  "name": "zig-jemalloc",
+  "owner": "jiacai2050",
+  "repo": "zig-jemalloc",
+  "description": "Zig allocator baked by jemalloc",
+  "type": "project",
+  "topics": [
+    "zig-library",
+    "zig-package"
+  ],
+  "stars": 4,
+  "forks": 0,
+  "watchers": 2,
+  "updated_at": "2025-09-29T22:30:54Z",
+  "dependencies": [
+    {
+      "name": "jemalloc",
+      "url": "https://github.com/jemalloc/jemalloc/archive/refs/tags/5.3.0.tar.gz",
+      "hash": "1220018d05b405d30affa14b7e876e05dc8d7c40480653607ae60bbff48bcee28d96"
+    }
+  ],
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/3848910?u=60f91a765c4ad95cb3a5a5b41d19ca12ee71a65d&v=4",
+  "releases": [],
+  "owner_bio": "Rust developer at day and Zig at night.\r\n\r\n\r\nHost of @EmacsTalk and @RustTalk.\r\n",
+  "owner_company": "@zigcc",
+  "owner_location": "/home/mars",
+  "owner_blog": "https://en.liujiacai.net/",
+  "owner_twitter_username": "liujiacai",
+  "owner_followers": 1017,
+  "owner_following": 125,
+  "owner_created_at": "2013-03-13T01:33:15Z",
+  "license": "MIT",
+  "category": "library"
+}

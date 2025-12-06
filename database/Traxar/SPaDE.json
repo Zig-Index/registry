@@ -1,0 +1,62 @@
+{
+  "name": "SPaDE",
+  "owner": "Traxar",
+  "repo": "SPaDE",
+  "description": "a library for SParse and DEnse tensor operations.",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 3,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-11-05T02:36:20Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.15.0",
+  "readme": "# SPaDE\n\na library for **SP**arse **a**nd **DE**nse tensor operations.\n\n## Table of Contents\n\n- [Installation](#installation)\n- [Usage](#usage)\n- [Dependencies](#dependencies)\n\n## Installation\n\nin your zig-project run:\n\n    zig fetch --save https://github.com/Traxar/SPaDE/archive/refs/tags/v0.0.3.tar.gz\n\nThen add `spade` as an import to your root modules in `build.zig`:\n\n```zig\nfn build(b: *std.Build) void {\n    // set build options ...\n\n    const spade = b.dependency(\"spade\", .{});\n\n    // define exe ...\n\n    exe.root_module.addImport(\"spade\", spade.module(\"spade\"));\n}\n```\n\n## Usage\n\n```zig\nconst std = @import(\"std\");\nconst assert = std.debug.assert;\nconst spade = @import(\"spade\");\n\nconst T = spade.Tensor(usize,f32); //tensor base type, supports arbitrary element types\nconst V = T.Dense(&.{0}); //vector\nconst Mcol = T.Dense(&.{ 0, 1 }); //column major matrix\nconst Mrow = T.Dense(&.{ 1, 0 }); //row major matrix\n\n// elementwise functions for tensor operations\nconst op = spade.op;\n// but you can also define your own :)\nfn add(a: anytype, b: anytype) @TypeOf(a + b) {\n    return a + b;\n}\n\n/// matrix multiplication\nfn mul(res: anytype, a: anytype, b: anytype) void {\n    const Res = @TypeOf(res);\n    const A = @TypeOf(a);\n    const B = @TypeOf(b);\n    if (Res != Mcol and Res != Mrow) @compileError(\"res must be of type Mcol or Mrow\");\n    if (A != Mcol and A != Mrow) @compileError(\"a must be of type Mcol or Mrow\");\n    if (B != Mcol and B != Mrow) @compileError(\"b must be of type Mcol or Mrow\");\n    res.f(add, op.mul, .{ a.t(1, 2), b.t(0, 2) });\n}\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer if (gpa.deinit() == .leak) @panic(\"MEMORY LEAKED\");\n    const allocator = gpa.allocator();\n\n    const a = try Mcol.init(&.{ 2, 3 }, allocator); //allocate 2 x 3 matrix\n    defer a.deinit(allocator);\n    a.set(&.{ 0, 0 }, 1); //setting elements 1 by 1\n    a.set(&.{ 0, 1 }, 2);\n    a.set(&.{ 0, 2 }, 3);\n    a.set(&.{ 1, 0 }, -1);\n    a.set(&.{ 1, 1 }, -2);\n    a.set(&.{ 1, 2 }, -3);\n    // a = / 1  2  3 \\\n    //     \\-1 -2 -3 /\n\n    const b = try Mcol.init(&.{ 4, 3 }, allocator); //allocate 4 x 3 matrix\n    defer b.deinit(allocator);\n    b.f(undefined, op.id, .{0}); //fill with zeros\n    b.clamp(0, 2, 2).f(undefined, op.id, .{1}); //fill the lower half of the matrix\n    assert(@TypeOf(b.clamp(0, 2, 2)) == Mcol); //.clamp gives a sub tensor of same type\n    b.sub(1, 0).f(undefined, op.id, .{2}); //fill the first column of the matrix\n    assert(@TypeOf(b.sub(1, 0)) == V); //.sub gives a sub tensor of lower dimension\n    //     / 2  0  0 \\\n    // b = | 2  0  0 |\n    //     | 2  1  1 |\n    //     \\ 2  1  1 /\n\n    const c = try Mcol.init(&.{ 2, 4 }, allocator); //allocate 4 x 3 matrix\n    defer c.deinit(allocator);\n    mul(c, a, b.t(0, 1)); // c = a * b^T\n    assert(@TypeOf(b.t(0, 1)) == Mrow); //.t swaps 2 dimensions\n\n    const stdout_file = std.io.getStdOut().writer();\n    var bw = std.io.bufferedWriter(stdout_file);\n    const stdout = bw.writer();\n    try stdout.print(\"a * b^T =\\n\", .{});\n    for (0..2) |i| {\n        for (0..4) |j| {\n            try stdout.print(\"{} \", .{c.at(&.{ i, j })});\n        }\n        try stdout.print(\"\\n\", .{});\n    }\n    try bw.flush();\n}\n```\n\nyou can find this demo project [here](https://github.com/Traxar/SPaDE-demo)\n\n## Dependencies\n\n- `zig 0.14.0`\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/50418189?u=76dd7391a6c9d154f9cb2459476bf4638f19db93&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.0.3",
+      "name": "v0.0.3",
+      "body": "This release mostly serves to bump zig versions.\r\n\r\nAdded first draft of sparse tensors.\r\n",
+      "prerelease": true,
+      "published_at": "2025-05-29T07:02:31Z",
+      "html_url": "https://github.com/Traxar/SPaDE/releases/tag/v0.0.3",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.2",
+      "name": "v0.0.2",
+      "body": "`zig 0.13.0`\r\n\r\n# features:\r\n\r\n## lazy diagonals with `diag`\r\n\r\nThis allows the user to operate on diagonals of a tensor. This is implemented in a lazy way, meaning that no memory is changed by selecting a diagonal, instead the returned tensor simply references the entries on the diagonal of the underlying tensor. This can be arbitrarily combined with `f` as well as any of the other lazy operations (`t`, `sub`, `clamp`).\r\n\r\n## improved inplace operation detection\r\n\r\nThis allows the user to perform various types of inplace operations, which previously were considered illegal. The only illegal operations remaining, are the ones, that depend on the order of their computation and thus being invalid anyway.",
+      "prerelease": true,
+      "published_at": "2025-02-10T00:57:46Z",
+      "html_url": "https://github.com/Traxar/SPaDE/releases/tag/v0.0.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.1",
+      "name": "v0.0.1",
+      "body": "`zig 0.13.0`\r\n\r\nFeatures the basics workings of dense tensors.\r\nThis release is meant for demo purposes.",
+      "prerelease": true,
+      "published_at": "2024-12-30T11:39:24Z",
+      "html_url": "https://github.com/Traxar/SPaDE/releases/tag/v0.0.1",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 1,
+  "owner_following": 0,
+  "owner_created_at": "2019-05-08T16:23:49Z",
+  "license": "MIT",
+  "category": "library"
+}

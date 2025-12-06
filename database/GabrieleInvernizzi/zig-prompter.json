@@ -1,0 +1,40 @@
+{
+  "name": "zig-prompter",
+  "owner": "GabrieleInvernizzi",
+  "repo": "zig-prompter",
+  "description": "zig-prompter is a lightweight and flexible library for building and managing interactive text-based prompts.",
+  "type": "project",
+  "topics": [
+    "cli",
+    "prompt",
+    "terminal",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 23,
+  "forks": 4,
+  "watchers": 1,
+  "updated_at": "2025-12-05T19:18:42Z",
+  "dependencies": [
+    {
+      "name": "mibu",
+      "url": "git+https://github.com/xyaman/mibu#b001662c929e2719ee24be585a3120640f946337",
+      "hash": "1220d78664322b50e31a99cfb004b6fa60c43098d95abf7ec60a21ebeaf1c914edaf"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# zig-prompter\n\n**zig-prompter** is a lightweight and flexible library for building and managing interactive text-based prompts in the [Zig programming language](https://ziglang.org/). Whether you're creating command-line tools, text-based games, or utilities requiring user input, **zig-prompter** simplifies the process with intuitive APIs and a robust feature set.\n\n## Installation\n\nFirst, add zig-prompter to your `build.zig.zon` file:\n```bash\nzig fetch --save git+https://github.com/GabrieleInvernizzi/zig-prompter/\n```\n\nUpdate your `build.zig` file to include the dependency:\n```zig\nconst prompter_dep = b.dependency(\"prompter\", .{\n        .target = target,\n        .optimize = optimize,\n    });\n\nexe.root_module.addImport(\"prompter\", prompter_dep.module(\"prompter\"));\n```\n\nHere’s an example of using **zig-prompter** to create a simple selection prompt:\n```zig\nconst std = @import(\"std\");\nconst Prompter = @import(\"prompter\");\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n    const stdout = std.io.getStdOut();\n\n    const theme = Prompter.Themes.SimpleTheme{};\n    var p = Prompter.Prompt.init(allocator, theme.theme());\n\n    const opts = [_][]const u8{ \"Option 1\", \"Option 2\", \"Option 3\" };\n    const sel_opt = try p.option(\"Select an option\", &opts, 1);\n    if (sel_opt) |o| {\n        try stdout.writer().print(\"The selected option was: {s} (idx: {d})\\n\", .{ opts[o], o });\n    } else {\n        try stdout.writer().writeAll(\"The selection was aborted.\\n\");\n    }\n}\n```\n\nFor a more exhaustive example, take a look at the [example](https://github.com/GabrieleInvernizzi/zig-prompter/tree/main/example) directory.\n\n## Features\n- [x] String prompt\n- [x] Interactive option selection prompt\n- [x] Confirmation prompt\n- [x] Password prompt\n- [x] Input validation\n- [x] Advanced support for themes and personalization\n- [ ] Include more themes\n- [ ] Windows support\n\n## Contributions\nContributions are always welcome and greatly appreciated! Whether it's fixing bugs, adding features, improving documentation, or enhancing examples, your input helps make **zig-prompter** even better. Feel free to open issues to discuss potential improvements or submit pull requests directly.\n\nThank you for your support!\n\n## Acknowledgments  \nThis library was inspired by the fantastic **Rust** library [Dialoguer](https://github.com/mitsuhiko/dialoguer).\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/42583079?u=476585d9e921116039f155992582286e990fd299&v=4",
+  "releases": [],
+  "owner_bio": "Master's degree student in Computer Engineering, University of Pavia.",
+  "owner_company": null,
+  "owner_location": "Milan",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 7,
+  "owner_following": 7,
+  "owner_created_at": "2018-08-21T16:26:29Z",
+  "homepage": "https://gabrieleinvernizzi.github.io/zig-prompter/",
+  "license": "MIT",
+  "category": "cli"
+}

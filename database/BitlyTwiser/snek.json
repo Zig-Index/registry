@@ -1,0 +1,59 @@
+{
+  "name": "snek",
+  "owner": "BitlyTwiser",
+  "repo": "snek",
+  "description": "Snek - A simple CLI parser to build CLI applications in Zig",
+  "type": "project",
+  "topics": [
+    "cli",
+    "snek",
+    "zig",
+    "zig-library",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 28,
+  "forks": 1,
+  "watchers": 2,
+  "updated_at": "2025-10-21T07:04:48Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.11.0",
+  "readme": "<div align=\"center\"> \n\n<img src=\"/assets/logo.png\" width=\"450\" height=\"500\">\n\n\n# 🐍snek🐍\nA simple CLI parser building CLI applications in Zig\n\n# Contents\n[Usage](#usage) |\n[Building the CLI](#build-your-cli) |\n[Examples](#examples) |\n[Optionals](#optionals) |\n[Default Values](#default-values) |\n[Help Menu](#help-menu) |\n[What is not supported](#what-is-not-supported)\n\n</div>\n\n\n### Usage\nAdd snek to your Zig project with Zon:\n```\nzig fetch --save https://github.com/BitlyTwiser/snek/archive/refs/tags/v0.1.1.tar.gz\n```\n\nAdd the following to build.zig file:\n```\n    const snek = b.dependency(\"snek\", .{});\n    exe.root_module.addImport(\"snek\", snek.module(\"snek\"));\n```\n\n### Build your CLI\nSnek builds dynamic (yet simple) CLI's using zigs meta programming to infer the struct fields, the expected types, then insert the incoming data from the stdin arguments and serialize that data into the given struct mapping the data values to the given fields and marshalling the data into the proper type.\n\n```\n    const T = struct {\n        bool_test: bool,\n        word: []const u8,\n        test_opt: ?u32,\n        test_default: []const u8 = \"I am static if not set by user\",\n    };\n    var snek = try Snek(T).init(std.heap.page_allocator);\n    const parsed = try snek.parse();\n\n    // Do Stuff with the fields of the struct after parsing\n    std.debug.print(\"{any}\", .{parsed});\n```\n\nWhen the user goes to interact with the application, they can now utilize the flags you have established to run specific commands.\n\nSee the [completed](#example---full-execution) and functional example below or checkout the [main file](./src/main.zig) in the repo for a full working example as well.\n\n#### Items to note:\n1. If the user does not supply a value and the field is *not* otional, that is a failure case and a message is displayed to the user\n2. If there is a default value on the field of the struct and a vale is not passed for that field, it is treated as an *optional* case and will use the static value (i.e. no error message and value is set)\n3. Simple structs only for now, no recursive struct fields at the moment. (i.e. no embeded structs)\n4. If the users passed the wrong *type* which differes from what is expeected (i.e. the type of the struct field), this is an error case and a message will be displayed to the user.\n5. If you want to handle the errors yourself, the CliError struct is public, so you can catch errors on the `parse()` call\n```\n    const T = struct {\n        bool_test: bool,\n        word: []const u8,\n        test_opt: ?u32,\n        test_default: []const u8 = \"I am static if not set by user\",\n    };\n    var snek = try Snek(T).init(std.heap.page_allocator);\n    // Adjust to actually use value of course\n    _ = snek.parse() catch |err| {\n        switch(e) {\n            ... do stuff with the Errors\n        }\n    }\n\n```\n\n\n#### Examples\n\nUsing the above struct as a  reference, here are a few examples of calling the CLI:\n##### Example - Help Command\n```\n./<yourappname> -help\n\n# or\n\n./<yourappname> -h\n```\n\nNote: As you can see, the optionals are just that, *optional*. They are not required by your users and can be checked in the calling code in the standard ways that Zig handles optionals.\nThis is a design decisions allowing flexibility over the CLI to not lock users into using every flag etc..\n##### Example - Optionals\n````\n./<yourappname> -bool_test=true -word=\"I am a word!\"\n````\n\n##### Example - Defaults:\n```\n./<yourappname> -bool_test=true -word=\"I am a word!\"\n\n# or to override the default field\n\n\n./<yourappname> -bool_test=true -word=\"I am a word!\" -test_defaults=\"I am a different word!\"\n```\n\n\n##### Example - Full execution\n```\nconst std = @import(\"std\");\nconst snek = @import(\"lib.zig\").Snek;\n\n// Binary is also compiled for showcasing how to use the API\nconst T = struct {\n    name: []const u8,\n    location: u32,\n    exists: bool,\n    necessary: ?bool,\n    filled_optional: ?[]const u8,\n    default_name: []const u8 = \"test default name\",\n};\n\n// Example command after compilation:\n// ./zig-out/bin/snek -name=\"test mctest\" -location=420 -exists=true\npub fn main() !void {\n    var cli = try snek(T).init(std.heap.page_allocator);\n    const parsed_cli = try cli.parse();\n\n    // Necessary is skipped here to showcase optional values being ignored\n    std.debug.print(\"Name: {s}\\n Location: {d}\\n Exists: {any}\\n Defualt value: {s}\\n Filled Optional: {s}\\n\", .{ parsed_cli.name, parsed_cli.location, parsed_cli.exists, parsed_cli.default_name, parsed_cli.filled_optional orelse \"badvalue\" });\n}\n```\nCompile with `zig build` then run the cli command:\n```\n./zig-out/bin/snek -name=\"test mctest\" -location=420 -exists=true\n```\n\n#### Optionals\nUsing zig optionals, you can set selected flags to be ignored on the CLI, thus giving flexibilitiy on the behalf of the CLI creator to use or not use selected flags at their whimsy\n\n#### Default Values\nYou can use struct defaut values to set a static value if one is not parsed. This can be useful for certain flags for conditional logic branching later in program execution.\n\n### Help Menu\nSnek dynaically builds the help menu for your users. By calling the `help()` function, you can display how to use your CLI:\n```\n    const T = struct {\n        bool_test: bool,\n        word: []const u8,\n        test_opt: ?u32,\n    };\n    var snek = try Snek(T).init(std.heap.page_allocator);\n    const parsed = try snek.help();\n\n```\nOutput:\n```\nCLI Flags Help Menu\n---------\n-bool_test=Bool (optional: false)\n-word=Pointer (optional: false)\n-test_opt=Optional (optional: true)\n---------\n```\n\n\nAlternatively, if users call -help as the *first* arguments in the CLI, it will also display the help menu.\n```\n./<yourappname> -help\n\n# or\n\n./<yourappname> -h\n```\n\nThis will display the help menu and skip *all other parsing*. So its important to note that this is effectively an exit case for the parser and your program. \nYou should build your application to support this.\n\n\n### What is *not* supported\n\n##### Recursive struct types for sub-command fields\nAt this time, no recursive flags are supported, i.e. you cannot use a slice of structs as a field in the primary CLI interface struct and have those fields parsed as sub-command fields.\nPerhaps, if this is requested, we could work that into the application. It seemed slightly messy and unecessray for a simple CLI builder, but perhaps expansion will be necessary there if its requested :)\n\n[Top](#usage)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/46653655?u=49a4249423fa40b6183a98fca414a3ec9b0d4f99&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.1",
+      "name": "Updating Optional bugs in Ints",
+      "body": "Making some updates to fix bugs when optional ints were used in a CLI application",
+      "prerelease": false,
+      "published_at": "2025-01-05T19:52:25Z",
+      "html_url": "https://github.com/BitlyTwiser/snek/releases/tag/v0.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "Initial release of Snek",
+      "body": "The official and initial release for Snek",
+      "prerelease": false,
+      "published_at": "2024-09-24T00:18:45Z",
+      "html_url": "https://github.com/BitlyTwiser/snek/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Enjoying the boundless realm of software development.",
+  "owner_company": "RedSparrow Technologies",
+  "owner_location": null,
+  "owner_blog": "https://bitlytwiser.com/",
+  "owner_twitter_username": null,
+  "owner_followers": 6,
+  "owner_following": 8,
+  "owner_created_at": "2019-01-13T17:36:51Z",
+  "license": "MIT",
+  "category": "cli"
+}

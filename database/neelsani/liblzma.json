@@ -1,0 +1,33 @@
+{
+  "name": "liblzma",
+  "owner": "neelsani",
+  "repo": "liblzma",
+  "description": "",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-06-01T02:22:50Z",
+  "dependencies": [
+    {
+      "name": "upstream",
+      "url": "git+https://github.com/tukaani-project/xz?ref=v5.6.4#ac50df0d89ce73f30430b8174e578071cbb4e056",
+      "hash": "N-V-__8AAEA6TACxELjnETrSpB0Gkb8usjfTqsLRdOaSCrLP"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# liblzma Zig Build Integration\n\nZig build system integration for [liblzma](https://github.com/tukaani-project/xz) \n\n## Quick Start\n\n1. Add to your project:\n```bash\nzig fetch --save git+https://github.com/neelsani/liblzma\n```\n2. Add to your build.zig\n\n```zig\nconst liblzma_dep = b.dependency(\"liblzma\", .{\n    .target = target,\n    .optimize = optimize,\n});\nconst lib = liblzma_dep.artifact(\"liblzma\");\n\n//then link it to your exe\n\nexe.linkLibrary(lib);\n```",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/59120225?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Atlanta, GA",
+  "owner_blog": "neels.dev/",
+  "owner_twitter_username": null,
+  "owner_followers": 2,
+  "owner_following": 4,
+  "owner_created_at": "2019-12-21T16:18:48Z",
+  "category": "library"
+}

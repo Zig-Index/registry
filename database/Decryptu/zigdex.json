@@ -1,0 +1,120 @@
+{
+  "name": "zigdex",
+  "owner": "Decryptu",
+  "repo": "zigdex",
+  "description": "A fast, lightweight Pokemon sprite viewer for your terminal written in Zig.",
+  "type": "project",
+  "topics": [
+    "fastfetch",
+    "neofetch",
+    "ohmyzsh",
+    "pokemon",
+    "sprites",
+    "zig",
+    "zig-package",
+    "ziglang",
+    "zsh"
+  ],
+  "stars": 12,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-12-03T04:14:13Z",
+  "readme": "<div align=\"center\">\n\n# zigdex\n\n<img width=\"128\" height=\"128\" alt=\"zigdex-logo\" src=\"https://github.com/user-attachments/assets/203c4298-687c-4c72-b2ed-791f5768bab8\" />\n\n[![Zig](https://img.shields.io/badge/Zig-0.15.2-orange?logo=zig&logoColor=white)](https://ziglang.org/)\n[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)\n\nA fast, lightweight Pokemon sprite viewer for your terminal written in Zig.\n\n<img width=\"834\" alt=\"zigdex-screenshot\" src=\"https://github.com/user-attachments/assets/c2ebf09a-51d8-46d1-923f-0160882262ef\" />\n\n</div>\n\n## Features\n\n- 🎲 Random Pokemon with 1/128 shiny chance\n- ✨ Shiny variant support\n- 🚀 Sprites embedded in binary (works offline)\n- 📦 Single self-contained executable\n- ⚡ Optimized for shell startup scripts\n\n## Performance\n\n| Command | Mean [µs] | Min [µs] | Max [µs] | Relative |\n|:---|---:|---:|---:|---:|\n| `zigdex random` | 630.4 ± 130.2 | 407.6 | 1993.0 | 1.00 |\n| `pokeget random` | 1203.0 ± 387.7 | 889.1 | 10657.3 | 1.91 ± 0.73 |\n| `krabby random` | 3632.3 ± 284.5 | 3182.5 | 5362.4 | 5.76 ± 1.27 |\n\n```ascii\nzigdex   ▓░░░░░░░░░  0.63ms  ← 5.8x faster than krabby\npokeget  ▓▓░░░░░░░░  1.20ms\nkrabby   ▓▓▓▓▓▓▓▓░░  3.63ms\n```\n\n<sub>Benchmarked with `hyperfine --warmup 3`</sub>\n\n## Installation\n\n### Homebrew (macOS/Linux)\n\n```bash\nbrew tap Decryptu/tap\nbrew install zigdex\n```\n\n*Note: While zigdex is being reviewed for inclusion in Homebrew core, you can install it from my personal tap.*\n\n### Manual Installation\n\nDownload the appropriate binary for your architecture from the [releases page](https://github.com/Decryptu/zigdex/releases) and add it to your PATH.\n\n## Building\n\n```bash\nzig build\n```\n\nThis will:\n\n1. Generate embedded sprites from your `assets/` directory at compile time\n2. Create a single executable at `zig-out/bin/zigdex`\n3. Embed all 1010+ Pokemon sprites directly into the binary\n\n## Usage\n\n```bash\n# Random Pokemon (1/128 chance for shiny)\nzigdex random\nzigdex --random\n\n# Specific Pokemon by name\nzigdex pikachu\nzigdex bulbasaur charmander squirtle\n\n# By Pokedex number\nzigdex 25\nzigdex 1 4 7\n\n# Force shiny variant\nzigdex pikachu --shiny\nzigdex random --shiny\n\n# Hide Pokemon name\nzigdex pikachu --hide-name\nzigdex random --hide-name\n```\n\n## Shell Integration\n\nAdd to your `.zshrc` or `.bashrc`:\n\n```bash\n# Show random Pokemon on terminal start\nzigdex --random --hide-name\n\n# Or with fastfetch\nalias fastfetch='zigdex --random --hide-name | command fastfetch --logo-type file-raw --logo -'\n```\n\n*Note: [fastfetch](https://github.com/fastfetch-cli/fastfetch) is a fast system information tool similar to neofetch.*\n\n## Project Structure\n\n```tree\nzigdex/\n├── src/\n│   ├── main.zig       # Entry point and CLI\n│   ├── args.zig       # Argument parser\n│   └── sprites.zig    # Pokemon lookup and display\n├── tools/\n│   └── generate_sprites.zig  # Build-time sprite embedder\n├── assets/\n│   ├── pokemon.json\n│   └── colorscripts/\n│       ├── regular/   # Normal sprites\n│       └── shiny/     # Shiny variants\n└── build.zig\n```\n\n## Implementation Details\n\n### Compile-Time Sprite Embedding\n\n- Sprites are converted to byte arrays at compile time\n- The `generate_sprites.zig` tool runs during build\n- Creates `embedded_sprites.zig` with all Pokemon data\n- No runtime filesystem dependencies\n- Binary size: ~18MB (fully self-contained; ~1.3MB gzip compressed)\n\n### Fast Random Selection\n\n- Uses `std.Random.DefaultPrng` with nanosecond seed\n- 1/128 chance for shiny (mimicking main series games)\n- O(1) lookup by index\n- Zero filesystem I/O at runtime\n\n### Pokemon Lookup\n\nSupports multiple lookup methods:\n\n- Case-insensitive name matching (`pikachu`, `PIKACHU`)\n- Slug matching (`charizard-mega-x`)\n- Pokedex number (`25`, `150`)\n\n### Memory Management\n\n- Uses `GeneralPurposeAllocator` for safety\n- Proper `defer` patterns for cleanup\n- No memory leaks in debug builds\n- Efficient argument parsing\n\n## Command-Line Options\n\n| Option | Short | Description |\n|--------|-------|-------------|\n| `--random` | `-r` | Display random Pokemon (1/128 shiny) |\n| `--shiny` | `-s` | Force shiny variant |\n| `--hide-name` | | Don't print Pokemon name |\n| `--help` | `-h` | Show help message |\n\n## Requirements\n\n- Zig 0.15.2 or later\n- Terminal with ANSI color support\n- Pokemon sprite assets in `assets/` directory\n\n## Recommended Terminals\n\nFor the best experience, we recommend using:\n\n- [iTerm2](https://iterm2.com/) - Works great with zigdex\n- [Ghostty](https://ghostty.org/) - Works great with zigdex\n\nBoth terminals provide excellent ANSI color support and render Pokemon sprites beautifully.\n\n## License\n\nMIT\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/90518536?u=fb9bc91014ee303e34169d03a998e03c3fc72628&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.2.1",
+      "name": "Zigdex v0.2.1",
+      "body": "Support 'random' as a positional argument\r\n\r\n**Full Changelog**: https://github.com/Decryptu/zigdex/compare/v0.2.0...v0.2.1",
+      "prerelease": false,
+      "published_at": "2025-11-06T08:10:20Z",
+      "html_url": "https://github.com/Decryptu/zigdex/releases/tag/v0.2.1",
+      "assets": [
+        {
+          "name": "checksums.txt",
+          "url": "https://github.com/Decryptu/zigdex/releases/download/v0.2.1/checksums.txt",
+          "size": 201,
+          "content_type": "text/plain"
+        },
+        {
+          "name": "zigdex-v0.2.1-aarch64-macos.tar.gz",
+          "url": "https://github.com/Decryptu/zigdex/releases/download/v0.2.1/zigdex-v0.2.1-aarch64-macos.tar.gz",
+          "size": 1398729,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "zigdex-v0.2.1-x86_64-macos.tar.gz",
+          "url": "https://github.com/Decryptu/zigdex/releases/download/v0.2.1/zigdex-v0.2.1-x86_64-macos.tar.gz",
+          "size": 1362216,
+          "content_type": "application/x-gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "Zigdex v0.2.0",
+      "body": "## What's Changed\r\n* Refactor argument parsing and random sprite logic by @Decryptu in https://github.com/Decryptu/zigdex/pull/1\r\n\r\n**Full Changelog**: https://github.com/Decryptu/zigdex/compare/v0.1.0...v0.2.0",
+      "prerelease": false,
+      "published_at": "2025-11-06T07:46:33Z",
+      "html_url": "https://github.com/Decryptu/zigdex/releases/tag/v0.2.0",
+      "assets": [
+        {
+          "name": "checksums.txt",
+          "url": "https://github.com/Decryptu/zigdex/releases/download/v0.2.0/checksums.txt",
+          "size": 201,
+          "content_type": "text/plain"
+        },
+        {
+          "name": "zigdex-v0.2.0-aarch64-macos.tar.gz",
+          "url": "https://github.com/Decryptu/zigdex/releases/download/v0.2.0/zigdex-v0.2.0-aarch64-macos.tar.gz",
+          "size": 1398716,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "zigdex-v0.2.0-x86_64-macos.tar.gz",
+          "url": "https://github.com/Decryptu/zigdex/releases/download/v0.2.0/zigdex-v0.2.0-x86_64-macos.tar.gz",
+          "size": 1362279,
+          "content_type": "application/x-gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "Zigdex v0.1.0",
+      "body": "# Zigdex v0.1.0\r\n\r\nDisplay Pokemon sprites in your terminal.\r\n\r\n## Installation\r\n\r\n### Homebrew (macOS)\r\n```bash\r\nbrew tap Decryptu/tap\r\nbrew install zigdex\r\n```\r\n\r\n### Manual Installation\r\nDownload the appropriate binary for your architecture and add it to your PATH.\r\n\r\n## Usage\r\n```bash\r\nzigdex random --hide-name\r\n```\r\n\r\n## What's Changed\r\n- Initial release with 649 Pokemon sprites\r\n- Terminal sprite display support\r\n- Random Pokemon selection",
+      "prerelease": false,
+      "published_at": "2025-11-05T17:24:05Z",
+      "html_url": "https://github.com/Decryptu/zigdex/releases/tag/v0.1.0",
+      "assets": [
+        {
+          "name": "zigdex-v0.1.0-aarch64-macos.tar.gz",
+          "url": "https://github.com/Decryptu/zigdex/releases/download/v0.1.0/zigdex-v0.1.0-aarch64-macos.tar.gz",
+          "size": 1478596,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "zigdex-v0.1.0-x86_64-macos.tar.gz",
+          "url": "https://github.com/Decryptu/zigdex/releases/download/v0.1.0/zigdex-v0.1.0-x86_64-macos.tar.gz",
+          "size": 1453051,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "checksums.txt",
+          "url": "https://github.com/Decryptu/zigdex/releases/download/v0.1.0/checksums.txt",
+          "size": 201,
+          "content_type": "text/plain"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "✦ Web Designer & Web Dev ✦\r\nWorking with DefiLlama, Cryptoast, OAK Research & Adan",
+  "owner_company": null,
+  "owner_location": "France",
+  "owner_blog": "https://decrypt.im/",
+  "owner_twitter_username": "decryptTV",
+  "owner_followers": 14,
+  "owner_following": 7,
+  "owner_created_at": "2021-09-11T15:17:48Z",
+  "license": "MIT",
+  "category": "library"
+}

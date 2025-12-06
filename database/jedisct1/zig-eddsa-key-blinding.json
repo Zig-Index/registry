@@ -1,0 +1,31 @@
+{
+  "name": "zig-eddsa-key-blinding",
+  "owner": "jedisct1",
+  "repo": "zig-eddsa-key-blinding",
+  "description": "A Zig implementation of EdDSA signatures with blind keys.",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package",
+    "eddsa",
+    "ed25519",
+    "blinding"
+  ],
+  "stars": 17,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-01-18T04:18:25Z",
+  "readme": "# EdDSA signatures with blind keys\n\nA Zig implementation of the [EdDSA key blinding](https://chris-wood.github.io/draft-wood-cfrg-eddsa-blinding/draft-wood-cfrg-eddsa-blinding.html) proposal.\n\n```zig\n    // Create a standard Ed25519 key pair\n    const kp = try Ed25519.KeyPair.create(null);\n\n    // Create a random blinding seed\n    var blind: [32]u8 = undefined;\n    crypto.random.bytes(&blind);\n\n    // Blind the key pair\n    const blind_kp = try BlindEd25519.blind(kp, blind);\n\n    // Sign a message and check that it can be verified with the blind public key\n    const msg = \"test\";\n    const sig = try BlindEd25519.sign(msg, blind_kp, null);\n    try Ed25519.verify(sig, msg, blind_kp.blind_public_key);\n\n    // Unblind the public key\n    const pk = try BlindEd25519.unblind_public_key(blind_kp.blind_public_key, blind);\n    try std.testing.expectEqualSlices(u8, &pk, &kp.public_key);\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/124872?v=4",
+  "releases": [],
+  "owner_bio": "Get my public keys here: https://sk.tl/7CPRo8kn",
+  "owner_company": null,
+  "owner_location": "Antibes, France",
+  "owner_blog": "https://primulinus.tpopsite.com",
+  "owner_twitter_username": "jedisct1",
+  "owner_followers": 4074,
+  "owner_following": 194,
+  "owner_created_at": "2009-09-09T10:20:57Z",
+  "license": "MIT",
+  "category": "library"
+}

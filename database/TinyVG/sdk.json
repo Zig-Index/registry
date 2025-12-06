@@ -1,0 +1,41 @@
+{
+  "name": "sdk",
+  "owner": "TinyVG",
+  "repo": "sdk",
+  "description": "TinyVG software development kit",
+  "type": "project",
+  "topics": [
+    "zig",
+    "sdk",
+    "tinyvg",
+    "zig-package",
+    "vector-graphics"
+  ],
+  "stars": 292,
+  "forks": 20,
+  "watchers": 6,
+  "updated_at": "2025-10-29T14:45:49Z",
+  "dependencies": [
+    {
+      "name": "args",
+      "url": "https://github.com/ikskuh/zig-args/archive/9425b94c103a031777fdd272c555ce93a7dea581.zip",
+      "hash": "args-0.0.0-CiLiqv_NAAC97fGpk9hS2K681jkiqPsWP6w3ucb_ctGH"
+    },
+    {
+      "name": "ptk",
+      "url": "https://github.com/ikskuh/parser-toolkit/archive/0d5e00d4830bca53d10fee5d562152f1329d5784.zip",
+      "hash": "parser_toolkit-0.1.0-baYGPS1CEwDuQk1W_5QEfKF_BWU5lN4qb8kVZoQ6Id9k"
+    }
+  ],
+  "readme": "# TinyVG Software Development Kit\n\nThis SDK enables you to work with the [TinyVG](https://tinyvg.tech/) vector graphics format.\n\n## Contents\n\n- Native Library (C ABI)\n- Zig Package\n- Command Line Tooling\n  - Offline Rendering (TVG -> TGA)\n  - Format Conversion (SVG <-> TVG <-> TVGT)\n\n## Building\n\n**Note**: builds with zig 0.14.0, needs dotnet 6 runtime, but builds fine with dotnet 9 sdk!\n\nThe SDK is implemented with [Zig](https://ziglang.org/) 0.11.0 and [dotnet 6](https://dotnet.microsoft.com/en-us/).\n\nTo build the SDK (except `svg2tvgt`), do this:\n\n```sh-session\n[user@host sdk]$ zig build\n[user@host sdk]$\n```\n\nThis will then produce the folders `zig-cache` (for temporary files) and `zig-out`, which contains the SDK files for your current platform.\n\nTo build `svg2tvgt`, go into the folder `src/tools/svg2tvgt` and do this:\n\n```sh-session\n[user@host sdk]$ cd src/tools/svg2tvgt/\n[user@host svg2tvgt]$ dotnet build\nMSBuild version 17.3.2+561848881 for .NET\n  Determining projects to restore...\n  All projects are up-to-date for restore.\n  svg2tvgt -> /mnt/src/tools/svg2tvgt/bin/Debug/net6.0/svg2tvgt.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:00.69\n[user@host svg2tvgt]$\n```\n\nThis will then produce `src/tools/svg2tvgt/bin/Debug/net5.0/svg2tvgt` (or `.exe` if you are on windows).\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/96174566?v=4",
+  "releases": [],
+  "owner_bio": "Organisation to manage the creation of a a new vector graphics format",
+  "owner_location": "Germany",
+  "owner_blog": "https://tinyvg.tech/",
+  "owner_twitter_username": "ikskuh",
+  "owner_created_at": "2021-12-15T09:23:11Z",
+  "homepage": "https://tinyvg.tech/",
+  "license": "MIT",
+  "category": "library"
+}

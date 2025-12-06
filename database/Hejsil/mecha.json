@@ -1,0 +1,99 @@
+{
+  "name": "mecha",
+  "owner": "Hejsil",
+  "repo": "mecha",
+  "description": "A parser combinator library for Zig",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package",
+    "parser-combinators",
+    "functional",
+    "parser",
+    "parser-library",
+    "parsers",
+    "zig-library"
+  ],
+  "stars": 562,
+  "forks": 27,
+  "watchers": 5,
+  "updated_at": "2025-12-05T07:18:56Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# Mecha\n\nA parser combinator library for the [`Zig`](https://ziglang.org/)\nprogramming language. Time to make your own parser mech!\n\n```zig\nconst mecha = @import(\"mecha\");\nconst std = @import(\"std\");\n\nconst Rgb = struct {\n    r: u8,\n    g: u8,\n    b: u8,\n};\n\nfn toByte(v: u4) u8 {\n    return @as(u8, v) * 0x10 + v;\n}\n\nconst hex1 = mecha.int(u4, .{\n    .parse_sign = false,\n    .base = 16,\n    .max_digits = 1,\n}).map(toByte);\nconst hex2 = mecha.int(u8, .{\n    .parse_sign = false,\n    .base = 16,\n    .max_digits = 2,\n});\nconst rgb1 = mecha.manyN(hex1, 3, .{}).map(mecha.toStruct(Rgb));\nconst rgb2 = mecha.manyN(hex2, 3, .{}).map(mecha.toStruct(Rgb));\nconst rgb = mecha.combine(.{\n    mecha.ascii.char('#').discard(),\n    mecha.oneOf(.{ rgb2, rgb1 }),\n});\n\ntest \"rgb\" {\n    const testing = std.testing;\n    const allocator = testing.allocator;\n    const a = (try rgb.parse(allocator, \"#aabbcc\")).value.ok;\n    try testing.expectEqual(@as(u8, 0xaa), a.r);\n    try testing.expectEqual(@as(u8, 0xbb), a.g);\n    try testing.expectEqual(@as(u8, 0xcc), a.b);\n\n    const b = (try rgb.parse(allocator, \"#abc\")).value.ok;\n    try testing.expectEqual(@as(u8, 0xaa), b.r);\n    try testing.expectEqual(@as(u8, 0xbb), b.g);\n    try testing.expectEqual(@as(u8, 0xcc), b.b);\n\n    const c = (try rgb.parse(allocator, \"#000000\")).value.ok;\n    try testing.expectEqual(@as(u8, 0), c.r);\n    try testing.expectEqual(@as(u8, 0), c.g);\n    try testing.expectEqual(@as(u8, 0), c.b);\n\n    const d = (try rgb.parse(allocator, \"#000\")).value.ok;\n    try testing.expectEqual(@as(u8, 0), d.r);\n    try testing.expectEqual(@as(u8, 0), d.g);\n    try testing.expectEqual(@as(u8, 0), d.b);\n}\n```\n\n\n## Installation\n\nDevelopers tend to either use\n* The latest tagged release of Zig\n* The latest build of Zigs master branch\n\nDepending on which developer you are, you need to run different `zig fetch` commands:\n\n```sh\n# Version of mecha that works with a tagged release of Zig\n# Replace `<REPLACE ME>` with the version of mecha that you want to use\n# See: https://github.com/Hejsil/mecha/releases\nzig fetch --save https://github.com/Hejsil/mecha/archive/refs/tags/<REPLACE ME>.tar.gz\n\n# Version of mecha that works with latest build of Zigs master branch\nzig fetch --save git+https://github.com/Hejsil/mecha\n```\n\nThen add the following to `build.zig`:\n\n```zig\nconst mecha = b.dependency(\"mecha\", .{});\nexe.root_module.addImport(\"mecha\", mecha.module(\"mecha\"));\n```\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/3759175?u=d5da2f7afbb8ffadbc68b1822d16b107da36b4de&v=4",
+  "releases": [
+    {
+      "tag_name": "0.11.0",
+      "name": "0.11.0",
+      "body": "`mecha` release `0.11.0` which compiles and works for `zig 0.15.1`\n\n### Fixes\n\n- `mecha.intToken` not compiling when `.parse_sign = true`\n",
+      "prerelease": false,
+      "published_at": "2025-08-21T17:43:49Z",
+      "html_url": "https://github.com/Hejsil/mecha/releases/tag/0.11.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.10.0",
+      "name": "0.10.0",
+      "body": "`mecha` release `0.10.0` which compiles and works for `zig 0.14.0`\r\n\r\n### Features\r\n\r\n* Add `mecha.unionInit`\r\n\r\n### Changes\r\n\r\n* The result of parsers have changed\r\n  * Whether a parser succeeded in parsing the string is now returned in `Result` instead of as `error.ParserFailed`\r\n    * To get out the result, you now have to unwrap the `value` union, which is either `ok: T` or `err`\r\n  * `Result` now also contains an `index` instead of `rest` which contains the amount of progress made into the string\r\n    * For success, this is the end of how much was parsed\r\n    * For error, this is where parsing failed\r\n* Allow `mecha.toStruct` to wrap a single value `T` in a struct with one field of type `T` (`struct { field: T }`)",
+      "prerelease": false,
+      "published_at": "2025-03-05T17:02:28Z",
+      "html_url": "https://github.com/Hejsil/mecha/releases/tag/0.10.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.9.0",
+      "name": "0.9.0",
+      "body": "`mecha` release `0.9.0` which compiles and works for `zig 0.13.0`\r\n",
+      "prerelease": false,
+      "published_at": "2024-06-19T19:23:26Z",
+      "html_url": "https://github.com/Hejsil/mecha/releases/tag/0.9.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.8.0",
+      "name": "0.8.0",
+      "body": "`mecha` release `0.8.0` which compiles and works for `zig 0.12.0`\r\n\r\n## Changes\r\n\r\n* Remove support for unofficial package managers `gyro` and `zigmod`",
+      "prerelease": false,
+      "published_at": "2024-04-21T08:54:23Z",
+      "html_url": "https://github.com/Hejsil/mecha/releases/tag/0.8.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.7.0",
+      "name": "0.7.0",
+      "body": "`mecha` release `0.7.0` which compiles and works for `zig 0.11.0`\r\n",
+      "prerelease": false,
+      "published_at": "2024-02-02T13:52:51Z",
+      "html_url": "https://github.com/Hejsil/mecha/releases/tag/0.7.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.6.0",
+      "name": "0.6.0",
+      "body": "`mecha` release `0.6.0` which compiles and works for `zig 0.9.0`\r\n",
+      "prerelease": false,
+      "published_at": "2021-12-21T22:35:03Z",
+      "html_url": "https://github.com/Hejsil/mecha/releases/tag/0.6.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.5.0",
+      "name": "0.5.0",
+      "body": "The first release of `mecha`, a library for constructing parsers at comptime using parser combinators.\r\n",
+      "prerelease": false,
+      "published_at": "2021-06-05T13:25:30Z",
+      "html_url": "https://github.com/Hejsil/mecha/releases/tag/0.5.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Makes computers go brrrrr",
+  "owner_company": null,
+  "owner_location": "Celadon City",
+  "owner_blog": "https://hejsil.github.io",
+  "owner_twitter_username": null,
+  "owner_followers": 390,
+  "owner_following": 25,
+  "owner_created_at": "2013-03-03T23:32:52Z",
+  "license": "MIT",
+  "category": "parser"
+}

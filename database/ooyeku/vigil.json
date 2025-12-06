@@ -1,0 +1,100 @@
+{
+  "name": "vigil",
+  "owner": "ooyeku",
+  "repo": "vigil",
+  "description": "A process supervision and management library for Zig, inspired by Erlang/OTP's supervisor model.",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 3,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-11-30T04:06:20Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# Vigil\n\nA process supervision and inter-process communication library for Zig, designed for building reliable distributed systems and concurrent applications. Inspired by Erlang/OTP.\n\n**Version: 1.0.0**\n\n## Installation\n\n```bash\nzig fetch --save \"git+https://github.com/ooyeku/vigil\"\n```\n\nAdd as a dependency in your `build.zig`:\n\n```zig\nconst vigil = b.dependency(\"vigil\", .{\n    .target = target,\n    .optimize = optimize,\n});\nexe.root_module.addImport(\"vigil\", vigil.module(\"vigil\"));\n```\n\n## Quick Start\n\n### Simple Worker Application\n\n```zig\nconst std = @import(\"std\");\nconst vigil = @import(\"vigil\");\n\nfn worker() void {\n    std.debug.print(\"Worker running\\n\", .{});\n    std.Thread.sleep(100 * std.time.ns_per_ms);\n}\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    var app = try vigil.app(allocator);\n    _ = try app.worker(\"task1\", worker);\n    _ = try app.workerPool(\"pool\", worker, 4);\n    try app.start();\n    defer app.shutdown();\n}\n```\n\n### Channel-Like Message Passing\n\n```zig\nvar inbox = try vigil.inbox(allocator);\ndefer inbox.close();\n\ntry inbox.send(\"hello\");\n\nif (try inbox.recvTimeout(1000)) |msg| {\n    defer msg.deinit();\n    std.debug.print(\"Received: {s}\\n\", .{msg.payload.?});\n}\n```\n\n### Circuit Breaker for Resilience\n\n```zig\nvar breaker = try vigil.CircuitBreaker.init(allocator, \"api\", .{\n    .failure_threshold = 5,\n    .reset_timeout_ms = 30000,\n});\ndefer breaker.deinit();\n\nif (breaker.getState() == .open) {\n    // Service unavailable, fail fast\n}\n```\n\n### Rate Limiting\n\n```zig\nvar limiter = vigil.RateLimiter.init(100); // 100 ops/sec\n\nif (limiter.allow()) {\n    // Process request\n} else {\n    // Rate limited\n}\n```\n\n### Process Groups\n\n```zig\nvar group = try vigil.ProcessGroup.init(allocator, \"workers\");\ndefer group.deinit();\n\ntry group.add(\"worker1\", inbox1);\ntry group.add(\"worker2\", inbox2);\n\ntry group.broadcast(\"message\");  // Send to all\ntry group.roundRobin(\"message\"); // Load balance\n```\n\n## Features\n\n### Core\n\n- **Process Supervision** - Automatic restart strategies (one_for_one, one_for_all, rest_for_one)\n- **Message Passing** - Thread-safe inboxes with priority queues\n- **Fluent Builders** - Intuitive API with sensible defaults\n- **Configuration Presets** - Production, development, HA, and testing modes\n\n### Resilience (v1.0.0)\n\n- **Circuit Breaker** - Protect services from cascading failures\n- **Rate Limiting** - Token bucket algorithm for flow control\n- **Backpressure** - Strategies for handling overload (drop_oldest, drop_newest, block, error)\n\n### Messaging (v1.0.0)\n\n- **Pub/Sub** - Topic-based messaging with wildcard support\n- **Process Groups** - Manage related processes with broadcast/round-robin routing\n- **Request/Reply** - Synchronous messaging with correlation IDs\n\n### Observability (v1.0.0)\n\n- **Telemetry** - Event hooks for monitoring (process, message, supervisor, circuit events)\n- **Testing Utilities** - Mock inboxes, mock supervisors, time control\n\n### Advanced (v1.0.0)\n\n- **Graceful Shutdown** - Coordinated cleanup with shutdown hooks\n- **State Checkpointing** - Persist and recover process state\n- **Distributed Registry** - Cross-process name resolution\n\n## Configuration Presets\n\n```zig\n// Production: conservative restarts, monitoring enabled\nvar app = try vigil.appWithPreset(allocator, .production);\n\n// Development: verbose logging, quick restarts\nvar app = try vigil.appWithPreset(allocator, .development);\n\n// High availability: intensive health checks\nvar app = try vigil.appWithPreset(allocator, .high_availability);\n\n// Testing: minimal restarts, fast health checks\nvar app = try vigil.appWithPreset(allocator, .testing);\n```\n\n## Examples\n\nSee [examples/vigilant_server](examples/vigilant_server) for a complete TCP server with:\n- Circuit breaker protection\n- Rate limiting\n- Telemetry integration\n- Graceful shutdown\n\n```bash\ncd examples/vigilant_server\nzig build\n./zig-out/bin/vigilant_server\n```\n\n## Documentation\n\nSee [docs/api.md](docs/api.md) for comprehensive API documentation.\n\n## Running Tests\n\n```bash\nzig build test\n```\n\n## Requirements\n\n- Zig 0.15.x\n- POSIX-compliant operating system\n\n## License\n\nMIT - see the [LICENSE](LICENSE) file for details.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/94309053?u=db839e059711091385a913b6f3fe3e4d1576ab4e&v=4",
+  "releases": [
+    {
+      "tag_name": "v1.0.0",
+      "name": "v1.0.0",
+      "body": "**Full Changelog**: https://github.com/ooyeku/vigil/compare/v0.4.0...v1.0.0",
+      "prerelease": false,
+      "published_at": "2025-11-30T04:11:13Z",
+      "html_url": "https://github.com/ooyeku/vigil/releases/tag/v1.0.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.4.0",
+      "name": "v0.4.0",
+      "body": "# Vigil 0.4.0 - Release Summary\r\n\r\n## What's New\r\n\r\n**Bug Fixes:**\r\n- Fixed memory leak in AppBuilder where child process IDs were not freed during shutdown\r\n- Added proper ID tracking and cleanup in AppBuilder\r\n\r\n**Improvements:**\r\n- Rewrote example.zig with realistic worker pool demonstration\r\n- Better example showcasing supervision, worker pools, and graceful shutdown\r\n\r\n**Testing:**\r\n- All tests pass cleanly\r\n- Zero memory leaks verified\r\n\r\nThis is a maintenance release with no breaking changes. All 0.3.0 code continues to work.\r\n\r\n---",
+      "prerelease": false,
+      "published_at": "2025-11-20T02:16:02Z",
+      "html_url": "https://github.com/ooyeku/vigil/releases/tag/v0.4.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.3.0",
+      "name": "v0.3.0",
+      "body": "**Full Changelog**: https://github.com/ooyeku/vigil/compare/v0.2.2...v0.3.0",
+      "prerelease": false,
+      "published_at": "2025-10-25T17:16:05Z",
+      "html_url": "https://github.com/ooyeku/vigil/releases/tag/v0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.2",
+      "name": "v0.2.2",
+      "body": "**Full Changelog**: https://github.com/ooyeku/vigil/compare/v0.2.1...v0.2.2",
+      "prerelease": false,
+      "published_at": "2025-09-11T05:49:11Z",
+      "html_url": "https://github.com/ooyeku/vigil/releases/tag/v0.2.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.1",
+      "name": "v0.2.1",
+      "body": "## What's Changed\r\n* Upgrade to Zig 0.14.1\r\n* Feature/vserver by @ooyeku in https://github.com/ooyeku/vigil/pull/1\r\n\r\n\r\n**Full Changelog**: https://github.com/ooyeku/vigil/compare/v0.2.0...v0.2.1",
+      "prerelease": false,
+      "published_at": "2025-07-28T03:46:45Z",
+      "html_url": "https://github.com/ooyeku/vigil/releases/tag/v0.2.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "# Vigil v0.2.0\r\n\r\n## Major Changes\r\n- Added comprehensive supervision tree implementation with configurable strategies\r\n- Introduced priority-based message passing system with dead letter queues\r\n- Added GenServer pattern for stateful process management\r\n\r\n## New Features\r\n- Mailbox priority queues with configurable TTL\r\n- Dynamic worker scaling based on load metrics\r\n- Health monitoring and statistics collection\r\n- Graceful shutdown handling with timeouts\r\n\r\n## Breaking Changes\r\n- Changed supervisor initialization API to require explicit configuration\r\n- Updated process lifecycle management interface\r\n- Modified message passing to use new priority system\r\n\r\n## Bug Fixes\r\n- Fixed integer overflow in shutdown timer calculations\r\n- Improved mutex handling in supervisor monitoring\r\n- Fixed memory leaks in message broadcasting\r\n\r\n## Documentation\r\n- Added comprehensive API documentation with examples\r\n- Updated installation instructions for Zig package manager\r\n- Added example code for common use cases\r\n\r\nFor installation instructions and examples, see:\r\n\r\n````7:24:README.md\r\n## Installation\r\n\r\nFetch latest release:\r\n\r\n```bash\r\nzig fetch --save \"git+https://github.com/ooyeku/vigil/#v0.2.0\"\r\n```\r\n\r\nAdd as a dependency in your `build.zig.zon`:\r\n\r\n```zig\r\n    const vigil = b.dependency(\"vigil\", .{\r\n        .target = target,\r\n        .optimize = optimize,\r\n    });\r\n    exe.root_module.addImport(\"vigil\", vigil.module(\"vigil_lib\"));\r\n    b.installArtifact(exe);\r\n```\r\n````\r\n\r\n",
+      "prerelease": false,
+      "published_at": "2025-02-13T00:31:01Z",
+      "html_url": "https://github.com/ooyeku/vigil/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.1",
+      "name": "v0.1.1",
+      "body": "**Full Changelog**: https://github.com/ooyeku/vigil/compare/v0.1.0...v0.1.1",
+      "prerelease": false,
+      "published_at": "2025-01-02T00:30:02Z",
+      "html_url": "https://github.com/ooyeku/vigil/releases/tag/v0.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "**Full Changelog**: https://github.com/ooyeku/vigil/commits/v0.1.0",
+      "prerelease": false,
+      "published_at": "2025-01-01T20:05:00Z",
+      "html_url": "https://github.com/ooyeku/vigil/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 5,
+  "owner_following": 8,
+  "owner_created_at": "2021-11-14T16:25:49Z",
+  "license": "MIT",
+  "category": "library"
+}

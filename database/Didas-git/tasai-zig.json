@@ -1,0 +1,29 @@
+{
+  "name": "tasai-zig",
+  "owner": "Didas-git",
+  "repo": "tasai-zig",
+  "description": "A set of tools for dealing with the terminal.",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-library",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-10-21T23:29:19Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# Tasai\n\nTasai is a zig library that provides multiple comptime utilities to colorize your terminal messages, logs, and much more, if it supports [ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code) then tasai will work.\n\nLet's make our terminals more colorful (多彩).\n\n###### If you are looking for the javascript/typescript version, it can be found [here](https://github.com/Didas-git/tasai).\n\n# Installation\n\nTasai is available using the `zig fetch` command.\n\n```sh\nzig fetch --save git+https://github.com/Didas-git/tasai-zig\n```\n\nTo add it yo your project, after running the command above add the following to your build file:\n\n```zig\nconst tasai = b.dependency(\"tasai\", .{\n    .target = target,\n    .optimize = optimize,\n});\nexe.root_module.addImport(\"tasai\", tasai.module(\"tasai\"));\n```\n\n# Usage\n\nTasai provides 2 different comptime apis\n\n## String API\n\nThe available tags are documented on the function itself.\n\n```zig\nconst print = @import(\"std\").debug.print;\nconst SGR = @import(\"tasai\").SGR;\n\n// Print \"hello\" in pink (with a hex code) and \"world\" in bold blue (the blue comes from the 8bit ANSI codes)\nprint(SGR.parseString(\"<f:#ff00ef>hello<r> <f:33><b>world<r><r>\\n\"), .{});\n\n// Escaping '<'\nprint(SGR.parseString(\"This will print <f:red>\\\\<<r> in red\\n\"), .{});\n```\n\n## Verbose API\n\nWhile this API is rather overkill it can be rather useful given it includes all* the SGR codes and is not limited to a few set of them.\n\n###### * all the ones documented [here](https://en.wikipedia.org/wiki/ANSI_escape_code#Select_Graphic_Rendition_parameters).\n\n```zig\nconst print = @import(\"std\").debug.print;\nconst SGR = @import(\"tasai\").SGR;\n\n// // Print \"hello\" in pink (with a hex code) and \"world\" in bold blue\nprint(\"{s} {s}\\n\", .{\n    SGR.verboseFormat(\"Hello\", &.{\n            .{ .Color = .{ .Foreground = .{ .@\"24bit\" = .{ .r = 255, .g = 0, .b = 239 } } } },\n        }, &.{\n            .{ .Attribute = .Default_Foreground_Color },\n        }),\n    SGR.verboseFormat(\"World\", &.{\n            .{ .Attribute = .Bold },\n            .{ .Color = .{ .Foreground = .{ .@\"8bit\" = 33 } } },\n        }, &.{\n            .{ .Attribute = .Not_Bold_Or_Dim },\n            .{ .Attribute = .Default_Foreground_Color },\n        }),\n});\n```",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/80978939?u=4cb67cc26f91cb27085e90f080b8b5c1f4c91f0d&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 17,
+  "owner_following": 9,
+  "owner_created_at": "2021-03-19T17:44:48Z",
+  "category": "library"
+}

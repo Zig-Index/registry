@@ -1,0 +1,28 @@
+{
+  "name": "art",
+  "owner": "peterhellberg",
+  "repo": "art",
+  "description": "art is a Zig module used to build WebAssembly binaries rendering to a HTML canvas.",
+  "type": "project",
+  "topics": [
+    "canvas",
+    "wasm",
+    "zig-package"
+  ],
+  "stars": 7,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-08-22T08:24:48Z",
+  "readme": "# art :art:\n\nart is a [Zig](https://ziglang.org/) ⚡ module used to build\n[WebAssembly](https://webassembly.org/) binaries rendering to a\n[HTML canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API).\n\n> [!IMPORTANT]\n> You might want to install the [art-init](https://github.com/peterhellberg/art-init) tool\n> and use that instead of manually creating the files needed to use this library.\n\n## Usage\n\nYou can have `zig build` retrieve the `art` module if you specify it as a dependency.\n\n### Create a `build.zig.zon` that looks something like this:\n```zig\n.{\n    .name = .art_canvas,\n    .version = \"0.0.0\",\n    .fingerprint = 0x0000000000,\n    .paths = .{\"\"},\n    .dependencies = .{\n        .art = .{\n            .url = \"https://github.com/peterhellberg/art/archive/refs/tags/v0.1.0.tar.gz\",\n        },\n    },\n}\n```\n\n> [!NOTE]\n> If you leave out the hash then `zig build` will tell you that it is missing the hash, and what it is.\n> Another way to get the hash is to use `zig fetch`, this is probably how you _should_ do it :)\n\n### Download `index.html` and `script.js` from `art-init`\n\n```console\nwget https://raw.githubusercontent.com/peterhellberg/art-init/refs/heads/main/content/index.html\nwget https://raw.githubusercontent.com/peterhellberg/art-init/refs/heads/main/content/script.js\n```\n\n### Then you can add the module in your `build.zig` like this:\n\n```zig\nconst std = @import(\"std\");\n\npub fn build(b: *std.Build) void {\n    const exe = b.addExecutable(.{\n        .name = \"art-canvas\",\n        .root_module = b.createModule(.{\n            .root_source_file = b.path(\"src/canvas.zig\"),\n            .target = b.resolveTargetQuery(.{\n                .cpu_arch = .wasm32,\n                .os_tag = .freestanding,\n            }),\n            .optimize = .ReleaseSmall,\n            .strip = true,\n        }),\n    });\n\n    exe.root_module.addImport(\"art\", b.dependency(\"art\", .{}).module(\"art\"));\n\n    const number_of_pages = 4;\n\n    exe.entry = .disabled;\n    exe.export_memory = true;\n    exe.initial_memory = std.wasm.page_size * number_of_pages;\n    exe.max_memory = std.wasm.page_size * number_of_pages;\n    exe.stack_size = 512;\n    exe.rdynamic = true;\n\n    b.installArtifact(exe);\n}\n```\n\n### In your `src/canvas.zig` you should now be able to:\n\n```zig\nconst art = @import(\"art\");\n\nvar canvas: art.Canvas(16, 9) = .{};\n\nexport fn start() void {\n    art.log(\"Hello from Zig!\");\n}\n\nexport fn update(pad: u32) void {\n    _ = pad; // autofix\n}\n\nexport fn draw() void {\n    canvas.clear(.{ 0x7C, 0xAF, 0x3C, 0xFF });\n}\n\nexport fn fps() usize {\n    return 60;\n}\n\nexport fn width() usize {\n    return canvas.width;\n}\n\nexport fn height() usize {\n    return canvas.height;\n}\n\nexport fn offset() [*]u8 {\n    return canvas.offset();\n}\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/565124?u=9933200ccff1d65f1635b4ca59876e2794b6985b&v=4",
+  "releases": [],
+  "owner_company": "Code7 Interactive and Athega",
+  "owner_location": "Stockholm, Sweden",
+  "owner_blog": "https://c7.se",
+  "owner_twitter_username": "peterhellberg",
+  "owner_followers": 417,
+  "owner_following": 66,
+  "owner_created_at": "2011-01-14T18:42:34Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,45 @@
+{
+  "name": "zig-caseconverter",
+  "owner": "funbiscuit",
+  "repo": "zig-caseconverter",
+  "description": "A case conversion library for zig",
+  "type": "project",
+  "topics": [
+    "case",
+    "conversion",
+    "converter",
+    "string-manipulation",
+    "strings",
+    "utility",
+    "zig-package",
+    "zig-library",
+    "ziglang"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-11-01T15:25:38Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# zig-caseconverter\n\nA zig library for transforming strings from one case into another (e.g. camelCase -> kebab-case).\n\nImplementation is inspired by [case converter](https://github.com/chrisdoherty4/python-case-converter) for Python.\n\n## Features\n\n- Supports conversion to following cases\n    - camelCase (`caseconverter.toCamel`)\n    - COBOL-CASE (`caseconverter.toCobol`)\n    - flatcase (`caseconverter.toFlat`)\n    - kebab-case (`caseconverter.toKebab`)\n    - MACRO_CASE (`caseconverter.toMacro`)\n    - PascalCase (`caseconverter.toPascal`)\n    - SCREAMING_SNAKE_CASE (`caseconverter.toScreamingSnake`). Same as `toMacro`, but cooler\n    - SCREAMING-KEBAB-CASE (`caseconverter.toScreamingKebab`). Same as `toCobol`, but cooler\n    - snake_case (`caseconverter.toSnake`)\n    - Title Case (`caseconverter.toTitle`)\n- Optional stripping of punctuation (enabled by default)\n- Conversion is performed only in ASCII. Non ASCII chars can be kept as is or removed\n\n## Installation\n\nDevelopers tend to either use\n\n- The latest tagged release of Zig\n- The latest build of Zig master branch\n\nDepending on which developer you are, you need to run different `zig fetch` commands:\n\n- Version of `zig-caseconverter` that works with a tagged release of Zig. Replace `<REPLACE ME>` with the version of\n  `zig-caseconverter` that you want to use. See: https://github.com/funbiscuit/zig-caseconverter/releases\n  ```sh\n  zig fetch --save https://github.com/funbiscuit/zig-caseconverter/archive/refs/tags/<REPLACE ME>.tar.gz\n  ```\n\n- Version of `zig-caseconverter` that works with latest build of Zig master branch\n  ```sh\n  zig fetch --save git+https://github.com/funbiscuit/zig-caseconverter\n  ```\n\nThen add the following to `build.zig`:\n\n```zig\nconst caseconverter = b.dependency(\"caseconverter\", .{});\nexe.root_module.addImport(\"caseconverter\", caseconverter.module(\"caseconverter\"));\n```\n\n## Examples\n\nThe simplest way to use this library is to just call the `caseconverter.to<desired-case>` function.\nExample code is from [examples/simple.zig](examples/simple.zig).\n\n```zig\nconst std = @import(\"std\");\nconst caseconverter = @import(\"caseconverter\");\n\npub fn main() !void {\n    var gpa = std.heap.DebugAllocator(.{}){};\n    defer _ = gpa.deinit();\n\n    const input = \"hello, world\";\n    const camelCased = try caseconverter.toCamel(gpa.allocator(), \"hello, world\", .{});\n    defer gpa.allocator().free(camelCased);\n    const macroCased = try caseconverter.toMacro(gpa.allocator(), \"hello, world\", .{});\n    defer gpa.allocator().free(macroCased);\n    const camelCased2 = try caseconverter.toCamel(gpa.allocator(), macroCased, .{});\n    defer gpa.allocator().free(camelCased2);\n\n    std.debug.print(\"`{s}` camelcased is `{s}`\\n\", .{ input, camelCased });\n    std.debug.print(\"`{s}` macrocased is `{s}`\\n\", .{ input, macroCased });\n    std.debug.print(\"`{s}` camelcased is `{s}`\\n\", .{ macroCased, camelCased2 });\n}\n\n```\n\nOutput:\n\n```\n$ zig build examples\n$ zig-out/bin/simple\n`hello, world` camelcased is `helloWorld`\n`hello, world` macrocased is `HELLO_WORLD`\n`HELLO_WORLD` camelcased is `helloWorld`\n```\n\n## Contributing\n\nContributions are welcome in the form of bug reports, feature suggestions, and pull requests.\n\n**Before starting substantial work,** please open an issue or discussion to discuss the change. This ensures effort is\nnot wasted and the contribution aligns with the project's goals.\n\n### Reporting Issues\n\nOpen an issue to report a bug or suggest a new feature. Please include:\n\n- A clear, descriptive title.\n- Steps to reproduce a bug.\n- The expected and actual behavior.\n\n### Submitting Changes\n\n1. Fork the repository.\n2. Create a feature branch from `main`.\n3. Make your changes, ensuring they are well-tested.\n4. Submit a pull request with a clear description of the problem and solution.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/9351181?v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "The first release of `zig-caseconverter`",
+      "prerelease": false,
+      "published_at": "2025-10-13T14:49:43Z",
+      "html_url": "https://github.com/funbiscuit/zig-caseconverter/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": "NAUMEN",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 20,
+  "owner_following": 1,
+  "owner_created_at": "2014-10-22T12:18:21Z",
+  "license": "MIT",
+  "category": "library"
+}

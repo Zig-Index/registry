@@ -1,0 +1,67 @@
+{
+  "name": "comphash",
+  "owner": "galactixx",
+  "repo": "comphash",
+  "description": "comphash is a very lightweight Zig package offering a compile-time hash map for immutable, O(1) string-keyed lookups.",
+  "type": "project",
+  "topics": [
+    "hashmap",
+    "zig",
+    "zig-lang",
+    "compile-time",
+    "zig-package"
+  ],
+  "stars": 16,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-08-17T04:11:16Z",
+  "dependencies": [
+    {
+      "name": "zighash",
+      "url": "git+https://github.com/galactixx/zighash?ref=v0.2.0#637df9622c31bf8ef5696212ccb5c006e7657fb5",
+      "hash": "zighash-0.2.0-vI0CjfiqAADoDlW4f89g-APRtq-d_x1rT8x12OpH27G_"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "<p align=\"center\">\n  <img src=\"/docs/logo.png\" alt=\"comptime-hashmap logo\" width=\"75%\"/>\n</p>\n\n**comphash** is a very lightweight Zig package offering a compile-time hash map for immutable, O(1) string-keyed lookups.\n\nPerfect for command‑line flag tables, protocol constant look‑ups, compile‑time DSLs, and any situation where the set of keys is known ahead of time.\n\n---\n\n## ✨ **Features**\n\n| Category                | Details                                                                                                            |\n| ----------------------- | ------------------------------------------------------------------------------------------------------------------ |\n| Lookup                  | O(1) expected access.                                                                                              |\n| **Hash Algorithms**     | Use any `fn([]const u8) u64` — the default is **xxHash64** from [`zighash`](https://github.com/galactixx/zighash). |\n| **Probing**             | `Prober` enum: `Linear`, `DoubleHash`, `Bidirectional`, `Triangular`.                                              |\n| **Iterators**           | Type‑driven `keys()`, `values()`, `items()`—all lazy and allocation‑free.                                          |\n\n---\n\n## 🚀 **Getting Started**\n\n### Fetch via `zig fetch`\n\n```bash\nzig fetch --save git+https://github.com/galactixx/comphash#v0.3.0\n```\n\n> This adds a `comphash` entry under `.dependencies` in your `build.zig.zon`.\n\nThen in your build.zig:\n\n```zig\nconst comphash_mod = b.dependency(\"comphash\", .{\n    .target = target,\n    .optimize = optimize,\n}).module(\"comphash\");\n\n// add to library\nlib_mod.addImport(\"comphash\", comphash_mod);\n\n// add to executable\nexe.root_module.addImport(\"comphash\", comphash_mod);\n```\n\nThis lets you `const ch = @import(\"comphash\");` in your Zig code.\n\n## 📚 **Usage**\n\n```zig\nconst std = @import(\"std\");\nconst ch = @import(\"comphash\");\n\nconst FruitMap = ch.ComptimeHashMap(u32, null, null, null);\n\npub fn main() !void {\n    const kv = &.{ .{ \"apple\", 10 }, .{ \"banana\", 20 }, .{ \"cherry\", 30 } };\n    const map = FruitMap.init(kv);\n\n    std.debug.print(\"apple → {}\\n\", .{map.get(\"apple\") orelse 0});\n    std.debug.print(\"Length: {}\\n\",  .{map.length()});\n}\n```\n\n---\n\n## 🔍 **API**\n\n### `ComptimeHashMap`\n\n```zig\npub fn ComptimeHashMap(\n    comptime V:      type,                          // value type\n    comptime hasher: ?fn([]const u8) u64,           // optional hash func\n    comptime prober: ?Prober,                       // optional probe strategy\n    comptime eql:    ?fn([]const u8,[]const u8)bool // optional equality\n) type\n```\n\nCalling this generic returns **a new struct type** with the following methods:\n\n| Method                            | Description                                                              |\n| --------------------------------- | ------------------------------------------------------------------------ |\n| `init(kvs)`                       | Build the table at comptime. Accepts `[]const struct { []const u8, V }`. |\n| `get(key)`                        | Returns `?V`.                                                            |\n| `contains(key)`                   | Boolean containment check.                                               |\n| `length()` / `isEmpty()`          | Item count helpers.                                                      |\n| `keys()` / `values()` / `items()` | Lazy iterators.                                                          |\n| `capacity()`                      | Underlying table size (power‑of‑two).                                    |\n\n### `Prober`\n\nAn enum that provides options for probing:\n\n* `Linear` – `base + i`\n* `DoubleHash` – `base + i * (h(key) | 1)`\n* `Bidirectional` – Alternates ±offsets\n* `Triangular` – `base + i * (i + 1) / 2`\n\nSelect with the third parameter to `ComptimeHashMap`.\n\n---\n\n## 🤝 **License**\n\nThis project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.\n\n---\n\n## 📞 **Contact & Contributing**\n\nFeel free to open an [issue](https://github.com/galactixx/comphash/issues) or a pull request.  Discussion and feedback are welcome!\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/146773150?u=adbf103b39af7d9d4c912a4b8b90dbc9d1f6a496&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.3.0",
+      "name": "v0.3.0",
+      "body": "## 🚀 comphash v0.3.0 — Build Configuration\r\n\r\n**Release Date:** 2025-06-24\r\n\r\n### 📝 What’s Changed\r\n- build.zig now registers the `comphash` module and builds it as a static library  \r\n- Enables `const comphash = @import(\"comphash\");` in downstream code",
+      "prerelease": false,
+      "published_at": "2025-06-24T18:11:21Z",
+      "html_url": "https://github.com/galactixx/comphash/releases/tag/v0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "## 🚀 comphash v0.2.0 — Documentation Update\r\n\r\n**Release Date:** 2025-06-23\r\n\r\n### 📝 What’s Changed\r\n- **README.md** bumped to v0.2.0  \r\n- Added inline comments across the codebase  \r\n- Improved and expanded documentation for public APIs  \r\n\r\n_No functional changes — just clearer docs!_  ",
+      "prerelease": false,
+      "published_at": "2025-06-24T03:36:42Z",
+      "html_url": "https://github.com/galactixx/comphash/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v1.0.1 – Initial Release",
+      "body": "## 🎉 comphash v0.1.0 — Initial Release\r\n\r\n**comphash** is a zero-cost, compile-time hash map for immutable, O(1) string-keyed lookups in Zig—no runtime allocations, no deps.\r\n\r\n### ✨ Features\r\n- **O(1) lookups** for known-at-compile-time keys  \r\n- **Pluggable hash fn** (default: xxHash64 via zighash)  \r\n- **Collision probers**: Linear, DoubleHash, Bidirectional, Triangular  \r\n- **Lazy, allocation-free iterators**: `keys()`, `values()`, `items()`  \r\n- **Pure Zig**: no libc or external libraries  \r\n- **Comprehensive tests** in `std.testing`",
+      "prerelease": false,
+      "published_at": "2025-06-24T03:34:06Z",
+      "html_url": "https://github.com/galactixx/comphash/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Houston, TX",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 5,
+  "owner_following": 25,
+  "owner_created_at": "2023-10-02T19:09:29Z",
+  "license": "MIT",
+  "category": "library"
+}

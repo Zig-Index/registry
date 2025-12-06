@@ -1,0 +1,53 @@
+{
+  "name": "kcov",
+  "owner": "allyourcodebase",
+  "repo": "kcov",
+  "description": "kcov ported to the zig build system ",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 5,
+  "forks": 0,
+  "watchers": 3,
+  "updated_at": "2025-11-21T03:06:11Z",
+  "dependencies": [
+    {
+      "name": "kcov",
+      "url": "git+https://github.com/SimonKagstrom/kcov?ref=v43#a39874f938ce13f7a65f253120d1ec946b349ffe",
+      "hash": "N-V-__8AACKwDgClVrsguz3LNqiw8Qg95GMitZzo8mLHTRKT"
+    },
+    {
+      "name": "zlib",
+      "url": "git+https://github.com/allyourcodebase/zlib.git#61e7df7e996ec5a5f13a653db3c419adb340d6ef",
+      "hash": "zlib-1.3.1-ZZQ7lbYMAAB1hTSOKSXAKAgHsfDcyWNH_37ojw5WSpgR"
+    },
+    {
+      "name": "curl",
+      "url": "git+https://github.com/allyourcodebase/curl.git#6b43eca64fea0ab958f12ad863748449c0c08030",
+      "hash": "curl-8.15.0-mFDAWPDzAADRUo0hA9JEsT2vEFkAY8uDYdLapuctqA0u"
+    },
+    {
+      "name": "binutils",
+      "url": "git+https://github.com/allyourcodebase/binutils.git#a11bcdf655e54dd5ce2328feb03baaad4f33b53a",
+      "hash": "binutils-2.45.0-SsZUiK0eAwB2eKc68Mzfvf9n2PRgdY4efkeZU9Hiea6T"
+    },
+    {
+      "name": "elfutils",
+      "url": "git+https://github.com/allyourcodebase/elfutils.git#c834aab6695719da8a572edf1d103a899ebecd79",
+      "hash": "elfutils-0.192.0-lx7CHBD-AQCZ6z8BazmHUyIlxTNtzkVATs-2QtqBl0Zw"
+    }
+  ],
+  "minimum_zig_version": "0.15.2",
+  "readme": "[![CI](https://github.com/allyourcodebase/kcov/actions/workflows/ci.yaml/badge.svg)](https://github.com/allyourcodebase/kcov/actions)\n\n# Kcov\n\nThis is [Kcov](https://github.com/SimonKagstrom/kcov), packaged for [Zig](https://ziglang.org/).\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
+  "releases": [],
+  "owner_bio": "...are belong to Ziguanas, but we'd also be delighted to give them back!",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2023-09-28T21:29:33Z",
+  "license": "GPL-2.0",
+  "category": "library"
+}

@@ -1,0 +1,33 @@
+{
+  "name": "compotent",
+  "owner": "sea-grass",
+  "repo": "compotent",
+  "description": "",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-10-19T03:14:38Z",
+  "dependencies": [
+    {
+      "name": "quickjs",
+      "url": "git+https://github.com/sea-grass/quickjs-zig?ref=zig-v0.15.1#6810c3364070b58a7ed95c75a96ef94815797cca",
+      "hash": "quickjs-0.0.0-h7npN2EHAABwkwYnhDm0xcoWCZ6kCuq1OxXBihkLGYN4"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# compotent\n\nCompotent is a JS runtime for rendering components on the server.\n\n> Compotent is a malapropism of the word \"component.\"\n\nSee `example/sample_component.js` for an example component.\n\nSee `example/main.zig` for an example on rendering components.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/3868549?u=494545671e53ed3082ce917ca5f894785967d522&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Montreal, QC",
+  "owner_blog": "http://sea-grass.github.io",
+  "owner_twitter_username": null,
+  "owner_followers": 24,
+  "owner_following": 22,
+  "owner_created_at": "2013-03-14T20:51:36Z",
+  "category": "library"
+}

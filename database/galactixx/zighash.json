@@ -1,0 +1,31 @@
+{
+  "name": "zighash",
+  "owner": "galactixx",
+  "repo": "zighash",
+  "description": "Zighash is a Zig package for generating non-cryptographic hash values using a variety of popular algorithms: FNV-1a, MurmurHash3, SpookyHash, xxHash, SuperFastHash, and CityHash. Perfect for hash-based data structures, checksums, deduplication, and performance-sensitive applications.",
+  "type": "project",
+  "topics": [
+    "hashing",
+    "zig",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-06-26T03:11:36Z",
+  "minimum_zig_version": "0.14.0",
+  "readme": "<p align=\"center\">\n  <img src=\"/docs/logo.png\" alt=\"zighash logo\" width=\"75%\"/>\n</p>\n\nZighash is a Zig package for generating non-cryptographic hash values using a variety of popular algorithms: **FNV-1a**, **MurmurHash3**, **SpookyHash**, **xxHash**, **SuperFastHash**, and **CityHash**.\n\n## ✨ **Features**\n\n* **Multiple Hash Algorithms:**\n\n  * **FNV-1a:** `fnv1aHash32`, `fnv1aHash64`\n  * **SuperFastHash:** `superFastHash32`\n  * **MurmurHash3:** `murmur3Hash32`\n  * **SpookyHash:** `spookyHash32`, `spookyHash64`\n  * **xxHash:** `xxHash32`, `xxHash64`\n  * **CityHash:** `cityHash32`, `cityHash64`\n\n## 🚀 Getting Started\n\n### Fetch via `zig fetch`\n\nYou can use the built‑in Zig fetcher to download and pin a tarball:\n\n```bash\nzig fetch --save git+https://github.com/galactixx/zighash#v0.2.0\n```\n\n> This adds an `zighash` entry under `.dependencies` in your `build.zig.zon`. \n\nThen in your build.zig:\n\n```zig\nconst zighash_mod = b.dependency(\"zighash\", .{\n    .target = target,\n    .optimize = optimize,\n}).module(\"zighash\");\n\n// add to library\nlib_mod.addImport(\"zighash\", zighash_mod);\n\n// add to executable\nexe.root_module.addImport(\"zighash\", zighash_mod);\n```\n\nThis lets you `const zh = @import(\"zighash\");` in your Zig code.\n\n## 📚 **Usage**\n\n```zig\nconst std = @import(\"std\");\nconst zh  = @import(\"zighash\");\n\npub fn main() void {\n    const key = \"Hello, Zig!\";\n    const hash32 = zh.fnv1aHash32(key);\n    const hash64 = zh.xxHash64(key);\n\n    std.debug.print(\"FNV-1a 32-bit: {x}\\n\", .{hash32});\n    std.debug.print(\"xxHash 64-bit: {x}\\n\", .{hash64});\n}\n```\n\n## 🔍 **API**\n\n### FNV-1a\n\n```zig\npub fn fnv1aHash32(key: []const u8) u32\n```\n\n* **Parameters:**\n\n  * `key`: The input byte slice (`[]const u8`) to hash.\n* **Returns:** A 32-bit unsigned integer (`u32`) representing the FNV-1a hash.\n\n```zig\npub fn fnv1aHash64(key: []const u8) u64\n```\n\n* **Parameters:**\n\n  * `key`: The input byte slice.\n* **Returns:** A 64-bit unsigned integer (`u64`) representing the FNV-1a hash.\n\n---\n\n### MurmurHash3\n\n```zig\npub fn murmur3Hash32(key: []const u8, seed: u32) u32\n```\n\n* **Parameters:**\n\n  * `key`: The input byte slice.\n  * `seed`: The 32-bit seed.\n* **Returns:** A 32-bit unsigned integer (`u32`) computed by MurmurHash3.\n\n---\n\n### SpookyHash\n\n```zig\npub fn spookyHash32(key: []const u8, seed: u32) u32\npub fn spookyHash64(key: []const u8, seed: u64) u64\n```\n\n* **Parameters:**\n\n  * `key`: The input byte slice.\n  * `seed`: The 32-bit (`u32`) or 64-bit (`u64`) seed.\n* **Returns:** 32-bit (`u32`) or 64-bit (`u64`) hash values.\n\n---\n\n### xxHash\n\n```zig\npub fn xxHash32(key: []const u8, seed: u32) u32\npub fn xxHash64(key: []const u8, seed: u64) u64\n```\n\n* **Parameters:**\n\n  * `key`: The input byte slice.\n  * `seed`: The 32-bit (`u32`) or 64-bit (`u64`) seed.\n* **Returns:** 32-bit or 64-bit non-cryptographic hash.\n\n---\n\n### SuperFastHash\n\n```zig\npub fn superFastHash32(key: []const u8) u32\n```\n\n* **Parameters:**\n\n  * `key`: The input byte slice.\n* **Returns:** A 32-bit non-cryptographic hash.\n\n---\n\n### CityHash\n\n```zig\npub fn cityHash32(key: []const u8) u32\npub fn cityHash64(key: []const u8) u64\n```\n\n* **Parameters:**\n\n  * `key`: The input byte slice.\n* **Returns:** 32-bit or 64-bit hash optimized for varied input lengths.\n\n## 🤝 **License**\n\nThis project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.\n\n---\n\n## 📞 **Contact**\n\nHave questions or want to contribute? Open an issue or pull request on [GitHub](https://github.com/galactixx/zighash).\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/146773150?u=adbf103b39af7d9d4c912a4b8b90dbc9d1f6a496&v=4",
+  "releases": [],
+  "owner_bio": "Houston, TX",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 5,
+  "owner_following": 25,
+  "owner_created_at": "2023-10-02T19:09:29Z",
+  "license": "MIT",
+  "category": "library"
+}

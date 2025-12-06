@@ -1,0 +1,27 @@
+{
+  "name": "random_variable",
+  "owner": "PauloCampana",
+  "repo": "random_variable",
+  "description": "RNG, density, probability, survival and quantile functions for various distributions. ",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 7,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-11-10T01:29:55Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "![](image.png)\n\nFor over 30 probability distributions, this library provides:\n\n* Random variable generation\n* Density, probability, survival and quantile functions\n\nMathematical functions are tested for high precision and\nRNG tested to correctly fit the distribution\n\n# Installation\nBuilds static library with header file, optionally run tests\n```bash\n$ zig build -Doptimize=ReleaseFast\n$ zig build test\n$ zig build correctness -Doptimize=ReleaseFast\n```\n\n# [Documentation](https://paulocampana.github.io/random_variable)\n\n# Importing Zig module\n```bash\n$ zig fetch --save git+https://github.com/PauloCampana/random_variable\n```\n\n```zig\n// build.zig\nconst rv_dep = b.dependency(\"random_variable\", .{\n    .target = target,\n    .optimize = optimize,\n});\nconst rv_mod = rv_dep.module(\"random_variable\");\n\nexe.root_module.addImport(\"rv\", rv_mod);\n```\n\n```zig\n// main.zig\nconst rv = @import(\"rv\");\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/101306295?u=7813ce04b52f4c2716cff34400949c9c0f414437&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 3,
+  "owner_following": 1,
+  "owner_created_at": "2022-03-10T03:00:49Z",
+  "license": "MIT",
+  "category": "library"
+}

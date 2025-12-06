@@ -1,0 +1,29 @@
+{
+  "name": "zollections",
+  "owner": "zigzedd",
+  "repo": "zollections",
+  "description": "[MIRROR] Zig collections library.",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-library",
+    "zig-package",
+    "collections"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-01-08T22:24:08Z",
+  "minimum_zig_version": "0.13.0",
+  "readme": "<p align=\"center\">\n\t<a href=\"https://code.zeptotech.net/zedd/zollections\">\n\t\t<picture>\n\t\t\t<img alt=\"Zollections logo\" width=\"150\" src=\"https://code.zeptotech.net/zedd/zollections/raw/branch/main/logo.svg\" />\n\t\t</picture>\n\t</a>\n</p>\n\n<h1 align=\"center\">\n\tZollections\n</h1>\n\n<h4 align=\"center\">\n\t<a href=\"https://code.zeptotech.net/zedd/zollections\">Documentation</a>\n|\n\t<a href=\"https://zedd.zeptotech.net/zollections/api\">API</a>\n</h4>\n\n<p align=\"center\">\n\tZig collections library\n</p>\n\nZollections is part of [_zedd_](https://code.zeptotech.net/zedd), a collection of useful libraries for zig.\n\n## Zollections\n\n_Zollections_ is a collections library for Zig. It's made to ease memory management of dynamically allocated slices and elements.\n\n## Versions\n\nZollections 0.1.1 is made and tested with zig 0.13.0.\n\n## How to use\n\n### Install\n\nIn your project directory:\n\n```shell\n$ zig fetch --save https://code.zeptotech.net/zedd/zollections/archive/v0.1.1.tar.gz\n```\n\nIn `build.zig`:\n\n```zig\n// Add zollections dependency.\nconst zollections = b.dependency(\"zollections\", .{\n\t.target = target,\n\t.optimize = optimize,\n});\nexe.root_module.addImport(\"zollections\", zollections.module(\"zollections\"));\n```\n\n### Examples\n\nThese examples are taken from tests in [`tests/collection.zig`](https://code.zeptotech.net/zedd/zollections/src/branch/main/tests/collection.zig).\n\n#### Simple collection\n\n```zig\n// Allocate your slice.\nconst slice = try allocator.alloc(*u8, 3);\n// Create your slice elements.\nslice[0] = try allocator.create(u8);\nslice[1] = try allocator.create(u8);\nslice[2] = try allocator.create(u8);\n\n// Create a collection with your slice of elements.\nconst collection = try zollections.Collection(u8).init(allocator, slice);\n// Free your collection: your slice and all your elements will be freed.\ndefer collection.deinit();\n```\n\n#### Recursive free\n\n```zig\n// Create a pointer to a slice.\nconst slicePointer = try allocator.create([]*u8);\n\n// Allocate your slice in the pointed slice.\nslicePointer.* = try allocator.alloc(*u8, 3);\n// Create slice elements.\nslicePointer.*[0] = try allocator.create(u8);\nslicePointer.*[1] = try allocator.create(u8);\nslicePointer.*[2] = try allocator.create(u8);\n\n// Allocate your slice or pointers to slices.\nconst slice = try allocator.alloc(*[]*u8, 1);\nslice[0] = slicePointer;\n\n// Create a collection with your slice of elements.\nconst collection = try zollections.Collection([]*u8).init(allocator, slice);\n// Free your collection: your slice and all your slices and their elements will be freed.\ndefer collection.deinit();\n```\n\n#### Custom structure deinitialization\n\n```zig\n\n/// An example structure.\nconst ExampleStruct = struct {\n\tconst Self = @This();\n\n\tallocator: std.mem.Allocator,\n\tbuffer: []u8,\n\n\t/// Initialize a new example struct.\n\tpub fn init(bufSiz: usize) !Self\n\t{\n\t\tconst allocator = std.testing.allocator;\n\n\t\treturn .{\n\t\t\t.allocator = allocator,\n\t\t\t.buffer = try allocator.alloc(u8, bufSiz),\n\t\t};\n\t}\n\n\t/// Deinitialize the example struct.\n\tpub fn deinit(self: *Self) void\n\t{\n\t\tself.allocator.free(self.buffer);\n\t}\n};\n\n// Allocate your slice.\nconst slice = try allocator.alloc(*ExampleStruct, 3);\n// Create your slice elements with custom structs and their inner init / deinit.\nslice[0] = try allocator.create(ExampleStruct);\nslice[0].* = try ExampleStruct.init(4);\nslice[1] = try allocator.create(ExampleStruct);\nslice[1].* = try ExampleStruct.init(8);\nslice[2] = try allocator.create(ExampleStruct);\nslice[2].* = try ExampleStruct.init(16);\n\n// Create a collection with your slice of elements.\nconst collection = try zollections.Collection(ExampleStruct).init(allocator, slice);\n// Free your collection: your slice and all your elements will be deinitialized and freed.\ndefer collection.deinit();\n\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/184568612?v=4",
+  "releases": [],
+  "owner_bio": "Zig libraries.",
+  "owner_location": null,
+  "owner_blog": "https://code.zeptotech.net/zedd",
+  "owner_twitter_username": null,
+  "owner_created_at": "2024-10-10T22:10:33Z",
+  "homepage": "https://code.zeptotech.net/zedd/zollections",
+  "license": "MIT",
+  "category": "library"
+}

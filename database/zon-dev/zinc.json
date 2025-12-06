@@ -1,0 +1,57 @@
+{
+  "name": "zinc",
+  "owner": "zon-dev",
+  "repo": "zinc",
+  "description": "Zinc is a web framework written in pure Zig with a focus on high performance, usability, security, and extensibility.",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zinc",
+    "framework",
+    "api",
+    "rest-api",
+    "web",
+    "web-development",
+    "ziglang",
+    "resetful",
+    "web-framework"
+  ],
+  "stars": 155,
+  "forks": 8,
+  "watchers": 2,
+  "updated_at": "2025-12-05T19:18:32Z",
+  "dependencies": [
+    {
+      "name": "url",
+      "url": "https://github.com/zon-dev/url/archive/refs/heads/main.zip",
+      "hash": "url-0.1.3-niLQwoU-AADuCggCBxol0MK6dwBra0gJ25BpUdfqOhMA"
+    },
+    {
+      "name": "aio",
+      "url": "https://github.com/zon-dev/aio/archive/refs/tags/0.1.3-alpha.2.tar.gz",
+      "hash": "aio-0.1.3-alpha.2-dzJt5HiCBAC0k7L30mFm8JvD8HIwc0S_nWLjzn0pnZkf"
+    }
+  ],
+  "minimum_zig_version": "0.15.0",
+  "readme": "# zinc\n\n----\n\nZinc is a high-performance web framework written in pure Zig with a focus on usability, security, and extensibility. It features **asynchronous I/O powered by the [aio library](https://github.com/zon-dev/aio)** for maximum performance across all supported platforms.\n\n**:rocket: Now with async I/O support via aio library for fast performance!**\n\n**:construction: It's still in active development. Not the fastest zig framework in the universe, but fast enough.**\n\n**:warning: Do not use it in production environments until the stable release.**\n\n## 🚀 Key Features\n\n- **⚡ Asynchronous I/O**: Powered by the [aio library](https://github.com/zon-dev/aio) for maximum performance\n- **🔄 Cross-platform**: Linux (io_uring), macOS (kqueue), Windows (IOCP planned)\n- **🧵 Multithreading**: Efficient thread pool management\n- **🔧 Middleware Support**: Flexible middleware system\n- **📁 Route Groups**: Organized routing with nested groups\n- **🎨 Built-in Rendering**: Template and static file support\n- **🔒 Security Focused**: Built with security best practices\n- **🧪 Comprehensive Testing**: Full test suite coverage\n- **📚 Extensible**: Easy to extend and customize\n\n## 🏗️ Architecture\n\nZinc uses a modern async/await architecture with the [aio library](https://github.com/zon-dev/aio):\n\n- **Event Loop**: Non-blocking I/O operations\n- **Callback-based**: Efficient async callbacks for I/O completion\n- **Connection Pooling**: Optimized connection management\n- **Memory Safety**: Zero-copy operations where possible\n\n## 📦 Installation\n\nAdd zinc to your `build.zig.zon`:\n\n```zig\nzig fetch --save https://github.com/zon-dev/zinc/archive/refs/heads/main.zip\n```\n\n## 🚀 Quick Start\n\nA basic example with async I/O:\n\n```zig\nconst zinc = @import(\"zinc\");\n\npub fn main() !void {\n    var z = try zinc.init(.{ \n        .port = 8080,\n        .num_threads = 4,  // Configure thread pool\n    });\n    defer z.deinit();\n    \n    var router = z.getRouter();\n    try router.get(\"/\", helloWorld);\n\n    try z.run();\n}\n\nfn helloWorld(ctx: *zinc.Context) anyerror!void {\n    try ctx.text(\"Hello world!\", .{});\n}\n```\n\n## 🛠️ Advanced Usage\n\n### Route Groups\n\n```zig\nvar router = z.getRouter();\nvar api = try router.group(\"/api\");\ntry api.get(\"/users\", getUsers);\ntry api.post(\"/users\", createUser);\n\nvar v1 = try api.group(\"/v1\");\ntry v1.get(\"/status\", getStatus);\n```\n\n### Middleware\n\n```zig\n// Global middleware\ntry router.use(&.{authMiddleware, corsMiddleware});\n\n// Route-specific middleware\ntry router.get(\"/protected\", protectedHandler);\n```\n\n### Static Files\n\n```zig\n// Serve static files\ntry router.staticFile(\"/favicon.ico\", \"public/favicon.ico\");\n\n// Serve static directories\ntry router.staticDir(\"/assets\", \"public/assets\");\n```\n\n## 🖥️ Platform Support\n\n### Linux\n- **io_uring**: Maximum performance with Linux kernel 5.5+\n- **Zero-copy**: Efficient memory operations\n- **Batch operations**: High-throughput I/O\n\n### macOS\n- **kqueue**: Native async I/O support\n- **Optimized**: macOS-specific optimizations\n- **Full feature support**: All async operations\n\n### Windows\n- **IOCP**: Planned for future releases\n- **Native async**: Windows-native I/O completion ports\n\n## 📊 Performance\n\nZinc with aio integration provides:\n\n- **High concurrency**: Handle thousands of concurrent connections\n- **Low latency**: Sub-millisecond response times\n- **Efficient memory usage**: Minimal memory overhead\n- **Scalable**: Linear scaling with CPU cores\n\n## 🧪 Testing\n\nRun the comprehensive test suite:\n\n```bash\nzig build test\n```\n\nAll tests pass with zero memory leaks and full async I/O coverage.\n\n## 📚 Documentation\n\n- **API Reference**: https://zinc.zon.dev/\n- **Quick Start Guide**: https://zinc.zon.dev/src/quickstart.html\n\n## 🔧 Development\n\n### Clone project\n\n```bash\ngit clone https://github.com/zon-dev/zinc.git\ncd zinc\n```\n\n### Running Tests\n\n```bash\nzig build test\n```\n\n## 🤝 Contributing\n\nWe welcome contributions! Please see our contributing guidelines for details.\n\n## 📄 License\n\nThis project is licensed under the MIT License - see the LICENSE file for details.\n\n## 🙏 Acknowledgments\n\n- **[aio library](https://github.com/zon-dev/aio)**: For providing excellent cross-platform async I/O\n- **Zig community**: For the amazing language and ecosystem\n- **Contributors**: Everyone who has helped make zinc better\n\n---\n\n**:star: Star this repository if you find it useful!**",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/163546630?v=4",
+  "releases": [
+    {
+      "tag_name": "0.0.1-alpha1",
+      "name": "0.0.1-alpha1",
+      "body": "pre-release",
+      "prerelease": true,
+      "published_at": "2024-04-06T13:19:13Z",
+      "html_url": "https://github.com/zon-dev/zinc/releases/tag/0.0.1-alpha1",
+      "assets": []
+    }
+  ],
+  "owner_bio": "ZON (Zig Object Notation) is a simple data format. The zon.dev is a website for a decentralized community.",
+  "owner_location": "Hong Kong",
+  "owner_blog": "https://zon.dev",
+  "owner_twitter_username": null,
+  "owner_created_at": "2024-03-15T13:26:07Z",
+  "homepage": "https://zinc.zon.dev",
+  "license": "MIT",
+  "category": "web"
+}

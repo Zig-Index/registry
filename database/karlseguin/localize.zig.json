@@ -1,0 +1,29 @@
+{
+  "name": "localize.zig",
+  "owner": "karlseguin",
+  "repo": "localize.zig",
+  "description": "ICU Message Parser and Renderer",
+  "type": "project",
+  "topics": [
+    "localization",
+    "zig",
+    "zig-library",
+    "zig-package"
+  ],
+  "stars": 7,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-02-06T23:08:53Z",
+  "readme": "ICU Message Format for Zig\n\nVery basic support for parsing and rendering ICU message formats.\n\n## Install\n1) Add localize.zig as a dependency in your `build.zig.zon`:\n\n```bash\nzig fetch --save git+https://github.com/karlseguin/localize.zig#master\n```\n\n2) In your `build.zig`, add the `localize` module as a dependency you your program:\n\n```zig\nconst localize = b.dependency(\"localize\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\n// the executable from your call to b.addExecutable(...)\nexe.root_module.addImport(\"localize\", localize.module(\"localize\"));\n```\n\n\n## Usage\nFirst, create a `Resource`:\n\n```zig\nvar resource = try localize.Resource(Locales).init(allocator);\ndefer resource.deinit();\n\nconst Locales = enum {\n    en,\n    fr,\n};\n```\n\nThis will likely be a long-lived object. Next, create a parser for each locale and add messages:\n\n```zig\nvar parser = try resource.parser(.en, .{});\ndefer parser.deinit();\n\n// loop over entries in a file, or something\n// localize.zig currently doesn't \"read\" files\n\ntry parser.add(\"string_len_min\", \\\\ must be at least {min}\n    \\\\ {min, plural,\n    \\\\  =1 {character}\n    \\\\  other {characters}\n    \\\\  }\n    \\\\ long\n);\n```\n\nOnce all messages have been loaded, you can use `resource.write` to write a localized message:\n\n```zig\ntry resource.write(writer, .en, \"string_len_min\", .{.min = 6});\n```\n\nThe `write` method is thread-safe.\n\nIn cases where you'll be generating multiple message for a single locale, you can first get a <code>Locale</code> and then use its thread-safe write:</\n\n```zig\n// you very likely have logic in your code that makes it so that\n// this could never return null\nvar locale = resource.getLocale(.en) orelse unreachable;\n\nlocale.write(\"string_len_min\", .{.min = 6});\n```\n\n## Limited Functionality\nCurrently, this only supports:\n\n* variables\n* plural\n    * =0 or zero\n    * =1 or one\n    * other\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/206480?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "https://www.openmymind.net/",
+  "owner_twitter_username": "karlseguin",
+  "owner_followers": 2252,
+  "owner_following": 3,
+  "owner_created_at": "2010-02-19T04:01:58Z",
+  "license": "MIT",
+  "category": "library"
+}

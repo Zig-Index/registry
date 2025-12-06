@@ -1,0 +1,39 @@
+{
+  "name": "zig-cmake",
+  "owner": "dasimmet",
+  "repo": "zig-cmake",
+  "description": "",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-12-04T19:58:03Z",
+  "dependencies": [
+    {
+      "name": "cmake",
+      "url": "https://github.com/Kitware/CMake/releases/download/v3.30.3/cmake-3.30.3.tar.gz",
+      "hash": "N-V-__8AAJPLDwP_0Lzdfi0aZ6bkzPxXp-LLZ4f_gIyIFkOQ"
+    },
+    {
+      "name": "gnumake",
+      "url": "git+https://github.com/dasimmet/gnumake.git?ref=zig-master#5ea895c985b9668f4a0f3a676b2a36ab4c227c14",
+      "hash": "gnumake-4.4.1-QLj9ddvEAAAJy5DoKgCLqbmXhoWKjXN1_16Qzc3uvuu1"
+    }
+  ],
+  "minimum_zig_version": "0.14.1",
+  "readme": "# CMake bootstrapped with build.zig\n\nusing the zig build system, this repository bootstraps `cmake` `3.30.1` without any system cmake\nor the usual shellscript method. it takes a while and is only tested on x64 linux,\nbut can be used to build your C/C++ dependency libraries.\n\nthe package also has a custom `CMakeStep` that will configure and build and install a cmake project,\nand providdes a `.install(b, name)` function to get the artifacts:\n```\nzig fetch --save git+https://github.com/dasimmet/zig-cmake.git\n```\nbuild.zig (from [example](./example/build.zig)):\n```\npub fn build() void {\n  const cmake_import = b.lazyImport(@This(), \"cmake\");\n\n  if (cmake_import) |cmake| {\n    const cmakeStep = cmake.addCMakeStep(b, .{\n      .target = b.standardTargetOptions(.{}),\n      .name = \"cmake_my_project\",\n      .source_dir = b.path(\"\"), // or path to directory containing CMakeLists.txt\n        .defines = &.{\n            .{ \"CMAKE_BUILD_TYPE\", if (optimize == .Debug) \"Debug\" else \"Release\" },\n        },\n    });\n  }\n  const install_step = cmakeStep.install(b, \"\"); // installs the \n  b.getInstallStep().dependOn(&install_step.step);\n}\n```\n\n# Supported\n\n- ✅ stage1 linux\n- ✅ stage2 linux\n- ✅ example build step linux\n\n- ✅ stage1 windows\n- 🏃‍♂️ stage2 windows\n- 🏃‍♂️ example build step windows\n\n- ✅ stage1 macos\n- 🏃‍♂️ stage2 macos\n- 🏃‍♂️ example build step macos\n\n- 🏃‍♂️test building other cmake projects\n- 🏃‍♂️try to link cmake fully static\n- 🏃‍♂️test other architectures\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/2773256?u=609e5b7eac1f972a0854a240741c5c8deca85518&v=4",
+  "releases": [],
+  "owner_bio": "@ziglang enthusiast",
+  "owner_company": "ANNAX GmbH",
+  "owner_location": "Munich, Germany",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 7,
+  "owner_following": 4,
+  "owner_created_at": "2012-11-11T19:52:46Z",
+  "category": "library"
+}

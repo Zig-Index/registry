@@ -1,0 +1,46 @@
+{
+  "name": "zuws",
+  "owner": "harmony-co",
+  "repo": "zuws",
+  "description": "Opinionated Zig bindings for uWebSockets",
+  "type": "project",
+  "topics": [
+    "bindings",
+    "uwebsockets",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 10,
+  "forks": 3,
+  "watchers": 1,
+  "updated_at": "2025-12-05T19:18:47Z",
+  "dependencies": [
+    {
+      "name": "libuv",
+      "url": "libuv"
+    },
+    {
+      "name": "zlib",
+      "url": "zlib"
+    },
+    {
+      "name": "uSockets",
+      "url": "uWebSockets/uSockets/src"
+    },
+    {
+      "name": "boringssl",
+      "url": "uWebSockets/uSockets/boringssl"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# zuws\n\nOpinionated zig bindings for [`uWebSockets`](https://github.com/uNetworking/uWebSockets).\n\n# Installation\n\nCurrently zig does not support nested submodules, the recommended way is to add zuws as a submodule.\n\n```sh\ngit submodule add git@github.com:harmony-co/zuws.git\n```\n\nIn your `build.zig.zon` file add the following:\n\n```zig\n.dependencies = .{\n    .zuws = .{\n        .path = \"zuws\", // or the path you saved zuws to\n    },\n},\n```\n\nAnd import it on your `build.zig` file:\n\n```zig\nconst zuws = b.dependency(\"zuws\", .{\n    .target = target,\n    .optimize = optimize,\n    .debug_logs = true,\n    .ssl = false,\n    .no_zlib = false,\n    .with_proxy = false,\n    .with_uv = false,\n});\n\nexe.root_module.addImport(\"zuws\", zuws.module(\"zuws\"));\n```\n\n> [!NOTE]\n> The raw C bindings are available via `zuws.module(\"uws\")`\n\n# Usage\n\n```zig\nconst uws = @import(\"zuws\");\nconst App = uws.App;\nconst Request = uws.Request;\nconst Response = uws.Response;\n\npub fn main() !void {\n    const app: App = try .init();\n    defer app.deinit();\n\n    app.get(\"/hello\", hello);\n    app.listen(3000, null);\n    app.run();\n}\n\nfn hello(res: *Response, _: *Request) void {\n    const str = \"Hello World!\\n\";\n    res.end(str, false);\n}\n```\n\n## SSL support via BoringSSL\n\nEnabling ssl in `zuws` is as simple as passing `.ssl = true` to the build options, once enabled `App.init` will now ask for the options which can be found [here](https://github.com/uNetworking/uSockets/blob/182b7e4fe7211f98682772be3df89c71dc4884fa/src/libusockets.h#L127).\n\nYou can also check our [example](./examples/hello-world-ssl) for using ssl.\n\n# Grouping\n\nGrouping is not something provided by uws itself and instead is an abstraction we provide to aid developers.\n\nThe grouping API has a `comptime` and a `runtime` variant, most of the time you will want to use the `comptime` variant, but for the rare cases where adding routes at runtime dynamically is needed the functionality is there.\n\n## Creating groups at `comptime`\n\n```zig\nconst app: App = try .init();\ndefer app.deinit();\n\nconst my_group = App.Group.initComptime(\"/v1\")\n    .get(\"/example\", someHandler);\n\n// This will create the following route:\n// /v1/example\napp.comptimeGroup(my_group);\n```\n\n## Creating groups at `runtime`\n\n```zig\nconst app: App = try .init();\ndefer app.deinit();\n\nvar gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;\nconst allocator = gpa.allocator();\n\nvar my_group = App.Group.init(allocator, \"/v1\");\ntry my_group.get(\"/example\", someHandler);\n\n// This will create the following route:\n// /v1/example\ntry app.group(my_group);\n\n// We highly recommend you deinit the group\n// after you don't need it anymore\nmy_group.deinit();\n\n\n```\n\n## Combining groups together\n\nWe provide 2 different ways of combining groups together.\n\n### Grouping\n\n```zig\nconst app: App = try .init();\ndefer app.deinit();\n\nconst api = App.Group.initComptime(\"/api\");\nconst v1 = App.Group.initComptime(\"/v1\")\n    .get(\"/example\", someHandler);\n\n_ = api.group(v1);\n\n// This will create the following route:\n// /api/v1/example\napp.comptimeGroup(api);\n```\n\n### Merging\n\n```zig\nconst app: App = try .init();\ndefer app.deinit();\n\nconst v1 = App.Group.initComptime(\"/v1\")\n    .get(\"/example\", someHandler);\nconst v2 = App.Group.initComptime(\"/v2\");\n\n_ = v2.merge(v1);\n\n// This will create the following route:\n// /v2/example\napp.comptimeGroup(v2);\n```\n\n# Running the Examples\n\nTo run the provided examples in `zuws` you can clone the repository (don't forget to initialize the submodules), and run the following command:\n\n```zsh\nzig build example -- <example-name>\n```\n\nYou can also generate the assembly of a specific example using the following:\n\n```zsh\nzig build example-asm -- <example-name>\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/177400051?v=4",
+  "releases": [],
+  "owner_bio": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2024-08-03T11:39:31Z",
+  "license": "Apache-2.0",
+  "category": "library"
+}

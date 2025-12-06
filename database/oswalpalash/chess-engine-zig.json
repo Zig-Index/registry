@@ -1,0 +1,33 @@
+{
+  "name": "chess-engine-zig",
+  "owner": "oswalpalash",
+  "repo": "chess-engine-zig",
+  "description": "Zig Based Chess Engine ",
+  "type": "project",
+  "topics": [
+    "chess",
+    "engine",
+    "uci",
+    "zig",
+    "zig-lang",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 2,
+  "updated_at": "2025-09-23T14:51:53Z",
+  "readme": "### Zig based Chess Engine\n\n### Project Summary\n\nA chess engine written in zig. Mostly written as a means to learn and improve at zig.\n\n#### What works?\n\n- [x] UCI Compliant\n- [x] Basic Evaluation\n- [x] FEN Parsing\n- [x] Board Design and Piece Information\n- [x] Move Generator\n- [x] Unit Tests for supported code\n- [x] CI Based Testing ![CI](https://github.com/oswalpalash/chess-engine-zig/actions/workflows/ci.yaml/badge.svg)\n\n**_NOTE:_** This is an evolving project. No backwards compatibility guaraenteed.\n\n#### How to test\n\n```bash\nzig build test\n```\n\n#### How to run\n\n```bash\nzig build run\n```\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/6431196?u=ceaa977c3dc79127be38b0b6f14cb0ffbf65c437&v=4",
+  "releases": [],
+  "owner_bio": "Alumnus @ Carnegie Mellon University  \r\nCTFs @pwning and @mmm-team \r\nChallenge Author and Tester @picoCTF \r\nSecurity Research at @cmu-pasta \r\nWorks @cargurus",
+  "owner_company": "https://oswalpalash.com",
+  "owner_location": "Boston",
+  "owner_blog": "https://oswalpalash.com",
+  "owner_twitter_username": "oswalpalash",
+  "owner_followers": 63,
+  "owner_following": 12,
+  "owner_created_at": "2014-01-17T16:33:33Z",
+  "homepage": "https://github.com/oswalpalash/chess-engine-zig",
+  "license": "MIT",
+  "category": "library"
+}

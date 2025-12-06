@@ -1,0 +1,115 @@
+{
+  "name": "zig-luajit-build",
+  "owner": "sackosoft",
+  "repo": "zig-luajit-build",
+  "description": "A package to compile LuaJIT using the Zig toolchain. Install to access the LuaJIT C API. For Zig API see https://github.com/sackosoft/zig-luajit",
+  "type": "project",
+  "topics": [
+    "luajit",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 17,
+  "forks": 8,
+  "watchers": 0,
+  "updated_at": "2025-11-23T19:14:56Z",
+  "dependencies": [
+    {
+      "name": "upstream",
+      "url": "git+https://github.com/LuaJIT/LuaJIT#538a82133ad6fddfd0ca64de167c4aca3bc1a2da",
+      "hash": "N-V-__8AABdRQgCigs7KLUb8QxQk1Pi15kpIDYtYvMoXpMGb"
+    }
+  ],
+  "readme": "<div align=\"center\">\n\n# zig-luajit-build\n\nUsed to compile and link the native [LuaJIT][LUAJIT] C API into Zig ⚡ applications.\n\n![Ubuntu Build Status Badge](https://img.shields.io/github/actions/workflow/status/sackosoft/zig-luajit-build/build-ubuntu.yml?label=Linux%20Build)\n![Windows Build Status Badge](https://img.shields.io/github/actions/workflow/status/sackosoft/zig-luajit-build/build-windows.yml?label=Windows%20Build)\n![GitHub License](https://img.shields.io/github/license/sackosoft/zig-luajit-build)\n\n<!--\nTODO: Capture attention with a visualization, diagram, demo or other visual placeholder here.\n![Placeholder]()\n-->\n\n</div>\n\nLuaJIT is a fork from the [Lua][LUA] project -- \"Lua is a powerful, efficient, lightweight, embeddable scripting language.\"\n\n[LUAJIT]: https://luajit.org/index.html\n[LUA]: https://www.lua.org/about.html\n\n## Are you looking for a Zig interface to the LuaJIT C API?\n\nThis package does not contain Zig language bindings to the C API. This package only handles building and linking the\nLuaJIT library into a Zig application.\n\nIf you're looking to run Lua on LuaJIT in your Zig application, you're probably looking for one of these projects:\n\n1. [sackosoft/zig-luajit](https://github.com/sackosoft/zig-luajit) **- Zig language bindings LuaJIT.**\n    - Preferred solution when only one Lua runtime (LuaJIT) is required;  built on top of `zig-luajit-build`.\n2. [natecraddock/ziglua](https://github.com/natecraddock/ziglua) - Zig language bindings for Lua 5.x and Luau and LuaJIT.\n    - More mature project, maintained by Nathan Craddock. Has some quirks as a result of supporting all Lua runtimes\n      with the same Zig API.\n\n## Zig Version\n\nThe `main` branch targets the latest stable Zig version. Currently `0.15.1`.\n\nFor other Zig versions look for branches with the named version.\n\n## Installation & Usage\n\nInstall using `zig fetch`. This will add a `luajit_build` dependency to your `build.zig.zon` file.\n\n```bash\nzig fetch --save=luajit_build git+https://github.com/sackosoft/zig-luajit-build\n```\n\nNext, in order for your code to import the LuaJIT C API, you'll need to update your `build.zig` to:\n\n1. get a reference to the `luajit-build` dependency which was added by zig fetch.\n2. get a reference to the `luajit-build` module, containing the native LuaJIT C API.\n3. attach that module as an import to your library or executable, so that your code can reference the C API.\n\n```zig\n// (1) Reference the dependency\nconst luajit_build_dep = b.dependency(\"luajit_build\", .{\n    .target = target, \n    .optimize = optimize,\n    .link_as = .static  // Or .dynamic to link as a shared library\n});\n\n// (2) Reference the module containing the LuaJIT C API.\nconst luajit_build = luajit_build_dep.module(\"luajit-build\");\n\n// Set up your library or executable\nconst lib = // ...\nconst exe = // ...\n\n// (3) Add the module as an import, available via `@import(\"c\")`, or any other name you choose here.\nlib.root_module.addImport(\"c\", luajit_build);\n// Or\nexe.root_module.addImport(\"c\", luajit_build);\n```\n\nNow the code in your library or executable can import and access the LuaJIT C API!\n\n```zig\nconst c = @import(\"c\");  // Access LuaJIT functions via 'c'\n\npub fn main() !void {\n    const state: ?*c.lua_State = c.luaL_newstate();\n    if (state) |L| {\n        c.luaL_openlibs(L);\n        c.luaL_dostring(\n            L, \n            \\\\ print(\"Hello, world!\")\n        );\n    }\n}\n```\n\n## Configuration\n\nThis package supports one configuration option, shown in the example above.\n\n- `link_as`: Controls how LuaJIT is linked\n  - `.static`: Build and link LuaJIT as a static library (default).\n  - `.dynamic`: Build and link LuaJIT as a shared library.\n\n## License\n\nSome files in this repository were copied or adapted from the [natecraddock/ziglua](https://github.com/natecraddock/ziglua) project.\nAny files copied or adapted from that project have a comment describing the attribution at the top. Such files are shared by Nathan\nCraddock under the MIT License in [ziglua/license](https://github.com/natecraddock/ziglua/blob/90dab7e72173709353dcaaa6d911bed7655c030d/license).\n\nAll other files are released under the MIT License in [zig-luajit-build/LICENSE](./LICENSE).\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/192897928?v=4",
+  "releases": [
+    {
+      "tag_name": "v1.1.7",
+      "name": "v1.1.7 - Zig 0.15.1 - 2025-10-06",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-10-06T12:59:34Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit-build/releases/tag/v1.1.7",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.1.6",
+      "name": "v1.1.6 - Zig 0.15.1 - 2025-08-28",
+      "body": "Update Zig package version number.",
+      "prerelease": false,
+      "published_at": "2025-08-28T14:13:42Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit-build/releases/tag/v1.1.6",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.1.5",
+      "name": "v1.1.5 - Zig 0.15.1 - 2025-08-28",
+      "body": "* Upgrade for 0.15.1\r\n* Begin tracking Zig's latest stable release on `main` instead of Zig nightly.\r\n\r\n**Full Changelog**: https://github.com/sackosoft/zig-luajit-build/compare/v1.1.4...v1.1.5",
+      "prerelease": false,
+      "published_at": "2025-08-28T13:51:13Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit-build/releases/tag/v1.1.5",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.1.4",
+      "name": "v1.1.4",
+      "body": "Updated to 1.1.4 reflecting updates for Zig 1.15 and changes to target selection\r\n\r\n## What's Changed\r\n* Fix cross compilation by @sengir in https://github.com/sackosoft/zig-luajit-build/pull/9\r\n\r\n## New Contributors\r\n* @sengir made their first contribution in https://github.com/sackosoft/zig-luajit-build/pull/9\r\n\r\n**Full Changelog**: https://github.com/sackosoft/zig-luajit-build/compare/v1.1.3...v1.1.4",
+      "prerelease": false,
+      "published_at": "2025-05-18T02:03:10Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit-build/releases/tag/v1.1.4",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.1.3",
+      "name": "v1.1.3",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-03-12T00:54:32Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit-build/releases/tag/v1.1.3",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.1.2",
+      "name": "v1.1.2",
+      "body": "Updated the `build.zig.zon` dependency hash format for the upstream LuaJIT project to match the new Zig 0.14.0 implementation.",
+      "prerelease": false,
+      "published_at": "2025-03-12T00:52:32Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit-build/releases/tag/v1.1.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.1.1",
+      "name": "v1.1.1",
+      "body": "Upgrade to Zig 14.0-dev.3460, add package metadata: fingerprint and version.",
+      "prerelease": false,
+      "published_at": "2025-03-04T14:50:52Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit-build/releases/tag/v1.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.0.1",
+      "name": "v1.0.1",
+      "body": "## What's Changed\r\n* Fix build on windows by patching `dynasm.lua` generated file path separators by @thsackos in https://github.com/sackosoft/zig-luajit-build/pull/2\r\n* Split build into ubuntu build and windows build to validate changes by @thsackos in https://github.com/sackosoft/zig-luajit-build/pull/3\r\n\r\n**Full Changelog**: https://github.com/sackosoft/zig-luajit-build/compare/v1.0.0...v1.0.1",
+      "prerelease": false,
+      "published_at": "2025-01-31T16:15:48Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit-build/releases/tag/v1.0.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.0.0",
+      "name": "v1.0.0",
+      "body": "Creating a release artifact to track the first stable production release.",
+      "prerelease": false,
+      "published_at": "2025-01-26T15:29:51Z",
+      "html_url": "https://github.com/sackosoft/zig-luajit-build/releases/tag/v1.0.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Building stable foundations for modern software.",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2024-12-26T15:40:18Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,42 @@
+{
+  "name": "osdialog-zig",
+  "owner": "ttytm",
+  "repo": "osdialog-zig",
+  "description": "Cross-platform utility module for Zig to open native dialogs for the filesystem, message boxes, color-picking.",
+  "type": "project",
+  "topics": [
+    "bindings",
+    "library",
+    "linux",
+    "macos",
+    "module",
+    "windows",
+    "zig",
+    "ziglang",
+    "color-picker",
+    "dialog"
+  ],
+  "stars": 15,
+  "forks": 2,
+  "watchers": 1,
+  "updated_at": "2025-10-06T09:30:50Z",
+  "dependencies": [
+    {
+      "name": "osdialog",
+      "url": "https://github.com/ttytm/osdialog/archive/989a270.tar.gz",
+      "hash": "1220f0e1adfbc7648d2d47d6e6a8b722b9c9e02329c29f1f33afa2997844217fffe6"
+    }
+  ],
+  "readme": "# osdialog-zig\n\n[badge__build-status]: https://img.shields.io/github/actions/workflow/status/ttytm/osdialog-zig/ci.yml?branch=main&logo=github&logoColor=C0CAF5&labelColor=333\n[badge__version-lib]: https://img.shields.io/github/v/tag/ttytm/osdialog-zig?logo=task&logoColor=C0CAF5&labelColor=333&color=\n[badge__version-zig]: https://img.shields.io/badge/Zig-0.13.0-cc742f?logo=zig&logoColor=C0CAF5&labelColor=333\n\n[![][badge__build-status]](https://github.com/ttytm/osdialog-zig/actions?query=branch%3Amain)\n[![][badge__version-lib]](https://github.com/ttytm/osdialog-zig/releases/latest)\n[![][badge__version-zig]](https://github.com/ttytm/osdialog-zig/releases/latest)\n\nCross-platform utility module for Zig to open native dialogs for the filesystem, message boxes, color-picking.\n\n## Quickstart\n\n- [Installation](#installation)\n- [Usage](#usage)\n  - [Example](#example)\n- [Credits](#credits)\n\n## Showcase\n\n<table align=\"center\">\n  <tr>\n    <th>Linux</th>\n    <th>Windows</th>\n    <th>macOS</th>\n  </tr>\n  <tr>\n    <td width=\"400\">\n      <img alt=\"Linux File Dialog\" src=\"https://github.com/ttytm/dialog/assets/34311583/6ba6e96b-3581-4382-8074-79918a99dcbd\">\n    </td>\n    <td width=\"400\">\n      <img alt=\"Windows File Dialog\" src=\"https://github.com/ttytm/dialog/assets/34311583/911e8c71-0cc1-4426-a62c-04714b6b071f\">\n    </td>\n    <td width=\"400\">\n      <img alt=\"macOS File Dialog\" src=\"https://github.com/ttytm/dialog/assets/34311583/f7c4375e-d2e4-4121-ad34-db0473d8fabe\">\n    </td>\n  </tr>\n</table>\n\n<details open>\n<summary><b>More Examples</b> <sub><sup>Toggle visibility...</sup></sub></summary><br>\n\n<table align=\"center\">\n  <tr>\n    <th>Linux</th>\n    <th>Windows</th>\n    <th>macOS</th>\n  </tr>\n  <tr>\n    <td width=\"400\">\n      <img alt=\"Linux Color Picker GTK3\" src=\"https://github.com/ttytm/dialog/assets/34311583/8e587c8c-2f12-41ee-9a10-4c3f92e72885\">\n      <img alt=\"Linux Message\" src=\"https://github.com/ttytm/dialog/assets/34311583/42e1081b-ee52-4286-abfd-ad9eda63d282\">\n      <img alt=\"Linux Message with Yes and No Buttons\" src=\"https://github.com/ttytm/dialog/assets/34311583/07aa26bd-f887-417b-9c1a-56724ceb2589\">\n      <img alt=\"Linux Input Prompt\" src=\"https://github.com/ttytm/dialog/assets/34311583/bc5e3ec1-88b5-4e1a-b46e-381b322b8a6c\">\n      <img alt=\"Linux Color Picker GTK2\" src=\"https://github.com/ttytm/dialog/assets/34311583/37619ed0-8fe2-4e5c-af11-70d7f2304b2b\">\n    </td>\n    <td width=\"400\">\n      <img alt=\"Windows Color Picker\" src=\"https://github.com/ttytm/dialog/assets/34311583/966b1395-55ac-45b8-aa1b-516f673b64e8\">\n      <img alt=\"Windows Message\" src=\"https://github.com/ttytm/dialog/assets/34311583/a73e0eaf-e56b-44e6-bcc5-31bb381c6e37\">\n      <img alt=\"Windows Message with Yes and No Buttons\" src=\"https://github.com/ttytm/dialog/assets/34311583/16a1ad65-571e-4183-8c0b-119cbf126aec\">\n      <img alt=\"Windows Input Prompt\" src=\"https://github.com/ttytm/dialog/assets/34311583/54e4a708-de38-44ea-ae61-be39c1bdbff9\">\n    </td>\n    <td width=\"400\">\n      <img alt=\"macOS Color Picker\" src=\"https://github.com/user-attachments/assets/551ac8d6-406d-4b01-9095-d0a357cc8250\">\n      <!-- <img alt=\"macOS Message\" src=\"https://github.com/ttytm/dialog/assets/34311583/15920c46-e529-405f-9731-3ac57ce46449\"> -->\n      <img alt=\"macOS Message with Yes and No Buttons\" src=\"https://github.com/ttytm/dialog/assets/34311583/11cba10b-3190-4114-b1ad-e49e56d4498c\">\n      <img alt=\"macOS Input Prompt\" src=\"https://github.com/ttytm/dialog/assets/34311583/e6d496b4-3c20-4ece-8808-0eba99a59a45\">\n    </td>\n  </tr>\n</table>\n\n</details>\n\n## Installation\n\n```sh\n# ~/<ProjectsPath>/your-awesome-projct\nzig fetch --save https://github.com/ttytm/osdialog-zig/archive/main.tar.gz\n```\n\n```zig\n// your-awesome-projct/build.zig\nconst std = @import(\"std\");\n\npub fn build(b: *std.Build) void {\n\t// ..\n\tconst osdialog_dep = b.dependency(\"osdialog\", .{});\n\tconst exe = b.addExecutable(.{\n\t\t.name = \"your-awesome-projct\",\n\t\t// ..\n\t});\n\texe.root_module.addImport(\"osdialog\", osdialog_dep.module(\"osdialog\"));\n\t// ...\n}\n```\n\n## Usage\n\nRef.: [`osdialog-zig/src/lib.zig`](https://github.com/ttytm/osdialog-zig/blob/main/src/lib.zig)\n```zig\n/// Opens a message box and returns `true` if `OK` or `Yes` was pressed.\npub fn message(text: [*:0]const u8, opts: MessageOptions) bool\n\n/// Opens an input prompt with an \"OK\" and \"Cancel\" button.\npub fn prompt(allocator: std.mem.Allocator, text: [*:0]const u8, opts: PromptOptions) ?[:0]u8\n\n/// Opens an RGBA color picker and returns the selected `Color` or `null` if the selection was canceled.\npub fn color(options: ColorPickerOptions) ?Color\n\n/// Opens a file dialog and returns the selected path or `null` if the selection was canceled.\npub fn path(allocator: std.mem.Allocator, action: PathAction, options: PathOptions) ?[:0]u8\n```\n\n### Example\n\nRef.: [`osdialog-zig/examples/src/main.zig`](https://github.com/ttytm/osdialog-zig/blob/main/examples/src/main.zig)\n\n```zig\nconst std = @import(\"std\");\nconst osd = @import(\"osdialog\");\n\npub fn main() void {\n\tvar gpa = std.heap.GeneralPurposeAllocator(.{}){};\n\tconst allocator = gpa.allocator();\n\tdefer _ = gpa.deinit();\n\n\t_ = osd.message(\"Hello, World!\", .{});\n\tif (!osd.message(\"Do you want to continue?\", .{ .buttons = .yes_no })) {\n\t\tstd.process.exit(0);\n\t}\n\tif (osd.prompt(allocator, \"Give me some input\", .{})) |input| {\n\t\tdefer allocator.free(input);\n\t\tstd.debug.print(\"Input: {s}\\n\", .{input});\n\t}\n\tif (osd.color(.{ .color = .{ .r = 247, .g = 163, .b = 29, .a = 255 } })) |selected| {\n\t\tstd.debug.print(\"Color RRR,GGG,BBB,AAA: {d},{d},{d},{d}\\n\", .{ selected.r, selected.g, selected.b, selected.a });\n\t}\n\tif (osd.path(allocator, .open, .{})) |path| {\n\t\tdefer allocator.free(path);\n\t\tstd.debug.print(\"Selected file: {s}\\n\", .{path});\n\t}\n\tif (osd.path(allocator, .open_dir, .{})) |path| {\n\t\tdefer allocator.free(path);\n\t}\n\tif (osd.path(allocator, .save, .{ .path = \".\", .filename = \"myfile.txt\" })) |path| {\n\t\tdefer allocator.free(path);\n\t\tstd.debug.print(\"Save location: {s}\\n\", .{path});\n\t}\n}\n```\n\n```sh\n# osdialog/examples\nzig build run\n```\n\n## Credits\n\n- [AndrewBelt/osdialog](https://github.com/AndrewBelt/osdialog) - The C project this library is leveraging\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/34311583?u=e8d3ed10b58b43fd7dd2b6ec5f347b5d5a2f8ce0&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 99,
+  "owner_following": 51,
+  "owner_created_at": "2017-12-06T15:22:36Z",
+  "license": "ISC",
+  "category": "library"
+}

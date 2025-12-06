@@ -1,0 +1,144 @@
+{
+  "name": "zig-dart",
+  "owner": "akunaakwei",
+  "repo": "zig-dart",
+  "description": "building dart with zig",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-11-07T16:47:12Z",
+  "dependencies": [
+    {
+      "name": "dart",
+      "url": "https://github.com/dart-lang/sdk/archive/refs/tags/3.8.1.tar.gz",
+      "hash": "N-V-__8AAN6B5w_Vlia8GjaRhx386OpKubh2DLHaBP3ERf4t"
+    },
+    {
+      "name": "prebuilt_dart_windows_x86_64",
+      "url": "https://storage.googleapis.com/dart-archive/channels/stable/release/3.8.1/sdk/dartsdk-windows-x64-release.zip",
+      "hash": "N-V-__8AAIdNGyDotMuzgGm-EDTXV9wWTnUgHyHIVVbYf685"
+    },
+    {
+      "name": "prebuilt_dart_windows_aarch64",
+      "url": "https://storage.googleapis.com/dart-archive/channels/stable/release/3.8.1/sdk/dartsdk-windows-arm64-release.zip",
+      "hash": "N-V-__8AAJd2pBaBMHO2O_WashfWV-wM3n7sFupEMgtgN5Ha"
+    },
+    {
+      "name": "prebuilt_dart_linux_x86_64",
+      "url": "https://storage.googleapis.com/dart-archive/channels/stable/release/3.8.1/sdk/dartsdk-linux-x64-release.zip",
+      "hash": "N-V-__8AAAixVSA1OfR4Wwh6Os7eqnH2LTXwp73Pa-OPwaDX"
+    },
+    {
+      "name": "prebuilt_dart_linux_aarch64",
+      "url": "https://storage.googleapis.com/dart-archive/channels/stable/release/3.8.1/sdk/dartsdk-linux-arm64-release.zip",
+      "hash": "N-V-__8AAFXg2SBTgZJ6p-UszZ9aNsLYImVmtMhL5YnAHyI3"
+    },
+    {
+      "name": "prebuilt_dart_linux_arm",
+      "url": "https://storage.googleapis.com/dart-archive/channels/stable/release/3.8.1/sdk/dartsdk-linux-arm-release.zip",
+      "hash": "N-V-__8AAKFdTxaHal9Vtv2tdMSVEeeTsROCGqrp8mDfxvOb"
+    },
+    {
+      "name": "prebuilt_dart_linux_riscv64",
+      "url": "https://storage.googleapis.com/dart-archive/channels/stable/release/3.8.1/sdk/dartsdk-linux-riscv64-release.zip",
+      "hash": "N-V-__8AALCuMRfrdylcA21WvvVI7zBXV_7iwfmbzwpbrTLZ"
+    },
+    {
+      "name": "prebuilt_dart_macos_x86_64",
+      "url": "https://storage.googleapis.com/dart-archive/channels/stable/release/3.8.1/sdk/dartsdk-macos-x64-release.zip",
+      "hash": "N-V-__8AAPAQQSBASqYuQRLA8QY1lxO5uU-QnlGiNcLYuXJj"
+    },
+    {
+      "name": "prebuilt_dart_macos_aarch64",
+      "url": "https://storage.googleapis.com/dart-archive/channels/stable/release/3.8.1/sdk/dartsdk-macos-arm64-release.zip",
+      "hash": "N-V-__8AAE_zqiBr95kS42fsxmTHu7Om1dqtHPNVf-e6uR2W"
+    },
+    {
+      "name": "patch",
+      "url": "https://github.com/akunaakwei/zig-patch/archive/799ade2cd8954a38aba3d730de1a69891aa68234.tar.gz",
+      "hash": "patch-2.6.1-po1jORRvAAD4_gRpqMKvC00UPblvIpkxvnJdDpG4-DMY"
+    },
+    {
+      "name": "icu",
+      "url": "https://github.com/akunaakwei/zig-icu/archive/6f4e3a4765ebf7602a512c0fc9dfd8c75d207f63.tar.gz",
+      "hash": "icu-77.1.0-b1DbVOOrAAARxFFjP-nWibrw4HkGrJO-gTOUFAQvjpQR"
+    },
+    {
+      "name": "z",
+      "url": "https://github.com/akunaakwei/zig-z/archive/90f9f5b5892f248426f86ec87d2ad210017b4fbb.tar.gz",
+      "hash": "z-1.3.1-bMk6UWILAACBq0z3H3a5qZNyCx0O7BVePzsBnlIv4zVr"
+    },
+    {
+      "name": "boringssl",
+      "url": "https://github.com/akunaakwei/zig-boringssl/archive/78d8745a3a86f694b924df0200a261f9f0c2e39a.tar.gz",
+      "hash": "boringssl-0.0.0-wabiQdC0AgBh6EndYbIJjQSJLBR4i_C6ztDkZxmoYGSL"
+    },
+    {
+      "name": "clap",
+      "url": "https://github.com/Hejsil/zig-clap/archive/refs/tags/0.11.0.tar.gz",
+      "hash": "clap-0.11.0-oBajB-HnAQDPCKYzwF7rO3qDFwRcD39Q0DALlTSz5H7e"
+    },
+    {
+      "name": "mimalloc",
+      "url": "https://github.com/akunaakwei/zig-mimalloc/archive/f399b5567926026bb81e63302921d80e8962af3f.tar.gz",
+      "hash": "mimalloc-3.0.3-ayYwXNAOAACdkorEWufCMN7QPilc-uKvvoP7WhnwgL8-"
+    },
+    {
+      "name": "zeit",
+      "url": "https://github.com/akunaakwei/zig-zeit/archive/fd626e4552f71336abeca0ca8e18a2f36caebb78.tar.gz",
+      "hash": "zeit-0.6.0-5I6bk8V7AgDfJixE8uADm4fL1byHknAI8rY3fv74DhxT"
+    },
+    {
+      "name": "comsupp",
+      "url": "https://github.com/akunaakwei/zig-comsupp/archive/e8d48fa9f0d6d893df1cf6343742d3d2a823951b.tar.gz",
+      "hash": "comsupp-0.4.15-4BppA6IQAAAqRVWcsHgi10kjUpSyrapPQwzRng6cY7yA"
+    },
+    {
+      "name": "dart_tools",
+      "url": "https://github.com/dart-lang/tools/archive/8d49319b95912a5dff3d7ba4cd861458c55c5608.tar.gz",
+      "hash": "N-V-__8AAHP4xwA8t2W4Jm95YtFPrwZ6RoXNXGvc0q4B6jWq"
+    },
+    {
+      "name": "dart_core",
+      "url": "https://github.com/dart-lang/core/archive/7a80178ca72b01b0efb99a9a9a654d83ca21d6b7.tar.gz",
+      "hash": "N-V-__8AAInqXQCo3IOlrLHmGCgRpQeYZTyweHNTRxNZTGVC"
+    },
+    {
+      "name": "dart_webdriver",
+      "url": "https://github.com/google/webdriver.dart/archive/f52afbf72895ae980bd4129d877305c2182d6cbc.tar.gz",
+      "hash": "N-V-__8AANd-BgCNwvPgpEXuH7mnnyEBmngus53X_a21qnZW"
+    },
+    {
+      "name": "dart_test",
+      "url": "https://github.com/dart-lang/test/archive/c1fa1e692084a9aab83a171cdcffcc4087e8e40b.tar.gz",
+      "hash": "N-V-__8AAAYTLwCUdhWLbB9frP44-UPBuhcF6qhtGI1qpM1t"
+    },
+    {
+      "name": "dart_sync_http",
+      "url": "https://github.com/dart-lang/sync_http/archive/dc54465f07d9652875deeade643256dafa2fbc6c.tar.gz",
+      "hash": "N-V-__8AAH2OAADxx4J-21YOH5-eEsNTOBvjipEZey8vvtXD"
+    },
+    {
+      "name": "dart_native",
+      "url": "https://github.com/dart-lang/native/archive/4928765d7681ad8a4211c5977afd2f93f50b3f65.tar.gz",
+      "hash": "N-V-__8AAKhZnQBCA0ra9a01Dk__hlMOwKUwFeggE1YztMpO"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# dart\r\nThis is dart packaged for the zig build system.  \r\nUsed by [zig-dartlib](https://github.com/akunaakwei/zig-dartlib) to embed dart in zig projects.",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/11787994?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 0,
+  "owner_following": 2,
+  "owner_created_at": "2015-04-03T16:34:07Z",
+  "license": "Zlib",
+  "category": "library"
+}

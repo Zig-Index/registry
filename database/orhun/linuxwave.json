@@ -1,0 +1,1504 @@
+{
+  "name": "linuxwave",
+  "owner": "orhun",
+  "repo": "linuxwave",
+  "description": "Generate music from the entropy of Linux 🐧🎵",
+  "type": "project",
+  "topics": [
+    "entropy",
+    "linux",
+    "music",
+    "music-generation",
+    "music-generator",
+    "random",
+    "random-music",
+    "retrowave",
+    "synthwave",
+    "tune-generator"
+  ],
+  "stars": 622,
+  "forks": 22,
+  "watchers": 7,
+  "updated_at": "2025-12-05T07:30:25Z",
+  "dependencies": [
+    {
+      "name": "clap",
+      "url": "https://github.com/Hejsil/zig-clap/archive/refs/tags/0.10.0.tar.gz",
+      "hash": "clap-0.10.0-oBajB434AQBDh-Ei3YtoKIRxZacVPF1iSwp3IX_ZB8f0"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# `linuxwave` 🐧🎵\n\n<p align=\"center\">\n\n<img src=\"https://github.com/orhun/linuxwave/blob/main/assets/demo.gif\" alt=\"demo\">\n<a href=\"https://github.com/orhun/linuxwave/releases\"><img src=\"https://img.shields.io/github/v/release/orhun/linuxwave?style=flat&amp;labelColor=1d1d1d&amp;color=424242&amp;logo=GitHub&amp;logoColor=white\" alt=\"GitHub Release\"></a>\n<a href=\"https://codecov.io/gh/orhun/linuxwave\"><img src=\"https://img.shields.io/codecov/c/gh/orhun/linuxwave?style=flat&amp;labelColor=1d1d1d&amp;color=424242&amp;logo=Codecov&amp;logoColor=white\" alt=\"Coverage\"></a>\n<a href=\"https://github.com/orhun/linuxwave/actions?query=workflow%3A%22Continuous+Integration%22\"><img src=\"https://img.shields.io/github/actions/workflow/status/orhun/linuxwave/ci.yml?branch=main&amp;style=flat&amp;labelColor=1d1d1d&amp;color=424242&amp;logo=GitHub%20Actions&amp;logoColor=white\" alt=\"Continuous Integration\"></a>\n<a href=\"https://github.com/orhun/linuxwave/actions?query=workflow%3A%22Continuous+Deployment%22\"><img src=\"https://img.shields.io/github/actions/workflow/status/orhun/linuxwave/cd.yml?style=flat&amp;labelColor=1d1d1d&amp;color=424242&amp;logo=GitHub%20Actions&amp;logoColor=white&amp;label=deploy\" alt=\"Continuous Deployment\"></a>\n<a href=\"https://hub.docker.com/r/orhunp/gpg-tui\"><img src=\"https://img.shields.io/github/actions/workflow/status/orhun/linuxwave/docker.yml?style=flat&amp;labelColor=1d1d1d&amp;color=424242&amp;label=docker&amp;logo=Docker&amp;logoColor=white\" alt=\"Docker Builds\"></a>\n<a href=\"https://orhun.dev/linuxwave/docs/\"><img src=\"https://img.shields.io/github/actions/workflow/status/orhun/linuxwave/pages.yml?style=flat&amp;labelColor=1d1d1d&amp;color=424242&amp;logo=Zig&amp;logoColor=white&amp;label=docs\" alt=\"Documentation\"></a>\n\n<p align=\"center\">\n<a href=\"https://www.youtube.com/watch?v=SLiEuvDmo8M\"><strong>Click here to watch the demo!</strong></a><br>\n<a href=\"https://open.spotify.com/track/0ChxCDjs6wKnl8iu71K7yp\">Listen to \"linuxwave\" on Spotify!</a>\n</p>\n\n</p>\n\n<details>\n  <summary>Table of Contents</summary>\n\n<!-- vim-markdown-toc GFM -->\n\n- [Motivation ✨](#motivation-)\n- [Installation 🤖](#installation-)\n  - [Build from source](#build-from-source)\n    - [Prerequisites](#prerequisites)\n    - [Instructions](#instructions)\n  - [Binary releases](#binary-releases)\n  - [Arch Linux](#arch-linux)\n  - [Void Linux](#void-linux)\n  - [Docker](#docker)\n    - [Images](#images)\n    - [Usage](#usage)\n    - [Building](#building)\n- [Examples 🎵](#examples-)\n- [Presets 🎹](#presets-)\n- [Usage 📚](#usage-)\n  - [`scale`](#scale)\n  - [`note`](#note)\n  - [`rate`](#rate)\n  - [`channels`](#channels)\n  - [`format`](#format)\n  - [`volume`](#volume)\n  - [`duration`](#duration)\n  - [`input`](#input)\n  - [`output`](#output)\n- [Related Projects](#related-projects)\n- [Funding 💖](#funding-)\n- [Contributing 🌱](#contributing-)\n- [License ⚖️](#license-)\n- [Copyright ⛓️](#copyright-)\n\n<!-- vim-markdown-toc -->\n\n</details>\n\n## Motivation ✨\n\n- [Bash One Liner - Compose Music From Entropy in /dev/urandom](https://web.archive.org/web/20230122184930/https://blog.robertelder.org/bash-one-liner-compose-music/)\n  - ['Music' from /dev/urandom](https://news.ycombinator.com/item?id=11238247)\n\n## Installation 🤖\n\n### Build from source\n\n#### Prerequisites\n\n- [Zig](https://ziglang.org/download/) (`0.14`)\n\n#### Instructions\n\n1. Clone the repository.\n\n```sh\ngit clone https://github.com/orhun/linuxwave && cd linuxwave/\n```\n\n2. Build.\n\n```sh\nzig build --release=safe\n```\n\nBinary will be located at `zig-out/bin/linuxwave`. You can also run the binary directly via `zig build run`.\n\nIf you want to use `linuxwave` in your Zig project as a package, the API documentation is available [here](https://orhun.dev/linuxwave/docs).\n\n### Binary releases\n\nSee the available binaries for different targets from the [releases page](https://github.com/orhun/linuxwave/releases). They are automated via [Continuous Deployment](.github/workflows/cd.yml) workflow.\n\nRelease tarballs are signed with the following PGP key: [0xC0701E98290D90B8](https://keyserver.ubuntu.com/pks/lookup?search=0xC0701E98290D90B8&op=vindex)\n\n### Arch Linux\n\n`linuxwave` can be installed from the [community repository](https://archlinux.org/packages/community/x86_64/linuxwave/) using [pacman](https://wiki.archlinux.org/title/Pacman):\n\n```sh\npacman -S linuxwave\n```\n\n### Void Linux\n\n`linuxwave` can be installed from official Void Linux package repository:\n\n```sh\nxbps-install linuxwave\n```\n\n### Docker\n\n#### Images\n\nDocker builds are [automated](./.github/workflows/docker.yml) and images are available in the following registries:\n\n- [Docker Hub](https://hub.docker.com/r/orhunp/linuxwave)\n- [GitHub Container Registry](https://github.com/orhun/linuxwave/pkgs/container/linuxwave)\n\n#### Usage\n\nThe following command can be used to generate `output.wav` in the current working directory:\n\n```sh\ndocker run --rm -v \"$(pwd)\":/app \"orhunp/linuxwave:${TAG:-latest}\"\n```\n\n#### Building\n\nCustom Docker images can be built from the [Dockerfile](./Dockerfile):\n\n```sh\ndocker build -t linuxwave .\n```\n\n## Examples 🎵\n\n**Default**: Read random data from `/dev/urandom` to generate a 20-second music composition in the A4 scale and save it to `output.wav`:\n\n```sh\nlinuxwave\n```\n\nOr play it directly with [mpv](https://mpv.io/) without saving:\n\n```sh\nlinuxwave -o - | mpv -\n```\n\nTo use the A minor blues scale:\n\n```sh\nlinuxwave -s 0,3,5,6,7,10 -n 220 -o blues.wav\n```\n\nRead from an arbitrary file and turn it into a 10-second music composition in the C major scale:\n\n```sh\nlinuxwave -i build.zig -n 261.63 -d 10 -o music.wav\n```\n\nRead from stdin via giving `-` as input:\n\n```sh\ncat README.md | linuxwave -i -\n```\n\nWrite to stdout via giving `-` as output:\n\n```\nlinuxwave -o - > output.wav\n```\n\n## Presets 🎹\n\nGenerate a **calming music** with a sample rate of 2000 Hz and a 32-bit little-endian signed integer format:\n\n```sh\nlinuxwave -r 2000 -f S32_LE -o calm.wav\n```\n\nGenerate a **chiptune music** with a sample rate of 44100 Hz, stereo (2-channel) output and 8-bit unsigned integer format:\n\n```sh\nlinuxwave -r 44100 -f U8 -c 2 -o chiptune.wav\n```\n\nGenerate a **boss stage music** with the volume of 65:\n\n```sh\nlinuxwave -s 0,7,1 -n 60 -v 65 -o boss.wav\n```\n\nGenerate a **spooky low-fidelity music** with a sample rate of 1000 Hz, 4-channel output:\n\n```sh\nlinuxwave -s 0,1,5,3 -n 100 -r 1000 -v 55 -c 4 -o spooky_manor.wav\n```\n\nFeel free to [submit a pull request](CONTRIBUTING.md) to show off your preset here!\n\nAlso, see [this discussion](https://github.com/orhun/linuxwave/discussions/1) for browsing the music generated by our community.\n\n## Usage 📚\n\n```\nOptions:\n  -s, --scale <SCALE>            Sets the musical scale [default: 0,2,3,5,7,8,10,12]\n  -n, --note <HZ>                Sets the frequency of the note [default: 440 (A4)]\n  -r, --rate <HZ>                Sets the sample rate [default: 24000]\n  -c, --channels <NUM>           Sets the number of channels [default: 1]\n  -f, --format <FORMAT>          Sets the sample format [default: S16_LE]\n  -v, --volume <VOL>             Sets the volume (0-100) [default: 50]\n  -d, --duration <SECS>          Sets the duration [default: 20]\n  -i, --input <FILE>             Sets the input file [default: /dev/urandom]\n  -o, --output <FILE>            Sets the output file [default: output.wav]\n  -V, --version                  Display version information.\n  -h, --help                     Display this help and exit.\n```\n\n### `scale`\n\nSets the musical scale for the output. It takes a list of [semitones](https://en.wikipedia.org/wiki/Semitone) separated by commas as its argument.\n\nThe default value is `0,2,3,5,7,8,10,12`, which represents a major scale starting from C.\n\nHere are other examples:\n\n- A natural minor scale: `0,2,3,5,7,8,10`\n- A pentatonic scale starting from G: `7,9,10,12,14`\n- A blues scale starting from D: `2,3,4,6,7,10`\n- An octatonic scale starting from F#: `6,7,9,10,12,13,15,16`\n- Ryukyuan (Okinawa) Japanese scale: `4,5,7,11`\n\n### `note`\n\nThe `note` option sets the frequency of the note played. It takes a frequency in Hz as its argument.\n\nThe default value is `440`, which represents A4. You can see the frequencies of musical notes [here](https://pages.mtu.edu/~suits/notefreqs.html).\n\nOther examples would be:\n\n- A3 (220 Hz)\n- C4 (261.63 Hz)\n- G4 (392 Hz)\n- A4 (440 Hz) (default)\n- E5 (659.26 Hz)\n\n### `rate`\n\nSets the sample rate for the output in Hertz (Hz).\n\nThe default value is `24000`.\n\n### `channels`\n\nSets the number of audio channels in the output file. It takes an integer as its argument, representing the number of audio channels to generate. The default value is `1`, indicating mono audio.\n\nFor stereo audio, set the value to `2`. For multi-channel audio, specify the desired number of channels.\n\nNote that the more audio channels you use, the larger the resulting file size will be.\n\n### `format`\n\nSets the sample format for the output file. It takes a string representation of the format as its argument.\n\nThe default value is `S16_LE`, which represents 16-bit little-endian signed integer.\n\nPossible values are:\n\n- `U8`: Unsigned 8-bit.\n- `S16_LE`: Signed 16-bit little-endian.\n- `S24_LE`: Signed 24-bit little-endian.\n- `S32_LE`: Signed 32-bit little-endian.\n\n### `volume`\n\nSets the volume of the output file as a percentage from 0 to 100.\n\nThe default value is `50`.\n\n### `duration`\n\nSets the duration of the output file in seconds. It takes a float as its argument.\n\nThe default value is `20` seconds.\n\n### `input`\n\nSets the input file for the music generation. It takes a filename as its argument.\n\nThe default value is `/dev/urandom`, which generates random data.\n\nYou can provide _any_ type of file for this argument and it will generate music based on the contents of that file.\n\n### `output`\n\nSets the output file. It takes a filename as its argument.\n\nThe default value is `output.wav`.\n\n## Related Projects\n\n- [linuxwavegui](https://github.com/Arcmyx/linuxwavegui) – A graphical interface for linuxwave with tempo shifting, pitch control, flawed (but still cool-sounding) MIDI generation, and an interactive piano for scale selection.\n\n## Funding 💖\n\nIf you find `linuxwave` and/or other projects on my [GitHub profile](https://github.com/orhun) useful, consider supporting me on [GitHub Sponsors](https://github.com/sponsors/orhun) or [becoming a patron](https://www.patreon.com/join/orhunp)!\n\n[![Support me on GitHub Sponsors](https://img.shields.io/github/sponsors/orhun?style=flat&logo=GitHub&labelColor=424242&color=1d1d1d&logoColor=white)](https://github.com/sponsors/orhun)\n[![Support me on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dorhunp%26type%3Dpatrons&style=flat&logo=Patreon&labelColor=424242&color=1d1d1d&logoColor=white)](https://patreon.com/join/orhunp)\n[![Support me on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dorhunp%26type%3Dpledges&style=flat&logo=Patreon&labelColor=424242&color=1d1d1d&logoColor=white&label=)](https://patreon.com/join/orhunp)\n\n## Contributing 🌱\n\nSee our [Contribution Guide](./CONTRIBUTING.md) and please follow the [Code of Conduct](./CODE_OF_CONDUCT.md) in all your interactions with the project.\n\n## License ⚖️\n\nLicensed under [The MIT License](./LICENSE).\n\n## Copyright ⛓️\n\nCopyright © 2023-2024, [Orhun Parmaksız](mailto:orhunparmaksiz@gmail.com)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/24392180?u=8efd6f14a04f081cf0e9dbe5e9237dfc2d380596&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.3.0",
+      "name": "Release v0.3.0",
+      "body": "## [0.3.0] - 2025-03-07\n\n### 🎵 Features\n\n- *(uncategorized)* Zig 0.14 ([#40](https://github.com/orhun/linuxwave/issues/40))\n\n### 📚 Documentation\n\n- *(license)* Update license copyright years\n\n<!-- generated by git-cliff -->",
+      "prerelease": false,
+      "published_at": "2025-03-07T23:27:44Z",
+      "html_url": "https://github.com/orhun/linuxwave/releases/tag/v0.3.0",
+      "assets": [
+        {
+          "name": "v0.3.0.zip.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.3.0/v0.3.0.zip.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "v0.3.0.zip",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.3.0/v0.3.0.zip",
+          "size": 990247,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "v0.3.0.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.3.0/v0.3.0.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "v0.3.0.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.3.0/v0.3.0.tar.gz",
+          "size": 967880,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.3.0-x86_64-windows.zip",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.3.0/linuxwave-0.3.0-x86_64-windows.zip",
+          "size": 230066,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.3.0-aarch64-macos.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.3.0/linuxwave-0.3.0-aarch64-macos.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.3.0-aarch64-macos.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.3.0/linuxwave-0.3.0-aarch64-macos.tar.gz.sha512",
+          "size": 167,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.3.0-riscv64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.3.0/linuxwave-0.3.0-riscv64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.3.0-aarch64-macos.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.3.0/linuxwave-0.3.0-aarch64-macos.tar.gz",
+          "size": 160116,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.3.0-x86_64-macos.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.3.0/linuxwave-0.3.0-x86_64-macos.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.3.0-riscv64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.3.0/linuxwave-0.3.0-riscv64-linux.tar.gz.sha512",
+          "size": 167,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.3.0-x86_64-macos.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.3.0/linuxwave-0.3.0-x86_64-macos.tar.gz.sha512",
+          "size": 166,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.3.0-riscv64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.3.0/linuxwave-0.3.0-riscv64-linux.tar.gz",
+          "size": 920849,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.3.0-x86_64-macos.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.3.0/linuxwave-0.3.0-x86_64-macos.tar.gz",
+          "size": 173146,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.3.0-x86_64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.3.0/linuxwave-0.3.0-x86_64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.3.0-x86_64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.3.0/linuxwave-0.3.0-x86_64-linux.tar.gz.sha512",
+          "size": 166,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.3.0-x86_64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.3.0/linuxwave-0.3.0-x86_64-linux.tar.gz",
+          "size": 817140,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.3.0-aarch64-windows.zip",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.3.0/linuxwave-0.3.0-aarch64-windows.zip",
+          "size": 212635,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.3.0-arm-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.3.0/linuxwave-0.3.0-arm-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.3.0-arm-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.3.0/linuxwave-0.3.0-arm-linux.tar.gz.sha512",
+          "size": 163,
+          "content_type": "binary/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "Release v0.2.0",
+      "body": "## [0.2.0] - 2024-10-20\n\n### 🎵 Features\n\n- *(uncategorized)* [**breaking**] Rewrite for Zig 0.12/0.13 ([#28](https://github.com/orhun/linuxwave/issues/28))\n\n### 🐛 Bug Fixes\n\n- *(test)* Add back `main` test ([#30](https://github.com/orhun/linuxwave/issues/30))\n\n### ⚙️ Miscellaneous Tasks\n\n- *(website)* Update tracking link\n\n<!-- generated by git-cliff -->",
+      "prerelease": false,
+      "published_at": "2024-10-20T21:42:49Z",
+      "html_url": "https://github.com/orhun/linuxwave/releases/tag/v0.2.0",
+      "assets": [
+        {
+          "name": "v0.2.0.zip.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.2.0/v0.2.0.zip.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "v0.2.0.zip",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.2.0/v0.2.0.zip",
+          "size": 981160,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "v0.2.0.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.2.0/v0.2.0.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "v0.2.0.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.2.0/v0.2.0.tar.gz",
+          "size": 956482,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.2.0-aarch64-windows.zip",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.2.0/linuxwave-0.2.0-aarch64-windows.zip",
+          "size": 178261,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.2.0-aarch64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.2.0/linuxwave-0.2.0-aarch64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.2.0-aarch64-macos.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.2.0/linuxwave-0.2.0-aarch64-macos.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.2.0-aarch64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.2.0/linuxwave-0.2.0-aarch64-linux.tar.gz.sha512",
+          "size": 167,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.2.0-x86_64-macos.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.2.0/linuxwave-0.2.0-x86_64-macos.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.2.0-aarch64-macos.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.2.0/linuxwave-0.2.0-aarch64-macos.tar.gz.sha512",
+          "size": 167,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.2.0-x86_64-macos.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.2.0/linuxwave-0.2.0-x86_64-macos.tar.gz.sha512",
+          "size": 166,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.2.0-aarch64-macos.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.2.0/linuxwave-0.2.0-aarch64-macos.tar.gz",
+          "size": 144780,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.2.0-riscv64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.2.0/linuxwave-0.2.0-riscv64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.2.0-x86_64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.2.0/linuxwave-0.2.0-x86_64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.2.0-x86_64-macos.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.2.0/linuxwave-0.2.0-x86_64-macos.tar.gz",
+          "size": 162953,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.2.0-aarch64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.2.0/linuxwave-0.2.0-aarch64-linux.tar.gz",
+          "size": 611020,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.2.0-riscv64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.2.0/linuxwave-0.2.0-riscv64-linux.tar.gz.sha512",
+          "size": 167,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.2.0-x86_64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.2.0/linuxwave-0.2.0-x86_64-linux.tar.gz.sha512",
+          "size": 166,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.2.0-riscv64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.2.0/linuxwave-0.2.0-riscv64-linux.tar.gz",
+          "size": 763548,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.2.0-x86_64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.2.0/linuxwave-0.2.0-x86_64-linux.tar.gz",
+          "size": 638833,
+          "content_type": "binary/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.5",
+      "name": "Release v0.1.5",
+      "body": "## [0.1.5] - 2023-07-21\n\n### 📚 Documentation\n\n- *(readme)* Add Spotify link\n- *(readme)* Update table of contents\n\n### ⚙️ Miscellaneous Tasks\n\n- *(deps)* Bump actions/upload-pages-artifact from 1 to 2\n\n<!-- generated by git-cliff -->",
+      "prerelease": false,
+      "published_at": "2023-07-21T12:07:04Z",
+      "html_url": "https://github.com/orhun/linuxwave/releases/tag/v0.1.5",
+      "assets": [
+        {
+          "name": "v0.1.5.zip.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.5/v0.1.5.zip.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "v0.1.5.zip",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.5/v0.1.5.zip",
+          "size": 1404179,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "v0.1.5.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.5/v0.1.5.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "v0.1.5.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.5/v0.1.5.tar.gz",
+          "size": 1366154,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.5-i386-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.5/linuxwave-0.1.5-i386-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.5-i386-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.5/linuxwave-0.1.5-i386-linux.tar.gz.sha512",
+          "size": 164,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.5-riscv64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.5/linuxwave-0.1.5-riscv64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.5-i386-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.5/linuxwave-0.1.5-i386-linux.tar.gz",
+          "size": 388709,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.5-riscv64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.5/linuxwave-0.1.5-riscv64-linux.tar.gz.sha512",
+          "size": 167,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.5-riscv64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.5/linuxwave-0.1.5-riscv64-linux.tar.gz",
+          "size": 441000,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.5-x86_64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.5/linuxwave-0.1.5-x86_64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.5-x86_64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.5/linuxwave-0.1.5-x86_64-linux.tar.gz.sha512",
+          "size": 166,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.5-x86_64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.5/linuxwave-0.1.5-x86_64-linux.tar.gz",
+          "size": 387936,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.5-aarch64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.5/linuxwave-0.1.5-aarch64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.5-arm-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.5/linuxwave-0.1.5-arm-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.5-aarch64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.5/linuxwave-0.1.5-aarch64-linux.tar.gz.sha512",
+          "size": 167,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.5-x86_64-macos.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.5/linuxwave-0.1.5-x86_64-macos.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.5-aarch64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.5/linuxwave-0.1.5-aarch64-linux.tar.gz",
+          "size": 368493,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "orhun-linuxwave.spdx.json",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.5/orhun-linuxwave.spdx.json",
+          "size": 72825,
+          "content_type": "application/json; charset=utf-8"
+        },
+        {
+          "name": "linuxwave-0.1.5-arm-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.5/linuxwave-0.1.5-arm-linux.tar.gz.sha512",
+          "size": 163,
+          "content_type": "binary/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.4",
+      "name": "Release v0.1.4",
+      "body": "## [0.1.4] - 2023-06-29\n\n### 🚜 Refactor\n\n- *(build)* Use Builder's fmt function to avoid using allocator\n- *(build)* Use built-in allocator\n\n### 📚 Documentation\n\n- *(readme)* Add installation instruction for Void Linux\n- *(readme)* Simplify the Docker command\n\n<!-- generated by git-cliff -->",
+      "prerelease": false,
+      "published_at": "2023-06-29T17:37:28Z",
+      "html_url": "https://github.com/orhun/linuxwave/releases/tag/v0.1.4",
+      "assets": [
+        {
+          "name": "v0.1.4.zip.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.4/v0.1.4.zip.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "v0.1.4.zip",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.4/v0.1.4.zip",
+          "size": 1397421,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "v0.1.4.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.4/v0.1.4.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "v0.1.4.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.4/v0.1.4.tar.gz",
+          "size": 1360569,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.4-aarch64-windows.zip",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.4/linuxwave-0.1.4-aarch64-windows.zip",
+          "size": 158698,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.4-aarch64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.4/linuxwave-0.1.4-aarch64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.4-aarch64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.4/linuxwave-0.1.4-aarch64-linux.tar.gz.sha512",
+          "size": 167,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.4-i386-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.4/linuxwave-0.1.4-i386-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.4-riscv64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.4/linuxwave-0.1.4-riscv64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.4-aarch64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.4/linuxwave-0.1.4-aarch64-linux.tar.gz",
+          "size": 367344,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.4-i386-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.4/linuxwave-0.1.4-i386-linux.tar.gz.sha512",
+          "size": 164,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.4-riscv64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.4/linuxwave-0.1.4-riscv64-linux.tar.gz.sha512",
+          "size": 167,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.4-arm-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.4/linuxwave-0.1.4-arm-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.4-i386-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.4/linuxwave-0.1.4-i386-linux.tar.gz",
+          "size": 387640,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.4-arm-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.4/linuxwave-0.1.4-arm-linux.tar.gz.sha512",
+          "size": 163,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.4-riscv64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.4/linuxwave-0.1.4-riscv64-linux.tar.gz",
+          "size": 442603,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.4-x86_64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.4/linuxwave-0.1.4-x86_64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.4-x86_64-windows.zip",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.4/linuxwave-0.1.4-x86_64-windows.zip",
+          "size": 174060,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.4-arm-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.4/linuxwave-0.1.4-arm-linux.tar.gz",
+          "size": 384120,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.4-x86_64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.4/linuxwave-0.1.4-x86_64-linux.tar.gz.sha512",
+          "size": 166,
+          "content_type": "binary/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.3",
+      "name": "Release v0.1.3",
+      "body": "## [0.1.3] - 2023-04-19\n\n### 🎵 Features\n\n- *(cd)* Publish the signed source code which includes submodules\n\n### 📚 Documentation\n\n- *(readme)* Add stdout playback example\n\n### ⚙️ Miscellaneous Tasks\n\n- *(ci)* Use Zig 0.10.1 for CI/CD\n\n<!-- generated by git-cliff -->",
+      "prerelease": false,
+      "published_at": "2023-04-19T13:00:45Z",
+      "html_url": "https://github.com/orhun/linuxwave/releases/tag/v0.1.3",
+      "assets": [
+        {
+          "name": "v0.1.3.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.3/v0.1.3.tar.gz",
+          "size": 1341250,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "v0.1.3.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.3/v0.1.3.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "v0.1.3.zip",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.3/v0.1.3.zip",
+          "size": 1379000,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "v0.1.3.zip.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.3/v0.1.3.zip.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.3-aarch64-windows.zip",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.3/linuxwave-0.1.3-aarch64-windows.zip",
+          "size": 158592,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.3-i386-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.3/linuxwave-0.1.3-i386-linux.tar.gz",
+          "size": 388760,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.3-x86_64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.3/linuxwave-0.1.3-x86_64-linux.tar.gz",
+          "size": 387777,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.3-i386-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.3/linuxwave-0.1.3-i386-linux.tar.gz.sha512",
+          "size": 164,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.3-riscv64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.3/linuxwave-0.1.3-riscv64-linux.tar.gz",
+          "size": 442469,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.3-x86_64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.3/linuxwave-0.1.3-x86_64-linux.tar.gz.sha512",
+          "size": 166,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.3-i386-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.3/linuxwave-0.1.3-i386-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.3-x86_64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.3/linuxwave-0.1.3-x86_64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.3-riscv64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.3/linuxwave-0.1.3-riscv64-linux.tar.gz.sha512",
+          "size": 167,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.3-aarch64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.3/linuxwave-0.1.3-aarch64-linux.tar.gz",
+          "size": 368228,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.3-riscv64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.3/linuxwave-0.1.3-riscv64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.3-aarch64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.3/linuxwave-0.1.3-aarch64-linux.tar.gz.sha512",
+          "size": 167,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.3-aarch64-macos.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.3/linuxwave-0.1.3-aarch64-macos.tar.gz",
+          "size": 124207,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.3-aarch64-macos.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.3/linuxwave-0.1.3-aarch64-macos.tar.gz.sha512",
+          "size": 167,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.3-aarch64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.3/linuxwave-0.1.3-aarch64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.3-x86_64-macos.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.3/linuxwave-0.1.3-x86_64-macos.tar.gz",
+          "size": 134835,
+          "content_type": "binary/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.2",
+      "name": "Release v0.1.2",
+      "body": "## [0.1.2] - 2023-04-17\n\n### 🐛 Bug Fixes\n\n- *(docker)* Scan the correct docker image\n\n### 📚 Documentation\n\n- *(preset)* Add the \"spooky_manor\" preset\n\n### ⚙️ Miscellaneous Tasks\n\n- *(deps)* Bump actions/configure-pages from 1 to 3\n- *(deps)* Bump actions/deploy-pages from 1 to 2\n\n<!-- generated by git-cliff -->",
+      "prerelease": false,
+      "published_at": "2023-04-17T22:32:03Z",
+      "html_url": "https://github.com/orhun/linuxwave/releases/tag/v0.1.2",
+      "assets": [
+        {
+          "name": "linuxwave-0.1.2-riscv64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.2/linuxwave-0.1.2-riscv64-linux.tar.gz",
+          "size": 448072,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.2-x86_64-windows.zip",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.2/linuxwave-0.1.2-x86_64-windows.zip",
+          "size": 175624,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.2-riscv64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.2/linuxwave-0.1.2-riscv64-linux.tar.gz.sha512",
+          "size": 167,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.2-aarch64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.2/linuxwave-0.1.2-aarch64-linux.tar.gz",
+          "size": 373420,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.2-aarch64-macos.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.2/linuxwave-0.1.2-aarch64-macos.tar.gz",
+          "size": 124781,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.2-riscv64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.2/linuxwave-0.1.2-riscv64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.2-x86_64-macos.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.2/linuxwave-0.1.2-x86_64-macos.tar.gz",
+          "size": 134815,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.2-aarch64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.2/linuxwave-0.1.2-aarch64-linux.tar.gz.sha512",
+          "size": 167,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.2-aarch64-macos.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.2/linuxwave-0.1.2-aarch64-macos.tar.gz.sha512",
+          "size": 167,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.2-x86_64-macos.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.2/linuxwave-0.1.2-x86_64-macos.tar.gz.sha512",
+          "size": 166,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.2-aarch64-macos.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.2/linuxwave-0.1.2-aarch64-macos.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.2-aarch64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.2/linuxwave-0.1.2-aarch64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.2-x86_64-macos.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.2/linuxwave-0.1.2-x86_64-macos.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.2-arm-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.2/linuxwave-0.1.2-arm-linux.tar.gz",
+          "size": 389288,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.2-arm-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.2/linuxwave-0.1.2-arm-linux.tar.gz.sha512",
+          "size": 163,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.2-arm-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.2/linuxwave-0.1.2-arm-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.2-i386-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.2/linuxwave-0.1.2-i386-linux.tar.gz",
+          "size": 393562,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.2-aarch64-windows.zip",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.2/linuxwave-0.1.2-aarch64-windows.zip",
+          "size": 159077,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.2-i386-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.2/linuxwave-0.1.2-i386-linux.tar.gz.sha512",
+          "size": 164,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.2-x86_64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.2/linuxwave-0.1.2-x86_64-linux.tar.gz",
+          "size": 393861,
+          "content_type": "binary/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.1",
+      "name": "Release v0.1.1",
+      "body": "## [0.1.1] - 2023-04-17\r\n\r\n### 📚 Documentation\r\n\r\n- *(readme)* Add submodule update step for building from source\r\n- *(readme)* Add installation instructions for Arch Linux\r\n\r\n<!-- generated by git-cliff -->",
+      "prerelease": false,
+      "published_at": "2023-04-17T18:21:33Z",
+      "html_url": "https://github.com/orhun/linuxwave/releases/tag/v0.1.1",
+      "assets": [
+        {
+          "name": "linuxwave-0.1.1-aarch64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.1/linuxwave-0.1.1-aarch64-linux.tar.gz",
+          "size": 373285,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.1-aarch64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.1/linuxwave-0.1.1-aarch64-linux.tar.gz.sha512",
+          "size": 167,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.1-x86_64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.1/linuxwave-0.1.1-x86_64-linux.tar.gz",
+          "size": 393727,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.1-aarch64-macos.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.1/linuxwave-0.1.1-aarch64-macos.tar.gz",
+          "size": 124651,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.1-arm-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.1/linuxwave-0.1.1-arm-linux.tar.gz",
+          "size": 389162,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.1-aarch64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.1/linuxwave-0.1.1-aarch64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.1-aarch64-macos.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.1/linuxwave-0.1.1-aarch64-macos.tar.gz.sha512",
+          "size": 167,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.1-arm-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.1/linuxwave-0.1.1-arm-linux.tar.gz.sha512",
+          "size": 163,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.1-x86_64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.1/linuxwave-0.1.1-x86_64-linux.tar.gz.sha512",
+          "size": 166,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.1-aarch64-macos.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.1/linuxwave-0.1.1-aarch64-macos.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.1-x86_64-windows.zip",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.1/linuxwave-0.1.1-x86_64-windows.zip",
+          "size": 175482,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.1-aarch64-windows.zip",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.1/linuxwave-0.1.1-aarch64-windows.zip",
+          "size": 158936,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.1-i386-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.1/linuxwave-0.1.1-i386-linux.tar.gz",
+          "size": 393431,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.1-arm-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.1/linuxwave-0.1.1-arm-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.1-x86_64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.1/linuxwave-0.1.1-x86_64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.1-i386-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.1/linuxwave-0.1.1-i386-linux.tar.gz.sha512",
+          "size": 164,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.1-i386-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.1/linuxwave-0.1.1-i386-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.1-x86_64-macos.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.1/linuxwave-0.1.1-x86_64-macos.tar.gz",
+          "size": 134677,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.1-x86_64-macos.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.1/linuxwave-0.1.1-x86_64-macos.tar.gz.sha512",
+          "size": 166,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.1-x86_64-macos.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.1/linuxwave-0.1.1-x86_64-macos.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "Release v0.1.0",
+      "body": "## [0.1.0] - 2023-04-17\n\n### 🎵 Features\n\n- *(docs)* Add a man page\n\n### 🚜 Refactor\n\n- *(ci)* Remove unnecessary node options\n\n### 📚 Documentation\n\n- *(readme)* Add demo link\n- *(readme)* Add motivation section\n- *(website)* Add demo link to website\n\n### 🎨 Styling\n\n- *(readme)* Set the alignment to center for demo link\n- *(readme)* Center the demo text\n\n<!-- generated by git-cliff -->",
+      "prerelease": false,
+      "published_at": "2023-04-17T09:12:31Z",
+      "html_url": "https://github.com/orhun/linuxwave/releases/tag/v0.1.0",
+      "assets": [
+        {
+          "name": "linuxwave-0.1.0-arm-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0/linuxwave-0.1.0-arm-linux.tar.gz",
+          "size": 388997,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-arm-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0/linuxwave-0.1.0-arm-linux.tar.gz.sha512",
+          "size": 163,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-arm-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0/linuxwave-0.1.0-arm-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-riscv64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0/linuxwave-0.1.0-riscv64-linux.tar.gz",
+          "size": 447776,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-riscv64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0/linuxwave-0.1.0-riscv64-linux.tar.gz.sha512",
+          "size": 167,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-x86_64-windows.zip",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0/linuxwave-0.1.0-x86_64-windows.zip",
+          "size": 175295,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-x86_64-macos.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0/linuxwave-0.1.0-x86_64-macos.tar.gz",
+          "size": 134520,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-aarch64-macos.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0/linuxwave-0.1.0-aarch64-macos.tar.gz",
+          "size": 124494,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-x86_64-macos.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0/linuxwave-0.1.0-x86_64-macos.tar.gz.sha512",
+          "size": 166,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-riscv64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0/linuxwave-0.1.0-riscv64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-aarch64-macos.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0/linuxwave-0.1.0-aarch64-macos.tar.gz.sha512",
+          "size": 167,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-x86_64-macos.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0/linuxwave-0.1.0-x86_64-macos.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-aarch64-macos.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0/linuxwave-0.1.0-aarch64-macos.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-i386-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0/linuxwave-0.1.0-i386-linux.tar.gz",
+          "size": 393287,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-i386-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0/linuxwave-0.1.0-i386-linux.tar.gz.sha512",
+          "size": 164,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-i386-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0/linuxwave-0.1.0-i386-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-aarch64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0/linuxwave-0.1.0-aarch64-linux.tar.gz",
+          "size": 373135,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-aarch64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0/linuxwave-0.1.0-aarch64-linux.tar.gz.sha512",
+          "size": 167,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-aarch64-windows.zip",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0/linuxwave-0.1.0-aarch64-windows.zip",
+          "size": 158751,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-x86_64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0/linuxwave-0.1.0-x86_64-linux.tar.gz",
+          "size": 393579,
+          "content_type": "binary/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.0-rc.4",
+      "name": "Release v0.1.0-rc.4",
+      "body": "## [0.1.0-rc.4] - 2023-04-15\n\n### 🎵 Features\n\n- *(website)* Add a landing page\n\n### 🚜 Refactor\n\n- *(ci)* Remove unnecessary OS from build matrixes\n- *(lib)* Extract reusable modules as packages\n\n### 📚 Documentation\n\n- *(lib)* Support auto-generation of documentation with a build flag\n- *(readme)* Mention the API documentation\n- *(readme)* Add documentation build badge\n\n### 🎨 Styling\n\n- *(readme)* Use HTML for the badges\n- *(readme)* Fix centering the badges\n- *(readme)* Center the badges\n\n### ⚙️ Miscellaneous Tasks\n\n- *(ci)* Fix the grammar for the build job\n- *(pages)* Rename deploy step\n- *(pages)* Add workflow for deploying documentation\n\n<!-- generated by git-cliff -->",
+      "prerelease": false,
+      "published_at": "2023-04-15T19:08:14Z",
+      "html_url": "https://github.com/orhun/linuxwave/releases/tag/v0.1.0-rc.4",
+      "assets": [
+        {
+          "name": "linuxwave-0.1.0-rc.4-x86_64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.4/linuxwave-0.1.0-rc.4-x86_64-linux.tar.gz",
+          "size": 393020,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.4-x86_64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.4/linuxwave-0.1.0-rc.4-x86_64-linux.tar.gz.sha512",
+          "size": 171,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.4-x86_64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.4/linuxwave-0.1.0-rc.4-x86_64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.0-rc.4",
+      "name": "Release v0.1.0-rc.4",
+      "body": "## [0.1.0-rc.4] - 2023-04-15\n\n### 🎵 Features\n\n- *(website)* Add a landing page\n\n### 🚜 Refactor\n\n- *(ci)* Remove unnecessary OS from build matrixes\n- *(lib)* Extract reusable modules as packages\n\n### 📚 Documentation\n\n- *(lib)* Support auto-generation of documentation with a build flag\n- *(readme)* Mention the API documentation\n- *(readme)* Add documentation build badge\n\n### 🎨 Styling\n\n- *(readme)* Use HTML for the badges\n- *(readme)* Fix centering the badges\n- *(readme)* Center the badges\n\n### ⚙️ Miscellaneous Tasks\n\n- *(ci)* Fix the grammar for the build job\n- *(pages)* Rename deploy step\n- *(pages)* Add workflow for deploying documentation\n\n<!-- generated by git-cliff -->",
+      "prerelease": false,
+      "published_at": "2023-04-15T19:08:14Z",
+      "html_url": "https://github.com/orhun/linuxwave/releases/tag/v0.1.0-rc.4",
+      "assets": [
+        {
+          "name": "linuxwave-0.1.0-rc.4-aarch64-windows.zip",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.4/linuxwave-0.1.0-rc.4-aarch64-windows.zip",
+          "size": 157525,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.4-arm-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.4/linuxwave-0.1.0-rc.4-arm-linux.tar.gz",
+          "size": 387962,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.4-arm-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.4/linuxwave-0.1.0-rc.4-arm-linux.tar.gz.sha512",
+          "size": 168,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.4-x86_64-macos.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.4/linuxwave-0.1.0-rc.4-x86_64-macos.tar.gz",
+          "size": 133182,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.4-aarch64-macos.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.4/linuxwave-0.1.0-rc.4-aarch64-macos.tar.gz",
+          "size": 123352,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.4-arm-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.4/linuxwave-0.1.0-rc.4-arm-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.4-x86_64-macos.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.4/linuxwave-0.1.0-rc.4-x86_64-macos.tar.gz.sha512",
+          "size": 171,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.4-aarch64-macos.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.4/linuxwave-0.1.0-rc.4-aarch64-macos.tar.gz.sha512",
+          "size": 172,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.4-aarch64-macos.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.4/linuxwave-0.1.0-rc.4-aarch64-macos.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.4-x86_64-macos.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.4/linuxwave-0.1.0-rc.4-x86_64-macos.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.4-riscv64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.4/linuxwave-0.1.0-rc.4-riscv64-linux.tar.gz",
+          "size": 446650,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.4-riscv64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.4/linuxwave-0.1.0-rc.4-riscv64-linux.tar.gz.sha512",
+          "size": 172,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.4-riscv64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.4/linuxwave-0.1.0-rc.4-riscv64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.4-aarch64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.4/linuxwave-0.1.0-rc.4-aarch64-linux.tar.gz",
+          "size": 372575,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.4-aarch64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.4/linuxwave-0.1.0-rc.4-aarch64-linux.tar.gz.sha512",
+          "size": 172,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.4-i386-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.4/linuxwave-0.1.0-rc.4-i386-linux.tar.gz",
+          "size": 392686,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.4-aarch64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.4/linuxwave-0.1.0-rc.4-aarch64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.4-i386-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.4/linuxwave-0.1.0-rc.4-i386-linux.tar.gz.sha512",
+          "size": 169,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.4-i386-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.4/linuxwave-0.1.0-rc.4-i386-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "orhun-systeroid.spdx.json",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.4/orhun-systeroid.spdx.json",
+          "size": 562,
+          "content_type": "application/json; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.0-rc.3",
+      "name": "Release v0.1.0-rc.3",
+      "body": "## [0.1.0-rc.3] - 2023-04-15\n\n### 🐛 Bug Fixes\n\n- *(cd)* Use windows specific commands\n\n### ⚙️ Miscellaneous Tasks\n\n- *(changelog)* Remove author names from changelog\n\n<!-- generated by git-cliff -->",
+      "prerelease": false,
+      "published_at": "2023-04-15T13:37:57Z",
+      "html_url": "https://github.com/orhun/linuxwave/releases/tag/v0.1.0-rc.3",
+      "assets": [
+        {
+          "name": "linuxwave-0.1.0-rc.3-aarch64-windows.zip",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.3/linuxwave-0.1.0-rc.3-aarch64-windows.zip",
+          "size": 157129,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.3-x86_64-windows.zip",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.3/linuxwave-0.1.0-rc.3-x86_64-windows.zip",
+          "size": 173687,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.3-aarch64-macos.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.3/linuxwave-0.1.0-rc.3-aarch64-macos.tar.gz",
+          "size": 123001,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.3-aarch64-macos.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.3/linuxwave-0.1.0-rc.3-aarch64-macos.tar.gz.sha512",
+          "size": 172,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.3-x86_64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.3/linuxwave-0.1.0-rc.3-x86_64-linux.tar.gz",
+          "size": 392666,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.3-i386-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.3/linuxwave-0.1.0-rc.3-i386-linux.tar.gz",
+          "size": 392331,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "orhun-systeroid.spdx.json",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.3/orhun-systeroid.spdx.json",
+          "size": 562,
+          "content_type": "application/json; charset=utf-8"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.3-aarch64-macos.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.3/linuxwave-0.1.0-rc.3-aarch64-macos.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.3-x86_64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.3/linuxwave-0.1.0-rc.3-x86_64-linux.tar.gz.sha512",
+          "size": 171,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.3-i386-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.3/linuxwave-0.1.0-rc.3-i386-linux.tar.gz.sha512",
+          "size": 169,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.3-x86_64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.3/linuxwave-0.1.0-rc.3-x86_64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.3-i386-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.3/linuxwave-0.1.0-rc.3-i386-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.3-x86_64-macos.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.3/linuxwave-0.1.0-rc.3-x86_64-macos.tar.gz",
+          "size": 132838,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.3-x86_64-macos.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.3/linuxwave-0.1.0-rc.3-x86_64-macos.tar.gz.sha512",
+          "size": 171,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.3-x86_64-macos.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.3/linuxwave-0.1.0-rc.3-x86_64-macos.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.3-aarch64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.3/linuxwave-0.1.0-rc.3-aarch64-linux.tar.gz",
+          "size": 372232,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.3-aarch64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.3/linuxwave-0.1.0-rc.3-aarch64-linux.tar.gz.sha512",
+          "size": 172,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.3-arm-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.3/linuxwave-0.1.0-rc.3-arm-linux.tar.gz",
+          "size": 387625,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.3-aarch64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.3/linuxwave-0.1.0-rc.3-aarch64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.3-arm-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.3/linuxwave-0.1.0-rc.3-arm-linux.tar.gz.sha512",
+          "size": 168,
+          "content_type": "binary/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.0-rc.2",
+      "name": "Release v0.1.0-rc.2",
+      "body": "## [0.1.0-rc.2] - 2023-04-15\n\n### 🎵 Features\n\n- *(cd)* Add different build targets by Orhun Parmaksız\n\n<!-- generated by git-cliff -->",
+      "prerelease": false,
+      "published_at": "2023-04-15T13:23:47Z",
+      "html_url": "https://github.com/orhun/linuxwave/releases/tag/v0.1.0-rc.2",
+      "assets": [
+        {
+          "name": "linuxwave-0.1.0-rc.2-riscv64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.2/linuxwave-0.1.0-rc.2-riscv64-linux.tar.gz",
+          "size": 446196,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.2-aarch64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.2/linuxwave-0.1.0-rc.2-aarch64-linux.tar.gz",
+          "size": 372153,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.2-riscv64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.2/linuxwave-0.1.0-rc.2-riscv64-linux.tar.gz.sha512",
+          "size": 172,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.2-aarch64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.2/linuxwave-0.1.0-rc.2-aarch64-linux.tar.gz.sha512",
+          "size": 172,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.2-riscv64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.2/linuxwave-0.1.0-rc.2-riscv64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.2-aarch64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.2/linuxwave-0.1.0-rc.2-aarch64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.2-x86_64-macos.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.2/linuxwave-0.1.0-rc.2-x86_64-macos.tar.gz",
+          "size": 132753,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.2-arm-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.2/linuxwave-0.1.0-rc.2-arm-linux.tar.gz",
+          "size": 387548,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.2-x86_64-macos.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.2/linuxwave-0.1.0-rc.2-x86_64-macos.tar.gz.sha512",
+          "size": 171,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.2-arm-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.2/linuxwave-0.1.0-rc.2-arm-linux.tar.gz.sha512",
+          "size": 168,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.2-x86_64-macos.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.2/linuxwave-0.1.0-rc.2-x86_64-macos.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.2-i386-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.2/linuxwave-0.1.0-rc.2-i386-linux.tar.gz",
+          "size": 392257,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.2-arm-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.2/linuxwave-0.1.0-rc.2-arm-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.2-i386-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.2/linuxwave-0.1.0-rc.2-i386-linux.tar.gz.sha512",
+          "size": 169,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.2-i386-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.2/linuxwave-0.1.0-rc.2-i386-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "orhun-systeroid.spdx.json",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.2/orhun-systeroid.spdx.json",
+          "size": 562,
+          "content_type": "application/json; charset=utf-8"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.2-aarch64-macos.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.2/linuxwave-0.1.0-rc.2-aarch64-macos.tar.gz",
+          "size": 122929,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.2-aarch64-macos.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.2/linuxwave-0.1.0-rc.2-aarch64-macos.tar.gz.sha512",
+          "size": 172,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.2-aarch64-macos.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.2/linuxwave-0.1.0-rc.2-aarch64-macos.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.1.0-rc.2-x86_64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.1.0-rc.2/linuxwave-0.1.0-rc.2-x86_64-linux.tar.gz",
+          "size": 392590,
+          "content_type": "binary/octet-stream"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "Terminal Chef at @ratatui |\r\n\r\nMaintainer at @archlinux btw  ",
+  "owner_company": "@ratatui | @archlinux",
+  "owner_location": "Ankara, Turkey",
+  "owner_blog": "orhun.dev",
+  "owner_twitter_username": null,
+  "owner_followers": 4151,
+  "owner_following": 573,
+  "owner_created_at": "2016-12-05T15:47:47Z",
+  "homepage": "http://orhun.dev/linuxwave/",
+  "license": "MIT",
+  "category": "library"
+}

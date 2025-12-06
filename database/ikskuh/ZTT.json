@@ -1,0 +1,42 @@
+{
+  "name": "ZTT",
+  "owner": "ikskuh",
+  "repo": "ZTT",
+  "description": "Precompiled Zig text template engine",
+  "type": "project",
+  "topics": [
+    "zig",
+    "ziglang",
+    "template-engine",
+    "zig-package",
+    "text-templating-engine"
+  ],
+  "stars": 35,
+  "forks": 4,
+  "watchers": 1,
+  "updated_at": "2025-09-17T05:16:27Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# Zig Text Templates\n\nThis project implements a template generator for Zig that works similar to how PHP works.\n\nIt allows you to mix plain text and Zig code to generate automatic text files.\n\nConsider the following example:\n\n```zig\n<#\n// This tag let's you import global statements available to the `render()` function\n// `const std = @import(\"std\");` is automatically added so you can skip that.\n#>\n\n# Zig Text Template\n\nThe following syntax inserts `ctx.intro` formattet with the format string `{s:-^10}`.\n\n<= ctx.intro : {s:-^10} =>\n\nThe list has the following <= ctx.list.len => items:\n\n<? for(ctx.list) |item| { ?>\n    - <= item.name : {s} => *(weight <= item.weight : {d:.1} => kg)*\n<? } ?>\n\nYou can pass arbitrary format strings and expressions to the direct formatter:\n- <= \"hello:world\" : {s} =>\n- <= (10 + 20 * 30) =>\n- <= std.math.log10(10 + 20 * 30) =>\n\nNote that for using a `:` inside the format expression itself, use braces to encapsulate the items.\n\n```\n\nThis was inspired by both [PHP](https://www.php.net/manual/en/intro-whatis.php) and [Microsofts T4](https://docs.microsoft.com/en-us/visualstudio/modeling/code-generation-and-t4-text-templates?view=vs-2019) engine.\n\n## Usage\n\nEach generated template will yield a `zig` file which exports a function called `render`:\n```zig\npub fn render(stream: anytype, ctx: anytype) !void {\n  …\n}\n```\n\nThis function must be invoked with a `std.io.Writer` for the first argument and *any* value for the second argument. `ctx` is meant to pass information from the caller to the template engine to allow dynamic content generation.\n\nTo generate templates in your build script, follow [build.zig](example/demo/build.zig) and the [example/demo](example/demo) folder.  You'll have to replace\nthe path to the ZTT dependency in your [build.zig.zon](example/demo/build.zig.zon) with a url.  You can do that by running the following in your project root:\n```console\nzig fetch --save git+https://github.com/ikskuh/ZTT\n```\n\n## Syntax\n\nThe syntax knows these constructs:\n\n- `<? … ?>` will paste everything between the start and end sigil verbatim into the `render` function code. This can be used to generate loops, conditions, ...\n- `<= expr => will print a default-formatted (`{}`) expression into the stream.\n- `<= expr : format =>` will behave similar to the default-formatted version, but you can specify your own format string in `format`. This accepts any format string that `std.fmt.format` accepts for the type of `expr`.\n- `<# … #>` will paste everything between the start and end sigil verbatim into the global scope of the Zig code. This can be used to create custom functions or exports.\n\nNote that both `<# … #>` and `<? … ?>` will swallow a directly following line break, while `<= … =>` will not. This makes writing templates more intuitive.",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/3932972?u=2893028da897d46ed12f55aa05a935a80e7c119b&v=4",
+  "releases": [
+    {
+      "tag_name": "v1.0",
+      "name": "1.0",
+      "body": "I did a rewrite of ZTT, the latest previous version is now frozen and won't be improved further.\r\n\r\nAs the build system advances, usage of ZTT will change drastically in the future anyways",
+      "prerelease": false,
+      "published_at": "2023-04-26T12:24:41Z",
+      "html_url": "https://github.com/ikskuh/ZTT/releases/tag/v1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Hacker, Dad & Demoscener from southern germany, loves lowlevel and oldschool stuff",
+  "owner_company": null,
+  "owner_location": "Stuttgart - Germany",
+  "owner_blog": "https://random-projects.net/",
+  "owner_twitter_username": "ikskuh",
+  "owner_followers": 473,
+  "owner_following": 72,
+  "owner_created_at": "2013-03-21T16:08:06Z",
+  "license": "Zlib",
+  "category": "library"
+}

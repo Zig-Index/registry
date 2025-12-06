@@ -1,0 +1,40 @@
+{
+  "name": "ayc-jsoncpp",
+  "owner": "vspefs",
+  "repo": "ayc-jsoncpp",
+  "description": "jsoncpp C++ library (not a binding!) as a fetch-able Zig package. ",
+  "type": "project",
+  "topics": [
+    "json",
+    "jsoncpp",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-03-13T11:19:01Z",
+  "dependencies": [
+    {
+      "name": "src",
+      "url": "git+https://github.com/open-source-parsers/jsoncpp#037752d9a1e48c8b7e5a62ee895a352166df03e3",
+      "hash": "N-V-__8AAFXMQADkeXMtANtA2OyZ589pcWu4w9owznM8GVh4"
+    },
+    {
+      "name": "detector",
+      "url": "detector"
+    }
+  ],
+  "readme": "I build jsoncpp with Zig build system. You fetch it and use it in your Zig build system.\n\nDoesn't support using amalgamated source. It can easily be done by exposing a function at build.zig level, but I'm lazy.\nIf you want an object library, get the public module \"sources\" and build it yourself.\n\nShould be NOT working on OSX and some other platforms. Maybe. I don't have a Mac. Sorry. (even if I have I would be too lazy to test)\n\nAs you could possibly guess, I mean to get this into [All Your Codebase](https://github.com/allyourcodebase/). But this is not decent enough yet so...",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/87294692?v=4",
+  "releases": [],
+  "owner_bio": "A LOSER.",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 10,
+  "owner_following": 4,
+  "owner_created_at": "2021-07-12T05:04:29Z",
+  "license": "GPL-3.0",
+  "category": "library"
+}

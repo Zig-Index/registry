@@ -1,0 +1,49 @@
+{
+  "name": "ZigAndroidTemplate",
+  "owner": "ikskuh",
+  "repo": "ZigAndroidTemplate",
+  "description": "This repository contains a example on how to create a minimal Android app in Zig.",
+  "type": "project",
+  "topics": [
+    "android",
+    "ziglang",
+    "zig",
+    "zig-package",
+    "android-support",
+    "app-framework"
+  ],
+  "stars": 420,
+  "forks": 37,
+  "watchers": 8,
+  "updated_at": "2025-12-05T11:11:59Z",
+  "readme": "# Android Apps in Zig\n\n![Project banner](design/logo.png)\n\nThis repository contains multiple examples of creating a minimal Android app in Zig.\n\n## Examples\n\nThere are 4 different examples. The examples have no dependencies on C code except for the android libraries, so they can be considered pure Zig apps.\n\nTo select which example to build and run, pass the example flag (e.g. `-Dexample=egl`). Valid values for the example flag are `egl`, `minimal`, `textview`, and `invocationhandler`.\n\nWe're running a CI that will verify the build for Windows, macOS and Linux:\n\n[![CI](https://github.com/MasterQ32/ZigAndroidTemplate/actions/workflows/main-ci.yml/badge.svg)](https://github.com/MasterQ32/ZigAndroidTemplate/actions/workflows/main-ci.yml)\n\n### Minimal\n\n`examples/minimal` includes just enough code to get the app running.\n\n### EGL\n\n`examples/egl/` initializes OpenGL and renders a color cycle. Touchscreen events will activate a sine wave synth and be displayed as small circles beneath the fingers that will fade as soon as no event for the same finger will happen again.\n\nThe code contains some commented examples on how to interface with the JNI to use advanced features of the `ANativeActivity`.\n\n### Textview\n\n`examples/textview/` creates a Textview component with Android's built-in UI to display \"Hello, World!\".\n\n### InvocationHandler\n\n`examples/invocationhandler` builds on the textview example. It shows how to pass a callback to the JNI by creating a button component that reacts to being pressed.\n\n## Presentation\n\nThere is a [FOSDEM Talk](https://fosdem.org/2021/schedule/event/zig_android/) you can watch here:\n\n- [MP4 Video](https://video.fosdem.org/2021/D.zig/zig_android.mp4)\n- [WebM Video](https://video.fosdem.org/2021/D.zig/zig_android.webm)\n\nSince the time of recording ZigAndroidTemplate has changed in some major ways.\n\n## What's missing\n\n- Configuration management example\n- Save/load app state example\n\n## Requirements & Build\n\nYou need the [Android SDK](https://developer.android.com/studio#command-tools) installed together with the [Android NDK](https://developer.android.com/ndk).\n\nYou also need [adb](https://developer.android.com/studio/command-line/adb) and a Java SDK installed (required for `jarsigner`).\n\nNow you need to generate yourself a keystore to sign your apps. For debugging purposes, the build script contains a helper. Just invoke `zig build keystore` to generate yourself a debug keystore that can be used with later build invocations.\n\n**Note** that the build file might ask you to configure some paths. Do as requested and just run the build again, it should work then.\n\nIf all of the above is done, you should be able to build the app by running `zig build`.\n\nThere are convenience options with `zig build push` (installs the app on a connected phone) and `zig build run` (which installs, then runs the app).\n\n### Quick Start\n\nInstall the [`sdkmanager`](https://developer.android.com/studio/command-line/sdkmanager) and invoke the following command line:\n\n```\n# Android Platforms for your target Android version\n# Min version: Android 5\nsdkmanager --install \"platforms;android-21\"\n# you can install other versions as well\n# remember to set it like `zig build -Dandroid=android99`\n\nsdkmanager --install \"build-tools;33.0.1\"\nsdkmanager --install \"ndk;25.1.8937393\"\nzig build keystore install run\n```\n\nThis should build an APK and install it on your connected phone if possible.\n\n## Getting started\n\nCheck out the [`build.zig`](build.zig) to see how to build a new android app. The [`examples`](examples/) folder has multiple examples for making minimal android apps.\n\n## Credits\n\nHuge thanks to [@cnlohr](https://github.com/cnlohr) to create [rawdrawandroid](https://github.com/cnlohr/rawdrawandroid) and making this project possible!\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/3932972?u=2893028da897d46ed12f55aa05a935a80e7c119b&v=4",
+  "releases": [
+    {
+      "tag_name": "prototype",
+      "name": "The Prototype",
+      "body": "A simple android app written in Zig that displays a color cycle effect as well as all fingers on the touch screen.\r\n\r\nNo Java involved, requires some manual patching of the build files still",
+      "prerelease": false,
+      "published_at": "2020-07-30T17:45:32Z",
+      "html_url": "https://github.com/ikskuh/ZigAndroidTemplate/releases/tag/prototype",
+      "assets": [
+        {
+          "name": "ziggy.apk",
+          "url": "https://github.com/ikskuh/ZigAndroidTemplate/releases/download/prototype/ziggy.apk",
+          "size": 250141,
+          "content_type": "application/vnd.android.package-archive"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "Hacker, Dad & Demoscener from southern germany, loves lowlevel and oldschool stuff",
+  "owner_company": null,
+  "owner_location": "Stuttgart - Germany",
+  "owner_blog": "https://random-projects.net/",
+  "owner_twitter_username": "ikskuh",
+  "owner_followers": 473,
+  "owner_following": 72,
+  "owner_created_at": "2013-03-21T16:08:06Z",
+  "license": "MIT",
+  "category": "library"
+}

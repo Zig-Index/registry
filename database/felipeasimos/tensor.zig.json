@@ -1,0 +1,29 @@
+{
+  "name": "tensor.zig",
+  "owner": "felipeasimos",
+  "repo": "tensor.zig",
+  "description": "A tensor implementation in zig",
+  "type": "project",
+  "topics": [
+    "zig-lib",
+    "zig-library",
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-09-04T03:48:06Z",
+  "minimum_zig_version": "0.14.0",
+  "readme": "# tensor.zig\n\nA Zig tensor library with compile-time shapes and efficient operations.\n\n## Tensor Creation\n\n```zig\n// Create tensor with compile-time shape\nvar tensor = Tensor(f64, .{3, 3}).init(&data);\nvar view = TensorView(f64, .{3, 3}).init(data[0..]);\n\n// Create zero-filled tensor\nvar zeros = Tensor(f64, .{2, 2}).zeroes();\n\n// Create random tensor\nvar rand = Tensor(f64, .{2, 2}).random(rng);\n```\n\n## Basic Operations\n\n### Element Access\n```zig\n// Get scalar value\nvar value = tensor.scalar(.{0, 1});\n\n// Get mutable reference\nvar ref = tensor.mut(.{0, 1});\n\n// Clone subtensor\nvar sub = tensor.clone(.{0});\n```\n\n### Views and Slicing\n```zig\n// Get view of subtensor\nvar view = tensor.view(.{0});\n\n// Slice with ranges\nvar slice = tensor.slice(.{.{1, 3}, .{0, 2}});\n\n// Reshape (contiguous tensors only)\nvar reshaped = tensor.reshape(.{6});\n```\n\n### Element-wise Operations\n```zig\n// In-place operation\ntensor.wise(other, &result, addFunc);\n\n// Create new tensor\nvar result = tensor.wiseNew(scalar, addFunc);\n\n// Apply function\ntensor.apply(squareFunc);\n```\n\n### Matrix Operations\n```zig\n// Matrix multiplication\nop.matmul(&a, &b, &result);\n\n// Matrix multiplication with new result\nvar result = op.matmulNew(&a, &b);\n\n// Transpose\nvar transposed = tensor.transpose(.{});\n```\n\n### Broadcasting\n```zig\n// Broadcast to target shape\nvar broadcasted = tensor.broadcast(.{3, 4});\n```\n\n### Iteration\n```zig\n// Iterate over elements\nvar iter = tensor.iter();\nwhile (iter.next()) |item| {\n    // item.indices, item.value\n}\n```\n\n## Function Factories\n\n```zig\nconst func = @import(\"tensor\").func;\n\n// Basic arithmetic\nconst add = func.addFactory(f64);\nconst sub = func.subFactory(f64);\nconst mul = func.mulFactory(f64);\nconst div = func.divFactory(f64);\n```\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/34526320?u=47f78fc22d602d9acc459e3752cbf7e3aa879ed4&v=4",
+  "releases": [],
+  "owner_bio": "I flip bits for a living",
+  "owner_company": "Newsco AI",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 11,
+  "owner_following": 21,
+  "owner_created_at": "2017-12-14T00:34:15Z",
+  "category": "library"
+}

@@ -1,0 +1,49 @@
+{
+  "name": "kewpie",
+  "owner": "weskoerber",
+  "repo": "kewpie",
+  "description": "A simple query string parser for Zig.",
+  "type": "project",
+  "topics": [
+    "zig",
+    "ziglang",
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 1,
+  "watchers": 2,
+  "updated_at": "2025-09-08T20:07:52Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "[![test](https://github.com/weskoerber/kewpie/actions/workflows/test.yaml/badge.svg)](https://github.com/weskoerber/kewpie/actions/workflows/test.yaml)\n[![docs](https://github.com/weskoerber/kewpie/actions/workflows/docs.yaml/badge.svg)](https://github.com/weskoerber/kewpie/actions/workflows/docs.yaml)\n\n# Kewpie\n\nA simple query string parser for zig.\n\n## Getting Started\n\n### Prerequisites\n\n- [Zig](https://ziglang.org/download) (`0.14.0` or newer)\n    - If using Zig `0.12` and `0.13`, use the [`zig-0.12`](https://github.com/weskoerber/kewpie/tree/zig-0.12) branch\n\n### Installation\n\n1. Add kewpie as a dependency in your project using Zig's package manager\n\n    ```console\n    zig fetch --save git+https://github.com/weskoerber/kewpie.git#0.1.1\n    ```\n\n2. Add kewpie module to your `build.zig`\n\n    ```zig\n    const kewpie = b.dependency(\"kewpie\", .{\n        .target = target,\n        .optimize = optimize,\n    });\n    exe.root_module.addImport(\"kewpie\", kewpie.module(\"kewpie\"));\n    ```\n\n### Usage\n\n- Parse entire query string into a hash map\n\n    ```zig\n    const std = @import(\"std\");\n    const kewpie = @import(\"kewpie\");\n\n    pub fn main() !void {\n        var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n        defer if (gpa.deinit() != .ok) @panic(\"leak\");\n\n        const uri = try std.Uri.parse(\"https://example.com?hello=world\");\n\n        const query_params = try kewpie.parse(gpa.allocator(), uri);\n        defer query_params.deinit();\n\n        if (query_params.get(\"hello\")) |value| {\n            // `value` holds the value `world`\n            // ...\n        }\n    }\n    ```\n\n- Parse the query string into an iterator\n\n    ```zig\n    const std = @import(\"std\");\n    const kewpie = @import(\"kewpie\");\n\n    pub fn main() !void {\n        const uri = try std.Uri.parse(\"https://example.com?hello=world\");\n\n        var query_params = kewpie.iter(uri);\n        while (query_params.next()) |param| {\n            // `param` holds a QueryParam struct\n            // ...\n        }\n    }\n    ```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/28966224?u=899d7f0c26e0f90d797542eaa9d264f776f0b643&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.1",
+      "name": "v0.1.1",
+      "body": "**Full Changelog**: https://github.com/weskoerber/kewpie/compare/v0.1.0...v0.1.1",
+      "prerelease": false,
+      "published_at": "2024-05-20T01:38:43Z",
+      "html_url": "https://github.com/weskoerber/kewpie/releases/tag/v0.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "**Full Changelog**: https://github.com/weskoerber/kewpie/commits/v0.1.0",
+      "prerelease": false,
+      "published_at": "2024-02-11T00:13:44Z",
+      "html_url": "https://github.com/weskoerber/kewpie/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": "Tennessee, United States",
+  "owner_blog": "https://www.weskoerber.com",
+  "owner_twitter_username": null,
+  "owner_followers": 8,
+  "owner_following": 33,
+  "owner_created_at": "2017-05-25T21:04:19Z",
+  "homepage": "https://weskoerber.github.io/kewpie/",
+  "license": "MIT",
+  "category": "library"
+}

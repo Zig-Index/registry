@@ -1,0 +1,32 @@
+{
+  "name": "tracy_zig",
+  "owner": "Games-by-Mason",
+  "repo": "tracy_zig",
+  "description": "Tracy bindings for Zig.",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 34,
+  "forks": 2,
+  "watchers": 2,
+  "updated_at": "2025-11-27T12:36:29Z",
+  "dependencies": [
+    {
+      "name": "tracy",
+      "url": "https://github.com/wolfpld/tracy/archive/refs/tags/v0.11.1.tar.gz",
+      "hash": "N-V-__8AAMeOlQEipHjcyu0TCftdAi9AQe7EXUDJOoVe0k-t"
+    }
+  ],
+  "minimum_zig_version": "0.15.0",
+  "readme": "# Tracy Zig\n\n[Tracy](https://github.com/wolfpld/tracy) client bindings for marking up your Zig projects.\n\nThis library aims to expose all features available in Tracy's C API, including features like GPU zones. For the list of features that have yet to be implemented, see the issue tracker.\n\n## Integration\n\nYou can integrate Tracy into your library without forcing it on your downstream users. This allows library developers to use Tracy without inconveniencing an application developer who may not be using it.\n\nThis section walks you through the integration. [There are plans to simplify this.](https://github.com/Games-by-Mason/tracy_zig/issues/8)\n\n## Documentation\n\nGenerated documentation for the bindings available [here](https://docs.gamesbymason.com/tracy/), you can generate up to date docs yourself with `zig build docs`. For documentation on Tracy, see [upstream](https://github.com/wolfpld/tracy).\n\n### Libraries\n\nTo integrate Tracy with your library, just add the Tracy module in your build.zig.\n\nAll configuration, including whether Tracy is enabled or disabled, is inherited from the executable. If the executable does not specify a preference, Tracy is disabled. **This means that you can use Tracy in your library without forcing it on your downstream users.**\n\nbuild.zig:\n```zig\nconst tracy = b.dependency(\"tracy\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\nlib.addImport(\"tracy\", tracy.module(\"tracy\"));\n```\n\nfoo.zig:\n```\nconst tracy = @import(\"foo\");\n```\n\n### Executables\n\nExecutables need to advertise whether or not Tracy should be enabled, or it will be implicitly disabled. Here's the recommended approach.\n\nbuild.zig:\n```zig\n// Allow the user to enable or disable Tracy support with a build flag\nconst tracy_enabled = b.option(\n    bool,\n    \"tracy\",\n    \"Build with Tracy support.\",\n) orelse false;\n\n// Get the Tracy dependency\nconst tracy = b.dependency(\"tracy\", .{\n    .target = target,\n    .optimize = optimize,\n    // ...\n});\n\n// Make Tracy available as an import\nexe.root_module.addImport(\"tracy\", tracy.module(\"tracy\"));\n\n// Pick an implementation based on the build flags.\n// Don't build both, we don't want to link with Tracy at all unless we intend to enable it.\nif (tracy_enabled) {\n    // The user asked to enable Tracy, use the real implementation\n    exe.root_module.addImport(\"tracy_impl\", tracy.module(\"tracy_impl_enabled\"));\n} else {\n    // The user asked to disable Tracy, use the dummy implementation\n    exe.root_module.addImport(\"tracy_impl\", tracy.module(\"tracy_impl_disabled\"));\n}\n```\n\nmain.zig:\n```zig\n// If `tracy_impl` is not set in your root file, Tracy integration will be disabled.\npub const tracy_impl = @import(\"tracy_impl\");\n\n// You can optionally configure Tracy by setting `tracy_options` in your root file.\npub const tracy = @import(\"tracy\");\npub const tracy_options: tracy.Options = .{\n    .on_demand = false,\n    .no_broadcast = false,\n    .only_localhost = false,\n    .only_ipv4 = false,\n    .delayed_init = false,\n    .manual_lifetime = false,\n    .verbose = false,\n    .data_port = null,\n    .broadcast_port = null,\n    .default_callstack_depth = 0,\n};\n```\n\n## Mark Up\n\nYou can mark CPU zones with the following code, see the source for more options:\n```zig\nfn foo() void {\n    const zone = Zone.begin(.{\n        .name = \"Do some work\",\n        .src = @src(),\n        .color = .tomato,\n    });\n    defer zone.end();\n    // Do some work\n}\n```\n\nYou may also wrap your Zig allocators with an allocator that reports allocations to Tracy:\n```zig\nvar tracy_allocator: tracy.Allocator = .{ .parent = gpa.allocator() };\nconst allocator = tracy_allocator.allocator();\n```\n\nYou can write your logs to Tracy with:\n```zig\ntracy.message(.{\n    .text = \"Hello, world!\",\n    .color = .light_green,\n});\n```\n\nFor more advanced use cases, including GPU zones and frame images, see `src/root.zig` and [Tracy's documentation (PDF)](https://github.com/wolfpld/tracy/releases/latest/download/tracy.pdf).\n\n## Where do I get the actual profiler?\n\nThis package builds the client for integrating the [Tracy](https://github.com/wolfpld/tracy) profiler into your application. It does not build the profiler GUI that you run as a separate process.\n\nTo get the profiler, first check which version these bindings are targeting in `build.zig.zon`. Then either download [download](https://github.com/wolfpld/tracy/releases) that build of the profiler, or build it yourself via the official build instructions.\n\nTips on building the profiler:\n- Read Tracy's [manual](https://github.com/wolfpld/tracy/releases/latest/download/tracy.pdf)\n- If the Wayland build fails, use `-DLEGACY=1` to use X11 instead\n- If LLVM lto fails, try gcc/g++\n\n## Upgrading Tracy\n\nTo upgrade Tracy, just update the version listed in `build.zig.zon`.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/174537044?v=4",
+  "releases": [],
+  "owner_bio": "",
+  "owner_location": null,
+  "owner_blog": "https://gamesbymason.com/",
+  "owner_twitter_username": null,
+  "owner_created_at": "2024-07-02T21:36:16Z",
+  "license": "MIT",
+  "category": "library"
+}

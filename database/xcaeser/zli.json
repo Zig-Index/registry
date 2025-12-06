@@ -1,0 +1,212 @@
+{
+  "name": "zli",
+  "owner": "xcaeser",
+  "repo": "zli",
+  "description": "📟 Build ergonomic, high-performance command-line tools (CLI) with zig.",
+  "type": "project",
+  "topics": [
+    "cli",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 287,
+  "forks": 11,
+  "watchers": 2,
+  "updated_at": "2025-12-05T10:22:16Z",
+  "minimum_zig_version": "0.15.2",
+  "readme": "### 📟 zli - a blazing-fast CLI framework for Zig.\n\nBuild modular, ergonomic, and high-performance CLIs with ease.\n\nBatteries included. [ZLI reference docs](https://xcaeser.github.io/zli)\n\n[![Tests](https://github.com/xcaeser/zli/actions/workflows/main.yml/badge.svg)](https://github.com/xcaeser/zli/actions/workflows/main.yml)\n[![Zig Version](https://img.shields.io/badge/Zig_Version-0.15.2-orange.svg?logo=zig)](README.md)\n[![License: MIT](https://img.shields.io/badge/License-MIT-lightgrey.svg?logo=cachet)](LICENSE)\n[![Built by xcaeser](https://img.shields.io/badge/Built%20by-@xcaeser-blue)](https://github.com/xcaeser)\n[![Version](https://img.shields.io/badge/ZLI-v4.3.0-green)](https://github.com/xcaeser/zli/releases)\n\n## 🚀 Features\n\n- Modular commands & subcommands\n- Fast flag parsing (`--flag`, `--flag=value`, shorthand `-abc`)\n- Type-safe support for `bool`, `int`, `string`\n- Named positional arguments with `required`, `optional`, `variadic`\n- Auto help/version/deprecation handling\n- Pretty help output with aligned flags & args\n- Spinners for a more interactive experience\n- Usage hints, context-aware\n\n## 📦 Installation\n\n```sh\nzig fetch --save=zli https://github.com/xcaeser/zli/archive/v4.3.0.tar.gz\n```\n\nAdd to your `build.zig`:\n\n```zig\nconst zli_dep = b.dependency(\"zli\", .{ .target = target, .optimize = optimize });\nexe.root_module.addImport(\"zli\", zli_dep.module(\"zli\"));\n```\n\n## 🗂 Recommended Structure (but you can do what you want)\n\n```\nyour-app/\n├── build.zig\n├── src/\n│   ├── main.zig\n│   └── cli/\n│       ├── root.zig // zli entrypoint\n│       ├── run.zig  // subcommand 1\n│       └── version.zig // subcommand 1\n        ... // subcommand of subcommands, go nuts\n```\n\n- Each command is in its own file\n- You explicitly register subcommands\n- `root.zig` is the entry point\n\n## 🧪 Example\n\n### Your program\n\n```zig\n// src/main.zig\nconst std = @import(\"std\");\nconst fs = std.fs;\nconst cli = @import(\"cli/root.zig\");\n\npub fn main() !void {\n    var dbg = std.heap.DebugAllocator(.{}).init;\n\n    const allocator = switch (@import(\"builtin\").mode) {\n        .Debug => dbg.allocator(),\n        .ReleaseFast, .ReleaseSafe, .ReleaseSmall => std.heap.smp_allocator,\n    };\n\n    defer if (@import(\"builtin\").mode == .Debug) std.debug.assert(dbg.deinit() == .ok);\n\n    var stdout_writer = fs.File.stdout().writerStreaming(&.{});\n    var stdout = &stdout_writer.interface;\n\n    var buf: [4096]u8 = undefined;\n    var stdin_reader = fs.File.stdin().readerStreaming(&buf);\n    const stdin = &stdin_reader.interface;\n\n    const root = try cli.build(stdout, stdin, allocator);\n    defer root.deinit();\n\n    try root.execute(.{}); // Or pass data with: try root.execute(.{ .data = &my_data });\n\n    try stdout_writer.flush(); // Don't forget to flush!\n}\n```\n\n### Root command - entrypoint\n\n```zig\n// src/cli/root.zig\nconst std = @import(\"std\");\nconst Writer = std.Io.Writer;\nconst Reader = std.Io.Reader;\nconst zli = @import(\"zli\");\n\nconst run = @import(\"run.zig\");\nconst version = @import(\"version.zig\");\n\npub fn build(writer: *Writer, reader: *Reader, allocator: std.mem.Allocator) !*zli.Command {\n    const root = try zli.Command.init(writer, reader, allocator, .{\n        .name = \"blitz\",\n        .description = \"Your dev toolkit CLI\",\n        .version = .{ .major = 0, .minor = 0, .patch = 1, .pre = null, .build = null },\n    }, showHelp);\n\n    try root.addCommands(&.{\n        try run.register(writer, reader, allocator),\n        try version.register(writer, reader, allocator),\n    });\n\n    return root;\n}\n\nfn showHelp(ctx: zli.CommandContext) !void {\n    try ctx.command.printHelp();\n}\n```\n\n### Run subcommand\n\n```zig\n// src/cli/run.zig\nconst std = @import(\"std\");\nconst Writer = std.Io.Writer;\nconst Reader = std.Io.Reader;\nconst zli = @import(\"zli\");\n\nconst now_flag = zli.Flag{\n    .name = \"now\",\n    .shortcut = \"n\",\n    .description = \"Run immediately\",\n    .type = .Bool,\n    .default_value = .{ .Bool = false },\n};\n\npub fn register(writer: *Writer, reader: *Reader, allocator: std.mem.Allocator) !*zli.Command {\n    const cmd = try zli.Command.init(writer, reader, allocator, .{\n        .name = \"run\",\n        .description = \"Run your workflow\",\n    }, run);\n\n    try cmd.addFlag(now_flag);\n    try cmd.addPositionalArg(.{\n        .name = \"script\",\n        .description = \"Script to execute\",\n        .required = true,\n    });\n    try cmd.addPositionalArg(.{\n        .name = \"env\",\n        .description = \"Environment name\",\n        .required = false,\n    });\n\n    return cmd;\n}\n\nfn run(ctx: zli.CommandContext) !void {\n    const now = ctx.flag(\"now\", bool); // type-safe flag access\n\n    const script = ctx.getArg(\"script\") orelse {\n        try ctx.writer.print(\"Missing script arg\\n\", .{});\n        return;\n    };\n    const env = ctx.getArg(\"env\") orelse \"default\";\n\n    std.debug.print(\"Running {s} in {s} (now = {})\\n\", .{ script, env, now });\n\n    // You can also get other commands by name:\n    // if (ctx.root.findCommand(\"create\")) |create_cmd| {\n    //    try create_cmd.printUsageLine();\n    // }\n\n    // if you passed data to your root command, you can access it here:\n    // const object = ctx.getContextData(type_of_your_data); // can be struct, []const u8, etc., object is a pointer.\n\n};\n```\n\n### Version subcommand\n\n```zig\n// src/cli/version.zig\nconst std = @import(\"std\");\nconst Writer = std.Io.Writer;\nconst Reader = std.Io.Reader;\nconst zli = @import(\"zli\");\n\npub fn register(writer: *Writer, reader: *Reader, allocator: std.mem.Allocator) !*zli.Command {\n    return zli.Command.init(writer, reader, allocator, .{\n        .name = \"version\",\n        .shortcut = \"v\",\n        .description = \"Show CLI version\",\n    }, show);\n}\n\nfn show(ctx: zli.CommandContext) !void {\n    try ctx.root.printVersion();\n}\n```\n\n### Spinners example\n\nAvailable funtions:\n\n- `spinner.start`: to add a new line. sets the spinner to running\n- `spinner.updateStyle`: to update the spinner style\n- `spinner.updateMessage`: to update text of a running spinner\n- `spinner.succeed`, `fail`, `info`, `preserve`: mandatory to complete a line you started. each `spinner.start` needs a `spinner.succeed`, `fail` etc.. spinner after this action is done for that specific line\n- Recommendation: use `spinner.print` instead of your own `writer.print` to not have non-displayed messages as spinner works on its own thread\n\n```zig\nconst std = @import(\"std\");\nconst zli = @import(\"zli\");\n\npub fn run(ctx: zli.CommandContext) !void {\n    var spinner = ctx.spinner;\n    spinner.updateStyle(.{ .frames = Spinner.SpinnerStyles.earth, .refresh_rate_ms = 150 }); // many styles available\n\n    // Step 1\n    try spinner.start(\"Step 1\", .{}); // New line\n    std.Thread.sleep(2000 * std.time.ns_per_ms);\n\n    try spinner.succeed(\"Step 1 success\", .{}); // each start must be closed with succeed, fail, info, preserve\n\n    spinner.updateStyle(.{ .frames = Spinner.SpinnerStyles.weather, .refresh_rate_ms = 150 }); // many styles available\n\n    // Step 2\n    try spinner.start(\"Step 2\", .{}); // New line\n    std.Thread.sleep(3000 * std.time.ns_per_ms);\n\n    spinner.updateStyle(.{ .frames = Spinner.SpinnerStyles.dots, .refresh_rate_ms = 150 }); // many styles available\n    try spinner.updateMessage(\"Step 2: Calculating things...\", .{}); // update the text of step 2\n\n    const i = work(); // do some work\n\n    try spinner.info(\"Step 2 info: {d}\", .{i});\n\n    // Step 3\n    try spinner.start(\"Step 3\", .{});\n    std.Thread.sleep(2000 * std.time.ns_per_ms);\n\n    try spinner.fail(\"Step 3 fail\", .{});\n\n    try spinner.print(\"Finish\\n\", .{}); // instead of using ctx.writer or another writer to avoid concurrency issues\n}\n\nfn work() u128 {\n    var i: u128 = 1;\n    for (0..100000000) |t| {\n        i = (t + i);\n    }\n\n    return i;\n}\n```\n\n## ✅ Features Checklist\n\n- [x] Commands & subcommands\n- [x] Command aliases\n- [x] Flags & shorthands\n- [x] Type-safe flag values\n- [x] Positional args (required, optional, variadic)\n- [x] Named access: `ctx.getArg(\"name\")`\n- [x] Context data\n- [x] Help/version auto handling\n- [x] Deprecation notices\n- [x] Pretty-aligned help for flags & args\n- [x] Clean usage output like Cobra\n- [x] Spinners and loading state (very powerful)\n- [ ] Persistent flags\n\n## 📚 Documentation\n\nSee [docs](https://xcaeser.github.io/zli/) for full usage, examples, and internals.\n\n## 📝 License\n\nMIT. See [LICENSE](LICENSE). Contributions welcome.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/8210099?u=fcc6610ade4cd145899e4d5c505bdefc832b7249&v=4",
+  "releases": [
+    {
+      "tag_name": "v4.3.0",
+      "name": "v4.3.0",
+      "body": "## zli v4.3.0\n\n- let's say I write better code than before 😊 (many internal refactors)\n- Everything is padded correctly when printing help\n- breaking: rename of functions from listCommands, listFlags etc... to printCommands, etc.. more consistent with printHelp and with printing in zig in general\n\nfull changelog: https://github.com/xcaeser/zli/compare/v4.2.0...v4.3.0\n",
+      "prerelease": false,
+      "published_at": "2025-11-08T16:30:08Z",
+      "html_url": "https://github.com/xcaeser/zli/releases/tag/v4.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v4.2.0",
+      "name": "v4.2.0",
+      "body": "## zli v4.2.0\n\n- bump zig version to 0.15.2\n- breaking: addition of io reader in the command struct for ease of use. checkout the README.md for examples.\n\nfull changelog: https://github.com/xcaeser/zli/compare/v4.1.1...v4.2.0\n",
+      "prerelease": false,
+      "published_at": "2025-10-14T15:33:43Z",
+      "html_url": "https://github.com/xcaeser/zli/releases/tag/v4.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v4.1.1",
+      "name": "v4.1.1",
+      "body": "### zli v4.1.1\n\n- Fixed spinner index out of bounds.\n\nfull changelog: https://github.com/xcaeser/zli/compare/v4.1.0...v4.1.1\n",
+      "prerelease": false,
+      "published_at": "2025-08-24T10:17:07Z",
+      "html_url": "https://github.com/xcaeser/zli/releases/tag/v4.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v4.1.0",
+      "name": "v4.1.0",
+      "body": "### zli v4.1.0\n\nCompletely reworked the spinner, with a simplified api:\n\n- spinner.start\n- spinner.updateMessage\n- spinner.succeed, fail, info\n- recommendation to use spinner.print instead of your own writer.print to not have non-displayed messages as spinner works on its own thread.\n\nfull changelog: https://github.com/xcaeser/zli/compare/v4.0.3...v4.1.0\n",
+      "prerelease": false,
+      "published_at": "2025-08-23T23:29:04Z",
+      "html_url": "https://github.com/xcaeser/zli/releases/tag/v4.1.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v4.0.3",
+      "name": "v4.0.3",
+      "body": "### zli v4.0.3\n\nfull changelog: https://github.com/xcaeser/zli/compare/v4.0.2...v4.0.3\n",
+      "prerelease": false,
+      "published_at": "2025-08-21T22:10:37Z",
+      "html_url": "https://github.com/xcaeser/zli/releases/tag/v4.0.3",
+      "assets": []
+    },
+    {
+      "tag_name": "v4.0.2",
+      "name": "v4.0.2",
+      "body": "full changelog: https://github.com/xcaeser/zli/compare/v4.0.1...v4.0.2\n",
+      "prerelease": false,
+      "published_at": "2025-08-21T21:37:50Z",
+      "html_url": "https://github.com/xcaeser/zli/releases/tag/v4.0.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v4.0.1",
+      "name": "v4.0.1",
+      "body": "## zli v4.0.1\n\n- Improved error handling instead of process exit\n- Internal improvements for Command with better code\n\nfull changelog: https://github.com/xcaeser/zli/compare/v4.0.0...v4.0.1\n",
+      "prerelease": false,
+      "published_at": "2025-08-21T20:40:11Z",
+      "html_url": "https://github.com/xcaeser/zli/releases/tag/v4.0.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v4.0.0",
+      "name": "v4.0.0",
+      "body": "## zli v4.0.0\n\n- Update the project to use Zig version 0.15.1 to use the new zig Io Writergate :)\n  - Documentation update\n  - Adjustments to spinner\n- Internal improvements for Command with better code\n\nfull changelog: https://github.com/xcaeser/zli/compare/v3.7.1...v4.0.0\n",
+      "prerelease": false,
+      "published_at": "2025-08-21T18:44:45Z",
+      "html_url": "https://github.com/xcaeser/zli/releases/tag/v4.0.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v3.7.1",
+      "name": "v3.7.1",
+      "body": "## zli v3.7.1\n\n- Improve section sorting for commands,\n- remove the preferred optimization mode from the build configuration,\n- and clarify the spinner feature as experimental in the documentation.\n- Update version references throughout the README and related files.\n\nfull changelog: https://github.com/xcaeser/zli/compare/v3.7.0...v3.7.1\n",
+      "prerelease": false,
+      "published_at": "2025-06-19T17:25:03Z",
+      "html_url": "https://github.com/xcaeser/zli/releases/tag/v3.7.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v3.7.0",
+      "name": "v3.7.0",
+      "body": "## zli v3.7.0\r\n\r\n> [!IMPORTANT]\r\n> Introducing Spinners! by @xcaeser in https://github.com/xcaeser/zli/pull/16\r\n>\r\n> Spinners are a new feature in `zli` v3.7.0. Accessible through ctx.spinner, They are a powerful and customizable CLI spinner that can be used in any command's `execFn`.\r\n\r\nHere's an example of how it works:\r\n\r\n```zig\r\nfn run(ctx: CLICommandContext) !void {\r\n    const writer = ctx.command.stdout; // Convenience\r\n\r\n    // --- Example 1: Basic single-line spinner ---\r\n    try writer.print(\"\\n--- Example 1: Single-Line Spinner ---\\n\", .{});\r\n    try ctx.spinner.start(.{}, \"Starting a simple, single-line task...\", .{});\r\n    std.time.sleep(2 * std.time.ns_per_s);\r\n    try ctx.spinner.succeed(\"Single-line task complete!\", .{});\r\n    std.time.sleep(1 * std.time.ns_per_s);\r\n\r\n    // --- Example 2: Multi-step process ---\r\n    try writer.print(\"\\n--- Example 2: Multi-Step Process ---\\n\", .{});\r\n    try ctx.spinner.start(.{}, \"Step 1: Initializing network...\", .{});\r\n    std.time.sleep(1500 * std.time.ms_per_s);\r\n\r\n    try ctx.spinner.nextStep(\"Step 2: Authenticating user...\", .{});\r\n    std.time.sleep(1500 * std.time.ms_per_s);\r\n\r\n    try ctx.spinner.updateText(\"Step 2: Authentication is taking a moment...\", .{});\r\n    std.time.sleep(1500 * std.time.ms_per_s);\r\n\r\n    try ctx.spinner.nextStep(\"Step 3: Fetching data...\", .{});\r\n    std.time.sleep(2 * std.time.ns_per_s);\r\n\r\n    try ctx.spinner.fail(\"Failed to fetch data from server.\", .{});\r\n    std.time.sleep(1 * std.time.ns_per_s);\r\n\r\n    // --- Example 3: Adding log lines during a process ---\r\n    try writer.print(\"\\n--- Example 3: Process with Log Lines ---\\n\", .{});\r\n    try ctx.spinner.start(.{}, \"Downloading and unpacking files...\", .{});\r\n    std.time.sleep(1 * std.time.ns_per_s);\r\n\r\n    try ctx.spinner.addLine(\"Downloaded archive.zip (2.5 MB)\", .{});\r\n    std.time.sleep(1 * std.time.ns_per_s);\r\n\r\n    try ctx.spinner.addLine(\"Unpacking to /tmp/my-app...\", .{});\r\n    std.time.sleep(1500 * std.time.ms_per_s);\r\n\r\n    try ctx.spinner.addLine(\"Verified file integrity.\", .{});\r\n    std.time.sleep(1 * std.time.ns_per_s);\r\n\r\n    try ctx.spinner.succeed(\"All files ready.\", .{});\r\n    std.time.sleep(1 * std.time.ns_per_s);\r\n\r\n    // --- Example 4: Customizing style at runtime ---\r\n    try writer.print(\"\\n--- Example 4: Customizing Style at Start ---\\n\", .{});\r\n\r\n    try ctx.spinner.start(.{\r\n        .frames = zli.SpinnerStyles.bouncing_bar,\r\n        .interval_ms = 120,\r\n    }, \"Running with a different style...\", .{});\r\n    std.time.sleep(3 * std.time.ns_per_s);\r\n\r\n    try ctx.spinner.info(\"Custom run finished for your information.\", .{});\r\n    try writer.print(\"\\n\", .{});\r\n}\r\n```\r\n\r\nfull changelog: https://github.com/xcaeser/zli/compare/v3.6.3...v3.7.0\r\n",
+      "prerelease": false,
+      "published_at": "2025-06-10T21:50:39Z",
+      "html_url": "https://github.com/xcaeser/zli/releases/tag/v3.7.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v3.6.3",
+      "name": "v3.6.3",
+      "body": "## What's Changed\r\n* Clarify pointer types in CommandContext, Update version to 3.6.3 by @xcaeser in https://github.com/xcaeser/zli/pull/15\r\n\r\n\r\n**Full Changelog**: https://github.com/xcaeser/zli/compare/v3.6.2...v3.6.3",
+      "prerelease": false,
+      "published_at": "2025-06-01T18:21:40Z",
+      "html_url": "https://github.com/xcaeser/zli/releases/tag/v3.6.3",
+      "assets": []
+    },
+    {
+      "tag_name": "v3.6.2",
+      "name": "v3.6.2",
+      "body": "## What's Changed\r\n* Refactor flag printing for improved alignment and efficiency by @xcaeser in https://github.com/xcaeser/zli/pull/13\r\n\r\n\r\n**Full Changelog**: https://github.com/xcaeser/zli/compare/v3.6.1...v3.6.2",
+      "prerelease": false,
+      "published_at": "2025-05-28T14:19:45Z",
+      "html_url": "https://github.com/xcaeser/zli/releases/tag/v3.6.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v3.6.1",
+      "name": "v3.6.1",
+      "body": "## What's Changed\r\n* Enhance command functionality with flag and positional argument tests by @xcaeser in https://github.com/xcaeser/zli/pull/8\r\n* Improve error handling and update version to 3.6.1 by @xcaeser in https://github.com/xcaeser/zli/pull/9\r\n* ci: update build command to include summary output during tests by @xcaeser in https://github.com/xcaeser/zli/pull/10\r\n\r\n**Full Changelog**: https://github.com/xcaeser/zli/compare/v3.6.0...v3.6.1",
+      "prerelease": false,
+      "published_at": "2025-05-27T19:07:02Z",
+      "html_url": "https://github.com/xcaeser/zli/releases/tag/v3.6.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v3.6.0",
+      "name": "v3.6.0",
+      "body": "## What's Changed\r\n* Add support for command aliases and update version to 3.6.0 by @xcaeser in https://github.com/xcaeser/zli/pull/7\r\n\r\n## New Contributors\r\n* @xcaeser made their first contribution in https://github.com/xcaeser/zli/pull/7 - lol what? \r\n\r\n**Full Changelog**: https://github.com/xcaeser/zli/compare/v3.5.3...v3.6.0",
+      "prerelease": false,
+      "published_at": "2025-05-27T14:41:48Z",
+      "html_url": "https://github.com/xcaeser/zli/releases/tag/v3.6.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v3.5.3",
+      "name": "v3.5.3",
+      "body": "## v3.5.3\n\n- added support for hidden flags\n- help is now a defined flag for every command\n\nFull changelog: https://github.com/xcaeser/zli/compare/v3.5.2...v3.5.3\n",
+      "prerelease": false,
+      "published_at": "2025-05-27T08:15:55Z",
+      "html_url": "https://github.com/xcaeser/zli/releases/tag/v3.5.3",
+      "assets": []
+    },
+    {
+      "tag_name": "v3.5.2",
+      "name": "v3.5.2",
+      "body": "## v3.5.2\n\n- updated `build.zig` to remove unnecessary libc linking...\n\nFull changelog: https://github.com/xcaeser/zli/compare/v3.5.1...v3.5.2\n",
+      "prerelease": false,
+      "published_at": "2025-05-25T22:00:04Z",
+      "html_url": "https://github.com/xcaeser/zli/releases/tag/v3.5.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v3.5.1",
+      "name": "v3.5.1",
+      "body": "## Internal improvement\r\n\r\n* Improved parsing to reduce number of loops = faster cli.\r\n\r\n**Full Changelog**: https://github.com/xcaeser/zli/compare/v3.5.0...v3.5.1",
+      "prerelease": false,
+      "published_at": "2025-05-25T17:12:10Z",
+      "html_url": "https://github.com/xcaeser/zli/releases/tag/v3.5.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v3.5.0",
+      "name": "v3.5.0",
+      "body": "> [!IMPORTANT]\r\n> NEW: Parsing of flags and positional args is interchangeable\r\n\r\n**Full Changelog**: https://github.com/xcaeser/zli/compare/v3.4.0...v3.5.0",
+      "prerelease": false,
+      "published_at": "2025-05-24T16:29:43Z",
+      "html_url": "https://github.com/xcaeser/zli/releases/tag/v3.5.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v3.4.0",
+      "name": "v3.4.0",
+      "body": "## 📦 v3.4.0 – Enhanced Positional Argument Support & UX Improvements\r\n\r\n**Release date:** 2025-05-24\r\n\r\n### ✨ New Features\r\n\r\n* **Positional Arguments**:\r\n\r\n  * Added full support for **required** and **variadic** positional arguments.\r\n  * New API: `ctx.getArg(\"name\")` for easy access to named positional inputs.\r\n  * Enhanced help output now includes `Arguments` section with clear formatting.\r\n  * Added automatic usage line generation with `printUsageLine()`.\r\n\r\n* **Improved Help Output**:\r\n\r\n  * `printHelp()` now includes:\r\n\r\n    * Usage line with flags and args.\r\n    * Positional arguments list with required/variadic indicators.\r\n    * Improved call-to-action line (e.g., `command --help`).\r\n\r\n### 🔁 Behavioral Changes\r\n\r\n* `findLeaf()` now detects and handles unknown subcommands vs. expected positional args more gracefully.\r\n* `parsePositionalArgs()` enforces required arg count and variadic placement.\r\n\r\n### 🧪 Tests Added\r\n\r\n* Coverage for:\r\n\r\n  * Positional argument enforcement.\r\n  * `getArg()` access behavior.\r\n  * CLI structure integrity with nested commands and flags.\r\n\r\n### 🧹 Cleanups\r\n\r\n* Removed unused legacy help/print code.\r\n* Removed unused `CommandContext.flag()` fallback if no default exists (now unreachable by design).\r\n\r\n\r\n**\\[!IMPORTANT]** This release includes breaking behavior for commands with positional arguments. If you use `ctx.positional_args` directly, consider migrating to `ctx.getArg(\"name\")`.\r\n\r\n\r\n\r\n**Full Changelog**: https://github.com/xcaeser/zli/compare/v3.3.1...v3.4.0",
+      "prerelease": false,
+      "published_at": "2025-05-24T16:08:59Z",
+      "html_url": "https://github.com/xcaeser/zli/releases/tag/v3.4.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v3.3.1",
+      "name": "v3.3.1",
+      "body": "* Added tests\r\n* Fixed issue where complier things we're doing a dependency loop\r\n**Full Changelog**: https://github.com/xcaeser/zli/compare/v3.2.1...v3.3.1",
+      "prerelease": false,
+      "published_at": "2025-05-22T21:19:08Z",
+      "html_url": "https://github.com/xcaeser/zli/releases/tag/v3.3.1",
+      "assets": []
+    }
+  ],
+  "owner_bio": "zig is nice",
+  "owner_company": null,
+  "owner_location": "On my laptop",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 5,
+  "owner_following": 4,
+  "owner_created_at": "2014-07-19T16:33:10Z",
+  "homepage": "https://xcaeser.github.io/zli/",
+  "license": "MIT",
+  "category": "cli"
+}

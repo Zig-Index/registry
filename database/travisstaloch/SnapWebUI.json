@@ -1,0 +1,38 @@
+{
+  "name": "SnapWebUI",
+  "owner": "travisstaloch",
+  "repo": "SnapWebUI",
+  "description": "Reactive immediate DOM rendering with Wasm in Zig",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-11-14T06:15:47Z",
+  "dependencies": [
+    {
+      "name": "superhtml",
+      "url": "git+https://github.com/kristoff-it/superhtml/#13f5a2221cb748bbe50ad702e89362afd5b925a7",
+      "hash": "superhtml-0.4.0-Y7MdPI6YDQB8UaNuIEYnkPKvdFQ28Pz4aHOvklVcq8Xu"
+    },
+    {
+      "name": "rem",
+      "url": "git+https://github.com/chadwain/rem#09296092033aae5c14db95b5a600ff16392e9027",
+      "hash": "rem-0.3.0-K3YxlLUFDgBPnXv6_y--d7ztxujL-uOMhD8yztAibBHb"
+    }
+  ],
+  "readme": "# SnapUI\n\nWrite your web app in Zig in a reactive style. Compiles to WebAssembly binaries.\n\n## Features\n\n-   **Immediate mode DOM rendering**: Efficiently update the UI based on your application state.\n-   **Event handling with callbacks**: Connect user interactions to Zig logic.\n-   **Reactive state management**:  Automatic re-rendering when your application state changes.\n-   **HTML Templating**: Parse templates in JavaScript, render from WebAssembly. Any HTML element can be a template and templates can be nested.\n-   **Dynamic HTML Attributes**: Control attributes like class names dynamically.\n-   **Partial DOM Updates**: Update only the changed parts of your UI.\n-   **Animation Support**: `requestAnimationFrame` integration.\n\n## Examples\nSee [`public/index.html`](public/index.html) and [`src/snap-demo.zig`](src/snap-demo.zig) for a demo app with a counter, a todo app and more.\n\n## Quick Start\n\n```console\nzig build --release=small\npython -m http.server\n```\nOpen [localhost:8000](http://localhost:8000) in your browser.\n\n### Prerequisites\n- Zig 0.14.0 or later\n- A modern web browser\n\n## Contributing\n\nThis project is in early development. Contributions welcome!\n\n1. Fork the repository\n1. Create a feature branch\n1. Add tests for new functionality\n1. Ensure `zig build test` passes\n1. Submit a pull request\n\n## License\n\nMIT License - see LICENSE file for details.\n\n## Roadmap / Ideas\n\n- [ ] Component system architecture\n- [ ] Server-side rendering support\n- [ ] WebAssembly module bundling / loading\n\n---\n\n**Note**: This is version 0.x software. APIs may change.",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1562827?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 68,
+  "owner_following": 32,
+  "owner_created_at": "2012-03-22T00:22:23Z",
+  "license": "MIT",
+  "category": "library"
+}

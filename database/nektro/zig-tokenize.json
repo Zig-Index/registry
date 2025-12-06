@@ -1,0 +1,27 @@
+{
+  "name": "zig-tokenize",
+  "owner": "nektro",
+  "repo": "zig-tokenize",
+  "description": "A data-oriented-design built tokenizer",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 6,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2024-06-22T18:27:07Z",
+  "readme": "# zig-tokenize\nA data-oriented-design built tokenizer\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/5464072?u=a84ae9f68c3b0567fe276def3ab932d2f2f6703f&v=4",
+  "releases": [],
+  "owner_bio": "29. Local trans witch who prefers to do her magic with a keyboard. she/her.",
+  "owner_company": null,
+  "owner_location": "San Francisco, CA, USA",
+  "owner_blog": "https://mlog.nektro.net/",
+  "owner_twitter_username": "nektro",
+  "owner_followers": 576,
+  "owner_following": 254,
+  "owner_created_at": "2013-09-15T16:41:53Z",
+  "category": "library"
+}

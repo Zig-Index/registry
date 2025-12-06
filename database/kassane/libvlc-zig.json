@@ -1,0 +1,39 @@
+{
+  "name": "libvlc-zig",
+  "owner": "kassane",
+  "repo": "libvlc-zig",
+  "description": "Zig bindings for libVLC media framework.",
+  "type": "project",
+  "topics": [
+    "bindings",
+    "libvlc",
+    "zig",
+    "zig-library",
+    "libvlc-zig",
+    "zig-package"
+  ],
+  "stars": 21,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-08-18T11:54:29Z",
+  "dependencies": [
+    {
+      "name": "libvlcpp",
+      "url": "https://github.com/kassane/libvlcpp/archive/00424d823873612c795f59eb1fc9a29c7360782a.tar.gz",
+      "hash": "12206324828247b2a8a4ec8a86e40e0ef8846971f95083e70dfb3acee2b1aa10ca5e"
+    }
+  ],
+  "readme": "<h1 align=\"center\">\n  <div>\n    <img src=\".github/logo.png\" alt=\"libvlc-zig logo\"/>\n  </div>\n</h1>\n<p align=\"center\">\n    <a href=\"https://github.com/kassane/libvlc-zig/actions/workflows/Linux.yml\">\n        <img alt=\"Build Linux status\" src=\"https://github.com/kassane/libvlc-zig/actions/workflows/Linux.yml/badge.svg\">\n    </a>\n    <a href=\"https://github.com/kassane/libvlc-zig/actions/workflows/Darwin.yml\">\n        <img alt=\"Build MacOS status\" src=\"https://github.com/kassane/libvlc-zig/actions/workflows/Darwin.yml/badge.svg\">\n    </a>\n    <a href=\"https://github.com/kassane/libvlc-zig/actions/workflows/MinGW.yml\">\n        <img alt=\"Build MinGW status\" src=\"https://github.com/kassane/libvlc-zig/actions/workflows/MinGW.yml/badge.svg\">\n    </a>\n    <a href=\"https://opensource.org/licenses/BSD-2-Clause\" rel=\"nofollow\">\n        <img alt=\"BSD 2 Clause license\" src=\"https://img.shields.io/github/license/kassane/libvlc-zig\"/>\n    </a>\n    <a href=\"https://github.com/kassane/libvlc-zig/graphs/contributors\">\n        <img alt=\"GitHub contributors\" src=\"https://img.shields.io/github/contributors/kassane/libvlc-zig\" />\n    </a>\n</p>\n\n# libvlc-zig\n\nZig bindings for libVLC media framework. Some of the features provided by libVLC include the ability to play local files and network streams, as well as to transcode media content into different formats. It also provides support for a wide range of codecs, including popular formats like H.264, MPEG-4, and AAC.\n\n## Requirements\n\n- [zig v0.11.0 or higher](https://ziglang.org/download)\n- [vlc](https://code.videolan.org/videolan/vlc)\n\n## How to use\n\n### Example\n\n```bash\n$> zig build run -Doptimize=ReleaseSafe # print-version (default)\n$> zig build run -DExample=\"cliPlayer-{c,cpp,zig}\" -Doptimize=ReleaseSafe -- -i /path/multimedia_file\n```\n\n## How to contribute to the libvlc-zig project?\n\nRead [Contributing](CONTRIBUTING.md).\n\n\n## FAQ\n\n\n### Q: Why isn't libvlc-zig licensed under **LGPLv2.1**?\n\n\nA: The decision to license `libvlc-zig` under the **BSD-2 clause** was made by the author of the project. This license was chosen because it allows for more permissive use and distribution of the code, while still ensuring that the original author receives credit for their work.\n\n`libvlc-zig` respects the original **LGPLv2.1** (Lesser General Public License) license of the VLC project.\n\n\n### Q: Are you connected to the developers of the original project?\n\n\nA: No, the author of `libvlc-zig` is not part of the **VideoLAN development team**. They are simply interested in being part of the VLC community and contributing to its development.\n\n\n### Q: What is the main goal of this project?\n\n\nA: The main goal of `libvlc-zig` is to provide a set of bindings for the **VLC media player's** libvlc library that are written in the **Zig programming language**. The project aims to provide a more modern and safe way to interface with the library, while maintaining compatibility with existing code written in **C** and **C++**.\n\n\n### Q: Does libvlc-zig aim to replace libvlc?\n\n\nA: No, `libvlc-zig` does not aim to replace libvlc. Instead, it provides an alternative way to interface with the library that may be more suitable for Zig developers.\n\n\n### Q: Can I use libvlc-zig in my project?\n\n\nA: Yes, you can use `libvlc-zig` in your project as long as you comply with the terms of the **BSD-2 clause** license. This includes giving credit to the original author of the code.\n\n\n### Q: Does libvlc-zig support all of the features of libvlc?\n\n\nA: `libvlc-zig` aims to provide bindings for all of the features of libvlc, but it may not be complete or up-to-date with the latest version of the library. If you encounter any missing features or bugs, please report them to the project's GitHub issues page.\n\n\n### Q: What programming languages are compatible with libvlc-zig?\n\n\nA: `libvlc-zig` provides bindings for the **Zig programming language**, but it can also be used with **C** and **C++** projects that use the libvlc library.\n\n\n\n## License\n\n```\nBSD 2-Clause License\n\nCopyright (c) 2022, Matheus Catarino França\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/6756180?u=d6f3a7066e4d3a99cc18ce3af2fd4b2fa754eec7&v=4",
+  "releases": [],
+  "owner_bio": "Software developer 👨‍🦽",
+  "owner_company": null,
+  "owner_location": "Bahia, Brazil",
+  "owner_blog": "https://kassane.github.io",
+  "owner_twitter_username": "TheuCatarino",
+  "owner_followers": 145,
+  "owner_following": 34,
+  "owner_created_at": "2014-02-22T13:35:59Z",
+  "license": "BSD-2-Clause",
+  "category": "library"
+}

@@ -1,0 +1,37 @@
+{
+  "name": "minijinja.zig",
+  "owner": "thekorn",
+  "repo": "minijinja.zig",
+  "description": "zig bindings for minijinja",
+  "type": "project",
+  "topics": [
+    "bindings",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-04-06T15:36:10Z",
+  "dependencies": [
+    {
+      "name": "minijinja",
+      "url": "git+https://github.com/mitsuhiko/minijinja.git?ref=main#a2584052e5d1b65a6ab96eff6f656bb9788cc55f",
+      "hash": "N-V-__8AAL6CIgCziiCi4_t_DbOkxkVFYaP0m7DYbjWEhzYV"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# minijinja.zig\n\n![ci workflow](https://github.com/thekorn/minijinja.zig/actions/workflows/ci.yaml/badge.svg)\n\nzig bindings for the amazing [minijinja](https://github.com/mitsuhiko/minijinja) templating engine.\nIt's a thin wrapper around the C ABI of minijinja.\n\n**NOTE**: this is a work in progress and mac only at the moment.\n\n## Requirements\n\n- zig >= 0.14\n- rustup (for building minijinja-capi) or\n- a nix environment (and then use `nix develop` to get a shell with all dependencies)\n\n## Usage\n\nAdd this package to your zig project:\n\n```bash\n$ zig fetch --save git+https://github.com/thekorn/minijinja.zig#main\n```\n\nAdd dependency and import to the `build.zig` file:\n\n```zig\n...\nconst minijinja = b.dependency(\"minijinja\", .{\n    .target = target,\n    .optimize = optimize,\n});\n...\nexe.root_module.addImport(\"minijinja\", minijinja.module(\"minijinja\"));\n```\n\nAnd then, just use it in the code:\n\n```zig\nconst std = @import(\"std\");\n\nconst minijinja = @import(\"minijinja\");\nconst Environment = minijinja.Environment;\nconst Context = minijinja.Context;\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    const allocator = gpa.allocator();\n    const templ =\n        \\\\<ul>\n        \\\\{%- for user in users %}\n        \\\\  <li>{{ user.name }}</li>\n        \\\\{%- endfor %}\n        \\\\</ul>\n    ;\n\n    var env = try Environment.init();\n    defer env.deinit();\n\n    env.set_debug(true);\n\n    try env.add_template(\"list\", templ);\n\n    const User = struct {\n        name: []const u8,\n    };\n\n    const users = [_]User{\n        .{ .name = \"Hans\" },\n        .{ .name = \"Wurst\" },\n    };\n\n    const t = try env.render_template_struct(allocator, \"list\", .{ .users = users });\n    defer allocator.free(t);\n\n    std.debug.print(\"{s}\\n\", .{t});\n}\n```\n\nWhich results in\n\n```\n<ul>\n  <li>Hans</li>\n  <li>Wurst</li>\n</ul>\n```\n\n## Tests\n\nUsing `nix` tests can be run like\n\n```bash\n$ nix develop -c zig build test --summary all\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/576065?u=97f4478b6942170567ec5edb91efc8cba68e8260&v=4",
+  "releases": [],
+  "owner_company": "@BurdaForward",
+  "owner_location": "Munich, Germany",
+  "owner_blog": "https://www.thekorn.dev",
+  "owner_twitter_username": null,
+  "owner_followers": 19,
+  "owner_following": 9,
+  "owner_created_at": "2011-01-21T08:38:38Z",
+  "homepage": "https://github.com/thekorn/minijinja.zig",
+  "license": "Apache-2.0",
+  "category": "library"
+}

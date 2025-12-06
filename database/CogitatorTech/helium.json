@@ -1,0 +1,40 @@
+{
+  "name": "helium",
+  "owner": "CogitatorTech",
+  "repo": "helium",
+  "description": "A micro web framework for Zig (WIP)",
+  "type": "project",
+  "topics": [
+    "web-development",
+    "zig",
+    "zig-library",
+    "web-framewok",
+    "zig-package",
+    "api"
+  ],
+  "stars": 1,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-10-28T16:58:47Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "<div align=\"center\">\n  <picture>\n    <img alt=\"Helium Logo\" src=\"logo.svg\" height=\"25%\" width=\"25%\">\n  </picture>\n<br>\n\n<h2>Helium</h2>\n\n[![Tests](https://img.shields.io/github/actions/workflow/status/CogitatorTech/helium/tests.yml?label=tests&style=flat&labelColor=282c34&logo=github)](https://github.com/CogitatorTech/helium/actions/workflows/tests.yml)\n[![CodeFactor](https://img.shields.io/codefactor/grade/github/CogitatorTech/helium?label=code%20quality&style=flat&labelColor=282c34&logo=codefactor)](https://www.codefactor.io/repository/github/CogitatorTech/helium)\n[![Zig Version](https://img.shields.io/badge/Zig-0.15.1-orange?logo=zig&labelColor=282c34)](https://ziglang.org/download/)\n[![Examples](https://img.shields.io/badge/examples-view-green?style=flat&labelColor=282c34&logo=zig)](https://github.com/CogitatorTech/helium/tree/main/examples)\n[![Docs](https://img.shields.io/badge/docs-read-blue?style=flat&labelColor=282c34&logo=read-the-docs)](https://github.com/CogitatorTech/helium/tree/main/docs)\n[![Release](https://img.shields.io/github/release/CogitatorTech/helium.svg?label=release&style=flat&labelColor=282c34&logo=github)](https://github.com/CogitatorTech/helium/releases/latest)\n[![License](https://img.shields.io/badge/license-MIT-007ec6?label=license&style=flat&labelColor=282c34&logo=open-source-initiative)](https://github.com/CogitatorTech/helium/blob/main/LICENSE)\n\nA micro web framework for Zig\n\n</div>\n\n---\n\nHelium is a small, configurable web framework for the Zig programming language.\nIt aims to provide the essential building blocks needed for creating fast web applications and services in\nZig without getting in the way of your application's logic.\n\nHelium follows a micro-framework design philosophy with a small core feature set that can be extended via optional\nmiddleware and utilities.\nIt aims to be lightweight and easy to use but still be able to provide the necessary building blocks for building\ncomplex web applications by allowing users to compose their applications from reusable components.\n\n### Features\n\n-   Supports application type with custom context\n-   Supports Type-safe request handlers and middleware\n-   Supports configurable memory allocator and error handlers\n-   Provides routing API with dynamic parameters and query parsing\n-   Supports route groups with shared path prefixes\n-   Provides middleware for global, group, and route-specific logic\n-   Supports JSON and plain text response serialization\n-   Supports static file serving with path traversal protection\n\nSee the [ROADMAP.md](ROADMAP.md) for the full list of implemented and planned features.\n\n> [!IMPORTANT]\n> Helium is in early development, so bugs and breaking changes are expected.\n> Please use the [issues page](https://github.com/CogitatorTech/Helium/issues) to report bugs or request features.\n\n---\n\n### Getting Started\n\nTo be added.\n\n---\n\n### Documentation\n\nCheck out the [docs](docs) directory for Helium documentation, including the API reference.\n\n### Examples\n\nCheck out the [examples](examples) directory for example usages for various Helium features.\n\n---\n\n### Contributing\n\nSee [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to make a contribution.\n\n### License\n\nHelium is licensed under the MIT License (see [LICENSE](LICENSE)).\n\n### Acknowledgements\n\n* The logo is from [SVG Repo](https://www.svgrepo.com/svg/206807/atom) with some modifications.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/229955204?v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.0-alpha.1",
+      "name": "",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-10-08T13:26:25Z",
+      "html_url": "https://github.com/CogitatorTech/helium/releases/tag/v0.1.0-alpha.1",
+      "assets": []
+    }
+  ],
+  "owner_bio": "",
+  "owner_location": "Norway",
+  "owner_blog": null,
+  "owner_twitter_username": "CogitatorTech",
+  "owner_created_at": "2025-09-02T12:46:35Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,32 @@
+{
+  "name": "godot-zig",
+  "owner": "godot-zig",
+  "repo": "godot-zig",
+  "description": "Zig bindings for Godot 4",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 283,
+  "forks": 22,
+  "watchers": 10,
+  "updated_at": "2025-12-06T14:34:20Z",
+  "dependencies": [
+    {
+      "name": "case",
+      "url": "git+https://github.com/travisstaloch/case#698a01886de891c03434f34e6bca95546026eb0f",
+      "hash": "12207c971fe9b4d6430503d3a4d00c6296f52b52da47c11cb8e37706e86c3ffee49e"
+    }
+  ],
+  "minimum_zig_version": "0.13.0",
+  "readme": "# godot-zig\n\nA WIP Zig bindings for Godot 4.\nFeatures are being gradually added to meet the needs of a demo game.\nBugs and missing features are expected until a stable version finally released.\nIssue report, feature request and pull request are all welcome.\n\n## Prerequisites\n\n1. zig 0.13\n2. godot 4.3\n\n## Usage:\n\nsee [Examples](https://github.com/godot-zig/godot-zig-examples) for reference.\n\n## Code Sample:\n\n```\nconst std = @import(\"std\");\nconst Godot = @import(\"godot\");\nconst Vec2 = Godot.Vector2;\nconst Self = @This();\nconst Base = Godot.Control;\npub usingnamespace Base;\nbase: Base,\n\nsprite: Godot.Sprite2D,\n\npub fn _enter_tree(self: *Self) void {\n    if (Godot.Engine.getSingleton().isEditorHint()) return;\n\n    var normal_btn = Godot.initButton();\n    self.add_child(normal_btn, false, Godot.Node.INTERNAL_MODE_DISABLED);\n    normal_btn.setPosition(Vec2.new(100, 20), false);\n    normal_btn.setSize(Vec2.new(100, 50), false);\n    normal_btn.setText(\"Press Me\");\n\n    var toggle_btn = Godot.initCheckBox();\n    self.add_child(toggle_btn, false, Godot.Node.INTERNAL_MODE_DISABLED);\n    toggle_btn.setPosition(Vec2.new(320, 20), false);\n    toggle_btn.setSize(Vec2.new(100, 50), false);\n    toggle_btn.setText(\"Toggle Me\");\n\n    Godot.connect(toggle_btn, \"toggled\", self, \"on_toggled\");\n    Godot.connect(normal_btn, \"pressed\", self, \"on_pressed\");\n\n    const resource_loader = Godot.ResourceLoader.getSingleton();\n    const res_name = Godot.String.initFromLatin1Chars(\"res://textures/logo.png\");\n    const texture = resource_loader.load(res_name, \"\", Godot.ResourceLoader.CACHE_MODE_REUSE);\n    if (texture) |tex| {\n        defer _ = Godot.unreference(tex);\n        self.sprite = Godot.initSprite2D();\n        self.sprite.setTexture(tex);\n        self.sprite.setPosition(Vec2.new(400, 300));\n        self.sprite.setScale(Vec2.new(0.6, 0.6));\n        self.addChild(self.sprite, false, Godot.Node.INTERNAL_MODE_DISABLED);\n    }\n}\n\npub fn _exit_tree(self: *Self) void {\n    _ = self;\n}\n\npub fn on_pressed(self: *Self) void {\n    _ = self;\n    std.debug.print(\"on_pressed \\n\", .{});\n}\n\npub fn on_toggled(self: *Self, toggled_on: bool) void {\n    _ = self;\n    std.debug.print(\"on_toggled {any}\\n\", .{toggled_on});\n}\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/156585637?v=4",
+  "releases": [],
+  "owner_bio": "Zig bindings for Godot 4",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2024-01-14T12:43:03Z",
+  "license": "MIT",
+  "category": "library"
+}

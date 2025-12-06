@@ -1,0 +1,37 @@
+{
+  "name": "zig-scudo",
+  "owner": "kassane",
+  "repo": "zig-scudo",
+  "description": "Scudo Allocator for Zig",
+  "type": "project",
+  "topics": [
+    "zig-package",
+    "scudo-allocator",
+    "allocator"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-08-17T22:46:38Z",
+  "dependencies": [
+    {
+      "name": "runner",
+      "url": "git+https://gist.github.com/karlseguin/c6bea5b35e4e8d26af6f81c22cb5d76b/#f303e77231e14b405e4e800072e7deacac4a4881",
+      "hash": "12208ab39744c8c0909d53b8c9889aff0690930d20e98e4f650f9690310e9a860b14"
+    }
+  ],
+  "minimum_zig_version": "0.13.0",
+  "readme": "# scudo-zig\n\nScudo Allocator for Zig\n\n## Requires\n\n- [Zig](https://ziglang.org/download) v0.13.0 or master\n\n\n## How to use\n\n```bash\n# Create a project\n$ mkdir project_name\n$ cd project_name\n$ zig init\n\n# get zig-scudo (add on zon file - overwrited)\nzig fetch --save=scudo git+https://github.com/kassane/zig-scudo\n```\n\nIn `build.zig`, add:\n```zig\n// pkg name (same in zon file)\nconst scudo_dep = b.dependency(\"scudo\",.{.target = target, .optimize = optimize });\nconst scudo_module = scudo_dep.module(\"scudoAllocator\"); // get lib + zig bindings\n\n// my project (executable)\nexe.root_module.addImport(\"scudoAllocator\", scudo_module);\n```\n\n## References\n\n- [LLVM-Doc: Scudo Allocator](https://llvm.org/docs/ScudoHardenedAllocator.html)\n- [SCUDO Hardened Allocator — Unofficial Internals](https://www.l3harris.com/newsroom/editorial/2023/10/scudo-hardened-allocator-unofficial-internals-documentation) authored by [Rodrigo Rubira](https://github.com/rrbranco)\n- [High level overview of Scudo](https://expertmiami.blogspot.com/2019/05/high-level-overview-of-scudo.html) by Kostya\n- [What is the Scudo hardened allocator?](https://expertmiami.blogspot.com/2019/05/what-is-scudo-hardened-allocator_10.html) by Kostya\n- [google/rust-scudo](https://github.com/google/rust-scudo)",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/6756180?u=d6f3a7066e4d3a99cc18ce3af2fd4b2fa754eec7&v=4",
+  "releases": [],
+  "owner_bio": "Software developer 👨‍🦽",
+  "owner_company": null,
+  "owner_location": "Bahia, Brazil",
+  "owner_blog": "https://kassane.github.io",
+  "owner_twitter_username": "TheuCatarino",
+  "owner_followers": 145,
+  "owner_following": 34,
+  "owner_created_at": "2014-02-22T13:35:59Z",
+  "license": "Apache-2.0",
+  "category": "library"
+}

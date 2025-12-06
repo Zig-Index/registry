@@ -1,0 +1,43 @@
+{
+  "name": "lua",
+  "owner": "allyourcodebase",
+  "repo": "lua",
+  "description": "lua build system ported to Build.zig",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 10,
+  "forks": 5,
+  "watchers": 0,
+  "updated_at": "2025-09-20T13:23:17Z",
+  "dependencies": [
+    {
+      "name": "lua",
+      "url": "https://www.lua.org/ftp/lua-5.4.7.tar.gz",
+      "hash": "N-V-__8AAIMvFABt-Qcpk24RD10ldEN743D8Q2e19Er8x3dJ"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# Lua \n## 5.4.7\n\n## Build Instructions\nTo build all targets run \n```sh\nzig build\n```\n\n## Build Artifacts\n| Name      | Artifact                  |\n|:---------:| ------------------------- |\n| \"lua\"     | The main lua library      |\n| \"lua_exe\" | The lua interpreter       |\n| \"luac\"    | The lua bytecode compiler |\n\n## Compile Options\n| Name         | Type | Description                |\n|:------------:| ---- | -------------------------- |\n| release      | bool | optimize for end users     |\n| shared       | bool | build as shared library    |\n| use_readline | bool | readline support for linux |\n\n## Using in a zig project\nTo add to a zig project run:\n```\nzig fetch --save https://github.com/allyourcodebase/lua/archive/refs/tags/5.4.7.tar.gz\n```\nthen add the following to your `build.zig` \n```zig\nconst lua_dep = b.dependency(\"lua\", .{\n    .target = target,\n    .release = optimize != .Debug,\n});\nconst lua_lib = lua_dep.artifact(if (target.result.os.tag == .windows) \"lua54\" else \"lua\");\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
+  "releases": [
+    {
+      "tag_name": "5.4.7",
+      "name": "Lua 5.4.7 release",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-08-22T18:07:42Z",
+      "html_url": "https://github.com/allyourcodebase/lua/releases/tag/5.4.7",
+      "assets": []
+    }
+  ],
+  "owner_bio": "...are belong to Ziguanas, but we'd also be delighted to give them back!",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2023-09-28T21:29:33Z",
+  "license": "MIT",
+  "category": "library"
+}

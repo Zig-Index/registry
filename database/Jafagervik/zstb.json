@@ -1,0 +1,109 @@
+{
+  "name": "zstb",
+  "owner": "Jafagervik",
+  "repo": "zstb",
+  "description": "Zig Standard Library Extension",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-08-12T12:06:03Z",
+  "minimum_zig_version": "0.14.0",
+  "readme": "#  ZSTB - Zig Standard Library Extension\n\n## Requirements\n\n* Zig Version 0.14.0\n\n## Usage \n\nTo install, run: \n\n```sh\nzig fetch --save git+https://github.com/Jafagervik/zstb#{version}\n```\n\nWhere {version} is the release version you want to use; e.g 0.1.7: \n\n```sh\nzig fetch --save git+https://github.com/Jafagervik/zstb#v0.1.7\n```\n\nIn your `build.zig` file: add like this:\n\n```zig \n    const target = b.standardTargetOptions(.{});\n    const optimize = b.standardOptimizeOption(.{});\n\n    const zstb_dep = b.dependency(\"zstb\", .{});\n    const zstb = zstb_dep.module(\"zstb\");\n\n    const exe_mod = b.createModule(.{\n        .root_source_file = b.path(\"path/to/your/main/source/file\"),\n        .target = target,\n        .optimize = optimize,\n    });\n\n    exe_mod.addImport(\"zstb\", zstb);\n```\n\nThen, to use it, include it in a file like such: \n\n```zig \nconst zstb = @import(\"zstb\");\n\nconst a = \"a\";\nconst b = \"b\";\n\nconst isSame = zstb.strings.eql(\"a\", \"b\");\nstd.debug.print(\"{any}\\n\", .{isSame});\n```\n\nSee `examples/` for example setup\n\n## Modules\n\n### Strings\n\n* join\n* concat \n* isEmpty\n* isNullOrEmpty\n* eql -- shortcut for std.mem.eql(u8, a, b)\n* isNumeric\n\nNow for char operations\n\n* isWhitespace\n* isAlpha\n* isDigit -- base 10\n\n### Types \n\n* str = `[]const u8`\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/20770505?u=2d5adbbef816d352e9795404545139d672eaedb7&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.7",
+      "name": "Release v0.1.7",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-08-12T11:43:09Z",
+      "html_url": "https://github.com/Jafagervik/zstb/releases/tag/v0.1.7",
+      "assets": [
+        {
+          "name": "libzstb.a",
+          "url": "https://github.com/Jafagervik/zstb/releases/download/v0.1.7/libzstb.a",
+          "size": 3884,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.6",
+      "name": "Release v0.1.6",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-08-12T10:55:01Z",
+      "html_url": "https://github.com/Jafagervik/zstb/releases/tag/v0.1.6",
+      "assets": [
+        {
+          "name": "libzstb.a",
+          "url": "https://github.com/Jafagervik/zstb/releases/download/v0.1.6/libzstb.a",
+          "size": 3884,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.5",
+      "name": "Release v0.1.5",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-08-12T10:40:03Z",
+      "html_url": "https://github.com/Jafagervik/zstb/releases/tag/v0.1.5",
+      "assets": [
+        {
+          "name": "libzstb.a",
+          "url": "https://github.com/Jafagervik/zstb/releases/download/v0.1.5/libzstb.a",
+          "size": 3884,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.4",
+      "name": "Release v0.1.4",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-08-12T09:05:32Z",
+      "html_url": "https://github.com/Jafagervik/zstb/releases/tag/v0.1.4",
+      "assets": [
+        {
+          "name": "libzstb.a",
+          "url": "https://github.com/Jafagervik/zstb/releases/download/v0.1.4/libzstb.a",
+          "size": 3884,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.3",
+      "name": "Release v0.1.3",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-08-12T08:51:52Z",
+      "html_url": "https://github.com/Jafagervik/zstb/releases/tag/v0.1.3",
+      "assets": [
+        {
+          "name": "libzstb.a",
+          "url": "https://github.com/Jafagervik/zstb/releases/download/v0.1.3/libzstb.a",
+          "size": 3884,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "AI, HPC and proglang enthusiast. Currentlyorking in telecom\r\nPrev. Head of Development for FaceIt\r\nPrevious Software Developer for Revolve NTNU",
+  "owner_company": "Gintel",
+  "owner_location": "Trondheim, Norway",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 10,
+  "owner_following": 50,
+  "owner_created_at": "2016-08-01T10:25:28Z",
+  "license": "MIT",
+  "category": "library"
+}

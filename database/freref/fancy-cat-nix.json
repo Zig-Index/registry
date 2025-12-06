@@ -1,0 +1,27 @@
+{
+  "name": "fancy-cat-nix",
+  "owner": "freref",
+  "repo": "fancy-cat-nix",
+  "description": "Nix package for fancy-cat",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 3,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-05-05T18:12:05Z",
+  "readme": "# fancy-cat-nix\n\n> [!NOTE]\n> This is a fork, you can find the original repo by @AaronVerDow [here](https://github.com/AaronVerDow/nix/tree/main/pkgs/fancy-cat). This nix flake is community-maintained and provided as-is without warranty or official support.\n\nPackage [fancy-cat](https://github.com/freref/fancy-cat) for use in Nix.\n\nThis directory can be included in a Nix config as a package using `callPackage`.\n\nThe flake is used for building the package in a local shell and can be tested with `nix shell`.\n\n`build.zig.zon.nix` is created by running `nix run github:Cloudef/zig2nix#zon2nix -- build.zig.zon` in the source repo.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/35976402?u=54ccbfc2224f6b1d7a2687366d2d96a1252b1639&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 26,
+  "owner_following": 13,
+  "owner_created_at": "2018-01-30T21:34:30Z",
+  "homepage": "https://github.com/freref/fancy-cat",
+  "category": "library"
+}

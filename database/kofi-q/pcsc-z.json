@@ -1,0 +1,42 @@
+{
+  "name": "pcsc-z",
+  "owner": "kofi-q",
+  "repo": "pcsc-z",
+  "description": "Zig PC/SC (smart card) API bindings for Linux / MacOS / Win32",
+  "type": "project",
+  "topics": [
+    "pcsc",
+    "pcsclite",
+    "smartcard",
+    "winscard",
+    "zig",
+    "zig-package",
+    "pcsc-lite",
+    "smart-card"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-11-10T01:37:39Z",
+  "dependencies": [
+    {
+      "name": "base",
+      "url": "git+https://github.com/kofi-q/base-z.git#fd20656c029dff054bb19d7da65291624ff23865",
+      "hash": "base-0.1.0-rhH4pnYnBQAwcgeqIX63Yqx2TsUr5ubNf8jYE5BhE4Dn"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# pcsc-z\n\n` › Zig PC/SC API bindings for smart card access on Linux / MacOS / Win32 `\n\n[Docs ↗](https://kofi-q.github.io/pcsc-z) | | [Prerequisites](#prerequisites) | | [Installation](#installation) | | [Usage](#usage)\n\n## Prerequisites\n\n### Linux - Alpine\n\nRequired packages:\n\n- `ccid`\n- `pcsc-lite`\n- `pcsc-lite-libs`\n\n```sh\ndoas apk add ccid pcsc-lite pcsc-lite-libs\n```\nTo run the server daemon:\n```sh\ndoas rc-service pcscd start\n```\n\n### Linux - Debian/Ubuntu/etc\n\nRequired packages:\n\n- `libpcsclite1`\n- `pcscd`\n\n```sh\nsudo apt install libpcsclite1 pcscd\n```\nOptional packages:\n\n- `libpcsclite-dev` (Required when using the `link_system_pcsclite` build option for native targets).\n\n```sh\nsudo apt install libpcsclite-dev\n```\n\nTo run the server daemon:\n```sh\nsudo systemctl start pcscd\n```\n\n### MacOS/Windows\n\n**`N/A`::** MacOS and Windows come pre-installed with smart card support. No additional installation needed.\n\n<br />\n\n## Installation\n\n```sh\nzig fetch --save=pcsc \"git+https://github.com/kofi-q/pcsc-z.git\"\n```\n\n## Build Configuration\n\n```zig\n//! build.zig\n\nconst std = @import(\"std\");\n\npub fn build(b: *std.Build) !void {\n    const target = b.standardTargetOptions(.{});\n    const mode = b.standardOptimizeOption(.{});\n\n    const pcsc_dep = b.dependency(\"pcsc\", .{\n        .optimize = mode,\n        .target = target,\n\n        // Optional. May be needed when building for native targets, to avoid\n        // version mismatch issues.\n        // See https://github.com/kofi-q/pcsc-z/issues/8.\n        // .link_system_pcsclite = true,\n    });\n\n    const pcsc_mod = pcsc_dep.module(\"pcsc\");\n\n    const exe = b.addExecutable(.{\n        .name = \"pcsc-demo\",\n        .root_module = b.createModule(.{\n            .imports = &.{\n                .{ .name = \"pcsc\", .module = pcsc_mod },\n            },\n            .optimize = mode,\n            .root_source_file = b.path(\"src/main.zig\"),\n            .target = target,\n        }),\n    });\n\n    const demo_run = b.addRunArtifact(exe);\n    const demo_step = b.step(\"demo\", \"Run PCSC demo\");\n    demo_step.dependOn(&demo_run.step);\n}\n```\n\n## Usage\n\n```zig\n//! src/main.zig\n\nconst std = @import(\"std\");\nconst pcsc = @import(\"pcsc\");\n\npub fn main() !void {\n    const client = try pcsc.Client.init(.SYSTEM);\n    defer client.deinit() catch |err| std.debug.print(\n        \"Unable to release client: {t}\",\n        .{err},\n    );\n\n    // Detect connected card readers:\n    var readers = [_]pcsc.Reader{.empty};\n    while (true) {\n        var reader_names = try client.readerNames();\n        if (reader_names.next()) |name| {\n            std.debug.print(\"Reader detected: {s}\\n\", .{name});\n            readers[0].name_ptr = name.ptr;\n            break;\n        }\n\n        std.debug.print(\"Connect a reader to continue...\\n\", .{});\n\n        try client.waitForUpdates(&[_]pcsc.Reader{.pnp_query}, .infinite);\n    }\n\n    // Detect inserted cards:\n    while (true) {\n        try client.waitForUpdates(&readers, .infinite);\n\n        readers[0].status = readers[0].status_new;\n\n        if (readers[0].status.flags.IN_USE) {\n            std.debug.print(\"Card in use. Waiting...\\n\", .{});\n            continue;\n        }\n\n        if (readers[0].status.flags.MUTE) {\n            std.debug.print(\"Card not readable. Check orientation...\\n\", .{});\n            continue;\n        }\n\n        if (readers[0].status.flags.PRESENT) break;\n\n        std.debug.print(\"Insert a card to continue...\\n\", .{});\n    }\n\n    std.debug.print(\"Connecting to card...\\n\", .{});\n\n    // Connect to an inserted card:\n    const card = try client.connect(readers[0].name_ptr, .SHARED, .ANY);\n    defer card.disconnect(.RESET) catch |err| std.debug.print(\n        \"Unable to disconnect card: {t}\\n\",\n        .{err},\n    );\n\n    std.debug.print(\"Card connected with protocol {f}\\n\", .{card.protocol});\n\n    const command = [_]u8{ 0xca, 0xfe, 0xf0, 0x0d };\n\n    std.debug.print(\"Transmitting APDU: {x}\\n\", .{command});\n\n    // Transmit/receive data to/from a card:\n    var buf_response: [pcsc.max_buffer_len]u8 = undefined;\n    const response = try card.transmit(&command, &buf_response);\n\n    std.debug.print(\"Received response: {x}\\n\", .{response});\n}\n\n```\n```console\n$ zig build demo\nConnect a reader to continue...\nReader detected: Gemalto USB SmartCard Reader\nInsert a card to continue...\nConnecting to card...\nCard connected with protocol T=1\nTransmitting APDU: cafef00d\nReceived response: 6881\n```\n\n> [!TIP]\n>\n> See the [E2E test application](./e2e/main.zig) for more involved usage.\n\n## Developing\n\n### Prerequisites\n\n#### Zig\n\nv0.15.1 required - see [`.zigversion`](.zigversion) for latest compatible version.\n\n#### Linux\n\nSee [Linux](#linux) section above for a list of runtime prerequisites.\n\nOther relevant development libraries (e.g. `libpcsclite-dev` on Debian-based distros) are included in this repo to ease cross-compilation. No additional installation needed.\n\n#### MacOS\n\n**`N/A`::** Required MacOS Framework `.tbd`s are included here. No additional installation needed.\n\n**NOTE:** To update the `.tbd`s, however, an XCode installation is needed.\n\n#### Windows\n\n**`N/A`::** Required DLLs are shipped with the Zig compiler. No additional installation needed.\n\n## License\n\n[MIT](./LICENSE)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/264902?u=95b6be0c000a1aa3561a1f94a18102a519392b2b&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 7,
+  "owner_following": 0,
+  "owner_created_at": "2010-05-04T20:54:29Z",
+  "homepage": "https://kofi-q.github.io/pcsc-z/",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,62 @@
+{
+  "name": "viletech-2022",
+  "owner": "jerome-trc",
+  "repo": "viletech-2022",
+  "description": "Doom source port and related technologies",
+  "type": "project",
+  "topics": [
+    "doom",
+    "doom-2",
+    "game",
+    "game-engine",
+    "zig-package",
+    "zig",
+    "wad"
+  ],
+  "stars": 2,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-02-19T17:03:21Z",
+  "dependencies": [
+    {
+      "name": "zbcx",
+      "url": "depend/zbcx.ln"
+    },
+    {
+      "name": "zdfs",
+      "url": "depend/zdfs.ln"
+    },
+    {
+      "name": "zmsx",
+      "url": "depend/zmsx.ln"
+    },
+    {
+      "name": "znbx",
+      "url": "depend/znbx.ln"
+    },
+    {
+      "name": "sdl",
+      "url": "git+https://github.com/ikskuh/SDL.zig#fac81ec499cfd64da7b846de27f6db4a0d4943bf",
+      "hash": "12206c3d312175cf6a1bf1e8247ace5ac49ed8be80a94d8857d7d41fd7d1aee7ac4b"
+    },
+    {
+      "name": "bgfx",
+      "url": "git+https://github.com/bkaradzic/bgfx#dd4199bcb37426326e0e31419e99c10701e96c58",
+      "hash": "1220ffe97391bd51bde10d91fbe5356ffa6c5f0c4c1acc73ddecc1b6ede53162cef3"
+    }
+  ],
+  "minimum_zig_version": "0.13.0",
+  "readme": "# VileTech\n\n## About\n\nVileTech is a collection of Doom-related Rust technologies, oriented towards the building of new tools, game engines, and games descending from id Software's id Tech 1 engine.\n\nThe goals of the VileTech \"project\" are as follows, in descending order of priority:\n1. [![justforfunnoreally.dev badge](https://img.shields.io/badge/justforfunnoreally-dev-9ff)](https://justforfunnoreally.dev)\n2. Build a new Doom source port that fulfills all my specific needs.\n3. Publicly expose the technologies developed in service of 2., especially where some functionality did not already have an implementation in an available library.\n\nBeware that this project:\n- is deep in development. You should not assume that any of the code herein is even sound.\n- is strictly a solo hobby project. The code within this repository is going to be deeply disorganized for the foreseeable future.\n\n## Contents\n\n- `/assets` contains non-code resources used by executable artifacts at runtime.\n- `/c` contains the C component of the VileTech Engine - inherited from [dsda-doom](https://github.com/kraflab/dsda-doom) - pending translation to Zig.\n- `/client` contains the code for the VileTech engine's Zig executable.\n- `/crates` contains Rust libraries associated with this project.\n- `/demotest` is a suite of integration tests for ensuring that the VileTech Engine is capable of running [demos](https://doomwiki.org/wiki/Demo) with perfect accuracy.\n- `/depend` contains files, Git subtrees and submodules from other projects.\n- `/doc` contains documentation for developers.\n- `/legal` contains license information for outside code.\n- `/libs` contains Zig libraries associated with this project.\n- `/sample` contains data used for automated testing.\n\n<!--\n\n## Developer Guide\n\nTODO\n\n-->\n\n## Licensing, Attribution\n\nA complete list of attributions and other third-party licensing information can be found [here](/ATTRIB.md).\n\nAll VileTech-original source - i.e., that which is no way covered by the terms of the document provided above - is provided under either of\n\n * Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or https://www.apache.org/licenses/LICENSE-2.0)\n * MIT license ([LICENSE-MIT](LICENSE-MIT) or https://opensource.org/licenses/MIT)\n\nat your option.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/46534306?u=4ecebbca63e97ebe1a5c4224a45492b5ce48b929&v=4",
+  "releases": [],
+  "owner_bio": "Interested in game technology, technical writing, API design, and compilers.",
+  "owner_company": null,
+  "owner_location": "Ontario, Canada",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 2,
+  "owner_following": 0,
+  "owner_created_at": "2019-01-09T16:27:28Z",
+  "license": "GPL-3.0",
+  "category": "game-engine"
+}

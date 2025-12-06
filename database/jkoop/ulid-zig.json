@@ -1,0 +1,31 @@
+{
+  "name": "ulid-zig",
+  "owner": "jkoop",
+  "repo": "ulid-zig",
+  "description": "A simple ULID helper for Zig",
+  "type": "project",
+  "topics": [
+    "ulid",
+    "zig",
+    "ziglang",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-08-30T00:04:23Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# Ulid package for Zig\n\nThis is a simple package for Zig projects that implements [ULID][ulid-spec] as an enum with convenience methods. Includes methods for `std.json` to en-/decode as a string, e.g. `\"01JT9B27HTN19SEWVMWXRDRVC4\"`.\n\n- [API docs][api-docs]\n\n## Usage\n\n```zig\nconst Ulid = @import(\"ulid\").Ulid;\n\n// generate a new ulid\nvar ulid = Ulid.generateRandom();\n\n// for monotonic mode, guaranteeing ulid to be \"higher\" than all previous (see api doc)\nvar ulid = try Ulid.generateMonotonic();\n\n// parse a ulid from a string\nvar ulid = try Ulid.fromString(\"01JT9B27HTN19SEWVMWXRDRVC4\");\n\n// encode a ulid to a string\nvar buffer: [26]u8 = @splat(0);\nulid.toString(&buffer); // overwrites the bytes of the buffer with the string and returns the string\n\n// compare two ulids\nif (ulid1 == ulid2) {\n\t// this 👆 is allowed; they're enums after all\n}\n```\n\n## Installation\n\nThe normal procedure:\n\n```sh\nzig fetch --save https://github.com/jkoop/ulid-zig/archive/COMMIT.zip\n```\n\n```zig\n// add to your build.zig, in your Module's .imports\n.{\n    .name = \"ulid\",\n    .module = b.dependency(\"ulid\", .{ .target = target }).module(\"ulid\"),\n},\n```\n\n[api-docs]: https://joekoop.com/ulid-zig\n[ulid-spec]: https://github.com/ulid/spec\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/36482619?u=bb7191b78c090c0b8dc0ad9252c2f13c5e9e0519&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Manitoba, Canada",
+  "owner_blog": "https://joekoop.com/",
+  "owner_twitter_username": null,
+  "owner_followers": 8,
+  "owner_following": 2,
+  "owner_created_at": "2018-02-14T16:09:30Z",
+  "homepage": "http://joekoop.com/ulid-zig/",
+  "license": "MIT",
+  "category": "library"
+}

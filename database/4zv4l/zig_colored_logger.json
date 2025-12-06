@@ -1,0 +1,45 @@
+{
+  "name": "zig_colored_logger",
+  "owner": "4zv4l",
+  "repo": "zig_colored_logger",
+  "description": "Simple colored logger for the std.log.LogFn",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-01-24T05:58:20Z",
+  "dependencies": [
+    {
+      "name": "chameleon",
+      "url": "git+https://github.com/tr1ckydev/chameleon#c9327827352354da246733e97535754ced64def8",
+      "hash": "12203173fa28bcd0fdeac9862d6d6ea59ae9bcac5d6054f97f556789d32e0b55d0a1"
+    }
+  ],
+  "minimum_zig_version": "0.11.0",
+  "readme": "# zig_colored_logger\nSimple colored logger for the std.log.LogFn\n\n## Usage\n\nTo add the project in your `build.zig.zon`:\n\n`zig fetch --save git+https://github.com/4zv4l/zig_colored_logger`\n\nThen and this in `build.zig`:\n\n```rs\nconst colored_logger = b.dependency(\"colored_logger\", .{ .project_name = exe.name });\nexe.root_module.addImport(\"colored_logger\", colored_logger.module(\"colored_logger\"));\n```\n\n> This library depends on Chameleon https://github.com/tr1ckydev/chameleon\n\n## How it looks like\n<img width=\"625\" alt=\"image\" src=\"https://github.com/user-attachments/assets/b74ac911-fead-46f5-a4ee-1b2eb3890918\">\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/46655455?u=aebc907c24b247329eaffa1116749e0f67a17117&v=4",
+  "releases": [
+    {
+      "tag_name": "1.0",
+      "name": "Colored Logger 1.0",
+      "body": "First release, I've tested it in my zfs project (a very basic file server) and so far it doesn't look too bad.",
+      "prerelease": false,
+      "published_at": "2024-09-26T01:36:28Z",
+      "html_url": "https://github.com/4zv4l/zig_colored_logger/releases/tag/1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "4zv4l@protonmail.com",
+  "owner_company": null,
+  "owner_location": "Belgium",
+  "owner_blog": "https://4zv4l.github.io/",
+  "owner_twitter_username": null,
+  "owner_followers": 25,
+  "owner_following": 88,
+  "owner_created_at": "2019-01-13T19:14:03Z",
+  "license": "MIT",
+  "category": "library"
+}

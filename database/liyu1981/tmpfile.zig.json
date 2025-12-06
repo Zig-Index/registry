@@ -1,0 +1,34 @@
+{
+  "name": "tmpfile.zig",
+  "owner": "liyu1981",
+  "repo": "tmpfile.zig",
+  "description": "a convenient util to use tmp files with zig",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 4,
+  "forks": 5,
+  "watchers": 1,
+  "updated_at": "2024-12-31T00:02:23Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.11.0",
+  "readme": "# tmpfile.zig\n\n## why\n\nSo far as I found there is no good lib in `zig` for creating temp files, so I write one for myself. This util file provides methods to create temp dir or temp file in system temp folder less tedious and manageable.\n\nsee code for example\n\n```zig\nvar tmp_file = try ThisModule.tmpFile(.{});\ndefer tmp_file.deinit(); // file will be deleted when deinit\ntry tmp_file.f.writeAll(\"hello, world!\");\ntry tmp_file.f.seekTo(0);\nvar buf: [4096]u8 = undefined;\nvar read_count = try tmp_file.f.readAll(&buf);\ntry testing.expectEqual(read_count, \"hello, world!\".len);\ntry testing.expectEqualSlices(u8, buf[0..read_count], \"hello, world!\");\n```\n\nor complexer\n\n```zig\nvar tmp_dir = try ThisModule.tmpDirOwned(.{});\ndefer {\n    tmp_dir.deinit();\n    tmp_dir.allocator.destroy(tmp_dir);\n}\n\nvar tmp_file = try ThisModule.tmpFile(.{ .tmp_dir = tmp_dir });\ndefer tmp_file.deinit();\ntry tmp_file.f.writeAll(\"hello, world!\");\ntry tmp_file.f.seekTo(0);\nvar buf: [4096]u8 = undefined;\nvar read_count = try tmp_file.f.readAll(&buf);\ntry testing.expectEqual(read_count, \"hello, world!\".len);\ntry testing.expectEqualSlices(u8, buf[0..read_count], \"hello, world!\");\n\nvar tmp_file2 = try ThisModule.tmpFile(.{ .tmp_dir = tmp_dir });\ndefer tmp_file2.deinit();\ntry tmp_file2.f.writeAll(\"hello, world!2\");\ntry tmp_file2.f.seekTo(0);\nread_count = try tmp_file2.f.readAll(&buf);\ntry testing.expectEqual(read_count, \"hello, world!2\".len);\ntry testing.expectEqualSlices(u8, buf[0..read_count], \"hello, world!2\");\n```\n\n## useage\n\nuse zig packager\n\n```bash\nzig fetch --save https://github.com/liyu1981/tmpfile.zig/archive/refs/heads/main.tar.gz\n```\n\n(or lock on any commit as)\n```bash\nzig fetch --save zig fetch https://github.com/liyu1981/zcmd.zig/archive/<commit hash>.tar.gz\n```\n\nthis lib is also provided for `build.zig`, use like\n\n```zig\n// in build.zig\nconst tmpfile = @import(\"tmpfile\").tmpfile;\n```\n\n## license\n\nMIT\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/499599?v=4",
+  "releases": [],
+  "owner_company": "TikTok",
+  "owner_location": "Sydney",
+  "owner_blog": "https://liyu1981.xyz/",
+  "owner_twitter_username": null,
+  "owner_followers": 53,
+  "owner_following": 0,
+  "owner_created_at": "2010-11-28T03:02:01Z",
+  "category": "library"
+}

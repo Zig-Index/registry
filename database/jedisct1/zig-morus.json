@@ -1,0 +1,31 @@
+{
+  "name": "zig-morus",
+  "owner": "jedisct1",
+  "repo": "zig-morus",
+  "description": "MORUS-1280-128 implementation in Zig.",
+  "type": "project",
+  "topics": [
+    "morus",
+    "morus-1280-128",
+    "zig",
+    "zig-package",
+    "webassembly"
+  ],
+  "stars": 11,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2024-05-09T20:00:03Z",
+  "readme": "# MORUS cipher for Zig\n\nThis is a Zig implementation of\n[MORUS](https://competitions.cr.yp.to/round3/morusv2.pdf) (MORUS-1280-128)\n\nMORUS is a fast authenticated cipher for platforms without hardware AES acceleration.\n\nIt performs especially well on WebAssembly compared to alternatives.\n\nIts performance is comparable to AES-OCB, without using AES instructions.\n\nBenchmark results on x86_64 (Macbook Pro, 2,4 GHz Core i9, single core):\n\n```text\n            morus:       5890 MiB/s\n       aes128-ocb:       5824 MiB/s\n```\n\nBenchmark results for WebAssembly (WAVM)\n\n```text\n       aes128-gcm:        176 MiB/s\n       aes128-ocb:        300 MiB/s\n xchacha8Poly1305:        319 MiB/s\n       aegis-128l:        807 MiB/s\n            rocca:        854 MiB/s\n            morus:       3505 MiB/s\n```\n\nMORUS is the fastest cipher on Raspberry Pi 4, and possibly other ARM devices without crypto extensions:\n\n```text\n       aes128-gcm:         41 MiB/s\n       aes128-ocb:         81 MiB/s\n xchacha8Poly1305:        159 MiB/s\n       aegis-128l:        168 MiB/s\n            rocca:        221 MiB/s\n            morus:        713 MiB/s\n```\n\nOn platforms with AES acceleration, [AEGIS](https://jedisct1.github.io/draft-aegis-aead/draft-irtf-cfrg-aegis-aead.html)(available in the standard library as `std.crypto.aead.aegis.Aegis128L`) and [ROCCA](https://github.com/jedisct1/zig-rocca) have higher performance.\n\nBenchmark on Rocket Lake (Xeon E-2386G):\n\n```text\n       aes128-ocb:      10173 MiB/s\n       aes256-ocb:       7792 MiB/s\n            morus:      11069 MiB/s\n            rocca:      16274 MiB/s\n       aegis-128l:      21206 MiB/s (170 Gb/s)\n```\n\nWarning: MORUS doesn't provide 128-bit confidentiality even though [the best know attacks](https://eprint.iacr.org/2019/172.pdf) are impractical.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/124872?v=4",
+  "releases": [],
+  "owner_bio": "Get my public keys here: https://sk.tl/7CPRo8kn",
+  "owner_company": null,
+  "owner_location": "Antibes, France",
+  "owner_blog": "https://primulinus.tpopsite.com",
+  "owner_twitter_username": "jedisct1",
+  "owner_followers": 4074,
+  "owner_following": 194,
+  "owner_created_at": "2009-09-09T10:20:57Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,29 @@
+{
+  "name": "nix-zig-packager",
+  "owner": "garrisonhh",
+  "repo": "nix-zig-packager",
+  "description": "package zig 0.11.0+ projects for nix",
+  "type": "project",
+  "topics": [
+    "nix",
+    "nix-flake",
+    "nix-packages",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 3,
+  "forks": 0,
+  "watchers": 2,
+  "updated_at": "2023-09-21T19:27:43Z",
+  "readme": "# nix-zig-packager\n\nare you annoyed with zig 0.11.0 incompatibility with nix? me too! this is a fix\nbefore the zig compiler people figure it out (which I'm sure they will)\n\n## adding to your flake\n\nthis flake provides an overlay which provides `buildZig11Package`. here's\na simple flake to build a zig project for `x86_64-linux`:\n\n*unfortunately, you will still need to use the `--impure` flag for this to work*\n\n```nix\n{\n  inputs.zig-packager.url = github:garrisonhh/nix-zig-packager;\n\n  outputs = { self, nixpkgs, zig-packager, ... }:\n    let\n      system = \"x86_64-linux\";\n\n      pkgs = (import nixpkgs) {\n        inherit system;\n        overlays = [\n          zig-packager.overlays.default\n        ];\n      };\n    in\n    {\n      packages.${system}.default = pkgs.buildZig11Package {\n        src = self;\n        inherit system;\n      };\n    };\n}\n```",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/71951273?u=9de74b86b4cf9af0d65c7ef629ca237dc4b44b47&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 25,
+  "owner_following": 14,
+  "owner_created_at": "2020-09-27T00:33:25Z",
+  "category": "library"
+}

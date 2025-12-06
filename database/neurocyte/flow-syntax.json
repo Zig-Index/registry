@@ -1,0 +1,41 @@
+{
+  "name": "flow-syntax",
+  "owner": "neurocyte",
+  "repo": "flow-syntax",
+  "description": "Syntax highlighting module used by flow and zat",
+  "type": "project",
+  "topics": [
+    "tree-sitter",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 16,
+  "forks": 11,
+  "watchers": 1,
+  "updated_at": "2025-12-04T19:52:47Z",
+  "dependencies": [
+    {
+      "name": "tree_sitter",
+      "url": "https://github.com/neurocyte/tree-sitter/releases/download/master-6e2827ee231e220467bf04d2a2746faff5cb204a/source.tar.gz",
+      "hash": "tree_sitter-0.22.4-150-g7e3f5726-z0LhyGeG1y67PeOltaplVkxRNT2jMMexQhbUlrh0vdxM"
+    },
+    {
+      "name": "cbor",
+      "url": "git+https://github.com/neurocyte/cbor?ref=master#7d2eeb68c8a2fb3f4d6baad6cc04c521b92974c0",
+      "hash": "cbor-1.0.0-RcQE_AswAQAPlqBCZXYQf9DZXn-0Ubt8Mk03ZcJWcsAG"
+    }
+  ],
+  "minimum_zig_version": "0.15.0",
+  "readme": "# flow-syntax\nSyntax highlighting module used by [flow](https://github.com/neurocyte/flow), [zat](https://github.com/neurocyte/zat) and [zine](https://github.com/kristoff-it/zine)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1552770?u=5c42562ca7bf8db5e586c5f373541572957629fe&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 127,
+  "owner_following": 3,
+  "owner_created_at": "2012-03-19T13:04:13Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,35 @@
+{
+  "name": "zinput",
+  "owner": "ziglibs",
+  "repo": "zinput",
+  "description": "A Zig command-line input library!",
+  "type": "project",
+  "topics": [
+    "zig",
+    "ziglang",
+    "zig-package"
+  ],
+  "stars": 50,
+  "forks": 5,
+  "watchers": 3,
+  "updated_at": "2025-01-18T16:24:54Z",
+  "readme": "# zinput\r\n\r\nA Zig command-line input library!\r\n\r\n- [zinput](#zinput)\r\n\t- [Usage](#usage)\r\n\r\n## Usage\r\n```zig\r\nconst zinput = @import(\"zinput\");\r\n\r\nconst my_string = try zinput.askString(allocator, \"I need a string!\", 128);\r\ndefer allocator.free(my_string);\r\n```\r\n\r\nCheck out the test in `main.zig` for an example!\r\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/65570835?v=4",
+  "releases": [
+    {
+      "tag_name": "0.1.0",
+      "name": "zinput 0.1.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2020-11-16T01:57:17Z",
+      "html_url": "https://github.com/ziglibs/zinput/releases/tag/0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Community-driven library development",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2020-05-18T21:45:12Z",
+  "category": "library"
+}

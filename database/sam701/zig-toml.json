@@ -1,0 +1,31 @@
+{
+  "name": "zig-toml",
+  "owner": "sam701",
+  "repo": "zig-toml",
+  "description": "Zig TOML (v1.0.0) parser",
+  "type": "project",
+  "topics": [
+    "parser",
+    "toml",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 80,
+  "forks": 26,
+  "watchers": 1,
+  "updated_at": "2025-12-04T07:24:42Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# zig-toml\n[![Zig Docs](https://img.shields.io/badge/docs-zig-%23f7a41d)](https://sam701.github.io/zig-toml)\n\nZig [TOML v1.0.0](https://toml.io/en/v1.0.0) parser.\n\nThis is a top-down LL parser that parses directly into Zig structs.\n\n## Features\n* TOML Syntax\n  * [x] Integers, hexadecimal, octal, and binary numbers\n  * [x] Floats\n  * [x] Booleans\n  * [x] Comments\n  * [x] Arrays\n  * [x] Tables\n  * [x] Array of Tables\n  * [x] Inline Table\n  * [x] Single-line strings\n  * [x] String escapes (also unicode)\n  * [x] Multi-line strings\n  * [x] Multi-line string leading space trimming\n  * [x] Trailing backslash in multi-line strings\n  * [x] Date, time, date-time, time offset\n* Struct mapping\n  * [x] Mapping to structs\n  * [x] Mapping to enums\n  * [x] Mapping to slices\n  * [x] Mapping to arrays\n  * [x] Mapping to pointers\n  * [x] Mapping to integer and floats with lower bit number than defined by TOML, i.e. `i16`, `f32`.\n  * [x] Mapping to optional fields\n  * [x] Mapping to HashMaps\n* [ ] Serialization\n    * [x] Basic types like integers, floating points, strings, booleans etc.\n    * [x] Arrays\n    * [x] Top level tables\n    * [x] Sub tables\n    * [x] Pointers\n    * [x] Date, time, DateTime, time offset\n    * [x] Enums\n    * [x] Unions\n\n## Using with the Zig package manager\nAdd `zig-toml` to your `build.zig.zon`\n```\n# For zig-master\nzig fetch --save git+https://github.com/sam701/zig-toml\n\n# For zig 0.13\nzig fetch --save git+https://github.com/sam701/zig-toml#last-zig-0.13\n```\n\n## Example\nSee [`example1.zig`](./examples/example1.zig) for the complete code that parses [`example.toml`](./examples/example1.toml)\n\nRun it with `zig build examples`\n```zig\n// ....\n\nconst Address = struct {\n    port: i64,\n    host: []const u8,\n};\n\nconst Config = struct {\n    master: bool,\n    expires_at: toml.DateTime,\n    description: []const u8,\n\n    local: *Address,\n    peers: []const Address,\n};\n\npub fn main() anyerror!void {\n    var parser = toml.Parser(Config).init(allocator);\n    defer parser.deinit();\n\n    var result = try parser.parseFile(\"./examples/example1.toml\");\n    defer result.deinit();\n\n    const config = result.value;\n    std.debug.print(\"{s}\\nlocal address: {s}:{}\\n\", .{ config.description, config.local.host, config.local.port });\n    std.debug.print(\"peer0: {s}:{}\\n\", .{ config.peers[0].host, config.peers[0].port });\n}\n```\n\n## Error Handling\nTODO\n\n## License\nMIT\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/7078566?u=bc7208f733dce14a1f0b8246f6824d60e5e2b46c&v=4",
+  "releases": [],
+  "owner_bio": "I enjoy creating simple, reliable systems",
+  "owner_company": null,
+  "owner_location": "Munich, Germany",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 28,
+  "owner_following": 1,
+  "owner_created_at": "2014-03-27T07:11:09Z",
+  "license": "MIT",
+  "category": "parser"
+}

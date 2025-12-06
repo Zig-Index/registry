@@ -1,0 +1,47 @@
+{
+  "name": "gc.zig",
+  "owner": "johan0A",
+  "repo": "gc.zig",
+  "description": "a Zig garbage collector interface for the bdwgc garbage collector.",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-library",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 6,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-11-08T04:00:31Z",
+  "dependencies": [
+    {
+      "name": "bdwgc",
+      "url": "git+https://github.com/bdwgc/bdwgc#2dddff06cc5e87df34f1da790cdc7faa54d04170",
+      "hash": "N-V-__8AADTYLQAM3ygJCC_yC7p0noII4-gSth9DtlFvoeyt"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# gc.zig\n\nThe [bdwgc Boehm GC](https://github.com/ivmai/bdwgc) garbage coollector packaged for zig.\n\n## Usage\n\n```zig\nconst gc = @import(\"gc\");\n\npub fn main() !void {\n    const allocator = gc.bdwgc.allocator();\n\n    var list: std.ArrayListUnmanaged(u8) = .empty;\n\n    try list.appendSlice(allocator, \"Hello\");\n    try list.appendSlice(allocator, \" World\");\n\n    std.debug.print(\"{s}\\n\", .{list.items});\n    // the program will exit without memory leaks :D\n}\n```\n\n## install\n\n1. Add `gc` to the depency list in `build.zig.zon`: \n\n```sh\nzig fetch --save git+https://github.com/johan0A/gc.zig\n```\n\n2. Config `build.zig`:\n\n```zig\nconst gc_dep = b.dependency(\"gc\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\nroot_module.addImport(\"gc\", gc_dep.module(\"gc\"));\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/85748765?u=aedb06a7b1afcfbb8c854c2c7ca78e233b8d5619&v=4",
+  "releases": [
+    {
+      "tag_name": "0.1.0",
+      "name": "",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-06-11T21:32:12Z",
+      "html_url": "https://github.com/johan0A/gc.zig/releases/tag/0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 6,
+  "owner_following": 2,
+  "owner_created_at": "2021-06-11T13:45:07Z",
+  "license": "MIT",
+  "category": "library"
+}

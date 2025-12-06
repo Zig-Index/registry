@@ -1,0 +1,31 @@
+{
+  "name": "zig-windows-process",
+  "owner": "GoNZooo",
+  "repo": "zig-windows-process",
+  "description": "Toolset for interacting with Windows processes in Zig",
+  "type": "project",
+  "topics": [
+    "zig-package",
+    "windows",
+    "processes",
+    "zig",
+    "ziglang",
+    "win32"
+  ],
+  "stars": 17,
+  "forks": 2,
+  "watchers": 1,
+  "updated_at": "2025-06-06T00:50:13Z",
+  "readme": "# zig-windows-process\n\nThis repo is meant to hold tools for tinkering with Windows processes\n(though I might extend it in the future) to allow for a higher-level interface\nfor injecting DLLs and such.\n\nThe primary motivation is that I'd like to have a basic toolkit for dealing with\nthings that usually come up in game hacking and exploration.\n\n## The library code\n\nThe library code is primarily in `main.zig` so if you were to add the package\nit would be from that file, as follows:\n\n```zig\nexe.addPackagePath(\"windows-process\", \"dependencies/windows-process/src/main.zig\");\n```\n\n## Example usage\n\n### DLL injection\n\n`inject_dll.zig` contains a main file for a program that will take a DLL path\nand inject it into a given process. One needs to make sure that the process has\nthe same bitness as the DLL.\n\n### Finding/enumerating processes\n\n`find_process.zig` uses the process enumeration API to find processes matching\na given executable name.\n\n## More stuff and more ways to do these things\n\nI'm not an expert on any of these things and there are way more things to add\nhere. I'd love suggestions for tools to add, techniques to facilitate through\nthis package. Having a general module that allows interaction with Windows\nprocesses in general is the point, after all.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1327032?u=85d6d39dae7581ab380ef27670e32892cb83c765&v=4",
+  "releases": [],
+  "owner_bio": "Backend & frontend. Odin, Zig, Haskell, \r\n PureScript, TypeScript, Elixir/Erlang and lots more, check repos.",
+  "owner_company": null,
+  "owner_location": "Pleven, Bulgaria",
+  "owner_blog": "http://severnatazvezda.com/",
+  "owner_twitter_username": null,
+  "owner_followers": 113,
+  "owner_following": 23,
+  "owner_created_at": "2012-01-13T07:32:59Z",
+  "category": "library"
+}

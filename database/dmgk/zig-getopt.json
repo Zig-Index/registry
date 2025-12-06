@@ -1,0 +1,30 @@
+{
+  "name": "zig-getopt",
+  "owner": "dmgk",
+  "repo": "zig-getopt",
+  "description": "POSIX-compatible getopt(3) implementation in Zig",
+  "type": "project",
+  "topics": [
+    "zig",
+    "ziglang",
+    "zig-package",
+    "option-parser",
+    "option-parsing"
+  ],
+  "stars": 20,
+  "forks": 6,
+  "watchers": 1,
+  "updated_at": "2025-10-24T05:35:48Z",
+  "readme": "# Minimal POSIX getopt(3) implementation in Zig\n\nThis is a minimal, allocation-free getopt(3) implementation with [POSIX-conforming](http://pubs.opengroup.org/onlinepubs/9699919799/functions/getopt.html) argument parsing semantics.\n\n## Example\n\n```zig\nconst std = @import(\"std\");\nconst debug = std.debug;\nconst getopt = @import(\"getopt.zig\");\n\npub fn main() void {\n    var arg: []const u8 = undefined;\n    var verbose: bool = false;\n\n    var opts = getopt.getopt(\"a:vh\");\n\n    while (opts.next()) |maybe_opt| {\n        if (maybe_opt) |opt| {\n            switch (opt.opt) {\n                'a' => {\n                    arg = opt.arg.?;\n                    debug.print(\"arg = {s}\\n\", .{arg});\n                },\n                'v' => {\n                    verbose = true;\n                    debug.print(\"verbose = {}\\n\", .{verbose});\n                },\n                'h' => debug.print(\n                    \\\\usage: example [-a arg] [-hv]\n                    \\\\\n                , .{}),\n                else => unreachable,\n            }\n        } else break;\n    } else |err| {\n        switch (err) {\n            getopt.Error.InvalidOption => debug.print(\"invalid option: {c}\\n\", .{opts.optopt}),\n            getopt.Error.MissingArgument => debug.print(\"option requires an argument: {c}\\n\", .{opts.optopt}),\n        }\n    }\n\n    debug.print(\"remaining args: {?s}\\n\", .{opts.args()});\n}\n```\n\n```\n$ zig run example.zig -- -hv -a42 foo bar\nusage: example [-a arg] [-hv]\nverbose = true\narg = 42\nremaining args: { foo, bar }\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/5332688?u=1b3c4998816719d133b428fdf8bfb3207fa5ab58&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Ecuador",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 64,
+  "owner_following": 30,
+  "owner_created_at": "2013-08-28T19:07:19Z",
+  "license": "0BSD",
+  "category": "library"
+}

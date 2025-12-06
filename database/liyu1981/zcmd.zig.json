@@ -1,0 +1,65 @@
+{
+  "name": "zcmd.zig",
+  "owner": "liyu1981",
+  "repo": "zcmd.zig",
+  "description": "zcmd is a single file lib to replace zig's std.childProcess.run with the ability of running pipeline like bash..",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 15,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-10-22T20:31:59Z",
+  "minimum_zig_version": "0.12.0",
+  "readme": "# zcmd.zig\n\n`zcmd` is a single file lib (`zcmd.zig`) to replace zig's `std.childProcess.run`. It has almost identical API like `std.childProcess.run`, but with the ability of running pipeline like `bash`.\n\nExample like execution of single command (replacement of zig's `std.childProcess.run`)\n\n```zig\nconst result = try Zcmd.run(.{\n    .allocator = allocator,\n    .commands = &[_][]const []const u8{\n        &.{ \"uname\", \"-a\" },\n    },\n});\n```\n\nthe differences to `std.childProcess.run` is it will take `commands` instead of single `command`.\n\nIt can run a `bash` like pipeline like follows (_to recursively find and list the latest modified files in a directory with subdirectories and times_)\n\n```zig\nconst result = try Zcmd.run(.{\n    .allocator = allocator,\n    .commands = &[_][]const []const u8{\n        &.{ \"find\", \".\", \"-type\", \"f\", \"-exec\", \"stat\", \"-f\", \"'%m %N'\", \"{}\", \";\" },\n        &.{ \"sort\", \"-nr\" },\n        &.{ \"head\", \"-1\" },\n    },\n});\n```\n\nIt can also accept an input from outside as stdin to command or command pipeline, like follows\n\n```zig\nconst f = try std.fs.cwd().openFile(\"tests/big_input.txt\", .{});\ndefer f.close();\nconst content = try f.readToEndAlloc(allocator, MAX_OUTPUT);\ndefer allocator.free(content);\nconst result = try Zcmd.run(.{\n    .allocator = allocator,\n    .commands = &[_][]const []const u8{\n        &.{\"cat\"},\n        &.{ \"wc\", \"-lw\" },\n    },\n    .stdin_input = content,\n});\n```\n\nWhen there is something failed inside pipeline, we will report back `stdout` and `stderr` just like `bash`, like below example\n\n```zig\nconst result = try Zcmd.run(.{\n    .allocator = allocator,\n    .commands = &[_][]const []const u8{\n        &.{ \"find\", \"nonexist\" },\n        &.{ \"wc\", \"-lw\" },\n    },\n});\ndefer result.deinit();\ntry testing.expectEqualSlices(\n    u8,\n    result.stdout.?,\n    \"       0       0\\n\",\n);\ntry testing.expectEqualSlices(\n    u8,\n    result.stderr.?,\n    \"find: nonexist: No such file or directory\\n\",\n);\n```\n\nPlease check [example/zcmd_app](https://github.com/liyu1981/zcmd.zig/tree/main/example/zcmd_app) for an example on how to use `zcmd.zig`.\n\n### use `zcmd.zig` in `build.zig`\n\nOriginally `zcmd.zig` is functions I wrote in `build.zig` to auto generating files with commands, so it is important that can use this in `build.zig`. So `zcmd.zig` exposed itself for `build.zig` too.\n\nTo use that we will need to normally introduce `zcmd.zig` to `build.zig.zon` (see Usage below). Then in your `build.zig`, do following to use it\n\n```zig\n// when import in build.zig, the zcmd is exposed in nested const zcmd\nconst zcmd = @import(\"zcmd\").zcmd;\n// then next can use zcmd.run as above\n```\n\nPlease check [example/zcmd_build_app](https://github.com/liyu1981/zcmd.zig/tree/main/example/zcmd_build_app) for detail version how to use in this way.\n\n## Usage\n\n### through Zig Package Manager\n\nuse following bash in your project folder (with `build.zig.zon`)\n\n```\nzig fetch --save https://github.com/liyu1981/zcmd.zig/archive/refs/tags/v0.2.2.tar.gz\n```\n\nyou can change the version `v0.1.0` to other version if there are in [release](https://github.com/liyu1981/zcmd.zig/releases) page.\n\n### or simply just copy `zcmd.zig` file to your project\n\nIt is a single file lib with no dependencies!\n\n## Zig Docs\n\nZig docs is hosted in github pages at: [https://liyu1981.github.io/zcmd.zig/](https://liyu1981.github.io/zcmd.zig/), please go there to\nfind what apis `zcmd.zig` provides.\n\n## Coverage\n\n`zcmd.zig` is rigorously tested. Run unit tests at repo checkout root folder with `zig test src/zcmd.zig`.\n\nFor coverage test, as `kcov` is working in a way of 'debug every line and record', it can not work with `zcmd` tests. `zcmd` tests will fork many sub processes and if one of them be stopped the whole pipeline hangs. I am still in searching of what's the best method to cover.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/499599?v=4",
+  "releases": [
+    {
+      "tag_name": "v0.3.0",
+      "name": "v0.3.0",
+      "body": "update to zig v0.12.0\r\n",
+      "prerelease": false,
+      "published_at": "2024-04-24T01:48:15Z",
+      "html_url": "https://github.com/liyu1981/zcmd.zig/releases/tag/v0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.2",
+      "name": "v0.2.2",
+      "body": "**Full Changelog**: https://github.com/liyu1981/zcmd.zig/compare/v0.2.1...v0.2.2",
+      "prerelease": false,
+      "published_at": "2024-02-21T00:07:14Z",
+      "html_url": "https://github.com/liyu1981/zcmd.zig/releases/tag/v0.2.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.1",
+      "name": "v0.2.1",
+      "body": "add example for using in build.zig, as well as expose zcmd in build.zig",
+      "prerelease": false,
+      "published_at": "2024-01-19T03:04:46Z",
+      "html_url": "https://github.com/liyu1981/zcmd.zig/releases/tag/v0.2.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "rewrite!",
+      "prerelease": false,
+      "published_at": "2024-01-18T10:19:06Z",
+      "html_url": "https://github.com/liyu1981/zcmd.zig/releases/tag/v0.2.0",
+      "assets": []
+    }
+  ],
+  "owner_company": "TikTok",
+  "owner_location": "Sydney",
+  "owner_blog": "https://liyu1981.xyz/",
+  "owner_twitter_username": null,
+  "owner_followers": 53,
+  "owner_following": 0,
+  "owner_created_at": "2010-11-28T03:02:01Z",
+  "license": "MIT",
+  "category": "library"
+}

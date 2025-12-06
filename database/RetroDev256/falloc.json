@@ -1,0 +1,30 @@
+{
+  "name": "falloc",
+  "owner": "RetroDev256",
+  "repo": "falloc",
+  "description": "A temporary-file backed allocator for zig",
+  "type": "project",
+  "topics": [
+    "zig-library",
+    "zig-memory",
+    "zig-modules",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-03-05T18:05:43Z",
+  "readme": "Ever wanted a zig allocator that could allocate all the free space of your HDD? Look no further! Really though, don't. Unless you have a specific need for this, you likely don't need it ;)\n\nI created this allocator (POSIX systems only right now) for the purpose of single, *very* large allocations. Think lots and lots of math with hundreds of gigabytes in each array.\n\nIt is advised that you use ReleaseFast/ReleaseSmall when using this library. This is because the allocated memory is set to `undefined` by the Allocator interface, which may take a while for large allocations.\n\n```zig\nconst std = @import(\"std\");\nconst Allocator = std.mem.Allocator;\nconst falloc = @import(\"falloc\");\n\npub fn main() !void {\n    const gpa: Allocator = falloc.allocator;\n\n    // 256 GiB of memory to work with\n    const mem = try gpa.alloc(u8, 1 << 38);\n    defer gpa.free(mem);\n\n    // In a real-world use case scenario, this would be better utilized.\n    const hello = \"Hello, World!\\n\";\n    @memcpy(mem[0..hello.len], hello);\n    std.debug.print(\"{s}\", .{mem[0..hello.len]});\n}\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/54503497?u=9d9d0b184b1981963f74dd066693c77e6c9b0e38&v=4",
+  "releases": [],
+  "owner_bio": "Zig, Rust, C, C++, C#, HTML, JS, CSS, x86 ASM",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "https://alloc.dev",
+  "owner_twitter_username": null,
+  "owner_followers": 30,
+  "owner_following": 0,
+  "owner_created_at": "2019-08-25T13:57:51Z",
+  "license": "MIT",
+  "category": "library"
+}

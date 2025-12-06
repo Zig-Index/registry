@@ -1,0 +1,41 @@
+{
+  "name": "zassimp",
+  "owner": "parodyband",
+  "repo": "zassimp",
+  "description": "Clean, idiomatic Zig wrapper around Assimp's C API",
+  "type": "project",
+  "topics": [
+    "3d",
+    "3d-models",
+    "animation",
+    "assimp",
+    "bindings",
+    "game-development",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 3,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-11-06T17:52:15Z",
+  "dependencies": [
+    {
+      "name": "assimp",
+      "url": "https://github.com/parodyband/assimp/archive/8c92bc97241a2bf9b6dcb0fbb8af80b798e37b38.tar.gz",
+      "hash": "1220e926b4980a1a1d5b43b040384fb3624e35580764c62e76a0dc471c13341a7289"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# zassimp\n\nModern Zig bindings for [Assimp](https://github.com/assimp/assimp) (Open Asset Import Library).\n\n**Requires Zig 0.15.1**\n\n## Installation\n\nAdd to `build.zig.zon`:\n\n```zig\n.dependencies = .{\n    .zassimp = .{\n        .url = \"https://github.com/parodyband/zassimp/archive/main.tar.gz\",\n        .hash = \"...\", // Use `zig build --fetch` to get the hash\n    },\n},\n```\n\nAdd to `build.zig`:\n\n```zig\nconst dep_zassimp = b.dependency(\"zassimp\", .{ .target = target, .optimize = optimize });\nconst zassimp = dep_zassimp.module(\"zassimp\");\n\n// Then add module like normal :)\n```\n\n## Quick Start\n\n```zig\nconst std = @import(\"std\");\nconst zassimp = @import(\"zassimp\");\n\npub fn main() !void {\n    var importer = zassimp.Importer.init();\n    defer importer.deinit();\n\n    const scene = try importer.importFile(\"model.obj\", \n        zassimp.PostProcessSteps.Triangulate |\n        zassimp.PostProcessSteps.GenNormals);\n    \n    const meshes = scene.getMeshes();\n    std.debug.print(\"Loaded {} meshes\\n\", .{meshes.len});\n}\n```\n\n## Examples\n\nSee the `examples/` directory for reference code:\n- `basic.zig` - Basic model loading and information display\n- `animation.zig` - Animation loading and keyframe interpolation\n\n## License\n\nBSD 3-Clause (via Assimp)",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1767779?u=df97bb66205511a6563d0c55fa27ae524e3a5bcd&v=4",
+  "releases": [],
+  "owner_bio": "Principal Technical Artist",
+  "owner_company": "Series",
+  "owner_location": null,
+  "owner_blog": "http://www.austincrane.us",
+  "owner_twitter_username": "EuclideanDreams",
+  "owner_followers": 8,
+  "owner_following": 12,
+  "owner_created_at": "2012-05-23T01:14:40Z",
+  "category": "library"
+}

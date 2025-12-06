@@ -1,0 +1,56 @@
+{
+  "name": "jstring.zig",
+  "owner": "liyu1981",
+  "repo": "jstring.zig",
+  "description": "a reusable string lib for myself with all familiar methods methods can find in javascript string",
+  "type": "project",
+  "topics": [
+    "zig",
+    "jstring",
+    "zig-package"
+  ],
+  "stars": 10,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-03-17T17:39:42Z",
+  "minimum_zig_version": "0.11.0",
+  "readme": "# `jstring.zig`\n\n## Target: create a reusable string lib for myself with all familiar methods methods can find in javascript string.\n\n## Reason:\n\n1.  string is important we all know, so a good string lib will be very useful.\n2.  javascript string is (in my opinion) the most battle tested string library out there, strike a good balance\n    between features and complexity.\n\nThe javascript string specs and methods this file use as reference can be found at\nhttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String\n\nAll methods except those marked as deprecated (such as anchor, big, blink etc) are implemented, in zig way.\n\n# integration with PCRE2 regex\n\nOne highlight of `jstring.zig` is that it integrates with [PCRE2](https://www.pcre.org/) to provide `match`, `match_all` and more just like the familar feeling of javascript string.\n\nhere are some examples of how regex can be used\n\n```zig\nvar str1 = try JStringUnmanaged.newFromSlice(arena.allocator(), \"hello,hello,world\");\nvar results = try str1.splitByRegex(arena.allocator(), \"l+\", 0, 0);\ntry testing.expectEqual(results.len, 1);\ntry testing.expect(results[0].eqlSlice(\"hello,hello,world\"));\nresults = try str1.splitByRegex(arena.allocator(), \"l+\", 0, -1);\ntry testing.expectEqual(results.len, 4);\ntry testing.expect(results[0].eqlSlice(\"he\"));\ntry testing.expect(results[1].eqlSlice(\"o,he\"));\ntry testing.expect(results[2].eqlSlice(\"o,wor\"));\ntry testing.expect(results[3].eqlSlice(\"d\"));\n```\n\n# usage\n\n```bash\nzig fetch --save https://github.com/liyu1981/jstring.zig/archive/refs/tags/0.1.1.tar.gz\n```\n\ncheck `example` folder for a sample project\n\n```zig\nconst std = @import(\"std\");\nconst jstring = @import(\"jstring\");\n\npub fn main() !u8 {\n    var your_name = brk: {\n        var jstr = try jstring.JString.newFromSlice(std.heap.page_allocator, \"name is: zig\");\n        defer jstr.deinit();\n        const m = try jstr.match(\"name is: (?<name>.+)\", 0, true, 0, 0);\n        if (m.matchSucceed()) {\n            const r = m.getGroupResultByName(\"name\");\n            break :brk try jstr.slice(\n                @as(isize, @intCast(r.?.start)),\n                @as(isize, @intCast(r.?.start + r.?.len)),\n            );\n        }\n        unreachable;\n    };\n    defer your_name.deinit();\n\n    try std.io.getStdOut().writer().print(\"\\nhello, {s}\\n\", .{your_name});\n    return 0;\n}\n```\n\nin order to run this example from the `git clone` repo, you will need\n\n```bash\ncd <jstirng_repo>/examples\nzig fetch --save ../ # to update your local zig cache about jstring\nzig build run\n```\n\n# `build.zig`\n\nwhen use `jstring.zig` in your project, as it integrates with `PCRE2`, will need to link your project to `libpcre-8`. `jstring.zig` provide a build time function to easy this process.\n\n```zig\n// in your build.zig\nconst jstring_build = @import(\"jstring\");\n...\nconst jstring_dep = b.dependency(\"jstring\", .{});\nexe.addModule(\"jstring\", jstring_dep.module(\"jstring\"));\njstring_build.linkPCRE(exe, jstring_dep);\n```\n\nagain, check `example` folder for the usage\n\n# performance\n\n`jstring.zig` is built with performance in mind. Though `benchmark` is still in developing, but the initial result of allocate/free 1M random size of strings shows a _~70%_ advantage comparing to c++/20's `std::string`.\n\n```bash\nbenchmark % ./zig-out/bin/benchmark\n|zig create/release: | [ooooo] | avg=    16464000ns | min=    14400000ns | max=    20975000ns |\n|cpp create/release: | [ooooo] | avg=    56735400ns | min=    56137000ns | max=    57090000ns |\n```\n\n(`jstring.zig` is built with `-Doptimize=ReleaseFast`, and `cpp` is built with `-std=c++20 -O2`)\n\ncheck current benchmark method [here](https://github.com/liyu1981/jstring.zig/blob/main/tools/benchmark/main.zig)\n\n# docs\n\ncheck the auto generated zig docs [here](https://liyu1981.github.io/jstring.zig)\n\n# tests\n\n`jstring` is rigorously tested.\n\n```bash\n./script/pcre_test.sh src/jstring.zig\n```\n\nto run all tests.\n\nor check kcov report [here](https://liyu1981.github.io/jstring.zig/cov/index.html): the current level is 100%.\n\n# license\n\nMIT License :)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/499599?v=4",
+  "releases": [
+    {
+      "tag_name": "0.1.1",
+      "name": "v0.1.1",
+      "body": "**Full Changelog**: https://github.com/liyu1981/jstring.zig/compare/0.1.0...0.1.1",
+      "prerelease": false,
+      "published_at": "2024-02-21T00:22:59Z",
+      "html_url": "https://github.com/liyu1981/jstring.zig/releases/tag/0.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "0.1.0",
+      "name": "v0.1.0",
+      "body": "v0.1.0",
+      "prerelease": false,
+      "published_at": "2024-01-25T01:30:42Z",
+      "html_url": "https://github.com/liyu1981/jstring.zig/releases/tag/0.1.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.0.1",
+      "name": "v0.0.1",
+      "body": "v0.0.1 for myself",
+      "prerelease": false,
+      "published_at": "2024-01-24T05:06:49Z",
+      "html_url": "https://github.com/liyu1981/jstring.zig/releases/tag/0.0.1",
+      "assets": []
+    }
+  ],
+  "owner_company": "TikTok",
+  "owner_location": "Sydney",
+  "owner_blog": "https://liyu1981.xyz/",
+  "owner_twitter_username": null,
+  "owner_followers": 53,
+  "owner_following": 0,
+  "owner_created_at": "2010-11-28T03:02:01Z",
+  "category": "library"
+}

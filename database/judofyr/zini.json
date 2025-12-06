@@ -1,0 +1,35 @@
+{
+  "name": "zini",
+  "owner": "judofyr",
+  "repo": "zini",
+  "description": "Succinct data structures for Zig",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 72,
+  "forks": 2,
+  "watchers": 2,
+  "updated_at": "2025-12-05T19:18:11Z",
+  "dependencies": [
+    {
+      "name": "parg",
+      "url": "git+https://github.com/judofyr/parg.git#0c8a79749b13d111eb1484f89c4eb3501248a2e3",
+      "hash": "parg-0.0.0-dOPWZPhYAAAX2bzGpU0RFDnEOCq-GBidEJYv1owRws8o"
+    }
+  ],
+  "minimum_zig_version": "0.11.0",
+  "readme": "# Zini\n\nZini (Zig + Mini) is a [Zig](https://ziglang.org/) library providing some succinct data structures:\n\n- `zini.pthash`, a [**minimal perfect hash function**](https://en.wikipedia.org/wiki/Perfect_hash_function) construction algorithm, using less than 4 bits per element.\n- `zini.ribbon`, a **retrieval data structure** (sometimes called a \"static function\") construction algorithm, having less than 1% overhead.\n- `zini.CompactArray` stores n-bit numbers tightly packed, leaving no bits unused.\n  If the largest value in an array is `m` then you actually only need `n = log2(m) + 1` bits per element.\n  E.g. if the largest value is 270, you will get 7x compression using CompactArray over `[]u64` as it stores each element using only 9 bits (and 64 divided by 9 is roughly 7).\n- `zini.DictArray` finds all distinct elements in the array, stores each once into a CompactArray (the dictionary), and creates a new CompactArray containing indexes into the dictionary.\n  This will give excellent compression if there's a lot of repetition in the original array.\n- `zini.EliasFano` stores increasing 64-bit numbers in a compact manner.\n- `zini.darray` provides constant-time support for the `select1(i)` operation which returns the _i_-th set bit in a `std.DynamicBitSetUnmanaged`.\n\n## Overview\n\n### PTHash, minimal perfect hash function\n\n`zini.pthash` contains an implementation of [PTHash][pthash], a [minimal perfect hash function](https://en.wikipedia.org/wiki/Perfect_hash_function) construction algorithm.\nGiven a set of `n` elements, with the only requirement being that you can hash them, it generates a hash function which maps each element to a distinct number between `0` and `n - 1`.\nThe generated hash function is extremely small, typically consuming less than **4 _bits_ per element**, regardless of the size of the input type.\nThe algorithm provides multiple parameters to tune making it possible to optimize for (small) size, (short) construction time, or (short) lookup time.\n\nTo give a practical example:\nIn ~0.6 seconds Zini was able to create a hash function for /usr/share/dict/words containing 235886 words.\nThe resulting hash function required in total 865682 bits in memory.\nThis corresponds to 108.2 kB in total or 3.67 bits per word.\nIn comparison, the original file was 2.49 MB and compressing it with `gzip -9` only gets it down to 754 kB (which you can't use directly in memory without decompressing it).\nIt should of course be noted that they don't store the equivalent data as you can't use the generated hash function to determine if a word is present or not in the list.\nThe comparison is mainly useful to get a feeling of the magnitudes.\n\n### Bumped Ribbon Retrieval, a retrieval data structure\n\n`zini.ribbon` contains an implementation of [Bumped Ribbon Retrieval][burr] (_BuRR_), a retrieval data structure.\nGiven `n` keys (with the only requirement being that you can hash them) which each have an `r`-bit value, we'll build a data structure which will return the value for all of the `n` keys.\nHowever, the keys are actually not stored (we're only using the hash) so if you ask for the value for an _unknown_ key you will get a seemingly random answer; there's no way of knowing whether the key was present in the original dataset or not.\n\nThe theoretically minimal amount of space needed to store the _values_ is `n * r` (we have `n` `r`-bit values after all).\nWe use the term \"overhead\" to refer to how much _extra_ amount of data we need.\nThe Bumped Ribbon Retrieval will often have **less than 1% overhead**.\n\n## Usage\n\nZini is intended to be used as a library, but also ships the command-line tools `zini-pthash` and `zini-ribbon`.\nAs the documentation is a bit lacking it might be useful to look through `tools/zini-{pthash,ribbon}/main.zig` to understand how it's used.\n\n```\nUSAGE\n  ./zig-out/bin/zini-pthash [build | lookup] <options>\n\nCOMMAND: build\n  Builds hash function for plain text file.\n\n  -i, --input <file>\n  -o, --output <file>\n  -c <int>\n  -a, --alpha <float>\n  -s, --seed <int>\n\nCOMMAND: lookup\n\n  -i, --input <file>\n  -k, --key <key>\n  -b, --benchmark\n```\n\nAnd here's an example run of using `zini-pthash`.\n\n```\n# Build zini-pthash:\n$ zig build -Drelease-safe\n\n# Build a hash function:\n$ ./zig-out/bin/zini-pthash build -i /usr/share/dict/words -o words.pth\nReading /usr/share/dict/words...\n\nBuilding hash function...\n\nSuccessfully built hash function:\n  seed: 12323441790160983030\n  bits: 865554\n  bits/n: 3.6693741892269993\n\nWriting to words.pth\n\n# Look up an index in the hash function:\n$ ./zig-out/bin/zini-pthash lookup -i words.pth --key hello\nReading words.pth...\n\nSuccessfully loaded hash function:\n  seed: 12323441790160983030\n  bits: 865554\n  bits/n: 3.6693741892269993\n\nLooking up key=hello:\n112576\n```\n\n## Acknowledgments\n\nZini is merely an implementation of existing algorithms and techniques already described in the literature:\n\n- The [PTHash][pthash] algorithm is described by Giulio Ermanno Pibiri and Roberto Trani in arXiv:2104.10402.\n- They also implemented PTHash as a C++ library in <https://github.com/jermp/pthash> under the MIT license.\n  Zini uses no code directly from that repository, but it has been an invaluable resource for understanding how to implement PTHash in practice.\n- The [BuRR][burr] data structure is described by Peter C. Dillinger, Lorenz Hübschle-Schneider, Peter Sanders and Stefan Walzer in arXiv:2109.01892.\n\n[pthash]: https://arxiv.org/abs/2104.10402\n[burr]: https://arxiv.org/abs/2109.01892\n\n## License\n\nZini is licensed under the [0BSD license](https://spdx.org/licenses/0BSD.html).\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/499?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Oslo, Norway",
+  "owner_blog": "http://judofyr.net",
+  "owner_twitter_username": null,
+  "owner_followers": 569,
+  "owner_following": 56,
+  "owner_created_at": "2008-02-20T16:48:23Z",
+  "license": "0BSD",
+  "category": "library"
+}

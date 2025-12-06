@@ -1,0 +1,31 @@
+{
+  "name": "imagehash",
+  "owner": "galactixx",
+  "repo": "imagehash",
+  "description": "ImageHash is a Zig package for generating robust image fingerprints using four popular algorithms: average (ahash), difference (dhash), perceptual (phash), and wavelet (whash) hashing.",
+  "type": "project",
+  "topics": [
+    "zig-package",
+    "image-hashing",
+    "zig",
+    "ziglang"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-06-26T03:12:37Z",
+  "minimum_zig_version": "0.14.0",
+  "readme": "<p align=\"center\">\n  <img src=\"/docs/logo.png\" alt=\"imagehash logo\" width=\"75%\"/>\n</p>\n\nImageHash is a Zig package for generating robust image fingerprints using four popular algorithms: **average (ahash)**, **difference (dhash)**, **perceptual (phash)**, and **wavelet (whash)** hashing.\n\n## ✨ **Features**\n\n* **Multiple Hash Algorithms:**\n\n  * **ahash** (Average Hash)\n  * **dhash** (Difference Hash)\n  * **phash** (Perceptual Hash)\n  * **whash** (Wavelet Hash)\n  * \n## 🚀 Getting Started\n\n### Fetch via `zig fetch`\n\nYou can use the built‑in Zig fetcher to download and pin a tarball:\n\n```bash\nzig fetch --save git+https://github.com/galactixx/imagehash#v0.2.0\n```\n\n> This adds an `imagehash` entry under `.dependencies` in your `build.zig.zon`. \n\nThen in your build.zig:\n\n```zig\nconst imagehash_mod = b.dependency(\"imagehash\", .{\n    .target = target,\n    .optimize = optimize,\n}).module(\"imagehash\");\n\n// add to library\nlib_mod.addImport(\"imagehash\", imagehash_mod);\n\n// add to executable\nexe.root_module.addImport(\"imagehash\", imagehash_mod);\n```\n\nThis lets you `const ih = @import(\"imagehash\");` in your Zig code.\n\n## 📚 **Usage**\n\n```zig\nconst std = @import(\"std\");\nconst ih = @import(\"imagehash\");\n\npub fn main() !void {\n    const file = \"testdata/checkerboard.png\";\n\n    // Compute all four hashes\n    const ahash = try ih.averageHash(file);\n    const dhash = try ih.differenceHash(file);\n    const phash = try ih.perceptualHash(file);\n    const whash = try ih.waveletHash(file);\n\n    // Print hex digests\n    var buf: [16]u8 = undefined;\n    std.debug.print(\"ahash: {s}\\n\", .{ahash.hexDigest(buf[0..])});\n    std.debug.print(\"phash: {s}\\n\", .{phash.hexDigest(buf[0..])});\n\n    // Compare two hashes\n    const dist = ahash.distance(dhash);\n    std.debug.print(\"Hamming distance: {}\\n\", .{dist});\n}\n```\n\n## 🔍 **API**\n\n#### `pub fn averageHash(filename: []const u8) Error!ImageHash`\n\nComputes an 8×8 average-based hash (`ahash`).\n\n#### `pub fn differenceHash(filename: []const u8) Error!ImageHash`\n\nComputes a 9×8 horizontal difference-based hash (`dhash`).\ns\n#### `pub fn perceptualHash(filename: []const u8) Error!ImageHash`\n\nComputes a 32×32 perceptual (DCT-based) hash and reduces to an 8×8 block (`phash`).\n\n#### `pub fn waveletHash(filename: []const u8) Error!ImageHash`\n\nComputes a 64×64 wavelet-based hash with 4-level decomposition (`whash`).\n\n#### `pub fn (self: ImageHash) distance(other: ImageHash) u64`\n\nReturns the Hamming distance between two hashes.\n\n#### `pub fn (self: ImageHash) toJSON(alloc: *std.mem.Allocator) ![]u8`\n\nSerialize an `ImageHash` to a JSON byte slice.\n\n#### `pub fn fromJSON(json: []const u8, alloc: std.mem.Allocator) ParseError!ImageHash`\n\nParse an `ImageHash` from JSON.\n\n## 🤝 **License**\n\nThis project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.\n\n---\n\n## 📞 **Contact**\n\nHave questions or need help? Open an issue on the [GitHub repository](https://github.com/galactixx/imagehash).\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/146773150?u=adbf103b39af7d9d4c912a4b8b90dbc9d1f6a496&v=4",
+  "releases": [],
+  "owner_bio": "Houston, TX",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 5,
+  "owner_following": 25,
+  "owner_created_at": "2023-10-02T19:09:29Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,41 @@
+{
+  "name": "skip32",
+  "owner": "caiocdcs",
+  "repo": "skip32",
+  "description": "32-bit block cipher based on Skipjack, written in Zig",
+  "type": "project",
+  "topics": [
+    "zig-package",
+    "crypto",
+    "zig",
+    "block-cipher"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-06-25T08:00:31Z",
+  "minimum_zig_version": "0.14.1",
+  "readme": "# Skip32 for Zig\n\nA pure Zig implementation of the Skip32 algorithm - a 32-bit block cipher for obfuscating sequential numbers.\n\n## What is Skip32?\n\nSkip32 transforms sequential numbers (like database IDs) into seemingly random values while maintaining perfect 1:1 mapping. Ideal for hiding predictable ID patterns in URLs and APIs.\n\n⚠️ **Note**: Skip32 is for obfuscation, not cryptographic security.\n\n## Getting Started\n\n### 1. Add Dependency\n\nAdd dependency:\n\n```bash\n.zig fetch https://github.com/caiocdcs/skip32/archive/v0.0.1.tar.gz --save\n```\n\n### 2. Configure Build\n\nIn your `build.zig`:\n\n```zig\nconst skip32 = b.dependency(\"skip32\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\nexe.root_module.addImport(\"skip32\", skip32.module(\"skip32\"));\n```\n\n### 3. Fetch Dependencies\n\n```bash\nzig build --fetch\n```\n\n## Usage\n\n```zig\nconst skip32 = @import(\"skip32\");\n\nconst key = [_]u8{ 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A };\n\nconst encoded = skip32.encode(&key, 12345);  // Returns obfuscated number\nconst decoded = skip32.decode(&key, encoded); // Returns 12345\n```\n\n## API\n\n- `encode(key: *const [10]u8, value: u32) u32` - Encode a value\n- `decode(key: *const [10]u8, value: u32) u32` - Decode a value\n\nKey must be exactly 10 bytes. Encoding/decoding is perfectly reversible.\n\n## Example Use Cases\n\n- Hide sequential database IDs in URLs\n- Obfuscate user IDs in APIs\n- Generate non-predictable order numbers\n- Create hard-to-guess tokens (with proper key management)\n\n## Testing\n\n```bash\nzig test src/root.zig\n```\n\n## License\n\nMIT\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/8338516?v=4",
+  "releases": [
+    {
+      "tag_name": "v0.0.1",
+      "name": "v0.0.1",
+      "body": "## Skip32 for Zig - Initial Release\r\n\r\nThis is the first release of Skip32 for Zig - a pure Zig implementation of the Skip32 algorithm for obfuscating sequential numbers.\r\n\r\n### Features\r\n\r\n- Pure Zig implementation with zero dependencies\r\n- Compile-time safety with key length validation\r\n- Perfect reversibility - bijective mapping for all 32-bit values\r\n- High performance with minimal allocations\r\n\r\n### What's Included\r\n\r\n- encode() and decode() functions\r\n- Comprehensive test suite\r\n- Full documentation\r\n- Examples and usage guide\r\n\r\n### Quick Start\r\n\r\n```zig\r\nconst skip32 = @import(\"skip32\");\r\n\r\nconst key = [_]u8{ 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A };\r\nconst encoded = skip32.encode(&key, 12345);\r\nconst decoded = skip32.decode(&key, encoded); // Returns 12345\r\n",
+      "prerelease": false,
+      "published_at": "2025-06-24T20:27:32Z",
+      "html_url": "https://github.com/caiocdcs/skip32/releases/tag/v0.0.1",
+      "assets": []
+    }
+  ],
+  "owner_bio": "☕ Java dev exploring Rust 🦀, Zig ⚡, and dabbling in AI \r\nAlways building, always learning and always having fun",
+  "owner_company": null,
+  "owner_location": "Lisbon",
+  "owner_blog": "https://caiocdcs.github.io",
+  "owner_twitter_username": null,
+  "owner_followers": 3,
+  "owner_following": 3,
+  "owner_created_at": "2014-08-02T16:34:25Z",
+  "license": "MIT",
+  "category": "crypto"
+}

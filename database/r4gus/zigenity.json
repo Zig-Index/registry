@@ -1,0 +1,176 @@
+{
+  "name": "zigenity",
+  "owner": "r4gus",
+  "repo": "zigenity",
+  "description": "Like zenity but in Zig",
+  "type": "project",
+  "topics": [
+    "gtk",
+    "gtk3",
+    "gui",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-09-30T19:02:17Z",
+  "dependencies": [
+    {
+      "name": "dvui",
+      "url": "git+https://github.com/david-vanderson/dvui#764159277d7f8477b378737cf6bbed2db2d682d6",
+      "hash": "dvui-0.4.0-dev-AQFJmYPy0wBBSvkv148fIhT3c7lc_45KCaRqW-PIqBLT"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# zigenity\n\nLike [zenity](https://gitlab.gnome.org/GNOME/zenity) but in [Zig](https://ziglang.org/) and only for Linux.\n\n![Question Dialog](static/example01.png)\n\n## Dialog Types\n\n| Type | Supported |\n|:----:|:---------:|\n| calendar | |\n| entry | |\n| error | |\n| info | |\n| file-selection | |\n| list | |\n| notification | |\n| progress | |\n| question | ✅ |\n| warning | |\n| scale | |\n| text-info | |\n| color-selection | |\n| password | ✅ |\n| forms | |\n\n## Getting started\n\nRun `zigenity --help` for a list of options.\n\nThis application uses the same return codes and options as [zenity](https://gitlab.gnome.org/GNOME/zenity), including:\n* `0` - Ok button was pressed\n* `1` - Cancel button was pressed\n* `5` - Timeout (this is only returned when using the `--timeout` option)\n* `255` - Some other error (e.g., no dialog type has been selected)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/25912761?u=03c61d1386a1628b528c35971c59d99c0c5ee8b2&v=4",
+  "releases": [
+    {
+      "tag_name": "0.6.0",
+      "name": "0.6.0",
+      "body": "- Updated zigenity to compile with Zig version 0.15.1",
+      "prerelease": false,
+      "published_at": "2025-09-30T19:03:41Z",
+      "html_url": "https://github.com/r4gus/zigenity/releases/tag/0.6.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.5.0",
+      "name": "0.5.0",
+      "body": "- Reimplemented `--icon` option\r\n- Reimplemented `--timeout` option\r\n\r\n![Screenshot from 2025-05-12 07-41-50](https://github.com/user-attachments/assets/a81eb20c-d92b-46fc-be09-c524536a62a0)\r\n",
+      "prerelease": false,
+      "published_at": "2025-05-12T05:42:56Z",
+      "html_url": "https://github.com/r4gus/zigenity/releases/tag/0.5.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.4.1",
+      "name": "0.4.1",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-04-04T13:02:55Z",
+      "html_url": "https://github.com/r4gus/zigenity/releases/tag/0.4.1",
+      "assets": []
+    },
+    {
+      "tag_name": "0.4.0",
+      "name": "0.4.0",
+      "body": "Moved from gtk to dvui",
+      "prerelease": false,
+      "published_at": "2025-03-31T07:54:18Z",
+      "html_url": "https://github.com/r4gus/zigenity/releases/tag/0.4.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.3.0",
+      "name": "0.3.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-07-23T18:05:34Z",
+      "html_url": "https://github.com/r4gus/zigenity/releases/tag/0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.2.0",
+      "name": null,
+      "body": "## 0.2.0\n\nSwitched to Zig `0.12.0`.\n",
+      "prerelease": false,
+      "published_at": "2024-04-26T18:12:39Z",
+      "html_url": "https://github.com/r4gus/zigenity/releases/tag/0.2.0",
+      "assets": [
+        {
+          "name": "zigenity.deb",
+          "url": "https://github.com/r4gus/zigenity/releases/download/0.2.0/zigenity.deb",
+          "size": 11410,
+          "content_type": "application/x-debian-package"
+        },
+        {
+          "name": "zigenity-0.2.0-x86_64",
+          "url": "https://github.com/r4gus/zigenity/releases/download/0.2.0/zigenity-0.2.0-x86_64",
+          "size": 24568,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.1.3",
+      "name": null,
+      "body": "# 0.1.3\n\n* Closing a window using the close button returns the return-code `1` (same as cancel)\n* The `--question` widget allows the removal of the Ok and Cancel button\n* For `--password`, users can confirm the password entry using the Enter key\n",
+      "prerelease": false,
+      "published_at": "2024-03-11T23:07:54Z",
+      "html_url": "https://github.com/r4gus/zigenity/releases/tag/0.1.3",
+      "assets": [
+        {
+          "name": "zigenity-0.1.3-x86_64",
+          "url": "https://github.com/r4gus/zigenity/releases/download/0.1.3/zigenity-0.1.3-x86_64",
+          "size": 22136,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "zigenity.deb",
+          "url": "https://github.com/r4gus/zigenity/releases/download/0.1.3/zigenity.deb",
+          "size": 9906,
+          "content_type": "application/x-debian-package"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.1.2",
+      "name": null,
+      "body": "# 0.1.2\n\nThis is a test-release that includes the automatic generation of a debian package.\n",
+      "prerelease": false,
+      "published_at": "2024-03-10T11:48:17Z",
+      "html_url": "https://github.com/r4gus/zigenity/releases/tag/0.1.2",
+      "assets": [
+        {
+          "name": "zigenity-0.1.2-x86_64",
+          "url": "https://github.com/r4gus/zigenity/releases/download/0.1.2/zigenity-0.1.2-x86_64",
+          "size": 21656,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "zigenity.deb",
+          "url": "https://github.com/r4gus/zigenity/releases/download/0.1.2/zigenity.deb",
+          "size": 9694,
+          "content_type": "application/x-debian-package"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.1.1",
+      "name": null,
+      "body": "## 0.1.1\n\nAdded GitHub action workflow for automatic releases.\n",
+      "prerelease": false,
+      "published_at": "2024-03-09T23:37:58Z",
+      "html_url": "https://github.com/r4gus/zigenity/releases/tag/0.1.1",
+      "assets": [
+        {
+          "name": "zigenity-0.1.1-x86_64",
+          "url": "https://github.com/r4gus/zigenity/releases/download/0.1.1/zigenity-0.1.1-x86_64",
+          "size": 21656,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.1.0",
+      "name": "0.1.0",
+      "body": "First release with some basic widgets",
+      "prerelease": false,
+      "published_at": "2024-03-09T20:35:52Z",
+      "html_url": "https://github.com/r4gus/zigenity/releases/tag/0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Maybe we meet @ Zigtoberfest (https://zigtoberfest.de) or Software You Can Love (https://softwareyoucan.love)",
+  "owner_company": null,
+  "owner_location": "Germany",
+  "owner_blog": "https://zigtoberfest.de",
+  "owner_twitter_username": null,
+  "owner_followers": 57,
+  "owner_following": 27,
+  "owner_created_at": "2017-02-20T22:05:23Z",
+  "license": "MIT",
+  "category": "gui"
+}

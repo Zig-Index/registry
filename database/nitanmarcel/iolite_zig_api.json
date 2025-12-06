@@ -1,0 +1,30 @@
+{
+  "name": "iolite_zig_api",
+  "owner": "nitanmarcel",
+  "repo": "iolite_zig_api",
+  "description": "Zig bindings for the Iolite Engine plugin system.",
+  "type": "project",
+  "topics": [
+    "engine",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-10-11T07:50:09Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# Iolite Zig Plugin API\n\nZig bindings for the [Iolite Engine](https://github.com/MissingDeadlines/iolite/tree/legacy) plugin system.\n\n## Prerequisites\n\n- [Zig](https://ziglang.org/download/) 0.15.1 or newer\n- [Iolite Engine](https://iolite-engine.com/)\n\n## Installation\n\n```bash\nzig fetch --save git+https://github.com/nitanmarcel/iolite_zig_api.git\n```\n\n## Usage\n\nIn your `build.zig`:\n\n```zig\nconst std = @import(\"std\");\n\npub fn build(b: *std.Build) void {\n    const target = b.standardTargetOptions(.{});\n    const optimize = b.standardOptimizeOption(.{});\n\n    const iolite = b.dependency(\"iolite\", .{\n        .target = target,\n        .optimize = optimize,\n    });\n\n    const plugin = b.addLibrary(.{\n        .linkage = .dynamic,\n        .name = \"my_plugin\",\n        .root_module = b.createModule(.{\n            .root_source_file = b.path(\"src/main.zig\"),\n            .target = target,\n            .optimize = optimize,\n            .imports = &.{\n                .{ .name = \"iolite\", .module = iolite.module(\"iolite\") },\n            },\n        }),\n    });\n    plugin.linkLibC();\n    b.installArtifact(plugin);\n}\n```\n\nIn your plugin code:\n\n```zig\nconst iolite = @import(\"iolite\");\n\nexport fn get_api_version() callconv(.c) u32 {\n    return iolite.IO_API_VERSION;\n}\n\nexport fn load_plugin(api_manager: *const anyopaque) callconv(.c) i32 {\n    // Your initialization code\n    return 0;\n}\n\nexport fn unload_plugin() callconv(.c) void {\n    // Your cleanup code\n}\n```\n\n## Example\n\nSee [examples/simple_plugin.zig](examples/simple_plugin.zig) for a complete example.\n\nBuild the example:\n\n```bash\ngit clone https://github.com/nitanmarcel/iolite_zig_api.git\ncd iolite_zig_api\nzig build example\n\n# Copy the built plugin and plugins.json file to your Iolite root directory:\ncp zig-out/lib/libIoliteSimpleZigPlugin.so /path/to/iolite\ncp plugins.json /path/to/iolite\n```\n```\n\n## License\n\nMIT\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/41646249?u=eafb0d26b0f6a583f3faa079723686ff38fb83af&v=4",
+  "releases": [],
+  "owner_company": "MARCEL'S SECURITY AND SOFTWARE TECHNOLOGIES",
+  "owner_location": null,
+  "owner_blog": "https://msectech.dev/",
+  "owner_twitter_username": null,
+  "owner_followers": 80,
+  "owner_following": 6,
+  "owner_created_at": "2018-07-24T17:50:08Z",
+  "homepage": "https://nitanmarcel.github.io/iolite_zig_api/",
+  "license": "MIT",
+  "category": "library"
+}

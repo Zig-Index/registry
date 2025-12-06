@@ -1,0 +1,33 @@
+{
+  "name": "llvm-ir-zig",
+  "owner": "seyhajin",
+  "repo": "llvm-ir-zig",
+  "description": "🚀 A minimal example to create and execute a LLVM IR module in Zig.",
+  "type": "project",
+  "topics": [
+    "llvm",
+    "llvm-ir",
+    "zig",
+    "linux",
+    "macos",
+    "windows",
+    "zig-package"
+  ],
+  "stars": 3,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2024-11-09T09:43:49Z",
+  "readme": "![👁️](https://views.whatilearened.today/views/github/seyhajin/llvm-ir-zig.svg)\n\n# LLVM IR module in Zig\n\nA minimal example to create and execute a LLVM IR module in Zig.\n\n## Install\n\nFirst of all, you need to install [LLVM](https://llvm.org/) and [Zig](ziglang.org) according to your system.\n\n### Windows\n\n#### with [Scoop](https://scoop.sh/)\n\n```batch\nscoop install llvm zig\n```\n\n> [!WARNING]\n> untested\n\n#### with [Chocolatey](https://chocolatey.org/)\n\n```batch\nchoco install llvm zig\n```\n\n> [!WARNING]\n> untested\n\n### Linux\n\n```batch\napt-get install llvm zig\n```\n\n> [!WARNING]\n> untested\n\n### MacOS\n\n#### with [Homebrew](https://brew.sh/)\n\n```bash\nbrew install llvm zig\n```\n\n> [!TIP]\n> Tested successfully with LLVM 17.0.6 and Zig 0.11+.\n\n## Clone\n\n```bash\ngit clone https://github.com/seyhajin/llvm-ir-zig\n```\n\nAlternatively, download [zip](https://github.com/seyhajin/llvm-ir-zig/archive/refs/heads/master.zip) from Github repository and extract wherever you want.\n\n## Build & Run\n\n> [!NOTE]\n> For simplicity, the program uses LLVM's dynamic libraries installed in your environment.\n\nBuild and run program :\n\n```bash\nzig build run\n```\n\n**Output:**\n\n```\nHello, world!\nsum(2, 3)=5\n```\n\n## LLVM IR Module\n\nLLVM IR module equivalent of:\n```C\nint sum(int a, int b) {\n    return a + b;    \n}\n\nvoid main() {\n    printf(\"Hello, world!\\nsum(2, 3)=%d\\n\", sum(2, 3));\n}\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/24609692?u=3e98fcabd33c6c4487e918237ffcc648b521c7f6&v=4",
+  "releases": [],
+  "owner_bio": "Coding, Graphics, GameDev, DevTools, Space",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "https://seyhajin.itch.io",
+  "owner_twitter_username": "seyhajin",
+  "owner_followers": 32,
+  "owner_following": 111,
+  "owner_created_at": "2016-12-16T15:30:25Z",
+  "license": "MIT",
+  "category": "library"
+}

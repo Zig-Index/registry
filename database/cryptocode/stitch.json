@@ -1,0 +1,66 @@
+{
+  "name": "stitch",
+  "owner": "cryptocode",
+  "repo": "stitch",
+  "description": "Append resources to your executables",
+  "type": "project",
+  "topics": [
+    "zig-library",
+    "zig-package",
+    "zig"
+  ],
+  "stars": 18,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-11-21T17:44:51Z",
+  "readme": "<img align=\"right\" height=\"120\" src=\"https://user-images.githubusercontent.com/34946442/232327201-294224c2-8502-423b-b2cb-663ca88ccfc1.png\">\n\n<img src=\"https://user-images.githubusercontent.com/34946442/230613201-60de5adc-6304-4f18-84d9-d36bb46fdc1f.svg\" width=\"24\" height=\"24\">&nbsp;\n<img src=\"https://user-images.githubusercontent.com/34946442/230613198-ca5c938a-613b-412f-8d97-8ce8f19aeb1f.svg\" width=\"24\" height=\"24\">&nbsp;\n<img src=\"https://user-images.githubusercontent.com/34946442/230613203-858cb471-2859-4e6e-8ef9-61b03c36c085.svg\" width=\"24\" height=\"24\">\n\nStitch is a tool and library for Zig and C for adding and retrieving resources to and from executables.\n\nWhy not just use `@embedFile` / `#embed`? Stitch serves a different purpose, namely to let build systems, and *users* of your software, create self-contained executables.\n\nFor example, instead of requiring users to install an interpreter and execute `mylisp fib.lisp`, they can simply run `./fib` or `fib.exe`\n\nResoures can be anything, such as scripts, images, text, templates config files and other executables.\n\n## Some use cases\n* Self extracting tools, like an installer\n* Create executables for scripts written in your interpreted programming language\n* Include a sample config file, which is extracted on first run. The user can then edit this.\n* An image in your own format that's able to display itself when executed\n\n## Building the project\nTo build with a specific Zig version, use the `zig-<version>` tag.\nTo build with Zig master, use the main branch.\n\n`zig build` will put a `bin` and `lib` directory in your output folder (e.g. zig-out)\n\n* bin/stitch is a standalone tool for attaching resources to executables. This can also be done programmatically using the library\n* lib/libstitch is a library for reading attached resources from the current executable, and for adding resources to executables (like the standalone tool)\n\n## Using the tool\n\nThis example adds two scripts to a Lisp interpreter that supports, through the stitch library, reading embedded scripts:\n\n```bash\nstitch ./mylisp std.lisp fib.lisp --output fib\n\n./fib 8\n21\n```\n\nResources can be named explicitly\n\n```bash\nstitch ./mylisp std=std.lisp fibonacci=fib.lisp --output fib\n```\n\nIf a name is not given, the filename (without path) is used. The stitch library supports finding resources by name or index.\n\nThe `--output` flag is optional. By default, resources are added to the original executable (first argument)\n\n## Stitching programmatically\nLet's say you want your interpreted programming language to support producing binaries.\n\nAn easy way to do this is to create an interpreter executable that reads scripts attached to itself using stitch.\n\nYou can provide interpreter binaries for all the OS'es you wanna support, or have the Zig build file do this if your user is building the interpreter.\n\nIn the example below, a Lisp interpreter uses the stitch library to support creating self-contained executables:\n\n```bash\n./mylisp --create-exe sql-client.lisp --output sql-client\n```\nThe resulting binary can now be executed:\n\n```\n./sql-client\n```\n\nYou can make the `mylisp` binary understand stitch attachments and then make a copy of it and stitch it with the scripts. Alternatively, you can have separate interpreter binaries specifically for reading stitched scripts.\n## Using the library from C\n\nInclude the `stitch.h` header and link to the library. Here's an example, using the included C test program:\n\n```bash\nzig build-exe c-api/test/c-test.c -Lzig-out/lib -lstitch -Ic-api/include\n./c-test\n```\n\n## Binary layout\n\nThe binary layout specification can be used by other tools that wants to parse files produced by Stitch, without using the Stitch library.\n\n[Specification](spec/README.md)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/34946442?u=5de89bdf8ffb0f3c7b211d4f6598709ce622e831&v=4",
+  "releases": [
+    {
+      "tag_name": "zig-0.15.2",
+      "name": "zig-0.15.2",
+      "body": "This release of Stitch supports Zig 0.15.2\r\n\r\nPlease use the main branch if you use Zig master.",
+      "prerelease": false,
+      "published_at": "2025-11-11T17:10:39Z",
+      "html_url": "https://github.com/cryptocode/stitch/releases/tag/zig-0.15.2",
+      "assets": []
+    },
+    {
+      "tag_name": "zig-0.15.1",
+      "name": "zig-0.15.1",
+      "body": "This release of Stitch supports Zig 0.15.1\r\n\r\nPlease use the main branch if you use Zig master.",
+      "prerelease": false,
+      "published_at": "2025-08-25T14:33:34Z",
+      "html_url": "https://github.com/cryptocode/stitch/releases/tag/zig-0.15.1",
+      "assets": []
+    },
+    {
+      "tag_name": "zig-0.14",
+      "name": "zig-0.14",
+      "body": "This release of Stitch supports Zig 0.14.x\r\n\r\nPlease use the main branch if you use Zig master.",
+      "prerelease": false,
+      "published_at": "2025-08-22T10:21:19Z",
+      "html_url": "https://github.com/cryptocode/stitch/releases/tag/zig-0.14",
+      "assets": []
+    },
+    {
+      "tag_name": "zig-0.13",
+      "name": "zig-0.13",
+      "body": "This release of Stitch supports Zig 0.13.\r\n\r\nPlease use the main branch if you use Zig master.",
+      "prerelease": false,
+      "published_at": "2024-06-29T22:18:53Z",
+      "html_url": "https://github.com/cryptocode/stitch/releases/tag/zig-0.13",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Dad, programmer, avocational musician",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "https://cryptocode.github.io/blog/",
+  "owner_twitter_username": null,
+  "owner_followers": 116,
+  "owner_following": 54,
+  "owner_created_at": "2017-12-29T18:50:57Z",
+  "license": "MIT",
+  "category": "library"
+}

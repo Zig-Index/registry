@@ -1,0 +1,32 @@
+{
+  "name": "pieQ",
+  "owner": "bogwi",
+  "repo": "pieQ",
+  "description": "Priority Queue for Zig",
+  "type": "project",
+  "topics": [
+    "algorithms",
+    "data-structures",
+    "zig",
+    "zig-lang",
+    "zig-package",
+    "priority-queue"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2024-11-17T16:57:53Z",
+  "readme": "# Priority Queue in ZIG\n\n## Foreword\n\nHow fast is PieQ? On the Apple M1 CPU, inserting in random order and removing 100,000,000 unsigned 32-bit integer pairs in ReleaseFast mode takes `1.5` seconds for insert and about `20` seconds for remove. The cumulative time stayed within `22` seconds for many attempts, which pushes PieQ a bit into HashMap territory. And PieQ does not warp under heavy load because there are no recursive calls. Add+remove time compared to ZIG's standard PriorityQueue library shows that PieQ is twice as fast.\n\nThe API is designed to be as literal and self-explanatory as possible. PieQ uses an implicit data structure, so there is no memory allocation routine. The possible error interface is reduced to a bare minimum, like warning you if the queue is empty and you still want to pull something from it; that must be an error. Every public method has a comprehensive doc string where needed, and the full API is used in the test section. Interesting uncommon features like changing the root or locking the root are also implemented.\n\nPieQ has two modes of operation, min-oriented and max-oriented, which are turned on by passing `.min` or `.max` parameters during initiation. This is along with the general idea of a priority queue. However, keys can also be complex types. PieQ gives you the ability to define what is min and what is max, and is designed to handle any key, anything you know how to compare; if not, invent how. For example, PieQ can be easily used as a data filter, sorting multi-valued elements together, such as enum's literals. Or you can filter items with certain keys you are interested in and put them strictly in front of the queue to pop them earlier than the rest. Maybe you want to queue vectors as keys, or functions that call other functions, you can do that.\n\nThere could be many dozens of possible use cases, I can't mention them all, but the testing section is a good place to start.\nApplications that come to mind are heavy load balancers, stock market or large financial tasks - schedulers, medical solutions; then graphs, Dijkstra, of course, statistics, and anywhere you need scheduled event processing.\n\n## Benchmark\nIf you are interested in how well PieQ runs on your system, try `bench` step. Run this:\n```zig\nzig build bench -- 12345678\n```\nand you will get stats for your machine\n\n```\nPieQ:        12_345_678 items\n|action  |push    |pop     |sum     |\n|time:sec|0.1563  |2.0006  |2.1569  |\n|ns:item |12.6578 |162.0510|174.7088|\n```\n\nRunning `zig build bench` without arguments tests on the default 1Mil. With modern CPUs, it makes sense to test harder, at least above 10Mils. Or if you know in advance the amount of data you intend to run, it is great to do such a test; or against other priority queue implementations to find the best option for your code.\n\n\n## Usage\n\n1. Add `PieQ` as a dependency in your `build.zig.zon`.\n\n    <!-- <details> -->\n\n    <!-- <summary><code>build.zig.zon</code> example </summary> -->\n\n    ```zig\n    .{\n        .name = \"name_of_your_package\",\n        .version = \"version_of_your_package\",\n        .dependencies = .{\n            .PieQ = .{\n                .url = \"https://github.com/bogwi/pieQ/archive/master.tar.gz\",\n                .hash = \"1220dbe03c05ad89578e9522d3f2ff1fa611495f770773c711979ac00e48fd2825e9\",\n            },\n        },\n    }\n    ```\n    If the hash has changed, you will get a gentle  `error: hash mismatch` where in the field `found:` ZIG brings you the correct value.\n\n    <!-- </details> -->\n\n2. Add `PieQ` as a module in your `build.zig`.\n\n    <!-- <details> -->\n\n    <!-- <summary><code>build.zig</code> example </summary> -->\n\n    ```zig\n    const pieQ = b.dependency(\"PieQ\", .{});\n    exe.addModule(\"PieQ\", pieQ.module(\"PieQ\"));\n    ```\n    Using the module in test scopes, requires one more declaration with the same constant (if you need the module in tests, of course).\n    ```zig\n    unit_tests.addModule(\"PieQ\", pieQ.module(\"PieQ\"));\n\n    ``` \n\n    <!-- </details> -->\n\n3. Import the module.\n    ```zig\n        const PieQ = @import(\"PieQ\").PieQ;\n    ```\n4. This is your comparison function if you want numbers.\n    ```zig\n        fn compareU32(isMin: bool, a: u32, b: u32) bool {\n            while (isMin)\n                return a <= b;\n            return a >= b;\n        }\n    ```\n5. And this this how you initiate the Queue.\n    ```zig\n        var minQueue = PieQ(u32, u32, .min, compareU32).init(your_allocator);\n        defer minQueue.deinit();\n    ```\n\nTo find out more, see the testing section, file `pieq.zig`. Tests and code are placed together so you can explore the implementation better, hovering over the functions and all. Thanks.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/139293750?u=a426cdaa6178259c0105574394452449a9738e98&v=4",
+  "releases": [],
+  "owner_bio": "BSc/MSc Eng. Focus: Math Modeling & Comp. Stats, Systems/Complex Analysis, Eng. Graphics, Automation/Control.",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 3,
+  "owner_following": 1,
+  "owner_created_at": "2023-07-12T00:18:25Z",
+  "license": "MIT",
+  "category": "library"
+}

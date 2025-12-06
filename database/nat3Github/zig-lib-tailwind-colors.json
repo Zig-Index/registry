@@ -1,0 +1,29 @@
+{
+  "name": "zig-lib-tailwind-colors",
+  "owner": "nat3Github",
+  "repo": "zig-lib-tailwind-colors",
+  "description": "Tailwind CSS color constants for zig",
+  "type": "project",
+  "topics": [
+    "tailwind",
+    "tailwind-colors",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-09-04T13:16:01Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# Tailwind Color Hex Codes in Zig\n\n- color pallete like \"red-300\" as hexcode strings https://tailwindcss.com/docs/colors\n- small RgbaColor struct for convenient usage\n- when used with zon, the module name is \"tailwind\"\n- no dependencies\n\n# Licence\n\n- MIT / WTFPL\n- use it as you like\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/121395237?u=7c64287a2ffd563fdeaba0de387a8065f10fd176&v=4",
+  "releases": [],
+  "owner_bio": "cs at leipzig university",
+  "owner_company": null,
+  "owner_location": "Germany",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 1,
+  "owner_following": 1,
+  "owner_created_at": "2022-12-25T16:00:20Z",
+  "category": "library"
+}

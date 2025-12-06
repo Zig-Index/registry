@@ -1,0 +1,30 @@
+{
+  "name": "zigqlite",
+  "owner": "jkoop",
+  "repo": "zigqlite",
+  "description": "An SQLite binding for Zig.",
+  "type": "project",
+  "topics": [
+    "sqlite",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 5,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-11-23T21:19:08Z",
+  "minimum_zig_version": "0.15.1",
+  "readme": "# zigqlite\n\n> [!NOTE]  \n> Forked from https://chiselapp.com/user/javier/repository/zigqlite, 2024-07-24\n\nAn [SQLite](https://sqlite.org) binding for [Zig](https://ziglang.org).\n\n## Install\n\n```sh\nzig fetch --save https://github.com/jkoop/zigqlite/archive/COMMIT.zip\n```\n\n```zig\n// add to your build.zig, in your Module's .imports\n.{\n    .name = \"zigqlite\",\n    .module = b.dependency(\"zigqlite\", .{ .target = target }).module(\"zigqlite\"),\n},\n\n// add before `b.installArtifact(exe);`\nexe.linkSystemLibrary(\"c\");\nexe.linkSystemLibrary(\"sqlite3\"); // apt install libsqlite3-dev\n```\n\n## Usage\n\nSee also, the [API documentation](https://joekoop.com/zigqlite).\n\nTo open a database file at the given path, creating it if needed:\n\n```zig\nvar db = try sqlite.DB.open(allocator, \"database.db\");\ndefer db.close() catch unreachable; // @todo figure out if I can handle this error or not\n```\n\nCreate a statment:\n\n```zig\nvar stmt = try db.prep(\"SELECT * FROM iguanas WHERE name = ?\");\n```\n\nThe SQL can include positional arguments like `?` or named arguments like `:argname`.\n\nOnce prepared, the statement is executed with the `.exec()` function:\n\n```zig\n// var cursor = try stmt.exec(args, rowtype);\nvar cursor = try stmt.exec(.{\"Zero\"}, struct { name: []u8, photo_url: []u8 });\n```\n\nWhere `args` is a tuple or structure holding arguments to fill in the SQL command. If field names match named arguments, they are used regardless of order; otherwise the position in the tuple or struct determines the field it fills.\n\nThe `rowtype` parameter is a struct type. Each returned row will be a value of this type. Each field will hold a column from the row, in order. If there are more fields than columns, the extra fields would be filled with their respective default value, if declared in the struct.\n\nThe value returned by the `stmt.exec()` function is used to retrieve results row by row with the `.fetch()` function:\n\n```zig\nwhile (try cursor.fetch()) |iguana| {\n    std.debug.print(\"{s}'s picture is at {s}\\n\", .{ iguana.name, iguana.photo_url });\n}\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/36482619?u=bb7191b78c090c0b8dc0ad9252c2f13c5e9e0519&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Manitoba, Canada",
+  "owner_blog": "https://joekoop.com/",
+  "owner_twitter_username": null,
+  "owner_followers": 8,
+  "owner_following": 2,
+  "owner_created_at": "2018-02-14T16:09:30Z",
+  "homepage": "http://joekoop.com/zigqlite/",
+  "license": "MIT",
+  "category": "library"
+}

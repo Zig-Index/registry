@@ -1,0 +1,132 @@
+{
+  "name": "zeit",
+  "owner": "rockorager",
+  "repo": "zeit",
+  "description": "a date and time library written in zig. Timezone, DST, and leap second aware",
+  "type": "project",
+  "topics": [
+    "date",
+    "datetime",
+    "library",
+    "time",
+    "timezone",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 166,
+  "forks": 21,
+  "watchers": 4,
+  "updated_at": "2025-12-05T20:21:36Z",
+  "readme": "# zeit\n\nA time library written in zig.\n\n## Usage\n\n[API Documentation](https://rockorager.github.io/zeit/)\n\n```zig\nconst std = @import(\"std\");\nconst zeit = @import(\"zeit\");\n\npub fn main() void {\n    const allocator = std.heap.page_allocator;\n    var env = try std.process.getEnvMap(allocator);\n    defer env.deinit();\n\n    // Get an instant in time. The default gets \"now\" in UTC\n    const now = try zeit.instant(.{});\n\n    // Load our local timezone. This needs an allocator. Optionally pass in a\n    // *const std.process.EnvMap to support TZ and TZDIR environment variables\n    const local = try zeit.local(alloc, &env);\n\n    // Convert our instant to a new timezone\n    const now_local = now.in(&local);\n\n    // Generate date/time info for this instant\n    const dt = now_local.time();\n\n    // Print it out\n    std.debug.print(\"{}\", .{dt});\n\n    // zeit.Time{\n    //    .year = 2024,\n    //    .month = zeit.Month.mar,\n    //    .day = 16,\n    //    .hour = 8,\n    //    .minute = 38,\n    //    .second = 29,\n    //    .millisecond = 496,\n    //    .microsecond = 706,\n    //    .nanosecond = 64\n    //    .offset = -18000,\n    // }\n\n    // Format using strftime specifier. Format strings are not required to be comptime\n    try dt.strftime(anywriter, \"%Y-%m-%d %H:%M:%S %Z\");\n\n    // Or...golang magic date specifiers. Format strings are not required to be comptime\n    try dt.gofmt(anywriter, \"2006-01-02 15:04:05 MST\");\n\n    // Load an arbitrary location using IANA location syntax. The location name\n    // comes from an enum which will automatically map IANA location names to\n    // Windows names, as needed. Pass an optional EnvMap to support TZDIR\n    const vienna = try zeit.loadTimeZone(alloc, .@\"Europe/Vienna\", &env);\n    defer vienna.deinit();\n\n    // Parse an Instant from an ISO8601 or RFC3339 string\n    const iso = try zeit.instant(.{\n\t.source = .{\n\t    .iso8601 = \"2024-03-16T08:38:29.496-1200\",\n\t},\n    });\n\n    const rfc3339 = try zeit.instant(.{\n\t.source = .{\n\t    .rfc3339 = \"2024-03-16T08:38:29.496706064-1200\",\n\t},\n    });\n}\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/476352?u=aff432b811e969bae9d2f71a01510895e4bf469e&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.7.0",
+      "name": "v0.7.0",
+      "body": "## What's Changed\r\n* Support for RFC1123 HTTP dates by @deevus in https://github.com/rockorager/zeit/pull/29\r\n* gofmt: require fractional seconds to be all 0 or 9 by @rockorager in https://github.com/rockorager/zeit/pull/30\r\n* Fix parsing of ISO 8601 basic format by @deevus in https://github.com/rockorager/zeit/pull/34\r\n* Fix minute precision ISO8601 parsing with time zone by @raindev in https://github.com/rockorager/zeit/pull/35\r\n* fix: remove usingnamespace in build.zig by @neurocyte in https://github.com/rockorager/zeit/pull/36\r\n* adapt to zig 0.15.1 by @renerocksai in https://github.com/rockorager/zeit/pull/41\r\n\r\n## New Contributors\r\n* @deevus made their first contribution in https://github.com/rockorager/zeit/pull/29\r\n* @raindev made their first contribution in https://github.com/rockorager/zeit/pull/35\r\n* @neurocyte made their first contribution in https://github.com/rockorager/zeit/pull/36\r\n* @renerocksai made their first contribution in https://github.com/rockorager/zeit/pull/41\r\n\r\n**Full Changelog**: https://github.com/rockorager/zeit/compare/v0.6.0...v0.7.0",
+      "prerelease": false,
+      "published_at": "2025-09-11T11:58:13Z",
+      "html_url": "https://github.com/rockorager/zeit/releases/tag/v0.7.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.6.0",
+      "name": "v0.6.0",
+      "body": "Update to zig 0.14.0\r\nUpdate Windows timezone names",
+      "prerelease": false,
+      "published_at": "2025-03-05T15:25:04Z",
+      "html_url": "https://github.com/rockorager/zeit/releases/tag/v0.6.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.5.0",
+      "name": "v0.5.0",
+      "body": "## What's Changed\r\n* tzdb: close file in local and localFromEnv by @rockorager in https://github.com/rockorager/zeit/pull/17\r\n* zeit: prevent integer overflow when creating Instant from unix_timestamp by @rockorager in https://github.com/rockorager/zeit/pull/19\r\n* Added Date comparison methods by @MSeiler-png in https://github.com/rockorager/zeit/pull/20\r\n\r\n## New Contributors\r\n* @MSeiler-png made their first contribution in https://github.com/rockorager/zeit/pull/20\r\n\r\n**Full Changelog**: https://github.com/rockorager/zeit/compare/v0.4.4...v0.5.0",
+      "prerelease": false,
+      "published_at": "2025-02-04T02:52:11Z",
+      "html_url": "https://github.com/rockorager/zeit/releases/tag/v0.5.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.4.4",
+      "name": "v0.4.4",
+      "body": "## What's Changed\r\n* fix(posix): only adjust for dst if we are in dst by @rockorager in https://github.com/rockorager/zeit/pull/12\r\n* fix(windows): use correct conditionals for dst end month by @rockorager in https://github.com/rockorager/zeit/pull/13\r\n* Use type aliases to clarify integer usage by @rockorager in https://github.com/rockorager/zeit/pull/14\r\n\r\n\r\n**Full Changelog**: https://github.com/rockorager/zeit/compare/v0.4.3...v0.4.4",
+      "prerelease": false,
+      "published_at": "2024-11-01T15:06:38Z",
+      "html_url": "https://github.com/rockorager/zeit/releases/tag/v0.4.4",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.4.3",
+      "name": "v0.4.3",
+      "body": "- fix(strftime): %l shouldn't add one to hour",
+      "prerelease": false,
+      "published_at": "2024-09-12T14:05:41Z",
+      "html_url": "https://github.com/rockorager/zeit/releases/tag/v0.4.3",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.4.2",
+      "name": "v0.4.2",
+      "body": "## What's Changed\r\n* fix: integer overflow when adding or subtracting durations by @vascocosta in https://github.com/rockorager/zeit/pull/6\r\n* fix(windows): use correct type for Windows.loadFromName by @rockorager in https://github.com/rockorager/zeit/pull/7\r\n* fix(daysUntil): use larger integer type for proper underflow by @rockorager in https://github.com/rockorager/zeit/pull/9",
+      "prerelease": false,
+      "published_at": "2024-09-10T18:11:38Z",
+      "html_url": "https://github.com/rockorager/zeit/releases/tag/v0.4.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.4.1",
+      "name": "v0.4.1",
+      "body": "- Fix missing closing brace in strftime",
+      "prerelease": false,
+      "published_at": "2024-09-07T02:55:27Z",
+      "html_url": "https://github.com/rockorager/zeit/releases/tag/v0.4.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.4.0",
+      "name": "v0.4.0",
+      "body": "## What's Changed\r\n* zeit: add time comparison methods by @vascocosta in https://github.com/rockorager/zeit/pull/5\r\n* add strftime and gofmt formatting\r\n* fix bounds checking tzinfo transitions\r\n\r\n**Full Changelog**: https://github.com/rockorager/zeit/compare/v0.3.0...v0.4.0",
+      "prerelease": false,
+      "published_at": "2024-09-07T01:59:39Z",
+      "html_url": "https://github.com/rockorager/zeit/releases/tag/v0.4.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.3.0",
+      "name": "v0.3.0",
+      "body": "- Fix location references of sourcecode\r\n- Fix argument for `Instant.in`\r\n- Fix Readme links",
+      "prerelease": false,
+      "published_at": "2024-08-08T20:35:47Z",
+      "html_url": "https://github.com/rockorager/zeit/releases/tag/v0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "- Add windows support\r\n- Add support for TZ and TZDIR environment variables\r\n- Add Olson names enum and map to Windows names\r\n- Add support for parsing RFC5322 (email) formatted strings",
+      "prerelease": false,
+      "published_at": "2024-07-25T13:55:15Z",
+      "html_url": "https://github.com/rockorager/zeit/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "Initial release",
+      "prerelease": false,
+      "published_at": "2024-06-07T11:19:56Z",
+      "html_url": "https://github.com/rockorager/zeit/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": "Sourcegraph",
+  "owner_location": "St. Paul, MN",
+  "owner_blog": "https://rockorager.dev",
+  "owner_twitter_username": "rockorager",
+  "owner_followers": 232,
+  "owner_following": 5,
+  "owner_created_at": "2010-11-10T20:36:25Z",
+  "license": "MIT",
+  "category": "library"
+}

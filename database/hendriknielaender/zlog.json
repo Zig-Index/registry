@@ -1,0 +1,104 @@
+{
+  "name": "zlog",
+  "owner": "hendriknielaender",
+  "repo": "zlog",
+  "description": "🪵 structured logging library for zig",
+  "type": "project",
+  "topics": [
+    "lib",
+    "library",
+    "logging",
+    "structured-logging",
+    "zig",
+    "async",
+    "file-logger",
+    "json",
+    "network-logs",
+    "zig-lib"
+  ],
+  "stars": 22,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-12-05T19:18:26Z",
+  "dependencies": [
+    {
+      "name": "zbench",
+      "url": "git+https://github.com/hendriknielaender/zBench#c64bb43a3e32c5c62c02058ad7247e072301708d",
+      "hash": "zbench-0.10.0-YTdc714iAQDO4lTHMnIljYHPZ5v_sNTsw75vAmO1pyT-"
+    },
+    {
+      "name": "libxev",
+      "url": "git+https://github.com/mitchellh/libxev#5647630d7bff969414a0edc24c03c30aff34b101",
+      "hash": "libxev-0.0.0-86vtc4b1EgCl0Kvo2Ixmjfl5PgAaJmvCXRIn_n89nCaR"
+    }
+  ],
+  "minimum_zig_version": "0.14.1",
+  "readme": "> [!WARNING]  \n> Still work in progress.\n\n# zlog - structured logging for zig\n[![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/hendriknielaender/zlog/blob/HEAD/LICENSE)\n![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/hendriknielaender/zlog)\n[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/hendriknielaender/zlog/blob/HEAD/CONTRIBUTING.md)\n<img src=\"logo.png\" alt=\"zlog logo\" align=\"right\" width=\"20%\"/>\n\nzlog is a high-performance, zero-allocation structured logging library for Zig with full OpenTelemetry support. Designed for system-level applications requiring maximum performance and observability, zlog provides clean anonymous struct logging with comprehensive tracing capabilities.\n\n---\n\n## Getting Started\n\n### Installation\n\n1. Add to `build.zig.zon`:\n\n```zig\n.{\n    .name = \"my-project\",\n    .version = \"1.0.0\",\n    .dependencies = .{\n        .zlog = .{\n            .url = \"https://github.com/hendriknielaender/zlog/archive/<COMMIT>.tar.gz\",\n            .hash = \"<HASH>\",\n        },\n    },\n}\n```\n\n> **Note**: libxev is automatically included as a dependency of zlog and managed internally. No need to import or manage event loops manually.\n\n2. Configure in `build.zig`:\n\n```zig\nconst zlog_module = b.dependency(\"zlog\", opts).module(\"zlog\");\nexe.root_module.addImport(\"zlog\", zlog_module);\n```\n\n### Basic Usage\n\n```zig\nconst std = @import(\"std\");\nconst zlog = @import(\"zlog\");\n\npub fn main() !void {\n    // High-performance async logger with managed event loop\n    var logger = try zlog.default(std.heap.page_allocator);\n    defer logger.deinitWithAllocator(std.heap.page_allocator);\n    \n    // Clean, ergonomic logging with anonymous structs\n    logger.info(\"Service started\", .{\n        .version = \"1.0.0\",\n        .port = 8080,\n    });\n    \n    // Type inference handles everything at compile time\n    logger.info(\"User action\", .{\n        .user = \"alice\",\n        .user_id = 12345,\n        .success = true,\n        .duration_ms = 45.7,\n    });\n    \n    // With trace context for distributed tracing\n    const trace_ctx = zlog.TraceContext.init(true);\n    logger.infoWithTrace(\"Request processed\", trace_ctx, .{\n        .endpoint = \"/api/users\",\n        .status_code = 200,\n    });\n\n    // Process async events (when using async logger)\n    try logger.runEventLoop();\n}\n```\n\n### Async Logging\n\nFor maximum throughput in high-load scenarios:\n\n```zig\nconst std = @import(\"std\");\nconst zlog = @import(\"zlog\");\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){}; \n    defer _ = gpa.deinit();\n\n    // Create async logger with managed event loop\n    const config = zlog.Config{\n        .async_mode = true,\n        .async_queue_size = 1024,\n        .batch_size = 32,\n        .enable_simd = true,\n    };\n\n    const stdout = std.io.getStdOut().writer();\n    var logger = try zlog.Logger(config).initAsync(stdout.any(), gpa.allocator());\n    defer logger.deinitWithAllocator(gpa.allocator());\n\n    const trace_ctx = zlog.TraceContext.init(true);\n    \n    // Log messages per second\n    for (0..1_000_000) |i| {\n        logger.infoWithTrace(\"High throughput message\", trace_ctx, &.{\n            zlog.field.uint(\"iteration\", i),\n            zlog.field.string(\"service\", \"api\"),\n        });\n        \n        // Process event loop periodically\n        if (i % 1000 == 0) {\n            try logger.runEventLoop();\n        }\n    }\n    \n    // Final flush\n    try logger.runEventLoop();\n}\n```\n\n### Custom Configuration\n\n```zig\nconst Config = zlog.Config{\n    .level = .debug,           // Minimum level to log\n    .max_fields = 64,          // Maximum fields per message  \n    .buffer_size = 8192,       // Buffer size for formatting\n    .async_mode = true,        // Enable async logging\n    .async_queue_size = 2048,  // Async queue size\n    .batch_size = 64,          // Batch size for async writes\n    .enable_simd = true,       // Enable SIMD optimizations\n};\n\n// Async logger with managed event loop\nvar logger = try zlog.Logger(Config).initAsync(writer, allocator);\ndefer logger.deinitWithAllocator(allocator);\n\n// Or sync logger (no event loop needed)\nvar sync_logger = zlog.Logger(.{}).init(writer);\n```\n\n## Anonymous Struct API\n\nzlog uses anonymous structs exclusively for clean, type-safe logging:\n\n```zig\n// Type inference handles everything at compile time\nlogger.info(\"User login\", .{\n    .user_id = \"12345\",           // string\n    .username = \"john_doe\",       // string  \n    .attempt = 1,                 // int\n    .success = true,              // bool\n    .ip_address = \"192.168.1.100\", // string\n    .session_duration = 3.14,     // float\n    .metadata = null,             // null\n});\n\n// Clean syntax for all log levels\nlogger.debug(\"Debug info\", .{ .component = \"auth\", .step = 1 });\nlogger.warn(\"Warning\", .{ .threshold = 0.8, .current = 0.95 });\nlogger.err(\"Error\", .{ .code = 500, .message = \"Internal error\" });\n```\n\n## Field Redaction\n\nzlog provides a hybrid compile-time and runtime redaction system for sensitive data:\n\n### Compile-time Redaction (Zero Cost)\n\n```zig\n// Define sensitive fields at compile-time\nvar logger = zlog.loggerWithRedaction(.{\n    .redacted_fields = &.{ \"password\", \"api_key\", \"ssn\" },\n});\n\n// These fields will be automatically redacted with zero runtime cost\nlogger.info(\"User login\", &.{\n    zlog.field.string(\"username\", \"alice\"),\n    zlog.field.string(\"password\", \"secret123\"), // Output: [REDACTED:string]\n});\n```\n\n### Runtime Redaction (Dynamic)\n\n```zig\nvar redaction_config = zlog.RedactionConfig.init(allocator);\ndefer redaction_config.deinit();\n\ntry redaction_config.addKey(\"credit_card\");\ntry redaction_config.addKey(\"phone\");\n\nvar logger = zlog.Logger(.{}).initWithRedaction(writer, &redaction_config);\n```\n\n### Hybrid Approach\n\n```zig\n// Combine compile-time and runtime redaction\nconst SecureLogger = zlog.LoggerWithRedaction(.{}, .{\n    .redacted_fields = &.{ \"password\", \"token\" }, // Compile-time\n});\n\nvar logger = SecureLogger.initWithRedaction(writer, &runtime_config);\n```\n\n## Log Levels\n\n```zig\nlogger.trace(\"Detailed trace\", &.{});  // Lowest priority\nlogger.debug(\"Debug info\", &.{});      \nlogger.info(\"Information\", &.{});      // Default level\nlogger.warn(\"Warning\", &.{});          \nlogger.err(\"Error occurred\", &.{});    \nlogger.fatal(\"Fatal error\", &.{});     // Highest priority\n```\n\n## Performance Benchmarks\n\nzlog is designed for zero-allocation logging with exceptional performance:\n\n```bash\n# Run all benchmarks\nzig build benchmarks\n\n# Individual benchmark categories\nzig build benchmark-memory      # Memory allocation analysis\nzig build benchmark-async       # Async performance\nzig build benchmark-production  # Production workload simulation\nzig build benchmark-comprehensive # Full feature benchmarks\n\n# Run tests\nzig build test\n```\n\n### Key Performance Features\n\n- **Zero Allocations**: No heap allocations during logging operations\n- **SIMD Optimizations**: Vectorized string operations where available  \n- **Async Batching**: Intelligent batching with backpressure handling\n- **Pre-formatted Traces**: Hex strings generated once, reused efficiently\n- **Compile-time Field Validation**: Type safety with zero runtime cost\n\n## Trace\n\nFull distributed tracing support with pre-formatted hex strings for maximum performance:\n\n```zig\nconst trace_ctx = zlog.TraceContext.init(true);\nlogger.infoWithTrace(\"Request processed\", trace_ctx, .{\n    .endpoint = \"/api/users\",\n    .status_code = 200,\n    .duration_ms = 45.7,\n});\n```\n\nOutput:\n```json\n{\"level\":\"INFO\",\"msg\":\"Request processed\",\"trace\":\"a1b2c3d4e5f67890a1b2c3d4e5f67890\",\"span\":\"1234567890abcdef\",\"ts\":1640995200000,\"tid\":12345,\"service\":\"api\",\"status_code\":200}\n```\n\nzlog provides full W3C Trace Context specification compliance:\n\n```zig\n// Create trace context\nconst trace_ctx = zlog.TraceContext.init(true);\n\n// Child spans maintain trace correlation\nconst child_ctx = trace_ctx.createChild(true);\n\n// Extract for compatibility with other systems\nconst short_id = zlog.extract_short_from_trace_id(trace_ctx.trace_id);\n```\n\nPre-formatted hex strings eliminate per-log conversion overhead, crucial for ultra-high throughput scenarios.\n\n## OpenTelemetry Support\n\nzlog provides full OpenTelemetry compliance with dedicated OTel loggers:\n\n### Basic OTel Logger\n\n```zig\nconst std = @import(\"std\");\nconst zlog = @import(\"zlog\");\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){}; \n    defer _ = gpa.deinit();\n\n    // Create OpenTelemetry-compliant logger with managed event loop\n    var otel_logger = try zlog.otelLogger(gpa.allocator());\n    defer otel_logger.deinitWithAllocator(gpa.allocator());\n\n    // Log with OTel semantic conventions\n    otel_logger.info(\"HTTP request received\", .{\n        .@\"http.method\" = \"GET\",\n        .@\"http.url\" = \"/api/users\",\n        .@\"http.status_code\" = 200,\n        .@\"http.user_agent\" = \"curl/7.68.0\",\n    });\n}\n```\n\n### Custom OTel Configuration\n\n```zig\nconst otel_config = zlog.OTelConfig{\n    .base_config = .{\n        .async_mode = true,\n        .level = .debug,\n        .buffer_size = 8192,\n    },\n    .resource = .{\n        .service_name = \"my-service\",\n        .service_version = \"1.0.0\",\n        .service_namespace = \"production\",\n    },\n    .instrumentation_scope = .{\n        .name = \"my-service-logger\",\n        .version = \"1.0.0\",\n    },\n};\n\nvar otel_logger = try zlog.otelLoggerWithConfig(otel_config, allocator);\n```\n\n### OTLP Export\n\nExport logs directly to OpenTelemetry collectors:\n\n```zig\nconst exporter = zlog.OTLPExporter.init(allocator, .{\n    .endpoint = \"http://localhost:4318/v1/logs\",\n    .headers = &.{\n        .{ .key = \"Authorization\", .value = \"Bearer token123\" },\n    },\n});\ndefer exporter.deinit();\n\n// Export log records\ntry exporter.export(&log_records);\n```\n\n### Semantic Conventions\n\nUse standardized OpenTelemetry semantic conventions:\n\n```zig\n// HTTP semantic conventions\nlogger.info(\"Request processed\", .{\n    .@\"http.method\" = zlog.SemConv.HTTP.method.GET,\n    .@\"http.status_code\" = 200,\n    .@\"http.route\" = \"/api/users/{id}\",\n});\n\n// Database semantic conventions  \nlogger.debug(\"Database query\", .{\n    .@\"db.system\" = zlog.SemConv.DB.system.postgresql,\n    .@\"db.statement\" = \"SELECT * FROM users WHERE id = $1\",\n    .@\"db.operation\" = \"SELECT\",\n});\n\n// Common fields helper\nconst common = zlog.CommonFields{\n    .service_name = \"user-service\",\n    .service_version = \"1.2.3\",\n    .environment = \"production\",\n};\n```\n\n## Span Tracking & Correlation\n\nBuilt-in span tracking for distributed tracing:\n\n```zig\n// Start a span (supports both syntaxes)\nconst span = logger.spanStart(\"user_authentication\", .{\n    .user_id = \"12345\",\n    .method = \"oauth\",\n});\n\n// Your business logic here...\nstd.time.sleep(100 * std.time.ns_per_ms);\n\n// End the span with results\nlogger.spanEnd(span, .{\n    .success = true,\n    .token_type = \"bearer\",\n});\n```\n\nOutput includes automatic span correlation:\n```json\n{\"level\":\"INFO\",\"msg\":\"user_authentication\",\"span_mark\":\"start\",\"span_id\":123,\"task_id\":456,\"thread_id\":789,\"user_id\":\"12345\",\"method\":\"oauth\"}\n{\"level\":\"INFO\",\"msg\":\"user_authentication\",\"span_mark\":\"end\",\"span_id\":123,\"task_id\":456,\"thread_id\":789,\"duration_ns\":100000000,\"success\":true,\"token_type\":\"bearer\"}\n```\n\n## Advanced Usage\n\n### Custom Event Loop Management\n\nFor advanced users who need to integrate with existing event loops:\n\n```zig\nconst xev = @import(\"xev\"); // Only needed for advanced usage\nconst zlog = @import(\"zlog\");\n\n// Create your own event loop\nvar loop = try xev.Loop.init(.{});\ndefer loop.deinit();\n\n// Use the advanced API with custom event loop\nvar logger = try zlog.Logger(.{ .async_mode = true }).initAsyncWithEventLoop(\n    writer, \n    &loop, \n    allocator\n);\ndefer logger.deinit(); // No allocator needed since you manage the loop\n\n// You control the event loop\ntry loop.run(.no_wait);\n```\n\n### Managed vs Custom Event Loop\n\n- **Managed (Recommended)**: Use `initAsync()` - zlog handles everything\n- **Custom (Advanced)**: Use `initAsyncWithEventLoop()` - you control the loop\n\n## License\n\nzlog is [MIT licensed](./LICENSE).\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/51416554?u=77d5ff88d269c348985295baa6bd915873b09249&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "### API Improvements\r\n\r\n• Cleaner function interfaces with better separation of concerns\r\n• Improved async logger initialization patterns\r\n\r\n\r\n**Full Changelog**: https://github.com/hendriknielaender/zlog/compare/v0.1.2...v0.2.0\r\n",
+      "prerelease": false,
+      "published_at": "2025-08-22T15:52:59Z",
+      "html_url": "https://github.com/hendriknielaender/zlog/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.2",
+      "name": "v0.1.2",
+      "body": "## What's Changed\r\n* ci: add basic workflow by @hendriknielaender in https://github.com/hendriknielaender/zlog/pull/27\r\n* chore: add test suite by @hendriknielaender in https://github.com/hendriknielaender/zlog/pull/28\r\n* feat: simd optimization by @hendriknielaender in https://github.com/hendriknielaender/zlog/pull/29\r\n\r\n\r\n**Full Changelog**: https://github.com/hendriknielaender/zlog/compare/v0.1.1...v0.1.2",
+      "prerelease": false,
+      "published_at": "2025-07-01T16:01:55Z",
+      "html_url": "https://github.com/hendriknielaender/zlog/releases/tag/v0.1.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.1",
+      "name": "v0.1.1",
+      "body": "## What's Changed\r\n* fix: deps hash mismatch by @mrtowers in https://github.com/hendriknielaender/zlog/pull/23\r\n* feat: add redaction by @hendriknielaender in https://github.com/hendriknielaender/zlog/pull/24\r\n* refactor: split up into modules by @hendriknielaender in https://github.com/hendriknielaender/zlog/pull/26\r\n\r\n## New Contributors\r\n* @hendriknielaender made their first contribution in https://github.com/hendriknielaender/zlog/pull/24\r\n\r\n**Full Changelog**: https://github.com/hendriknielaender/zlog/compare/v0.1.0...v0.1.1",
+      "prerelease": false,
+      "published_at": "2025-06-28T17:00:02Z",
+      "html_url": "https://github.com/hendriknielaender/zlog/releases/tag/v0.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "# zlog v0.1.0 – First Release\r\n\r\n> [!WARNING]\r\n> **Early Preview:**  \r\n> zlog is under active development. APIs and features may change.  \r\n> Please report issues and help us shape the future of structured logging in Zig.\r\n\r\n---\r\n\r\n## 🚀 Highlights\r\n\r\n- **Structured, strongly-typed logging** for Zig\r\n- **Synchronous and asynchronous** logging modes\r\n- **W3C Trace Context** support for distributed tracing\r\n- **Comprehensive benchmarks** and test coverage\r\n\r\n---\r\n\r\n## 🆕 What’s Included\r\n\r\n- Core logger with sync/async modes\r\n- Strongly-typed log fields (string, int, uint, float, bool, null)\r\n- Configurable log levels and output\r\n- Trace context propagation and child span support\r\n- Benchmarks and test suite\r\n\r\n---\r\n\r\n## ⚠️ Stability & Feedback\r\n\r\nThis is an **initial preview**.  \r\nWe encourage early adopters to:\r\n- Experiment and provide feedback\r\n- Report issues and suggest improvements\r\n- Contribute tests, benchmarks, and docs\r\n\r\nAPIs are not yet stable and may change in upcoming releases.\r\n\r\n---\r\n\r\n## 🛣️ Roadmap\r\n\r\nPlanned for upcoming releases:\r\n- More output formats (e.g., plain text, custom sinks)\r\n- Log rotation and file output\r\n- Extended trace context features\r\n- Integration with observability stacks\r\n- Further performance optimizations\r\n\r\n---\r\n\r\n## 📢 Get Involved\r\n\r\n- Read the [README](./README.md) for usage and examples\r\n- Open issues and PRs to help us improve\r\n- \r\n\r\n**Full Changelog**: https://github.com/hendriknielaender/zlog/compare/v0.0.1-beta...v0.1.0",
+      "prerelease": false,
+      "published_at": "2025-06-15T21:31:37Z",
+      "html_url": "https://github.com/hendriknielaender/zlog/releases/tag/v0.1.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.1-beta",
+      "name": "v0.0.1-beta",
+      "body": "## What's Changed\r\n* Update to Zig 0.13 by @mrtowers in https://github.com/hendriknielaender/zlog/pull/13\r\n* Enforce Zig styleguide by @mrtowers in https://github.com/hendriknielaender/zlog/pull/16\r\n* Overhauled zlog api https://github.com/hendriknielaender/zlog/commit/02c73ea8ad60803f3c06702a47a17e6998b138a3\r\n\r\n\r\n**Full Changelog**: https://github.com/hendriknielaender/zlog/compare/v0.0.1-alpha...v0.0.1-beta",
+      "prerelease": false,
+      "published_at": "2025-06-15T16:19:28Z",
+      "html_url": "https://github.com/hendriknielaender/zlog/releases/tag/v0.0.1-beta",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.1-alpha",
+      "name": "v0.0.1-alpha",
+      "body": "**Full Changelog**: https://github.com/hendriknielaender/zlog/commits/v0.0.1-alpha",
+      "prerelease": false,
+      "published_at": "2024-03-25T20:45:24Z",
+      "html_url": "https://github.com/hendriknielaender/zlog/releases/tag/v0.0.1-alpha",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Software developer (zig, go & TypeScript)\r\nI like using Neovim. Currently learning rust.",
+  "owner_company": "@Taxdoo ",
+  "owner_location": "Hamburg",
+  "owner_blog": "double-trouble.dev",
+  "owner_twitter_username": null,
+  "owner_followers": 59,
+  "owner_following": 277,
+  "owner_created_at": "2019-06-05T17:02:09Z",
+  "license": "MIT",
+  "category": "library"
+}

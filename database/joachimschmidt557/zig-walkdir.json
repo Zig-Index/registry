@@ -1,0 +1,27 @@
+{
+  "name": "zig-walkdir",
+  "owner": "joachimschmidt557",
+  "repo": "zig-walkdir",
+  "description": "Provides functions for walking directories recursively",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-03-08T22:25:54Z",
+  "readme": "# zig-walkdir\n\nA zig package providing functions for recursively traversing directories.\nWorks with zig 0.14.0.\n\n## Todo\n\n- [x] Breadth-first search\n- [x] Depth-first search\n- [ ] Tests\n- [ ] Following symlinks\n- [ ] Correct error handling\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/28556218?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Germany",
+  "owner_blog": "www.josch557.de",
+  "owner_twitter_username": null,
+  "owner_followers": 80,
+  "owner_following": 13,
+  "owner_created_at": "2017-05-09T06:23:23Z",
+  "license": "MIT",
+  "category": "library"
+}

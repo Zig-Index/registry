@@ -1,0 +1,30 @@
+{
+  "name": "blackmagic",
+  "owner": "agagniere",
+  "repo": "blackmagic",
+  "description": "C preprocessor tricks, explained",
+  "type": "project",
+  "topics": [
+    "c",
+    "preprocessor",
+    "tutorial",
+    "zig-package"
+  ],
+  "stars": 5,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-11-25T17:14:25Z",
+  "readme": "# Black Magic\n\n*`impossible` is not a C keyword*\n\n**Learn about C preprocessor tricks**\n\nThis book delves into techniques to generate C code with the preprocessor,\nstarting with a reminder about what the preprocessor is and how it is integrated in the C compilation pipeline,\nthen building up increasingly complex tools anyone can use in their C projects.\n\n[Read it online !](https://agagniere.github.io/blackmagic/)\n\n## Tools\nAdd this project as a dependency to your C project today (using Zig, Nix or Conan) to get:\n- ANSI color codes as a string literal by writing `COLOR(UNDERLINED, BOLD, RED)` [`blackmagic/color.h`](include/blackmagic/color.h)\n- Convert enums to/from strings [`blackmagic/enum.h`](include/blackmagic/enum.h)\n- Logs with a compile-time configurable format and level [`blackmagic/log.h`](include/blackmagic/log.h). Possible formats include:\n   - colored console\n   - JSON\n   - Markdown table\n   - custom callback\n\n## Roadmap\nI would like to explain the following tricks in the book:\n- [x] Logging\n- [ ] Default arguments\n- [ ] Function overloading\n- [ ] Enum to/from string\n- [ ] Serialization / Deserialization of a structure\n- [ ] Unit-tests library\n\n## Extras\n- Sphinx directive to show C code before and after preprocessing\n- Custom pygment lexer to color the code the way the preprocessor sees it\n\n## Use it\n\n### With Zig build as your C package manager\n\nAdd the dependency in your `build.zig.zon` by running the following command:\n```shell\nzig fetch --save git+https://github.com/agagniere/blackmagic#master\n```\n\nThen, in your `build.zig`:\n```zig\nconst blackmagic = b.dependency(\"blackmagic\", .{});\n// wherever needed:\nexe.addIncludePath(blackmagic.path(\"include\"));\n```\n\n### With Conan\n\nAdd the dependency in your `conanfile.txt`\n```toml\n[requires]\nblackmagic/0.3\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/8630600?u=d1242ba0f38966f4f2318d9814cf6d12efe68f75&v=4",
+  "releases": [],
+  "owner_company": "@Datadog",
+  "owner_location": "France",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 34,
+  "owner_following": 46,
+  "owner_created_at": "2014-09-02T16:19:59Z",
+  "homepage": "https://agagniere.github.io/blackmagic/",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,51 @@
+{
+  "name": "small-array-list",
+  "owner": "kalamay",
+  "repo": "small-array-list",
+  "description": "Memory efficient array list for zig that allows a small number of items to be stored allocation-free.",
+  "type": "project",
+  "topics": [
+    "array",
+    "array-list",
+    "memory-efficient",
+    "zig",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-11-12T01:44:11Z",
+  "minimum_zig_version": "0.14.0",
+  "readme": "# small-array-list\n\nThis library provides a `SmallArrayList` type (and some variants), which is\noptimized for memory efficient storage of arrays that generally contain few\nitems. This works by sharing the memory internal storage space between either\na fixed size array, or an externally allocated slice, and switching between\nthe two as needed. See the [Small Capacity Limit](#small-capacity-limit) for\ndetails on this storage mechanism.\n\n```zig\n// We'll just use SmallArrayList for this example, but there are variants\n// that allow further parameterization.\nconst SmallArrayList = @import(\"small_array_list\").SmallArrayList;\n\n// Setup whichever allocator you'd like to use.\nvar arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);\ndefer arena.deinit();\nconst allocator = arena.allocator();\n\nvar list: SmallArrayList(i32) = .empty;\ndefer list.deinit(allocator);\n\n// Append works just like the std.array_list.ArrayListUnmanaged append.\ntry list.append(allocator, 1);\n\n// Nearly all of the standard library methods are available.\nvar many = try list.addManyAsArray(allocator, 2);\nmany[0] = 2;\nmany[1] = 3;\n\n// Unlike ArrayList, items cannot be accessed directly as a slice.\nfor (list.items()) |item| {\n    std.debug.print(\"item={}\\n\", .{item});\n}\n\n// You can see if the SmallArrayList is using an allocation or not.\nif (!list.hasAllocation()) {\n    std.debug.print(\"no allocations!\\n\", .{});\n}\n\n// Unlike ArrayList, len is a top-level field.\n// On 64-bit systems, this will be: len=3 capacity=4\nstd.debug.print(\"len={} capacity={}\\n\", .{ list.len, list.capacity });\n```\n\n> [!IMPORTANT]\n> Instances keep much of the interface in common with `std.array_list.ArrayListUnmanaged`\n> with a few important differences:\n>\n> 1. To get the number of items in the list, use `list.len` instead of `list.items.len`.\n> 1. To get the items of in the list, use `list.items()` instead of `list.items`.\n\n## Installing\n\nFirst, add the dependency to your `build.zig.zon`:\n\n```sh\nzig fetch --save git+https://github.com/kalamay/small-array-list#v0.2.0\n```\n\nNext add the dependecy to your `build.zig`:\n\n```zig\nconst small_array_list_mod = b.dependency(\"small_array_list\", .{\n    .target = target,\n    .optimize = optimize,\n}).module(\"small_array_list\");\n\nexe_mod.addImport(\"small_array_list\", small_array_list_mod);\n// or lib_mod, or any other module\n```\n\nNow you can import the library:\n\n```zig\nconst small_array_list = @import(\"small_array_list\");\n```\n\n### Using a Different Name\n\nIf you'd like to use a different name within your project, you can choose a\ndifferent import name for the module:\n\n```zig\nconst small_array_list_mod = b.dependency(\"small_array_list\", .{\n    .target = target,\n    .optimize = optimize,\n}).module(\"small_array_list\");\n\nexe_mod.addImport(\"array\", small_array_list_mod);\n```\n\nAnd then you'd be able to import it as `\"array\"`:\n\n```zig\nconst array = @import(\"array\");\n```\n\n## Why This Library\n\nThe standard library already includes `std.ArrayList`. In many cases, this is\nthe ideal choice. This is especially so if you know you are going to be storing\nmany items in the array. Alternatively, if you know you will only be storing\na limited number of items, using zig's array types (i.e. `[8]i32`) is sensible.\n\nHowever, there are cases where you are most likely going to be storing few\nitems, but need the flexibility to grow past the fixed limit that arrays\nprovide. That is, you will generally need the compactness of a zig array,\nbut you need the option to grow like a `std.ArrayList`.\n\nThis is where `SmallArrayList` comes in. In the low item count case, you can\nstay allocation-free, like a zig array. If item capacity needs to increase,\nhowever, you can still expand to support whatever size is needed. This can\nkeep overall memory usage down for low-item array lists. Additionally, when\nthe items are non-allocated, you gain a memory locality benefit as there is\nno pointer indirection.\n\n## Small Capacity Limit\n\nThe available small capacity limit is determined by the type stored and the\nnative machine word size. Because a zig slice requires two machine words for\nstoring it's `ptr` and `len`, this space can be used for direct item storage\ninstead until the small capacity is exceeded. For any given type `T`, the\nsmall array list can store up to `2*@sizeOf(usize) / @sizeOf(T)` items before\nrequiring any internal allocation.\n\nFor example on a 64-bit processor will print out `small_capacity=4 sizeOf=24`:\n\n```zig\nconst List = SmallArrayList(i32);\nstd.debug.print(\"small_capacity={} sizeOf={}\\n\", .{List.small_capacity, @sizeOf(List)});\n```\n\nThe over size of a `SmallArrayList` is generally three machine words. This is\nachieved using a few trade-offs:\n\n1. The overlapped memory of the internal array and external slice is achieved\nusing a union. By ensuring this union is indiscriminate, the array list can\nmaximize storage efficiency. This union is then discriminated using the\n`capacity` field of the array list. Using `SmallArrayListSized`, you can set\na small capacity limit that exceeds the default size. This will cause the\noverall small array list size to grow.\n\n2. The `len` and `capacity` are each half of a `usize`. This does mean it will result\nin an `error.OutOfMemory` when trying to allocate a capacity greater than\nhalf the maximum of a `std.array_list.ArrayList`. However, this library is\noptimized for small array lists. If lists of such size are needed, the standard\nlibrary should be used.\n\n3. All `SmallArrayList` types are unmanaged, meaning they do not store the\n`std.mem.Allocator` internally, and each function that could possibly allocate\nor deallocate takes the allocator as a parameter. Note that the same allocator\ninstance must be used for each call into any single small array list.\n\n> [!IMPORTANT]\n> One important thing to keep in mind when using larger types is that there is\n> a minimum small capacity of 1, so if the size of `T` exceeds two machine words,\n> the overall size of the `SmallArrayList` will expand. This can still be\n> beneficial, but it is something you'll want to consider.\n\n## Variants\n\nThe `SmallArrayList` uses the default alignment of `T` and a small capacity\ndetermined by how many items of `T` can be stored in two machine words. However,\nboth of these values may be overridden.\n\nIf you want to change the alignment, you can use either `SmallArrayListAligned`\nor `SmallArrayListAlignedSized`, passing in the desired alignment.\n\nChanging the small capacity can be done using either `SmallArrayListSized` or\n`SmallArrayListAlignedSized`. Using a small capacity larger than the default\nwill increase the overall size of the `SmallArrayList`, but it allows for\nstoring more items before allocating.\n\nFor example, on a 64-bit system:\n\n```zig\nconst std = @import(\"std\");\nconst expect = std.testing.expect;\n\ntest \"sizes\" {\n    const a = testing.allocator;\n\n    const List1 = SmallArrayList(i32);\n    const List2 = SmallArrayListSized(i32, 6);\n\n    // This holds true on a 64-bit system\n    try testing.expect(@sizeOf(List1) == 24);\n    try testing.expect(@sizeOf(List2) == 32);\n\n    var list1: List1 = .empty;\n    var list2: List2 = .empty;\n\n    defer list1.deinit(a);\n    defer list2.deinit(a); // don't strictly need to deinit list2\n\n    for (0..List2.small_capacity) |i| {\n        try list1.append(a, @intCast(i));\n        try list2.append(a, @intCast(i));\n    }\n\n    try testing.expect(list1.hasAllocation());\n    try testing.expect(!list2.hasAllocation());\n}\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/8317?u=538eb5b82eaba1bb86b67922be205495a66bdf6a&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "* Support writer and fixedWriter\r\n* Remove `.init` in favor of `.empty`\r\n* Improve tests",
+      "prerelease": false,
+      "published_at": "2025-05-27T14:46:19Z",
+      "html_url": "https://github.com/kalamay/small-array-list/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.1",
+      "name": "v0.1.1",
+      "body": "- Update build to produce a module.\r\n- Improve example in README\r\n- Add installation instructions in README",
+      "prerelease": false,
+      "published_at": "2025-05-26T21:19:56Z",
+      "html_url": "https://github.com/kalamay/small-array-list/releases/tag/v0.1.1",
+      "assets": []
+    }
+  ],
+  "owner_company": "Segment",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 42,
+  "owner_following": 1,
+  "owner_created_at": "2008-04-24T00:46:22Z",
+  "license": "MIT",
+  "category": "library"
+}

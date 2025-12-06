@@ -1,0 +1,117 @@
+{
+  "name": "zigformer",
+  "owner": "CogitatorTech",
+  "repo": "zigformer",
+  "description": "An educational transformer-based LLM in pure Zig",
+  "type": "project",
+  "topics": [
+    "ai",
+    "llm",
+    "transformer-architecture",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 31,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-12-04T21:56:08Z",
+  "dependencies": [
+    {
+      "name": "chilli",
+      "url": "https://github.com/CogitatorTech/chilli/archive/v0.2.2.tar.gz",
+      "hash": "chilli-0.2.2-c19PrvIyAQAgsL0VkYCKq0DuxU7rZUpRuH991zsyOkYQ"
+    }
+  ],
+  "minimum_zig_version": "0.15.2",
+  "readme": "<div align=\"center\">\n  <picture>\n    <img alt=\"ZigFormer Logo\" src=\"logo.svg\" height=\"25%\" width=\"25%\">\n  </picture>\n<br>\n\n<h2>ZigFormer</h2>\n\n[![Tests](https://img.shields.io/github/actions/workflow/status/CogitatorTech/zigformer/tests.yml?label=tests&style=flat&labelColor=282c34&logo=github)](https://github.com/CogitatorTech/zigformer/actions/workflows/tests.yml)\n[![License](https://img.shields.io/badge/license-MIT-007ec6?label=license&style=flat&labelColor=282c34&logo=open-source-initiative)](https://github.com/CogitatorTech/zigformer/blob/main/LICENSE)\n[![Docs](https://img.shields.io/badge/docs-read-blue?style=flat&labelColor=282c34&logo=read-the-docs)](https://CogitatorTech.github.io/zigformer/)\n[![Zig Version](https://img.shields.io/badge/Zig-0.15.2-orange?logo=zig&labelColor=282c34)](https://ziglang.org/download/)\n[![Release](https://img.shields.io/github/release/CogitatorTech/zigformer.svg?label=release&style=flat&labelColor=282c34&logo=github)](https://github.com/CogitatorTech/zigformer/releases/latest)\n\nAn educational transformer-based LLM in pure Zig\n\n</div>\n\n---\n\nZigFormer is a fully functional implementation of a transformer-based large language model (LLM) written in Zig\nprogramming language.\nIt aims to provide a clean, easy-to-understand LLM implementation with no large dependencies like PyTorch or TensorFlow.\nZigFormer was mainly made for learning how a conventional transformer-based LLM works under the hood and is\ninspired by Andrej Karpathy's [nanoGPT](https://github.com/karpathy/nanoGPT)\nand [nanochat](https://github.com/karpathy/nanochat) projects, and follows the architecture described in the\n[\"Attention Is All You Need\"](https://arxiv.org/abs/1706.03762) and\n[\"Language Models are Unsupervised Multitask Learners\"](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf)\npapers.\nIt can be used as a [Zig library](https://CogitatorTech.github.io/zigformer/) for building LLMs or as a\n[standalone application](https://github.com/CogitatorTech/zigformer/releases/latest)\nfor training, inference, and chatting with the model.\n\nThe diagrams below show the high-level architecture and its core components.\n\n![ZigFormer Architecture](assets/diagrams/zigformer_architecture_v0.1.0.svg)\n\n![ZigFormer Workflow](assets/diagrams/zigformer_workflow_v0.1.0.svg)\n\n### Features\n\n- Implements core transformer architecture with multi-head self-attention\n- Supports both pretraining and instruction fine-tuning\n- Provides multiple decoding strategies (like greedy and beam search)\n- Includes a CLI for training and inference\n- Has a web-based UI for chatting with the model\n- Supports model checkpointing and the use of configuration files\n\nSee the [ROADMAP.md](ROADMAP.md) for the list of implemented and planned features.\n\n> [!IMPORTANT]\n> ZigFormer is in early development, so bugs and breaking changes are expected.\n> Please use the [issues page](https://github.com/CogitatorTech/zigformer/issues) to report bugs or request features.\n\n---\n\n### Getting Started\n\nYou can get started with ZigFormer by following the steps below.\n\n#### Installation\n\n```bash\ngit clone https://github.com/CogitatorTech/zigformer.git\ncd zigformer\nzig build\n```\n\n> [!IMPORTANT]\n> ZigFormer is developed and tested with Zig 0.15.2.\n> It should work with newer versions, but it is not guaranteed.\n\n#### Training a Model\n\n```bash\nzig build run -- --save-model model.bin\n```\n\nThis will:\n\n1. Load the training datasets from `datasets/simple_dataset/`\n2. Build a vocabulary of tokens from the data\n3. Pretrain the model on the pretraining examples (raw text)\n4. Train (or fine-tune) the model on question-answer pairs\n5. Save the trained model to `model.bin`\n\nTraining parameters can be given through a configuration file or CLI arguments.\n\n```bash\nzig build run -- --config my_config.json\n```\n\n**Sample CLI Configuration:**\n\n```json\n{\n    \"pretrain_path\": \"datasets/simple_dataset/pretrain.json\",\n    \"train_path\": \"datasets/simple_dataset/train.json\",\n    \"pre_epochs\": 10,\n    \"chat_epochs\": 10,\n    \"batch_size\": 32,\n    \"accumulation_steps\": 1,\n    \"pre_lr\": 0.0005,\n    \"chat_lr\": 0.0001,\n    \"save_model_path\": \"model.bin\",\n    \"interactive\": true\n}\n```\n\n> [!IMPORTANT]\n> A saved model only works with the model with the same configuration.\n\n#### Using the Web UI\n\nYou can run the web-based UI to chat with the trained model:\n\n```bash\nzig build run-gui -- --load-model model.bin\n```\n\nThe UI can be accessed at `http://localhost:8085` by default.\n\nYou can also provide a configuration file for the UI:\n\n```bash\nzig build run-gui -- --config gui_config.json\n```\n\n**Sample Web UI Configuration:**\n\n```json\n{\n    \"port\": 8085,\n    \"host\": \"0.0.0.0\",\n    \"pretrain_path\": \"datasets/simple_dataset/pretrain.json\",\n    \"train_path\": \"datasets/simple_dataset/train.json\",\n    \"load_model_path\": \"model.bin\",\n    \"max_request_size\": 1048576,\n    \"max_prompt_length\": 1000,\n    \"timeout_seconds\": 30\n}\n```\n\n#### Available Options (CLI and Web UI)\n\n```bash\nzig build run -- --help\nzig build run -- predict --help\nzig build run-gui -- --help\n```\n\n#### Example Usage\n\n```bash\n# Train the model (using the default dataset and save the weights to 'model.bin')\nzig build run -- --save-model model.bin\n```\n\n```bash\n# Generate coherent text (using Beam search with beam width of 5)\nzig build run -- predict --prompt \"How do mountains form?\" --beam-width 5\n```\n\n```bash\n# Generate more diverse text (using top-k sampling with k=5)\nzig build run -- predict --prompt \"How do mountains form?\" --top-k 5 --load-model model.bin\n```\n\n```bash\n# Launch the web UI server and chat with the trained model on http://localhost:8085\nzig build run-gui -- --load-model model.bin\n```\n\n![ZigFormer Web UI](assets/screenshots/zigformer_webui_v0.1.1.jpeg)\n\n---\n\n### Documentation\n\nYou can find the full API documentation for the latest release of\nZigFormer [here](https://CogitatorTech.github.io/zigformer/).\n\n---\n\n### Contributing\n\nContributions are always welcome!\nSee [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to make a contribution.\n\n### License\n\nZigFormer is licensed under the MIT License (see [LICENSE](LICENSE)).\n\n### Acknowledgements\n\n* The logo is from [SVG Repo](https://www.svgrepo.com/svg/357414/brain) with some modifications.\n* This project uses the [Chilli](https://github.com/CogitatorTech/chilli) CLI framework.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/229955204?v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.1",
+      "name": "Release v0.1.1",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-11-27T15:37:51Z",
+      "html_url": "https://github.com/CogitatorTech/zigformer/releases/tag/v0.1.1",
+      "assets": [
+        {
+          "name": "zigformer-linux-x86_64.zip",
+          "url": "https://github.com/CogitatorTech/zigformer/releases/download/v0.1.1/zigformer-linux-x86_64.zip",
+          "size": 236351,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigformer-linux-aarch64.zip",
+          "url": "https://github.com/CogitatorTech/zigformer/releases/download/v0.1.1/zigformer-linux-aarch64.zip",
+          "size": 240746,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigformer-macos-aarch64.zip",
+          "url": "https://github.com/CogitatorTech/zigformer/releases/download/v0.1.1/zigformer-macos-aarch64.zip",
+          "size": 253372,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigformer-macos-x86_64.zip",
+          "url": "https://github.com/CogitatorTech/zigformer/releases/download/v0.1.1/zigformer-macos-x86_64.zip",
+          "size": 243555,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigformer-windows-aarch64.zip",
+          "url": "https://github.com/CogitatorTech/zigformer/releases/download/v0.1.1/zigformer-windows-aarch64.zip",
+          "size": 228693,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigformer-windows-x86_64.zip",
+          "url": "https://github.com/CogitatorTech/zigformer/releases/download/v0.1.1/zigformer-windows-x86_64.zip",
+          "size": 245112,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "Release v0.1.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-11-27T14:01:18Z",
+      "html_url": "https://github.com/CogitatorTech/zigformer/releases/tag/v0.1.0",
+      "assets": [
+        {
+          "name": "zigformer-cli-linux-aarch64.zip",
+          "url": "https://github.com/CogitatorTech/zigformer/releases/download/v0.1.0/zigformer-cli-linux-aarch64.zip",
+          "size": 120491,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigformer-cli-linux-x86_64.zip",
+          "url": "https://github.com/CogitatorTech/zigformer/releases/download/v0.1.0/zigformer-cli-linux-x86_64.zip",
+          "size": 118727,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigformer-cli-macos-x86_64.zip",
+          "url": "https://github.com/CogitatorTech/zigformer/releases/download/v0.1.0/zigformer-cli-macos-x86_64.zip",
+          "size": 121970,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigformer-cli-macos-aarch64.zip",
+          "url": "https://github.com/CogitatorTech/zigformer/releases/download/v0.1.0/zigformer-cli-macos-aarch64.zip",
+          "size": 126597,
+          "content_type": "application/zip"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "",
+  "owner_location": "Norway",
+  "owner_blog": null,
+  "owner_twitter_username": "CogitatorTech",
+  "owner_created_at": "2025-09-02T12:46:35Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,27 @@
+{
+  "name": "bitmatch",
+  "owner": "freakmangd",
+  "repo": "bitmatch",
+  "description": "Bitmatching in zig",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 4,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2024-08-30T05:08:38Z",
+  "readme": "# bitmatch\nSimple zig library based off of the rust crate [bitmatch](https://github.com/porglezomp/bitmatch).\n```zig\nconst match = bitmatch(\"00oo_aabb\", 0b0011_1001) orelse return error.ExpectedNonNull;\ntry std.testing.expectEqual(0b11, match.o);\ntry std.testing.expectEqual(0b10, match.a);\ntry std.testing.expectEqual(0b01, match.b);\n```\n\n### Installing\n```\nzig fetch --save git+https://github.com/freakmangd/bitmatch\n```\n`build.zig`:\n```zig\nconst bitmatch = b.dependency(\"bitmatch\", .{});\nexe.root_module.addImport(\"bitmatch\", bitmatch.module(\"root\"));\n```\n\n### Features\n\nThe main functions of the library are `bitmatch` and `bitmatchPacked`.\n\nBoth functions take a match string and a byte to match against. \nThe match string must be comptime known.\n\n`bitmatch` returns `?struct`. Each field is of type `u8`.\n\n`bitmatchPacked` returns `?packed struct(u8)`. Each field is the smallest int type\nrequired to hold all bits matched by the field's identifier.\n\n```zig\n// non-packed\nconst match = bitmatch(\"aaaa_b010\", 0b1000_1010) orelse return error.ExpectedNonNull;\ntry std.testing.expect(@TypeOf(match.a) == u8);\ntry std.testing.expect(@TypeOf(match.b) == u8);\ntry std.testing.expectEqual(0b0000_1000, match.a);\ntry std.testing.expectEqual(0b0000_0001, match.b);\n\n// packed\nconst match = bitmatchPacked(\"aaaa_b010\", 0b1000_1010) orelse return error.ExpectedNonNull;\ntry std.testing.expect(@TypeOf(match.a) == u4);\ntry std.testing.expect(@TypeOf(match.b) == u1);\ntry std.testing.expectEqual(0b1000, match.a);\ntry std.testing.expectEqual(0b1, match.b);\n\n// no identifiers\nconst match = bitmatch(\"0001_1010\", 0b0001_1010) orelse return error.ExpectedNonNull;\ntry std.testing.expectEqual(0, @sizeOf(@TypeOf(match)));\n```\n\n#### Match bits\n\n0s and 1s in the match string are the only characters that decide whether\na byte matches the pattern defined.\n\n```zig\n// This match returns null as were expecting the last bits to be 1011\n// the match fails here -----------v\nif (bitmatch(\"aaaa_1011\", 0b1010_1001)) |_| return error.ExpectedNull;\n```\n\n#### Identifiers\n\nAn \"identifier\" refers to an alphabetic character inside the match string, they\nare allowed to be in the range a-z and A-Z. An identifier captures the bits\nthat share their position. All identifiers will be fields of the return value.\n\nThere is a max of 8 identifiers per match string \nas this library assumes 8 bits in a byte.\n\n```zig\nconst match = bitmatch(\"aaaa_bbbb\", 0b0101_1010) orelse return error.ExpectedNonNull;\ntry std.testing.expectEqual(0b0101, match.a);\ntry std.testing.expectEqual(0b1010, match.b);\n\nconst match = bitmatch(\"abcd_efgh\", 0b0101_1010) orelse return error.ExpectedNonNull;\ntry std.testing.expectEqual(0b0, match.a);\ntry std.testing.expectEqual(0b1, match.b);\ntry std.testing.expectEqual(0b0, match.c);\n// ...\ntry std.testing.expectEqual(0b0, match.h);\n\n// identifiers are case-sensitive\nconst match = bitmatch(\"aaaa_AAAA\", 0b0000_1111) orelse return error.ExpectedNonNull;\ntry std.testing.expectEqual(0b0000, match.a);\ntry std.testing.expectEqual(0b1111, match.A);\n```\n\nIdentifiers can be split as many times as is necessary, they will capture the bits\nthat share their position and concat them.\n```zig\nconst match = bitmatch(\"aa_bb_aa_bb\", 0b10_01_00_11);\ntry std.testing.expectEqual(0b10_00, match.a);\ntry std.testing.expectEqual(0b01_11, match.b);\n```\n\n#### Underscores\nUnderscores in match strings are ignored, and are more lenient than zig's integer literal underscores. You can have as many as you want for the purposes of increasing readability.\n\nThese match strings function the same: `\"aaaabbbb\"`, `\"aaaa_bbbb\"` `\"a_a____aa_bb__b_b_\"`\n\n#### Wildcards\nThe `?` character is used as a wildcard, matching either a 0 or 1 without capturing it.\n```zig\nconst match = bitmatch(\"???_aa_???\", 0b010_01_101) orelse return error.ExpectedNonNull;\ntry std.testing.expectEqual(0b01, match.a);\n```\n\nIf the match string is less than 8 characters, the match string is left-padded\nwith wildcards, making `\"aa01\"` equivalent to `\"????aa01\"`\n```zig\nconst match = bitmatch(\"aa01\", 0b0000_1101) orelse return error.ExpectedNonNull;\ntry std.testing.expectEqual(0b11, match.a);\n```\n\n### More Examples\nSee the bottom of `src/init.zig` for more testable examples. You can run them\nwith `zig build test`.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/53349189?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 3,
+  "owner_following": 3,
+  "owner_created_at": "2019-07-26T16:58:33Z",
+  "license": "MIT",
+  "category": "library"
+}

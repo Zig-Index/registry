@@ -1,0 +1,94 @@
+{
+  "name": "di.zig",
+  "owner": "AleksandrShadrin",
+  "repo": "di.zig",
+  "description": "A simple and lightweight dependency injection container for Zig.",
+  "type": "project",
+  "topics": [
+    "dependency-injection",
+    "zig",
+    "zig-package",
+    "zig-library",
+    "ioc-container"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-01-16T17:48:08Z",
+  "readme": "[![CI](https://github.com/AleksandrShadrin/di.zig/actions/workflows/ci.yml/badge.svg)](https://github.com/AleksandrShadrin/di.zig/actions/workflows/ci.yml)\n\n# Zig DI Container 🚀\n\nA simple and lightweight dependency injection (DI) container for Zig. Manage your dependencies effortlessly and keep your code clean!\n\n📦 Features\n* Singletons: One instance throughout the app.\n* Transients: New instance every time.\n* Scoped Services: Manage lifetimes within scopes.\n* Generics Support: Work with generic types smoothly.\n* Error Handling: Gracefully handle errors when creating/allocating services\n* Object Management: Implement your own logic for deinitializing resources, which will be called by the service provider when freeing resources. Here [example](https://github.com/AleksandrShadrin/di.zig/blob/main/examples/deinit.zig)\n* Thread Safety: The service provider guarantees that singleton resolving is thread-safe. For other usage if you need thread safety use scopes.\n* Support custom allocators for scopes\n\n# 🛠️ Installation\n\nAdd the di module to your project using zig zon.\n\n```zig\nconst di_dep = b.dependency(\"di\", .{ .target = target, .optimize = optimize });\nconst di_module = di_dep.module(\"di\");\n\nconst exe = b.addExecutable(.{...});\nexe.root_module.addImport(\"di\", di_module);\n```\n\n# 📚 Usage\n\nInitialize the Container.\nStart by setting up the DI container with an allocator.\n\n```zig\nconst std = @import(\"std\");\nconst di = @import(\"di\");\n\nconst Container = di.Container;\n\npub fn main() !void {\n    const allocator = std.heap.page_allocator;\n    var container = Container.init(allocator);\n    defer container.deinit();\n\n    // Register your services here\n}\n```\n## Register Services\n\nChoose how you want your services to behave.\n\n### Singleton\n\nOne shared instance.\n\n```zig\ntry container.registerSingleton(MyService);\n```\n### Transient\n\nA new instance each time.\n\n```zig\ntry container.registerTransient(MyService);\n```\n### Scoped\n\nManaged within a specific scope.\n\n```zig\ntry container.registerScoped(MyService);\n```\n\n### Factories\n\nYou can also register factories to create instances of your services. This allows you to add multiple implementations\n\n```zig\ntry container.registerSingletonFactory(builderFn);\n```\n\n## Create a Service Provider\n\nAfter registering services, create a provider to resolve them.\n\n```zig\nvar serviceProvider = try container.createServiceProvider();\ndefer serviceProvider.deinit();\n```\n## Resolve Services\n\nGet instances of your services when needed.\n\n```zig\nconst myService = try serviceProvider.resolve(MyService);\nconst myServices = try serviceProvider.resolveSlice(MyService); // get all registered services of type MyService, MyService if it was registered wihtout factory + all instances created by factories\n```\n## Handle Generics\n\nHandle generic types with ease.\n\n```zig\n// register\ntry container.registerSingleton(MyService);\n...\n// resolve\nconst genericService = try serviceProvider.resolve(di.Generic(MyService, .{u8}));\n```\n## Using Scopes\n\nManage scoped services within a controlled environment.\n\n```zig\nvar scope = try serviceProvider.initScope();\ndefer scope.deinit();\n\nconst scopedService = try scope.resolve(MyService);\n```\n\nProvide custom allocator if you don't want to use parent's\n\n```zig\nvar allocator = ...;\nvar scope = try serviceProvider.initScopeWithAllocator(allocator);\n\n...\n\n```\n\n## Unresolve Transient Services or slices\n\nManually release a service if needed.\n\n```zig\ntry serviceProvider.unresolve(resolvedService);    \ntry serviceProvider.unresolve(resolvedServices); // resolved by resolveSlice\n```\n\n# 🎉 Example\n\nHere's a quick example to get you started!\n\n\n```zig\nconst std = @import(\"std\");\nconst di = @import(\"di\");\n\nconst Container = di.Container;\n\n// Example Services\nconst Logger = struct {\n    pub fn init() Logger {\n        return Logger{};\n    }\n\n    pub fn log(self: *Logger, message: []const u8) void {\n        _ = self;\n        std.log.info(\"{s}\", .{message});\n    }\n};\n\nconst Database = struct {\n    logger: *Logger,\n\n    pub fn init(logger: *Logger) Database {\n        return Database{\n            .logger = logger,\n        };\n    }\n\n    pub fn persist(self: *Database) void {\n        self.logger.log(\"Log some job\");\n    }\n};\n\npub fn main() !void {\n    const allocator = std.heap.page_allocator;\n    var container = Container.init(allocator);\n    defer container.deinit();\n\n    // Register services\n    try container.registerSingleton(Logger);\n    try container.registerTransient(Database);\n\n    // Create provider\n    var provider = try container.createServiceProvider();\n    defer provider.deinit();\n\n    // Resolve services\n    var db = try provider.resolve(Database);\n\n    // Use services\n    db.persist();\n}\n```\n\nThis example sets up a simple DI container, registers a Logger as a singleton and Database as a transient service, then resolves and uses them.\n\nMore examples can be founded in examples folder, use:\n\n```sh\nzig build run-${filename}\n```\n\n## 📄 License\n\nThis project is MIT licensed. See the LICENSE file for details.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/83881873?v=4",
+  "releases": [
+    {
+      "tag_name": "1.0.1",
+      "name": "1.0.1",
+      "body": "## What's Changed\r\n* Refactor/dependencies+fixes by @AleksandrShadrin in https://github.com/AleksandrShadrin/di.zig/pull/20\r\n* fixes by @AleksandrShadrin in https://github.com/AleksandrShadrin/di.zig/pull/21\r\n* fixes+improve dependecy by @AleksandrShadrin in https://github.com/AleksandrShadrin/di.zig/pull/22\r\n\r\n\r\n**Full Changelog**: https://github.com/AleksandrShadrin/di.zig/compare/1.0.0...1.0.1",
+      "prerelease": false,
+      "published_at": "2025-01-16T17:49:15Z",
+      "html_url": "https://github.com/AleksandrShadrin/di.zig/releases/tag/1.0.1",
+      "assets": []
+    },
+    {
+      "tag_name": "1.0.0",
+      "name": "1.0.0",
+      "body": "## What's Changed\r\n* Feat/add thread safety by @AleksandrShadrin in https://github.com/AleksandrShadrin/di.zig/pull/18\r\n* Update/readme by @AleksandrShadrin in https://github.com/AleksandrShadrin/di.zig/pull/19\r\n\r\n\r\n**Full Changelog**: https://github.com/AleksandrShadrin/di.zig/compare/0.4.0...1.0.0",
+      "prerelease": false,
+      "published_at": "2024-12-27T07:01:52Z",
+      "html_url": "https://github.com/AleksandrShadrin/di.zig/releases/tag/1.0.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.4.0",
+      "name": "0.4.0",
+      "body": "added slices + fixed bugs\r\n\r\n## What's Changed\r\n* Feat/add slices by @AleksandrShadrin in https://github.com/AleksandrShadrin/di.zig/pull/15\r\n* Update/mediatr by @AleksandrShadrin in https://github.com/AleksandrShadrin/di.zig/pull/16\r\n* upd by @AleksandrShadrin in https://github.com/AleksandrShadrin/di.zig/pull/17\r\n\r\n\r\n**Full Changelog**: https://github.com/AleksandrShadrin/di.zig/compare/0.3.0...0.4.0",
+      "prerelease": false,
+      "published_at": "2024-12-14T07:17:34Z",
+      "html_url": "https://github.com/AleksandrShadrin/di.zig/releases/tag/0.4.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.3.0",
+      "name": "0.3.0",
+      "body": "update resolved dependencies storage",
+      "prerelease": false,
+      "published_at": "2024-12-12T17:19:11Z",
+      "html_url": "https://github.com/AleksandrShadrin/di.zig/releases/tag/0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.2.0",
+      "name": "0.2.0",
+      "body": "update deinit api",
+      "prerelease": false,
+      "published_at": "2024-12-04T08:27:46Z",
+      "html_url": "https://github.com/AleksandrShadrin/di.zig/releases/tag/0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.1.1",
+      "name": "fixes",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-12-03T10:49:51Z",
+      "html_url": "https://github.com/AleksandrShadrin/di.zig/releases/tag/0.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "0.1.0",
+      "name": "0.1.0",
+      "body": "All features added",
+      "prerelease": false,
+      "published_at": "2024-12-02T07:58:30Z",
+      "html_url": "https://github.com/AleksandrShadrin/di.zig/releases/tag/0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 1,
+  "owner_following": 0,
+  "owner_created_at": "2021-05-08T18:18:49Z",
+  "license": "MIT",
+  "category": "library"
+}

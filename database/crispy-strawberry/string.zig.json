@@ -1,0 +1,39 @@
+{
+  "name": "string.zig",
+  "owner": "crispy-strawberry",
+  "repo": "string.zig",
+  "description": "A Rust like String type for Zig",
+  "type": "project",
+  "topics": [
+    "zig",
+    "zig-package",
+    "ziglang",
+    "string"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2023-12-24T09:56:37Z",
+  "readme": "# An allocated string type\r\nInspired by Rust's `String` type.\r\nImplementation mostly ported from Rust.\r\n\r\nProvides helper functions that make working with\r\nstrings easier.\r\n\r\nI try to keep names consistent with `std.ArrayList`\r\n\r\n## Using with package manager\r\n1. Create `build.zig.zon` in the project root if you don't already have one.\r\n2. Add the barebones skeleton. ([this](https://pastebin.com/Kkf6KfRi) if you don't know what it looks like)\r\n3. Inside the dependencies section add -\r\n  ```\r\n  .string = .{\r\n    .url = \"git+https://github.com/crispy-strawberry/string.zig#main\",\r\n  }\r\n  ```\r\n4. Run `zig build` and wait for zig to complain about the hash\r\n5. Copy the provided hash and add it besides the url like -\r\n  ```\r\n  .string = .{\r\n    .url = \"<repo url>\",\r\n    .hash = \"<the provided hash>\"\r\n  }\r\n  ```\r\n6. In your `build.zig`, add -\r\n  ```zig\r\n  const string = b.dependency(\"string\", .{ .optimize = optimize, .target = target });\r\n  // Replace exe with whatever you are using.\r\n  exe.addModule(\"string\", string.module(\"string\"));\r\n  ```\r\n7. Now, in your source files, you can use `String` by-\r\n  ```zig\r\n  const String = @import(\"string\").String;\r\n  ```\r\n8. Enjoy :)\r\n  \r\n## Examples\r\n```zig\r\nconst hello_world = try String.fromStr(allocator, \"Hello World!\");\r\n\r\nstd.debug.print(\"{}\\n\", .{hello_world.isAscii()});\r\n```\r\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/145422627?u=1859d2e39111b26b8ca270f7d3659e8f9c214447&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.0.0-alpha",
+      "name": "v0.0.0-alpha",
+      "body": "",
+      "prerelease": true,
+      "published_at": "2023-11-15T14:34:35Z",
+      "html_url": "https://github.com/crispy-strawberry/string.zig/releases/tag/v0.0.0-alpha",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 0,
+  "owner_following": 0,
+  "owner_created_at": "2023-09-19T05:09:59Z",
+  "license": "Apache-2.0",
+  "category": "library"
+}

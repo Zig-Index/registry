@@ -1,0 +1,35 @@
+{
+  "name": "ayc-libuv",
+  "owner": "vspefs",
+  "repo": "ayc-libuv",
+  "description": "libuv C library (not a binding!) as a fetch-able Zig package.",
+  "type": "project",
+  "topics": [
+    "libuv",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-02-19T09:22:27Z",
+  "dependencies": [
+    {
+      "name": "src",
+      "url": "git+https://github.com/libuv/libuv#e59e2a9e49c96feffebdfd44915320e32a91a957",
+      "hash": "1220a688c4d1a764bf27282baa0a12c43aac2bd2ce766a4d44a9f884c7304dafd1c0"
+    }
+  ],
+  "readme": "I build libuv with Zig build system. You fetch it and use it in your Zig build system.\n\nSanitizers not usable. I'm lazy and I'm sorry. Should fix that later.\n\nShould be working on Linux and Windows.\nTake care of the platform-specific macros yourself. Like `_GNU_SOURCE` on Linux.\n\nAs you could possibly guess, I mean to get this into [All Your Codebase](https://github.com/allyourcodebase/). But I should really provide support for all available platforms first before try to get this to anywhere else.",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/87294692?v=4",
+  "releases": [],
+  "owner_bio": "A LOSER.",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 10,
+  "owner_following": 4,
+  "owner_created_at": "2021-07-12T05:04:29Z",
+  "license": "GPL-3.0",
+  "category": "library"
+}

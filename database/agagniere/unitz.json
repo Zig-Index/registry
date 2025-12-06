@@ -1,0 +1,36 @@
+{
+  "name": "unitz",
+  "owner": "agagniere",
+  "repo": "unitz",
+  "description": "For when you don't want your probe crashing in Mars' atmosphere",
+  "type": "project",
+  "topics": [
+    "zig-package",
+    "physics"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 2,
+  "updated_at": "2025-09-25T22:36:00Z",
+  "dependencies": [
+    {
+      "name": "comath",
+      "url": "git+https://github.com/InKryption/comath?ref=main#502c5e65c3708e14f19e19fb78c18123e4cb752c",
+      "hash": "comath-0.1.0-wKZ2n-ffAQD0U6AGU-dnus5nW1yRJP5SXtycwQDQoKNb"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# Unitz\n\nAchieve compile-time unit correctness and avoid runtime surprises.\n\n## Showcase\n\nUse units as types, to document your functions, and convert to units of the same dimension:\n\n```zig\nconst units = @import(\"unitz\").quantities(f32);\n\nconst m = units.meter;\nconst s = units.second;\nconst kt = units.knot;\nconst @\"km/h\" = unitz.evalQuantity(f32, \"km / h\", .{});\n\nfn aircraft_speed(distance: m, duration: s) kt {\n\tconst speed = distance.div(duration); // value is in m/s\n\tconst result = speed.to(kt);\n\tstd.debug.print(\"Speed: {} m/s = {} kt = {} km/h\\n\", .{\n\t\tspeed.val(),\n\t\tresult.val(),\n\t\tspeed.to_val(@\"km/h\"),\n\t});\n\treturn result;\n}\n```\n\nA compilation error occurs when trying to perform an invalid conversion:\n\n```zig\nconst J = units.joule;\nconst hp = units.imperial_horsepower;\n\nconst engine_power = hp.init(130);\nconst energy = engine_power.to(J);\n```\nWill result in the compilation error:\n```zig\nsrc/root.zig:233:61: error: Units are only interconvertible if they measure the same kind of dimension\n            comptime if (!unit_from.is_compatible(unit_to)) @compileError(\"Units are only interconvertible if they measure the same kind of dimension\");\n                                                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nfoo.zig:29:35: note: called from here\n    const energy = engine_power.to(J);\n                   ~~~~~~~~~~~~~~~^~~\n```\n\nNo conversion is done implicitly, the value stored in memory is exactly the one provided to the constructor.\n\n## Defining your own units\n\nThis library does not provide all variations of standard units: meter and hour are provided, but kilometer and kilometer per hour is not. Instead, you can define any unit you want from its definition, using prefixes if needed:\n\n```zig\nconst nanosecond = unitz.evalQuantity(f32, \"ns\", .{});\nconst @\"kg/m3\" = unitz.evalQuantity(f32, \"kg / m^3\", .{});\nconst kilowatthour = unitz.evalQuantity(f32, \"kW * h\", .{});\nconst Cal = unitz.evalQuantity(f32, \"kcal\", .{}); // large calorie\n```\n\n## Simple example\n\n```zig\nconst std = @import(\"std\");\nconst unitz = @import(\"unitz\");\nconst q = unitz.quantities(f32);\n\nconst m = q.meter;\nconst kg = q.kilogram;\nconst lb = q.pound;\nconst cm = unitz.evalQuantity(f32, \"cm\", .{});\nconst @\"kg/m²\" = unitz.evalQuantity(f32, \"kg / m^2\", .{});\n\nfn body_mass_index(height: m, weight: kg) @\"kg/m²\" {\n\treturn weight.div(height.pow(2));\n}\n\npub fn main() void {\n\tconst height = cm.init(162);\n\tconst weight = lb.init(124);\n\tconst bmi = body_mass_index(height.to(m), weight.to(kg));\n\tstd.debug.print(\"BMI: {}\", .{bmi.val()});\n}\n```\n\n## Advanced example\n\nWe redefine slug and pound-force to show how it can be done\n```zig\nconst unitz = @import(\"unitz\");\n\nconst slug = unitz.evalUnit(\"32.174_049 * lb\", .{});\nconst lbf = unitz.evalQuantity(f32, \"ft * my_slug / s^2\", .{ .my_slug = slug });\nconst @\"lbf.s\" = unitz.evalQuantity(f32, \"my_lbf * s\", .{ .my_lbf = lbf.unit });\nconst @\"N.s\" = unitz.evalQuantity(f32, \"N * s\", .{});\nconst @\"μs\" = unitz.evalQuantity(f32, \"us\", .{});\n\nfn compute_impulse(force: lbf, delta: @\"μs\") @\"lbf.s\" {\n    return force.mul(delta).to(@\"lbf.s\"); // we need to convert from lbf.us to lbf.s, if we forget, a compilation error occurs\n}\n\nfn compute_trajectory(impulse: @\"N.s\") void {\n    // ...\n}\n\npub fn main() void {\n    const force = lbf.init(123.0);\n    const delta = @\"μs\".init(45.0);\n\n    compute_trajectory(compute_impulse(force, delta)); // compilation error ! Adding .to(@\"N.s\") will fix it\n}\n```\n\nAnd just like that, you can avoid [crashing into the atmosphere](https://en.wikipedia.org/wiki/Mars_Climate_Orbiter#Cause_of_failure)\n\n## Use in your project\n\nAdd the dependency in your build.zig.zon by running the following command:\n\n```shell\nzig fetch --save git+https://github.com/agagniere/unitz#master\n```\n\nAdd it to your exe in your build.zig:\n```zig\nexe.root_module.addImport(\"unitz\", b.dependency(\"unitz\", .{ .target = target, .optimize = optimize }).module(\"unitz\"));\n```\n\nThen you can import it from your code:\n```zig\nconst unitz = @import(\"unitz\");\n```\n\n## Generate documentation\n\n```shell\nzig build docs\n# Then serve locally, for example:\npython -m http.server 8000 -d zig-out/docs\nopen \"http://localhost:8000\"\n```\n\n## Bump dependencies\n\n```shell\nzig fetch --save git+https://github.com/InKryption/comath#main\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/8630600?u=d1242ba0f38966f4f2318d9814cf6d12efe68f75&v=4",
+  "releases": [],
+  "owner_company": "@Datadog",
+  "owner_location": "France",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 34,
+  "owner_following": 46,
+  "owner_created_at": "2014-09-02T16:19:59Z",
+  "homepage": "https://agagniere.github.io/unitz/",
+  "license": "MIT",
+  "category": "physics"
+}

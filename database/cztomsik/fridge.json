@@ -1,0 +1,38 @@
+{
+  "name": "fridge",
+  "owner": "cztomsik",
+  "repo": "fridge",
+  "description": "A small, batteries-included database library for Zig.",
+  "type": "project",
+  "topics": [
+    "sqlite",
+    "sqlite3",
+    "zig",
+    "database",
+    "zig-package"
+  ],
+  "stars": 75,
+  "forks": 7,
+  "watchers": 3,
+  "updated_at": "2025-12-05T19:18:28Z",
+  "dependencies": [
+    {
+      "name": "sqlite_source",
+      "url": "https://sqlite.org/2025/sqlite-autoconf-3490100.tar.gz",
+      "hash": "N-V-__8AAPmiwQDYOF242Pnl0pUbyqdyr4Rq43HQqlgvoeZG"
+    }
+  ],
+  "readme": "# Fridge\n\nA small, batteries-included database library for Zig. It offers a type-safe\nquery builder, connection pooling, shorthands for common tasks, migrations, and\nmore.\n\n## Features\n\n- [x] Supports both bundling SQLite3 with your app or linking system SQLite3.\n- [x] Type-safe + raw query builder.\n- [x] Connection pool.\n- [x] Shortcuts for common tasks.\n- [x] **Migrations** inspired by [David Röthlisberger](https://david.rothlis.net/declarative-schema-migration-for-sqlite/).\n- [ ] Additional drivers (e.g., PostgreSQL).\n- [ ] Documentation.\n\n## Installation\n\nTo get started, get the library first:\n\n```sh\nzig fetch https://github.com/cztomsik/fridge/archive/refs/heads/main.tar.gz --save\n```\n\nThen, in your `build.zig`:\n\n```zig\n// Use .bundle = false if you want to link system SQLite3\nconst sqlite = b.dependency(\"fridge\", .{ .bundle = true });\nexe.root_module.addImport(\"fridge\", sqlite.module(\"fridge\"));\n```\n\n## Basic Usage\n\nFridge's API is highly generic and revolves around user-defined structs. Let's\nstart by adding a few imports and defining a simple struct for the `User` table:\n\n```zig\nconst std = @import(\"std\");\nconst fr = @import(\"fridge\");\n\nconst User = struct {\n    id: u32,\n    name: []const u8,\n    role: []const u8,\n};\n```\n\nThe primary API you'll interact with is always `Session`. This high-level API\nwraps the connection with an arena allocator and provides a type-safe query\nbuilder.\n\nSessions can be either one-shot or pooled. Let's start with the simplest case:\n\n```zig\nvar db = try fr.Session.open(fr.SQLite3, allocator, .{ .filename = \":memory:\" });\ndefer db.deinit();\n```\n\nAs you can see, `Session.open()` is generic and expects a driver type,\nallocator, and connection options. These connection options are driver-specific.\n\nCurrently, only SQLite3 is supported, but the API is designed to be easily\nextendable to other drivers, including your own.\n\nNow, let's do something useful with the session. For example, we can create a\ntable. Executing DDL statements is a bit special because it usually involves\nmultiple statements and doesn't return any rows. In such cases, you can access\n`conn: Connection` directly and use low-level methods like `execAll()`,\n`lastInsertRowId()`, etc.\n\n```zig\ntry db.conn.execAll(\n    \\\\CREATE TABLE User (\n    \\\\  id INTEGER PRIMARY KEY,\n    \\\\  name TEXT NOT NULL,\n    \\\\  role TEXT NOT NULL\n    \\\\);\n)\n```\n\nNext, let's insert some data. Since this is a common operation, there's a\nconvenient shorthand:\n\n```zig\ntry db.insert(User, .{\n    .name = \"Alice\",\n    .role = \"admin\",\n});\n```\n\nAlternatively, you could also use the query builder directly:\n\n```zig\ntry db.query(User).insert(.{\n    .name = \"Bob\",\n    .role = \"user\",\n});\n```\n\nThe difference here is subtle. For instance, you could add `onConflict()` before\ncalling `insert()`, or in the case of `update()`, you could add `where()`, which\nis often more common.\n\nNow, let's query the data back. The `query()` method returns a query builder\nthat, among other things, has a `findAll()` method.\n\n```zig\nfor (try db.query(User).findAll()) |user| {\n    std.log.debug(\"User: {}\", .{user});\n}\n```\n\nOf course, you can also use `where()` to filter the results:\n\n```zig\nfor (try db.query(User).where(\"role\", \"admin\").findAll()) |user| {\n    std.log.debug(\"Admin: {}\", .{user});\n}\n```\n\nNotably, the `.where()` method is type-safe and will only accept types compatible with the column type.\n\n### Type-safe Query Builder\n\nThe type-safe query builder provides methods that are aware of your struct's fields:\n\n```zig\n// Find all users with role \"admin\", ordered by name\nconst admins = try db.query(User)\n    .where(\"role\", \"admin\")\n    .orderBy(.name, .asc)\n    .findAll();\n\n// Count users by role\nconst n_admins = try db.query(User)\n    .where(\"role\", \"admin\")\n    .count(\"id\");\n\n// Find users with optional filters\nconst users = try db.query(User)\n    .maybeWhere(\"role\", filter.role) // only applies if filter.role is not null\n    .ifWhere(cond, \"age\", filter.age) // only applies if cond is true\n    .findAll();\n```\n\n### Raw Query Builder\n\nFor more complex queries:\n\n```zig\nconst users = try db.raw(\"SELECT * FROM User\")\n    .where(\"role = ?\", \"admin\")\n    .fetchAll(User);\n\nconst users = try db.query(User)\n    .raw // switch to unsafe\n    .where(\"role = ? or role = ?\", .{ \"admin\", \"editor\" }) // pass multiple args\n    .fetchAll(User);\n```\n\n## Pooling\n\nIf you're building a web application, you might want to use a connection pool. Pooling improves performance and ensures that each user request gets its own session with separate transaction chains.\n\nHere's how to use the `fr.Pool`:\n\n```zig\n// During your app initialization\nvar pool = try fr.Pool(fr.SQLite3).init(allocator, .{ .max_count = 5 }, .{ .filename = \":memory:\" });\ndefer pool.deinit();\n\n// Inside your request handler\nvar db = try pool.getSession(allocator); // per-request allocator\ndefer db.deinit(); // cleans up and returns the connection to the pool\n\n// Now you can use the session as usual\n_ = try db.query(User).findAll();\n```\n\n## Migrations\n\n> **TODO: Currently, migrations only work with SQLite.**\n\nFridge includes a simple migration script that can be used with any DDL SQL\nfile. It expects a `CREATE XXX` statement for every table, view, trigger, etc.,\nand will automatically create or drop the respective objects. The only\nrequirement is that all names must be quoted.\n\n```sql\nCREATE TABLE \"User\" (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n```\n\nFor tables, the script will try to reuse as much data as possible. It will first\ncreate a new table with a temporary name, copy all data from the old table using\n`INSERT INTO xxx ... FROM temp`, and finally drop the old table and rename the\nnew one.\n\nThis approach allows you to freely add or remove columns, though you can't\nchange their types or remove default values. While it's not a fully-fledged\nmigration system, it works surprisingly well for most cases.\n\n```zig\ntry fr.migrate(allocator, \"my.db\", @embedFile(\"db_schema.sql\"));\n```\n\n## License\n\nMIT\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/3526922?u=c238259210ea197b3c06bc8f156246749db71d97&v=4",
+  "releases": [],
+  "owner_bio": "Working on a desktop app for chatting with LLMs (Ava PLS).",
+  "owner_company": null,
+  "owner_location": "Brno, Czech Republic",
+  "owner_blog": "https://www.avapls.com",
+  "owner_twitter_username": "cztomsik",
+  "owner_followers": 195,
+  "owner_following": 250,
+  "owner_created_at": "2013-02-10T20:02:00Z",
+  "license": "MIT",
+  "category": "database"
+}

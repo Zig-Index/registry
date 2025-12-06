@@ -1,0 +1,77 @@
+{
+  "name": "shared-memory-zig",
+  "owner": "Peter-Barrow",
+  "repo": "shared-memory-zig",
+  "description": "Unified interface to shared memory on Linux, macOS and Windows",
+  "type": "project",
+  "topics": [
+    "shared-memory",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 5,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-08-11T11:35:47Z",
+  "dependencies": [
+    {
+      "name": "known_folders",
+      "url": "git+https://github.com/ziglibs/known-folders.git#ab5cf5feb936fa3b72c95d3ad0c0c67791937ba1",
+      "hash": "known_folders-0.0.0-Fy-PJtTTAADUOhGKM0sxzG4eMkNQxRvx9e5dfHVyaeA3"
+    },
+    {
+      "name": "zigwin32",
+      "url": "git+https://www.github.com/marlersoft/zigwin32.git#d21b419d808215e1f82605fdaddc49750bfa3bca",
+      "hash": "zigwin32-25.0.28-preview-AAAAAI0J-wP-8_KKo4Yjr33XLhVhlJmeagGUedByaOnX"
+    }
+  ],
+  "readme": "# Shared Memory Zig\n\n**Overview**\n\nThis library implements a unified interface to shared memory on Linux, macOS and Windows\n\n## Features\n\n- Cross-platform support (Linux, FreeBSD, Windows)\n- Multiple implementation strategies (memfd, POSIX shm, Windows file mapping)\n- Type-safe shared memory segments\n- Automatic memory layout management with headers\n- Built-in existence checking\n\n## Installation\nAdd the following to you `build.zig.zon`, replacing the url with the latest archive, for example `https://github.com/Peter-Barrow/shared-memory-zig/archive/699c748fbb143733183760cc7e83ded098eac6d1.zip` and then replacing the hash with the latest commit hash.\n``` zig\n.{\n    .name = \"my-project\",\n    .version = \"0.0.0\",\n    .dependencies = .{\n        .shared_memory = .{\n            .url = \"\",\n            .hash = \"\",\n        },\n    },\n}\n```\nOr alternatively run:\n``` shell\nzig fetch --save git+https://github.com/Peter-Barrow/shared-memory-zig.git\n```\n\nAdd the following to your `build.zig`\n``` zig\nconst shared_memory = b.dependency(\"shared_memory\", .{}).module(\"shared_memory\");\nconst exe = b.addExecutable(...);\n// This adds the shared-memory-zig module to the executable which can then be imported with `@import(\"shared-memory-zig\")`\nexe.root_module.addImport(\"shared-memory-zig\", shared_memory);\n```\n\n## Dependencies\nFor compatibility with Windows this requires [zigwin32](https://github.com/marlersoft/zigwin32)\nThis codebase also uses the [known-folders](https://github.com/ziglibs/known-folders/tree/master) library to get the runtime directory on Linux and FreeBSD when using the `memfd` backend.\n\n## Example\n### Create a shared struct\n``` zig\nconst shmem = @import(\"shared_memory\");\n\nconst TestStruct = struct {\n    id: i32,\n    float: f64,\n    string: [20]u8,\n};\n\nconst shm_name = \"/test_struct_with_string\";\n\nvar shm: SharedStruct = try SharedStruct.create(shm_name, alloca);\ndefer shm.close();\n\nshm.data.* = .{ .x = 42, .y = 3.14 };\n\n// Open the shared memory in another \"process\"\nvar shm2 = try SharedStruct.open(shm_name, alloca);\ndefer shm2.close();\n\ntry std.testing.expectEqual(@as(i32, 42), shm2.data.x);\ntry std.testing.expectApproxEqAbs(@as(f64, 3.14), shm2.data.y, 0.001);\n```\n\n### Create a shared array of comptime known length\n``` zig\nconst shmem = @import(\"shared_memory\");\n\nvar gpa = std.heap.GeneralPurposeAllocator(.{}){};\ndefer _ = gpa.deinit();\nconst alloca = switch (tag) {\n    .linux, .freebsd => gpa.allocator(),\n    else => null,\n};\n\nconst array_size = 20;\nvar expected = [_]i32{0} ** array_size;\nfor (0..array_size) |i| {\n    expected[i] = @intCast(i * 2);\n}\n\nconst shm_name = \"/test_array\";\n\nconst SharedI32 = SharedMemory([array_size]i32);\n\nvar shm: SharedI32 = try SharedI32.create(shm_name, alloca);\ndefer shm.close();\n\nfor (shm.data, 0..) |*item, i| {\n    item.* = @intCast(i * 2);\n}\n\n// Open the shared memory in another \"process\"\nvar shm2 = try SharedI32.open(shm_name, alloca);\ndefer shm2.close();\n\nfor (shm2.data, 0..) |item, i| {\n    try std.testing.expectEqual(@as(i32, @intCast(i * 2)), item);\n}\ntry std.testing.expectEqualSlices(i32, &expected, shm2.data);\n}\n```\n### Create an array with runtime known length\n``` zig\nconst shmem = @import(\"shared_memory\");\n\nvar gpa = std.heap.GeneralPurposeAllocator(.{}){};\ndefer _ = gpa.deinit();\nconst alloca = switch (tag) {\n    .linux, .freebsd => gpa.allocator(),\n    else => null,\n};\n\nconst array_size = 20;\nvar expected = [_]i32{0} ** array_size;\nfor (0..array_size) |i| {\n    expected[i] = @intCast(i * 2);\n}\n\nconst shm_name = \"/test_array\";\n\nconst SharedI32 = SharedMemory([]i32);\n\nvar shm: SharedI32 = try SharedI32.createWithLength(shm_name, array_size, alloca);\ndefer shm.close();\n\nfor (shm.data, 0..) |*item, i| {\n    item.* = @intCast(i * 2);\n}\n\n// Open the shared memory in another \"process\"\nvar shm2 = try SharedI32.open(shm_name, alloca);\ndefer shm2.close();\n\nfor (shm2.data, 0..) |item, i| {\n    try std.testing.expectEqual(@as(i32, @intCast(i * 2)), item);\n}\ntry std.testing.expectEqualSlices(i32, &expected, shm2.data);\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/24245170?u=b3792e0c9ee9f1ce51ebb59186ae44c0323ec4e7&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.3.2",
+      "name": "",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-08-11T11:26:29Z",
+      "html_url": "https://github.com/Peter-Barrow/shared-memory-zig/releases/tag/v0.3.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.3.0",
+      "name": "v0.3.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-03-19T20:43:49Z",
+      "html_url": "https://github.com/Peter-Barrow/shared-memory-zig/releases/tag/v0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "**Full Changelog**: https://github.com/Peter-Barrow/shared-memory-zig/compare/v0.1.0...v0.2.0",
+      "prerelease": false,
+      "published_at": "2024-12-17T17:49:10Z",
+      "html_url": "https://github.com/Peter-Barrow/shared-memory-zig/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "**Full Changelog**: https://github.com/Peter-Barrow/shared-memory-zig/commits/v0.1.0",
+      "prerelease": false,
+      "published_at": "2024-12-10T17:50:20Z",
+      "html_url": "https://github.com/Peter-Barrow/shared-memory-zig/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 5,
+  "owner_following": 4,
+  "owner_created_at": "2016-11-29T09:33:01Z",
+  "license": "MIT",
+  "category": "library"
+}

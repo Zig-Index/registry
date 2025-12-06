@@ -1,0 +1,54 @@
+{
+  "name": "cudaz",
+  "owner": "akhildevelops",
+  "repo": "cudaz",
+  "description": "Cuda library for Zig",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 117,
+  "forks": 10,
+  "watchers": 2,
+  "updated_at": "2025-12-03T15:28:28Z",
+  "minimum_zig_version": "0.11.0",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/6951100?u=d1219532a4e544f59a9fd017eb83787d9ea9032e&v=4",
+  "releases": [
+    {
+      "tag_name": "0.2.1",
+      "name": "0.2.1",
+      "body": "## What's Changed\r\n* convert runtime type error to comptime by @JackDyre in https://github.com/akhildevelops/cudaz/pull/11\r\n* device deinit/free by @JackDyre in https://github.com/akhildevelops/cudaz/pull/12\r\n* add device to host memcpy by @JackDyre in https://github.com/akhildevelops/cudaz/pull/10\r\n* Add extra nvrtc args by @PaulBrushman in https://github.com/akhildevelops/cudaz/pull/14\r\n* Expose module and function from lib by @PaulBrushman in https://github.com/akhildevelops/cudaz/pull/13\r\n\r\n## New Contributors\r\n* @JackDyre made their first contribution in https://github.com/akhildevelops/cudaz/pull/11\r\n* @PaulBrushman made their first contribution in https://github.com/akhildevelops/cudaz/pull/14\r\n\r\n**Full Changelog**: https://github.com/akhildevelops/cudaz/compare/0.2.0...0.2.1\r\n",
+      "prerelease": false,
+      "published_at": "2025-08-01T09:33:45Z",
+      "html_url": "https://github.com/akhildevelops/cudaz/releases/tag/0.2.1",
+      "assets": []
+    },
+    {
+      "tag_name": "0.2.0",
+      "name": "0.2.0",
+      "body": "Compaitible with zig 0.14.0\r\n\r\n## What's Changed\r\n* Update zon and test target for zig 0.14 by @jackalcooper in https://github.com/akhildevelops/cudaz/pull/8\r\n\r\n## New Contributors\r\n* @jackalcooper made their first contribution in https://github.com/akhildevelops/cudaz/pull/8\r\n\r\n**Full Changelog**: https://github.com/akhildevelops/cudaz/compare/0.1.0...0.2.0",
+      "prerelease": false,
+      "published_at": "2025-03-29T12:38:16Z",
+      "html_url": "https://github.com/akhildevelops/cudaz/releases/tag/0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.1.0",
+      "name": "0.1.0",
+      "body": "Compatible with zig 0.13.0\r\n\r\n## What's Changed\r\n* Fix `build.zig`. Make example depend on parent project. by @DanikVitek in https://github.com/akhildevelops/cudaz/pull/2\r\n* Fix segfault on Windows by @DanikVitek in https://github.com/akhildevelops/cudaz/pull/4\r\n* update for zig 14 by @Koeng101 in https://github.com/akhildevelops/cudaz/pull/7\r\n\r\n## New Contributors\r\n* @DanikVitek made their first contribution in https://github.com/akhildevelops/cudaz/pull/2\r\n* @Koeng101 made their first contribution in https://github.com/akhildevelops/cudaz/pull/7\r\n\r\n**Full Changelog**: https://github.com/akhildevelops/cudaz/commits/0.1.0",
+      "prerelease": false,
+      "published_at": "2025-02-05T16:29:58Z",
+      "html_url": "https://github.com/akhildevelops/cudaz/releases/tag/0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": " 🤖 Software Engineer\r\n\r\n\r\n 🧑‍🎨 Blogger\r\n\r\n 🤔 Thinker",
+  "owner_company": "Self",
+  "owner_location": "India",
+  "owner_blog": null,
+  "owner_twitter_username": "akhildevelops",
+  "owner_followers": 44,
+  "owner_following": 6,
+  "owner_created_at": "2014-03-14T12:24:26Z",
+  "category": "library"
+}

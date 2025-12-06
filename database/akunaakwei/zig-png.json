@@ -1,0 +1,44 @@
+{
+  "name": "zig-png",
+  "owner": "akunaakwei",
+  "repo": "zig-png",
+  "description": "libpng for zig",
+  "type": "project",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-10-18T07:53:43Z",
+  "dependencies": [
+    {
+      "name": "png",
+      "url": "https://github.com/pnggroup/libpng/archive/refs/tags/v1.6.50.tar.gz",
+      "hash": "N-V-__8AAGrVXwC00HYe0ep6gbt70MXihr_woI0886_w8tD8"
+    },
+    {
+      "name": "z",
+      "url": "https://github.com/akunaakwei/zig-z/archive/90f9f5b5892f248426f86ec87d2ad210017b4fbb.tar.gz",
+      "hash": "z-1.3.1-bMk6UWILAACBq0z3H3a5qZNyCx0O7BVePzsBnlIv4zVr"
+    },
+    {
+      "name": "mawk",
+      "url": "https://github.com/akunaakwei/zig-mawk/archive/7d60616cd324eef46176babf231b7f5950b73fec.zip",
+      "hash": "mawk-1.3.4-anuHUHE2AABoqR3_NH_X6AqeKRAFhT_vbmEkV-PpsKJR"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# libpng\r\nThis is libpng packaged for the zig build system.",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/11787994?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 0,
+  "owner_following": 2,
+  "owner_created_at": "2015-04-03T16:34:07Z",
+  "license": "Zlib",
+  "category": "library"
+}

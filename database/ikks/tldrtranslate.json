@@ -1,0 +1,203 @@
+{
+  "name": "tldrtranslate",
+  "owner": "ikks",
+  "repo": "tldrtranslate",
+  "description": "A helper on tldrtranslation that uses argos",
+  "type": "project",
+  "topics": [
+    "tldr",
+    "translation",
+    "zig-package"
+  ],
+  "stars": 4,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-01-12T18:32:12Z",
+  "dependencies": [
+    {
+      "name": "clap",
+      "url": "https://github.com/Hejsil/zig-clap/archive/refs/tags/0.9.1.tar.gz",
+      "hash": "122062d301a203d003547b414237229b09a7980095061697349f8bef41be9c30266b"
+    },
+    {
+      "name": "lmdb",
+      "url": "https://github.com/Syndica/lmdb-zig/archive/93ee129e4556c0d8af19abb0261530f0444dd577.tar.gz",
+      "hash": "1220e27a4e98d4f93b1f29c7c38985a4818e6cd135525379e23087c20c8de4a3034b"
+    }
+  ],
+  "minimum_zig_version": "0.13.0",
+  "readme": "# TLDR Helper Translation\n\nThis is a helper to translate [tldr pages](https://tldr.sh/). Collaborators can introduce this tool in the workflow to speed up the [translation process](https://github.com/tldr-pages/tldr/blob/main/CONTRIBUTING.md#translations).  Take a look to see how the tool works.\n\nhttps://github.com/user-attachments/assets/b81b3895-aa8d-443b-84d5-057d9ecc4041\n\n## Supported languages\n\n* ar\n* bn\n* ca\n* cs\n* da\n* de\n* es\n* fa\n* fi\n* fr\n* hi\n* id\n* it\n* ja\n* ko\n* nl\n* pl\n* pt_BR\n* pt_PT\n* ro\n* ru\n* sv\n* th\n* tr\n* uk\n* zh\n* zh_TW\n\nThe workflow is:\n * `tldrtranslate` translates from English to the language you desire.\n * With your team, you can fix the output and make a pull request.\n\n## Download and usage\n\n * Download for your platform from the [releases page](https://github.com/ikks/tldrtranslate/releases), take the latest one.\n * Download [Argos-API](https://github.com/Jaro-c/Argos-API) and [argos-translate](https://github.com/argosopentech/argos-translate) and make the API run.\n\nIf you are having problems getting the API and argos-translate to run, please ask \nin https://app.element.io/#/room/#tldr-pages:matrix.org , maybe there is someone\nthat can put a server for your use.\n\n## Running\n\nSuppose you aim to translate `pages/common/argos-translate.md` to `it` , you will run:\n\n``` \ntldrtranslate -L it pages/common/argos-translate.md\n```\n\n`tldrtranslate` will output the translation to `pages.it/common/argos-translate.md`, overwriting the file if it existed\n\nYou can use relative or absolute paths, as soon as you include the hierarchy beginning with the `pages` directory.\n\n`tldrtranslate` takes into account the following ENV_VARS:\n\n* LANG: if set and with a supported language, is used unless TLDR_LANG is set or -L option is passed\n* NO_COLOR: if set, the output with -y option will not show colors respecting original format\n\nYou can set the following ENV_VARS to change the default configurations:\n\n*  TLDR_LANG: defaults to `es` (spanish) \n*  TLDR_ARGOS_API_URLBASE: defaults to `localhost`\n*  TLDR_ARGOS_API_PORT: Defaults to `8000`\n*  TLDR_ES_DB_PATH: Your spanish db to present singular verb tweak, has no default\n\neach one of them is superseeded by the option of the command line\n\n* -L es\n* -H localhost\n* -P 8000\n* -d path/to/tldr_translation.db\n\n## Building from source\n\n* You need [zig 0.13.0](https://ziglang.org/download/) to compile tldrtranslate\n* Clone this repository\n\nAnd issue\n\n```\nzig build\n```\n\nUnder `zig-out/bin/` should be present `tldrtranslate` for your use.\n\n* [argos-API](https://github.com/Jaro-c/Argos-API) translate instance running, in port 8000\n* If you are translating to Spanish, [download data](https://igor.tamarapatino.org/tldrtranslate/resources/es/data.mdb.gz) to tweak the verb inflection and use the `-d path/to/directory/holding/data`, if there is an error, you will be instructed on how to install the inflection db.\n\nFeel free to clone and modify to suit your needs. Ideas, bug reports and PRs are welcome.\n\n## Running an Argos API instance\n\nYou will need to have Python, argos-translate and api-argos or Docker and some Gigas of space for the models and the needed infrastructure.\n\nHave an [Argos-API](https://github.com/Jaro-c/Argos-API) locally. To run it, with your\nlanguage pairs you can issue on your virtualenv:\n\n```\nfastapi dev main\n```\n\n## About languages\n\n### Adding a language\n\nIf your language is in the list of supported languages by Argos-translate, just download the required package to your running argos-API environment.  For example, for portuguese `argospm install translate-en_pt`, which happens to be the same for both PT or BR.\n\nIf your language is not supported by argos-translate, you can [open an issue in Argos-translate](https://github.com/argosopentech/argos-translate/discussions/91).\n\n### Adding common replacements for your language\n\nIf your will is to have consistent translations, there are some words that can be replaced before the translation process, please look [here](docs/language_replacements.md).\n\n## Resources\n\n* [Spanish verbs conversion](https://igor.tamarapatino.org/tldrtranslate/resources/es/data.mdb.gz). Based on Compjugador.  The data is covered by GPL and can be used optionally in the case of basic verbs inflection for spanish.\n* [Argos-translate](https://github.com/argosopentech/argos-translate) with tons of work.\n* [Argos-API](https://github.com/Jaro-c/Argos-API)\n* [tldr pages](https://tldr.sh/)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/531285?u=2f0c6b1224962ea4b98a529b63b9b6db6b8950f8&v=4",
+  "releases": [
+    {
+      "tag_name": "v1.0.0",
+      "name": "v1.0.0",
+      "body": "# V1.0.0\r\n\r\nSupport for more than 20 target languages, please let us know the quality of the language you are interested in.  So far Spanish has been used in more than 30 translations to Spanish. We need always to supervise the output to have a quality translation.\r\n\r\nWe support formatting colors when using --dryrun option\r\n![20241202_18h38m17s_grim](https://github.com/user-attachments/assets/e85a77da-a5eb-4742-b7dc-f96ac5d3acf4)\r\n\r\nIt's also possible to output the raw file when setting NO_COLOR environment variable\r\n![20241202_18h47m41s_grim](https://github.com/user-attachments/assets/3fecfae0-f51c-4958-9df1-32370e13d6c0)\r\n\r\n\r\n**Full Changelog**: https://github.com/ikks/tldrtranslate/compare/v0.2.0...v1.0.0",
+      "prerelease": false,
+      "published_at": "2024-12-03T00:02:56Z",
+      "html_url": "https://github.com/ikks/tldrtranslate/releases/tag/v1.0.0",
+      "assets": [
+        {
+          "name": "tldrtranslate-aarch64-linux",
+          "url": "https://github.com/ikks/tldrtranslate/releases/download/v1.0.0/tldrtranslate-aarch64-linux",
+          "size": 1593872,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "tldrtranslate-aarch64-macos",
+          "url": "https://github.com/ikks/tldrtranslate/releases/download/v1.0.0/tldrtranslate-aarch64-macos",
+          "size": 1390808,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "tldrtranslate-x86_64-windows.exe",
+          "url": "https://github.com/ikks/tldrtranslate/releases/download/v1.0.0/tldrtranslate-x86_64-windows.exe",
+          "size": 1797120,
+          "content_type": "application/x-ms-dos-executable"
+        },
+        {
+          "name": "tldrtranslate-x86_64-linux",
+          "url": "https://github.com/ikks/tldrtranslate/releases/download/v1.0.0/tldrtranslate-x86_64-linux",
+          "size": 1620808,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "tldrtranslate-x86_64-macos",
+          "url": "https://github.com/ikks/tldrtranslate/releases/download/v1.0.0/tldrtranslate-x86_64-macos",
+          "size": 1380844,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "Spanish has received some more love in this opportunity and documentation to make it\r\neasier to have common replacements for other languages\r\n\r\n* Added option -y to show the translation without overwriting\r\n* Added option for spanish to improve the conjugation to adhere to third person\r\n* Added warning about automated translation and flag to supress from the output\r\n* If you want to improve your language, take a look at https://github.com/ikks/tldrtranslate/blob/main/docs/language_replacements.md\r\n",
+      "prerelease": false,
+      "published_at": "2024-11-27T22:10:32Z",
+      "html_url": "https://github.com/ikks/tldrtranslate/releases/tag/v0.2.0",
+      "assets": [
+        {
+          "name": "tldrtranslate-x86_64-linux",
+          "url": "https://github.com/ikks/tldrtranslate/releases/download/v0.2.0/tldrtranslate-x86_64-linux",
+          "size": 1610552,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "tldrtranslate-aarch64-macos",
+          "url": "https://github.com/ikks/tldrtranslate/releases/download/v0.2.0/tldrtranslate-aarch64-macos",
+          "size": 1370472,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "tldrtranslate-aarch64-linux",
+          "url": "https://github.com/ikks/tldrtranslate/releases/download/v0.2.0/tldrtranslate-aarch64-linux",
+          "size": 1584840,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "tldrtranslate-x86_64-macos",
+          "url": "https://github.com/ikks/tldrtranslate/releases/download/v0.2.0/tldrtranslate-x86_64-macos",
+          "size": 1370528,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "tldrtranslate-x86_64-windows.exe",
+          "url": "https://github.com/ikks/tldrtranslate/releases/download/v0.2.0/tldrtranslate-x86_64-windows.exe",
+          "size": 1769984,
+          "content_type": "application/x-ms-dos-executable"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.1",
+      "name": "v0.1.1",
+      "body": "Added nl and tr languages, supported by Argos Translate\n",
+      "prerelease": false,
+      "published_at": "2024-11-25T00:48:07Z",
+      "html_url": "https://github.com/ikks/tldrtranslate/releases/tag/v0.1.1",
+      "assets": [
+        {
+          "name": "tldrtranslate-aarch64-linux",
+          "url": "https://github.com/ikks/tldrtranslate/releases/download/v0.1.1/tldrtranslate-aarch64-linux",
+          "size": 888208,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "tldrtranslate-aarch64-macos",
+          "url": "https://github.com/ikks/tldrtranslate/releases/download/v0.1.1/tldrtranslate-aarch64-macos",
+          "size": 985072,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "tldrtranslate.exe",
+          "url": "https://github.com/ikks/tldrtranslate/releases/download/v0.1.1/tldrtranslate.exe",
+          "size": 1149952,
+          "content_type": "application/x-ms-dos-executable"
+        },
+        {
+          "name": "tldrtranslate-x86_64-macos",
+          "url": "https://github.com/ikks/tldrtranslate/releases/download/v0.1.1/tldrtranslate-x86_64-macos",
+          "size": 1010809,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "tldrtranslate-x86_64-linux",
+          "url": "https://github.com/ikks/tldrtranslate/releases/download/v0.1.1/tldrtranslate-x86_64-linux",
+          "size": 967784,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "First Release",
+      "body": "# Operating systems supported\r\n\r\nSupport for:\r\n* Linux: Tested on Debian 12\r\n* MacOS: Let us know if it worked for you\r\n* Windows: Tested via Wine on Linux\r\n\r\n# Languages supported\r\nLanguages supported via argos-translate: ar, bn, ca, cs, da, de, es, fa, fi, fr, hi, id, it, ja, ko, nl, pl, pt_BR, pt_PT, ro, ru, sv, th, uk, zh, zh_TW.  Extensively tested for es(Spanish).\r\n\r\n# Server translation parameters\r\nBoth, Port and Url API Argos-translate server can be set via command line parameters or Environment variables.\r\n\r\nDistributed as small as possible.",
+      "prerelease": false,
+      "published_at": "2024-11-24T22:38:53Z",
+      "html_url": "https://github.com/ikks/tldrtranslate/releases/tag/v0.1.0",
+      "assets": [
+        {
+          "name": "tldrtranslate-x86_64-macos",
+          "url": "https://github.com/ikks/tldrtranslate/releases/download/v0.1.0/tldrtranslate-x86_64-macos",
+          "size": 1010751,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "tldrtranslate-x86_64-linux",
+          "url": "https://github.com/ikks/tldrtranslate/releases/download/v0.1.0/tldrtranslate-x86_64-linux",
+          "size": 967776,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "tldrtranslate.exe",
+          "url": "https://github.com/ikks/tldrtranslate/releases/download/v0.1.0/tldrtranslate.exe",
+          "size": 1149952,
+          "content_type": "application/x-ms-dos-executable"
+        },
+        {
+          "name": "tldrtranslate-aarch64-macos",
+          "url": "https://github.com/ikks/tldrtranslate/releases/download/v0.1.0/tldrtranslate-aarch64-macos",
+          "size": 985008,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "tldtrtranslate-aarch64-linux",
+          "url": "https://github.com/ikks/tldrtranslate/releases/download/v0.1.0/tldtrtranslate-aarch64-linux",
+          "size": 888200,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "In a nice planet, good to be here as a parent, just developing a few, teams multiply whatever we can do alone.  Postgresql, python, Debian fan.",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "http://igor.tamarapatino.org",
+  "owner_twitter_username": "ikks",
+  "owner_followers": 52,
+  "owner_following": 20,
+  "owner_created_at": "2010-12-21T00:44:23Z",
+  "license": "MIT",
+  "category": "library"
+}

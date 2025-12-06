@@ -1,0 +1,41 @@
+{
+  "name": "detourz",
+  "owner": "jhark",
+  "repo": "detourz",
+  "description": "Zig wrapper for Microsoft Detours.",
+  "type": "project",
+  "topics": [
+    "zig-library",
+    "zig-package",
+    "zig"
+  ],
+  "stars": 3,
+  "forks": 2,
+  "watchers": 0,
+  "updated_at": "2025-06-09T10:19:46Z",
+  "dependencies": [
+    {
+      "name": "flags",
+      "url": "git+https://github.com/joegm/flags#0e2491d8e6d2be38dc0c2ce8e103469886e468bb",
+      "hash": "flags-0.10.0-a_9h3kR2AABNAfaPGRyOOGmWsfv12Hk6JQPTX4MM446s"
+    },
+    {
+      "name": "detours",
+      "url": "git+https://github.com/jhark/Detours.git#8fecdd592700a7afb2d68b244fe0f486d2dc568b",
+      "hash": "N-V-__8AAAfkMgDEuZJD2VmcUvKWvWKcArczOQpsJayOn_rL"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# detourz\n\n`detourz` is Zig wrapper for [Microsoft Detours](https://github.com/microsoft/Detours), a library for intercepting function calls on Windows. For a full explanation of how it works, consult the [official wiki](https://github.com/microsoft/Detours/wiki).\n\nIn short, the typical usage pattern is to build your hooking code (using the Detours API) into a DLL, and then to run your target executable with that DLL injected into it, which Detours can also facilitate.\n\nThis project provides a few different things:\n\n* A Zig module that wraps the Detours C API to make it slightly nicer to use from Zig.\n* `detourz.exe`, a multipurpose command-line that tool exposes some of the functionality of Detours, most importantly:\n    * Running an executable with injected DLLs (`detourz run`). This is equivalent to the `withdll.exe` sample in Detours.\n    * Modifying an executable to inject DLLs permanently (`detourz inject`). This is equivalent to the `setdll.exe` sample in Detours.\n* `detourz_nt_file.dll`, a DLL that hooks several functions from the Windows Nt* APIs related to files, and prints the results of the calls.\n    * It also serves as an example of how to write your own hooks and create a DLL that you can then use with `detourz run`.\n    * Hooked APIs: `NtCreateFile`, `NtOpenFile`, `NtReadFile`, `NtWriteFile`, `NtDeviceIoControlFile`, `NtClose`.\n\n## Requirements\n\n- Windows.\n- Zig compiler (version 0.14.0)\n\n## Building\n\n```sh\nzig build\n```\n\n## Usage\n\n```\nUsage: detourz [-h | --help] <command>\n\nUtility for working with Microsoft Detours.\n\nUsage:\n  detourz <command> [options]\n\nExample:\n  detourz run my_dll.dll my_dll2.dll my_exe.exe -- --foo --bar\n\nCommands:\n  payloads <file>\n  exports <file>\n  imports <file>\n  run <dll> <dll> ... <exe> [-- <exe_args>...]\n  inject <dll> <exe>\n\nOptions:\n\n  -h, --help Show this help and exit\n\nCommands:\n\n  payloads List detours payloads in a PE binary\n  exports  List exports from a PE binary\n  run      Run an executable with injected DLLs\n  imports  List imports from a PE binary\n  inject   Inject a DLL into an executable's import table\n  reset    Remove all previously injected imports from an executable file\n```\n\n## Usage as a library\n\nInside your project:\n\n```\nzig fetch --save git+https://github.com/jhark/detourz.git\n```\n\n`build.zig`:\n\n```zig\n  const detourz_dep = b.dependency(\"detourz\", .{\n      .target = target,\n      .optimize = optimize,\n  });\n\n  exe_mod.addImport(\"detourz\", detourz_dep.module(\"detourz\"));\n```\n\n## Demo\n\nApplication to trace, `my_cat.zig`:\n\n```zig\nconst std = @import(\"std\");\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    const args = try std.process.argsAlloc(allocator);\n    defer std.process.argsFree(allocator, args);\n\n    const stdout = std.io.getStdOut();\n\n    if (args.len <= 1) {\n        std.log.err(\"Expected one or more file paths\", .{});\n    }\n\n    for (args[1..]) |arg| {\n        const file = std.fs.cwd().openFile(arg, .{ .mode = .read_only }) catch |err| {\n            std.log.err(\"{s}: {}\", .{ arg, err });\n            std.process.exit(1);\n        };\n        _ = try file.copyRangeAll(0, stdout, 0, std.math.maxInt(u64));\n    }\n}\n```\n\nRun the application with `detourz_nt_file.dll` injected, which will hook and print basic Nt* file APIs.\n\n```sh\nzig-out/bin/detourz.exe run zig-out/bin/detourz_nt_file.dll my_cat.exe -- hello_world.txt\n```\n\n```\ninfo(detourz_nt_file): NtCreateFile(parent = 96 (\"\\Users\\Joe\\dev\\detourz\"), path = \"hello_world.txt\", access = (FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE)) => SUCCESS [io_status = FILE_OPENED, handle = 180]\ninfo(detourz_nt_file): NtReadFile(handle = 180 (\"\\Users\\Joe\\dev\\detourz\\hello_world.txt\"), length = 32768, offset = i64@a4d41f6ed0) => SUCCESS [bytes_transferred = 13: [Hello world.�]]\nHello world.\ninfo(detourz_nt_file): NtWriteFile(handle = 12, length = 13, offset = i64@a4d41f6ec0) => SUCCESS [bytes_transferred = 13: [Hello world.�]]\ninfo(detourz_nt_file): NtReadFile(handle = 180 (\"\\Users\\Joe\\dev\\detourz\\hello_world.txt\"), length = 32768, offset = i64@a4d41f6ed0) => END_OF_FILE [bytes_transferred = 0: []]\n```\n\n\nAgain, with more verbosity.\n\nThe DLL has some options that it reads from the `DETOURZ` environment variable.\n\n \n```sh\nzig build\nDETOURZ=\"verbose=true\" zig-out/bin/detourz.exe run zig-out/bin/detourz_nt_file.dll my_cat.exe -- hello_world.txt\n```\n\nOutput\n\n```\ninfo(detourz_nt_file): NtCreateFile(\n  FileHandle        => 192\n  DesiredAccess     =  GENERIC_READ | SYNCHRONIZE\n  ObjectAttributes  =  {\n    ObjectName               =  \"hello_world.txt\",\n    Attributes               =  NONE,\n    Length                   =  48,\n    RootDirectory            =  96 (\"\\Users\\Joe\\dev\\detourz\"),\n    SecurityDescriptor       =  null,\n    SecurityQualityOfService =  null,\n  }\n  IoStatusBlock     => { Status = SUCCESS, Information = FILE_OPENED }\n  AllocationSize    =  null\n  FileAttributes    =  FILE_ATTRIBUTE_NORMAL\n  ShareAccess       =  FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE\n  CreateDisposition =  FILE_OPEN\n  CreateOptions     =  FILE_NON_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT\n  EaBuffer          =  null\n  EaLength          =  0\n) => SUCCESS\ninfo(detourz_nt_file): NtReadFile(\n  FileHandle    =  192 (\"\\Users\\Joe\\dev\\detourz\\hello_world.txt\")\n  Event         =  null\n  ApcRoutine    =  null\n  ApcContext    =  anyopaque@cb8fbf72a8\n  IoStatusBlock => { Status = SUCCESS, BytesTransferred = 13 }\n  Buffer        =  anyopaque@cb8fbf7468 => [Hello world.�]\n  Length        =  32768\n  ByteOffset    =  i64@cb8fbf7200\n  Key           =  null\n) => SUCCESS\nHello world.\ninfo(detourz_nt_file): NtWriteFile(\n  FileHandle    =  12\n  Event         =  null\n  ApcRoutine    =  null\n  ApcContext    =  anyopaque@cb8fbf72a0\n  IoStatusBlock => { Status = SUCCESS, BytesTransferred = 13 }\n  Buffer        =  anyopaque@cb8fbf7468 => [Hello world.�]\n  Length        =  13\n  ByteOffset    =  i64@cb8fbf71f0\n  Key           =  null\n) => SUCCESS\ninfo(detourz_nt_file): NtReadFile(\n  FileHandle    =  192 (\"\\Users\\Joe\\dev\\detourz\\hello_world.txt\")\n  Event         =  null\n  ApcRoutine    =  null\n  ApcContext    =  anyopaque@cb8fbf72a8\n  IoStatusBlock => { Status = END_OF_FILE, BytesTransferred = 0 }\n  Buffer        =  anyopaque@cb8fbf7468 => []\n  Length        =  32768\n  ByteOffset    =  i64@cb8fbf7200\n  Key           =  null\n) => END_OF_FILE\n```",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1906851?u=e16e2a91382fe98962b66edd01045cfd7a08fb53&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 1,
+  "owner_following": 4,
+  "owner_created_at": "2012-06-29T17:45:06Z",
+  "license": "ISC",
+  "category": "library"
+}

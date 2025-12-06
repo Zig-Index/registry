@@ -1,0 +1,62 @@
+{
+  "name": "zig-jsonlog",
+  "owner": "softprops",
+  "repo": "zig-jsonlog",
+  "description": "format zig std logs as structured JSON",
+  "type": "project",
+  "topics": [
+    "json",
+    "logging",
+    "zig",
+    "ziglang",
+    "zigdex-lib",
+    "zig-package",
+    "zig-library"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2024-06-08T22:20:12Z",
+  "minimum_zig_version": "0.13.0",
+  "readme": "<h1 align=\"center\">\n    jsonlog\n</h1>\n\n<div align=\"center\">\n    A zero-allocation JSON formatting logging library for zig\n</div>\n\n---\n\n[![ci](https://github.com/softprops/zig-jsonlog/actions/workflows/ci.yml/badge.svg)](https://github.com/softprops/zig-jsonlog/actions/workflows/ci.yml) ![License Info](https://img.shields.io/github/license/softprops/zig-jsonlog) ![Releases](https://img.shields.io/github/v/release/softprops/zig-jsonlog) [![Zig Support](https://img.shields.io/badge/zig-0.13.0-black?logo=zig)](https://ziglang.org/documentation/0.13.0/)\n\n## 🍬 features\n\n- make your logs easy to query with tools like aws cloud watch insights\n- zero-allocation\n- append arbitrary metadata to your logs\n- automatic newline insertion\n\nComing soon...\n\n- configurable writers\n\n  currently jsonlog writes to stderr, as the default std log fn does. we'd like to make the writer user configurable.\n\n## examples\n\n```zig\nconst std = @import(\"std\");\nconst jsonLog = @import(\"jsonlog\");\nconst log = std.log.scoped(.demo);\n\npub const std_options: std.Options = .{\n    // configure the std lib log api fn to use jsonlog formatting\n    .logFn = jsonLog.logFn,\n};\n\npub fn main() void {\n    // std log interface\n    log.debug(\"DEBUG\", .{});\n    log.info(\"INFO\", .{});\n    log.warn(\"WARN\", .{});\n    log.err(\"ERR\", .{});\n\n    // jsonLog interface for provoding arbitrary structured metadata\n    jsonLog.info(\"things are happening\", .{}, .{\n        .endpoint = \"/home\",\n        .method = \"GET\",\n    });\n\n    // create a custom scope for doing the same\n    jsonLog.scoped(.demo).warn(\"things could be better\", .{}, .{\n        .endpoint = \"/home\",\n        .method = \"GET\",\n    });\n}\n```\n\n```json\n{\"ts\":\"2024-03-20T15:07:15.363Z\",\"level\":\"debug\",\"msg\":\"DEBUG\",\"scope\":\"demo\"}\n{\"ts\":\"2024-03-20T15:07:15.364Z\",\"level\":\"info\",\"msg\":\"INFO\",\"scope\":\"demo\"}\n{\"ts\":\"2024-03-20T15:07:15.364Z\",\"level\":\"warning\",\"msg\":\"WARN\",\"scope\":\"demo\"}\n{\"ts\":\"2024-03-20T15:07:15.364Z\",\"level\":\"error\",\"msg\":\"ERR\",\"scope\":\"demo\"}\n{\"ts\":\"2024-03-20T15:07:15.364Z\",\"level\":\"info\",\"msg\":\"things are happening\",\"scope\":\"default\",\"meta\":{\"endpoint\":\"/home\",\"method\":\"GET\"}}\n{\"ts\":\"2024-03-20T15:07:15.364Z\",\"level\":\"warning\",\"msg\":\"things could be better\",\"scope\":\"demo\",\"meta\":{\"endpoint\":\"/home\",\"method\":\"GET\"}}\n```\n\n## 📼 installing\n\nCreate a new exec project with `zig init-exe`. Copy the echo handler example above into `src/main.zig`\n\nCreate a `build.zig.zon` file to declare a dependency\n\n> .zon short for \"zig object notation\" files are essentially zig structs. `build.zig.zon` is zigs native package manager convention for where to declare dependencies\n\nStarting in zig 0.12.0, you can use and should prefer\n\n```sh\nzig fetch --save https://github.com/softprops/zig-jsonlog/archive/refs/tags/v0.2.1.tar.gz\n```\n\notherwise, to manually add it, do so as follows\n\n```diff\n.{\n    .name = \"my-app\",\n    .version = \"0.1.0\",\n    .dependencies = .{\n+       // 👇 declare dep properties\n+        .jsonlog = .{\n+            // 👇 uri to download\n+            .url = \"https://github.com/softprops/zig-jsonlog/archive/refs/tags/v0.2.1.tar.gz\",\n+            // 👇 hash verification\n+            .hash = \"...\",\n+        },\n    },\n}\n```\n\n> the hash below may vary. you can also depend any tag with `https://github.com/softprops/zig-jsonlog/archive/refs/tags/v{version}.tar.gz` or current main with `https://github.com/softprops/zig-jsonlog/archive/refs/heads/main/main.tar.gz`. to resolve a hash omit it and let zig tell you the expected value.\n\nAdd the following in your `build.zig` file\n\n```diff\nconst std = @import(\"std\");\n\npub fn build(b: *std.Build) void {\n    const target = b.standardTargetOptions(.{});\n\n    const optimize = b.standardOptimizeOption(.{});\n    // 👇 de-reference jsonlog dep from build.zig.zon\n+    const jsonlog = b.dependency(\"jsonlog\", .{\n+        .target = target,\n+        .optimize = optimize,\n+    }).module(\"jsonlog\");\n    var exe = b.addExecutable(.{\n        .name = \"your-exe\",\n        .root_source_file = .{ .path = \"src/main.zig\" },\n        .target = target,\n        .optimize = optimize,\n    });\n    // 👇 add the jsonlog module to executable\n+    exe.root_mode.addImport(\"jsonlog\", jsonlog);\n\n    b.installArtifact(exe);\n}\n```\n\n## 🥹 for budding ziglings\n\nDoes this look interesting but you're new to zig and feel left out? No problem, zig is young so most us of our new are as well. Here are some resources to help get you up to speed on zig\n\n- [the official zig website](https://ziglang.org/)\n- [zig's one-page language documentation](https://ziglang.org/documentation/0.13.0/)\n- [ziglearn](https://ziglearn.org/)\n- [ziglings exercises](https://github.com/ratfactor/ziglings)\n\n\\- softprops 2024\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/2242?v=4",
+  "releases": [
+    {
+      "tag_name": "v0.2.1",
+      "name": "v0.2.1",
+      "body": "Upgrade to zig 0.13.0, current stable. No breaking changes.",
+      "prerelease": false,
+      "published_at": "2024-06-07T16:26:43Z",
+      "html_url": "https://github.com/softprops/zig-jsonlog/releases/tag/v0.2.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "Upgrade to zig 0.12.0, current stable\r\n\r\nThe main changes were artifacts of the [0.12.0 std_options](https://ziglang.org/download/0.12.0/release-notes.html#toc-Global-Configuration) and build configuration changes. Because these were both breaking changes the new min supported zig version is 0.12.0. See the readme for the latest install notes.",
+      "prerelease": false,
+      "published_at": "2024-04-20T16:52:08Z",
+      "html_url": "https://github.com/softprops/zig-jsonlog/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "\r\nInitial version\r\n\r\n## 📼 installing\r\n\r\n```zig\r\n.{\r\n    .name = \"my-app\",\r\n    .version = \"0.1.0\",\r\n    .dependencies = .{\r\n        // 👇 declare dep properties\r\n        .jsonlog = .{\r\n            // 👇 uri to download\r\n            .url = \"https://github.com/softprops/zig-jsonlog/archive/refs/tags/v0.1.0.tar.gz\",\r\n            // 👇 hash verification\r\n            .hash = \"1220b444a86bc4261c025d9ad318919c03219e23722c43a4d97db8c3225a483fc7c8\",\r\n        },\r\n    },\r\n}\r\n```\r\n\r\n```\r\nconst std = @import(\"std\");\r\n\r\npub fn build(b: *std.Build) void {\r\n    const target = b.standardTargetOptions(.{});\r\n\r\n    const optimize = b.standardOptimizeOption(.{});\r\n    // 👇 de-reference envy dep from build.zig.zon\r\n     const jsonlog = b.dependency(\"jsonlog\", .{\r\n        .target = target,\r\n        .optimize = optimize,\r\n    });\r\n    var exe = b.addExecutable(.{\r\n        .name = \"your-exe\",\r\n        .root_source_file = .{ .path = \"src/main.zig\" },\r\n        .target = target,\r\n        .optimize = optimize,\r\n    });\r\n    // 👇 add the jsonlog module to executable\r\n    exe.addModule(\"jsonlog\", jsonlog.module(\"jsonlog\"));\r\n\r\n    b.installArtifact(exe);\r\n}\r\n```\r\n",
+      "prerelease": false,
+      "published_at": "2024-03-20T16:03:20Z",
+      "html_url": "https://github.com/softprops/zig-jsonlog/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "I'm coming in jwt",
+  "owner_company": "https://www.mongodb.com/atlas",
+  "owner_location": "nyc",
+  "owner_blog": "http://lessis.me",
+  "owner_twitter_username": "softprops",
+  "owner_followers": 942,
+  "owner_following": 168,
+  "owner_created_at": "2008-03-05T03:41:51Z",
+  "license": "MIT",
+  "category": "library"
+}

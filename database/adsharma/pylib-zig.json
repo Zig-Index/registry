@@ -1,0 +1,35 @@
+{
+  "name": "pylib-zig",
+  "owner": "adsharma",
+  "repo": "pylib-zig",
+  "description": "Python style libs for zig to assist transpilation",
+  "type": "project",
+  "topics": [
+    "python",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-08-09T23:26:53Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.11.0",
+  "readme": "# Python style libraries for Zig\n\nZig as a language likes to keep things explicit (e.g. allocators). This makes transpilers more\ncomplex since one line of python explodes into many lines of zig.\n\nTry a library approach so we keep the expansion minimal\n\n## Building\n\nTo build the library, you need to have Zig installed (version 0.11.0 or later).\n\n```bash\n# Clone the repository\ngit clone https://github.com/your-username/pylib-zig.git\ncd pylib-zig\n\n# Build the library\nzig build\n\n# Run tests\nzig build test\n```\n\nOr use the provided build script:\n```bash\n./build.sh\n```\n\n## CI\n\nThis project uses GitHub Actions for continuous integration. The CI pipeline:\n- Tests building the library\n- Runs all unit tests\n- Tests against recent Zig versions (0.14.x for now)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/658691?u=2a690671b9768e729b6175be67b5302d73a1c34c&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 58,
+  "owner_following": 0,
+  "owner_created_at": "2011-03-08T22:29:43Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,46 @@
+{
+  "name": "zig-lib-svg2tvg",
+  "owner": "nat3Github",
+  "repo": "zig-lib-svg2tvg",
+  "description": "svg to tvg file converter and tvg renderer",
+  "type": "project",
+  "topics": [
+    "converter",
+    "rasterization",
+    "renderer",
+    "svg",
+    "tvg",
+    "vector-graphics",
+    "zig-package",
+    "mit-license"
+  ],
+  "stars": 3,
+  "forks": 6,
+  "watchers": 1,
+  "updated_at": "2025-12-03T20:22:35Z",
+  "dependencies": [
+    {
+      "name": "xml",
+      "url": "git+https://github.com/ianprime0509/zig-xml#c0bda4f35ea61cfb7845337adfa255c86c67fd13",
+      "hash": "xml-0.1.0-ZTbP35VkAgAp2cDlvsPuL7SWVZWwPg-V99LmVRSHbCtL"
+    },
+    {
+      "name": "z2d",
+      "url": "git+https://github.com/vancluever/z2d#052c328e8b37d8daf162e374f847c435bec87c6d",
+      "hash": "z2d-0.8.0-j5P_HqfdFAAhoTDoRcm7Iix_8aszukCODbGuw2JxID-Z"
+    }
+  ],
+  "readme": "# svg2tvg - convert svg to tvg and render tvg to image!\n\n- written in zig 0.15.1\n- dependency name: svg2tvg, module name: svg2tvg\n\n## status / background\n\n- the main goal is to convert and render icons\n- the renderer has options to overwrite color and stroke width\n- only a small subset of svg is supported\n- related project: [zig-lib-icons](https://github.com/nat3Github/zig-lib-icons/tree/main)\n- as of now used in the [dvui](https://github.com/david-vanderson/dvui) project to render icons\n\n# api\n\n- tvg_from_svg(...) - convert svg to tvg\n- renderStream(...) - render tvg to an image\n- RenderOptions - Options for rendering\n\n## usage:\n\n```zig\ntest \"convert to tvg and render\" {\n    const svg2tvg = @import(\"svg2tvg\");\n    const gpa = std.testing.allocator;\n    var arena = std.heap.ArenaAllocator.init(gpa);\n    defer arena.deinit();\n    const alloc = arena.allocator();\n\n    const Wrapper = struct {\n        width: i64,\n        height: i64,\n        img: *MyImage,\n        pub fn setPixel(self: *@This(), x: i64, y: i64, color: [4]u8) void {\n            const pix: MyPixel = .init_from_u8_slice(&color);\n            self.img.set_pixel(@intCast(x), @intCast(y), pix);\n        }\n    };\n\n    const width_and_height = 200;\n\n    var myImage = try MyImageType.init(alloc, width_and_height, width_and_height);\n    const my_svg_icon_data = icons.svg.feather.activity;\n\n    var w = std.ArrayList(u8).init(alloc);\n    try svg2tvg.tvg_from_svg(alloc, w.writer(), svg_bytes);\n\n    var image_wrapper = Wrapper{\n        .img = img,\n        .width = @intCast(img.get_width()),\n        .height = @intCast(img.get_height()),\n    };\n\n    var fb = std.io.fixedBufferStream(w.items);\n    try svg2tvg.renderStream(alloc, &image_wrapper, fb.reader(), .{}); <-- you can use options here\n\n    ...\n}\n```\n\n## Credit:\n\n- Chris Marchesi: https://github.com/vancluever/z2d (used to render tvg as image)\n- Ian Johnson: https://github.com/ianprime0509/zig-xml (used for parsing xml)\n- Chris Marchesi: https://github.com/vancluever/zig-svg (for svg color attribute parsing)\n- https://github.com/TinyVG/sdk/tree/main (used for writing tvg)\n\n## Licence\n\n- this library is under MIT\n- svg.zig from https://github.com/vancluever/zig-svg is MPL licenced\n- z2d is MPL licenced\n- zig-xml is under 0BSD\n- tinyVG/sdk is under MIT\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/121395237?u=7c64287a2ffd563fdeaba0de387a8065f10fd176&v=4",
+  "releases": [],
+  "owner_bio": "cs at leipzig university",
+  "owner_company": null,
+  "owner_location": "Germany",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 1,
+  "owner_following": 1,
+  "owner_created_at": "2022-12-25T16:00:20Z",
+  "license": "MIT",
+  "category": "library"
+}

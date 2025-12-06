@@ -1,0 +1,501 @@
+{
+  "name": "minisign",
+  "owner": "jedisct1",
+  "repo": "minisign",
+  "description": "A dead simple tool to sign files and verify digital signatures.",
+  "type": "project",
+  "topics": [
+    "cryptography",
+    "crypto",
+    "signatures",
+    "ed25519",
+    "pgp",
+    "gpg",
+    "zig-package"
+  ],
+  "stars": 2538,
+  "forks": 138,
+  "watchers": 37,
+  "updated_at": "2025-12-05T02:57:53Z",
+  "readme": "# Minisign\n\n![CodeQL scan](https://github.com/jedisct1/minisign/workflows/CodeQL%20scan/badge.svg)\n![Release](https://img.shields.io/github/v/release/jedisct1/minisign)\n\nA dead simple tool to sign files and verify signatures.\n\n## Table of Contents\n\n- [Minisign](#minisign)\n  - [Table of Contents](#table-of-contents)\n  - [Overview](#overview)\n  - [Documentation](#documentation)\n  - [Installation](#installation)\n    - [Pre-built Packages](#pre-built-packages)\n    - [Building with Zig](#building-with-zig)\n    - [Building with cmake and gcc or clang](#building-with-cmake-and-gcc-or-clang)\n  - [Usage](#usage)\n    - [Generating a Key Pair](#generating-a-key-pair)\n    - [Signing Files](#signing-files)\n    - [Verifying Signatures](#verifying-signatures)\n  - [Verification of Official Releases](#verification-of-official-releases)\n  - [Docker](#docker)\n  - [Compatibility with Signify](#compatibility-with-signify)\n  - [Signature Determinism](#signature-determinism)\n  - [Additional Tools, Libraries and Implementations](#additional-tools-libraries-and-implementations)\n\n## Overview\n\nMinisign is a tool to sign files and verify signatures. It's designed to be:\n\n- Simple to use\n- Secure (based on modern cryptography)\n- Minimal (focused on doing one thing well)\n- Cross-platform\n\nMinisign uses the [Ed25519](https://ed25519.cr.yp.to/) public-key signature system with small and fast signatures.\n\n## Documentation\n\nFor comprehensive documentation, please refer to the [Minisign documentation](https://jedisct1.github.io/minisign/) website or the included man page.\n\n## Installation\n\n### Prebuilt Packages\n\nMinisign is available in various package managers:\n\n| Platform             | Command                  |\n| -------------------- | ------------------------ |\n| macOS (Homebrew)     | `brew install minisign`  |\n| Windows (Scoop)      | `scoop install minisign` |\n| Windows (Chocolatey) | `choco install minisign` |\n\n### Building with Zig\n\n**Dependencies:**\n\n- [libsodium](https://libsodium.org/) (optional)\n- [zig](https://ziglang.org) (version 0.15.1 or later)\n\n**Compilation options:**\n\n1. With libsodium, dynamically linked:\n\n```sh\nzig build -Doptimize=ReleaseSmall\n```\n\n2. With libsodium, statically linked:\n\n```sh\nzig build -Doptimize=ReleaseSmall -Dstatic\n```\n\n3. Without libsodium (no dependencies required):\n\n```sh\nzig build -Doptimize=ReleaseSmall -Dwithout-libsodium\n```\n\nThe resulting binary can be found in `zig-out/bin/minisign`.\n\nFor faster execution at the cost of larger binary size, you can replace `ReleaseSmall` with `ReleaseFast` in any of the above commands.\n\n### Building with CMake and GCC or Clang\n\n**Dependencies:**\n\n- [libsodium](https://libsodium.org/) (required)\n- CMake\n- pkg-config\n- GCC or Clang\n\n**Compilation:**\n\n```sh\nmkdir build\ncd build\ncmake ..\nmake\nmake install  # with appropriate permissions\n```\n\n**Alternative configuration for static binaries:**\n\n```sh\ncmake -D STATIC_LIBSODIUM=1 ..\n```\n\nor:\n\n```sh\ncmake -D BUILD_STATIC_EXECUTABLES=1 ..\n```\n\n## Usage\n\n### Generating a Key Pair\n\n```sh\nminisign -G\n```\n\nThis creates:\n\n- A public key (`minisign.pub` by default)\n- A password-protected secret key (`minisign.key` by default)\n\n### Signing Files\n\n```sh\nminisign -S -m file.txt\n```\n\nThis creates a signature file named `file.txt.minisig`.\n\nTo add a trusted comment that will be verified:\n\n```sh\nminisign -S -m file.txt -t \"Trusted comment here\"\n```\n\n### Verifying Signatures\n\n```sh\nminisign -Vm file.txt -p minisign.pub\n```\n\nor with a public key directly:\n\n```sh\nminisign -Vm file.txt -P RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3\n```\n\n## Verification of Official Releases\n\nTarballs and precompiled binaries from the project can be verified with the following public key:\n\n```text\nRWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3\n```\n\n## Docker\n\nMinisign is available as a Docker image:\n\n```sh\ndocker run -i --rm jedisct1/minisign\n```\n\nExample of generating a key for the first time and then signing a local file:\n\n```sh\ndocker run -i --rm -v .:/minisign jedisct1/minisign \\\n  -s minisign.key -G\n```\n\n```sh\ndocker run -i --rm -v .:/minisign jedisct1/minisign \\\n  -s minisign.key -S -m files_to_sign\n```\n\n`-s minisign.key` creates and uses the secret key; the public key will be named `minisign.pub`.\n\nImportant: create a backup and do not commit or share your generated private key file `minisign.key`.\n\nExample of verifying a signature using the Docker image:\n\n```sh\ndocker run -i --rm -v .:/minisign jedisct1/minisign \\\n  -Vm file_to_verify -p minisign.pub\n```\n\n`-p minisign.pub` may be omitted if the default name has been generated.\n\nThe image can be verified with the following cosign public key:\n\n```text\n-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAExjZWrlc6c58W7ZzmQnx6mugty99C\nOQTDtJeciX9LF9hEbs1J1fzZHRdRhV4OTqcq0jTW9PXnrSSZlk1fbkE/5w==\n-----END PUBLIC KEY-----\n```\n\n## Compatibility with Signify\n\nMinisign is compatible with [signify](https://www.openbsd.org/papers/bsdcan-signify.html), the OpenBSD signing tool. Signatures created with signify can be verified with minisign, and vice versa.\n\n## Signature Determinism\n\nThis implementation uses deterministic signatures, unless libsodium was compiled with the `ED25519_NONDETERMINISTIC` macro defined. This adds random noise to the computation of EdDSA nonces.\n\nOther implementations can choose to use non-deterministic signatures by default. They will remain fully interoperable with implementations using deterministic signatures.\n\n## Additional Tools, Libraries and Implementations\n\n- [minizign](https://github.com/jedisct1/zig-minisign) - Compact implementation in Zig that can also use SSH-encoded keys\n- [minisign-misc](https://github.com/JayBrown/minisign-misc) - Set of workflows and scripts for macOS to verify and sign files\n- [go-minisign](https://github.com/jedisct1/go-minisign) - Go module to verify Minisign signatures\n- [rust-minisign](https://github.com/jedisct1/rust-minisign) - Minisign library in pure Rust\n- [rsign2](https://github.com/jedisct1/rsign2) - Reimplementation of the command-line tool in Rust\n- [minisign (go)](https://github.com/aead/minisign) - Rewrite in Go language (CLI and library)\n- [minisign-verify](https://github.com/jedisct1/rust-minisign-verify) - Small Rust crate to verify Minisign signatures\n- [minisign-net](https://github.com/bitbeans/minisign-net) - .NET library for Minisign signatures\n- [minisign](https://github.com/chm-diederichs/minisign) - JavaScript implementation\n- WebAssembly implementations: [rsign2](https://wapm.io/package/jedisct1/rsign2) and [minisign-cli](https://wapm.io/package/jedisct1/minisign) on WAPM\n- [minisign-php](https://github.com/soatok/minisign-php) - PHP implementation\n- [py-minisign](https://github.com/x13a/py-minisign) - Python implementation\n- [minisign](https://hexdocs.pm/minisign/Minisign.html) - Elixir implementation (verification only)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/124872?v=4",
+  "releases": [
+    {
+      "tag_name": "0.12",
+      "name": "0.12",
+      "body": "* Libsodium is now an optional dependency. When using the Zig toolchain to compile Minisign, you can specify the `-Dwithout-libsodium` flag to build and run without libsodium.\r\n* Key identifiers are now zero-padded when printed.\r\n\r\n## New Contributors\r\n* @ityonemo made their first contribution in https://github.com/jedisct1/minisign/pull/138\r\n* @ryancdotorg made their first contribution in https://github.com/jedisct1/minisign/pull/139",
+      "prerelease": false,
+      "published_at": "2025-01-15T21:48:15Z",
+      "html_url": "https://github.com/jedisct1/minisign/releases/tag/0.12",
+      "assets": [
+        {
+          "name": "minisign-0.12.tar.gz",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.12/minisign-0.12.tar.gz",
+          "size": 21808,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "minisign-0.12.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.12/minisign-0.12.tar.gz.minisig",
+          "size": 315,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign-0.12-linux.tar.gz",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.12/minisign-0.12-linux.tar.gz",
+          "size": 271043,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "minisign-0.12-linux.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.12/minisign-0.12-linux.tar.gz.minisig",
+          "size": 321,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign-0.12-win64.zip",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.12/minisign-0.12-win64.zip",
+          "size": 252505,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "minisign-0.12-win64.zip.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.12/minisign-0.12-win64.zip.minisig",
+          "size": 318,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign-0.12-wasm.gz",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.12/minisign-0.12-wasm.gz",
+          "size": 48793,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "minisign-0.12-wasm.gz.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.12/minisign-0.12-wasm.gz.minisig",
+          "size": 316,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign-0.12-macos.zip",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.12/minisign-0.12-macos.zip",
+          "size": 83496,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "minisign-0.12-macos.zip.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.12/minisign-0.12-macos.zip.minisig",
+          "size": 318,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.11",
+      "name": "0.11",
+      "body": "- For non-interactive usage (CI/CD, etc), encryption of private keys can be disabled with the `-W` switch.\r\n- A new command, `-C` was added to change passwords, or remove them (when combined with `-W`).",
+      "prerelease": false,
+      "published_at": "2023-01-16T21:48:11Z",
+      "html_url": "https://github.com/jedisct1/minisign/releases/tag/0.11",
+      "assets": [
+        {
+          "name": "minisign-0.11-macos.zip",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.11/minisign-0.11-macos.zip",
+          "size": 367052,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "minisign-0.11-macos.zip.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.11/minisign-0.11-macos.zip.minisig",
+          "size": 318,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign-0.11-linux.tar.gz",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.11/minisign-0.11-linux.tar.gz",
+          "size": 245836,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "minisign-0.11-linux.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.11/minisign-0.11-linux.tar.gz.minisig",
+          "size": 321,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign-0.11.tar.gz",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.11/minisign-0.11.tar.gz",
+          "size": 18121,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "minisign-0.11.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.11/minisign-0.11.tar.gz.minisig",
+          "size": 315,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign-0.11-win64.zip",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.11/minisign-0.11-win64.zip",
+          "size": 144317,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "minisign-0.11-win64.zip.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.11/minisign-0.11-win64.zip.minisig",
+          "size": 318,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.10",
+      "name": "0.10",
+      "body": "- Minisign can be compiled with Zig instead of cmake+make+a C toolchain\r\n- Minimal `VERIFY_ONLY` versions can be built again\r\n- Prehashing is now enabled by default, regardless of the input size. Support for non-prehashed signatures will eventually be removed\r\n- Legacy signatures can be rejected with the addition of the `-H` flag\r\n- Precompiled binaries for Win64, Linux and WebAssembly are now available.",
+      "prerelease": false,
+      "published_at": "2021-10-09T13:12:07Z",
+      "html_url": "https://github.com/jedisct1/minisign/releases/tag/0.10",
+      "assets": [
+        {
+          "name": "minisign-0.10-macos.zip",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.10/minisign-0.10-macos.zip",
+          "size": 91231,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "minisign-0.10-win64.zip",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.10/minisign-0.10-win64.zip",
+          "size": 158456,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "minisign-0.10-win64.zip.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.10/minisign-0.10-win64.zip.minisig",
+          "size": 318,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign-0.10-macos.zip.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.10/minisign-0.10-macos.zip.minisig",
+          "size": 318,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign-0.10-linux.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.10/minisign-0.10-linux.tar.gz.minisig",
+          "size": 321,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign-0.10-linux.tar.gz",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.10/minisign-0.10-linux.tar.gz",
+          "size": 108363,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "0.10.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.10/0.10.tar.gz.minisig",
+          "size": 306,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.9",
+      "name": "0.9",
+      "body": "- New option: `-R` to recover the public key from a secret key.\r\n- `minisign` can now be compiled to WebAssembly.\r\n- Error messages have been improved.\r\n- Key derivation is now possible on devices with limited memory.\r\n- Compilation on OpenWRT is now possible using `cmake`.\r\n- A Docker image is now available.\r\n- 64-bit Windows binaries have been added, and macOS binaries are notarized.",
+      "prerelease": false,
+      "published_at": "2020-06-06T20:35:04Z",
+      "html_url": "https://github.com/jedisct1/minisign/releases/tag/0.9",
+      "assets": [
+        {
+          "name": "minisign-osx.zip",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.9/minisign-osx.zip",
+          "size": 132976,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "minisign-osx.zip.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.9/minisign-osx.zip.minisig",
+          "size": 304,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign-win32.zip",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.9/minisign-win32.zip",
+          "size": 161027,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "minisign-win32.zip.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.9/minisign-win32.zip.minisig",
+          "size": 306,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign-win64.zip",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.9/minisign-win64.zip",
+          "size": 145915,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "minisign-win64.zip.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.9/minisign-win64.zip.minisig",
+          "size": 306,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign-0.9.tar.gz",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.9/minisign-0.9.tar.gz",
+          "size": 16266,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "minisign-0.9.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.9/minisign-0.9.tar.gz.minisig",
+          "size": 307,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.8",
+      "name": "0.8",
+      "body": "- Multiple files can now be signed at once.\r\n- Support for HaikuOS was added.\r\n- The command-line switch to use custom file names when generating key pairs didn't work properly; this has been fixed.\r\n\r\n",
+      "prerelease": false,
+      "published_at": "2018-02-03T10:08:48Z",
+      "html_url": "https://github.com/jedisct1/minisign/releases/tag/0.8",
+      "assets": [
+        {
+          "name": "minisign-win32.zip",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.8/minisign-win32.zip",
+          "size": 161307,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "minisign-win32.zip.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.8/minisign-win32.zip.minisig",
+          "size": 306,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign-0.8.tar.gz",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.8/minisign-0.8.tar.gz",
+          "size": 14045,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "minisign-0.8.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.8/minisign-0.8.tar.gz.minisig",
+          "size": 307,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign-osx.zip.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.8/minisign-osx.zip.minisig",
+          "size": 304,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign-osx.zip",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.8/minisign-osx.zip",
+          "size": 86101,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.7",
+      "name": "0.7",
+      "body": "- The default location of the secret key was changed to `~/.minisign/minisign.key`.\r\n- Generating a new set of keys (`-G`) doesn't replace an existing key pair any more; the additional `-f` switch is required in order to force this operation.\r\n- Improved error messages and Windows compatibility.\r\n- A man page was added.\r\n",
+      "prerelease": false,
+      "published_at": "2016-07-31T23:23:22Z",
+      "html_url": "https://github.com/jedisct1/minisign/releases/tag/0.7",
+      "assets": [
+        {
+          "name": "minisign-osx.zip",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.7/minisign-osx.zip",
+          "size": 125000,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "minisign-osx.zip.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.7/minisign-osx.zip.minisig",
+          "size": 304,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign-win32.zip",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.7/minisign-win32.zip",
+          "size": 132716,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "minisign-win32.zip.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.7/minisign-win32.zip.minisig",
+          "size": 306,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "0.7.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.7/0.7.tar.gz.minisig",
+          "size": 298,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.6",
+      "name": "0.6",
+      "body": "Support for pre-hashing (HashEdDSA) was added.\n\nThe `-H` command-line switch, in addition to `-S`, enables HashEdDSA signatures instead of the default, pure EdDSA signatures.\n\nHashEdDSA signatures:\n- Require very little memory to be generated and verified, even with huge files\n- Are faster to generate and verify than pure EdDSA signatures\n- Require Minisign >= 0.6. In particular, they are not compatible with OpenBSD `signify` tool.\n- Would not remain secure against (improbable) collisions in the Blake2b-512 hash function.\n\nPureEdDSA signatures (default):\n- Require as much memory as the size of the file to sign\n- Cannot be used with files whose size is over 1 Gb\n- Are compatible with all Minisign versions, as well as OpenBSD `signify`.\n- Would remain secure against (improbable) collisions in the Blake2b-512 hash function.\n",
+      "prerelease": false,
+      "published_at": "2015-11-11T10:53:59Z",
+      "html_url": "https://github.com/jedisct1/minisign/releases/tag/0.6",
+      "assets": [
+        {
+          "name": "minisign-osx.zip",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.6/minisign-osx.zip",
+          "size": 81675,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "minisign-osx.zip.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.6/minisign-osx.zip.minisig",
+          "size": 304,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign-win32.zip",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.6/minisign-win32.zip",
+          "size": 91526,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "minisign-win32.zip.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.6/minisign-win32.zip.minisig",
+          "size": 306,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.5",
+      "name": "0.5",
+      "body": "The return code is now `1` on verification/password error, and `2` for system errors.\n\nBug fix: `-p` and `-V` could not be used together. It has been fixed.\n\nNew option: `-o`, that can be combined with `-V` in order to send the content of the signed file to `stdout` after successful verification.\n",
+      "prerelease": false,
+      "published_at": "2015-11-09T17:51:46Z",
+      "html_url": "https://github.com/jedisct1/minisign/releases/tag/0.5",
+      "assets": [
+        {
+          "name": "minisign-osx.zip",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.5/minisign-osx.zip",
+          "size": 99785,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "minisign-osx.zip.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.5/minisign-osx.zip.minisig",
+          "size": 304,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign-0.5.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.5/minisign-0.5.tar.gz.minisig",
+          "size": 307,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign-win32.zip.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.5/minisign-win32.zip.minisig",
+          "size": 306,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign-win32.zip",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.5/minisign-win32.zip",
+          "size": 95271,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.4",
+      "name": "0.4",
+      "body": "New switch: `-Q`, to display only the trusted comment (after verification)\n",
+      "prerelease": false,
+      "published_at": "2015-07-12T14:30:36Z",
+      "html_url": "https://github.com/jedisct1/minisign/releases/tag/0.4",
+      "assets": [
+        {
+          "name": "minisign-0.4.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.4/minisign-0.4.tar.gz.minisig",
+          "size": 298,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign-win32.zip",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.4/minisign-win32.zip",
+          "size": 95266,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "minisign-win32.zip.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.4/minisign-win32.zip.minisig",
+          "size": 306,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "0.3",
+      "name": "0.3",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2015-06-11T06:36:49Z",
+      "html_url": "https://github.com/jedisct1/minisign/releases/tag/0.3",
+      "assets": [
+        {
+          "name": "minisign-osx.zip",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.3/minisign-osx.zip",
+          "size": 71317,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "minisign-osx.zip.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.3/minisign-osx.zip.minisig",
+          "size": 304,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign-win32.zip",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.3/minisign-win32.zip",
+          "size": 95227,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "minisign-win32.zip.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.3/minisign-win32.zip.minisig",
+          "size": 306,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "minisign-0.3.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/minisign/releases/download/0.3/minisign-0.3.tar.gz.minisig",
+          "size": 307,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "Get my public keys here: https://sk.tl/7CPRo8kn",
+  "owner_company": null,
+  "owner_location": "Antibes, France",
+  "owner_blog": "https://primulinus.tpopsite.com",
+  "owner_twitter_username": "jedisct1",
+  "owner_followers": 4074,
+  "owner_following": 194,
+  "owner_created_at": "2009-09-09T10:20:57Z",
+  "homepage": "https://jedisct1.github.io/minisign/",
+  "license": "ISC",
+  "category": "crypto"
+}

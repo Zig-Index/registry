@@ -1,0 +1,31 @@
+{
+  "name": "zig-unidecode",
+  "owner": "squeek502",
+  "repo": "zig-unidecode",
+  "description": "Very approximate UTF-8 to ASCII transliterator (a Zig implementation of the Text::Unidecode Perl module)",
+  "type": "project",
+  "topics": [
+    "zig",
+    "ziglang",
+    "zig-package",
+    "unidecode",
+    "transliteration"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2024-05-11T15:21:34Z",
+  "readme": "# zig-unidecode\n\nA [Zig](https://ziglang.org/) implementation of the [Text::Unidecode Perl module](https://metacpan.org/pod/Text::Unidecode) to convert UTF-8 text into a (very) approximate ASCII-only transliteration. That is, this is \"meant to be a transliterator of last resort.\"\n\nFor a more detailed description including motivation, caveats, etc, see:\n\nhttps://metacpan.org/pod/Text::Unidecode\n\n## Examples\n\n| UTF-8  | Transliterated ASCII |\n| ------------- | ------------- |\n| `\"ÿéáh\"`  | `\"yeah\"`  |\n| `\"北亰\"`  | `\"Bei Jing \"` |\n| `\"Славься\"`  | `\"Slav'sia\"` |\n| `\"[██  ] 50%\"`  | `\"[##  ] 50%\"` |\n\n## Some things worth noting\n\n- The returned output will only contain ASCII characters (`0x00`-`0x7F`).\n- Any ASCII characters in the input will be unconverted in the output.\n- UTF-8 codepoints may be transliterated to a variable number of ASCII\n  characters (including 0).\n- UTF-8 codepoints > `0x7F` will never be transliterated to include any\n  ASCII control characters except `\\n`.\n- Unknown UTF-8 codepoints may be transliterated to `[?]`.\n\n## The different functions provided\n\n### `unidecodeAlloc`\n\nTakes an allocator in order to handle any input size safely. This should be used for most use-cases.\n\n### `unidecodeBuf`\n\nTakes a `dest` slice that must be large enough to handle the transliterated ASCII. Because the output size can vary greatly depending on the input, this is unsafe unless it can be known ahead-of-time that the transliterated output will fit (i.e. comptime).\n\n### `unidecodeStringLiteral`\n\nA way to transliterate a UTF-8 string literal into ASCII at compile time.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/2389051?u=3290602ddcaca1ccdff98990caa59c9cf45bd95b&v=4",
+  "releases": [],
+  "owner_bio": "An all around dumbo",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "https://www.ryanliptak.com",
+  "owner_twitter_username": null,
+  "owner_followers": 235,
+  "owner_following": 13,
+  "owner_created_at": "2012-09-20T21:31:39Z",
+  "license": "0BSD",
+  "category": "library"
+}

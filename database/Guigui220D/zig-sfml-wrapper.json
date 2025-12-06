@@ -1,0 +1,41 @@
+{
+  "name": "zig-sfml-wrapper",
+  "owner": "Guigui220D",
+  "repo": "zig-sfml-wrapper",
+  "description": "A zig wrapper for csfml",
+  "type": "project",
+  "topics": [
+    "zig-package",
+    "binding",
+    "csfml",
+    "sfml",
+    "wrapper",
+    "zig"
+  ],
+  "stars": 64,
+  "forks": 10,
+  "watchers": 2,
+  "updated_at": "2025-11-09T10:42:54Z",
+  "readme": "# Zig [SFML](https://www.sfml-dev.org/) Wrapper\r\n\r\n## A pretty interface to use CSFML in a way that looks Object-Oriented in zig!\r\n\r\n### What this is\r\n\r\nThis is a wrapper for CSFML. Theres no problem importing CSFML in Zig, but the resulting code can be a little bit messy.\r\nMy goal is to make things close enough to SFML, with nice methods.\r\n\r\nThis currently for Zig 0.12 (should work with 0.13) and CSFML 2.6.1.\r\n\r\n### Adding to your project\r\n\r\nAdd using Zig's package manager like so: `zig fetch --save https://github.com/Guigui220D/zig-sfml-wrapper/archive/d5272051a937c8a3756bb96eab8276b76a271de4.tar.gz` (replace the commit hash if you want an other version).\r\n\r\nAdd this to your exe compile in `build.zig`:\r\n\r\n```zig\r\nconst sfml = @import(\"sfml\"); // AT THE TOP OF THE FILE\r\n\r\nexe.root_module.addImport(\"sfml\", b.dependency(\"sfml\", .{}).module(\"sfml\"));\r\nsfml.link(exe);\r\n```\r\n\r\n> **Note:** Your project must know the location of the CSFML2.6.1 include, lib, and binaries directories for successful building and running. For more information, please refer to the wiki 👇 \r\n\r\nCheck the [wiki](../../wiki) for more details on how to compile your project or the examples.\r\n\r\n### Small example\r\n\r\nThis is a small example of how you use this sfml wrapper:\r\n\r\n```zig\r\n//! This is a translation of the c++ code the sfml website gives you to test if SFML works\r\n//! for instance, in this page: https://www.sfml-dev.org/tutorials/2.6/start-vc.php\r\n\r\nconst sf = struct {\r\n    const sfml = @import(\"sfml\");\r\n    usingnamespace sfml;\r\n    usingnamespace sfml.graphics;\r\n};\r\n\r\npub fn main() !void {\r\n    var window = try sf.RenderWindow.createDefault(.{ .x = 200, .y = 200 }, \"SFML works!\");\r\n    defer window.destroy();\r\n\r\n    var shape = try sf.CircleShape.create(100.0);\r\n    defer shape.destroy();\r\n    shape.setFillColor(sf.Color.Green);\r\n\r\n    while (window.isOpen()) {\r\n        while (window.pollEvent()) |event| {\r\n            if (event == .closed)\r\n                window.close();\r\n        }\r\n\r\n        window.clear(sf.Color.Black);\r\n        window.draw(shape, null);\r\n        window.display();\r\n    }\r\n}\r\n```\r\n\r\n### Projects made with this wrapper\r\n\r\nFeel free to add your project to this list!\r\n\r\n- [Pong clone I made](https://github.com/Guigui220D/sfml-pong-zig)\r\n- [Minez](https://github.com/Guigui220D/minez) an arcade looking minecraft inspired mining game\r\n- [quran-warsh](https://github.com/muslimDevCommunity/quran-warsh) a desktop quran app\r\n  \r\n### How much is done\r\n\r\nMost of the classes are wrapped and you should be able to write games with this wrapper.\r\nThe network module is a recent addition and does not contain all classes yet (HTTP, FTP, ...).\r\nThreads are not available yet.\r\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/24529384?u=8f1b28f882b7e1ebcc049dae1f15bb019ec68e7b&v=4",
+  "releases": [
+    {
+      "tag_name": "zig_0.12_sfml_2.6.1_a",
+      "name": "Zig 0.12, SFML 2.6.1",
+      "body": "Now updated to 2.6.1 (somewhat complete)\r\nNow works with Zig 0.12 and 0.13\r\nNow available from zig fetch",
+      "prerelease": false,
+      "published_at": "2024-06-30T14:04:17Z",
+      "html_url": "https://github.com/Guigui220D/zig-sfml-wrapper/releases/tag/zig_0.12_sfml_2.6.1_a",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Researcher, PhD student, at CEA-List in nuclear instrumentation",
+  "owner_company": "CEA List",
+  "owner_location": "France",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 35,
+  "owner_following": 40,
+  "owner_created_at": "2016-12-12T17:45:18Z",
+  "category": "library"
+}

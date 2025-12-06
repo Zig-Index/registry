@@ -1,0 +1,29 @@
+{
+  "name": "zig-editor-core",
+  "owner": "GoNZooo",
+  "repo": "zig-editor-core",
+  "description": "Eventually the core of an editor, interactive shell put on top.",
+  "type": "project",
+  "topics": [
+    "zig",
+    "ziglang",
+    "zig-package",
+    "vim",
+    "editor"
+  ],
+  "stars": 5,
+  "forks": 0,
+  "watchers": 3,
+  "updated_at": "2023-09-02T23:14:58Z",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1327032?u=85d6d39dae7581ab380ef27670e32892cb83c765&v=4",
+  "releases": [],
+  "owner_bio": "Backend & frontend. Odin, Zig, Haskell, \r\n PureScript, TypeScript, Elixir/Erlang and lots more, check repos.",
+  "owner_company": null,
+  "owner_location": "Pleven, Bulgaria",
+  "owner_blog": "http://severnatazvezda.com/",
+  "owner_twitter_username": null,
+  "owner_followers": 113,
+  "owner_following": 23,
+  "owner_created_at": "2012-01-13T07:32:59Z",
+  "category": "library"
+}
