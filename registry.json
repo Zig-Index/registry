@@ -1,5 +1,5 @@
 {
-  "lastSync": "2025-12-06T18:11:08.910Z",
+  "lastSync": "2025-12-06T18:31:37.134Z",
   "repos": {
     "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3": {
       "id": "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3",
@@ -609,9 +609,9 @@
       "name": "webview-zig",
       "owner": "thechampagne",
       "type": "project",
-      "updatedAt": "2025-12-05T23:14:21Z",
-      "commitHash": "599c106a69fe354ec525a3ae12673e48c09d1e8a",
-      "lastSynced": "2025-12-06T18:07:53.512Z"
+      "updatedAt": "2025-12-06T18:15:57Z",
+      "commitHash": "ce50c7e183f35521df788ec70d113828c3572b97",
+      "lastSynced": "2025-12-06T18:31:36.073Z"
     },
     "R_kgDOKyYB0Q": {
       "id": "R_kgDOKyYB0Q",
@@ -4002,9 +4002,9 @@
       "name": "registry",
       "owner": "Zig-Index",
       "type": "project",
-      "updatedAt": "2025-12-06T18:06:06Z",
-      "commitHash": "bea2716092bc19a1a5c4ae101fd4cff0ba536381",
-      "lastSynced": "2025-12-06T18:09:14.088Z"
+      "updatedAt": "2025-12-06T18:11:17Z",
+      "commitHash": "b1dbb4cd77ae66daf2046697382eb874de9070ec",
+      "lastSynced": "2025-12-06T18:31:36.130Z"
     },
     "R_kgDOOHrEMA": {
       "id": "R_kgDOOHrEMA",
