@@ -1,33 +1,28 @@
 # Zig Index Registry
 
-**Zig Index is an independent and unofficial registry of Zig packages and applications. It is not affiliated with, endorsed by, or maintained by the Zig Software Foundation or any of its founders. All packages, libraries, and applications listed on this website are owned and maintained by their respective developers and the community. No ownership or responsibility is claimed over any third-party software hosted or indexed. I do not own or claim any rights to trademarks, logos, or names referenced or displayed; all such assets belong to their respective owners.**
+**Zig Index is an independent and unofficial registry of Zig projects. It is not affiliated with, endorsed by, or maintained by the Zig Software Foundation or any of its founders. All projects listed on this website are owned and maintained by their respective developers and the community. No ownership or responsibility is claimed over any third-party software hosted or indexed. I do not own or claim any rights to trademarks, logos, or names referenced or displayed; all such assets belong to their respective owners.**
 
 ## 🌟 Overview
 
-Zig Index is a community-driven registry for discovering and sharing Zig packages, libraries, and applications. It provides:
+Zig Index is a community-driven registry for discovering and sharing Zig projects. It provides:
 
-- **📦 Package Discovery**: Browse and search through curated Zig packages
-- **🚀 Application Showcase**: Find tools and software built with Zig
+- **📦 Project Discovery**: Browse and search through curated Zig projects
+- **🚀 Project Showcase**: Find tools and software built with Zig
 - **📊 Live Statistics**: Real-time GitHub stats (stars, forks, issues)
 - **📖 README Display**: View project documentation directly
 - **🔧 Installation Commands**: Copy-to-clipboard `zig fetch` commands
 - **👤 Developer Profiles**: View contributors and their Zig projects
-- **🔍 Advanced Search**: Filter by category, license, and more
+- **🔍 Advanced Search**: Filter by category, license, topic, and more
 
 ## 📁 Structure
 
 ```
-repositories/
-├── applications/           # Applications built with Zig
-│   ├── bun.json           # Bun JavaScript runtime
-│   ├── tigerbeetle.json   # TigerBeetle database
-│   └── zig-compiler.json  # Zig compiler itself
-└── packages/              # Zig libraries and packages
-    ├── capy.json          # Cross-platform GUI library
-    ├── logly.json         # Logging library
-    ├── mach.json          # Game engine & graphics toolkit
-    ├── zig-std.json       # Standard library docs
-    └── zls.json           # Zig Language Server
+database/
+├── username/              # GitHub username or organization
+│   ├── repo-name.json     # Repository details
+│   └── another-repo.json
+└── another-user/
+    └── project.json
 ```
 
 ## ➕ Adding Your Project
@@ -36,78 +31,21 @@ repositories/
 
 Fork the [Zig Index registry repository](https://github.com/Zig-Index/zig-index.github.io) on GitHub.
 
-### Step 2: Create a JSON file
+### Step 2: Add GitHub Topics
 
-#### For Packages (libraries/modules)
+You **must** add one of the following topics to your GitHub repository:
 
-Create a file in `src/registry/repositories/packages/your-package.json`:
+- **For Packages**: Add `zig-package`
+- **For Applications**: Add `zig-application`
 
-```json
-{
-  "name": "Your Package Name",
-  "owner": "github-username",
-  "repo": "repository-name",
-  "description": "A brief description of your package (max 200 chars)",
-  "homepage": "https://your-docs-site.com",
-  "license": "MIT",
-  "category": "networking"
-}
-```
-
-#### For Applications (tools/software)
-
-Create a file in `src/registry/repositories/applications/your-app.json`:
-
-```json
-{
-  "name": "Your Application Name",
-  "owner": "github-username",
-  "repo": "repository-name",
-  "description": "A brief description of your application",
-  "homepage": "https://your-app-site.com",
-  "license": "MIT",
-  "category": "development-tools",
-  "download_url": "https://example.com/your-app-installer.exe"
-}
-```
-
-### Step 3: Submit a Pull Request
-
-Submit a PR with your changes. We'll review and merge it!
-
-## 📋 JSON Schema
-
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `name` | string | ✅ | Display name of the project |
-| `owner` | string | ✅ | GitHub username or organization |
-| `repo` | string | ✅ | GitHub repository name |
-| `description` | string | ✅ | Brief description (max 200 chars) |
-| `homepage` | string | ❌ | Project website or documentation URL |
-| `license` | string | ❌ | SPDX license identifier (e.g., "MIT", "Apache-2.0") |
-| `category` | string | ❌ | Category for filtering (see categories below) |
-| `download_url` | string | ❌ | Direct download URL for binary releases |
-
-### Required Fields
-
-- **`name`** - The display name shown on the website
-- **`owner`** - Your GitHub username or organization name  
-- **`repo`** - The exact repository name on GitHub
-- **`description`** - A brief description of your project (keep it under 200 characters)
-
-### Optional Fields
-
-- **`homepage`** - Link to your documentation or project website
-- **`license`** - Use [SPDX identifiers](https://spdx.org/licenses/) (MIT, Apache-2.0, GPL-3.0, etc.)
-- **`category`** - Helps users filter and discover your project
-- **`download_url`** - Direct download link for pre-built binaries
+Optionally, you can also add `zig-index` to show support.
 
 
 ## 🔧 Installation
 
-### For Packages
+### For Projects
 
-Users can install packages directly using `zig fetch`:
+Users can install projects directly using `zig fetch`:
 
 ```bash
 # Using .tar.gz (recommended)
@@ -231,7 +169,7 @@ This registry is open source under the **MIT License**.
 
 We welcome contributions! Here's how you can help:
 
-1. **Add Projects**: Submit PRs to add Zig packages/applications
+1. **Add Projects**: Add zig-index & zig-package/zig-application topics to your repo
 2. **Report Issues**: Found a bug? Open an issue
 3. **Improve Code**: PRs for bug fixes and features welcome
 4. **Spread the Word**: Share Zig Index with the community!

@@ -1,9 +1,0 @@
-{
-  "name": "TigerBeetle",
-  "owner": "tigerbeetle",
-  "repo": "tigerbeetle",
-  "description": "A financial accounting database designed for mission-critical safety and performance, written in Zig",
-  "category": "database",
-  "license": "Apache-2.0",
-  "homepage": "https://tigerbeetle.com"
-}

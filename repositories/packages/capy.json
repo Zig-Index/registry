@@ -1,9 +1,0 @@
-{
-  "name": "Capy",
-  "owner": "capy-ui",
-  "repo": "capy",
-  "description": "Cross-platform GUI library for Zig focusing on productivity and ease of use",
-  "category": "gui",
-  "license": "MIT",
-  "homepage": "https://capy-ui.github.io/capy/"
-}

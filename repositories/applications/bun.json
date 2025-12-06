@@ -1,9 +1,0 @@
-{
-  "name": "Bun",
-  "owner": "oven-sh",
-  "repo": "bun",
-  "description": "Incredibly fast JavaScript runtime, bundler, test runner, and package manager – all in one built with Zig",
-  "category": "runtime",
-  "license": "MIT",
-  "homepage": "https://bun.sh"
-}

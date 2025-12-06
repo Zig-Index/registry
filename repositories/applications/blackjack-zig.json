@@ -1,9 +1,0 @@
-{
-  "name": "blackjack-zig",
-  "owner": "gdonald",
-  "repo": "blackjack-zig",
-  "description": "Console Blackjack written in Zig",
-  "homepage": "https://github.com/gdonald/blackjack-zig",
-  "license": "MIT",
-  "category": "game"
-}

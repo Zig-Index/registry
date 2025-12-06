@@ -1,9 +1,0 @@
-{
-  "name": "Mach Engine",
-  "owner": "hexops",
-  "repo": "mach",
-  "description": "Zig game engine and graphics toolkit for building high-performance games and multimedia applications",
-  "category": "game-engine",
-  "license": "MIT",
-  "homepage": "https://machengine.org"
-}

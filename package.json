@@ -1,0 +1,16 @@
+{
+  "name": "zig-registry-updater",
+  "version": "1.0.0",
+  "description": "Auto-updater for Zig Registry",
+  "type": "module",
+  "scripts": {
+    "update": "tsx scripts/update.ts"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "tsx": "^4.7.1",
+    "@types/node": "^20.11.24"
+  }
+}

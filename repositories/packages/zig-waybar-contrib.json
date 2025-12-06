@@ -1,7 +1,0 @@
-{
-  "name": "zig-waybar-contrib",
-  "owner": "erffy",
-  "repo": "zig-waybar-contrib",
-  "description": "High-performance Waybar modules written in Zig for efficient system monitoring",
-  "license": "GPL3"
-}

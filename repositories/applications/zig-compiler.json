@@ -1,9 +1,0 @@
-{
-  "name": "Zig",
-  "owner": "ziglang",
-  "repo": "zig",
-  "description": "General-purpose programming language and target-aware optimizing compilers",
-  "homepage": "https://ziglang.org",
-  "license": "MIT",
-  "category": "compiler"
-}

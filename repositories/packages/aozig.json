@@ -1,9 +1,0 @@
-{
-  "name": "aozig",
-  "owner": "Sh4d1",
-  "repo": "aozig",
-  "description": "Advent Of Code (AoC) helper for Zig",
-  "category": "development-tools",
-  "license": "MIT",
-  "homepage": "https://github.com/Sh4d1/aozig"
-}
