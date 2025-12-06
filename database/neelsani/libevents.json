@@ -1,0 +1,33 @@
+{
+  "name": "libevents",
+  "owner": "neelsani",
+  "repo": "libevents",
+  "description": "",
+  "type": "package",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-05-31T20:22:31Z",
+  "dependencies": [
+    {
+      "name": "upstream",
+      "url": "git+https://github.com/mavlink/libevents#9ef591c447fe0386d698bf6fb9a6d27e43988ee4",
+      "hash": "N-V-__8AAGrbEQAHnTTlMb80CVWL9OQzygRZ5Dz-dg6cIEqn"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# libevents Zig Build Integration\n\nZig build system integration for [libevents](https://github.com/mavlink/libevents) \n\n## Quick Start\n\n1. Add to your project:\n```bash\nzig fetch --save git+https://github.com/neelsani/libevents\n```\n2. Add to your build.zig\n\n```zig\nconst libevents_dep = b.dependency(\"libevents\", .{\n    .target = target,\n    .optimize = optimize,\n});\nconst lib = libevents_dep.artifact(\"libevents\");\n\n//then link it to your exe\n\nexe.linkLibrary(lib);\n```",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/59120225?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Atlanta, GA",
+  "owner_blog": "neels.dev/",
+  "owner_twitter_username": null,
+  "owner_followers": 2,
+  "owner_following": 4,
+  "owner_created_at": "2019-12-21T16:18:48Z",
+  "category": "library"
+}

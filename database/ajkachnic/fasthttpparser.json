@@ -1,0 +1,26 @@
+{
+  "name": "fasthttpparser",
+  "owner": "ajkachnic",
+  "repo": "fasthttpparser",
+  "description": "A moderately fast HTTP 1.1 parser written in Zig.",
+  "type": "package",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2022-02-25T20:53:33Z",
+  "readme": "# fasthttpparser\n\n*Note: this is unstable and the API is likely to change; use at your own risk*\n\nA HTTP 1.1 parser written in Zig. Currently competes with [`httparse`](https://https://github.com/seanmonstar/httparse) and is beaten by [`picohttpparser`](https://github.com/h20/picohttpparser)\n\n## Benchmarks\n\n| parser         | one-long | one-short  | smaller    | bigger     |\n|----------------|----------|------------|------------|------------|\n| fasthttpparser | 1.08gb/s | 987.54mb/s | 986.80mb/s | 984.49mb/s |\n| picohttpparser | 3.04gb/s | 2.99gb/s   | 3.06gb/s   | 3.06gb/s   |\n\nYou can run these yourself with `zig build bench`. I'll eventually extend the benchmark suite to include httparse, but I don't feel like dealing with Rust-Zig interop (test harness is written in Zig) at the moment.\n\n## Installation\n\nSince the parser ships as a single file (`fasthttpparser.zig`), you can just drop that into your project.\n\nThen, you could add it to your `build.zig` file as a package, or just import it directly.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/44317699?u=0be16f5ef208aa37131f53abcc3112a8da3acb69&v=4",
+  "releases": [],
+  "owner_company": "aaru",
+  "owner_location": "nyc",
+  "owner_blog": "https://nullish.space",
+  "owner_twitter_username": "su_andrewk",
+  "owner_followers": 42,
+  "owner_following": 43,
+  "owner_created_at": "2018-10-20T11:55:10Z",
+  "category": "library"
+}

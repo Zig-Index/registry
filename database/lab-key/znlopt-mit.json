@@ -1,0 +1,35 @@
+{
+  "name": "znlopt-mit",
+  "owner": "lab-key",
+  "repo": "znlopt-mit",
+  "description": "A Thin Zig Wrapper For stevengj/nlopt - Excluding 'luksan'",
+  "type": "package",
+  "topics": [
+    "non-linear-optimization",
+    "optimization-algorithms",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-11-06T15:27:19Z",
+  "dependencies": [
+    {
+      "name": "lib_znlopt_mit",
+      "url": "libs/nlopt-mit"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/238103222?u=492d6add4a6a4d97e8bc2f418c46064c85938866&v=4",
+  "releases": [],
+  "owner_bio": "Oh you don't wanna know",
+  "owner_company": null,
+  "owner_location": "London - Officially",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 1,
+  "owner_following": 0,
+  "owner_created_at": "2025-10-14T21:53:28Z",
+  "license": "MIT",
+  "category": "library"
+}

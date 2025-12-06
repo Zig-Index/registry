@@ -1,5 +1,5 @@
 {
-  "lastSync": "2025-12-06T19:18:40.213Z",
+  "lastSync": "2025-12-06T20:24:45.822Z",
   "repos": {
     "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3": {
       "id": "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3",
@@ -4002,9 +4002,9 @@
       "name": "registry",
       "owner": "Zig-Index",
       "type": "package",
-      "updatedAt": "2025-12-06T18:33:09Z",
-      "commitHash": "b34ba91d9183eea9df031b3d220d1459486c7229",
-      "lastSynced": "2025-12-06T19:18:39.209Z"
+      "updatedAt": "2025-12-06T19:18:44Z",
+      "commitHash": "f880ce5f1ed722a8486c6ae5b84b3229b70180d5",
+      "lastSynced": "2025-12-06T20:24:44.820Z"
     },
     "R_kgDOOHrEMA": {
       "id": "R_kgDOOHrEMA",
@@ -8658,6 +8658,33 @@
       "updatedAt": "2025-11-07T21:17:58Z",
       "commitHash": "c58b3e60e507f731e14d1824927b2bacbb4d3c37",
       "lastSynced": "2025-12-06T18:11:07.908Z"
+    },
+    "R_kgDOQQD9RA": {
+      "id": "R_kgDOQQD9RA",
+      "name": "znlopt-mit",
+      "owner": "lab-key",
+      "type": "package",
+      "updatedAt": "2025-11-06T15:27:19Z",
+      "commitHash": "b853b6cf1b47098bd33eaab903178fc2d2bfc2c9",
+      "lastSynced": "2025-12-06T20:24:42.031Z"
+    },
+    "R_kgDOG6MUCA": {
+      "id": "R_kgDOG6MUCA",
+      "name": "fasthttpparser",
+      "owner": "ajkachnic",
+      "type": "package",
+      "updatedAt": "2022-02-25T20:53:33Z",
+      "commitHash": "d85aa7ef265b7940c5b2d1ff5de2bdb8082b1eff",
+      "lastSynced": "2025-12-06T20:24:42.102Z"
+    },
+    "R_kgDOOzF4Vg": {
+      "id": "R_kgDOOzF4Vg",
+      "name": "libevents",
+      "owner": "neelsani",
+      "type": "package",
+      "updatedAt": "2025-05-31T20:22:31Z",
+      "commitHash": "99d175b65193f13bd4d699833722b30681ec6d1f",
+      "lastSynced": "2025-12-06T20:24:43.489Z"
     }
   }
 }
