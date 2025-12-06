@@ -1,5 +1,5 @@
 {
-  "lastSync": "2025-12-06T18:31:37.134Z",
+  "lastSync": "2025-12-06T19:18:40.213Z",
   "repos": {
     "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3": {
       "id": "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3",
@@ -3623,10 +3623,10 @@
       "id": "R_kgDOO1ny5Q",
       "name": "tokota",
       "owner": "kofi-q",
-      "type": "project",
-      "updatedAt": "2025-12-06T17:56:01Z",
-      "commitHash": "034d989c6bcce37abc0a0d811ef8a74f4e849b78",
-      "lastSynced": "2025-12-06T18:09:00.776Z"
+      "type": "package",
+      "updatedAt": "2025-12-06T18:38:48Z",
+      "commitHash": "a3ae64e0d88f3fad6576ad3ac03cb6a12611bdb9",
+      "lastSynced": "2025-12-06T19:18:39.134Z"
     },
     "R_kgDOMB6nUg": {
       "id": "R_kgDOMB6nUg",
@@ -4001,10 +4001,10 @@
       "id": "R_kgDOQhjJPA",
       "name": "registry",
       "owner": "Zig-Index",
-      "type": "project",
-      "updatedAt": "2025-12-06T18:11:17Z",
-      "commitHash": "b1dbb4cd77ae66daf2046697382eb874de9070ec",
-      "lastSynced": "2025-12-06T18:31:36.130Z"
+      "type": "package",
+      "updatedAt": "2025-12-06T18:33:09Z",
+      "commitHash": "b34ba91d9183eea9df031b3d220d1459486c7229",
+      "lastSynced": "2025-12-06T19:18:39.209Z"
     },
     "R_kgDOOHrEMA": {
       "id": "R_kgDOOHrEMA",

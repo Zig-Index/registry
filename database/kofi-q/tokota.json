@@ -3,7 +3,7 @@
   "owner": "kofi-q",
   "repo": "tokota",
   "description": "Build / Package / Publish Node.js addons written in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "napi",
     "node-api",
@@ -17,7 +17,7 @@
   "stars": 8,
   "forks": 1,
   "watchers": 0,
-  "updated_at": "2025-12-06T17:56:01Z",
+  "updated_at": "2025-12-06T18:38:48Z",
   "dependencies": [
     {
       "name": "base",
