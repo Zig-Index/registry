@@ -3,7 +3,7 @@
   "owner": "floooh",
   "repo": "sokol-zig",
   "description": "Zig bindings for the sokol headers (https://github.com/floooh/sokol)",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "sokol",
@@ -13,7 +13,7 @@
   "stars": 605,
   "forks": 73,
   "watchers": 8,
-  "updated_at": "2025-12-06T15:39:13Z",
+  "updated_at": "2025-12-06T22:29:07Z",
   "dependencies": [
     {
       "name": "emsdk",

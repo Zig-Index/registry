@@ -3,7 +3,7 @@
   "owner": "Mario-SO",
   "repo": "ohlcv",
   "description": "OHLCV library in zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "trading",
@@ -12,7 +12,7 @@
   "stars": 22,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-12-05T23:20:07Z",
+  "updated_at": "2025-12-06T23:19:13Z",
   "dependencies": [
     {
       "name": "example",

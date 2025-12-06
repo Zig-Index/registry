@@ -1,5 +1,5 @@
 {
-  "lastSync": "2025-12-06T22:21:47.596Z",
+  "lastSync": "2025-12-06T23:21:35.606Z",
   "repos": {
     "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3": {
       "id": "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3",
@@ -176,10 +176,10 @@
       "id": "MDEwOlJlcG9zaXRvcnkxMzU2MTM0MDA=",
       "name": "sokol-zig",
       "owner": "floooh",
-      "type": "project",
-      "updatedAt": "2025-12-06T15:39:13Z",
-      "commitHash": "f715165f00dce80085cb3fb4e4d66a43efe315c9",
-      "lastSynced": "2025-12-06T18:07:39.821Z"
+      "type": "package",
+      "updatedAt": "2025-12-06T22:29:07Z",
+      "commitHash": "def7b27f82d04c3b690a49913f4979c8dd46a103",
+      "lastSynced": "2025-12-06T23:21:34.601Z"
     },
     "MDEwOlJlcG9zaXRvcnkyNTk2MTk5Mzk=": {
       "id": "MDEwOlJlcG9zaXRvcnkyNTk2MTk5Mzk=",
@@ -2300,10 +2300,10 @@
       "id": "R_kgDOOa3T2Q",
       "name": "ohlcv",
       "owner": "Mario-SO",
-      "type": "project",
-      "updatedAt": "2025-12-05T23:20:07Z",
-      "commitHash": "27d0994d797f16754f535eaee13ff7177dd2d9c6",
-      "lastSynced": "2025-12-06T18:08:33.963Z"
+      "type": "package",
+      "updatedAt": "2025-12-06T23:19:13Z",
+      "commitHash": "9fa8106935283e3aec287fb745d68725497f681c",
+      "lastSynced": "2025-12-06T23:21:34.604Z"
     },
     "MDEwOlJlcG9zaXRvcnkzMjAwNTc3NjM=": {
       "id": "MDEwOlJlcG9zaXRvcnkzMjAwNTc3NjM=",
@@ -2678,10 +2678,10 @@
       "id": "R_kgDOMy0GCg",
       "name": "zml",
       "owner": "srmadrid",
-      "type": "project",
-      "updatedAt": "2025-11-30T16:11:38Z",
-      "commitHash": "a1339262099ff2516c72ce7d068cf939f317b008",
-      "lastSynced": "2025-12-06T18:08:41.159Z"
+      "type": "package",
+      "updatedAt": "2025-12-06T22:49:04Z",
+      "commitHash": "c22df22cc854bff7add8d4fd63e80800dfa5fffe",
+      "lastSynced": "2025-12-06T23:21:34.604Z"
     },
     "R_kgDOLHENMQ": {
       "id": "R_kgDOLHENMQ",
@@ -4002,9 +4002,9 @@
       "name": "registry",
       "owner": "Zig-Index",
       "type": "package",
-      "updatedAt": "2025-12-06T21:20:14Z",
-      "commitHash": "0d1648838cd3c2a87315a70f7868fd311b41649e",
-      "lastSynced": "2025-12-06T22:21:46.592Z"
+      "updatedAt": "2025-12-06T22:21:52Z",
+      "commitHash": "85d0a9f4f7148f3edde4be2af4bc52be5ae3b3e1",
+      "lastSynced": "2025-12-06T23:21:34.604Z"
     },
     "R_kgDOOHrEMA": {
       "id": "R_kgDOOHrEMA",
