@@ -1,5 +1,5 @@
 {
-  "lastSync": "2025-12-06T21:20:10.006Z",
+  "lastSync": "2025-12-06T22:21:47.596Z",
   "repos": {
     "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3": {
       "id": "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3",
@@ -662,10 +662,10 @@
       "id": "R_kgDOOEvujA",
       "name": "libqt6zig",
       "owner": "rcalixte",
-      "type": "project",
-      "updatedAt": "2025-12-06T01:50:01Z",
-      "commitHash": "56375f9b52c90a6e2334885cce0e1066c27c9ccf",
-      "lastSynced": "2025-12-06T18:07:53.515Z"
+      "type": "package",
+      "updatedAt": "2025-12-06T21:59:13Z",
+      "commitHash": "b791eab4ca120055a1e4706b86aadea3e974669c",
+      "lastSynced": "2025-12-06T22:21:46.535Z"
     },
     "R_kgDONpnMrg": {
       "id": "R_kgDONpnMrg",
@@ -1319,10 +1319,10 @@
       "id": "R_kgDOOEvuiA",
       "name": "libqt6c",
       "owner": "rcalixte",
-      "type": "project",
-      "updatedAt": "2025-12-05T20:52:22Z",
-      "commitHash": "65d75dc894b2c127d4b05b03d7429c4fd6bab39d",
-      "lastSynced": "2025-12-06T18:08:10.457Z"
+      "type": "package",
+      "updatedAt": "2025-12-06T21:59:11Z",
+      "commitHash": "10ab925f265f199e71fa42199c2b66801cfda042",
+      "lastSynced": "2025-12-06T22:21:46.591Z"
     },
     "R_kgDOMC8M7Q": {
       "id": "R_kgDOMC8M7Q",
@@ -3749,10 +3749,10 @@
       "id": "R_kgDOOreXfw",
       "name": "zli",
       "owner": "mahiremirhan",
-      "type": "project",
-      "updatedAt": "2025-12-06T16:49:10Z",
-      "commitHash": "b9b56f1ca24e957876bf8b1043c6a2bf2aa9c6bd",
-      "lastSynced": "2025-12-06T18:09:05.666Z"
+      "type": "package",
+      "updatedAt": "2025-12-06T22:10:32Z",
+      "commitHash": "ea08598e2e7422dbdc590a138bf3c02c2007669a",
+      "lastSynced": "2025-12-06T22:21:46.592Z"
     },
     "R_kgDOJI-a-w": {
       "id": "R_kgDOJI-a-w",
@@ -4002,9 +4002,9 @@
       "name": "registry",
       "owner": "Zig-Index",
       "type": "package",
-      "updatedAt": "2025-12-06T20:24:50Z",
-      "commitHash": "95e86d5c340c5fa6e2954613b966ac0de1f9535f",
-      "lastSynced": "2025-12-06T21:20:09.004Z"
+      "updatedAt": "2025-12-06T21:20:14Z",
+      "commitHash": "0d1648838cd3c2a87315a70f7868fd311b41649e",
+      "lastSynced": "2025-12-06T22:21:46.592Z"
     },
     "R_kgDOOHrEMA": {
       "id": "R_kgDOOHrEMA",
@@ -4766,10 +4766,10 @@
       "id": "R_kgDOO_RP0g",
       "name": "zigsdl",
       "owner": "mmoehabb",
-      "type": "project",
-      "updatedAt": "2025-11-29T00:44:57Z",
-      "commitHash": "da212347eb7b27e417ecff546960e5d06f0cf68e",
-      "lastSynced": "2025-12-06T18:09:32.291Z"
+      "type": "package",
+      "updatedAt": "2025-12-06T21:48:29Z",
+      "commitHash": "454cb4047e740b93313207211445aa9b06d33f1a",
+      "lastSynced": "2025-12-06T22:21:46.592Z"
     },
     "R_kgDOQM-WOQ": {
       "id": "R_kgDOQM-WOQ",
