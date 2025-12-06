@@ -27,11 +27,7 @@ database/
 
 ## ➕ Adding Your Project
 
-### Step 1: Fork this repository
-
-Fork the [Zig Index registry repository](https://github.com/Zig-Index/zig-index.github.io) on GitHub.
-
-### Step 2: Add GitHub Topics
+###  Add GitHub Topics
 
 You **must** add one of the following topics to your GitHub repository:
 
