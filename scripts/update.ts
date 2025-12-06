@@ -301,6 +301,12 @@ function extractZonMetadata(zonContent: string): { dependencies: { name: string;
         } else if (pathMatch) {
           deps.push({
             name,
+            url: pathMatch[1], // Use path as url for local deps
+            hash: undefined
+          });
+        } else if (pathMatch) {
+          deps.push({
+            name,
             url: pathMatch[1],
             hash: undefined
           });
@@ -420,6 +426,9 @@ async function processBatch(ids: string[], state: RegistryState) {
     const hasAppTopic = topicSet.has('zig-application');
 
     let type: 'package' | 'application' | 'project' = 'project'; // Default
+    if (hasPackageTopic) type = 'package';
+    else if (hasAppTopic) type = 'application';
+    else if (hasZon) type = 'package'; // Assume package if build.zig.zon exists
     
     // Process releases
     const releases = repo.releases.nodes.map((r: any) => ({
@@ -563,11 +572,16 @@ async function main() {
   console.log(` Loaded state: ${Object.keys(state.repos).length} tracked repos.`);
 
   // 2. Discovery
-  // Search for both packages and applications
-  const packages = await discoverRepos('topic:zig-package fork:false');
-  const applications = await discoverRepos('topic:zig-application fork:false');
+  // Search for topics defined in env or default to zig-package and zig-application
+  const topics = (process.env.SEARCH_TOPICS || 'zig-package,zig-application').split(',').map(t => t.trim());
+  let allDiscovered: DiscoveryItem[] = [];
   
-  const allDiscovered = [...packages, ...applications];
+  for (const topic of topics) {
+    console.log(`Discovering topic: ${topic}...`);
+    const repos = await discoverRepos(`topic:${topic} fork:false`);
+    allDiscovered = [...allDiscovered, ...repos];
+  }
+  
   // Deduplicate by ID
   const uniqueDiscovered = Array.from(new Map(allDiscovered.map(item => [item.id, item])).values());
 
@@ -581,8 +595,16 @@ async function main() {
   // Identify New & Updated
   for (const item of uniqueDiscovered) {
     const tracked = state.repos[item.id];
+    
+    // Check if file exists on disk
+    const expectedFile = path.join(CONFIG.outputDir, item.owner, `${item.name}.json`);
+    const fileExists = fs.existsSync(expectedFile);
+
     if (!tracked) {
       newRepos.push(item);
+    } else if (!fileExists) {
+      console.log(`[Reconcile] File missing for ${item.owner}/${item.name}, forcing update.`);
+      updatedRepos.push(item);
     } else {
       // Check if updated on GitHub since last sync
       // We compare GitHub's commit hash with our stored commit hash

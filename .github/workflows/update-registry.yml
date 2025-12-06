@@ -26,13 +26,17 @@ jobs:
       - name: Run update script
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: bun run update
+          SEARCH_TOPICS: "zig-package,zig-application"
+        run: |
+          mkdir -p database
+          bun run update
 
       - name: Commit and push changes
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          # Ensure database folder exists to prevent git add failure
+          mkdir -p database
           git add -A database/ registry.json
-          git commit -m "chore: update registry data [skip ci]" || exit 0
-          git pull --rebase
-          git push
+          # Only commit and push if there are changes
+          git diff --staged --quiet || (git commit -m "chore: update registry data [skip ci]" && git pull --rebase && git push)
