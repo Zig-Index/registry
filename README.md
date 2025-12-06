@@ -94,19 +94,6 @@ pub fn build(b: *std.Build) void {
 }
 ```
 
-## 🌐 Website Features
-
-### Pages
-
-| Page | URL | Description |
-|------|-----|-------------|
-| Home | `/` | Overview with stats and featured projects |
-| Packages | `/packages` | Browse all Zig packages |
-| Applications | `/applications` | Browse all Zig applications |
-| Search | `/search` | Advanced search with filters |
-| Repository | `/repo?owner=xxx&name=yyy` | Detailed project view |
-| User Profile | `/u?username=xxx` | Developer profile & projects |
-| How to Add | `/how-to-add` | Submission guide |
 
 ## 📜 Guidelines
 
