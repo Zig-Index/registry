@@ -3,7 +3,7 @@
   "owner": "KurtWagner",
   "repo": "zlinter",
   "description": "An extendable and customisable Zig linter that is integrated from source into your build.zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "linter",
     "linters",
@@ -14,12 +14,12 @@
   "stars": 40,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-12-05T19:18:54Z",
+  "updated_at": "2025-12-07T03:38:20Z",
   "dependencies": [
     {
       "name": "zls",
-      "url": "git+https://github.com/zigtools/zls?ref=master#b95b65a749ada2dea013188ec0f3b83b02cd17ba",
-      "hash": "zls-0.16.0-dev-rmm5fgfOJAA0yJSq0lsjL6a_RStkfl3rCEUv2kTZT7Ms"
+      "url": "git+https://github.com/zigtools/zls?ref=master#60cff3d69f6072b840aa588fb8454fac9a95fbe1",
+      "hash": "zls-0.16.0-dev-rmm5fgPUJABn4CfY6k6jMBI87sJHSfaGw7fy1rjpp7h-"
     }
   ],
   "minimum_zig_version": "0.15.1",
