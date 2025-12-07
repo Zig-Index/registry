@@ -1,5 +1,5 @@
 {
-  "lastSync": "2025-12-06T23:21:35.606Z",
+  "lastSync": "2025-12-07T01:59:47.668Z",
   "repos": {
     "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3": {
       "id": "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3",
@@ -320,10 +320,10 @@
       "id": "R_kgDOJhiC6A",
       "name": "zigar",
       "owner": "chung-leong",
-      "type": "project",
-      "updatedAt": "2025-12-05T21:21:27Z",
-      "commitHash": "3e23af6db8f20b25e46a28b4435f9a14ead89915",
-      "lastSynced": "2025-12-06T18:07:45.727Z"
+      "type": "package",
+      "updatedAt": "2025-12-06T23:51:29Z",
+      "commitHash": "5b5d91ef545143925cb3c6f59ee44c4b3da02dfc",
+      "lastSynced": "2025-12-07T01:59:46.615Z"
     },
     "MDEwOlJlcG9zaXRvcnkzMzIxNDMyNjM=": {
       "id": "MDEwOlJlcG9zaXRvcnkzMzIxNDMyNjM=",
@@ -4002,9 +4002,9 @@
       "name": "registry",
       "owner": "Zig-Index",
       "type": "package",
-      "updatedAt": "2025-12-06T22:21:52Z",
-      "commitHash": "85d0a9f4f7148f3edde4be2af4bc52be5ae3b3e1",
-      "lastSynced": "2025-12-06T23:21:34.604Z"
+      "updatedAt": "2025-12-06T23:21:39Z",
+      "commitHash": "b4cb7d3e52cfc3b4d522f20727d6fa00854bd113",
+      "lastSynced": "2025-12-07T01:59:46.663Z"
     },
     "R_kgDOOHrEMA": {
       "id": "R_kgDOOHrEMA",
