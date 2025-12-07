@@ -1,5 +1,5 @@
 {
-  "lastSync": "2025-12-07T17:19:30.834Z",
+  "lastSync": "2025-12-07T18:31:22.416Z",
   "repos": {
     "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3": {
       "id": "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3",
@@ -2679,9 +2679,9 @@
       "name": "zml",
       "owner": "srmadrid",
       "type": "package",
-      "updatedAt": "2025-12-06T22:49:04Z",
-      "commitHash": "c22df22cc854bff7add8d4fd63e80800dfa5fffe",
-      "lastSynced": "2025-12-06T23:21:34.604Z"
+      "updatedAt": "2025-12-07T18:27:15Z",
+      "commitHash": "38265311d922264f9e479cc265cc0d8baf8fc998",
+      "lastSynced": "2025-12-07T18:31:21.408Z"
     },
     "R_kgDOLHENMQ": {
       "id": "R_kgDOLHENMQ",
@@ -4002,9 +4002,9 @@
       "name": "registry",
       "owner": "Zig-Index",
       "type": "package",
-      "updatedAt": "2025-12-07T16:27:12Z",
-      "commitHash": "d7eafb239c725369b050d99d8d38e6b7929159b2",
-      "lastSynced": "2025-12-07T17:19:29.831Z"
+      "updatedAt": "2025-12-07T17:19:35Z",
+      "commitHash": "9644a7cbb5f6da859f76bb1741e95855b528ea5d",
+      "lastSynced": "2025-12-07T18:31:21.413Z"
     },
     "R_kgDOOHrEMA": {
       "id": "R_kgDOOHrEMA",
@@ -5252,10 +5252,10 @@
       "id": "R_kgDONiZoAg",
       "name": "vigil",
       "owner": "ooyeku",
-      "type": "project",
-      "updatedAt": "2025-11-30T04:06:20Z",
-      "commitHash": "48bd2ccb0265810f83d76523768efd610e92de7b",
-      "lastSynced": "2025-12-06T18:09:46.463Z"
+      "type": "package",
+      "updatedAt": "2025-12-07T17:22:54Z",
+      "commitHash": "23a309d23016227a108e7e0a502ed0c113578328",
+      "lastSynced": "2025-12-07T18:31:21.414Z"
     },
     "R_kgDOPSTpDQ": {
       "id": "R_kgDOPSTpDQ",
@@ -8718,9 +8718,9 @@
       "name": "num.zig",
       "owner": "muhammad-fiaz",
       "type": "package",
-      "updatedAt": "2025-12-07T17:15:56Z",
-      "commitHash": "144bdd3c586c9d00db61298167a0e9c033b5d2f0",
-      "lastSynced": "2025-12-07T17:19:29.831Z"
+      "updatedAt": "2025-12-07T18:22:37Z",
+      "commitHash": "faea5106e00a255bdaae024c16c07da62c728847",
+      "lastSynced": "2025-12-07T18:31:21.414Z"
     }
   }
 }
