@@ -1,5 +1,5 @@
 {
-  "lastSync": "2025-12-07T04:35:42.089Z",
+  "lastSync": "2025-12-07T05:21:42.399Z",
   "repos": {
     "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3": {
       "id": "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3",
@@ -4002,9 +4002,9 @@
       "name": "registry",
       "owner": "Zig-Index",
       "type": "package",
-      "updatedAt": "2025-12-07T03:42:22Z",
-      "commitHash": "66e31925972d3933fcba463a70eb33c7936af4b3",
-      "lastSynced": "2025-12-07T04:35:41.039Z"
+      "updatedAt": "2025-12-07T04:35:46Z",
+      "commitHash": "a4af385e09001587894957ee405690a037018b93",
+      "lastSynced": "2025-12-07T05:21:41.396Z"
     },
     "R_kgDOOHrEMA": {
       "id": "R_kgDOOHrEMA",
@@ -4380,9 +4380,9 @@
       "name": "zevy-ecs",
       "owner": "captkirk88",
       "type": "package",
-      "updatedAt": "2025-12-07T04:04:44Z",
-      "commitHash": "32eb0dbf3b24120017a80d6a70fca92db2222967",
-      "lastSynced": "2025-12-07T04:35:41.085Z"
+      "updatedAt": "2025-12-07T05:02:06Z",
+      "commitHash": "ade803e5f5837b43070592dd2f75fd5280ebe3bc",
+      "lastSynced": "2025-12-07T05:21:41.396Z"
     },
     "R_kgDOQLwQMQ": {
       "id": "R_kgDOQLwQMQ",
@@ -8685,6 +8685,33 @@
       "updatedAt": "2025-05-31T20:22:31Z",
       "commitHash": "99d175b65193f13bd4d699833722b30681ec6d1f",
       "lastSynced": "2025-12-06T20:24:43.489Z"
+    },
+    "R_kgDOMQeH9A": {
+      "id": "R_kgDOMQeH9A",
+      "name": "combinato",
+      "owner": "travisstaloch",
+      "type": "package",
+      "updatedAt": "2024-08-17T03:41:06Z",
+      "commitHash": "f41468daff8c97e100ab3a9f97f1d23028bfa612",
+      "lastSynced": "2025-12-07T05:21:38.225Z"
+    },
+    "R_kgDOPiqwTg": {
+      "id": "R_kgDOPiqwTg",
+      "name": "anne_bzip2",
+      "owner": "AnneKitsune",
+      "type": "package",
+      "updatedAt": "2025-08-23T17:10:58Z",
+      "commitHash": "5621a0d734a0295ef23b2003e8b6d60d492fc366",
+      "lastSynced": "2025-12-07T05:21:38.271Z"
+    },
+    "R_kgDOOX8KLQ": {
+      "id": "R_kgDOOX8KLQ",
+      "name": "osslsigncode",
+      "owner": "allyourcodebase",
+      "type": "package",
+      "updatedAt": "2025-04-11T17:54:40Z",
+      "commitHash": "e54774647758cd5af61294b11410a8aceb695ca1",
+      "lastSynced": "2025-12-07T05:21:39.797Z"
     }
   }
 }
