@@ -1,5 +1,5 @@
 {
-  "lastSync": "2025-12-07T21:19:43.150Z",
+  "lastSync": "2025-12-07T22:21:33.873Z",
   "repos": {
     "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3": {
       "id": "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3",
@@ -663,9 +663,9 @@
       "name": "libqt6zig",
       "owner": "rcalixte",
       "type": "package",
-      "updatedAt": "2025-12-06T21:59:13Z",
-      "commitHash": "b791eab4ca120055a1e4706b86aadea3e974669c",
-      "lastSynced": "2025-12-06T22:21:46.535Z"
+      "updatedAt": "2025-12-07T22:13:20Z",
+      "commitHash": "1abc2a8a0c19f90d9d95b83bf5dec86849b41472",
+      "lastSynced": "2025-12-07T22:21:32.827Z"
     },
     "R_kgDONpnMrg": {
       "id": "R_kgDONpnMrg",
@@ -1320,9 +1320,9 @@
       "name": "libqt6c",
       "owner": "rcalixte",
       "type": "package",
-      "updatedAt": "2025-12-06T21:59:11Z",
-      "commitHash": "10ab925f265f199e71fa42199c2b66801cfda042",
-      "lastSynced": "2025-12-06T22:21:46.591Z"
+      "updatedAt": "2025-12-07T22:13:19Z",
+      "commitHash": "d501a81bb569f4a8857e0f2fcec85e0a527dfcc1",
+      "lastSynced": "2025-12-07T22:21:32.869Z"
     },
     "R_kgDOMC8M7Q": {
       "id": "R_kgDOMC8M7Q",
@@ -3750,9 +3750,9 @@
       "name": "zli",
       "owner": "mahiremirhan",
       "type": "package",
-      "updatedAt": "2025-12-07T19:34:28Z",
-      "commitHash": "e4b1a61bc791831404959ecf892344dfd460b26d",
-      "lastSynced": "2025-12-07T20:25:28.979Z"
+      "updatedAt": "2025-12-07T21:33:38Z",
+      "commitHash": "ca5c3a51dcff49a7bd7b5a33ed78e0ec0cea45ec",
+      "lastSynced": "2025-12-07T22:21:32.870Z"
     },
     "R_kgDOJI-a-w": {
       "id": "R_kgDOJI-a-w",
@@ -4002,9 +4002,9 @@
       "name": "registry",
       "owner": "Zig-Index",
       "type": "package",
-      "updatedAt": "2025-12-07T20:25:34Z",
-      "commitHash": "1c3ab29d5bd6b08130c7ec8e2a3f500b26a2e6f0",
-      "lastSynced": "2025-12-07T21:19:42.143Z"
+      "updatedAt": "2025-12-07T21:19:47Z",
+      "commitHash": "33633d34eaf2f617cf07e4ca18f8f692aea13956",
+      "lastSynced": "2025-12-07T22:21:32.870Z"
     },
     "R_kgDOOHrEMA": {
       "id": "R_kgDOOHrEMA",
@@ -5163,9 +5163,9 @@
       "name": "bench",
       "owner": "pyk",
       "type": "package",
-      "updatedAt": "2025-12-07T20:51:59Z",
-      "commitHash": "dd07bb0ba25db0065598707edafe46e2b838fb75",
-      "lastSynced": "2025-12-07T21:19:42.148Z"
+      "updatedAt": "2025-12-07T21:55:27Z",
+      "commitHash": "6032815c96204f764744dfea95d1493fc96027f9",
+      "lastSynced": "2025-12-07T22:21:32.870Z"
     },
     "MDEwOlJlcG9zaXRvcnkyNTA4OTE4NTc=": {
       "id": "MDEwOlJlcG9zaXRvcnkyNTA4OTE4NTc=",
