@@ -3,14 +3,14 @@
   "owner": "lalinsky",
   "repo": "zio",
   "description": "Async I/O framework for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],
   "stars": 300,
   "forks": 7,
   "watchers": 0,
-  "updated_at": "2025-12-06T16:41:33Z",
+  "updated_at": "2025-12-07T11:14:01Z",
   "dependencies": [
     {
       "name": "aio",
