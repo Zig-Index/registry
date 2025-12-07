@@ -1,5 +1,5 @@
 {
-  "lastSync": "2025-12-07T07:21:43.933Z",
+  "lastSync": "2025-12-07T08:28:48.270Z",
   "repos": {
     "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3": {
       "id": "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3",
@@ -4002,9 +4002,9 @@
       "name": "registry",
       "owner": "Zig-Index",
       "type": "package",
-      "updatedAt": "2025-12-07T06:33:02Z",
-      "commitHash": "736823f21001a1997a5f3595dc16bf93413c6036",
-      "lastSynced": "2025-12-07T07:21:42.927Z"
+      "updatedAt": "2025-12-07T07:21:48Z",
+      "commitHash": "caf3ea9a524b972254ee122da429b82ad934533b",
+      "lastSynced": "2025-12-07T08:28:47.226Z"
     },
     "R_kgDOOHrEMA": {
       "id": "R_kgDOOHrEMA",
@@ -5162,10 +5162,10 @@
       "id": "R_kgDOQi7MDQ",
       "name": "bench",
       "owner": "pyk",
-      "type": "project",
-      "updatedAt": "2025-12-06T11:16:33Z",
-      "commitHash": "30a6a477493928cc59c1e91d3ebd1674dac803f5",
-      "lastSynced": "2025-12-06T18:09:41.737Z"
+      "type": "package",
+      "updatedAt": "2025-12-07T07:58:57Z",
+      "commitHash": "bf6c5493bde9fcc8fa989cfaed92a60cf7b46cc1",
+      "lastSynced": "2025-12-07T08:28:47.268Z"
     },
     "MDEwOlJlcG9zaXRvcnkyNTA4OTE4NTc=": {
       "id": "MDEwOlJlcG9zaXRvcnkyNTA4OTE4NTc=",
