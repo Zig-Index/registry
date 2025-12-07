@@ -1,5 +1,5 @@
 {
-  "lastSync": "2025-12-07T20:25:30.039Z",
+  "lastSync": "2025-12-07T21:19:43.150Z",
   "repos": {
     "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3": {
       "id": "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3",
@@ -4002,9 +4002,9 @@
       "name": "registry",
       "owner": "Zig-Index",
       "type": "package",
-      "updatedAt": "2025-12-07T19:18:44Z",
-      "commitHash": "186a474d8780692c8e823197646d743239063e93",
-      "lastSynced": "2025-12-07T20:25:29.034Z"
+      "updatedAt": "2025-12-07T20:25:34Z",
+      "commitHash": "1c3ab29d5bd6b08130c7ec8e2a3f500b26a2e6f0",
+      "lastSynced": "2025-12-07T21:19:42.143Z"
     },
     "R_kgDOOHrEMA": {
       "id": "R_kgDOOHrEMA",
@@ -4056,9 +4056,9 @@
       "name": "zigbeam",
       "owner": "eakova",
       "type": "package",
-      "updatedAt": "2025-12-07T20:18:46Z",
-      "commitHash": "dacc8e9c9b0f3a90f03659f84630b8a3c1a8a7f1",
-      "lastSynced": "2025-12-07T20:25:29.035Z"
+      "updatedAt": "2025-12-07T21:03:22Z",
+      "commitHash": "0120a6851a9c7c7ddb1cadaba25545b2a44472cb",
+      "lastSynced": "2025-12-07T21:19:42.147Z"
     },
     "MDEwOlJlcG9zaXRvcnkzNTc4MzE1Mzg=": {
       "id": "MDEwOlJlcG9zaXRvcnkzNTc4MzE1Mzg=",
@@ -5163,9 +5163,9 @@
       "name": "bench",
       "owner": "pyk",
       "type": "package",
-      "updatedAt": "2025-12-07T10:27:40Z",
-      "commitHash": "3637d3668370616d39631d4c96b1326bd749c2f9",
-      "lastSynced": "2025-12-07T11:18:43.609Z"
+      "updatedAt": "2025-12-07T20:51:59Z",
+      "commitHash": "dd07bb0ba25db0065598707edafe46e2b838fb75",
+      "lastSynced": "2025-12-07T21:19:42.148Z"
     },
     "MDEwOlJlcG9zaXRvcnkyNTA4OTE4NTc=": {
       "id": "MDEwOlJlcG9zaXRvcnkyNTA4OTE4NTc=",
