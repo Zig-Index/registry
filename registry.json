@@ -1,5 +1,5 @@
 {
-  "lastSync": "2025-12-07T18:31:22.416Z",
+  "lastSync": "2025-12-07T19:18:39.852Z",
   "repos": {
     "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3": {
       "id": "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3",
@@ -4002,9 +4002,9 @@
       "name": "registry",
       "owner": "Zig-Index",
       "type": "package",
-      "updatedAt": "2025-12-07T17:19:35Z",
-      "commitHash": "9644a7cbb5f6da859f76bb1741e95855b528ea5d",
-      "lastSynced": "2025-12-07T18:31:21.413Z"
+      "updatedAt": "2025-12-07T18:31:27Z",
+      "commitHash": "b2a7f8a549c2b9051cc750f88fff13b2f5609da2",
+      "lastSynced": "2025-12-07T19:18:38.653Z"
     },
     "R_kgDOOHrEMA": {
       "id": "R_kgDOOHrEMA",
@@ -4514,10 +4514,10 @@
       "id": "R_kgDOQbuMMQ",
       "name": "raftz",
       "owner": "burdzwastaken",
-      "type": "project",
-      "updatedAt": "2025-12-05T17:37:25Z",
-      "commitHash": "5a28e93bdd606669bca7e879d2720a625b4027fc",
-      "lastSynced": "2025-12-06T18:09:27.859Z"
+      "type": "package",
+      "updatedAt": "2025-12-07T18:50:05Z",
+      "commitHash": "23c2eba7a8fd10a37a4389d4d1915e28e26e7fb4",
+      "lastSynced": "2025-12-07T19:18:38.849Z"
     },
     "R_kgDOOi-VLQ": {
       "id": "R_kgDOOi-VLQ",
@@ -7385,10 +7385,10 @@
       "id": "R_kgDOQNYEAw",
       "name": "engine12",
       "owner": "ooyeku",
-      "type": "project",
-      "updatedAt": "2025-12-04T19:49:24Z",
-      "commitHash": "67ef123b627992916a16b896e877825cc490bd85",
-      "lastSynced": "2025-12-06T18:10:38.579Z"
+      "type": "package",
+      "updatedAt": "2025-12-07T18:54:57Z",
+      "commitHash": "aa626a0b98125ef60154d91d6e6216f3595e01a6",
+      "lastSynced": "2025-12-07T19:18:38.850Z"
     },
     "R_kgDOO_mf4w": {
       "id": "R_kgDOO_mf4w",

@@ -3,7 +3,7 @@
   "owner": "ooyeku",
   "repo": "engine12",
   "description": "A web framework for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "web-development",
     "zig-package"
@@ -11,12 +11,12 @@
   "stars": 1,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-12-04T19:49:24Z",
+  "updated_at": "2025-12-07T18:54:57Z",
   "dependencies": [
     {
       "name": "vigil",
-      "url": "git+https://github.com/ooyeku/vigil#48bd2ccb0265810f83d76523768efd610e92de7b",
-      "hash": "vigil-1.0.0-0NlCVIthBACKtd0EPfwT-iRCdFfvpEm_iwX2YTOwZN27"
+      "url": "git+https://github.com/ooyeku/vigil#23a309d23016227a108e7e0a502ed0c113578328",
+      "hash": "vigil-1.0.1-0NlCVCBuBAAH9R8ILSaFqtDyArMhACw7pwvteqnOAxzH"
     },
     {
       "name": "ziggurat",
