@@ -1,5 +1,5 @@
 {
-  "lastSync": "2025-12-07T16:27:07.729Z",
+  "lastSync": "2025-12-07T17:19:30.834Z",
   "repos": {
     "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3": {
       "id": "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3",
@@ -41,10 +41,10 @@
       "id": "MDEwOlJlcG9zaXRvcnkzNDkxMzQ0MjY=",
       "name": "microzig",
       "owner": "ZigEmbeddedGroup",
-      "type": "project",
-      "updatedAt": "2025-12-06T14:54:56Z",
-      "commitHash": "cb7b34dd7253b0371b4898379c25ad85166ff258",
-      "lastSynced": "2025-12-06T18:07:39.814Z"
+      "type": "package",
+      "updatedAt": "2025-12-07T16:58:42Z",
+      "commitHash": "0b5a6204ff9143b0d8442466ad838a0ae9160467",
+      "lastSynced": "2025-12-07T17:19:29.790Z"
     },
     "R_kgDOIoahtw": {
       "id": "R_kgDOIoahtw",
@@ -4002,9 +4002,9 @@
       "name": "registry",
       "owner": "Zig-Index",
       "type": "package",
-      "updatedAt": "2025-12-07T15:21:06Z",
-      "commitHash": "3950ac3798c406fb67b98559509c921b7e4892f0",
-      "lastSynced": "2025-12-07T16:27:06.726Z"
+      "updatedAt": "2025-12-07T16:27:12Z",
+      "commitHash": "d7eafb239c725369b050d99d8d38e6b7929159b2",
+      "lastSynced": "2025-12-07T17:19:29.831Z"
     },
     "R_kgDOOHrEMA": {
       "id": "R_kgDOOHrEMA",
@@ -8718,9 +8718,9 @@
       "name": "num.zig",
       "owner": "muhammad-fiaz",
       "type": "package",
-      "updatedAt": "2025-12-07T15:48:24Z",
-      "commitHash": "0427361e126094afbec845beda97543d51194bca",
-      "lastSynced": "2025-12-07T16:27:06.726Z"
+      "updatedAt": "2025-12-07T17:15:56Z",
+      "commitHash": "144bdd3c586c9d00db61298167a0e9c033b5d2f0",
+      "lastSynced": "2025-12-07T17:19:29.831Z"
     }
   }
 }

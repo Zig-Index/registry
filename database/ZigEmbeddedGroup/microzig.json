@@ -3,7 +3,7 @@
   "owner": "ZigEmbeddedGroup",
   "repo": "microzig",
   "description": "MicroZig is a toolbox for building embedded applications in Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "ziglang",
     "zig-package",
@@ -11,10 +11,10 @@
     "embedded",
     "hal"
   ],
-  "stars": 1921,
+  "stars": 1924,
   "forks": 156,
   "watchers": 24,
-  "updated_at": "2025-12-06T14:54:56Z",
+  "updated_at": "2025-12-07T16:58:42Z",
   "dependencies": [
     {
       "name": "core",
