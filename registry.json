@@ -1,5 +1,5 @@
 {
-  "lastSync": "2025-12-07T13:28:42.236Z",
+  "lastSync": "2025-12-07T14:20:37.066Z",
   "repos": {
     "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3": {
       "id": "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3",
@@ -842,10 +842,10 @@
       "id": "R_kgDOICEQcg",
       "name": "zigcli",
       "owner": "jiacai2050",
-      "type": "project",
-      "updatedAt": "2025-12-04T08:55:13Z",
-      "commitHash": "439f375fcb8d9f43cb884139d9da1372ee1cd77d",
-      "lastSynced": "2025-12-06T18:07:57.869Z"
+      "type": "package",
+      "updatedAt": "2025-12-07T13:31:16Z",
+      "commitHash": "7044c23b8dedd0f66136264281f00bb2e6cf3fa4",
+      "lastSynced": "2025-12-07T14:20:36.011Z"
     },
     "R_kgDOJrpWqA": {
       "id": "R_kgDOJrpWqA",
@@ -3750,9 +3750,9 @@
       "name": "zli",
       "owner": "mahiremirhan",
       "type": "package",
-      "updatedAt": "2025-12-07T08:32:40Z",
-      "commitHash": "3da3cc3ee7d269237b7d979ef57402f49fe324c1",
-      "lastSynced": "2025-12-07T09:22:33.605Z"
+      "updatedAt": "2025-12-07T13:46:39Z",
+      "commitHash": "5a2b54ebf7c31e43d69dd8b2a980cac0c3e085fc",
+      "lastSynced": "2025-12-07T14:20:36.061Z"
     },
     "R_kgDOJI-a-w": {
       "id": "R_kgDOJI-a-w",
@@ -4002,9 +4002,9 @@
       "name": "registry",
       "owner": "Zig-Index",
       "type": "package",
-      "updatedAt": "2025-12-07T12:42:39Z",
-      "commitHash": "157885149926b5546ac4881a7f7edfd97cd3e0fc",
-      "lastSynced": "2025-12-07T13:28:41.233Z"
+      "updatedAt": "2025-12-07T13:28:46Z",
+      "commitHash": "58feb77937ef13e82a176ac78a74363f5be403b6",
+      "lastSynced": "2025-12-07T14:20:36.062Z"
     },
     "R_kgDOOHrEMA": {
       "id": "R_kgDOOHrEMA",
