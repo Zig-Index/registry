@@ -1,0 +1,66 @@
+{
+  "name": "JZlog",
+  "owner": "johmaru",
+  "repo": "JZlog",
+  "description": "No dependent Simple zig logging library",
+  "type": "package",
+  "topics": [
+    "library",
+    "logging",
+    "zig",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2024-12-24T12:31:11Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.11.0",
+  "readme": "# JZlog\n\nNo dependent Simple zig logging library\n\nlibrary v 0.0.3 on zig version 0.13.0\n\n※Version 0.0.3 linux supported\n\n## how to install\n\n```zig fetch --save https://github.com/johmaru/JZlog/archive/refs/tags/v0.0.3.zip```\n\nedit build.zig\n\n```zig\n    const jzlog_dep = b.dependency(\"JZlog\", .{});\n    const jzlog_module = jzlog_dep.module(\"JZlog\");\n\n    //Under\n    //const exe = b.addExecutable(.{\n      //  .name = \"test_log\",\n      //  .root_source_file = b.path(\"src/main.zig\"),\n      //  .target = target,\n      //  .optimize = optimize,\n    // });\n\n    exe.root_module.addImport(\"JZlog\", jzlog_module);\n```\n\nmain.zig\n\n```zig\nconst jz_log = @import(\"JZlog\");\n```\n\n## how to use\n\n```zig\n    const JZlog = @import(\"JZlog\");\n\n    // all default\n    try JZlog.init(null,.{}); \n\n    // If you want to choose time format (Y-M-D or Y-M-D-H-M-S), you can use LogTime enum types.\n    try logger.init(.y_m_d,.{}); \n\n    // Include hsms\n    try logger.init(.Include_h_s_m_s,{}); \n    \n    // also you can chose any settings your like\n     try logger.init(null,.{ .min_level = logger.LogLevel.Warning }); \n\n\n\n\n    // this is log write function\n    try JZlog.log(\"Hello!\", JZlog.LogLevel.Info); // This library supports various LogLevel types\n\n    // this library have async function\n    try logger.asyncLog(\"async!!\", logger.LogLevel.Info);\n    defer logger.shutdown();\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/21039159?u=65adad3894d482b956736057cb5878e18cd26676&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.0.3",
+      "name": "v0.0.3",
+      "body": "**Full Changelog**: https://github.com/johmaru/JZlog/compare/v0.0.2...v0.0.3",
+      "prerelease": false,
+      "published_at": "2024-12-24T12:33:10Z",
+      "html_url": "https://github.com/johmaru/JZlog/releases/tag/v0.0.3",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.2",
+      "name": "v0.0.2",
+      "body": "**Full Changelog**: https://github.com/johmaru/JZlog/compare/v0.0.1...v0.0.2",
+      "prerelease": false,
+      "published_at": "2024-11-29T13:16:53Z",
+      "html_url": "https://github.com/johmaru/JZlog/releases/tag/v0.0.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.1",
+      "name": "v0.0.1",
+      "body": "**Full Changelog**: https://github.com/johmaru/JZlog/commits/v0.0.1",
+      "prerelease": false,
+      "published_at": "2024-11-29T12:25:12Z",
+      "html_url": "https://github.com/johmaru/JZlog/releases/tag/v0.0.1",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Generally using lang C# Zig is pretty good as a programming language. I like it.",
+  "owner_company": null,
+  "owner_location": "2Dimension (Only Brain..... Sadge.... QwQ)",
+  "owner_blog": "http://johmaru.jp/",
+  "owner_twitter_username": "Johmaru_gamer",
+  "owner_followers": 21,
+  "owner_following": 9,
+  "owner_created_at": "2016-08-15T13:50:59Z",
+  "category": "library"
+}

@@ -1,0 +1,48 @@
+{
+  "name": "zig-holodex",
+  "owner": "TemariVirus",
+  "repo": "zig-holodex",
+  "description": "Zig library for the Holodex API with pretty formatting",
+  "type": "package",
+  "topics": [
+    "holodex",
+    "hololive",
+    "vtuber",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-04-12T13:00:13Z",
+  "dependencies": [
+    {
+      "name": "zeit",
+      "url": "git+https://github.com/rockorager/zeit?ref=v0.6.0#44bebf856693332b168d8ba2c45b9d1ec15511de",
+      "hash": "zeit-0.0.0-5I6bk_pZAgB03N1p1GmVOZ--gOFwwQSRKj1UXb5tnaKS"
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# zig-holodex\n\nZig library for the [Holodex](https://holodex.net/) API, with pretty formatting.\n\nNote that as the [official documentation](https://docs.holodex.net/) is outdated,\nany documentation here about API endpoints, their parameters, and their responses\nare guesswork from querying the API. This library is not affiliated with Holodex.\n\n[Holodex API License](https://docs.holodex.net/#section/LICENSE)\n\n## Installation\n\nRun the following command to add the package to your `build.zig.zon`:\n\n```sh\nzig fetch --save git+https://github.com/TemariVirus/zig-holodex#GIT_COMMIT_HASH_OR_TAG\n```\n\nThen, reference the package and import it into your module of choice in your `build.zig`:\n\n```zig\nconst holodex = b.dependency(\"holodex\", .{\n    .target = target,\n    .optimize = optimize,\n});\nyour_module.addImport(\"holodex\", holodex.module(\"holodex\"));\n```\n\n## Examples\n\nYou can find your holodex API key at <https://holodex.net/login>.\n\n### POST /search/commentSearch\n\n```zig\nconst std = @import(\"std\");\nconst holodex = @import(\"holodex\");\n\npub fn main() !void {\n    var debug_allocator: std.heap.DebugAllocator(.{}) = .init;\n    const allocator = debug_allocator.allocator();\n    defer _ = debug_allocator.deinit();\n\n    var api = holodex.Api.init(.{\n        .allocator = allocator,\n        .api_key = \"YOUR-API-KEY-HERE\",\n    }) catch unreachable;\n    defer api.deinit();\n\n    const comments = try api.searchComments(allocator, .{\n        .comment = \"if...\",\n        .channels = &.{\n            \"UCvaTdHTWBGv3MKj3KVqJVCw\", // Okayu\n            \"UChAnqc_AY5_I3Px5dig3X1Q\", // Korone\n        },\n        .topics = &.{\"singing\"},\n    });\n    defer comments.deinit();\n\n    std.debug.print(\"value: {pretty}\\n\", .{comments.value});\n    std.debug.print(\"headers: {}\\n\", .{comments.headers});\n}\n```\n\n### GET /channels\n\n```zig\nconst std = @import(\"std\");\nconst holodex = @import(\"holodex\");\n\npub fn main() !void {\n    var debug_allocator: std.heap.DebugAllocator(.{}) = .init;\n    const allocator = debug_allocator.allocator();\n    defer _ = debug_allocator.deinit();\n\n    var api = holodex.Api.init(.{\n        .allocator = allocator,\n        .api_key = \"YOUR-API-KEY-HERE\",\n    }) catch unreachable;\n    defer api.deinit();\n\n    var pager = api.pageChannels(allocator, .{\n        .limit = 10,\n        .offset = 0,\n        .org = holodex.datatypes.Organizations.hololive,\n        .sort = .clip_count,\n        .order = .desc,\n    }) catch unreachable;\n    defer pager.deinit();\n\n    var i: usize = 0;\n    while (try pager.next()) |channel| {\n        std.debug.print(\"{s}'s clip count: {}\\n\", .{\n            channel.english_name orelse channel.name,\n            channel.stats.clip_count,\n        });\n        i += 1;\n        if (i >= 20) {\n            break;\n        }\n    }\n    std.debug.print(\"Latest headers: {}\\n\", .{pager.lastResponseHeaders().?});\n}\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/103554944?u=9410c585c693390d6d30eafb8c6872d9400c4dd5&v=4",
+  "releases": [
+    {
+      "tag_name": "1.0.0",
+      "name": "1.0.0",
+      "body": "Check the [README](https://github.com/TemariVirus/zig-holodex/tree/1.0.0?tab=readme-ov-file#zig-holodex) for more details.",
+      "prerelease": false,
+      "published_at": "2025-04-02T13:39:01Z",
+      "html_url": "https://github.com/TemariVirus/zig-holodex/releases/tag/1.0.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "I code cool stuff. Student of Singapore Institute of Technology.",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 8,
+  "owner_following": 7,
+  "owner_created_at": "2022-04-13T04:56:24Z",
+  "license": "CC0-1.0",
+  "category": "library"
+}

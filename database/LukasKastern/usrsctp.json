@@ -1,0 +1,33 @@
+{
+  "name": "usrsctp",
+  "owner": "LukasKastern",
+  "repo": "usrsctp",
+  "description": "usrsctp packaged for the zig build system",
+  "type": "package",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-08-12T23:18:14Z",
+  "dependencies": [
+    {
+      "name": "usrsctp",
+      "url": "git+https://github.com/paullouisageneau/usrsctp.git#fec583d54493f879d2ae44a743423bf8a04371ab",
+      "hash": "N-V-__8AALAGWACeA2U3iSwHwHdWNrq6RB1I8N80fRDQYjrw"
+    }
+  ],
+  "readme": "# libjuice\r\n\r\nThis is [usrsctp](https://github.com/paullouisageneau/usrsctp), packaged for Zig.\r\n\r\n## Installation\r\n\r\nFirst, update your `build.zig.zon`:\r\n\r\n```\r\n# Initialize a `zig build` project if you haven't already\r\nzig init\r\nzig fetch --save git+https://github.com/lukaskastern/libjuice.git\r\n```\r\n\r\nYou can then import `usrsctp` in your `build.zig` with:\r\n\r\n```zig\r\nconst usrsctp_dependency = b.dependency(\"usrsctp\", .{\r\n    .target = target,\r\n    .optimize = optimize,\r\n});\r\nyour_exe.linkLibrary(usrsctp_dependency.artifact(\"usrsctp\"));\r\n```\r\n\r\nAnd use the library like this:\r\n```zig\r\nconst usrsctp = @cImport({\r\n    @cInclude(\"usrsctp.h\");\r\n});\r\n\r\n...\r\n```\r\n\r\n### Zig Version\r\nThe target zig version is 0.14.0\r\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/40829791?u=f48144616bcec0bd3c477560229ab2fbd15d456b&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Germany",
+  "owner_blog": "https://lukaskastern.com",
+  "owner_twitter_username": null,
+  "owner_followers": 5,
+  "owner_following": 18,
+  "owner_created_at": "2018-07-04T12:40:21Z",
+  "license": "Zlib",
+  "category": "library"
+}
