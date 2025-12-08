@@ -3,7 +3,7 @@
   "owner": "zigcc",
   "repo": "zig-msgpack",
   "description": "zig messagpack implementation / msgpack.org[zig]",
-  "type": "project",
+  "type": "package",
   "topics": [
     "msgpack",
     "msgpack-rpc",

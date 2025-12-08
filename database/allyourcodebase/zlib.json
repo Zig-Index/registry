@@ -3,7 +3,7 @@
   "owner": "allyourcodebase",
   "repo": "zlib",
   "description": "zlib ported to the zig build system",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

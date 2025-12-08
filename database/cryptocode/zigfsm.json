@@ -3,7 +3,7 @@
   "owner": "cryptocode",
   "repo": "zigfsm",
   "description": "A finite state machine library for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "finite-state-machine",

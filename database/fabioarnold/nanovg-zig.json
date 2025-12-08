@@ -3,7 +3,7 @@
   "owner": "fabioarnold",
   "repo": "nanovg-zig",
   "description": "A small anti-aliased hardware-accelerated vector graphics library",
-  "type": "project",
+  "type": "package",
   "topics": [
     "2d",
     "gamedev",

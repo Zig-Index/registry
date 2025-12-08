@@ -3,7 +3,7 @@
   "owner": "ziglibs",
   "repo": "s2s",
   "description": "A zig binary serialization format.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package",

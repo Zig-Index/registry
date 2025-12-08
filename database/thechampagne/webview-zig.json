@@ -3,7 +3,7 @@
   "owner": "thechampagne",
   "repo": "webview-zig",
   "description": "⚡ Zig binding & wrapper for a tiny cross-platform webview library to build modern cross-platform GUIs.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "library",
     "webview",
@@ -11,10 +11,10 @@
     "ziglang",
     "zig-package"
   ],
-  "stars": 154,
+  "stars": 155,
   "forks": 20,
   "watchers": 4,
-  "updated_at": "2025-12-06T18:15:57Z",
+  "updated_at": "2025-12-08T10:32:30Z",
   "dependencies": [
     {
       "name": "webview",

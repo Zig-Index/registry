@@ -3,7 +3,7 @@
   "owner": "discord-zig",
   "repo": "discord.zig",
   "description": "Mirror of Discord.zig, submit PRs and issues at https://git.yuzucchii.xyz/yuzucchii/discord.zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "discord",
     "zig",

@@ -3,7 +3,7 @@
   "owner": "rdunnington",
   "repo": "bytebox",
   "description": "Standalone WebAssembly VM.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "wasm",

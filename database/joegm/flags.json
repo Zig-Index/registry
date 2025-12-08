@@ -3,7 +3,7 @@
   "owner": "joegm",
   "repo": "flags",
   "description": "An effortless command-line argument parser for Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "command-line-arguments-parser",
     "library",

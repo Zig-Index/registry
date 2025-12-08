@@ -3,7 +3,7 @@
   "owner": "ZigEmbeddedGroup",
   "repo": "serial",
   "description": "Serial port configuration library for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "ziglang",

@@ -3,7 +3,7 @@
   "owner": "kassane",
   "repo": "qml_zig",
   "description": "QML bindings for the Zig programming language",
-  "type": "project",
+  "type": "package",
   "topics": [
     "qml-zig",
     "qml-bindings",

@@ -3,7 +3,7 @@
   "owner": "lalinsky",
   "repo": "nats.zig",
   "description": "A Zig client library for NATS",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

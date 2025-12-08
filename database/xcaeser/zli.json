@@ -3,7 +3,7 @@
   "owner": "xcaeser",
   "repo": "zli",
   "description": "📟 Build ergonomic, high-performance command-line tools (CLI) with zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "cli",
     "zig",

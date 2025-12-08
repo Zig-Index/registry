@@ -3,7 +3,7 @@
   "owner": "yamafaktory",
   "repo": "hypergraphz",
   "description": "HypergraphZ - A Hypergraph Implementation in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "graph",
     "graph-algorithms",

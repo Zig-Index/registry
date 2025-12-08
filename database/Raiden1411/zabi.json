@@ -3,7 +3,7 @@
   "owner": "Raiden1411",
   "repo": "zabi",
   "description": "Interact with ethereum and EVM based chains via Zig!",
-  "type": "project",
+  "type": "package",
   "topics": [
     "abi",
     "ethereum",
@@ -15,10 +15,10 @@
     "blockchain",
     "zig-package"
   ],
-  "stars": 106,
+  "stars": 107,
   "forks": 13,
   "watchers": 2,
-  "updated_at": "2025-12-06T00:12:54Z",
+  "updated_at": "2025-12-08T14:17:31Z",
   "dependencies": [
     {
       "name": "c_kzg_4844",

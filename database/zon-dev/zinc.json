@@ -3,7 +3,7 @@
   "owner": "zon-dev",
   "repo": "zinc",
   "description": "Zinc is a web framework written in pure Zig with a focus on high performance, usability, security, and extensibility.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zinc",

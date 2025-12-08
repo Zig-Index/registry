@@ -3,7 +3,7 @@
   "owner": "theseyan",
   "repo": "bufzilla",
   "description": "Fast & compact serialization format in Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

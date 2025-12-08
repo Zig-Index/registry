@@ -3,7 +3,7 @@
   "owner": "nektro",
   "repo": "zig-tracy",
   "description": "Zig bindings for the Tracy profiler.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

@@ -3,7 +3,7 @@
   "owner": "cztomsik",
   "repo": "tokamak",
   "description": "Web framework for Zig that leverages dependency injection for clean, modular application development.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "express",
     "framework",
@@ -15,10 +15,10 @@
     "rest",
     "dependency-injection"
   ],
-  "stars": 534,
+  "stars": 538,
   "forks": 19,
   "watchers": 5,
-  "updated_at": "2025-12-05T19:18:30Z",
+  "updated_at": "2025-12-07T17:09:20Z",
   "dependencies": [
     {
       "name": "httpz",

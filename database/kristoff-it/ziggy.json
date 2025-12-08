@@ -3,15 +3,15 @@
   "owner": "kristoff-it",
   "repo": "ziggy",
   "description": "A data serialization language for expressing clear API messages, config files, etc.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "serialization-format",
     "zig-package"
   ],
-  "stars": 496,
+  "stars": 497,
   "forks": 37,
   "watchers": 7,
-  "updated_at": "2025-12-05T19:18:31Z",
+  "updated_at": "2025-12-08T14:00:31Z",
   "dependencies": [
     {
       "name": "known_folders",
@@ -80,7 +80,7 @@
   "owner_location": "Milan, Italy",
   "owner_blog": "https://kristoff.it",
   "owner_twitter_username": null,
-  "owner_followers": 1291,
+  "owner_followers": 1292,
   "owner_following": 22,
   "owner_created_at": "2012-07-10T15:27:34Z",
   "homepage": "https://ziggy-lang.io",

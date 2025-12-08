@@ -3,7 +3,7 @@
   "owner": "webui-dev",
   "repo": "zig-webui",
   "description": "Use any web browser or WebView as GUI, with Zig in the backend and modern web technologies in the frontend, all in a lightweight portable library.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "gui",
     "webui",
@@ -15,10 +15,10 @@
     "linux",
     "windows"
   ],
-  "stars": 706,
+  "stars": 708,
   "forks": 30,
   "watchers": 14,
-  "updated_at": "2025-12-06T02:50:39Z",
+  "updated_at": "2025-12-08T13:30:31Z",
   "dependencies": [
     {
       "name": "webui",

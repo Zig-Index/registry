@@ -3,14 +3,14 @@
   "owner": "godot-zig",
   "repo": "godot-zig",
   "description": "Zig bindings for Godot 4",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],
   "stars": 283,
   "forks": 22,
   "watchers": 10,
-  "updated_at": "2025-12-06T14:34:20Z",
+  "updated_at": "2025-12-07T21:16:49Z",
   "dependencies": [
     {
       "name": "case",

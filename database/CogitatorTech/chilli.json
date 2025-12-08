@@ -3,7 +3,7 @@
   "owner": "CogitatorTech",
   "repo": "chilli",
   "description": "A microframework for creating command-line applications in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "cli-framework",
     "command-line",

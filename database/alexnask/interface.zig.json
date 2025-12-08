@@ -3,7 +3,7 @@
   "owner": "alexnask",
   "repo": "interface.zig",
   "description": "Dynamic dispatch for zig made easy",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package",

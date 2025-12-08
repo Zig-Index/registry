@@ -3,7 +3,7 @@
   "owner": "ikskuh",
   "repo": "zig-args",
   "description": "Simple-to-use argument parser with struct-based config",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "ziglang",

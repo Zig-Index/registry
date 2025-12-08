@@ -3,7 +3,7 @@
   "owner": "TinyVG",
   "repo": "sdk",
   "description": "TinyVG software development kit",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "sdk",

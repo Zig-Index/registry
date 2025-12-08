@@ -3,7 +3,7 @@
   "owner": "kassane",
   "repo": "llvm-zig",
   "description": "LLVM bindings written in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "ffi-bindings",
     "llvm-c",
@@ -14,10 +14,10 @@
     "llvm-bindings",
     "libclang"
   ],
-  "stars": 50,
+  "stars": 51,
   "forks": 7,
   "watchers": 0,
-  "updated_at": "2025-12-04T07:17:40Z",
+  "updated_at": "2025-12-08T13:59:55Z",
   "dependencies": [
     {
       "name": "test_runner",

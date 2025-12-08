@@ -3,7 +3,7 @@
   "owner": "xyaman",
   "repo": "mibu",
   "description": "Pure Zig library for low-level terminal manipulation: zero heap allocations, UTF-8 support, text styling, color output, cursor and screen control, key and mouse event handling.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "terminal",
     "console",

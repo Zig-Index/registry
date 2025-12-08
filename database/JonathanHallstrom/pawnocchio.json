@@ -3,7 +3,7 @@
   "owner": "JonathanHallstrom",
   "repo": "pawnocchio",
   "description": "chess engine, goal is to make it strong. currently plays good chess",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],
@@ -2489,7 +2489,7 @@
   "owner_location": null,
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 16,
+  "owner_followers": 17,
   "owner_following": 7,
   "owner_created_at": "2021-05-26T11:15:04Z",
   "license": "GPL-3.0",

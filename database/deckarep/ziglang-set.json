@@ -3,7 +3,7 @@
   "owner": "deckarep",
   "repo": "ziglang-set",
   "description": "A generic and general purpose Set implementation for the Zig language",
-  "type": "project",
+  "type": "package",
   "topics": [
     "datastructures",
     "generics",

@@ -3,7 +3,7 @@
   "owner": "judofyr",
   "repo": "spice",
   "description": "Fine-grained parallelism with sub-nanosecond overhead in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "concurrency",
     "parallelism",
@@ -11,10 +11,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 913,
-  "forks": 21,
+  "stars": 916,
+  "forks": 22,
   "watchers": 8,
-  "updated_at": "2025-12-05T08:08:54Z",
+  "updated_at": "2025-12-08T12:59:31Z",
   "dependencies": [
     {
       "name": "parg",

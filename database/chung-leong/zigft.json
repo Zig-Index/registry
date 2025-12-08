@@ -3,7 +3,7 @@
   "owner": "chung-leong",
   "repo": "zigft",
   "description": "Zig function transform library",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

@@ -3,7 +3,7 @@
   "owner": "batiati",
   "repo": "mustache-zig",
   "description": "Logic-less templates for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "mustache-templating",
     "mustache",

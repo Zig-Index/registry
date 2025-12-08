@@ -3,7 +3,7 @@
   "owner": "johan0A",
   "repo": "clay-zig-bindings",
   "description": "Zig bindings for the library clay: A high performance UI layout library in C.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "layout",
     "ui",
@@ -11,10 +11,10 @@
     "zig-library",
     "zig-package"
   ],
-  "stars": 180,
+  "stars": 181,
   "forks": 15,
   "watchers": 5,
-  "updated_at": "2025-12-06T05:20:38Z",
+  "updated_at": "2025-12-07T14:09:16Z",
   "dependencies": [
     {
       "name": "clay",

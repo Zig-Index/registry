@@ -3,7 +3,7 @@
   "owner": "malcolmstill",
   "repo": "zware",
   "description": "Zig WebAssembly Runtime Engine",
-  "type": "project",
+  "type": "package",
   "topics": [
     "ziglang",
     "zig",

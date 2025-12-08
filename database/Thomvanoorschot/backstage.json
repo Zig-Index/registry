@@ -3,7 +3,7 @@
   "owner": "Thomvanoorschot",
   "repo": "backstage",
   "description": "This repository contains an experimental actor framework built using the Zig programming language. The framework implements actor-based concurrent programming patterns, including message passing between actors, actor lifecycle management, and state isolation. It leverages the libxev library for its event loop and concurrency.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "actor",
     "actor-framework",

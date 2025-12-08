@@ -3,7 +3,7 @@
   "owner": "cryptocode",
   "repo": "marble",
   "description": "A metamorphic testing library for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "metamorphic-testing",
     "zig",

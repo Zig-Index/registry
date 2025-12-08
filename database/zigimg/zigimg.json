@@ -3,7 +3,7 @@
   "owner": "zigimg",
   "repo": "zigimg",
   "description": "Zig library for reading and writing different image formats",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-library",
@@ -17,7 +17,7 @@
     "png-decoder"
   ],
   "stars": 715,
-  "forks": 119,
+  "forks": 118,
   "watchers": 10,
   "updated_at": "2025-12-06T02:07:55Z",
   "minimum_zig_version": "0.15.2",

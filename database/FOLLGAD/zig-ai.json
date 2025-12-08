@@ -3,7 +3,7 @@
   "owner": "FOLLGAD",
   "repo": "zig-ai",
   "description": "OpenAI SDK with streaming support",
-  "type": "project",
+  "type": "package",
   "topics": [
     "openai",
     "zig",

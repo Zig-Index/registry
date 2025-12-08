@@ -3,7 +3,7 @@
   "owner": "00JCIV00",
   "repo": "cova",
   "description": "Commands, Options, Values, Arguments. A simple yet robust cross-platform command line argument parsing library for Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "clap",
     "cli",

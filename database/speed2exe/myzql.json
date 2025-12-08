@@ -3,7 +3,7 @@
   "owner": "speed2exe",
   "repo": "myzql",
   "description": "MySQL and MariaDB  driver in native Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "driver",
     "mariadb",

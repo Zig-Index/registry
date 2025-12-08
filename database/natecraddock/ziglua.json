@@ -3,7 +3,7 @@
   "owner": "natecraddock",
   "repo": "ziglua",
   "description": "Zig bindings for the Lua C API",
-  "type": "project",
+  "type": "package",
   "topics": [
     "binding",
     "lua",

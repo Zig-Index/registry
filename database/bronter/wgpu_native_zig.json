@@ -3,7 +3,7 @@
   "owner": "bronter",
   "repo": "wgpu_native_zig",
   "description": "Zig bindings for wgpu-native",
-  "type": "project",
+  "type": "package",
   "topics": [
     "wgpu-native",
     "zig-package"

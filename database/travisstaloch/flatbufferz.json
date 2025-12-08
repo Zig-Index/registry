@@ -3,7 +3,7 @@
   "owner": "travisstaloch",
   "repo": "flatbufferz",
   "description": "a flatbuffers codegen library in zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "flatbuffers",
     "zig-package"

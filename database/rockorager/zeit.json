@@ -3,7 +3,7 @@
   "owner": "rockorager",
   "repo": "zeit",
   "description": "a date and time library written in zig. Timezone, DST, and leap second aware",
-  "type": "project",
+  "type": "package",
   "topics": [
     "date",
     "datetime",
@@ -13,10 +13,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 166,
+  "stars": 168,
   "forks": 21,
   "watchers": 4,
-  "updated_at": "2025-12-05T20:21:36Z",
+  "updated_at": "2025-12-08T07:11:57Z",
   "readme": "# zeit\n\nA time library written in zig.\n\n## Usage\n\n[API Documentation](https://rockorager.github.io/zeit/)\n\n```zig\nconst std = @import(\"std\");\nconst zeit = @import(\"zeit\");\n\npub fn main() void {\n    const allocator = std.heap.page_allocator;\n    var env = try std.process.getEnvMap(allocator);\n    defer env.deinit();\n\n    // Get an instant in time. The default gets \"now\" in UTC\n    const now = try zeit.instant(.{});\n\n    // Load our local timezone. This needs an allocator. Optionally pass in a\n    // *const std.process.EnvMap to support TZ and TZDIR environment variables\n    const local = try zeit.local(alloc, &env);\n\n    // Convert our instant to a new timezone\n    const now_local = now.in(&local);\n\n    // Generate date/time info for this instant\n    const dt = now_local.time();\n\n    // Print it out\n    std.debug.print(\"{}\", .{dt});\n\n    // zeit.Time{\n    //    .year = 2024,\n    //    .month = zeit.Month.mar,\n    //    .day = 16,\n    //    .hour = 8,\n    //    .minute = 38,\n    //    .second = 29,\n    //    .millisecond = 496,\n    //    .microsecond = 706,\n    //    .nanosecond = 64\n    //    .offset = -18000,\n    // }\n\n    // Format using strftime specifier. Format strings are not required to be comptime\n    try dt.strftime(anywriter, \"%Y-%m-%d %H:%M:%S %Z\");\n\n    // Or...golang magic date specifiers. Format strings are not required to be comptime\n    try dt.gofmt(anywriter, \"2006-01-02 15:04:05 MST\");\n\n    // Load an arbitrary location using IANA location syntax. The location name\n    // comes from an enum which will automatically map IANA location names to\n    // Windows names, as needed. Pass an optional EnvMap to support TZDIR\n    const vienna = try zeit.loadTimeZone(alloc, .@\"Europe/Vienna\", &env);\n    defer vienna.deinit();\n\n    // Parse an Instant from an ISO8601 or RFC3339 string\n    const iso = try zeit.instant(.{\n\t.source = .{\n\t    .iso8601 = \"2024-03-16T08:38:29.496-1200\",\n\t},\n    });\n\n    const rfc3339 = try zeit.instant(.{\n\t.source = .{\n\t    .rfc3339 = \"2024-03-16T08:38:29.496706064-1200\",\n\t},\n    });\n}\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/476352?u=aff432b811e969bae9d2f71a01510895e4bf469e&v=4",
   "releases": [
@@ -124,7 +124,7 @@
   "owner_location": "St. Paul, MN",
   "owner_blog": "https://rockorager.dev",
   "owner_twitter_username": "rockorager",
-  "owner_followers": 232,
+  "owner_followers": 233,
   "owner_following": 5,
   "owner_created_at": "2010-11-10T20:36:25Z",
   "license": "MIT",

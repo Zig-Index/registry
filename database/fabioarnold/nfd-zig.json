@@ -3,7 +3,7 @@
   "owner": "fabioarnold",
   "repo": "nfd-zig",
   "description": "OS-native file dialogs on Linux, macOS and Windows ",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package",

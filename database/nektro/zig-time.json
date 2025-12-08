@@ -3,7 +3,7 @@
   "owner": "nektro",
   "repo": "zig-time",
   "description": "A date and time parsing and formatting library for Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "time",

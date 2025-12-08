@@ -3,7 +3,7 @@
   "owner": "Hejsil",
   "repo": "ziter",
   "description": "The missing iterators for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "zig",

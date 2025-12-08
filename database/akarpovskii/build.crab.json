@@ -3,7 +3,7 @@
   "owner": "akarpovskii",
   "repo": "build.crab",
   "description": "Build and use Rust libraries from Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "cargo",
     "rust",

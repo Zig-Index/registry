@@ -3,7 +3,7 @@
   "owner": "greenfork",
   "repo": "jzignet",
   "description": "Zig library to connect Janet and Zig together",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package",

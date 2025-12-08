@@ -3,7 +3,7 @@
   "owner": "MoAlyousef",
   "repo": "zfltk",
   "description": "Zig bindings for the FLTK gui library",
-  "type": "project",
+  "type": "package",
   "topics": [
     "gui",
     "zig",

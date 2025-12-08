@@ -3,7 +3,7 @@
   "owner": "Guigui220D",
   "repo": "zig-sfml-wrapper",
   "description": "A zig wrapper for csfml",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "binding",

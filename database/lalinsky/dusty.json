@@ -3,7 +3,7 @@
   "owner": "lalinsky",
   "repo": "dusty",
   "description": "HTTP server library for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

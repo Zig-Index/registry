@@ -3,7 +3,7 @@
   "owner": "Zig-Sec",
   "repo": "PassKeeZ",
   "description": "PassKeeZ is a FIDO2/ Passkey compatible authenticator implementation for Linux",
-  "type": "project",
+  "type": "package",
   "topics": [
     "authentication",
     "authenticator",

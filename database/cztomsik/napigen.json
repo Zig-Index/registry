@@ -3,7 +3,7 @@
   "owner": "cztomsik",
   "repo": "napigen",
   "description": "Automatic N-API (server-side javascript) bindings for your Zig project.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "napi",
     "nodejs",

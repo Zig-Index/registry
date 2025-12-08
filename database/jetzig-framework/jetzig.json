@@ -3,14 +3,14 @@
   "owner": "jetzig-framework",
   "repo": "jetzig",
   "description": "Jetzig is a web framework written in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],
-  "stars": 1340,
-  "forks": 47,
+  "stars": 1345,
+  "forks": 48,
   "watchers": 14,
-  "updated_at": "2025-12-06T10:07:40Z",
+  "updated_at": "2025-12-08T01:29:06Z",
   "dependencies": [
     {
       "name": "jetcommon",

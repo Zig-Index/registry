@@ -3,7 +3,7 @@
   "owner": "chadwain",
   "repo": "zss",
   "description": "zss is a CSS parser, layout engine, and renderer, written in Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "css",

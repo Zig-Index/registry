@@ -3,7 +3,7 @@
   "owner": "sam701",
   "repo": "zig-cli",
   "description": "A simple package for building command line apps in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "cli",
     "argument-parser",

@@ -3,7 +3,7 @@
   "owner": "dweiller",
   "repo": "zimalloc",
   "description": "General purpose allocator for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

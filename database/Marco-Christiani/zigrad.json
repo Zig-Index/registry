@@ -3,7 +3,7 @@
   "owner": "Marco-Christiani",
   "repo": "zigrad",
   "description": "A deep learning framework built on an autograd engine with high level abstractions and low level control.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "autograd",
     "deep-learning",
@@ -14,10 +14,10 @@
     "zig-package",
     "ziglang"
   ],
-  "stars": 162,
+  "stars": 163,
   "forks": 9,
   "watchers": 3,
-  "updated_at": "2025-12-05T20:27:35Z",
+  "updated_at": "2025-12-07T06:41:17Z",
   "dependencies": [
     {
       "name": "tracy",
@@ -39,7 +39,7 @@
   "owner_location": null,
   "owner_blog": "datatician.io",
   "owner_twitter_username": null,
-  "owner_followers": 41,
+  "owner_followers": 40,
   "owner_following": 145,
   "owner_created_at": "2015-03-03T07:25:24Z",
   "homepage": "http://zigrad.datatician.io/",

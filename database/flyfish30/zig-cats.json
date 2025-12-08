@@ -3,17 +3,17 @@
   "owner": "flyfish30",
   "repo": "zig-cats",
   "description": "A category theory and functional programing library for Zig language",
-  "type": "project",
+  "type": "package",
   "topics": [
     "category-theory",
     "functional-programming",
     "zig",
     "zig-package"
   ],
-  "stars": 64,
+  "stars": 65,
   "forks": 4,
   "watchers": 2,
-  "updated_at": "2025-12-06T05:17:01Z",
+  "updated_at": "2025-12-08T08:33:27Z",
   "dependencies": [
     {
       "name": "example",

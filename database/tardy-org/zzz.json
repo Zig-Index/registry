@@ -3,7 +3,7 @@
   "owner": "tardy-org",
   "repo": "zzz",
   "description": "A framework for writing performant and reliable networked services.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "http",
     "https",
@@ -17,7 +17,7 @@
   "stars": 678,
   "forks": 31,
   "watchers": 13,
-  "updated_at": "2025-12-05T19:18:36Z",
+  "updated_at": "2025-12-08T14:00:49Z",
   "dependencies": [
     {
       "name": "tardy",

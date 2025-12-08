@@ -3,7 +3,7 @@
   "owner": "IridescenceTech",
   "repo": "zglfw",
   "description": "A thin, idiomatic wrapper for GLFW. Written in Zig, for Zig!",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "glfw",

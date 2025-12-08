@@ -3,7 +3,7 @@
   "owner": "zenolith-ui",
   "repo": "zenolith",
   "description": "The GUI engine to end them all! Mirror of https://git.mzte.de/zenolith/zenolith",
-  "type": "project",
+  "type": "package",
   "topics": [
     "gui",
     "retained-mode-gui",

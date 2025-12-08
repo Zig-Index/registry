@@ -3,7 +3,7 @@
   "owner": "ikskuh",
   "repo": "TextEditor",
   "description": "A backbone for text editors. No rendering, no input, but everything else.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "text",
     "text-editor",

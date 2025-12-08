@@ -3,7 +3,7 @@
   "owner": "hexops-graveyard",
   "repo": "mach-gpu-dawn",
   "description": "Google's Dawn WebGPU implementation, cross-compiled with Zig into a single static library",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

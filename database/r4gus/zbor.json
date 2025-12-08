@@ -3,7 +3,7 @@
   "owner": "r4gus",
   "repo": "zbor",
   "description": "CBOR parser written in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "cbor",
     "zig",

@@ -3,7 +3,7 @@
   "owner": "ringtailsoftware",
   "repo": "zig-wasm-audio-framebuffer",
   "description": "Examples of integrating Zig and Wasm (and C) for audio and graphics on the web",
-  "type": "project",
+  "type": "package",
   "topics": [
     "wasm",
     "webassembly",

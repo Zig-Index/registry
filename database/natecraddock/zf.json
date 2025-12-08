@@ -3,7 +3,7 @@
   "owner": "natecraddock",
   "repo": "zf",
   "description": "a commandline fuzzy finder and zig module designed for filtering filepaths",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "cli",
@@ -14,10 +14,10 @@
     "zig-package",
     "zig-library"
   ],
-  "stars": 573,
+  "stars": 574,
   "forks": 22,
   "watchers": 3,
-  "updated_at": "2025-12-06T02:07:13Z",
+  "updated_at": "2025-12-06T19:58:20Z",
   "dependencies": [
     {
       "name": "vaxis",

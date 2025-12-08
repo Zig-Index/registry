@@ -3,7 +3,7 @@
   "owner": "ikskuh",
   "repo": "SDL.zig",
   "description": "A shallow wrapper around SDL that provides object API and error handling",
-  "type": "project",
+  "type": "package",
   "topics": [
     "sdl",
     "zig",

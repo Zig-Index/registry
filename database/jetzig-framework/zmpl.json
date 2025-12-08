@@ -3,7 +3,7 @@
   "owner": "jetzig-framework",
   "repo": "zmpl",
   "description": "Zmpl is a templating language written in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

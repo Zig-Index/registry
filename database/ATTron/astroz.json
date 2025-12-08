@@ -3,7 +3,7 @@
   "owner": "ATTron",
   "repo": "astroz",
   "description": "Astrodynamics and Spacecraft Toolkit Written in Zig! Features orbit prop, celestial precession, CCSDS parsing, RF parsing, fits image parsing, and more!",
-  "type": "project",
+  "type": "package",
   "topics": [
     "astro",
     "astronomy",

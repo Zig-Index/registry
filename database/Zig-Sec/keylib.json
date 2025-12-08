@@ -3,7 +3,7 @@
   "owner": "Zig-Sec",
   "repo": "keylib",
   "description": "FIDO2/ PassKey compatible authentication library",
-  "type": "project",
+  "type": "package",
   "topics": [
     "authentication",
     "authenticator",

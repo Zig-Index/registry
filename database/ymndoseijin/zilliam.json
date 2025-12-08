@@ -3,7 +3,7 @@
   "owner": "ymndoseijin",
   "repo": "zilliam",
   "description": "A Geometric Algebra library for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "3d-graphics",
     "clifford-algebras",

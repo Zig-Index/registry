@@ -3,7 +3,7 @@
   "owner": "g41797",
   "repo": "mailbox",
   "description": "Zig Mailbox  is convenient  inter-thread communication mechanizm.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "actor-model",
     "inter-thread-communication",

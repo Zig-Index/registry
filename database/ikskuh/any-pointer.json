@@ -3,7 +3,7 @@
   "owner": "ikskuh",
   "repo": "any-pointer",
   "description": "A type erasure library for Zig that is meant to be eventually upstreamed to std",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package",

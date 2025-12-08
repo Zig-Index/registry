@@ -3,7 +3,7 @@
   "owner": "Arnau478",
   "repo": "hevi",
   "description": "Hex viewer",
-  "type": "project",
+  "type": "package",
   "topics": [
     "binary",
     "hex",

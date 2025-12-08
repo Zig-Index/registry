@@ -3,7 +3,7 @@
   "owner": "octopus-foundation",
   "repo": "gremlin.zig",
   "description": "A zero-dependency Google Protocol Buffers implementation in pure Zig. Single allocation encode and lazy decode",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "zig"

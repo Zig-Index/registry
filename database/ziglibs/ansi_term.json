@@ -3,7 +3,7 @@
   "owner": "ziglibs",
   "repo": "ansi_term",
   "description": "Zig library for dealing with ANSI terminals",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "ziglang",

@@ -3,7 +3,7 @@
   "owner": "ziglibs",
   "repo": "zinput",
   "description": "A Zig command-line input library!",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "ziglang",

@@ -3,7 +3,7 @@
   "owner": "Hejsil",
   "repo": "zig-bench",
   "description": "Simple benchmarking library",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package",

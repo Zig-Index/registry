@@ -3,7 +3,7 @@
   "owner": "ikskuh",
   "repo": "ZigAndroidTemplate",
   "description": "This repository contains a example on how to create a minimal Android app in Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "android",
     "ziglang",

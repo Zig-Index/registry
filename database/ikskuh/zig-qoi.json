@@ -3,7 +3,7 @@
   "owner": "ikskuh",
   "repo": "zig-qoi",
   "description": "Quite OK Image format encoder/decoder written in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "ziglang",

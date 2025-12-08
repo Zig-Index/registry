@@ -3,7 +3,7 @@
   "owner": "ziglibs",
   "repo": "known-folders",
   "description": "Provides access to well-known folders across several operating systems",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package",

@@ -3,7 +3,7 @@
   "owner": "capy-ui",
   "repo": "capy",
   "description": "💻Build one codebase and get native UI on Windows, Linux and Web",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "gui",
@@ -16,10 +16,10 @@
     "cross-platform-gui",
     "gui-library"
   ],
-  "stars": 2431,
+  "stars": 2436,
   "forks": 89,
   "watchers": 31,
-  "updated_at": "2025-12-06T17:37:40Z",
+  "updated_at": "2025-12-08T04:05:54Z",
   "dependencies": [
     {
       "name": "macos_sdk",

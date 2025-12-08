@@ -3,7 +3,7 @@
   "owner": "zPSP-Dev",
   "repo": "Zig-PSP",
   "description": "A project to bring the Zig Programming Language to the Sony PlayStation Portable!",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "psp",

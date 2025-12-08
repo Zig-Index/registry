@@ -3,7 +3,7 @@
   "owner": "tardy-org",
   "repo": "tardy",
   "description": "An asynchronous runtime for writing applications and services. Supports io_uring, epoll, kqueue, and poll for I/O. ",
-  "type": "project",
+  "type": "package",
   "topics": [
     "async",
     "net",

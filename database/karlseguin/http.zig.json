@@ -3,17 +3,17 @@
   "owner": "karlseguin",
   "repo": "http.zig",
   "description": "An HTTP/1.1 server for zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "http-server",
     "zig",
     "zig-library",
     "zig-package"
   ],
-  "stars": 1281,
+  "stars": 1283,
   "forks": 89,
   "watchers": 11,
-  "updated_at": "2025-12-06T07:07:55Z",
+  "updated_at": "2025-12-07T09:10:41Z",
   "dependencies": [
     {
       "name": "metrics",
@@ -37,7 +37,7 @@
   "owner_location": null,
   "owner_blog": "https://www.openmymind.net/",
   "owner_twitter_username": "karlseguin",
-  "owner_followers": 2252,
+  "owner_followers": 2253,
   "owner_following": 3,
   "owner_created_at": "2010-02-19T04:01:58Z",
   "license": "MIT",

@@ -3,7 +3,7 @@
   "owner": "JacobCrabill",
   "repo": "zigdown",
   "description": "Markdown toolset in Zig ⚡",
-  "type": "project",
+  "type": "package",
   "topics": [
     "markdown",
     "zig",

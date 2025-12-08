@@ -3,7 +3,7 @@
   "owner": "SimonLSchlee",
   "repo": "zigraylib",
   "description": "a fairly minimal raylib zig example codebase using the zig package manager",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

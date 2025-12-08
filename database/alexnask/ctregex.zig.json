@@ -3,7 +3,7 @@
   "owner": "alexnask",
   "repo": "ctregex.zig",
   "description": "Compile time regular expressions in zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "zig-library",

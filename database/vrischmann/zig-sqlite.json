@@ -3,16 +3,16 @@
   "owner": "vrischmann",
   "repo": "zig-sqlite",
   "description": "zig-sqlite is a small wrapper around sqlite's C API, making it easier to use with Zig. ",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "sqlite",
     "zig-package"
   ],
-  "stars": 545,
-  "forks": 72,
+  "stars": 546,
+  "forks": 73,
   "watchers": 8,
-  "updated_at": "2025-12-05T19:17:53Z",
+  "updated_at": "2025-12-08T00:50:23Z",
   "dependencies": [
     {
       "name": "sqlite",

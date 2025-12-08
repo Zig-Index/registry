@@ -3,7 +3,7 @@
   "owner": "zigcc",
   "repo": "zig-course",
   "description": "Zig 语言圣经：简单、快速地学习 Zig, Zig Chinese tutorial, learn zig simply and quickly",
-  "type": "project",
+  "type": "package",
   "topics": [
     "tutorial",
     "tutorials",

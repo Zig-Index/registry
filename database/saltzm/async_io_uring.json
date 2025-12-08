@@ -3,7 +3,7 @@
   "owner": "saltzm",
   "repo": "async_io_uring",
   "description": "An event loop in Zig using io_uring and coroutines",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package",

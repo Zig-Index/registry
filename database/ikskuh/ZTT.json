@@ -3,7 +3,7 @@
   "owner": "ikskuh",
   "repo": "ZTT",
   "description": "Precompiled Zig text template engine",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "ziglang",

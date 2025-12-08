@@ -3,7 +3,7 @@
   "owner": "batiati",
   "repo": "IUPforZig",
   "description": "IUP (Portable User Interface Toolkit) bindings for the Zig language.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "iup",
     "iup-toolkit",

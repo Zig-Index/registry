@@ -3,7 +3,7 @@
   "owner": "allyourcodebase",
   "repo": "ffmpeg",
   "description": "FFmpeg Zig package",
-  "type": "project",
+  "type": "package",
   "topics": [
     "ffmpeg",
     "zig",

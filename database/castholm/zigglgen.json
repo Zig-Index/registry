@@ -3,7 +3,7 @@
   "owner": "castholm",
   "repo": "zigglgen",
   "description": "Zig OpenGL binding generator",
-  "type": "project",
+  "type": "package",
   "topics": [
     "bindings",
     "opengl",

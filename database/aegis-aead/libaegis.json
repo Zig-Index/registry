@@ -3,7 +3,7 @@
   "owner": "aegis-aead",
   "repo": "libaegis",
   "description": "Portable C implementations of the AEGIS family of high-performance authenticated encryption algorithms.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "aead",
     "aegis",

@@ -3,17 +3,17 @@
   "owner": "freref",
   "repo": "fancy-cat",
   "description": "PDF reader for terminal emulators using the Kitty image protocol",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package",
     "pdf-viewer",
     "cli"
   ],
-  "stars": 447,
+  "stars": 448,
   "forks": 16,
   "watchers": 5,
-  "updated_at": "2025-12-05T05:55:52Z",
+  "updated_at": "2025-12-08T02:00:27Z",
   "dependencies": [
     {
       "name": "vaxis",
@@ -40,7 +40,7 @@
   "owner_blog": null,
   "owner_twitter_username": null,
   "owner_followers": 26,
-  "owner_following": 13,
+  "owner_following": 11,
   "owner_created_at": "2018-01-30T21:34:30Z",
   "license": "AGPL-3.0",
   "category": "cli"

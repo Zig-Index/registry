@@ -3,7 +3,7 @@
   "owner": "raylib-zig",
   "repo": "raylib-zig",
   "description": "Manually tweaked, auto-generated raylib bindings for zig. https://github.com/raysan5/raylib",
-  "type": "project",
+  "type": "package",
   "topics": [
     "raylib",
     "zig",
@@ -13,10 +13,10 @@
     "binding",
     "zig-package"
   ],
-  "stars": 1460,
+  "stars": 1463,
   "forks": 206,
   "watchers": 14,
-  "updated_at": "2025-12-05T22:07:15Z",
+  "updated_at": "2025-12-08T13:46:31Z",
   "dependencies": [
     {
       "name": "raylib",

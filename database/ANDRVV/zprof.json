@@ -3,7 +3,7 @@
   "owner": "ANDRVV",
   "repo": "zprof",
   "description": "🧮 Cross-allocator profiler for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "allocator",
     "memory",

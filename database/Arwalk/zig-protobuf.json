@@ -3,7 +3,7 @@
   "owner": "Arwalk",
   "repo": "zig-protobuf",
   "description": "a protobuf 3 implementation for zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "protobuf",

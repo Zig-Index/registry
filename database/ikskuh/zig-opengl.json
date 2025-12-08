@@ -3,7 +3,7 @@
   "owner": "ikskuh",
   "repo": "zig-opengl",
   "description": "OpenGL binding generator based on the opengl registry",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "gamedev",

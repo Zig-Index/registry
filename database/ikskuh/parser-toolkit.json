@@ -3,7 +3,7 @@
   "owner": "ikskuh",
   "repo": "parser-toolkit",
   "description": "A toolkit that makes it easier to write recursive-descent parsers in Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package",

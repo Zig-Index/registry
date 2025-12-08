@@ -3,7 +3,7 @@
   "owner": "dokwork",
   "repo": "parcom",
   "description": "Parser combinators for Zig, ready to parse on-the-fly. Consume input, not memory.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "parser",
     "parser-combinators",

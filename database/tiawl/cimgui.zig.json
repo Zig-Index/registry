@@ -3,7 +3,7 @@
   "owner": "tiawl",
   "repo": "cimgui.zig",
   "description": "dear imgui packaged for @ziglang",
-  "type": "project",
+  "type": "package",
   "topics": [
     "binding",
     "cimgui",

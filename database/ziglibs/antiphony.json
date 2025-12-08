@@ -3,7 +3,7 @@
   "owner": "ziglibs",
   "repo": "antiphony",
   "description": "A zig remote procedure call solution",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "ziglang",

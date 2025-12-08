@@ -3,7 +3,7 @@
   "owner": "speed2exe",
   "repo": "tree-fmt",
   "description": "Tree-like pretty formatter for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-library",
     "zig-package"

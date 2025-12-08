@@ -3,7 +3,7 @@
   "owner": "ringtailsoftware",
   "repo": "commy",
   "description": "A serial monitor for Mac, Linux and Windows",
-  "type": "project",
+  "type": "package",
   "topics": [
     "serial",
     "serial-communication",

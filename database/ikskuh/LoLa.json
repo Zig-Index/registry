@@ -3,7 +3,7 @@
   "owner": "ikskuh",
   "repo": "LoLa",
   "description": "LoLa is a small programming language meant to be embedded into games.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "lola-language",
     "zig",

@@ -3,7 +3,7 @@
   "owner": "tensorush",
   "repo": "liza",
   "description": "Zig codebase initializer.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "cli"

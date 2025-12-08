@@ -3,7 +3,7 @@
   "owner": "nektro",
   "repo": "zig-extras",
   "description": "An assortment of random utility functions that aren't in std and don't need to be their own pacakge.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "zig"

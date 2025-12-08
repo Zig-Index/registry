@@ -3,7 +3,7 @@
   "owner": "lun-4",
   "repo": "zigdig",
   "description": "naive dns client library in zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "dns",

@@ -3,7 +3,7 @@
   "owner": "ziglana",
   "repo": "gRPC-zig",
   "description": "blazigly fast gRPC client & server implementation in zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "blazigly",
     "grpc",
@@ -12,7 +12,7 @@
     "zig-package"
   ],
   "stars": 91,
-  "forks": 17,
+  "forks": 18,
   "watchers": 0,
   "updated_at": "2025-12-06T06:53:59Z",
   "dependencies": [
