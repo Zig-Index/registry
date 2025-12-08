@@ -245,10 +245,35 @@ interface DiscoveryItem {
   commitHash?: string;
 }
 
+interface DiskEntry {
+  owner: string;
+  name: string;
+  filePath: string;
+  mtime: number;
+}
+
 // --- Helpers ---
 
 function sleep(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function scanDatabaseEntries(baseDir: string): DiskEntry[] {
+  const entries: DiskEntry[] = [];
+  if (!fs.existsSync(baseDir)) return entries;
+
+  const owners = fs.readdirSync(baseDir, { withFileTypes: true }).filter(d => d.isDirectory());
+  for (const ownerDir of owners) {
+    const ownerPath = path.join(baseDir, ownerDir.name);
+    const files = fs.readdirSync(ownerPath, { withFileTypes: true }).filter(f => f.isFile() && f.name.endsWith('.json'));
+    for (const file of files) {
+      const filePath = path.join(ownerPath, file.name);
+      const stats = fs.statSync(filePath);
+      const name = file.name.replace(/\.json$/, '');
+      entries.push({ owner: ownerDir.name, name, filePath, mtime: stats.mtimeMs });
+    }
+  }
+  return entries;
 }
 
 function extractZonMetadata(zonContent: string): { dependencies: { name: string; url: string; hash?: string }[], minimum_zig_version?: string } {
@@ -362,6 +387,38 @@ async function fetchGraphQL(query: string, variables: any): Promise<{ data: any,
   }
 
   return { data: result.data, headers: response.headers };
+}
+
+async function fetchRepoByOwnerName(owner: string, name: string): Promise<DiscoveryItem | null> {
+  const query = `
+    query($owner: String!, $name: String!) {
+      repository(owner: $owner, name: $name) {
+        id
+        name
+        nameWithOwner
+        updatedAt
+        defaultBranchRef { target { ... on Commit { oid } } }
+        owner { login }
+      }
+    }
+  `;
+
+  try {
+    const { data } = await fetchGraphQL(query, { owner, name });
+    const repo = data.repository;
+    if (!repo) return null;
+    return {
+      id: repo.id,
+      name: repo.name,
+      owner: repo.owner.login,
+      nameWithOwner: repo.nameWithOwner,
+      updatedAt: repo.updatedAt,
+      commitHash: repo.defaultBranchRef?.target?.oid,
+    };
+  } catch (error) {
+    console.error(`[Reconcile] Failed to fetch repo by owner/name ${owner}/${name}:`, error);
+    return null;
+  }
 }
 
 async function discoverRepos(query: string): Promise<DiscoveryItem[]> {
@@ -590,6 +647,19 @@ async function main() {
   const updatedRepos: DiscoveryItem[] = [];
   const removedRepos: string[] = [];
 
+  const discoveryByOwnerRepo = new Map<string, DiscoveryItem>();
+  const stateByOwnerRepo = new Map<string, { id: string; entry: RegistryState['repos'][string] }>();
+  const newRepoIds = new Set<string>();
+  const updatedRepoIds = new Set<string>();
+
+  uniqueDiscovered.forEach(item => {
+    discoveryByOwnerRepo.set(`${item.owner}/${item.name}`.toLowerCase(), item);
+  });
+
+  Object.entries(state.repos).forEach(([id, entry]) => {
+    stateByOwnerRepo.set(`${entry.owner}/${entry.name}`.toLowerCase(), { id, entry });
+  });
+
   const discoveredIds = new Set(uniqueDiscovered.map(i => i.id));
 
   // Identify New & Updated
@@ -601,10 +671,16 @@ async function main() {
     const fileExists = fs.existsSync(expectedFile);
 
     if (!tracked) {
-      newRepos.push(item);
+      if (!newRepoIds.has(item.id)) {
+        newRepoIds.add(item.id);
+        newRepos.push(item);
+      }
     } else if (!fileExists) {
       console.log(`[Reconcile] File missing for ${item.owner}/${item.name}, forcing update.`);
-      updatedRepos.push(item);
+      if (!updatedRepoIds.has(item.id)) {
+        updatedRepoIds.add(item.id);
+        updatedRepos.push(item);
+      }
     } else {
       // Check if updated on GitHub since last sync
       // We compare GitHub's commit hash with our stored commit hash
@@ -614,9 +690,44 @@ async function main() {
       
       // If we have commit hash tracking, rely on it. Otherwise fallback to updatedAt.
       if (item.commitHash) {
-        if (hasNewCommit) updatedRepos.push(item);
-      } else if (hasNewUpdate) {
+        if (hasNewCommit && !updatedRepoIds.has(item.id)) {
+          updatedRepoIds.add(item.id);
+          updatedRepos.push(item);
+        }
+      } else if (hasNewUpdate && !updatedRepoIds.has(item.id)) {
+        updatedRepoIds.add(item.id);
         updatedRepos.push(item);
+      }
+    }
+  }
+
+  // Ensure disk JSON and registry stay in sync
+  const diskEntries = scanDatabaseEntries(CONFIG.outputDir);
+  for (const disk of diskEntries) {
+    const key = `${disk.owner}/${disk.name}`.toLowerCase();
+    const stateEntry = stateByOwnerRepo.get(key);
+    const discovered = discoveryByOwnerRepo.get(key);
+
+    // If registry is missing this disk JSON, try to fetch and refresh it
+    if (!stateEntry) {
+      if (!discovered) {
+        console.log(`[Reconcile] Disk JSON found without registry entry or discovery: ${key}. Fetching by owner/name.`);
+        const fetched = await fetchRepoByOwnerName(disk.owner, disk.name);
+        if (fetched && !updatedRepoIds.has(fetched.id) && !newRepoIds.has(fetched.id)) {
+          updatedRepoIds.add(fetched.id);
+          updatedRepos.push(fetched);
+        }
+      }
+      continue;
+    }
+
+    // If registry has the repo but discovery missed it (topic removal), refresh by owner/name
+    if (!discovered) {
+      console.log(`[Reconcile] Registry entry missing in discovery for ${key}. Refreshing by owner/name.`);
+      const fetched = await fetchRepoByOwnerName(disk.owner, disk.name);
+      if (fetched && !updatedRepoIds.has(fetched.id)) {
+        updatedRepoIds.add(fetched.id);
+        updatedRepos.push(fetched);
       }
     }
   }
