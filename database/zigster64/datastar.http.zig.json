@@ -3,17 +3,17 @@
   "owner": "zigster64",
   "repo": "datastar.http.zig",
   "description": "Alternate Datastar API for http.zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "data-star",
     "datastar",
     "hypermedia",
     "zig-package"
   ],
-  "stars": 11,
+  "stars": 12,
   "forks": 2,
   "watchers": 0,
-  "updated_at": "2025-12-05T10:00:25Z",
+  "updated_at": "2025-12-07T17:11:18Z",
   "dependencies": [
     {
       "name": "httpz",
@@ -69,7 +69,7 @@
   "owner_blog": null,
   "owner_twitter_username": null,
   "owner_followers": 53,
-  "owner_following": 56,
+  "owner_following": 57,
   "owner_created_at": "2020-10-03T12:46:34Z",
   "license": "MIT",
   "category": "library"

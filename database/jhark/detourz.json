@@ -3,7 +3,7 @@
   "owner": "jhark",
   "repo": "detourz",
   "description": "Zig wrapper for Microsoft Detours.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-library",
     "zig-package",

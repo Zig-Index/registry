@@ -3,7 +3,7 @@
   "owner": "ikskuh",
   "repo": "SLF",
   "description": "The Simple Linking Format",
-  "type": "project",
+  "type": "package",
   "topics": [
     "binary",
     "zig-package",

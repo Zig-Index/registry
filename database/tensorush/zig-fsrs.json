@@ -3,7 +3,7 @@
   "owner": "tensorush",
   "repo": "zig-fsrs",
   "description": "Zig implementation of FSRS-6 flashcard review scheduling algorithm.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-library",
     "zig-package",

@@ -3,7 +3,7 @@
   "owner": "Thomvanoorschot",
   "repo": "async_zocket",
   "description": "This repository contains a basic, non-blocking WebSocket client written in the Zig programming language. It leverages the xev event loop for asynchronous operations and is able to run non-blocking on a single thread.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "eventloop",
     "libuv",

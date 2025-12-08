@@ -3,7 +3,7 @@
   "owner": "BitlyTwiser",
   "repo": "snek",
   "description": "Snek - A simple CLI parser to build CLI applications in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "cli",
     "snek",

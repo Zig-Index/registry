@@ -3,7 +3,7 @@
   "owner": "Orolia2s",
   "repo": "ublox_parser",
   "description": "Use a serial port to receive and decode u-blox messages",
-  "type": "project",
+  "type": "package",
   "topics": [
     "gnss",
     "ublox",

@@ -3,7 +3,7 @@
   "owner": "EsportToys",
   "repo": "ClipPad",
   "description": "A barebones plaintext scratch pad.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "windows",
     "notepad",

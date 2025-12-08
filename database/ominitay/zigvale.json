@@ -3,7 +3,7 @@
   "owner": "ominitay",
   "repo": "zigvale",
   "description": "A Zig implementation of the stivale2 boot protocol",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package",

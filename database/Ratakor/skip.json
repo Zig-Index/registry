@@ -3,7 +3,7 @@
   "owner": "Ratakor",
   "repo": "skip",
   "description": "zig and C99 implementation of skip lists ",
-  "type": "project",
+  "type": "package",
   "topics": [
     "skiplist",
     "c99",

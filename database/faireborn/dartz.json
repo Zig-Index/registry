@@ -3,7 +3,7 @@
   "owner": "faireborn",
   "repo": "dartz",
   "description": "Double-Array Trie Zig implementation",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "double-array-trie"

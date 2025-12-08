@@ -3,7 +3,7 @@
   "owner": "allisoneer",
   "repo": "zai",
   "description": "Zig AI!",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],
@@ -20,7 +20,7 @@
   "owner_location": "San Francisco, CA",
   "owner_blog": "https://allisoneer.com",
   "owner_twitter_username": null,
-  "owner_followers": 115,
+  "owner_followers": 118,
   "owner_following": 123,
   "owner_created_at": "2016-08-08T16:45:59Z",
   "license": "MIT",

@@ -3,7 +3,7 @@
   "owner": "RecursiveError",
   "repo": "ClockHelper-zig",
   "description": "ClockHelper is a utility to facilitate clock management on STM32 microcontrollers.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "embedded",
     "stm32",
@@ -30,7 +30,7 @@
   "owner_location": "Praia Grande-sp,  Brasil ",
   "owner_blog": "https://www.linkedin.com/in/guilherme-s-schultz-a72b70217",
   "owner_twitter_username": "RecursiveError",
-  "owner_followers": 43,
+  "owner_followers": 45,
   "owner_following": 73,
   "owner_created_at": "2020-05-18T04:06:34Z",
   "license": "MIT",

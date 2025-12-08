@@ -3,7 +3,7 @@
   "owner": "nektro",
   "repo": "zig-tls",
   "description": "[WIP] A pure-Zig TLS 1.3 client implementation.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "tls",
     "tls13",

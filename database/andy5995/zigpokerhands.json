@@ -3,7 +3,7 @@
   "owner": "andy5995",
   "repo": "zigpokerhands",
   "description": "A program that uses zigdeck to evaluate five cards to determine if it matches a poker hand",
-  "type": "project",
+  "type": "package",
   "topics": [
     "cards",
     "mit-license",
@@ -32,7 +32,7 @@
   "owner_location": "United States",
   "owner_blog": "https://andy5995.github.io/",
   "owner_twitter_username": null,
-  "owner_followers": 86,
+  "owner_followers": 87,
   "owner_following": 26,
   "owner_created_at": "2016-01-18T19:15:38Z",
   "license": "MIT",

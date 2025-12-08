@@ -3,7 +3,7 @@
   "owner": "allyourcodebase",
   "repo": "AFLplusplus",
   "description": "Zig build for AFL++",
-  "type": "project",
+  "type": "package",
   "topics": [
     "afl",
     "afl-fuzz",

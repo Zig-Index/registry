@@ -3,7 +3,7 @@
   "owner": "zetaframe",
   "repo": "zetaframe",
   "description": "lightweight zig game framework.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "ziglang",

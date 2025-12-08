@@ -3,7 +3,7 @@
   "owner": "dasimmet",
   "repo": "ncurses",
   "description": "ncurses built with zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

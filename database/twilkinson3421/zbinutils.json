@@ -3,7 +3,7 @@
   "owner": "twilkinson3421",
   "repo": "zbinutils",
   "description": "A simple standalone library for reading and writing byte arrays in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

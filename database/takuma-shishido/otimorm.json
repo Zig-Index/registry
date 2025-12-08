@@ -3,7 +3,7 @@
   "owner": "takuma-shishido",
   "repo": "otimorm",
   "description": "library for PostgreSQL ORM written in zig 🔥",
-  "type": "project",
+  "type": "package",
   "topics": [
     "database",
     "orm",

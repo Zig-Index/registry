@@ -3,7 +3,7 @@
   "owner": "hiae-aead",
   "repo": "zig-hiae",
   "description": "HiAE - A High-Throughput Authenticated Encryption Algorithm for Cross-Platform Efficiency.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "aead",
     "aes",

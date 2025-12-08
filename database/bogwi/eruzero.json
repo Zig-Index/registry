@@ -3,7 +3,7 @@
   "owner": "bogwi",
   "repo": "eruzero",
   "description": "Bullet-Train fast hashmap for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "benchmark",
     "data-structures",

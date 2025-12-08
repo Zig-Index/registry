@@ -3,7 +3,7 @@
   "owner": "AlexJReid",
   "repo": "zigxll",
   "description": "Write Excel custom functions in zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "excel",
     "excel-custom-functions",

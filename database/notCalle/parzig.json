@@ -3,7 +3,7 @@
   "owner": "notCalle",
   "repo": "parzig",
   "description": "Parser Combinator library for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-library",

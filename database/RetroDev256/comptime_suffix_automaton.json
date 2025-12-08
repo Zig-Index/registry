@@ -3,7 +3,7 @@
   "owner": "RetroDev256",
   "repo": "comptime_suffix_automaton",
   "description": "Compile-time suffix automaton construction for optimal substring/suffix string lookup codegen in zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-lib",

@@ -3,7 +3,7 @@
   "owner": "akunaakwei",
   "repo": "zig-miniz",
   "description": "miniz for zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

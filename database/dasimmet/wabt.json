@@ -3,7 +3,7 @@
   "owner": "dasimmet",
   "repo": "wabt",
   "description": "WebAssembly Binary Toolkit (wabt) and Binaryen on the zig build system",
-  "type": "project",
+  "type": "package",
   "topics": [
     "wabt",
     "wasm",

@@ -3,7 +3,7 @@
   "owner": "ion232",
   "repo": "reticulum-zig",
   "description": "An implementation of Reticulum for operating systems and embedded devices",
-  "type": "project",
+  "type": "package",
   "topics": [
     "microzig",
     "reticulum",

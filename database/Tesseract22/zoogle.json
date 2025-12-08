@@ -3,7 +3,7 @@
   "owner": "Tesseract22",
   "repo": "zoogle",
   "description": "Fuzz Search for Function in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

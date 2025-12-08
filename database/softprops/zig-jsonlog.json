@@ -3,7 +3,7 @@
   "owner": "softprops",
   "repo": "zig-jsonlog",
   "description": "format zig std logs as structured JSON",
-  "type": "project",
+  "type": "package",
   "topics": [
     "json",
     "logging",

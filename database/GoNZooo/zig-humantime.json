@@ -3,7 +3,7 @@
   "owner": "GoNZooo",
   "repo": "zig-humantime",
   "description": "Mini library for expressing integer time values in more human readable ways",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

@@ -3,7 +3,7 @@
   "owner": "lalinsky",
   "repo": "msgpack.zig",
   "description": "Msgpack serialization for Zig / msgpack.org[Zig]",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

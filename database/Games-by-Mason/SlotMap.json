@@ -3,7 +3,7 @@
   "owner": "Games-by-Mason",
   "repo": "SlotMap",
   "description": "A high performance associative container with persistent keys.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

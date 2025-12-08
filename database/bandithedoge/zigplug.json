@@ -3,7 +3,7 @@
   "owner": "bandithedoge",
   "repo": "zigplug",
   "description": "WIP Zig audio plugin framework",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

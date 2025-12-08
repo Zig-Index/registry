@@ -3,7 +3,7 @@
   "owner": "travisstaloch",
   "repo": "combinatorics.zig",
   "description": "A port of Julia's combinatorics library along with miscellaneous related tools.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-library",
     "zig-package"

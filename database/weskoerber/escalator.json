@@ -3,7 +3,7 @@
   "owner": "weskoerber",
   "repo": "escalator",
   "description": "A library for privelege-escalation written in Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

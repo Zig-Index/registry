@@ -3,7 +3,7 @@
   "owner": "by-nir",
   "repo": "aws-lambda-zig",
   "description": "🟠 Write AWS Lambda functions in Zig programming language",
-  "type": "project",
+  "type": "package",
   "topics": [
     "aws",
     "zig",

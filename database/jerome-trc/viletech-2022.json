@@ -3,7 +3,7 @@
   "owner": "jerome-trc",
   "repo": "viletech-2022",
   "description": "Doom source port and related technologies",
-  "type": "project",
+  "type": "package",
   "topics": [
     "doom",
     "doom-2",

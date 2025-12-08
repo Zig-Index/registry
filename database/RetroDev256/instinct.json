@@ -3,7 +3,7 @@
   "owner": "RetroDev256",
   "repo": "instinct",
   "description": "",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

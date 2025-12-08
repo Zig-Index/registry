@@ -3,7 +3,7 @@
   "owner": "sackosoft",
   "repo": "zig-luajit-build",
   "description": "A package to compile LuaJIT using the Zig toolchain. Install to access the LuaJIT C API. For Zig API see https://github.com/sackosoft/zig-luajit",
-  "type": "project",
+  "type": "package",
   "topics": [
     "luajit",
     "zig",

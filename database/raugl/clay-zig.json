@@ -3,7 +3,7 @@
   "owner": "raugl",
   "repo": "clay-zig",
   "description": "Zig bindings for the library clay: A high performance UI layout library in C.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "layout",
     "ui",

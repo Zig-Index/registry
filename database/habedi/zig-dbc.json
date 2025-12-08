@@ -3,7 +3,7 @@
   "owner": "habedi",
   "repo": "zig-dbc",
   "description": "A design by contract library for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "design-by-contract",
     "zig",

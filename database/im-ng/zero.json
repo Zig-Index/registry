@@ -3,7 +3,7 @@
   "owner": "im-ng",
   "repo": "zero",
   "description": "Simple, opinionated web framework written in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "framework",
     "web",

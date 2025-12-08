@@ -3,7 +3,7 @@
   "owner": "furpu",
   "repo": "jwt.zig",
   "description": "Zig JSON Web Token package.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-library",

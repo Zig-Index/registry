@@ -3,7 +3,7 @@
   "owner": "bcrist",
   "repo": "zbox",
   "description": "SVG Block Diagram Generator",
-  "type": "project",
+  "type": "package",
   "topics": [
     "block-diagram",
     "blockdiagram",

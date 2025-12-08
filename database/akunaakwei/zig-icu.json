@@ -3,7 +3,7 @@
   "owner": "akunaakwei",
   "repo": "zig-icu",
   "description": "icu packaged for zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

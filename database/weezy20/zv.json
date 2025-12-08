@@ -3,7 +3,7 @@
   "owner": "weezy20",
   "repo": "zv",
   "description": "Blazing fast, cross-platform zig version manager & project starter kit",
-  "type": "project",
+  "type": "package",
   "topics": [
     "programming-languages",
     "toolchain",

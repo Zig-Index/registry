@@ -3,7 +3,7 @@
   "owner": "ziglibs",
   "repo": "ini",
   "description": "A teeny tiny ini parser",
-  "type": "project",
+  "type": "package",
   "topics": [
     "ziglang",
     "zig",

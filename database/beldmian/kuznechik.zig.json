@@ -3,7 +3,7 @@
   "owner": "beldmian",
   "repo": "kuznechik.zig",
   "description": "Kuznechik cipher implementation in pure zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

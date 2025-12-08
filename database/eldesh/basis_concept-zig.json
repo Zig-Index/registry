@@ -3,7 +3,7 @@
   "owner": "eldesh",
   "repo": "basis_concept-zig",
   "description": "A collection of basis concept and their operations",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

@@ -3,7 +3,7 @@
   "owner": "JacobCrabill",
   "repo": "zig-yaml-cpp",
   "description": "Zig build of the yaml-cpp repo",
-  "type": "project",
+  "type": "package",
   "topics": [
     "yaml",
     "zig",

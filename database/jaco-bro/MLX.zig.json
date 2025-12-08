@@ -3,7 +3,7 @@
   "owner": "jaco-bro",
   "repo": "MLX.zig",
   "description": "MLX.zig: Phi-4, Llama 3.2, and Whisper in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "llama",
     "llm",

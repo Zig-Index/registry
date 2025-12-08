@@ -3,7 +3,7 @@
   "owner": "andy5995",
   "repo": "zigdeck",
   "description": "A library that creates and shuffles a deck of cards from which you can draw",
-  "type": "project",
+  "type": "package",
   "topics": [
     "cards",
     "simulation",
@@ -49,7 +49,7 @@
   "owner_location": "United States",
   "owner_blog": "https://andy5995.github.io/",
   "owner_twitter_username": null,
-  "owner_followers": 86,
+  "owner_followers": 87,
   "owner_following": 26,
   "owner_created_at": "2016-01-18T19:15:38Z",
   "license": "MIT",

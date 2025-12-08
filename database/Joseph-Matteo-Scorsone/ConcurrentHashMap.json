@@ -3,7 +3,7 @@
   "owner": "Joseph-Matteo-Scorsone",
   "repo": "ConcurrentHashMap",
   "description": "Hashmap that avoids the use of a Mutex until the need for resizing for better concurrency with the use of atomic values.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

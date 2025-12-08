@@ -3,7 +3,7 @@
   "owner": "scottredig",
   "repo": "zig-demo-webserver",
   "description": "a webserver which hosts a zig build path",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

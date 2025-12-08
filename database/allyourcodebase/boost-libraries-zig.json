@@ -3,7 +3,7 @@
   "owner": "allyourcodebase",
   "repo": "boost-libraries-zig",
   "description": "Boost Libraries using build.zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "boost-libraries",
     "cpp",

@@ -3,7 +3,7 @@
   "owner": "thechampagne",
   "repo": "cutenet-zig",
   "description": "Zig binding for cutenet a networking library for games requiring an optional reliability layer over UDP with a baked in security scheme.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

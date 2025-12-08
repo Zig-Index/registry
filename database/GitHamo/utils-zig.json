@@ -3,7 +3,7 @@
   "owner": "GitHamo",
   "repo": "utils-zig",
   "description": "Commonly used utility modules built for ziglang",
-  "type": "project",
+  "type": "package",
   "topics": [
     "http",
     "mysql",

@@ -3,7 +3,7 @@
   "owner": "Zig-Sec",
   "repo": "zat",
   "description": "The Zig Audit Tool",
-  "type": "project",
+  "type": "package",
   "topics": [
     "dependencies",
     "dependency",

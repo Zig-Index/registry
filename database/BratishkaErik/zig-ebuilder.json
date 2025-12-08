@@ -3,7 +3,7 @@
   "owner": "BratishkaErik",
   "repo": "zig-ebuilder",
   "description": "Tool for distro maintainers to generate package recipes for Zig projects",
-  "type": "project",
+  "type": "package",
   "topics": [
     "ebuild",
     "zig-package",

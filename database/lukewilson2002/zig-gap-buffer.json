@@ -3,7 +3,7 @@
   "owner": "lukewilson2002",
   "repo": "zig-gap-buffer",
   "description": "A gap buffer implementation for Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "gap-buffers",
     "zig",

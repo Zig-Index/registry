@@ -3,7 +3,7 @@
   "owner": "alexnask",
   "repo": "lepto.zig",
   "description": "Date and time library for zig, inspired by C++20 std::chrono",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "ziglang",

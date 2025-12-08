@@ -3,7 +3,7 @@
   "owner": "dasimmet",
   "repo": "zig-devserver",
   "description": "a reloading static http server for `zig build --watch`",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

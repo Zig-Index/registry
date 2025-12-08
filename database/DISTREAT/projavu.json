@@ -3,7 +3,7 @@
   "owner": "DISTREAT",
   "repo": "projavu",
   "description": "A program for on-disk storing and managing of project ideas.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "idea-management-tool",
     "project-management",

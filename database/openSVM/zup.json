@@ -3,7 +3,7 @@
   "owner": "openSVM",
   "repo": "zup",
   "description": "zig api server",
-  "type": "project",
+  "type": "package",
   "topics": [
     "bunjs",
     "high-load",

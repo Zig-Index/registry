@@ -3,7 +3,7 @@
   "owner": "tiawl",
   "repo": "glslang.zig",
   "description": "glslang packaged for @ziglang",
-  "type": "project",
+  "type": "package",
   "topics": [
     "binding",
     "glslang",

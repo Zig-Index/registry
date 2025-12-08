@@ -3,7 +3,7 @@
   "owner": "agagniere",
   "repo": "unitz",
   "description": "For when you don't want your probe crashing in Mars' atmosphere",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "physics"

@@ -3,7 +3,7 @@
   "owner": "knadh",
   "repo": "zig-releaser",
   "description": "A simple hack to use GoReleaser to build, release, and publish Zig projects.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "zig",
@@ -26,7 +26,7 @@
   "owner_location": "Bengaluru",
   "owner_blog": "https://nadh.in",
   "owner_twitter_username": null,
-  "owner_followers": 11765,
+  "owner_followers": 11772,
   "owner_following": 0,
   "owner_created_at": "2011-01-04T15:32:55Z",
   "license": "MIT",

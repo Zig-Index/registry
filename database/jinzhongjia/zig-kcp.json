@@ -3,7 +3,7 @@
   "owner": "jinzhongjia",
   "repo": "zig-kcp",
   "description": "KCP - A Fast and Reliable ARQ Protocol (Zig Implementation)",
-  "type": "project",
+  "type": "package",
   "topics": [
     "kcp",
     "zig",

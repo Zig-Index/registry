@@ -3,7 +3,7 @@
   "owner": "dayvster",
   "repo": "zig-btree",
   "description": "A simple BTree implementation in zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-lang",

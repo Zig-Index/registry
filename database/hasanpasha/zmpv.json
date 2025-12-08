@@ -3,7 +3,7 @@
   "owner": "hasanpasha",
   "repo": "zmpv",
   "description": "libmpv bindings in zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "libmpv",
     "mpv",

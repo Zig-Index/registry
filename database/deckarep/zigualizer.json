@@ -3,7 +3,7 @@
   "owner": "deckarep",
   "repo": "zigualizer",
   "description": "Zigualizer: A music visualizer built with Zig, powered by the FFT algorithm.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "fft",
     "music",

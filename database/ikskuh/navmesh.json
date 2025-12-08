@@ -3,7 +3,7 @@
   "owner": "ikskuh",
   "repo": "navmesh",
   "description": "A navmesh implementation in zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "ziglang",

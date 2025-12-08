@@ -3,7 +3,7 @@
   "owner": "thuvasooriya",
   "repo": "azem",
   "description": "awesome zig enabled micro-mouse maze simulator",
-  "type": "project",
+  "type": "package",
   "topics": [
     "maze",
     "micromouse",

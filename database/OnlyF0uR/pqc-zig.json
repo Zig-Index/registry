@@ -3,7 +3,7 @@
   "owner": "OnlyF0uR",
   "repo": "pqc-zig",
   "description": "Post-Quantum Cryptography for Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "cryptography",
     "post-quantum-cryptography",

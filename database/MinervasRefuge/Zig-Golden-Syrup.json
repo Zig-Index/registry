@@ -3,7 +3,7 @@
   "owner": "MinervasRefuge",
   "repo": "Zig-Golden-Syrup",
   "description": "A Zig implementation of the Syrup/Preserves serialization format/s.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package",

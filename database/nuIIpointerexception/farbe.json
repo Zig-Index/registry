@@ -3,7 +3,7 @@
   "owner": "nuIIpointerexception",
   "repo": "farbe",
   "description": "A optimized color module and library for high performance applications.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "cpp",
     "rust",

@@ -3,7 +3,7 @@
   "owner": "RomaricKc1",
   "repo": "raylib-lists",
   "description": "List widget for Raylib-zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "raylib-zig",
     "zig",

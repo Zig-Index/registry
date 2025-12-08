@@ -3,7 +3,7 @@
   "owner": "liyu1981",
   "repo": "tmpfile.zig",
   "description": "a convenient util to use tmp files with zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

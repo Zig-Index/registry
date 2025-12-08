@@ -3,7 +3,7 @@
   "owner": "bcrist",
   "repo": "Zig-SX",
   "description": "S-Expression [de]serialization in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "encoding",
     "s-expression",

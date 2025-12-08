@@ -3,7 +3,7 @@
   "owner": "Joseph-Matteo-Scorsone",
   "repo": "InkList",
   "description": "Actor model implementation in Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

@@ -3,7 +3,7 @@
   "owner": "jkoop",
   "repo": "zigqlite",
   "description": "An SQLite binding for Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "sqlite",
     "zig",

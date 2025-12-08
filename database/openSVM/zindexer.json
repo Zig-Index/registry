@@ -3,7 +3,7 @@
   "owner": "openSVM",
   "repo": "zindexer",
   "description": "solana indexer for clickhouse in zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package",

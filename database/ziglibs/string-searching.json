@@ -3,7 +3,7 @@
   "owner": "ziglibs",
   "repo": "string-searching",
   "description": "String(not limited to []const u8)-searching algorithms in zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "ziglang",

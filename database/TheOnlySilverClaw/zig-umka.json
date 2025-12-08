@@ -3,7 +3,7 @@
   "owner": "TheOnlySilverClaw",
   "repo": "zig-umka",
   "description": " Zig bindings for the Umka scripting language",
-  "type": "project",
+  "type": "package",
   "topics": [
     "bindings",
     "umka-lang",

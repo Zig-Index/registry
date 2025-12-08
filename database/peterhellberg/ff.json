@@ -3,7 +3,7 @@
   "owner": "peterhellberg",
   "repo": "ff",
   "description": "A small Zig ⚡ module meant for making Firefly Zero games 🎮",
-  "type": "project",
+  "type": "package",
   "topics": [
     "firefly-zero",
     "wasm",

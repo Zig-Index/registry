@@ -3,7 +3,7 @@
   "owner": "Niek-HM",
   "repo": "zig-config",
   "description": "A Zig parser for .env, .ini, and .toml files with variable substitution, type-safe accessors, and merging support",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-library",
     "zig-package",

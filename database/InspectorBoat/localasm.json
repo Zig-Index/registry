@@ -3,7 +3,7 @@
   "owner": "InspectorBoat",
   "repo": "localasm",
   "description": "Local assembly viewer for zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

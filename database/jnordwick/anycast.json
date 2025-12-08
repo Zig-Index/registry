@@ -3,7 +3,7 @@
   "owner": "jnordwick",
   "repo": "anycast",
   "description": "One cast to rule them all",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

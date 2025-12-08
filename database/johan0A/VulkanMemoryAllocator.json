@@ -3,7 +3,7 @@
   "owner": "johan0A",
   "repo": "VulkanMemoryAllocator",
   "description": "VulkanMemoryAllocator packaged for the Zig build system ",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-library",

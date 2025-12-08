@@ -3,7 +3,7 @@
   "owner": "ttytm",
   "repo": "osdialog-zig",
   "description": "Cross-platform utility module for Zig to open native dialogs for the filesystem, message boxes, color-picking.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "bindings",
     "library",

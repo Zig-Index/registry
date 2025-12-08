@@ -3,7 +3,7 @@
   "owner": "JacobCrabill",
   "repo": "zig-zstd",
   "description": "Zig build of the zstd compression library from Facebook",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package",

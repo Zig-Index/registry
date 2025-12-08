@@ -3,7 +3,7 @@
   "owner": "uniboi",
   "repo": "zigzag",
   "description": "x64 detour hook library for Windows and Linux",
-  "type": "project",
+  "type": "package",
   "topics": [
     "detours",
     "hooks",

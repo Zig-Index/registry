@@ -3,7 +3,7 @@
   "owner": "Vexu",
   "repo": "comptime_hash_map",
   "description": "A statically initiated HashMap",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package",

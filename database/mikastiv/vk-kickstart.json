@@ -3,7 +3,7 @@
   "owner": "mikastiv",
   "repo": "vk-kickstart",
   "description": "Vulkan initialization library",
-  "type": "project",
+  "type": "package",
   "topics": [
     "helpers-library",
     "vulkan",

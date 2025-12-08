@@ -3,7 +3,7 @@
   "owner": "Chanyon",
   "repo": "minimd-zig",
   "description": "simple markdown parser",
-  "type": "project",
+  "type": "package",
   "topics": [
     "markdown-parser",
     "ziglang",

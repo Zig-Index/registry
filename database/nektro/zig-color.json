@@ -3,7 +3,7 @@
   "owner": "nektro",
   "repo": "zig-color",
   "description": "",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

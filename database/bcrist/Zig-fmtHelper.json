@@ -3,7 +3,7 @@
   "owner": "bcrist",
   "repo": "Zig-fmtHelper",
   "description": "Some std.fmt helpers for Zig programs",
-  "type": "project",
+  "type": "package",
   "topics": [
     "formatting",
     "gigabytes",

@@ -3,7 +3,7 @@
   "owner": "MatthewJohnHeath",
   "repo": "zunit",
   "description": "Quantities with units of measure for unit-safe arithmetic in zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "units-of-measure",
     "units-of-measurement",

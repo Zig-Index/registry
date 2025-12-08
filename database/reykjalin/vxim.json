@@ -3,7 +3,7 @@
   "owner": "reykjalin",
   "repo": "vxim",
   "description": "Immediate mode framework for https://github.com/rockorager/libvaxis",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

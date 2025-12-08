@@ -3,7 +3,7 @@
   "owner": "robbielyman",
   "repo": "EmbedFile.zig",
   "description": "an extension to the Zig build system to programmatically collect assets",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-build",

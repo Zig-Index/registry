@@ -3,7 +3,7 @@
   "owner": "akunaakwei",
   "repo": "zig-dart",
   "description": "building dart with zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

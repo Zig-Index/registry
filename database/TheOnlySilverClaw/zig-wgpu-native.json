@@ -3,7 +3,7 @@
   "owner": "TheOnlySilverClaw",
   "repo": "zig-wgpu-native",
   "description": "Zig bindings for the wgpu-native graphics API",
-  "type": "project",
+  "type": "package",
   "topics": [
     "bindings",
     "webgpu",

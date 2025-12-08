@@ -3,7 +3,7 @@
   "owner": "interpunct",
   "repo": "clap-zig-bindings",
   "description": "manually written idiomatic zig bindings for CLAP audio API (mirror)",
-  "type": "project",
+  "type": "package",
   "topics": [
     "audio",
     "clap",

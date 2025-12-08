@@ -3,7 +3,7 @@
   "owner": "cbilz",
   "repo": "gnu-m4-zig",
   "description": "GNU M4 packaged for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "gnu",
     "gnu-m4",

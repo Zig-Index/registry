@@ -3,7 +3,7 @@
   "owner": "weskoerber",
   "repo": "mac_address",
   "description": "A cross-platform library to retrieve the MAC address from your network interfaces without libc.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "tools",
     "zig",

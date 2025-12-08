@@ -3,7 +3,7 @@
   "owner": "nihjul",
   "repo": "lua",
   "description": "Building lua using zig build system. May become a wrapper for zig later",
-  "type": "project",
+  "type": "package",
   "topics": [
     "lua",
     "zig-package"

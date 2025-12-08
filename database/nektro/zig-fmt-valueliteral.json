@@ -3,7 +3,7 @@
   "owner": "nektro",
   "repo": "zig-fmt-valueliteral",
   "description": "Print a value to a writer as it would be written in Zig syntax as a (x) literal.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "zig"

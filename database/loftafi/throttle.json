@@ -3,7 +3,7 @@
   "owner": "loftafi",
   "repo": "throttle",
   "description": "Zig API for tracking and throttling API requests.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "zig"

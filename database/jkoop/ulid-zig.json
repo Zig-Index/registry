@@ -3,7 +3,7 @@
   "owner": "jkoop",
   "repo": "ulid-zig",
   "description": "A simple ULID helper for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "ulid",
     "zig",

@@ -3,7 +3,7 @@
   "owner": "vmintf",
   "repo": "SimpleEnvs",
   "description": "A zig language for environment library.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "env",
     "zig",
@@ -29,7 +29,7 @@
   "owner_location": "Gyeongsangbuk-do, Republic of Korea",
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 3,
+  "owner_followers": 4,
   "owner_following": 12,
   "owner_created_at": "2021-05-18T06:24:14Z",
   "license": "MIT",

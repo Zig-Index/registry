@@ -3,7 +3,7 @@
   "owner": "vspefs",
   "repo": "ayc-libuv",
   "description": "libuv C library (not a binding!) as a fetch-able Zig package.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "libuv",
     "zig-package"

@@ -3,7 +3,7 @@
   "owner": "jnordwick",
   "repo": "znh",
   "description": "Zig Microbenchmarking Harness: for generating microbenchmarks in zig, but way inferior to JMH",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

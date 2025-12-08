@@ -3,7 +3,7 @@
   "owner": "eltNEG",
   "repo": "zigomponent",
   "description": "HTML compoenents in pure zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

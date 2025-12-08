@@ -3,7 +3,7 @@
   "owner": "allyourcodebase",
   "repo": "valgrind.h",
   "description": "provides valgrind/valgrind.h",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

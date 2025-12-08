@@ -3,7 +3,7 @@
   "owner": "jnordwick",
   "repo": "zig-string",
   "description": "Zig string library that includes small string optimization on the stack",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

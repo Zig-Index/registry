@@ -3,7 +3,7 @@
   "owner": "CascadeOS",
   "repo": "zig-sbi",
   "description": "Zig wrapper around the RISC-V SBI specification",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "ziglang",

@@ -3,7 +3,7 @@
   "owner": "mxpv",
   "repo": "luaz",
   "description": " Zero-cost Luau wrapper for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "lua",
     "luau",

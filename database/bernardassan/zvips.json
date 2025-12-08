@@ -3,7 +3,7 @@
   "owner": "bernardassan",
   "repo": "zvips",
   "description": "A blazingly fast image processing library in Zig using libvips",
-  "type": "project",
+  "type": "package",
   "topics": [
     "gobject",
     "libvips",

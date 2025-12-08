@@ -3,7 +3,7 @@
   "owner": "softprops",
   "repo": "zig-jwt",
   "description": "A JWT library for zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "jwt",
     "jwt-token",

@@ -3,7 +3,7 @@
   "owner": "griush",
   "repo": "CoreX",
   "description": "CoreX Framework",
-  "type": "project",
+  "type": "package",
   "topics": [
     "game-development",
     "game-engine",

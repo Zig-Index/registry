@@ -3,7 +3,7 @@
   "owner": "zigzedd",
   "repo": "zrm",
   "description": "[MIRROR] Zig relational mapper.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "database",
     "mapper",

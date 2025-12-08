@@ -3,7 +3,7 @@
   "owner": "harmony-co",
   "repo": "zuws",
   "description": "Opinionated Zig bindings for uWebSockets",
-  "type": "project",
+  "type": "package",
   "topics": [
     "bindings",
     "uwebsockets",

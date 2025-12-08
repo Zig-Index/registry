@@ -3,7 +3,7 @@
   "owner": "softprops",
   "repo": "uri-template",
   "description": "a zig uri template (rfc6570) implementation",
-  "type": "project",
+  "type": "package",
   "topics": [
     "uri-template",
     "zig-library",

@@ -3,7 +3,7 @@
   "owner": "lepton9",
   "repo": "zcli",
   "description": "CLI argument parser",
-  "type": "project",
+  "type": "package",
   "topics": [
     "argument-parser",
     "command-line",

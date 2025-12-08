@@ -3,7 +3,7 @@
   "owner": "mrjbq7",
   "repo": "zig-gitweb",
   "description": "Git repository web interface",
-  "type": "project",
+  "type": "package",
   "topics": [
     "git",
     "gitweb",

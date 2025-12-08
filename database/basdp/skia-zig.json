@@ -3,7 +3,7 @@
   "owner": "basdp",
   "repo": "skia-zig",
   "description": "Zig bindings for the Skia 2D Graphics Library",
-  "type": "project",
+  "type": "package",
   "topics": [
     "skia",
     "zig",

@@ -3,7 +3,7 @@
   "owner": "sam701",
   "repo": "slog",
   "description": "Structured logging for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "logging",
     "zig-package",

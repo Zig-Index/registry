@@ -3,7 +3,7 @@
   "owner": "dweiller",
   "repo": "zli",
   "description": "Simple CLI parsing for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

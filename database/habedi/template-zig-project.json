@@ -3,7 +3,7 @@
   "owner": "habedi",
   "repo": "template-zig-project",
   "description": "A template for Zig projects :lizard:",
-  "type": "project",
+  "type": "package",
   "topics": [
     "project-template",
     "quality-of-life",

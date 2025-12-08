@@ -3,7 +3,7 @@
   "owner": "ringtailsoftware",
   "repo": "zeptolibc",
   "description": "Some basic libc functions for working with C code in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "libc",
     "zig",

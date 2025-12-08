@@ -3,7 +3,7 @@
   "owner": "insolor",
   "repo": "zig-itertools",
   "description": "WIP. Implementation of some useful iterators in Zig. Inspired by Python's itertools module.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-library",

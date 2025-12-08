@@ -3,7 +3,7 @@
   "owner": "zigzedd",
   "repo": "zollections",
   "description": "[MIRROR] Zig collections library.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-library",

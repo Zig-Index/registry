@@ -3,7 +3,7 @@
   "owner": "krish-r",
   "repo": "libevdev",
   "description": "libevdev ported to the zig build system",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

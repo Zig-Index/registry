@@ -3,7 +3,7 @@
   "owner": "timsurber",
   "repo": "cfltk",
   "description": "CFLTK packaged for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

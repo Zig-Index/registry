@@ -3,7 +3,7 @@
   "owner": "im-ng",
   "repo": "zero-docs",
   "description": "Brief documentation to get start with zero framework",
-  "type": "project",
+  "type": "package",
   "topics": [
     "framework",
     "web",

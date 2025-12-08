@@ -3,7 +3,7 @@
   "owner": "ANDRVV",
   "repo": "Lean",
   "description": "⚡ Blazing fast scientific computing library for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "linear-algebra",
     "math",

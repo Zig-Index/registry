@@ -3,7 +3,7 @@
   "owner": "ikks",
   "repo": "tldrtranslate",
   "description": "A helper on tldrtranslation that uses argos",
-  "type": "project",
+  "type": "package",
   "topics": [
     "tldr",
     "translation",

@@ -3,7 +3,7 @@
   "owner": "conero",
   "repo": "zig-uyams",
   "description": "zig 学习实践",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package",

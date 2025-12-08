@@ -3,7 +3,7 @@
   "owner": "neurocyte",
   "repo": "cbor",
   "description": "A Fast & flexible cbor encoding, decoding and matching library for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "cbor",
     "zig-library",

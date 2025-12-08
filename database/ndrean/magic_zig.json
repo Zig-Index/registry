@@ -3,7 +3,7 @@
   "owner": "ndrean",
   "repo": "magic_zig",
   "description": "Tiny Zig wrapper of libmagic",
-  "type": "project",
+  "type": "package",
   "topics": [
     "libmagic",
     "zig",

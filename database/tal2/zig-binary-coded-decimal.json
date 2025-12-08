@@ -3,7 +3,7 @@
   "owner": "tal2",
   "repo": "zig-binary-coded-decimal",
   "description": "Zig - Binary Coded Decimal - Decimal128",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

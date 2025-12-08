@@ -3,7 +3,7 @@
   "owner": "mnemnion",
   "repo": "ztap",
   "description": "ZTAP: TAP producer for zig build test",
-  "type": "project",
+  "type": "package",
   "topics": [
     "tap",
     "testing",
@@ -77,7 +77,7 @@
   "owner_location": "Eastern Standard Tribe",
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 90,
+  "owner_followers": 91,
   "owner_following": 24,
   "owner_created_at": "2010-03-27T23:31:39Z",
   "license": "MIT",

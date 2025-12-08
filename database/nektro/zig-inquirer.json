@@ -3,7 +3,7 @@
   "owner": "nektro",
   "repo": "zig-inquirer",
   "description": "A collection of utilities for prompting information from the user on the CLI",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "zig"

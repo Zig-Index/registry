@@ -3,7 +3,7 @@
   "owner": "smallbraintime",
   "repo": "asciitecture",
   "description": "terminal graphics game library for zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "ascii",
     "ascii-graphics",

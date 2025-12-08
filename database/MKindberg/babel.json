@@ -3,7 +3,7 @@
   "owner": "MKindberg",
   "repo": "babel",
   "description": "A library for building language servers in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

@@ -3,7 +3,7 @@
   "owner": "patrickowor",
   "repo": "DizeDB",
   "description": "a Dice DB Sdk for the zig programming language.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

@@ -3,7 +3,7 @@
   "owner": "FalsePattern",
   "repo": "koishi",
   "description": "The koishi C coroutine library ported to the zig build system",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

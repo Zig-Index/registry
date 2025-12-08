@@ -3,7 +3,7 @@
   "owner": "bcrist",
   "repo": "microbe",
   "description": "Embedded Zig framework for ARM microcontrollers",
-  "type": "project",
+  "type": "package",
   "topics": [
     "cortex-m",
     "embedded",

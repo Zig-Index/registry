@@ -3,7 +3,7 @@
   "owner": "deevus",
   "repo": "compile_flagz",
   "description": "",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

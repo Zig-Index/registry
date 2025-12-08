@@ -3,7 +3,7 @@
   "owner": "kassane",
   "repo": "zig-scudo",
   "description": "Scudo Allocator for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "scudo-allocator",

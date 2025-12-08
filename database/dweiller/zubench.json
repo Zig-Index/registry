@@ -3,7 +3,7 @@
   "owner": "dweiller",
   "repo": "zubench",
   "description": "Micro benchmarking in zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

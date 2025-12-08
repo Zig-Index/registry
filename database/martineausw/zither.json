@@ -3,7 +3,7 @@
   "owner": "martineausw",
   "repo": "zither",
   "description": "Small tensor library with contraction and reduction operations in zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "tensor",
     "zig-package"

@@ -3,7 +3,7 @@
   "owner": "nektro",
   "repo": "zig-signal",
   "description": "",
-  "type": "project",
+  "type": "package",
   "topics": [
     "linux",
     "zig",

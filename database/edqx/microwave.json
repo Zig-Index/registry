@@ -3,7 +3,7 @@
   "owner": "edqx",
   "repo": "microwave",
   "description": "TOML Parser for Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "config",
     "household-appliance",

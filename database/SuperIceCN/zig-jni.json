@@ -3,7 +3,7 @@
   "owner": "SuperIceCN",
   "repo": "zig-jni",
   "description": "Zig-JNI helps you to impl Java native methods in Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "c",
     "cpp",

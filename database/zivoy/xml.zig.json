@@ -3,7 +3,7 @@
   "owner": "zivoy",
   "repo": "xml.zig",
   "description": "A thin wrapper and build system for xml.c",
-  "type": "project",
+  "type": "package",
   "topics": [
     "xml",
     "xml-parser",

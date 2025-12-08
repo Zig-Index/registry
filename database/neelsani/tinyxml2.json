@@ -3,7 +3,7 @@
   "owner": "neelsani",
   "repo": "tinyxml2",
   "description": "",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

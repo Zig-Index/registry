@@ -3,7 +3,7 @@
   "owner": "zetaframe",
   "repo": "zva",
   "description": "Zig Vulkan Allocator (zva).",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "vulkan"

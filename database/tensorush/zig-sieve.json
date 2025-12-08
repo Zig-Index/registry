@@ -3,7 +3,7 @@
   "owner": "tensorush",
   "repo": "zig-sieve",
   "description": "Zig implementation of SIEVE cache eviction algorithm.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "sieve-cache",

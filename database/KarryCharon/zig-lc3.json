@@ -3,7 +3,7 @@
   "owner": "KarryCharon",
   "repo": "zig-lc3",
   "description": "LC3 VM with zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "lc3",

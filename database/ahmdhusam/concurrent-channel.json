@@ -3,7 +3,7 @@
   "owner": "ahmdhusam",
   "repo": "concurrent-channel",
   "description": "A thread-safe communication channel for concurrent programming in Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-library",
     "zig-package"

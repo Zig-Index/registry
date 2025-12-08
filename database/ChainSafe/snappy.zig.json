@@ -3,7 +3,7 @@
   "owner": "ChainSafe",
   "repo": "snappy.zig",
   "description": "Zig bindings for the Google Snappy compression library",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

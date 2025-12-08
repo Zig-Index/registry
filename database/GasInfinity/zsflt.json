@@ -3,7 +3,7 @@
   "owner": "GasInfinity",
   "repo": "zsflt",
   "description": "an ieee soft-float library",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

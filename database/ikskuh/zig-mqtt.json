@@ -3,7 +3,7 @@
   "owner": "ikskuh",
   "repo": "zig-mqtt",
   "description": "A build package for mqtt-c.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "iot",
     "mqtt",

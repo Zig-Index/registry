@@ -3,7 +3,7 @@
   "owner": "Element0Lang",
   "repo": "element-0",
   "description": "A small embeddable Lisp for the Zig ecosystem λ",
-  "type": "project",
+  "type": "package",
   "topics": [
     "lisp",
     "lisp-dialect",

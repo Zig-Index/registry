@@ -3,7 +3,7 @@
   "owner": "olksdr",
   "repo": "sentry-native",
   "description": "Sentry Native packaged for Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "getsentry",
     "native",

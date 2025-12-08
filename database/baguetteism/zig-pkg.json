@@ -3,7 +3,7 @@
   "owner": "baguetteism",
   "repo": "zig-pkg",
   "description": "Zig Package Aggregator ",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "ziglang"

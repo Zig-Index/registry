@@ -3,7 +3,7 @@
   "owner": "eldesh",
   "repo": "iter-zig",
   "description": "A basic iterator library written in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

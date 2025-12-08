@@ -3,7 +3,7 @@
   "owner": "nektro",
   "repo": "zig-errno",
   "description": "",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

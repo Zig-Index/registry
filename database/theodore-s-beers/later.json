@@ -3,7 +3,7 @@
   "owner": "theodore-s-beers",
   "repo": "later",
   "description": "Unicode Collation Algorithm implementation in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "unicode",

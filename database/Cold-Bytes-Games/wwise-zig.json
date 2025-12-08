@@ -3,7 +3,7 @@
   "owner": "Cold-Bytes-Games",
   "repo": "wwise-zig",
   "description": "Zig bindings to Audiokinetic Wwise",
-  "type": "project",
+  "type": "package",
   "topics": [
     "audiokinetic-wwise",
     "wwise",

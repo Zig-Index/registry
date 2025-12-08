@@ -3,7 +3,7 @@
   "owner": "FalsePattern",
   "repo": "satori",
   "description": "Ziggified bindings for the koishi C coroutine library",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-library",
     "zig-package"

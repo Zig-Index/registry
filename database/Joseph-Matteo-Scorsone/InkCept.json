@@ -3,7 +3,7 @@
   "owner": "Joseph-Matteo-Scorsone",
   "repo": "InkCept",
   "description": "Document analyzer",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

@@ -3,7 +3,7 @@
   "owner": "uyha",
   "repo": "mzg",
   "description": "A MessagePack library for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "message-pack",
     "msgpack",

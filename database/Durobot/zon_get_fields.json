@@ -3,7 +3,7 @@
   "owner": "Durobot",
   "repo": "zon_get_fields",
   "description": "Utility functions to get field values from the abstract syntax tree generated from ZON (Zig Object Notation) text using Zig stdlib",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "ziglang",

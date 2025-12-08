@@ -3,7 +3,7 @@
   "owner": "nektro",
   "repo": "zig-unicode-ucd",
   "description": "Zig bindings for the Unicode Character Database",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

@@ -3,7 +3,7 @@
   "owner": "kALLEBALIK",
   "repo": "poopie",
   "description": "A benchmarking library.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

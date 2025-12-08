@@ -3,7 +3,7 @@
   "owner": "bcrist",
   "repo": "dizzy",
   "description": "Zig Comptime Dependency Injection",
-  "type": "project",
+  "type": "package",
   "topics": [
     "dependency-injection",
     "zig",

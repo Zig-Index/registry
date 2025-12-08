@@ -3,7 +3,7 @@
   "owner": "zhuyadong",
   "repo": "Closure.zig",
   "description": "closure for zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "closure",
     "zig",

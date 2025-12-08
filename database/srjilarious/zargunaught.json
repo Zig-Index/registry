@@ -3,7 +3,7 @@
   "owner": "srjilarious",
   "repo": "zargunaught",
   "description": "Zig argument parsing library, based on my C++ argunaught library",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "zig"

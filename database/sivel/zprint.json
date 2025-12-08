@@ -3,7 +3,7 @@
   "owner": "sivel",
   "repo": "zprint",
   "description": "Thread-safe print utilities for Zig CLI applications with formatted printing to stdout and stderr",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "zig",

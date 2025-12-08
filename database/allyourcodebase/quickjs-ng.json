@@ -3,7 +3,7 @@
   "owner": "allyourcodebase",
   "repo": "quickjs-ng",
   "description": "",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

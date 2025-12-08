@@ -3,7 +3,7 @@
   "owner": "datainquiry",
   "repo": "ta-zig",
   "description": "Zig package  with time series finance indicators to process streaming data.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "technical-analysis",
     "zig-package"

@@ -3,7 +3,7 @@
   "owner": "travisstaloch",
   "repo": "fixed-point",
   "description": "A fixed point arithmetic package in zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

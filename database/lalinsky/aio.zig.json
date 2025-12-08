@@ -3,7 +3,7 @@
   "owner": "lalinsky",
   "repo": "aio.zig",
   "description": "Completion-based I/O event loop for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

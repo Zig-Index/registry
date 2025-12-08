@@ -3,7 +3,7 @@
   "owner": "alexnask",
   "repo": "PeerType",
   "description": "Zig peer type resolution at comptime, ported from the compiler source code",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package",

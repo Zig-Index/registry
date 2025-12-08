@@ -3,7 +3,7 @@
   "owner": "DanielKMach",
   "repo": "interfaceCast",
   "description": "A Zig-ish way of handling interfaces",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

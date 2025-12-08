@@ -3,7 +3,7 @@
   "owner": "egegungordu",
   "repo": "zig-fsrs",
   "description": "Zig implementation of FSRS",
-  "type": "project",
+  "type": "package",
   "topics": [
     "fsrs",
     "spaced-repetition-algorithm",

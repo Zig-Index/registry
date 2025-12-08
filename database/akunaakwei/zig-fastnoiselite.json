@@ -3,7 +3,7 @@
   "owner": "akunaakwei",
   "repo": "zig-fastnoiselite",
   "description": "fastnoiselite packaged for zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

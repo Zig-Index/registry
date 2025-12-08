@@ -3,7 +3,7 @@
   "owner": "allyourcodebase",
   "repo": "kcov",
   "description": "kcov ported to the zig build system ",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

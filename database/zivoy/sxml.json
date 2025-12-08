@@ -3,7 +3,7 @@
   "owner": "zivoy",
   "repo": "sxml",
   "description": " A thin wrapper and build system for sxml",
-  "type": "project",
+  "type": "package",
   "topics": [
     "xml",
     "xml-parser",

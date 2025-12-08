@@ -3,7 +3,7 @@
   "owner": "lab-key",
   "repo": "phyzx",
   "description": "Zig Bindings For MuJoCo & An Attempt To Be a All In One Robot Training Library",
-  "type": "project",
+  "type": "package",
   "topics": [
     "machine-learning",
     "mujoco",

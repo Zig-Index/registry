@@ -3,7 +3,7 @@
   "owner": "0xCatPKG",
   "repo": "dbuz",
   "description": "D-Bus client library written in pure zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "dbus",
     "zig-package",

@@ -3,7 +3,7 @@
   "owner": "bridgeQiao",
   "repo": "concurrent_skip_list",
   "description": "Concurrent skip list written in zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

@@ -3,7 +3,7 @@
   "owner": "nandisomnath",
   "repo": "chrono-zig",
   "description": "The chrono library for zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "chrono",
     "zig",

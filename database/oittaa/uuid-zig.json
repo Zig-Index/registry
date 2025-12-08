@@ -3,7 +3,7 @@
   "owner": "oittaa",
   "repo": "uuid-zig",
   "description": "Universally Unique IDentifiers (UUIDs)",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "uuid"

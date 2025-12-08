@@ -3,7 +3,7 @@
   "owner": "bandithedoge",
   "repo": "cairo.zig",
   "description": "Cairo packaged for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

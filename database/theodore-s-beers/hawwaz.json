@@ -3,7 +3,7 @@
   "owner": "theodore-s-beers",
   "repo": "hawwaz",
   "description": "Abjad numeral calculation in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "abjad-numerals",

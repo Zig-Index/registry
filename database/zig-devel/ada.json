@@ -3,7 +3,7 @@
   "owner": "zig-devel",
   "repo": "ada",
   "description": "",
-  "type": "project",
+  "type": "package",
   "topics": [
     "ada-url",
     "zig",

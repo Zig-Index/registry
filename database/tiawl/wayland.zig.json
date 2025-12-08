@@ -3,7 +3,7 @@
   "owner": "tiawl",
   "repo": "wayland.zig",
   "description": "wayland headers packaged for @ziglang",
-  "type": "project",
+  "type": "package",
   "topics": [
     "binding",
     "wayland",

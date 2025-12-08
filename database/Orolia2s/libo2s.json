@@ -3,7 +3,7 @@
   "owner": "Orolia2s",
   "repo": "libo2s",
   "description": "Data Structures for C",
-  "type": "project",
+  "type": "package",
   "topics": [
     "datastructures",
     "serial-ports",

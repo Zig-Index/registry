@@ -3,7 +3,7 @@
   "owner": "thuvasooriya",
   "repo": "verilator",
   "description": "build verilator with zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "compilers",
     "cpp",

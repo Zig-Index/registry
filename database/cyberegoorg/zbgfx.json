@@ -3,7 +3,7 @@
   "owner": "cyberegoorg",
   "repo": "zbgfx",
   "description": "When zig meets bgfx.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "bgfx",
     "bgfx-graphics-library",

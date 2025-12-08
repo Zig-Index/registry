@@ -3,7 +3,7 @@
   "owner": "nektro",
   "repo": "zig-oauth2",
   "description": "HTTP handler functions to allow you to easily add OAuth2 login support to your Zig application",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "zig"

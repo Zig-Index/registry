@@ -3,7 +3,7 @@
   "owner": "issy62",
   "repo": "optzig",
   "description": "A command-line argument parsing library for Zig, inspired by Go's flag package. Provides structured argument definition and parsing with support for various data types.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "args",
     "cli",

@@ -3,7 +3,7 @@
   "owner": "sbancuz",
   "repo": "throw",
   "description": "Zig library to add metadata to errors",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

@@ -3,7 +3,7 @@
   "owner": "Games-by-Mason",
   "repo": "dear_imgui_zig",
   "description": "A Zig interface to Dear ImGui",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

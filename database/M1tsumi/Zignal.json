@@ -3,7 +3,7 @@
   "owner": "M1tsumi",
   "repo": "Zignal",
   "description": "High-performance Discord API wrapper for Zig with zero dependencies",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

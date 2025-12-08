@@ -3,7 +3,7 @@
   "owner": "MahdiGMK",
   "repo": "named_fmt.zig",
   "description": "simple formatting library for ziglang where each parameter has its own name",
-  "type": "project",
+  "type": "package",
   "topics": [
     "formatting",
     "zig",

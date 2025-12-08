@@ -3,7 +3,7 @@
   "owner": "bcrist",
   "repo": "zkittle",
   "description": "A little Zig template engine",
-  "type": "project",
+  "type": "package",
   "topics": [
     "file-format",
     "template",

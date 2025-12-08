@@ -3,7 +3,7 @@
   "owner": "jinzhongjia",
   "repo": "znvim",
   "description": "neovim remote rpc client implementation with zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "neovim",
     "neovim-remote",

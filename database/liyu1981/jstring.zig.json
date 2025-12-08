@@ -3,7 +3,7 @@
   "owner": "liyu1981",
   "repo": "jstring.zig",
   "description": "a reusable string lib for myself with all familiar methods methods can find in javascript string",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "jstring",

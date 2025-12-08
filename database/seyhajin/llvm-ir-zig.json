@@ -3,7 +3,7 @@
   "owner": "seyhajin",
   "repo": "llvm-ir-zig",
   "description": "🚀 A minimal example to create and execute a LLVM IR module in Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "llvm",
     "llvm-ir",

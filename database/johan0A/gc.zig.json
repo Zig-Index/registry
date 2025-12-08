@@ -3,7 +3,7 @@
   "owner": "johan0A",
   "repo": "gc.zig",
   "description": "a Zig garbage collector interface for the bdwgc garbage collector.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-library",

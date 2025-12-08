@@ -3,7 +3,7 @@
   "owner": "allyourcodebase",
   "repo": "fmt",
   "description": "{fmt} C++ library uses build.zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "cpp",
     "cpp-library",

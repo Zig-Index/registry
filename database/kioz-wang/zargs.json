@@ -3,7 +3,7 @@
   "owner": "kioz-wang",
   "repo": "zargs",
   "description": "Comptime Argparse for Zig! Let's start to build your command line!",
-  "type": "project",
+  "type": "package",
   "topics": [
     "argument-parser",
     "command-line",

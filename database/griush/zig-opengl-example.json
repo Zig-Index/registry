@@ -3,7 +3,7 @@
   "owner": "griush",
   "repo": "zig-opengl-example",
   "description": "Minimal example using GFLW/OpenGL/zm made in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "glfw",
     "opengl",

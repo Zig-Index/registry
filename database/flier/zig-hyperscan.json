@@ -3,7 +3,7 @@
   "owner": "flier",
   "repo": "zig-hyperscan",
   "description": "A high-performance Zig binding for Hyperscan, Intel's high-performance multiple regex matching library. This library provides fast, memory-efficient pattern matching capabilities for Zig applications.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "hyperscan",
     "regex-engine",

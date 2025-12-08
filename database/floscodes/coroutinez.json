@@ -3,7 +3,7 @@
   "owner": "floscodes",
   "repo": "coroutinez",
   "description": "A small runtime for running tasks using coroutines in zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],
@@ -37,7 +37,7 @@
   "owner_location": "Vienna, Austria",
   "owner_blog": "floscodes.net",
   "owner_twitter_username": null,
-  "owner_followers": 72,
+  "owner_followers": 73,
   "owner_following": 104,
   "owner_created_at": "2020-08-03T09:34:52Z",
   "license": "MIT",

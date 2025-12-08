@@ -3,7 +3,7 @@
   "owner": "nitrogenez",
   "repo": "resfs",
   "description": "File system abstraction layer for Zig games and apps",
-  "type": "project",
+  "type": "package",
   "topics": [
     "abstraction",
     "files",

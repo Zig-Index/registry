@@ -3,7 +3,7 @@
   "owner": "Peter-Barrow",
   "repo": "shared-memory-zig",
   "description": "Unified interface to shared memory on Linux, macOS and Windows",
-  "type": "project",
+  "type": "package",
   "topics": [
     "shared-memory",
     "zig",

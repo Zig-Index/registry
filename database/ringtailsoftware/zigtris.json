@@ -3,7 +3,7 @@
   "owner": "ringtailsoftware",
   "repo": "zigtris",
   "description": "A minimal terminal Tetris written in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

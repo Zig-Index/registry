@@ -3,7 +3,7 @@
   "owner": "loftafi",
   "repo": "zig-sdl3-ios",
   "description": "Example zig project demonstrating how to build and run a simple SDL3 project for iOS",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

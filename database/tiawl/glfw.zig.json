@@ -3,7 +3,7 @@
   "owner": "tiawl",
   "repo": "glfw.zig",
   "description": "@glfw packaged for @ziglang",
-  "type": "project",
+  "type": "package",
   "topics": [
     "binding",
     "glfw3",
@@ -11,10 +11,10 @@
     "ziglang",
     "zig-package"
   ],
-  "stars": 20,
+  "stars": 21,
   "forks": 5,
   "watchers": 2,
-  "updated_at": "2025-12-06T10:21:51Z",
+  "updated_at": "2025-12-07T12:02:25Z",
   "dependencies": [
     {
       "name": "toolbox",

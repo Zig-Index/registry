@@ -3,7 +3,7 @@
   "owner": "qsrmc",
   "repo": "comptime_allocator",
   "description": "Zig compile time only allocator",
-  "type": "project",
+  "type": "package",
   "topics": [
     "comptime",
     "zig",

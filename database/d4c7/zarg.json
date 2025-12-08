@@ -3,7 +3,7 @@
   "owner": "d4c7",
   "repo": "zarg",
   "description": "[WIP] zarg is a minimalist and efficient command-line parsing library written in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "cli",
     "command-line",

@@ -3,7 +3,7 @@
   "owner": "caiocdcs",
   "repo": "probz",
   "description": "A Zig library for probabilistic data structures, like Bloom Filter, HyperLogLog, etc.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "bloom-filter",
     "probabilistic-data-structures",
@@ -31,7 +31,7 @@
   "owner_location": "Lisbon",
   "owner_blog": "https://caiocdcs.github.io",
   "owner_twitter_username": null,
-  "owner_followers": 3,
+  "owner_followers": 4,
   "owner_following": 3,
   "owner_created_at": "2014-08-02T16:34:25Z",
   "license": "MIT",

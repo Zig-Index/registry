@@ -3,7 +3,7 @@
   "owner": "cogits",
   "repo": "riscv",
   "description": "",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

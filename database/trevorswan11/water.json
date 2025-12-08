@@ -3,7 +3,7 @@
   "owner": "trevorswan11",
   "repo": "water",
   "description": "A zig chess library and engine. ",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "chess",

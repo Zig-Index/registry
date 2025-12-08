@@ -3,7 +3,7 @@
   "owner": "tiawl",
   "repo": "spirv.zig",
   "description": "spirv-tools packaged for @ziglang ",
-  "type": "project",
+  "type": "package",
   "topics": [
     "binding",
     "spirv",

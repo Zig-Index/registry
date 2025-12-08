@@ -3,7 +3,7 @@
   "owner": "paoda",
   "repo": "hamt",
   "description": "Hash Array Mapped Trie as defined in Phil Bagwell (2001). Ideal Hash Tries  ",
-  "type": "project",
+  "type": "package",
   "topics": [
     "hamt",
     "hash-array-mapped-trie",

@@ -3,12 +3,12 @@
   "owner": "allyourcodebase",
   "repo": "libpq",
   "description": "PostgreSQL's libpq ported to the zig build system",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],
   "stars": 11,
-  "forks": 3,
+  "forks": 4,
   "watchers": 3,
   "updated_at": "2025-12-04T13:41:36Z",
   "dependencies": [

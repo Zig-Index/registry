@@ -3,7 +3,7 @@
   "owner": "sentrygunlv3",
   "repo": "qlist",
   "description": "",
-  "type": "project",
+  "type": "package",
   "topics": [
     "data-format",
     "zig-package"

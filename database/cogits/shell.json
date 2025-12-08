@@ -3,7 +3,7 @@
   "owner": "cogits",
   "repo": "shell",
   "description": "a simple shell parser",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

@@ -3,7 +3,7 @@
   "owner": "KarryCharon",
   "repo": "Zren",
   "description": "Scripting language Wren reimplement with Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "scripting-language",

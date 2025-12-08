@@ -3,7 +3,7 @@
   "owner": "loftafi",
   "repo": "praxis",
   "description": "Zig Dictionary module for Ancient Languages",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

@@ -3,7 +3,7 @@
   "owner": "TA-Lib",
   "repo": "ta-lib-zig",
   "description": "Zig wrapper for TA-Lib (http://ta-lib.org)",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

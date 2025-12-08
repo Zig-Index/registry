@@ -3,7 +3,7 @@
   "owner": "getsentry",
   "repo": "sentry-zig",
   "description": "Hackweek Sentry SDK for Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "error-monitoring",
     "logging",

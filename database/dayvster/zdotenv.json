@@ -3,7 +3,7 @@
   "owner": "dayvster",
   "repo": "zdotenv",
   "description": "A simple Zig library for loading environment variables from .env files.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "dotenv",
     "dotenv-parser",

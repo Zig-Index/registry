@@ -3,7 +3,7 @@
   "owner": "AsgardXIV",
   "repo": "calyx",
   "description": "A Zig library for interacting with FFXIV game data.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "ffxiv",
     "final-fantasy-xiv",

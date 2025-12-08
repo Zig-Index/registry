@@ -3,7 +3,7 @@
   "owner": "allyourcodebase",
   "repo": "libmp3lame",
   "description": "libmp3lame with the build system replaced by zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

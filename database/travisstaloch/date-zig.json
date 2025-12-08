@@ -3,7 +3,7 @@
   "owner": "travisstaloch",
   "repo": "date-zig",
   "description": "Fast calendar algorithms ported to zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-library",
     "zig-package"

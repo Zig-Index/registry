@@ -3,7 +3,7 @@
   "owner": "timsurber",
   "repo": "libjpeg",
   "description": "libjpeg packaged for zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

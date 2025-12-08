@@ -3,7 +3,7 @@
   "owner": "g41797",
   "repo": "syslog",
   "description": "Zig syslog client",
-  "type": "project",
+  "type": "package",
   "topics": [
     "syslog-client",
     "tcp",

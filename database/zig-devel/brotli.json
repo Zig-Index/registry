@@ -3,7 +3,7 @@
   "owner": "zig-devel",
   "repo": "brotli",
   "description": "",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-library",

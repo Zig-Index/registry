@@ -3,7 +3,7 @@
   "owner": "lalinsky",
   "repo": "coro.zig",
   "description": "Stackful coroutine library for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

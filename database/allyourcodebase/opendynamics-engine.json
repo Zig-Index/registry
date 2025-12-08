@@ -3,7 +3,7 @@
   "owner": "allyourcodebase",
   "repo": "opendynamics-engine",
   "description": "Zig ODE sdk",
-  "type": "project",
+  "type": "package",
   "topics": [
     "open-dynamics-engine",
     "ode",

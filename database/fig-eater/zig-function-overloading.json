@@ -3,7 +3,7 @@
   "owner": "fig-eater",
   "repo": "zig-function-overloading",
   "description": "Explicit function overloading for the Zig programming language",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package",

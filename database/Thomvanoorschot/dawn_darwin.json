@@ -3,7 +3,7 @@
   "owner": "Thomvanoorschot",
   "repo": "dawn_darwin",
   "description": "Pre built Google Dawn Native binary. Meant for \"out of the box\" usage by Zig applications",
-  "type": "project",
+  "type": "package",
   "topics": [
     "darwin",
     "dawn",

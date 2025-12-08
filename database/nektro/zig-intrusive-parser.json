@@ -3,7 +3,7 @@
   "owner": "nektro",
   "repo": "zig-intrusive-parser",
   "description": "Core plumbing to make text or binary document parsers with Data Oriented Design",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

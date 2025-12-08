@@ -3,7 +3,7 @@
   "owner": "Ryoga-exe",
   "repo": "proconio-zig",
   "description": "proconio for the Zig programming language. useful and easy io library for programming contests.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package",

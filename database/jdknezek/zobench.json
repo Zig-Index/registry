@@ -3,7 +3,7 @@
   "owner": "jdknezek",
   "repo": "zobench",
   "description": "Simple Zig benchmarking",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

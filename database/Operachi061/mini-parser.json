@@ -3,7 +3,7 @@
   "owner": "Operachi061",
   "repo": "mini-parser",
   "description": "A very-minimal command-line parser",
-  "type": "project",
+  "type": "package",
   "topics": [
     "argument-parsing",
     "command-line",

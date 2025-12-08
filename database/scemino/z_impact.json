@@ -3,7 +3,7 @@
   "owner": "scemino",
   "repo": "z_impact",
   "description": "A 2d game engine written in ZIG",
-  "type": "project",
+  "type": "package",
   "topics": [
     "gamedev",
     "zig-package"

@@ -3,7 +3,7 @@
   "owner": "MahdiGMK",
   "repo": "barazzesh",
   "description": "Simple trait-like type-checking and static dispatch for zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package",

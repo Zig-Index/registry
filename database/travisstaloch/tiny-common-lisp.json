@@ -3,7 +3,7 @@
   "owner": "travisstaloch",
   "repo": "tiny-common-lisp",
   "description": "a toy lisp common lisp compiler",
-  "type": "project",
+  "type": "package",
   "topics": [
     "common-lisp",
     "lisp-interpreter",

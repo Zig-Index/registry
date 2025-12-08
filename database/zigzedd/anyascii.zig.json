@@ -3,7 +3,7 @@
   "owner": "zigzedd",
   "repo": "anyascii.zig",
   "description": "[MIRROR] Zig port of C implementation of anyascii.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "ascii",
     "emoji",

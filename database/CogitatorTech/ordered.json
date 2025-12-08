@@ -3,7 +3,7 @@
   "owner": "CogitatorTech",
   "repo": "ordered",
   "description": "A sorted collection library (sorted sets and sorted maps) for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "ordered-collections",
     "zig",

@@ -3,7 +3,7 @@
   "owner": "FalsePattern",
   "repo": "zopengl_glgen",
   "description": "OpenGL type-safe wrapper for Zig, built on top of zigglgen",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

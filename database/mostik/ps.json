@@ -3,7 +3,7 @@
   "owner": "mostik",
   "repo": "ps",
   "description": "linux proc/pid/stat",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

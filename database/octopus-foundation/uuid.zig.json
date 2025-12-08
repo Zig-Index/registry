@@ -3,7 +3,7 @@
   "owner": "octopus-foundation",
   "repo": "uuid.zig",
   "description": "UUID v4 implementation in pure Zig. No allocations",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

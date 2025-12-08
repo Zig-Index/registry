@@ -3,7 +3,7 @@
   "owner": "nektro",
   "repo": "zig-json",
   "description": "A JSON library for inspecting arbitrary values",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

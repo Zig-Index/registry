@@ -3,7 +3,7 @@
   "owner": "aoemods",
   "repo": "zig-essence",
   "description": "Zig impl of Relic Entertainment's Essence formats",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package",

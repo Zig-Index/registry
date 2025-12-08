@@ -3,7 +3,7 @@
   "owner": "cryptocode",
   "repo": "zbf",
   "description": "Zig build port of libbf",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

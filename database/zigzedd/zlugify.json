@@ -3,7 +3,7 @@
   "owner": "zigzedd",
   "repo": "zlugify",
   "description": "[MIRROR] Generate ASCII slugs from unicode strings.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "ascii",
     "emoji",

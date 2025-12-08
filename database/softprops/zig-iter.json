@@ -3,7 +3,7 @@
   "owner": "softprops",
   "repo": "zig-iter",
   "description": "iterators for zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "iterator",
     "zig",

@@ -3,7 +3,7 @@
   "owner": "kassane",
   "repo": "sanitizers-zig",
   "description": "LLVM sanitizers for zig-toolchain",
-  "type": "project",
+  "type": "package",
   "topics": [
     "cpp",
     "cpp-libraries",

@@ -3,7 +3,7 @@
   "owner": "Tony-ArtZ",
   "repo": "zorm",
   "description": "A Zig ORM with custom schema support",
-  "type": "project",
+  "type": "package",
   "topics": [
     "database",
     "mongodb",

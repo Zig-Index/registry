@@ -3,7 +3,7 @@
   "owner": "notxorand",
   "repo": "zig-ds",
   "description": "Common data structures and trees in zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],
@@ -22,7 +22,7 @@
   "readme": "# zig data structures\n\n[![Brainmade](https://brainmade.org/black-logo.svg)](https://brainmade.org)\n\nThis is a compilation of common data structures and trees in Zig. Most of these exist in the Rust ecosystem already (not standardised), so I'm mostly porting them over.\n\nIt's a work in progress, with plans for:\n\n- [x] bitmap\n- [x] bloom filter\n- [ ] cuckoo filter\n- [ ] merkle tree\n- [ ] merkle mountain range (mmr)\n- [ ] sparse merkle tree (smt)\n- [ ] lamport clock\n- [ ] vector clock\n\nNote: I just started writing Zig, so don't expect things to necessarily work as expected.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/66304707?u=9acf47d5a11bddd664c8c071e214d838aea4a97b&v=4",
   "releases": [],
-  "owner_bio": "under the burgeoning of fate, my head is bruised but unbowed",
+  "owner_bio": "under the bludgeoning of fate, my head is bruised but unbowed",
   "owner_company": "@s3ndotxyz",
   "owner_location": "true_level",
   "owner_blog": null,

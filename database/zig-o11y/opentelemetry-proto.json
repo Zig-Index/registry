@@ -3,7 +3,7 @@
   "owner": "zig-o11y",
   "repo": "opentelemetry-proto",
   "description": "Zig type definitions generated from https://github.com/open-telemetry/opentelemetry-proto",
-  "type": "project",
+  "type": "package",
   "topics": [
     "opentelemetry",
     "protobuf",

@@ -3,7 +3,7 @@
   "owner": "travisstaloch",
   "repo": "case",
   "description": "a case conversion and detection library in zig with a c api",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-library",
     "zig-package"

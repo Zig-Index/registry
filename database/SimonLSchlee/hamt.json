@@ -3,7 +3,7 @@
   "owner": "SimonLSchlee",
   "repo": "hamt",
   "description": "HAMT and StencilArrays implementation in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

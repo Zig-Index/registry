@@ -3,7 +3,7 @@
   "owner": "dantecatalfamo",
   "repo": "9p-zig",
   "description": "9P2000 protocol implemented in zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "9p",
     "9p2000",

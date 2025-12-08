@@ -3,7 +3,7 @@
   "owner": "dasimmet",
   "repo": "zig-cmake",
   "description": "",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

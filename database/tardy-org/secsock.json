@@ -3,7 +3,7 @@
   "owner": "tardy-org",
   "repo": "secsock",
   "description": "Async TLS (Secure Socket) for the Tardy runtime",
-  "type": "project",
+  "type": "package",
   "topics": [
     "async",
     "tls",

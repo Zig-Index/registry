@@ -3,7 +3,7 @@
   "owner": "alexbishop",
   "repo": "zig-rbtree",
   "description": "An implementation of an augmented red-black tree in Zig with 3 layers of abstraction",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

@@ -3,7 +3,7 @@
   "owner": "Peter-Barrow",
   "repo": "magic-rings-zig",
   "description": "",
-  "type": "project",
+  "type": "package",
   "topics": [
     "ringbuffer",
     "shared-memory",

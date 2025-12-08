@@ -3,7 +3,7 @@
   "owner": "oswalpalash",
   "repo": "chess-engine-zig",
   "description": "Zig Based Chess Engine ",
-  "type": "project",
+  "type": "package",
   "topics": [
     "chess",
     "engine",

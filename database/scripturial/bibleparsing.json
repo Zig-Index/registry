@@ -3,7 +3,7 @@
   "owner": "scripturial",
   "repo": "bibleparsing",
   "description": "Zig library to read Greek parsing codes commonly used in annotated Koine Greek text.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "biblical-greek",
     "zig",

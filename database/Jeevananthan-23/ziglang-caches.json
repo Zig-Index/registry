@@ -3,7 +3,7 @@
   "owner": "Jeevananthan-23",
   "repo": "ziglang-caches",
   "description": "In-memory cache implementation with commonly used LRU, W-LFU and S3-FIFO as the eviction policy",
-  "type": "project",
+  "type": "package",
   "topics": [
     "cache",
     "lfu-cache",

@@ -3,7 +3,7 @@
   "owner": "SuperKogito",
   "repo": "Zorch",
   "description": "Neural networks in Zig ",
-  "type": "project",
+  "type": "package",
   "topics": [
     "autograd",
     "automatic-differentiation",

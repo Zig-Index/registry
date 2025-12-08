@@ -3,7 +3,7 @@
   "owner": "srmadrid",
   "repo": "zgm",
   "description": "Zig Graphics Mathematics",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

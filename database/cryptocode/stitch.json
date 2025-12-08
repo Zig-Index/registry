@@ -3,7 +3,7 @@
   "owner": "cryptocode",
   "repo": "stitch",
   "description": "Append resources to your executables",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-library",
     "zig-package",

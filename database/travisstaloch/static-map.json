@@ -3,7 +3,7 @@
   "owner": "travisstaloch",
   "repo": "static-map",
   "description": "A generic hashmap backed by static memory",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

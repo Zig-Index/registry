@@ -3,7 +3,7 @@
   "owner": "sea-grass",
   "repo": "compotent",
   "description": "",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

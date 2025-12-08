@@ -3,7 +3,7 @@
   "owner": "jedisct1",
   "repo": "huggingface-xet",
   "description": "Implementation of the HuggingFace Xet Protocol.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "hf",
     "huggingface",
@@ -35,7 +35,7 @@
   "owner_location": "Antibes, France",
   "owner_blog": "https://primulinus.tpopsite.com",
   "owner_twitter_username": "jedisct1",
-  "owner_followers": 4074,
+  "owner_followers": 4075,
   "owner_following": 194,
   "owner_created_at": "2009-09-09T10:20:57Z",
   "license": "MIT",

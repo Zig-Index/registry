@@ -3,7 +3,7 @@
   "owner": "jamesfrancis2004",
   "repo": "uuid",
   "description": "A uuid library written in zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

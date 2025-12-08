@@ -3,7 +3,7 @@
   "owner": "reykjalin",
   "repo": "fn",
   "description": "Editor backend and TUI editor written in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "editor",
     "tui",

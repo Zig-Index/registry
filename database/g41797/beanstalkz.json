@@ -3,7 +3,7 @@
   "owner": "g41797",
   "repo": "beanstalkz",
   "description": "Zig client for Beanstalkd - simple and fast general purpose work queue",
-  "type": "project",
+  "type": "package",
   "topics": [
     "background-jobs",
     "beanstalkd",

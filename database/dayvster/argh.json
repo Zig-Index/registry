@@ -3,7 +3,7 @@
   "owner": "dayvster",
   "repo": "argh",
   "description": "A modern, minimal argument parser for Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-lib",

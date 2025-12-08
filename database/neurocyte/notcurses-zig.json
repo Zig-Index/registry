@@ -3,7 +3,7 @@
   "owner": "neurocyte",
   "repo": "notcurses-zig",
   "description": "Zig bindings and packaging for notcurses",
-  "type": "project",
+  "type": "package",
   "topics": [
     "tui",
     "zig",

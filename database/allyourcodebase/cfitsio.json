@@ -3,7 +3,7 @@
   "owner": "allyourcodebase",
   "repo": "cfitsio",
   "description": "Zig build of CFITSIO library.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "cfitsio",
     "fits",

@@ -3,7 +3,7 @@
   "owner": "ikskuh",
   "repo": "zig-ihex",
   "description": "An intel hex loader written in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "ziglang",

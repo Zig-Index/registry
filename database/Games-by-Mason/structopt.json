@@ -3,7 +3,7 @@
   "owner": "Games-by-Mason",
   "repo": "structopt",
   "description": "Argument parsing for Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

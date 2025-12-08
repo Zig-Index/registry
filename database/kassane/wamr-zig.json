@@ -3,7 +3,7 @@
   "owner": "kassane",
   "repo": "wamr-zig",
   "description": "Zig bindings from WebAssembly Micro Runtime (WAMR)",
-  "type": "project",
+  "type": "package",
   "topics": [
     "embedded",
     "wasm",

@@ -3,7 +3,7 @@
   "owner": "loftafi",
   "repo": "bip39",
   "description": "BIP39 Seed Phrase generator zig package",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

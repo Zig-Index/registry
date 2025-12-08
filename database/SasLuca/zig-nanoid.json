@@ -3,7 +3,7 @@
   "owner": "SasLuca",
   "repo": "zig-nanoid",
   "description": "A tiny, secure, URL-friendly, unique string ID generator. Now available in pure Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "nanoid",
     "zig",

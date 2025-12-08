@@ -3,7 +3,7 @@
   "owner": "eltNEG",
   "repo": "passprompt",
   "description": "A simple Zig library for secure password input from the terminal with customizable display options",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

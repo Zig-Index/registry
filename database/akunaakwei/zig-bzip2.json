@@ -3,7 +3,7 @@
   "owner": "akunaakwei",
   "repo": "zig-bzip2",
   "description": "bzip2 for zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

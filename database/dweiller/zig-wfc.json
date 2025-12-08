@@ -3,7 +3,7 @@
   "owner": "dweiller",
   "repo": "zig-wfc",
   "description": "An implementation of the wave function collapse algorithm in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

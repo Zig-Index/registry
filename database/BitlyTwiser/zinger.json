@@ -3,7 +3,7 @@
   "owner": "BitlyTwiser",
   "repo": "zinger",
   "description": "Simple HTTP request library for Zig applications",
-  "type": "project",
+  "type": "package",
   "topics": [
     "http",
     "http-requests",

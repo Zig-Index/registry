@@ -3,7 +3,7 @@
   "owner": "hgminh95",
   "repo": "zqueue",
   "description": "Collections of queues implemented in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

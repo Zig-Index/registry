@@ -3,7 +3,7 @@
   "owner": "Catniped",
   "repo": "stl-loader-zig",
   "description": "A tiny simple zig library for loading STL files with binary and ASCII support",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-gamedev",

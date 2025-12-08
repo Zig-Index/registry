@@ -3,7 +3,7 @@
   "owner": "tiawl",
   "repo": "vulkan.zig",
   "description": "vulkan headers packaged for @ziglang",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "ziglang",

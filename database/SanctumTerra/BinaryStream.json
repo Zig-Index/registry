@@ -3,7 +3,7 @@
   "owner": "SanctumTerra",
   "repo": "BinaryStream",
   "description": "BinaryStream implementation for Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

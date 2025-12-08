@@ -3,7 +3,7 @@
   "owner": "oswalpalash",
   "repo": "zit",
   "description": "zit - Zig TUI Library",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

@@ -3,7 +3,7 @@
   "owner": "ooyeku",
   "repo": "ziggurat",
   "description": "A modern, lightweight HTTP server framework for Zig that prioritizes performance, safety, and developer experience.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "http",
     "zig-library",

@@ -3,7 +3,7 @@
   "owner": "chearon",
   "repo": "node-api-zig",
   "description": "zig build instead of node-gyp",
-  "type": "project",
+  "type": "package",
   "topics": [
     "n-api",
     "node-addon-api",

@@ -3,7 +3,7 @@
   "owner": "ringtailsoftware",
   "repo": "zoridor",
   "description": "A Quoridor game for terminal and web",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "game",

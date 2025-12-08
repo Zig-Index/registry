@@ -3,7 +3,7 @@
   "owner": "bcrist",
   "repo": "zig-percent-encoding",
   "description": "Percent (URL) Encoding and Decoding for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "encoding",
     "percent-encoding",

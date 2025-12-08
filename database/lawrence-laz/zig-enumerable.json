@@ -3,7 +3,7 @@
   "owner": "lawrence-laz",
   "repo": "zig-enumerable",
   "description": "Iterator tools for functional data processing.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "enumerable",
     "functional",

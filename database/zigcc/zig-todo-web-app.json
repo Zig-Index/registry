@@ -3,7 +3,7 @@
   "owner": "zigcc",
   "repo": "zig-todo-web-app",
   "description": "A Single-page TODO app in Zig!",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-library",

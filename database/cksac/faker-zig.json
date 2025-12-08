@@ -3,7 +3,7 @@
   "owner": "cksac",
   "repo": "faker-zig",
   "description": "A faker library for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "faker"

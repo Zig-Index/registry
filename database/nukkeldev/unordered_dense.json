@@ -3,7 +3,7 @@
   "owner": "nukkeldev",
   "repo": "unordered_dense",
   "description": "unordered_dense, packaged with zig. ",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

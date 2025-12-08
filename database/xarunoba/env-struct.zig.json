@@ -3,7 +3,7 @@
   "owner": "xarunoba",
   "repo": "env-struct.zig",
   "description": "🌱 — Parse environment variables into typed structs in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "env",
     "environment-variables",

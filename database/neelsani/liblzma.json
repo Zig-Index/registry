@@ -3,7 +3,7 @@
   "owner": "neelsani",
   "repo": "liblzma",
   "description": "",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

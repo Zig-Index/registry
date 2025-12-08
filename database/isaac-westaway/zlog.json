@@ -3,7 +3,7 @@
   "owner": "isaac-westaway",
   "repo": "zlog",
   "description": "Appplication-level logging library for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

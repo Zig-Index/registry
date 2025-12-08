@@ -3,7 +3,7 @@
   "owner": "galactixx",
   "repo": "comphash",
   "description": "comphash is a very lightweight Zig package offering a compile-time hash map for immutable, O(1) string-keyed lookups.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "hashmap",
     "zig",
@@ -59,7 +59,7 @@
   "owner_location": null,
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 5,
+  "owner_followers": 7,
   "owner_following": 25,
   "owner_created_at": "2023-10-02T19:09:29Z",
   "license": "MIT",

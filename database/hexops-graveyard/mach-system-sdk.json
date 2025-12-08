@@ -3,7 +3,7 @@
   "owner": "hexops-graveyard",
   "repo": "mach-system-sdk",
   "description": "DirectX 12 headers for MinGW/Zig, cross-compile DX12/Metal/etc with Zig, etc.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

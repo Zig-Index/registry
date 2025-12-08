@@ -3,7 +3,7 @@
   "owner": "eddineimad0",
   "repo": "tomlz",
   "description": "A Toml Parser written in zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "parser",
     "toml",

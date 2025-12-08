@@ -3,7 +3,7 @@
   "owner": "jiacai2050",
   "repo": "zig-jemalloc",
   "description": "Zig allocator baked by jemalloc",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-library",
     "zig-package"
@@ -26,7 +26,7 @@
   "owner_location": "/home/mars",
   "owner_blog": "https://en.liujiacai.net/",
   "owner_twitter_username": "liujiacai",
-  "owner_followers": 1017,
+  "owner_followers": 1016,
   "owner_following": 125,
   "owner_created_at": "2013-03-13T01:33:15Z",
   "license": "MIT",

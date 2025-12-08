@@ -3,7 +3,7 @@
   "owner": "kioz-wang",
   "repo": "zterm",
   "description": "A Zig implementation of console_codes (4). Let's start to print colorful message anywhere!",
-  "type": "project",
+  "type": "package",
   "topics": [
     "cli",
     "zig",

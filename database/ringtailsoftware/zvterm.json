@@ -3,7 +3,7 @@
   "owner": "ringtailsoftware",
   "repo": "zvterm",
   "description": "Zig binding for libvterm, a terminal emulator core",
-  "type": "project",
+  "type": "package",
   "topics": [
     "libvterm",
     "terminal",

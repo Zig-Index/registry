@@ -3,7 +3,7 @@
   "owner": "bogwi",
   "repo": "pieQ",
   "description": "Priority Queue for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "algorithms",
     "data-structures",

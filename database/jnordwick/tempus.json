@@ -3,7 +3,7 @@
   "owner": "jnordwick",
   "repo": "tempus",
   "description": "fast, minimal clocks, TSC, dates, and timestamps for zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

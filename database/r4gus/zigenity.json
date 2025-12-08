@@ -3,7 +3,7 @@
   "owner": "r4gus",
   "repo": "zigenity",
   "description": "Like zenity but in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "gtk",
     "gtk3",

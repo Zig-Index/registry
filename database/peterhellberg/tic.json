@@ -3,7 +3,7 @@
   "owner": "peterhellberg",
   "repo": "tic",
   "description": "A small Zig :zap: module primarily meant for my own experiments with TIC-80 :video_game:",
-  "type": "project",
+  "type": "package",
   "topics": [
     "tic-80",
     "ziglang",

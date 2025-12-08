@@ -3,7 +3,7 @@
   "owner": "nektro",
   "repo": "zig-range",
   "description": "A range function to loop over an index without an extra variable.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

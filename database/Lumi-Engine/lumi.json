@@ -3,7 +3,7 @@
   "owner": "Lumi-Engine",
   "repo": "lumi",
   "description": "The main Lumi engine repo",
-  "type": "project",
+  "type": "package",
   "topics": [
     "gamedev",
     "gamedev-framework",

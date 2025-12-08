@@ -3,7 +3,7 @@
   "owner": "voidstar240",
   "repo": "zig-wayland-client",
   "description": "A Zig native wayland client library",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

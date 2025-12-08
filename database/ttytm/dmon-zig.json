@@ -3,7 +3,7 @@
   "owner": "ttytm",
   "repo": "dmon-zig",
   "description": "Cross-platform Zig module to monitor changes in directories.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "bindings",
     "cross-platform",

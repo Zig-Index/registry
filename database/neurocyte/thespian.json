@@ -3,7 +3,7 @@
   "owner": "neurocyte",
   "repo": "thespian",
   "description": "thespian: an actor library for Zig, C & C++ applications",
-  "type": "project",
+  "type": "package",
   "topics": [
     "actor-model",
     "cpp",

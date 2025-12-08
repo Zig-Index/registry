@@ -3,7 +3,7 @@
   "owner": "g41797",
   "repo": "nats",
   "description": "Zig client for NATS Core and JetStream",
-  "type": "project",
+  "type": "package",
   "topics": [
     "jetstream",
     "nats",

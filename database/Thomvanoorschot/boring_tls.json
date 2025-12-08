@@ -3,7 +3,7 @@
   "owner": "Thomvanoorschot",
   "repo": "boring_tls",
   "description": "A memory-safe TLS/SSL library for Zig, providing both client and server implementations built on Google's BoringSSL for secure, high-performance encrypted communications.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "boringssl",
     "https",

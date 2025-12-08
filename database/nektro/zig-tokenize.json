@@ -3,7 +3,7 @@
   "owner": "nektro",
   "repo": "zig-tokenize",
   "description": "A data-oriented-design built tokenizer",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

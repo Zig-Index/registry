@@ -3,7 +3,7 @@
   "owner": "zhuyadong",
   "repo": "zoop",
   "description": "A Zig OOP solution",
-  "type": "project",
+  "type": "package",
   "topics": [
     "oop",
     "zig",

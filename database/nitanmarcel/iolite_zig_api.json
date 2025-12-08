@@ -3,7 +3,7 @@
   "owner": "nitanmarcel",
   "repo": "iolite_zig_api",
   "description": "Zig bindings for the Iolite Engine plugin system.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "engine",
     "zig",

@@ -3,7 +3,7 @@
   "owner": "ciathefed",
   "repo": "sizeify",
   "description": "Format byte sizes into human-readable strings in Zig. Supports SI, IEC, and Windows-style units with no dependencies.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "human",
     "readable",

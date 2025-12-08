@@ -3,7 +3,7 @@
   "owner": "reykjalin",
   "repo": "log_to_file",
   "description": "Have Zig's `std.log` log to a file instead of to stderr",
-  "type": "project",
+  "type": "package",
   "topics": [
     "logging",
     "zig",

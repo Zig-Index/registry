@@ -3,7 +3,7 @@
   "owner": "parodyband",
   "repo": "zassimp",
   "description": "Clean, idiomatic Zig wrapper around Assimp's C API",
-  "type": "project",
+  "type": "package",
   "topics": [
     "3d",
     "3d-models",

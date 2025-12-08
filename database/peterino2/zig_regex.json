@@ -3,7 +3,7 @@
   "owner": "peterino2",
   "repo": "zig_regex",
   "description": "A regex implementation.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

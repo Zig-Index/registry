@@ -3,7 +3,7 @@
   "owner": "Durobot",
   "repo": "export_ppm",
   "description": "A couple of functions to export data as a PPM/PGM image file from your Zig code",
-  "type": "project",
+  "type": "package",
   "topics": [
     "ppm-format",
     "ppm-image",

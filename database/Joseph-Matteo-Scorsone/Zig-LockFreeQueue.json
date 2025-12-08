@@ -3,7 +3,7 @@
   "owner": "Joseph-Matteo-Scorsone",
   "repo": "Zig-LockFreeQueue",
   "description": "Zig Library that implements a Michael-Scott lock free queue with the use of Atomic types.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

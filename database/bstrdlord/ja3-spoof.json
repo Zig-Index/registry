@@ -3,7 +3,7 @@
   "owner": "bstrdlord",
   "repo": "ja3-spoof",
   "description": "http client for zig that spoofs tls/ssl ja3",
-  "type": "project",
+  "type": "package",
   "topics": [
     "curl",
     "ja3",

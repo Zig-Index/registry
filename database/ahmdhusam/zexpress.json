@@ -3,7 +3,7 @@
   "owner": "ahmdhusam",
   "repo": "zexpress",
   "description": "An HTTP/1.1 server library for the Zig programming language",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-library",
     "zig-package"

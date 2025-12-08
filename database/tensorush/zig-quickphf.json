@@ -3,7 +3,7 @@
   "owner": "tensorush",
   "repo": "zig-quickphf",
   "description": "Zig port of quickphf library for static hash map generation.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "quickphf",

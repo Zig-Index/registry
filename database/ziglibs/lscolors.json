@@ -3,7 +3,7 @@
   "owner": "ziglibs",
   "repo": "lscolors",
   "description": "A zig library for colorizing paths according to LS_COLORS",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "ziglang",

@@ -3,7 +3,7 @@
   "owner": "dasimmet",
   "repo": "zcomplete",
   "description": "a python argcomplete inspired completion engine for zig-clap",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

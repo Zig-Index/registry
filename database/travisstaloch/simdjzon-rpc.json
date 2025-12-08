@@ -3,7 +3,7 @@
   "owner": "travisstaloch",
   "repo": "simdjzon-rpc",
   "description": "A fast json-rpc implementation in Zig based on simdjzon",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

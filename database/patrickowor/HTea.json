@@ -3,7 +3,7 @@
   "owner": "patrickowor",
   "repo": "HTea",
   "description": "A http web framework implemented entirely in zig ",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

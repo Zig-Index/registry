@@ -3,7 +3,7 @@
   "owner": "ziglana",
   "repo": "solana-zig-program-template",
   "description": "Minimal Solana Zig program template",
-  "type": "project",
+  "type": "package",
   "topics": [
     "solana",
     "zig",

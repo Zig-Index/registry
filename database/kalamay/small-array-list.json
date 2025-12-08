@@ -3,7 +3,7 @@
   "owner": "kalamay",
   "repo": "small-array-list",
   "description": "Memory efficient array list for zig that allows a small number of items to be stored allocation-free.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "array",
     "array-list",

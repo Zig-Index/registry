@@ -3,7 +3,7 @@
   "owner": "PondWader",
   "repo": "fuse.zig",
   "description": "FUSE filesystem daemon library in pure Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "fuse",
     "zig",
@@ -12,7 +12,7 @@
     "libfuse"
   ],
   "stars": 2,
-  "forks": 1,
+  "forks": 2,
   "watchers": 0,
   "updated_at": "2025-10-26T13:14:39Z",
   "minimum_zig_version": "0.15.1",

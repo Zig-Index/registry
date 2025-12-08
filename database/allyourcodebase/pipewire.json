@@ -3,7 +3,7 @@
   "owner": "allyourcodebase",
   "repo": "pipewire",
   "description": "pipewire ported to the zig build system",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

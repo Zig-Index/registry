@@ -3,7 +3,7 @@
   "owner": "akunaakwei",
   "repo": "zig-sdl3",
   "description": "sdl3 for zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

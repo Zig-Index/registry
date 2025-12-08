@@ -3,7 +3,7 @@
   "owner": "dayvster",
   "repo": "zig-bplus-tree",
   "description": "A robust, generic, and idiomatic B+ tree implementation in Zig (0.15+). This package is designed for high performance, reliability, and ease of use—perfect for use as a dependency or as a learning resource for advanced data structures in Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-lib",

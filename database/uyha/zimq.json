@@ -3,7 +3,7 @@
   "owner": "uyha",
   "repo": "zimq",
   "description": "Zig binding for ZeroMQ",
-  "type": "project",
+  "type": "package",
   "topics": [
     "bindings",
     "zeromq",
@@ -13,7 +13,7 @@
     "libzmq"
   ],
   "stars": 30,
-  "forks": 4,
+  "forks": 3,
   "watchers": 2,
   "updated_at": "2025-11-24T06:26:29Z",
   "dependencies": [

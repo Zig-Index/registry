@@ -3,7 +3,7 @@
   "owner": "arats-io",
   "repo": "zuffy",
   "description": "",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "logger",

@@ -3,7 +3,7 @@
   "owner": "vinymeuh",
   "repo": "zig-build-libgpiod",
   "description": "The libgpiod library packaged for the Zig build system",
-  "type": "project",
+  "type": "package",
   "topics": [
     "libgpiod",
     "zig-package"

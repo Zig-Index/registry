@@ -3,7 +3,7 @@
   "owner": "4zv4l",
   "repo": "zig_colored_logger",
   "description": "Simple colored logger for the std.log.LogFn",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

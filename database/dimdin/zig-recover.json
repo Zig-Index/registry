@@ -3,7 +3,7 @@
   "owner": "dimdin",
   "repo": "zig-recover",
   "description": "zig panic recover",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-library",

@@ -3,7 +3,7 @@
   "owner": "jaco-bro",
   "repo": "tokenizer",
   "description": "BPE tokenizer for LLMs in Pure Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "bpe-tokenizer",
     "pcre2",

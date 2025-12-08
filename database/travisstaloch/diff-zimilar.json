@@ -3,7 +3,7 @@
   "owner": "travisstaloch",
   "repo": "diff-zimilar",
   "description": "a port of the dtolnay/dissimilar text diffing library to zig.  based on google's diff-match-patch ",
-  "type": "project",
+  "type": "package",
   "topics": [
     "text-diff",
     "diff-match-patch",

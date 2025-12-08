@@ -3,7 +3,7 @@
   "owner": "agagniere",
   "repo": "blackmagic",
   "description": "C preprocessor tricks, explained",
-  "type": "project",
+  "type": "package",
   "topics": [
     "c",
     "preprocessor",

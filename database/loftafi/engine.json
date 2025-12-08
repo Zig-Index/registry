@@ -3,7 +3,7 @@
   "owner": "loftafi",
   "repo": "engine",
   "description": "A simple GUI wrapper for building cross platform GUI apps.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

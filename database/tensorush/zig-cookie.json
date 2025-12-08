@@ -3,7 +3,7 @@
   "owner": "tensorush",
   "repo": "zig-cookie",
   "description": "Zig port of cookie-rs library for HTTP cookie storage.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "cookie",

@@ -3,7 +3,7 @@
   "owner": "tensorush",
   "repo": "zig-exhaustigen",
   "description": "Zig port of exhaustigen-rs library for exhaustive testing.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "exhaustigen",

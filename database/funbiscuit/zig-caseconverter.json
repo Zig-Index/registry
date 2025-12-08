@@ -3,7 +3,7 @@
   "owner": "funbiscuit",
   "repo": "zig-caseconverter",
   "description": "A case conversion library for zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "case",
     "conversion",

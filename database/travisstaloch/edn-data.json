@@ -3,7 +3,7 @@
   "owner": "travisstaloch",
   "repo": "edn-data",
   "description": "An edn (extensibile data notation) library in zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

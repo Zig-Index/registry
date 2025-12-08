@@ -3,7 +3,7 @@
   "owner": "hedzr",
   "repo": "trie.zig",
   "description": "key-value storage identified by dotted path",
-  "type": "project",
+  "type": "package",
   "topics": [
     "radix-tree",
     "trie",

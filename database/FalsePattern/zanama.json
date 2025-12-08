@@ -3,7 +3,7 @@
   "owner": "FalsePattern",
   "repo": "zanama",
   "description": "A Zig to Java FFI bindings generator, inspired by JExtract.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "bindings-generator",
     "gradle-plugin",

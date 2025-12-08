@@ -3,7 +3,7 @@
   "owner": "travisstaloch",
   "repo": "flagset",
   "description": "A command line flag parsing package",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

@@ -3,7 +3,7 @@
   "owner": "ringtailsoftware",
   "repo": "misshod",
   "description": "MiSSHod is a minimal, experimental SSH client and server implemented as a library",
-  "type": "project",
+  "type": "package",
   "topics": [
     "ssh",
     "ssh-client",

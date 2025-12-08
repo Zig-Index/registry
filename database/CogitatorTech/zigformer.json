@@ -3,7 +3,7 @@
   "owner": "CogitatorTech",
   "repo": "zigformer",
   "description": "An educational transformer-based LLM in pure Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "ai",
     "llm",

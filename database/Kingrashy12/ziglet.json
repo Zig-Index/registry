@@ -3,7 +3,7 @@
   "owner": "Kingrashy12",
   "repo": "ziglet",
   "description": "A concise and powerful CLI builder for Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "cli-builder",
     "zig-package"

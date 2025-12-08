@@ -3,7 +3,7 @@
   "owner": "dmgk",
   "repo": "zig-uuid",
   "description": "Fast, allocation-free v4 UUIDs in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "ziglang",

@@ -3,7 +3,7 @@
   "owner": "ChainSafe",
   "repo": "blst",
   "description": "blst packaged for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

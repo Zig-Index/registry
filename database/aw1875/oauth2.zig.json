@@ -3,7 +3,7 @@
   "owner": "aw1875",
   "repo": "oauth2.zig",
   "description": "A light weight oauth2 wrapper for zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "oauth2",

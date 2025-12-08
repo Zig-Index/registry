@@ -3,7 +3,7 @@
   "owner": "liskvork",
   "repo": "libgomoku",
   "description": "[MIRROR] Game and protocol library for the gomoku game",
-  "type": "project",
+  "type": "package",
   "topics": [
     "gomoku",
     "zig",

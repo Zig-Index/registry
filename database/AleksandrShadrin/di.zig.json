@@ -3,7 +3,7 @@
   "owner": "AleksandrShadrin",
   "repo": "di.zig",
   "description": "A simple and lightweight dependency injection container for Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "dependency-injection",
     "zig",

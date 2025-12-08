@@ -3,7 +3,7 @@
   "owner": "nektro",
   "repo": "zig-js",
   "description": "[WIP] An ECMAScript module for Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

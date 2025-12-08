@@ -3,7 +3,7 @@
   "owner": "weezy20",
   "repo": "replace-exe",
   "description": "A smol Zig library that lets a running executable replace (or delete) itself.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-library",

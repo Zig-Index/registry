@@ -3,7 +3,7 @@
   "owner": "0xrinegade",
   "repo": "apz",
   "description": "blazigly spicy http server",
-  "type": "project",
+  "type": "package",
   "topics": [
     "blazigly",
     "http-server",

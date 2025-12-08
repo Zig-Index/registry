@@ -3,7 +3,7 @@
   "owner": "travisstaloch",
   "repo": "kd-tree",
   "description": "A k-d tree implementation in zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-library",
     "zig-package"

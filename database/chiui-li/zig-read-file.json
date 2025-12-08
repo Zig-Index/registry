@@ -3,7 +3,7 @@
   "owner": "chiui-li",
   "repo": "zig-read-file",
   "description": "",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-library",

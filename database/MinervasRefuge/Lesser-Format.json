@@ -3,7 +3,7 @@
   "owner": "MinervasRefuge",
   "repo": "Lesser-Format",
   "description": "A format utility for quick custom formatting in Zig. ",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package",

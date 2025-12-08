@@ -3,7 +3,7 @@
   "owner": "softprops",
   "repo": "zig-doh",
   "description": "DNS over HTTPS client",
-  "type": "project",
+  "type": "package",
   "topics": [
     "dns",
     "doh",

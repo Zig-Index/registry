@@ -3,7 +3,7 @@
   "owner": "twilkinson3421",
   "repo": "zlshm",
   "description": "A simple shared library for reading from shared memory on Windows",
-  "type": "project",
+  "type": "package",
   "topics": [
     "binary",
     "shared-library",

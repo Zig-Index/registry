@@ -3,7 +3,7 @@
   "owner": "OhMyDitzzy",
   "repo": "argonaut",
   "description": "Flexible and Powerful Command-Line Argument Parser for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "argument-parser",
     "zig",

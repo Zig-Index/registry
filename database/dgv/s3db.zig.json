@@ -3,7 +3,7 @@
   "owner": "dgv",
   "repo": "s3db.zig",
   "description": "Zig wrapper of SQLite/Go extension that stores tables in an S3-compatible object store",
-  "type": "project",
+  "type": "package",
   "topics": [
     "sqlite-extension",
     "zig-library",

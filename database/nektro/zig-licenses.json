@@ -3,7 +3,7 @@
   "owner": "nektro",
   "repo": "zig-licenses",
   "description": "generated data from https://spdx.org/licenses/.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "zig"

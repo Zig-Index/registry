@@ -3,7 +3,7 @@
   "owner": "nektro",
   "repo": "zig-detect-license",
   "description": "Given an input text guess which SPDX license it most likely is an instance of",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "zig"

@@ -3,7 +3,7 @@
   "owner": "nektro",
   "repo": "zig-bencode",
   "description": "Bencode parser for Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "bencode",

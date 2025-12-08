@@ -3,7 +3,7 @@
   "owner": "vinterbell",
   "repo": "cart",
   "description": "a `cross application run time` for luau, designed to be easy to embed and sandbox",
-  "type": "project",
+  "type": "package",
   "topics": [
     "luau",
     "zig-package"

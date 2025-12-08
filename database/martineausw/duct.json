@@ -3,7 +3,7 @@
   "owner": "martineausw",
   "repo": "duct",
   "description": "Zig library with generic array, vector, and slice functions.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "generics",
     "zig-package"

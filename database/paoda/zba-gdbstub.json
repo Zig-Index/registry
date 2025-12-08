@@ -3,7 +3,7 @@
   "owner": "paoda",
   "repo": "zba-gdbstub",
   "description": "GDB Server for Debugging guest code in paoda/zba",
-  "type": "project",
+  "type": "package",
   "topics": [
     "gdb",
     "gdbstub",

@@ -3,7 +3,7 @@
   "owner": "kassane",
   "repo": "Standalone-Server",
   "description": "Asio standalone C++ HTTP/S Server (uses zig build-system)",
-  "type": "project",
+  "type": "package",
   "topics": [
     "cpp",
     "zig-package"

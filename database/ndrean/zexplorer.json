@@ -3,7 +3,7 @@
   "owner": "ndrean",
   "repo": "zexplorer",
   "description": "A Zig wrapper for lexbor",
-  "type": "project",
+  "type": "package",
   "topics": [
     "lexbor",
     "zig",

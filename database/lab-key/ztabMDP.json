@@ -3,7 +3,7 @@
   "owner": "lab-key",
   "repo": "ztabMDP",
   "description": "A simple zig library for defining & solving tabular Markov Descision Processes",
-  "type": "project",
+  "type": "package",
   "topics": [
     "mdp",
     "zig-package"

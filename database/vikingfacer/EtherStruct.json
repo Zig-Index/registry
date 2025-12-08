@@ -3,7 +3,7 @@
   "owner": "vikingfacer",
   "repo": "EtherStruct",
   "description": "Packed Structs for tcp/ip packets",
-  "type": "project",
+  "type": "package",
   "topics": [
     "ethernet-protocol",
     "netwoking",

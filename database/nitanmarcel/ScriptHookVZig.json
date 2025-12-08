@@ -3,7 +3,7 @@
   "owner": "nitanmarcel",
   "repo": "ScriptHookVZig",
   "description": "Write GTA V mods using Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "gta5",
     "gtamodding",

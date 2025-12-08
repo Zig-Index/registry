@@ -3,7 +3,7 @@
   "owner": "nat3Github",
   "repo": "zig-lib-osmr",
   "description": "vector tile map render library written in zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "map-renderer",
     "mapbox",

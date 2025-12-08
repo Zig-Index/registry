@@ -3,7 +3,7 @@
   "owner": "DivergentClouds",
   "repo": "portmidi-zig",
   "description": "A Zig wrapper for PortMidi",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-library",

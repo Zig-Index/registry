@@ -3,7 +3,7 @@
   "owner": "Traxar",
   "repo": "SPaDE",
   "description": "a library for SParse and DEnse tensor operations.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

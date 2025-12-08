@@ -3,7 +3,7 @@
   "owner": "theseyan",
   "repo": "lmdbx-zig",
   "description": "Zig bindings for libMDBX (a fork of LMDB)",
-  "type": "project",
+  "type": "package",
   "topics": [
     "database",
     "libmdbx",

@@ -3,7 +3,7 @@
   "owner": "vspefs",
   "repo": "tellme-dev",
   "description": "A Zig package that (sort of) allows comptime polymorphism",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

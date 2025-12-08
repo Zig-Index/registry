@@ -3,7 +3,7 @@
   "owner": "nat3Github",
   "repo": "zig-lib-tailwind-colors",
   "description": "Tailwind CSS color constants for zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "tailwind",
     "tailwind-colors",

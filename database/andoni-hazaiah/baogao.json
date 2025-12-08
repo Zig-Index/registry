@@ -3,7 +3,7 @@
   "owner": "andoni-hazaiah",
   "repo": "baogao",
   "description": "baogao (bàogào) is a flexible and extensible logging library for the Zig Programming Language.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "extensible",
     "flexible",

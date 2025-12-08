@@ -3,7 +3,7 @@
   "owner": "lawrence-laz",
   "repo": "jaysan",
   "description": "A fast json serializer",
-  "type": "project",
+  "type": "package",
   "topics": [
     "json",
     "json-serializer",

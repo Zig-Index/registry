@@ -3,7 +3,7 @@
   "owner": "peterhellberg",
   "repo": "typ",
   "description": "A small Zig ⚡ module, as a convenience for me when writing WebAssembly plugins for Typst",
-  "type": "project",
+  "type": "package",
   "topics": [
     "module",
     "typesetting",

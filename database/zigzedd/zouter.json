@@ -3,7 +3,7 @@
   "owner": "zigzedd",
   "repo": "zouter",
   "description": "[MIRROR] Zig HTTP router library.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-library",

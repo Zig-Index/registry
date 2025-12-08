@@ -3,7 +3,7 @@
   "owner": "bogwi",
   "repo": "Musubi",
   "description": "All purpose Graph in ZIG",
-  "type": "project",
+  "type": "package",
   "topics": [
     "data-structures",
     "graph",

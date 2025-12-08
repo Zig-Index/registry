@@ -3,7 +3,7 @@
   "owner": "thevilledev",
   "repo": "zig-nn",
   "description": "A lightweight neural network library implemented in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "learning",
     "neural-networks",

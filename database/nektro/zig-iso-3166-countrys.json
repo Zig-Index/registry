@@ -3,7 +3,7 @@
   "owner": "nektro",
   "repo": "zig-iso-3166-countrys",
   "description": "Zig package for ISO 3166 Country Codes",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

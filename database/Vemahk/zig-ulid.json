@@ -3,7 +3,7 @@
   "owner": "Vemahk",
   "repo": "zig-ulid",
   "description": "A binary, zero-allocation Ulid implementation written in Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

@@ -3,7 +3,7 @@
   "owner": "nuIIpointerexception",
   "repo": "lifetch",
   "description": "a hyperfast system fetching utility 🏃 💨",
-  "type": "project",
+  "type": "package",
   "topics": [
     "neofetch",
     "sysfetch",

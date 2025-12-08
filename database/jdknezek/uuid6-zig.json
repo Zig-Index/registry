@@ -3,7 +3,7 @@
   "owner": "jdknezek",
   "repo": "uuid6-zig",
   "description": "UUIDv6 implemented in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

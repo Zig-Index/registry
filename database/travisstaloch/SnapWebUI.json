@@ -3,7 +3,7 @@
   "owner": "travisstaloch",
   "repo": "SnapWebUI",
   "description": "Reactive immediate DOM rendering with Wasm in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

@@ -3,7 +3,7 @@
   "owner": "zephyrchien",
   "repo": "libev-zig",
   "description": "Zig binding for libev, with coroutine support.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "network",
     "zig-package"

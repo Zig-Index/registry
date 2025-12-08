@@ -3,7 +3,7 @@
   "owner": "AsgardXIV",
   "repo": "texzel",
   "description": "A pure Zig library for BCn texture encoding/decoding.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "compression",
     "dxt",

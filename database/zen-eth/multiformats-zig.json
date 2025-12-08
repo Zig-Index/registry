@@ -3,7 +3,7 @@
   "owner": "zen-eth",
   "repo": "multiformats-zig",
   "description": "Zig implementation of the multiformats https://github.com/multiformats/multiformats.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "multibase",
     "multicodec",

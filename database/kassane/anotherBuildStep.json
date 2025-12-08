@@ -3,7 +3,7 @@
   "owner": "kassane",
   "repo": "anotherBuildStep",
   "description": "zig build add-on (add more toolchains [LLVM-based] support)",
-  "type": "project",
+  "type": "package",
   "topics": [
     "d",
     "dlang",

@@ -3,7 +3,7 @@
   "owner": "MinervasRefuge",
   "repo": "GZZG",
   "description": "A typed Zig wrapper for the Guile (scheme) C API.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "guile",
     "guile-scheme",

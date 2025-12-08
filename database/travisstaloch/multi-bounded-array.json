@@ -3,7 +3,7 @@
   "owner": "travisstaloch",
   "repo": "multi-bounded-array",
   "description": "Similar to std.MultiArrayList() but backed by fixed size arrays",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

@@ -3,7 +3,7 @@
   "owner": "Jafagervik",
   "repo": "zstb",
   "description": "Zig Standard Library Extension",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

@@ -3,7 +3,7 @@
   "owner": "timsurber",
   "repo": "fltk",
   "description": "FLTK built with zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

@@ -3,7 +3,7 @@
   "owner": "allyourcodebase",
   "repo": "gifsicle",
   "description": "gifsicle using the zig build system",
-  "type": "project",
+  "type": "package",
   "topics": [
     "gif",
     "gifsicle",

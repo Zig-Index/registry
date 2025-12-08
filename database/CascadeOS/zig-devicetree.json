@@ -3,7 +3,7 @@
   "owner": "CascadeOS",
   "repo": "zig-devicetree",
   "description": "A read-only Flattened Device Tree (DTB) API.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "device-tree",
     "zig",
@@ -14,10 +14,10 @@
     "fdt",
     "devicetree"
   ],
-  "stars": 8,
+  "stars": 9,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2025-12-03T04:14:22Z",
+  "updated_at": "2025-12-07T15:00:14Z",
   "minimum_zig_version": "0.15.1",
   "readme": "# zig-devicetree\n\nA read-only Flattened Devicetree (DTB) API.\n\nNone of the API requires allocation except the various list builders in `Property.Value` which are completely optional.\n\nCompatible with [Devicetree Specification v0.4](https://github.com/devicetree-org/devicetree-specification/releases/tag/v0.4).\n\n[Auto-generated docs](https://cascadeos.github.io/zig-devicetree/)\n\nThis started as a wrapper around [libfdt](https://github.com/dgibson/dtc/tree/main/libfdt) but is now a fresh implementation.\n\n## Installation\n\nAdd the dependency to `build.zig.zon`:\n\n```sh\nzig fetch --save git+https://github.com/CascadeOS/zig-devicetree\n```\n\nThen add the following to `build.zig`:\n\n```zig\nconst devicetree_dep = b.dependency(\"devicetree\", .{});\nexe.root_module.addImport(\"DeviceTree\", devicetree_dep.module(\"DeviceTree\"));\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/132705474?v=4",

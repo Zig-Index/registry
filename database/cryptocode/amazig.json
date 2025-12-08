@@ -3,7 +3,7 @@
   "owner": "cryptocode",
   "repo": "amazig",
   "description": "Maze generator based on the Origin Shift algorithm",
-  "type": "project",
+  "type": "package",
   "topics": [
     "maze",
     "maze-generator",

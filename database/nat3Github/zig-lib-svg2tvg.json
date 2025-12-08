@@ -3,7 +3,7 @@
   "owner": "nat3Github",
   "repo": "zig-lib-svg2tvg",
   "description": "svg to tvg file converter and tvg renderer",
-  "type": "project",
+  "type": "package",
   "topics": [
     "converter",
     "rasterization",

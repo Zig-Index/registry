@@ -3,7 +3,7 @@
   "owner": "rktr1998",
   "repo": "zig-wol",
   "description": "Wake-on-lan CLI written in Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "command-line",
     "wake-on-lan",

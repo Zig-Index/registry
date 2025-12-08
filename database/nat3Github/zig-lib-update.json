@@ -3,7 +3,7 @@
   "owner": "nat3Github",
   "repo": "zig-lib-update",
   "description": "update tool - zig utility tool for updating remote git dependencies in .zon files",
-  "type": "project",
+  "type": "package",
   "topics": [
     "dependency-manager-update",
     "git",

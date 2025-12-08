@@ -3,7 +3,7 @@
   "owner": "jrosberg",
   "repo": "zig-zconfig",
   "description": "ZMQ zconfig with Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-library",
     "zig-package",

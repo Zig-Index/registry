@@ -3,7 +3,7 @@
   "owner": "egegungordu",
   "repo": "jaime",
   "description": "A fast, lightweight Japanese IME engine for Zig projects that converts romaji to hiragana, kanji, and full-width characters. Supports Google 日本語入力-style input patterns with an easy-to-use API.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "hiragana",
     "ime",

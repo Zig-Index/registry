@@ -3,7 +3,7 @@
   "owner": "zig-devel",
   "repo": "lz4",
   "description": "",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-library",

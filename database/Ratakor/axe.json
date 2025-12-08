@@ -3,7 +3,7 @@
   "owner": "Ratakor",
   "repo": "axe",
   "description": "A logging library for zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "log",
     "logging",

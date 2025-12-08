@@ -3,7 +3,7 @@
   "owner": "GoNZooo",
   "repo": "zig-editor-core",
   "description": "Eventually the core of an editor, interactive shell put on top.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "ziglang",

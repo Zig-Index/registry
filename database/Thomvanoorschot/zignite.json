@@ -3,7 +3,7 @@
   "owner": "Thomvanoorschot",
   "repo": "zignite",
   "description": "Zignite is a Cross-platform graphics engine built with Zig, featuring WebGPU rendering using GLFW for window management. It has WebAssembly and native support",
-  "type": "project",
+  "type": "package",
   "topics": [
     "emscripten",
     "glfw",

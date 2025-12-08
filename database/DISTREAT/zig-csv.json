@@ -3,7 +3,7 @@
   "owner": "DISTREAT",
   "repo": "zig-csv",
   "description": "A library for parsing, creating, and manipulating CSV data.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "csv",
     "zig",

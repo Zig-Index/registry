@@ -3,7 +3,7 @@
   "owner": "PauloCampana",
   "repo": "random_variable",
   "description": "RNG, density, probability, survival and quantile functions for various distributions. ",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

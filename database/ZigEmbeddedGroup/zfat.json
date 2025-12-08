@@ -3,7 +3,7 @@
   "owner": "ZigEmbeddedGroup",
   "repo": "zfat",
   "description": "Generic purpose platform-independent FAT driver for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "fat",
     "fat32",

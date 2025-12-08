@@ -3,7 +3,7 @@
   "owner": "sackosoft",
   "repo": "zig-bbq",
   "description": "A high-performance concurrent ring buffer implementing the Block-based Bounded Queue algorithm (BBQ).",
-  "type": "project",
+  "type": "package",
   "topics": [
     "circular-buffer",
     "circular-queue",

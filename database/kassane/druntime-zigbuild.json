@@ -3,7 +3,7 @@
   "owner": "kassane",
   "repo": "druntime-zigbuild",
   "description": "D runtime build using zig-build",
-  "type": "project",
+  "type": "package",
   "topics": [
     "d",
     "dlang",

@@ -3,7 +3,7 @@
   "owner": "akunaakwei",
   "repo": "zig-z",
   "description": "zlib packaged for zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

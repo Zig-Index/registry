@@ -3,7 +3,7 @@
   "owner": "felipeasimos",
   "repo": "contract.zig",
   "description": "Simple comptime type validation for contract-based programming using anytype in zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-lib",
     "zig-library",

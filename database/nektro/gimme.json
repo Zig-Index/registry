@@ -3,7 +3,7 @@
   "owner": "nektro",
   "repo": "gimme",
   "description": "A yummy collection of useful Allocators.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

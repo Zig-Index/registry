@@ -3,7 +3,7 @@
   "owner": "ringtailsoftware",
   "repo": "zig-embshell",
   "description": "Small embeddable command line shell in zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "embedded",
     "zig",

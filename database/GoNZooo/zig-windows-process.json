@@ -3,7 +3,7 @@
   "owner": "GoNZooo",
   "repo": "zig-windows-process",
   "description": "Toolset for interacting with Windows processes in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "windows",

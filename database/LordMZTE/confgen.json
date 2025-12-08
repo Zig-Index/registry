@@ -3,7 +3,7 @@
   "owner": "LordMZTE",
   "repo": "confgen",
   "description": "A universal template engine and real-time configuration file generator - mirror of https://mzte.de/git/LordMZTE/confgen",
-  "type": "project",
+  "type": "package",
   "topics": [
     "lua",
     "template-engine",

@@ -3,7 +3,7 @@
   "owner": "jedisct1",
   "repo": "zig-blind-rsa-signatures",
   "description": "Blind RSA signatures implementation for Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "rsa",
     "blind",
@@ -26,7 +26,7 @@
   "owner_location": "Antibes, France",
   "owner_blog": "https://primulinus.tpopsite.com",
   "owner_twitter_username": "jedisct1",
-  "owner_followers": 4074,
+  "owner_followers": 4075,
   "owner_following": 194,
   "owner_created_at": "2009-09-09T10:20:57Z",
   "license": "Apache-2.0",

@@ -3,7 +3,7 @@
   "owner": "jinzhongjia",
   "repo": "zTroy",
   "description": "a zig library",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

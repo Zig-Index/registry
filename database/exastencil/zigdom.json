@@ -3,7 +3,7 @@
   "owner": "exastencil",
   "repo": "zigdom",
   "description": "Simple library for constructing DOM elements in Zig and rendering to strings",
-  "type": "project",
+  "type": "package",
   "topics": [
     "dom",
     "zig",

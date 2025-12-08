@@ -3,7 +3,7 @@
   "owner": "jaxron",
   "repo": "zigache",
   "description": "A customizable cache library in Zig with multiple eviction policies.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-lang",

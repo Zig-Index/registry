@@ -3,7 +3,7 @@
   "owner": "JacobCrabill",
   "repo": "bonzai",
   "description": "Simple Behavior Tree library in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "behavior-tree",
     "zig",

@@ -3,7 +3,7 @@
   "owner": "nektro",
   "repo": "zig-unicode-uca",
   "description": "Zig bindings for the contributory data files for the Unicode Collation Algorithm.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

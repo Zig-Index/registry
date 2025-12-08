@@ -3,7 +3,7 @@
   "owner": "burlindw",
   "repo": "zig-build-utils",
   "description": "A collection of common utilities for Zig build scripts inspired by the build scripts used by Zig and ZLS.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package",

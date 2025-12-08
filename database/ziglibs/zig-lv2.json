@@ -3,7 +3,7 @@
   "owner": "ziglibs",
   "repo": "zig-lv2",
   "description": "Zig-intuitive bindings for LV2.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "lv2",
     "zig-lv2",

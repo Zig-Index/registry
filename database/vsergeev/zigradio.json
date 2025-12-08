@@ -3,7 +3,7 @@
   "owner": "vsergeev",
   "repo": "zigradio",
   "description": "A lightweight software-defined radio framework built with Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "sdr",
     "zig",

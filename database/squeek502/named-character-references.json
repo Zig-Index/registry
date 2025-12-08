@@ -3,7 +3,7 @@
   "owner": "squeek502",
   "repo": "named-character-references",
   "description": "Purpose-built DAFSA for named character reference matching during HTML tokenization",
-  "type": "project",
+  "type": "package",
   "topics": [
     "character-references",
     "html",

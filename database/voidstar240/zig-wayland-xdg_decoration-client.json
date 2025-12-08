@@ -3,7 +3,7 @@
   "owner": "voidstar240",
   "repo": "zig-wayland-xdg_decoration-client",
   "description": "XDG Decoration protocol extension for zig-wayland-client",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

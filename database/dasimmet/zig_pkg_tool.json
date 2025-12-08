@@ -3,7 +3,7 @@
   "owner": "dasimmet",
   "repo": "zig_pkg_tool",
   "description": "a command line tool to work with build.zig dependencies and build graphs",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

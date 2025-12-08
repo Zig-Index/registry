@@ -3,7 +3,7 @@
   "owner": "Thomvanoorschot",
   "repo": "wire",
   "description": "Wire is a networking library written in Zig, designed to simplify building non-blocking TCP-based client-server applications. It integrates with the xev event loop for asynchronous I/O operations and is able to run non-blocking on a single thread.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "event-loop",
     "libxev",

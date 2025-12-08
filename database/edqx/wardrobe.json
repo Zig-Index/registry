@@ -3,7 +3,7 @@
   "owner": "edqx",
   "repo": "wardrobe",
   "description": "Zig Multipart Form Data library",
-  "type": "project",
+  "type": "package",
   "topics": [
     "form-data",
     "household-appliance",

@@ -3,7 +3,7 @@
   "owner": "LukasKastern",
   "repo": "boringssl",
   "description": "boringssl packaged with Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

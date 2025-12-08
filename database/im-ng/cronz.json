@@ -3,7 +3,7 @@
   "owner": "im-ng",
   "repo": "cronz",
   "description": "Schedule one or more tasks with crontab expression written in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "cron",
     "cronjob",

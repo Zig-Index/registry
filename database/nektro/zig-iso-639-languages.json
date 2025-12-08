@@ -3,7 +3,7 @@
   "owner": "nektro",
   "repo": "zig-iso-639-languages",
   "description": "Zig package for ISO 639 Language codes",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

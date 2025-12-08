@@ -3,7 +3,7 @@
   "owner": "allyourcodebase",
   "repo": "SDL3",
   "description": "SDL3 ported to the Zig build system.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

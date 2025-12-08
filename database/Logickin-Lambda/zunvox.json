@@ -3,7 +3,7 @@
   "owner": "Logickin-Lambda",
   "repo": "zunvox",
   "description": "SunVox Lib, but in Zig!",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

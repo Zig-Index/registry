@@ -3,7 +3,7 @@
   "owner": "martineausw",
   "repo": "ziggurat",
   "description": "Type assertion and constraints zig library.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "assertions",
     "traits",

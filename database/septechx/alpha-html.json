@@ -3,7 +3,7 @@
   "owner": "septechx",
   "repo": "alpha-html",
   "description": "Zig library for parsing a superset of html",
-  "type": "project",
+  "type": "package",
   "topics": [
     "html",
     "parser",

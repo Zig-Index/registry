@@ -3,7 +3,7 @@
   "owner": "loftafi",
   "repo": "resources",
   "description": "A minimalist zig module for collecting files into a resource bundle.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

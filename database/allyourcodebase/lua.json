@@ -3,7 +3,7 @@
   "owner": "allyourcodebase",
   "repo": "lua",
   "description": "lua build system ported to Build.zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

@@ -3,7 +3,7 @@
   "owner": "loftafi",
   "repo": "lru",
   "description": "LRU cache for zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "zig"

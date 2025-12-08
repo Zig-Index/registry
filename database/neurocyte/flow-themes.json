@@ -3,7 +3,7 @@
   "owner": "neurocyte",
   "repo": "flow-themes",
   "description": "Themes compiler for Flow Control, the text editor",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

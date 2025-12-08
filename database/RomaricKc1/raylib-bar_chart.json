@@ -3,7 +3,7 @@
   "owner": "RomaricKc1",
   "repo": "raylib-bar_chart",
   "description": "Bar chart widget for Raylib-zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "raylib-zig",
     "zig",

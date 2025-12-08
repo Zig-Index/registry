@@ -3,7 +3,7 @@
   "owner": "marselester",
   "repo": "maxminddb.zig",
   "description": "MaxMind DB format reader in Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "maxmind",
     "maxmind-db",

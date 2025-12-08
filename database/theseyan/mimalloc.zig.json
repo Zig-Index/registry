@@ -3,7 +3,7 @@
   "owner": "theseyan",
   "repo": "mimalloc.zig",
   "description": "Simple Zig Allocator interface over mimalloc.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "mimalloc",
     "zig",

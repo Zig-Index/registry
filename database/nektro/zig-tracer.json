@@ -3,7 +3,7 @@
   "owner": "nektro",
   "repo": "zig-tracer",
   "description": "Generic tracing library for Zig, supports multiple backends.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

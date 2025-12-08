@@ -3,7 +3,7 @@
   "owner": "zen-eth",
   "repo": "eth-p2p-z",
   "description": "Ethereum p2p implementation in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "libp2p",
     "libp2p-pubsub",

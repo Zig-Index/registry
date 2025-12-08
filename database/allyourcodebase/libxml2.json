@@ -3,7 +3,7 @@
   "owner": "allyourcodebase",
   "repo": "libxml2",
   "description": "libxml2 ported to the zig build system ",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

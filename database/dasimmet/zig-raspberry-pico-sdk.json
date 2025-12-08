@@ -3,7 +3,7 @@
   "owner": "dasimmet",
   "repo": "zig-raspberry-pico-sdk",
   "description": "",
-  "type": "project",
+  "type": "package",
   "topics": [
     "microzig",
     "pico",

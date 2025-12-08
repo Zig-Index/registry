@@ -3,7 +3,7 @@
   "owner": "thevilledev",
   "repo": "ChibiHash-zig",
   "description": "ChibiHash in Zig - a small, fast 64-bit hash function",
-  "type": "project",
+  "type": "package",
   "topics": [
     "hash-functions",
     "zig",

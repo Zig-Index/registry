@@ -3,7 +3,7 @@
   "owner": "dmgk",
   "repo": "zig-getopt",
   "description": "POSIX-compatible getopt(3) implementation in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "ziglang",

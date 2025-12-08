@@ -3,7 +3,7 @@
   "owner": "tristanpemble",
   "repo": "uuidz",
   "description": "A thread safe, RFC compliant UUID v1, v2, v3, v4, v5, v6, v7, and v8 library written in Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-library",

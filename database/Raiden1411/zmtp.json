@@ -3,7 +3,7 @@
   "owner": "Raiden1411",
   "repo": "zmtp",
   "description": "SMTP Client Implementation",
-  "type": "project",
+  "type": "package",
   "topics": [
     "email",
     "smtp",

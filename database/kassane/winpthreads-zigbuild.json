@@ -3,7 +3,7 @@
   "owner": "kassane",
   "repo": "winpthreads-zigbuild",
   "description": "The Winpthreads Library for Zig toolchain",
-  "type": "project",
+  "type": "package",
   "topics": [
     "mingw-w64",
     "zig-package",

@@ -3,7 +3,7 @@
   "owner": "Durobot",
   "repo": "zigStructPrint",
   "description": "Small library to pretty-print Zig structs (and arrays)",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "ziglang",

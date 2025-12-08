@@ -3,7 +3,7 @@
   "owner": "Ang3lERR404",
   "repo": "zig-utilities",
   "description": "Utilities for zig, in a smol, convenient file",
-  "type": "project",
+  "type": "package",
   "topics": [
     "utilities",
     "zig",

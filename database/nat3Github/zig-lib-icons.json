@@ -3,7 +3,7 @@
   "owner": "nat3Github",
   "repo": "zig-lib-icons",
   "description": "svg and tvg icons ready to embed into your zig binary",
-  "type": "project",
+  "type": "package",
   "topics": [
     "feather",
     "feather-icons",

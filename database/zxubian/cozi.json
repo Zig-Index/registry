@@ -3,7 +3,7 @@
   "owner": "zxubian",
   "repo": "cozi",
   "description": "Concurrency primitives for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "concurrency",
     "concurrent-programming",

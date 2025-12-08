@@ -3,7 +3,7 @@
   "owner": "liyu1981",
   "repo": "zcmd.zig",
   "description": "zcmd is a single file lib to replace zig's std.childProcess.run with the ability of running pipeline like bash..",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

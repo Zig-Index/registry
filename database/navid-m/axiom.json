@@ -3,7 +3,7 @@
   "owner": "navid-m",
   "repo": "axiom",
   "description": "Terminal tables, charts, and other components library for CLIs",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

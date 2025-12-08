@@ -3,7 +3,7 @@
   "owner": "CalebQ42",
   "repo": "zig-squashfs",
   "description": "Learning zig via squashfs",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-library",

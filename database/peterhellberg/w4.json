@@ -3,7 +3,7 @@
   "owner": "peterhellberg",
   "repo": "w4",
   "description": "A small Zig ⚡ module, primarily meant for my own experiments with WASM-4",
-  "type": "project",
+  "type": "package",
   "topics": [
     "wasm4",
     "zig-package"

@@ -3,7 +3,7 @@
   "owner": "ethanthoma",
   "repo": "zensor",
   "description": "Zig tensor library",
-  "type": "project",
+  "type": "package",
   "topics": [
     "machine-learning",
     "tensor",

@@ -3,7 +3,7 @@
   "owner": "JacobCrabill",
   "repo": "zig-Fast-CDR",
   "description": "Zig build of eProsima Fast-CDR",
-  "type": "project",
+  "type": "package",
   "topics": [
     "dds",
     "zig",

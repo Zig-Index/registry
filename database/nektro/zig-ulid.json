@@ -3,7 +3,7 @@
   "owner": "nektro",
   "repo": "zig-ulid",
   "description": "A binary implementation of ULID in Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "ulid",

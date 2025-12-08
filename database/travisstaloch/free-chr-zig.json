@@ -3,7 +3,7 @@
   "owner": "travisstaloch",
   "repo": "free-chr-zig",
   "description": "A toy constraint solver in zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

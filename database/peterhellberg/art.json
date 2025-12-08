@@ -3,7 +3,7 @@
   "owner": "peterhellberg",
   "repo": "art",
   "description": "art is a Zig module used to build WebAssembly binaries rendering to a HTML canvas.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "canvas",
     "wasm",

@@ -3,7 +3,7 @@
   "owner": "nukkeldev",
   "repo": "miniz",
   "description": "miniz, built with zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package"

@@ -3,7 +3,7 @@
   "owner": "xcaeser",
   "repo": "glob.zig",
   "description": "Fast and reliable glob pattern matching in pure zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig",
     "zig-package",

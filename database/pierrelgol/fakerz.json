@@ -3,7 +3,7 @@
   "owner": "pierrelgol",
   "repo": "fakerz",
   "description": "zig port of python faker package",
-  "type": "project",
+  "type": "package",
   "topics": [
     "faker",
     "zig",

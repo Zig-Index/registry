@@ -3,7 +3,7 @@
   "owner": "kofi-q",
   "repo": "pcsc-z",
   "description": "Zig PC/SC (smart card) API bindings for Linux / MacOS / Win32",
-  "type": "project",
+  "type": "package",
   "topics": [
     "pcsc",
     "pcsclite",

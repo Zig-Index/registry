@@ -3,7 +3,7 @@
   "owner": "BrookJeynes",
   "repo": "progress",
   "description": "A simple thread safe progress bar and spinner library",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "cli",

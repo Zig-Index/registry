@@ -3,7 +3,7 @@
   "owner": "lab-key",
   "repo": "zmujoco",
   "description": "A Thin Zig Wrapper For MuJoCo ",
-  "type": "project",
+  "type": "package",
   "topics": [
     "mujoco",
     "physics",

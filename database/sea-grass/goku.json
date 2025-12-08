@@ -3,7 +3,7 @@
   "owner": "sea-grass",
   "repo": "goku",
   "description": "A Static Site Generator written in Zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "markdown",
     "static-site-generator",

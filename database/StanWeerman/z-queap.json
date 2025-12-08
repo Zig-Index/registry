@@ -3,7 +3,7 @@
   "owner": "StanWeerman",
   "repo": "z-queap",
   "description": "Zig implementation of a Queap data structure",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

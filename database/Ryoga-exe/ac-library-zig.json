@@ -3,7 +3,7 @@
   "owner": "Ryoga-exe",
   "repo": "ac-library-zig",
   "description": "Zig implementation of AtCoder Library",
-  "type": "project",
+  "type": "package",
   "topics": [
     "atcoder-library",
     "zig",

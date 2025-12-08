@@ -3,7 +3,7 @@
   "owner": "nickelca",
   "repo": "x-client",
   "description": "X11 client library for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "cross-platform",
     "windowing",

@@ -3,7 +3,7 @@
   "owner": "theodore-s-beers",
   "repo": "utf8-decode",
   "description": "A classic UTF-8 decoder, now in Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "text-processing",
     "unicode",

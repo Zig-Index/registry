@@ -3,7 +3,7 @@
   "owner": "malcolmstill",
   "repo": "qbe-zig-build",
   "description": "QBE (https://c9x.me/compile/) via zig build",
-  "type": "project",
+  "type": "package",
   "topics": [
     "compiler-backend",
     "qbe",

@@ -3,7 +3,7 @@
   "owner": "uzyn",
   "repo": "passcay",
   "description": "🦎🔑 Secure & fast Passkey (WebAuthn) library for Zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "authentication",
     "passkey",

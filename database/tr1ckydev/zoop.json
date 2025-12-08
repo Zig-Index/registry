@@ -3,7 +3,7 @@
   "owner": "tr1ckydev",
   "repo": "zoop",
   "description": "A benchmarking library for zig.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

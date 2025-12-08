@@ -3,7 +3,7 @@
   "owner": "navid-m",
   "repo": "termc",
   "description": "Cross-platform terminal library including support for hooking terminal Ctrl+C with custom handlers",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

@@ -3,7 +3,7 @@
   "owner": "nektro",
   "repo": "zig-iana-tlds",
   "description": "List of official IANA Top Level Domain Names",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "zig"

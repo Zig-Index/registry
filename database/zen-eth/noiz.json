@@ -3,7 +3,7 @@
   "owner": "zen-eth",
   "repo": "noiz",
   "description": "",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package"
   ],

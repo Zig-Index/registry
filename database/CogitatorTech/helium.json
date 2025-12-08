@@ -3,7 +3,7 @@
   "owner": "CogitatorTech",
   "repo": "helium",
   "description": "A micro web framework for Zig (WIP)",
-  "type": "project",
+  "type": "package",
   "topics": [
     "web-development",
     "zig",

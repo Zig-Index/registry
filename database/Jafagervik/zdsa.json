@@ -3,7 +3,7 @@
   "owner": "Jafagervik",
   "repo": "zdsa",
   "description": "Data structures in zig",
-  "type": "project",
+  "type": "package",
   "topics": [
     "zig-package",
     "dsa",

@@ -3,7 +3,7 @@
   "owner": "bogwi",
   "repo": "SortedMap",
   "description": "Map for fast storing key-value pairs sorted by key",
-  "type": "project",
+  "type": "package",
   "topics": [
     "skiplist",
     "sorted-data",

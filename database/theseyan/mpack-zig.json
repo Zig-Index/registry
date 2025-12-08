@@ -3,7 +3,7 @@
   "owner": "theseyan",
   "repo": "mpack-zig",
   "description": "MessagePack bindings for Zig / msgpack.org[Zig]",
-  "type": "project",
+  "type": "package",
   "topics": [
     "messagepack",
     "mpack",
