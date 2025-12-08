@@ -1,5 +1,5 @@
 {
-  "lastSync": "2025-12-07T23:21:28.391Z",
+  "lastSync": "2025-12-08T01:52:11.029Z",
   "repos": {
     "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3": {
       "id": "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3",
@@ -321,9 +321,9 @@
       "name": "zigar",
       "owner": "chung-leong",
       "type": "package",
-      "updatedAt": "2025-12-06T23:51:29Z",
-      "commitHash": "5b5d91ef545143925cb3c6f59ee44c4b3da02dfc",
-      "lastSynced": "2025-12-07T01:59:46.615Z"
+      "updatedAt": "2025-12-08T01:01:12Z",
+      "commitHash": "ad7bdfbe70ef9ef1fdd9209f67f810aa6d2bd0cb",
+      "lastSynced": "2025-12-08T01:52:10.023Z"
     },
     "MDEwOlJlcG9zaXRvcnkzMzIxNDMyNjM=": {
       "id": "MDEwOlJlcG9zaXRvcnkzMzIxNDMyNjM=",
@@ -4002,9 +4002,9 @@
       "name": "registry",
       "owner": "Zig-Index",
       "type": "package",
-      "updatedAt": "2025-12-07T22:33:59Z",
-      "commitHash": "1200d8baf04bd89fd57637d2942128fdb20a72ef",
-      "lastSynced": "2025-12-07T23:21:27.389Z"
+      "updatedAt": "2025-12-07T23:21:32Z",
+      "commitHash": "b84061c8ccc7ebbbc9bea4170995eecc1356711e",
+      "lastSynced": "2025-12-08T01:52:10.027Z"
     },
     "R_kgDOOHrEMA": {
       "id": "R_kgDOOHrEMA",
@@ -8483,10 +8483,10 @@
       "id": "R_kgDOOPrffQ",
       "name": "data-structurez",
       "owner": "definitepotato",
-      "type": "project",
-      "updatedAt": "2025-11-11T15:15:44Z",
-      "commitHash": "17eea2e8fa05493167b6cf98e74dd3c11e6ad26c",
-      "lastSynced": "2025-12-06T18:11:03.774Z"
+      "type": "package",
+      "updatedAt": "2025-12-08T01:45:25Z",
+      "commitHash": "aedc774c32669bcdbd8857d454d996a3d811cd56",
+      "lastSynced": "2025-12-08T01:52:10.027Z"
     },
     "R_kgDOQWm9-A": {
       "id": "R_kgDOQWm9-A",
