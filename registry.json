@@ -1,5 +1,5 @@
 {
-  "lastSync": "2025-12-08T05:27:08.533Z",
+  "lastSync": "2025-12-08T06:39:57.838Z",
   "repos": {
     "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3": {
       "id": "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3",
@@ -4002,9 +4002,9 @@
       "name": "registry",
       "owner": "Zig-Index",
       "type": "package",
-      "updatedAt": "2025-12-08T04:37:15Z",
-      "commitHash": "d2585eb007ef8129e938d4150ee96bf9a88779ec",
-      "lastSynced": "2025-12-08T05:27:07.467Z"
+      "updatedAt": "2025-12-08T05:27:13Z",
+      "commitHash": "680069ef739121e3a89a722f49559979167d3bc4",
+      "lastSynced": "2025-12-08T06:39:56.783Z"
     },
     "R_kgDOOHrEMA": {
       "id": "R_kgDOOHrEMA",
