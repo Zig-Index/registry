@@ -1,14 +1,14 @@
 {
-  "lastSync": "2025-12-08T03:25:28.155Z",
+  "lastSync": "2025-12-08T04:37:10.560Z",
   "repos": {
     "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3": {
       "id": "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3",
       "name": "libsodium",
       "owner": "jedisct1",
-      "type": "project",
-      "updatedAt": "2025-12-06T14:55:11Z",
-      "commitHash": "9bd8c451406ef8634169a6ec8c9b99d7f5cdf6c0",
-      "lastSynced": "2025-12-06T18:07:39.743Z"
+      "type": "package",
+      "updatedAt": "2025-12-08T03:54:17Z",
+      "commitHash": "5a722d2f48c7d31a7eac84881fbdd3b2c977290b",
+      "lastSynced": "2025-12-08T04:37:09.502Z"
     },
     "R_kgDOIxEyIA": {
       "id": "R_kgDOIxEyIA",
@@ -3750,9 +3750,9 @@
       "name": "zli",
       "owner": "mahiremirhan",
       "type": "package",
-      "updatedAt": "2025-12-07T21:33:38Z",
-      "commitHash": "ca5c3a51dcff49a7bd7b5a33ed78e0ec0cea45ec",
-      "lastSynced": "2025-12-07T22:21:32.870Z"
+      "updatedAt": "2025-12-08T03:48:25Z",
+      "commitHash": "3e83c12c56a469a3b635c590ccbb4067a59d99ab",
+      "lastSynced": "2025-12-08T04:37:09.558Z"
     },
     "R_kgDOJI-a-w": {
       "id": "R_kgDOJI-a-w",
@@ -4002,9 +4002,9 @@
       "name": "registry",
       "owner": "Zig-Index",
       "type": "package",
-      "updatedAt": "2025-12-08T01:52:15Z",
-      "commitHash": "c1df131e15b8075b882a5e3b5c337922f1d01d4e",
-      "lastSynced": "2025-12-08T03:25:27.109Z"
+      "updatedAt": "2025-12-08T03:25:32Z",
+      "commitHash": "b3593c6bca1bdbabff367a318c2c6f31842d47d2",
+      "lastSynced": "2025-12-08T04:37:09.558Z"
     },
     "R_kgDOOHrEMA": {
       "id": "R_kgDOOHrEMA",

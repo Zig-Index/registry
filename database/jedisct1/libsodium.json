@@ -3,17 +3,17 @@
   "owner": "jedisct1",
   "repo": "libsodium",
   "description": "A modern, portable, easy to use crypto library.",
-  "type": "project",
+  "type": "package",
   "topics": [
     "crypto",
     "cryptography",
     "c",
     "zig-package"
   ],
-  "stars": 13217,
+  "stars": 13220,
   "forks": 1831,
   "watchers": 372,
-  "updated_at": "2025-12-06T14:55:11Z",
+  "updated_at": "2025-12-08T03:54:17Z",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/124872?v=4",
   "releases": [
     {
