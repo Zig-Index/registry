@@ -1,5 +1,5 @@
 {
-  "lastSync": "2025-12-08T10:30:15.780Z",
+  "lastSync": "2025-12-08T11:22:57.685Z",
   "repos": {
     "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3": {
       "id": "MDEwOlJlcG9zaXRvcnk3NzEwNjQ3",
@@ -42,9 +42,9 @@
       "name": "microzig",
       "owner": "ZigEmbeddedGroup",
       "type": "package",
-      "updatedAt": "2025-12-07T16:58:42Z",
-      "commitHash": "0b5a6204ff9143b0d8442466ad838a0ae9160467",
-      "lastSynced": "2025-12-07T17:19:29.790Z"
+      "updatedAt": "2025-12-08T10:35:59Z",
+      "commitHash": "33da8f0dee5fe04c565b2276ff78e056d9c899ae",
+      "lastSynced": "2025-12-08T11:22:56.377Z"
     },
     "R_kgDOIoahtw": {
       "id": "R_kgDOIoahtw",
@@ -4002,9 +4002,9 @@
       "name": "registry",
       "owner": "Zig-Index",
       "type": "project",
-      "updatedAt": "2025-12-08T09:39:12Z",
-      "commitHash": "78ac6372d149418a5e52c346c2d6695acc84f50e",
-      "lastSynced": "2025-12-08T10:29:39.482Z"
+      "updatedAt": "2025-12-08T10:30:20Z",
+      "commitHash": "a5579f85982436e12c90d273b4b7bdaf143e4c7c",
+      "lastSynced": "2025-12-08T11:22:56.681Z"
     },
     "R_kgDOOHrEMA": {
       "id": "R_kgDOOHrEMA",
@@ -5163,9 +5163,9 @@
       "name": "bench",
       "owner": "pyk",
       "type": "package",
-      "updatedAt": "2025-12-08T09:33:44Z",
-      "commitHash": "e3f447b10695856ab2b9446165a036c9b9120586",
-      "lastSynced": "2025-12-08T09:38:15.561Z"
+      "updatedAt": "2025-12-08T11:03:36Z",
+      "commitHash": "006b0f4a715296d4d06cbc97ef6f1e2bf5c3f8dd",
+      "lastSynced": "2025-12-08T11:22:56.681Z"
     },
     "MDEwOlJlcG9zaXRvcnkyNTA4OTE4NTc=": {
       "id": "MDEwOlJlcG9zaXRvcnkyNTA4OTE4NTc=",
@@ -8594,7 +8594,7 @@
       "type": "package",
       "updatedAt": "2025-09-13T18:18:13Z",
       "commitHash": "90884536007e91f6f9841353e882f5c64d286fc9",
-      "lastSynced": "2025-12-08T10:29:48.804Z"
+      "lastSynced": "2025-12-08T11:22:56.681Z"
     },
     "R_kgDOM00r_w": {
       "id": "R_kgDOM00r_w",
@@ -8603,7 +8603,7 @@
       "type": "package",
       "updatedAt": "2025-02-11T13:55:36Z",
       "commitHash": "9119e8fc6ccb91091c9a0113e56e2739d95f690f",
-      "lastSynced": "2025-12-08T10:29:58.411Z"
+      "lastSynced": "2025-12-08T11:22:56.682Z"
     },
     "R_kgDOOzep6g": {
       "id": "R_kgDOOzep6g",
@@ -8612,7 +8612,7 @@
       "type": "package",
       "updatedAt": "2025-06-01T02:22:50Z",
       "commitHash": "4ce0f19f06a6f350682cfdb77053bc4ac19969ff",
-      "lastSynced": "2025-12-08T10:30:03.470Z"
+      "lastSynced": "2025-12-08T11:22:56.682Z"
     },
     "R_kgDOOz1SQg": {
       "id": "R_kgDOOz1SQg",
@@ -8621,7 +8621,7 @@
       "type": "package",
       "updatedAt": "2025-07-19T17:51:50Z",
       "commitHash": "90f9f5b5892f248426f86ec87d2ad210017b4fbb",
-      "lastSynced": "2025-12-08T10:29:43.755Z"
+      "lastSynced": "2025-12-08T11:22:56.681Z"
     },
     "R_kgDOQGJjVg": {
       "id": "R_kgDOQGJjVg",
@@ -8630,7 +8630,7 @@
       "type": "package",
       "updatedAt": "2025-10-21T02:11:49Z",
       "commitHash": "69c56248feea188d4bd3b973c5df4befa474c87a",
-      "lastSynced": "2025-12-08T10:30:14.775Z"
+      "lastSynced": "2025-12-08T11:22:56.682Z"
     },
     "R_kgDOQKRWnA": {
       "id": "R_kgDOQKRWnA",
@@ -8639,7 +8639,7 @@
       "type": "package",
       "updatedAt": "2025-11-02T20:57:01Z",
       "commitHash": "7916221c64219bff9e407bd3e22ba1bd7c220dcc",
-      "lastSynced": "2025-12-08T10:29:58.412Z"
+      "lastSynced": "2025-12-08T11:22:56.682Z"
     },
     "R_kgDOLN6EIw": {
       "id": "R_kgDOLN6EIw",
