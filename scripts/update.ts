@@ -40,7 +40,7 @@ function getGitHubToken(): string | undefined {
 function getHeaders(): Record<string, string> {
   const token = getGitHubToken();
   if (!token) {
-    console.error('Error: GH_TOKEN or GITHUB_TOKEN is not set in .env file.');
+    console.error('Error: GH_TOKEN is not set in .env file (will also accept GITHUB_TOKEN as fallback).');
     process.exit(1);
   }
   return {
