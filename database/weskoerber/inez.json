@@ -1,0 +1,29 @@
+{
+  "name": "inez",
+  "owner": "weskoerber",
+  "repo": "inez",
+  "description": "Inez - A fast INI parser",
+  "type": "package",
+  "topics": [
+    "tools",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2024-12-28T22:24:26Z",
+  "readme": "[![test](https://github.com/weskoerber/inez/actions/workflows/test.yaml/badge.svg)](https://github.com/weskoerber/inez/actions/workflows/test.yaml)\n[![docs](https://github.com/weskoerber/inez/actions/workflows/docs.yaml/badge.svg)](https://github.com/weskoerber/inez/actions/workflows/docs.yaml)\n\n# Inez - A fast INI parser\n\n## Quickstart\n\n1. Fetch *inez* using Zig's package manager\n\n    ```shell\n    zig fetch --save git+https://github.com/weskoerber/inez#main\n    ```\n\n2. Add *inez* to your artifacts in `build.zig`\n\n    ```zig\n    const std = @import(\"std\");\n\n    pub fn build(b: *std.Build) void {\n        const target = b.standardTargetOptions(.{});\n        const optimize = b.standardOptimizeOption(.{});\n\n        const inez = b.dependency(\"inez\", .{\n                .target = target,\n                .optimize = optimize,\n        }).module(\"inez\");\n\n        const my_exe = b.addExecutable(.{\n            .name = \"my_exe\",\n            .root_source_file = b.path(\"src/main.zig\"),\n            .target = target,\n            .optimize = optimize,\n        });\n\n        my_exe.root_module.addImport(inez);\n    }\n    ```\n\n## Usage\n\nTo use *inez*, there are 4 main steps:\n1. Initialize *inez*\n2. Load a document\n3. Parse the document\n4. Use parsed document\n\nSee the `examples/` directory for some examples. You can run them by using the\n`example` step (where `name` is the name of the example):\n```shell\nzig build example -Dexample=<name>\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/28966224?u=899d7f0c26e0f90d797542eaa9d264f776f0b643&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Tennessee, United States",
+  "owner_blog": "https://www.weskoerber.com",
+  "owner_twitter_username": null,
+  "owner_followers": 8,
+  "owner_following": 34,
+  "owner_created_at": "2017-05-25T21:04:19Z",
+  "homepage": "https://weskoerber.github.io/inez/",
+  "license": "MIT",
+  "category": "library"
+}

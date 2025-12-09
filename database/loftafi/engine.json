@@ -10,7 +10,7 @@
   "stars": 2,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-12-02T05:02:09Z",
+  "updated_at": "2025-12-09T02:31:09Z",
   "dependencies": [
     {
       "name": "sdl",
@@ -29,8 +29,8 @@
     },
     {
       "name": "resources",
-      "url": "git+https://github.com/loftafi/resources.git#09fe6e0dd0fec98096cd63fba15286e3441359d2",
-      "hash": "resources-0.4.0-J0GwIySNAQBvdKL1b7tFxAq7qevZ0CCdIuRkjom8Qnsv"
+      "url": "git+https://github.com/loftafi/resources.git#2d842bc2e48e897123bacdc1d11c1b7f47f75416",
+      "hash": "resources-0.5.1-J0GwI9WaAQCMBhfbQky1jRbG6JTSLhMHusRix33fgLy1"
     }
   ],
   "minimum_zig_version": "0.15.2",

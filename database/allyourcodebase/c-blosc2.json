@@ -1,0 +1,46 @@
+{
+  "name": "c-blosc2",
+  "owner": "allyourcodebase",
+  "repo": "c-blosc2",
+  "description": "c-blosc2 ported to the zig build system",
+  "type": "package",
+  "topics": [
+    "data-store",
+    "zig",
+    "zig-lang",
+    "zig-language",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-10-23T19:59:52Z",
+  "dependencies": [
+    {
+      "name": "c_blosc2",
+      "url": "git+https://github.com/Blosc/c-blosc2?ref=v2.21.3#0c853a639ba97997e33e29db9eed202459ebc6f0",
+      "hash": "N-V-__8AABtlIQEWY9A8rCWuxQog0nf3MXG0TBWr3HNyRqjv"
+    },
+    {
+      "name": "lz4",
+      "url": "git+https://github.com/allyourcodebase/lz4.git#873969ee73aecb3c35203feaf0b5727b9d02b864",
+      "hash": "lz4-1.10.0-5-ewyzw7YNAADOUkQ7M9fjW005oGzxt9b6m0uPd_kQC48z"
+    },
+    {
+      "name": "zstd",
+      "url": "git+https://github.com/allyourcodebase/zstd.git?ref=1.5.7#01327d49cbc56dc24c20a167bb0055d7fc23de84",
+      "hash": "zstd-1.5.7-KEItkJ8vAAC5_rRlKmLflYQ-eKXbAIQBWZNmmJtS18q0"
+    }
+  ],
+  "minimum_zig_version": "0.15.2",
+  "readme": "[![CI](https://github.com/allyourcodebase/c-blosc2/actions/workflows/ci.yaml/badge.svg)](https://github.com/allyourcodebase/c-blosc2/actions)\n\n# c-blosc2\n\nThis is [c-blosc2](https://github.com/Blosc/c-blosc2), packaged for [Zig](https://ziglang.org/).\n\n## Installation\n\nFirst, update your `build.zig.zon`:\n\n```\n# Initialize a `zig build` project if you haven't already\nzig init\nzig fetch --save git+https://github.com/allyourcodebase/c-blosc2.git\n```\n\nYou can then link `c-blosc2` in your `build.zig` with:\n\n```zig\nconst c_blosc2_dependency = b.dependency(\"c_blosc2\", .{\n    .target = target,\n    .optimize = optimize,\n});\nyour_exe.linkLibrary(c_blosc2_dependency.artifact(\"blosc2\"));\n```\n\n## Compatibility\n\n| CPU      | OS        | ABI    | Status           |\n|----------|-----------|--------|------------------|\n| `x86_64` | `linux`   | `gnu`  | Tested with CI   |\n| `x86_64` | `linux`   | `musl` | Manually tested  |\n| `x86_64` | `windows` | `gnu`  | Manually tested  |\n|          | `windows` | `msvc` | Fails to compile |\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
+  "releases": [],
+  "owner_bio": "...are belong to Ziguanas, but we'd also be delighted to give them back!",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2023-09-28T21:29:33Z",
+  "category": "library"
+}
