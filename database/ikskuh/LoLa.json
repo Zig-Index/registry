@@ -14,10 +14,10 @@
     "interpreter",
     "zig-package"
   ],
-  "stars": 224,
+  "stars": 225,
   "forks": 12,
   "watchers": 7,
-  "updated_at": "2025-11-30T10:18:47Z",
+  "updated_at": "2025-12-08T15:19:23Z",
   "dependencies": [
     {
       "name": "args",

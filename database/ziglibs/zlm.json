@@ -12,10 +12,10 @@
     "opengl-math",
     "game-math"
   ],
-  "stars": 247,
+  "stars": 248,
   "forks": 44,
   "watchers": 2,
-  "updated_at": "2025-12-07T19:12:28Z",
+  "updated_at": "2025-12-09T01:15:04Z",
   "minimum_zig_version": "0.15.1",
   "readme": "# zlm\nZig linear mathemathics library.\n\nCurrent provides the following types:\n\n- `Vec2`\n- `Vec3`\n- `Vec4`\n- `Mat2`\n- `Mat3`\n- `Mat4`\n\nThe library is currently built around the OpenGL coordinate system and is fully generic on the basic data type.\n\n## Example\n\n```zig\n// using `as(f32)` to specify precision of fields\nconst math = @import(\"zlm\").as(f32);\n\n/// Accelerate the given velocity `v` by `a` over `t`.\nfn accelerate(v: math.Vec3, a: math.Vec3, t: f32) math.Vec3 {\n  return v.add(a.scale(t));\n}\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/65570835?v=4",

@@ -8,10 +8,10 @@
     "serialization-format",
     "zig-package"
   ],
-  "stars": 497,
-  "forks": 37,
+  "stars": 498,
+  "forks": 36,
   "watchers": 7,
-  "updated_at": "2025-12-08T14:00:31Z",
+  "updated_at": "2025-12-08T14:34:15Z",
   "dependencies": [
     {
       "name": "known_folders",
@@ -80,7 +80,7 @@
   "owner_location": "Milan, Italy",
   "owner_blog": "https://kristoff.it",
   "owner_twitter_username": null,
-  "owner_followers": 1292,
+  "owner_followers": 1294,
   "owner_following": 22,
   "owner_created_at": "2012-07-10T15:27:34Z",
   "homepage": "https://ziggy-lang.io",
