@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 12,
+  "stars": 13,
   "forks": 7,
   "watchers": 1,
-  "updated_at": "2025-11-19T19:59:34Z",
+  "updated_at": "2025-12-09T10:48:43Z",
   "dependencies": [
     {
       "name": "glslang",

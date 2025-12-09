@@ -13,10 +13,10 @@
     "game-engine",
     "game-framework-engine"
   ],
-  "stars": 14,
+  "stars": 13,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-07-03T08:03:39Z",
+  "updated_at": "2025-12-09T13:37:31Z",
   "readme": "# zetaframe\n\n![GitHub Workflow Status](https://img.shields.io/github/workflow/status/zetaframe/zetaframe/Tests?style=for-the-badge)\n\nA `wip` lightweight zig game framework.\n\n## Modules\n\n### core\n\nThe core of all zetaframe applications.\n\nzetaframe is based around a Entity Component System (ECS).\n\n### math\n\nA glsl compatible linear algebra library. `wip`\n\n### render\n\nAn powerful vulkan render api. `wip`.\n\nWill later include a system that can be added directly into `core`.\n\n---\n\n## Building\n\nUse zig master.\n\n---\n\n## License\n\nSee [LICENSE.md](../master/LICENSE.md)\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/60146383?v=4",
   "releases": [],
