@@ -19,7 +19,7 @@
   "stars": 341,
   "forks": 6,
   "watchers": 3,
-  "updated_at": "2025-12-08T01:01:12Z",
+  "updated_at": "2025-12-09T09:52:16Z",
   "readme": "# Zigar\n\n![Logo](./logo.png)\n\nA software tool set that lets you utilize [Zig](https://ziglang.org/) code in your JavaScript\nprojects.\n\nConsult the [project wiki](https://github.com/chung-leong/zigar/wiki) for installation instructions\nand tutorials.\n\n## Features\n\n* Access to all Zig data types in JavaScript\n* Zig-to-JavaScript, JavaScript-to-Zig call marshalling\n* Async task management\n* Threads in native code and WebAssembly\n* Emulating of file system operations\n* Support for MacOS, Linux, and Windows (both 64-bit and 32-bit)\n* Support for Node.js, Bun.js, Electron, and NW.js (native code execution)\n* Support for Webpack, Rollup, and Vite (WebAssembly)\n\n## Versioning\n\nThe major and minor version numbers of Zigar correspond to the version of the Zig compiler\nit's designed for. The current version is 0.14.2. It works with Zig 0.14.0 and 0.14.1.\n\nA version designed for Zig 0.15.x is currently in the works.\n\n## Technical support\n\nIf you have questions concerning this project, please post them at this project's\n[discussion section](https://github.com/chung-leong/zigar/discussions). I can also be contacted at\n[ziggit.dev](https://ziggit.dev/), which also happens to be an excellent forum for finding help on\nall matters related to the Zig language.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/2793150?u=0978273c5cb88332637e8ebff6d828c567a9eff0&v=4",
   "releases": [],
