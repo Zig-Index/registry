@@ -12,10 +12,10 @@
     "zig-package",
     "zig-library"
   ],
-  "stars": 5,
+  "stars": 6,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-12-07T05:02:06Z",
+  "updated_at": "2025-12-09T05:56:34Z",
   "dependencies": [
     {
       "name": "zevy_reflect",
