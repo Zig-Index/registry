@@ -1,0 +1,37 @@
+{
+  "name": "leveldb.zig",
+  "owner": "ChainSafe",
+  "repo": "leveldb.zig",
+  "description": "Zig bindings for Leveldb",
+  "type": "package",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-10-21T21:15:33Z",
+  "dependencies": [
+    {
+      "name": "leveldb",
+      "url": "git+https://github.com/google/leveldb#ac691084fdc5546421a55b25e7653d450e5a25fb",
+      "hash": "N-V-__8AAFYkDwAaCkrqWx3fY7zEKG2rp55dCDmkZYyv5zqn"
+    },
+    {
+      "name": "snappy",
+      "url": "git+https://github.com/chainsafe/snappy.zig#ede2ad602ac9ffa506e3724a2bf5fc14c806187f",
+      "hash": "snappy-0.1.0-n4AaqtMYAACgB1kHWQ2_CFI-gbtYEUCbXyYlQZ2ENyfd"
+    }
+  ],
+  "minimum_zig_version": "0.14.1",
+  "readme": "# leveldb.zig\n\nA minimal, idiomatic Zig wrapper around LevelDB's C API.\n\n## Installation\n\n1. Zig fetch\n   ```bash\n   zig fetch --save=leveldb git+https://github.com/chainsafe/leveldb.zig\n   ```\n\n2. In your `build.zig`, link the dependency\n   ```zig\n   const leveldb_module = b.dependency(\"leveldb\", .{}).module(\"leveldb\");\n   my_module.addImport(\"leveldb\", leveldb_module);\n   ```\n\n3. Import and use in your code:\n   ```zig\n   const leveldb = @import(\"leveldb\");\n   ```\n\n## Quick Start\n\nHere's a simple example to get you started:\n\n```zig\nconst std = @import(\"std\");\nconst leveldb = @import(\"leveldb\");\n\npub fn main() !void {\n    // Create options\n    var options = leveldb.Options.create();\n    defer options.destroy();\n    options.setCreateIfMissing(true);\n\n    // Open database\n    var db = try leveldb.DB.open(&options, \"/tmp/testdb\");\n    defer db.close();\n\n    // Put a key-value pair\n    var write_opts = leveldb.WriteOptions.create();\n    defer write_opts.destroy();\n    try db.put(&write_opts, \"hello\", \"world\");\n\n    // Get the value\n    var read_opts = leveldb.ReadOptions.create();\n    defer read_opts.destroy();\n    const value = try db.get(&read_opts, \"hello\");\n    if (value) |v| {\n        std.debug.print(\"Value: {s}\\n\", .{v});\n        // IMPORTANT: Free the memory allocated by LevelDB\n        leveldb.free(v.ptr);\n    }\n}\n```\n\n## API Overview\n\n### Core Types\n\n- **`DB`**: Main database handle for operations like `put`, `get`, `delete`.\n- **`Options`**: Configuration for database creation (compression, cache, etc.).\n- **`Iterator`**: For traversing key-value pairs in order.\n- **`WriteBatch`**: Groups multiple write operations atomically.\n- **`Snapshot`**: Provides consistent read views.\n- **`Cache`**: LRU cache for block caching.\n- **`Comparator`**: Custom key comparison logic.\n- **`FilterPolicy`**: Bloom filter for read optimization.\n\n### Key Functions\n\n- **Database Management**: `DB.open()`, `DB.close()`, `destroyDB()`, `repairDB()`\n- **CRUD Operations**: `DB.put()`, `DB.get()`, `DB.delete()`\n- **Iteration**: `DB.createIterator()`, `Iterator.seek()`, `Iterator.next()`\n- **Batching**: `WriteBatch.put()`, `DB.write()`\n- **Snapshots**: `DB.createSnapshot()`, `ReadOptions.setSnapshot()`\n- **Utilities**: `free()` for memory management\n\n### Error Handling\n\nAll operations return `Error!T` where `Error` includes:\n- `Corruption`: Database corruption\n- `InvalidArgument`: Bad input\n- `IOError`: File system issues\n- `Unknown`: Other errors\n\n## Examples\n\n### Basic Operations\n\n```zig\n// Open database\nvar options = leveldb.Options.create();\noptions.setCreateIfMissing(true);\nvar db = try leveldb.DB.open(&options, \"/tmp/mydb\");\n\n// Put and get\ntry db.put(&leveldb.WriteOptions.create(), \"key1\", \"value1\");\nconst val = try db.get(&leveldb.ReadOptions.create(), \"key1\");\nif (val) |v| {\n    // Use v...\n    // Then free v\n    leveldb.free(v);\n}\n\n// Delete\ntry db.delete(&leveldb.WriteOptions.create(), \"key1\");\n\n// Close\ndb.close();\noptions.destroy();\n```\n\n### Using Iterators\n\n```zig\nvar iter = db.createIterator(&leveldb.ReadOptions.create());\ndefer iter.destroy();\n\niter.seekToFirst();\nwhile (iter.valid()) {\n    const key = iter.key();\n    const value = iter.value();\n    // Process key/value (valid until next iterator move)\n    std.debug.print(\"{s} = {s}\\n\", .{key, value});\n    iter.next();\n}\n```\n\n### Write Batches\n\n```zig\nvar batch = leveldb.WriteBatch.create();\ndefer batch.destroy();\n\nbatch.put(\"key1\", \"val1\");\nbatch.put(\"key2\", \"val2\");\nbatch.delete(\"old_key\");\n\ntry db.write(&leveldb.WriteOptions.create(), &batch);\n```\n\n### Snapshots\n\n```zig\nvar snapshot = db.createSnapshot();\ndefer db.releaseSnapshot(&snapshot);\n\nvar read_opts = leveldb.ReadOptions.create();\nread_opts.setSnapshot(&snapshot);\n// Reads will see DB state at snapshot time\n```\n\n## Memory Management\n\n⚠️ **Important**: Functions `DB.get()` and `DB.propertyValue()` return slices pointing to C-allocated memory. You **must** call `leveldb.free(slice)` after use to avoid memory leaks.\n\nIterator `key()` and `value()` return slices valid only until the next iterator operation or DB modification.\n\n## License\n\nMIT",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/27474093?v=4",
+  "releases": [],
+  "owner_bio": "Building the infrastructure for web3.",
+  "owner_location": "Toronto, Canada",
+  "owner_blog": "chainsafe.io",
+  "owner_twitter_username": "chainsafeth",
+  "owner_created_at": "2017-04-14T04:59:30Z",
+  "license": "MIT",
+  "category": "library"
+}

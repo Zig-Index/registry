@@ -1,0 +1,38 @@
+{
+  "name": "snowballstem.zig",
+  "owner": "thekorn",
+  "repo": "snowballstem.zig",
+  "description": "zig wrapper for the snowball stemmer",
+  "type": "package",
+  "topics": [
+    "bindings",
+    "zig",
+    "zig-package",
+    "snowball",
+    "stemmer"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-03-15T02:58:43Z",
+  "dependencies": [
+    {
+      "name": "snowball",
+      "url": "git+https://github.com/snowballstem/snowball.git#b72b71fd51e633cb7a63d9f1883266b3d4acac11",
+      "hash": "1220f73632b55528d8a6d8ab438c82d0addc9de0cf2399ca0bd89b87fadd24f15e45"
+    }
+  ],
+  "readme": "# zig wrapper for the snowball stemmer\n\n![ci workflow](https://github.com/thekorn/snowballstem.zig/actions/workflows/ci.yaml/badge.svg)\n\n\n**NOTE**: this is a work in progress, and not yet ready for use.\n\n## Requirements\n\n- zig >= 0.14\n\n## how to use?\n\nAdd this package to your zig project:\n\n```bash\n$ zig fetch --save=snowballstem git+https://github.com/thekorn/snowballstem.zig.git#main\n```\n\nAdd dependency and import to the `build.zig` file:\n\n```zig\n...\nconst snowballstem = b.dependency(\"snowballstem\", .{\n    .target = target,\n    .optimize = optimize,\n});\n...\nexe.root_module.addImport(\"snowballstem\", snowballstem.module(\"snowballstem\"));\n```\n\nAnd then, just use it in the code:\n\n```zig\nconst std = @import(\"std\");\n\nconst Stemmer = @import(\"snowballstem\");\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer std.debug.assert(gpa.deinit() == .ok);\n    const alloc = gpa.allocator();\n\n    const stemmer = try Stemmer.list(alloc);\n    defer alloc.free(stemmer);\n\n    std.debug.print(\">>> {s}\\n\", .{stemmer});\n}\n```\n\n## Tests\n\nUsing `nix` tests can be run like\n\n```bash\n$ nix develop -c zig build test --summary all\n```\n\n## TODOS\n\n- [ ] the build is not correct, first build sometimes fails\n- [x] implement the stemmer\n- [ ] make wasm buildable\n- [ ] how to handle german umlauts?\n- [x] write test for german stemmer to check against the [upstream test suite](https://github.com/snowballstem/snowball-data/blob/master/german/voc.txt)\n- [ ] add other languages to tests (esp english)\n\n## reference\n\n- [snowball stemmer](https://github.com/snowballstem/snowball)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/576065?u=97f4478b6942170567ec5edb91efc8cba68e8260&v=4",
+  "releases": [],
+  "owner_company": "@BurdaForward",
+  "owner_location": "Munich, Germany",
+  "owner_blog": "https://www.thekorn.dev",
+  "owner_twitter_username": null,
+  "owner_followers": 19,
+  "owner_following": 9,
+  "owner_created_at": "2011-01-21T08:38:38Z",
+  "homepage": "https://github.com/thekorn/snowballstem.zig",
+  "license": "Apache-2.0",
+  "category": "library"
+}

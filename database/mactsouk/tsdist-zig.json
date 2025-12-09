@@ -1,0 +1,33 @@
+{
+  "name": "tsdist-zig",
+  "owner": "mactsouk",
+  "repo": "tsdist-zig",
+  "description": "Time Series Distances in Zig",
+  "type": "package",
+  "topics": [
+    "book",
+    "time-series",
+    "timeseries",
+    "zig",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-08-28T06:30:57Z",
+  "minimum_zig_version": "0.15.0",
+  "readme": "# Time Series Distances Zig Library\n\nA Zig library for calculating distances between time series, including Euclidean, Manhattan, Chebyshev, LCSS and EDR distances.\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/5994571?u=accf74aa6efaafad7af684e176a770fb9e5e1b1c&v=4",
+  "releases": [],
+  "owner_bio": "UNIX Systems Engineer and Technical Writer. Author of Go Systems Programming, Mastering Go (https://t.co/O2YuWr6ZnR) and Time Series Indexing.",
+  "owner_company": null,
+  "owner_location": "Greece",
+  "owner_blog": "https://www.mtsoukalos.eu/",
+  "owner_twitter_username": "mactsouk",
+  "owner_followers": 271,
+  "owner_following": 6,
+  "owner_created_at": "2013-11-20T20:12:29Z",
+  "license": "MIT",
+  "category": "library"
+}

@@ -1,0 +1,29 @@
+{
+  "name": "anne_dice",
+  "owner": "AnneKitsune",
+  "repo": "anne_dice",
+  "description": "Simple zig dice roller",
+  "type": "package",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-08-23T01:56:35Z",
+  "minimum_zig_version": "0.15.0-dev.1380+e98aeeb73",
+  "readme": "# Zig simple dice library\n\nA simple library to quickly do common dice rolls.\n\nUsage (zig):\n1. Add `anne_dice` to your module's imports.\n2. `anne_dice.d2()`\n3. Profit!\n\nUsage (C):\n1. Include `anne_dice.h`\n2. Link against `anne_dice.a`\n3. `d2()`\n4. Profit!\n\n### Available functions:\n```\nintRange(min: u32, max: u32) u32\nd2() u32\nd4() u32\nd6() u32\n/// Sums the value of `count` d6 rolls.\nd6Count(count: u32) u32\nd8() u32\nd10() u32\nd12() u32\nd20() u32\nd100() u32\n/// See documentation in `src/root.zig`\nchallengeRoll(modifier: i32) ChallengeRollResult\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/4755185?u=758b06e7f8ee6db8837014dcd854b1e9df898d34&v=4",
+  "releases": [],
+  "owner_bio": "I Press Keys on my Keyboard.",
+  "owner_company": null,
+  "owner_location": "Quebec, Canada",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 91,
+  "owner_following": 6,
+  "owner_created_at": "2013-06-21T02:30:22Z",
+  "license": "AGPL-3.0",
+  "category": "library"
+}

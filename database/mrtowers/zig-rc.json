@@ -1,0 +1,45 @@
+{
+  "name": "zig-rc",
+  "owner": "mrtowers",
+  "repo": "zig-rc",
+  "description": "Reference counting module for Zig",
+  "type": "package",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-10-16T14:48:39Z",
+  "readme": "> [!WARNING]\n> **zig-rc** is still WIP. I'm still doing **breaking changes**\n\n# Reference Counting Smart Pointer for Zig\n\nA simple and efficient implementation of a reference counting smart pointer for Zig. This library helps manage the lifetime of heap-allocated objects by automatically tracking references and freeing memory when no references remain.\n\n## Features\n\n- **Automatic Memory Management**: Simplifies memory handling by automatically freeing unused resources.\n- **Thread-Safe (Optional)**: Includes optional support for atomic reference counting for multithreaded applications.\n- **Lightweight**: Designed to be minimal and efficient.\n\n## Installation\n\n### Adding to Your Project\n\n```bash\nzig fetch --save git+https://github.com/mrtowers/zig-rc\n```\nIn `build.zig`:\n\n```zig\nconst rc = b.dependency(\"zig-rc\", .{\n    .target = target,\n    .optimize = optimize,\n});\nyour_app.root_module.addImport(\"rc\", rc.module(\"rc\"));\n```\n\n## Usage\n\n### Basic Example\n\n```zig\nconst std = @import(\"std\");\nconst Rc = @import(\"rc\").Generate(i32, .{});\n\npub fn main() !void {\n    var allocator = std.heap.page_allocator;\n\n    // Create a new reference-counted object\n    var ptr = try Rc.init(allocator, 1234);\n\n    // Access the value\n    std.debug.print(\"Value: {}\\n\", .{ptr.value});\n\n    // Clone the pointer (increments the reference count)\n    var ptr_clone = ptr.ref();\n\n    // Both pointers are valid\n    std.debug.print(\"Cloned value: {}\\n\", .{ptr_clone.value});\n\n    // Release references (automatically decrements the count)\n    _ = ptr.deref();\n    _ = ptr_clone.deref();\n}\n```\n\n## License\n\nThis project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.\n\n## Contributing\n\nContributions are welcome! Feel free to open issues or submit pull requests.\n\nAlso you can donate me [here](https://buymeacoffee.com/mrtowers), this helps alot! (mainly becouse i drink a lot of coffee)\n\nHappy coding! 🎉\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/30564150?u=90af66c587cf6ca836d3a5bfb581ebfd6272f302&v=4",
+  "releases": [
+    {
+      "tag_name": "0.2.0",
+      "name": "0.2.0",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2025-02-20T21:41:19Z",
+      "html_url": "https://github.com/mrtowers/zig-rc/releases/tag/0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.1.0",
+      "name": "0.1.0",
+      "body": "first release of zig-rc",
+      "prerelease": false,
+      "published_at": "2025-01-24T17:48:14Z",
+      "html_url": "https://github.com/mrtowers/zig-rc/releases/tag/0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 1,
+  "owner_following": 7,
+  "owner_created_at": "2017-07-30T05:00:57Z",
+  "license": "MIT",
+  "category": "library"
+}
