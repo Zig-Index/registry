@@ -1,0 +1,42 @@
+{
+  "name": "outboxx",
+  "owner": "lukashes",
+  "repo": "outboxx",
+  "description": "Outboxx - Lightweight PostgreSQL Change Data Capture in Zig",
+  "type": "application",
+  "topics": [
+    "cdc",
+    "kafka",
+    "postgresql",
+    "ziglang",
+    "zig-application"
+  ],
+  "stars": 5,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-12-10T07:44:30Z",
+  "dependencies": [
+    {
+      "name": "toml",
+      "url": "git+https://github.com/sam701/zig-toml?ref=zig-0.15#475b03c630c802f8b6bd3e239d8fc2279b4fadb8",
+      "hash": "toml-0.3.0-bV14BfV7AQD8DkuQI7skP8ekQTaBYKTO0MY_35Cw_EXo"
+    },
+    {
+      "name": "zbench",
+      "url": "https://github.com/hendriknielaender/zbench/archive/463f8d5349daf72430697c9fe42cfe0a68729859.tar.gz",
+      "hash": "zbench-0.11.1-YTdc7zgmAQDtDcHPFwsLeawui27WjMLWmUwrfz7pIlB2"
+    }
+  ],
+  "readme": "# Outboxx\n\n<picture>\n  <source media=\"(prefers-color-scheme: dark)\" srcset=\"logo/dark/logo-animated-icon-only.svg\">\n  <source media=\"(prefers-color-scheme: light)\" srcset=\"logo/light/logo-animated-icon-only.svg\">\n  <img alt=\"Outboxx\" src=\"logo/light/logo-animated-icon-only.svg\" width=\"160\" align=\"left\" style=\"margin-right: 20px; margin-bottom: 10px;\">\n</picture>\n\n**PostgreSQL Change Data Capture in Zig**\n\nLightweight tool that streams WAL changes to Kafka. Built in Zig for minimal resource consumption.\n\n**🚀 Development Status**: Core CDC pipeline implemented with streaming replication. Under active optimization, approaching alpha release.\n\n## What is Outboxx?\n\nOutboxx captures PostgreSQL database changes in real-time and streams them to Kafka topics. Inspired by Debezium but designed for simplicity and low resource usage.\n\n**Key Features:**\n- PostgreSQL streaming replication (pgoutput) ✅\n- Multi-table CDC streams ✅\n- Kafka producer integration ✅\n- TOML-based configuration ✅\n- Memory-safe Zig implementation ✅\n\n## Current vs Planned\n\n| Component | Status |\n|-----------|--------|\n| PostgreSQL Streaming Replication | ✅ Working |\n| Message Processing | ✅ Working |\n| Kafka Producer | ✅ Working |\n| TOML Configuration | ✅ Working |\n| Multi-stream Support | ✅ Working |\n| Schema Registry | 📋 Planned |\n| Table/Column Filtering | 📋 Planned |\n| Production Features | 📋 Planned |\n\n## Inspired by Debezium\n\nOutboxx is heavily inspired by [Debezium](https://debezium.io/), the industry standard for Change Data Capture. Debezium is an excellent, battle-tested solution with a rich feature set. However, being a JVM-based application, it comes with resource overhead that may not be suitable for all environments:\n\n| Aspect | Outboxx | Debezium |\n|--------|---------|----------|\n| **Runtime** | Native binary | JVM (Kafka Connect) |\n| **Memory Usage** | <10 MB | ~200-500 MB |\n| **Startup Time** | <1s | 10-30s |\n| **Throughput** | ~105k events/sec | ~150k events/sec |\n| **Configuration** | Simple TOML | Complex JSON/Properties |\n| **Deployment** | Single binary | Kafka Connect cluster |\n\n**Choose Outboxx when:**\n- Memory is constrained (containers, edge computing, cost optimization)\n- Simple deployment without Kafka Connect infrastructure\n- Learning Zig or experimenting with lightweight CDC solutions\n- Native binary and minimal dependencies preferred\n\n**Stick with Debezium when:**\n- Production-critical workloads requiring mature, battle-tested solution\n- Complex transformations and extensive connector ecosystem needed\n- Kafka Connect infrastructure already in place\n- Enterprise support and maximum feature coverage required\n\nOutboxx aims to bring Debezium's excellent CDC concepts to resource-constrained environments where every MB of RAM matters.\n\n## Configuration Example\n\n```toml\n[metadata]\nversion = \"v0\"\n\n[source]\ntype = \"postgres\"\n\n[source.postgres]\nhost = \"localhost\"\nport = 5432\ndatabase = \"mydb\"\nuser = \"postgres\"\npassword_env = \"POSTGRES_PASSWORD\"\nslot_name = \"outboxx_slot\"\npublication_name = \"outboxx_publication\"\n\n[sink]\ntype = \"kafka\"\n\n[sink.kafka]\nbrokers = [\"localhost:9092\"]\n\n# Multiple streams for different tables\n[[streams]]\nname = \"users-stream\"\n\n[streams.source]\nresource = \"users\"\noperations = [\"insert\", \"update\", \"delete\"]\n\n[streams.flow]\nformat = \"json\"\n\n[streams.sink]\ndestination = \"user_changes\"\n\n[[streams]]\nname = \"orders-stream\"\n\n[streams.source]\nresource = \"orders\"\noperations = [\"insert\", \"update\"]\n\n[streams.flow]\nformat = \"json\"\n\n[streams.sink]\ndestination = \"order_changes\"\n```\n\nFor complete configuration examples and architectural documentation, see [`docs/examples/config.toml`](docs/examples/config.toml).\n\n## Quick Start\n\n### 1. Prerequisites\n\n**PostgreSQL Requirements**: Version 14 or later (tested and supported versions)\n\n**Configure PostgreSQL** (`postgresql.conf`):\n```ini\nwal_level = logical              # Required for logical replication (CDC)\n```\n\nRestart PostgreSQL after configuration changes.\n\n**Create User** (run as PostgreSQL superuser):\n\n```sql\n-- Create user with REPLICATION attribute (required for replication slots and WAL access)\nCREATE USER outboxx_user WITH REPLICATION PASSWORD 'secure_password';\n\n-- Grant database access\nGRANT CONNECT ON DATABASE my_database TO outboxx_user;\n\n-- Grant schema access (CREATE needed for creating publications)\nGRANT USAGE, CREATE ON SCHEMA public TO outboxx_user;\n\n-- Grant table access (SELECT needed for logical replication)\nGRANT SELECT ON TABLE my_table TO outboxx_user;\n\n-- Enable REPLICA IDENTITY FULL (required for capturing complete row data in UPDATE/DELETE)\nALTER TABLE my_table REPLICA IDENTITY FULL;\n```\n\n**Note**: Outboxx automatically creates replication slot and publication on startup. Currently supports `public` schema only.\n\n**Kafka Setup**:\n- Topics are auto-created by default (`auto.create.topics.enable=true`)\n- For production: pre-create topics with desired partitions and replication factor\n- Outboxx will fail-fast if topic doesn't exist and auto-create is disabled\n\n### 2. Running Outboxx\n\n```bash\n# Build the application\nmake build\n\n# Run with your configuration\nexport POSTGRES_PASSWORD=\"your_password\"\n./zig-out/bin/outboxx --config config.toml\n```\n\n### 3. Production Deployment\n\n⚠️ **Outboxx requires a process supervisor** (systemd, Kubernetes, Docker restart policy, supervisord) as it uses fail-fast error handling. PostgreSQL replication slots preserve state across restarts.\n\n## Contributing\n\nThis is a learning project for Zig programming. See [`dev/README.md`](dev/README.md) for development setup.\n\n### Architecture Documentation\n\nFor complete configuration examples and design vision, see [`docs/examples/`](docs/examples/).\n\n## License\n\nMIT License - See LICENSE file for details.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1044059?u=d9fe74efba44b5b6ca773857fcd09ba1f961f1b0&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Germany",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 22,
+  "owner_following": 9,
+  "owner_created_at": "2011-09-12T10:45:59Z",
+  "license": "MIT",
+  "category": "cli"
+}
