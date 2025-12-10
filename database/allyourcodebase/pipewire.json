@@ -10,7 +10,7 @@
   "stars": 20,
   "forks": 0,
   "watchers": 2,
-  "updated_at": "2025-11-25T03:24:29Z",
+  "updated_at": "2025-12-10T01:32:04Z",
   "dependencies": [
     {
       "name": "valgrind_h",
@@ -23,18 +23,13 @@
       "hash": "N-V-__8AAKYw2AD301ZQsWszbYSWZQF5y-q4WXJif0UGRvFh"
     },
     {
-      "name": "sdl",
-      "url": "git+https://github.com/allyourcodebase/SDL3#af9c32ce4824e0ad4337447434c40f2b672faf94",
-      "hash": "sdl-0.0.0-i4QD0btgqAABajEXrQnyZr1xVsk7LM48w2nBmuQ5gdfr"
-    },
-    {
       "name": "zin",
-      "url": "git+https://github.com/marler8997/zin#d3e230690f09debdb99dffe4586ad19f9dfb4716",
-      "hash": "zin-0.0.0-W7QDx6kKAwCVg-wWMO4FdpvZMH66NJpc9wFDdxp5c8E2"
+      "url": "git+https://github.com/marler8997/zin#62706713b7089b4220d8e1eb49f8d776138a9058",
+      "hash": "zin-0.0.0-W7QDx9BaAwC-H1uS9Cz68oMn9uh5fWuVis5b-eqhCeeq"
     }
   ],
   "minimum_zig_version": "0.15.1",
-  "readme": "# pipewire\n\nPipewire client library, statically linked, ported to the Zig build system.\n\n\n## Motivation\n\nI want a static executable that can play audio and turn screen contents into a video feed. The pipewire library makes heavy use of `dlopen` internally, so this is nontrivial.\n\n## Strategy\n\nThis library builds pipewire with an alternate implementation of `dlfcn.h` (and some filesystem APIs) that look for data in a symbol table statically compiled with the executable, instead of loading the data at runtime.\n\nFor more information, see [src/wrap](src/wrap).\n\nThis project follows the pristine tarball approach. No modifications are required to the upstream pipewire source.\n\n## Status\n\nYou can run the `video-play` example with `zig build video-play` to see the current webcam feed. This currently works without pipewire accessing the dynamic linker, but the example executable isn't fully static since it relies on SDL. I plan to port the example away from SDL so that this can be changed.\n\nOnly the pipewire plugins/modules required for this example are currently built. To use other parts of the pipewire API, you may need to add more symbols to [src/wrap/dlfcn.zig](src/wrap/dlfcn.zig) and regenerate `c.zig` if additional pipewire headers are required.\n\n\n## Usage\n\nFirst, add pipewire to your `build.zig.zon`:\n```sh\nzig fetch --save git+https://github.com/allyourcodebase/pipewire\n```\n\nThen, link it to you executable in `build.zig`\n```zig\nconst pipewire = b.dependency(\"pipewire\", .{\n    .optimize = optimize,\n    .target = target,\n});\n\n// For Zig projects, add the `pipewire` module.\nmy_zig_exe.root_module.addImport(\"pipewire\", pipewire.module(\"pipewire\"));\n\n// For C projects, link the `pipewire-0.3` static library.\nmy_c_exe.linkLibrary(pipewire.artifact(\"pipewire-0.3\"));\n```\n\nYou can then access pipewire as you would normally from C, you can import the already translated headers from Zig. This is necessary for now as the headers can't yet be translated automatically, in the future you'll be able to use `@cImport` directly:\n```zig\nconst pw = @import(\"pipewire\").c;\n\npw.pw_init(0, null);\ndefer pw.pw_deinit();\n\n// ...\n```\n\nSee [`src/examples`](`src/examples`) for more information.\n",
+  "readme": "# pipewire\n\nPipewire client library, statically linked, ported to the Zig build system.\n\n\n## Motivation\n\nI want a static executable that can play audio and turn screen contents into a video feed. The pipewire library makes heavy use of `dlopen`  internally, so this is nontrivial.\n\n## Strategy\n\nThis library builds pipewire with an alternate implementation of `dlfcn.h` (and some filesystem APIs) that look for data in a symbol table statically compiled with the executable, instead of loading the data at runtime.\n\nFor more information, see [src/wrap](src/wrap).\n\nThis project follows the pristine tarball approach. No modifications are required to the upstream pipewire source.\n\n## Example\n\nYou can run the `video-play` example with `zig build video-play` to see the current webcam feed. Use something like `-Dtarget=x86_64-linux-musl` if you want full static linking.\n\nNote that the video will be fairly low resolution as the example doesn't have a real graphics stack and as such is rendering pixels one at a time. This example also only supports the YUV2 video format.\n\n## Status\n\nOnly the pipewire plugins/modules required for the provided example are currently built. To use other parts of the pipewire API, you may need to add more symbols to the `libs` table in [src/wrap/dlfcn.zig](src/wrap/dlfcn.zig) and regenerate `c.zig` if additional pipewire headers are required.\n\n## Usage\n\nFirst, add pipewire to your `build.zig.zon`:\n```sh\nzig fetch --save git+https://github.com/allyourcodebase/pipewire\n```\n\nThen, link it to you executable in `build.zig`\n```zig\nconst pipewire = b.dependency(\"pipewire\", .{\n    .optimize = optimize,\n    .target = target,\n});\n\n// For Zig projects, add the `pipewire` module.\nmy_zig_exe.root_module.addImport(\"pipewire\", pipewire.module(\"pipewire\"));\n\n// For C projects, link the `pipewire-0.3` static library.\nmy_c_exe.linkLibrary(pipewire.artifact(\"pipewire-0.3\"));\n```\n\nYou can then access pipewire as you would normally from C, you can import the already translated headers from Zig. This is necessary for now as the headers can't yet be translated automatically, in the future you'll be able to use `@cImport` directly:\n```zig\nconst pw = @import(\"pipewire\").c;\n\npw.pw_init(0, null);\ndefer pw.pw_deinit();\n\n// ...\n```\n\nSee [`src/examples`](`src/examples`) for more information.\n\n### Help, I'm getting undefined symbols!\n\nIf you import the Pipewire zig module but don't reference it, the import won't get evaluated and the wrapper functions won't get exported.\n\nTo resolve this, use something from the pipewire module, or declare `comptime { _ = @import(\"pipewire\"); }` to force evaluation.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
   "releases": [],
   "owner_bio": "...are belong to Ziguanas, but we'd also be delighted to give them back!",
