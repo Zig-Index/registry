@@ -12,15 +12,15 @@
     "zig-package",
     "zig-library"
   ],
-  "stars": 6,
+  "stars": 7,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-12-09T05:56:34Z",
+  "updated_at": "2025-12-10T02:40:38Z",
   "dependencies": [
     {
       "name": "zevy_reflect",
-      "url": "git+https://github.com/captkirk88/zevy-reflect#e92be3991320b249dc692c2441041ad002605887",
-      "hash": "zevy_reflect-0.0.1-8SzYxkTAAADe3roYg_Axq3LJDlPn5K-tLv6EUyYntZ9S"
+      "url": "git+https://github.com/captkirk88/zevy-reflect#cb8c6f72e033d1d4e0a3d4d685110c72c68c8d4b",
+      "hash": "zevy_reflect-0.0.1-8SzYxiPRAABMxJQZRLVw4GvJAt_9jeGWqRPdowqZCxv2"
     },
     {
       "name": "zevy_mem",
