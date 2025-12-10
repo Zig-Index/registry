@@ -8,9 +8,9 @@
     "zig-package"
   ],
   "stars": 20,
-  "forks": 0,
+  "forks": 1,
   "watchers": 2,
-  "updated_at": "2025-12-10T01:32:04Z",
+  "updated_at": "2025-12-10T22:40:12Z",
   "dependencies": [
     {
       "name": "valgrind_h",
