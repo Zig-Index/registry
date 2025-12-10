@@ -3,18 +3,18 @@
   "owner": "lukashes",
   "repo": "outboxx",
   "description": "Outboxx - Lightweight PostgreSQL Change Data Capture in Zig",
-  "type": "application",
+  "type": "package",
   "topics": [
     "cdc",
     "kafka",
     "postgresql",
     "ziglang",
-    "zig-application"
+    "zig-package"
   ],
   "stars": 5,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-12-10T07:44:30Z",
+  "updated_at": "2025-12-10T15:37:39Z",
   "dependencies": [
     {
       "name": "toml",
@@ -38,5 +38,5 @@
   "owner_following": 9,
   "owner_created_at": "2011-09-12T10:45:59Z",
   "license": "MIT",
-  "category": "cli"
+  "category": "library"
 }

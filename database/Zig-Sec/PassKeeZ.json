@@ -16,10 +16,10 @@
     "linux",
     "webauthn"
   ],
-  "stars": 70,
+  "stars": 72,
   "forks": 1,
   "watchers": 3,
-  "updated_at": "2025-12-06T17:26:08Z",
+  "updated_at": "2025-12-10T09:54:10Z",
   "dependencies": [
     {
       "name": "keylib",
