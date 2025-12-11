@@ -8,10 +8,10 @@
     "zig-library",
     "zig-package"
   ],
-  "stars": 2,
-  "forks": 0,
+  "stars": 3,
+  "forks": 1,
   "watchers": 1,
-  "updated_at": "2025-11-01T10:00:41Z",
+  "updated_at": "2025-12-11T09:00:15Z",
   "readme": "# combinatorics.zig\n\nAn incomplete port of Julia's [combinatorics library](https://github.com/JuliaMath/Combinatorics.jl) along with miscellaneous related tools.\n\n__WARNING__ This library is very immature, untested and may have bugs.  Use at your own risk.\n\nThis library provides itertors over set permutations and combinations.  It also provides an [`NChooseK`](src/misc.zig) iterator.  `Combination` set sizes are limited to 127.  `Permutations` and `nthperm` set sizes are limited to 34.  For larger set sizes use `nthpermBig`, `PermutationsBig`, `NChooseKBig` and `CombinationsBig`.  \n\n\n# use\n\n```\n$ zig fetch --save git+https://github.com/travisstaloch/combinatorics.zig\n```\n```zig\n// build.zig\nconst mod = b.createModule(.{\n    .root_source_file = b.path(\"src/root.zig\"),\n    .target = target,\n    .imports = &.{\n        .{\n            .name = \"combinatorics\",\n            .module = b.dependency(\"combinatorics\", .{ .target = target, .optimize = optimize }).module(\"combinatorics\"),\n        },\n    },\n});\n```\n\n## run tests\nTo test this project\n```console\nzig build test\n```\n\n## examples\nlook at the tests in [permutations.zig](src/permutations.zig), [combinations.zig](src/combinations.zig) and [misc.zig](src/misc.zig).  Tests are usually found at the bottom of the files or directly after the thing they're testing.  \n\n\n# todo\n- export a c api\n- support larger sets by using big integers\n  - [x] nthpermBig and PermutationsBig\n  - [x] NChooseKBig and CombinationsBig\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/1562827?v=4",
   "releases": [],
