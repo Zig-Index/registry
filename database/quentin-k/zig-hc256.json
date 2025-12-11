@@ -1,0 +1,37 @@
+{
+  "name": "zig-hc256",
+  "owner": "quentin-k",
+  "repo": "zig-hc256",
+  "description": "Hc256 Cipher in zig",
+  "type": "package",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2022-10-24T18:58:30Z",
+  "readme": "# Zig Hc256\n\nAn implementation of the hc-256 cipher in zig.\n\n## License\n\nApache 2.0\n\n## Usage\n\n1. initialize the cipher with a key and iv\n2. use the `apply_stream` method on a slice of `u8`s to encrypt/decrypt the data\n\nThe test vectors file (`/tests/test-vectors.zig`) shows examples on how to use the library.",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/49767738?u=9d8f0b69f48306ef9c893a1652dd58d699370d92&v=4",
+  "releases": [
+    {
+      "tag_name": "v1.1.0",
+      "name": "",
+      "body": "Fixed a bug with the RNG, and improved performance.",
+      "prerelease": false,
+      "published_at": "2022-10-15T21:06:02Z",
+      "html_url": "https://github.com/quentin-k/zig-hc256/releases/tag/v1.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 2,
+  "owner_following": 5,
+  "owner_created_at": "2019-04-18T21:44:42Z",
+  "license": "Apache-2.0",
+  "category": "library"
+}

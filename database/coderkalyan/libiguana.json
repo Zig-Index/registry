@@ -1,0 +1,28 @@
+{
+  "name": "libiguana",
+  "owner": "coderkalyan",
+  "repo": "libiguana",
+  "description": "Useful zig utility libraries, pulled out into a standalone dependency-free library.",
+  "type": "package",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-10-30T05:51:01Z",
+  "minimum_zig_version": "0.15.0",
+  "readme": "# libiguana\n\nA collection of simple, standalone zig utilities that I use across my projects.\n\n## List\n* StringPool: An interning string pool implementation.\n\n## Usage\nUtilities are standalone wherever possible, and have no dependencies outside the standard library. Either add the library to your dependencies:\n`$ zig fetch --save git+https://github.com/coderkalyan/libiguana.git`\nor simply copy the source files you need into your project.\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/35181624?v=4",
+  "releases": [],
+  "owner_company": "University of Wisconsin - Madison",
+  "owner_location": "Madison, Wisconsin, USA",
+  "owner_blog": "https://ksriram.dev",
+  "owner_twitter_username": null,
+  "owner_followers": 14,
+  "owner_following": 29,
+  "owner_created_at": "2018-01-07T01:15:07Z",
+  "license": "MIT",
+  "category": "library"
+}
