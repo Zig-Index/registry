@@ -15,7 +15,7 @@
   "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-11-30T22:35:36Z",
+  "updated_at": "2025-12-11T17:07:55Z",
   "minimum_zig_version": "0.15.1",
   "readme": "\n![ci](https://github.com/vikingfacer/EtherStruct/actions/workflows/ci.yaml/badge.svg)\n\n![API doc](https://vikingfacer.github.io/EtherStruct)\n\n# EtherStruct\nThis module provides structures and functions to work with network packets\ny converting bytes into packed structures for Ethernet, IP, TCP, UDP\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/25182174?u=b8732a826682cb2d68022c5ed050670174575416&v=4",
