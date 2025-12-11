@@ -14,10 +14,10 @@
     "bevy",
     "entity-component-framework"
   ],
-  "stars": 7,
+  "stars": 8,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-12-10T03:59:42Z",
+  "updated_at": "2025-12-11T00:11:11Z",
   "dependencies": [
     {
       "name": "zevy_reflect",

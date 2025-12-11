@@ -1,0 +1,47 @@
+{
+  "name": "zig-project-starter",
+  "owner": "muhammad-fiaz",
+  "repo": "zig-project-starter",
+  "description": "a minimal starter template for Zig projects, including build script, source structure, and testing setup.",
+  "type": "application",
+  "topics": [
+    "zig",
+    "zig-application",
+    "zig-lang",
+    "zig-library",
+    "zig-project",
+    "zig-app",
+    "zig-project-boilerplate",
+    "zig-project-starter",
+    "zig-project-template"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-12-11T15:30:28Z",
+  "dependencies": [
+    {
+      "name": "logly",
+      "url": "https://github.com/muhammad-fiaz/logly.zig",
+      "hash": "Qm...PLACEHOLDER..."
+    },
+    {
+      "name": "logly",
+      "url": "vendor/logly"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# Zig Project Starter\n\na minimal starter template for Zig projects, including build script, source structure, and testing setup.\n\nRequirements\n- Zig >= 0.15.0\n\nQuick start\n1. Clone: `git clone https://github.com/muhammad-fiaz/zig-project-starter.git`\n2. Enter: `cd zig-project-starter`\n3. Build: `zig build`\n4. Run: `zig build run` (if a run step is configured)\n5. Test: `zig test`\n\nProject layout\n- `build.zig` — central build script\n- `src/lib.zig` — library code\n- `src/main.zig` — demo executable\n- `tests/lib_test.zig` — unit tests\n- `examples/` — small demos (optional)\n\nDependencies\n- Fetch and save a Zig package: `zig fetch --save https://github.com/owner/zig-package.git`\n- Import a fetched dependency: `@import(\"zig-cache/deps/github.com-owner-zig-package/src/lib.zig\")`\n- Or wire dependencies into `build.zig` per your workflow/version of Zig\n\nNotes\n- Run `zig fmt` to format code.\n- `zig-cache` and `zig-out` are build artifacts and should be ignored by git.\n\nLicense\n- MIT",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/75434191?u=e23dc1e7c2fe9c80a958e1dc8df6c6165bb1c2fb&v=4",
+  "releases": [],
+  "owner_bio": "Open Source Contributor ✨ and Maintainer 🔥| Full Stack Developer 🧑‍💻",
+  "owner_company": "@FiazTechnologies",
+  "owner_location": "india",
+  "owner_blog": "muhammadfiaz.com",
+  "owner_twitter_username": "muhammadfiaz_",
+  "owner_followers": 87,
+  "owner_following": 2,
+  "owner_created_at": "2020-12-03T14:17:55Z",
+  "license": "MIT",
+  "category": "cli"
+}
