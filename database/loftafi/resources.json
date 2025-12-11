@@ -10,12 +10,12 @@
   "stars": 1,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-12-10T09:43:37Z",
+  "updated_at": "2025-12-11T01:11:19Z",
   "dependencies": [
     {
       "name": "praxis",
-      "url": "git+https://github.com/loftafi/praxis.git#d36cedfcd43071a144dcefd7cadc28ccdc7fa108",
-      "hash": "praxis-0.4.2-FPf2NYbHBgDZl3Wyn59xUjsn4PFKPfOE8rw9RaVkOdRR"
+      "url": "git+https://github.com/loftafi/praxis.git#224f82a904cea1a3c02ffdc5c046308bf30d36d5",
+      "hash": "praxis-0.4.4-FPf2NUbKBgC9hEdrSMleAWVOTSaI9dQ2xmqf1ZdWbJTe"
     },
     {
       "name": "zstbi",

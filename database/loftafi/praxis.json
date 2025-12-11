@@ -10,7 +10,7 @@
   "stars": 1,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-11-10T01:55:47Z",
+  "updated_at": "2025-12-11T01:08:50Z",
   "minimum_zig_version": "0.15.2",
   "readme": "# Praxis\n\nThis zig module supports loading, searching, and saving dictoinary\ninformation with a specific focus for enhanced searching for ancient\nlanguages.\n\n## How to use\n\nCare has been taken to carefully name and document each struct and\nimportant public method. See `praxis.zig` for the public interface.\nIf anything is unclear please raise a Github issue.\n\n## License\n\nThis code is released under the terms of the MIT license. This\ncode is useful for my purposes. No warrantee is given or implied\nthat this library will be suitable for your purpose and no warantee\nis given or implied that this code is free from defects.\n\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/199742861?u=f3dc58206cc40c5e6ef5f95258d934e8a11f9e69&v=4",
