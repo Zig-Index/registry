@@ -13,16 +13,94 @@
     "zig-package",
     "ziglang",
     "zig-model-context-protocol",
-    "ziglibrary"
+    "ziglibrary",
+    "model-context-protocol"
   ],
   "stars": 1,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-12-12T17:10:52Z",
+  "updated_at": "2025-12-12T17:47:17Z",
   "minimum_zig_version": "0.15.0",
   "readme": "<div align=\"center\">\n<img alt=\"logo\" src=\"https://github.com/user-attachments/assets/09fa609c-22fd-4076-9849-dbd9800f8c03\" />\n    \n# MCP.zig\n\n<a href=\"https://muhammad-fiaz.github.io/mcp.zig/\"><img src=\"https://img.shields.io/badge/docs-muhammad--fiaz.github.io-blue\" alt=\"Documentation\"></a>\n<a href=\"https://ziglang.org/\"><img src=\"https://img.shields.io/badge/Zig-0.15.0+-orange.svg?logo=zig\" alt=\"Zig Version\"></a>\n<a href=\"https://github.com/muhammad-fiaz/mcp.zig\"><img src=\"https://img.shields.io/github/stars/muhammad-fiaz/mcp.zig\" alt=\"GitHub stars\"></a>\n<a href=\"https://github.com/muhammad-fiaz/mcp.zig/issues\"><img src=\"https://img.shields.io/github/issues/muhammad-fiaz/mcp.zig\" alt=\"GitHub issues\"></a>\n<a href=\"https://github.com/muhammad-fiaz/mcp.zig/pulls\"><img src=\"https://img.shields.io/github/issues-pr/muhammad-fiaz/mcp.zig\" alt=\"GitHub pull requests\"></a>\n<a href=\"https://github.com/muhammad-fiaz/mcp.zig\"><img src=\"https://img.shields.io/github/last-commit/muhammad-fiaz/mcp.zig\" alt=\"GitHub last commit\"></a>\n<a href=\"https://github.com/muhammad-fiaz/mcp.zig/blob/main/LICENSE\"><img src=\"https://img.shields.io/github/license/muhammad-fiaz/mcp.zig\" alt=\"License\"></a>\n<a href=\"https://github.com/muhammad-fiaz/mcp.zig/actions/workflows/deploy-docs.yml\"><img src=\"https://github.com/muhammad-fiaz/mcp.zig/actions/workflows/deploy-docs.yml/badge.svg\" alt=\"Docs\"></a>\n<img src=\"https://img.shields.io/badge/platforms-linux%20%7C%20windows%20%7C%20macos-blue\" alt=\"Supported Platforms\">\n<a href=\"https://github.com/muhammad-fiaz/mcp.zig/releases/latest\"><img src=\"https://img.shields.io/github/v/release/muhammad-fiaz/mcp.zig?label=Latest%20Release&style=flat-square\" alt=\"Latest Release\"></a>\n<a href=\"https://pay.muhammadfiaz.com\"><img src=\"https://img.shields.io/badge/Sponsor-pay.muhammadfiaz.com-ff69b4?style=flat&logo=heart\" alt=\"Sponsor\"></a>\n<a href=\"https://github.com/sponsors/muhammad-fiaz\"><img src=\"https://img.shields.io/badge/Sponsor-💖-pink?style=social&logo=github\" alt=\"GitHub Sponsors\"></a>\n<a href=\"https://hits.sh/github.com/muhammad-fiaz/mcp.zig/\"><img src=\"https://hits.sh/github.com/muhammad-fiaz/mcp.zig.svg?label=Visitors&extraCount=0&color=green\" alt=\"Repo Visitors\"></a>\n\n<p><em>A comprehensive Model Context Protocol (MCP) library for Zig — bringing MCP support to the Zig ecosystem.</em></p>\n\n<b>📚 <a href=\"https://muhammad-fiaz.github.io/mcp.zig/\">Documentation</a> |\n<a href=\"https://muhammad-fiaz.github.io/mcp.zig/api/\">API Reference</a> |\n<a href=\"https://muhammad-fiaz.github.io/mcp.zig/guide/getting-started\">Quick Start</a> |\n<a href=\"https://muhammad-fiaz.github.io/mcp.zig/contributing\">Contributing</a></b>\n\n</div>\n\n---\n\n## 🔌 What is MCP?\n\n**Model Context Protocol (MCP)** is an open-source standard for connecting AI applications to external systems.\n**Think of MCP like a USB-C port for AI applications.** Just as USB-C provides a standardized way to connect electronic devices, MCP provides a standardized way to connect AI applications to external systems.\n\n## 🎯 Why mcp.zig?\n\nThe [Model Context Protocol (MCP)](https://modelcontextprotocol.io/docs/getting-started/intro) is an open standard by Anthropic for connecting AI applications to external systems. While MCP has official SDKs for TypeScript, Python, and other languages, **Zig currently lacks proper MCP support**.\n\n**mcp.zig** aims to fill this gap by providing a native, high-performance MCP implementation for the Zig programming language, enabling Zig developers to:\n\n- 🔧 Build MCP servers that expose tools, resources, and prompts to AI applications\n- 🔌 Create MCP clients that connect to any MCP-compatible server\n- ⚡ Leverage Zig's performance and safety features for AI integrations\n\n## ✨ Features\n\n- 🛠️ **Server Framework** - Build MCP servers that expose tools, resources, and prompts\n- 🔌 **Client Framework** - Create MCP clients that connect to servers\n- 📡 **Transport Layer** - STDIO and HTTP transport support\n- 📋 **Full Protocol Support** - JSON-RPC 2.0, capability negotiation, lifecycle management\n- ⚡ **Native Performance** - Written in pure Zig for optimal performance\n- 🧪 **Comprehensive Testing** - Unit tests for all components\n\n## 📚 Documentation\n\nFull documentation is available at **[muhammad-fiaz.github.io/mcp.zig](https://muhammad-fiaz.github.io/mcp.zig/)**\n\nFor the official MCP specification and resources, visit:\n\n- [MCP Documentation](https://modelcontextprotocol.io/docs/getting-started/intro)\n- [MCP Specification](https://spec.modelcontextprotocol.io/)\n\n## 🚀 Quick Start\n\n### Installation\n\n### Installation\n\nRun the following command to add mcp.zig to your project:\n\n```bash\nzig fetch --save https://github.com/muhammad-fiaz/mcp.zig/archive/refs/tags/v0.0.1.tar.gz\n```\n\nThen in your `build.zig`:\n\n```zig\nconst mcp_dep = b.dependency(\"mcp\", .{\n    .target = target,\n    .optimize = optimize,\n});\nexe.root_module.addImport(\"mcp\", mcp_dep.module(\"mcp\"));\n```\n\n### Creating a Server\n\n```zig\nconst std = @import(\"std\");\nconst mcp = @import(\"mcp\");\n\npub fn main() void {\n    if (run()) {} else |err| {\n        mcp.reportError(err);\n    }\n}\n\nfn run() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    // Check for updates\n    _ = mcp.report.checkForUpdates(allocator);\n\n    // Create server\n    var server = mcp.Server.init(.{\n        .name = \"my-server\",\n        .version = \"1.0.0\",\n        .allocator = allocator,\n    });\n    defer server.deinit();\n\n    // Enable tools capability\n    server.enableTools();\n\n    // Add a tool\n    try server.addTool(.{\n        .name = \"greet\",\n        .description = \"Greet a user\",\n        .handler = greetHandler,\n    });\n\n    // Run with STDIO transport\n    try server.run(.stdio);\n}\n\nfn greetHandler(\n    allocator: std.mem.Allocator,\n    args: ?std.json.Value\n) mcp.tools.ToolError!mcp.tools.ToolResult {\n    const name = mcp.tools.getString(args, \"name\") orelse \"World\";\n    const message = try std.fmt.allocPrint(allocator, \"Hello, {s}!\", .{name});\n    return .{ .content = &.{mcp.Content.createText(message)} };\n}\n```\n\n### Creating a Client\n\n```zig\nconst std = @import(\"std\");\nconst mcp = @import(\"mcp\");\n\npub fn main() void {\n    if (run()) {} else |err| {\n        mcp.reportError(err);\n    }\n}\n\nfn run() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    var client = mcp.Client.init(.{\n        .name = \"my-client\",\n        .version = \"1.0.0\",\n        .allocator = allocator,\n    });\n    defer client.deinit();\n\n    // Enable capabilities\n    client.enableSampling();\n    client.enableRoots(true); // Supports list changed notifications\n\n    // Add roots\n    try client.addRoot(\"file:///projects\", \"Projects\");\n}\n```\n\n## 📁 Examples\n\nThe `examples/` directory contains several example implementations:\n\n| Example                   | Description                           |\n| ------------------------- | ------------------------------------- |\n| **simple_server.zig**     | Basic server with greeting tool       |\n| **simple_client.zig**     | Basic client setup                    |\n| **weather_server.zig**    | Weather information server            |\n| **calculator_server.zig** | Calculator with arithmetic operations |\n\nRun examples:\n\n```bash\n# Build all examples\nzig build\n\n# Run examples\n./zig-out/bin/example-server\n./zig-out/bin/weather-server\n./zig-out/bin/calculator-server\n```\n\n## 🏗️ Architecture\n\n```\nsrc/\n├── mcp.zig              # Main entry point\n├── protocol/\n│   ├── protocol.zig     # MCP protocol definitions\n│   ├── types.zig        # Type definitions\n│   ├── jsonrpc.zig      # JSON-RPC 2.0 implementation\n│   └── schema.zig       # JSON Schema utilities\n├── transport/\n│   └── transport.zig    # STDIO and HTTP transports\n├── server/\n│   ├── server.zig       # Server implementation\n│   ├── tools.zig        # Tool primitive\n│   ├── resources.zig    # Resource primitive\n│   └── prompts.zig      # Prompt primitive\n└── client/\n    └── client.zig       # Client implementation\n```\n\n## 🛠️ Server Features\n\n### Tools\n\nTools are executable functions that AI applications can invoke:\n\n```zig\ntry server.addTool(.{\n    .name = \"search_files\",\n    .description = \"Search for files matching a pattern\",\n    .handler = searchHandler,\n});\n```\n\n### Resources\n\nResources provide read-only data to AI applications:\n\n```zig\ntry server.addResource(.{\n    .uri = \"file:///docs/readme.md\",\n    .name = \"README\",\n    .mimeType = \"text/markdown\",\n    .handler = readFileHandler,\n});\n```\n\n### Prompts\n\nPrompts are reusable templates for LLM interactions:\n\n```zig\ntry server.addPrompt(.{\n    .name = \"summarize\",\n    .description = \"Summarize a document\",\n    .arguments = &.{\n        .{ .name = \"document\", .required = true },\n    },\n    .handler = summarizeHandler,\n});\n```\n\n## 🔌 Client Features\n\n### Roots\n\nDefine filesystem boundaries:\n\n```zig\nclient.enableRoots(true);\ntry client.addRoot(\"file:///projects\", \"Projects\");\n```\n\n### Sampling\n\nAllow servers to request LLM completions:\n\n```zig\nclient.enableSampling();\n```\n\n## 🧪 Testing\n\nRun the test suite:\n\n```bash\nzig build test\n```\n\n## 📖 Protocol Version\n\nThis library implements MCP protocol version **2025-11-25**.\n\n| Version    | Status        |\n| ---------- | ------------- |\n| 2025-11-25 | ✅ Supported  |\n| 2024-11-05 | ✅ Compatible |\n\n\n## 🤝 Contributing\n\nContributions are welcome! Please feel free to submit issues and pull requests.\n\nSee [Contributing Guide](https://muhammad-fiaz.github.io/mcp.zig/contributing) for guidelines.\n\n## 💖 Support\n\nIf you find this project helpful, consider supporting its development:\n\n<a href=\"https://pay.muhammadfiaz.com\"><img src=\"https://img.shields.io/badge/Sponsor-pay.muhammadfiaz.com-ff69b4?style=for-the-badge&logo=heart\" alt=\"Sponsor\"></a>\n<a href=\"https://github.com/sponsors/muhammad-fiaz\"><img src=\"https://img.shields.io/badge/GitHub_Sponsors-💖-pink?style=for-the-badge&logo=github\" alt=\"GitHub Sponsors\"></a>\n\n## 📄 License\n\nMIT License - see [LICENSE](LICENSE) for details.\n\n## 🔗 Resources\n\n- [📚 mcp.zig Documentation](https://muhammad-fiaz.github.io/mcp.zig/)\n- [🌐 Official MCP Documentation](https://modelcontextprotocol.io/docs/getting-started/intro)\n- [📋 MCP Specification](https://spec.modelcontextprotocol.io)\n- [💻 MCP GitHub](https://github.com/modelcontextprotocol)\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/75434191?u=e23dc1e7c2fe9c80a958e1dc8df6c6165bb1c2fb&v=4",
-  "releases": [],
+  "releases": [
+    {
+      "tag_name": "0.0.1",
+      "name": "V0.0.1",
+      "body": "\n\n### Option A — Automatic (Recommended)\n\nRun this to install the dependency and automatically save the hash:\n\n```bash\nzig fetch --save https://github.com/muhammad-fiaz/mcp.zig/archive/refs/tags/0.0.1.tar.gz\n```\n\nAfter running, Zig updates your `build.zig.zon` with something like:\n\n```zig\n.dependencies = .{\n    .mcp = .{\n        .url = \"https://github.com/muhammad-fiaz/mcp.zig/archive/refs/tags/0.0.1.tar.gz\",\n        .hash = \"mcp-0.0.1-cIUFg6yUAgA8yYsHQhJvxOH18ymuqeFteEzWwcEqPArj\",\n    },\n},\n```\n\n### Option B — Manual\n\n```bash\nzig fetch --hash https://github.com/muhammad-fiaz/mcp.zig/archive/refs/tags/0.0.1.tar.gz\n```\n\nCopy that hash into:\n\n```zig\n.hash = \"<your_hash_here>\"\n```\n\n## 📥 Downloads (Prebuilt Library)\n\n| Platform | Architecture | File |\n|----------|--------------|------|\n| Windows | x86_64 | [mcp-x86_64-windows.lib](https://github.com/muhammad-fiaz/mcp.zig/releases/download/0.0.1/mcp-x86_64-windows.lib) |\n| Windows | x86 | [mcp-x86-windows.lib](https://github.com/muhammad-fiaz/mcp.zig/releases/download/0.0.1/mcp-x86-windows.lib) |\n| Linux | x86_64 | [libmcp-x86_64-linux.a](https://github.com/muhammad-fiaz/mcp.zig/releases/download/0.0.1/libmcp-x86_64-linux.a) |\n| Linux | x86 | [libmcp-x86-linux.a](https://github.com/muhammad-fiaz/mcp.zig/releases/download/0.0.1/libmcp-x86-linux.a) |\n| Linux | aarch64 (ARM64) | [libmcp-aarch64-linux.a](https://github.com/muhammad-fiaz/mcp.zig/releases/download/0.0.1/libmcp-aarch64-linux.a) |\n| macOS | x86_64 (Intel) | [libmcp-x86_64-macos.a](https://github.com/muhammad-fiaz/mcp.zig/releases/download/0.0.1/libmcp-x86_64-macos.a) |\n| macOS | aarch64 (Apple Silicon) | [libmcp-aarch64-macos.a](https://github.com/muhammad-fiaz/mcp.zig/releases/download/0.0.1/libmcp-aarch64-macos.a) |\n| Bare Metal | x86_64 | [libmcp-x86_64-freestanding.a](https://github.com/muhammad-fiaz/mcp.zig/releases/download/0.0.1/libmcp-x86_64-freestanding.a) |\n| Bare Metal | aarch64 | [libmcp-aarch64-freestanding.a](https://github.com/muhammad-fiaz/mcp.zig/releases/download/0.0.1/libmcp-aarch64-freestanding.a) |\n| Bare Metal | RISC-V 64 | [libmcp-riscv64-freestanding.a](https://github.com/muhammad-fiaz/mcp.zig/releases/download/0.0.1/libmcp-riscv64-freestanding.a) |\n| Bare Metal | ARM | [libmcp-arm-freestanding.a](https://github.com/muhammad-fiaz/mcp.zig/releases/download/0.0.1/libmcp-arm-freestanding.a) |\n\n### 🛠️ Using Prebuilt Libraries\n\n1. Download the library for your platform.\n2. Place it in your project (e.g., in a `libs/` folder).\n3. Update your `build.zig`:\n\n```zig\n// Assuming you placed the library in `libs/`\nexe.addLibraryPath(b.path(\"libs\"));\nexe.linkSystemLibrary(\"mcp\");\n```\n",
+      "prerelease": false,
+      "published_at": "2025-12-12T17:47:35Z",
+      "html_url": "https://github.com/muhammad-fiaz/mcp.zig/releases/tag/0.0.1",
+      "assets": [
+        {
+          "name": "libmcp-arm-freestanding.a",
+          "url": "https://github.com/muhammad-fiaz/mcp.zig/releases/download/0.0.1/libmcp-arm-freestanding.a",
+          "size": 3020,
+          "content_type": "application/x-archive"
+        },
+        {
+          "name": "libmcp-riscv64-freestanding.a",
+          "url": "https://github.com/muhammad-fiaz/mcp.zig/releases/download/0.0.1/libmcp-riscv64-freestanding.a",
+          "size": 5168,
+          "content_type": "application/x-archive"
+        },
+        {
+          "name": "libmcp-x86_64-freestanding.a",
+          "url": "https://github.com/muhammad-fiaz/mcp.zig/releases/download/0.0.1/libmcp-x86_64-freestanding.a",
+          "size": 3960,
+          "content_type": "application/x-archive"
+        },
+        {
+          "name": "libmcp-aarch64-freestanding.a",
+          "url": "https://github.com/muhammad-fiaz/mcp.zig/releases/download/0.0.1/libmcp-aarch64-freestanding.a",
+          "size": 4104,
+          "content_type": "application/x-archive"
+        },
+        {
+          "name": "libmcp-x86_64-linux.a",
+          "url": "https://github.com/muhammad-fiaz/mcp.zig/releases/download/0.0.1/libmcp-x86_64-linux.a",
+          "size": 3960,
+          "content_type": "application/x-archive"
+        },
+        {
+          "name": "mcp-x86_64-windows.lib",
+          "url": "https://github.com/muhammad-fiaz/mcp.zig/releases/download/0.0.1/mcp-x86_64-windows.lib",
+          "size": 976,
+          "content_type": "application/vnd.microsoft.portable-executable"
+        },
+        {
+          "name": "libmcp-aarch64-linux.a",
+          "url": "https://github.com/muhammad-fiaz/mcp.zig/releases/download/0.0.1/libmcp-aarch64-linux.a",
+          "size": 4104,
+          "content_type": "application/x-archive"
+        },
+        {
+          "name": "mcp-x86-windows.lib",
+          "url": "https://github.com/muhammad-fiaz/mcp.zig/releases/download/0.0.1/mcp-x86-windows.lib",
+          "size": 976,
+          "content_type": "application/vnd.microsoft.portable-executable"
+        },
+        {
+          "name": "libmcp-x86_64-macos.a",
+          "url": "https://github.com/muhammad-fiaz/mcp.zig/releases/download/0.0.1/libmcp-x86_64-macos.a",
+          "size": 2412,
+          "content_type": "application/x-archive"
+        },
+        {
+          "name": "libmcp-x86-linux.a",
+          "url": "https://github.com/muhammad-fiaz/mcp.zig/releases/download/0.0.1/libmcp-x86-linux.a",
+          "size": 2912,
+          "content_type": "application/x-archive"
+        },
+        {
+          "name": "libmcp-aarch64-macos.a",
+          "url": "https://github.com/muhammad-fiaz/mcp.zig/releases/download/0.0.1/libmcp-aarch64-macos.a",
+          "size": 2540,
+          "content_type": "application/x-archive"
+        }
+      ]
+    }
+  ],
   "owner_bio": "Open Source Contributor ✨ and Maintainer 🔥| Full Stack Developer 🧑‍💻",
   "owner_company": "@FiazTechnologies",
   "owner_location": "india",
