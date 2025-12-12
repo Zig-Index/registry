@@ -1,0 +1,63 @@
+{
+  "name": "StringZilla.ZIG",
+  "owner": "WonderBeat",
+  "repo": "StringZilla.ZIG",
+  "description": "Zig wrapper around StringZilla",
+  "type": "package",
+  "topics": [
+    "zig-library",
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-12-12T10:07:06Z",
+  "dependencies": [
+    {
+      "name": "stringzilla",
+      "url": "https://github.com/ashvardanian/StringZilla/archive/refs/tags/v4.4.2.tar.gz",
+      "hash": "N-V-__8AAGUfPwAsYRR_xSKO4UTLq5xJtwfv8sYKG9BkDSm9"
+    }
+  ],
+  "minimum_zig_version": "0.15.2",
+  "readme": "# StringZilla.ZIG\n\n[![CI](https://github.com/WonderBeat/StringZilla.ZIG/workflows/CI/badge.svg)](https://github.com/WonderBeat/StringZilla.ZIG/actions)\n[![Latest Release](https://img.shields.io/github/release/WonderBeat/StringZilla.ZIG.svg)](https://github.com/WonderBeat/StringZilla.ZIG/releases/latest)\n[![License](https://img.shields.io/github/license/WonderBeat/StringZilla.ZIG.svg)](https://github.com/WonderBeat/StringZilla.ZIG/blob/main/LICENSE)\n[![Zig Version](https://img.shields.io/badge/zig-0.15.2+-yellow.svg)](https://ziglang.org/download/)\n\nZig wrapper for [StringZilla](https://github.com/ashvardanian/StringZilla) - a SIMD-accelerated string processing library designed for massive datasets\n\n<img width=\"800\" alt=\"image\" src=\"https://github.com/user-attachments/assets/5cee8781-92ca-44ea-a887-26ffe7245c49\" />\n\n## Overview\n\nStringZilla.ZIG provides idiomatic Zig bindings to the StringZilla C library\n\n## Features\n\n- **String Search**: `find()`, `rfind()`, `find_byteset()`, `find_byte_from()`\n- **Hashing**: `bytesum()`, `hash()`, `hmac_sha256()`\n- **UTF-8 Support**: Character counting and Unicode-aware operations\n- **Memory Operations**: `copy()`, `move()`, `fill()`, `lookup()`\n- **Character Set Operations**: `Byteset` for efficient pattern matching\n\n## Installation\n\nAdd StringZilla.ZIG to your project using Zig's package manager:\n\n```bash\nzig fetch --save=stringzilla https://github.com/WonderBeat/StringZilla.ZIG/archive/refs/tags/<RELEASE-VERSION>.tar.gz\n```\n\nThen add it to your `build.zig`:\n\n```zig\nconst std = @import(\"std\");\n\npub fn build(b: *std.Build) void {\n    const target = b.standardTargetOptions(.{});\n    const optimize = b.standardOptimizeOption(.{});\n\n    // Add StringZilla.ZIG as a dependency\n    const stringzilla = b.dependency(\"stringzilla\", .{\n        .target = target,\n        .optimize = optimize,\n    });\n\n    const exe = b.addExecutable(.{\n        .name = \"my-app\",\n        .root_source_file = b.path(\"src/main.zig\"),\n        .target = target,\n        .optimize = optimize,\n    });\n\n    // Import the StringZilla module\n    exe.root_module.addImport(\"stringzilla\", stringzilla.module(\"stringzilla\"));\n\n    b.installArtifact(exe);\n}\n```\n\n## Usage\n\n### Basic String Operations\n\n```zig\nconst std = @import(\"std\");\nconst stringzilla = @import(\"stringzilla\");\n\npub fn main() !void {\n    const haystack = \"Hello, World!\";\n    const needle = \"World\";\n\n    // Find substring\n    if (stringzilla.find(haystack, needle)) |pos| {\n        std.debug.print(\"Found '{s}' at position {}\\n\", .{ needle, pos });\n    }\n\n    // Reverse find\n    if (stringzilla.rfind(haystack, \"o\")) |pos| {\n        std.debug.print(\"Last 'o' at position {}\\n\", .{pos});\n    }\n\n    // Count characters (UTF-8 aware)\n    const char_count = stringzilla.count_utf8(haystack);\n    std.debug.print(\"Character count: {}\\n\", .{char_count});\n}\n```\n\n### Hashing and Checksums\n\n```zig\n// Simple checksum\nconst checksum = stringzilla.bytesum(\"Hello, World!\");\nstd.debug.print(\"Bytesum: {}\\n\", .{checksum});\n\n// 64-bit hash\nconst hash_val = stringzilla.hash(\"Hello, World!\");\nstd.debug.print(\"Hash: {}\\n\", .{hash_val});\n\n// HMAC-SHA256 \nconst hmac = stringzilla.hmac_sha256(\"secret-key\", \"message\");\n```\n\n### Character Set Operations\n\n```zig\nconst text = \"The quick brown fox jumps over the lazy dog\";\n\n// Create a character set\nconst vowels = stringzilla.Byteset.from_bytes(\"aeiou\");\n\n// Find first character from set\nif (stringzilla.find_byteset(text, vowels)) |pos| {\n    std.debug.print(\"First vowel at position {}\\n\", .{pos});\n}\n\n// Alternative method\nif (stringzilla.find_byte_from(text, \"aeiou\")) |pos| {\n    std.debug.print(\"First vowel (using find_byte_from) at position {}\\n\", .{pos});\n}\n```\n\n### Memory Operations\n\n```zig\nvar buffer: [100]u8 = undefined;\nconst source = \"Copy this text!\";\n\n// Copy memory\nstringzilla.copy(buffer[0..source.len], source);\n\n// Fill with pattern\nstringzilla.fill(buffer[0..50], 0xAA);\n\n// Move memory with overlap handling\nstringzilla.moveMemory(buffer[10..60], buffer[0..50]);\n\n```\n\n### UTF-8 Unpacking\n\n```zig\nconst utf8_text = \"Hello 🌍 世界\";\nvar runes: [16]u32 = undefined;\n\n// Unpack UTF-8 to UTF-32 runes \nconst result = stringzilla.utf8_unpack_chunk(utf8_text, &runes);\n\nstd.debug.print(\"Consumed {} bytes, unpacked {} runes\\n\", .{ \n    result.bytes_consumed, result.runes_unpacked \n});\n\n// Access individual runes\nfor (0..result.runes_unpacked) |i| {\n    std.debug.print(\"Rune {}: {X}\\n\", .{ i, runes[i] });\n}\n```\n\n### Character Set Manipulation\n\n```zig\nconst text = \"The quick brown fox jumps over the lazy dog\";\n\n// Create a byteset for pattern matching\nvar pattern = stringzilla.Byteset{};\npattern.add('A');\npattern.add('B');\npattern.add('C');\n\n// Create from bytes \nconst vowels = stringzilla.Byteset.from_bytes(\"aeiou\");\nconst consonants = stringzilla.Byteset.from_bytes(\"bcdfghjklmnpqrstvwxyz\");\n\n// Find characters in sets\nif (stringzilla.find_byteset(text, vowels)) |pos| {\n    std.debug.print(\"First vowel at position {}\\n\", .{pos});\n}\n\nif (stringzilla.find_byteset(text, consonants)) |pos| {\n    std.debug.print(\"First consonant at position {}\\n\", .{pos});\n}\n\n// Alternative: find from byte slice\nif (stringzilla.find_byte_from(text, \"xyz\")) |pos| {\n    std.debug.print(\"Found 'x', 'y', or 'z' at position {}\\n\", .{pos});\n}\n\n// Find characters NOT in set\nif (stringzilla.find_byte_not_from(text, \"aeiou \")) |pos| {\n    std.debug.print(\"First non-vowel/non-space at position {}\\n\", .{pos});\n}\n```\n\n\n### UTF-8 Processing\n\n```zig\nconst utf8_text = \"Hello, 世界! 🌍\";\n\n// Count Unicode characters\nconst char_count = stringzilla.count_utf8(utf8_text);\nstd.debug.print(\"Unicode characters: {}\\n\", .{char_count});\n\n// Case-insensitive search with Unicode (returns Range)\nif (stringzilla.utf8_case_insensitive_find(utf8_text, \"WORLD\")) |range| {\n    const found_text = range.slice(utf8_text);\n    std.debug.print(\"Case-insensitive match: '{s}'\\n\", .{found_text});\n}\n\n// Case-insensitive Unicode search (Russian text example)\nconst russian_text = \"Привет МИР, привет мир!\";\nif (stringzilla.utf8_case_insensitive_find(russian_text, \"мир\")) |range| {\n    const found_word = range.slice(russian_text);\n    std.debug.print(\"Found Russian word: '{s}'\\n\", .{found_word});\n}\n\n// Find newline characters\nif (stringzilla.find_newline_utf8(utf8_text)) |newline_slice| {\n    std.debug.print(\"Newline found: '{any}'\\n\", .{newline_slice});\n}\n\n// Find whitespace (UTF-8 aware) \nif (stringzilla.find_whitespace_utf8(utf8_text)) |whitespace_slice| {\n    std.debug.print(\"Whitespace found: '{any}'\\n\", .{whitespace_slice});\n}\n```\n\n### Build the Example\n\n```bash\nzig build run\n```\n\n### Run Tests\n\n```bash\nzig build test\n```\n\n## Current Limitations\n\n- Only dynamic runtime dispatch is supported (compile-time optimization not yet implemented)\n- Some advanced StringZilla features may not be exposed yet\n- Error handling follows Zig conventions rather than C-style error codes\n\n## Contributing\n\n1. Fork the repository\n2. Create a feature branch\n3. Make your changes\n4. Add tests for new functionality\n5. Ensure all tests pass: `zig build test`\n6. Submit a pull request\n\n## License\n\nThis project follows the same license as the original StringZilla library. Please refer to the [StringZilla repository](https://github.com/ashvardanian/StringZilla) for license information.\n\n## Acknowledgments\n\n- [StringZilla](https://github.com/ashvardanian/StringZilla) by Ash Vardanian for the high-performance C implementation\n- The Zig community for the excellent language and tooling\n\n## Related Projects\n\n- [StringZilla](https://github.com/ashvardanian/StringZilla) - Original C library\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/739463?u=d85d2522648311668d344973e76ab8186b8be515&v=4",
+  "releases": [
+    {
+      "tag_name": "v2.1-4.4.2-0.15",
+      "name": "v2.1-4.4.2-0.15",
+      "body": "# What's Changed\r\n\r\n## Other changes\r\n\r\n* C Lib Documentation transferred (#1) @WonderBeat\r\n\r\n**Full Changelog**: https://github.com/WonderBeat/StringZilla.ZIG/compare/v2.0-4.4.2-0.15...v3.0.0\r\n",
+      "prerelease": false,
+      "published_at": "2025-12-11T11:28:47Z",
+      "html_url": "https://github.com/WonderBeat/StringZilla.ZIG/releases/tag/v2.1-4.4.2-0.15",
+      "assets": []
+    },
+    {
+      "tag_name": "v2.0-4.4.2-0.15",
+      "name": "StringZilla 4.4.2 update",
+      "body": "- sz_utf8_unpack_chunk bytes calculation issue fixed",
+      "prerelease": false,
+      "published_at": "2025-12-09T15:00:54Z",
+      "html_url": "https://github.com/WonderBeat/StringZilla.ZIG/releases/tag/v2.0-4.4.2-0.15",
+      "assets": []
+    },
+    {
+      "tag_name": "v1.0-4.4.0-0.15",
+      "name": "v1.0-4.4.0-0.15",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-12-09T14:29:54Z",
+      "html_url": "https://github.com/WonderBeat/StringZilla.ZIG/releases/tag/v1.0-4.4.0-0.15",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": "Budapest, Hungary",
+  "owner_blog": null,
+  "owner_twitter_username": "binarykitteh",
+  "owner_followers": 32,
+  "owner_following": 49,
+  "owner_created_at": "2011-04-19T16:35:24Z",
+  "license": "MIT",
+  "category": "library"
+}
