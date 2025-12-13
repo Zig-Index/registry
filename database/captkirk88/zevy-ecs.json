@@ -17,17 +17,17 @@
   "stars": 8,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-12-11T00:11:11Z",
+  "updated_at": "2025-12-13T20:12:56Z",
   "dependencies": [
     {
       "name": "zevy_reflect",
-      "url": "git+https://github.com/captkirk88/zevy-reflect#0af13754eb91df989d820e42093542f894acedfd",
-      "hash": "zevy_reflect-0.0.1-8SzYxtTbAACHQG9U4fSoUZgGjACGifF8e9kFoPbPjUrj"
+      "url": "git+https://github.com/captkirk88/zevy-reflect#95f54de4a079d83e4734fb72893f58c661ab4312",
+      "hash": "zevy_reflect-0.0.1-8SzYxm2uAQACCIavP0dhFd2Lwl1IJZOrX_2e2jN94sjP"
     },
     {
       "name": "zevy_mem",
-      "url": "git+https://github.com/captkirk88/zevy-mem#14f8faedae86d2d62e9912d1571db5b97195599f",
-      "hash": "zevy_mem-0.0.1-jK9L0RoXAQDuGUVYLFUHn7M93NwyEY6AOzFkYt2nPerx"
+      "url": "git+https://github.com/captkirk88/zevy-mem#e5d5aefa3ab3a56400bc84298228c0ec3a32c121",
+      "hash": "zevy_mem-0.0.1-jK9L0RY_AQB9HBf2-Ub1SmPi9zBMn1sp604owSLC4XfB"
     }
   ],
   "minimum_zig_version": "0.15.1",
@@ -39,7 +39,7 @@
   "owner_location": "Moon",
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 4,
+  "owner_followers": 5,
   "owner_following": 17,
   "owner_created_at": "2014-01-01T08:56:32Z",
   "license": "MIT",
