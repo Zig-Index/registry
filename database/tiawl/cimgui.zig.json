@@ -12,10 +12,10 @@
     "ziglang",
     "zig-package"
   ],
-  "stars": 90,
+  "stars": 91,
   "forks": 17,
   "watchers": 1,
-  "updated_at": "2025-12-05T21:33:01Z",
+  "updated_at": "2025-12-14T10:22:09Z",
   "dependencies": [
     {
       "name": "glfw_zig",
@@ -39,8 +39,8 @@
     },
     {
       "name": "vulkan_zig",
-      "url": "git+https://github.com/tiawl/vulkan.zig?ref=v1.4.335#24c5c8f384ee94807a292ad254535eedd1062e08",
-      "hash": "vulkan_zig-1.0.0-p2wg3iY3JwGkZYm3xBdnki4R7h-1CHkBXvCpT9cuYCnD"
+      "url": "git+https://github.com/tiawl/vulkan.zig?ref=v1.4.336#fb11b6547a81daaf18964e8321dd6cae040da235",
+      "hash": "vulkan_zig-1.0.0-p2wg3p7RNQEZD3HdlK-1Z9r6WD7faGy446u11y8gLGjk"
     }
   ],
   "minimum_zig_version": "0.15.1",
