@@ -1,0 +1,50 @@
+{
+  "name": "ja3-spoof",
+  "owner": "revenuenet",
+  "repo": "ja3-spoof",
+  "description": "http client for zig that spoofs tls/ssl ja3",
+  "type": "package",
+  "topics": [
+    "curl",
+    "ja3",
+    "spoof",
+    "ssl",
+    "tls",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2024-03-30T01:25:30Z",
+  "readme": "## TTL/SSL JA3 Spoof\n\n<img src=\"https://raw.githubusercontent.com/ziglang/logo/9d06c090ca39ef66019a639241ea2d7e448b9fe1/ziggy.svg\" width=\"300\">\n\n**A curl-based zig http client that can spoof [tls/ssl ja3](https://github.com/salesforce/ja3)**\n\n### 📦 Installing\n\n#### 1. Install ja3_spoof\n```\nzig fetch --save https://github.com/blockkwork/ja3-spoof/archive/refs/tags/[LATEST TAG].tar.gz\n```\nExample\n```\nzig fetch --save https://github.com/blockkwork/ja3-spoof/archive/refs/tags/0.0.1.tar.gz\n```\n\n#### 2. Add ja3_spoof to build.zig\nAdd to build.zig\n```zig\nconst ja3_spoof = b.dependency(\"ja3_spoof\", .{}).module(\"ja3_spoof\");\nexe.root_module.addImport(\"ja3_spoof\", ja3_spoof);\n```\n\n\n### 🚀 Examples\nExample in ./examples folder \n\n Run with command: \n```\nmake EXAMPLE\n```\n\n```zig\nconst client = ja3_spoof.init(.{\n        .allocator = allocator,\n        .custom_cookies = \"Cookie\",\n        .custom_user_agent = \"ja3 spoof\",\n        .custom_ciphers = \"AES256-SHA\",\n}) catch |err| {\n        std.debug.print(\"error: {}\\n\", .{err});\n        return;\n};\n\nconst response = client.send(\"https://tools.scrapfly.io/api/tls\") catch |err| {\n        std.debug.print(\"error: {}\\n\", .{err});\n        return;\n};\n\nstd.debug.print(\"status_code: {}\\nresponse: {s}\\n\", .{ response.status_code, response.response });\n```\n\n\n\n### 🛡️ Spoofing\nTo spoof ja3 you need to change .custom_ciphers to any other in Client Options\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/164784529?u=3205b98c9babd84e37b1361d0acf6ce0a689d91d&v=4",
+  "releases": [
+    {
+      "tag_name": "2",
+      "name": "Bug fixed",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-03-29T08:32:18Z",
+      "html_url": "https://github.com/revenuenet/ja3-spoof/releases/tag/2",
+      "assets": []
+    },
+    {
+      "tag_name": "1",
+      "name": "Init",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-03-28T19:06:21Z",
+      "html_url": "https://github.com/revenuenet/ja3-spoof/releases/tag/1",
+      "assets": []
+    }
+  ],
+  "owner_company": "NNM ltd",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 0,
+  "owner_following": 2,
+  "owner_created_at": "2024-03-24T17:46:05Z",
+  "category": "library"
+}
