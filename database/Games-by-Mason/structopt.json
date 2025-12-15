@@ -10,9 +10,9 @@
   "stars": 14,
   "forks": 5,
   "watchers": 1,
-  "updated_at": "2025-11-29T07:30:44Z",
+  "updated_at": "2025-12-15T11:05:27Z",
   "minimum_zig_version": "0.16.0-dev.1484+d0ba6642b",
-  "readme": "# Structopt\n\nThis is the argument parser I use in my engine and various supporting tools.\n\n# Zig Version\n\n[`main`](https://github.com/Games-by-Mason/structopt/tree/main) loosely tracks Zig master. For support for specific Zig versions, see [releases](https://github.com/Games-by-Mason/structopt/releases/).\n",
+  "readme": "[Moved to Codeberg](https://codeberg.org/Games-by-Mason/mr_structopt)\n\nThis repository is not mirrored.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/174537044?v=4",
   "releases": [
     {

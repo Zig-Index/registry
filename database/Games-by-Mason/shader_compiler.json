@@ -10,21 +10,21 @@
   "stars": 61,
   "forks": 9,
   "watchers": 3,
-  "updated_at": "2025-12-13T06:09:24Z",
+  "updated_at": "2025-12-15T11:16:21Z",
   "dependencies": [
     {
-      "name": "glslang",
-      "url": "git+https://github.com/Games-By-Mason/glslang-zig#800e71c1db09bc242ecc7e9fecfad58a2ac958f2",
-      "hash": "glslang-1.4.309-eMn68IvGCQDg1sEYYzGKGS1oWPJPclgb7D4IVbPo1OIm"
+      "name": "mr_structopt",
+      "url": "git+https://codeberg.org/Games-by-Mason/mr_structopt.git#13da0f2f5f95ca406af2b0f7cfbb76f33f7b2012",
+      "hash": "mr_structopt-1.0.0-Fb_EBn47AQAloreQHZPEY6g1eNlBraHj5GPJdDEpiW5W"
     },
     {
-      "name": "structopt",
-      "url": "git+https://github.com/Games-By-Mason/structopt#d2cba72809f3aa41464e2597371ea45078bfada3",
-      "hash": "structopt-1.0.0-OgtKAng7AQDBL7zVfz0Rz4asvZdmOpjrLS2039TH-owI"
+      "name": "glslang",
+      "url": "git+https://codeberg.org/Games-by-Mason/glslang_zig.git#fac0f72448efc01c0f651f5f59a609280ab49e35",
+      "hash": "glslang-1.4.309-eMn68KLGCQDAuHVUzugaYOOEhbkyHmN526R7mHIq9YUs"
     }
   ],
   "minimum_zig_version": "0.16.0-dev.1484+d0ba6642b",
-  "readme": "# Shader Compiler\n\nA command line tool that compiles GLSL shaders to SPIRV, and optimizes them using [glslang-zig](https://github.com/Games-by-Mason/glslang-zig).\n\nRemap is also supported (results in better compression), SPIRV is validated before results are written.\n\nGenerated docs available [here](https://docs.gamesbymason.com/shader_compiler/), you can generate up to date docs yourself with `zig build docs`.\n\n# Zig Version\n\n[`main`](https://github.com/Games-by-Mason/shader_compiler/tree/main) loosely tracks Zig master. For support for Zig 0.14.0, use [v1.0.0](https://github.com/Games-by-Mason/shader_compiler/releases/tag/v0.1.0).\n\n# Usage\n\nNote that the initial compile will take quite while as it's building the shader C++ implementation of the shader compiler. Once this finishes it will be cached.\n\nExample usage:\n```sh\nzig build run -- --target Vulkan-1.3 --optimize-perf input.glsl output.spv\n```\n\nExample usage from Zig's build system:\n\n```zig\nconst compile_shader = b.addRunArtifact(shader_compiler_exe);\ncompile_shader.addArg(\"--scalar-block-layout\");\ncompile_shader.addArgs(&.{\n    \"--target\", \"Vulkan-1.3\",\n});\nswitch (optimize) {\n    .Debug => {},\n    .ReleaseSafe, .ReleaseFast => compile_shader.addArgs(&.{\n        \"--optimize-perf\",\n    }),\n    .ReleaseSmall => compile_shader.addArgs(&.{\n        \"--optimize-perf\",\n        \"--optimize-size\",\n    }),\n}\ncompile_shader.addFileArg(b.path(path));\nreturn compile_shader.addOutputFileArg(\"compiled.spv\");\n```\n\n# `GL_ARB_shading_language_include`\n\n`glslang` supports `#include` via the [`GL_ARB_shading_language_include`](https://registry.khronos.org/OpenGL/extensions/ARB/ARB_shading_language_include.txt) extension. You can enable it in your shaders like this:\n\n```glsl\n#extension GL_ARB_shading_language_include : require\n```\n\nYou will also need to specify at least one include path via `--include-path`. Multiple can be specified by passing the arg more than once. If calling via Zig's build system, use '--write-deps' for proper caching behavior.\n\nCommand line:\n```\nzig build run -- --target Vulkan-1.3 --include-path include shader.vert shader.spv\n```\n\nZig build system:\n```zig\ncompile_shader.addArg(\"--include-path\");\ncompile_shader.addDirectoryArg(b.path(\"include\"));\ncompile_shader.addArg(\"--write-deps\");\n_ = compile_shader.addDepFileOutputArg(\"deps.d\");\n```\n\nYou can now include files in your shaders:\n```glsl\n#include \"foo.glsl\"\n```\n\nFor details on inclusion syntax and path resolution, see the [extension specification](https://registry.khronos.org/OpenGL/extensions/ARB/ARB_shading_language_include.txt).\n\n# Usage as a library\n\nSee `root.zig` for calling the compiler directly from Zig.\n",
+  "readme": "[Moved to Codeberg](https://codeberg.org/Games-by-Mason/mr_texture)\n\nThis repository is not mirrored.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/174537044?v=4",
   "releases": [
     {
