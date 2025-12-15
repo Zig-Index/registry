@@ -12,7 +12,7 @@
   "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-12-15T10:48:13Z",
+  "updated_at": "2025-12-15T15:17:26Z",
   "minimum_zig_version": "0.15.2",
   "readme": "# Zipfer\n\n## Build\n\n```bash\nzig build --release=fast\n```\n\n## Usage\n\n```bash\nzipfer --target=encoded.txt --output=output_directory\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/147643164?u=973e9ca414532524e07ab9f12dbe00e4f595c1f5&v=4",
