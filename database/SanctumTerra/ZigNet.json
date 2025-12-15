@@ -14,12 +14,12 @@
   "stars": 4,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-12-12T18:51:00Z",
+  "updated_at": "2025-12-15T21:44:58Z",
   "dependencies": [
     {
       "name": "BinaryStream",
-      "url": "git+https://github.com/SanctumTerra/BinaryStream?ref=master#9d8aeeefe68a99314cf423cc18b3d6a7cc0ec24f",
-      "hash": "BinaryStream-0.0.0-gn8mmk8wAQBhVdhDnqi81jqGZfZRebG6a4hXFBeoqpF2"
+      "url": "git+https://www.github.com/SanctumTerra/BinaryStream#fcd0fadceee544af1846316379c4754823480700",
+      "hash": "BinaryStream-0.0.0-gn8mms1bAQBhJ-o3pf5HlszhMctodPrYFOjQJyoESOem"
     }
   ],
   "minimum_zig_version": "0.15.1",
