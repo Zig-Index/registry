@@ -10,7 +10,7 @@
   "stars": 61,
   "forks": 9,
   "watchers": 3,
-  "updated_at": "2025-12-15T11:16:21Z",
+  "updated_at": "2025-12-15T11:24:01Z",
   "dependencies": [
     {
       "name": "mr_structopt",
@@ -24,7 +24,7 @@
     }
   ],
   "minimum_zig_version": "0.16.0-dev.1484+d0ba6642b",
-  "readme": "[Moved to Codeberg](https://codeberg.org/Games-by-Mason/mr_texture)\n\nThis repository is not mirrored.\n",
+  "readme": "[Moved to Codeberg](https://codeberg.org/Games-by-Mason/mr_glsl)\n\nThis repository is not mirrored.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/174537044?v=4",
   "releases": [
     {

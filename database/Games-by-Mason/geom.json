@@ -10,7 +10,7 @@
   "stars": 10,
   "forks": 0,
   "watchers": 2,
-  "updated_at": "2025-11-15T10:40:38Z",
+  "updated_at": "2025-12-15T11:49:16Z",
   "dependencies": [
     {
       "name": "tween",
@@ -19,7 +19,7 @@
     }
   ],
   "minimum_zig_version": "0.15.0",
-  "readme": "# Geom\n\nGeometry and related math for game development.\n\n# Documentation\n\nDocs can be found [here](https://docs.gamesbymason.com/geom/), you can generate up to date docs yourself with `zig build docs`.\n\n# \"For Game Development\"?\n\nThis library has features you wouldn't expect out of a linear algebra library, and lacks features you would.\n\nFurthermore, it prioritizes speed over both precision and determinism across CPUs. You shouldn't use this library for scientific computing, or for something like rollback netcode. You *should* use it when you wanna go fast.\n\nThis library runs *much* faster in release mode. It's recommended that you build it in release mode even when the rest of your app is in debug mode.\n\n# Target Features\n\nFor best performance, enable FMA & SSE3 on x86 and Neon & VFP4 on ARM.\n\nLack of support for FMA in particular will result in FMA being emulated in places where we explicitly ask for it. This will harm performance. On desktop, all common \"big\" core CPUs have had support since at least 2015 but \"small\" core CPUs got support more recently.\n",
+  "readme": "[Moved to Codeberg](https://codeberg.org/Games-by-Mason/mr_geom)\n\nThis repository is not mirrored.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/174537044?v=4",
   "releases": [],
   "owner_bio": "",
