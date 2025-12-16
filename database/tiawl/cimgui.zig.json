@@ -12,15 +12,15 @@
     "ziglang",
     "zig-package"
   ],
-  "stars": 91,
+  "stars": 92,
   "forks": 17,
   "watchers": 1,
-  "updated_at": "2025-12-14T11:16:24Z",
+  "updated_at": "2025-12-16T21:51:08Z",
   "dependencies": [
     {
       "name": "glfw_zig",
-      "url": "git+https://github.com/tiawl/glfw.zig?ref=vulkan.zig-v1.4.336#1abb80ceb61c25ad21d5e1602cf47098fdf876ca",
-      "hash": "glfw_zig-1.0.0-NrvYo8bXGQBubZTprlHFRuRkRdq3au7UAbFob6o0gM8B"
+      "url": "git+https://github.com/tiawl/glfw.zig?ref=wayland.zig-wayland-protocols-1.47#65b02416fd6795c0566d6b155a8c0ea23f03a62f",
+      "hash": "glfw_zig-1.0.0-NrvYo8bXGQDQvMHLao8ML7L6L9kL_Idk8IOKBTDyg8aN"
     },
     {
       "name": "sdl",
