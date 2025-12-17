@@ -10,12 +10,12 @@
   "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-10-06T17:32:57Z",
+  "updated_at": "2025-12-17T09:56:01Z",
   "dependencies": [
     {
       "name": "mimalloc",
-      "url": "https://github.com/akunaakwei/zig-mimalloc/archive/f399b5567926026bb81e63302921d80e8962af3f.tar.gz",
-      "hash": "mimalloc-3.0.3-ayYwXNAOAACdkorEWufCMN7QPilc-uKvvoP7WhnwgL8-"
+      "url": "https://github.com/akunaakwei/zig-mimalloc/archive/61177539a36ed75b8a9fcfb16b9ffde7ba886c76.tar.gz",
+      "hash": "mimalloc-3.1.5-ayYwXNIOAACVeJOdzAdMwEJSDoKhQrybKwCSnzU-uGjI"
     },
     {
       "name": "clap",
