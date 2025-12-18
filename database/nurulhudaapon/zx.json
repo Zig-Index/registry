@@ -18,7 +18,7 @@
   "stars": 86,
   "forks": 7,
   "watchers": 0,
-  "updated_at": "2025-12-18T22:14:41Z",
+  "updated_at": "2025-12-18T22:33:54Z",
   "dependencies": [
     {
       "name": "httpz",
@@ -55,13 +55,50 @@
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/55424194?u=4e7731597f51019ecfef7854afd03c393b869c09&v=4",
   "releases": [
     {
-      "tag_name": "v0.1.0-dev.356",
-      "name": null,
-      "body": "This is a developer preview of ZX, some features are work in progress.\n\n## Installation\n\n##### Linux/macOS\n```bash\ncurl -fsSL https://ziex.dev/install | bash\n```\n##### Windows\n```powershell\npowershell -c \"irm ziex.dev/install.ps1 | iex\"\n```\n\n## Changelog\n- [x] feat: client side rendering (wip)\n\n## Feature Checklist\n\n- [x] Server Side Rendering (SSR)\n- [x] Static Site Generation (SSG)\n- [ ] Client Side Rendering (CSR) via WebAssembly (_WIP_)\n- [x] Client Side Rendering (CSR) via React\n- [x] Type Safety\n- [x] Routing\n    - [x] File-system Routing\n    - [x] Search Parameters\n    - [x] Path Segments\n- [x] Components\n- [x] Control Flow\n    - [x] `if`\n    - [ ] `if` nested\n    - [x] `if/else`\n    - [x] `if/else` nested\n    - [x] `for`\n    - [x] `for` nested\n    - [x] `switch`\n    - [x] `switch` nested\n    - [x] `while`\n    - [x] `while` nested\n- [x] Assets\n    - [x] Copying\n    - [x] Serving\n- [ ] Assets Optimization\n    - [ ] Image\n    - [ ] CSS\n    - [ ] JS\n    - [ ] HTML\n- [ ] Middleware\n- [ ] API Endpoints\n- [ ] Server Actions\n- [x] CLI\n    - [x] `init` Project Template\n    - [x] `transpile` Transpile .zx files to Zig source code\n    - [x] `serve` Serve the project\n    - [x] `dev` HMR or Rebuild on Change\n    - [x] `fmt` Format the ZX source code (_Alpha_)\n    - [x] `export` Generate static site assets\n    - [x] `bundle` Bundle the ZX executable with public/assets and exe\n    - [x] `version` Show the version of the ZX CLI\n    - [x] `update` Update the version of ZX dependency\n    - [x] `upgrade` Upgrade the version of ZX CLI\n\n",
-      "prerelease": true,
-      "published_at": "2025-12-18T21:19:45Z",
-      "html_url": "https://github.com/nurulhudaapon/zx/releases/tag/v0.1.0-dev.356",
-      "assets": []
+      "tag_name": "v0.1.0-dev.357",
+      "name": "v0.1.0-dev.357",
+      "body": "This is a developer preview of ZX, some features are work in progress.\r\n\r\n## Installation\r\n\r\n##### Linux/macOS\r\n```bash\r\ncurl -fsSL https://ziex.dev/install | bash\r\n```\r\n##### Windows\r\n```powershell\r\npowershell -c \"irm ziex.dev/install.ps1 | iex\"\r\n```\r\n\r\n## Changelog\r\n* refactor: migrate to tree-sitter for parsing/transpiling/formatting by @nurulhudaapon in https://github.com/nurulhudaapon/zx/pull/19\r\n* test: add cli test by @nurulhudaapon in https://github.com/nurulhudaapon/zx/pull/20\r\n* fix: being used as dependency by @elpekenin in https://github.com/nurulhudaapon/zx/pull/21\r\n* feat: use `LazyPath` instead of `[]const u8` by @elpekenin in https://github.com/nurulhudaapon/zx/pull/22\r\n* feat: allow formatting several paths at the same time by @elpekenin in https://github.com/nurulhudaapon/zx/pull/23\r\n\r\n\r\n**Full Changelog**: https://github.com/nurulhudaapon/zx/compare/v0.1.0-dev.308...v0.1.0-dev.357\r\n\r\n## Feature Checklist\r\n\r\n- [x] Server Side Rendering (SSR)\r\n- [x] Static Site Generation (SSG)\r\n- [ ] Client Side Rendering (CSR) via WebAssembly (_WIP_)\r\n- [x] Client Side Rendering (CSR) via React\r\n- [x] Type Safety\r\n- [x] Routing\r\n    - [x] File-system Routing\r\n    - [x] Search Parameters\r\n    - [x] Path Segments\r\n- [x] Components\r\n- [x] Control Flow\r\n    - [x] `if`\r\n    - [ ] `if` nested\r\n    - [x] `if/else`\r\n    - [x] `if/else` nested\r\n    - [x] `for`\r\n    - [x] `for` nested\r\n    - [x] `switch`\r\n    - [x] `switch` nested\r\n    - [x] `while`\r\n    - [x] `while` nested\r\n- [x] Assets\r\n    - [x] Copying\r\n    - [x] Serving\r\n- [ ] Assets Optimization\r\n    - [ ] Image\r\n    - [ ] CSS\r\n    - [ ] JS\r\n    - [ ] HTML\r\n- [ ] Middleware\r\n- [ ] API Endpoints\r\n- [ ] Server Actions\r\n- [x] CLI\r\n    - [x] `init` Project Template\r\n    - [x] `transpile` Transpile .zx files to Zig source code\r\n    - [x] `serve` Serve the project\r\n    - [x] `dev` HMR or Rebuild on Change\r\n    - [x] `fmt` Format the ZX source code (_Alpha_)\r\n    - [x] `export` Generate static site assets\r\n    - [x] `bundle` Bundle the ZX executable with public/assets and exe\r\n    - [x] `version` Show the version of the ZX CLI\r\n    - [x] `update` Update the version of ZX dependency\r\n    - [x] `upgrade` Upgrade the version of ZX CLI\r\n\r\n",
+      "prerelease": false,
+      "published_at": "2025-12-18T22:38:38Z",
+      "html_url": "https://github.com/nurulhudaapon/zx/releases/tag/v0.1.0-dev.357",
+      "assets": [
+        {
+          "name": "zx-macos-x64.tar.gz",
+          "url": "https://github.com/nurulhudaapon/zx/releases/download/v0.1.0-dev.357/zx-macos-x64.tar.gz",
+          "size": 1173076,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zx-windows-x64.zip",
+          "url": "https://github.com/nurulhudaapon/zx/releases/download/v0.1.0-dev.357/zx-windows-x64.zip",
+          "size": 1254779,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zx-linux-x64.tar.gz",
+          "url": "https://github.com/nurulhudaapon/zx/releases/download/v0.1.0-dev.357/zx-linux-x64.tar.gz",
+          "size": 4017133,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zx-windows-aarch64.zip",
+          "url": "https://github.com/nurulhudaapon/zx/releases/download/v0.1.0-dev.357/zx-windows-aarch64.zip",
+          "size": 1204483,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zx-linux-aarch64.tar.gz",
+          "url": "https://github.com/nurulhudaapon/zx/releases/download/v0.1.0-dev.357/zx-linux-aarch64.tar.gz",
+          "size": 3977481,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zx-macos-aarch64.tar.gz",
+          "url": "https://github.com/nurulhudaapon/zx/releases/download/v0.1.0-dev.357/zx-macos-aarch64.tar.gz",
+          "size": 1101417,
+          "content_type": "application/gzip"
+        }
+      ]
     },
     {
       "tag_name": "v0.1.0-dev.308",
