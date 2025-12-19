@@ -1,0 +1,40 @@
+{
+  "name": "zig-floe",
+  "owner": "jedisct1",
+  "repo": "zig-floe",
+  "description": "Fast Lightweight Online Encryption.",
+  "type": "package",
+  "topics": [
+    "encryption",
+    "seekable",
+    "streaming",
+    "zig",
+    "zig-package",
+    "floe"
+  ],
+  "stars": 1,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2025-12-19T03:47:38Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# zig-floe\n\nA Zig implementation of FLOE (Fast Lightweight Online Encryption), a streaming authenticated encryption scheme designed by Snowflake.\n\n## What is FLOE?\n\nFLOE is a segment-based encryption scheme that lets you encrypt and decrypt large files with constant memory usage. Unlike traditional authenticated encryption that requires loading the entire file into memory, FLOE processes data in fixed-size segments while maintaining full authentication guarantees.\n\nKey properties:\n\n- Bounded memory: Process files of any size with fixed memory footprint\n- Streaming: Encrypt/decrypt data as it arrives, no need to buffer everything\n- Authenticated: Tampered or truncated data is detected and rejected\n- Key commitment: The header cryptographically binds the key to the ciphertext\n- FIPS-compatible: Uses only AES-GCM-256 and HMAC-SHA384\n\n## Installation\n\nRequires Zig 0.15.1 or later.\n\nAdd the dependency using `zig fetch`:\n\n```sh\nzig fetch --save git+https://github.com/jedisct1/zig-floe\n```\n\nThen in your `build.zig`:\n\n```zig\nconst floe = b.dependency(\"floe\", .{});\nexe.root_module.addImport(\"floe\", floe.module(\"zig_floe\"));\n```\n\nOr just copy `src/root.zig` into your project.\n\n## Quick Start\n\n### Encrypting a small message\n\n```zig\nconst std = @import(\"std\");\nconst floe = @import(\"floe\");\nconst Floe = floe.Aes256GcmSha384;\n\npub fn main() !void {\n    // 32-byte encryption key (use crypto.random.bytes in production)\n    const key: [Floe.key_length]u8 = @splat(0);\n\n    // Associated data - authenticated but not encrypted\n    const associated_data = \"user-id:12345\";\n\n    // Use 4KB segments (good for small-medium files)\n    const params = Floe.Params.gcm256_iv256_4k;\n\n    // Create encryptor\n    var encryptor = try Floe.Encryptor.init(params, key, associated_data);\n\n    // Get header (must be sent/stored before ciphertext)\n    const header = encryptor.get_header();\n\n    // Encrypt the message\n    const plaintext = \"Hello, FLOE!\";\n    var ciphertext: [params.encrypted_segment_length]u8 = undefined;\n    const ct_len = try encryptor.encrypt_last_segment(plaintext, &ciphertext);\n\n    // Now header[0..header.len] and ciphertext[0..ct_len] can be transmitted/stored\n    _ = header;\n    _ = ct_len;\n}\n```\n\n### Decrypting a message\n\n```zig\nconst std = @import(\"std\");\nconst floe = @import(\"floe\");\nconst Floe = floe.Aes256GcmSha384;\n\npub fn decrypt(header: []const u8, ciphertext: []const u8) ![]const u8 {\n    const key: [Floe.key_length]u8 = @splat(0);\n    const associated_data = \"user-id:12345\";\n    const params = Floe.Params.gcm256_iv256_4k;\n\n    // Create decryptor (validates header tag)\n    var decryptor = try Floe.Decryptor.init(params, key, associated_data, header);\n\n    // Decrypt\n    var plaintext: [params.plaintext_segment_length()]u8 = undefined;\n    const pt_len = try decryptor.decrypt_last_segment(ciphertext, &plaintext);\n\n    return plaintext[0..pt_len];\n}\n```\n\n### Streaming encryption of large data\n\nFor data larger than one segment, encrypt in chunks:\n\n```zig\nconst std = @import(\"std\");\nconst floe = @import(\"floe\");\nconst Floe = floe.Aes256GcmSha384;\n\npub fn encrypt_file(reader: anytype, writer: anytype) !void {\n    const key: [Floe.key_length]u8 = @splat(0);\n    const params = Floe.Params.gcm256_iv256_1m; // 1MB segments for large files\n\n    var encryptor = try Floe.Encryptor.init(params, key, \"\");\n\n    // Write header first\n    try writer.writeAll(encryptor.get_header());\n\n    const pt_seg_len = params.plaintext_segment_length();\n    var plaintext_buf: [1024 * 1024]u8 = undefined; // Must match segment size\n    var ciphertext_buf: [params.encrypted_segment_length]u8 = undefined;\n\n    while (true) {\n        const bytes_read = try reader.readAll(plaintext_buf[0..pt_seg_len]);\n\n        if (bytes_read < pt_seg_len) {\n            // Last segment (can be any size from 0 to pt_seg_len)\n            const ct_len = try encryptor.encrypt_last_segment(\n                plaintext_buf[0..bytes_read],\n                &ciphertext_buf,\n            );\n            try writer.writeAll(ciphertext_buf[0..ct_len]);\n            break;\n        } else {\n            // Full segment\n            const ct_len = try encryptor.encrypt_segment(\n                plaintext_buf[0..pt_seg_len],\n                &ciphertext_buf,\n            );\n            try writer.writeAll(ciphertext_buf[0..ct_len]);\n        }\n    }\n}\n```\n\n### Streaming decryption\n\n```zig\nconst std = @import(\"std\");\nconst floe = @import(\"floe\");\nconst Floe = floe.Aes256GcmSha384;\n\npub fn decrypt_file(reader: anytype, writer: anytype) !void {\n    const key: [Floe.key_length]u8 = @splat(0);\n    const params = Floe.Params.gcm256_iv256_1m;\n\n    // Read header\n    var header: [params.header_length()]u8 = undefined;\n    try reader.readNoEof(&header);\n\n    var decryptor = try Floe.Decryptor.init(params, key, \"\", &header);\n\n    const enc_seg_len = params.encrypted_segment_length;\n    var ciphertext_buf: [enc_seg_len]u8 = undefined;\n    var plaintext_buf: [params.plaintext_segment_length()]u8 = undefined;\n\n    while (!decryptor.is_closed()) {\n        const bytes_read = try reader.readAll(&ciphertext_buf);\n\n        if (bytes_read == 0) {\n            return error.UnexpectedEndOfFile;\n        }\n\n        // decrypt_segment auto-detects the last segment by checking the length prefix\n        const pt_len = try decryptor.decrypt_segment(\n            ciphertext_buf[0..bytes_read],\n            &plaintext_buf,\n        );\n        try writer.writeAll(plaintext_buf[0..pt_len]);\n    }\n}\n```\n\n## Ciphertext Format\n\nFLOE ciphertext consists of:\n\n1. Header (74 bytes with default IV):\n   - 10 bytes: Encoded parameters\n   - 32 bytes: Random IV\n   - 32 bytes: Header tag (key commitment)\n\n2. Segments (one or more):\n   - 4 bytes: Length prefix (`0xFFFFFFFF` for internal segments, actual length for final)\n   - 12 bytes: Random nonce\n   - Variable: Ciphertext (same length as plaintext)\n   - 16 bytes: Authentication tag\n\nOverhead per segment: 32 bytes (4 + 12 + 16)\n\n## Choosing Segment Size\n\n| Segment Size | Use Case                             | Memory per Segment |\n| ------------ | ------------------------------------ | ------------------ |\n| 4 KB         | Small files, low-memory environments | ~8 KB              |\n| 64 KB        | General purpose                      | ~130 KB            |\n| 1 MB         | Large files, high-throughput         | ~2 MB              |\n\nSmaller segments = less memory, more overhead. Larger segments = more memory, better throughput.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/124872?v=4",
+  "releases": [],
+  "owner_bio": "Get my public keys here: https://sk.tl/7CPRo8kn",
+  "owner_company": null,
+  "owner_location": "Antibes, France",
+  "owner_blog": "https://primulinus.tpopsite.com",
+  "owner_twitter_username": "jedisct1",
+  "owner_followers": 4084,
+  "owner_following": 194,
+  "owner_created_at": "2009-09-09T10:20:57Z",
+  "license": "MIT",
+  "category": "library"
+}
