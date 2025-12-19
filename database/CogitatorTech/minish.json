@@ -1,0 +1,56 @@
+{
+  "name": "minish",
+  "owner": "CogitatorTech",
+  "repo": "minish",
+  "description": "A property-based testing framework for Zig ⚡",
+  "type": "package",
+  "topics": [
+    "property-based-testing",
+    "software-testing",
+    "zig",
+    "zig-library",
+    "zig-package",
+    "software-framework"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-12-19T23:17:39Z",
+  "dependencies": [
+    {
+      "name": "chilli",
+      "url": "https://github.com/CogitatorTech/chilli/archive/v0.2.2.tar.gz",
+      "hash": "chilli-0.2.2-c19PrvIyAQAgsL0VkYCKq0DuxU7rZUpRuH991zsyOkYQ"
+    }
+  ],
+  "minimum_zig_version": "0.15.2",
+  "readme": "<div align=\"center\">\n  <picture>\n    <img alt=\"Minish Logo\" src=\"logo.svg\" height=\"25%\" width=\"25%\">\n  </picture>\n<br>\n\n<h2>Minish</h2>\n\n[![Tests](https://img.shields.io/github/actions/workflow/status/CogitatorTech/minish/tests.yml?label=tests&style=flat&labelColor=282c34&logo=github)](https://github.com/CogitatorTech/minish/actions/workflows/tests.yml)\n[![License](https://img.shields.io/badge/license-Apache--2.0-007ec6?label=license&style=flat&labelColor=282c34&logo=open-source-initiative)](https://github.com/CogitatorTech/minish/blob/main/LICENSE)\n[![Examples](https://img.shields.io/badge/examples-view-green?style=flat&labelColor=282c34&logo=zig)](https://github.com/CogitatorTech/minish/tree/main/examples)\n[![Docs](https://img.shields.io/badge/docs-read-blue?style=flat&labelColor=282c34&logo=read-the-docs)](https://CogitatorTech.github.io/minish/)\n[![Zig Version](https://img.shields.io/badge/Zig-0.15.2-orange?logo=zig&labelColor=282c34)](https://ziglang.org/download/)\n[![Release](https://img.shields.io/github/release/CogitatorTech/minish.svg?label=release&style=flat&labelColor=282c34&logo=github)](https://github.com/CogitatorTech/minish/releases/latest)\n\nA property-based testing framework for Zig\n\n</div>\n\n---\n\nMinish is a small [property-based testing](https://en.wikipedia.org/wiki/Software_testing#Property_testing) framework\nfor Zig,\ninspired by [QuickCheck](https://hackage.haskell.org/package/QuickCheck)\nand [Hypothesis](https://hypothesis.readthedocs.io/en/latest/).\n\n### What is Property-based Testing?\n\nProperty-based testing is a way of testing software by defining properties that should always hold.\nCompared to typical example-based testing (like unit tests), instead of writing individual test cases with specific\ninputs and expected outputs, you define general properties about your code's behavior.\nThe testing framework then generates a wide range of random inputs to verify that these properties hold for all cases.\n\nGiven a piece of code like a function and its property, a property-based testing workflow normally involves the\nfollowing steps:\n\n1. Generating a lot of random inputs.\n2. Finding cases where the input causes the property to fail.\n3. Finding smaller subsets of the failing input that still cause the failure (this is called \"shrinking\").\n\nFor example, consider the property of a `reverse` function that states that reversing\na string twice should return the original string.\nIn property-based testing, you would define this property and let the framework generate a lot of random strings to\ntest it.\nIf it finds a string that makes the property fail (due to a bug in the reverse function, for example), it will then try\nto shrink that string to a simpler or shorter case that still makes the property fail.\n\nHere is a brief comparison between example-based testing and property-based testing paradigms:\n\n| Criterion | Example-based Testing          | Property-based Testing                     |\n|-----------|--------------------------------|--------------------------------------------|\n| Input     | Hand-written specific values   | Auto-generated random values               |\n| Coverage  | Only cases you can think of    | Discovers edge cases automatically         |\n| Debugging | Exact failing inputs are known | Shrinks to minimal failing case            |\n| Effort    | Write a lot of test cases      | Define one property, test with many inputs |\n\n### Why Minish?\n\n- Written in pure Zig with no external dependencies\n- Includes over 25 built-in generators (like for integers, floats, strings, lists, structs, UUIDs, timestamps, etc.)\n- Combinators to build complex generators from simple ones (map, filter, flatMap, frequency)\n- Supports automatic shrinking for integers, floats, strings, lists, tuples, and arrays\n- Supports reproducible failures and verbose mode\n- Configurable and easy to integrate into existing Zig projects\n\nSee [ROADMAP.md](ROADMAP.md) for the list of implemented and planned features.\n\n> [!IMPORTANT]\n> Minish is in early development, so bugs and breaking changes are expected.\n> Please use the [issues page](https://github.com/CogitatorTech/minish/issues) to report bugs or request features.\n\n---\n\n### Getting Started\n\nYou can add Minish to your project and start using it by following the steps below.\n\n#### Installation\n\nRun the following command in the root directory of your project to download Minish:\n\n```sh\nzig fetch --save=minish \"https://github.com/CogitatorTech/minish/archive/<branch_or_tag>.tar.gz\"\n```\n\nReplace `<branch_or_tag>` with the desired branch or release tag, like `main` (for the development version) or `v0.1.0`.\nThis command will download Minish and add it to Zig's global cache and update your project's `build.zig.zon` file.\n\n> [!NOTE]\n> Minsih is developed and tested with Zig version 0.15.2.\n\n#### Adding to Build Script\n\nNext, modify your `build.zig` file to make Minish available to your build target as a module.\n\n```zig\npub fn build(b: *std.Build) void {\n    // ... the existing setup ...\n\n    const minish_dep = b.dependency(\"minish\", .{});\n    const minish_module = minish_dep.module(\"minish\");\n    exe.root_module.addImport(\"minish\", minish_module);\n}\n```\n\n#### A Simple Example\n\nFinally, you can `@import(\"minish\")` and start using it in your Zig project.\n\n```zig\nconst std = @import(\"std\");\nconst minish = @import(\"minish\");\nconst gen = minish.gen;\n\n// Helper function to reverse a string\nfn reverse(allocator: std.mem.Allocator, s: []const u8) ![]u8 {\n    const result = try allocator.alloc(u8, s.len);\n    for (s, 0..) |c, i| {\n        result[s.len - 1 - i] = c;\n    }\n    return result;\n}\n\n// Property: reversing a string twice returns the original\nfn reverse_twice_is_identity(s: []const u8) !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    const once = try reverse(allocator, s);\n    defer allocator.free(once);\n\n    const twice = try reverse(allocator, once);\n    defer allocator.free(twice);\n\n    try std.testing.expectEqualStrings(s, twice);\n}\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    // Generate random strings and test the property\n    const string_gen = gen.string(.{\n        .min_len = 0,\n        .max_len = 100,\n        .charset = .alphanumeric,\n    });\n\n    try minish.check(allocator, string_gen, reverse_twice_is_identity, .{\n        .num_runs = 100,\n    });\n}\n```\n\n---\n\n### Documentation\n\nYou can find the API documentation for the latest release of Minish [here](https://CogitatorTech.github.io/minish/).\n\nAlternatively, you can use the `make docs` command to generate the documentation for the current version of Minish.\nThis will generate HTML documentation in the `docs/api` directory, which you can serve locally with `make serve-docs`\nand view in a web browser.\n\n### Examples\n\nCheck out the [examples](examples) directory for example usages of Minish.\n\n---\n\n### Contributing\n\nSee [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to make a contribution.\n\n### License\n\nMinish is licensed under the Apache License, Version 2.0 (see [LICENSE](LICENSE)).\n\n### Acknowledgements\n\n* The logo is from [SVG Repo](https://www.svgrepo.com/svg/426957/hat) with some modifications.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/229955204?v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.0",
+      "name": "",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-12-19T21:30:50Z",
+      "html_url": "https://github.com/CogitatorTech/minish/releases/tag/v0.1.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0-alpha.1",
+      "name": "",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-12-19T20:17:06Z",
+      "html_url": "https://github.com/CogitatorTech/minish/releases/tag/v0.1.0-alpha.1",
+      "assets": []
+    }
+  ],
+  "owner_bio": "",
+  "owner_location": "Norway",
+  "owner_blog": null,
+  "owner_twitter_username": "CogitatorTech",
+  "owner_created_at": "2025-09-02T12:46:35Z",
+  "license": "Apache-2.0",
+  "category": "library"
+}
