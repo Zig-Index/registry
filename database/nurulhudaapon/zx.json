@@ -18,7 +18,7 @@
   "stars": 86,
   "forks": 7,
   "watchers": 0,
-  "updated_at": "2025-12-19T11:20:30Z",
+  "updated_at": "2025-12-19T12:10:15Z",
   "dependencies": [
     {
       "name": "httpz",
@@ -42,7 +42,7 @@
     },
     {
       "name": "tree_sitter_zx",
-      "url": "tree-sitter-zx"
+      "url": "packages/tree-sitter-zx"
     },
     {
       "name": "tree_sitter",
