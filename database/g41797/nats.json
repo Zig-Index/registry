@@ -13,7 +13,7 @@
   "stars": 33,
   "forks": 1,
   "watchers": 3,
-  "updated_at": "2025-11-09T21:54:07Z",
+  "updated_at": "2025-12-19T10:22:36Z",
   "dependencies": [
     {
       "name": "mailbox",
@@ -22,8 +22,7 @@
     },
     {
       "name": "zul",
-      "url": "git+https://github.com/karlseguin/zul#d9142c73aedc5698beba58b3fbf2bcfe69864778",
-      "hash": "zul-0.0.0-1oDot0BCBwA9cUo5OOrPs5NGmvoM7sk1ztfbdfL7mh4P"
+      "url": "vendor/zul"
     }
   ],
   "minimum_zig_version": "0.14.0",
@@ -34,9 +33,10 @@
   "owner_location": null,
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 11,
-  "owner_following": 7,
+  "owner_followers": 12,
+  "owner_following": 8,
   "owner_created_at": "2014-10-09T16:33:35Z",
+  "homepage": "https://g41797.github.io/nats/",
   "license": "MIT",
   "category": "library"
 }
