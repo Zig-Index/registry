@@ -14,22 +14,22 @@
   "stars": 8,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-12-18T15:08:23Z",
+  "updated_at": "2025-12-20T22:16:41Z",
   "dependencies": [
     {
       "name": "nats",
-      "url": "git+https://github.com/g41797/nats#5028b8772a15b84a9c7ff959db93ac74ac2c754b",
-      "hash": "nats-0.0.3-MWKeg18aAgBOji2Yb_PlNYb0zyN6SvcCP0ULh8m3Qewp"
+      "url": "git+https://github.com/g41797/nats#b4655d4154457b8f4af31a34f93ef4445da66fd3",
+      "hash": "nats-0.0.3-obw1dFV7BgDV_yIz3BlpO5ThGIbOHoYDsl_9gAvgqDwX"
     },
     {
       "name": "mailbox",
-      "url": "git+https://github.com/g41797/mailbox#5e2a00e7af3d27be9f40dc03aeca204bb8973fce",
-      "hash": "mailbox-0.0.0-eJsHsMBEAACjbrEiAWogXHrTTXjUheNjxm-PLKTUQWCz"
+      "url": "git+https://github.com/g41797/mailbox#09ce9a443d17a36df47925e8927252fcde3c6940",
+      "hash": "mailbox-0.0.13-a-vFm3lcAAD33j3q2G2Hj6lnDahYuT1ESGBq99aVehow"
     },
     {
       "name": "temp",
-      "url": "git+https://github.com/abhinav/temp.zig#382a711f253d54a88f222650e6c03b62411373c6",
-      "hash": "temp-0.3.0-Ogl1FSSBAAB2WXv3QbTYO3NYfVFoYTBkZsVK3MYvbxFE"
+      "url": "git+https://github.com/abhinav/temp.zig#cf2317e06d32f3f0abdfc743c7a5950d9fdb2d19",
+      "hash": "temp-0.3.0-Ogl1Ff5-AABRtiHj_zDFI0CZVU8ORLPko6iQiw63Znrz"
     },
     {
       "name": "datetime",
@@ -37,7 +37,7 @@
       "hash": "datetime-0.8.0-cJNXzP_YAQBxQ5hkNNP6ScnG5XsqciJmeP5RVV4xwCBA"
     }
   ],
-  "minimum_zig_version": "0.14.0",
+  "minimum_zig_version": "0.15.2",
   "readme": "![](_logo/Ziggy_And_Zero_Are_Cooking_Tofu.png)\n# **_Tofu - Sync your devs, Async your apps_**!\n\n[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)\n[![Linux](https://github.com/g41797/yaaamp/actions/workflows/linux.yml/badge.svg)](https://github.com/g41797/yaaamp/actions/workflows/linux.yml)\n<!-- [![MacOS](https://github.com/g41797/yaaamp/actions/workflows/mac.yml/badge.svg)](https://github.com/g41797/yaaamp/actions/workflows/mac.yml) -->\n\n---\n\n# tofu\n\n**tofu** is a _protocol_ and an _asynchronous_ **Zig messaging library** used to:\n\n- Build **custom** communication flows.\n- Create **non-blocking** systems.\n- Enable **peer-to-peer** messaging between applications.\n\n**tofu** is a completely new project. It is not a port of old code, and it does not use any C libraries.\nIt is built **100% in native Zig**. The core functionality uses only the standard library.\n\n---\n\n## Why tofu?\n\nAs a food, **tofu** is very simple and has almost no flavor on its own.\nBy using tofu **cubes**, you can:\n\n- Eat it **plain** for a simple snack.\n- Add a little **spice** to make it better.\n- Create a **culinary masterpiece**.\n\nAs a **protocol**, tofu uses **messages** like cubes. By \"cooking\" these messages together, you can grow your project:\n\n- Start with **minimal setups**.\n- Build **complex flows**.\n- Create full **distributed applications**.\n\n> [!IMPORTANT]\n> **tofu** is as good as you are a cook.\n\n---\n\n## \"Connect your developers. Then connect your applications.\"\n\nThis is the **tofu** mantra. It is a paraphrase of [Conway's Law](https://en.wikipedia.org/wiki/Conway%27s_law). \n\n\n## Features\n \n- **Message-Based**: Uses discrete messages for communication.\n- **Asynchronous**: Enables non-blocking message exchanges.\n- **Duplex**: Supports two-way communication.\n- **Peer-to-Peer**: Allows equal roles after connection establishment.\n- **Stream oriented transport** - TCP/IP and **U**nix **D**omain **S**ockets\n- **Multithread-friendly** - All APIs are safe for concurrent access.\n- **Memory management for messages** - internal message pool\n- **Backpressure management** - allows to control receive of messages\n- **Customizable application flows** - allows to build various application flows not restricted to request/response or pub/sub\n- **Simplest API** - you don't have to bother with or know the \"guts\" of socket interfaces\n\n\nDocumentation and examples are available on the [Tofu documentation site](https://g41797.github.io/tofu/) (**_work in progress_**).\n\n---\n\n## A Bit of History\n\n**tofu** did not come from nowhere.\n\nThe journey began in 2008 when I first built a similar system. I maintained and ran that system \nfor many years in high-stakes environments. It powered everything from basic IPC to complex data transfers in a custom distributed file system.\n\nI left that project a few years ago, but I haven't heard any complaints yet — the systems are still running strong.\n\nCorporate lawyers can stay calm: I didn't take any code. I only took the \"**smell**.\"\n(See the [precedent case about paying for a smell](http://fable1001.blogspot.com/2009/11/nasreddin-hodja-smell-of-soup-and-sound.html)).\n\nBy \"**smell**,\" I mean the core philosophy:\n\n- **The Message is the API**: The data itself defines the connection.\n- **Gradual Evolution**: Start with something simple and grow it into a powerful system over time.\n- **The Mantra**: \"Connect your developers. Then connect your applications.\"\n \n---\n\n## AI Usage\n\nAlmost all of this project (99.99%) is \"handmade.\"\n\nAI was used only for these specific tasks:\n\n* **Image Generation**\n  * Generated the project [Logo](_logo/Ziggy_And_Zero_Are_Cooking_Tofu.png).\n* **Code Snippets**\n  * Implemented [Big-Endian (BE) to Little-Endian (LE) serialization](/src/message.zig#L86) and vice versa.\n  * Implemented [data copying to message bodies](/src/message.zig#L722) and vice versa.\n* **Code Refactoring**\n  * **Explicit Pointer Dereferencing**: Replaced implicit \"Automatic pointer dereference\" with explicit `ptr.*` syntax for improved clarity.\n  * **Explicit Type Declaration**: Replaced \"Type Inference\" with explicit type declarations for all variables to ensure strict type safety.\n\n> [!TIP]\n> Configuration files and guidelines related to refactoring are located in the [.claude/rules](.claude/rules) directory.\n\n\n## Credits\n- [Karl Seguin](https://github.com/karlseguin) — for introducing me to [Zig networking](https://www.openmymind.net/TCP-Server-In-Zig-Part-1-Single-Threaded/)\n- [tardy](https://github.com/tardy-org/tardy) — I peeked into 2 files of the project (the author will guess which ones)\n- [temp.zig](https://github.com/abhinav/temp.zig) — helped me (and will help you) work with temporary files\n- [Gemini AI image generator](https://gemini.google.com/app) — the only one out of six I managed to convince to seat Ziggy and Zero at the same table\n- Zig Community Forums (in order of my registration) - for your help and patience with my posts\n  - [Zig on Reddit](https://www.reddit.com/r/Zig/)\n  - [Zig on Discord](https://discord.com/invite/zig)\n  - [Zig on Discourse](https://ziggit.dev/)\n\n---\n\n## Last but not least\n⭐️ Like, share, and don’t forget to [subscribe to the channel](https://github.com/g41797/tofu) !\n\n\n\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/9116281?u=2db219a6136b07d51afe2002b80a7e47b3b37427&v=4",
   "releases": [],
