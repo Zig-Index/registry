@@ -11,10 +11,10 @@
     "ziglang",
     "zig-package"
   ],
-  "stars": 7,
+  "stars": 9,
   "forks": 2,
   "watchers": 1,
-  "updated_at": "2025-12-12T09:35:33Z",
+  "updated_at": "2025-12-20T12:51:50Z",
   "dependencies": [
     {
       "name": "toolbox",

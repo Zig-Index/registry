@@ -14,7 +14,7 @@
   "stars": 22,
   "forks": 5,
   "watchers": 2,
-  "updated_at": "2025-12-16T21:33:37Z",
+  "updated_at": "2025-12-20T13:18:42Z",
   "dependencies": [
     {
       "name": "toolbox",
@@ -28,13 +28,13 @@
     },
     {
       "name": "X11_zig",
-      "url": "git+https://github.com/tiawl/X11.zig?ref=xkbcommon-1.13.0#4ff2107cdb67d664b3707298b437afb27697cd2f",
-      "hash": "X11_zig-1.0.0-UuAzbK8vwADtWhkBKbPt_zgSJrK86ArnxrsyinDN3Hp7"
+      "url": "git+https://github.com/tiawl/X11.zig?ref=xorgproto-2025.1#ad7242012c1511ee97d7e10f8c03bf6d31729416",
+      "hash": "X11_zig-1.0.0-UuAzbMxlwADqtBm9hneM2bqQO_Tj0yovhrifMM8OCWOd"
     },
     {
       "name": "vulkan_zig",
-      "url": "git+https://github.com/tiawl/vulkan.zig?ref=v1.4.336#fb11b6547a81daaf18964e8321dd6cae040da235",
-      "hash": "vulkan_zig-1.0.0-p2wg3p7RNQEZD3HdlK-1Z9r6WD7faGy446u11y8gLGjk"
+      "url": "git+https://github.com/tiawl/vulkan.zig?ref=v1.4.337#e02f9a8e94ab2d3fdc863f221b53cd2a9063463e",
+      "hash": "vulkan_zig-1.0.0-p2wg3vU_NgFmNm9OUx0i4zqIfyj1rMaQHbd37DFCsI5R"
     }
   ],
   "minimum_zig_version": "0.15.1",
