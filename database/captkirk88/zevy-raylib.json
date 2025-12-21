@@ -15,12 +15,16 @@
   "stars": 2,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-12-10T02:49:03Z",
+  "updated_at": "2025-12-21T23:16:53Z",
   "dependencies": [
     {
       "name": "zevy_ecs",
-      "url": "git+https://github.com/captkirk88/zevy-ecs#334346855307eb3a9028825647bc01b23a72072a",
-      "hash": "zevy_ecs-1.56.0-VoL9mYKoBgAGYKW7ZNcsUoo1VwHwMTbo32yqVOa4DR20"
+      "url": "git+https://github.com/captkirk88/zevy-ecs#1210aa6f2dbe7119568703dff2edef4e298d9e21",
+      "hash": "zevy_ecs-1.56.0-VoL9mS3fBgCFEGQY21e_JMj7dKVrVIwRihKfIkiI76YX"
+    },
+    {
+      "name": "zevy_ecs",
+      "url": "../zevy-ecs"
     },
     {
       "name": "raylib_zig",
@@ -39,8 +43,12 @@
     },
     {
       "name": "zevy_reflect",
-      "url": "git+https://github.com/captkirk88/zevy-reflect#a7534fc03d51bde31162c81bcbbe3cb513b18027",
-      "hash": "zevy_reflect-0.0.1-8SzYxp7EAAB3I-yhLbVneAvo3CwhCuqdRWm_VhviQQKA"
+      "url": "git+https://github.com/captkirk88/zevy-reflect#5275f0c056aeab2a371a466ee0e3733db0dd7390",
+      "hash": "zevy_reflect-0.0.1-8SzYxrgiAgCKTc2uwU98GCKLR8Zpk2eYmFicCno_cIRQ"
+    },
+    {
+      "name": "zevy_reflect",
+      "url": "../zevy-reflect"
     },
     {
       "name": "zevy_mem",
@@ -58,7 +66,7 @@
   "owner_blog": null,
   "owner_twitter_username": null,
   "owner_followers": 5,
-  "owner_following": 17,
+  "owner_following": 18,
   "owner_created_at": "2014-01-01T08:56:32Z",
   "category": "library"
 }
