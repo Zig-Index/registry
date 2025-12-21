@@ -7,15 +7,15 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 38,
+  "stars": 39,
   "forks": 1,
   "watchers": 0,
-  "updated_at": "2025-11-20T16:04:19Z",
+  "updated_at": "2025-12-21T11:49:57Z",
   "dependencies": [
     {
       "name": "zio",
-      "url": "git+https://github.com/lalinsky/zio#1025c55dd5f67cda3d8dfe9a09087097c2f035d2",
-      "hash": "zio-0.4.0-xHbVVOdXHACcHf2a5VidyvK70IH0FdWNugm6OyniqBku"
+      "url": "git+https://github.com/lalinsky/zio#7485735bea53a9ca8aa394a39a918edb4c564aff",
+      "hash": "zio-0.4.0-xHbVVGk-DAA0_W1_0NKYeSCwqSn1nDeMw03Nj-ieHAuX"
     }
   ],
   "minimum_zig_version": "0.15.2",
@@ -26,7 +26,7 @@
   "owner_location": "Trenčín, Slovakia",
   "owner_blog": "https://lalinsky.com",
   "owner_twitter_username": null,
-  "owner_followers": 297,
+  "owner_followers": 299,
   "owner_following": 27,
   "owner_created_at": "2010-03-11T19:55:55Z",
   "category": "library"
