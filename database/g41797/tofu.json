@@ -14,7 +14,7 @@
   "stars": 8,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-12-21T14:52:14Z",
+  "updated_at": "2025-12-22T09:28:19Z",
   "dependencies": [
     {
       "name": "nats",
