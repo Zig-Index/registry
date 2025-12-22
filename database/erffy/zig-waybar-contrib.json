@@ -1,0 +1,320 @@
+{
+  "name": "zig-waybar-contrib",
+  "owner": "erffy",
+  "repo": "zig-waybar-contrib",
+  "description": "⚡ High-performance Waybar modules written in Zig for efficient system monitoring",
+  "type": "package",
+  "topics": [
+    "sway",
+    "waybar",
+    "waybar-module",
+    "zig",
+    "ziglang",
+    "zls",
+    "waybar-contrib",
+    "hypr",
+    "hyprland",
+    "swayfx"
+  ],
+  "stars": 29,
+  "forks": 3,
+  "watchers": 3,
+  "updated_at": "2025-12-22T20:45:00Z",
+  "minimum_zig_version": "0.16.0-dev.1484+d0ba6642b",
+  "readme": "> [!IMPORTANT]\n> This repository has been migrated to [codeberg.org](https://codeberg.org/erffy/zig-waybar-contrib)<br/>\n> **This repository is not mirrored.**\n\n\n#### Zig moved its codebase to Codeberg hit me like a wake-up slap: why keep hosting my project in Microsoft’s digital landfill when genuinely open, community-driven platforms actually exist?\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/132709186?u=394868512af3d52d32ddccf5b461caf6d2831393&v=4",
+  "releases": [
+    {
+      "tag_name": "2.0.0-beta.3",
+      "name": "2.0.0 Beta 3",
+      "body": "> [!IMPORTANT]\r\n> This is an **Beta release**, based on Zig version `0.16.0-dev.1484+d0ba6642b`.\r\n\r\n**Full Changelog**: https://github.com/erffy/zig-waybar-contrib/compare/2.0.0-beta.2...2.0.0-beta.3",
+      "prerelease": true,
+      "published_at": "2025-12-07T21:29:52Z",
+      "html_url": "https://github.com/erffy/zig-waybar-contrib/releases/tag/2.0.0-beta.3",
+      "assets": []
+    },
+    {
+      "tag_name": "2.0.0-beta.2",
+      "name": "2.0.0 Beta 2",
+      "body": "> [!IMPORTANT]\r\n> This is an **Beta release**, based on Zig version `0.16.0-dev.1484+d0ba6642b`.\r\n\r\n**Full Changelog**: https://github.com/erffy/zig-waybar-contrib/compare/2.0.0-beta.1...2.0.0-beta.2",
+      "prerelease": true,
+      "published_at": "2025-12-02T16:09:20Z",
+      "html_url": "https://github.com/erffy/zig-waybar-contrib/releases/tag/2.0.0-beta.2",
+      "assets": []
+    },
+    {
+      "tag_name": "2.0.0-beta.1",
+      "name": "2.0.0 Beta 1",
+      "body": "> [!IMPORTANT]\r\n> This is an **Beta release**, based on Zig version `0.16.0-dev.1470+32dc46aae`.\r\n\r\n**Full Changelog**: https://github.com/erffy/zig-waybar-contrib/compare/2.0.0-alpha.3...2.0.0-beta.1",
+      "prerelease": true,
+      "published_at": "2025-11-26T12:54:14Z",
+      "html_url": "https://github.com/erffy/zig-waybar-contrib/releases/tag/2.0.0-beta.1",
+      "assets": []
+    },
+    {
+      "tag_name": "2.0.0-alpha.3",
+      "name": "2.0.0 Alpha 3",
+      "body": "> [!IMPORTANT]\r\n> This is an **Alpha release**, based on Zig version `0.16.0-dev.1458+755a3d957`.\r\n\r\n**Full Changelog**: https://github.com/erffy/zig-waybar-contrib/compare/2.0.0-alpha.2...2.0.0-alpha.3",
+      "prerelease": true,
+      "published_at": "2025-11-25T19:54:36Z",
+      "html_url": "https://github.com/erffy/zig-waybar-contrib/releases/tag/2.0.0-alpha.3",
+      "assets": []
+    },
+    {
+      "tag_name": "2.0.0-alpha.2",
+      "name": "2.0.0 Alpha 2",
+      "body": "> [!IMPORTANT]\r\n> This is an **Alpha release**, based on Zig version `0.16.0-dev.1441+2ea55d715`.\r\n\r\n**Full Changelog**: https://github.com/erffy/zig-waybar-contrib/compare/2.0.0-alpha.1...2.0.0-alpha.2",
+      "prerelease": true,
+      "published_at": "2025-11-23T13:14:10Z",
+      "html_url": "https://github.com/erffy/zig-waybar-contrib/releases/tag/2.0.0-alpha.2",
+      "assets": []
+    },
+    {
+      "tag_name": "2.0.0-alpha.1",
+      "name": "2.0.0 Alpha 1",
+      "body": "> [!IMPORTANT]\r\n> This is an **Alpha release**, based on Zig version `0.16.0-dev.732+2f3234c76`.\r\n\r\n**Full Changelog**: https://github.com/erffy/zig-waybar-contrib/compare/1.4.2...2.0.0-alpha.1",
+      "prerelease": true,
+      "published_at": "2025-11-01T21:07:36Z",
+      "html_url": "https://github.com/erffy/zig-waybar-contrib/releases/tag/2.0.0-alpha.1",
+      "assets": []
+    },
+    {
+      "tag_name": "1.4.2",
+      "name": "1.4.2",
+      "body": "> [!IMPORTANT]\r\n> The version **`v1.4.2`** is the **final release** for the [`0.15.x` branch](https://github.com/erffy/zig-waybar-contrib/tree/0.15.x).  \r\n\r\n> **Full Changelog**: https://github.com/erffy/zig-waybar-contrib/compare/1.4.1...1.4.2\r\n- Refer to [CHANGELOG](https://github.com/erffy/zig-waybar-contrib/blob/0.15.x/CHANGELOG.md#v142)",
+      "prerelease": false,
+      "published_at": "2025-10-19T11:32:14Z",
+      "html_url": "https://github.com/erffy/zig-waybar-contrib/releases/tag/1.4.2",
+      "assets": []
+    },
+    {
+      "tag_name": "1.4.1",
+      "name": "1.4.1",
+      "body": "> **Full Changelog**: https://github.com/erffy/zig-waybar-contrib/compare/1.4.0...1.4.1\r\n- Refer to [CHANGELOG](https://github.com/erffy/zig-waybar-contrib/blob/0.15.x/CHANGELOG.md#v141)",
+      "prerelease": false,
+      "published_at": "2025-10-15T18:55:51Z",
+      "html_url": "https://github.com/erffy/zig-waybar-contrib/releases/tag/1.4.1",
+      "assets": []
+    },
+    {
+      "tag_name": "1.4.0",
+      "name": "1.4.0",
+      "body": "> **Full Changelog**: https://github.com/erffy/zig-waybar-contrib/compare/1.3.0...1.4.0\r\n- Refer to [CHANGELOG](https://github.com/erffy/zig-waybar-contrib/blob/0.15.x/CHANGELOG.md#v140)",
+      "prerelease": false,
+      "published_at": "2025-10-10T17:19:17Z",
+      "html_url": "https://github.com/erffy/zig-waybar-contrib/releases/tag/1.4.0",
+      "assets": []
+    },
+    {
+      "tag_name": "1.3.0",
+      "name": "1.3.0",
+      "body": "> **Full Changelog**: https://github.com/erffy/zig-waybar-contrib/compare/1.2.0...1.3.0\r\n- Refer to [CHANGELOG](https://github.com/erffy/zig-waybar-contrib/blob/0.15.x/CHANGELOG.md#v130)",
+      "prerelease": false,
+      "published_at": "2025-09-24T19:38:27Z",
+      "html_url": "https://github.com/erffy/zig-waybar-contrib/releases/tag/1.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "1.2.0",
+      "name": "1.2.0",
+      "body": "> **Full Changelog**: https://github.com/erffy/zig-waybar-contrib/compare/1.1.4...1.2.0\r\n- Refer to [CHANGELOG](https://github.com/erffy/zig-waybar-contrib/blob/0.15.x/CHANGELOG.md#v120)",
+      "prerelease": false,
+      "published_at": "2025-09-18T16:26:22Z",
+      "html_url": "https://github.com/erffy/zig-waybar-contrib/releases/tag/1.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "1.1.4",
+      "name": "1.1.4",
+      "body": "> **Full Changelog**: https://github.com/erffy/zig-waybar-contrib/compare/1.1.3...1.1.4\r\n- Refer to [CHANGELOG](https://github.com/erffy/zig-waybar-contrib/blob/0.14.x/CHANGELOG.md#v114)",
+      "prerelease": false,
+      "published_at": "2025-08-23T14:33:44Z",
+      "html_url": "https://github.com/erffy/zig-waybar-contrib/releases/tag/1.1.4",
+      "assets": []
+    },
+    {
+      "tag_name": "1.1.3",
+      "name": "1.1.3",
+      "body": "> **Full Changelog**: https://github.com/erffy/zig-waybar-contrib/compare/1.1.2...1.1.3\r\n- Refer to [CHANGELOG](https://github.com/erffy/zig-waybar-contrib/blob/0.14.x/CHANGELOG.md#v113)",
+      "prerelease": false,
+      "published_at": "2025-08-08T11:24:13Z",
+      "html_url": "https://github.com/erffy/zig-waybar-contrib/releases/tag/1.1.3",
+      "assets": []
+    },
+    {
+      "tag_name": "1.1.2",
+      "name": "1.1.2",
+      "body": "> **Full Changelog**: https://github.com/erffy/zig-waybar-contrib/compare/1.1.1...1.1.2\r\n- Refer to [CHANGELOG](https://github.com/erffy/zig-waybar-contrib/blob/main/CHANGELOG.md#v112)",
+      "prerelease": false,
+      "published_at": "2025-07-31T12:30:08Z",
+      "html_url": "https://github.com/erffy/zig-waybar-contrib/releases/tag/1.1.2",
+      "assets": []
+    },
+    {
+      "tag_name": "1.1.1",
+      "name": "1.1.1",
+      "body": "> **Full Changelog**: https://github.com/erffy/zig-waybar-contrib/compare/1.0.16...1.1.0\r\n- Refer to [CHANGELOG](https://github.com/erffy/zig-waybar-contrib/blob/main/CHANGELOG.md)\r\n\r\n\r\n**Note: With this update I stop sharing binaries via GitHub Releases, please use the AUR package or compile your own.**",
+      "prerelease": false,
+      "published_at": "2025-07-20T08:33:21Z",
+      "html_url": "https://github.com/erffy/zig-waybar-contrib/releases/tag/1.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "1.1.0",
+      "name": "1.1.0",
+      "body": "> **Full Changelog**: https://github.com/erffy/zig-waybar-contrib/compare/1.0.16...1.1.0\r\n- Refer to [CHANGELOG](https://github.com/erffy/zig-waybar-contrib/blob/main/CHANGELOG.md)\r\n\r\n\r\n**Note: The following `gpu` binary was compiled with `rocm-smi-lib`, if you try to use it with `amdsmi` installed you will not be able to use it.**",
+      "prerelease": false,
+      "published_at": "2025-07-18T19:20:55Z",
+      "html_url": "https://github.com/erffy/zig-waybar-contrib/releases/tag/1.1.0",
+      "assets": [
+        {
+          "name": "updates",
+          "url": "https://github.com/erffy/zig-waybar-contrib/releases/download/1.1.0/updates",
+          "size": 2509248,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "ping",
+          "url": "https://github.com/erffy/zig-waybar-contrib/releases/download/1.1.0/ping",
+          "size": 2348472,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "memory",
+          "url": "https://github.com/erffy/zig-waybar-contrib/releases/download/1.1.0/memory",
+          "size": 2401808,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "gpu",
+          "url": "https://github.com/erffy/zig-waybar-contrib/releases/download/1.1.0/gpu",
+          "size": 2381128,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "1.0.16",
+      "name": "1.0.16",
+      "body": "> **Full Changelog**: https://github.com/erffy/zig-waybar-contrib/compare/1.0.15...1.0.16\r\n\r\n### What's Changed\r\n- **refactor(gpu)**: Replace `sysfs` backend with `rocm-smi-lib` for improved compatibility and performance  \r\n- **chore(release)**: Bump version to `1.0.16`  \r\n- **chore(license)**: Add per-file `LICENSE` notices (GPL-3.0)",
+      "prerelease": false,
+      "published_at": "2025-07-17T13:44:24Z",
+      "html_url": "https://github.com/erffy/zig-waybar-contrib/releases/tag/1.0.16",
+      "assets": [
+        {
+          "name": "gpu",
+          "url": "https://github.com/erffy/zig-waybar-contrib/releases/download/1.0.16/gpu",
+          "size": 2437632,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "1.0.15",
+      "name": "1.0.15",
+      "body": "> **Full Changelog**: https://github.com/erffy/zig-waybar-contrib/compare/1.0.14...1.0.15\r\n\r\n### What's Changed\r\n- **feat(ping)**: Add Waybar signal implementation  \r\n- **refactor(network)**: Change signal to `14`  \r\n- **chore(release)**: Bump version to `1.0.15`",
+      "prerelease": false,
+      "published_at": "2025-07-15T20:47:20Z",
+      "html_url": "https://github.com/erffy/zig-waybar-contrib/releases/tag/1.0.15",
+      "assets": [
+        {
+          "name": "ping",
+          "url": "https://github.com/erffy/zig-waybar-contrib/releases/download/1.0.15/ping",
+          "size": 2363904,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "network",
+          "url": "https://github.com/erffy/zig-waybar-contrib/releases/download/1.0.15/network",
+          "size": 2423512,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "1.0.14",
+      "name": "1.0.14",
+      "body": "> **Full Changelog**: https://github.com/erffy/zig-waybar-contrib/compare/1.0.13b...1.0.14\r\n\r\n### What's Changed\r\n- **refactor**: Update signal handling logic  \r\n- **feat(ping)**: Change default target to AdGuard DNS  \r\n- **fix(updates)**: Correct stdout message formatting  \r\n- **chore(build)**: Remove `libc` dependency  \r\n- **feat(core)**: Add utility to fetch Waybar PID  \r\n- **feat(signals)**: Implement native Waybar signaling using Zig stdlib",
+      "prerelease": false,
+      "published_at": "2025-07-15T13:41:53Z",
+      "html_url": "https://github.com/erffy/zig-waybar-contrib/releases/tag/1.0.14",
+      "assets": [
+        {
+          "name": "updates",
+          "url": "https://github.com/erffy/zig-waybar-contrib/releases/download/1.0.14/updates",
+          "size": 2521176,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "ping",
+          "url": "https://github.com/erffy/zig-waybar-contrib/releases/download/1.0.14/ping",
+          "size": 2339104,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "network",
+          "url": "https://github.com/erffy/zig-waybar-contrib/releases/download/1.0.14/network",
+          "size": 2423512,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "memory",
+          "url": "https://github.com/erffy/zig-waybar-contrib/releases/download/1.0.14/memory",
+          "size": 2415032,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "gpu",
+          "url": "https://github.com/erffy/zig-waybar-contrib/releases/download/1.0.14/gpu",
+          "size": 2715504,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "1.0.13b",
+      "name": "1.0.13b",
+      "body": "> **Full Changelog**: https://github.com/erffy/zig-waybar-contrib/compare/1.0.12...1.0.13b\r\n\r\n### What's Changed\r\n- **feat(network)**: Partial implementation of network module  \r\n- **style(updates)**: Align version display to the left for better readability  \r\n- **refactor(updates,memory)**: Update declarations  \r\n- **docs**: Update README  \r\n- **chore(release)**: Bump version to `1.0.13b`",
+      "prerelease": true,
+      "published_at": "2025-06-02T20:17:10Z",
+      "html_url": "https://github.com/erffy/zig-waybar-contrib/releases/tag/1.0.13b",
+      "assets": [
+        {
+          "name": "memory",
+          "url": "https://github.com/erffy/zig-waybar-contrib/releases/download/1.0.13b/memory",
+          "size": 2385384,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "network",
+          "url": "https://github.com/erffy/zig-waybar-contrib/releases/download/1.0.13b/network",
+          "size": 2383792,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "updates",
+          "url": "https://github.com/erffy/zig-waybar-contrib/releases/download/1.0.13b/updates",
+          "size": 2496424,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "ping",
+          "url": "https://github.com/erffy/zig-waybar-contrib/releases/download/1.0.13b/ping",
+          "size": 2322224,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "Software & Linux Enthusiast",
+  "owner_company": null,
+  "owner_location": "Burdur, Türkiye",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 20,
+  "owner_following": 36,
+  "owner_created_at": "2023-05-05T19:44:12Z",
+  "homepage": "https://codeberg.org/erffy/zig-waybar-contrib",
+  "license": "GPL-3.0",
+  "category": "library"
+}
