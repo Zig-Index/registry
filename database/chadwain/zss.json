@@ -12,7 +12,7 @@
   "stars": 47,
   "forks": 2,
   "watchers": 2,
-  "updated_at": "2025-11-27T09:37:53Z",
+  "updated_at": "2025-12-23T01:01:12Z",
   "dependencies": [
     {
       "name": "harfbuzz",
@@ -26,12 +26,12 @@
     },
     {
       "name": "zigimg",
-      "url": "git+https://github.com/zigimg/zigimg#362cdd6bce109f7bc674be134cddd378f52da5d4",
-      "hash": "zigimg-0.1.0-8_eo2jNrFQD4mu3EAUkfQRmCkyfprdIXc8JQ6uyxhjSQ"
+      "url": "git+https://github.com/zigimg/zigimg#eab2522c023b9259db8b13f2f90d609b7437e5f6",
+      "hash": "zigimg-0.1.0-8_eo2vUZFgAAtN1c6dAO5DdqL0d4cEWHtn6iR5ucZJti"
     }
   ],
   "minimum_zig_version": "0.15.1",
-  "readme": "# zss\nzss is a [CSS](https://www.w3.org/Style/CSS/) layout engine and document renderer, written in [Zig](https://ziglang.org/).\n\n# Building zss\nTo build zss, simply run `zig build --help` to see your options.\n\nzss uses version 0.15.1 of the zig compiler.\n\n# Standards Implemented\nIn general, zss tries to implement the standards contained in [CSS Snapshot 2023](https://www.w3.org/TR/css-2023/).\n\n| Module | Level | Progress |\n| ------ | ----- | ----- |\n| CSS Level 2 | 2.2 | Partial |\n| Syntax | 3 | Partial |\n| Selectors | 3 | Partial |\n| Cascading and Inheritance | 4 | Partial |\n| Backgrounds and Borders | 3 | Partial |\n| Values and Units | 3 | Partial |\n| Namespaces | 3 | Partial |\n\n# License\nSee [LICENSE.md](LICENSE.md) for detailed licensing information.\n",
+  "readme": "# zss\nzss is a [CSS](https://www.w3.org/Style/CSS/) layout engine and document renderer, written in [Zig](https://ziglang.org/).\n\n# Building zss\nTo build zss, simply run `zig build --help` to see your options.\n\nzss uses version 0.15.2 of the zig compiler.\n\n# Standards Implemented\nIn general, zss tries to implement the standards contained in [CSS Snapshot 2023](https://www.w3.org/TR/css-2023/).\n\n| Module | Level | Progress |\n| ------ | ----- | ----- |\n| CSS Level 2 | 2.2 | Partial |\n| Syntax | 3 | Partial |\n| Selectors | 3 | Partial |\n| Cascading and Inheritance | 4 | Partial |\n| Backgrounds and Borders | 3 | Partial |\n| Values and Units | 3 | Partial |\n| Namespaces | 3 | Partial |\n\n# License\nSee [LICENSE.md](LICENSE.md) for detailed licensing information.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/39384757?u=768e910508b1b299442a6fa729ccd1e515e0069f&v=4",
   "releases": [],
   "owner_bio": "Most interested in systems programming. Mainly using Zig.",
