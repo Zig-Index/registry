@@ -15,10 +15,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 86,
+  "stars": 87,
   "forks": 7,
   "watchers": 1,
-  "updated_at": "2025-12-22T23:16:32Z",
+  "updated_at": "2025-12-23T07:15:39Z",
   "dependencies": [
     {
       "name": "httpz",
