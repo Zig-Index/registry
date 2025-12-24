@@ -16,7 +16,7 @@
   "stars": 1,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-11-10T02:47:47Z",
+  "updated_at": "2025-12-24T17:36:39Z",
   "dependencies": [
     {
       "name": "console_helper",
@@ -30,8 +30,8 @@
     },
     {
       "name": "re4k",
-      "url": "git+https://github.com/bcrist/re4k#ea6c0ce0e24688b5956f25ea4fe04a27fb52f9cf",
-      "hash": "re4k-0.1.0-VW5jDM_rwwBplfd6yRRdH5vOr95RuzKEDonKi6dm1X1N"
+      "url": "git+https://github.com/bcrist/re4k#5bf8cfd1945606247a9fed96f4b5c63410d6f0ad",
+      "hash": "re4k-0.1.0-VW5jDPPrwwBtfUBeaszs4eB_AZWZMDV3eTmRQngQfeWY"
     }
   ],
   "minimum_zig_version": "0.15.1",
