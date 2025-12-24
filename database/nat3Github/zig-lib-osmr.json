@@ -14,10 +14,10 @@
     "mit-license",
     "cartography"
   ],
-  "stars": 2,
+  "stars": 3,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-10-29T03:27:15Z",
+  "updated_at": "2025-12-21T22:56:10Z",
   "dependencies": [
     {
       "name": "dotenv",

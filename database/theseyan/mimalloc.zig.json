@@ -9,10 +9,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 1,
-  "forks": 0,
+  "stars": 2,
+  "forks": 1,
   "watchers": 1,
-  "updated_at": "2025-10-04T05:58:03Z",
+  "updated_at": "2025-12-19T03:29:46Z",
   "dependencies": [
     {
       "name": "macos_sdk",
@@ -39,7 +39,7 @@
   "owner_location": "Agartala, India",
   "owner_blog": "seyan.co",
   "owner_twitter_username": "sayanjdas",
-  "owner_followers": 36,
+  "owner_followers": 37,
   "owner_following": 3,
   "owner_created_at": "2017-08-13T05:59:42Z",
   "license": "MIT",

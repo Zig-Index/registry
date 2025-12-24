@@ -7,12 +7,16 @@
   "topics": [
     "zig",
     "zig-package",
-    "ziglang"
+    "ascii",
+    "ascii-art",
+    "zig-lang",
+    "zig-lib",
+    "zig-library"
   ],
   "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-10-06T16:44:31Z",
+  "updated_at": "2025-12-18T04:08:40Z",
   "minimum_zig_version": "0.15.1",
   "readme": "# asciigraph\n\nZig module to flush console ascii line graphs ╭┈╯\n\nCrude derivation of the [asciichart](https://github.com/kroitor/asciichart) implementations in zig\n\n## Installation\n\nAdd asciigraph to your build.zig.zon:\n\n```\nzig fetch --save https://github.com/im-ng/asciigraph/archive/refs/heads/main.zip\n```\n\n## Usage\n\n```zig\nconst std = @import(\"std\");\nconst asciigraph = @import(\"asciigraph\");\nconst configs = asciigraph.options;\nconst colors = asciigraph.colors;\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    const allocator = gpa.allocator();\n\n    const c = configs.config{\n        .rows = 1,\n        .columns = 50,\n        .height = 5,\n        .offset = 0,\n        .legendColor = colors.White,\n        .legends = \"X Axis\",\n        .caption = \"Y Axis\",\n    };\n\n    const matrix = try asciigraph.prepareMatrix(c.rows, c.columns, allocator);\n    asciigraph.fillRandom(matrix);\n\n    try asciigraph.PlotGraph(allocator, matrix, c);\n}\n```\n\n#### Output \n\n```bash\nasciigraph/examples on  main [?] via ↯ v0.15.1 \n❯ zig build basic\n  ┤         ╭╮  ╭╮        ╭─╮      ╭╮                \n  ┤ ╭╮     ╭╯│  │╰╮  ╭╮   │ │   ╭╮ ││ ╭╮  ╭─╮   ╭╮ ╭ \n  ┼╮││    ╭╯ │ ╭╯ ╰──╯╰╮  │ │   ││ ││ ││  │ ╰╮╭─╯╰╮│ \n  ┤│││╭─╮╭╯  ╰╮│       │  │ │ ╭╮│╰╮││ ││ ╭╯  ││   ││ \n  ┤╰╯╰╯ ╰╯    ││       │╭─╯ │ │╰╯ ╰╯╰╮│╰╮│   ╰╯   ││ \n  ┤           ╰╯       ╰╯   ╰─╯      ╰╯ ╰╯        ╰╯ \n\nY Axis                      X Axis\n```\n\n## Examples\n\nThis repository contains a number of ready-to-run examples demonstrates the use of the `asciigraph`.\n\n\n- [x] Basic\n- [x] Sine Wave \n- [x] Stream - Real time data\n- [ ] Rainbow\n\n```\ngit clone https://github.com/im-ng/asciigraph.git\ncd asciigraph/examples\nzig build\n```\n\nRun one of the sample use command `zig build {sample_name}` from examples folder.\n\n```\nzig build basic\nzig build sine\nping -i1 google.com | grep -oP \"time=\\K\\d+\\.?\\d*\" --line-buffered | zig build stream\n```\n\n## Real time plot\n\n![Real-time](./docs/ascii-graph.png)\n\n\n## Todos\n\nWhatever options shown in [asciichart](https://github.com/kroitor/asciichart)\n\n## 🤝 Attribution\n\nThe idea of this zig module taken from this [asciigraph](https://github.com/guptarohit/asciigraph) including the Plot logic.\n\n## 📄 License\n\nThis project is licensed under the MIT License - see the LICENSE file for details.",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/2039564?u=254167699886eef3c68d1bda198d7c8697928bc0&v=4",
@@ -22,7 +26,7 @@
   "owner_location": "Coimbatore",
   "owner_blog": null,
   "owner_twitter_username": "nagendhiran_",
-  "owner_followers": 3,
+  "owner_followers": 5,
   "owner_following": 14,
   "owner_created_at": "2012-07-25T09:57:32Z",
   "license": "MIT",

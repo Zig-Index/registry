@@ -12,7 +12,7 @@
     "zig-package"
   ],
   "stars": 5,
-  "forks": 1,
+  "forks": 2,
   "watchers": 1,
   "updated_at": "2025-10-21T16:21:20Z",
   "minimum_zig_version": "0.15.1",
@@ -43,7 +43,7 @@
   "owner_location": "Antibes, France",
   "owner_blog": "https://primulinus.tpopsite.com",
   "owner_twitter_username": "jedisct1",
-  "owner_followers": 4078,
+  "owner_followers": 4091,
   "owner_following": 194,
   "owner_created_at": "2009-09-09T10:20:57Z",
   "license": "MIT",

@@ -33,8 +33,8 @@
   "owner_location": null,
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 100,
-  "owner_following": 51,
+  "owner_followers": 101,
+  "owner_following": 52,
   "owner_created_at": "2017-12-06T15:22:36Z",
   "license": "BSD-2-Clause",
   "category": "filesystem"

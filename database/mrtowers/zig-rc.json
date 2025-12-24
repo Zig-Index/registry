@@ -5,12 +5,17 @@
   "description": "Reference counting module for Zig",
   "type": "package",
   "topics": [
-    "zig-package"
+    "zig-package",
+    "library",
+    "reference-counting",
+    "zig",
+    "zig-lib",
+    "zig-library"
   ],
   "stars": 1,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-12-23T16:26:33Z",
+  "updated_at": "2025-12-24T08:07:04Z",
   "readme": "> [!WARNING]\n> **zig-rc** is still WIP. I'm still doing **breaking changes**\n\n# Reference Counting Smart Pointer for Zig\n\nA simple and efficient implementation of a reference counting smart pointer for Zig. This library helps manage the lifetime of heap-allocated objects by automatically tracking references and freeing memory when no references remain.\n\n## Features\n\n- **Automatic Memory Management**: Simplifies memory handling by automatically freeing unused resources.\n- **Thread-Safe (Optional)**: Includes optional support for atomic reference counting for multithreaded applications.\n- **Lightweight**: Designed to be minimal and efficient.\n\n## Installation\n\n### Adding to Your Project\n\n```bash\nzig fetch --save git+https://github.com/mrtowers/zig-rc\n```\nIn `build.zig`:\n\n```zig\nconst rc = b.dependency(\"zig-rc\", .{\n    .target = target,\n    .optimize = optimize,\n});\nyour_app.root_module.addImport(\"rc\", rc.module(\"rc\"));\n```\n\n## Usage\n\n### Basic Example\n\n```zig\nconst std = @import(\"std\");\nconst rc = @import(\"rc\");\nconst Allocator = std.mem.Allocator;\n\nconst User = struct {\n    name: []u8,\n    allocator: Allocator,\n\n    pub fn deinit(self: *const User) u8 {\n        self.allocator.free(self.name);\n        return 0;\n    }\n};\n\npub fn main() !void {\n    var gpa = std.heap.DebugAllocator(.{}).init;\n    defer _ = gpa.deinit();\n\n    var ptr = try rc.Rc(User).init(gpa.allocator(), User{\n        .allocator = gpa.allocator(),\n        .name = try gpa.allocator().dupe(u8, \"some user\"),\n    }, .{\n        .auto_deinit = true,\n    });\n    var ptr2 = ptr.ref();\n    _ = ptr.deref();\n    _ = ptr2.deref(); // object cleaned up here\n\n}\n```\n\n## License\n\nThis project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.\n\n## Contributing\n\nContributions are welcome! Feel free to open issues or submit pull requests.\n\nAlso you can donate me [here](https://buymeacoffee.com/mrtowers), this helps alot! (mainly becouse i drink a lot of coffee)\n\nHappy coding! 🎉\n\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/30564150?u=90af66c587cf6ca836d3a5bfb581ebfd6272f302&v=4",
   "releases": [
@@ -19,7 +24,7 @@
       "name": "v0.3.0 - Even simpler life",
       "body": "A lot of rework done, major breakage but the design is simpler now\r\n\r\n## What's Changed\r\n* V0.3.0 by @mrtowers in https://github.com/mrtowers/zig-rc/pull/9\r\n\r\n## New Contributors\r\n* @mrtowers made their first contribution in https://github.com/mrtowers/zig-rc/pull/9\r\n\r\n**Full Changelog**: https://github.com/mrtowers/zig-rc/compare/0.2.0...0.3.0",
       "prerelease": false,
-      "published_at": "2025-12-23T16:32:00Z",
+      "published_at": "2025-12-24T07:52:01Z",
       "html_url": "https://github.com/mrtowers/zig-rc/releases/tag/0.3.0",
       "assets": []
     },
