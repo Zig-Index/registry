@@ -11,10 +11,10 @@
     "lines-of-code",
     "tree"
   ],
-  "stars": 109,
-  "forks": 17,
+  "stars": 114,
+  "forks": 20,
   "watchers": 2,
-  "updated_at": "2025-12-07T13:31:16Z",
+  "updated_at": "2025-12-24T01:05:24Z",
   "dependencies": [
     {
       "name": "curl",
@@ -549,7 +549,7 @@
   "owner_location": "/home/mars",
   "owner_blog": "https://en.liujiacai.net/",
   "owner_twitter_username": "liujiacai",
-  "owner_followers": 1018,
+  "owner_followers": 1024,
   "owner_following": 125,
   "owner_created_at": "2013-03-13T01:33:15Z",
   "homepage": "https://zigcli.liujiacai.net/",
