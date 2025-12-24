@@ -2,7 +2,7 @@
   "name": "zevy-raylib",
   "owner": "captkirk88",
   "repo": "zevy-raylib",
-  "description": "zevy-raylib is a abstraction for Raylib with zevy-ecs. It provides a plugin-based architecture for rapid game prototyping with built-in input handling, asset management, GUI components+layouts(Flex,Anchor,Grid), and embedded resource support (through embed.zig).",
+  "description": "zevy-raylib is a abstraction for Raylib with zevy-ecs. It provides a plugin-based architecture for rapid game prototyping. (work in progress)",
   "type": "package",
   "topics": [
     "raylib-zig",
@@ -15,7 +15,7 @@
   "stars": 2,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-12-24T13:48:41Z",
+  "updated_at": "2025-12-24T15:53:02Z",
   "dependencies": [
     {
       "name": "zevy_ecs",
