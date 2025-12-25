@@ -1,0 +1,51 @@
+{
+  "name": "znet",
+  "owner": "connellr023",
+  "repo": "znet",
+  "description": "Reliable UDP networking from ENet wrapped in Zig.",
+  "type": "package",
+  "topics": [
+    "bindings",
+    "client-server",
+    "enet",
+    "networking",
+    "udp-protocol",
+    "zig-bindings",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2025-12-25T20:23:50Z",
+  "dependencies": [
+    {
+      "name": "c_enet",
+      "url": "git+https://github.com/lsalzman/enet.git#8be2368a8001f28db44e81d5939de5e613025023",
+      "hash": "N-V-__8AAOfEBQDV0QE6f1lRiGiqZa9k3-ZkthJHdwGIp3Zh"
+    }
+  ],
+  "minimum_zig_version": "0.15.2",
+  "readme": "# ZNet\n\n> Reliable UDP networking from **ENet** wrapped in **Zig**.\n\n![Zig](https://img.shields.io/badge/Zig-%23F7A41D.svg?style=for-the-badge&logo=zig&logoColor=white)\n![C](https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white)\n\n**ZNet** is a **Zig** binding for [ENet](http://enet.bespin.org/), a reliable UDP networking library. It provides a type-safe, idiomatic **Zig** interface for building high-performance networked applications with optional reliability guarantees.\n\n<!-- prettier-ignore -->\n> [!NOTE]\n> **ZNet** is not a complete binding of **ENet**, but it covers the essential APIs needed for typical networking use cases.\n\n## Installation\n\nAdd **ZNet** to your `build.zig.zon`:\n\n```bash\nzig fetch --save git+https://github.com/connellr023/znet\n```\n\nThen in your `build.zig`, add ZNet as a dependency:\n\n```zig\n/// ...\n\nconst znet_dep = b.dependency(\"znet\", .{\n    .target = target,\n    .optimize = optimize,\n});\nconst znet_mod = znet_dep.module(\"znet\");\nconst znet_artifact = znet_dep.artifact(\"znet\");\n\n/// ...\n\nexe.root_module.addImport(znet_mod);\nexe.linkLibrary(znet_artifact);\n```\n\n## Usage\n\n### Basic Server\n\n```zig\nconst znet = @import(\"znet\");\n\npub fn main() !void {\n    try znet.init();\n    defer znet.deinit();\n\n    const host_addr = try znet.Address.init(.any, .{ .port = 5000 });\n    const host_config = znet.HostConfig{\n        .addr = host_addr,\n        .peer_limit = 32,\n        .channel_limit = .max,\n        .incoming_bandwidth = .unlimited,\n        .outgoing_bandwidth = .unlimited,\n    };\n\n    const host = try znet.Host.init(host_config);\n    defer host.deinit();\n\n    // Service events\n    while (try host.service(500)) |event| switch (event) {\n        .connect => |data| {\n            // Handle connection\n        },\n        .disconnect => |data| {\n            // Handle disconnection\n        },\n        .receive => |data| {\n            // Handle received packet\n            defer data.packet.deinit();\n        },\n    };\n}\n```\n\n### Basic Client\n\n```zig\nconst znet = @import(\"znet\");\n\npub fn main() !void {\n    try znet.init();\n    defer znet.deinit();\n\n    const host_config = znet.HostConfig{\n        .addr = null,\n        .peer_limit = 1,\n        .channel_limit = .max,\n        .incoming_bandwidth = .unlimited,\n        .outgoing_bandwidth = .unlimited,\n    };\n\n    const host = try znet.Host.init(host_config);\n    defer host.deinit();\n\n    const server_addr = znet.Address.init(\n        .{ .ipv4 = \"127.0.0.1\" },\n        .{ .port = 5000 },\n    );\n    var peer = try host.connect(peer_addr, .max, 0);\n\n    // Send reliable packet\n    var packet = try znet.Packet.init(\"Hello, Server!\", 0, .reliable);\n    try peer.send(packet);\n\n    // Service events\n    while (try host.service(500)) |event| switch (event) {\n        .connect => |data| {\n            // Handle connection\n        },\n        .disconnect => |data| {\n            // Handle disconnection\n        },\n        .receive => |data| {\n            // Handle received packet\n            defer data.packet.deinit();\n        },\n    };\n}\n```\n\n## Features\n\n- **Type-safe ENet bindings** with **Zig**'s error handling\n- **Flexible address and port configuration** via union types\n- **Packet flags** for reliability and fragmentation control\n- **Bandwidth limiting** and channel management\n- **Peer state tracking** and event-driven architecture\n\n## Contributing\n\nContributions are welcome! Feel free to submit issues, fork the repository, and create pull requests.\n\n## License\n\nMIT\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/58084009?u=f316739ef0838fea2933ce728637c538e71d9f89&v=4",
+  "releases": [
+    {
+      "tag_name": "v1.0.0",
+      "name": "v1.0.0",
+      "body": "First working release.",
+      "prerelease": false,
+      "published_at": "2025-12-25T20:24:50Z",
+      "html_url": "https://github.com/connellr023/znet/releases/tag/v1.0.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "A monad is just a monoid in the category of endofunctors, what's the problem? :face_with_spiral_eyes: ",
+  "owner_company": null,
+  "owner_location": "Canada",
+  "owner_blog": "https://connellr023.github.io/",
+  "owner_twitter_username": null,
+  "owner_followers": 12,
+  "owner_following": 9,
+  "owner_created_at": "2019-11-22T16:34:17Z",
+  "license": "MIT",
+  "category": "networking"
+}
