@@ -11,10 +11,10 @@
     "crypto",
     "signatures"
   ],
-  "stars": 77,
-  "forks": 8,
+  "stars": 78,
+  "forks": 9,
   "watchers": 4,
-  "updated_at": "2025-11-12T19:07:36Z",
+  "updated_at": "2025-12-25T18:32:44Z",
   "minimum_zig_version": "0.15.1",
   "readme": "# zig-minisign\n\nA Zig implementation of [Minisign](https://jedisct1.github.io/minisign/).\n\n`minizign` supports signature verification, signing, and key generation.\n\n## Compilation\n\nRequires the current `master` version of [Zig](https://ziglang.org).\n\nCompile with:\n\n```sh\nzig build -Doptimize=ReleaseSmall\n```\n\nfor a size-optimized version, or\n\n```sh\nzig build -Doptimize=ReleaseFast\n```\n\nfor a speed-optimized version.\n\n## Usage\n\n```text\nUsage:\n    -h, --help                       Display this help and exit\n    -p, --publickey-path <PATH>      Public key path to a file\n    -P, --publickey <STRING>         Public key, as a BASE64-encoded string\n    -s, --secretkey-path <PATH>      Secret key path to a file\n    -l, --legacy                     Accept legacy signatures\n    -m, --input <PATH>               Input file\n    -o, --output <PATH>              Output file (signature)\n    -q, --quiet                      Quiet mode\n    -V, --verify                     Verify\n    -S, --sign                       Sign\n    -G, --generate                   Generate a new key pair\n    -C, --convert                    Convert the given public key to SSH format\n    -t, --trusted-comment <STRING>   Trusted comment\n    -c, --untrusted-comment <STRING> Untrusted comment\n```\n\n## Examples\n\n### Key Generation\n\nGenerate a new key pair:\n\n```sh\nminizign -G -s minisign.key -p minisign.pub\n```\n\nThis will prompt for a password to encrypt the secret key. Leave empty for an unencrypted key.\n\n### Signing\n\nSign a file:\n\n```sh\nminizign -S -s minisign.key -m file.txt\n```\n\nThis creates `file.txt.minisig`. You can specify a custom output path with `-o`.\n\n### Verification\n\nVerify `public-resolvers.md` using `public-resolvers.md.minisig` and the public key file `minisign.pub`:\n\n```sh\nminizign -V -p minisign.pub -m public-resolvers.md\n```\n\nVerify `public-resolvers.md` by directly providing the public key on the command-line:\n\n```sh\nminizign -V -P RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3 -m public-resolvers.md\n```\n\n## SSH-encoded public keys\n\n`minizign` can encode public keys in SSH format, so that they can be uploaded to GitHub:\n\n```sh\nminizign -p minisign.pub -C\n```\n\n```text\nssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHmlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3 minisign key E7620F1842B4E81F\n```\n\nGitHub makes public SSH keys available at `https://github.com/<username>.keys`.\n\nSSH-encoded keys can be loaded by `minizign` the same way as native keys, with `-p <key file>`. They will be automatically recognized as such.\n\n## Features\n\n`minizign` supports prehashing (which can be forced if you know this is how the signature was created), has zero dependencies and can be cross-compiled to anything that Zig can cross-compile to, including WebAssembly.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/124872?v=4",
@@ -43,7 +43,7 @@
   "owner_location": "Antibes, France",
   "owner_blog": "https://primulinus.tpopsite.com",
   "owner_twitter_username": "jedisct1",
-  "owner_followers": 4076,
+  "owner_followers": 4092,
   "owner_following": 194,
   "owner_created_at": "2009-09-09T10:20:57Z",
   "category": "crypto"
