@@ -8,10 +8,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 10,
+  "stars": 11,
   "forks": 8,
   "watchers": 1,
-  "updated_at": "2025-12-11T11:47:21Z",
+  "updated_at": "2025-12-26T15:10:19Z",
   "dependencies": [
     {
       "name": "theme_1984",
@@ -129,6 +129,11 @@
       "hash": "N-V-__8AAHRcEwAAvSM_ODzsp-La1PE4Ydrg8MR827anf94J"
     },
     {
+      "name": "theme_selenized",
+      "url": "git+https://github.com/jan-warchol/selenized?ref=master#9a753d5c575c48e29eeb2be745d9571b4cec42b3",
+      "hash": "N-V-__8AAFxeDgAAAxUwDQG7UYFdbTtDN_V7uCgmycPJNr0G"
+    },
+    {
       "name": "cbor",
       "url": "git+https://github.com/neurocyte/cbor?ref=master#7d2eeb68c8a2fb3f4d6baad6cc04c521b92974c0",
       "hash": "cbor-1.0.0-RcQE_AswAQAPlqBCZXYQf9DZXn-0Ubt8Mk03ZcJWcsAG"
@@ -138,6 +143,22 @@
   "readme": "# flow-themes\nThemes compiler for Flow-Control, the text editor\n\n## Requirements\n\n - zig 0.15.1\n - hjson (installed in your PATH)\n\n## Build\n\n`zig build`\n\nThis will download and compile all the themes and create a zig module\nin `zig-out` that can be referenced as a dependency from another project's\n`build.zig.zon`.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/1552770?u=5c42562ca7bf8db5e586c5f373541572957629fe&v=4",
   "releases": [
+    {
+      "tag_name": "master-870b0340c61ff0d14910d0f29be0857aed38e3d2",
+      "name": "Tarball release",
+      "body": "Tarball release",
+      "prerelease": false,
+      "published_at": "2025-12-26T15:10:53Z",
+      "html_url": "https://github.com/neurocyte/flow-themes/releases/tag/master-870b0340c61ff0d14910d0f29be0857aed38e3d2",
+      "assets": [
+        {
+          "name": "flow-themes.tar.gz",
+          "url": "https://github.com/neurocyte/flow-themes/releases/download/master-870b0340c61ff0d14910d0f29be0857aed38e3d2/flow-themes.tar.gz",
+          "size": 142231,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
     {
       "tag_name": "master-26cd36456014e6c3a1c814cf204b2203eef16633",
       "name": "Tarball release",
@@ -441,29 +462,13 @@
           "content_type": "application/gzip"
         }
       ]
-    },
-    {
-      "tag_name": "master-163188fc145ff9468b807bb28f9f6a74a28a016b",
-      "name": "Tarball release",
-      "body": "Tarball release",
-      "prerelease": false,
-      "published_at": "2024-10-19T22:04:25Z",
-      "html_url": "https://github.com/neurocyte/flow-themes/releases/tag/master-163188fc145ff9468b807bb28f9f6a74a28a016b",
-      "assets": [
-        {
-          "name": "flow-themes.tar.gz",
-          "url": "https://github.com/neurocyte/flow-themes/releases/download/master-163188fc145ff9468b807bb28f9f6a74a28a016b/flow-themes.tar.gz",
-          "size": 60482,
-          "content_type": "application/gzip"
-        }
-      ]
     }
   ],
   "owner_company": null,
   "owner_location": null,
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 129,
+  "owner_followers": 135,
   "owner_following": 3,
   "owner_created_at": "2012-03-19T13:04:13Z",
   "license": "MIT",
