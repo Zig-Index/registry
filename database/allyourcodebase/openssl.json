@@ -10,7 +10,7 @@
   "stars": 24,
   "forks": 11,
   "watchers": 2,
-  "updated_at": "2025-12-04T13:31:10Z",
+  "updated_at": "2025-12-27T17:30:20Z",
   "dependencies": [
     {
       "name": "openssl",
@@ -19,7 +19,7 @@
     }
   ],
   "minimum_zig_version": "0.14.0",
-  "readme": "# openssl zig package\n\nThis is openssl ported to the Zig Build System.\n\n## Status\n\nI was able to use this to build [CPython](https://github.com/thejoshwolfe/cpython) for x86_64-linux.\n\nAdding support for other operating systems and CPU architectures is straightforward and will\nrequire fiddling with the build script to take into account the target.\n\n## Anti-Endorsement\n\nI do not endorse openssl. I think it is a pile of trash. My motivation for this\nproject is because it is a dependency of CPython, which is a dependency of the\nmost active YouTube downloader, [ytdlp](https://github.com/yt-dlp/yt-dlp).\n",
+  "readme": "# openssl zig package\n\nThis is openssl ported to the Zig Build System.\n\n## Status\n\nI was able to use this to build [CPython](https://github.com/thejoshwolfe/cpython) for x86_64-linux.\n\nAdding support for other operating systems and CPU architectures is straightforward and will\nrequire fiddling with the build script to take into account the target.\n\n## Zig version compatibility\n\n- `0.16.x`\n- `0.15.x`\n- `0.14.x`\n\n## Anti-Endorsement\n\nI do not endorse openssl. I think it is a pile of trash. My motivation for this\nproject is because it is a dependency of CPython, which is a dependency of the\nmost active YouTube downloader, [ytdlp](https://github.com/yt-dlp/yt-dlp).\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
   "releases": [],
   "owner_bio": "...are belong to Ziguanas, but we'd also be delighted to give them back!",

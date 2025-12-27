@@ -1,0 +1,121 @@
+{
+  "name": "args.zig",
+  "owner": "muhammad-fiaz",
+  "repo": "args.zig",
+  "description": "A fast, production-grade command-line argument parser for Zig.",
+  "type": "package",
+  "topics": [
+    "zig",
+    "zig-lang",
+    "zig-package",
+    "zig-args",
+    "zig-library-args",
+    "args-parser",
+    "argsparse",
+    "argsparse-library",
+    "argsparse-zig",
+    "args-kwargs"
+  ],
+  "stars": 4,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-12-27T17:42:02Z",
+  "minimum_zig_version": "0.15.0",
+  "readme": "<div align=\"center\">\n\n<img  alt=\"cover\" src=\"https://github.com/user-attachments/assets/6b4390a1-af10-4175-8c8b-c36f3868b398\" />\n\n<a href=\"https://muhammad-fiaz.github.io/args.zig/\"><img src=\"https://img.shields.io/badge/docs-muhammad--fiaz.github.io-blue\" alt=\"Documentation\"></a>\n<a href=\"https://ziglang.org/\"><img src=\"https://img.shields.io/badge/Zig-0.15.1+-orange.svg?logo=zig\" alt=\"Zig Version\"></a>\n<a href=\"https://github.com/muhammad-fiaz/args.zig\"><img src=\"https://img.shields.io/github/stars/muhammad-fiaz/args.zig\" alt=\"GitHub stars\"></a>\n<a href=\"https://github.com/muhammad-fiaz/args.zig/issues\"><img src=\"https://img.shields.io/github/issues/muhammad-fiaz/args.zig\" alt=\"GitHub issues\"></a>\n<a href=\"https://github.com/muhammad-fiaz/args.zig/pulls\"><img src=\"https://img.shields.io/github/issues-pr/muhammad-fiaz/args.zig\" alt=\"GitHub pull requests\"></a>\n<a href=\"https://github.com/muhammad-fiaz/args.zig\"><img src=\"https://img.shields.io/github/last-commit/muhammad-fiaz/args.zig\" alt=\"GitHub last commit\"></a>\n<a href=\"https://github.com/muhammad-fiaz/args.zig\"><img src=\"https://img.shields.io/github/license/muhammad-fiaz/args.zig\" alt=\"License\"></a>\n<a href=\"https://github.com/muhammad-fiaz/args.zig/actions/workflows/ci.yml\"><img src=\"https://github.com/muhammad-fiaz/args.zig/actions/workflows/ci.yml/badge.svg\" alt=\"CI\"></a>\n<img src=\"https://img.shields.io/badge/platforms-linux%20%7C%20windows%20%7C%20macos-blue\" alt=\"Supported Platforms\">\n<a href=\"https://github.com/muhammad-fiaz/args.zig/actions/workflows/github-code-scanning/codeql\"><img src=\"https://github.com/muhammad-fiaz/args.zig/actions/workflows/github-code-scanning/codeql/badge.svg\" alt=\"CodeQL\"></a>\n<a href=\"https://github.com/muhammad-fiaz/args.zig/actions/workflows/release.yml\"><img src=\"https://github.com/muhammad-fiaz/args.zig/actions/workflows/release.yml/badge.svg\" alt=\"Release\"></a>\n<a href=\"https://github.com/muhammad-fiaz/args.zig/releases/latest\"><img src=\"https://img.shields.io/github/v/release/muhammad-fiaz/args.zig?label=Latest%20Release&style=flat-square\" alt=\"Latest Release\"></a>\n<a href=\"https://pay.muhammadfiaz.com\"><img src=\"https://img.shields.io/badge/Sponsor-pay.muhammadfiaz.com-ff69b4?style=flat&logo=heart\" alt=\"Sponsor\"></a>\n<a href=\"https://github.com/sponsors/muhammad-fiaz\"><img src=\"https://img.shields.io/badge/Sponsor-💖-pink?style=social&logo=github\" alt=\"GitHub Sponsors\"></a>\n<a href=\"https://hits.sh/muhammad-fiaz/args.zig/\"><img src=\"https://hits.sh/muhammad-fiaz/args.zig.svg?label=Visitors&extraCount=0&color=green\" alt=\"Repo Visitors\"></a>\n\n<p><em>A fast, powerful, and developer-friendly command-line argument parsing library for Zig.</em></p>\n\n<b>📚 <a href=\"https://muhammad-fiaz.github.io/args.zig/\">Documentation</a> |\n<a href=\"https://muhammad-fiaz.github.io/args.zig/api/parser\">API Reference</a> |\n<a href=\"https://muhammad-fiaz.github.io/args.zig/guide/quick-start\">Quick Start</a> |\n<a href=\"CONTRIBUTING.md\">Contributing</a></b>\n\n</div>\n\n---\n\nA production-grade, high-performance command-line argument parsing library for Zig, inspired by Python's argparse with a clean, intuitive, and developer-friendly API.\n\n**⭐️ If you love `args.zig`, make sure to give it a star! ⭐️**\n\n## ✨ Features\n\n- 🚀 **Fast & Zero Allocations** - Minimal memory footprint with efficient parsing\n- 🎯 **Intuitive API** - Python argparse-inspired fluent interface\n- 📝 **Auto-Generated Help** - Beautiful, colorized help text out of the box\n- 🔤 **Shell Completions** - Generate completions for Bash, Zsh, Fish, PowerShell\n- 🌐 **Environment Variables** - Fallback to env vars for configuration\n- 📦 **Subcommands** - Full support for Git-style subcommands\n- 🎨 **Colored Output** - ANSI color support for beautiful terminal output\n- 🔄 **Update Checker** - Optional non-blocking update notifications from GitHub\n- ✅ **Comprehensive Validation** - Type checking, choices, and custom validators\n- 🧪 **Well Tested** - Extensive test coverage across all modules\n\n## 📦 Installation\n\n### Release Installation (Recommended)\n\nInstall the latest stable release (v0.0.1):\n\n```bash\nzig fetch --save https://github.com/muhammad-fiaz/args.zig/archive/refs/tags/v0.0.1.tar.gz\n```\n\n### Nightly Installation\n\nInstall the latest development version:\n\n```bash\nzig fetch --save git+https://github.com/muhammad-fiaz/args.zig\n```\n\n### Configure build.zig\n\nThen add it to your `build.zig`:\n\n```zig\nconst args_dep = b.dependency(\"args\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\nexe.root_module.addImport(\"args\", args_dep.module(\"args\"));\n```\n\n## 🚀 Quick Start\n\n```zig\nconst std = @import(\"std\");\nconst args = @import(\"args\");\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    // Create argument parser\n    var parser = try args.ArgumentParser.init(allocator, .{\n        .name = \"myapp\",\n        .version = \"1.0.0\",\n        .description = \"A sample application built with args.zig\",\n    });\n    defer parser.deinit();\n\n    // Add arguments\n    try parser.addFlag(\"verbose\", .{\n        .short = 'v',\n        .help = \"Enable verbose output\",\n    });\n\n    try parser.addOption(\"output\", .{\n        .short = 'o',\n        .help = \"Output file path\",\n        .default = \"output.txt\",\n    });\n\n    try parser.addPositional(\"input\", .{\n        .help = \"Input file to process\",\n    });\n\n    // Parse command-line arguments\n    var result = try parser.parseProcess();\n    defer result.deinit();\n\n    // Use parsed values\n    const verbose = result.getBool(\"verbose\") orelse false;\n    const output = result.getString(\"output\") orelse \"output.txt\";\n    const input = result.getString(\"input\") orelse \"unknown\";\n\n    if (verbose) {\n        std.debug.print(\"Processing {s} -> {s}\\n\", .{ input, output });\n    }\n}\n```\n\n## 📖 Examples\n\n### Flags and Options\n\n```zig\n// Boolean flag\ntry parser.addFlag(\"verbose\", .{ .short = 'v', .help = \"Verbose mode\" });\n\n// String option\ntry parser.addOption(\"config\", .{ .short = 'c', .help = \"Config file\" });\n\n// Integer option\ntry parser.addOption(\"count\", .{\n    .short = 'n',\n    .value_type = .int,\n    .default = \"10\",\n});\n\n// Choice option\ntry parser.addOption(\"format\", .{\n    .short = 'f',\n    .choices = &[_][]const u8{ \"json\", \"xml\", \"csv\" },\n});\n```\n\n### Counter Arguments\n\n```zig\n// -v, -vv, -vvv for increasing verbosity\ntry parser.addCounter(\"verbose\", .{ .short = 'v' });\n\nvar result = try parser.parse(&[_][]const u8{ \"-v\", \"-v\", \"-v\" });\nconst verbosity = result.get(\"verbose\").?.counter; // = 3\n```\n\n### Subcommands\n\n```zig\ntry parser.addSubcommand(.{\n    .name = \"clone\",\n    .help = \"Clone a repository\",\n    .args = &[_]args.ArgSpec{\n        .{ .name = \"url\", .positional = true, .required = true },\n        .{ .name = \"depth\", .short = 'd', .long = \"depth\", .value_type = .int },\n    },\n});\n\ntry parser.addSubcommand(.{\n    .name = \"init\",\n    .help = \"Initialize a new repository\",\n});\n```\n\n### Shell Completions\n\n```zig\n// Generate Bash completion script\nconst bash_script = try parser.generateCompletion(.bash);\nstd.debug.print(\"{s}\", .{bash_script});\n\n// Also supports: .zsh, .fish, .powershell\n```\n\n### Environment Variable Fallback\n\n```zig\ntry parser.addOption(\"token\", .{\n    .help = \"API token\",\n    .env_var = \"API_TOKEN\",  // Falls back to $API_TOKEN\n});\n```\n\n## ⚙️ Configuration\n\n### Disable Update Checker\n\n```zig\n// Global disable\nargs.disableUpdateCheck();\n\n// Or per-parser\nvar parser = try args.ArgumentParser.init(allocator, .{\n    .name = \"myapp\",\n    .config = .{ .check_for_updates = false },\n});\n```\n\n### Minimal Configuration\n\n```zig\nvar parser = try args.ArgumentParser.init(allocator, .{\n    .name = \"myapp\",\n    .config = args.Config.minimal(), // No colors, no update check\n});\n```\n\n## 🏗️ Building\n\n```bash\n# Build library\nzig build\n\n# Run tests\nzig build test\n\n# Run examples\nzig build run-basic\nzig build run-advanced\n\n# Run benchmarks\nzig build bench\n\n# Format code\nzig build fmt\n```\n\n## 📊 Benchmarks\n\nRun benchmarks to see the performance:\n\n```bash\nzig build bench\n```\n\n### Benchmark Results\n\nTypical results on modern hardware (10,000 iterations):\n\n| Benchmark                    | Avg Time  | Throughput      |\n|------------------------------|-----------|-----------------|\n| Simple Flags (3 flags)          | ~33 μs    | ~30,000 ops/sec  |\n| Multiple Options (3 options)    | ~32 μs    | ~30,700 ops/sec  |\n| Positional Arguments            | ~24 μs    | ~42,000 ops/sec  |\n| Counters (-vvv -dd)             | ~23 μs    | ~42,700 ops/sec  |\n| Subcommands (2 subcommands)     | ~25 μs    | ~40,400 ops/sec  |\n| Mixed Arguments (complex CLI)   | ~40 μs    | ~24,800 ops/sec  |\n| Help Text Generation            | ~50 μs    | ~19,900 ops/sec  |\n| Shell Completion (Bash)         | ~23 μs    | ~42,600 ops/sec  |\n\n*Results vary based on hardware and system load. Tested on Windows x86_64 with Zig 0.15.1.*\n\n## 📚 Documentation\n\nFull documentation is available at [muhammad-fiaz.github.io/args.zig](https://muhammad-fiaz.github.io/args.zig/).\n\n- [Getting Started](https://muhammad-fiaz.github.io/args.zig/guide/getting-started)\n- [API Reference](https://muhammad-fiaz.github.io/args.zig/api/parser)\n- [Examples](https://muhammad-fiaz.github.io/args.zig/examples/)\n\n## 🤝 Contributing\n\nContributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) for details.\n\n1. Fork the repository\n2. Create your feature branch (`git checkout -b feature/amazing-feature`)\n3. Commit your changes (`git commit -m 'Add amazing feature'`)\n4. Push to the branch (`git push origin feature/amazing-feature`)\n5. Open a Pull Request\n\nSee our [Code of Conduct](CODE_OF_CONDUCT.md) for community guidelines.\n\n## 🔒 Security\n\nFor security concerns, please see our [Security Policy](SECURITY.md).\n\n## 📄 License\n\nThis project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.\n\n## 💖 Support\n\nIf you find this project helpful, consider supporting it:\n\n- ⭐ Star this repository\n- 🐛 Report bugs and suggest features\n- 💰 [Sponsor on GitHub](https://github.com/sponsors/muhammad-fiaz)\n- ☕ [Buy me a coffee](https://pay.muhammadfiaz.com)\n\n---\n\nMade with ❤️ by [Muhammad Fiaz](https://github.com/muhammad-fiaz)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/75434191?u=e23dc1e7c2fe9c80a958e1dc8df6c6165bb1c2fb&v=4",
+  "releases": [
+    {
+      "tag_name": "0.0.1",
+      "name": "V0.0.1",
+      "body": "\n\n### Option A — Automatic (Recommended)\n\nRun this to install the dependency and automatically save the hash:\n\n```bash\nzig fetch --save https://github.com/muhammad-fiaz/args.zig/archive/refs/tags/0.0.1.tar.gz\n```\n\nAfter running, Zig updates your `build.zig.zon` with something like:\n\n```zig\n.dependencies = .{\n    .args = .{\n        .url = \"https://github.com/muhammad-fiaz/args.zig/archive/refs/tags/0.0.1.tar.gz\",\n        .hash = \"args-0.0.1-8hzgbmqCAgDy5AauLMH7cns6C4yEC1-heEOJT7uNr8AU\",\n    },\n},\n```\n\n### Option B — Manual\n\n```bash\nzig fetch --hash https://github.com/muhammad-fiaz/args.zig/archive/refs/tags/0.0.1.tar.gz\n```\n\nCopy that hash into:\n\n```zig\n.hash = \"<your_hash_here>\" // which is args-0.0.1-8hzgbmqCAgDy5AauLMH7cns6C4yEC1-heEOJT7uNr8AU\n```\n\n## ⬇️ Downloads (Prebuilt Library)\n\n| Platform | Architecture | File |\n|----------|--------------|------|\n| Windows | x86_64 | [args-x86_64-windows.lib](https://github.com/muhammad-fiaz/args.zig/releases/download/0.0.1/args-x86_64-windows.lib) |\n| Windows | x86 | [args-x86-windows.lib](https://github.com/muhammad-fiaz/args.zig/releases/download/0.0.1/args-x86-windows.lib) |\n| Linux | x86_64 | [libargs-x86_64-linux.a](https://github.com/muhammad-fiaz/args.zig/releases/download/0.0.1/libargs-x86_64-linux.a) |\n| Linux | x86 | [libargs-x86-linux.a](https://github.com/muhammad-fiaz/args.zig/releases/download/0.0.1/libargs-x86-linux.a) |\n| Linux | aarch64 (ARM64) | [libargs-aarch64-linux.a](https://github.com/muhammad-fiaz/args.zig/releases/download/0.0.1/libargs-aarch64-linux.a) |\n| macOS | x86_64 (Intel) | [libargs-x86_64-macos.a](https://github.com/muhammad-fiaz/args.zig/releases/download/0.0.1/libargs-x86_64-macos.a) |\n| macOS | aarch64 (Apple Silicon) | [libargs-aarch64-macos.a](https://github.com/muhammad-fiaz/args.zig/releases/download/0.0.1/libargs-aarch64-macos.a) |\n| Bare Metal | x86_64 | [libargs-x86_64-freestanding.a](https://github.com/muhammad-fiaz/args.zig/releases/download/0.0.1/libargs-x86_64-freestanding.a) |\n| Bare Metal | aarch64 | [libargs-aarch64-freestanding.a](https://github.com/muhammad-fiaz/args.zig/releases/download/0.0.1/libargs-aarch64-freestanding.a) |\n| Bare Metal | RISC-V 64 | [libargs-riscv64-freestanding.a](https://github.com/muhammad-fiaz/args.zig/releases/download/0.0.1/libargs-riscv64-freestanding.a) |\n| Bare Metal | ARM | [libargs-arm-freestanding.a](https://github.com/muhammad-fiaz/args.zig/releases/download/0.0.1/libargs-arm-freestanding.a) |\n\n### 🛠️ Using Prebuilt Libraries\n\n1. Download the library for your platform.\n2. Place it in your project (e.g., in a `libs/` folder).\n3. Update your `build.zig`:\n\n```zig\n// Assuming you placed the library in `libs/`\nexe.addLibraryPath(b.path(\"libs\"));\nexe.linkSystemLibrary(\"args\");\n```\n",
+      "prerelease": false,
+      "published_at": "2025-12-27T17:35:30Z",
+      "html_url": "https://github.com/muhammad-fiaz/args.zig/releases/tag/0.0.1",
+      "assets": [
+        {
+          "name": "libargs-aarch64-macos.a",
+          "url": "https://github.com/muhammad-fiaz/args.zig/releases/download/0.0.1/libargs-aarch64-macos.a",
+          "size": 2548,
+          "content_type": "application/x-archive"
+        },
+        {
+          "name": "libargs-x86_64-linux.a",
+          "url": "https://github.com/muhammad-fiaz/args.zig/releases/download/0.0.1/libargs-x86_64-linux.a",
+          "size": 3970,
+          "content_type": "application/x-archive"
+        },
+        {
+          "name": "args-x86-windows.lib",
+          "url": "https://github.com/muhammad-fiaz/args.zig/releases/download/0.0.1/args-x86-windows.lib",
+          "size": 982,
+          "content_type": "application/vnd.microsoft.portable-executable"
+        },
+        {
+          "name": "libargs-x86_64-macos.a",
+          "url": "https://github.com/muhammad-fiaz/args.zig/releases/download/0.0.1/libargs-x86_64-macos.a",
+          "size": 2420,
+          "content_type": "application/x-archive"
+        },
+        {
+          "name": "libargs-aarch64-freestanding.a",
+          "url": "https://github.com/muhammad-fiaz/args.zig/releases/download/0.0.1/libargs-aarch64-freestanding.a",
+          "size": 4114,
+          "content_type": "application/x-archive"
+        },
+        {
+          "name": "libargs-x86_64-freestanding.a",
+          "url": "https://github.com/muhammad-fiaz/args.zig/releases/download/0.0.1/libargs-x86_64-freestanding.a",
+          "size": 3970,
+          "content_type": "application/x-archive"
+        },
+        {
+          "name": "libargs-x86-freestanding.a",
+          "url": "https://github.com/muhammad-fiaz/args.zig/releases/download/0.0.1/libargs-x86-freestanding.a",
+          "size": 2926,
+          "content_type": "application/x-archive"
+        },
+        {
+          "name": "libargs-arm-freestanding.a",
+          "url": "https://github.com/muhammad-fiaz/args.zig/releases/download/0.0.1/libargs-arm-freestanding.a",
+          "size": 3030,
+          "content_type": "application/x-archive"
+        },
+        {
+          "name": "libargs-x86-linux.a",
+          "url": "https://github.com/muhammad-fiaz/args.zig/releases/download/0.0.1/libargs-x86-linux.a",
+          "size": 2926,
+          "content_type": "application/x-archive"
+        },
+        {
+          "name": "libargs-aarch64-linux.a",
+          "url": "https://github.com/muhammad-fiaz/args.zig/releases/download/0.0.1/libargs-aarch64-linux.a",
+          "size": 4114,
+          "content_type": "application/x-archive"
+        },
+        {
+          "name": "args-x86_64-windows.lib",
+          "url": "https://github.com/muhammad-fiaz/args.zig/releases/download/0.0.1/args-x86_64-windows.lib",
+          "size": 982,
+          "content_type": "application/vnd.microsoft.portable-executable"
+        },
+        {
+          "name": "libargs-riscv64-freestanding.a",
+          "url": "https://github.com/muhammad-fiaz/args.zig/releases/download/0.0.1/libargs-riscv64-freestanding.a",
+          "size": 5178,
+          "content_type": "application/x-archive"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "Open Source Contributor ✨ and Maintainer 🔥| Full Stack Developer 🧑‍💻",
+  "owner_company": "@FiazTechnologies",
+  "owner_location": "india",
+  "owner_blog": "muhammadfiaz.com",
+  "owner_twitter_username": "muhammadfiaz_",
+  "owner_followers": 91,
+  "owner_following": 1,
+  "owner_created_at": "2020-12-03T14:17:55Z",
+  "homepage": "https://muhammad-fiaz.github.io/args.zig/",
+  "license": "MIT",
+  "category": "library"
+}
