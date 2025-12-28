@@ -16,7 +16,7 @@
   "stars": 98,
   "forks": 11,
   "watchers": 1,
-  "updated_at": "2025-12-26T19:35:08Z",
+  "updated_at": "2025-12-28T18:24:38Z",
   "minimum_zig_version": "0.16.0-dev.1316+181b25ce4",
   "readme": "<img src=\"https://raw.githubusercontent.com/griush/resources/f5f9659dd5c4d18d63ff9bc2e67b8feee874e482/logos/zm-dark.svg#gh-dark-mode-only\" alt=\"zm Logo\" width=\"400px\">\n<img src=\"https://raw.githubusercontent.com/griush/resources/f5f9659dd5c4d18d63ff9bc2e67b8feee874e482/logos/zm-light.svg#gh-light-mode-only\" alt=\"zm Logo\" width=\"400px\">\n\n![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/griush/zm/ci.yaml?style=flat&logo=github&label=CI)\n\n# zm - Fast math library\nzm is a Zig math library. It is fast and easy to use.\n\n## Usage\n> [!NOTE]\n> This library is tracking Zig's master branch. Last tested with `0.16.0-dev.1316+181b25ce4`.\n> It may not compile with newer or older versions.\n\nRun `zig fetch --save git+https://github.com/griush/zm` on the directory of your `build.zig` and `build.zig.zon`.\n\nThen in the `build.zig` add:\n```zig\nconst zm = b.dependency(\"zm\", .{\n    .target = target,\n    .optimize = optimize,\n});\nmodule.addImport(\"zm\", zm.module(\"zm\"));\n```\nNow, in your code, you can use:\n```zig\nconst zm = @import(\"zm\");\n```\n\n### Example\nDemo using the library (incomplete) [demo](/examples/demo.zig).\n\n## Benchmarks\nSee [benchmarks](/test/benchmark.zig).\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/57322933?v=4",
