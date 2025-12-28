@@ -12,10 +12,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 5,
+  "stars": 6,
   "forks": 3,
   "watchers": 4,
-  "updated_at": "2025-09-10T20:08:12Z",
+  "updated_at": "2025-12-28T04:29:35Z",
   "dependencies": [
     {
       "name": "pcre2",
@@ -23,7 +23,7 @@
       "hash": "1220c927731a4b31f5ebf8b4f33f0efe6fa1561cdcf026f39cbee512e08ad24fb785"
     }
   ],
-  "readme": "# Tokenizer\nBPE tokenizer implemented entirely in Zig.\n\nExample integration with LLMs at [nnx-lm](https://pypi.org/project/nnx-lm).\n\n## Requirement\nzig v0.13.0\n\n## Install\n```bash\ngit clone https://github.com/jaco-bro/tokenizer\ncd tokenizer\nzig build exe --release=fast\n```\n\n## Usage\n- `zig-out/bin/tokenizer_exe [--model MODEL_NAME] COMMAND INPUT` \n- `zig build run -- [--model MODEL_NAME] COMMAND INPUT` \n\n```bash\nzig build run -- --encode \"hello world\"\nzig build run -- --decode \"{14990, 1879}\"\nzig build run -- --model \"phi-4-4bit\" --encode \"hello world\"\nzig build run -- --model \"phi-4-4bit\" --decode \"15339 1917\"\n```\n\n## Python (optional)\nTokenizer is also pip-installable for use from Python:\n```bash\npip install tokenizerz\npython\n```\n\nUsage:\n```python\n>>> import tokenizerz\n>>> tokenizer = tokenizerz.Tokenizer()\nDirectory 'Qwen2.5-Coder-0.5B' created successfully.\nDL% UL%  Dled  Uled  Xfers  Live Total     Current  Left    Speed\n100 --  6866k     0     1     0   0:00:01  0:00:01 --:--:-- 4904k\nDownload successful.\n>>> tokens = tokenizer.encode(\"Hello, world!\")\n>>> print(tokens)\n[9707, 11, 1879, 0]\n>>> tokenizer.decode(tokens)\n'Hello, world!'\n```\n\nShell:\n```bash\nbpe --encode \"hello world\"\n```\n",
+  "readme": "# Tokenizer\n![Alt text](https://raw.githubusercontent.com/jaco-bro/tokenizer/main/assets/tokenizerz.png)\n\nBPE tokenizer implemented entirely in Zig.\n\nExample integration with LLMs at [nnx-lm](https://pypi.org/project/nnx-lm).\n\n## Requirement\nzig v0.13.0\n\n## Install\n```bash\ngit clone https://github.com/jaco-bro/tokenizer\ncd tokenizer\nzig build exe --release=fast\n```\n\n## Usage\n- `zig-out/bin/tokenizer_exe [--model MODEL_NAME] COMMAND INPUT` \n- `zig build run -- [--model MODEL_NAME] COMMAND INPUT` \n\n```bash\nzig build run -- --encode \"hello world\"\nzig build run -- --decode \"{14990, 1879}\"\nzig build run -- --model \"phi-4-4bit\" --encode \"hello world\"\nzig build run -- --model \"phi-4-4bit\" --decode \"15339 1917\"\nzig build run -- --repo \"Qwen\" --model \"Qwen3-0.6B\" --encode \"안녕\"\nzig build run -- --repo \"Qwen\" --model \"Qwen3-0.6B\" --decode \"126246 144370\"\n```\n\n## Python (optional)\nTokenizer is also pip-installable for use from Python:\n```bash\npip install tokenizerz\npython\n```\n\nUsage:\n```python\n>>> import tokenizerz\n>>> tokenizer = tokenizerz.Tokenizer()\nDirectory 'Qwen2.5-Coder-0.5B' created successfully.\nDL% UL%  Dled  Uled  Xfers  Live Total     Current  Left    Speed\n100 --  6866k     0     1     0   0:00:01  0:00:01 --:--:-- 4904k\nDownload successful.\n>>> tokens = tokenizer.encode(\"Hello, world!\")\n>>> print(tokens)\n[9707, 11, 1879, 0]\n>>> tokenizer.decode(tokens)\n'Hello, world!'\n```\n\nShell:\n```bash\nbpe --encode \"hello world\"\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/201527030?u=a4a8eb095cb003fc096a6f0c5e1b83b6d2317d65&v=4",
   "releases": [
     {
@@ -58,7 +58,7 @@
   "owner_location": null,
   "owner_blog": "https://jaco-bro.github.io/blog",
   "owner_twitter_username": null,
-  "owner_followers": 9,
+  "owner_followers": 10,
   "owner_following": 28,
   "owner_created_at": "2025-03-03T03:49:47Z",
   "homepage": "https://github.com/jaco-bro/nnx-lm",
