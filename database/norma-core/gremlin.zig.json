@@ -1,0 +1,26 @@
+{
+  "name": "gremlin.zig",
+  "owner": "norma-core",
+  "repo": "gremlin.zig",
+  "description": "A zero-dependency Google Protocol Buffers implementation in pure Zig. Single allocation encode and lazy decode",
+  "type": "package",
+  "topics": [
+    "zig-package",
+    "zig"
+  ],
+  "stars": 229,
+  "forks": 18,
+  "watchers": 4,
+  "updated_at": "2025-12-29T19:33:48Z",
+  "minimum_zig_version": "0.14.0",
+  "readme": "# gremlin\n\nA zero-dependency Google Protocol Buffers implementation in pure Zig (no protoc required)\n\n## Installation & Setup\n\nSingle command setup:\n```bash\nzig fetch --save https://github.com/octopus-foundation/gremlin.zig/archive/refs/tags/0.0.0.tar.gz\n```\n\nThis command will:\n1. Download gremlin\n2. Add it to your `build.zig.zon`\n3. Generate the correct dependency hash\n\nIn your `build.zig`:\n```zig\nconst std = @import(\"std\");\nconst ProtoGenStep = @import(\"gremlin\").ProtoGenStep;\n\npub fn build(b: *std.Build) void {\n    const target = b.standardTargetOptions(.{});\n    const optimize = b.standardOptimizeOption(.{});\n\n    // Get the parser dependency\n    const gremlin_dep = b.dependency(\"gremlin\", .{\n        .target = target,\n        .optimize = optimize,\n    }).module(\"gremlin\");\n\n    // Generate Zig code from .proto files\n    // This will process all .proto files in the proto/ directory\n    // and output generated Zig code to src/gen/\n    const protobuf = ProtoGenStep.create(\n        b,\n        .{\n            .proto_sources = b.path(\"proto\"),    // Directory containing .proto files\n            .target = b.path(\"src/gen\"),         // Output directory for generated Zig code\n        },\n    );\n\n    // Create binary\n    const exe = b.addExecutable(.{\n        .name = \"example\",\n        .root_source_file = b.path(\"src/main.zig\"),\n        .target = target,\n        .optimize = optimize,\n    });\n\n    // Add the parser module\n    exe.root_module.addImport(\"gremlin\", gremlin_dep);\n    exe.step.dependOn(&protobuf.step);\n\n    b.installArtifact(exe);\n}\n```\n\n## Features\n\n- Zero dependencies\n- Pure Zig implementation (no protoc required)\n- Compatible with Protocol Buffers version 2 and 3\n- Simple integration with Zig build system\n- Single! allocation for serialization (including complex recursive messages)\n- Lazy parsing - parses only required complex fields\n- Tested with Zig 0.14.0-dev\n\n## Generated code\n\nSee the complete working example in the [`example`](./example) folder.\n\nGiven a protobuf definition:\n```protobuf\nsyntax = \"proto3\";\n\nmessage User {\n  string name = 1;\n  uint64 id   = 2;\n  repeated string tags = 10;\n}\n```\n\nGremlin will generate equivalent Zig code (see [example.proto.zig](./example/src/gen/example.proto.zig)):\n```zig\nconst std = @import(\"std\");\nconst gremlin = @import(\"gremlin\");\n\n// Wire numbers for fields\nconst UserWire = struct {\n    const NAME_WIRE: gremlin.ProtoWireNumber = 1;\n    const ID_WIRE: gremlin.ProtoWireNumber = 2;\n    const TAGS_WIRE: gremlin.ProtoWireNumber = 10;\n};\n\n// Message struct\npub const User = struct {\n    name: ?[]const u8 = null,\n    id: u64 = 0,\n    tags: ?[]const ?[]const u8 = null,\n    \n    // Calculate size for allocation\n    pub fn calcProtobufSize(self: *const User) usize { ... }\n    \n    // Encode to new buffer\n    pub fn encode(self: *const User, allocator: std.mem.Allocator) gremlin.Error![]const u8 { ... }\n    \n    // Encode to existing buffer\n    pub fn encodeTo(self: *const User, target: *gremlin.Writer) void { ... }\n};\n\n// Reader for lazy parsing\npub const UserReader = struct {\n    allocator: std.mem.Allocator,\n    buf: gremlin.Reader,\n    _name: ?[]const u8 = null, \n    _id: u64 = 0,\n    _tags: ?std.ArrayList([]const u8) = null,\n\n    pub fn init(allocator: std.mem.Allocator, src: []const u8) gremlin.Error!UserReader { ... }\n    pub fn deinit(self: *const UserReader) void { ... }\n    \n    // Accessor methods\n    pub inline fn getName(self: *const UserReader) []const u8 { ... }\n    pub inline fn getId(self: *const UserReader) u64 { ... }\n    pub fn getTags(self: *const UserReader) []const []const u8 { ... }\n};\n```",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/250746960?v=4",
+  "releases": [],
+  "owner_bio": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2025-12-20T20:29:42Z",
+  "license": "MIT",
+  "category": "library"
+}

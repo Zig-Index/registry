@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 0,
+  "stars": 1,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-09-19T13:59:33Z",
+  "updated_at": "2025-12-24T18:38:40Z",
   "minimum_zig_version": "0.15.1",
   "readme": "ImGui.zig\n===\n\n## What is ImGui.zig?\nImGui with c bindings and zig build system. This repo should be updated anytime there is a new imgui tag.\nThe minimum zig version required is \"1.14.1\".\n\n## How to use it\n\nFetch imgui.zig\n```sh\nzig fetch --save git+https://github.com/TheNemoNemesis/imgui.zig.git\n```\n\nThan import it as a dependency into your build.zig \n\n```diff\nconst std = @import(\"std\");\n+ const imgui = @import(\"imgui_zig\");\n\npub fn build(b: *std.Build) {\n    // ...\n    \n+    const imgui_dep = b.dependency(\"imgui_zig\", .{\n+        .target = target,\n+        .optimize = optimize,\n+        .platform = imgui.Platform.sdl3,\n+        .renderer = imgui.Platform.sdlrenderer3,\n+    });\n\n    // \"exe\" represents your executable/library\n+    exe.linkLibrary(imgui_dep.artifact(\"imgui\"));\n\n    // ...\n}\n```\n\n## Backends\nImGui.zig supports almost every imgui backend, with the exception of osx and metal. \nMost of the backends are not tested (only sdl3, sdlrender3 and opengl3 were tested), so feel free to add suggestions to improve this project.\n\n## Dependencies\nImGui.zig is dependency free, you can add the platform and backend libraries independently from \"imgui.zig\".\n\n## Credits\nThanks to [orconut/imgui](https://github.com/ocornut/imgui) for the imgui library and to [dearimgui/dear_bindings](https://github.com/dearimgui/dear_bindings) for the C bindings.\nAlso thanks to [thedmd/imgui](https://github.com/thedmd/imgui/tree/layouts) for the stacklayout implementation used in the \"master_stacklayout\" and \"docking_stacklayout\" branches.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/140025279?u=ff4933ef333f7fd7410c9b63ec359da85d2bb11f&v=4",
