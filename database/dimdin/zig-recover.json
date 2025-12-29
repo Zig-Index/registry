@@ -10,10 +10,10 @@
     "zig-package",
     "ziglang"
   ],
-  "stars": 14,
+  "stars": 15,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-11-28T22:08:02Z",
+  "updated_at": "2025-12-29T18:00:01Z",
   "minimum_zig_version": "0.14.0",
   "readme": "Zig Panic Recover\n=================\n\nRecover calls a function and regains control of the calling thread when the\nfunction panics or behaves undefined.\nRecover is licensed under the terms of the [MIT License](LICENSE).\n\nHow to use\n----------\n\nRecover `call`, calls `function` with `args`, if the function does not panic,\nwill return the called function's return value. If the function panics, will\nreturn `error.Panic`.\n```\nconst recover = @import(\"recover\");\n\ntry recover.call(function, args);\n```\n\nPrerequisites\n-------------\n\n1. Enabled runtime safety checks, such as unreachable, index out of bounds,\noverflow, division by zero, incorrect pointer alignment, etc.\n\n2. In the root source file define panic as recover.panic or override the\ndefault panic handler and call recover `panicked`.\n```\npub const panic = recover.panic;\n```\n3. Excluding Windows, linking to C standard library is required.\n\nExample\n-------\n\nReturns `error.Panic` because function division panics with runtime error\n\"division by zero\".\n```\nfn division(num: u32, den: u32) u32 {\n    return num / den;\n}\n\ntry recover.call(division, .{1, 0});\n```\n\nTesting\n-------\n\nFor recover to work for testing, you need a custom test runner with a panic\nhandler:\n```\npub const panic = @import(\"recover\").panic;\n```\n\nTo test that `foo(0)` panics:\n```\ntest \"foo(0) panics\" {\n     const err = recover.call(foo, .{0});\n     std.testing.expectError(error.Panic, err).\n}    \n```\n\nProper Usage\n------------\n\n- Recover is useful for testing panic and undefined behavior runtime\nsafety checks.\n- It is **not** recommended to use recover as a general exception mechanism.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/6881800?u=2d27f11c45ea8b33d4b5100c7a000e81557e8c4f&v=4",
