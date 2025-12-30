@@ -12,9 +12,9 @@
     "zig-package"
   ],
   "stars": 370,
-  "forks": 16,
-  "watchers": 10,
-  "updated_at": "2025-12-25T09:24:26Z",
+  "forks": 18,
+  "watchers": 9,
+  "updated_at": "2025-12-30T02:09:29Z",
   "dependencies": [
     {
       "name": "wabt",
@@ -27,7 +27,7 @@
       "hash": "N-V-__8AAKtbtgBFkB_BMIKSUqC-temKvHmuqBSvjBlf4hD6"
     }
   ],
-  "minimum_zig_version": "0.15.1",
+  "minimum_zig_version": "0.15.2",
   "readme": "<h1 align=\"center\">zware</h1>\n\n<div align=\"center\">\n  <img src=\"https://github.com/malcolmstill/web-assembly-logo/blob/master/dist/icon/web-assembly-icon-128px.png\" alt=\"WebAssembly logo: a purple-blue square containing the uppercase letters W A. The square has a semicirclular notch on the top edge in the middle\" />\n  <br />\n  <strong>Zig WebAssembly Runtime Engine</strong>\n</div>\n\n## About\n\n`zware` is a library for executing WebAssembly embedded in [Zig](https://ziglang.org) programs.\n\n## Example\n\nFrom `examples/fib`:\n\n```zig\nconst std = @import(\"std\");\nconst zware = @import(\"zware\");\nconst Store = zware.Store;\nconst Module = zware.Module;\nconst Instance = zware.Instance;\nconst GeneralPurposeAllocator = std.heap.GeneralPurposeAllocator;\nvar gpa = GeneralPurposeAllocator(.{}){};\n\npub fn main() !void {\n    defer _ = gpa.deinit();\n    const alloc = gpa.allocator();\n\n    const bytes = @embedFile(\"fib.wasm\");\n\n    var store = Store.init(alloc);\n    defer store.deinit();\n\n    var module = Module.init(alloc, bytes);\n    defer module.deinit();\n    try module.decode();\n\n    var instance = Instance.init(alloc, &store, module);\n    try instance.instantiate();\n    defer instance.deinit();\n\n    const n = 39;\n    var in = [1]u64{n};\n    var out = [1]u64{0};\n\n    try instance.invoke(\"fib\", in[0..], out[0..], .{});\n\n    const result: i32 = @bitCast(@as(u32, @truncate(out[0])));\n    std.debug.print(\"fib({}) = {}\\n\", .{ n, result });\n}\n```\n\n## Requirements\n\n### Compile-time\n\n- Zig 0.15.1 (master)\n\n### Run-time\n\n- None, zig generates static binaries:\n\n```bash\n➜  zware git:(master) ✗ ldd fib\n        not a dynamic executable\n```\n\n## Goals\n\n- Embed WebAssembly programs in other zig programs\n- Be fast enough to be useful\n\n## Status\n\n- The project is very much alpha quality\n- WebAssembly 2.0 supported (apart from the vector / SIMD support which is WIP)\n- The WebAssembly official testsuite passes (not including SIMD tests)\n- Partial WASI support\n\n## Running tests\n\nUse `zig build --help` to see all the test targets, here's a summary of the important ones:\n\n```sh\nzig build test      # Run all the tests (includes unittest and testsuite)\nzig build unittest  # Run the library unittests\nzig build testsuite # Run all the testsuite tests\nzig build test-NAME # Run the NAME testsuite test, i.e. test-type\n```\n\n## Does it run doom?\n\nYes, [yes it does](https://github.com/malcolmstill/zware-doom)\n\nhttps://github.com/malcolmstill/zware/assets/2567177/c9acdcb2-69e7-495f-b3f1-89cf6b807a43\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/2567177?u=64617edeb6170b898d7b94b90514950e940c4533&v=4",
   "releases": [],
