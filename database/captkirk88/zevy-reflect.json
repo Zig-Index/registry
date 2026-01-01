@@ -15,12 +15,12 @@
   "stars": 3,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-12-28T18:04:59Z",
+  "updated_at": "2026-01-01T16:54:19Z",
   "dependencies": [
     {
       "name": "zevy_buildtools",
-      "url": "git+https://github.com/captkirk88/zevy-buildtools#cc84a951e1bb8b4032c58fdf23258cecbdd27caf",
-      "hash": "zevy_buildtools-0.0.0-So808TZzAABf5scbnRki4NwMHPQXe1zlKu-RNCvAjcV0"
+      "url": "git+https://github.com/captkirk88/zevy-buildtools#ec089b7ab9607311e12ab5a92936702d8df94461",
+      "hash": "zevy_buildtools-0.0.0-So808bhxAADKN4Hd4CWr_EUNIg2xUIqzfKdM_XMD9eum"
     }
   ],
   "minimum_zig_version": "0.15.1",
