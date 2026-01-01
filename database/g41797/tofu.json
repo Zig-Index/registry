@@ -11,10 +11,10 @@
     "zig-library",
     "zig-package"
   ],
-  "stars": 9,
+  "stars": 10,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-01-01T17:34:28Z",
+  "updated_at": "2026-01-01T22:14:20Z",
   "dependencies": [
     {
       "name": "nats",
