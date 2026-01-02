@@ -1,0 +1,27 @@
+{
+  "name": "zig-perlin3d",
+  "owner": "vExcess",
+  "repo": "zig-perlin3d",
+  "description": "3D Perlin Noise in Zig",
+  "type": "package",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 1,
+  "watchers": 1,
+  "updated_at": "2026-01-02T02:31:22Z",
+  "readme": "# Zig Perlin3D\n3D, 2D, and 1D Perlin Noise in Zig\n\nThis is a port of https://github.com/alterebro/perlin-noise-3d from JS into Zig which was adapted from P5.js https://github.com/processing/p5.js/blob/main/src/math/noise.js . This Perlin noise's output should visually equivelant to p5.js but it has been optimized to be twice as fast  \n\n# Sample Output\n![sample](https://github.com/vExcess/zig-perlin3d/blob/main/demo-output.jpg?raw=true)\n\n## Quickstart code\n### Use global API from Zig\n```ts\nconst Perlin = @import(\"perlin3d\");\n\nPerlin.init(321);\ndefer Perlin.deinit();\nPerlin.seedNoise(123);\nPerlin.noiseDetail(4, 0.5);\nPerlin.noise1(12.0);\nPerlin.noise2(12.0, 34.0);\nPerlin.noise3(12.0, 34.0, 56.0);\n```\n\n### Directly use PerlinGenerator from Zig\n```ts\nconst Perlin = @import(\"perlin3d\");\nconst PerlinGenerator = Perlin.PerlinGenerator;\n\nvar myGenerator = try PerlinGenerator.init(321);\ndefer myGenerator.deinit();\n\nmyGenerator.octaves = 3; // change octaves used\nmyGenerator.seedNoise(123);\nmyGenerator.octaves = 4;\nmyGenerator.falloff = 0.5;\nmyGenerator.get(12.0, 34.0, 56.0);\n```\n\n### Use global API in WASM\n```ts\nconst wasm = new WebAssembly.Module(buffer);\nconst wasmInstance = new WebAssembly.Instance(wasm, {});\nconst Perlin = wasmInstance.exports;\n\nPerlin.init(321);\nPerlin.seedNoise(123);\nPerlin.noiseDetail(4, 0.5);\nPerlin.noise1(12.0);\nPerlin.noise2(12.0, 34.0);\nPerlin.noise3(12.0, 34.0, 56.0);\nPerlin.deinit();\n```\n\n## Zig Demo\nView `demo/demo.zig` to see demo code. To run native demo locally:\n```sh\nsudo apt install libcairo2-dev\nsudo apt install libsdl2-dev\nzig run -lc -I/usr/include/SDL2 -lSDL2 -I/usr/include/cairo -lcairo -O ReleaseFast demo/demo.zig\n```\n\n## WASM Demo\nView `demo/demo.html` to see demo code. To run wasm demo locally:\n```sh\nnpm install --global http-server\nhttp-server -o demo/demo.html\n```\n\n## Compile Library To WASM\n```sh\nzig build-exe -fno-entry -O ReleaseSmall -target wasm32-freestanding -rdynamic src/perlin3d.zig\n```\n\n## Documentation\n### Global API\n`fn init(seed: u32) void`  \nInitialize the global perlin generator. This must be done before calling the globals: seedNoise(), noise1(), noise2(), noise3(), and deinit(). This doesn't need to be called if you are directly using the PerlinGenerator struct.\n\n`fn deinit() void`  \nDeallocate the global generator in order to prevent leaking memory. If using the WASM module it is not necessary to call deinit() because the WASM VM will free all the VM's memory, however deinit() can still be called from WASM as good practice.\n\n`fn seedNoise(seed: u32) void`  \nReseeds the global perlin generator. The generator is already seeded by the init() function so this doesn't need to be called unless you want to change the seed.\n\n`fn noiseDetail(octaves: i32, falloff: f64) void`  \nSets the octaves and falloff of the global generator.\n\n`fn noise1(x: f64) f64`  \nSample a 1D noise value. Return value is in range [0, 1].\n\n`fn noise2(x: f64, y: f64) f64`  \nSample a 2D noise value. Return value is in range [0, 1].\n\n`fn noise3(x: f64, y: f64, z: f64) f64`  \nSample a 3D noise value. Return value is in range [0, 1].\n\n### PerlinGenerator\n```ts\nstruct PerlinGenerator {\n    // The number of octaves to be used by the noise.\n    octaves: i32 = 4, // default to medium smooth\n    // The falloff factor for each octave.\n    falloff: f64 = 0.5, // 50% reduction/octave\n\n    // Initialize a PerlinGenerator. Throws if memory allocation fails.\n    fn init(allocator: *const std.mem.Allocator, seed: u32) !PerlinGenerator\n\n    // Deallocate generator's internal buffers.\n    fn deinit(self: *PerlinGenerator) void\n\n    // Reseed the generator. Throws if memory allocation fails.\n    fn seedNoise(self: *PerlinGenerator, seed: u32) !void\n\n    // Sample the noise value at a 3D coordinate. Return value is in range [0, 1].\n    fn get(self: *PerlinGenerator, x_: f64, y_: f64, z_: f64) f64\n}\n```\n\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/41875927?u=b5d3f43ab7c17a5000c5095dc713a50d213d4922&v=4",
+  "releases": [],
+  "owner_bio": "Programming since 2012. Learning Dart and Zig. Looking for software engineering internship.",
+  "owner_company": null,
+  "owner_location": "United States",
+  "owner_blog": "https://vexcess.github.io",
+  "owner_twitter_username": null,
+  "owner_followers": 56,
+  "owner_following": 24,
+  "owner_created_at": "2018-07-29T19:11:52Z",
+  "license": "MIT",
+  "category": "library"
+}
