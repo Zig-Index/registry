@@ -8,10 +8,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 7,
+  "stars": 8,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-01-02T21:03:24Z",
+  "updated_at": "2026-01-02T23:21:51Z",
   "dependencies": [
     {
       "name": "sokol",
@@ -24,7 +24,7 @@
       "hash": "cimgui-0.1.0-44ClkQYjlQCl0iQX5wlquJ-mFZMqSxXA3hE2MG_3i1BT"
     }
   ],
-  "readme": "# Cronos\n\nMinimal calendar app built with Sokol + Zig.\n\n[Small preview](https://x.com/mariodev__/status/2007028805173698739?s=20)\n\nFeatures:\n- Month grid with today/selection highlight\n- Add events and list/delete events in modals\n- Keyboard-first navigation (H/J/K/L, arrows, A/T/V)\n\nProject layout:\n- `lib/cronos/` time/date/calendar/event logic (library code)\n- `src/app/` state + commands + shortcuts\n- `src/ui/` calendar view and modals\n- `src/render/` Sokol render helpers\n- `src/platform/` macOS window tweaks\n\nBuild:\n- `zig build run`\n\nRoadmap for v1.0:\n- [x] Go to date\n- [x] Richer events (time duration, color)\n- [x] Edit events\n- [ ] Search through event list\n- [ ] Persistance\n- [ ] Event previews in monthly view\n- [ ] Week and day views\n- [ ] Settings\n- [ ] ImGui debugging\n- [ ] Mac App\n- [ ] Customization?\n",
+  "readme": "# Cronos\n\nMinimal calendar app built with Sokol + Zig.\n\n[Small preview](https://x.com/mariodev__/status/2007028805173698739?s=20)\n\nFeatures:\n- Month grid with today/selection highlight\n- Add events and list/delete events in modals\n- Keyboard-first navigation (H/J/K/L, arrows, A/T/V)\n\nProject layout:\n- `lib/cronos/` time/date/calendar/event logic (library code)\n- `src/app/` state + commands + shortcuts\n- `src/ui/` calendar view and modals\n- `src/render/` Sokol render helpers\n- `src/platform/` macOS window tweaks\n\nBuild:\n- `zig build run`\n\nRoadmap for v1.0:\n- [x] Go to date\n- [x] Richer events (time duration, color)\n- [x] Edit events\n- [ ] Search through event list\n- [ ] Persistance\n- [x] Event previews in monthly view\n- [ ] Week and day views\n- [ ] Settings\n- [ ] ImGui debugging\n- [ ] Mac App\n- [ ] Customization?\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/36546318?u=1e28f8f367cdb4f44f8320cb2fd85ff8f3754208&v=4",
   "releases": [],
   "owner_bio": "✦ Be best, not first ✦",
