@@ -12,9 +12,9 @@
     "hal"
   ],
   "stars": 1980,
-  "forks": 160,
+  "forks": 159,
   "watchers": 24,
-  "updated_at": "2026-01-01T22:47:13Z",
+  "updated_at": "2026-01-02T06:25:30Z",
   "dependencies": [
     {
       "name": "core",
