@@ -10,10 +10,10 @@
     "dom",
     "zig-package"
   ],
-  "stars": 128,
+  "stars": 129,
   "forks": 14,
   "watchers": 2,
-  "updated_at": "2025-12-04T08:46:16Z",
+  "updated_at": "2026-01-02T19:00:46Z",
   "dependencies": [
     {
       "name": "named_character_references",
