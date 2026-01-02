@@ -10,7 +10,7 @@
   "stars": 41,
   "forks": 2,
   "watchers": 0,
-  "updated_at": "2026-01-02T06:54:27Z",
+  "updated_at": "2026-01-02T10:13:01Z",
   "dependencies": [
     {
       "name": "zio",
@@ -29,5 +29,6 @@
   "owner_followers": 301,
   "owner_following": 27,
   "owner_created_at": "2010-03-11T19:55:55Z",
+  "license": "MIT",
   "category": "library"
 }
