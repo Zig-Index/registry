@@ -1,0 +1,64 @@
+{
+  "name": "zig-libzip",
+  "owner": "akunaakwei",
+  "repo": "zig-libzip",
+  "description": "libzip for zig",
+  "type": "package",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-01-03T10:54:10Z",
+  "dependencies": [
+    {
+      "name": "libzip",
+      "url": "https://github.com/nih-at/libzip/releases/download/v1.11.4/libzip-1.11.4.tar.gz",
+      "hash": "N-V-__8AAIGWXwDb3q2kABh4z-r1aO2vLvZnKmf5aLSaRxk-"
+    },
+    {
+      "name": "autoconfigheader",
+      "url": "https://github.com/akunaakwei/zig-autoconfigheader/archive/71ad985da68e897ad168117f04cb519466b759cd.tar.gz",
+      "hash": "autoconfigheader-0.0.1-M7E_ZQ4nAAATJAY2WlwDXjd1EETCQMDvTfCBQaAVFMgB"
+    },
+    {
+      "name": "mawk",
+      "url": "https://github.com/akunaakwei/zig-mawk/archive/7d60616cd324eef46176babf231b7f5950b73fec.tar.gz",
+      "hash": "mawk-1.3.4-anuHUHE2AABoqR3_NH_X6AqeKRAFhT_vbmEkV-PpsKJR"
+    },
+    {
+      "name": "zlib_ng",
+      "url": "https://github.com/akunaakwei/zig-zlib-ng/archive/47d21424d8563ef78096f787cb56692be0e94c9d.tar.gz",
+      "hash": "zlib_ng-2.3.2-O92soDc5AACuyk3AbAx4qYT1RVQF_Kj0weQvyVmLpMTz"
+    },
+    {
+      "name": "bzip2",
+      "url": "https://github.com/akunaakwei/zig-bzip2/archive/86378fb0bda23a19e73ff985efee28cb6168db3d.tar.gz",
+      "hash": "bzip2-1.0.8-x1Hi7ggMAADABRaL5NII4o5DrIntwlTl_IpAcHGzA1Cq"
+    },
+    {
+      "name": "xz",
+      "url": "https://github.com/akunaakwei/zig-xz/archive/d01038bce5762c9fe520dd8bbf2c543311f73943.tar.gz",
+      "hash": "xz-5.8.2-6v47_JYeAAAwKtZxu1r3QUcw8BLEMcyXzi9zBimsD8M4"
+    },
+    {
+      "name": "zstd",
+      "url": "https://github.com/akunaakwei/zig-zstd/archive/5904d1268686a67ce9291bec290b44f5c7de5318.zip",
+      "hash": "zstd-1.5.7-biH4jGcSAAABEOoCl0woGj2_mzxSqPtOnAbeEFrHf5Qc"
+    }
+  ],
+  "minimum_zig_version": "0.15.2",
+  "readme": "# libzip\r\nThis is libzip packaged for the zig build system.",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/11787994?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 0,
+  "owner_following": 2,
+  "owner_created_at": "2015-04-03T16:34:07Z",
+  "license": "Zlib",
+  "category": "library"
+}
