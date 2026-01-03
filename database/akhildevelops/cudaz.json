@@ -7,13 +7,22 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 118,
+  "stars": 121,
   "forks": 10,
   "watchers": 2,
-  "updated_at": "2025-12-08T04:13:32Z",
+  "updated_at": "2026-01-03T01:43:13Z",
   "minimum_zig_version": "0.11.0",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/6951100?u=d1219532a4e544f59a9fd017eb83787d9ea9032e&v=4",
   "releases": [
+    {
+      "tag_name": "0.3.0",
+      "name": "0.3.0",
+      "body": "**Full Changelog**: https://github.com/akhildevelops/cudaz/compare/0.2.1...0.3.0\r\n- Port to zig 0.15.2 ",
+      "prerelease": false,
+      "published_at": "2026-01-03T01:38:42Z",
+      "html_url": "https://github.com/akhildevelops/cudaz/releases/tag/0.3.0",
+      "assets": []
+    },
     {
       "tag_name": "0.2.1",
       "name": "0.2.1",
