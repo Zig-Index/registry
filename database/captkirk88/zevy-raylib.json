@@ -10,17 +10,18 @@
     "zig-library",
     "zig-package",
     "zevy-ecs",
-    "raylib"
+    "raylib",
+    "zevy"
   ],
   "stars": 2,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-12-27T01:39:32Z",
+  "updated_at": "2026-01-03T14:40:12Z",
   "dependencies": [
     {
       "name": "zevy_ecs",
-      "url": "git+https://github.com/captkirk88/zevy-ecs#6b984b1415d4dd28b77cbdf3157b78c95c77739f",
-      "hash": "zevy_ecs-1.56.0-VoL9mcH5BgC_rpYNq3FQ2bNtfqXwWTtRmncte9Snyt5d"
+      "url": "git+https://github.com/captkirk88/zevy-ecs#382bede6178c470e62ed167a23309ee2c18f8da2",
+      "hash": "zevy_ecs-1.56.0-VoL9md8IBwDfZ0wpUIRlR725wUbnb-c3rHOU8nEzUtwT"
     },
     {
       "name": "zevy_ecs",
@@ -43,13 +44,18 @@
     },
     {
       "name": "zevy_reflect",
-      "url": "git+https://github.com/captkirk88/zevy-reflect#739797f94a94c9f3e6e1d70b5fe75228cd801247",
-      "hash": "zevy_reflect-0.0.1-8SzYxvVWAgAv4POB43USjmhHDg0TqjM5BMQLovuZ_N6o"
+      "url": "git+https://github.com/captkirk88/zevy-reflect#15e55f475c1b0d2f38accbd83a5a75c970ac5981",
+      "hash": "zevy_reflect-0.0.1-8SzYxmR0AgBRzHSiEaDYGLb6aMr_-tPzB-WEM31uKQfz"
     },
     {
       "name": "zevy_mem",
-      "url": "git+https://github.com/captkirk88/zevy-mem#a1120bb8c4405f8edcbf7df992299b5dea48a62f",
-      "hash": "zevy_mem-0.0.1-jK9L0bwJAgD5Z1lsyzRl_xZ51R3Sq6Wkvb65gP87ycLG"
+      "url": "git+https://github.com/captkirk88/zevy-mem#abf720b930e955e64d8f7e19ec1b9dcccb370298",
+      "hash": "zevy_mem-0.0.1-jK9L0SbQAgASz_DC07oh3HbMevWjNh2G9B1oQc6Z4mpk"
+    },
+    {
+      "name": "zevy_buildtools",
+      "url": "git+https://github.com/captkirk88/zevy-buildtools#34137d06a8ca55e146af8653e208e39bd7c6bd49",
+      "hash": "zevy_buildtools-0.0.0-So808Wp9AACw8cGzXxCKpUdjPAziAr33sDQQJ2mPXtNN"
     }
   ],
   "minimum_zig_version": "0.15.1",
@@ -61,8 +67,8 @@
   "owner_location": "Moon",
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 6,
-  "owner_following": 18,
+  "owner_followers": 7,
+  "owner_following": 19,
   "owner_created_at": "2014-01-01T08:56:32Z",
   "category": "library"
 }

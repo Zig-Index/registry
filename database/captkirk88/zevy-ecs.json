@@ -12,12 +12,13 @@
     "zig-package",
     "zig-library",
     "bevy",
-    "entity-component-framework"
+    "entity-component-framework",
+    "zevy"
   ],
-  "stars": 9,
+  "stars": 10,
   "forks": 1,
   "watchers": 0,
-  "updated_at": "2026-01-01T18:29:22Z",
+  "updated_at": "2026-01-03T14:30:49Z",
   "dependencies": [
     {
       "name": "zevy_reflect",
@@ -30,8 +31,8 @@
     },
     {
       "name": "zevy_mem",
-      "url": "git+https://github.com/captkirk88/zevy-mem#bb9b83e8d4a3ac689f0dfc9edae8015a1aa8835d",
-      "hash": "zevy_mem-0.0.1-jK9L0ZWmAgC17MDoo2QPM9b9LveBYWzxdqzQL6nTj6nH"
+      "url": "git+https://github.com/captkirk88/zevy-mem#abf720b930e955e64d8f7e19ec1b9dcccb370298",
+      "hash": "zevy_mem-0.0.1-jK9L0SbQAgASz_DC07oh3HbMevWjNh2G9B1oQc6Z4mpk"
     },
     {
       "name": "zevy_mem",
@@ -39,8 +40,8 @@
     },
     {
       "name": "zevy_buildtools",
-      "url": "git+https://github.com/captkirk88/zevy-buildtools#ec089b7ab9607311e12ab5a92936702d8df94461",
-      "hash": "zevy_buildtools-0.0.0-So808bhxAADKN4Hd4CWr_EUNIg2xUIqzfKdM_XMD9eum"
+      "url": "git+https://github.com/captkirk88/zevy-buildtools#34137d06a8ca55e146af8653e208e39bd7c6bd49",
+      "hash": "zevy_buildtools-0.0.0-So808Wp9AACw8cGzXxCKpUdjPAziAr33sDQQJ2mPXtNN"
     }
   ],
   "minimum_zig_version": "0.15.1",
@@ -52,8 +53,8 @@
   "owner_location": "Moon",
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 6,
-  "owner_following": 18,
+  "owner_followers": 7,
+  "owner_following": 19,
   "owner_created_at": "2014-01-01T08:56:32Z",
   "license": "MIT",
   "category": "library"
