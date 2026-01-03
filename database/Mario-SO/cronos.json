@@ -8,10 +8,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 8,
+  "stars": 11,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-01-02T23:21:51Z",
+  "updated_at": "2026-01-03T11:34:45Z",
   "dependencies": [
     {
       "name": "sokol",
