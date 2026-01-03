@@ -8,10 +8,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 10,
+  "stars": 11,
   "forks": 2,
   "watchers": 4,
-  "updated_at": "2025-12-01T00:15:58Z",
+  "updated_at": "2026-01-03T02:21:42Z",
   "dependencies": [
     {
       "name": "zstd",
@@ -20,7 +20,7 @@
     }
   ],
   "minimum_zig_version": "0.14.0",
-  "readme": "[![CI](https://github.com/allyourcodebase/zstd/actions/workflows/ci.yaml/badge.svg)](https://github.com/allyourcodebase/zstd/actions)\n\n# zstd\n\nThis is [zstd](https://github.com/facebook/zstd), packaged for [Zig](https://ziglang.org/).\n\n## Installation\n\nFirst, update your `build.zig.zon`:\n\n```\n# Initialize a `zig build` project if you haven't already\nzig init\nzig fetch --save git+https://github.com/allyourcodebase/zstd.git#1.5.7\n```\n\nYou can then import `zstd` in your `build.zig` with:\n\n```zig\nconst zstd_dependency = b.dependency(\"zstd\", .{\n    .target = target,\n    .optimize = optimize,\n});\nyour_exe.linkLibrary(zstd_dependency.artifact(\"zstd\"));\n```\n",
+  "readme": "[![CI](https://github.com/allyourcodebase/zstd/actions/workflows/ci.yaml/badge.svg)](https://github.com/allyourcodebase/zstd/actions)\n\n# zstd\n\nThis is [zstd](https://github.com/facebook/zstd), packaged for [Zig](https://ziglang.org/).\n\n## Installation\n\nFirst, update your `build.zig.zon`:\n\n```\n# Initialize a `zig build` project if you haven't already\nzig init\nzig fetch --save git+https://github.com/allyourcodebase/zstd.git#1.5.7-1\n```\n\nYou can then import `zstd` in your `build.zig` with:\n\n```zig\nconst zstd_dependency = b.dependency(\"zstd\", .{\n    .target = target,\n    .optimize = optimize,\n});\nyour_exe.linkLibrary(zstd_dependency.artifact(\"zstd\"));\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
   "releases": [],
   "owner_bio": "...are belong to Ziguanas, but we'd also be delighted to give them back!",

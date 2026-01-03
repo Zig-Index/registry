@@ -1,0 +1,67 @@
+{
+  "name": "zig-syslinfo",
+  "owner": "javiorfo",
+  "repo": "zig-syslinfo",
+  "description": "Linux sysinfo Zig library",
+  "type": "package",
+  "topics": [
+    "linux",
+    "sysinfo",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 11,
+  "forks": 3,
+  "watchers": 1,
+  "updated_at": "2026-01-03T02:44:14Z",
+  "minimum_zig_version": "0.14.1",
+  "readme": "# zig-syslinfo\n*Linux sysinfo Zig library*\n\n## Caveats\n- C libs dependencies: `asound`, `libnm`, `glib-2.0` \n- Required Zig version: **0.14.1**\n- This library has been developed on and for Linux following open source philosophy.\n\n## Usage\n```zig\nconst std = @import(\"std\");\nconst syslinfo = @import(\"syslinfo\");\n\npub fn main() !void {\n    // DISK\n    const disk = try syslinfo.disk.usage(\"/\");\n    std.debug.print(\"DISK free {d}\\n\", .{disk.free});\n    std.debug.print(\"DISK blocks {d}\\n\", .{disk.blocks});\n    std.debug.print(\"DISK files {d}\\n\", .{disk.files});\n    std.debug.print(\"DISK files free {d}\\n\", .{disk.files_free});\n    std.debug.print(\"DISK perc used {d:.2}%\\n\", .{try disk.percentageUsed()});\n\n    // CPU\n    const cpu = syslinfo.cpu;\n    const cpu_usage = try cpu.usage();\n    std.debug.print(\"CPU user {d}\\n\", .{cpu_usage.user});\n    std.debug.print(\"CPU nice {d}\\n\", .{cpu_usage.nice});\n    std.debug.print(\"CPU idle {d}\\n\", .{cpu_usage.idle});\n    std.debug.print(\"CPU system {d}\\n\", .{cpu_usage.system});\n    std.debug.print(\"CPU iowait {d}\\n\", .{cpu_usage.iowait});\n\n    const cpu_info = try cpu.info();\n    defer cpu_info.deinit();\n    std.debug.print(\"CPU vendor id {s}\\n\", .{cpu_info.vendor_id});\n    std.debug.print(\"CPU model {d}\\n\", .{cpu_info.model});\n    std.debug.print(\"CPU model name {s}\\n\", .{cpu_info.model_name});\n    std.debug.print(\"CPU microcode {s}\\n\", .{cpu_info.microcode});\n    std.debug.print(\"CPU cores {d}\\n\", .{cpu_info.cpu_cores});\n    std.debug.print(\"CPU family {d}\\n\", .{cpu_info.cpu_family});\n    std.debug.print(\"CPU cache size {s}\\n\", .{cpu_info.cache_size});\n    std.debug.print(\"CPU perc used {d:.2}%\\n\", .{try cpu.percentageUsed()});\n\n    // THERMAL\n    const thermal = syslinfo.thermal;\n    const thermal_info = try thermal.info();\n    std.debug.print(\"THERMAL zone0 {d}\\n\", .{thermal_info.zone0.?});\n    std.debug.print(\"THERMAL zone1 {d}\\n\", .{try thermal.getTemperatureFromZone(thermal.ZONE.one)});\n    std.debug.print(\"THERMAL zone2 {d}\\n\", .{try thermal.getTemperatureFromZoneId(2)});\n\n    // MEMORY\n    const memory = try syslinfo.memory.usage();\n    std.debug.print(\"MEM free {d}\\n\", .{memory.free});\n    std.debug.print(\"MEM total {d}\\n\", .{memory.total});\n    std.debug.print(\"MEM cached {d}\\n\", .{memory.cached});\n    std.debug.print(\"MEM buffers {d}\\n\", .{memory.buffers});\n    std.debug.print(\"MEM available {d}\\n\",.{ memory.available});\n    std.debug.print(\"MEM free swap {d}\\n\", .{memory.free_swap});\n    std.debug.print(\"MEM total swap {d}\\n\", .{memory.total_swap});\n    std.debug.print(\"MEM perc used {d:.2}%\\n\", .{try memory.percentageUsed()});\n\n    // VOLUME\n    const vol = try syslinfo.volume.state(.{}); // Receives a struct (default values are \"default\" and \"Master\")\n    std.debug.print(\"VOL card name {s}\\n\", .{vol.card_name});\n    std.debug.print(\"VOL volume {d}%\\n\", .{vol.volume});\n    std.debug.print(\"VOL minimum {d}\\n\", .{vol.min});\n    std.debug.print(\"VOL maximum {d}\\n\", .{vol.max});\n    std.debug.print(\"VOL is muted {b}\\n\", .{vol.muted});\n\n    // NETWORK\n    const net = try syslinfo.network.state();\n    std.debug.print(\"NET SSID {s}\\n\", .{net.?.SSID});\n    std.debug.print(\"NET SSID len {d}\\n\", .{net.?.SSID_len});\n    std.debug.print(\"NET IPv4 {s}\\n\", .{net.?.ipv4});\n    std.debug.print(\"NET IPv4 len {d}\\n\", .{net.?.ipv4_len});\n    std.debug.print(\"NET mask {d}\\n\", .{net.?.mask});\n    std.debug.print(\"NET signal strength {d}\\n\", .{net.?.signal_strength});\n    std.debug.print(\"NET connection speed {d}\\n\", .{net.?.connection_speed});\n    std.debug.print(\"NET connection type {d}\\n\", .{net.?.connection_type});\n}\n```\n\n## Installation\n#### In your `build.zig.zon`:\n```zig\n.dependencies = .{\n    .syslinfo = .{\n        .url = \"https://github.com/javiorfo/zig-syslinfo/archive/refs/heads/master.tar.gz\",            \n        // .hash = \"hash suggested\",\n        // the hash will be suggested by zig build\n    },\n}\n```\n\n#### In your `build.zig`:\n```zig\nconst dep = b.dependency(\"syslinfo\", .{\n    .target = target,\n    .optimize = optimize,\n});\nexe.root_module.addImport(\"syslinfo\", dep.module(\"syslinfo\"));\n\nexe.linkLibC();\nexe.linkSystemLibrary(\"asound\");\nexe.linkSystemLibrary(\"libnm\");\nexe.linkSystemLibrary(\"glib-2.0\");\n```\n\n---\n\n### Donate\n- **Bitcoin** [(QR)](https://raw.githubusercontent.com/javiorfo/img/master/crypto/bitcoin.png)  `1GqdJ63RDPE4eJKujHi166FAyigvHu5R7v`\n- [Paypal](https://www.paypal.com/donate/?hosted_button_id=FA7SGLSCT2H8G)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/124217829?u=a89449f8083e3dccc939ac5be59c19aff50e212e&v=4",
+  "releases": [
+    {
+      "tag_name": "0.2.0",
+      "name": "",
+      "body": "Update to Zig 0.14.1",
+      "prerelease": false,
+      "published_at": "2025-06-04T01:06:43Z",
+      "html_url": "https://github.com/javiorfo/zig-syslinfo/releases/tag/0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.1.2",
+      "name": "",
+      "body": "- Memory validation fixed\r\n- Cpu Usage: \"cpu\" string bug fixed\r\n- Cpu Info: wrong deallocation fixed",
+      "prerelease": false,
+      "published_at": "2025-01-27T19:12:13Z",
+      "html_url": "https://github.com/javiorfo/zig-syslinfo/releases/tag/0.1.2",
+      "assets": []
+    },
+    {
+      "tag_name": "0.1.1",
+      "name": "",
+      "body": "- Allocator leak fix\r\n- Thermal by ID function\r\n- Documentation",
+      "prerelease": false,
+      "published_at": "2025-01-10T15:21:49Z",
+      "html_url": "https://github.com/javiorfo/zig-syslinfo/releases/tag/0.1.1",
+      "assets": []
+    },
+    {
+      "tag_name": "0.1.0",
+      "name": "",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2024-12-29T02:17:19Z",
+      "html_url": "https://github.com/javiorfo/zig-syslinfo/releases/tag/0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": "Argentina",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 21,
+  "owner_following": 0,
+  "owner_created_at": "2023-02-02T00:07:28Z",
+  "license": "MIT",
+  "category": "library"
+}
