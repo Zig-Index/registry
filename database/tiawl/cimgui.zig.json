@@ -12,10 +12,10 @@
     "ziglang",
     "zig-package"
   ],
-  "stars": 92,
+  "stars": 97,
   "forks": 17,
   "watchers": 1,
-  "updated_at": "2025-12-30T11:10:31Z",
+  "updated_at": "2026-01-03T09:53:52Z",
   "dependencies": [
     {
       "name": "glfw_zig",
