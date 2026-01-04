@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 1372,
-  "forks": 49,
-  "watchers": 14,
-  "updated_at": "2025-12-22T04:20:54Z",
+  "stars": 1382,
+  "forks": 50,
+  "watchers": 15,
+  "updated_at": "2026-01-04T01:03:34Z",
   "dependencies": [
     {
       "name": "jetcommon",
@@ -39,8 +39,8 @@
     },
     {
       "name": "zmpl",
-      "url": "https://github.com/jetzig-framework/zmpl/archive/a4746fcab433a86b461a48c48aed80effcf5853a.tar.gz",
-      "hash": "zmpl-0.0.1-SYFGBoeqAwAVSZK5OD-wzQkL11iie_jNZ0w0F5z22j5u"
+      "url": "https://github.com/jetzig-framework/zmpl/archive/92fe1d7682361c292382a3c0035febeb854ce72f.tar.gz",
+      "hash": "zmpl-0.0.1-SYFGBsmrAwCY-rmZZxwbHCMnHccWkMHqoUFlCeqG7C8_"
     },
     {
       "name": "httpz",
@@ -49,8 +49,8 @@
     },
     {
       "name": "jetquery",
-      "url": "https://github.com/jetzig-framework/jetquery/archive/a5a97b5f10dbd43b4dd18d9fddb7a1d9f1403c91.tar.gz",
-      "hash": "jetquery-0.0.0-TNf3zuDABgCbhjXEg2zcJSfspQd2MNwxZw3gdr1Do17U"
+      "url": "https://github.com/jetzig-framework/jetquery/archive/2d7659ddba9252fad2b73c14204a43fd73e4fc12.tar.gz",
+      "hash": "jetquery-0.0.0-TNf3zjTDBgBjArdWf0K49scPrXrogdEC8ZYvDCye9-xb"
     }
   ],
   "minimum_zig_version": "0.15.0-dev.355+206bd1ced",
