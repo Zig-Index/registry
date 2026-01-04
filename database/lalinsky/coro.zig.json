@@ -10,7 +10,7 @@
   "stars": 8,
   "forks": 1,
   "watchers": 0,
-  "updated_at": "2026-01-02T19:38:58Z",
+  "updated_at": "2026-01-04T15:08:44Z",
   "minimum_zig_version": "0.15.2",
   "readme": "Low-level library for implementing stackful coroutines for Zig.\r\n\r\nThis project is part of [zio](https://github.com/lalinsky/zio), but can be also used on its own.\r\n\r\nTested on Linux, FreeBSD, NetBSD, macOS and Windows.\r\n\r\nFeatures:\r\n - context switching on x86_64/aarch64/riscv64/loongarch64 architectures via custom assembly\r\n - allocating stacks on virtual memory with proper stack guard pages\r\n - growable stacks within the reserved virtual memory space\r\n    * automatic on Windows\r\n    * opt-in on Linux, FreeBSD, NetBSD and macOS (uses custom SIGSEGV/SIGBUS handler)\r\n - stacks registered with Valgrind in debug mode\r\n \r\n\r\n\r\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/220839?u=76f817358cb458727e81dd4ec11188d343becc9e&v=4",
