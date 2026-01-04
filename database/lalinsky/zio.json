@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 335,
-  "forks": 10,
+  "stars": 338,
+  "forks": 12,
   "watchers": 0,
-  "updated_at": "2026-01-02T15:32:31Z",
+  "updated_at": "2026-01-04T06:02:10Z",
   "dependencies": [
     {
       "name": "aio",
