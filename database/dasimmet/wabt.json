@@ -14,7 +14,7 @@
   "stars": 8,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-01-04T16:42:18Z",
+  "updated_at": "2026-01-04T17:54:08Z",
   "dependencies": [
     {
       "name": "wabt",
@@ -38,7 +38,7 @@
     }
   ],
   "minimum_zig_version": "0.14.0",
-  "readme": "# WebAssembly Tools on the zig build system\n\nuses the [Zig](https://ziglang.org/) build system to build WebAssembly's binary\nC tools.\n\n## building\n\n```zig build\nzig build\n```\n\n## add to your zig project\n\n```bash\nzig fetch --save git+https://github.com/dasimmet/wabt.git\n```\n\n## [WebAssembly Binary Toolkit](https://github.com/WebAssembly/wabt.git)\n\n```\n> ./zig-out/bin/wasm2c --help\nusage: wasm2c [options] filename\n\n  Read a file in the WebAssembly binary format, and convert it to\n  a C source file and header.\n```\n\n## [Binaryen](https://github.com/WebAssembly/binaryen.git)\n\n```\n> ./zig-out/bin/wasm-merge --help\n================================================================================\nwasm-merge INFILE1 NAME1 INFILE2 NAME2 [..]\n\nMerge wasm files into one.\n```\n\n## build.zig usage\n\n```zig\nconst wabt = @import(\"wabt\");\n\n// wasm-opt\n\nconst optimized_wasm: LazyPath = wabt.wasm_opt(\n    b,\n    b.path(\"my.wasm\"),                // source path\n    \"optimized.wasm\",                 // out_basename\n    .{\"--mvp-features\", \"-Oz\", \"-c\"}, // extra args\n);\n\n// wasm2wat\n\nconst my_wat: LazyPath = wabt.wasm2wat(\n    b,\n    optimized_wasm, // source path\n    \"my.wat\",       // out_basename\n    .{},            // extra args\n);\n```\n",
+  "readme": "# WebAssembly Tools on the zig build system\n\nuses the [Zig](https://ziglang.org/) build system to build WebAssembly's binary\nC tools.\n\n## building\n\n```zig build\nzig build\n```\n\n## add to your zig project\n\n```bash\nzig fetch --save git+https://github.com/dasimmet/wabt.git\n```\n\n## [WebAssembly Binary Toolkit](https://github.com/WebAssembly/wabt.git)\n\n```\n> ./zig-out/bin/wasm2c --help\nusage: wasm2c [options] filename\n\n  Read a file in the WebAssembly binary format, and convert it to\n  a C source file and header.\n```\n\n## [Binaryen](https://github.com/WebAssembly/binaryen.git)\n\n```\n> ./zig-out/bin/wasm-merge --help\n================================================================================\nwasm-merge INFILE1 NAME1 INFILE2 NAME2 [..]\n\nMerge wasm files into one.\n```\n\n## build.zig usage\n\n```zig\nconst wabt = @import(\"wabt\");\n\n// wasm-opt\n\nconst optimized_wasm: LazyPath = wabt.wasm_opt(\n    b,\n    b.path(\"my.wasm\"),                // source path\n    \"optimized.wasm\",                 // out_basename\n    &.{\"--mvp-features\", \"-Oz\", \"-c\"}, // extra args array\n);\n\n// wasm2wat\n\nconst my_wat: LazyPath = wabt.wasm2wat(\n    b,\n    optimized_wasm, // source path\n    \"my.wat\",       // out_basename\n    &.{},            // extra args array\n);\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/2773256?u=609e5b7eac1f972a0854a240741c5c8deca85518&v=4",
   "releases": [],
   "owner_bio": "@ziglang enthusiast",
