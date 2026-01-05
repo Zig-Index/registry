@@ -16,20 +16,20 @@
     "zig-library",
     "rf"
   ],
-  "stars": 58,
-  "forks": 3,
+  "stars": 59,
+  "forks": 5,
   "watchers": 2,
-  "updated_at": "2025-12-10T01:26:01Z",
+  "updated_at": "2026-01-05T05:35:53Z",
   "dependencies": [
     {
       "name": "cfitsio",
-      "url": "https://github.com/arrufat/cfitsio/archive/9a7161ff41600aaa28fd040989294fb60a58df38.tar.gz",
-      "hash": "cfitsio-4.6.2-LaSYAO4YAACT0MYEVI4nelpfX5lnyQi_MvupX-zSrdRH"
+      "url": "git+https://github.com/ATTron/cfitsio/?ref=HEAD#8b315fb1f0b0a76e04eb394f28db87733d8953e3",
+      "hash": "cfitsio-4.6.2-LaSYAD8ZAADmDI5X4e906pIVSb_dmIXrMYhm0PNVondp"
     },
     {
       "name": "zignal",
-      "url": "git+https://github.com/bfactory-ai/zignal#d7fc48ae3f06ae3533d929f185842b44020e502f",
-      "hash": "zignal-0.5.0-dev-OrZ3s8bMEgCCafyz_uBhoDKlHI58EAJXuyTuVySAnzkz"
+      "url": "git+https://github.com/bfactory-ai/zignal#b5448b9f62f87cb5a71695b1bf52d9b2a378ee9e",
+      "hash": "zignal-0.10.0-dev-OrZ3s-gSJgBCy-lsn7PIuYM2ijP-H7hEh-lPgWNr3sgZ"
     }
   ],
   "minimum_zig_version": "0.16.0-dev.381+bc512648d",
@@ -69,7 +69,7 @@
   "owner_location": "New York, NY",
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 15,
+  "owner_followers": 13,
   "owner_following": 12,
   "owner_created_at": "2015-06-09T21:06:31Z",
   "homepage": "https://attron.github.io/astroz/",
