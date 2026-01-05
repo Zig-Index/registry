@@ -19,7 +19,7 @@
   "stars": 1,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-01-05T17:23:44Z",
+  "updated_at": "2026-01-05T18:17:24Z",
   "dependencies": [
     {
       "name": "verilator",
@@ -33,9 +33,56 @@
     }
   ],
   "minimum_zig_version": "0.15.2",
-  "readme": "# verilator\n\nzig-based build system and setup for [verilator](https://github.com/verilator/verilator)\n\n## version compatibility\n\ntested range: **v5.018 - v5.044** (and likely newer)\n\n## quick start\n\n```bash\nzig build -Doptimize=ReleaseFast\n\n./zig-out/bin/verilator --version\n./zig-out/bin/verilator --lint-only your_design.v\n```\n\n## requirements\n\n### build dependencies\n\n| dependency  | notes                         |\n| ----------- | ----------------------------- |\n| zig 0.15.2+ | build system and c++ compiler |\n| python 3    | wrapper scripts               |\n| bison 2.3+  | parser generator              |\n\n### runtime dependencies\n\n| dependency   | notes                                |\n| ------------ | ------------------------------------ |\n| perl         | verilator wrapper scripts            |\n| make         | building verilated designs           |\n| c++ compiler | compiling verilated code (see below) |\n\n## build options\n\n| option         | default | description                                           |\n| -------------- | ------- | ----------------------------------------------------- |\n| `-Doptimize`   | Debug   | ReleaseFast, ReleaseSafe, ReleaseSmall                |\n| `-Dtarget`     | native  | cross-compile target (e.g., `aarch64-linux-gnu`)      |\n| `-Duse-zig-cc` | true    | use `zig c++`/`zig ar` for verilated code compilation |\n| `-Dcxx`        | (auto)  | override c++ compiler (e.g., `clang++`, `g++`)        |\n| `-Dar`         | (auto)  | override archiver (e.g., `llvm-ar`, `ar`)             |\n\n### compiler selection\n\nby default, verilated designs use `zig c++` as the compiler. this provides:\n\n- cross-platform builds without msvc/mingw on windows\n- consistent c++20/coroutines support\n- single toolchain\n\nto use system compiler:\n\n```bash\nzig build -Duse-zig-cc=false    # uses system c++ and ar\n```\n\nto use a specific compiler:\n\n```bash\nzig build -Dcxx=clang++ -Dar=llvm-ar\nzig build -Dcxx=g++ -Dar=ar\n```\n\n> [!NOTE]\n> `-Dcxx`/`-Dar` take precedence over `-Duse-zig-cc`\n\n### runtime compiler override\n\nthe generated `verilated.mk` defaults to `zig c++` but supports runtime override:\n\n```bash\n# override when building verilated designs\nVERILATOR_CXX=g++ VERILATOR_AR=ar make -f Vdesign.mk\n\n# or export for the session\nexport VERILATOR_CXX=clang++\nexport VERILATOR_AR=llvm-ar\nmake -f Vdesign.mk\n```\n\nthe makefile automatically detects compiler type (zig/clang/gcc) and adjusts:\n- coroutine flags (`-fcoroutines` for gcc)\n- precompiled header suffix (`.gch` for clang)\n- macos linker flags (`-undefined dynamic_lookup` for zig)\n\n## building\n\n```bash\nzig build\n```\n\n### switch verilator version\n\n```bash\nzig fetch --save=verilator \"git+https://github.com/verilator/verilator#v5.042\"\nzig build\n```\n\n### cross-compilation\n\n```bash\nzig build -Dtarget=aarch64-linux-gnu -Doptimize=ReleaseFast\nzig build -Dtarget=x86_64-windows-gnu -Doptimize=ReleaseFast\n```\n\n### supported targets:\n\n- `x86_64-linux-gnu`, `aarch64-linux-gnu`\n- `x86_64-macos`, `aarch64-macos`\n- `x86_64-windows-gnu`, `aarch64-windows-gnu`\n\n## output structure\n\n```\nzig-out/\n├── bin/\n│   ├── verilator              # perl wrapper (entry point)\n│   ├── verilator_bin          # main compiler binary\n│   ├── verilator_coverage     # coverage tool wrapper\n│   └── ...\n└── include/\n    ├── verilated.h            # runtime headers\n    ├── verilated.mk           # makefile for verilated designs\n    └── vltstd/                # standard library\n```\n\n## license\n\n- build system (this repo): MIT\n- verilator (upstream): LGPL-3.0-only or Artistic-2.0\n",
+  "readme": "# verilator\n\nzig-based build system and setup for [verilator](https://github.com/verilator/verilator)\n\n## version compatibility\n\ntested range: **v5.018 - v5.044** (and likely newer)\n\n## quick start\n\n```bash\nzig build -Doptimize=ReleaseFast\n\n./zig-out/bin/verilator --version\n./zig-out/bin/verilator --lint-only your_design.v\n```\n\n## requirements\n\n### build dependencies\n\n| dependency  | notes                         |\n| ----------- | ----------------------------- |\n| zig 0.15.2+ | build system and c++ compiler |\n| python 3    | wrapper scripts               |\n| bison 2.3+  | parser generator              |\n\n### runtime dependencies\n\n| dependency   | notes                                |\n| ------------ | ------------------------------------ |\n| perl         | verilator wrapper scripts            |\n| make         | building verilated designs           |\n| c++ compiler | compiling verilated code (see below) |\n\n## build options\n\n| option         | default | description                                           |\n| -------------- | ------- | ----------------------------------------------------- |\n| `-Doptimize`   | Debug   | ReleaseFast, ReleaseSafe, ReleaseSmall                |\n| `-Dtarget`     | native  | cross-compile target (e.g., `aarch64-linux-gnu`)      |\n| `-Duse-zig-cc` | true    | use `zig c++`/`zig ar` for verilated code compilation |\n| `-Dcxx`        | (auto)  | override c++ compiler (e.g., `clang++`, `g++`)        |\n| `-Dar`         | (auto)  | override archiver (e.g., `llvm-ar`, `ar`)             |\n\n### compiler selection\n\nby default, verilated designs use `zig c++` as the compiler. this provides:\n\n- cross-platform builds without msvc/mingw on windows\n- consistent c++20/coroutines support\n- single toolchain\n\nto use system compiler:\n\n```bash\nzig build -Duse-zig-cc=false    # uses system c++ and ar\n```\n\nto use a specific compiler:\n\n```bash\nzig build -Dcxx=clang++ -Dar=llvm-ar\nzig build -Dcxx=g++ -Dar=ar\n```\n\n> [!NOTE]\n> `-Dcxx`/`-Dar` take precedence over `-Duse-zig-cc`\n\n### runtime compiler override\n\nthe generated `verilated.mk` defaults to `zig c++` but supports runtime override:\n\n```bash\n# override when building verilated designs\nVERILATOR_CXX=g++ VERILATOR_AR=ar make -f Vdesign.mk\n\n# or export for the session\nexport VERILATOR_CXX=clang++\nexport VERILATOR_AR=llvm-ar\nmake -f Vdesign.mk\n```\n\nthe makefile automatically detects compiler type (zig/clang/gcc) and adjusts:\n- coroutine flags (`-fcoroutines` for gcc)\n- precompiled header suffix (`.gch` for clang)\n- macos linker flags (`-undefined dynamic_lookup` for zig)\n\n## building\n\n```bash\nzig build\n```\n\n### switch verilator version\n\n```bash\nzig fetch --save=verilator \"git+https://github.com/verilator/verilator#v5.042\"\nzig build\n```\n\n### cross-compilation\n\n```bash\nzig build -Dtarget=aarch64-linux-gnu -Doptimize=ReleaseFast\nzig build -Dtarget=x86_64-windows-gnu -Doptimize=ReleaseFast\n```\n\n### supported targets:\n\n- `x86_64-linux-gnu`, `aarch64-linux-gnu`\n- `x86_64-macos`, `aarch64-macos`\n- `x86_64-windows-gnu`, `aarch64-windows-gnu`\n\n## output structure\n\n```\nzig-out/\n├── bin/\n│   ├── verilator              # perl wrapper (entry point)\n│   ├── verilator_bin          # main compiler binary\n│   ├── verilator_coverage     # coverage tool wrapper\n│   └── ...\n└── include/\n    ├── verilated.h            # runtime headers\n    ├── verilated.mk           # makefile for verilated designs\n    └── vltstd/                # standard library\n```\n\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/74165167?u=6f4c3b1ba878d99ea2139feb0c1f1b0403c7dd94&v=4",
-  "releases": [],
+  "releases": [
+    {
+      "tag_name": "v5.044.0",
+      "name": "v5.044.0",
+      "body": "**Full Changelog**: https://github.com/thuvasooriya/verilator/commits/v5.044.0",
+      "prerelease": false,
+      "published_at": "2026-01-05T18:09:08Z",
+      "html_url": "https://github.com/thuvasooriya/verilator/releases/tag/v5.044.0",
+      "assets": [
+        {
+          "name": "verilator-5.044.0-aarch64-linux-gnu.tar.gz",
+          "url": "https://github.com/thuvasooriya/verilator/releases/download/v5.044.0/verilator-5.044.0-aarch64-linux-gnu.tar.gz",
+          "size": 38787989,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "verilator-5.044.0-x86_64-linux-gnu.tar.gz",
+          "url": "https://github.com/thuvasooriya/verilator/releases/download/v5.044.0/verilator-5.044.0-x86_64-linux-gnu.tar.gz",
+          "size": 38803719,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "verilator-5.044.0-aarch64-macos.tar.gz",
+          "url": "https://github.com/thuvasooriya/verilator/releases/download/v5.044.0/verilator-5.044.0-aarch64-macos.tar.gz",
+          "size": 5016298,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "verilator-5.044.0-x86_64-windows-gnu.zip",
+          "url": "https://github.com/thuvasooriya/verilator/releases/download/v5.044.0/verilator-5.044.0-x86_64-windows-gnu.zip",
+          "size": 28429931,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "verilator-5.044.0-aarch64-windows-gnu.zip",
+          "url": "https://github.com/thuvasooriya/verilator/releases/download/v5.044.0/verilator-5.044.0-aarch64-windows-gnu.zip",
+          "size": 27423231,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "verilator-5.044.0-x86_64-macos.tar.gz",
+          "url": "https://github.com/thuvasooriya/verilator/releases/download/v5.044.0/verilator-5.044.0-x86_64-macos.tar.gz",
+          "size": 5109441,
+          "content_type": "application/gzip"
+        }
+      ]
+    }
+  ],
   "owner_bio": "reading electronics and telecom engineering @ university of moratuwa w/ chips, robots, n automation",
   "owner_company": null,
   "owner_location": "Sri Lanka",
@@ -44,6 +91,5 @@
   "owner_followers": 27,
   "owner_following": 71,
   "owner_created_at": "2020-11-09T02:58:29Z",
-  "license": "LGPL-3.0",
   "category": "library"
 }
