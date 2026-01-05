@@ -14,10 +14,10 @@
     "zig-library",
     "umka"
   ],
-  "stars": 5,
+  "stars": 6,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-11-15T12:38:24Z",
+  "updated_at": "2025-12-14T04:49:05Z",
   "minimum_zig_version": "0.15.2",
   "readme": "Zig bindings for the [Umka](https://github.com/vtereshkov/umka-lang) scripting language.\n\nTested against Umka 1.5.3\n\n## Usage\n\nThere are two modules avaiable:\n- \"binding\" is as close to the C API as possible\n- \"wrapper\" is a more opinionated API on top which should be easier for Zig users\n\nYou can add either one as an import like this:\n\n```zig\nconst umka_dependency = b.dependency(\"umka\", .{});\nexe_module.addImport(\"umka\", umka_dependency.module(\"binding\"));\n// or\nexe_module.addImport(\"umka\", umka_dependency.module(\"wrapper\"));\n```\n\nThis project only provides the bindings!  \nYou have to link Umka as a static libary.  \nGet it from the official release or build from source.\n\nBuild configuration and further examples can be found under [examples](/examples).\n\n## To run the examples\n- install Zig, at least version 0.14.0\n- get a static Umka libary build called libumka.a\n- drop it into examples\n- run `zig build run`",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/6529548?u=7c11d86a2154ebb34d9c5a5154903858aa6c338f&v=4",

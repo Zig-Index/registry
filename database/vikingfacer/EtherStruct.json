@@ -21,6 +21,15 @@
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/25182174?u=b8732a826682cb2d68022c5ed050670174575416&v=4",
   "releases": [
     {
+      "tag_name": "v0.0.2",
+      "name": "",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2026-01-01T05:49:51Z",
+      "html_url": "https://github.com/vikingfacer/EtherStruct/releases/tag/v0.0.2",
+      "assets": []
+    },
+    {
       "tag_name": "v0.0.1",
       "name": "",
       "body": "",

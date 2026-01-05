@@ -14,7 +14,7 @@
   "watchers": 1,
   "updated_at": "2025-12-23T10:47:16Z",
   "readme": "# ChibiHash64-Zig\n\nA Zig port of [ChibiHash64](https://github.com/N-R-K/ChibiHash) - a small, fast 64-bit hash function. See the article [ChibiHash: A small, fast 64-bit hash function](https://nrk.neocities.org/articles/chibihash) for more information.\n\nAll credit for the algorithm goes to [N-R-K](https://github.com/N-R-K).\n\n## Features\n\n- Simple 64-bit hash function\n- Supports both v1 and v2 of the hash function\n- HashMap implementation\n- Thoroughly tested with known test vectors\n\n## Usage\n\n```\nconst std = @import(\"std\");\nconst ChibiHash64v1 = @import(\"chibihash64_v1.zig\");\nconst ChibiHash64v2 = @import(\"chibihash64_v2.zig\");\n\n// Basic hashing v1\nconst hash = ChibiHash64v1.hash(\"Hello, world!\", 0);\n\n// Using HashMap v1\nvar map = ChibiHash64v1.HashMap([]const u8, i32).init(allocator);\ndefer map.deinit();\n\n// Basic hashing v2\nconst hash = ChibiHash64v2.hash(\"Hello, world!\", 0);\n\n// Using HashMap v2\nvar map = ChibiHash64v2.HashMap([]const u8, i32).init(allocator);\ndefer map.deinit();\n```\n\nSee `example/example.zig` for a complete example. Run it with `zig build run-example`.\n\n## License\n\nMIT.\n",
-  "owner_avatar_url": "https://avatars.githubusercontent.com/u/3088277?u=5aaaa92c6f63a5f47c8790bd145cec3e6408650c&v=4",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/3088277?u=781b86aed447b07ec093486b4dd5457027f1d8e7&v=4",
   "releases": [
     {
       "tag_name": "v0.3.0",
@@ -27,12 +27,12 @@
     }
   ],
   "owner_bio": "infra + ai + security",
-  "owner_company": "@UpCloudLtd",
+  "owner_company": null,
   "owner_location": "Finland",
   "owner_blog": "ville.dev",
   "owner_twitter_username": "thevilledev",
-  "owner_followers": 33,
-  "owner_following": 41,
+  "owner_followers": 34,
+  "owner_following": 42,
   "owner_created_at": "2012-12-20T08:48:18Z",
   "homepage": "https://chibiha.sh",
   "license": "MIT",

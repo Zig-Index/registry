@@ -17,7 +17,7 @@
   "stars": 10,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-12-18T08:20:26Z",
+  "updated_at": "2026-01-03T05:19:49Z",
   "readme": "# Zig ZON › zzon\n\n<p align=\"center\">\n <img alt=\"zzon logo\" src=\"https://raw.githubusercontent.com/nurulhudaapon/zzon/refs/heads/main/asset/zzon.svg\" width=\"350\" />\n</p>\n\n<p align=\"center\">\n  <a href=\"https://www.npmjs.com/package/zzon\"><img alt=\"npm\" src=\"https://img.shields.io/npm/v/zzon.svg?style=flat-square\" /></a>\n  <a href=\"https://github.com/nurulhudaapon/zzon/actions/workflows/release.yml\"><img alt=\"Build status\" src=\"https://img.shields.io/github/actions/workflow/status/nurulhudaapon/zzon/release.yml?style=flat-square&branch=main\" /></a>\n</p>\n\n\nA fast, spec-compliant ZON parser and serializer for JavaScript.\n\n\n[ZON](https://github.com/ziglang/zig/pull/20271) is a compact, human-readable, and easy-to-parse data format from the Zig programming language that is similar to JSON in JavaScript.\n\n\nThe API is similar to the native [`JSON` API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON).\n\n[Try it in the Playground](https://zzon.nuhu.dev)\n\n## Installation\n\n```bash\nnpm install zzon\n```\n\n## Usage\n\n#### Stringify\n\n```ts id=\"stringify\"\nimport { ZON } from 'zzon';\n\nconst zon = ZON.stringify({\"a\":1,\"b\":\"abc\",\"c\":true});\nconsole.log(zon); // .{.a=1,.b=\"abc\",.c=true}\n```\n\n#### Parse\n\n```ts id=\"parse\"\nimport { ZON } from 'zzon';\n\nconst json = ZON.parse(`.{.a=1,.b=\"abc\",.c=true}`);\nconsole.log(json); // {\"a\":1,\"b\":\"abc\",\"c\":true}\n```\n\n## [Playground](https://zzon.nuhu.dev)\n\n\n![zzon playground demo](https://raw.githubusercontent.com/nurulhudaapon/zzon/refs/heads/main/asset/playground.gif)\n\n## Benchmarks\n\nPerformance comparison between ZON and JSON (source: [test/index.test.ts](test/index.test.ts)):\n\n| Operation | JSON | ZON | Difference |\n|-----------|------|-----|------------|\n| Parse | 430.80 MB/s | 38.66 MB/s | 11.04x slower |\n| Stringify | 454.94 MB/s | 87.43 MB/s | 5.15x slower |\n\nHardware: Apple M1 Pro  \nPlatform: darwin 25.0.0 (arm64)\n\n*Last updated: 2025-10-24T03:55:48.380Z*\n## Example Usage\n\n- [Browser](./example/browser)\n- [Bun](./example/bun)\n\n## License\n\n[MIT](https://github.com/nurulhudaapon/zzon/blob/main/LICENSE)\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/55424194?u=4e7731597f51019ecfef7854afd03c393b869c09&v=4",
   "releases": [
@@ -108,8 +108,8 @@
   "owner_location": "Bangladesh",
   "owner_blog": "nurulhudaapon.com",
   "owner_twitter_username": "nurulhudaapon",
-  "owner_followers": 106,
-  "owner_following": 38,
+  "owner_followers": 110,
+  "owner_following": 41,
   "owner_created_at": "2019-09-17T04:00:11Z",
   "homepage": "https://zzon.nuhu.dev/",
   "category": "library"

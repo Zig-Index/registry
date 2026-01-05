@@ -8,7 +8,7 @@
     "zig-package"
   ],
   "stars": 4,
-  "forks": 0,
+  "forks": 1,
   "watchers": 1,
   "updated_at": "2025-03-04T06:22:13Z",
   "readme": "# freestanding\n\nA zig utility module for OS-less (freestanding) stuff.\n\n## `freestanding.DebugInfo`\n\nPrint a stacktrace in a custom `panic` handler.\n\n```zig\n\npub fn panic(msg: []const u8, _: ?*std.builtin.StackTrace, _: ?usize) noreturn {\n    printStackTrace(@returnAddress(), @frameAddress()) catch {};\n    fatal();\n}\n\nfn printStackTrace(return_address: usize, frame_address: usize) !void {\n    var debug_info = try freestanding.DebugInfo.init(allocator, .{});\n    defer debug_info.deinit();\n\n    return debug_info.printStackTrace(writer, return_address, frame_address);\n}\n```\n\nsee `examples/riscv-stacktrace` for more details:\n\n```\ncd examples/riscv-stacktrace && zig build run\npanic: kaboom!\n         /Users/benburkert/.asdf/installs/zig/master/lib/std/debug.zig:0422:000: 0x8002fbe6 in panic__anon_8140 (riscv-stacktrace)\n/Users/benburkert/src/github.com/benburkert/freestanding.zig/examples/riscv-stacktrace/src/root.zig:0042:009: 0x8002fbce in bar (riscv-stacktrace)\n/Users/benburkert/src/github.com/benburkert/freestanding.zig/examples/riscv-stacktrace/src/root.zig:0038:008: 0x8002fbb6 in foo (riscv-stacktrace)\n/Users/benburkert/src/github.com/benburkert/freestanding.zig/examples/riscv-stacktrace/src/root.zig:0034:008: 0x8002fb9e in main (riscv-stacktrace)\n/Users/benburkert/src/github.com/benburkert/freestanding.zig/examples/riscv-stacktrace/src/root.zig:0030:009: 0x8002fb86 in start (riscv-stacktrace)\n/Users/benburkert/src/github.com/benburkert/freestanding.zig/examples/riscv-stacktrace/src/root.zig:0019:005: 0x80000010 in _start (riscv-stacktrace)\n```\n\n! Be sure to export the `debug_*_start` & `debug_*_end` symbols, see `examples/riscv-stacktrace/src/root.ld`.\n",
@@ -18,7 +18,7 @@
   "owner_location": "NYC",
   "owner_blog": "https://benburkert.com",
   "owner_twitter_username": "benburkert",
-  "owner_followers": 239,
+  "owner_followers": 237,
   "owner_following": 6,
   "owner_created_at": "2008-01-28T23:44:14Z",
   "license": "MIT",

@@ -10,10 +10,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 5,
+  "stars": 7,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-12-05T19:18:45Z",
+  "updated_at": "2025-12-30T09:46:16Z",
   "dependencies": [
     {
       "name": "log_to_file",
@@ -39,7 +39,7 @@
   "owner_location": "Canada",
   "owner_blog": "https://thorlaksson.com",
   "owner_twitter_username": null,
-  "owner_followers": 11,
+  "owner_followers": 13,
   "owner_following": 3,
   "owner_created_at": "2015-08-17T15:18:03Z",
   "homepage": "https://www.thorlaksson.com/projects/fonn",

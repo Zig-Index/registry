@@ -14,10 +14,10 @@
     "zig-package",
     "ziglang"
   ],
-  "stars": 7,
+  "stars": 8,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-11-23T05:14:32Z",
+  "updated_at": "2025-12-14T07:40:10Z",
   "dependencies": [
     {
       "name": "boringssl",
@@ -33,7 +33,7 @@
   "owner_location": "Breda, the Netherlands",
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 54,
+  "owner_followers": 55,
   "owner_following": 4,
   "owner_created_at": "2015-03-24T09:20:23Z",
   "license": "MIT",

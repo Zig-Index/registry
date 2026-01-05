@@ -32,13 +32,13 @@
       "assets": []
     }
   ],
-  "owner_bio": "I code out of enthusiasm. I code out of curiosity. I code for the love of learning new things.",
+  "owner_bio": "I code for the love of learning new things.",
   "owner_company": null,
   "owner_location": "Vienna, Austria",
   "owner_blog": "floscodes.net",
   "owner_twitter_username": null,
-  "owner_followers": 75,
-  "owner_following": 104,
+  "owner_followers": 79,
+  "owner_following": 109,
   "owner_created_at": "2020-08-03T09:34:52Z",
   "license": "MIT",
   "category": "library"

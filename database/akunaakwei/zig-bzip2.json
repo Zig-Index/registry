@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 0,
+  "stars": 1,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-10-18T08:14:34Z",
+  "updated_at": "2026-01-03T10:31:04Z",
   "dependencies": [
     {
       "name": "bzip2",

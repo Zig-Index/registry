@@ -10,10 +10,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 4,
+  "stars": 5,
   "forks": 1,
   "watchers": 0,
-  "updated_at": "2025-12-06T17:24:08Z",
+  "updated_at": "2026-01-02T03:50:35Z",
   "dependencies": [
     {
       "name": "luajit",
@@ -25,6 +25,15 @@
   "readme": "# `zluajit` - Zig bindings to LuaJIT C API\n\n[Documentation](https://www.negrel.dev/projects/zluajit/docs/0.1.0)\n\n`zluajit` provides high quality, ergonomic, well documented and type-safe\nbindings to LuaJIT 5.1/5.2 C API. Supporting other Lua versions is a non goal.\n\n## Getting started\n\nSee [`examples`](./examples/README.md) to get started embedding LuaJIT in Zig\nprogram or build Zig modules that can be imported from Lua.\n\nIt is strongly recommended to build programs depending on `zluajit` using the\nLLVM backend and the LLD linker (at least for now) or you will encounter\nunwinding errors.\n\n## Building `luajit`\n\nYou can build `luajit` executable using `zig build luajit`.\n\n## Contributing\n\nIf you want to contribute to `zluajit` to add a feature or improve the code contact\nme at [alexandre@negrel.dev](mailto:alexandre@negrel.dev), open an\n[issue](https://github.com/negrel/zluajit/issues) or make a\n[pull request](https://github.com/negrel/zluajit/pulls).\n\n## :stars: Show your support\n\nPlease give a :star: if this project helped you!\n\n[![buy me a coffee](https://github.com/negrel/.github/blob/master/.github/images/bmc-button.png?raw=true)](https://www.buymeacoffee.com/negrel)\n\n## :scroll: License\n\nMIT © [Alexandre Negrel](https://www.negrel.dev/)\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/44581623?u=c965cdae83f2947cc6bf1edf39eaebaa2168bdbf&v=4",
   "releases": [
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2026-01-01T19:01:16Z",
+      "html_url": "https://github.com/negrel/zluajit/releases/tag/v0.2.0",
+      "assets": []
+    },
     {
       "tag_name": "v0.1.0",
       "name": "v0.1.0",
@@ -40,7 +49,7 @@
   "owner_location": null,
   "owner_blog": "https://www.negrel.dev",
   "owner_twitter_username": "negrel_dev",
-  "owner_followers": 43,
+  "owner_followers": 46,
   "owner_following": 62,
   "owner_created_at": "2018-10-29T16:13:46Z",
   "license": "MIT",
