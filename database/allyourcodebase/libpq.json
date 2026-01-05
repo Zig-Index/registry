@@ -10,7 +10,7 @@
   "stars": 11,
   "forks": 4,
   "watchers": 3,
-  "updated_at": "2026-01-03T20:23:14Z",
+  "updated_at": "2026-01-05T13:12:29Z",
   "dependencies": [
     {
       "name": "upstream",
@@ -24,8 +24,8 @@
     },
     {
       "name": "libressl",
-      "url": "git+https://github.com/allyourcodebase/libressl?ref=zig-0.16#e8f79856c79117d3f90fb9466f07fe40326dc5ea",
-      "hash": "libressl-4.0.0--kqV4CnYAACipI0uyGhRMjpZU1JlcIrtPslSCMO0nLsj"
+      "url": "git+https://github.com/allyourcodebase/libressl?ref=simplify-installheader#de575d3584026c369754562f1330e3103158fa7d",
+      "hash": "libressl-4.0.0--kqV4KPTAACsSRP8mSIZmqgVa5OZjw6WEgvcftWkLu-c"
     },
     {
       "name": "zlib",
@@ -39,7 +39,7 @@
     }
   ],
   "minimum_zig_version": "0.14.0",
-  "readme": "# `build.zig` for libpq\n\nProvides a package to be used by the zig package manager for C programs.\n\n## Status\n\n| Architecture \\ OS | Linux      | MacOS                 |\n|:------------------|:-----------|-----------------------|\n| x86_64            | ✅         | ✅                    |\n| arm 64            | (untested) | ✅ (not with OpenSSL) |\n\n| Refname    | PostgreSQL version | Zig `0.16.x` | Zig `0.15.x` | Zig `0.14.x` | Zig `0.13.x` |\n|------------|--------------------|--------------|--------------|--------------|--------------|\n| `master`   | `REL_18_1`         | ✅           | ❌           | ❌           | ❌           |\n| `5.18.1+1` | `REL_18_1`         | ❌           | ✅           | ✅           | ❌           |\n| `5.16.4+5` | `REL_16_4`         | ❌           | ✅           | ✅           | ❌           |\n| `5.16.4+2` | `REL_16_4`         | ❌           | ❌           | ❌           | ✅           |\n\n## Use\n\nAdd the dependency to your `build.zig.zon` by running the following command:\n```zig\nzig fetch --save git+https://github.com/allyourcodebase/libpq#master\n```\n\nThen, in your `build.zig`:\n```zig\nconst postgres = b.dependency(\"libpq\", { .target = target, .optimize = optimize });\n\n// to use from Zig (since 5.16.4+5):\nmod.addImport(\"libpq\", postgres.module(\"libpq\"));\n\n// to use from C:\nexe.linkLibrary(postgres.artifact(\"pq\"));\n```\n\n## Options\n\n```\n  -Dssl=[enum]                 Choose which dependency to use for SSL. Defaults to LibreSSL\n                                 Supported Values:\n                                   OpenSSL\n                                   LibreSSL\n                                   None\n  -Ddisable-zlib=[bool]        Remove zlib as a dependency\n  -Ddisable-zstd=[bool]        Remove zstd as a dependency\n```\n\n## Bump dependencies\n\nTo update this project dependencies:\n\n```bash\nzig fetch --save=upstream git+https://github.com/postgres/postgres#REL_18_1\nzig fetch --save          git+https://github.com/allyourcodebase/openssl#main\nzig fetch --save          git+https://github.com/allyourcodebase/libressl#master\nzig fetch --save          git+https://github.com/allyourcodebase/zlib#main\nzig fetch --save          git+https://github.com/allyourcodebase/zstd#master\n```\n",
+  "readme": "# `build.zig` for libpq\n\nProvides a package to be used by the zig package manager for C programs.\n\n## Status\n\n| Architecture \\ OS | Linux      | MacOS                 |\n|:------------------|:-----------|-----------------------|\n| x86_64            | ✅         | ✅                    |\n| arm 64            | (untested) | ✅ (not with OpenSSL) |\n\n| Refname    | PostgreSQL version | Zig `0.16.0-dev` | Zig `0.15.x` | Zig `0.14.x` | Zig `0.13.x` |\n|------------|--------------------|------------------|--------------|--------------|--------------|\n| `5.18.1+1` | `REL_18_1`         | ✅               | ✅           | ✅           | ❌           |\n| `5.16.4+5` | `REL_16_4`         | ❌               | ✅           | ✅           | ❌           |\n| `5.16.4+2` | `REL_16_4`         | ❌               | ❌           | ❌           | ✅           |\n\n## Use\n\nAdd the dependency to your `build.zig.zon` by running the following command:\n```zig\nzig fetch --save git+https://github.com/allyourcodebase/libpq#master\n```\n\nThen, in your `build.zig`:\n```zig\nconst postgres = b.dependency(\"libpq\", { .target = target, .optimize = optimize });\n\n// to use from Zig (since 5.16.4+5):\nmod.addImport(\"libpq\", postgres.module(\"libpq\"));\n\n// to use from C:\nexe.linkLibrary(postgres.artifact(\"pq\"));\n```\n\n## Options\n\n```\n  -Dssl=[enum]                 Choose which dependency to use for SSL. Defaults to LibreSSL\n                                 Supported Values:\n                                   OpenSSL\n                                   LibreSSL\n                                   None\n  -Ddisable-zlib=[bool]        Remove zlib as a dependency\n  -Ddisable-zstd=[bool]        Remove zstd as a dependency\n```\n\n## Bump dependencies\n\nTo update this project dependencies:\n\n```bash\nzig fetch --save=upstream git+https://github.com/postgres/postgres#REL_18_1\nzig fetch --save          git+https://github.com/allyourcodebase/openssl#main\nzig fetch --save          git+https://github.com/allyourcodebase/libressl#master\nzig fetch --save          git+https://github.com/allyourcodebase/zlib#main\nzig fetch --save          git+https://github.com/allyourcodebase/zstd#master\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
   "releases": [],
   "owner_bio": "...are belong to Ziguanas, but we'd also be delighted to give them back!",
