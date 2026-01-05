@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 339,
+  "stars": 341,
   "forks": 12,
   "watchers": 0,
-  "updated_at": "2026-01-04T09:30:50Z",
+  "updated_at": "2026-01-05T22:18:48Z",
   "dependencies": [
     {
       "name": "aio",
@@ -19,8 +19,8 @@
     },
     {
       "name": "coro",
-      "url": "git+https://github.com/lalinsky/coro.zig#d8c07d5455b2e1693e8269540e7661b6fcad8e9e",
-      "hash": "coro-0.4.0-PlYYwElYAQAKxoMOQIyMErweD3byqagpmD8vjZx1Kn1V"
+      "url": "git+https://github.com/lalinsky/coro.zig?ref=v0.1.0#b981bc3a9b0e4da280af24e9e93ac157522a4dcb",
+      "hash": "coro-0.1.0-PlYYwPo3AQD7pfDBSQ1JywF2mHogRiAsfS00jsUQv8CZ"
     },
     {
       "name": "stdx",

@@ -7,20 +7,20 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 210,
-  "forks": 17,
+  "stars": 213,
+  "forks": 18,
   "watchers": 4,
-  "updated_at": "2025-12-22T22:12:40Z",
+  "updated_at": "2026-01-05T21:49:56Z",
   "dependencies": [
-    {
-      "name": "jetcommon",
-      "url": "https://github.com/jetzig-framework/jetcommon/archive/ed326c74b98fae893acd89d2e84c0d894a200df3.tar.gz",
-      "hash": "jetcommon-0.1.0-jPY_DbNIAAA0utNExN3zMeqXA4fhZXQ6LDDP1eg8vodj"
-    },
     {
       "name": "zmd",
       "url": "https://github.com/jetzig-framework/zmd/archive/87b1c46b517f47b3384eba7ce98d197c463a9d5e.tar.gz",
       "hash": "zmd-0.1.0-H8YV7bvdAABAVFR2lherqOup7valUMg9UTEiiMFxlTjZ"
+    },
+    {
+      "name": "jetcommon",
+      "url": "https://github.com/jetzig-framework/jetcommon/archive/4b985fce2609615f6126e2ce402c99d16dac3cff.tar.gz",
+      "hash": "jetcommon-0.1.0-jPY_De9FAADel24f0Zpk3NTO8ss6fBLrQGdipiGOmi1K"
     }
   ],
   "minimum_zig_version": "0.15.1",
