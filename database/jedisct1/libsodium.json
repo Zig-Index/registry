@@ -13,9 +13,73 @@
   "stars": 13341,
   "forks": 1838,
   "watchers": 375,
-  "updated_at": "2026-01-06T15:02:01Z",
+  "updated_at": "2026-01-06T23:02:24Z",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/124872?v=4",
   "releases": [
+    {
+      "tag_name": "1.0.21-RELEASE",
+      "name": "1.0.21",
+      "body": "* **Version 1.0.21**\r\n  This point release includes all the changes from 1.0.20-stable, which include a security fix for the `crypto_core_ed25519_is_valid_point()` function, as well as two new sets of functions:\r\n\r\n  * The new `crypto_ipcrypt_*` functions implement mechanisms for securely encrypting and anonymizing IP addresses.\r\n  * The `sodium_bin2ip` and `sodium_ip2bin` helper functions have been added to complement the `crypto_ipcrypt_*` functions and easily convert addresses between bytes and strings.\r\n  * XOF: the `crypto_xof_shake*` and `crypto_xof_turboshake*` functions are standard extendable output functions. From input of any length, they can derive output of any length with the same properties as hash functions. These primitives are required by many post-quantum mechanisms, but can also be used for a wide range of applications, including key derivation, session encryption and more.\r\n\r\n* **Version 1.0.20-stable**\r\n\r\n  * XCFramework: cross-compilation is now forced on Apple Silicon to avoid Rosetta-related build issues\r\n  * The Fil-C compiler is supported out of the box\r\n  * The CompCert compiler is supported out of the box\r\n  * MSVC 2026 (Visual Studio 2026) is now supported\r\n  * Zig builds now support FreeBSD targets\r\n  * Performance of AES256-GCM and AEGIS on ARM has been improved with some compilers\r\n  * Android binaries have been added to the NuGet package\r\n  * Windows ARM binaries have been added to the NuGet package\r\n  * The Android build script has been improved. The base SDK is now 27c, and the default platform is 21, supporting 16 KB page sizes.\r\n  * The library can now be compiled with Zig 0.15 and Zig 0.16\r\n  * Zig builds now generate position-independent static libraries by default on targets that support PIC\r\n  * arm64e builds have been added to the XCFramework packages\r\n  * XCFramework packages are now full builds instead of minimal builds\r\n  * MSVC builds have been enabled for ARM64\r\n  * iOS 32-bit (armv7/armv7s) support has been removed from the XCFramework build script\r\n  * Security: optblockers have been introduced in critical code paths to prevent compilers from introducing unwanted side channels via conditional jumps. This was observed on RISC-V targets with specific compilers and options.\r\n  * Security: `crypto_core_ed25519_is_valid_point()` now properly rejects small-order points that are not in the main subgroup\r\n  * `((nonnull))` attributes have been relaxed on some `crypto_stream*` functions to allow NULL output buffers when the output length is zero\r\n  * A cross-compilation issue with old clang versions has been fixed\r\n  * JavaScript: support for Cloudflare Workers has been added\r\n  * JavaScript: WASM_BIGINT is forcibly disabled to retain compatibility with older runtimes\r\n  * A compilation issue with old toolchains on Solaris has been fixed\r\n  * `crypto_aead_aes256gcm_is_available` is exported to JavaScript\r\n  * libsodium is now compatible with Emscripten 4.x\r\n  * Security: memory fences have been added after MAC verification in AEAD to prevent speculative access to plaintext before authentication is complete\r\n  * Assembly files now include .gnu.property notes for proper IBT and Shadow Stack support when building with CET instrumentation.",
+      "prerelease": false,
+      "published_at": "2026-01-06T15:58:43Z",
+      "html_url": "https://github.com/jedisct1/libsodium/releases/tag/1.0.21-RELEASE",
+      "assets": [
+        {
+          "name": "libsodium-1.0.21-mingw.tar.gz",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.21-RELEASE/libsodium-1.0.21-mingw.tar.gz",
+          "size": 1271032,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "libsodium-1.0.21-mingw.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.21-RELEASE/libsodium-1.0.21-mingw.tar.gz.minisig",
+          "size": 324,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libsodium-1.0.21-mingw.tar.gz.sig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.21-RELEASE/libsodium-1.0.21-mingw.tar.gz.sig",
+          "size": 566,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libsodium-1.0.21-msvc.zip",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.21-RELEASE/libsodium-1.0.21-msvc.zip",
+          "size": 26809465,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "libsodium-1.0.21-msvc.zip.minisig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.21-RELEASE/libsodium-1.0.21-msvc.zip.minisig",
+          "size": 320,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libsodium-1.0.21-msvc.zip.sig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.21-RELEASE/libsodium-1.0.21-msvc.zip.sig",
+          "size": 566,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libsodium-1.0.21.tar.gz",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.21-RELEASE/libsodium-1.0.21.tar.gz",
+          "size": 2046164,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "libsodium-1.0.21.tar.gz.minisig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.21-RELEASE/libsodium-1.0.21.tar.gz.minisig",
+          "size": 318,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libsodium-1.0.21.tar.gz.sig",
+          "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.21-RELEASE/libsodium-1.0.21.tar.gz.sig",
+          "size": 566,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
     {
       "tag_name": "1.0.20-RELEASE",
       "name": "1.0.20",
@@ -541,22 +605,6 @@
           "content_type": "application/x-gzip"
         }
       ]
-    },
-    {
-      "tag_name": "0.7.1",
-      "name": "0.7.1 (1.0 RC2)",
-      "body": "This is the second release candidate of Sodium 1.0.\n\nMinor compilation, readability and portability changes have been made and the test suite was improved, but the API is the same as the previous release candidate.\n",
-      "prerelease": false,
-      "published_at": "2014-09-19T21:04:37Z",
-      "html_url": "https://github.com/jedisct1/libsodium/releases/tag/0.7.1",
-      "assets": [
-        {
-          "name": "libsodium-0.7.1.tar.gz",
-          "url": "https://github.com/jedisct1/libsodium/releases/download/0.7.1/libsodium-0.7.1.tar.gz",
-          "size": 1537538,
-          "content_type": "application/x-gzip"
-        }
-      ]
     }
   ],
   "owner_bio": "Get my public keys here: https://sk.tl/7CPRo8kn",
@@ -564,7 +612,7 @@
   "owner_location": "Antibes, France",
   "owner_blog": "https://primulinus.tpopsite.com",
   "owner_twitter_username": "jedisct1",
-  "owner_followers": 4107,
+  "owner_followers": 4106,
   "owner_following": 194,
   "owner_created_at": "2009-09-09T10:20:57Z",
   "homepage": "https://libsodium.org",
