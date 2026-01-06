@@ -18,7 +18,7 @@
   "stars": 98,
   "forks": 8,
   "watchers": 3,
-  "updated_at": "2026-01-04T18:10:12Z",
+  "updated_at": "2026-01-06T05:33:13Z",
   "dependencies": [
     {
       "name": "httpz",
@@ -58,8 +58,8 @@
     {
       "tag_name": "v0.1.0-dev.517",
       "name": "v0.1.0-dev.517",
-      "body": "This is a developer preview of ZX; some features are still works in progress.\nUpdate or install the ZX CLI using the following scripts.\n\n## Installation\n\n##### Linux/macOS\n```bash\ncurl -fsSL https://ziex.dev/install | bash\n```\n##### Windows\n```powershell\npowershell -c \"irm ziex.dev/install.ps1 | iex\"\n```\n",
-      "prerelease": true,
+      "body": "This is a developer preview of ZX; some features are still works in progress.\nUpdate or install the ZX CLI using the following scripts.\n\n## Installation\n\n##### Linux/macOS\n```bash\ncurl -fsSL https://ziex.dev/install | bash\n```\n##### Windows\n```powershell\npowershell -c \"irm ziex.dev/install.ps1 | iex\"\n```\n\n## Changelog\n\n### v0.1.0-dev.517\n\n#### Features\n- feat(reactivity): signal, effect, compute [`2e373a3`](https://github.com/nurulhudaapon/zx/commit/2e373a36996ae9164a381592f5f7bd8b61d63fc2)\n- feat: web standard Request/Response [`4f44aad`](https://github.com/nurulhudaapon/zx/commit/4f44aad385bc9eb1fb5437f51f3dc1331106b1af)\n- feat: hydration of client side component [`c875440`](https://github.com/nurulhudaapon/zx/commit/c875440cc9fd81edaf70cbca9e088c043fa98f05)\n- feat: cookie getter and deleter in response [`19a9d1f`](https://github.com/nurulhudaapon/zx/commit/19a9d1f276d73da36037d93f14075710bccdab99)\n\n#### Documentation\n- docs: simplify client_counter example [`61276e3`](https://github.com/nurulhudaapon/zx/commit/61276e394ebe3e51ffbcc56084cb5b9f03555141)\n\n#### Miscellaneous\n- chore: add script to upstream changes to vendor [`d300fb9`](https://github.com/nurulhudaapon/zx/commit/d300fb9b7f03e6d6d916476a82115d1aa7b762cc)\n- bench: add server benchmark for js-framework-benchmark (#35) [`b5c1186`](https://github.com/nurulhudaapon/zx/commit/b5c11861c62e7d822e0cd550c02d81723ba3d2af)\n- chore: sync version and readme [`9378571`](https://github.com/nurulhudaapon/zx/commit/93785718d2dd895c7b7f38afc60e7e6e579b2644)\n\n### Contributors\n\n- @Andrew-Velox\n- @nurulhudaapon\n\n",
+      "prerelease": false,
       "published_at": "2026-01-04T18:31:23Z",
       "html_url": "https://github.com/nurulhudaapon/zx/releases/tag/v0.1.0-dev.517",
       "assets": [
