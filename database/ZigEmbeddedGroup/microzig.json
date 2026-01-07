@@ -11,10 +11,10 @@
     "embedded",
     "hal"
   ],
-  "stars": 1984,
+  "stars": 1989,
   "forks": 159,
   "watchers": 24,
-  "updated_at": "2026-01-05T17:25:23Z",
+  "updated_at": "2026-01-07T18:27:28Z",
   "dependencies": [
     {
       "name": "core",
