@@ -11,9 +11,9 @@
     "zig-package"
   ],
   "stars": 106,
-  "forks": 10,
+  "forks": 9,
   "watchers": 8,
-  "updated_at": "2026-01-05T17:54:30Z",
+  "updated_at": "2026-01-07T21:59:17Z",
   "dependencies": [
     {
       "name": "zPBPTool",
