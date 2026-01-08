@@ -1,0 +1,46 @@
+{
+  "name": "ta-zig",
+  "owner": "jailop",
+  "repo": "ta-zig",
+  "description": "Zig package  with time series finance indicators to process streaming data.",
+  "type": "package",
+  "topics": [
+    "technical-analysis",
+    "zig-package"
+  ],
+  "stars": 3,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-01-08T16:26:54Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# Zig Library for Technical Analysis\n\nDocumentation: <https://datainquiry.github.io/ta-zig/>\n\nI'm just starting. At this moment I have implemented a few technical\nanalysis indicators for streaming data:\n\nTrend:\n\n* Simple Moving Average (SMAvg)\n* Exponential Moving Average (EMAvg)\n* Moving Average Convergence Divergence (MACD) (new)\n* On-Balance Volume\n* Bollinger Bands\n\nVolatility:\n\n* Simple Moving Variance (SMVar)\n* Simple Moving Standard Deviation (SMStdDev)\n* Average True Range (ATR)\n\nMomentum:\n\n* Relative Strength Index (RSI) \n* Stochastic Oscilator\n\nThis implementation, based on circular lists, keeps just a window of\nvalues for an indicator, including the current one and a few past ones.\n\nInput data is not stored.\nWhen new data is pushed, the indicator is updated and older values\nexceeding the memory size are forgotten.\n\nFor example, computing a moving average at each update, it doesn't\ninclude all values involved. Instead, it just takes the previous average\nto update it with the proportion of the arriving value, performing a\nminimal number of operations. \n\n$$\\text{MA}_{t,p} = \\text{MA}_{t-1,p} + \\frac{x_t - x_{t-p}}{p}$$\n\nWhere:\n\n* $p$: Number of time points over the moving average is computed\n* $\\text{MA}_{t,p}$: Moving average for time $t$\n* $\\text{MA}_{t-1,p}$: Previous computed moving average\n* $x_t$: New arriving value\n* $x_{t - p}$: Value of $p$-points before, to be forgotten\n\n\nTherefore, this implementation avoids recomputing the indicator over all\nthe input data every time it's updated. All parameters are defined at\ncompile time. Finally, memory is only statically allocated. All these\nfeatures make indicator processing highly CPU and memory efficient.\n\n\nExample:\n\n```zig\n// Number of points to include in the moving average\nconst period = 3;\n// How many results should be kept in memory\nconst memory_size = 5;\n// Simple Moving Average\nvar ma = SMAvg(period, memory_size){};\n// Pushing a few values\nma.update(1.0);\nma.update(2.0);\nma.update(3.0);\n// At this point the moving average is 2.0\ntry std.testing.expectApproxEqAbs(2.0, ma.curr(), 1e-9);\n// Updating the moving average with a new value\nma.update(4.0);\n// Now the moving average is 3.0\ntry std.testing.expectApproxEqAbs(3.0, ma.curr(), 1e-9);\n// Retrieving the moving average for t-1 (previous value)\n// Past values are indexed by backward positive integers\ntry std.testing.expectApproxEqAbs(2.0, ma.get(1), 1e-9);\n```\n\n## Usage\n\nIn your project directory, run the following command:\n\n```\nzig fetch --save \"git+https://github.com/datainquiry/ta-zig#main\"\n\n```\n\nAdd the following sections to your `build.zig` file:\n\n```zig\n   ...\n   const ta_zig = b.dependency(\"ta_zig\", .{\n        .target = target,\n        .optimize = optimize,\n   });\n   ...\n   exe.root_module.addImport(\"ta_zig\", ta_zig.module(\"ta_zig\"));\n   ...\n```\n\nIn your code, you can use the library like in this example:\n\n```zig\nconst std = @import(\"std\");\nconst ta = @import(\"ta_zig\");\n\npub fn main() !void {\n    const period = 3;\n    const mem_size = 1;\n    var ma = ta.SMA(period, mem_size){};\n    const serie = [_]f64{112.15, 116.72, 119.21, 117.05, 119.01};\n    for (serie) |value| {\n        ma.update(value);\n    }\n    std.debug.print(\"Moving average: {}\\n\", .{ma.curr()});\n}\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1731959?u=39ae2ea41d70fc4fd5fff60f428ec3dc226deba9&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.0",
+      "name": "Version 0.1.0",
+      "body": "First ready-to-use version.",
+      "prerelease": false,
+      "published_at": "2025-09-27T19:59:37Z",
+      "html_url": "https://github.com/jailop/ta-zig/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": "Centereach, NY",
+  "owner_blog": "https://findev.datainquiry.dev/",
+  "owner_twitter_username": null,
+  "owner_followers": 18,
+  "owner_following": 13,
+  "owner_created_at": "2012-05-12T04:18:32Z",
+  "homepage": "https://datainquiry.github.io/ta-zig/",
+  "license": "MIT",
+  "category": "library"
+}
