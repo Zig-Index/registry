@@ -1,0 +1,64 @@
+{
+  "name": "ndarray-c",
+  "owner": "jailop",
+  "repo": "ndarray-c",
+  "description": "A numpy-like ndarray library for C and Zig, running over cblas and openmp",
+  "type": "package",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 5,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-01-08T17:39:51Z",
+  "minimum_zig_version": "0.15.0",
+  "readme": "# ndarray for C and Zig\n\nA numpy-like ndarray library for C, with Zig bindings.\n\n- Multi-dimensional arrays (ndim >= 2)\n- OpenMP parallelization\n- BLAS-optimized operations\n \n[Design Considerations](guide/design.md)  \n[API Reference](https://jailop.github.io/ndarray-c/)\n\n## Disclaimers\n\n- This is a project for learning.\n- The API can change at any moment.\n- It is not intended for production use.\n- Feedback is welcomed\n\n**Pending decisions**:\n\n- It has not being decided the error management approach. At this\n  moment, only asserts are applied.\n- The intention is that the name of the function indicates if the result\n  is a new allocated array or it is only an scalar. Functions that\n  doesn't have an indication about its return value perform inplace\n  operations over the first argument. This still needs to be refined.\n\n## For C Users\n\n- [Usage Guide](guide/usage.md)\n- [Building](guide/building.md)\n- [Advanced Topics](guide/advanced.md)\n\n## For Zig Users\n\n- [Zig Usage Guide](guide/zig-usage.md)\n- [Zig Building](guide/zig-building.md)\n\n## Examples\n\n```c\n#include \"ndarray.h\"\n\nint main() {\n    // Create a 2x3 array of ones\n    NDArray arr = ndarray_new_ones(NDA_DIMS(2, 3));\n    // Set value at position (1, 2)\n    ndarray_set(arr, NDA_POS(1, 2), 42.0);\n    // Print the array\n    ndarray_print(arr, \"My Array\", 2);  // 2 is the output precision\n    // Clean up\n    ndarray_free(arr);\n    return 0;\n}\n```\n\n```zig\nconst ndarray = @import(\"ndarray\");\nconst NDArray = ndarray.NDArray;\n\npub fn main() !void {\n    // Create arrays\n    const a = try NDArray.ones(&.{2, 3});\n    defer a.deinit();\n    const b = try NDArray.full(&.{2, 3}, 2.0);\n    defer b.deinit();\n    // Operations\n    _ = a.add(b);  // a = a + b\n    a.print(\"Result\", 2);  // 2 is the output precision\n}\n```\n\n## License\n\nBSD 3-Clause License. See [LICENSE](LICENSE) file for details.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1731959?u=39ae2ea41d70fc4fd5fff60f428ec3dc226deba9&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.2.3",
+      "name": "Version 0.2.3",
+      "body": "- const qualitifiers                                                             \r\n- CMakefileLists.txt updated                                                     \r\n- zig aditional dynamic memory allocations removed                               \r\n- zig tests extended                                                             \r\n- README divided in multiple files                                               \r\n- README - new section on nesting functions                                      \r\n- Tests for nested functions added                                               \r\n- License added: BSD 3-clause                                                    \r\n- Support for compiling in Windows added via CMakefile                           \r\n- new function: `ndarray_scalar_aggr`",
+      "prerelease": false,
+      "published_at": "2026-01-08T16:17:12Z",
+      "html_url": "https://github.com/jailop/ndarray-c/releases/tag/v0.2.3",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.2",
+      "name": "Version 0.2.2",
+      "body": "Zig build/importing reviewed/improved",
+      "prerelease": false,
+      "published_at": "2026-01-07T18:07:56Z",
+      "html_url": "https://github.com/jailop/ndarray-c/releases/tag/v0.2.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.1",
+      "name": "Version 0.2.1",
+      "body": "Random number generation improved.\r\nImproved zig compatibility",
+      "prerelease": false,
+      "published_at": "2026-01-07T17:49:00Z",
+      "html_url": "https://github.com/jailop/ndarray-c/releases/tag/v0.2.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "Version 0.2.0",
+      "body": "**Major Feature Release: Conditional Operations, Comparison Logic, and Slice Access**\r\n\r\nThis release expands the `ndarray` library's capabilities\r\nadding conditional operations, comparison logic, and efficient slice\r\naccess helpers. This is a fully backward-compatible release. All\r\nexisting APIs remain unchanged.\r\n\r\n## New Conditional Operations\r\n\r\nEssential for constraints, activation functions, and data validation:\r\n\r\n```c\r\nndarray_clip_min(A, 0.0);        // Non-negativity constraints, ReLU\r\nndarray_clip_max(A, 100.0);      // Saturation, prevent overflow\r\nndarray_clip(A, 0.0, 1.0);       // Normalize to [0, 1] range\r\nndarray_abs(A);                  // Distance calculations, L1 norm\r\nndarray_sign(A);                 // Direction indicators (-1, 0, +1)\r\n```\r\n\r\n## New Comparison Operations\r\n\r\nElement-wise comparisons returning boolean masks (1.0 for true, 0.0 for false):\r\n\r\n```c\r\n// Array vs Array\r\nNDArray eq = ndarray_new_equal(A, B);       // A == B\r\nNDArray lt = ndarray_new_less(A, B);        // A < B\r\nNDArray gt = ndarray_new_greater(A, B);     // A > B\r\n\r\n// Array vs Scalar\r\nNDArray positive = ndarray_new_greater_scalar(A, 0.0);\r\nNDArray zeros = ndarray_new_equal_scalar(A, 0.0);\r\nNDArray outliers = ndarray_new_greater_scalar(A, 100.0);\r\n```\r\n\r\n## New Logical Operations\r\n\r\nBoolean algebra on arrays for complex conditions:\r\n\r\n```c\r\n// Combine multiple conditions\r\nNDArray mask1 = ndarray_new_greater_scalar(A, 10.0);\r\nNDArray mask2 = ndarray_new_less_scalar(A, 90.0);\r\nNDArray combined = ndarray_logical_and(mask1, mask2);  // 10 < A < 90\r\n\r\n// Boolean logic\r\nndarray_logical_or(mask1, mask2);   // At least one true\r\nndarray_logical_not(mask1);         // Invert condition\r\n\r\n// NumPy-style where (ternary operator)\r\nNDArray result = ndarray_where(condition, x, y);  // condition ? x : y\r\n```\r\n\r\n## New Slice Access Helpers\r\n\r\nErgonomic access to array slices:\r\n\r\n```c\r\n// Direct pointer access (advanced users)\r\ndouble* row = ndarray_get_slice_ptr(matrix, 0, 2);  // Row 2\r\n\r\n// Safe slice copying\r\nndarray_copy_slice(src, 0, 1, dst, 0, 3);  // Copy row 1 to row 3\r\n\r\n// Query slice dimensions\r\nsize_t row_size = ndarray_get_slice_size(matrix, 0);  // Elements per row\r\n```\r\n\r\n## Supported Build Systems\r\n\r\nThree build systems:\r\n\r\n- Makefile: Traditional GNU Make (verified in Linux)\r\n- CMake: Cross-platform builds (verified in MacOS and Linux)\r\n- Zig: Native Zig integration (verified in MacOS and Linux)",
+      "prerelease": false,
+      "published_at": "2026-01-07T17:47:06Z",
+      "html_url": "https://github.com/jailop/ndarray-c/releases/tag/v0.2.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": "Centereach, NY",
+  "owner_blog": "https://findev.datainquiry.dev/",
+  "owner_twitter_username": null,
+  "owner_followers": 18,
+  "owner_following": 13,
+  "owner_created_at": "2012-05-12T04:18:32Z",
+  "license": "BSD-3-Clause",
+  "category": "library"
+}
