@@ -11,7 +11,7 @@
   "stars": 2,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-12-01T06:43:44Z",
+  "updated_at": "2026-01-08T20:06:33Z",
   "minimum_zig_version": "0.15.0-dev.864+75d0ec9c0",
   "readme": "# zig-dbn\n\n[![test](https://github.com/mrjbq7/zig-dbn/actions/workflows/test.yml/badge.svg)](https://github.com/mrjbq7/zig-dbn/actions/workflows/test.yml)\n\nSupport for working with [Databento](https://databento.com) APIs and data\nfiles in their [Databento Binary\nEncoding](https://databento.com/docs/standards-and-conventions/databento-binary-encoding)\nfile format.\n\n## Quick Start\n\n```zig\nconst dbn = @import(\"dbn\");\n\n// Open a DBN records file as an iterator\nvar iter = try dbn.iter.RecordIterator.init(allocator, path);\ndefer iter.deinit();\n\n// Iterate through all the records\nwhile (try iter.next()) |record| {\n    std.debug.print(\"{any}\\n\", .{record});\n}\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/24195?v=4",
@@ -20,7 +20,7 @@
   "owner_location": null,
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 515,
+  "owner_followers": 514,
   "owner_following": 182,
   "owner_created_at": "2008-09-11T17:52:32Z",
   "category": "library"
