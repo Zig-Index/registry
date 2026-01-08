@@ -15,8 +15,8 @@
   "stars": 18,
   "forks": 0,
   "watchers": 2,
-  "updated_at": "2026-01-06T19:25:57Z",
-  "minimum_zig_version": "0.15.1",
+  "updated_at": "2026-01-08T08:54:18Z",
+  "minimum_zig_version": "0.16.0",
   "readme": "# HiAE: A High-Throughput Authenticated Encryption Algorithm for Cross-Platform Efficiency\n\nA Zig implementation of HiAE, along with support for parallel variants.\n\n## Benchmarks\n\n### Encryption\n\n#### Zen4\n\n| Variant | Throughput |\n| :------ | ---------: |\n| HiAE    | 252.0 Gb/s |\n| HiAEX2  | 449.9 Gb/s |\n| HiAEX4  | 472.8 Gb/s |\n\n#### Apple M1\n\n| Variant | Throughput |\n| :------ | ---------: |\n| HiAE    | 169.5 Gb/s |\n| HiAEX2  | 133.9 Gb/s |\n| HiAEX4  |  98.3 Gb/s |\n\n#### WebAssembly (lime1+simd128)\n\n| Variant | Throughput |\n| :------ | ---------: |\n| HiAE    |   9.2 Gb/s |\n| HiAEX2  |  11.0 Gb/s |\n| HiAEX4  |   7.7 Gb/s |\n\n#### MAC\n\n#### Zen4 (likely limited by the memory bandwidth)\n\n| Variant    | Throughput |\n| :--------- | ---------: |\n| HiAE-MAC   | 315.8 Gb/s |\n| HiAEX2-MAC | 530.4 Gb/s |\n| HiAEX4-MAC | 522.2 Gb/s |\n| LeMAC      | 345.0 Gb/s |\n\n#### Apple M1\n\n| Variant    | Throughput |\n| :--------- | ---------: |\n| HiAE-MAC   | 163.1 Gb/s |\n| HiAEX2-MAC | 182.9 Gb/s |\n| HiAEX4-MAC | 138.8 Gb/s |\n| LeMAC      | 219.2 Gb/s |\n\n#### WebAssembly (lime1+simd128)\n\n| Variant | Throughput |\n| :------ | ---------: |\n| HiAE    |   9.8 Gb/s |\n| HiAEX2  |  12.0 Gb/s |\n| HiAEX4  |   7.7 Gb/s |\n| LeMAC   |  10.0 Gb/s |\n\n\n## Circuits\n\n### Absorption\n\n![Absorption in HiAE](.media/s1.png)\n\n### Encryption\n\n![Encryption in HiAE](.media/s2.png)\n\n### Inversion\n\n![Inversion in HiAE](.media/s3.png)\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/216238212?v=4",
   "releases": [

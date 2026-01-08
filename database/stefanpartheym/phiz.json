@@ -1,0 +1,46 @@
+{
+  "name": "phiz",
+  "owner": "stefanpartheym",
+  "repo": "phiz",
+  "description": "A very basic 2D physics engine written in Zig.",
+  "type": "package",
+  "topics": [
+    "physics-engine",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2026-01-08T09:15:43Z",
+  "dependencies": [
+    {
+      "name": "zalgebra",
+      "url": "git+https://github.com/kooparse/zalgebra.git#e3c6792c938b01015e6358e335ed2ba4527736e9",
+      "hash": "zalgebra-0.0.0-aaiVSkRuAQBKWSVhmr3kxk6Y3EjLOKGk65osMLNYi02d"
+    },
+    {
+      "name": "raylib_zig",
+      "url": "git+https://github.com/raylib-zig/raylib-zig#178530d5f5e654d9eb1d7a79e3fbfbd931e26163",
+      "hash": "raylib_zig-5.6.0-dev-KE8REKo6BQDt6jBeo3ODV5g9kzo2IRfJARkaN0kXtC2T"
+    },
+    {
+      "name": "zig_tracy",
+      "url": "git+https://github.com/cipharius/zig-tracy.git#fb0c7693726fc41a1d9e3ab2a897dc663d884584",
+      "hash": "zig_tracy-0.0.5-aOIqsQdyAADb7w5ji1KMsWBV6ek3SftSsY2yfTvUHycr"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "# φz (phiz)\n\n> A very basic 2D physics engine written in the [Zig programming language](https://ziglang.org).\n\n![Demo](./media/demo.gif)\n\n## Motivation\n\nThe goal is to provide a very basic physics solution for simple 2D games, eliminating the need to reimplement basic collision detection from scratch for every project. The main focus is on essential 2D collision detection and resolution without the complexity of a full physics simulation.\n\nThis project also serves as a learning exercise for me to understand the fundamentals of physics simulation.\n\nThe engine is **not** intended to solve complex collision scenarios. For a full fledged 2D physics engine, please use something like [box2d](https://box2d.org/).\n\n## Constraints\n\n- (Currently) only supports discrete collision detection (DCD).\n- Collision detection only supports axis aligned bodies (no rotated bodies).\n- Collision detection only supports rectangle and circle shapes.\n\n## Features\n\nThe list of features I'm planning to implement:\n\n- [x] AABB vs AABB collision detection (discrete)\n- [x] Collision response for dynamic body vs static body collisions\n- [x] Fully inelastic collision response for dynamic body vs dynamic body collisions\n- [x] Circle vs AABB collision detection (discrete)\n- [x] Circle vs circle collision detection (discrete)\n- [x] Broad phase collision detection (via spatial partitioning, quadtrees, etc.)\n  - [x] Spatial hash grid\n  - [ ] Quadtree\n- [ ] Continuous collision detection for fast moving bodies\n\n## Examples\n\nAll examples use a fixed timestep of 1/60 seconds for physics simulation. This will provide consistent physics across\nframe rates and serves as sort of a \"best practice\" on how to use the engine.\n\n### Demo\n\n```sh\nzig build run-demo\n```\n\nThis example demonstrates how multiple dynamic bodies fall onto a circle collider, bounce off and fall onto the ground.\n\nIt mainly serves as a reliable scenario for performance testing, as it does not allow for player interaction and should\nalways produce the same output (i.e. should be deterministic).\n\nIn this example, it is obvious, how stacking multiple dynamic bodies on top of each other is unstable and causes jitting.\n\n### Platformer\n\n![2D platformer physics example](./media/platformer.gif)\n\n```sh\nzig build run-platformer\n```\n\nThis example demonstrates the use of gravity and a simple player controller for side-scrolling platformers.\n\nDamping is used with two different values based on the player being on the ground or in the air.\nThis ensures the player will fall naturally due to gravity, but will gradually decelerate while being on the ground.\n\nThe `ContactListener`'s `on_contact` callback is used to destroy bodies to simulate coins being collected.\n\n### Top-down\n\n```sh\nzig build run-topdown\n```\n\nThis example demonstrates how to use the engine for top-down games (like RPG's, dungeon crawlers, survivor-likes, etc.),\nthat usually don't have gravity involved, since it's sort of a \"top-down\" view.\n\nFor the player a circle shape is used, which provides smooth sliding past corners.\n\n## Resources\n\n- [box2d.org](https://box2d.org/)\n- https://gafferongames.com/post/fix_your_timestep/\n- https://github.com/erincatto/box2d-lite\n- https://github.com/lumorsunil/zge\n- https://github.com/silversquirl/phyz\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1098870?u=27d20b373b674d3074ca4b19433961721a41103d&v=4",
+  "releases": [],
+  "owner_company": "initics",
+  "owner_location": "Munich - Germany",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 19,
+  "owner_following": 54,
+  "owner_created_at": "2011-10-03T13:45:39Z",
+  "license": "MIT",
+  "category": "library"
+}

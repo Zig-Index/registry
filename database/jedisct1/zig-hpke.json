@@ -13,7 +13,7 @@
   "stars": 17,
   "forks": 4,
   "watchers": 2,
-  "updated_at": "2025-08-05T20:15:41Z",
+  "updated_at": "2026-01-08T08:55:14Z",
   "dependencies": [
     {
       "name": "bounded_array",
@@ -29,7 +29,7 @@
   "owner_location": "Antibes, France",
   "owner_blog": "https://primulinus.tpopsite.com",
   "owner_twitter_username": "jedisct1",
-  "owner_followers": 4078,
+  "owner_followers": 4105,
   "owner_following": 194,
   "owner_created_at": "2009-09-09T10:20:57Z",
   "license": "MIT",
