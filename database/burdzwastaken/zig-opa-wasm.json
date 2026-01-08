@@ -15,7 +15,7 @@
   "stars": 2,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-12-29T15:02:54Z",
+  "updated_at": "2026-01-08T10:31:30Z",
   "dependencies": [
     {
       "name": "wasmer_zig_api",
@@ -45,7 +45,7 @@
     {
       "name": "zware",
       "url": "https://github.com/burdzwastaken/zware/archive/refs/heads/master.tar.gz",
-      "hash": "zware-0.0.1-ZA7j6dLpBAAIiASxs8G9aOkUqRNDjEtBrblF5QvgoNVV"
+      "hash": "zware-0.0.1-ZA7j6U_qBAAfIr6ZENpSVSzxpBG5nDG9xxqx_cAi6IDC"
     }
   ],
   "minimum_zig_version": "0.15.2",
