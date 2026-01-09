@@ -7,14 +7,23 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 5,
+  "stars": 6,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-01-08T19:26:43Z",
+  "updated_at": "2026-01-09T15:16:03Z",
   "minimum_zig_version": "0.15.0",
-  "readme": "# ndarray for C and Zig\n\nA numpy-like ndarray library for C, with Zig bindings.\n\n- Multi-dimensional arrays (ndim >= 2)\n- OpenMP parallelization\n- BLAS-optimized operations\n \n[Design Considerations](guide/design.md)  \n[API Reference](https://jailop.github.io/ndarray-c/)  \n[Nim Bindings](https://github.com/jailop/ndarray-nim)\n\n## Disclaimers\n\n- This is a project for learning.\n- The API can change at any moment.\n- It is not intended for production use.\n- Feedback is welcomed\n\n**Pending decisions**:\n\n- It has not being decided the error management approach. At this\n  moment, only asserts are applied.\n- The intention is that the name of the function indicates if the result\n  is a new allocated array or it is only an scalar. Functions that\n  doesn't have an indication about its return value perform inplace\n  operations over the first argument. This still needs to be refined.\n\n## For C Users\n\n- [Usage Guide](guide/usage.md)\n- [Building](guide/building.md)\n- [Advanced Topics](guide/advanced.md)\n\n## For Zig Users\n\n- [Zig Usage Guide](guide/zig-usage.md)\n- [Zig Building](guide/zig-building.md)\n\n## Examples\n\n```c\n#include \"ndarray.h\"\n\nint main() {\n    // Create a 2x3 array of ones\n    NDArray arr = ndarray_new_ones(NDA_DIMS(2, 3));\n    // Set value at position (1, 2)\n    ndarray_set(arr, NDA_POS(1, 2), 42.0);\n    // Print the array\n    ndarray_print(arr, \"My Array\", 2);  // 2 is the output precision\n    // Clean up\n    ndarray_free(arr);\n    return 0;\n}\n```\n\n```zig\nconst ndarray = @import(\"ndarray\");\nconst NDArray = ndarray.NDArray;\n\npub fn main() !void {\n    // Create arrays\n    const a = try NDArray.ones(&.{2, 3});\n    defer a.deinit();\n    const b = try NDArray.full(&.{2, 3}, 2.0);\n    defer b.deinit();\n    // Operations\n    _ = a.add(b);  // a = a + b\n    a.print(\"Result\", 2);  // 2 is the output precision\n}\n```\n\n## License\n\nBSD 3-Clause License. See [LICENSE](LICENSE) file for details.\n",
+  "readme": "# ndarray for C and Zig\n\nA numpy-like ndarray library for C, with Zig bindings.\n\n- Multi-dimensional arrays (ndim >= 2)\n- OpenMP parallelization\n- BLAS-optimized operations\n\nDocumentation:\n\n- [Design Considerations](guide/design.md)  \n- [C Building](guide/building.md)\n- [Zig Building](guide/zig-building.md)\n- [API Reference](https://jailop.github.io/ndarray-c/)  \n\nTo add this library to your zig project:\n\n```sh\nzig fetch --save \"git+https://github.com/jailop/ndarray-c#main\"\n```\n\nThis library has also bidings for Nim:\n\n- [Nim Bindings](https://github.com/jailop/ndarray-nim)\n\n## Disclaimers\n\n- This is a project for learning.\n- The API can change at any moment.\n- It is not intended for production use.\n- Feedback is welcomed\n\n## Pending decisions\n\n- It has not being decided the error management approach. At this\n  moment, only asserts are applied.\n- The intention is that the name of the function indicates if the result\n  is a new allocated array or it is only an scalar. Functions that\n  doesn't have an indication about its return value perform inplace\n  operations over the first argument. This still needs to be refined.\n\n## License\n\nBSD 3-Clause License. See [LICENSE](LICENSE) file for details.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/1731959?u=39ae2ea41d70fc4fd5fff60f428ec3dc226deba9&v=4",
   "releases": [
+    {
+      "tag_name": "v0.3.0",
+      "name": "Version 0.3.0",
+      "body": "- zig: all functions that creates a new NDArray are prefixed with init,\r\n  ex. initArange(...). In that way, it is easy to remember that it\r\n  requires a deinit and also that they can not be chained.\r\n- ndaray_logical... functions have been renamed to\r\n  ndarray_new_logical... Also ndarray_where has been renamed to\r\n  ndarray_new_where to be clear that they are allocating memory that\r\n  must be deallocated.\r\n- Comments in code improved to include examples.\r\n- Site documentation improved\r\n",
+      "prerelease": false,
+      "published_at": "2026-01-09T14:51:49Z",
+      "html_url": "https://github.com/jailop/ndarray-c/releases/tag/v0.3.0",
+      "assets": []
+    },
     {
       "tag_name": "v0.2.3",
       "name": "Version 0.2.3",
