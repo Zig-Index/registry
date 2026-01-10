@@ -10,7 +10,7 @@
   "stars": 6,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-01-09T16:55:35Z",
+  "updated_at": "2026-01-10T04:26:32Z",
   "minimum_zig_version": "0.15.0",
   "readme": "# ndarray for C and Zig\n\nA numpy-like ndarray library for C, with Zig bindings.\n\n- Multi-dimensional arrays (ndim >= 2)\n- OpenMP parallelization\n- BLAS-optimized operations\n\nDependencies:\n\n- OpenMP\n- OpenBLAS\n\nDocumentation:\n\n- [Design Considerations](guide/design.md)  \n- [C Building](guide/building.md)\n- [Zig Building](guide/zig-building.md)\n- [API Reference](https://jailop.github.io/ndarray-c/)  \n\nTo add this library to your zig project:\n\n```sh\nzig fetch --save \"git+https://github.com/jailop/ndarray-c#main\"\n```\n\nThis library has also bidings for Nim:\n\n- [Nim Bindings](https://github.com/jailop/ndarray-nim)\n\n## Disclaimers\n\n- This is a project for learning.\n- The API can change at any moment.\n- It is not intended for production use.\n- Feedback is welcomed\n\n## Pending decisions\n\n- It has not being decided the error management approach. At this\n  moment, only asserts are applied.\n- The intention is that the name of the function indicates if the result\n  is a new allocated array or it is only an scalar. Functions that\n  doesn't have an indication about its return value perform inplace\n  operations over the first argument. This still needs to be refined.\n\n## License\n\nBSD 3-Clause License. See [LICENSE](LICENSE) file for details.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/1731959?u=39ae2ea41d70fc4fd5fff60f428ec3dc226deba9&v=4",
