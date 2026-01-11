@@ -15,7 +15,7 @@
   "stars": 98,
   "forks": 17,
   "watchers": 1,
-  "updated_at": "2026-01-10T22:32:30Z",
+  "updated_at": "2026-01-11T10:03:49Z",
   "dependencies": [
     {
       "name": "glfw_zig",
@@ -24,8 +24,8 @@
     },
     {
       "name": "sdl",
-      "url": "git+https://github.com/castholm/SDL#ae5deb068787bd71d9aadbc054ff1af54f5d058c",
-      "hash": "sdl-0.4.0+3.4.0-SDL--u6yowGyvoiJ5qkFm_T1-MpmvnHShh2q2mTZf1fo"
+      "url": "git+https://github.com/castholm/SDL#887fa805e40d5c7bb3955ae69b89ed566c6a0471",
+      "hash": "sdl-0.4.0+3.4.0-SDL--rq2owEZsySGuHCuVJ9naEvH3i3e_pyUIjziBtJ-"
     },
     {
       "name": "toolbox",
