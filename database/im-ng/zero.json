@@ -10,10 +10,10 @@
     "zig-lang",
     "zig-library"
   ],
-  "stars": 9,
+  "stars": 10,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-01-11T08:55:33Z",
+  "updated_at": "2026-01-11T19:01:45Z",
   "dependencies": [
     {
       "name": "dotenv",

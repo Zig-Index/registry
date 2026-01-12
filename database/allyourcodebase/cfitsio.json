@@ -16,10 +16,10 @@
     "zig-library",
     "zig-package"
   ],
-  "stars": 1,
+  "stars": 0,
   "forks": 2,
   "watchers": 0,
-  "updated_at": "2024-07-24T11:00:42Z",
+  "updated_at": "2026-01-06T04:46:45Z",
   "dependencies": [
     {
       "name": "cfitsio",

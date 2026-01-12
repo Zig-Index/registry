@@ -13,7 +13,7 @@
     "rocksdb-zig"
   ],
   "stars": 6,
-  "forks": 1,
+  "forks": 2,
   "watchers": 1,
   "updated_at": "2025-12-04T09:06:27Z",
   "dependencies": [
@@ -50,7 +50,7 @@
   "owner_location": "/home/mars",
   "owner_blog": "https://en.liujiacai.net/",
   "owner_twitter_username": "liujiacai",
-  "owner_followers": 1026,
+  "owner_followers": 1029,
   "owner_following": 124,
   "owner_created_at": "2013-03-13T01:33:15Z",
   "homepage": "https://jiacai2050.github.io/zig-rocksdb/",

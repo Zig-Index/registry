@@ -16,10 +16,10 @@
     "tcp-client",
     "websocket-client"
   ],
-  "stars": 9,
-  "forks": 0,
+  "stars": 12,
+  "forks": 1,
   "watchers": 1,
-  "updated_at": "2025-12-04T09:21:19Z",
+  "updated_at": "2026-01-03T14:52:48Z",
   "dependencies": [
     {
       "name": "libxev",
@@ -40,7 +40,7 @@
   "owner_location": "Breda, the Netherlands",
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 54,
+  "owner_followers": 57,
   "owner_following": 4,
   "owner_created_at": "2015-03-24T09:20:23Z",
   "license": "MIT",

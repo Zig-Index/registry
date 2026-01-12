@@ -8,10 +8,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 2,
+  "stars": 3,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-11-11T00:56:26Z",
+  "updated_at": "2026-01-08T04:51:27Z",
   "minimum_zig_version": "0.15.1",
   "readme": "# TA-Lib\n\nThis is a Zig wrapper for [TA-LIB](http://ta-lib.org).\n\n## Installation\n\n1) Add ta-lib-zig as a dependency in your `build.zig.zon`:\n\n```bash\nzig fetch --save \"git+https://github.com/ta-lib/ta-lib-zig#main\"\n```\n\n2) In your `build.zig`, add the `httpz` module as a dependency you your program:\n\n```zig\nconst ta_lib = b.dependency(\"ta_lib\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\n// the executable from your call to b.addExecutable(...)\nexe.root_module.addImport(\"ta_lib\", ta_lib.module(\"ta_lib\"));\n```\n## Examples\n\nA simple example using the Momentum indicator:\n\n```zig\nconst ta = @import(\"ta_lib\");\n\nconst prices = [_]f64{ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0 };\n\nconst result = try ta.MOM(allocator, &prices, 5);\ndefer allocator.free(result);\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/21127168?v=4",

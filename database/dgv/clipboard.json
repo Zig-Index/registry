@@ -14,10 +14,10 @@
     "ziglang",
     "zig-package"
   ],
-  "stars": 10,
+  "stars": 11,
   "forks": 3,
   "watchers": 1,
-  "updated_at": "2025-12-08T22:37:43Z",
+  "updated_at": "2025-12-24T03:39:00Z",
   "minimum_zig_version": "0.14.0",
   "readme": "# clipboard\n[![zig version](https://img.shields.io/badge/0.15.1-orange?style=flat&logo=zig&label=Zig&color=%23eba742)](https://ziglang.org/download/)\n[![zig doc](https://img.shields.io/badge/zigdoc%20-pages-orange?color=%23eba742)](https://dgv.dev.br/clipboard/)\n[![reference Zig](https://img.shields.io/badge/deps%20-0-orange?color=%23eba742)](https://github.com/dgv/clipboard/blob/main/build.zig.zon)\n[![0 dependencies!](https://0dependencies.dev/0dependencies.svg)](https://0dependencies.dev)\n[![build](https://github.com/dgv/clipboard/actions/workflows/build.yml/badge.svg)](https://github.com/dgv/clipboard/actions/workflows/build.yml)\n[![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](https://opensource.org/licenses/MIT)\n\nProvide copying and pasting text (UTF-8) to the clipboard for Zig.\n\n### platform support\n- MacOS\n- Linux, Unix (requires 'xclip' or 'xsel' command to be installed)\n- Windows\n\n### usage\n#### install\n```\nzig fetch --save https://github.com/dgv/clipboard/archive/refs/heads/main.zip\n```\nor specific version\n```\nzig fetch --save \"git+https://github.com/dgv/clipboard?ref=v0.14.1\"\n```\n\n#### import (build.zig)\n```zig\n...\nexe.root_module.addImport(\"clipboard\", b.dependency(\"clipboard\", .{}).module(\"clipboard\"));\nb.installArtifact(exe);\n```\n\n#### sample\n```zig\nconst clipboard = @import(\"clipboard\");\nconst std = @import(\"std\");\n\npub fn main() !void {\n    try clipboard.write(\"Zig ⚡\");\n    std.debug.print(\"{s}\\n\", .{clipboard.read() catch \"\"});\n}\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/89275?u=af53cab5b5331a17b260df81cdbce32546150a19&v=4",

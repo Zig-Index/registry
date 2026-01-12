@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 14,
+  "stars": 15,
   "forks": 5,
   "watchers": 1,
-  "updated_at": "2025-12-15T11:05:27Z",
+  "updated_at": "2026-01-02T13:00:52Z",
   "minimum_zig_version": "0.16.0-dev.1484+d0ba6642b",
   "readme": "[Moved to Codeberg](https://codeberg.org/Games-by-Mason/mr_structopt)\n\nThis repository is not mirrored.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/174537044?v=4",
