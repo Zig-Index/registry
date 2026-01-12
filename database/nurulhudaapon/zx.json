@@ -13,12 +13,13 @@
     "web-assembly",
     "web-framework",
     "zig",
-    "zig-package"
+    "zig-package",
+    "server-side-rendering"
   ],
   "stars": 104,
   "forks": 9,
   "watchers": 3,
-  "updated_at": "2026-01-12T11:09:40Z",
+  "updated_at": "2026-01-12T11:41:12Z",
   "dependencies": [
     {
       "name": "httpz",

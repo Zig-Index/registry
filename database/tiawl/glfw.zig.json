@@ -12,9 +12,9 @@
     "zig-package"
   ],
   "stars": 22,
-  "forks": 5,
+  "forks": 6,
   "watchers": 2,
-  "updated_at": "2026-01-10T22:05:08Z",
+  "updated_at": "2026-01-12T12:26:54Z",
   "dependencies": [
     {
       "name": "toolbox",
