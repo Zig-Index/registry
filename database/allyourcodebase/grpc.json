@@ -1,0 +1,62 @@
+{
+  "name": "grpc",
+  "owner": "allyourcodebase",
+  "repo": "grpc",
+  "description": "libgrpc's core ported to the Zig build system",
+  "type": "package",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2025-12-28T10:29:38Z",
+  "dependencies": [
+    {
+      "name": "upstream",
+      "url": "git+https://github.com/grpc/grpc?ref=v1.76.0#f5ffb68d8a2fd603dff16287e90a4ac571e1fec6",
+      "hash": "N-V-__8AAD6keQTMOK8EQEmJQx54oll-zJuoNBdRu7xfYgRZ"
+    },
+    {
+      "name": "abseil",
+      "url": "git+https://github.com/abseil/abseil-cpp?ref=20250512.1#76bb24329e8bf5f39704eb10d21b9a80befa7c81",
+      "hash": "N-V-__8AAPVZnwDbTjOwxj7Svc8jGQDVnvG3Qz1XJ-L4fuL2"
+    },
+    {
+      "name": "re2",
+      "url": "git+https://github.com/google/re2?ref=2022-04-01#0c5616df9c0aaa44c9440d87422012423d91c7d1",
+      "hash": "N-V-__8AAGxoGACubi_UB9NHSdrrXU_eABgvR1IT1kRFFCuG"
+    },
+    {
+      "name": "boringssl",
+      "url": "git+https://github.com/google/boringssl#c63fadbde60a2224c22189d14c4001bbd2a3a629",
+      "hash": "N-V-__8AAMk7QghOaiEFo3db_JLRq_fM0eCxR4RaroVJmAaJ"
+    },
+    {
+      "name": "cares",
+      "url": "git+https://github.com/c-ares/c-ares?ref=v1.34.5#d3a507e920e7af18a5efb7f9f1d8044ed4750013",
+      "hash": "N-V-__8AAP0uLwAKiOH9FxdgMWWuzaL-7u5T1YLelhgQ41nA"
+    },
+    {
+      "name": "gtest",
+      "url": "git+https://github.com/google/googletest?ref=v1.17.0#52eb8108c5bdec04579160ae17225d66034bd723",
+      "hash": "N-V-__8AAEV8PgDOBc81AuVJQ9XhGo46f-4dlQ7sXar_M0_i"
+    },
+    {
+      "name": "zlib",
+      "url": "git+https://github.com/madler/zlib?ref=v1.3.1#51b7f2abdade71cd9bb0e7a373ef2610ec6f9daf",
+      "hash": "N-V-__8AAB0eQwD-0MdOEBmz7intriBReIsIDNlukNVoNu6o"
+    }
+  ],
+  "minimum_zig_version": "0.15.0",
+  "readme": "# gRPC packaged for the Zig build system\n\n## Status\n\n| Architecture \\ OS | Linux | MacOS |\n|:------------------|:-----:|:-----:|\n| x86_64            | ✅    | ✅    |\n| arm 64            | ✅    | ✅    |\n\n| Refname    | libGRPC version | Zig `0.16.x` | Zig `0.15.x` |\n|------------|-----------------|:------------:|:------------:|\n| `1.76.0+2` | `v1.76.0`       | ✅           | ✅           |\n\n## Use\n\nAdd the dependency to your `build.zig.zon` by running the following command:\n```zig\nzig fetch --save git+https://github.com/allyourcodebase/grpc#master\n```\n\nThen, in your `build.zig`:\n```zig\nconst grpc = b.dependency(\"grpc\", {\n\t.target = target,\n\t.optimize = optimize,\n\t.link_mode = .dynamic,\n\t.pic = true,\n});\n\n// to use from Zig:\nmod.addImport(\"cgrpc\", grpc.module(\"cgrpc\"));\n\n// to use from C:\nexe.linkLibrary(grpc.artifact(\"grpc\"));\n```\n\n## Options\n\n```\n  -Dlink_mode=[enum]           Compile static or dynamic libraries. Defaults to dynamic\n                                 Supported Values:\n                                   static\n                                   dynamic\n  -Dpic=[bool]                 Produce Position Independent Code. Defaults to true when link_mode is dynamic\n```\n\n## Bump dependencies\n\nWhen bumping upstream version, also bump dependencies. Example:\n\n```shell\nzig fetch --save=upstream  git+https://github.com/grpc/grpc#v1.76.0\nzig fetch --save=abseil    git+https://github.com/abseil/abseil-cpp#20250512.1\nzig fetch --save=re2       git+https://github.com/google/re2#2022-04-01\nzig fetch --save=boringssl git+https://github.com/google/boringssl#c63fadbde60a2224c22189d14c4001bbd2a3a629\nzig fetch --save=cares     git+https://github.com/c-ares/c-ares#v1.34.5\nzig fetch --save=gtest     git+https://github.com/google/googletest#v1.17.0\nzig fetch --save=zlib      git+https://github.com/madler/zlib#v1.3.1\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
+  "releases": [],
+  "owner_bio": "...are belong to Ziguanas, but we'd also be delighted to give them back!",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2023-09-28T21:29:33Z",
+  "license": "MIT",
+  "category": "library"
+}
