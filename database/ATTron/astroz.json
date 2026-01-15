@@ -19,7 +19,7 @@
   "stars": 62,
   "forks": 5,
   "watchers": 3,
-  "updated_at": "2026-01-15T21:43:27Z",
+  "updated_at": "2026-01-15T23:14:53Z",
   "dependencies": [
     {
       "name": "cfitsio",
