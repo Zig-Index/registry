@@ -10,10 +10,10 @@
     "c",
     "zig-package"
   ],
-  "stars": 13366,
-  "forks": 1842,
-  "watchers": 376,
-  "updated_at": "2026-01-13T20:18:58Z",
+  "stars": 13377,
+  "forks": 1844,
+  "watchers": 377,
+  "updated_at": "2026-01-15T18:26:40Z",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/124872?v=4",
   "releases": [
     {
@@ -612,7 +612,7 @@
   "owner_location": "Antibes, France",
   "owner_blog": "https://primulinus.tpopsite.com",
   "owner_twitter_username": "jedisct1",
-  "owner_followers": 4112,
+  "owner_followers": 4114,
   "owner_following": 194,
   "owner_created_at": "2009-09-09T10:20:57Z",
   "homepage": "https://libsodium.org",
