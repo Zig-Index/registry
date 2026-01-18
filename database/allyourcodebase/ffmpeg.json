@@ -9,15 +9,15 @@
     "zig",
     "zig-package"
   ],
-  "stars": 268,
-  "forks": 42,
+  "stars": 274,
+  "forks": 47,
   "watchers": 3,
-  "updated_at": "2025-12-05T14:34:57Z",
+  "updated_at": "2026-01-18T23:10:09Z",
   "dependencies": [
     {
       "name": "libz",
-      "url": "https://github.com/allyourcodebase/zlib/archive/6c72830882690c1eb2567a537525c3f432c1da50.tar.gz",
-      "hash": "zlib-1.3.1-ZZQ7lVgMAACwO4nUUd8GLhsuQ5JQq_VAhlEiENJTUv6h"
+      "url": "https://github.com/allyourcodebase/zlib/archive/c5115f4b69ef660f72a835c6638f80508ef284c7.tar.gz",
+      "hash": "zlib-1.3.1-1-ZZQ7ldENAAA7qJjUXP6E6xnRuV-jDL9dyoJFc_eb3zQ6"
     },
     {
       "name": "mbedtls",
@@ -26,36 +26,36 @@
     },
     {
       "name": "openssl",
-      "url": "https://github.com/allyourcodebase/openssl/archive/f348124c5382bcc377f1b3277357cbf2ed2fb8db.tar.gz",
-      "hash": "openssl-3.3.1-2-TC9C3Se3ZACF5WO_CjoD7Bt_X94oCsAAbbwhOp1rTZBe"
+      "url": "https://github.com/allyourcodebase/openssl/archive/refs/tags/3.3.2.tar.gz",
+      "hash": "openssl-3.3.2-TC9C3Wa3ZACgB1hZbrLOQCK9XccIBaW_F3imFfIeYP06"
     },
     {
       "name": "libressl",
-      "url": "https://github.com/allyourcodebase/libressl/archive/refs/tags/4.0.0+2.tar.gz",
-      "hash": "libressl-4.0.0--kqV4LnSAACWhbUEm8O5KHGuJpNJsN0xLIlbFun7ql-m"
+      "url": "https://github.com/allyourcodebase/libressl/archive/refs/tags/4.0.0+3.tar.gz",
+      "hash": "libressl-4.0.0--kqV4OjTAADhw9rD-tZaxFy2KPrSU4Bt9FOi9UZe-Zjl"
     },
     {
       "name": "libmp3lame",
-      "url": "https://github.com/andrewrk/libmp3lame/archive/9a7e3db1a86d86c33e1663c13ebe8e8f047fc008.tar.gz",
-      "hash": "libmp3lame-3.100.1-5-67wlF1KvEwDaCOrGGAl9Yb52UG3bcezunnbLcJo2t2HC"
+      "url": "https://github.com/andrewrk/libmp3lame/archive/43818f94336064a93ae84a7dcc457418e45dbde2.tar.gz",
+      "hash": "libmp3lame-3.100.1-6-67wlF_KvEwDRCT3pTpcDzi5KGntWCEoM-WtvVPEWdlk5"
     },
     {
       "name": "libvorbis",
-      "url": "https://github.com/andrewrk/libvorbis/archive/f276273dcb0d9a5e0d832e3745c458c8056ee7ad.tar.gz",
-      "hash": "libvorbis-1.3.8-4-gL_KI2kPJACPcXW6H_SSrsaRnauuaJGPS9wPqg5ALE8q"
+      "url": "https://github.com/andrewrk/libvorbis/archive/b251b0bc8cad130e06c3b86a362da2a0118af157.tar.gz",
+      "hash": "libvorbis-1.3.8-5-gL_KIwoQJAAWE9KTb9qyeFxhEBndToXcOUkA2QMrG0Pn"
     },
     {
       "name": "libogg",
-      "url": "https://github.com/andrewrk/libogg/archive/a0dc88e815fdd278b412d9b5ba09221f20517e03.tar.gz",
-      "hash": "libogg-1.3.6-3-ZBKq7fQUAgCz4fszMXyS-erQljD2tL5Z6A0Kh4B1T4qk"
+      "url": "https://github.com/andrewrk/libogg/archive/b7addd2261eb9b657466d47830afc886f697821e.tar.gz",
+      "hash": "libogg-1.3.6-4-ZBKq7WoVAgDYFKOFcXVvFH_br4ijhHkCtoDSy1jh6-nt"
     },
     {
       "name": "nasm",
-      "url": "https://github.com/allyourcodebase/nasm/archive/c153aec97cfe50a4600d9cf3d5f703d58f9ccd56.tar.gz",
-      "hash": "nasm-2.16.1-4-J30EdyVnXADate9iz7jWR4Q9tL1jU9S2Lw7PGgfOjP0v"
+      "url": "https://github.com/allyourcodebase/nasm/archive/4eabafcfca4f4dc5a0a5cd60e9233640b0c192f8.tar.gz",
+      "hash": "nasm-2.16.1-5-J30Ed9pnXADeEiehXaWUd4iLEMPwLrIv42q9X7NUFs8O"
     }
   ],
-  "minimum_zig_version": "0.15.0-dev.769+4d7980645",
+  "minimum_zig_version": "0.16.0-dev.2267+27e8d05ee",
   "readme": "# FFmpeg Packaged for Zig\n\nThis is a fork of [ffmpeg](https://ffmpeg.org/), packaged for Zig. Unnecessary\nfiles have been deleted, and the build system has been replaced with\n`build.zig`.\n\nThere are no system dependencies; the only thing required to build this package\nis [Zig](https://ziglang.org/download/).\n\nZig API bindings are also provided via the \"av\" module. See `doc/examples` for\nAPI usage examples.\n\n## Differences from Upstream\n\n* Only a single static library is produced. There is no option to create a\n  dynamic library.\n* The ffmpeg command line tool is not provided. Perhaps this could be added if\n  desired.\n* Documentation, tests, and tools are not provided.\n* This package enables everything supported by the target; it does not expose\n  configuration options to choose the set of supported codecs and formats.\n* The set of external library integrations is fixed.\n\n## External Libraries Included\n\n* [x] libmp3lame\n* [x] libvorbis\n* [x] libogg\n\nMore can be added as desired.\n\n## Update Process\n\nThese are the instructions to update this package when a new FFmpeg version is\nreleased upstream.\n\n1. Merge the new tag into main and resolve all conflicts by replacing the\n   conflicting files with the files from upstream.\n2. `find libavcodec/ libavdevice/ libavfilter/ libavformat libavutil/ libswscale/ libswresample/ -type f -name \"*.asm\" -o -name \"*.c\" -o -name \"*.S\"`\n   * Edit to omit files ending in `_template.c` or `_tablegen.c`\n   * Sort the list\n   * Update the `all_sources` list in `build.zig`.\n3. Inspect the git diff to keep some of the source files commented out like\n   they were before. Some handy filtering rules apply:\n   * `/L` prefix means Linux-only\n   * `/W` prefix means Windows-only\n4. Run `./configure --prefix=$HOME/local/ffmpeg --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-programs --enable-libmp3lame --enable-libvorbis --disable-shared --enable-static`\n   against upstream and diff the generated `config.h` file to the one generated\n   by this build script. Apply appropriate changes to `build.zig`.\n5. Update these files which are generated by the upstream configure script:\n   * `config_components.h`\n   * `libavfilter/filter_list.c`\n   * `libavcodec/codec_list.c`\n   * `libavcodec/parser_list.c`\n   * `libavcodec/bsf_list.c`\n   * `libavformat/demuxer_list.c`\n   * `libavformat/muxer_list.c`\n   * `libavdevice/indev_list.c`\n   * `libavdevice/outdev_list.c`\n   * `libavformat/protocol_list.c`\n6. Update the `headers` list in `build.zig` based on what files are present in\n   `$HOME/local/ffmpeg/include`.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
   "releases": [],
