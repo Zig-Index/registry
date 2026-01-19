@@ -18,12 +18,17 @@
   "stars": 17,
   "forks": 2,
   "watchers": 1,
-  "updated_at": "2026-01-13T21:06:33Z",
+  "updated_at": "2026-01-19T16:28:38Z",
   "dependencies": [
     {
       "name": "lz4",
-      "url": "https://github.com/jedisct1/zig-lz4/archive/refs/heads/master.tar.gz",
-      "hash": "lz4-0.1.0-fUqx0WZqAwCazL3_Ua1gl5SekV6qWUAQmEwhTyE9fr9X"
+      "url": "https://github.com/jedisct1/zig-lz4/archive/refs/tags/0.1.1.tar.gz",
+      "hash": "lz4-0.1.0-fUqx0aNqAwAgCD6q9krWFpMsUwLWZ-NRuuTxmHMOaxoV"
+    },
+    {
+      "name": "ultracdc",
+      "url": "https://github.com/jedisct1/zig-ultracdc/archive/refs/tags/0.1.1.tar.gz",
+      "hash": "ultracdc-0.1.0-vd07qbV2AAAUDCBiDEKMMVAZ7QUMgmjennH-W2KCIVck"
     }
   ],
   "minimum_zig_version": "0.16.0-dev.929+b409cdf63",
