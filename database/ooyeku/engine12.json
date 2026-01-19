@@ -12,10 +12,10 @@
     "zig-library",
     "jzig"
   ],
-  "stars": 1,
+  "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-01-04T05:02:34Z",
+  "updated_at": "2026-01-19T03:00:20Z",
   "dependencies": [
     {
       "name": "vigil",
