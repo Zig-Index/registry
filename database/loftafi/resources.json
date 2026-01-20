@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 1,
+  "stars": 2,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-01-19T03:12:38Z",
+  "updated_at": "2026-01-19T21:33:12Z",
   "dependencies": [
     {
       "name": "praxis",

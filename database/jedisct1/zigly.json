@@ -9,15 +9,25 @@
     "webassembly",
     "zig",
     "zig-library",
-    "zig-package"
+    "zig-package",
+    "compute"
   ],
   "stars": 93,
   "forks": 2,
   "watchers": 5,
-  "updated_at": "2026-01-20T11:22:48Z",
-  "readme": "![Zigly](logo.png)\n========\n\nA Zig library for building [Fastly Compute](https://www.fastly.com/products/edge-compute) services.\n\n## Why Zig?\n\nFastly Compute bills based on execution time and memory usage. The Zig compiler produces WebAssembly modules that are exceptionally small, fast, and memory-efficient, often significantly smaller than equivalent Rust code, and orders of magnitude smaller than JavaScript bundles.\n\nThis translates directly to lower costs: smaller binaries mean faster cold starts, less memory overhead, and reduced execution time. If you're running edge compute at scale, Zig can meaningfully reduce your Fastly bill.\n\n## Quick Example\n\n```zig\nconst zigly = @import(\"zigly\");\n\npub fn main() !void {\n    var downstream = try zigly.downstream();\n\n    // Proxy to origin\n    try downstream.proxy(\"origin\", \"api.example.com\");\n\n    // Or build a custom response\n    // try downstream.response.setStatus(200);\n    // try downstream.response.body.writeAll(\"Hello from the edge!\");\n    // try downstream.response.finish();\n}\n```\n\n## Installation\n\nAdd the dependency:\n\n```sh\nzig fetch --save=zigly https://github.com/jedisct1/zigly/archive/refs/tags/0.1.12.tar.gz\n```\n\nIn `build.zig`:\n\n```zig\nconst zigly = b.dependency(\"zigly\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\nconst exe_module = b.createModule(.{\n    .root_source_file = b.path(\"src/main.zig\"),\n    .target = target,\n    .optimize = optimize,\n});\nexe_module.addImport(\"zigly\", zigly.module(\"zigly\"));\nexe_module.linkLibrary(zigly.artifact(\"zigly\"));\n\nconst exe = b.addExecutable(.{\n    .name = \"my_app\",\n    .root_module = exe_module,\n});\nb.installArtifact(exe);\n```\n\nTarget `wasm32-wasi`:\n\n```zig\nconst target = b.standardTargetOptions(.{\n    .default_target = .{ .cpu_arch = .wasm32, .os_tag = .wasi }\n});\n```\n\nBuild with `zig build -Doptimize=ReleaseSmall`.\n\n## Documentation\n\nSee **[docs/index.md](docs/index.md)** for full documentation including:\n\n- Getting started guide\n- API reference for all modules (HTTP, caching, rate limiting, geolocation, device detection, etc.)\n- Practical guides and examples\n- Deployment instructions\n\n## Requirements\n\n- Zig 0.16.0 or later\n- Local testing: [Viceroy](https://github.com/fastly/Viceroy) or [Fastlike](https://github.com/avidal/fastlike)\n- [Fastly CLI](https://github.com/fastly/cli) for deployment\n\n## License\n\nSee the repository for license information.\n",
+  "updated_at": "2026-01-20T11:49:52Z",
+  "readme": "![Zigly](logo.png)\n========\n\nA Zig library for building [Fastly Compute](https://www.fastly.com/products/edge-compute) services.\n\n## Why Zig?\n\nFastly Compute bills based on execution time and memory usage. The Zig compiler produces WebAssembly modules that are exceptionally small, fast, and memory-efficient, often significantly smaller than equivalent Rust code, and orders of magnitude smaller than JavaScript bundles.\n\nThis translates directly to lower costs: smaller binaries mean faster cold starts, less memory overhead, and reduced execution time.\n\n## Quick Example\n\n```zig\nconst zigly = @import(\"zigly\");\n\npub fn main() !void {\n    var downstream = try zigly.downstream();\n\n    // Proxy to origin\n    try downstream.proxy(\"origin\", \"api.example.com\");\n\n    // Or build a custom response\n    // try downstream.response.setStatus(200);\n    // try downstream.response.body.writeAll(\"Hello from the edge!\");\n    // try downstream.response.finish();\n}\n```\n\n## Installation\n\nAdd the dependency:\n\n```sh\nzig fetch --save=zigly https://github.com/jedisct1/zigly/archive/refs/tags/0.1.13.tar.gz\n```\n\nIn `build.zig`:\n\n```zig\nconst zigly = b.dependency(\"zigly\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\nconst exe_module = b.createModule(.{\n    .root_source_file = b.path(\"src/main.zig\"),\n    .target = target,\n    .optimize = optimize,\n});\nexe_module.addImport(\"zigly\", zigly.module(\"zigly\"));\nexe_module.linkLibrary(zigly.artifact(\"zigly\"));\n\nconst exe = b.addExecutable(.{\n    .name = \"my_app\",\n    .root_module = exe_module,\n});\nb.installArtifact(exe);\n```\n\nTarget `wasm32-wasi`:\n\n```zig\nconst target = b.standardTargetOptions(.{\n    .default_target = .{ .cpu_arch = .wasm32, .os_tag = .wasi }\n});\n```\n\nBuild with `zig build -Doptimize=ReleaseSmall`.\n\n## Documentation\n\nSee **[docs/index.md](docs/index.md)** for full documentation including:\n\n- Getting started guide\n- API reference for all modules (HTTP, caching, rate limiting, geolocation, device detection, etc.)\n- Practical guides and examples\n- Deployment instructions\n\n## Requirements\n\n- Zig 0.16.0 or later\n- Local testing: [Viceroy](https://github.com/fastly/Viceroy) or [Fastlike](https://github.com/avidal/fastlike)\n- [Fastly CLI](https://github.com/fastly/cli) for deployment\n\n## License\n\nSee the repository for license information.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/124872?v=4",
   "releases": [
+    {
+      "tag_name": "0.1.13",
+      "name": "0.1.13",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2026-01-20T11:47:50Z",
+      "html_url": "https://github.com/jedisct1/zigly/releases/tag/0.1.13",
+      "assets": []
+    },
     {
       "tag_name": "0.1.12",
       "name": "0.1.12",

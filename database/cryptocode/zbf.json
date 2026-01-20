@@ -14,7 +14,6 @@
   "readme": "`zbf` is a `zig build` fork of Fabrice Bellard's `libbf`, an arbitrary precision number library.\n\nSupports Zig 0.14.x\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/34946442?u=5de89bdf8ffb0f3c7b211d4f6598709ce622e831&v=4",
   "releases": [],
-  "owner_bio": "Dad, programmer, avocational musician",
   "owner_company": null,
   "owner_location": null,
   "owner_blog": "https://cryptocode.github.io/blog/",

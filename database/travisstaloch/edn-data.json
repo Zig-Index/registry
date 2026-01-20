@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 0,
+  "stars": 2,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-11-03T23:58:36Z",
+  "updated_at": "2026-01-19T12:09:46Z",
   "dependencies": [
     {
       "name": "zig_afl_kit",
