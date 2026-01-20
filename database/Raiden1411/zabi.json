@@ -15,10 +15,10 @@
     "blockchain",
     "zig-package"
   ],
-  "stars": 112,
+  "stars": 113,
   "forks": 15,
   "watchers": 2,
-  "updated_at": "2026-01-11T09:24:59Z",
+  "updated_at": "2026-01-20T22:34:28Z",
   "dependencies": [
     {
       "name": "c_kzg_4844",
@@ -213,7 +213,7 @@
   "owner_location": null,
   "owner_blog": "https://www.zabi.sh/",
   "owner_twitter_username": "0xraiden_",
-  "owner_followers": 48,
+  "owner_followers": 49,
   "owner_following": 0,
   "owner_created_at": "2020-06-21T15:08:30Z",
   "homepage": "https://zabi.sh",
