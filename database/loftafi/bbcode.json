@@ -12,7 +12,7 @@
   "stars": 2,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-01-20T09:45:40Z",
+  "updated_at": "2026-01-21T09:04:53Z",
   "minimum_zig_version": "0.15.2",
   "readme": "# bbcode parser for zig\n\nSee the test cases for example usage.\n\nReleased under the MIT license.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/199742861?u=f3dc58206cc40c5e6ef5f95258d934e8a11f9e69&v=4",
