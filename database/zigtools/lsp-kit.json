@@ -12,7 +12,7 @@
   "stars": 129,
   "forks": 28,
   "watchers": 8,
-  "updated_at": "2026-01-21T17:57:35Z",
+  "updated_at": "2026-01-21T21:36:34Z",
   "minimum_zig_version": "0.16.0-dev.1976+8e091047b",
   "readme": "[![CI](https://github.com/zigtools/lsp-kit/actions/workflows/main.yml/badge.svg)](https://github.com/zigtools/lsp-kit/actions)\n[![codecov](https://codecov.io/gh/zigtools/lsp-kit/graph/badge.svg?token=C3HCN59E4C)](https://codecov.io/gh/zigtools/lsp-kit)\n[![Documentation](https://img.shields.io/badge/Docs-grey?logo=zig)](https://zigtools.github.io/lsp-kit)\n[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)\n\n# Zig LSP Kit\n\nProvides the necessary building blocks to develop Language Server Protocol implementations in Zig.\n\n# Installation\n\n> [!NOTE]\n> The default branch requires Zig `0.16.0-dev.1976+8e091047b` or later. Checkout the `0.15.x` branch when using Zig 0.15\n\n```bash\n# Initialize a `zig build` project if you haven't already\nzig init\n# Add the `lsp_kit` package to your `build.zig.zon`\nzig fetch --save git+https://github.com/zigtools/lsp-kit.git\n```\n\nYou can then import the `lsp` module in your `build.zig` with:\n\n```zig\nconst lsp = b.dependency(\"lsp_kit\", .{}).module(\"lsp\");\nconst exe = b.addExecutable(...);\nexe.root_module.addImport(\"lsp\", lsp);\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/65322356?v=4",
