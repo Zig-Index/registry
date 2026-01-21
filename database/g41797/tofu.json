@@ -11,10 +11,10 @@
     "zig-library",
     "zig-package"
   ],
-  "stars": 10,
+  "stars": 19,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-01-08T18:20:39Z",
+  "updated_at": "2026-01-21T12:13:27Z",
   "dependencies": [
     {
       "name": "nats",
@@ -45,7 +45,7 @@
   "owner_location": null,
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 13,
+  "owner_followers": 14,
   "owner_following": 8,
   "owner_created_at": "2014-10-09T16:33:35Z",
   "homepage": "https://g41797.github.io/tofu/",
