@@ -11,15 +11,15 @@
     "zig-package",
     "ziglang"
   ],
-  "stars": 44,
+  "stars": 45,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-01-18T01:03:43Z",
+  "updated_at": "2026-01-21T23:10:34Z",
   "dependencies": [
     {
       "name": "zls",
-      "url": "git+https://github.com/zigtools/zls?ref=master#246f9387629c82a2cfd51ee1f7895d7c9db39b47",
-      "hash": "zls-0.16.0-dev-rmm5fmdBJQCoJBgNx4V7WbbtQsd33XHFSs2sqwX9IvCb"
+      "url": "git+https://github.com/zigtools/zls?ref=master#d03b99209afcae2169912986b2f4c677fca279c9",
+      "hash": "zls-0.16.0-dev-rmm5fu5GJQBnXt4idjOYx7p4104rd3Ji-daO8a-7Gx6e"
     }
   ],
   "minimum_zig_version": "0.15.1",
