@@ -2,7 +2,7 @@
   "name": "zx",
   "owner": "nurulhudaapon",
   "repo": "zx",
-  "description": "Full-stack web framework for Zig. HTML syntax within your Zig code, just like JSX but for Zig!",
+  "description": "Full-stack web framework for Zig. HTML syntax within Zig code, just like JSX but for Zig!",
   "type": "package",
   "topics": [
     "client-side-rendering",
@@ -16,10 +16,10 @@
     "zig-package",
     "server-side-rendering"
   ],
-  "stars": 107,
+  "stars": 111,
   "forks": 9,
   "watchers": 3,
-  "updated_at": "2026-01-16T18:11:54Z",
+  "updated_at": "2026-01-22T06:58:26Z",
   "dependencies": [
     {
       "name": "httpz",
