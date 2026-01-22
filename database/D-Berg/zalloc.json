@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 8,
+  "stars": 9,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-12-30T07:38:00Z",
+  "updated_at": "2026-01-14T04:53:36Z",
   "minimum_zig_version": "0.14.1",
   "readme": "# Zalloc\n\nReplace malloc, calloc, realloc and free in a c module with a zig allocator. \n\n## Usage\n\n```sh\nzig fetch --save git+https://github.com/D-Berg/zalloc.git\n```\n\n```build.zig\n\nconst zalloc = @import(\"zalloc\");\n\npub fn build(b: *std.Build) !void {\n\n    //...\n\n    // add it as a dependency\n    const zalloc_dep = b.dependency(\"zalloc\", .{\n        .optimize = optimize,\n        .target = target,\n    });\n\n    // Example c lib, shoutout to md4c\n    const md4c_mod = b.addModule(\"md4c\", .{\n        .target = target,\n        .optimize = optimize,\n        .link_libc = true,\n    });\n\n    // this overwrites malloc, calloc, realloc and free in \n    // all c source files in the c module and will only affect that module.\n    zalloc.infect(md4c_mod);\n\n    // import the and link zalloc to your exe\n    exe_mod.addImport(\"zalloc\", zalloc_dep.module(\"zalloc\"));\n    exe_mod.linkLibrary(zalloc_dep.artifact(\"zalloc\"));\n}\n\n```\n\n```main.zig\n\nconst zalloc = @import(\"zalloc\");\n\npub fn main() !void {\n\n    // choose a zig allocator\n    var debug_allocator: std.heap.DebugAllocator(.{\n        .verbose_log = true, // logs allocations and frees, just to show that zalloc actually does something\n    }) = .init;\n    defer _ = debug_allocator.deinit(); \n\n    const gpa = debug_allocator.allocator();\n\n    // Specify which allocator the c library will use\n    // DO this before calling any of the c functions.\n    // Forgetting this will lead to allocations returning null.\n    zalloc.allocator = gpa;\n\n    // ...\n\n    // now md4c will use zigs debug allocator.\n    const rc = md4c.md_html(\n        markdown.ptr,\n        @intCast(markdown.len),\n        processHtml,\n        null,\n        md4c.MD_FLAG_COLLAPSEWHITESPACE,\n        0,\n    );\n    if (rc != 0) return error.FailedToParseMarkdown;\n}\n\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/20813127?v=4",
@@ -29,7 +29,7 @@
   "owner_location": null,
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 4,
+  "owner_followers": 5,
   "owner_following": 8,
   "owner_created_at": "2016-08-03T09:36:20Z",
   "license": "MIT",

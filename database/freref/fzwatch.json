@@ -8,10 +8,10 @@
     "zig-package",
     "zig"
   ],
-  "stars": 20,
-  "forks": 3,
+  "stars": 22,
+  "forks": 4,
   "watchers": 2,
-  "updated_at": "2025-10-21T18:01:41Z",
+  "updated_at": "2026-01-09T22:05:15Z",
   "minimum_zig_version": "0.15.1",
   "readme": "# fzwatch\n\nA lightweight and cross-platform file watcher for your Zig projects.\n\n> [!NOTE]\n> This project exists to support [fancy-cat](https://github.com/freref/fancy-cat) and has limited features.\n\n## Instructions\n\n### Run example\n\nYou can run the [examples](./examples/) like so:\n\n```sh\nzig build run-<example-filename> -- <file-to-watch>\n```\n\n### Usage\n\nA basic example can be found under [examples](./examples/basic.zig). The API is defined as follows:\n\n```zig\npub const Event = enum { modified };\npub const Callback = fn (context: *anyopaque, event: Event) void;\npub const Opts = struct { latency: f16 = 1.0 };\n\npub fn init(allocator: std.mem.Allocator) !Watcher;\npub fn deinit(self: *Watcher) void;\npub fn addFile(self: *Watcher, path: []const u8) !void;\npub fn removeFile(self: *Watcher, path: []const u8) !void;\npub fn setCallback(self: *Watcher, callback: Callback) void;\npub fn start(self: *Watcher, opts: Opts) !void;\npub fn stop(self: *Watcher) !void;\n```\n\n### Testing\n\nRun the test suite:\n\n```sh\nzig build test\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/35976402?u=54ccbfc2224f6b1d7a2687366d2d96a1252b1639&v=4",

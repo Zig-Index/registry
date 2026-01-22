@@ -15,7 +15,7 @@
   "updated_at": "2025-09-03T17:21:21Z",
   "minimum_zig_version": "0.14.0",
   "readme": "# progress\n\n![Demo of library](https://github.com/user-attachments/assets/227297c4-15a5-4c68-a8bc-49d7e1505a79)\n\nA simple thread safe progress bar and spinner library.\n\n- [Installation](#installation)\n- [Example](#example)\n- [Contributing](#contributing)\n\n## Installation\n1. Fetch the package.  \n    `zig fetch --save git+https://github.com/BrookJeynes/progress`\n2. Add to your `build.zig`.\n    ```zig\n    const progress = b.dependency(\"progress\", .{}).module(\"progress\");\n    exe.root_module.addImport(\"progress\", progress);\n    ```\n\n## Example\n```zig\nconst std = @import(\"std\");\nconst ProgressBar = @import(\"progress\").Bar;\nconst ProgressSpinner = @import(\"progress\").Spinner;\n\npub fn bar() !void {\n    const stdout = std.io.getStdOut().writer();\n    var pb = ProgressBar.init(10, stdout.any(), .{});\n\n    while (!pb.isFinished()) {\n        pb.add(1);\n        try pb.render();\n\n        std.time.sleep(std.time.ns_per_ms * 150);\n    }\n}\n\npub fn spinner() !void {\n    const stdout = std.io.getStdOut().writer();\n    var ps = ProgressSpinner.init(stdout.any(), .{\n        .symbols = ProgressSpinner.PredefinedSymbols.default,\n    });\n\n    var iterations: usize = 0;\n    while (!ps.isFinished()) {\n        iterations += 1;\n        try ps.render();\n\n        if (iterations == 20) try ps.finish();\n\n        std.time.sleep(std.time.ns_per_ms * 150);\n    }\n}\n```\n\nYou can find more examples in the `examples/` folder.  \nFor more information, see the source code or documentation (`zig build docs`).\n\n## Contributing\nContributions, issues, and feature requests are always welcome! This project is \nusing the latest stable release of Zig (0.14.0).\n",
-  "owner_avatar_url": "https://avatars.githubusercontent.com/u/25432120?u=0fa56389d4ec5817c47aadc25c81e3e4baa30e12&v=4",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/25432120?u=d8eda4d3284fc0b7c5525098166066d5ee8128bf&v=4",
   "releases": [
     {
       "tag_name": "v1.1.0",
@@ -32,7 +32,7 @@
   "owner_location": "Brisbane, Australia",
   "owner_blog": "www.brookjeynes.dev",
   "owner_twitter_username": null,
-  "owner_followers": 105,
+  "owner_followers": 103,
   "owner_following": 57,
   "owner_created_at": "2017-01-30T12:22:23Z",
   "license": "MIT",

@@ -8,9 +8,9 @@
     "zig-package"
   ],
   "stars": 24,
-  "forks": 11,
+  "forks": 12,
   "watchers": 2,
-  "updated_at": "2025-12-27T17:30:20Z",
+  "updated_at": "2026-01-12T05:21:41Z",
   "dependencies": [
     {
       "name": "openssl",

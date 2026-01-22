@@ -11,10 +11,10 @@
     "zig-library",
     "zig-package"
   ],
-  "stars": 33,
+  "stars": 35,
   "forks": 3,
   "watchers": 1,
-  "updated_at": "2025-12-05T19:18:30Z",
+  "updated_at": "2026-01-13T07:06:21Z",
   "dependencies": [
     {
       "name": "libxev",
@@ -37,11 +37,11 @@
     }
   ],
   "owner_bio": "Software developer (zig, go & TypeScript)\r\nI like using Neovim. Currently learning rust.",
-  "owner_company": "@Taxdoo ",
+  "owner_company": null,
   "owner_location": "Hamburg",
   "owner_blog": "double-trouble.dev",
   "owner_twitter_username": null,
-  "owner_followers": 59,
+  "owner_followers": 60,
   "owner_following": 277,
   "owner_created_at": "2019-06-05T17:02:09Z",
   "license": "MIT",

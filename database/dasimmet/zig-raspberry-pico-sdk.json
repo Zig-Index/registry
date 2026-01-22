@@ -11,10 +11,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 3,
+  "stars": 4,
   "forks": 2,
   "watchers": 1,
-  "updated_at": "2025-12-14T09:05:46Z",
+  "updated_at": "2026-01-16T07:59:54Z",
   "dependencies": [
     {
       "name": "picotool",

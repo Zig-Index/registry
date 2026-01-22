@@ -14,10 +14,10 @@
     "zig-package",
     "ziglang"
   ],
-  "stars": 29,
+  "stars": 30,
   "forks": 1,
   "watchers": 2,
-  "updated_at": "2025-04-03T15:55:29Z",
+  "updated_at": "2025-12-19T06:17:32Z",
   "minimum_zig_version": "0.13.0",
   "readme": "# zigualizer\nZigualizer: A music visualizer built with Zig, powered by the FFT algorithm.\n[Click here](https://youtu.be/6h9Bty-wdMA) for a demo on YouTube!\n\n![](screenshot.png)\n\n## Details\nThis implementation was originally based on the [Musializer project by @Tsoding](https://github.com/tsoding/musializer/blob/master/src/plug.c).\nThis version as it stands has been tested to work with Raylib 5.0.\nI have modified this version to be backed by a generic circular buffer over a \nfixed size array. Additionally, I am leveraging comptime in a few spots to\ngenerate some static windowing functions.\n\n## Raylib integration\nFor a more thorough example see raylib.zig in the examples/ folder.\nIntegration is a 4-step process (aside from music stream code).\n\n```zig\n// 1. Import\nconst fft = @import(\"zigualizer\");\n\n// 2. Init\nfft.FFT_Analyzer.reset();\n\n// After loading up a Raylib Music stream.\ntrack = c.LoadMusicStream(pathToTrack);\ndefer c.UnloadMusicStream(track);\n\n// 3. Attach\nc.AttachAudioStreamProcessor(track.stream, fft.FFT_Analyzer.fft_process_callback);\nc.PlayMusicStream(track);\n\n// In your update loop\nfn update() void {\n    c.UpdateMusicStream(track);\n    // 4. Analyze\n    frames = fft.FFT_Analyzer.analyze(c.GetFrameTime());\n}\n\n// In your draw loop render the FFT however you like!\nfn draw() void {\n    c.BeginDrawing();\n    defer c.EndDrawing();\n    c.ClearBackground(c.BLACK);\n    \n    // 5. Draw\n    renderFFT(400, 200);\n}\n```\n\n## Building the examples\n```sh\n# Run the Raylib demo.\nzig build -Dexample-name=raylib.zig && zig-out/example/raylib\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/200686?v=4",
@@ -27,8 +27,8 @@
   "owner_location": "Los Angeles, CA",
   "owner_blog": "https://medium.com/@deckarep",
   "owner_twitter_username": "deckarep",
-  "owner_followers": 230,
-  "owner_following": 184,
+  "owner_followers": 235,
+  "owner_following": 186,
   "owner_created_at": "2010-02-10T00:36:20Z",
   "license": "MIT",
   "category": "library"

@@ -17,7 +17,7 @@
     "model-context-protocol"
   ],
   "stars": 7,
-  "forks": 1,
+  "forks": 2,
   "watchers": 0,
   "updated_at": "2026-01-01T17:08:31Z",
   "minimum_zig_version": "0.15.0",

@@ -10,10 +10,10 @@
     "zig-package",
     "ls-colors"
   ],
-  "stars": 18,
+  "stars": 19,
   "forks": 1,
   "watchers": 2,
-  "updated_at": "2025-11-21T09:43:31Z",
+  "updated_at": "2025-12-30T21:08:13Z",
   "dependencies": [
     {
       "name": "ansi_term",

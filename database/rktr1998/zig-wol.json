@@ -13,10 +13,10 @@
     "cli",
     "zig-package"
   ],
-  "stars": 31,
+  "stars": 33,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2025-12-24T23:28:46Z",
+  "updated_at": "2025-12-26T17:10:37Z",
   "dependencies": [
     {
       "name": "clap",
@@ -1074,7 +1074,7 @@
   "owner_blog": "https://www.linkedin.com/in/riccardotorreggiani/",
   "owner_twitter_username": null,
   "owner_followers": 5,
-  "owner_following": 28,
+  "owner_following": 29,
   "owner_created_at": "2022-04-22T08:27:38Z",
   "homepage": "https://rktr1998.github.io/zig-wol/",
   "license": "MIT",

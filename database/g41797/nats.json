@@ -13,7 +13,7 @@
   "stars": 34,
   "forks": 1,
   "watchers": 3,
-  "updated_at": "2026-01-05T04:54:07Z",
+  "updated_at": "2026-01-06T19:51:17Z",
   "dependencies": [
     {
       "name": "mailbox",
@@ -33,7 +33,7 @@
   "owner_location": null,
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 13,
+  "owner_followers": 14,
   "owner_following": 8,
   "owner_created_at": "2014-10-09T16:33:35Z",
   "homepage": "https://g41797.github.io/nats/",

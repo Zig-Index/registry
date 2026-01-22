@@ -12,10 +12,10 @@
     "zig-package",
     "3d-formats"
   ],
-  "stars": 24,
+  "stars": 23,
   "forks": 18,
   "watchers": 2,
-  "updated_at": "2025-10-30T06:23:21Z",
+  "updated_at": "2025-12-19T20:56:10Z",
   "dependencies": [
     {
       "name": "assimp",

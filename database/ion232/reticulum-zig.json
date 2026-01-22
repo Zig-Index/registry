@@ -14,10 +14,10 @@
     "rns",
     "embedded"
   ],
-  "stars": 33,
-  "forks": 2,
+  "stars": 32,
+  "forks": 1,
   "watchers": 2,
-  "updated_at": "2025-10-25T21:41:12Z",
+  "updated_at": "2026-01-09T04:18:19Z",
   "dependencies": [
     {
       "name": "ohsnap",
@@ -34,7 +34,7 @@
   "owner_location": "United Kingdom",
   "owner_blog": "arran.ai",
   "owner_twitter_username": null,
-  "owner_followers": 10,
+  "owner_followers": 8,
   "owner_following": 3,
   "owner_created_at": "2020-06-09T12:22:30Z",
   "license": "Apache-2.0",

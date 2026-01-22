@@ -10,15 +10,15 @@
     "zig",
     "zig-package"
   ],
-  "stars": 23,
+  "stars": 26,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2025-11-27T02:03:42Z",
+  "updated_at": "2026-01-22T13:55:15Z",
   "dependencies": [
     {
       "name": "cbor",
-      "url": "git+https://github.com/neurocyte/cbor?ref=master#7d2eeb68c8a2fb3f4d6baad6cc04c521b92974c0",
-      "hash": "cbor-1.0.0-RcQE_AswAQAPlqBCZXYQf9DZXn-0Ubt8Mk03ZcJWcsAG"
+      "url": "git+https://github.com/neurocyte/cbor?ref=master#b6fc137250b7d3f70459652ee78c7b6cd9ad2826",
+      "hash": "cbor-1.0.0-RcQE_HwwAQAiNkKC9ezLxHUMkWgHeVa3QyTfv4hi3VZR"
     },
     {
       "name": "asio",
@@ -31,6 +31,7 @@
       "hash": "zig_tracy-0.0.3-5-cp3Ht3AAAfHqShKfTK7waFK3Wjd3l2NheiqxvRRAdo"
     }
   ],
+  "minimum_zig_version": "0.15.2",
   "readme": "# Thespian\nFast & flexible actors for Zig, C & C++ applications\n\nTo build:\n```\n./zig build\n```\n\nSee `tests/*` for many interesting examples.\n\nSee DeepWiki for more documentation: [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/neurocyte/thespian)\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/1552770?u=5c42562ca7bf8db5e586c5f373541572957629fe&v=4",
   "releases": [],
@@ -38,7 +39,7 @@
   "owner_location": null,
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 129,
+  "owner_followers": 141,
   "owner_following": 3,
   "owner_created_at": "2012-03-19T13:04:13Z",
   "homepage": "https://deepwiki.com/neurocyte/thespian",

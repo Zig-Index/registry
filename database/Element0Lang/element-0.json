@@ -13,10 +13,10 @@
     "embeddable",
     "zig-package"
   ],
-  "stars": 17,
+  "stars": 25,
   "forks": 1,
-  "watchers": 1,
-  "updated_at": "2025-12-21T09:27:26Z",
+  "watchers": 2,
+  "updated_at": "2026-01-22T03:38:34Z",
   "dependencies": [
     {
       "name": "chilli",
