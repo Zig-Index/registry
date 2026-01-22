@@ -11,10 +11,10 @@
     "rest",
     "dependency-injection"
   ],
-  "stars": 565,
+  "stars": 567,
   "forks": 20,
   "watchers": 6,
-  "updated_at": "2026-01-21T21:24:08Z",
+  "updated_at": "2026-01-22T19:27:59Z",
   "dependencies": [
     {
       "name": "httpz",
@@ -33,6 +33,7 @@
   "owner_followers": 191,
   "owner_following": 250,
   "owner_created_at": "2013-02-10T20:02:00Z",
+  "homepage": "https://tomsik.cz/tokamak/",
   "license": "MIT",
   "category": "library"
 }
