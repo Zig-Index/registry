@@ -1,0 +1,76 @@
+{
+  "name": "node-api-zig",
+  "owner": "typesafe",
+  "repo": "node-api-zig",
+  "description": "Idiomatic Zig bindings for Node-API.",
+  "type": "package",
+  "topics": [
+    "bun",
+    "napi",
+    "node-api",
+    "nodejs",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2026-01-23T22:22:23Z",
+  "dependencies": [
+    {
+      "name": "node_api_headers",
+      "url": "https://github.com/nodejs/node-api-headers/archive/refs/tags/v1.5.0.zip",
+      "hash": "N-V-__8AAASNAQA0UI0mvQk4LyFEhdFuFBPgH8HSokdFFpnz"
+    }
+  ],
+  "minimum_zig_version": "0.15.1",
+  "readme": "The `node-api` module provides [Node-API](https://nodejs.org/api/n-api.html) bindings for writing idiomatic Zig addons\nfor V8-based runtimes like Node.JS or Bun. Thanks to its conventions-based approach it bridges the gap seamlessly, \nwith almost no Node-API specific code!\n\n![build-badge](https://img.shields.io/github/actions/workflow/status/typesafe/node-api-zig/ci.yml)\n![test-badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Ftypesafe%2F26882516c7ac38bf94a81784f966bd86%2Fraw%2Fnode-api-zig-test-badge.json)\n\n## Key Features\n\n- **function mapping**, including async support (auto-conversion to Promises)\n- **class mapping**, incl. support for fields, instance (async) methods and satic (async) methods.\n- **wrapping/unwrapping** of native objects instances\n- **memory management** with convention-based `init`, `deinit` support & `allocator` injection\n- **error handling** with `errorunion` support\n- Convention-base **type conversion**\n  - **by value**: through (de)serialization or various types with automatic memory management\n  - **by reference**:\n    - Zig-managed values: through pointers to (wrapped) native Zig values\n    - JS-managed values: through wrappers types (`NodeValue` et.al.) for read/write\n  - **type-safe callbacks**: `NodeFunction(fn (u32, u32) !u32)`\n\n## Getting started\n\nInstall the `node_api` (note the underscore) dependency\n\n```sh\n> zig fetch --save https://github.com/typesafe/node-api-zig/archive/refs/tags/v0.0.4-beta.tar.gz\n```\n\nAdd the `node-api` module to your library:\n\n```zig\nconst std = @import(\"std\");\n\npub fn build(b: *std.Build) void {\n    const target = b.standardTargetOptions(.{});\n    const optimize = b.standardOptimizeOption(.{});\n\n    const mod = b.addModule(\"root\", .{\n        .root_source_file = b.path(\"src/root.zig\"),\n        .target = target,\n        .optimize = optimize,\n    });\n\n    const node_api = b.dependency(\"node_api\", .{});\n    mod.addImport(\"node-api\", node_api.module(\"node-api\"));\n\n    const lib = b.addLibrary(.{\n        // if Linux\n        .use_llvm = true,\n        .name = \"my-native-node-module\",\n        .root_module = mod,\n    });\n\n    b.installArtifact(lib);\n}\n```\n\nInitialize your Node-API extension:\n\n```zig\nconst node_api = @import(\"node-api\");\n\ncomptime {\n    // export encrypt function (or types, or values or pointers)\n    node_api.@\"export\"(.{ \n      .encrypt = encrypt,\n      // ...\n    });\n}\n\nfn encrypt(\n    // serialized from JS string, borrowed memory\n    value: []const u8,\n    // serialized from JS object by value (use *Options for wrapped native instances)\n    options: Options,\n    // \"injected\" by convention, any memory allocated with it is freed after returning to JS\n    allocator: std.mem.Allocator,\n) ![]const u8 {\n    const res = allocator.alloc(u8, 123);\n\n    // ...\n\n    return res; // freed by node-api\n}\n```\n\nUse your library as node module:\n\n```TypeScript\nimport { createRequire } from \"module\";\nconst require = createRequire(import.meta.url);\n\nconst { encrypt } = require(\"my-native-node-module.node\");\n\nconst m = encrypt(\"secret\", { salt: \"...\" });\n\n```\n\n## Features\n\n### Module Initialization\n\nThere are 2 options to initialize a module:\n\n- `node_api.@\"export\"`: conveniant for exporting comptime values, which is very likely\n- `node_api.init(fn (node: NodeContext) !NodeValue)`: for exporting runtime values\n\n\n```Zig\ncomptime {\n    node_api.register(init);\n}\n\nfn init(node: node_api.NodeContext) !?node_api.NodeValue {\n    // init & return `exports` value/object/function\n}\n```\n\n### NodeContext\n\nThe `node_api.init` initialization function as well as any \n\n\n\n## Type Conversions\n\nStruct types, functions, fields, parameters and return values are all converted by convention.\nUnsupported types result in compile errors.\n\n| Native type          | Node type             | Remarks                                                                                                                                         |\n| -------------------- | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |\n| `type`               | `Class` or `Function` | Returning or passing a struct `type` to JS, turns it into a class.<br>Returning or passing a `fn`, turns it into a JS-callable, well, function. |\n| `i32`,`i64`,`u32`    | `number`              |                                                                                                                                                 |\n| `u64`                | `BigInt`              |                                                                                                                                                 |\n| `[]const u8`, `[]u8` | `string`              | UTF-8                                                                                                                                           |\n| `[]const T`, `[]T`   | `array`               |                                                                                                                                                 |\n| `*T`                 | `Object`              | Passing struct pointers to JS will wrap & track them.                                                                                           |\n| `NodeValue`          | `any`                 | NodeValue can be used to access JS values by reference.                                                                                         |\n\nFunction parameters and return types can be\n\n- native Zig types (unsupported types will result in compile time errors)\n- one of the NodeValue types to access values by reference.\n\nNative values and NodeValue instance can be converted using `Convert`:\n\n- `nativeFromNode(comptime T: type, value: NodeValue, allocator. Allocator) T`\n- `nodeFromNative(value: anytype) NodeValue`\n\n## Define functions\n\nArguments can be of type:\n\n- NodeContext => will result in the injection of the current NodeContext\n- allocator => will inject the (arean) allocator for the current invocation, memory is freed after returning\n- native Zig type => will be deserialized\n- pointer => will return the native instance of a wrapped object\n- optional\n- enum\n- NodeXxx values for references\n\n## Define async functions\n\n## Define classes\n\n`node.defineClass` transforms a Zig struct to a JS-accessible class by convention:\n\n```zig\n\ncomptime {\n    node_api.register(init);\n}\n\nfn init(node: node_api.NodeContext) !?node_api.NodeValue {\n    // epo\n    return try node.serialize(.{\n        .MyClass = try node.defineClass(MyClass),\n    });\n}\n\nconst MyClass = struct {\n    Self = @This();\n\n    field1: i32,\n    field2: ?[]u8,\n\n    pub fn init() Self {\n        return .{ .field1 = 0, .field2 = null };\n    }\n\n    pub fn method1(self: Self, v: i32) !void {\n\n    }\n\n }\n\n```\n\n### Contstructors\n\n`init` maps to `new`.\n\n### Function parameters\n\n- parameters of type Self work as expected, they come from the unwrapped JS value\n- you can inject the current NodeContext, simply by adding a parameter of that type\n- you can pass NodeValue, NodeObject, NodeArray values parameters for by-ref semantics\n- you can declare Zig types as parameters, these result in a deserialized copy\n  - note that parameters that require memory allocation will be owned by the class instance (see below)\n\n## Wrap objects\n\n## Memory management\n\n- class instances are allocated and freed automatically\n  - new-ing instance (from JS) will allocate memory (and update V8 stats)\n  - GC finalizers will automatically free the memory (and update V8 stats)\n- Zig type arguments that require allocations are \"owned by the instance\"\n  - when the are store as field values the will be freed as part of the finalization process\n    - existing field values must be freed manually when they are overwritten!\n\n/\\*\n\nScenarios:\n\nnative (wrapped) instance lifecycle:\n\n- new in JS -> finalize in Zig\n- create in Zig -> finalize in Zig\n\nexternal instance memory:\n\n- arena per instance?\n- managed by instance if instance has allocator field\n\nparameters and return values:\n\n- pointers to structs result in uwrapped values\n- parameters and return type memory\n  - arena per function call\n\nsetting field values\n\n- frees previous value, if any\n\n  \\*/\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/123269?v=4",
+  "releases": [
+    {
+      "tag_name": "v0.0.4-beta",
+      "name": "v0.0.4-beta",
+      "body": "",
+      "prerelease": true,
+      "published_at": "2025-10-26T19:50:01Z",
+      "html_url": "https://github.com/typesafe/node-api-zig/releases/tag/v0.0.4-beta",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.3-beta",
+      "name": "v0.0.3-beta",
+      "body": "",
+      "prerelease": true,
+      "published_at": "2025-10-26T19:46:26Z",
+      "html_url": "https://github.com/typesafe/node-api-zig/releases/tag/v0.0.3-beta",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.2-beta",
+      "name": "v0.0.2-beta",
+      "body": "",
+      "prerelease": true,
+      "published_at": "2025-10-26T19:22:51Z",
+      "html_url": "https://github.com/typesafe/node-api-zig/releases/tag/v0.0.2-beta",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.1-beta",
+      "name": "v0.0.1-beta",
+      "body": "",
+      "prerelease": true,
+      "published_at": "2025-10-26T18:51:16Z",
+      "html_url": "https://github.com/typesafe/node-api-zig/releases/tag/v0.0.1-beta",
+      "assets": []
+    }
+  ],
+  "owner_company": "Element 80 BV",
+  "owner_location": "Belgium",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 17,
+  "owner_following": 6,
+  "owner_created_at": "2009-09-04T14:20:58Z",
+  "license": "MIT",
+  "category": "library"
+}
