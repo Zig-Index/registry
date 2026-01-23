@@ -14,12 +14,12 @@
   "stars": 7,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2025-12-19T20:44:14Z",
+  "updated_at": "2026-01-23T14:32:24Z",
   "dependencies": [
     {
       "name": "glslang_zig",
-      "url": "git+https://github.com/tiawl/glslang.zig?ref=16.1.0#c78326a72e9d7a702e10e544d55809e311fe0b43",
-      "hash": "glslang_zig-1.0.0-QiUC6kdiXQCo3aeI6uPjy2Cp6jsBOfC9AwkdbeNDnyOw"
+      "url": "git+https://github.com/tiawl/glslang.zig?ref=16.2.0#73adeb93ef32f6a993a49457446d0e96c672262d",
+      "hash": "glslang_zig-1.0.0-QiUC6u_VXgBoZPDPPkc-3uNlM8I_K-js57BO6s-MEaQh"
     },
     {
       "name": "toolbox",
