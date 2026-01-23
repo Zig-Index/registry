@@ -15,7 +15,7 @@
   "stars": 33,
   "forks": 3,
   "watchers": 2,
-  "updated_at": "2026-01-11T11:55:56Z",
+  "updated_at": "2026-01-23T18:21:06Z",
   "dependencies": [
     {
       "name": "libzmq",
