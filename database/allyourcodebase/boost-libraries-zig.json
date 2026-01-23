@@ -13,628 +13,642 @@
   "stars": 20,
   "forks": 4,
   "watchers": 0,
-  "updated_at": "2025-09-30T13:56:03Z",
+  "updated_at": "2026-01-23T18:58:06Z",
   "dependencies": [
     {
       "name": "core",
-      "url": "git+https://github.com/boostorg/core?ref=boost-1.89.0#a128501403c08d70475cc87c4e511b59744b1aa1",
-      "hash": "N-V-__8AADOWEAAMuUSjDb6dpGa4US3dPfF2z4QecdQrOusY"
+      "url": "git+https://github.com/boostorg/core#boost-1.90.0",
+      "hash": "N-V-__8AANS1EAAfwQIpipuIBE9JOIt9o5PSa5JAnVaBIxvQ"
     },
     {
       "name": "algorithm",
-      "url": "git+https://github.com/boostorg/algorithm?ref=boost-1.89.0#32c5a6327cfdca5d41ce0f1d8849b811886daa2f",
+      "url": "git+https://github.com/boostorg/algorithm#boost-1.90.0",
       "hash": "N-V-__8AACUhPQDA5Mvi9LLrRdKvMv8hAerVBZWKQkfHSqn1"
     },
     {
       "name": "assert",
-      "url": "git+https://github.com/boostorg/assert?ref=boost-1.89.0#5dcb2af5213ae132b7531e45e7f93258cc33ffd8",
-      "hash": "N-V-__8AAJHfAQDwMmkntNc6N5YRCF2WsmHiaO9p1yJr6BJi"
+      "url": "git+https://github.com/boostorg/assert#boost-1.90.0",
+      "hash": "N-V-__8AACvgAQBaFfdgSbJapZyYvo1kFqwJplwqrCF0BJTs"
     },
     {
       "name": "config",
-      "url": "git+https://github.com/boostorg/config?ref=boost-1.89.0#bf8c8bd7960cd8505210838f86bd28fb4fb71071",
-      "hash": "N-V-__8AAGThJwBWc_L1fi6RFm_jHgif_MY2haphDzC03gJK"
+      "url": "git+https://github.com/boostorg/config#boost-1.90.0",
+      "hash": "N-V-__8AANfOJwCqNE-xQT9GlQc2C8z2AjNju27IwHpAsBZD"
     },
     {
       "name": "mp11",
-      "url": "git+https://github.com/boostorg/mp11?ref=boost-1.89.0#2fb81c24534663a99f9570b99a3c748393a23dba",
-      "hash": "N-V-__8AAOwSDwDMj4wdHAD_UtIddVzzdKrSuVY4bhAngr4e"
+      "url": "git+https://github.com/boostorg/mp11#boost-1.90.0",
+      "hash": "N-V-__8AAMAUDwDCL4htKMS5qIGzu6k-t3Bswkb6ZpBJnPXG"
     },
     {
       "name": "type_traits",
-      "url": "git+https://github.com/boostorg/type_traits?ref=boost-1.89.0#67a6c32499866ea4485e249e8e406fb1348eb5d2",
+      "url": "git+https://github.com/boostorg/type_traits#boost-1.90.0",
       "hash": "N-V-__8AAHxrWADA1j6sqfZ-J9z9gXyL82-Nsp0zA8uASHtS"
     },
     {
       "name": "range",
-      "url": "git+https://github.com/boostorg/range?ref=boost-1.89.0#24b7c98ca12708549513adc4770a2cf5586168f9",
+      "url": "git+https://github.com/boostorg/range#boost-1.90.0",
       "hash": "N-V-__8AAMkRGQCRXp9NP8hEMMLkgBB2P43kgCweo_pwE_AP"
     },
     {
       "name": "functional",
-      "url": "git+https://github.com/boostorg/functional?ref=boost-1.89.0#6a573e4b8333ee63ee62ce95558c3667348db233",
+      "url": "git+https://github.com/boostorg/functional#boost-1.90.0",
       "hash": "N-V-__8AAHz5BAAHbQ1m2VR4nU0pzxbDjelQBNnSmWDxZvAp"
     },
     {
       "name": "container_hash",
-      "url": "git+https://github.com/boostorg/container_hash?ref=boost-1.89.0#5d8b8ac2b9d9d7cb3818f88fd7e6372e5f072ff5",
-      "hash": "N-V-__8AAJ2DBQCKC9z4NhZswoPXswGEttik3uBYBck-CZ2V"
+      "url": "git+https://github.com/boostorg/container_hash#boost-1.90.0",
+      "hash": "N-V-__8AAFSFBQAX-FkTY8sFGak0rkHoI8C42S9-OO78yF9x"
     },
     {
       "name": "mpl",
-      "url": "git+https://github.com/boostorg/mpl?ref=boost-1.89.0#74d927f9847c60b908beac94e1198d1985380abf",
-      "hash": "N-V-__8AABpViQDRvjP80WTO508uOFMp2xkI5xzYFM2lK-I4"
+      "url": "git+https://github.com/boostorg/mpl#boost-1.90.0",
+      "hash": "N-V-__8AAMUIiQDuh8KD3r8DMBhZq5rfToEYMaHe5xU9SXti"
     },
     {
       "name": "iterator",
-      "url": "git+https://github.com/boostorg/iterator?ref=boost-1.89.0#2a0b753691f326154436fa641287e6336c19d80e",
-      "hash": "N-V-__8AAJzPLAAX-jXQUFcp9UoyW-ROazUE4O0rfmkev7SZ"
+      "url": "git+https://github.com/boostorg/iterator#boost-1.90.0",
+      "hash": "N-V-__8AALnQLACbCKHQj1burAMsj2F7GBr3x9-p6g9RHAKA"
     },
     {
       "name": "preprocessor",
-      "url": "git+https://github.com/boostorg/preprocessor?ref=boost-1.89.0#cd1b1bd03900b68505822cfa25cb16851bd6caf1",
+      "url": "git+https://github.com/boostorg/preprocessor#boost-1.90.0",
       "hash": "N-V-__8AALI0tQDZW9UfY8zpFBacRQKLZ19tOAZCL4OAlZtG"
     },
     {
       "name": "describe",
-      "url": "git+https://github.com/boostorg/describe?ref=boost-1.89.0#b64177c39f929998e3a145992d0328712e095c29",
-      "hash": "N-V-__8AADr6AwBPtdKdJXDzLN24sfh_A-Ln0CEymC5BGrfo"
+      "url": "git+https://github.com/boostorg/describe#boost-1.90.0",
+      "hash": "N-V-__8AAJ0TBADxCht1K42oeWhCxm8bgdW6CbPo62I05Q0i"
     },
     {
       "name": "move",
-      "url": "git+https://github.com/boostorg/move?ref=boost-1.89.0#40d2be68bae9acfb4f165cdaab0a4246c5af5485",
-      "hash": "N-V-__8AADVmDABcDKw_D3-FlptU7zo0958BFPZBvuRT0d9E"
+      "url": "git+https://github.com/boostorg/move#boost-1.90.0",
+      "hash": "N-V-__8AAHdmDAAawhkDLYvSmlEet5FA9qFulTIJiLt60amx"
     },
     {
       "name": "detail",
-      "url": "git+https://github.com/boostorg/detail?ref=boost-1.89.0#43238b75cee1a010d6ef6dc48dfc21c365d3796f",
+      "url": "git+https://github.com/boostorg/detail#boost-1.90.0",
       "hash": "N-V-__8AABqQAwBjPZPQUVcSVlq2U4qbpVlTcMmpHvPCzzdu"
     },
     {
       "name": "static_assert",
-      "url": "git+https://github.com/boostorg/static_assert?ref=boost-1.89.0#9a6a86efc8dea37083ed1a78fb0998673517cf4e",
+      "url": "git+https://github.com/boostorg/static_assert#boost-1.90.0",
       "hash": "N-V-__8AAK7pAACf3O82lupST65fn7dA4KhONnxefg-gqW0z"
     },
     {
       "name": "throw_exception",
-      "url": "git+https://github.com/boostorg/throw_exception?ref=boost-1.89.0#f3d4d55f52894fda75ef2915dc122e3133b97b45",
-      "hash": "N-V-__8AAHDbAQBbTOh_gXYOheNgjIYnjBag1HqSfLJNb546"
+      "url": "git+https://github.com/boostorg/throw_exception#boost-1.90.0",
+      "hash": "N-V-__8AANrcAQCTTIsGvqo1SkfLKOW458t_M_e6qvdeheOI"
     },
     {
       "name": "concept_check",
-      "url": "git+https://github.com/boostorg/concept_check?ref=boost-1.89.0#0ef7f2b5daeaa125a53d98affba8f40091d24b17",
+      "url": "git+https://github.com/boostorg/concept_check#boost-1.90.0",
       "hash": "N-V-__8AAKR6BADavdkISDKa2l67WkyvTn1krdMceO6evWjs"
     },
     {
       "name": "asio",
-      "url": "git+https://github.com/boostorg/asio?ref=boost-1.89.0#f529dbbd6156b57f079f1387768b585a37d0f621",
-      "hash": "N-V-__8AAA446gD7kQ4vIk7qwv3fmTLLki4Og8IY9XPQ2Iit"
+      "url": "git+https://github.com/boostorg/asio#boost-1.90.0",
+      "hash": "N-V-__8AAKm78AD8tkhgh81sFJ7t9FmEmBQGwYym8qQ7rg0y"
     },
     {
       "name": "tuple",
-      "url": "git+https://github.com/boostorg/tuple?ref=boost-1.89.0#d04e4a692fda32f939edede89d67e4b2234f0da9",
+      "url": "git+https://github.com/boostorg/tuple#boost-1.90.0",
       "hash": "N-V-__8AAEorAgCGS_LIouQeOsTxNG0EcEwJ7-qYne288zDW"
     },
     {
       "name": "predef",
-      "url": "git+https://github.com/boostorg/predef?ref=boost-1.89.0#e1211a4ca467bb6512e99025772ca25afa8d6159",
+      "url": "git+https://github.com/boostorg/predef#boost-1.90.0",
       "hash": "N-V-__8AAM3hCgB8Arslq5pHATUljnwANJKh9EMM95ERNJmK"
     },
     {
       "name": "utility",
-      "url": "git+https://github.com/boostorg/utility?ref=boost-1.89.0#211570f2b972f66e368e4fe32b00fee31e597d25",
-      "hash": "N-V-__8AAM7xDAAh6UgGfBTGzSd5M2Y3EAYXVo_lz03cb4H-"
+      "url": "git+https://github.com/boostorg/utility#boost-1.90.0",
+      "hash": "N-V-__8AALjxDACbJGuCpXaC6ig6pTxfI0p25Wu7J4iHJFGR"
     },
     {
       "name": "bind",
-      "url": "git+https://github.com/boostorg/bind?ref=boost-1.89.0#a541a8d5c16920e1836d09299915890d687efe36",
+      "url": "git+https://github.com/boostorg/bind#boost-1.90.0",
       "hash": "N-V-__8AAEqrCgDamRDkhpeo431rBpKsRdNmJVEJ4L3xaF1x"
     },
     {
       "name": "container",
-      "url": "git+https://github.com/boostorg/container?ref=boost-1.89.0#e8baf848bc426022dffbc814db8e1261d6033d4b",
-      "hash": "N-V-__8AAC1wSgBqFydUHgmzFQVVdXrHxrJoLKCBMqkxZ9L9"
+      "url": "git+https://github.com/boostorg/container#boost-1.90.0",
+      "hash": "N-V-__8AAENxSwCgsbVGUQ35k1gtKmXGKvPM4nu9g_owbaXy"
     },
     {
       "name": "endian",
-      "url": "git+https://github.com/boostorg/endian?ref=boost-1.89.0#c0b5c80603b8de7eeea8724c9a4f2761c3df06f2",
+      "url": "git+https://github.com/boostorg/endian#boost-1.90.0",
       "hash": "N-V-__8AAE3GCACIRxAD3oWteML3w5sBwmm_njj5DG6cwX-Z"
     },
     {
       "name": "intrusive",
-      "url": "git+https://github.com/boostorg/intrusive?ref=boost-1.89.0#23e7a9cbf54f69f2bdc22951af959af74b037d10",
-      "hash": "N-V-__8AAMDrIwAmho_WzB-7Tt4V7NqUcCSwj0Oda5mjoPWd"
+      "url": "git+https://github.com/boostorg/intrusive#boost-1.90.0",
+      "hash": "N-V-__8AALjrIwCUK-MQbQGRkJbiN9Ye6dCfSBcYi-U4RvqK"
     },
     {
       "name": "logic",
-      "url": "git+https://github.com/boostorg/logic?ref=boost-1.89.0#9b8703a2d6623405323b892f1d126a6b17ca1651",
+      "url": "git+https://github.com/boostorg/logic#boost-1.90.0",
       "hash": "N-V-__8AADyLAQB5o2e2wLaIFkmW8NQ9NAo0Se1kEokyRggG"
     },
     {
       "name": "optional",
-      "url": "git+https://github.com/boostorg/optional?ref=boost-1.89.0#121f3efde91de78ca018019904732f55d33b5788",
+      "url": "git+https://github.com/boostorg/optional#boost-1.90.0",
       "hash": "N-V-__8AAAbXBgD7zMewPCjTL30k9q0XSXKrn4v2UoiKLByB"
     },
     {
       "name": "smart_ptr",
-      "url": "git+https://github.com/boostorg/smart_ptr?ref=boost-1.89.0#79dac0e691b99e2ba066eba44618ff620a6acfe3",
-      "hash": "N-V-__8AAHRTFQAUbTsubOw5Z-ggvK6scbN3NGuA9FUOBcsc"
+      "url": "git+https://github.com/boostorg/smart_ptr#boost-1.90.0",
+      "hash": "N-V-__8AAPOXEwCOOx2zZ07-O81hz7GCsWbYYqgN-HDqvzCE"
     },
     {
       "name": "static_string",
-      "url": "git+https://github.com/boostorg/static_string?ref=boost-1.89.0#bff5cb65a5cb9151aacaf56abe80125e0128f43a",
-      "hash": "N-V-__8AAH6rCgAubWoVbPcLq1Jy3zwrXM8FeP7YED3wJ2pI"
+      "url": "git+https://github.com/boostorg/static_string#boost-1.90.0",
+      "hash": "N-V-__8AAIRNCgBDREm7JBTAZe8oHnSCNh38wJOBAn9uEs8n"
     },
     {
       "name": "system",
-      "url": "git+https://github.com/boostorg/system?ref=boost-1.89.0#14c5f52602c172d2ede2dda2c06847f7123b4c77",
-      "hash": "N-V-__8AAG1vCgDmrPdu4aRlIOfLPdLL4ecxxbADvP0oPS4k"
+      "url": "git+https://github.com/boostorg/system#boost-1.90.0",
+      "hash": "N-V-__8AAER1CgCIKqbZH5tHP8qTqf3rTz-0ZEOdidu2sit4"
     },
     {
       "name": "winapi",
-      "url": "git+https://github.com/boostorg/winapi?ref=boost-1.89.0#bbd9bf65857bcf48fd2f90fecf077a192ee29be8",
-      "hash": "N-V-__8AABa1DgAIZmdXipk8huTt1Vn8HdO7kd5MwALLNknl"
+      "url": "git+https://github.com/boostorg/winapi#boost-1.90.0",
+      "hash": "N-V-__8AAHS7DgDg8VkTxL90eled29PeQTXjwrjFVJVA3UKO"
     },
     {
       "name": "json",
-      "url": "git+https://github.com/boostorg/json?ref=boost-1.89.0#3c80c097d2fe2266d3d41f4121d7af24e122e996",
-      "hash": "N-V-__8AAKdJLQG_Htvv2JMcB2rMck3xsHsXXykRgsThNc5r"
+      "url": "git+https://github.com/boostorg/json#boost-1.90.0",
+      "hash": "N-V-__8AAClkLQG9YRiMpxKGJi_NxdO6AVSrpGAxum78UZxM"
     },
     {
       "name": "io",
-      "url": "git+https://github.com/boostorg/io?ref=boost-1.89.0#342e4c6d10d586058818daa84201a2d301357a53",
+      "url": "git+https://github.com/boostorg/io#boost-1.90.0",
       "hash": "N-V-__8AAFuJAQDT6Xjpc49iuweYnJ4j4UM3h134E7SjgK2W"
     },
     {
       "name": "regex",
-      "url": "git+https://github.com/boostorg/regex?ref=boost-1.89.0#f439e22ae41fa647bd7de16c2d92deb232593985",
+      "url": "git+https://github.com/boostorg/regex#boost-1.90.0",
       "hash": "N-V-__8AADAtOgALiWNEOQK6hAmVZigPOHAqILZ7hzNWwGA4"
     },
     {
       "name": "variant2",
-      "url": "git+https://github.com/boostorg/variant2?ref=boost-1.89.0#8caa1a34843951b9e4e302dc85e90bc19ca4f3dd",
-      "hash": "N-V-__8AAEhxBgALKUq3Mxdhm8dJwedU_g0x2adiWEotdsDv"
+      "url": "git+https://github.com/boostorg/variant2#boost-1.90.0",
+      "hash": "N-V-__8AABySBgBu1lJOBNCt0fjIfeVKGjusgnGEMdp_D1Fw"
     },
     {
       "name": "date_time",
-      "url": "git+https://github.com/boostorg/date_time?ref=boost-1.89.0#85e637cb325208c2af9af791c3a1948b4888c6cd",
+      "url": "git+https://github.com/boostorg/date_time#boost-1.90.0",
       "hash": "N-V-__8AAMOOGwBP_hCvwzKYcwNojW9urbnpDTOB9e7CFFTD"
     },
     {
       "name": "outcome",
-      "url": "git+https://github.com/boostorg/outcome?ref=boost-1.89.0#9fab401aa0ee4e578ec6757c082b6f66c67a55c7",
-      "hash": "N-V-__8AACBiRQA64_Vr35VyzPDnQ7Dr1W7A1ANPoHYMRe1W"
+      "url": "git+https://github.com/boostorg/outcome#boost-1.90.0",
+      "hash": "N-V-__8AAPJmRQDsRoW40ccdXiDLvB9EEKMgg1JvuP9r1Y1G"
     },
     {
       "name": "hana",
-      "url": "git+https://github.com/boostorg/hana?ref=boost-1.89.0#bc49ee25638e59d977edff5737b4e6bf12c1e5ea",
+      "url": "git+https://github.com/boostorg/hana#boost-1.90.0",
       "hash": "N-V-__8AAIg9TQDdQ2vR5IvCCy4llIYMiArhZrT6i7glL-oz"
     },
     {
       "name": "numeric_conversion",
-      "url": "git+https://github.com/boostorg/numeric_conversion?ref=boost-1.89.0#d1b479f7a4aa54d8ffb93d8dc4ee0c24670210d8",
+      "url": "git+https://github.com/boostorg/numeric_conversion#boost-1.90.0",
       "hash": "N-V-__8AACHiCQC1YZI5LZX4OT7n2FGUQSB9SSMSOUX1LMIn"
     },
     {
       "name": "graph",
-      "url": "git+https://github.com/boostorg/graph?ref=boost-1.89.0#54a94911e68dccf5812b32d018566566700499f3",
+      "url": "git+https://github.com/boostorg/graph#boost-1.90.0",
       "hash": "N-V-__8AAPedBgE6M27iCELCBd3vV5OJ8UgeUojSrHfGLLEV"
     },
     {
       "name": "pfr",
-      "url": "git+https://github.com/boostorg/pfr?ref=boost-1.89.0#5034bf55fb6bd1efa7a14955bbb7171c2b3491fc",
-      "hash": "N-V-__8AAA72FQD6Y5k_wYXL6pRzLLVEF8mk_gxK99GmDtDK"
+      "url": "git+https://github.com/boostorg/pfr#boost-1.90.0",
+      "hash": "N-V-__8AAO0lFgDNdpgEI0yB3d9V1xucv8mDb4JVkLrf-ZIE"
     },
     {
       "name": "math",
-      "url": "git+https://github.com/boostorg/math?ref=boost-1.89.0#5e088ffe2ed0e237b9069e3a7352865283d8f196",
-      "hash": "N-V-__8AADz7RAYjVkkNadLVj35VD5OjXs7r2N1RR6Cdjxab"
+      "url": "git+https://github.com/boostorg/math#boost-1.90.0",
+      "hash": "N-V-__8AANMhoAaEcrpPR0AzXzLWczakd7uJZRruZBFUboJE"
     },
     {
       "name": "lexical_cast",
-      "url": "git+https://github.com/boostorg/lexical_cast?ref=boost-1.89.0#5326b49475f27d04e07fda8759211b5d65d07f64",
-      "hash": "N-V-__8AANFqBQDwAVbaLgTb6OO5ZzQLBjMdd1Ysm06CTj2V"
+      "url": "git+https://github.com/boostorg/lexical_cast#boost-1.90.0",
+      "hash": "N-V-__8AAP6GBQBOX48XWqBRbU3AieKxSEvtleputi3y5oK-"
     },
     {
       "name": "type_index",
-      "url": "git+https://github.com/boostorg/type_index?ref=boost-1.89.0#32dcf01725eb07d17e0bc2d55248b9609280896c",
-      "hash": "N-V-__8AAE0aAwB7fVrtwJcuKTVOzHjERHeBMxAOk78MnT92"
+      "url": "git+https://github.com/boostorg/type_index#boost-1.90.0",
+      "hash": "N-V-__8AAIo0AwD6b55eCacCdhnE6p3Ir2qvjaEiXl6FQWZB"
     },
     {
       "name": "beast",
-      "url": "git+https://github.com/boostorg/beast?ref=boost-1.89.0#9b24b28d502946583300d3e58767cb30a8ec8486",
-      "hash": "N-V-__8AAJAkjwAYYXHVJKUhUMKuToV0TNmsBJD2iHWobxdT"
+      "url": "git+https://github.com/boostorg/beast#boost-1.90.0",
+      "hash": "N-V-__8AAET-XwAmNl8nOdFIOXDRVNQ4jM5YP1Q23NVzbKUZ"
     },
     {
       "name": "variant",
-      "url": "git+https://github.com/boostorg/variant?ref=boost-1.89.0#1fd7271d2e34a36f010f8882fdde703ad9a4ffeb",
-      "hash": "N-V-__8AAI4vCADtGWf9KnoRUc6iyfyJTzCDTSoRISmzg6nO"
+      "url": "git+https://github.com/boostorg/variant#boost-1.90.0",
+      "hash": "N-V-__8AAGovCABWY0UhbWY_D-WwI-ERwCvb1x3X79MSjSQe"
     },
     {
       "name": "chrono",
-      "url": "git+https://github.com/boostorg/chrono?ref=boost-1.89.0#ef510872039483dc66b7b2263c43c273a9aaecd6",
+      "url": "git+https://github.com/boostorg/chrono#boost-1.90.0",
       "hash": "N-V-__8AAHKoEgC2FVY0dM8korgUTF2zl2VwWnrFCaE5RHS8"
     },
     {
       "name": "unordered",
-      "url": "git+https://github.com/boostorg/unordered?ref=boost-1.89.0#59e2a562edf0759e0ac52f659d25e0907ed7bec6",
-      "hash": "N-V-__8AAOM4fACNeZypFqiZCciOJhBPWiRT4ffcpQniLMox"
+      "url": "git+https://github.com/boostorg/unordered#boost-1.90.0",
+      "hash": "N-V-__8AALaffACayx1LpybnblDGe92D-OPo_dl3tTa83gq8"
     },
     {
       "name": "url",
-      "url": "git+https://github.com/boostorg/url?ref=boost-1.89.0#8d5cc6e34884b4f3a8a43c8f9706c0f5800238a0",
-      "hash": "N-V-__8AAJdoWwC2cyp_jJ2plRE9KnBTkdESqTkr4Stcx8gf"
+      "url": "git+https://github.com/boostorg/url#boost-1.90.0",
+      "hash": "N-V-__8AAF6nWwCww9CEgB7QWwvuXk8VuOtUSAcM5ZWA3rKX"
     },
     {
       "name": "any",
-      "url": "git+https://github.com/boostorg/any?ref=boost-1.89.0#9b1941c787f2769fcb6afdb0cef621db80f953a6",
-      "hash": "N-V-__8AAOQpAgDDYwqpKtDmaN6D3mnObQIVMFIYhyhhtsq_"
+      "url": "git+https://github.com/boostorg/any#boost-1.90.0",
+      "hash": "N-V-__8AAGY4AgDo5yX1iHxhAuDOyYd5ykXqKZfDxVeZBVvg"
     },
     {
       "name": "integer",
-      "url": "git+https://github.com/boostorg/integer?ref=boost-1.89.0#0fefe9831abf014d3a7da7172755aae0f54e85f0",
-      "hash": "N-V-__8AACeoAwDBhzf1Wp8HsLSDiKoijtb2R2i0X_0mVcCh"
+      "url": "git+https://github.com/boostorg/integer#boost-1.90.0",
+      "hash": "N-V-__8AAHWmAwAgWFMvZvI0ddKxjI_C54y-yMk2n78DfEVM"
     },
     {
       "name": "array",
-      "url": "git+https://github.com/boostorg/array?ref=boost-1.89.0#e988ef9c4a7d64be2850dc8de18b6461e094d4ae",
+      "url": "git+https://github.com/boostorg/array#boost-1.90.0",
       "hash": "N-V-__8AAFlMAgBlNIseNerkSVmUC9TxOlWrCI7SA6j_v4uz"
     },
     {
       "name": "multi_array",
-      "url": "git+https://github.com/boostorg/multi_array?ref=boost-1.89.0#0c5348bef71b890c4bd06eff1ee5ebda69e7b27a",
+      "url": "git+https://github.com/boostorg/multi_array#boost-1.90.0",
       "hash": "N-V-__8AALTJBwCHHiM6Be55w4Df-SLIOyD0xzirjjR8PIBN"
     },
     {
       "name": "safe_numerics",
-      "url": "git+https://github.com/boostorg/safe_numerics?ref=boost-1.89.0#777e0be5ec763d0333a717c5e421a4f7c5e5bdc9",
+      "url": "git+https://github.com/boostorg/safe_numerics#boost-1.90.0",
       "hash": "N-V-__8AALNNQQCHJ90BqIiWlYmFjpkaEKejVPYEftqw7gIs"
     },
     {
       "name": "filesystem",
-      "url": "git+https://github.com/boostorg/filesystem?ref=boost-1.89.0#d316a9d3aa09bb3d200646cc587a16e3b9be5f39",
-      "hash": "N-V-__8AADN2FwCbU_54Zgoc765ecy_CfPCwIlBhh628Dg0A"
+      "url": "git+https://github.com/boostorg/filesystem#boost-1.90.0",
+      "hash": "N-V-__8AADB6FwAGuERmTZ1EL0BaVBGR7oL0SWbrWieZ2MjS"
     },
     {
       "name": "compute",
-      "url": "git+https://github.com/boostorg/compute?ref=boost-1.89.0#cf7907574d6159cd43e6cf687a7b656278c61dd0",
+      "url": "git+https://github.com/boostorg/compute#boost-1.90.0",
       "hash": "N-V-__8AAL2PJwA7essATOp2Xd8l1jEo8e7fyahbreh2v3mQ"
     },
     {
       "name": "mysql",
-      "url": "git+https://github.com/boostorg/mysql?ref=boost-1.89.0#6a82609638e88bcea2985069dfc356f32a575a55",
-      "hash": "N-V-__8AAOCdTABust-DtGP27othQo0yvXts6oXGQHdi4HNr"
+      "url": "git+https://github.com/boostorg/mysql#boost-1.90.0",
+      "hash": "N-V-__8AAKRUTABcFfwzXJrIw-HR_UWVefd7j1ozmhcBr_yn"
     },
     {
       "name": "sort",
-      "url": "git+https://github.com/boostorg/sort?ref=boost-1.89.0#1368f28b2f32486c106ff1ec66626938bc5c8e94",
-      "hash": "N-V-__8AAFBjQAB5Dh0pMRlNRizhsX22Y1PHci340kHLL5wn"
+      "url": "git+https://github.com/boostorg/sort#boost-1.90.0",
+      "hash": "N-V-__8AAKZPQADD-a6CFT8f91TPuWD2APaILYTrtgGcHRrl"
     },
     {
       "name": "stacktrace",
-      "url": "git+https://github.com/boostorg/stacktrace?ref=boost-1.89.0#d6499f26d471158b6e6f65eea7425200f842b547",
-      "hash": "N-V-__8AAC3_AwAaL1_28mCHHIBafDRXZbptQ9qsZ_W7hqAh"
+      "url": "git+https://github.com/boostorg/stacktrace#boost-1.90.0",
+      "hash": "N-V-__8AAEP_AwCZrsL21StDhRYeyzMGFsv_oj2E1bPQcMaC"
     },
     {
       "name": "signals2",
-      "url": "git+https://github.com/boostorg/signals2?ref=boost-1.89.0#898c81affdac7759768f846ea461d2364b028f0e",
-      "hash": "N-V-__8AAKzDCAA4mjzbXNbygO1YuX4mU1AtyOWaAwcoX3rx"
+      "url": "git+https://github.com/boostorg/signals2#boost-1.90.0",
+      "hash": "N-V-__8AALvDCADG6Xn-a7Wx_nhCOSU3YqthrhZ1maSTQgMm"
     },
     {
       "name": "interprocess",
-      "url": "git+https://github.com/boostorg/interprocess?ref=boost-1.89.0#2c3d4f8bb91400298f285ebd197d808cf14b126a",
-      "hash": "N-V-__8AAK3NKABu1nbMdl-FFUCozuoyor6g7sC_9ZFBQy9P"
+      "url": "git+https://github.com/boostorg/interprocess#boost-1.90.0",
+      "hash": "N-V-__8AAMKrKACdsNoIhKv-0wnTK3Gk-ATVvrdSFqsEGsHy"
     },
     {
       "name": "context",
-      "url": "git+https://github.com/boostorg/context?ref=boost-1.89.0#3af0091efa65892e030add013417840f80b13e08",
-      "hash": "N-V-__8AAFsNGgB3V1msMNp3dMgDlxSplQS2LANIzqhi3OvZ"
+      "url": "git+https://github.com/boostorg/context#boost-1.90.0",
+      "hash": "N-V-__8AAJQgGgA2rcZ_e767GgoDdDapon6PCYkG7SAcuv_Q"
     },
     {
       "name": "timer",
-      "url": "git+https://github.com/boostorg/timer?ref=boost-1.89.0#b7f65f09a0975f26cb294eebd8b17e91a5beff3f",
+      "url": "git+https://github.com/boostorg/timer#boost-1.90.0",
       "hash": "N-V-__8AAGBTAgBqTK9eFPUQtClpOyyCk9T8Uj_i8NuaU6Lw"
     },
     {
       "name": "wave",
-      "url": "git+https://github.com/boostorg/wave?ref=boost-1.89.0#d7aa5a369d8f2faf48c8ea16ba041dfabbf91363",
+      "url": "git+https://github.com/boostorg/wave#boost-1.90.0",
       "hash": "N-V-__8AALO0MwBElcnzmpmvZb57SyPoGw_68--ZJx11tj7o"
     },
     {
       "name": "atomic",
-      "url": "git+https://github.com/boostorg/atomic?ref=boost-1.89.0#8a6de6d93dbe123134deff264851a18d96063764",
-      "hash": "N-V-__8AANlPGwDDXJm-H0ZZPDpBfm9RChfDqOnB-A9fDn_Y"
+      "url": "git+https://github.com/boostorg/atomic#boost-1.90.0",
+      "hash": "N-V-__8AAItOGwCbb1NFGRBKd7oN0WocQ063jJ6g2nwscpVk"
     },
     {
       "name": "scope",
-      "url": "git+https://github.com/boostorg/scope?ref=boost-1.89.0#e286819b43744aa589e6b1937ae0e6f78f038cc7",
-      "hash": "N-V-__8AADdSBgA8c7rVDjjqRIymq8mGDU15uqYuciLTZyAV"
+      "url": "git+https://github.com/boostorg/scope#boost-1.90.0",
+      "hash": "N-V-__8AAOFSBgDmsoCCQZIxPr3SPhKyJGQ_F81iZraQH0Kz"
     },
     {
       "name": "process",
-      "url": "git+https://github.com/boostorg/process?ref=boost-1.89.0#5597aa0055b81017f6ea24cb652f07a014b12771",
-      "hash": "N-V-__8AANBKFAAlncl9PmGon5xIp81-MPLLC5nqH3aCeU6W"
+      "url": "git+https://github.com/boostorg/process#boost-1.90.0",
+      "hash": "N-V-__8AAGdkFAAaeYSsPFESTuCkJcQw8smT-OAVzxxtyRxU"
     },
     {
       "name": "fusion",
-      "url": "git+https://github.com/boostorg/fusion?ref=boost-1.89.0#53da4e0b2c8cd4969b09fa646d314ac0c414c1ff",
+      "url": "git+https://github.com/boostorg/fusion#boost-1.90.0",
       "hash": "N-V-__8AAOQD7wC4pEgByUp4TphJvvtm476CD8o8BM14q_T4"
     },
     {
       "name": "spirit",
-      "url": "git+https://github.com/boostorg/spirit?ref=boost-1.89.0#08b3d033c92238f3c4f8d78e8b4e5b1d90307389",
-      "hash": "N-V-__8AAOFKzgCCDxTT2niHOb7wshEyuiLr57U5WKBz3a0R"
+      "url": "git+https://github.com/boostorg/spirit#boost-1.90.0",
+      "hash": "N-V-__8AAOBQzgCLvK3LADd-smcB-rcQe-XBbGCyzxLYQWkC"
     },
     {
       "name": "function",
-      "url": "git+https://github.com/boostorg/function?ref=boost-1.89.0#f6b538dbed2e3047dcbd09eb3f5c7f1ffa90d0a9",
+      "url": "git+https://github.com/boostorg/function#boost-1.90.0",
       "hash": "N-V-__8AAO2HBAC1TXKtzo65bNT9u1fcVPWy8hJ5bu3NbgbN"
     },
     {
       "name": "cobalt",
-      "url": "git+https://github.com/boostorg/cobalt?ref=boost-1.89.0#57181cacc5b8d5079d95a33b7aa078d0f5f16147",
-      "hash": "N-V-__8AABq_DgC0lnu8by8GZoGFe0a6uusmJuZ8U3WU_g0r"
+      "url": "git+https://github.com/boostorg/cobalt#boost-1.90.0",
+      "hash": "N-V-__8AABzLDgBVYcwamitFSsGjPDCc0lEUoP3OC9jrIiRt"
     },
     {
       "name": "phoenix",
-      "url": "git+https://github.com/boostorg/phoenix?ref=boost-1.89.0#8913607a3788cb82d48ed461ea59c919b7bad3df",
+      "url": "git+https://github.com/boostorg/phoenix#boost-1.90.0",
       "hash": "N-V-__8AALCYJwGwrs7rO_IvByy6Lt9m7O9-bYLL5JxbWw6M"
     },
     {
       "name": "locale",
-      "url": "git+https://github.com/boostorg/locale?ref=boost-1.89.0#9b7775715a50e62c5bc0ed99d65e0f56c06361f4",
-      "hash": "N-V-__8AAIV1FwDSpq88-9u5tgH11coxur4KVuaAT4qc_NMJ"
+      "url": "git+https://github.com/boostorg/locale#boost-1.90.0",
+      "hash": "N-V-__8AANRMGABv9h5N4lvpR4DRrRv3sWNxFVoGjOTbUZek"
     },
     {
       "name": "uuid",
-      "url": "git+https://github.com/boostorg/uuid?ref=boost-1.89.0#434329f8dc7fcfb69cd7565ab0318d86772cea39",
-      "hash": "N-V-__8AACuDBQBtvGvutYvKEqSBoYBcsvXoKIT9HWc45ajd"
+      "url": "git+https://github.com/boostorg/uuid#boost-1.90.0",
+      "hash": "N-V-__8AAHKjBQCFVutgE-smilRaA2cG2-lOVco7kGSaqxhN"
     },
     {
       "name": "nowide",
-      "url": "git+https://github.com/boostorg/nowide?ref=boost-1.89.0#b2f5f57fdb38ca42bc33b55d5e9cd7024e355399",
-      "hash": "N-V-__8AAHx_BwCNYH9hpUM0OlDZWkGXywYtZ0of3GeRYvci"
+      "url": "git+https://github.com/boostorg/nowide#boost-1.90.0",
+      "hash": "N-V-__8AAME6BwAYkBavPwaY0VofEB-FXsfw4cTqviJjaBuN"
     },
     {
       "name": "circular_buffer",
-      "url": "git+https://github.com/boostorg/circular_buffer?ref=boost-1.89.0#a08a5b55ee82e0c2487523471379ac53a23935dc",
+      "url": "git+https://github.com/boostorg/circular_buffer#boost-1.90.0",
       "hash": "N-V-__8AAP87CACoPesrgVNchRs4kD-neM6sb9cTaXhniOPo"
     },
     {
       "name": "leaf",
-      "url": "git+https://github.com/boostorg/leaf?ref=boost-1.89.0#aff38b5be343ac6f1588e3258d126224e5347934",
-      "hash": "N-V-__8AAC21DwAnTqvk8h56Tf6exNRnueYJ3qdnHCAGu8PJ"
+      "url": "git+https://github.com/boostorg/leaf#boost-1.90.0",
+      "hash": "N-V-__8AACO7DwBWvmUhQDTdp4ZRm7UgqhLS55GLEd83FDfm"
     },
     {
       "name": "lockfree",
-      "url": "git+https://github.com/boostorg/lockfree?ref=boost-1.89.0#4a69f38b3d1d20ac56e60095a550ffb2ce4ccbd7",
-      "hash": "N-V-__8AAI7OAwBNGHbb3auG83WXxmwyZQOteVESKIeCqVQ3"
+      "url": "git+https://github.com/boostorg/lockfree#boost-1.90.0",
+      "hash": "N-V-__8AAInMAwAXoCkp7Z7PNTVkbdlTLBaIJ8IFHnk1YnNd"
     },
     {
       "name": "redis",
-      "url": "git+https://github.com/boostorg/redis?ref=boost-1.89.0#76129bbcb8373f23d37877fccededb288690eed0",
-      "hash": "N-V-__8AACCJCQA-PKyRksmp38bHbdUH9MDctKN5a7BT9uSc"
+      "url": "git+https://github.com/boostorg/redis#boost-1.90.0",
+      "hash": "N-V-__8AAM87DABZ7PL-ia-_ow4Cb8DGZcvMelGrq02x-44-"
     },
     {
       "name": "geometry",
-      "url": "git+https://github.com/boostorg/geometry?ref=boost-1.89.0#617d75e0cda78b1f05590319200973514b609097",
-      "hash": "N-V-__8AAE6TewG5DeroUp9WPc2kWZPN9Nlb1CcbAhUYNtrp"
+      "url": "git+https://github.com/boostorg/geometry#boost-1.90.0",
+      "hash": "N-V-__8AAOsZfAEra0L_QzQPunHOecauK-EvfKmv0A10p5AG"
     },
     {
       "name": "crc",
-      "url": "git+https://github.com/boostorg/crc?ref=boost-1.89.0#75146a958410c789381a4609166c754d35548e2d",
-      "hash": "N-V-__8AAEjTAwB6uQ-nvXSJyu_Gzsk-5lgG4fcJ_-4mfaZV"
+      "url": "git+https://github.com/boostorg/crc#boost-1.90.0",
+      "hash": "N-V-__8AABTVAwD_LUXFlZRcq-xeCzNz-C5G2okXK1k91_by"
     },
     {
       "name": "compat",
-      "url": "git+https://github.com/boostorg/compat?ref=boost-1.89.0#e3746402659838fbd5efd91f4110ad0e0c63c957",
-      "hash": "N-V-__8AAJXCBgA7KCqx4FXdE85HRUeu8t97czaLcbgr1HbL"
+      "url": "git+https://github.com/boostorg/compat#boost-1.90.0",
+      "hash": "N-V-__8AANfeBgBwWkv3QGYoDsQuogdl10LLAfYIApak4KZF"
     },
     {
       "name": "bimap",
-      "url": "git+https://github.com/boostorg/bimap?ref=boost-1.89.0#f64de6d045bf6aa3f39a672604bcccbc97291525",
+      "url": "git+https://github.com/boostorg/bimap#boost-1.90.0",
       "hash": "N-V-__8AAMckMACDAWQbKCN5wEWdCcnf7fLMkfYBB5wySXUB"
     },
     {
       "name": "tokenizer",
-      "url": "git+https://github.com/boostorg/tokenizer?ref=boost-1.89.0#a1207c1a424ee565344fe5ef00605cb93f5210c2",
+      "url": "git+https://github.com/boostorg/tokenizer#boost-1.90.0",
       "hash": "N-V-__8AAMjfAQCFd7AbC0oR2nywxgUAoeLd1PnpMKIv7gtL"
     },
     {
       "name": "parameter",
-      "url": "git+https://github.com/boostorg/parameter?ref=boost-1.89.0#67861ef6ade2db396af4a3fd9e47647d8b01f73c",
-      "hash": "N-V-__8AAL7NHACmKrgvrDf_7aXv_vsiixCWvOv2LHOh4JNk"
+      "url": "git+https://github.com/boostorg/parameter#boost-1.90.0",
+      "hash": "N-V-__8AAKjNHAAd3ydne38WZYBMQCccWNUOmKnRSesf6ori"
     },
     {
       "name": "callable_traits",
-      "url": "git+https://github.com/boostorg/callable_traits?ref=boost-1.89.0#2a56a3a2496cdb66496f844db55085dd992d5e49",
+      "url": "git+https://github.com/boostorg/callable_traits#boost-1.90.0",
       "hash": "N-V-__8AAMa4BwCpVigub7aSIEgUJohLziOJXDmB3igMP7M8"
     },
     {
       "name": "odeint",
-      "url": "git+https://github.com/boostorg/odeint?ref=boost-1.89.0#9e75be5d9e435739b086aee928736fc241e77a4a",
+      "url": "git+https://github.com/boostorg/odeint#boost-1.90.0",
       "hash": "N-V-__8AACbVJAB945DbAOb-qVUoGDlIZDUl75YagkF5R5jA"
     },
     {
       "name": "ublas",
-      "url": "git+https://github.com/boostorg/ublas?ref=boost-1.89.0#15d871b410ff92592c6f3e0a53550035e7817046",
+      "url": "git+https://github.com/boostorg/ublas#boost-1.90.0",
       "hash": "N-V-__8AAK5-OwAjoTGZtX_qcfh6hQDM2cbkRbPXD7fxu8hY"
     },
     {
       "name": "serialization",
-      "url": "git+https://github.com/boostorg/serialization?ref=boost-1.89.0#a20c4d97c37e5f437c8ba78f296830edb79cff9e",
+      "url": "git+https://github.com/boostorg/serialization#boost-1.90.0",
       "hash": "N-V-__8AADOvIQDs5dJOPykAvU8G7JkELrGnc7C0MD4eeFxk"
     },
     {
       "name": "iostreams",
-      "url": "git+https://github.com/boostorg/iostreams?ref=boost-1.89.0#8561bdb8bcd0a1b528d60c090407233b0c1d9148",
+      "url": "git+https://github.com/boostorg/iostreams#boost-1.90.0",
       "hash": "N-V-__8AADTThQCR3QabRhSONgDag-0YZ2ZhtCvqZnTdmael"
     },
     {
       "name": "type_erasure",
-      "url": "git+https://github.com/boostorg/type_erasure?ref=boost-1.89.0#5281f14d3cb59f978c8cb6cbb90ce92dde4e3e13",
+      "url": "git+https://github.com/boostorg/type_erasure#boost-1.90.0",
       "hash": "N-V-__8AAP5SDQBITJgI5Jcyk3yGlFe0b_TqZIsjDZUydiC6"
     },
     {
       "name": "typeof",
-      "url": "git+https://github.com/boostorg/typeof?ref=boost-1.89.0#26e22b8b370617a6181f3ae4bd1f584b3b4767e1",
+      "url": "git+https://github.com/boostorg/typeof#boost-1.90.0",
       "hash": "N-V-__8AAC6jAQDBN1fyK8R1P3xdDSLDLnF_hu7wROXZvAtC"
     },
     {
       "name": "units",
-      "url": "git+https://github.com/boostorg/units?ref=boost-1.89.0#45787015dd8c11653eb988260acf05c4af9d42e5",
+      "url": "git+https://github.com/boostorg/units#boost-1.90.0",
       "hash": "N-V-__8AABVFEQDkg4mMFIiUaipuch30aW7TQdxy4hCE2X7e"
     },
     {
       "name": "function_types",
-      "url": "git+https://github.com/boostorg/function_types?ref=boost-1.89.0#6fba35ace59e9e7b1c3007ca6246a42ed6ead145",
+      "url": "git+https://github.com/boostorg/function_types#boost-1.90.0",
       "hash": "N-V-__8AAIKQDwA0c--Aj6OaH4orOc17CDZKowBOpZoVO1YG"
     },
     {
       "name": "hof",
-      "url": "git+https://github.com/boostorg/hof?ref=boost-1.89.0#63ac019fca325038bfb4f56db17fbb281d2b5f49",
+      "url": "git+https://github.com/boostorg/hof#boost-1.90.0",
       "hash": "N-V-__8AALKyCwA3vPUL9O__Q4y3m193L6sycgS9J03KBzsm"
     },
     {
       "name": "interval",
-      "url": "git+https://github.com/boostorg/interval?ref=boost-1.89.0#565d0d754f851eb9447745b359ca5be6a033918c",
+      "url": "git+https://github.com/boostorg/interval#boost-1.90.0",
       "hash": "N-V-__8AAI5fBgALNeyXb0DEVCArdX3aMz4rwz4bZhiQ8Pn4"
     },
     {
       "name": "local_function",
-      "url": "git+https://github.com/boostorg/local_function?ref=boost-1.89.0#258aeaa6c1a9618c02ca4e4af2890e70833035f0",
+      "url": "git+https://github.com/boostorg/local_function#boost-1.90.0",
       "hash": "N-V-__8AAHGaFQDt5k8TphnVwa6vACn9SjMFY-sjx1bHeyhn"
     },
     {
       "name": "log",
-      "url": "git+https://github.com/boostorg/log?ref=boost-1.89.0#ad2eb6c4e54ebefb667fac25672bdd723fe55f37",
-      "hash": "N-V-__8AADlcNQDhH366SuEkCxtTVAsvndumYUvXxtSEcoKu"
+      "url": "git+https://github.com/boostorg/log#boost-1.90.0",
+      "hash": "N-V-__8AAE9eNQBQamawUp3e3Gw0Z_9POQNnQRuAiGyEaQhp"
     },
     {
       "name": "charconv",
-      "url": "git+https://github.com/boostorg/charconv?ref=boost-1.89.0#728f7c4a85d7893c91c5fd85220367bb17cd06b5",
-      "hash": "N-V-__8AAJmKFwBGnXY8Tntsqzf7D8ZUV1gzARlvkEIG-mzN"
+      "url": "git+https://github.com/boostorg/charconv#boost-1.90.0",
+      "hash": "N-V-__8AAPqaFwDfhsVjU0JzvmQB7ttsnBg0DnCsMWZuyeW_"
     },
     {
       "name": "conversion",
-      "url": "git+https://github.com/boostorg/conversion?ref=boost-1.89.0#b74a4c34cb181a8a26d35d05fab608426449626a",
-      "hash": "N-V-__8AAF_HAAAa2M3jMn8cCdW6jOG3mNdWlDp6AFotkaIL"
+      "url": "git+https://github.com/boostorg/conversion#boost-1.90.0",
+      "hash": "N-V-__8AAHTOAAADsMO6fK_l-7EBWzXms5EcbhagI4fGNBJ8"
     },
     {
       "name": "heap",
-      "url": "git+https://github.com/boostorg/heap?ref=boost-1.89.0#7db5d9db6615b40239a8bb9383a12bd56924bd07",
-      "hash": "N-V-__8AAIGIBQBhI_4SU_mzopfWYmnFFYtDC2YjSCMA3NrO"
+      "url": "git+https://github.com/boostorg/heap#boost-1.90.0",
+      "hash": "N-V-__8AAJ6HBQD_VQ0_8HDQl4ttbU4b7Hsx055eFM8D5xCa"
     },
     {
       "name": "msm",
-      "url": "git+https://github.com/boostorg/msm?ref=boost-1.89.0#33e77cbfc70956d4b99f3dfc9c1e83848fe2550b",
-      "hash": "N-V-__8AAFycUwBUUnF2yUTADUwmx3-NW3GtNEQFb7wBzgIv"
+      "url": "git+https://github.com/boostorg/msm#boost-1.90.0",
+      "hash": "N-V-__8AALuBNQBIkgJ0WVCZcOz8FZvZCrFZEZmThWGCrnFx"
     },
     {
       "name": "coroutine2",
-      "url": "git+https://github.com/boostorg/coroutine2?ref=boost-1.89.0#dbbf042e0a9081b4119d491b788ae0fe7c03192a",
+      "url": "git+https://github.com/boostorg/coroutine2#boost-1.90.0",
       "hash": "N-V-__8AADeWBACdc4-qLylEme_d0C7JkljJh5TukDftAjNI"
     },
     {
       "name": "pool",
-      "url": "git+https://github.com/boostorg/pool?ref=boost-1.89.0#740c8076f9d02f0216e8f3dbb15d2fd80f67d7f4",
+      "url": "git+https://github.com/boostorg/pool#boost-1.90.0",
       "hash": "N-V-__8AAAieLgDl61ANGt1eaCLj0oYtzF3PZ5Wzzr-1bD3s"
     },
     {
       "name": "format",
-      "url": "git+https://github.com/boostorg/format?ref=boost-1.89.0#66075102416bc5d0f8e0bd151a19013dadbf94ce",
+      "url": "git+https://github.com/boostorg/format#boost-1.90.0",
       "hash": "N-V-__8AAGu-BABbjN6CgUc_0vHRqCMd3v7bNbI_zPUWZimO"
     },
     {
       "name": "fiber",
-      "url": "git+https://github.com/boostorg/fiber?ref=boost-1.89.0#238487b543e8863c647d31a82ccfc3fa11a960d9",
+      "url": "git+https://github.com/boostorg/fiber#boost-1.90.0",
       "hash": "N-V-__8AAAYbSABEngHJeWbJCaDFDOxpNEIStZP1Bm5i6LR5"
     },
     {
       "name": "proto",
-      "url": "git+https://github.com/boostorg/proto?ref=boost-1.89.0#7f924934689b940f3a72212ab0f714ec6fd6e34b",
+      "url": "git+https://github.com/boostorg/proto#boost-1.90.0",
       "hash": "N-V-__8AABj2LAB07zIsWblXUuJFTkspD0QbKKBXpX4zderm"
     },
     {
       "name": "property_tree",
-      "url": "git+https://github.com/boostorg/property_tree?ref=boost-1.89.0#2669458cebee100bc1f9f4a9d2f0cd95d07740bc",
+      "url": "git+https://github.com/boostorg/property_tree#boost-1.90.0",
       "hash": "N-V-__8AAMQ4CgBbGUjB0KqaRkOJtlQqQfeTuREDWKHGc4Zp"
     },
     {
       "name": "exception",
-      "url": "git+https://github.com/boostorg/exception?ref=boost-1.89.0#9238ef8e7f97e619ed3e58bc7becf16b4966ccf0",
+      "url": "git+https://github.com/boostorg/exception#boost-1.90.0",
       "hash": "N-V-__8AAI_2DwAAb7VpZLRfaT0nhgf4YaCGGSdiYOL9B7Ch"
     },
     {
       "name": "multi_index",
-      "url": "git+https://github.com/boostorg/multi_index?ref=boost-1.89.0#3a4ddd9c7ad29032edd6086687136c42d0dfb03f",
-      "hash": "N-V-__8AANNsIwDsiqCKw5nWGO_Y7tJpXDYvrWeMWnGtwjAf"
+      "url": "git+https://github.com/boostorg/multi_index#boost-1.90.0",
+      "hash": "N-V-__8AAMBsIwBNfTzWWw-XN2W0qka-1e31_3k7umSOpP1Z"
     },
     {
       "name": "random",
-      "url": "git+https://github.com/boostorg/random?ref=boost-1.89.0#ce34d1e3685861bca0e5c08f6f0cbe5701aa1266",
-      "hash": "N-V-__8AAOGGGACoUxgHAU7MfgR-ahJInnG7rh-DSY1QgUvn"
+      "url": "git+https://github.com/boostorg/random#boost-1.90.0",
+      "hash": "N-V-__8AAL6MGADwPC7JLXJtRs2zNkV24z0nibs1QR_mzHJa"
     },
     {
       "name": "dll",
-      "url": "git+https://github.com/boostorg/dll?ref=boost-1.89.0#4105c3a8f8d5287b59b0185c45d4c9a768d92a55",
-      "hash": "N-V-__8AAHUVBwBno0N-AuY5GL3NvDJCBDlWTIVae25QBzSE"
+      "url": "git+https://github.com/boostorg/dll#boost-1.90.0",
+      "hash": "N-V-__8AAHQZBwBbF3dW2ONxiLDEK4vwvYTWCJ1ycABPtWXa"
     },
     {
       "name": "multiprecision",
-      "url": "git+https://github.com/boostorg/multiprecision?ref=boost-1.89.0#e0c112538ff1e903594d039f2eb97e0057737e5d",
-      "hash": "N-V-__8AAPno2wCeM0mFzPP8Bip9rmLRU8piEhhGB31f5VJk"
+      "url": "git+https://github.com/boostorg/multiprecision#boost-1.90.0",
+      "hash": "N-V-__8AAP_J3ABgTOpSOKdzPBiFkoOgmD8YEbqQzwYmtWLS"
     },
     {
       "name": "gil",
-      "url": "git+https://github.com/boostorg/gil?ref=boost-1.89.0#201f31c76eed54b304f8d89e44da08a5e8825094",
-      "hash": "N-V-__8AAIbhogBBR0oCd8YkyM92CNRHRssIwCegr2aH_KJ0"
+      "url": "git+https://github.com/boostorg/gil#boost-1.90.0",
+      "hash": "N-V-__8AAJ3hogCMsm2qrgkk15y24t3FGD16LEdiKmmVwPbf"
     },
     {
       "name": "python",
-      "url": "git+https://github.com/boostorg/python?ref=boost-1.89.0#3e7be69e1e405e1d5ddd232c69c024ee441592c5",
-      "hash": "N-V-__8AAGrKIAB_3_BRvj80Q5dxy6Kicc8DXInk4yjZGBDT"
+      "url": "git+https://github.com/boostorg/python#boost-1.90.0",
+      "hash": "N-V-__8AABvUIABPwf86WKUIo_7vptqALtX07qf3MvDC9jQ9"
     },
     {
       "name": "property_map",
-      "url": "git+https://github.com/boostorg/property_map?ref=boost-1.89.0#830cb6bce0b54fc1b2d7806901c1b8c8716964b7",
+      "url": "git+https://github.com/boostorg/property_map#boost-1.90.0",
       "hash": "N-V-__8AAD5JAwBeVXAdgiQK80Ee_0gbp4P0gCNJ3s9rpU1a"
     },
     {
       "name": "property_map_parallel",
-      "url": "git+https://github.com/boostorg/property_map_parallel?ref=boost-1.89.0#a2f90e9660e4e7e012c0b54a1338d8e69fb71906",
+      "url": "git+https://github.com/boostorg/property_map_parallel#boost-1.90.0",
       "hash": "N-V-__8AAGkzAQAB_B7Hu8v4b6LLy_b17j8t4kcFfZznwv51"
     },
     {
       "name": "hash2",
-      "url": "git+https://github.com/boostorg/hash2?ref=boost-1.89.0#5cf695e5e2466df247561894b3c15b4394a68486",
+      "url": "git+https://github.com/boostorg/hash2#boost-1.90.0",
       "hash": "N-V-__8AANSEDwB5vng_bAG7nvSDqM_lbRkAt6N4sbRHmGrW"
     },
     {
       "name": "parser",
-      "url": "git+https://github.com/boostorg/parser?ref=boost-1.89.0#c674e94c3d409b6ab0ee05429361e8b50fe30320",
-      "hash": "N-V-__8AAGCELwBEBL5NQiILNJoVf81b7n1hP0XgDA0wezX2"
+      "url": "git+https://github.com/boostorg/parser#boost-1.90.0",
+      "hash": "N-V-__8AAI-sLwDfLArxHqXpnmODilDe2VV0chM7XOjZkp1_"
     },
     {
       "name": "mqtt5",
-      "url": "git+https://github.com/boostorg/mqtt5?ref=boost-1.89.0#620df1f9934925ac6044e4619c701d6dcf9dc8b6",
-      "hash": "N-V-__8AAP4lDgBa2x-KENz-ob8HIYVLP3Q637QSoAEf6KJ5"
+      "url": "git+https://github.com/boostorg/mqtt5#boost-1.90.0",
+      "hash": "N-V-__8AALckDgBxqr-hDDJGjCVk--UI3bh-Sx6WGNiR1WOe"
     },
     {
       "name": "bloom",
-      "url": "git+https://github.com/boostorg/bloom?ref=boost-1.89.0#42ac5003f8742981a9731ae443a99be6b8fa23bc",
-      "hash": "N-V-__8AAOPNBgANRzjmP1uiGRpxTpUnUwFR3c3PZVUAMP40"
+      "url": "git+https://github.com/boostorg/bloom#boost-1.90.0",
+      "hash": "N-V-__8AABIGCAB3UMfGvexVPi51jRyoMdix2Eqgcse3KsU5"
     },
     {
       "name": "tti",
-      "url": "git+https://github.com/boostorg/tti?ref=boost-1.89.0#03734c54a51b6372ac3296d2fe5103b7360bcd3f",
+      "url": "git+https://github.com/boostorg/tti#boost-1.90.0",
       "hash": "N-V-__8AAOZmCADODeMFdbLe1jAS_JVYPMQ3d3Jc3JyfDul9"
+    },
+    {
+      "name": "openmethod",
+      "url": "git+https://github.com/boostorg/openmethod#boost-1.90.0",
+      "hash": "N-V-__8AAPKRMwCbSO1xEueYjIMbcbIFB0WIsm2UZkp-OJI5"
     }
   ],
   "minimum_zig_version": "0.15.1",
-  "readme": "# Boost Libraries using Zig build-system\n\n[Boost Libraries](https://boost.io) using `build.zig`.\n\nReplacing the [CMake](https://cmake.org/) and [B2](https://www.bfgroup.xyz/b2/) build system.\n\n\n> [!IMPORTANT]\n> For C++ projects, `zig c++` uses LLVM's libunwind + libc++ (statically linked) by default.\n> This applies to all targets except MSVC, which uses `-nostdlib++` instead.\n\n\n### Requirements\n\n- [zig](https://ziglang.org/download) v0.15.1 or master\n\n## How to use\n\nBuild libraries\n\n```bash\n# Build no-header-only libraries\n$ zig build -Doptimize=<Debug|ReleaseSafe|ReleaseFast|ReleaseSmall> \\\n    -Dtarget=<triple-target> \\\n    --summary <all|new> \\\n    -Dcontext \\\n    -Djson \\\n    -Dsystem \\\n    -Dcontainer \\\n    -Dcobalt \\\n    -Dfilesystem\n```\n\n#### Helper\n\n```bash\nProject-Specific Options:\n  -Dtarget=[string]            The CPU architecture, OS, and ABI to build for\n  -Dcpu=[string]               Target CPU features to add or subtract\n  -Ddynamic-linker=[string]    Path to interpreter on the target system\n  -Doptimize=[enum]            Prioritize performance, safety, or binary size\n                                 Supported Values:\n                                   Debug\n                                   ReleaseSafe\n                                   ReleaseFast\n                                   ReleaseSmall\n  -Datomic=[bool]              Build boost.atomic library (default: false)\n  -Dcharconv=[bool]            Build boost.charconv library (default: false)\n  -Dcobalt=[bool]              Build boost.cobalt library (default: false)\n  -Dcontainer=[bool]           Build boost.container library (default: false)\n  -Dcontext=[bool]             Build boost.context library (default: false)\n  -Dexception=[bool]           Build boost.exception library (default: false)\n  -Dfiber=[bool]               Build boost.fiber library (default: false)\n  -Dfilesystem=[bool]          Build boost.filesystem library (default: false)\n  -Diostreams=[bool]           Build boost.iostreams library (default: false)\n  -Djson=[bool]                Build boost.json library (default: false)\n  -Dlog=[bool]                 Build boost.log library (default: false)\n  -Dnowide=[bool]              Build boost.nowide library (default: false)\n  -Dprocess=[bool]             Build boost.process library (default: false)\n  -Dpython=[bool]              Build boost.python library (default: false)\n  -Drandom=[bool]              Build boost.random library (default: false)\n  -Dregex=[bool]               Build boost.regex library (default: false)\n  -Dserialization=[bool]       Build boost.serialization library (default: false)\n  -Dstacktrace=[bool]          Build boost.stacktrace library (default: false)\n  -Dsystem=[bool]              Build boost.system library (default: false)\n  -Durl=[bool]                 Build boost.url library (default: false)\n  -Dwave=[bool]                Build boost.wave library (default: false)\n  -Dshared=[bool]              Build as shared library (default: false)\n```\n\n\n### or use in new zig project\n\nMake directory and init\n\n```bash\n$ zig init\n## add in 'build.zig.zon' boost-libraries-zig package\n$ zig fetch --save=boost git+https://github.com/allyourcodebase/boost-libraries-zig\n```\nAdd in **build.zig**\n```zig\nconst std = @import(\"std\");\npub fn build(b: *std.Build) !void {\n    const target = b.standardTargetOptions(.{});\n    const optimize = b.standardOptimizeOption(.{});\n\n    const boost_dep = b.dependency(\"boost\", .{\n        .target = target,\n        .optimize = optimize,\n    });\n    const boost_artifact = boost_dep.artifact(\"boost\");\n\n    for(boost_artifact.root_module.include_dirs.items) |include_dir| {\n        try exe.root_module.include_dirs.append(b.allocator, include_dir);\n    }\n    // if not header-only, link library\n    exe.linkLibrary(boost_artifact);\n}\n```\n\n## How update zon dependencies\n\nOpen [`update_zon.zig`](update_zon.zig) and change `const boost_version = \"boost-version-tagged\";` or add/sub url in `git_urls` list.\n\n```bash\nzig run -fsingle-threaded update_zon.zig\n```\n\n## License\n\nsee: [LICENSE](LICENSE)\n",
+  "readme": "# Boost Libraries using Zig build-system\n\n[Boost Libraries](https://boost.io) using `build.zig`.\n\nReplacing the [CMake](https://cmake.org/) and [B2](https://www.bfgroup.xyz/b2/) build system.\n\n\n> [!IMPORTANT]\n> For C++ projects, `zig c++` uses LLVM's libunwind + libc++ (statically linked) by default.\n> This applies to all targets except MSVC, which uses `-nostdlib++` instead.\n\n\n### Requirements\n\n- [zig](https://ziglang.org/download) v0.16.0 or master\n\n## How to use\n\nBuild libraries\n\n```bash\n# Build no-header-only libraries\n$ zig build -Doptimize=<Debug|ReleaseSafe|ReleaseFast|ReleaseSmall> \\\n    -Dtarget=<triple-target> \\\n    --summary <all|new> \\\n    -Dcontext \\\n    -Djson \\\n    -Dsystem \\\n    -Dcontainer \\\n    -Dcobalt \\\n    -Dfilesystem\n```\n\n#### Helper\n\n```bash\nProject-Specific Options:\n  -Dtarget=[string]            The CPU architecture, OS, and ABI to build for\n  -Dcpu=[string]               Target CPU features to add or subtract\n  -Ddynamic-linker=[string]    Path to interpreter on the target system\n  -Doptimize=[enum]            Prioritize performance, safety, or binary size\n                                 Supported Values:\n                                   Debug\n                                   ReleaseSafe\n                                   ReleaseFast\n                                   ReleaseSmall\n  -Datomic=[bool]              Build boost.atomic library (default: false)\n  -Dcharconv=[bool]            Build boost.charconv library (default: false)\n  -Dcobalt=[bool]              Build boost.cobalt library (default: false)\n  -Dcontainer=[bool]           Build boost.container library (default: false)\n  -Dcontext=[bool]             Build boost.context library (default: false)\n  -Dexception=[bool]           Build boost.exception library (default: false)\n  -Dfiber=[bool]               Build boost.fiber library (default: false)\n  -Dfilesystem=[bool]          Build boost.filesystem library (default: false)\n  -Diostreams=[bool]           Build boost.iostreams library (default: false)\n  -Djson=[bool]                Build boost.json library (default: false)\n  -Dlog=[bool]                 Build boost.log library (default: false)\n  -Dnowide=[bool]              Build boost.nowide library (default: false)\n  -Dprocess=[bool]             Build boost.process library (default: false)\n  -Dpython=[bool]              Build boost.python library (default: false)\n  -Drandom=[bool]              Build boost.random library (default: false)\n  -Dregex=[bool]               Build boost.regex library (default: false)\n  -Dserialization=[bool]       Build boost.serialization library (default: false)\n  -Dstacktrace=[bool]          Build boost.stacktrace library (default: false)\n  -Dsystem=[bool]              Build boost.system library (default: false)\n  -Durl=[bool]                 Build boost.url library (default: false)\n  -Dwave=[bool]                Build boost.wave library (default: false)\n  -Dshared=[bool]              Build as shared library (default: false)\n```\n\n\n### or use in new zig project\n\nMake directory and init\n\n```bash\n$ zig init\n## add in 'build.zig.zon' boost-libraries-zig package\n$ zig fetch --save=boost git+https://github.com/allyourcodebase/boost-libraries-zig\n```\nAdd in **build.zig**\n```zig\nconst std = @import(\"std\");\npub fn build(b: *std.Build) !void {\n    const target = b.standardTargetOptions(.{});\n    const optimize = b.standardOptimizeOption(.{});\n\n    const boost_dep = b.dependency(\"boost\", .{\n        .target = target,\n        .optimize = optimize,\n    });\n    const boost_artifact = boost_dep.artifact(\"boost\");\n\n    for(boost_artifact.root_module.include_dirs.items) |include_dir| {\n        try exe.root_module.include_dirs.append(b.allocator, include_dir);\n    }\n    // if not header-only, link library\n    exe.linkLibrary(boost_artifact);\n}\n```\n\n## How update zon dependencies\n\nOpen [`update_zon.zig`](update_zon.zig) and change `const boost_version = \"boost-version-tagged\";` or add/sub url in `git_urls` list.\n\n```bash\nzig run -fsingle-threaded update_zon.zig\n```\n\n## License\n\nsee: [LICENSE](LICENSE)\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
   "releases": [
+    {
+      "tag_name": "boost-1.90.0",
+      "name": "boost-1.90.0",
+      "body": "Tested on Zig version: 0.16.x\r\n\r\nBased on: https://www.boost.org/users/history/version_1_90_0.html\r\n\r\n```bash\r\nzig fetch --save=boost https://github.com/allyourcodebase/boost-libraries-zig/archive/refs/tags/boost-1.90.0.tar.gz\r\n```\r\n**Full Changelog**: https://github.com/allyourcodebase/boost-libraries-zig/compare/boost-1.89.0...boost-1.90.0",
+      "prerelease": false,
+      "published_at": "2026-01-23T18:59:29Z",
+      "html_url": "https://github.com/allyourcodebase/boost-libraries-zig/releases/tag/boost-1.90.0",
+      "assets": []
+    },
     {
       "tag_name": "boost-1.89.0",
       "name": "boost-1.89.0",
