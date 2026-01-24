@@ -15,12 +15,12 @@
   "stars": 102,
   "forks": 17,
   "watchers": 1,
-  "updated_at": "2026-01-24T10:48:33Z",
+  "updated_at": "2026-01-24T22:21:53Z",
   "dependencies": [
     {
       "name": "glfw_zig",
-      "url": "git+https://github.com/tiawl/glfw.zig?ref=vulkan.zig-v1.4.340#a9a36a37111c6c13be0feded8ef9fb9bf5193d99",
-      "hash": "glfw_zig-1.0.0-NrvYo-bXGQDIROPNQU3bpqFp0fpNUz8JeADGIYaeKbRz"
+      "url": "git+https://github.com/tiawl/glfw.zig?ref=vulkan.zig-v1.4.341#2815c42d2a0a7e7936bc2094b0547e53ec2b484d",
+      "hash": "glfw_zig-1.0.0-NrvYo-bXGQBIe3316R8aIKJrwvQvdeIet-hYcINGNa5g"
     },
     {
       "name": "sdl",
