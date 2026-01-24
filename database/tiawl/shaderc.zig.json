@@ -14,7 +14,7 @@
   "stars": 7,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-01-23T14:32:24Z",
+  "updated_at": "2026-01-24T10:26:54Z",
   "dependencies": [
     {
       "name": "glslang_zig",
