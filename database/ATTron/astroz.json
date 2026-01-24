@@ -16,10 +16,10 @@
     "zig-library",
     "rf"
   ],
-  "stars": 169,
-  "forks": 5,
+  "stars": 203,
+  "forks": 6,
   "watchers": 2,
-  "updated_at": "2026-01-22T02:00:20Z",
+  "updated_at": "2026-01-23T23:51:51Z",
   "dependencies": [
     {
       "name": "cfitsio",
@@ -105,7 +105,7 @@
   "owner_location": "New York, NY",
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 23,
+  "owner_followers": 28,
   "owner_following": 12,
   "owner_created_at": "2015-06-09T21:06:31Z",
   "homepage": "https://attron.github.io/astroz/",
