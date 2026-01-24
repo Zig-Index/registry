@@ -10,7 +10,7 @@
   "stars": 2,
   "forks": 1,
   "watchers": 0,
-  "updated_at": "2026-01-01T17:06:00Z",
+  "updated_at": "2026-01-24T02:50:49Z",
   "dependencies": [
     {
       "name": "example",
@@ -19,7 +19,7 @@
     }
   ],
   "minimum_zig_version": "0.14.1",
-  "readme": "# zig data structures\n\n[![Brainmade](https://brainmade.org/black-logo.svg)](https://brainmade.org)\n\nThis is a compilation of common data structures and trees in Zig. Most of these exist in the Rust ecosystem already (not standardised), so I'm mostly porting them over.\n\nIt's a work in progress, with plans for:\n\n- [x] bitmap\n- [x] bloom filter\n- [ ] cuckoo filter\n- [ ] merkle tree\n- [ ] merkle mountain range (mmr)\n- [ ] sparse merkle tree (smt)\n- [ ] lamport clock\n- [ ] vector clock\n\nNote: I just started writing Zig, so don't expect things to necessarily work as expected.\n",
+  "readme": "# zig data structures\n\nThis is a compilation of common data structures and trees in Zig. Most of these exist in the Rust ecosystem already (not standardised), so I'm mostly porting them over.\n\nIt's a work in progress, with plans for:\n\n+ [x] bitmap\n+ [x] bloom filter\n+ [x] skip list\n+ [ ] ring buffer\n+ [ ] cuckoo filter\n+ [ ] merkle tree\n+ [ ] merkle mountain range (mmr)\n+ [ ] sparse merkle tree (smt)\n+ [ ] lamport clock\n+ [ ] vector clock\n\nNote: I just started writing Zig, so don't expect things to necessarily work as expected.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/66304707?u=8fbe026409d657cee8f454eeb310ce5a111f3be9&v=4",
   "releases": [],
   "owner_bio": "under the bludgeoning of fate, my head is bruised but unbowed",
@@ -27,7 +27,7 @@
   "owner_location": null,
   "owner_blog": "notxorand.dev",
   "owner_twitter_username": "notxorand",
-  "owner_followers": 39,
+  "owner_followers": 40,
   "owner_following": 165,
   "owner_created_at": "2020-06-02T09:19:04Z",
   "license": "MIT",
