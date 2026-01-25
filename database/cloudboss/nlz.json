@@ -1,0 +1,28 @@
+{
+  "name": "nlz",
+  "owner": "cloudboss",
+  "repo": "nlz",
+  "description": "",
+  "type": "package",
+  "topics": [
+    "zig-package",
+    "linux",
+    "netlink",
+    "zig"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-01-25T22:59:47Z",
+  "minimum_zig_version": "0.15.0",
+  "readme": "# nlz\n\nA minimal rtnetlink library for Zig, providing network interface configuration via Linux netlink sockets.\n\n## Features\n\n- **Link operations**: List interfaces, bring up, rename\n- **Address operations**: Add/delete IPv4/IPv6 addresses\n- **Route operations**: Add/delete IPv4/IPv6 routes\n- **Zero-copy parsing**: Message structures reference input buffers\n- **No libc dependency**: Uses Zig's std.os.linux directly\n\n## Installation\n\n```bash\nzig fetch --save git+https://github.com/cloudboss/nlz\n```\n\nThen in `build.zig`:\n\n```zig\nconst nlz = b.dependency(\"nlz\", .{\n    .target = target,\n    .optimize = optimize,\n});\nexe.root_module.addImport(\"nlz\", nlz.module(\"nlz\"));\n```\n\n## Usage\n\n```zig\nconst std = @import(\"std\");\nconst nlz = @import(\"nlz\");\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    // Open a netlink socket\n    var socket = try nlz.Socket.open();\n    defer socket.close();\n\n    // List all network interfaces\n    var links = try socket.getLinks(allocator);\n    defer links.deinit();\n    while (links.next()) |link| {\n        std.debug.print(\"Interface: {s} (index={}, up={}, carrier={})\\n\", .{\n            link.name orelse \"unknown\",\n            link.ifindex(),\n            link.isUp(),\n            link.hasCarrier(),\n        });\n    }\n\n    // Bring interface up (requires CAP_NET_ADMIN)\n    try socket.setLinkUp(2, allocator);\n\n    // Add an IPv4 address\n    try socket.addAddressIPv4(2, .{ 192, 168, 1, 100 }, 24, allocator);\n\n    // Add a default route\n    try socket.addRouteIPv4(2, .{ 0, 0, 0, 0 }, .{ 192, 168, 1, 1 }, 0, allocator);\n\n    // Delete an address\n    try socket.delAddressIPv4(2, .{ 192, 168, 1, 100 }, 24, allocator);\n}\n```\n\n## API Reference\n\n### Socket\n\n| Method | Description |\n|--------|-------------|\n| `open()` | Open a new rtnetlink socket |\n| `close()` | Close the socket |\n| `getLinks()` | List all network interfaces |\n| `setLinkUp(ifindex)` | Bring an interface up |\n| `setLinkName(ifindex, name)` | Rename an interface |\n| `getAddresses(family)` | Get all addresses (AF_INET or AF_INET6) |\n| `getAddressesFiltered(family, ifindex)` | Get addresses for a specific interface |\n| `addAddressIPv4(ifindex, addr, prefix_len)` | Add an IPv4 address |\n| `addAddressIPv6(ifindex, addr, prefix_len)` | Add an IPv6 address |\n| `delAddressIPv4(ifindex, addr, prefix_len)` | Delete an IPv4 address |\n| `delAddressIPv6(ifindex, addr, prefix_len)` | Delete an IPv6 address |\n| `delAddress(addr_msg)` | Delete using an AddressMessage |\n| `addRouteIPv4(ifindex, dst, gateway, prefix_len)` | Add an IPv4 route |\n| `addRouteIPv6(ifindex, dst, gateway, prefix_len)` | Add an IPv6 route |\n| `delRouteIPv4(ifindex, dst, prefix_len)` | Delete an IPv4 route |\n| `delRouteIPv6(ifindex, dst, prefix_len)` | Delete an IPv6 route |\n\n### LinkMessage\n\n| Field/Method | Description |\n|--------------|-------------|\n| `name` | Interface name (e.g., \"eth0\") |\n| `address` | MAC address bytes |\n| `mtu` | Maximum transmission unit |\n| `carrier` | Carrier status (1 = link detected) |\n| `link_kind` | Virtual interface type |\n| `ifindex()` | Get interface index |\n| `isUp()` | Check if IFF_UP flag is set |\n| `hasCarrier()` | Check if carrier is present |\n| `isVirtual()` | Check if virtual interface |\n| `getMacAddress()` | Get MAC as [6]u8 |\n\n### AddressMessage\n\n| Field/Method | Description |\n|--------------|-------------|\n| `address` | IP address bytes |\n| `local` | Local address (point-to-point) |\n| `broadcast` | Broadcast address |\n| `ifindex()` | Get interface index |\n| `prefixLen()` | Get prefix length (CIDR) |\n| `family()` | Get address family |\n| `isIPv4()` | Check if IPv4 |\n| `isIPv6()` | Check if IPv6 |\n| `getIPv4Address()` | Get as [4]u8 |\n| `getIPv6Address()` | Get as [16]u8 |\n\n### RouteMessage\n\n| Field/Method | Description |\n|--------------|-------------|\n| `dst` | Destination address bytes |\n| `gateway` | Gateway address bytes |\n| `oif` | Output interface index |\n| `family()` | Get address family |\n| `dstLen()` | Get destination prefix length |\n| `isDefaultRoute()` | Check if default route (prefix_len=0) |\n| `getIPv4Dst()` | Get destination as [4]u8 |\n| `getIPv4Gateway()` | Get gateway as [4]u8 |\n\n## Requirements\n\n- Linux kernel 2.6.14+ (netlink sockets)\n- CAP_NET_ADMIN capability for modifying network configuration\n- Zig 0.15.0+\n\n## License\n\nMIT\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/15853060?v=4",
+  "releases": [],
+  "owner_bio": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2015-11-15T03:30:33Z",
+  "license": "MIT",
+  "category": "library"
+}
