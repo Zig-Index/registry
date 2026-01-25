@@ -11,10 +11,10 @@
     "rest",
     "dependency-injection"
   ],
-  "stars": 567,
+  "stars": 568,
   "forks": 20,
   "watchers": 6,
-  "updated_at": "2026-01-25T14:57:57Z",
+  "updated_at": "2026-01-25T21:28:59Z",
   "dependencies": [
     {
       "name": "httpz",

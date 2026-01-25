@@ -1,0 +1,24 @@
+{
+  "name": "dhcpz",
+  "owner": "cloudboss",
+  "repo": "dhcpz",
+  "description": "",
+  "type": "package",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-01-25T21:48:14Z",
+  "minimum_zig_version": "0.15.2",
+  "readme": "# dhcpz\n\nA DHCP protocol library for Zig.\n\n## Installation\n\n```bash\nzig fetch --save git+https://github.com/cloudboss/dhcpz\n```\n\nThen in your `build.zig`:\n\n```zig\nconst dhcpz = b.dependency(\"dhcpz\", .{\n    .target = target,\n});\nexe.root_module.addImport(\"dhcpz\", dhcpz.module(\"dhcpz\"));\n```\n\n## Example\n\n```zig\nconst std = @import(\"std\");\nconst v4 = @import(\"dhcpz\").v4;\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    // Create DHCPDISCOVER\n    const mac = [6]u8{ 0x02, 0x00, 0x00, 0x00, 0x00, 0x01 };\n    var discover = try v4.createDiscover(allocator, 0x12345678, mac);\n    defer discover.deinit();\n\n    // Encode to bytes\n    var buf: [1500]u8 = undefined;\n    const len = try discover.encode(&buf);\n\n    // Send buf[0..len] over UDP to port 67...\n\n    // Decode response\n    var response = try v4.Message.decode(allocator, received_data);\n    defer response.deinit();\n\n    // Check message type\n    if (response.options.getMessageType()) |msg_type| {\n        if (msg_type == .offer) {\n            // Handle DHCPOFFER\n            const offered_ip = response.yiaddr;\n            const subnet = response.options.get(.subnet_mask);\n            const gateway = response.options.get(.router);\n            // ...\n        }\n    }\n}\n```\n\n## API\n\nAll DHCPv4 types are under `dhcpz.v4`.\n\n### Types\n\n- `v4.Message` - DHCP message with header fields and options\n- `v4.Option` - Tagged union of all supported option types\n- `v4.MessageType` - DISCOVER, OFFER, REQUEST, ACK, NAK, etc.\n- `v4.OptionCode` - Option type codes\n- `v4.Ipv4Addr` - `[4]u8` alias for IPv4 addresses\n\n### Functions\n\n- `v4.createDiscover(allocator, xid, mac)` - Create DHCPDISCOVER message\n- `v4.createRequest(allocator, xid, mac, requested_ip, server_id)` - Create DHCPREQUEST message\n\n### Message Methods\n\n- `Message.init(allocator)` - Create empty message\n- `Message.deinit()` - Free all allocated memory\n- `Message.encode(buf)` - Encode to bytes, returns length\n- `Message.decode(allocator, data)` - Decode from bytes\n- `Message.setXid(xid)` - Set transaction ID\n- `Message.setChaddr(mac)` - Set client hardware address\n- `Message.setBroadcast(bool)` - Set broadcast flag\n\n### Options Methods\n\n- `Options.append(option)` - Add an option (takes ownership of slice data)\n- `Options.get(tag)` - Get option by tag, returns payload or null\n- `Options.getMessageType()` - Convenience for getting message type\n\n## Building\n\n```bash\nzig build test\n```\n\n## License\n\nMIT\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/15853060?v=4",
+  "releases": [],
+  "owner_bio": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2015-11-15T03:30:33Z",
+  "category": "library"
+}
