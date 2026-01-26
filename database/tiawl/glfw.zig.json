@@ -14,7 +14,7 @@
   "stars": 24,
   "forks": 5,
   "watchers": 2,
-  "updated_at": "2026-01-24T10:49:07Z",
+  "updated_at": "2026-01-26T19:02:41Z",
   "dependencies": [
     {
       "name": "toolbox",
@@ -28,7 +28,7 @@
     },
     {
       "name": "X11_zig",
-      "url": "git+https://github.com/tiawl/X11.zig?ref=xorgproto-2025.1#ad7242012c1511ee97d7e10f8c03bf6d31729416",
+      "url": "git+https://github.com/tiawl/X11.zig?ref=libXext-1.3.7#a7ae948e364a3105ea3157128239c8c818c68352",
       "hash": "X11_zig-1.0.0-UuAzbMxlwADqtBm9hneM2bqQO_Tj0yovhrifMM8OCWOd"
     },
     {
