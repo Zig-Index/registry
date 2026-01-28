@@ -13,7 +13,7 @@
   "stars": 4,
   "forks": 2,
   "watchers": 2,
-  "updated_at": "2026-01-26T22:43:23Z",
+  "updated_at": "2026-01-28T00:11:10Z",
   "readme": "# Zig MaxMind DB Reader\n\nThis Zig package reads the [MaxMind DB format](https://maxmind.github.io/MaxMind-DB/).\nIt's based on [maxminddb-rust](https://github.com/oschwald/maxminddb-rust) implementation.\n\nYou'll need [MaxMind-DB/test-data](https://github.com/maxmind/MaxMind-DB/tree/main/test-data) to run examples and tests.\n\n```sh\n$ git submodule update --init\n$ zig build test\n$ zig build example_lookup\nzh-CN = 瑞典\nde = Schweden\npt-BR = Suécia\nes = Suecia\nen = Sweden\nru = Швеция\nfr = Suède\nja = スウェーデン王国\n```\n\n## Quick start\n\nAdd maxminddb.zig as a dependency in your `build.zig.zon`.\n\n```sh\n$ zig fetch --save git+https://github.com/marselester/maxminddb.zig#master\n```\n\nAdd the `maxminddb` module as a dependency in your `build.zig`:\n\n```zig\nconst mmdb = b.dependency(\"maxminddb\", .{\n    .target = target,\n    .optimize = optimize,\n});\nexe.root_module.addImport(\"maxminddb\", mmdb.module(\"maxminddb\"));\n```\n\nSee [examples](./examples/).\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/823099?u=ee49298bc428c65e9b447fd48ad6ed919e0b43b2&v=4",
   "releases": [],
