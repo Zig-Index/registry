@@ -19,7 +19,7 @@
   "stars": 115,
   "forks": 10,
   "watchers": 3,
-  "updated_at": "2026-01-28T08:23:01Z",
+  "updated_at": "2026-01-29T16:39:52Z",
   "dependencies": [
     {
       "name": "httpz",
@@ -982,7 +982,7 @@
   "owner_location": "Bangladesh",
   "owner_blog": "nurulhudaapon.com",
   "owner_twitter_username": "nurulhudaapon",
-  "owner_followers": 111,
+  "owner_followers": 110,
   "owner_following": 41,
   "owner_created_at": "2019-09-17T04:00:11Z",
   "homepage": "https://ziex.dev/",
