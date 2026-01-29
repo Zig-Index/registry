@@ -10,10 +10,10 @@
     "zig-library",
     "zig-package"
   ],
-  "stars": 2,
+  "stars": 4,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-01-29T18:44:19Z",
+  "updated_at": "2026-01-29T22:32:23Z",
   "dependencies": [
     {
       "name": "example",
@@ -30,7 +30,7 @@
   "owner_location": null,
   "owner_blog": "felixutong.vercel.app",
   "owner_twitter_username": "felixutong",
-  "owner_followers": 5,
+  "owner_followers": 6,
   "owner_following": 6,
   "owner_created_at": "2024-11-03T17:28:31Z",
   "category": "library"
