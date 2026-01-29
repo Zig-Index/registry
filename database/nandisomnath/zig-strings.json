@@ -13,7 +13,7 @@
   "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-01-23T06:30:01Z",
+  "updated_at": "2026-01-29T05:36:52Z",
   "dependencies": [
     {
       "name": "example",
@@ -24,6 +24,15 @@
   "minimum_zig_version": "0.14.0",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/123479436?u=fe679fe7b41a3c43c5c74fef70ac05926e3c2043&v=4",
   "releases": [
+    {
+      "tag_name": "v0.3.1",
+      "name": "v0.3.1",
+      "body": "- Fixing docs error \r\n\r\n**Full Changelog**: https://github.com/nandisomnath/zig-strings/compare/v0.3.0...v0.3.1",
+      "prerelease": false,
+      "published_at": "2026-01-29T05:30:20Z",
+      "html_url": "https://github.com/nandisomnath/zig-strings/releases/tag/v0.3.1",
+      "assets": []
+    },
     {
       "tag_name": "v0.3.0",
       "name": "v0.3.0",
@@ -51,7 +60,7 @@
   "owner_followers": 3,
   "owner_following": 4,
   "owner_created_at": "2023-01-24T14:31:55Z",
-  "homepage": "https://nandisomnath.github.io/zig-strings/v0.3.0",
+  "homepage": "https://nandisomnath.github.io/zig-strings/v0.3.1",
   "license": "MIT",
   "category": "library"
 }
