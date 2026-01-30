@@ -10,7 +10,7 @@
   "stars": 10,
   "forks": 2,
   "watchers": 5,
-  "updated_at": "2026-01-26T22:31:23Z",
+  "updated_at": "2026-01-30T01:25:58Z",
   "dependencies": [
     {
       "name": "pcre2",
@@ -32,8 +32,8 @@
     },
     {
       "name": "zlinter",
-      "url": "git+https://github.com/kurtwagner/zlinter?ref=master#be35c4d432ea9362159d48ebf5e51972f0b5eea8",
-      "hash": "zlinter-0.0.1-OjQ08Y-qCwApKbGny8tTCsF5arUiSgCoWtP0XXh-vPwM"
+      "url": "git+https://github.com/kurtwagner/zlinter?ref=master#4d63663f6f18198875c1ecb26fc4c941cb38076e",
+      "hash": "zlinter-0.0.1-OjQ08Q55CwBuMIOPT6Fyf1v5iRyrQ--JSwevn8WStc-D"
     }
   ],
   "minimum_zig_version": "0.16.0-dev.1657+985a3565c",

@@ -16,10 +16,10 @@
     "zig-library",
     "rf"
   ],
-  "stars": 215,
-  "forks": 6,
+  "stars": 217,
+  "forks": 9,
   "watchers": 2,
-  "updated_at": "2026-01-29T08:46:36Z",
+  "updated_at": "2026-01-29T23:40:29Z",
   "dependencies": [
     {
       "name": "cfitsio",
@@ -28,8 +28,8 @@
     },
     {
       "name": "zignal",
-      "url": "git+https://github.com/bfactory-ai/zignal#981b576f7e76099c4dee623c569c77ce2e62bb73",
-      "hash": "zignal-0.10.0-dev-OrZ3s1_0JQAZVpXgsqjgcvAHGayjOFzCRlKxVdy3T6yp"
+      "url": "git+https://github.com/arrufat/zignal#2db97fcf6b95222b9c0568a129f93d1a72f5f494",
+      "hash": "zignal-0.10.0-dev-OrZ3sxJyJgATX9TyC9k2sFPlGmwaMav02bCxSKQvyfZr"
     }
   ],
   "minimum_zig_version": "0.16.0-dev.1976+8e091047b",
@@ -123,7 +123,7 @@
   "owner_location": "New York, NY",
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 31,
+  "owner_followers": 32,
   "owner_following": 12,
   "owner_created_at": "2015-06-09T21:06:31Z",
   "homepage": "https://attron.github.io/astroz/",
