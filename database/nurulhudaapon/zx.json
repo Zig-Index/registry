@@ -19,7 +19,7 @@
   "stars": 115,
   "forks": 10,
   "watchers": 3,
-  "updated_at": "2026-01-29T16:39:52Z",
+  "updated_at": "2026-01-31T18:21:14Z",
   "dependencies": [
     {
       "name": "httpz",
@@ -977,7 +977,7 @@
       ]
     }
   ],
-  "owner_bio": "Staff Engineer & Undergrad Student",
+  "owner_bio": "Staff Engineer at Voyage Mobile Inc",
   "owner_company": "@voyagemobile & @liverecover",
   "owner_location": "Bangladesh",
   "owner_blog": "nurulhudaapon.com",
