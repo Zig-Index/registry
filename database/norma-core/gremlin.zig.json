@@ -26,10 +26,10 @@
       "assets": []
     }
   ],
-  "owner_bio": null,
+  "owner_bio": "",
   "owner_location": null,
   "owner_blog": null,
-  "owner_twitter_username": null,
+  "owner_twitter_username": "norma_core_dev",
   "owner_created_at": "2025-12-20T20:29:42Z",
   "license": "MIT",
   "category": "library"
