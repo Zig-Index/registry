@@ -8,15 +8,15 @@
     "zig",
     "zig-package"
   ],
-  "stars": 72,
+  "stars": 73,
   "forks": 2,
   "watchers": 2,
-  "updated_at": "2025-12-05T19:18:11Z",
+  "updated_at": "2026-02-01T11:56:42Z",
   "dependencies": [
     {
       "name": "parg",
-      "url": "git+https://github.com/judofyr/parg.git#0c8a79749b13d111eb1484f89c4eb3501248a2e3",
-      "hash": "parg-0.0.0-dOPWZPhYAAAX2bzGpU0RFDnEOCq-GBidEJYv1owRws8o"
+      "url": "https://github.com/judofyr/parg/archive/8c4af60afdb3ad211ad12cd329c2859f8593af19.tar.gz",
+      "hash": "parg-0.0.0-dOPWZENZAAAAyp9Lz-4zKPZ8PD7DEwUCEsiw6Y1UR_bA"
     }
   ],
   "minimum_zig_version": "0.11.0",
@@ -27,7 +27,7 @@
   "owner_location": "Oslo, Norway",
   "owner_blog": "http://judofyr.net",
   "owner_twitter_username": null,
-  "owner_followers": 570,
+  "owner_followers": 569,
   "owner_following": 56,
   "owner_created_at": "2008-02-20T16:48:23Z",
   "license": "0BSD",
