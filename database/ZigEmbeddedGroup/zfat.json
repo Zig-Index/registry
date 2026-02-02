@@ -11,17 +11,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 20,
+  "stars": 22,
   "forks": 8,
   "watchers": 1,
-  "updated_at": "2025-11-25T19:47:13Z",
-  "dependencies": [
-    {
-      "name": "fatfs",
-      "url": "http://elm-chan.org/fsw/ff/arc/ff15a.zip",
-      "hash": "N-V-__8AAFQITQCnpmdR7PARImvk-cgb-9lZmjKolexSWkUL"
-    }
-  ],
+  "updated_at": "2026-02-02T19:51:59Z",
   "readme": "# zfat\n\nBindings for the [FatFs](http://elm-chan.org/fsw/ff/00index_e.html) library\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/80392719?v=4",
   "releases": [],
