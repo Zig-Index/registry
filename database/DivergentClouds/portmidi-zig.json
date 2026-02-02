@@ -12,7 +12,7 @@
     "zig-package"
   ],
   "stars": 4,
-  "forks": 1,
+  "forks": 2,
   "watchers": 1,
   "updated_at": "2025-08-02T08:15:09Z",
   "readme": "# portmidi-zig\nA Zig wrapper for PortMidi\n\n## Dependencies\n- [PortMidi](https://github.com/PortMidi/portmidi/)\n  - Made for [commit 103beb1](https://github.com/PortMidi/portmidi/tree/103beb136ca9833d47d3f3a150364330d78638e7), other versions may or may not work.\n\n## See also\n- [porttime-zig](https://github.com/DivergentClouds/porttime-zig)\n",
