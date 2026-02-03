@@ -22,6 +22,15 @@
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/231785?u=8a0cdeb97b0a614b0350536ecd6921ee6166c611&v=4",
   "releases": [
     {
+      "tag_name": "v0.1.8",
+      "name": "Use types as minor union tags",
+      "body": "This update exploits one of Zig's distinctive features, allowing\r\nany string to serve as an identifier using `@\"at syntax\"`, to reuse\r\nas tags the actual definition of the types they refer to.\r\n\r\nThis greatly improves the readability of generated code, which, as\r\nZig presently lacks a facility to map generated code in errors etc.\r\nback to its origin, is expected to substantially ameliorate the impact\r\nof that deficit on debugging of Zitron parsers.",
+      "prerelease": false,
+      "published_at": "2026-02-03T15:11:58Z",
+      "html_url": "https://github.com/mnemnion/zitron/releases/tag/v0.1.8",
+      "assets": []
+    },
+    {
       "tag_name": "v0.1.7",
       "name": "Correctly handle whitespace padding in %extra-type declarations",
       "body": "Before this release, any left-side whitespace as in\r\n\r\n    %extra_context {  foo: *Bar }\r\n\r\nWould result in attempting to use the variable name `foo:`.  A shallow bug, which could be worked around by removing the whitespace.  But this is no longer necessary as of `v0.1.7`.",

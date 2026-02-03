@@ -17,7 +17,7 @@
   "updated_at": "2025-09-14T08:41:09Z",
   "minimum_zig_version": "0.13.0",
   "readme": "# 🔺asciitecture\nA simple text-based graphics game library for zig . Currently, it only supports Linux. \n\n![example](https://github.com/user-attachments/assets/9630f70f-e137-428e-af28-495cd8116b4e)\n\n### Dependencies\n- zig 0.13.0\n- libc\n- libx11-dev\n- libxrandr-dev\n\n### Run example\n```zig build example```\n\n### Run tests\n```zig build test```\n\n### Todo\n- [ ] Add alpha blending\n- [ ] Update Color struct\n- [ ] Add more tests and docs\n- [ ] Add Windows support\n- [ ] Add grapheme clusters\n",
-  "owner_avatar_url": "https://avatars.githubusercontent.com/u/72736082?u=4df0986902b2927b8ae35415761c9ccc9a109551&v=4",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/72736082?v=4",
   "releases": [
     {
       "tag_name": "asciitecture-0.2.0",

@@ -19,6 +19,15 @@
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/96352918?v=4",
   "releases": [
     {
+      "tag_name": "v2024.1.10-zig0",
+      "name": "v2024.1.10-zig0",
+      "body": "Updated to Wwise 2024.1.10 and Zig 0.15.2",
+      "prerelease": false,
+      "published_at": "2026-02-03T14:23:32Z",
+      "html_url": "https://github.com/Cold-Bytes-Games/wwise-zig/releases/tag/v2024.1.10-zig0",
+      "assets": []
+    },
+    {
       "tag_name": "v2024.1.7-zig0",
       "name": "v2024.1.7-zig0",
       "body": "* Updated to Wwise 2014.1.7\r\n* Removed usage of `usingnamespace` in preparation for Zig 0.15",
@@ -187,15 +196,6 @@
       "prerelease": false,
       "published_at": "2024-02-25T22:17:35Z",
       "html_url": "https://github.com/Cold-Bytes-Games/wwise-zig/releases/tag/v2023.1.1-zig0",
-      "assets": []
-    },
-    {
-      "tag_name": "v2023.1.0-zig0",
-      "name": "v2023.1.0-zig0",
-      "body": "Support for Wwise 2023.1.0\r\n",
-      "prerelease": false,
-      "published_at": "2024-02-25T21:45:22Z",
-      "html_url": "https://github.com/Cold-Bytes-Games/wwise-zig/releases/tag/v2023.1.0-zig0",
       "assets": []
     }
   ],
