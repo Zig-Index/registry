@@ -2,18 +2,19 @@
   "name": "zsdl3",
   "owner": "felixuxx",
   "repo": "zsdl3",
-  "description": "zig bindings for low-level access to sdl3's multimedia capabilities for game and application development. ",
+  "description": "high quality zig bindings for low-level access to sdl3's multimedia capabilities for game and application development. ",
   "type": "package",
   "topics": [
     "sdl3",
     "zig",
     "zig-library",
-    "zig-package"
+    "zig-package",
+    "gamedev"
   ],
-  "stars": 6,
+  "stars": 9,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-01-30T11:41:43Z",
+  "updated_at": "2026-02-02T18:44:17Z",
   "dependencies": [
     {
       "name": "example",

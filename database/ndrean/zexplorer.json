@@ -12,12 +12,13 @@
     "css-sanitization",
     "html-parser",
     "javascript-tools",
-    "sanitize-html"
+    "sanitize-html",
+    "quickjs-ng"
   ],
   "stars": 5,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-02-03T00:16:15Z",
+  "updated_at": "2026-02-03T07:58:11Z",
   "dependencies": [
     {
       "name": "curl",

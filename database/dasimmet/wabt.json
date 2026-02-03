@@ -11,10 +11,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 8,
+  "stars": 9,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-01-04T17:54:08Z",
+  "updated_at": "2026-01-24T15:27:08Z",
   "dependencies": [
     {
       "name": "wabt",

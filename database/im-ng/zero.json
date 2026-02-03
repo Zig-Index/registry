@@ -8,12 +8,18 @@
     "zig",
     "zig-package",
     "zig-lang",
-    "zig-library"
+    "zig-library",
+    "api",
+    "microservices",
+    "rest-api",
+    "web",
+    "webframework",
+    "ziglang"
   ],
-  "stars": 10,
+  "stars": 13,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-01-11T19:01:45Z",
+  "updated_at": "2026-01-30T01:45:35Z",
   "dependencies": [
     {
       "name": "dotenv",
@@ -115,9 +121,9 @@
   "owner_location": "Coimbatore",
   "owner_blog": null,
   "owner_twitter_username": "nagendhiran_",
-  "owner_followers": 4,
+  "owner_followers": 5,
   "owner_following": 14,
   "owner_created_at": "2012-07-25T09:57:32Z",
   "homepage": "http://zerofmk.in",
-  "category": "library"
+  "category": "web"
 }

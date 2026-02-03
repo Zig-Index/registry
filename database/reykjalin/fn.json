@@ -10,10 +10,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 7,
+  "stars": 8,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-12-30T09:46:16Z",
+  "updated_at": "2026-02-01T20:16:15Z",
   "dependencies": [
     {
       "name": "log_to_file",
