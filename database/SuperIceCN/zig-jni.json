@@ -13,10 +13,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 29,
+  "stars": 30,
   "forks": 3,
   "watchers": 1,
-  "updated_at": "2025-12-01T11:23:30Z",
+  "updated_at": "2026-01-30T21:09:38Z",
   "minimum_zig_version": "0.14.0",
   "readme": "# Zig-JNI\n\nZig-JNI is a thin wrapper around the Java Native Interface (JNI) for the Zig programming language. It is designed to be a simple and easy-to-use interface for implementing Java native methods in Zig.\n\nPlease note that this project is **still in the early stages** of development, and it is **not** yet ready for production use. This project was initially created as a part of another project of mine which provides a write-one-run-anywhere solution for GPGPU programming using java language, and I will continue to improve it as I work on that project.\n\nSince this project is licensed under the MIT license, you are free to use it in your own projects, but please be aware that it is still a work in progress, and it may contain bugs or other issues. If you encounter any problems, please feel free to open an issue or submit a pull request.\n\n## Why Zig?\n\nZig is a modern, general-purpose programming language with a focus on safety, performance, and simplicity. It is designed to be a better C, and it is a great fit for implementing native methods in Java.  \n\nThe important features of Zig, especially for JNI development, are:\n\n- **First-class support for cross-compilation**: Zig can compile code for any platform from any platform, and it can do so with a single command. This makes it easy to build JNI libraries for multiple platforms from a single machine.\n- **No runtime**: Zig has no runtime, and it does not require a runtime to be present on the target system. This makes it easy to build small, self-contained JNI libraries that can be easily distributed and used.\n- **C & C++ interoperability**: Zig has first-class support for interoperating with C and C++ code, which makes it easy to work with the JNI API and other C libraries.\n\n## Platform Support\n\n| | Linux | Windows | macOS |\n| --- | --- | --- | --- |\n| x86_64 | ✅ | ✅ | ✅ |\n| aarch64 | ✅ | ❓ | ❓ |\n| armv7 | ❓ | ❌ | ❌ |\n\n- ✅ Supported\n- ❓ Untested, but should work\n- ❌ Not supported\n\n## Import the library\n\n**First**, add Zig-JNI to your `build.zig.zon` file (Don't forget to replace `{VERSION}` with the version you want to use) :  \n\n```zon\n.{\n    .name = \"...\",\n    .version = \"...\",\n    .dependencies = .{\n        .jni = .{\n            .url = \"https://github.com/SuperIceCN/Zig-JNI/archive/refs/tags/{VERSION}.tar.gz\",\n        }\n    },\n}\n```\n\n**Second**, Run zig build in your project, and the compiler will instruct you to add a .hash = \"...\" field next to .url. The instruction will look like this:\n\n```\nnote: expected .hash = \"1220a61eebdcda95a9e51e2a4f237522d407a0404aea4225fc27b2bb1d32f27edf9c\",\n```\n\n**Third**, use the dependency in your `build.zig` :\n\n```zig\npub fn build(b: *std.Build) void {\n    // depdencies\n    const dep_JNI = b.dependency(\"jni\", .{}).module(\"JNI\");\n    // ...\n    artifact.root_module.addImport(\"jni\", dep_JNI); \n    // here artifact is the return value of b.addExecutable / b.addSharedLibrary / b.addStaticLibrary\n    // ...\n}\n```\n\n## Example\n\nHere is a simple example of how to use Zig-JNI to implement a native method in Java:\n\n`com/example/SimpleAdd.java` :  \n\n```java\npackage com.example;\n\npublic class SimpleAdd {\n    static {\n        System.load(\"/path/to/shared_librarys.so\");\n    }\n\n    private static native int add(int a, int b);\n\n    public static void main(String[] args) {\n        var a = Integer.parseInt(args[0]);\n        var b = Integer.parseInt(args[1]);\n        System.out.println(\"Answer: \" + add(a, b));\n    }\n}\n```\n\n`SimpleAdd.zig` :  \n\n```zig\nconst std = @import(\"std\");\nconst jni = @import(\"jni\");\n\npub fn add(cEnv: *jni.cEnv, _: jni.jclass, a: jni.jint, b: jni.jint) callconv(.C) jni.jint {\n    return a + b;\n}\n```\n\n`root.zig` :  \n\n```zig\nconst jni = @import(\"jni\");\n\ncomptime {\n    jni.exportJNI(\"com.example.SimpleAdd\", @import(\"SimpleAdd.zig\"));\n}\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/51087818?u=0fc6c0384c7e18284fba4b837ed2a01d494ed0f3&v=4",
@@ -107,8 +107,8 @@
   "owner_location": "Guangzhou, China",
   "owner_blog": "superice.dev",
   "owner_twitter_username": null,
-  "owner_followers": 43,
-  "owner_following": 6,
+  "owner_followers": 44,
+  "owner_following": 7,
   "owner_created_at": "2019-05-27T14:14:57Z",
   "license": "MIT",
   "category": "library"

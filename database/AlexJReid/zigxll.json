@@ -64,12 +64,13 @@
       "assets": []
     }
   ],
+  "owner_bio": "go, zig, c++, lua",
   "owner_company": "Lexvica Limited",
   "owner_location": "Newcastle, UK",
   "owner_blog": "https://xllify.com",
   "owner_twitter_username": "alexjreid",
   "owner_followers": 9,
-  "owner_following": 6,
+  "owner_following": 7,
   "owner_created_at": "2011-09-19T15:12:09Z",
   "license": "MIT",
   "category": "library"

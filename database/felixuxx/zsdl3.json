@@ -11,10 +11,10 @@
     "zig-package",
     "gamedev"
   ],
-  "stars": 9,
+  "stars": 10,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-02-02T18:44:17Z",
+  "updated_at": "2026-02-03T18:49:07Z",
   "dependencies": [
     {
       "name": "example",

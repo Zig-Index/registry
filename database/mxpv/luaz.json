@@ -12,10 +12,10 @@
     "zig-package",
     "zig-lib"
   ],
-  "stars": 33,
+  "stars": 34,
   "forks": 1,
   "watchers": 0,
-  "updated_at": "2026-01-17T07:27:07Z",
+  "updated_at": "2026-01-27T18:00:43Z",
   "dependencies": [
     {
       "name": "luau",
@@ -87,7 +87,7 @@
   "owner_location": "Seattle, WA",
   "owner_blog": null,
   "owner_twitter_username": "mak_pav",
-  "owner_followers": 245,
+  "owner_followers": 250,
   "owner_following": 12,
   "owner_created_at": "2011-06-21T21:02:30Z",
   "homepage": "https://mxpv.github.io/luaz/",

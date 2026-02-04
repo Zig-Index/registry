@@ -16,10 +16,10 @@
     "zig-package",
     "ziglang"
   ],
-  "stars": 31,
-  "forks": 0,
-  "watchers": 4,
-  "updated_at": "2025-11-30T10:33:45Z",
+  "stars": 37,
+  "forks": 1,
+  "watchers": 3,
+  "updated_at": "2026-01-19T13:17:20Z",
   "dependencies": [
     {
       "name": "emsdk",
@@ -40,7 +40,7 @@
   "owner_location": "Breda, the Netherlands",
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 54,
+  "owner_followers": 57,
   "owner_following": 4,
   "owner_created_at": "2015-03-24T09:20:23Z",
   "license": "MIT",
