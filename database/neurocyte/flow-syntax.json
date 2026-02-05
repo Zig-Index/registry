@@ -12,7 +12,7 @@
   "stars": 17,
   "forks": 12,
   "watchers": 1,
-  "updated_at": "2025-12-24T12:15:54Z",
+  "updated_at": "2026-02-05T08:38:45Z",
   "dependencies": [
     {
       "name": "tree_sitter",
@@ -25,7 +25,7 @@
       "hash": "cbor-1.0.0-RcQE_AswAQAPlqBCZXYQf9DZXn-0Ubt8Mk03ZcJWcsAG"
     }
   ],
-  "minimum_zig_version": "0.15.0",
+  "minimum_zig_version": "0.15.2",
   "readme": "# flow-syntax\nSyntax highlighting module used by [flow](https://github.com/neurocyte/flow), [zat](https://github.com/neurocyte/zat) and [zine](https://github.com/kristoff-it/zine)\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/1552770?u=5c42562ca7bf8db5e586c5f373541572957629fe&v=4",
   "releases": [],
