@@ -2,7 +2,7 @@
   "name": "lifetch",
   "owner": "nuIIpointerexception",
   "repo": "lifetch",
-  "description": "a hyperfast system fetching utility 🏃 💨",
+  "description": "system fetching made fast",
   "type": "package",
   "topics": [
     "neofetch",
@@ -13,8 +13,9 @@
   "stars": 1,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-03-01T01:30:32Z",
-  "readme": "# lifetch\n\nthe fastest way to fetch your system info!\n\n```bash\n ~ zig build --release=fast && hyperfine --warmup 10 --runs 1000 'zig-out/bin/lifetch'\nBenchmark 1: zig-out/bin/lifetch\n  Time (mean ± σ):     264.4 µs ± 144.3 µs    [User: 253.7 µs, System: 492.1 µs]\n  Range (min … max):     0.0 µs … 906.6 µs    1000 runs\n```\n\n## tested on\n\n- archlinux\n\nmore to come!\n\n## config\n\ngenerated inside your home directory at\n`~/.config/lifetch/config.ini`\n\ndefault config can also be found [here](config.ini)\n\n## installing from package managers\n\nAUR:\n```bash\nparu -S lifetch-git\n```\n\n## building from src\n\n## prerequisites\n\n- [zig master](https://ziglang.org/)\n\ni recommend installing `zig-nightly-bin` from the aur if you are on archlinux.\n\n## building\n\n```bash\nzig build --release=fast\n```\n\n## running\n\n```bash\nzig build run --release=fast\n```\n",
+  "updated_at": "2026-02-05T01:04:44Z",
+  "minimum_zig_version": "0.16.0",
+  "readme": "# lifetch\n\nthe fastest way to fetch your system info!\n\n```bash\n ~ zig build --release=fast && hyperfine --warmup 10 --runs 1000 'zig-out/bin/lifetch'\nBenchmark 1: zig-out/bin/lifetch\n  Time (mean ± σ):     264.4 µs ± 144.3 µs    [User: 253.7 µs, System: 492.1 µs]\n  Range (min … max):     0.0 µs … 906.6 µs    1000 runs\n```\n\n## tested on\n\n- archlinux\n- voidlinux\n\n## config\n\ngenerated inside your home directory at\n`~/.config/lifetch/config.ini`\n\ndefault config can also be found [here](config.ini)\n\n## installing from package managers\n\nAUR:\n```bash\nparu -S lifetch-git\n```\n\n## building from src\n\n## prerequisites\n\n- [zig master](https://ziglang.org/) or later\n\n\n## building\n\n```bash\nzig build --release=fast\n```\n\n## running\n\n```bash\nzig build run --release=fast\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/61627919?u=69470a02d9e96bb8759d2f0dfc69ef800e58d2e6&v=4",
   "releases": [
     {
