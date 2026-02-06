@@ -16,7 +16,7 @@
   "stars": 25,
   "forks": 1,
   "watchers": 2,
-  "updated_at": "2026-01-22T03:38:34Z",
+  "updated_at": "2026-02-06T17:46:30Z",
   "dependencies": [
     {
       "name": "chilli",
@@ -25,13 +25,13 @@
     },
     {
       "name": "bdwgc",
-      "url": "https://github.com/ivmai/bdwgc/archive/refs/heads/master.tar.gz",
-      "hash": "bdwgc-8.3.0-8obE-I-ULgDCD4fx03oanMA_7raEBnQ-xxopQ_IHIy5J"
+      "url": "https://github.com/bdwgc/bdwgc/archive/refs/tags/v8.2.12.tar.gz",
+      "hash": "N-V-__8AACFbLwCc_S3bi22OQGduAL6tPehcttjX9PFqjkP-"
     },
     {
       "name": "linenoise",
-      "url": "https://github.com/antirez/linenoise/archive/refs/heads/master.tar.gz",
-      "hash": "N-V-__8AAO4RAQBJwbmiKN_IJKHYhxzcw_bUFkCKLcl1dIr5"
+      "url": "https://github.com/antirez/linenoise/archive/refs/tags/2.0.tar.gz",
+      "hash": "N-V-__8AAJ4HAgCX79UDBfNwhqAqUVoGC44ib6UYa18q6oa_"
     }
   ],
   "minimum_zig_version": "0.15.2",
