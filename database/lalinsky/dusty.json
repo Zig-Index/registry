@@ -7,26 +7,26 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 54,
+  "stars": 57,
   "forks": 2,
   "watchers": 0,
-  "updated_at": "2026-02-01T18:44:42Z",
+  "updated_at": "2026-02-06T07:49:27Z",
   "dependencies": [
     {
       "name": "zio",
-      "url": "git+https://github.com/lalinsky/zio?ref=v0.6.0#1d2bd4ebcc7666b45cc6cc29be547f5addd0fb5d",
-      "hash": "zio-0.6.0-xHbVVKDvFgD-QdmTVTh3RMmvaxyDiO21FbP5njC_VpK7"
+      "url": "git+https://github.com/lalinsky/zio?ref=v0.7.0#7df1afb751a8228560f6a70bc967a602e792e1fc",
+      "hash": "zio-0.7.0-xHbVVBjOFwAnuaSTkhI1Ne9GJPxzm6MBqUo1E7PQQbDe"
     }
   ],
   "minimum_zig_version": "0.15.2",
-  "readme": "Dusty is a HTTP client/server library built on top of [zio](https://github.com/lalinsky/zio) (coroutine/async engine) and [llhttp](https://github.com/nodejs/llhttp) (HTTP parser from NodeJS).\nThe server API is inspired by Karl Seguin's [http.zig](https://github.com/karlseguin/http.zig), and tries to be as compatible as possible. By using a coroutine scheduler under the hood, it's very easy to efficiently wait for a HTTP client request in a HTTP server handler, or perhaps have a long-runing WebSocket session and don't worry about state management between callbacks.\n\n## Features\n- Asynchronous I/O for multiple concurrent connections on a single CPU thread\n- Requests handled in lightweight coroutines\n- Router with support for parameters and wildcards\n- Supports HTTP/1.0 and HTTP/1.1\n- Supports chunked transfer encoding in both request/response bodies\n- Server-Sent Events (SSE) for streaming responses\n- WebSocket support (RFC 6455)\n- Request/keepalive timeouts via coroutine auto-cancellation\n- HTTP/HTTPS client with connection pooling\n\n## Server Example\n\n```zig\nconst std = @import(\"std\");\nconst zio = @import(\"zio\");\nconst http = @import(\"dusty\");\n\nfn handleUser(req: *http.Request, res: *http.Response) !void {\n    const user_id = req.params.get(\"id\") orelse \"guest\";\n    try res.json(.{ .id = user_id, .name = \"John Doe\" }, .{});\n}\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    var rt = try zio.Runtime.init(allocator, .{});\n    defer rt.deinit();\n\n    var server = http.Server(void).init(allocator, .{}, {});\n    defer server.deinit();\n\n    server.router.get(\"/user/:id\", handleUser);\n\n    const addr = try zio.net.IpAddress.parseIp(\"127.0.0.1\", 8080);\n    try server.listen(rt, addr);\n}\n```\n\n## Client Example\n\n```zig\nconst std = @import(\"std\");\nconst zio = @import(\"zio\");\nconst http = @import(\"dusty\");\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    var rt = try zio.Runtime.init(allocator, .{});\n    defer rt.deinit();\n\n    var client = http.Client.init(allocator, .{});\n    defer client.deinit();\n\n    var response = try client.fetch(rt, \"http://httpbin.org/get\", .{});\n    defer response.deinit();\n\n    std.debug.print(\"Status: {t}\\n\", .{response.status()});\n\n    if (try response.body()) |body| {\n        std.debug.print(\"Body: {s}\\n\", .{body});\n    }\n}\n```\n",
+  "readme": "Dusty is a HTTP client/server library built on top of [zio](https://github.com/lalinsky/zio) (coroutine/async engine) and [llhttp](https://github.com/nodejs/llhttp) (HTTP parser from NodeJS).\nThe server API is inspired by Karl Seguin's [http.zig](https://github.com/karlseguin/http.zig), and tries to be as compatible as possible. By using a coroutine scheduler under the hood, it's very easy to efficiently wait for a HTTP client request in a HTTP server handler, or perhaps have a long-runing WebSocket session and don't worry about state management between callbacks.\n\n## Features\n- Asynchronous I/O for multiple concurrent connections on a single CPU thread\n- Requests handled in lightweight coroutines\n- Router with support for parameters and wildcards\n- Supports HTTP/1.0 and HTTP/1.1\n- Supports chunked transfer encoding in both request/response bodies\n- Server-Sent Events (SSE) for streaming responses\n- WebSocket support (RFC 6455)\n- Request/keepalive timeouts via coroutine auto-cancellation\n- HTTP/HTTPS client with connection pooling\n\n## Server Example\n\n```zig\nconst std = @import(\"std\");\nconst zio = @import(\"zio\");\nconst http = @import(\"dusty\");\n\nfn handleUser(req: *http.Request, res: *http.Response) !void {\n    const user_id = req.params.get(\"id\") orelse \"guest\";\n    try res.json(.{ .id = user_id, .name = \"John Doe\" }, .{});\n}\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    var rt = try zio.Runtime.init(allocator, .{});\n    defer rt.deinit();\n\n    var server = http.Server(void).init(allocator, .{}, {});\n    defer server.deinit();\n\n    server.router.get(\"/user/:id\", handleUser);\n\n    const addr = try zio.net.IpAddress.parseIp(\"127.0.0.1\", 8080);\n    try server.listen(addr);\n}\n```\n\n## Client Example\n\n```zig\nconst std = @import(\"std\");\nconst zio = @import(\"zio\");\nconst http = @import(\"dusty\");\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    var rt = try zio.Runtime.init(allocator, .{});\n    defer rt.deinit();\n\n    var client = http.Client.init(allocator, .{});\n    defer client.deinit();\n\n    var response = try client.fetch(\"http://httpbin.org/get\", .{});\n    defer response.deinit();\n\n    std.debug.print(\"Status: {t}\\n\", .{response.status()});\n\n    if (try response.body()) |body| {\n        std.debug.print(\"Body: {s}\\n\", .{body});\n    }\n}\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/220839?u=76f817358cb458727e81dd4ec11188d343becc9e&v=4",
   "releases": [],
   "owner_company": null,
   "owner_location": "Trenčín, Slovakia",
   "owner_blog": "https://lalinsky.com",
   "owner_twitter_username": null,
-  "owner_followers": 304,
+  "owner_followers": 305,
   "owner_following": 27,
   "owner_created_at": "2010-03-11T19:55:55Z",
   "category": "library"
