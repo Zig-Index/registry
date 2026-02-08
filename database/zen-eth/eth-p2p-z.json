@@ -19,7 +19,7 @@
   "stars": 26,
   "forks": 9,
   "watchers": 2,
-  "updated_at": "2026-02-03T05:19:31Z",
+  "updated_at": "2026-02-08T18:51:14Z",
   "dependencies": [
     {
       "name": "libxev",
