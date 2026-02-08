@@ -16,10 +16,10 @@
     "zig-package",
     "server-side-rendering"
   ],
-  "stars": 119,
+  "stars": 120,
   "forks": 11,
   "watchers": 3,
-  "updated_at": "2026-02-08T14:56:58Z",
+  "updated_at": "2026-02-08T18:26:02Z",
   "dependencies": [
     {
       "name": "httpz",
@@ -57,48 +57,48 @@
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/55424194?u=4e7731597f51019ecfef7854afd03c393b869c09&v=4",
   "releases": [
     {
-      "tag_name": "v0.1.0-dev.628",
-      "name": "v0.1.0-dev.628",
-      "body": "This is a developer preview of ZX; some features are still works in progress.\nUpdate or install the ZX CLI using the following scripts.\n\n## Installation\n\n##### Linux/macOS\n```bash\ncurl -fsSL https://ziex.dev/install | bash\n```\n##### Windows\n```powershell\npowershell -c \"irm ziex.dev/install.ps1 | iex\"\n```\n\n## Changelog\n\n### v0.1.0-dev.628\n\n#### Features\n- feat: extra range capture for for [`ac9cff4`](https://github.com/nurulhudaapon/zx/commit/ac9cff4374a69de17ec7b918c5ab2e03e3be13e2)\n\n#### Fixes\n- fix(fmt): extra capture spacing [`022d2b0`](https://github.com/nurulhudaapon/zx/commit/022d2b0ca6d0db8d0dcfa317f64713520fdbf666)\n\n#### Documentation\n- docs: add api routes doc [`9a33551`](https://github.com/nurulhudaapon/zx/commit/9a33551073113a739ab46db53ccd40566a818c62)\n\n#### Miscellaneous\n- chore: version bump [`167b22d`](https://github.com/nurulhudaapon/zx/commit/167b22dde4d411949c561f830fe9b4e91fffe8ca)\n\n### Contributors\n\n- @nurulhudaapon\n\n",
-      "prerelease": false,
-      "published_at": "2026-02-04T09:42:17Z",
-      "html_url": "https://github.com/nurulhudaapon/zx/releases/tag/v0.1.0-dev.628",
+      "tag_name": "v0.1.0-dev.634",
+      "name": "v0.1.0-dev.634",
+      "body": "This is a developer preview of ZX; some features are still works in progress.\nUpdate or install the ZX CLI using the following scripts.\n\n## Installation\n\n##### Linux/macOS\n```bash\ncurl -fsSL https://ziex.dev/install | bash\n```\n##### Windows\n```powershell\npowershell -c \"irm ziex.dev/install.ps1 | iex\"\n```\n\n## Changelog\n\n### v0.1.0-dev.634\n\n#### Features\n- feat: extra range capture for for [`ac9cff4`](https://github.com/nurulhudaapon/zx/commit/ac9cff4374a69de17ec7b918c5ab2e03e3be13e2)\n- feat: per request context/state [`4864194`](https://github.com/nurulhudaapon/zx/commit/4864194baaf26c65ce97226003c16765555747b3)\n\n#### Fixes\n- fix(fmt): extra capture spacing [`022d2b0`](https://github.com/nurulhudaapon/zx/commit/022d2b0ca6d0db8d0dcfa317f64713520fdbf666)\n\n#### Documentation\n- docs: add api routes doc [`9a33551`](https://github.com/nurulhudaapon/zx/commit/9a33551073113a739ab46db53ccd40566a818c62)\n\n#### Miscellaneous\n- chore: version bump [`167b22d`](https://github.com/nurulhudaapon/zx/commit/167b22dde4d411949c561f830fe9b4e91fffe8ca)\n- wip: mdzx file format [`ad3400b`](https://github.com/nurulhudaapon/zx/commit/ad3400b3f53b6c79bfd389f25eb3ce79f035bcdc)\n- refactor: renamed packages -> pkg [`5dcbb21`](https://github.com/nurulhudaapon/zx/commit/5dcbb21d66021aa7d654ef05742b118d678b6ea4)\n- wip: server action [`bf3aaad`](https://github.com/nurulhudaapon/zx/commit/bf3aaadae0b80c5ae010fbefeaad220ba90241b4)\n- chore: add markdown related checklist [`691d603`](https://github.com/nurulhudaapon/zx/commit/691d603bf7c6376778072ec398cc8cc29ddc1d18)\n- chore: bump version [`4475a07`](https://github.com/nurulhudaapon/zx/commit/4475a07fbfc9edeba4b5abc288f6626aff40e48f)\n\n### Contributors\n\n- @nurulhudaapon\n\n",
+      "prerelease": true,
+      "published_at": "2026-02-08T18:28:46Z",
+      "html_url": "https://github.com/nurulhudaapon/zx/releases/tag/v0.1.0-dev.634",
       "assets": [
         {
-          "name": "zx-linux-aarch64.tar.gz",
-          "url": "https://github.com/nurulhudaapon/zx/releases/download/v0.1.0-dev.628/zx-linux-aarch64.tar.gz",
-          "size": 3873383,
-          "content_type": "application/gzip"
-        },
-        {
           "name": "zx-macos-x64.tar.gz",
-          "url": "https://github.com/nurulhudaapon/zx/releases/download/v0.1.0-dev.628/zx-macos-x64.tar.gz",
-          "size": 1106070,
+          "url": "https://github.com/nurulhudaapon/zx/releases/download/v0.1.0-dev.634/zx-macos-x64.tar.gz",
+          "size": 1106106,
           "content_type": "application/gzip"
         },
         {
-          "name": "zx-linux-x64.tar.gz",
-          "url": "https://github.com/nurulhudaapon/zx/releases/download/v0.1.0-dev.628/zx-linux-x64.tar.gz",
-          "size": 3885851,
+          "name": "zx-linux-aarch64.tar.gz",
+          "url": "https://github.com/nurulhudaapon/zx/releases/download/v0.1.0-dev.634/zx-linux-aarch64.tar.gz",
+          "size": 3873443,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zx-macos-aarch64.tar.gz",
+          "url": "https://github.com/nurulhudaapon/zx/releases/download/v0.1.0-dev.634/zx-macos-aarch64.tar.gz",
+          "size": 1042401,
           "content_type": "application/gzip"
         },
         {
           "name": "zx-windows-aarch64.zip",
-          "url": "https://github.com/nurulhudaapon/zx/releases/download/v0.1.0-dev.628/zx-windows-aarch64.zip",
-          "size": 1147755,
+          "url": "https://github.com/nurulhudaapon/zx/releases/download/v0.1.0-dev.634/zx-windows-aarch64.zip",
+          "size": 1147756,
           "content_type": "application/zip"
+        },
+        {
+          "name": "zx-linux-x64.tar.gz",
+          "url": "https://github.com/nurulhudaapon/zx/releases/download/v0.1.0-dev.634/zx-linux-x64.tar.gz",
+          "size": 3885578,
+          "content_type": "application/gzip"
         },
         {
           "name": "zx-windows-x64.zip",
-          "url": "https://github.com/nurulhudaapon/zx/releases/download/v0.1.0-dev.628/zx-windows-x64.zip",
-          "size": 1196939,
+          "url": "https://github.com/nurulhudaapon/zx/releases/download/v0.1.0-dev.634/zx-windows-x64.zip",
+          "size": 1196944,
           "content_type": "application/zip"
-        },
-        {
-          "name": "zx-macos-aarch64.tar.gz",
-          "url": "https://github.com/nurulhudaapon/zx/releases/download/v0.1.0-dev.628/zx-macos-aarch64.tar.gz",
-          "size": 1042390,
-          "content_type": "application/gzip"
         }
       ]
     },
