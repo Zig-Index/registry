@@ -13,7 +13,7 @@
   "stars": 4,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-02-07T23:20:07Z",
+  "updated_at": "2026-02-08T12:53:51Z",
   "dependencies": [
     {
       "name": "example",
@@ -22,7 +22,7 @@
     }
   ],
   "minimum_zig_version": "0.15.2",
-  "readme": "# zig-squashfs\n\nThis is my experiments to learn Zig. Might amount to something. Might not.\n\nA library and application to decompress or view squashfs archives.\n\n## Current State\n\nOverall works, but currently is completely single threaded and is missing some features. Extraction is slow. Only properly work on Linux, any other OSes probably won't work fully.\n\n## Build options\n\n> `-Duse_c_libs`\n\nInstead of using Zig's standard library for decompression \n\n> `-Dversion`\n\nSets the version of `unsquashfs` shown when `--version` is passed.\n\n## Capabilities\n\nMost features are present except for the following:\n\n* mod_time is not set on extraction\n* xattrs are not applied on extraction\n* Only zstd c library is implemented (all others result in error.TODO).\n* When using Zig decompression libraries then lzo and lz4 compression types are unavailable. I don't _really_ plan on spending the time to find and validate a library since neither is popular.\n",
+  "readme": "# zig-squashfs\n\nThis is my experiments to learn Zig. Might amount to something. Might not.\n\nA library and application to decompress or view squashfs archives.\n\n## Current State\n\nOverall works, but currently is completely single threaded and is missing some features. Extraction is slow. Only properly work on Linux, any other OSes probably won't work fully.\n\n## Build options\n\n> `-Duse_c_libs`\n\nInstead of using Zig's standard library for decompression \n\n> `-Dversion`\n\nSets the version of `unsquashfs` shown when `--version` is passed.\n\n## Capabilities\n\nMost features are present except for the following:\n\n* mod_time is not set on extraction\n* xattrs are not applied on extraction\n* Only zstd c library is implemented (all others result in error.TODO).\n* When using Zig decompression libraries then lzo and lz4 compression types are unavailable. I don't _really_ plan on spending the time to find and validate a library since neither is popular.\n\n## Building considerations\n\nCompilation without `use_c_libs` works completely fine, but Zig has issues with some symbols from the lzo library that needs to be manually fixed. In particular you need to fix the definitions for `lzo_bytep` and `lzo_voidp` to be `*u8` and `?*anyopaque` respectively.\n\n```zig\npub const lzo_bytep = @compileError(\"unable to translate C expr: unexpected token ''\");\n// /usr/include/lzo/lzoconf.h:148:9\npub const lzo_charp = @compileError(\"unable to translate C expr: unexpected token ''\");\n// /usr/include/lzo/lzoconf.h:149:9\npub const lzo_voidp = @compileError(\"unable to translate C expr: unexpected token ''\");\n```\n\nto\n\n```zig\npub const lzo_bytep = *u8;\n// /usr/include/lzo/lzoconf.h:148:9\npub const lzo_charp = @compileError(\"unable to translate C expr: unexpected token ''\");\n// /usr/include/lzo/lzoconf.h:149:9\npub const lzo_voidp = ?*anyopaque;\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/8998514?u=35e3a7483b8b15120c39776dbf1f4a5be21833c6&v=4",
   "releases": [],
   "owner_bio": "Coding is cool",
