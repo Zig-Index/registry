@@ -10,7 +10,7 @@
   "stars": 7,
   "forks": 1,
   "watchers": 0,
-  "updated_at": "2026-01-25T15:32:51Z",
+  "updated_at": "2026-02-09T10:21:39Z",
   "dependencies": [
     {
       "name": "example",
@@ -19,7 +19,7 @@
     }
   ],
   "minimum_zig_version": "0.14.0",
-  "readme": "# coroutinez\n\n[![CI](https://github.com/floscodes/coroutinez/actions/workflows/ci.yml/badge.svg)](https://github.com/floscodes/coroutinez/actions/workflows/ci.yml)\n[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)\n\ncoroutinez is a small runtime for running tasks using coroutines in Zig.\n\n\n## Minimal Example\n\n```zig\nconst std = @import(\"std\");\nconst coroutinez = @import(\"coroutinez\");\nconst Runtime = coroutinez.Runtime;\n\nfn main() !void {\n    const allocator = std.heap.page_allocator;\n    const rt = try Runtime.init(allocator);\n    defer rt.deinit();\n\n    const task = try rt.spawn(myTaskFunction, .{});\n    const task = task.join(i32);\n    std.debug.print(\"Result: {d}\\n\", .{result});\n}\n\nfn myTaskFunction() i32 {\n    return 42;\n}\n```\n\nFor a complete example showcasing advanced usage with dynamic allocations and multiple parameters, see [examples/basic.zig](./examples/basic.zig).\n\n## Overview\n\ncoroutinez spawns as many worker threads as logical CPU cores available on your machine. These threads continuously pick up and run asynchronous tasks you spawn via `Runtime.spawn`. Finished tasks remain in the task queue until you call the `Await()` method on the associated `*Task` to retrieve the result.\n\nYou can also control the number of worker threads by initializing the runtime with a specific core count using `initWithCores()`:\n\n```zig\nconst allocator = std.heap.page_allocator;\nconst rt = try Runtime.initWithCores(allocator, 16);\ndefer rt.deinit();\n```\n",
+  "readme": "# coroutinez\n\n[![CI](https://github.com/floscodes/coroutinez/actions/workflows/ci.yml/badge.svg)](https://github.com/floscodes/coroutinez/actions/workflows/ci.yml)\n[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)\n\ncoroutinez is a small runtime for running tasks using coroutines in Zig.\n\n\n## Minimal Example\n\n```zig\nconst std = @import(\"std\");\nconst coroutinez = @import(\"coroutinez\");\nconst Runtime = coroutinez.Runtime;\n\nfn main() !void {\n    const allocator = std.heap.page_allocator;\n    const rt = try Runtime.init(allocator);\n    defer rt.deinit();\n\n    const task = try rt.spawn(myTaskFunction, .{});\n    const task = task.join(i32);\n    std.debug.print(\"Result: {d}\\n\", .{result});\n}\n\nfn myTaskFunction() i32 {\n    return 42;\n}\n```\n\nFor a complete example showcasing advanced usage with dynamic allocations and multiple parameters, see [examples/basic.zig](./examples/basic.zig).\n\n## Overview\n\ncoroutinez spawns as many worker threads as logical CPU cores available on your machine. These threads continuously pick up and run asynchronous tasks you spawn via `Runtime.spawn`. Finished tasks remain in the task queue until you call the `join()` method on the associated `*Task` to retrieve the result.\n\nYou can also control the number of worker threads by initializing the runtime with a specific core count using `initWithCores()`:\n\n```zig\nconst allocator = std.heap.page_allocator;\nconst rt = try Runtime.initWithCores(allocator, 16);\ndefer rt.deinit();\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/69145145?u=1f34029b5dbb89a3c737460130fe5a41d66831bd&v=4",
   "releases": [
     {
@@ -37,8 +37,8 @@
   "owner_location": "Vienna, Austria",
   "owner_blog": "floscodes.net",
   "owner_twitter_username": null,
-  "owner_followers": 81,
-  "owner_following": 114,
+  "owner_followers": 82,
+  "owner_following": 115,
   "owner_created_at": "2020-08-03T09:34:52Z",
   "license": "MIT",
   "category": "library"
