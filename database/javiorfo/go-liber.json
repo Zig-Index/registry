@@ -1,0 +1,40 @@
+{
+  "name": "go-liber",
+  "owner": "javiorfo",
+  "repo": "go-liber",
+  "description": "Go library for creating EPUB files",
+  "type": "project",
+  "topics": [
+    "epub",
+    "epub-library",
+    "epub-generator",
+    "go",
+    "golang"
+  ],
+  "stars": 6,
+  "forks": 1,
+  "watchers": 2,
+  "updated_at": "2026-02-09T22:07:05Z",
+  "readme": "# liber\n*Go library for creating EPUB files*\n\n## Description\n- This library provides a high-level, ergonomic API for creating EPUB files (2.0.1). \n- It covers all [epubcheck](https://github.com/w3c/epubcheck) validations\n\n## Installation\n```bash\ngo get -u github.com/javiorfo/go-liber@latest\n```\n\n## Example\n\n```go\npackage main\n\nimport (\n  \"log\"\n  \"os\"\n\n  \"github.com/javiorfo/go-liber\"\n  \"github.com/javiorfo/go-liber/body\"\n  \"github.com/javiorfo/go-liber/ident\"\n  \"github.com/javiorfo/go-liber/lang\"\n  \"github.com/javiorfo/go-liber/reftype\"\n  \"github.com/javiorfo/go-liber/resource\"\n)\n\nfunc main() {\n  f, err := os.Create(\"book.epub\")\n  if err != nil {\n\t  panic(err)\n  }\n  defer f.Close()\n\n  e := liber.EpubBuilder(\n\t  liber.MetadataBuilder(\"My Book\", lang.Spanish, ident.Default()).\n\t\t  Creator(\"Johan Gambolputty\").\n\t\t  Build(),\n  ).\n\t  Stylesheet(body.Raw(\"body {}\")).\n\t  CoverImage(resource.JpgFile(\"/path/cats.jpg\")).\n\t  AddResources(resource.PngFile(\"/path/cs.png\")).\n\t  AddContents(\n\t\t  liber.ContentBuilder(body.Raw(\n          `<h1>Chapter 1</h1>\n\t\t  <h2 id=\"id01\">Section 1.1</h2>\n\t\t  <h2 id=\"id02\">Section 1.1.1</h2>\n\t\t  <h2 id=\"id03\">Section 1.2</h2>`,\n          ), reftype.Text(\"Chapter 1\")).\n\t\t\t  AddContentReferences(liber.ContentReferenceBuilder(\"Section 1.1\").\n\t\t\t\t  AddChildren(liber.ContentReferenceBuilder(\"Section 1.1.1\").Build()).\n\t\t\t\t  Build()).\n\t\t\t  AddContentReferences(liber.ContentReferenceBuilder(\"Section 1.2\").Build()).\n\t\t\t  AddChildren(\n\t\t\t\t  liber.ContentBuilder(body.Raw(\"<h1>Chapter 2</h1>\"), reftype.Text(\"Chapter 2\")).Build(),\n\t\t\t\t  liber.ContentBuilder(body.Raw(\"<h1>Chapter 3</h1>\"), reftype.Text(\"Chapter 3\")).\n\t\t\t\t\t  AddChildren(liber.ContentBuilder(body.Raw(\"<h1>Chapter 4</h1>\"), reftype.Text(\"Chapter 4\")).\n\t\t\t\t\t\t  Build()).\n\t\t\t\t\t  Build(),\n\t\t\t  ).\n\t\t\t  Build(),\n\t  ).\n\t  Build()\n\n  if err := liber.Create(&e, f); err != nil {\n      os.Remove(\"book.epub\")\n\t  log.Fatal(err)\n  }\n}\n```\n\n## Details\n- Every content is a **xhtml**. The entire xhml text or only the body could be added as content (the latter is more practical and secure because follows the standard). See [examples](https://github.com/javiorfo/go-liber/tree/master/examples))\n- Content (Ex: Chapter) and ContentReference (Ex: Chapter#ref1) could be named with filename and id methods respectively. If none is set, Content will be sequential c{number}.xhtml (c01.xhtml, c02.xhtml...) and ContentReferences will be id{number} (id01, id02...) corresponding to the Content.\n\n\n---\n\n### Donate\n- **Bitcoin** [(QR)](https://raw.githubusercontent.com/javiorfo/img/master/crypto/bitcoin.png)  `1GqdJ63RDPE4eJKujHi166FAyigvHu5R7v`\n- [Paypal](https://www.paypal.com/donate/?hosted_button_id=FA7SGLSCT2H8G)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/124217829?u=a89449f8083e3dccc939ac5be59c19aff50e212e&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2026-02-09T22:17:56Z",
+      "html_url": "https://github.com/javiorfo/go-liber/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 21,
+  "owner_following": 0,
+  "owner_created_at": "2023-02-02T00:07:28Z",
+  "license": "MIT",
+  "category": "library"
+}

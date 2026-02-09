@@ -1,0 +1,31 @@
+{
+  "name": "libernull",
+  "owner": "javiorfo",
+  "repo": "libernull",
+  "description": "Minimal markup-based typesetting system for authors/writers",
+  "type": "project",
+  "topics": [
+    "epub",
+    "epub-generation",
+    "latex",
+    "markup",
+    "markup-language",
+    "rust"
+  ],
+  "stars": 10,
+  "forks": 3,
+  "watchers": 1,
+  "updated_at": "2026-02-09T22:16:01Z",
+  "readme": "# libernull\n*Minimal markup-based typesetting system for authors/writers*\n\n## Caveats\n- This library has been developed on and for Linux following open source philosophy.\n\n---\n\n### Donate\n- **Bitcoin** [(QR)](https://raw.githubusercontent.com/javiorfo/img/master/crypto/bitcoin.png)  `1GqdJ63RDPE4eJKujHi166FAyigvHu5R7v`\n- [Paypal](https://www.paypal.com/donate/?hosted_button_id=FA7SGLSCT2H8G)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/124217829?u=a89449f8083e3dccc939ac5be59c19aff50e212e&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 21,
+  "owner_following": 0,
+  "owner_created_at": "2023-02-02T00:07:28Z",
+  "license": "MIT",
+  "category": "library"
+}
