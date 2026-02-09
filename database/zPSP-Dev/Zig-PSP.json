@@ -10,10 +10,10 @@
     "psp-sdk",
     "zig-package"
   ],
-  "stars": 106,
-  "forks": 9,
+  "stars": 110,
+  "forks": 8,
   "watchers": 8,
-  "updated_at": "2026-01-08T07:37:44Z",
+  "updated_at": "2026-02-09T15:26:48Z",
   "dependencies": [
     {
       "name": "zPBPTool",
@@ -22,10 +22,6 @@
     {
       "name": "zSFOTool",
       "url": "tools/sfo"
-    },
-    {
-      "name": "libzpsp",
-      "url": "src/libzpsp"
     }
   ],
   "minimum_zig_version": "0.15.2",
