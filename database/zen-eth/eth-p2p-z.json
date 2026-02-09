@@ -19,27 +19,27 @@
   "stars": 26,
   "forks": 9,
   "watchers": 2,
-  "updated_at": "2026-02-08T18:51:14Z",
+  "updated_at": "2026-02-09T04:33:03Z",
   "dependencies": [
     {
       "name": "libxev",
-      "url": "git+https://github.com/zen-eth/libxev#fe9928d11540b723aa131fe097c2c4b5359bb073",
-      "hash": "libxev-0.0.0-86vtc5gdEwBLKZucNlSW_tEfwaN9l4z6kqRegMdaux4-"
+      "url": "git+https://github.com/mitchellh/libxev#42d4ead52667e03619dcd5b1a3ca8ef7d5dd24ed",
+      "hash": "libxev-0.0.0-86vtc0IbEwBzMSXa-ZPZ8JpcV4Mw1SrsTuvtJmFAQ7Uu"
     },
     {
       "name": "zmultiformats",
-      "url": "git+https://github.com/zen-eth/multiformats-zig#1359ac3ab12a6af173c2b7f13ae9c4f5ff34e11e",
-      "hash": "zmultiformats-0.1.0-yjvchlEaBQCuIiXU5ScwglKjcfv9KxWERFPuriP7ReZs"
+      "url": "git+https://github.com/zen-eth/multiformats-zig#ddf4f0af34ce8f87c2dc7df73a261738c3868093",
+      "hash": "zmultiformats-0.1.0-yjvchohoBADALnCylBLeQF7Vn0SKULmQ_sFOrhzgmvQO"
     },
     {
       "name": "gremlin",
-      "url": "git+https://github.com/octopus-foundation/gremlin.zig#fccfe2659f24497199d86404e0ef7dbc79e033d2",
-      "hash": "gremlin-0.0.0-E2s91bN4DgDYbb4QNxl4ZT5nEEhNBkk5ngfVasDbsnNF"
+      "url": "git+https://github.com/norma-core/gremlin.zig#bdfcf36c2f4b22bdbd96a5ef5385ff0b940cffc2",
+      "hash": "gremlin-0.1.0-E2s91WkYEQCC1_KteI5rN9EU_tuyyZftimIOI4S4f8Fc"
     },
     {
       "name": "lsquic",
-      "url": "git+https://github.com/zen-eth/lsquic.git#59bee4ce57e35dab8c28415d4a5dfb2c26089c84",
-      "hash": "lsquic-0.0.0-jO7gdhAfAABVzSIdOXi13ePKeV-C6EMJ7KVosCgbTmOk"
+      "url": "git+https://github.com/zen-eth/lsquic.git?ref=anshalshukla/zig-0.15.2-upgrade#87391b162a9d05053bd256fadf716bc7ced1ce63",
+      "hash": "lsquic-0.0.0-jO7gdogfAAD9odKzV7c3R5ewa2LrX-73Kh6B5GJgS7Rh"
     },
     {
       "name": "cache",
@@ -48,12 +48,17 @@
     },
     {
       "name": "secp256k1",
-      "url": "git+https://github.com/zig-bitcoin/libsecp256k1-zig#b96922b375a601f3303bf43be1dceb3d101df6c6",
-      "hash": "secp256k1-0.0.0-AAAAAPPgAAADPOkS7brnO1B26LjbhZsxwz6Kx8a6jCwB"
+      "url": "git+https://github.com/blockblaz/libsecp256k1-zig#518a1370b66c6b575b4831c4a1a182f5b30b3d75",
+      "hash": "secp256k1-0.0.3-vtxi58DhAABoPpDgG3wagaDXiHHIDezLOPE0BI4V0bDS"
+    },
+    {
+      "name": "multiaddr",
+      "url": "git+https://github.com/zen-eth/multiaddr-zig#1f2493ad75870e98befe64fd54f642b023c82190",
+      "hash": "multiaddr-0.1.0-Cjayds-5AAArNw0ghMgquaRygVf7-kEWQJlQGjVpZzZ0"
     }
   ],
   "minimum_zig_version": "0.11.0",
-  "readme": "# eth-p2p-z\n\nZig implementation of the Ethereum peer-to-peer stack, built on top of the [libp2p](https://libp2p.io/) architecture.\n\n**Note**: This project is pre-release software. Expect rapid iteration and frequent breaking API changes while we carve out the Ethereum-focused feature set.\n\n## Project scope\n\n- Transport: QUIC (lsquic-backed) is the only supported transport. TCP, WebRTC, WebTransport, and other stacks are intentionally out of scope.\n- PubSub: Gossipsub v1.0 router is available today; additional Ethereum networking protocols will be layered on top in subsequent milestones.\n- Platform: Zig 0.14.1 toolchain targeting modern desktop/server environments. Browser runtimes are not supported.\n\nIf you are looking for a general-purpose libp2p implementation with multiple transports and protocol stacks, this project is not a drop-in replacement.\n\n## Prerequisites\n\n- Zig 0.14.1\n\n## Building\n\nTo build the project, run the following command in the root directory of the project:\n\n```bash\nzig build -Doptimize=ReleaseSafe\n```\n\n## Running Tests\n\nTo run the tests, run the following command in the root directory of the project:\n\n```bash\nzig build test --summary all\n```\n\n## Usage\n\nUpdate `build.zig.zon`:\n\n```sh\nzig fetch --save git+https://github.com/zen-eth/zig-libp2p.git\n```\n\nIn your `build.zig`:\n\n```zig\nconst libp2p_dep = b.dependency(\"libp2p\", .{\n    .target = target,\n    .optimize = optimize,\n});\nconst libp2p_module = libp2p_dep.module(\"zig-libp2p\");\nroot_module.addImport(\"libp2p\", libp2p_module);\n```\n",
+  "readme": "# eth-p2p-z\n\nZig implementation of the Ethereum peer-to-peer stack, built on top of the [libp2p](https://libp2p.io/) architecture.\n\n**Note**: This project is pre-release software. Expect rapid iteration and frequent breaking API changes while we carve out the Ethereum-focused feature set.\n\n## Project scope\n\n- Transport: QUIC (lsquic-backed) is the only supported transport. TCP, WebRTC, WebTransport, and other stacks are intentionally out of scope.\n- PubSub: Gossipsub v1.0 router is available today; additional Ethereum networking protocols will be layered on top in subsequent milestones.\n- Platform: Zig 0.15.2 toolchain targeting modern desktop/server environments. Browser runtimes are not supported.\n\nIf you are looking for a general-purpose libp2p implementation with multiple transports and protocol stacks, this project is not a drop-in replacement.\n\n## Prerequisites\n\n- Zig 0.15.2\n\n## Building\n\nTo build the project, run the following command in the root directory of the project:\n\n```bash\nzig build -Doptimize=ReleaseSafe\n```\n\n## Running Tests\n\nTo run the tests, run the following command in the root directory of the project:\n\n```bash\nzig build test --summary all\n```\n\n## Usage\n\nUpdate `build.zig.zon`:\n\n```sh\nzig fetch --save git+https://github.com/zen-eth/zig-libp2p.git\n```\n\nIn your `build.zig`:\n\n```zig\nconst libp2p_dep = b.dependency(\"libp2p\", .{\n    .target = target,\n    .optimize = optimize,\n});\nconst libp2p_module = libp2p_dep.module(\"zig-libp2p\");\nroot_module.addImport(\"libp2p\", libp2p_module);\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/190158618?v=4",
   "releases": [],
   "owner_bio": "An open source organization that builds Ethereum public goods",
