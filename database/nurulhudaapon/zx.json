@@ -19,7 +19,7 @@
   "stars": 121,
   "forks": 11,
   "watchers": 3,
-  "updated_at": "2026-02-08T19:21:15Z",
+  "updated_at": "2026-02-09T05:14:41Z",
   "dependencies": [
     {
       "name": "httpz",
@@ -46,6 +46,10 @@
     {
       "name": "tree_sitter_zx",
       "url": "pkg/tree-sitter-zx"
+    },
+    {
+      "name": "tree_sitter_mdzx",
+      "url": "pkg/tree-sitter-mdzx"
     },
     {
       "name": "cachez",
