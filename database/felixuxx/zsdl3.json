@@ -11,10 +11,10 @@
     "zig-package",
     "gamedev"
   ],
-  "stars": 10,
+  "stars": 11,
   "forks": 0,
-  "watchers": 0,
-  "updated_at": "2026-02-03T18:49:07Z",
+  "watchers": 1,
+  "updated_at": "2026-02-09T08:51:36Z",
   "dependencies": [
     {
       "name": "example",
@@ -32,7 +32,7 @@
   "owner_blog": "felixutong.vercel.app",
   "owner_twitter_username": "felixutong",
   "owner_followers": 6,
-  "owner_following": 6,
+  "owner_following": 7,
   "owner_created_at": "2024-11-03T17:28:31Z",
   "category": "library"
 }

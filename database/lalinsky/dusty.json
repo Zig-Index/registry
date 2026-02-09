@@ -10,7 +10,7 @@
   "stars": 57,
   "forks": 2,
   "watchers": 0,
-  "updated_at": "2026-02-06T07:49:27Z",
+  "updated_at": "2026-02-09T08:08:56Z",
   "dependencies": [
     {
       "name": "zio",
@@ -26,7 +26,7 @@
   "owner_location": "Trenčín, Slovakia",
   "owner_blog": "https://lalinsky.com",
   "owner_twitter_username": null,
-  "owner_followers": 305,
+  "owner_followers": 307,
   "owner_following": 27,
   "owner_created_at": "2010-03-11T19:55:55Z",
   "category": "library"

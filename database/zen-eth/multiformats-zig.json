@@ -18,15 +18,8 @@
   "stars": 8,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-02-09T06:00:37Z",
-  "dependencies": [
-    {
-      "name": "peer_id",
-      "url": "git+https://github.com/blockblaz/peer-id#2066600a1b9e0196dc35722f8ce544a3ca44fad6",
-      "hash": "peer_id-0.0.0-IgmND5VeAACon_XsphKZcYuOFn7SgmpBluBi2ieRFDya"
-    }
-  ],
-  "minimum_zig_version": "0.11.0",
+  "updated_at": "2026-02-09T08:37:16Z",
+  "minimum_zig_version": "0.15.2",
   "readme": "[![build](https://github.com/zen-eth/multiformats-zig/actions/workflows/check.yml/badge.svg?branch=main)](https://github.com/zen-eth/multiformats-zig/actions/workflows/check.yml)\n\n# Multiformats zig \nThis is the zig implementation of the multiformats [spec](https://github.com/multiformats/multiformats).\n\n## Build\n```bash\ngit clone --recurse-submodules git@github.com:zen-eth/multiformats-zig.git\ncd multiformats-zig\nzig build test --summary all\n```\n\n## Generate the code\n```bash\nzig build-exe src/generate.zig\n./generate\n```\n\n## Add to your project\n```bash\nzig fetch --save https://github.com/zen-eth/multiformats-zig/archive/main.tar.gz\n```\n\n## Usage\n```zig\nconst multiformats = @import(\"multiformats-zig\");\n```\n\n## Benchmark\n```bash\ngit clone --recurse-submodules git@github.com:zen-eth/multiformats-zig.git\ncd multiformats-zig\nzig build bench --release=fast -Dcode=7\n```\ntip: The `code` parameter in the command can refer to the declaration in the `MultiBaseCodec.fromCode()` in the source file `src/multibase.zig`.\n\n## License\nMIT\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/190158618?v=4",
   "releases": [
