@@ -14,10 +14,10 @@
     "mcp-server",
     "mcp-zig"
   ],
-  "stars": 98,
-  "forks": 21,
+  "stars": 110,
+  "forks": 24,
   "watchers": 0,
-  "updated_at": "2025-12-23T08:46:49Z",
+  "updated_at": "2026-01-30T22:37:07Z",
   "dependencies": [
     {
       "name": "spice",

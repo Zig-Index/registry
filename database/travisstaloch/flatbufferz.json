@@ -8,10 +8,10 @@
     "flatbuffers",
     "zig-package"
   ],
-  "stars": 48,
-  "forks": 6,
+  "stars": 50,
+  "forks": 7,
   "watchers": 3,
-  "updated_at": "2025-11-09T14:20:16Z",
+  "updated_at": "2026-01-19T02:53:29Z",
   "dependencies": [
     {
       "name": "flagset",

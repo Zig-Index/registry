@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 54,
+  "stars": 55,
   "forks": 3,
   "watchers": 2,
-  "updated_at": "2025-12-15T10:03:19Z",
+  "updated_at": "2026-01-02T13:00:53Z",
   "dependencies": [
     {
       "name": "bc7enc_rdo",

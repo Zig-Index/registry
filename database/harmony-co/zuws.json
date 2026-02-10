@@ -10,10 +10,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 12,
-  "forks": 3,
+  "stars": 13,
+  "forks": 4,
   "watchers": 1,
-  "updated_at": "2026-01-25T06:44:03Z",
+  "updated_at": "2026-02-08T22:08:09Z",
   "dependencies": [
     {
       "name": "libuv",

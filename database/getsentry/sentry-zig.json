@@ -17,7 +17,7 @@
     "tag-non-production"
   ],
   "stars": 12,
-  "forks": 0,
+  "forks": 1,
   "watchers": 1,
   "updated_at": "2025-11-11T20:53:23Z",
   "minimum_zig_version": "0.14.1",

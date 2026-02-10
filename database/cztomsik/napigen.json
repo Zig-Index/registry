@@ -11,10 +11,10 @@
     "zig-package",
     "javascript"
   ],
-  "stars": 72,
+  "stars": 75,
   "forks": 9,
-  "watchers": 2,
-  "updated_at": "2025-11-09T08:55:36Z",
+  "watchers": 3,
+  "updated_at": "2026-01-03T17:41:25Z",
   "dependencies": [
     {
       "name": "node_api",
@@ -30,7 +30,7 @@
   "owner_location": "Brno, Czech Republic",
   "owner_blog": "https://www.avapls.com",
   "owner_twitter_username": "cztomsik",
-  "owner_followers": 195,
+  "owner_followers": 193,
   "owner_following": 250,
   "owner_created_at": "2013-02-10T20:02:00Z",
   "license": "MIT",

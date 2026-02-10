@@ -9,10 +9,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 48,
+  "stars": 50,
   "forks": 9,
   "watchers": 1,
-  "updated_at": "2025-12-04T05:25:14Z",
+  "updated_at": "2026-02-09T16:03:54Z",
   "readme": "# zig-ai\n\nA simple OpenAI API client for Zig with streaming support.\n\nFind examples in the [`examples`](./examples) directory.\n\n## Usage\n\nWith streaming:\n\n```zig\nconst std = @import(\"std\");\nconst OpenAI = @import(\"zig-ai\");\n\npub fn main() !void {\n    // ...\n\n    var messages = std.ArrayList(OpenAI.Message).init(allocator);\n    try messages.append(.{\n        .role = \"system\",\n        .content = \"You are a helpful assistant\",\n    });\n    try messages.append(.{\n        .role = \"user\",\n        .content = \"User message here\",\n    });\n\n    const payload = OpenAI.ChatPayload{\n        .model = \"gpt-4o\",\n        .messages = messages.items,\n        .max_tokens = 1000,\n        .temperature = 0.2,\n    };\n\n    var stream = try openai.streamChat(payload, false);\n    defer stream.deinit();\n\n    while (try stream.next()) |response| {\n        // Stream the response to stdout\n        if (response.choices[0].delta.content) |content| {\n            try writer.writeAll(content);\n            try buf_writer.flush();\n        }\n    }\n}\n```\n\n## Installation\n\n```bash\n$ zig fetch --save git+https://github.com/FOLLGAD/zig-ai\n```\n\nand add `zig-ai` to your `build.zig` file:\n\n```zig\nconst std = @import(\"std\");\n\npub fn build(b: *std.Build) void {\n    const target = b.standardTargetOptions(.{});\n    const optimize = b.standardOptimizeOption(.{});\n\n    const exe = b.addExecutable(.{\n        .name = \"stream-cli\",\n        .root_source_file = b.path(\"examples/stream-cli.zig\"),\n        .target = target,\n        .optimize = optimize,\n    });\n\n    const module = b.dependency(\"zig-ai\", .{\n        .root_source_file = b.path(\"src/llm.zig\"),\n    });\n    exe.root_module.addImport(\"zig-ai\", module.module(\"zig-ai\"));\n}\n```\n\n## Usage\n\nSee the `examples` directory for usage examples.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/1856197?u=ba9754e73ca5f8e75654abf4fcd9dfa31b3f8c8e&v=4",
   "releases": [],
@@ -21,8 +21,8 @@
   "owner_location": null,
   "owner_blog": "https://emil.zip",
   "owner_twitter_username": "emilahlback",
-  "owner_followers": 235,
-  "owner_following": 58,
+  "owner_followers": 262,
+  "owner_following": 62,
   "owner_created_at": "2012-06-16T07:51:46Z",
   "category": "library"
 }

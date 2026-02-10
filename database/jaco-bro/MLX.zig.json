@@ -14,10 +14,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 31,
+  "stars": 33,
   "forks": 4,
   "watchers": 4,
-  "updated_at": "2025-12-18T20:37:08Z",
+  "updated_at": "2026-02-05T19:22:03Z",
   "dependencies": [
     {
       "name": "pcre2",

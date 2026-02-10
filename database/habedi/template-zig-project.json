@@ -21,6 +21,15 @@
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/7430969?u=8c0282c3cfae1d00447dc0bc7e4d91da568b1b2d&v=4",
   "releases": [
     {
+      "tag_name": "v0.1.0-alpha.2",
+      "name": "",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2026-02-05T20:28:53Z",
+      "html_url": "https://github.com/habedi/template-zig-project/releases/tag/v0.1.0-alpha.2",
+      "assets": []
+    },
+    {
       "tag_name": "v0.1.0a1",
       "name": "",
       "body": "",

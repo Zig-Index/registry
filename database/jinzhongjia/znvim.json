@@ -10,10 +10,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 25,
+  "stars": 26,
   "forks": 2,
   "watchers": 2,
-  "updated_at": "2026-01-27T16:17:51Z",
+  "updated_at": "2026-02-04T18:49:55Z",
   "dependencies": [
     {
       "name": "zig_msgpack",
