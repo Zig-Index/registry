@@ -18,7 +18,7 @@
   "stars": 19,
   "forks": 2,
   "watchers": 1,
-  "updated_at": "2026-01-25T08:23:22Z",
+  "updated_at": "2026-02-10T22:23:14Z",
   "dependencies": [
     {
       "name": "lz4",
@@ -27,8 +27,8 @@
     },
     {
       "name": "ultracdc",
-      "url": "https://github.com/jedisct1/zig-ultracdc/archive/refs/tags/0.1.1.tar.gz",
-      "hash": "ultracdc-0.1.0-vd07qbV2AAAUDCBiDEKMMVAZ7QUMgmjennH-W2KCIVck"
+      "url": "https://github.com/jedisct1/zig-ultracdc/archive/refs/tags/0.1.2.tar.gz",
+      "hash": "ultracdc-0.1.2-vd07qR94AACdcUsYVamB6e4yT5SR0AZKaz2NKQSvX821"
     }
   ],
   "minimum_zig_version": "0.16.0-dev.929+b409cdf63",
