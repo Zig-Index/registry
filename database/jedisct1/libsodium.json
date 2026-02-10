@@ -10,10 +10,10 @@
     "c",
     "zig-package"
   ],
-  "stars": 13437,
+  "stars": 13450,
   "forks": 1851,
   "watchers": 375,
-  "updated_at": "2026-02-08T15:44:08Z",
+  "updated_at": "2026-02-10T16:38:05Z",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/124872?v=4",
   "releases": [
     {
@@ -612,7 +612,7 @@
   "owner_location": "Antibes, France",
   "owner_blog": "https://00f.net",
   "owner_twitter_username": "jedisct1",
-  "owner_followers": 4140,
+  "owner_followers": 4143,
   "owner_following": 195,
   "owner_created_at": "2009-09-09T10:20:57Z",
   "homepage": "https://libsodium.org",
