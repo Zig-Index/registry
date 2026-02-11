@@ -11,10 +11,10 @@
     "zig-library",
     "zig-package"
   ],
-  "stars": 36,
+  "stars": 37,
   "forks": 3,
   "watchers": 1,
-  "updated_at": "2026-01-23T21:50:49Z",
+  "updated_at": "2026-02-10T19:48:08Z",
   "dependencies": [
     {
       "name": "libxev",
