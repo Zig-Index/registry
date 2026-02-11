@@ -1,0 +1,38 @@
+{
+  "name": "memcached.zig",
+  "owner": "lalinsky",
+  "repo": "memcached.zig",
+  "description": "Memcached client for Zig",
+  "type": "package",
+  "topics": [
+    "async",
+    "memcached",
+    "memcached-client",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-02-11T11:49:01Z",
+  "dependencies": [
+    {
+      "name": "zio",
+      "url": "git+https://github.com/lalinsky/zio?ref=v0.8.0#d7e56167f37bfedbd0dd470f56e01620e69a0d4a",
+      "hash": "zio-0.8.0-xHbVVHtnGACrWEGWxWvXl2rYDp9qDmJ-UO4hynM9cibA"
+    }
+  ],
+  "minimum_zig_version": "0.15.0",
+  "readme": "# memcached.zig\n\nA memcached client library for Zig, built on [zio](https://github.com/lalinsky/zio) for async I/O. Uses the modern [meta protocol](https://docs.memcached.org/protocols/meta/) for efficient communication.\n\n## Features\n\n- Async I/O via zio coroutines\n- Connection pooling per server\n- Multi-server support with consistent hashing (rendezvous)\n- Meta protocol (mg, ms, md, ma commands)\n- CAS (compare-and-swap) support\n- TTL and flags support\n\n## Example\n\n```zig\nconst std = @import(\"std\");\nconst zio = @import(\"zio\");\nconst memcached = @import(\"memcached\");\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n\n    var rt = try zio.Runtime.init(gpa.allocator(), .{});\n    defer rt.deinit();\n\n    var client = try memcached.connect(gpa.allocator(), \"localhost:11211\");\n    defer client.deinit();\n\n    // Set a value\n    try client.set(\"hello\", \"world\", .{ .ttl = 300 });\n\n    // Get a value\n    var buf: [1024]u8 = undefined;\n    if (try client.get(\"hello\", &buf, .{})) |info| {\n        std.debug.print(\"Value: {s}\\n\", .{info.value});\n    }\n\n    // Increment a counter\n    try client.set(\"counter\", \"0\", .{});\n    const val = try client.incr(\"counter\", 1);\n    std.debug.print(\"Counter: {d}\\n\", .{val});\n}\n```\n\n## Multi-server\n\n```zig\nvar client = try memcached.Client.init(gpa.allocator(), .{\n    .servers = &.{\n        \"server1:11211\",\n        \"server2:11211\",\n        \"server3:11211\",\n    },\n    .hasher = .rendezvous,\n});\ndefer client.deinit();\n```\n\n## Installation\n\nAdd memcached.zig as a dependency in your `build.zig.zon`:\n\n```bash\nzig fetch --save \"git+https://github.com/lalinsky/memcached.zig\"\n```\n\nIn your `build.zig`:\n\n```zig\nconst memcached = b.dependency(\"memcached\", .{\n    .target = target,\n    .optimize = optimize,\n});\nexe.root_module.addImport(\"memcached\", memcached.module(\"memcached\"));\n```\n\n## License\n\nMIT\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/220839?u=76f817358cb458727e81dd4ec11188d343becc9e&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Trenčín, Slovakia",
+  "owner_blog": "https://lalinsky.com",
+  "owner_twitter_username": null,
+  "owner_followers": 307,
+  "owner_following": 27,
+  "owner_created_at": "2010-03-11T19:55:55Z",
+  "license": "MIT",
+  "category": "library"
+}
