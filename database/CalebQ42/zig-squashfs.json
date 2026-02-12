@@ -13,7 +13,7 @@
   "stars": 4,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-02-12T08:51:58Z",
+  "updated_at": "2026-02-12T09:47:36Z",
   "dependencies": [
     {
       "name": "example",
@@ -28,9 +28,9 @@
     {
       "tag_name": "v0.0.1",
       "name": "Initial Release",
-      "body": "* Initial release\r\n* Currently `unsquashfs` only supports the `-d` and `-o` flags, but everything _should_ mostly work, with some exceptions listed in the README.",
+      "body": "* Initial Release\r\n* `squashfs` currently only supports `-o` and `-d` (offset and extract directory), but basic extraction would work fine.\r\n* Both Zig and C library version are provided, both staticly linked.",
       "prerelease": true,
-      "published_at": "2026-02-12T08:53:06Z",
+      "published_at": "2026-02-12T09:48:09Z",
       "html_url": "https://github.com/CalebQ42/zig-squashfs/releases/tag/v0.0.1",
       "assets": []
     }
