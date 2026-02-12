@@ -11,7 +11,7 @@
   "stars": 2,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2025-12-29T06:23:26Z",
+  "updated_at": "2026-02-12T10:25:34Z",
   "readme": "# zig-flag\n\n![loc](https://sloc.xyz/github/nektro/zig-flag)\n[![license](https://img.shields.io/github/license/nektro/zig-flag.svg)](https://github.com/nektro/zig-flag/blob/master/LICENSE)\n[![nektro @ github sponsors](https://img.shields.io/badge/sponsors-nektro-purple?logo=github)](https://github.com/sponsors/nektro)\n[![Zig](https://img.shields.io/badge/Zig-0.14-f7a41d)](https://ziglang.org/)\n[![Zigmod](https://img.shields.io/badge/Zigmod-latest-f7a41d)](https://github.com/nektro/zigmod)\n\nConfig management for Zig.\n\nIdeal if you would like to define flags in multiple modules or multiplex intake between CLI flags or environement variables.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/5464072?u=a84ae9f68c3b0567fe276def3ab932d2f2f6703f&v=4",
   "releases": [],

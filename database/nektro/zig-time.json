@@ -13,7 +13,7 @@
   "stars": 69,
   "forks": 13,
   "watchers": 2,
-  "updated_at": "2025-12-19T20:56:22Z",
+  "updated_at": "2026-02-12T10:25:39Z",
   "readme": "# zig-time\n\n![loc](https://sloc.xyz/github/nektro/zig-time)\n[![license](https://img.shields.io/github/license/nektro/zig-time.svg)](https://github.com/nektro/zig-time/blob/master/LICENSE)\n[![nektro @ github sponsors](https://img.shields.io/badge/sponsors-nektro-purple?logo=github)](https://github.com/sponsors/nektro)\n[![Zig](https://img.shields.io/badge/Zig-0.14-f7a41d)](https://ziglang.org/)\n[![Zigmod](https://img.shields.io/badge/Zigmod-latest-f7a41d)](https://github.com/nektro/zigmod)\n\nExposes a `DateTime` structure that can be initialized and acted upon using various methods. All public methods return a new structure.\n\nCurrently handles dates and times based on the [Proleptic Gregorian calendar](https://en.wikipedia.org/wiki/Proleptic_Gregorian_calendar) in adherence to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).\n\nDoes not currently support time zones outside of UTC.\n\nDoes not handle leap seconds.\n\nSee the `FormatSeq` structure for display information on what to pass as a `fmt` string.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/5464072?u=a84ae9f68c3b0567fe276def3ab932d2f2f6703f&v=4",
   "releases": [],

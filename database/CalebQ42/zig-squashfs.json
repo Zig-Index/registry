@@ -13,7 +13,7 @@
   "stars": 4,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-02-12T09:47:36Z",
+  "updated_at": "2026-02-12T10:29:29Z",
   "dependencies": [
     {
       "name": "example",
@@ -28,11 +28,24 @@
     {
       "tag_name": "v0.0.1",
       "name": "Initial Release",
-      "body": "* Initial Release\r\n* `squashfs` currently only supports `-o` and `-d` (offset and extract directory), but basic extraction would work fine.\r\n* Both Zig and C library version are provided, both staticly linked.",
+      "body": "* `unsquashsf` should mostly work, but it's arguments are limited to just `-d` and `-o` right now.\r\n  * Further limitation are listed in the README.",
       "prerelease": true,
-      "published_at": "2026-02-12T09:48:09Z",
+      "published_at": "2026-02-12T10:33:05Z",
       "html_url": "https://github.com/CalebQ42/zig-squashfs/releases/tag/v0.0.1",
-      "assets": []
+      "assets": [
+        {
+          "name": "unsquashfs",
+          "url": "https://github.com/CalebQ42/zig-squashfs/releases/download/v0.0.1/unsquashfs",
+          "size": 3469936,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "unsquashfs-c-libs",
+          "url": "https://github.com/CalebQ42/zig-squashfs/releases/download/v0.0.1/unsquashfs-c-libs",
+          "size": 653024,
+          "content_type": "application/octet-stream"
+        }
+      ]
     }
   ],
   "owner_bio": "Coding is cool",
