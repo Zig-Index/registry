@@ -13,7 +13,7 @@
   "stars": 4,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-02-12T12:55:30Z",
+  "updated_at": "2026-02-12T15:00:36Z",
   "dependencies": [
     {
       "name": "example",
@@ -26,9 +26,31 @@
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/8998514?u=35e3a7483b8b15120c39776dbf1f4a5be21833c6&v=4",
   "releases": [
     {
+      "tag_name": "v0.0.2",
+      "name": "v0.0.2",
+      "body": "* File/folder mod times are now set when extracted.\r\n* Fixed files not being closed properly causing FD quota errors.",
+      "prerelease": true,
+      "published_at": "2026-02-12T14:59:10Z",
+      "html_url": "https://github.com/CalebQ42/zig-squashfs/releases/tag/v0.0.2",
+      "assets": [
+        {
+          "name": "unsquashfs",
+          "url": "https://github.com/CalebQ42/zig-squashfs/releases/download/v0.0.2/unsquashfs",
+          "size": 3487640,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "unsquashfs-c-libs",
+          "url": "https://github.com/CalebQ42/zig-squashfs/releases/download/v0.0.2/unsquashfs-c-libs",
+          "size": 659264,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
       "tag_name": "v0.0.1",
       "name": "Initial Release",
-      "body": "* `unsquashsf` should mostly work, but it's arguments are limited to just `-d` and `-o` right now.\r\n  * Further limitation are listed in the README.",
+      "body": "* `unsquashfs` should mostly work, but it's arguments are limited to just `-d` and `-o` right now.\r\n  * Further limitation are listed in the README.",
       "prerelease": true,
       "published_at": "2026-02-12T10:33:05Z",
       "html_url": "https://github.com/CalebQ42/zig-squashfs/releases/tag/v0.0.1",
