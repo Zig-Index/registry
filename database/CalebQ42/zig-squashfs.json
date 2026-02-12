@@ -13,7 +13,7 @@
   "stars": 4,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-02-11T12:58:42Z",
+  "updated_at": "2026-02-12T08:51:58Z",
   "dependencies": [
     {
       "name": "example",
@@ -24,7 +24,17 @@
   "minimum_zig_version": "0.15.2",
   "readme": "# zig-squashfs\n\nThis is my experiments to learn Zig. Might amount to something. Might not.\n\nA library and application to decompress or view squashfs archives.\n\n## Current State\n\nOverall works, but currently is missing some features (see below). Extraction is a bit slow compared to the normal `unsquashfs` (from my _very_ basic testing it's about ~3x slower). Only properly work on Linux, any other OSes probably won't work fully and are untested.\n\n## Build options\n\n> `-Duse_c_libs`\n\nInstead of using Zig's standard library for decompression, use the system's C libraries. Has the benefit of being much faster and enabling LZO and LZ4 decompression.\n\n> `-Dallow_lzo`\n\nEnable compiling with LZO decompression support. The LZO library currently has some issues with Zig when imported so it's easier to just disable it by default. Only has an effect when using `-Duse_c_libs=true`.\n\n> `-Dversion`\n\nSets the version of `unsquashfs` shown when `--version` is passed.\n\n## Capabilities\n\nMost features are present except for the following:\n\n* mod_time is not set on extraction\n* xattrs are not applied on extraction\n* When using Zig decompression libraries then lzo and lz4 compression types are unavailable. I don't _currently_ plan on spending the time to find and validate a library since neither is popular.\n\n## Building considerations\n\nCompilation without `use_c_libs` works completely fine, but Zig has issues with some symbols from the lzo library that needs to be manually fixed. In particular you need to fix the definitions for `lzo_bytep` and `lzo_voidp` to be `*u8` and `?*anyopaque` respectively. Due to this, you have to manually enable LZO decompression using `-Dallow_lzo=true` when building.\n\n```zig\npub const lzo_bytep = @compileError(\"unable to translate C expr: unexpected token ''\");\n// /usr/include/lzo/lzoconf.h:148:9\npub const lzo_charp = @compileError(\"unable to translate C expr: unexpected token ''\");\n// /usr/include/lzo/lzoconf.h:149:9\npub const lzo_voidp = @compileError(\"unable to translate C expr: unexpected token ''\");\n```\n\nto\n\n```zig\npub const lzo_bytep = *u8;\n// /usr/include/lzo/lzoconf.h:148:9\npub const lzo_charp = @compileError(\"unable to translate C expr: unexpected token ''\");\n// /usr/include/lzo/lzoconf.h:149:9\npub const lzo_voidp = ?*anyopaque;\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/8998514?u=35e3a7483b8b15120c39776dbf1f4a5be21833c6&v=4",
-  "releases": [],
+  "releases": [
+    {
+      "tag_name": "v0.0.1",
+      "name": "Initial Release",
+      "body": "* Initial release\r\n* Currently `unsquashfs` only supports the `-d` and `-o` flags, but everything _should_ mostly work, with some exceptions listed in the README.",
+      "prerelease": true,
+      "published_at": "2026-02-12T08:53:06Z",
+      "html_url": "https://github.com/CalebQ42/zig-squashfs/releases/tag/v0.0.1",
+      "assets": []
+    }
+  ],
   "owner_bio": "Coding is cool",
   "owner_company": null,
   "owner_location": "United States",
