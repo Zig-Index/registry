@@ -10,7 +10,7 @@
   "stars": 10,
   "forks": 2,
   "watchers": 5,
-  "updated_at": "2026-02-11T17:26:25Z",
+  "updated_at": "2026-02-13T22:15:31Z",
   "dependencies": [
     {
       "name": "pcre2",
@@ -27,16 +27,16 @@
     },
     {
       "name": "yaml",
-      "url": "https://github.com/carlmontanari/zig-yaml/archive/ee8a229.tar.gz",
-      "hash": "zig_yaml-0.2.0-C1161vOtAgBlWxOdwTcAQaB8nLXn329Vn5xT-Q1dLszi"
+      "url": "https://github.com/kubkon/zig-yaml/archive/84d747b.tar.gz",
+      "hash": "zig_yaml-0.3.0-C1161vSrAgCEKLk0825Y_GtmnThQI6O_cqtkBHb57KT-"
     },
     {
       "name": "zlinter",
-      "url": "git+https://github.com/kurtwagner/zlinter?ref=master#4d63663f6f18198875c1ecb26fc4c941cb38076e",
-      "hash": "zlinter-0.0.1-OjQ08Q55CwBuMIOPT6Fyf1v5iRyrQ--JSwevn8WStc-D"
+      "url": "https://github.com/kurtwagner/zlinter/archive/1d9ba8f.tar.gz",
+      "hash": "zlinter-0.0.1-OjQ08QB6CwB9Sjd_wi8kBTYpjHTA2P_WJaxTPxexQwtG"
     }
   ],
-  "minimum_zig_version": "0.16.0-dev.1657+985a3565c",
+  "minimum_zig_version": "0.16.0-dev.2535+b5bd49460",
   "readme": "libscrapli\n==========\n\nlibscrapli is a zig project that aims to provide a unified \"core\" for scrapli. This is obviously \nuseful for the OG scrapli (python flavor) and scrapligo, but possibly for other languages/libraries \nor even for folks who would like to not have to reinvent the wheel for the \"core\" connection \nhandling and logic but want to write their own wrapper!\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/63824662?v=4",
   "releases": [
