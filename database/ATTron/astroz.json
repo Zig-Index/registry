@@ -17,9 +17,9 @@
     "rf"
   ],
   "stars": 232,
-  "forks": 10,
+  "forks": 11,
   "watchers": 2,
-  "updated_at": "2026-02-12T20:31:07Z",
+  "updated_at": "2026-02-14T06:46:55Z",
   "dependencies": [
     {
       "name": "cfitsio",
