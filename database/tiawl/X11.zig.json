@@ -14,16 +14,91 @@
   "stars": 12,
   "forks": 3,
   "watchers": 1,
-  "updated_at": "2026-02-08T15:51:20Z",
+  "updated_at": "2026-02-15T02:31:59Z",
   "dependencies": [
     {
+      "name": "XScrnSaver",
+      "url": "git+https://gitlab.freedesktop.org/xorg/lib/libxscrnsaver?ref=libXScrnSaver-1.2.5#60c957ba8a727d01b376da0142aef7e18aa86fe1",
+      "hash": "N-V-__8AAMXRAADYeHz48Y1IuZUzOOqRvOO7f0wrdeNkWcBF"
+    },
+    {
+      "name": "Xrender",
+      "url": "git+https://gitlab.freedesktop.org/xorg/lib/libxrender?ref=libXrender-0.9.12#46e12ff9e8e4d3f0313a2f097df93dbfdc14f92f",
+      "hash": "N-V-__8AANorBADbt-RlITZJofNvQWTiaQlv7r7lWYtxAqGx"
+    },
+    {
+      "name": "Xrandr",
+      "url": "git+https://gitlab.freedesktop.org/xorg/lib/libxrandr?ref=libXrandr-1.5.5#540c3ceef2be3e513b18002a858c7a9591dd749a",
+      "hash": "N-V-__8AAGlRAgBdkf1F-Y410qIz6cV4C62ZAUk_SGeUVriw"
+    },
+    {
+      "name": "xorgproto",
+      "url": "git+https://gitlab.freedesktop.org/xorg/proto/xorgproto?ref=xorgproto-2025.1#c18d2bc22813793bba7f0e4e603c0104d7724802",
+      "hash": "N-V-__8AAG86ZgA2-SHGTO4n81-Sj8LNvSASCKZ91wOWZ7Sg"
+    },
+    {
+      "name": "Xinerama",
+      "url": "git+https://gitlab.freedesktop.org/xorg/lib/libxinerama?ref=libXinerama-1.1.6#cc4ac9cf36fdf3815381b791e47a90b8aebc7e78",
+      "hash": "N-V-__8AADGbAADcSgAMV_BzmUHtufxO65p2fWn8YYOXU16O"
+    },
+    {
+      "name": "Xcursor",
+      "url": "git+https://gitlab.freedesktop.org/xorg/lib/libxcursor?ref=libXcursor-1.2.3#8ae6cf61b18ecddf26f72a07bbfbd1ea9f022c36",
+      "hash": "N-V-__8AAKtlAgAAqwksheZkCSajEEPpi2XivNet-_3hZyz2"
+    },
+    {
+      "name": "Xext",
+      "url": "git+https://gitlab.freedesktop.org/xorg/lib/libxext?ref=libXext-1.3.7#2a694ba264ccdb205909909abfe8b136f9156ebe",
+      "hash": "N-V-__8AAHTdBwAEWsgYzKEVP-WmGT0wYKIJjBtqH1No6y73"
+    },
+    {
+      "name": "Xtrans",
+      "url": "git+https://gitlab.freedesktop.org/xorg/lib/libxtrans?ref=xtrans-1.6.0#cf05ba4a10c90da2c63805a5375e983b174e28b0",
+      "hash": "N-V-__8AAPmRAwD2MFbqdgQz922YH3E6X_64ouktIekZrgb6"
+    },
+    {
+      "name": "Xfixes",
+      "url": "git+https://gitlab.freedesktop.org/xorg/lib/libxfixes?ref=libXfixes-6.0.2#70d5b0e37f8a759f3dbc218f22954347ceed094a",
+      "hash": "N-V-__8AAFIgAQCJSug37AGy4zypGtiDtUR9wtQa8U74Nm0a"
+    },
+    {
+      "name": "Xi",
+      "url": "git+https://gitlab.freedesktop.org/xorg/lib/libxi?ref=libXi-1.8.2#3c2d5aedd7708c75710b39268631762de904c304",
+      "hash": "N-V-__8AAPVzDQBJt3bUATh5SVq-T6QI-Ns9v2pSScvG_cwH"
+    },
+    {
+      "name": "Xau",
+      "url": "git+https://gitlab.freedesktop.org/xorg/lib/libXau?ref=libXau-1.0.12#a9c65683e68b3a4349afee5d7673b393fb924d2e",
+      "hash": "N-V-__8AAGTlAABgkQ5gmw2C1xhypMB4PArGI_hNIFTXs3mQ"
+    },
+    {
+      "name": "X11",
+      "url": "git+https://gitlab.freedesktop.org/xorg/lib/libx11?ref=libX11-1.8.13#6c75545a1deb51f5903992c52af6bc35cc9bc103",
+      "hash": "N-V-__8AANL5xACqderCBKpnIFKe282dZAikvyc--kNSKWgd"
+    },
+    {
+      "name": "xcb",
+      "url": "git+https://gitlab.freedesktop.org/xorg/lib/libxcb?ref=libxcb-1.17.0#622152ee42a310876f10602601206954b8d0613e",
+      "hash": "N-V-__8AAPZxCQD7JyQLx0_D9J9dnkSoP7iziBVxreTgUqlj"
+    },
+    {
+      "name": "xcbproto",
+      "url": "git+https://gitlab.freedesktop.org/xorg/proto/xcbproto?ref=xcb-proto-1.17.0#77d7fc04da729ddc5ed4aacf30253726fac24dca",
+      "hash": "N-V-__8AAFnMDACdXT5YIakLgEMFZ-K7ZICgB18p8xKobHjk"
+    },
+    {
+      "name": "xkbcommon",
+      "url": "git+https://github.com/xkbcommon/libxkbcommon?ref=xkbcommon-1.13.0#3049d310694fd70f1269bf48a1200aa4259e79b1",
+      "hash": "N-V-__8AAPSQawCcuTcqIxPOXcScgtciyBHFP_S54FcaFo5L"
+    },
+    {
       "name": "toolbox",
-      "url": "git+https://github.com/tiawl/toolbox?ref=1.12.6#79c1dffe608a9c4a7dcf11f98f1dc88b9b46e9f5",
-      "hash": "toolbox-1.12.6-kRAu4BJbAAAGPWPltdn1vwY83xau2Zh9015JTQ0MZjyM"
+      "url": "git+https://github.com/tiawl/toolbox#c6cfe66d9c755f225c4bb939304191ace6411a7b",
+      "hash": "toolbox-2.0.0-kRAu4D18AAAPL6Lztgn77bgpbsVhREsV3Morb6rcpGmJ"
     }
   ],
-  "minimum_zig_version": "0.15.1",
-  "readme": "# X11.zig\n\nThis is a fork of [hexops/x11-headers][1] which itself gather various [xorg][21] headers [GLFW][3] needs.\n\n## Why this forkception ?\n\nThe intention under this fork is the same as [hexops][4] had when they opened their repository: gather [xorg][21] headers and package them to compile [GLFW][4] with [Zig][5].\n\nHowever this repository has subtle differences:\n* Add [xorg][21] sources needed for [libX11][2] compilation,\n* No shell scripting for maintainability tasks,\n* A cron runs every day to check [xorg][21] repositories. Then it updates this repository if a new release is available.\n\n## How to use it\n\nThe current usage of this repository is centered around [tiawl/glfw.zig][3] compilation. But you could use it for your own projects. Files are here and there are no planned evolution to modify them. See [tiawl/glfw.zig][3] to see how you can use it. Maybe for your own need, some files are missing. If it happens, open an issue: this repository is open to potential usage evolution.\n\n## Dependencies\n\nThe [Zig][5] part of this package is relying on the latest [Zig][5] release (0.15.1) and will only be updated for the next one.\n\nHere the repositories' version used by this fork:\n* [xorg/lib/libx11](https://github.com/tiawl/X11.zig/blob/trunk/.references/X11)\n* [xorg/lib/libxcb](https://github.com/tiawl/X11.zig/blob/trunk/.references/xcb)\n* [xorg/proto/xcbproto](https://github.com/tiawl/X11.zig/blob/trunk/.references/xcbproto)\n* [xorg/lib/libxcursor](https://github.com/tiawl/X11.zig/blob/trunk/.references/Xcursor)\n* [xorg/lib/libxext](https://github.com/tiawl/X11.zig/blob/trunk/.references/Xext)\n* [xorg/lib/libxfixes](https://github.com/tiawl/X11.zig/blob/trunk/.references/Xfixes)\n* [xorg/lib/libxi](https://github.com/tiawl/X11.zig/blob/trunk/.references/Xi)\n* [xorg/lib/libxinerama](https://github.com/tiawl/X11.zig/blob/trunk/.references/Xinerama)\n* [xkbcommon/libxkbcommon](https://github.com/tiawl/X11.zig/blob/trunk/.references/xkbcommon)\n* [xorg/proto/xorgproto](https://github.com/tiawl/X11.zig/blob/trunk/.references/xorgproto)\n* [xorg/lib/libxrandr](https://github.com/tiawl/X11.zig/blob/trunk/.references/Xrandr)\n* [xorg/lib/libxrender](https://github.com/tiawl/X11.zig/blob/trunk/.references/Xrender)\n* [xorg/lib/libxscrnsaver](https://github.com/tiawl/X11.zig/blob/trunk/.references/XScrnSaver)\n* [xorg/lib/libxtrans](https://github.com/tiawl/X11.zig/blob/trunk/.references/Xtrans)\n* [xorg/lib/libxau](https://github.com/tiawl/X11.zig/blob/trunk/.references/Xau)\n\n## CICD reminder\n\nThese repositories are automatically updated when a new release is available:\n* [tiawl/glfw.zig][6]\n\nThis repository is automatically updated when a new release is available from these repositories:\n* [xorg/lib/libx11][2]\n* [xorg/lib/libxcb][7]\n* [xorg/proto/xcbproto][8]\n* [xorg/lib/libxcursor][9]\n* [xorg/lib/libxext][10]\n* [xorg/lib/libxfixes][11]\n* [xorg/lib/libxi][12]\n* [xorg/lib/libxinerama][13]\n* [xkbcommon/libxkbcommon][14]\n* [xorg/proto/xorgproto][15]\n* [xorg/lib/libxrandr][16]\n* [xorg/lib/libxrender][17]\n* [xorg/lib/libxscrnsaver][18]\n* [xorg/lib/libxtrans][19]\n* [xorg/lib/libxau][20]\n* [tiawl/toolbox][22]\n\n## `zig build` options\n\nThese additional options have been implemented for maintainability tasks:\n```\n  -Dfetch   Update .references folder and build.zig.zon then stop execution\n  -Dupdate  Update binding\n```\n\n## License\n\nThis repository is not subject to a unique License:\n\nThe parts of this repository originated from this repository are dedicated to the public domain. See the LICENSE file for more details.\n\n**For other parts, it is subject to the License restrictions their respective owners choosed. By design, the public domain code is incompatible with the License notion. In this case, the License prevails. So if you have any doubt about a file property, open an issue.**\n\n[1]:https://github.com/hexops/x11-headers\n[2]:https://gitlab.freedesktop.org/xorg/lib/libx11\n[3]:https://github.com/glfw/glfw\n[4]:https://github.com/hexops\n[5]:https://github.com/ziglang/zig\n[6]:https://github.com/tiawl/glfw.zig\n[7]:https://gitlab.freedesktop.org/xorg/lib/libxcb\n[8]:https://gitlab.freedesktop.org/xorg/proto/xcbproto\n[9]:https://gitlab.freedesktop.org/xorg/lib/libxcursor\n[10]:https://gitlab.freedesktop.org/xorg/lib/libxext\n[11]:https://gitlab.freedesktop.org/xorg/lib/libxfixes\n[12]:https://gitlab.freedesktop.org/xorg/lib/libxi\n[13]:https://gitlab.freedesktop.org/xorg/lib/libxinerama\n[14]:https://gitlab.freedesktop.org/xkbcommon/libxkbcommon\n[15]:https://gitlab.freedesktop.org/xorg/proto/xorgproto\n[16]:https://gitlab.freedesktop.org/xorg/lib/libxrandr\n[17]:https://gitlab.freedesktop.org/xorg/lib/libxrender\n[18]:https://gitlab.freedesktop.org/xorg/lib/libxscrnsaver\n[19]:https://gitlab.freedesktop.org/xorg/lib/libxtrans\n[20]:https://gitlab.freedesktop.org/xorg/lib/libxau\n[21]:https://gitlab.freedesktop.org/xorg\n[22]:https://github.com/tiawl/toolbox\n",
+  "minimum_zig_version": "0.15.2",
+  "readme": "# X11.zig\n\nThis is a fork of [hexops/x11-headers][1] which itself gather various [xorg][21] headers [GLFW][3] needs.\n\n## Why this forkception ?\n\nThe intention under this fork is the same as [hexops][4] had when they opened their repository: gather [xorg][21] headers and package them to compile [GLFW][4] with [Zig][5].\n\nHowever this repository has subtle differences:\n* Add [xorg][21] sources needed for [libX11][2] compilation,\n* No shell scripting for maintainability tasks,\n* A cron runs every day to check [xorg][21] repositories. Then it updates this repository if a new release is available.\n\n## How to use it\n\nThe current usage of this repository is centered around [tiawl/glfw.zig][3] compilation. But you could use it for your own projects. Files are here and there are no planned evolution to modify them. See [tiawl/glfw.zig][3] to see how you can use it. Maybe for your own need, some files are missing. If it happens, open an issue: this repository is open to potential usage evolution.\n\n## Dependencies\n\nThe [Zig][5] part of this package is relying on the latest [Zig][5] release (0.15.2) and will only be updated for the next one.\n\nHere the repositories' version used by this fork:\n* [xorg/lib/libx11](https://github.com/tiawl/X11.zig/blob/trunk/.references/X11)\n* [xorg/lib/libxcb](https://github.com/tiawl/X11.zig/blob/trunk/.references/xcb)\n* [xorg/proto/xcbproto](https://github.com/tiawl/X11.zig/blob/trunk/.references/xcbproto)\n* [xorg/lib/libxcursor](https://github.com/tiawl/X11.zig/blob/trunk/.references/Xcursor)\n* [xorg/lib/libxext](https://github.com/tiawl/X11.zig/blob/trunk/.references/Xext)\n* [xorg/lib/libxfixes](https://github.com/tiawl/X11.zig/blob/trunk/.references/Xfixes)\n* [xorg/lib/libxi](https://github.com/tiawl/X11.zig/blob/trunk/.references/Xi)\n* [xorg/lib/libxinerama](https://github.com/tiawl/X11.zig/blob/trunk/.references/Xinerama)\n* [xkbcommon/libxkbcommon](https://github.com/tiawl/X11.zig/blob/trunk/.references/xkbcommon)\n* [xorg/proto/xorgproto](https://github.com/tiawl/X11.zig/blob/trunk/.references/xorgproto)\n* [xorg/lib/libxrandr](https://github.com/tiawl/X11.zig/blob/trunk/.references/Xrandr)\n* [xorg/lib/libxrender](https://github.com/tiawl/X11.zig/blob/trunk/.references/Xrender)\n* [xorg/lib/libxscrnsaver](https://github.com/tiawl/X11.zig/blob/trunk/.references/XScrnSaver)\n* [xorg/lib/libxtrans](https://github.com/tiawl/X11.zig/blob/trunk/.references/Xtrans)\n* [xorg/lib/libxau](https://github.com/tiawl/X11.zig/blob/trunk/.references/Xau)\n\n## CICD reminder\n\nThese repositories are automatically updated when a new release is available:\n* [tiawl/glfw.zig][6]\n\nThis repository is automatically updated when a new release is available from these repositories:\n* [xorg/lib/libx11][2]\n* [xorg/lib/libxcb][7]\n* [xorg/proto/xcbproto][8]\n* [xorg/lib/libxcursor][9]\n* [xorg/lib/libxext][10]\n* [xorg/lib/libxfixes][11]\n* [xorg/lib/libxi][12]\n* [xorg/lib/libxinerama][13]\n* [xkbcommon/libxkbcommon][14]\n* [xorg/proto/xorgproto][15]\n* [xorg/lib/libxrandr][16]\n* [xorg/lib/libxrender][17]\n* [xorg/lib/libxscrnsaver][18]\n* [xorg/lib/libxtrans][19]\n* [xorg/lib/libxau][20]\n* [tiawl/toolbox][22]\n\n## `zig build` options\n\nThese additional options have been implemented for maintainability tasks:\n```\n  -Dfetch   Update .references folder and build.zig.zon then stop execution\n  -Dupdate  Update binding\n```\n\n## License\n\nThis repository is not subject to a unique License:\n\nThe parts of this repository originated from this repository are dedicated to the public domain. See the LICENSE file for more details.\n\n**For other parts, it is subject to the License restrictions their respective owners choosed. By design, the public domain code is incompatible with the License notion. In this case, the License prevails. So if you have any doubt about a file property, open an issue.**\n\n[1]:https://github.com/hexops/x11-headers\n[2]:https://gitlab.freedesktop.org/xorg/lib/libx11\n[3]:https://github.com/glfw/glfw\n[4]:https://github.com/hexops\n[5]:https://github.com/ziglang/zig\n[6]:https://github.com/tiawl/glfw.zig\n[7]:https://gitlab.freedesktop.org/xorg/lib/libxcb\n[8]:https://gitlab.freedesktop.org/xorg/proto/xcbproto\n[9]:https://gitlab.freedesktop.org/xorg/lib/libxcursor\n[10]:https://gitlab.freedesktop.org/xorg/lib/libxext\n[11]:https://gitlab.freedesktop.org/xorg/lib/libxfixes\n[12]:https://gitlab.freedesktop.org/xorg/lib/libxi\n[13]:https://gitlab.freedesktop.org/xorg/lib/libxinerama\n[14]:https://gitlab.freedesktop.org/xkbcommon/libxkbcommon\n[15]:https://gitlab.freedesktop.org/xorg/proto/xorgproto\n[16]:https://gitlab.freedesktop.org/xorg/lib/libxrandr\n[17]:https://gitlab.freedesktop.org/xorg/lib/libxrender\n[18]:https://gitlab.freedesktop.org/xorg/lib/libxscrnsaver\n[19]:https://gitlab.freedesktop.org/xorg/lib/libxtrans\n[20]:https://gitlab.freedesktop.org/xorg/lib/libxau\n[21]:https://gitlab.freedesktop.org/xorg\n[22]:https://github.com/tiawl/toolbox\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/57362253?u=519d9e3f04e4833f75c34cb6ceb371670ccddc4b&v=4",
   "releases": [],
   "owner_bio": "Starter villain trapped in a while loop",

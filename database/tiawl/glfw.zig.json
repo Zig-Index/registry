@@ -11,34 +11,39 @@
     "ziglang",
     "zig-package"
   ],
-  "stars": 27,
-  "forks": 6,
+  "stars": 28,
+  "forks": 7,
   "watchers": 2,
-  "updated_at": "2026-02-08T16:09:37Z",
+  "updated_at": "2026-02-15T02:32:57Z",
   "dependencies": [
     {
+      "name": "glfw",
+      "url": "git+https://github.com/glfw/glfw?ref=3.4#7b6aead9fb88b3623e3b3725ebb42670cbe4c579",
+      "hash": "N-V-__8AAKE_TAAJO1RHyQ6MPZFPLLCAyHNu7iYXh7n1KEfH"
+    },
+    {
       "name": "toolbox",
-      "url": "git+https://github.com/tiawl/toolbox?ref=1.12.6#79c1dffe608a9c4a7dcf11f98f1dc88b9b46e9f5",
-      "hash": "toolbox-1.12.6-kRAu4BJbAAAGPWPltdn1vwY83xau2Zh9015JTQ0MZjyM"
-    },
-    {
-      "name": "wayland_zig",
-      "url": "git+https://github.com/tiawl/wayland.zig?ref=wayland-protocols-1.47#3d9fd2ccfac8b61344b7becba3a54acb25f26ed5",
-      "hash": "wayland_zig-1.0.0-JmY-j0k_CgBILUhhfEM-RdwZjP8pFOiQvpmoGMm_-uHO"
-    },
-    {
-      "name": "X11_zig",
-      "url": "git+https://github.com/tiawl/X11.zig?ref=libX11-1.8.13#c5ee1a49153a89601bce9264ff408f3f21bd72bc",
-      "hash": "X11_zig-1.0.0-UuAzbBwzwABCRm6KhLr5KtzWs52eHEivuyx1LIEBLRtd"
+      "url": "git+https://github.com/tiawl/toolbox#c84141dcc39d9fe425eea8a837d8bbff76338368",
+      "hash": "toolbox-2.0.0-kRAu4JZ7AAA9Zsu9B4vZk54fDX-r7FPOyq6nqvlCdaGR"
     },
     {
       "name": "vulkan_zig",
-      "url": "git+https://github.com/tiawl/vulkan.zig?ref=v1.4.343#f66e8c34e270bbb471ee057c5c61d20b22e6593d",
-      "hash": "vulkan_zig-1.0.0-p2wg3qmGPQGYTOSvwMxrYSMrUujPD6tJ1bQillB9oLAH"
+      "url": "git+https://github.com/tiawl/vulkan.zig#ddeae6e453100a93b68d42a28ee0b1ef9782114d",
+      "hash": "vulkan_zig-1.0.0-p2wg3taBPQFFVmGwWu3vMizhARKnPPgF2n4WyLOP6S-V"
+    },
+    {
+      "name": "wayland_zig",
+      "url": "git+https://github.com/tiawl/wayland.zig#421fd40bb66eb83af10d5ea93e7a2db80f3a787a",
+      "hash": "wayland_zig-1.0.0-JmY-j1M4CgBJJqu_bxeJjCTGPYETlGwolZZe2T8n68t9"
+    },
+    {
+      "name": "X11_zig",
+      "url": "git+https://github.com/tiawl/X11.zig#3f563870c2c55a71998b6a9c0d20bc4f4b9ebb25",
+      "hash": "X11_zig-1.0.0-UuAzbKEKwABQuTE6JAcT1Knmt87Get_PF0HP5uqZCT_s"
     }
   ],
-  "minimum_zig_version": "0.15.1",
-  "readme": "# glfw.zig\n\nThis is a fork of [hexops/glfw][1] which is itself a fork of [glfw/glfw][2].\n\n## Why this forkception ?\n\nThe intention under this fork is the same as [hexops][9] had when they forked [glfw/glfw][2]: package it for [Zig][3]. So:\n* Unnecessary files have been deleted,\n* The build system has been replaced with `build.zig`.\n\nHowever this repository has subtle differences for maintainability tasks:\n* No shell scripting,\n* A cron runs every day to check [glfw/glfw][2]. Then it updates this repository if a new release is available,\n\n## How to use it\n\nThe goal of this repository is not to provide a [Zig][3] binding for [glfw/glfw][2]. There are at least as many legit ways as possible to make a binding as there are active accounts on Github. So you are not going to find an answer for this question here. The point of this repository is to abstract the [glfw/glfw][2] compilation process with [Zig][3] (which is not new comers friendly and not easy to maintain) to let you focus on your application. So you can use **glfw.zig**:\n- as raw (see GLFW examples [here](https://github.com/tiawl/cimgui.zig/blob/trunk/examples)),\n- as a daily updated interface for your [Zig][3] binding of [glfw/glfw][2] (see [here][10] for a private usage).\n\n## Important note\n\nThe current usage of this repository is centered around [tiawl/cimgui.zig][3] compilation. So for your usage it could break because some files have been filtered in the process. If it happens, open an issue: this repository is open to potential usage evolution.\n\n## Dependencies\n\nThe [Zig][3] part of this package is relying on the latest [Zig][3] release (0.15.1) and will only be updated for the next one.\n\nHere the repositories' version used by this fork:\n* [glfw/glfw](https://github.com/tiawl/glfw.zig/blob/trunk/.references/glfw)\n\n## CICD reminder\n\nThese repositories are automatically updated when a new release is available:\n* [tiawl/cimgui.zig][4]\n\nThis repository is automatically updated when a new release is available from these repositories:\n* [glfw/glfw][2]\n* [tiawl/toolbox][5]\n* [tiawl/vulkan.zig][6]\n* [tiawl/wayland.zig][7]\n* [tiawl/X11.zig][8]\n\n## `zig build` options\n\nThese additional options have been implemented for maintainability tasks:\n```\n  -Dfetch   Update .references folder and build.zig.zon then stop execution\n  -Dupdate  Update binding\n```\n\n## License\n\nThis repository is not subject to a unique License:\n\nThe parts of this repository originated from this repository are dedicated to the public domain. See the LICENSE file for more details.\n\n**For other parts, it is subject to the License restrictions their respective owners choosed. By design, the public domain code is incompatible with the License notion. In this case, the License prevails. So if you have any doubt about a file property, open an issue.**\n\n[1]:https://github.com/hexops/glfw\n[2]:https://github.com/glfw/glfw\n[3]:https://github.com/ziglang/zig\n[4]:https://github.com/tiawl/cimgui.zig\n[5]:https://github.com/tiawl/toolbox\n[6]:https://github.com/tiawl/vulkan.zig\n[7]:https://github.com/tiawl/wayland.zig\n[8]:https://github.com/tiawl/X11.zig\n[9]:https://github.com/hexops\n[10]:https://github.com/tiawl/spaceporn/blob/trunk/src/spaceporn/bindings/glfw/glfw.zig\n",
+  "minimum_zig_version": "0.15.2",
+  "readme": "# glfw.zig\n\nThis is a fork of [hexops/glfw][1] which is itself a fork of [glfw/glfw][2].\n\n## Why this forkception ?\n\nThe intention under this fork is the same as [hexops][9] had when they forked [glfw/glfw][2]: package it for [Zig][3]. So:\n* Unnecessary files have been deleted,\n* The build system has been replaced with `build.zig`.\n\nHowever this repository has subtle differences for maintainability tasks:\n* No shell scripting,\n* A cron runs every day to check [glfw/glfw][2]. Then it updates this repository if a new release is available,\n\n## How to use it\n\nThe goal of this repository is not to provide a [Zig][3] binding for [glfw/glfw][2]. There are at least as many legit ways as possible to make a binding as there are active accounts on Github. So you are not going to find an answer for this question here. The point of this repository is to abstract the [glfw/glfw][2] compilation process with [Zig][3] (which is not new comers friendly and not easy to maintain) to let you focus on your application. So you can use **glfw.zig**:\n- as raw (see GLFW examples [here](https://github.com/tiawl/cimgui.zig/blob/trunk/examples)),\n- as a daily updated interface for your [Zig][3] binding of [glfw/glfw][2]\n\n## Important note\n\nThe current usage of this repository is centered around [tiawl/cimgui.zig][3] compilation. So for your usage it could break because some files have been filtered in the process. If it happens, open an issue: this repository is open to potential usage evolution.\n\n## Dependencies\n\nThe [Zig][3] part of this package is relying on the latest [Zig][3] release (0.15.2) and will only be updated for the next one.\n\nHere the repositories' version used by this fork:\n* [glfw/glfw](https://github.com/tiawl/glfw.zig/blob/trunk/.references/glfw)\n\n## CICD reminder\n\nThese repositories are automatically updated when a new release is available:\n* [tiawl/cimgui.zig][4]\n\nThis repository is automatically updated when a new release is available from these repositories:\n* [glfw/glfw][2]\n* [tiawl/toolbox][5]\n* [tiawl/vulkan.zig][6]\n* [tiawl/wayland.zig][7]\n* [tiawl/X11.zig][8]\n\n## `zig build` options\n\nThese additional options have been implemented for maintainability tasks:\n```\n  -Dfetch   Update .references folder and build.zig.zon then stop execution\n  -Dupdate  Update binding\n```\n\n## License\n\nThis repository is not subject to a unique License:\n\nThe parts of this repository originated from this repository are dedicated to the public domain. See the LICENSE file for more details.\n\n**For other parts, it is subject to the License restrictions their respective owners choosed. By design, the public domain code is incompatible with the License notion. In this case, the License prevails. So if you have any doubt about a file property, open an issue.**\n\n[1]:https://github.com/hexops/glfw\n[2]:https://github.com/glfw/glfw\n[3]:https://github.com/ziglang/zig\n[4]:https://github.com/tiawl/cimgui.zig\n[5]:https://github.com/tiawl/toolbox\n[6]:https://github.com/tiawl/vulkan.zig\n[7]:https://github.com/tiawl/wayland.zig\n[8]:https://github.com/tiawl/X11.zig\n[9]:https://github.com/hexops\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/57362253?u=519d9e3f04e4833f75c34cb6ceb371670ccddc4b&v=4",
   "releases": [],
   "owner_bio": "Starter villain trapped in a while loop",
