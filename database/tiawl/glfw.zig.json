@@ -14,7 +14,7 @@
   "stars": 28,
   "forks": 7,
   "watchers": 2,
-  "updated_at": "2026-02-15T02:32:57Z",
+  "updated_at": "2026-02-15T10:54:50Z",
   "dependencies": [
     {
       "name": "glfw",
@@ -23,23 +23,23 @@
     },
     {
       "name": "toolbox",
-      "url": "git+https://github.com/tiawl/toolbox#c84141dcc39d9fe425eea8a837d8bbff76338368",
-      "hash": "toolbox-2.0.0-kRAu4JZ7AAA9Zsu9B4vZk54fDX-r7FPOyq6nqvlCdaGR"
+      "url": "git+https://github.com/tiawl/toolbox?ref=2.0.0#8cfe99b13c380c0a0437e9edc05ab4b961b242d6",
+      "hash": "toolbox-2.0.0-kRAu4EF8AAC9LKCNAHFDbj1RzTI4yczjgz7PL_9YjYqb"
     },
     {
       "name": "vulkan_zig",
-      "url": "git+https://github.com/tiawl/vulkan.zig#ddeae6e453100a93b68d42a28ee0b1ef9782114d",
-      "hash": "vulkan_zig-1.0.0-p2wg3taBPQFFVmGwWu3vMizhARKnPPgF2n4WyLOP6S-V"
+      "url": "git+https://github.com/tiawl/vulkan.zig?ref=toolbox-2.0.0#e916fb73247b0664ca6df1a19f45718e61ace719",
+      "hash": "vulkan_zig-1.0.0-p2wg3uCBPQGi_kx66D1m006wmtjL5GxNsFuS05dRmjmw"
     },
     {
       "name": "wayland_zig",
-      "url": "git+https://github.com/tiawl/wayland.zig#421fd40bb66eb83af10d5ea93e7a2db80f3a787a",
-      "hash": "wayland_zig-1.0.0-JmY-j1M4CgBJJqu_bxeJjCTGPYETlGwolZZe2T8n68t9"
+      "url": "git+https://github.com/tiawl/wayland.zig?ref=toolbox-2.0.0#5ce41c9d999ba65da9ed744fb2a7b1af7972e22e",
+      "hash": "wayland_zig-1.0.0-JmY-j104CgAc55X6FW_CTUGOiChX6GSViUAREGQ06gtt"
     },
     {
       "name": "X11_zig",
-      "url": "git+https://github.com/tiawl/X11.zig#3f563870c2c55a71998b6a9c0d20bc4f4b9ebb25",
-      "hash": "X11_zig-1.0.0-UuAzbKEKwABQuTE6JAcT1Knmt87Get_PF0HP5uqZCT_s"
+      "url": "git+https://github.com/tiawl/X11.zig?ref=toolbox-2.0.0#73eb80968506dd7fc7fdc6ef53515171b7a294fc",
+      "hash": "X11_zig-1.0.0-UuAzbKsKwADkteukor47VtrF2jAzgcPVoGpBm_uhp9Ec"
     }
   ],
   "minimum_zig_version": "0.15.2",

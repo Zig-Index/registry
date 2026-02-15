@@ -14,7 +14,7 @@
   "stars": 7,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-02-15T02:25:31Z",
+  "updated_at": "2026-02-15T11:19:29Z",
   "dependencies": [
     {
       "name": "shaderc",
@@ -23,18 +23,18 @@
     },
     {
       "name": "toolbox",
-      "url": "git+https://github.com/tiawl/toolbox#c40e214efcaf902c455dc9ba3dc1ddf64bb3bf25",
-      "hash": "toolbox-2.0.0-kRAu4Cp6AAAOOwydlP8GG2SVXq82AhgeA_C6ABUpDZhH"
+      "url": "git+https://github.com/tiawl/toolbox?ref=2.0.0#8cfe99b13c380c0a0437e9edc05ab4b961b242d6",
+      "hash": "toolbox-2.0.0-kRAu4EF8AAC9LKCNAHFDbj1RzTI4yczjgz7PL_9YjYqb"
     },
     {
       "name": "spirv_zig",
-      "url": "git+https://github.com/tiawl/spirv.zig#61dbe491192d4ed9795a5a425c3cfdb7073a74b8",
-      "hash": "spirv_zig-1.0.0-u_xqhypxfQCUFgIcMGTS4BoKigMvqmYqHVzgOqMJ5wVU"
+      "url": "git+https://github.com/tiawl/spirv.zig?ref=toolbox-2.0.0#2919733e4905aaf39ce9c97d1e998b93c57a03f5",
+      "hash": "spirv_zig-1.0.0-u_xqhzVxfQB-CxWN7LB4NZV5zcYewz-9PIPkhtxxSELL"
     },
     {
       "name": "glslang_zig",
-      "url": "git+https://github.com/tiawl/glslang.zig#d713189ca6d670d8f1aa9c3f16a7ae1b302b5838",
-      "hash": "glslang_zig-1.0.0-QiUC6rTRXgAlK0Vw0-9tDRtZIpbnFNxIEUBb19NOHc9R"
+      "url": "git+https://github.com/tiawl/glslang.zig?ref=toolbox-2.0.0#ec5f6a0dfe592904f118613aea227860bb153eff",
+      "hash": "glslang_zig-1.0.0-QiUC6r7RXgBhJgb3mK5D8pyKZgroKCj5xkE1gw29mZZP"
     }
   ],
   "minimum_zig_version": "0.15.2",
