@@ -13,10 +13,10 @@
     "zig-bindings",
     "zig-package"
   ],
-  "stars": 1,
+  "stars": 2,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-01-06T15:28:36Z",
+  "updated_at": "2026-02-14T06:54:45Z",
   "dependencies": [
     {
       "name": "c_enet",

@@ -14,10 +14,10 @@
     "zig-library",
     "zig-package"
   ],
-  "stars": 1,
+  "stars": 2,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-01-14T10:52:47Z",
+  "updated_at": "2026-02-14T06:52:59Z",
   "dependencies": [
     {
       "name": "zollections",

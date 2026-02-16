@@ -8,10 +8,10 @@
     "python",
     "zig-package"
   ],
-  "stars": 0,
+  "stars": 1,
   "forks": 0,
-  "watchers": 1,
-  "updated_at": "2025-08-09T23:26:53Z",
+  "watchers": 2,
+  "updated_at": "2026-02-14T18:52:50Z",
   "dependencies": [
     {
       "name": "example",
