@@ -13,7 +13,7 @@
   "stars": 3,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-10-30T19:25:47Z",
+  "updated_at": "2026-02-16T22:12:38Z",
   "dependencies": [
     {
       "name": "gifsicle_upstream",
@@ -21,8 +21,8 @@
       "hash": "N-V-__8AAC7iEQDSmeSIIN39pYpLM37G5auku7jmD1RoqsH0"
     }
   ],
-  "minimum_zig_version": "0.15.1",
-  "readme": "# Gifsicle\n\nThis is [gifsicle](https://github.com/kohler/gifsicle) packaged using Zig build system\n\nneeds zig version `0.15.1` or higher\n\n\n## Options\n\nYou can set these options when importing as a dependency with `b.dependency(\"gifsicle\", .{ option=value })`\nor when building directly with `zig build -Doption=value`\n\n|Option Name|default |description                                   |\n|-----------|:------:|----------------------------------------------|\n| linkage   | static | Linkage mode too build lib (dynamic library) |\n| tools     | true   | Build cli tools (gifsicle, gifview, gifdiff) |\n| terminal  | true   | Output gif to terminal                       |\n\n---\n\nThanks to andrew's fork of [ffmpeg](https://github.com/andrewrk/ffmpeg) for the knowhow\n",
+  "minimum_zig_version": "0.15.2",
+  "readme": "# Gifsicle\n\nThis is [gifsicle](https://github.com/kohler/gifsicle) packaged using Zig build system\n\nNeeds zig version `0.15.2` or higher\n\n\n## Options\n\nYou can set these options when importing as a dependency with `b.dependency(\"gifsicle\", .{ option=value })`\nor when building directly with `zig build -Doption=value`\n\n|Option Name|default |description                                   |\n|-----------|:------:|----------------------------------------------|\n| linkage   | static | Linkage mode too build lib (dynamic library) |\n| tools     | true   | Build cli tools (gifsicle, gifview, gifdiff) |\n| terminal  | true   | Output gif to terminal                       |\n\n---\n\nThanks to Andrew's fork of [ffmpeg](https://github.com/andrewrk/ffmpeg) for the knowhow\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
   "releases": [],
   "owner_bio": "...are belong to Ziguanas, but we'd also be delighted to give them back!",

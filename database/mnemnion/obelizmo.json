@@ -15,12 +15,12 @@
   "stars": 11,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-11-05T02:06:26Z",
+  "updated_at": "2026-02-16T22:14:59Z",
   "dependencies": [
     {
       "name": "ohsnap",
-      "url": "https://github.com/mnemnion/ohsnap/archive/refs/tags/v0.4.1.tar.gz",
-      "hash": "ohsnap-0.4.1-iWxzyhicAAA90MEnwxA22VshYmsSH3t0dcqM9yib7ose"
+      "url": "https://github.com/mnemnion/ohsnap/archive/refs/tags/v0.4.3.tar.gz",
+      "hash": "ohsnap-0.4.2-iWxzyg2fAADV1p8ahYk7KG6J9xy4Rl6ld53r9g0HV74K"
     },
     {
       "name": "mvzr",
