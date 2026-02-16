@@ -12,12 +12,12 @@
   "stars": 17,
   "forks": 12,
   "watchers": 1,
-  "updated_at": "2026-02-15T19:24:57Z",
+  "updated_at": "2026-02-16T20:42:12Z",
   "dependencies": [
     {
       "name": "tree_sitter",
-      "url": "https://github.com/neurocyte/tree-sitter/releases/download/master-42b2cb66296e83fef13d155eca4a13057e31438b/source.tar.gz",
-      "hash": "tree_sitter-0.22.4-150-g7e3f5726-z0LhyNr8hjA9keSgGlG4PBO_9BGxsBtODt3e3qvXeTHu"
+      "url": "https://github.com/neurocyte/tree-sitter/releases/download/master-772776d4a090b2d08b10834ab623d8d40c75a3b0/source.tar.gz",
+      "hash": "tree_sitter-0.22.4-150-g7e3f5726-z0LhyLF0iTBSKlZFqwf9kbYT1ENCbCFYp9XoKpZUrm2v"
     },
     {
       "name": "cbor",
@@ -33,7 +33,7 @@
   "owner_location": null,
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 149,
+  "owner_followers": 150,
   "owner_following": 3,
   "owner_created_at": "2012-03-19T13:04:13Z",
   "license": "MIT",
