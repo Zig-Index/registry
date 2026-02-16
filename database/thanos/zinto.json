@@ -1,0 +1,29 @@
+{
+  "name": "zinto",
+  "owner": "thanos",
+  "repo": "zinto",
+  "description": "A high-performance, Zig-native framework for building ultra-lightweight desktop applications with Svelte and Bun.",
+  "type": "package",
+  "topics": [
+    "zig-package",
+    "ui-framework"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-02-16T17:11:28Z",
+  "minimum_zig_version": "0.15.2",
+  "readme": "# Zinto\n\nZinto is a desktop application framework. It uses Zig for the backend and Svelte for the frontend. Bun manages the build toolchain.\n\n## Core Stack\n\n* **Backend:** Zig 0.15.2.\n* **Frontend:** SvelteKit with `adapter-static`.\n* **Build Tool:** Bun.\n* **Webview:** `turf`.\n* **Async I/O:** `libxev`.\n\n## Architecture\n\n### Process Model\n\nThe application runs as a single native binary. The main thread manages the OS window and webview loop. A background thread runs the `libxev` event loop for non-blocking I/O.\n\n### IPC Bridge\n\nCommunication between Svelte and Zig uses a JSON-based message bridge. Zig uses `comptime` reflection to parse and dispatch commands. \n\n### Asset Handling\n\nZig embeds the frontend production build directly into the binary. A custom URI scheme (`zinto://`) serves these assets from memory. The handler includes a fallback to `index.html` to support client-side routing.\n\n## Project Structure\n\n* `/src`: Zig backend source code.\n* `main.zig`: Entry point and window initialization.\n* `bridge.zig`: Comptime IPC dispatcher.\n* `assets.zig`: Embedded file map.\n\n\n* `/frontend`: Svelte project.\n* `build.zig`: Unified build script for Bun and Zig.\n\n## Build Pipeline\n\n1. **Frontend:** `build.zig` executes `bun install` and `bun run build`.\n2. **Codegen:** A build step scans `frontend/dist` and generates `assets.zig`.\n3. **Compilation:** Zig compiles the backend code and embeds the assets.\n4. **Output:** A single executable under 1MB.\n\n## Quickstart (Scaffold)\n\nThis repo now contains a working scaffold that matches the architecture described above:\n\n- A **Zig backend skeleton** under `src/` with:\n  - `src/bridge.zig`: JSON IPC + comptime API dispatch (starter `ping` + `echo`)\n  - `src/assets.zig`: placeholder asset server (overwritten by codegen)\n  - `src/webview_stub.zig`: **stub webview adapter** so the project has a runnable contract even before integrating a real webview library\n  - `src/async.zig`: background worker thread (placeholder for a real `libxev` loop)\n- A **SvelteKit + adapter-static** frontend under `frontend/` that builds to `frontend/dist`.\n\n### Prereqs\n\n- Zig **0.15.2**\n- Node.js **25.3.0** (recommended for local tooling; Bun is the build tool)\n- Bun\n\n### Commands\n\nFrom repo root:\n\n- Generate embedded assets + TypeScript API definitions:\n\n  - `zig build codegen`\n\n- Build:\n\n  - `zig build`\n\n- Run (stub webview prints the embedded `index.html` preview to stdout):\n\n  - `zig build run`\n\n### Next integration steps\n\n- Replace `src/webview_stub.zig` with a real implementation (e.g., turf/webview) and:\n  - bind the `zinto://` protocol handler to `src/assets.zig`\n  - bind the IPC handler to `src/bridge.zig` and dispatch results back via the webview’s dispatch mechanism\n- Replace `src/async.zig`’s placeholder loop with a `libxev` event loop and message passing as described below.\n\n## Implementation Requirements\n\n### Windowing\n\nInitialize a native window using `webview-zig`. Bind the `zinto://` protocol to the embedded asset map. Ensure the webview blocks the main thread.\n\n### Concurrency\n\nSpawn a thread for `libxev`. Use an atomic queue to pass messages from the webview thread to the async thread. Use `webview_dispatch` to return results to the UI.\n\n### Type Safety\n\nThe build system must generate a TypeScript definition file (`api.d.ts`) based on the exported Zig functions in `bridge.zig`.\n\n---\n\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/38292?u=3c45a8f0f23a3b3709a4cc141ab14e5e70a6c50f&v=4",
+  "releases": [],
+  "owner_bio": "((year, language) for language in ('various assemblers', 'c', 'c++', 'erlang', 'java', 'javascript', 'elixir', 'python') for year in range(1978, now()))",
+  "owner_company": "syntazo",
+  "owner_location": "new york",
+  "owner_blog": "syntazo.com",
+  "owner_twitter_username": null,
+  "owner_followers": 39,
+  "owner_following": 10,
+  "owner_created_at": "2008-12-04T14:57:03Z",
+  "license": "MIT",
+  "category": "library"
+}
