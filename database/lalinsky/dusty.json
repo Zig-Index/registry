@@ -15,15 +15,15 @@
     "websocket-server",
     "zig"
   ],
-  "stars": 59,
-  "forks": 3,
+  "stars": 62,
+  "forks": 4,
   "watchers": 0,
-  "updated_at": "2026-02-14T20:42:44Z",
+  "updated_at": "2026-02-17T18:22:31Z",
   "dependencies": [
     {
       "name": "zio",
-      "url": "git+https://github.com/lalinsky/zio?ref=v0.8.0#d7e56167f37bfedbd0dd470f56e01620e69a0d4a",
-      "hash": "zio-0.8.0-xHbVVHtnGACrWEGWxWvXl2rYDp9qDmJ-UO4hynM9cibA"
+      "url": "git+https://github.com/lalinsky/zio?ref=v0.8.1#d091a8e4ed5849e1eb1bd4a49fd019e48f00546d",
+      "hash": "zio-0.8.1-xHbVVGpjGADhmfXLbPcE9zPS0rTlCM3s5Z7EPX4chiwx"
     }
   ],
   "minimum_zig_version": "0.15.2",
@@ -34,7 +34,7 @@
   "owner_location": "Trenčín, Slovakia",
   "owner_blog": "https://lalinsky.com",
   "owner_twitter_username": null,
-  "owner_followers": 307,
+  "owner_followers": 308,
   "owner_following": 27,
   "owner_created_at": "2010-03-11T19:55:55Z",
   "category": "library"
