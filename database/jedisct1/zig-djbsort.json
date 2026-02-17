@@ -12,10 +12,10 @@
     "zig-package",
     "djbsort"
   ],
-  "stars": 1,
+  "stars": 2,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-02-17T05:17:27Z",
+  "updated_at": "2026-02-17T10:47:12Z",
   "dependencies": [
     {
       "name": "example",
@@ -24,7 +24,7 @@
     }
   ],
   "minimum_zig_version": "0.16.0-dev.2623+27eec9bd6",
-  "readme": "# djbsort for Zig\n\nA Zig implementation of DJB's constant-time sorting network ([djbsort](https://sorting.cr.yp.to/)).\n\nThe sorting network is data-oblivious: the sequence of comparisons and swaps depends only on the array length, never on the values being sorted. This makes it immune to timing side-channels, which matters when you need to sort sensitive data in cryptographic contexts.\n\n## Usage\n\nThe module exposes two functions.\n\n`sort` is the fast path for native numeric types (integers and floats of any width).\n\nIt uses SIMD vectorization and branchless min/max internally:\n\n```zig\nconst djbsort = @import(\"djbsort\");\n\nvar data = [_]i32{ 42, -7, 13, 0, -99 };\ndjbsort.sort(i32, .asc, &data);\n// data is now { -99, -7, 0, 13, 42 }\n```\n\n`sortWith` handles arbitrary types, including structs. It follows the same interface as `std.sort.pdq`: you provide a comparison function and an optional context. The sort is constant-time as long as your comparison function is:\n\n```zig\nconst djbsort = @import(\"djbsort\");\n\nconst Point = struct { x: i32, y: i32 };\n\nvar points = [_]Point{ .{ .x = 3, .y = 1 }, .{ .x = 1, .y = 2 } };\ndjbsort.sortWith(Point, &points, {}, struct {\n    fn lessThan(_: void, a: Point, b: Point) bool {\n        return a.x < b.x;\n    }\n}.lessThan);\n```\n\n### Float ordering\n\nFor floating-point types, `sort` imposes a total order: `-NaN < -inf < ... < -0.0 < +0.0 < ... < +inf < +NaN`.\n\nThis differs from IEEE 754 where `NaN` is unordered.\n",
+  "readme": "# djbsort for Zig\n\nA Zig implementation of DJB's constant-time sorting network ([djbsort](https://sorting.cr.yp.to/)).\n\nThe sorting network is data-oblivious: the sequence of comparisons and swaps depends only on the array length, never on the values being sorted. This makes it immune to timing side-channels, which matters when you need to sort sensitive data in cryptographic contexts.\n\n## Usage\n\nThe module exposes two functions.\n\n`sort` is the fast path for native numeric types (integers and floats of any width).\n\nIt uses SIMD vectorization and branchless min/max internally:\n\n```zig\nconst djbsort = @import(\"djbsort\");\n\nvar data = [_]i32{ 42, -7, 13, 0, -99 };\ndjbsort.sort(i32, .asc, &data);\n// data is now { -99, -7, 0, 13, 42 }\n```\n\n`sortWith` handles arbitrary types, including structs. It follows the same interface as `std.sort.pdq`: you provide a comparison function and an optional context. The sort is constant-time as long as your comparison function is:\n\n```zig\nconst djbsort = @import(\"djbsort\");\n\nconst Point = struct { x: i32, y: i32 };\n\nvar points = [_]Point{ .{ .x = 3, .y = 1 }, .{ .x = 1, .y = 2 } };\ndjbsort.sortWith(Point, &points, {}, struct {\n    fn lessThan(_: void, a: Point, b: Point) bool {\n        return a.x < b.x;\n    }\n}.lessThan);\n```\n\n### Performance\n\nOn Apple Silicon, `sort` runs 2x to 4x faster than `std.sort.pdq` on integers across array sizes from 16 to 1 million elements.\n\nFloats are faster up to ~256K elements; at 1M f64 elements the `O(n log^2 n)` scaling starts to show.\n\n`sortWith` (generic, no SIMD) beats `pdq` by 1.2x to 3x on integers up to 65K, then gradually converges at larger sizes.\n\nRun `zig build bench` to reproduce.\n\n### Float ordering\n\nFor floating-point types, `sort` imposes a total order: `-NaN < -inf < ... < -0.0 < +0.0 < ... < +inf < +NaN`.\n\nThis differs from IEEE 754 where `NaN` is unordered.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/124872?v=4",
   "releases": [
     {
