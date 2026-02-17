@@ -10,7 +10,7 @@
   "stars": 2,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-01-29T02:07:59Z",
+  "updated_at": "2026-02-17T04:26:45Z",
   "dependencies": [
     {
       "name": "praxis",
@@ -18,28 +18,18 @@
       "hash": "praxis-0.5.5-FPf2Nen-BgDUSHamZvZIlljSj-E6Jl_1k4i01ZcB-IWN"
     },
     {
-      "name": "zstbi",
-      "url": "git+https://github.com/zig-gamedev/zstbi.git#664305dd52640be15cbebd7cd73d1199679933e1",
-      "hash": "zstbi-0.11.0-dev-L0Ea_2yVBwA4uh-tHfgdhZcQaWRoZVYlNGs4Dl_WTeuR"
-    },
-    {
-      "name": "zigimg",
-      "url": "git+https://github.com/zigimg/zigimg.git#f5783e87627cbd9e0b45fad112e9f73503914f36",
-      "hash": "zigimg-0.1.0-8_eo2vBrFQBhsrLpexdcDQY-zrlzkyFZfKuYX-Nry6KN"
-    },
-    {
-      "name": "plutosvg",
-      "url": "git+https://github.com/JacobCrabill/zig-plutosvg#518e00df9412df30eea6a1934a7edd2658cdd2d9",
-      "hash": "plutosvg-0.0.6-LyMxgbMuAADqe6_HVbOOBTtsmMVlb-ar-iOc7pRrPQYc"
-    },
-    {
       "name": "zg",
-      "url": "git+https://codeberg.org/loftafi/zg.git#2f02c3b16c073d0bd3d9368a66ce272a574f75a3",
-      "hash": "zg-0.15.1-oGqU3J1DtAJhPKw_pU5s8kHGVYDk1leZm4TtO1cvMihq"
+      "url": "git+https://codeberg.org/loftafi/zg-16.git#f2243a83dc0f46100ff60f92d87c83c6fc143fb1",
+      "hash": "zg-0.15.4-oGqU3NVKtALBC0oT3XfERGB0nza4nfK5M1cH7uVl5C5J"
+    },
+    {
+      "name": "zstbi",
+      "url": "git+https://github.com/zaddok/zstbi.git#456b7620bf8036d29454d98cb506e0428e6510ae",
+      "hash": "zstbi-0.11.0-dev-L0Ea_06WBwCZoJBl6SD0bcHOLEEIrD5xbQ0TbXe-SQ5Y"
     }
   ],
   "minimum_zig_version": "0.15.2",
-  "readme": "# Resources\n\nThis zig module supports loading, searching, and bundling resources\ninto a bundle for distribution.\n\n## Example usage\n\n```zig\n// Load a repository folder of files (with metadata files)\nvar bucket = try Resources.create(allocator);\ndefer bucket.destroy();\nseed(); // If a uid is generated, make sure it is unique.\n_ = bucket.load_directory(folder) catch |e| {\n    std.debug.print(\"error {any} while loading {s}\\n\", .{ e, folder });\n    return Error.FailedReadingRepo;\n};\n\n// Load a resource bundle of files.\nbucket.load_bundle(\"/path/to/bundle\");\n\n// Search for a resource by filename or word in a filename\nvar results: std.ArrayListUnmanaged(*Resource) = .empty.\ndefer results.deinit(allocator);\ntry bucket.search(keywords.items, .any, &results);\nfor (results.items) |resource| {\n    std.debug.print(\" {d}  {s}\\n\", .{resource.uid, sentence});\n}\n\n// Load a file from the resource bucket\nconst data = resources.read_data(resource, allocator) catch |e| {\n    if (e == error.OutOfMemory) return error.OutOfMemory;\n    if (e == error.FileNotFound) return error.ResourceNotFound;\n    return error.ResourceReadError;\n};\n\n// Save the contents of a list of resources into a bundle\nbuket.save_bundle(\"/path/to/bundle\", results);\n\n```\n\n## Unicode filenames\n\nOn mac, some files may accidentally become NFD. You can convert all filenames\nto NFD usinc convmv:\n\n    convmv -r -f utf8 -t utf8 --nfc --notest .\n\n## License\n\nThis code is released under the terms of the MIT license. This\ncode is useful for my purposes. No warrantee is given or implied\nthat this library will be suitable for your purpose and no warantee\nis given or implied that this code is free from defects.\n",
+  "readme": "# Resources\n\nThis zig module supports loading, searching, and bundling resources\ninto a bundle for distribution.\n\n## Example usage\n\n```zig\n// Load a repository folder of files (with metadata files)\nvar bucket = try Resources.create(allocator);\ndefer bucket.destroy();\nseed(); // If a uid is generated, make sure it is unique.\n_ = bucket.loadDirectory(folder) catch |e| {\n    std.debug.print(\"error {any} while loading {s}\\n\", .{ e, folder });\n    return Error.FailedReadingRepo;\n};\n\n// Load a resource bundle of files.\nbucket.loadBundle(\"/path/to/bundle\");\n\n// Search for a resource by filename or word in a filename\nvar results: std.ArrayListUnmanaged(*Resource) = .empty.\ndefer results.deinit(allocator);\ntry bucket.search(keywords.items, .any, &results);\nfor (results.items) |resource| {\n    std.debug.print(\" {d}  {s}\\n\", .{resource.uid, sentence});\n}\n\n// Load a file from the resource bucket\nconst data = resources.loadResource(resource, allocator) catch |e| {\n    if (e == error.OutOfMemory) return error.OutOfMemory;\n    if (e == error.FileNotFound) return error.ResourceNotFound;\n    return error.ResourceReadError;\n};\n\n// Save the contents of a list of resources into a bundle\nbuket.saveBundle(\"/path/to/bundle\", results);\n\n```\n\n## Unicode filenames\n\nOn mac, some files may accidentally become NFD. You can convert all filenames\nto NFD usinc convmv:\n\n    convmv -r -f utf8 -t utf8 --nfc --notest .\n\n## License\n\nThis code is released under the terms of the MIT license. This\ncode is useful for my purposes. No warrantee is given or implied\nthat this library will be suitable for your purpose and no warantee\nis given or implied that this code is free from defects.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/199742861?u=f3dc58206cc40c5e6ef5f95258d934e8a11f9e69&v=4",
   "releases": [],
   "owner_bio": "Go • Zig • Rust",
