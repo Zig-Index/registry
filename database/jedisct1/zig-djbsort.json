@@ -1,0 +1,50 @@
+{
+  "name": "zig-djbsort",
+  "owner": "jedisct1",
+  "repo": "zig-djbsort",
+  "description": "djbsort: fast, data-oblivious sorting algorithm.",
+  "type": "package",
+  "topics": [
+    "djb",
+    "sort",
+    "sorting",
+    "zig",
+    "zig-package",
+    "djbsort"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2026-02-17T05:17:27Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.16.0-dev.2623+27eec9bd6",
+  "readme": "# djbsort for Zig\n\nA Zig implementation of DJB's constant-time sorting network ([djbsort](https://sorting.cr.yp.to/)).\n\nThe sorting network is data-oblivious: the sequence of comparisons and swaps depends only on the array length, never on the values being sorted. This makes it immune to timing side-channels, which matters when you need to sort sensitive data in cryptographic contexts.\n\n## Usage\n\nThe module exposes two functions.\n\n`sort` is the fast path for native numeric types (integers and floats of any width).\n\nIt uses SIMD vectorization and branchless min/max internally:\n\n```zig\nconst djbsort = @import(\"djbsort\");\n\nvar data = [_]i32{ 42, -7, 13, 0, -99 };\ndjbsort.sort(i32, .asc, &data);\n// data is now { -99, -7, 0, 13, 42 }\n```\n\n`sortWith` handles arbitrary types, including structs. It follows the same interface as `std.sort.pdq`: you provide a comparison function and an optional context. The sort is constant-time as long as your comparison function is:\n\n```zig\nconst djbsort = @import(\"djbsort\");\n\nconst Point = struct { x: i32, y: i32 };\n\nvar points = [_]Point{ .{ .x = 3, .y = 1 }, .{ .x = 1, .y = 2 } };\ndjbsort.sortWith(Point, &points, {}, struct {\n    fn lessThan(_: void, a: Point, b: Point) bool {\n        return a.x < b.x;\n    }\n}.lessThan);\n```\n\n### Float ordering\n\nFor floating-point types, `sort` imposes a total order: `-NaN < -inf < ... < -0.0 < +0.0 < ... < +inf < +NaN`.\n\nThis differs from IEEE 754 where `NaN` is unordered.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/124872?v=4",
+  "releases": [
+    {
+      "tag_name": "0.0.1",
+      "name": "0.0.1",
+      "body": "Initial public release.",
+      "prerelease": false,
+      "published_at": "2026-02-16T19:46:23Z",
+      "html_url": "https://github.com/jedisct1/zig-djbsort/releases/tag/0.0.1",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Get my public keys here: https://sk.tl/7CPRo8kn",
+  "owner_company": null,
+  "owner_location": "Antibes, France",
+  "owner_blog": "https://00f.net",
+  "owner_twitter_username": "jedisct1",
+  "owner_followers": 4150,
+  "owner_following": 195,
+  "owner_created_at": "2009-09-09T10:20:57Z",
+  "license": "MIT",
+  "category": "library"
+}

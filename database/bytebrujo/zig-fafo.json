@@ -1,0 +1,25 @@
+{
+  "name": "zig-fafo",
+  "owner": "bytebrujo",
+  "repo": "zig-fafo",
+  "description": "Bloom filter transaction dependency analyzer and parallel scheduler in Zig",
+  "type": "package",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-02-17T05:44:04Z",
+  "readme": "# zig-fafo\n\nBloom filter-based transaction dependency analyzer and parallel scheduler.\n\n## Overview\n\nzig-fafo determines which transactions can safely execute in parallel by using\nBloom filters to approximate read/write set intersection tests.  Transactions\nwhose key sets do not conflict are grouped into batches that can run\nconcurrently.\n\n## Components\n\n- **BloomFilter** -- Probabilistic set membership with configurable\n  false-positive rate.  Uses SipHash-2-4 with distinct seeds for each hash\n  function.\n\n- **ParallelScheduler** -- Accepts transactions annotated with read and write\n  key sets, then produces a sequence of batches via greedy conflict detection.\n\n## Usage\n\n```zig\nconst fafo = @import(\"zig-fafo\");\n\nvar sched = try fafo.ParallelScheduler.init(allocator);\ndefer sched.deinit();\n\ntry sched.submit(tx_id, &read_keys, &write_keys);\nconst batches = try sched.schedule(allocator);\n```\n\n## Build & Test\n\n```sh\nzig build test\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/247236101?u=b211389ca6af884418b9c77a1a7a76cb09e21c4c&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 0,
+  "owner_following": 0,
+  "owner_created_at": "2025-12-01T19:25:22Z",
+  "category": "library"
+}
