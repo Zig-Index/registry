@@ -14,12 +14,12 @@
   "stars": 2,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-02-14T21:03:41Z",
+  "updated_at": "2026-02-17T20:01:35Z",
   "dependencies": [
     {
       "name": "zio",
-      "url": "git+https://github.com/lalinsky/zio?ref=v0.8.0#d7e56167f37bfedbd0dd470f56e01620e69a0d4a",
-      "hash": "zio-0.8.0-xHbVVHtnGACrWEGWxWvXl2rYDp9qDmJ-UO4hynM9cibA"
+      "url": "git+https://github.com/lalinsky/zio?ref=v0.8.2#3ac234eae165177cd75742f922851dc5d373fd12",
+      "hash": "zio-0.8.2-xHbVVC5jGAAYUMZd_BW5eT-HJb_lf-LCGj4PaLOeEkA2"
     }
   ],
   "minimum_zig_version": "0.15.0",
