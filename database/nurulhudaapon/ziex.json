@@ -16,10 +16,10 @@
     "zig-package",
     "server-side-rendering"
   ],
-  "stars": 128,
+  "stars": 129,
   "forks": 11,
   "watchers": 3,
-  "updated_at": "2026-02-16T07:13:51Z",
+  "updated_at": "2026-02-18T02:29:17Z",
   "dependencies": [
     {
       "name": "httpz",

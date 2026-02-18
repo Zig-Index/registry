@@ -7,15 +7,15 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 2,
+  "stars": 3,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-02-17T04:26:45Z",
+  "updated_at": "2026-02-18T01:25:16Z",
   "dependencies": [
     {
       "name": "praxis",
-      "url": "git+https://github.com/loftafi/praxis.git#15961aa12dd184654a8217cdef1b3e03535f9123",
-      "hash": "praxis-0.5.5-FPf2Nen-BgDUSHamZvZIlljSj-E6Jl_1k4i01ZcB-IWN"
+      "url": "git+https://github.com/loftafi/praxis.git#6ca395cf15ebdd27b0eabb058c6cdc15e80099dc",
+      "hash": "praxis-0.5.6-FPf2Nen-BgBs2gGK1xUY4BzDnb8Si6we5Kjjj6lssI10"
     },
     {
       "name": "zg",

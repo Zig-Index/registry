@@ -10,30 +10,30 @@
   "stars": 3,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-02-13T02:16:42Z",
+  "updated_at": "2026-02-18T00:13:55Z",
   "dependencies": [
     {
+      "name": "resources",
+      "url": "git+https://github.com/loftafi/resources.git#b7475973e692f7aa8d06a5d4c8510a6fbc93bc9a",
+      "hash": "resources-0.9.0-J0GwIxhUAgC04XsG-EAjdg1ykMpoW5WcMJHBR7UdE_kk"
+    },
+    {
       "name": "sdl",
-      "url": "git+https://github.com/castholm/SDL.git#f103a1439670c35be756d4491b296a6e3ccffaed",
-      "hash": "sdl-0.3.2+3.2.26-7uIn9BNgfwHaS0qXiSIBLkJf8Jfrh5P6gSWdQvtnvxEp"
+      "url": "git+https://github.com/castholm/SDL.git#887fa805e40d5c7bb3955ae69b89ed566c6a0471",
+      "hash": "sdl-0.4.0+3.4.0-SDL--rq2owEZsySGuHCuVJ9naEvH3i3e_pyUIjziBtJ-"
     },
     {
       "name": "sdl_ttf",
-      "url": "git+https://github.com/loftafi/SDL_ttf.git#119d2eec127c4ca9de159939c95f5f3b55794155",
-      "hash": "sdl_ttf-3.2.26-9xyaiOgVBwA6HIB5v3N8mf-hRpDwexBaJ2vFckQeqZNH"
+      "url": "git+https://github.com/loftafi/SDL_ttf.git#1664f9dd72900cc54902222c656e922e62812206",
+      "hash": "sdl_ttf-3.2.26-2-9xyaiOwVBwBas0CEbu59d9QdQHmBKgpjDso-g1kjSdCP"
     },
     {
-      "name": "zigimg",
-      "url": "git+https://github.com/zigimg/zigimg.git#f5783e87627cbd9e0b45fad112e9f73503914f36",
-      "hash": "zigimg-0.1.0-8_eo2vBrFQBhsrLpexdcDQY-zrlzkyFZfKuYX-Nry6KN"
-    },
-    {
-      "name": "resources",
-      "url": "git+https://github.com/loftafi/resources.git#a99463a20ac15977ba43b28df18a889f7f2d4a03",
-      "hash": "resources-0.8.6-J0GwI1pBAgCwkbBvzefL_M4UpK2WPxBh47xJyoUt9G59"
+      "name": "zstbi",
+      "url": "git+https://github.com/zaddok/zstbi.git#456b7620bf8036d29454d98cb506e0428e6510ae",
+      "hash": "zstbi-0.11.0-dev-L0Ea_06WBwCZoJBl6SD0bcHOLEEIrD5xbQ0TbXe-SQ5Y"
     }
   ],
-  "minimum_zig_version": "0.15.2",
+  "minimum_zig_version": "0.16.0",
   "readme": "# Engine\n\nThis zig module provides a lightweight GUI api based around SDL3\nand SDL3 TTF.\n\nThis code is released under the terms of the MIT license. This\ncode is useful for my purposes. No warrantee is given or implied\nthat this library will be suitable for your purpose and no warantee\nis given or implied that this code is free from defects.\n\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/199742861?u=f3dc58206cc40c5e6ef5f95258d934e8a11f9e69&v=4",
   "releases": [],
