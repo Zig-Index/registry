@@ -12,21 +12,16 @@
   "stars": 4,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-12-31T19:01:25Z",
+  "updated_at": "2026-02-18T22:20:49Z",
   "dependencies": [
     {
       "name": "VulkanMemoryAllocator",
       "url": "git+https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator?ref=v3.3.0#1d8f600fd424278486eade7ed3e877c99f0846b1",
       "hash": "N-V-__8AAIutPgABk6NlXZhlJ5P8qVECvakZIKoO94h7xUOw"
-    },
-    {
-      "name": "vulkan_headers",
-      "url": "git+https://github.com/johan0A/vulkan-headers-zig#acab9467e982b249203db493dd5a3089aeb4c767",
-      "hash": "vulkan_headers-0.1.0+1.4.326-IPSI1uADAACG8vYTRpu3hY-wLEy_WGmJ5YwI_v2ajFAp"
     }
   ],
-  "minimum_zig_version": "0.14.0",
-  "readme": "# VulkanMemoryAllocator\n\nThis is [VulkanMemoryAllocator](https://gpuopen.com/vulkan-memory-allocator/),\npackaged for the [Zig](https://ziglang.org/) build system.\n\n## how to use\n\n1. Add `VulkanMemoryAllocator` to the dependency list in `build.zig.zon`: \n\n```sh\nzig fetch --save git+https://github.com/johan0A/VulkanMemoryAllocator\n```\n\n2. Config `build.zig`:\n\n```zig\nconst vma_dep = b.dependency(\"VulkanMemoryAllocator\", .{\n    .target = target,\n    .optimize = optimize,\n});\nroot_module.linkLibrary(\"vma\", vma_dep.artifact(\"VulkanMemoryAllocator\"));\n```\n",
+  "minimum_zig_version": "0.15.2",
+  "readme": "# VulkanMemoryAllocator\n\nThis is [VulkanMemoryAllocator](https://gpuopen.com/vulkan-memory-allocator/),\npackaged for the [Zig](https://ziglang.org/) build system.\n\n## how to use\n\n1. Add `VulkanMemoryAllocator` to the dependency list in `build.zig.zon`:\n\n```sh\nzig fetch --save git+https://github.com/johan0A/VulkanMemoryAllocator\n```\n\n2. Config `build.zig`:\n\n```zig\nconst vma_dep = b.dependency(\"VulkanMemoryAllocator\", .{\n    .target = target,\n    .optimize = optimize,\n    .VMA_DYNAMIC_VULKAN_FUNCTIONS = true,\n    .VMA_STATIC_VULKAN_FUNCTIONS = false,\n});\nroot_module.linkLibrary(vma_dep.artifact(\"VulkanMemoryAllocator\"));\n// Installed headers along the VulkanMemoryAllocator artifact:\n//   \"vk_mem_alloc_config.h\" generated configuration header that reflects the provided options, should be included before vk_mem_alloc.h\n//   \"vk_mem_alloc.h\"\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/85748765?u=aedb06a7b1afcfbb8c854c2c7ca78e233b8d5619&v=4",
   "releases": [
     {
