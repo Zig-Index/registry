@@ -12,7 +12,7 @@
   "stars": 4,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-02-18T22:20:49Z",
+  "updated_at": "2026-02-18T22:42:51Z",
   "dependencies": [
     {
       "name": "VulkanMemoryAllocator",
@@ -24,6 +24,15 @@
   "readme": "# VulkanMemoryAllocator\n\nThis is [VulkanMemoryAllocator](https://gpuopen.com/vulkan-memory-allocator/),\npackaged for the [Zig](https://ziglang.org/) build system.\n\n## how to use\n\n1. Add `VulkanMemoryAllocator` to the dependency list in `build.zig.zon`:\n\n```sh\nzig fetch --save git+https://github.com/johan0A/VulkanMemoryAllocator\n```\n\n2. Config `build.zig`:\n\n```zig\nconst vma_dep = b.dependency(\"VulkanMemoryAllocator\", .{\n    .target = target,\n    .optimize = optimize,\n    .VMA_DYNAMIC_VULKAN_FUNCTIONS = true,\n    .VMA_STATIC_VULKAN_FUNCTIONS = false,\n});\nroot_module.linkLibrary(vma_dep.artifact(\"VulkanMemoryAllocator\"));\n// Installed headers along the VulkanMemoryAllocator artifact:\n//   \"vk_mem_alloc_config.h\" generated configuration header that reflects the provided options, should be included before vk_mem_alloc.h\n//   \"vk_mem_alloc.h\"\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/85748765?u=aedb06a7b1afcfbb8c854c2c7ca78e233b8d5619&v=4",
   "releases": [
+    {
+      "tag_name": "v0.2.0+3.3.0",
+      "name": "v0.2.0+3.3.0",
+      "body": "compatibility with zig 0.16 and improvements\r\n\r\n**Full Changelog**: https://github.com/johan0A/VulkanMemoryAllocator/compare/0.1.1+3.3.0...v0.2.0+3.3.0",
+      "prerelease": false,
+      "published_at": "2026-02-18T22:49:19Z",
+      "html_url": "https://github.com/johan0A/VulkanMemoryAllocator/releases/tag/v0.2.0%2B3.3.0",
+      "assets": []
+    },
     {
       "tag_name": "0.1.1+3.3.0",
       "name": "0.1.1+3.3.0",
