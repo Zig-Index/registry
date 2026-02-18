@@ -1,0 +1,38 @@
+{
+  "name": "redis.zig",
+  "owner": "lalinsky",
+  "repo": "redis.zig",
+  "description": "Redis client for Zig",
+  "type": "package",
+  "topics": [
+    "redis",
+    "redis-client",
+    "zig",
+    "zig-package",
+    "zio"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-02-18T08:10:07Z",
+  "dependencies": [
+    {
+      "name": "zio",
+      "url": "git+https://github.com/lalinsky/zio?ref=v0.8.2#3ac234eae165177cd75742f922851dc5d373fd12",
+      "hash": "zio-0.8.2-xHbVVC5jGAAYUMZd_BW5eT-HJb_lf-LCGj4PaLOeEkA2"
+    }
+  ],
+  "minimum_zig_version": "0.15.0",
+  "readme": "# redis.zig\n\nA Redis client library for Zig, built on [zio](https://github.com/lalinsky/zio) for async I/O.\n\n## Features\n\n- Async I/O via zio coroutines\n- Connection pooling\n- RESP2 protocol implementation\n- Basic string commands (GET, SET, DEL, INCR, DECR, etc.)\n- TTL and expiration support\n- Retry logic with configurable attempts and intervals\n\n## Example\n\n```zig\nconst std = @import(\"std\");\nconst zio = @import(\"zio\");\nconst redis = @import(\"redis\");\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n\n    var rt = try zio.Runtime.init(gpa.allocator(), .{});\n    defer rt.deinit();\n\n    var client = try redis.connect(gpa.allocator(), \"localhost:6379\");\n    defer client.deinit();\n\n    // Set a value\n    try client.set(\"hello\", \"world\", .{});\n\n    // Get a value\n    var buf: [1024]u8 = undefined;\n    if (try client.get(\"hello\", &buf)) |value| {\n        std.debug.print(\"Value: {s}\\n\", .{value});\n    }\n\n    // Set with expiration\n    try client.set(\"temp\", \"data\", .{ .ex = 60 });\n\n    // Increment a counter\n    try client.set(\"counter\", \"0\", .{});\n    const val = try client.incrBy(\"counter\", 5);\n    std.debug.print(\"Counter: {d}\\n\", .{val});\n}\n```\n\n## API\n\n### String Commands\n\n- `get(key, buf)` - Get the value of a key\n- `set(key, value, opts)` - Set the string value of a key\n  - Options: `ex` (expire seconds), `nx` (only if not exists), `xx` (only if exists), `get` (return old value)\n- `del(keys)` - Delete one or more keys\n- `incr(key)` - Increment the integer value of a key by one\n- `incrBy(key, delta)` - Increment the integer value by amount\n- `decr(key)` - Decrement the integer value of a key by one\n- `decrBy(key, delta)` - Decrement the integer value by amount\n- `expire(key, seconds)` - Set a timeout on key\n- `ttl(key)` - Get the time to live for a key\n- `exists(keys)` - Determine if keys exist\n\n### Server Commands\n\n- `ping(message)` - Ping the server\n- `flushDB()` - Remove all keys from the current database\n- `dbSize()` - Return the number of keys in the current database\n\n## Installation\n\nAdd redis.zig as a dependency in your `build.zig.zon`:\n\n```bash\nzig fetch --save \"git+https://github.com/lalinsky/redis.zig\"\n```\n\nIn your `build.zig`:\n\n```zig\nconst redis = b.dependency(\"redis\", .{\n    .target = target,\n    .optimize = optimize,\n});\nexe.root_module.addImport(\"redis\", redis.module(\"redis\"));\n```\n\n## Development\n\nRun tests:\n\n```bash\nzig build test\n```\n\nRun example:\n\n```bash\ndocker compose up -d\nzig build run\n```\n\n## Roadmap\n\n- [ ] Pipelining support\n- [ ] Pub/Sub support\n- [ ] Transaction support (MULTI/EXEC)\n- [ ] Data structure commands (lists, sets, hashes)\n- [ ] Lua scripting support\n- [ ] Cluster support\n\n## License\n\nMIT\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/220839?u=76f817358cb458727e81dd4ec11188d343becc9e&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Trenčín, Slovakia",
+  "owner_blog": "https://lalinsky.com",
+  "owner_twitter_username": null,
+  "owner_followers": 307,
+  "owner_following": 27,
+  "owner_created_at": "2010-03-11T19:55:55Z",
+  "license": "MIT",
+  "category": "library"
+}
