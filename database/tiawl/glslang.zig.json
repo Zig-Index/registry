@@ -14,12 +14,12 @@
   "stars": 2,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-02-18T17:53:49Z",
+  "updated_at": "2026-02-19T20:32:16Z",
   "dependencies": [
     {
       "name": "glslang",
-      "url": "git+https://github.com/KhronosGroup/glslang#b83b2462ae7199c1560c68a710fb373bc2f75f86",
-      "hash": "N-V-__8AAG3NnQKFZX2vECvna5ovLSi84liHF9MAttE8DCe2"
+      "url": "git+https://github.com/KhronosGroup/glslang#5b226551be1f4f4595eb3aa9a7e300df870baa82",
+      "hash": "N-V-__8AAIvQnQKbrjwamaG2pLyfjgX1xljXp8gsRoQlivgk"
     },
     {
       "name": "toolbox",
