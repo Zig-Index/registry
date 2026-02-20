@@ -12,7 +12,7 @@
     "zig-package"
   ],
   "stars": 7,
-  "forks": 0,
+  "forks": 1,
   "watchers": 0,
   "updated_at": "2026-02-11T06:26:04Z",
   "minimum_zig_version": "0.16.0-dev.2535+b5bd49460",
