@@ -13,7 +13,7 @@
   "stars": 8,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-02-01T20:16:15Z",
+  "updated_at": "2026-02-20T02:21:38Z",
   "dependencies": [
     {
       "name": "log_to_file",
@@ -27,8 +27,8 @@
     },
     {
       "name": "vxim",
-      "url": "git+https://tangled.org/@reykjalin.org/vxim#bec46a41791ab417b0c69b0e554bda44d0df97d0",
-      "hash": "vxim-0.0.0-TaTdBTGbAAB6rptvOUADv3vMxvDYCUgcxxwKcVUuFeAj"
+      "url": "git+https://tangled.org/@reykjalin.org/vxim#1b9f318fa6f1faa9bd2d2b280f77b8c595739f14",
+      "hash": "vxim-0.0.0-TaTdBWSbAAD0du51FeM0w-gDQFTyCiya7Dbv5DlrlZNj"
     }
   ],
   "minimum_zig_version": "0.15.1",
