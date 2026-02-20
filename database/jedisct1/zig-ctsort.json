@@ -1,0 +1,50 @@
+{
+  "name": "zig-ctsort",
+  "owner": "jedisct1",
+  "repo": "zig-ctsort",
+  "description": "djbsort: fast, data-oblivious sorting algorithm.",
+  "type": "package",
+  "topics": [
+    "djb",
+    "sort",
+    "sorting",
+    "zig",
+    "zig-package",
+    "djbsort"
+  ],
+  "stars": 12,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2026-02-20T15:42:16Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.16.0-dev.2623+27eec9bd6",
+  "readme": "# ctsort for Zig\n\nA constant-time sorting network for Zig, based on Dan Bernstein's [djbsort](https://sorting.cr.yp.to/).\n\nThe sorting network is data-oblivious: the sequence of comparisons and swaps depends only on the array length, never on the values being sorted. This makes it immune to timing side-channels, which matters when you need to sort sensitive data in cryptographic contexts.\n\n## Usage\n\nThe module exposes two functions.\n\n`sort` is the fast path for native numeric types (integers and floats of any width).\n\nIt uses SIMD vectorization and branchless min/max internally:\n\n```zig\nconst ctsort = @import(\"ctsort\");\n\nvar data = [_]i32{ 42, -7, 13, 0, -99 };\nctsort.sort(i32, .asc, &data);\n// data is now { -99, -7, 0, 13, 42 }\n```\n\n`sortWith` handles arbitrary types, including structs. It follows the same interface as `std.sort.pdq`: you provide a comparison function and an optional context. The sort is constant-time as long as your comparison function is:\n\n```zig\nconst ctsort = @import(\"ctsort\");\n\nconst Point = struct { x: i32, y: i32 };\n\nvar points = [_]Point{ .{ .x = 3, .y = 1 }, .{ .x = 1, .y = 2 } };\nctsort.sortWith(Point, &points, {}, struct {\n    fn lessThan(_: void, a: Point, b: Point) bool {\n        return a.x < b.x;\n    }\n}.lessThan);\n```\n\n### Performance\n\nCompared to `std.sort.pdq` (ratio < 1 means ctsort is faster):\n\n`sort` (SIMD) is consistently faster across all sizes and types tested. Floats use the \"useint\" technique (bulk-transform to sortable integers, sort, transform back) so they run at the same speed as their integer counterparts.\n\nOn AMD Zen4, `sort` is 4-9x faster for small arrays (n <= 16K) and stays 1.3-1.5x faster at 1M elements. Floats and integers of the same width produce nearly identical timings.\n\nOn Apple Silicon, `sort` is 2.5-5x faster for small-to-mid sizes and 1.8-4x faster at 1M elements. The 32-bit types (i32, f32) benefit the most at large sizes due to double the SIMD lane count.\n\n`sortWith` (generic) uses no SIMD but still beats `pdq` up to ~65K elements (2-7x faster for small arrays). Beyond that the O(n log^2 n) network scaling catches up, and at 1M elements it's roughly 2x slower than `pdq` on Zen4 (closer to 1.2x on Apple Silicon).\n\nRun `zig build bench` to reproduce.\n\n### Float ordering\n\nFor floating-point types, `sort` imposes a total order: `-NaN < -inf < ... < -0.0 < +0.0 < ... < +inf < +NaN`.\n\nThis differs from IEEE 754 where `NaN` is unordered.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/124872?v=4",
+  "releases": [
+    {
+      "tag_name": "0.0.1",
+      "name": "0.0.1",
+      "body": "Initial public release.",
+      "prerelease": false,
+      "published_at": "2026-02-16T19:46:23Z",
+      "html_url": "https://github.com/jedisct1/zig-ctsort/releases/tag/0.0.1",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Get my public keys here: https://sk.tl/7CPRo8kn",
+  "owner_company": null,
+  "owner_location": "Antibes, France",
+  "owner_blog": "https://00f.net",
+  "owner_twitter_username": "jedisct1",
+  "owner_followers": 4157,
+  "owner_following": 195,
+  "owner_created_at": "2009-09-09T10:20:57Z",
+  "license": "MIT",
+  "category": "library"
+}
