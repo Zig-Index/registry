@@ -10,15 +10,15 @@
   "stars": 0,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-02-08T16:55:59Z",
+  "updated_at": "2026-02-21T15:53:17Z",
   "dependencies": [
     {
       "name": "libevdev",
-      "url": "git+https://gitlab.freedesktop.org/libevdev/libevdev/?ref=libevdev-1.13.5#f3a9c2038d54c95abedc58df2ff16738da355289",
-      "hash": "N-V-__8AAOg0DACi0vkbzCunxejgukP-CTSofNSA1aYajKy2"
+      "url": "git+https://gitlab.freedesktop.org/libevdev/libevdev/?ref=libevdev-1.13.6#6ce9eb316203da75971740e79f20188009e7c323",
+      "hash": "N-V-__8AAEM-DAATCD6cqOHTYoVmoGkoVOODgSWTnJbHtvsm"
     }
   ],
-  "minimum_zig_version": "0.16.0-dev.2075+62d6bbc7d",
+  "minimum_zig_version": "0.16.0-dev.2637+6a9510c0e",
   "readme": "# libevdev\n\nThis is [libevdev](https://www.freedesktop.org/software/libevdev/doc/latest/), packaged for [Zig](https://ziglang.org/).\n\n**NOTE**: This repository includes only basic build functionality (still a WIP, not thoroughly tested yet).\n\n## Dependencies\n\n* Python3\n\n## Usage\n\n* Update your `build.zig.zon`:\n\n```\nzig fetch --save git+https://github.com/krish-r/libevdev.git\n```\n\n* Add the following snippet to your `build.zig` script:\n\n```zig\nconst dep_optimize = b.option(std.builtin.OptimizeMode, \"dep-optimize\", \"optimization mode\") orelse .ReleaseFast;\n\nconst libevdev = b.dependency(\"libevdev\", .{\n    .target = target,\n    .optimize = dep_optimize,\n});\nyour_compilation.linkLibrary(libevdev.artifact(\"evdev\"));\n```\n\nThis will provide libevdev as a shared library to `your_compilation`.\n\n\n## Credits\n\n- [libevdev](https://gitlab.freedesktop.org/libevdev/libevdev)\n- [All Your Codebase](https://github.com/allyourcodebase)\n- [Ziggit](https://ziggit.dev)\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/54745129?u=4979fbbcbbdd0760fd20ddb765d8053639626db0&v=4",
   "releases": [],
