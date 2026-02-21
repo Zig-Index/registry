@@ -16,7 +16,7 @@
   "stars": 10,
   "forks": 3,
   "watchers": 1,
-  "updated_at": "2025-11-07T13:55:02Z",
+  "updated_at": "2026-02-21T01:34:44Z",
   "dependencies": [
     {
       "name": "vulkan",
@@ -37,7 +37,7 @@
   "owner_location": "Canada",
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 51,
+  "owner_followers": 50,
   "owner_following": 33,
   "owner_created_at": "2018-05-05T07:30:01Z",
   "category": "library"
