@@ -16,7 +16,7 @@
   "stars": 1,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-09-13T05:04:12Z",
+  "updated_at": "2026-02-21T20:30:05Z",
   "minimum_zig_version": "0.15.1",
   "readme": "# Zig-DeepHashMap\n\nProvides versions of `AutoHashMap`, etc. that follow pointers when hashing and comparing.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/2828351?v=4",
@@ -28,6 +28,5 @@
   "owner_followers": 9,
   "owner_following": 0,
   "owner_created_at": "2012-11-18T17:51:58Z",
-  "license": "MIT",
   "category": "library"
 }

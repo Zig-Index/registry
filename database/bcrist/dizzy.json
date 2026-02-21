@@ -14,8 +14,8 @@
   "stars": 0,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-02-14T02:38:15Z",
-  "minimum_zig_version": "0.14.0-dev.3217+5b9b5e45c",
+  "updated_at": "2026-02-21T20:30:41Z",
+  "minimum_zig_version": "0.15.1",
   "readme": "# Dizzy\n### Function Parameter Dependency Injection for Zig\n\nSee test.zig for example usage.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/2828351?v=4",
   "releases": [],
@@ -26,6 +26,5 @@
   "owner_followers": 9,
   "owner_following": 0,
   "owner_created_at": "2012-11-18T17:51:58Z",
-  "license": "MIT",
   "category": "library"
 }
