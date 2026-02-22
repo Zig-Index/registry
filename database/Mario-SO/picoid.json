@@ -1,0 +1,28 @@
+{
+  "name": "picoid",
+  "owner": "Mario-SO",
+  "repo": "picoid",
+  "description": "A tiny, secure, URL-friendly, unique string ID generator for Zig",
+  "type": "package",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-02-22T13:40:03Z",
+  "minimum_zig_version": "0.15.2",
+  "readme": "# picoid\n\nA tiny, secure, URL-friendly unique ID generator for Zig `0.15.2`. \n\n## Features\n\n- Cryptographically secure random IDs by default (`std.crypto.random`)\n- URL-safe default alphabet (`A-Za-z0-9_-`)\n- Custom size, custom alphabet, and custom random sources\n- Allocation-free default helper for the common 21-character ID\n\n## Usage\n\n```zig\nconst std = @import(\"std\");\nconst picoid = @import(\"picoid\");\n\npub fn main() !void {\n    const fixed = picoid.picoid();\n    std.debug.print(\"{s}\\n\", .{fixed[0..]});\n\n    const allocator = std.heap.page_allocator;\n    const id = try picoid.picoidAlloc(allocator, 32);\n    defer allocator.free(id);\n    std.debug.print(\"{s}\\n\", .{id});\n}\n```\n\nSample output (values will differ each run):\n\n```text\nZqRTEjLqW4X09G6uj-jhb\niNWX-4Fwnx3nDaBeawuQ1rXQd2n_CdtB\n```\n\n### Custom Alphabet\n\n```zig\nconst std = @import(\"std\");\nconst picoid = @import(\"picoid\");\n\npub fn main() !void {\n    const allocator = std.heap.page_allocator;\n    const hex = \"1234567890abcdef\";\n    const id = try picoid.customAlphabetAlloc(allocator, 10, hex);\n    defer allocator.free(id);\n    std.debug.print(\"{s}\\n\", .{id});\n}\n```\n\nSample output (value will differ each run):\n\n```text\n21a15d29d2\n```\n\n### Custom Random Source\n\n```zig\nconst std = @import(\"std\");\nconst picoid = @import(\"picoid\");\n\npub fn main() !void {\n    var prng = std.Random.DefaultPrng.init(42);\n    const allocator = std.heap.page_allocator;\n\n    const id = try picoid.customRandomAlloc(\n        allocator,\n        12,\n        picoid.alphabet.SAFE[0..],\n        prng.random(),\n    );\n    defer allocator.free(id);\n\n    std.debug.print(\"{s}\\n\", .{id});\n}\n```\n\nSample output (deterministic for seed `42`):\n\n```text\ntCQ2dbQefRJl\n```\n\n## API\n\n- `picoid.picoid() [21]u8`\n- `picoid.picoidInto(out: []u8) void`\n- `picoid.picoidAlloc(allocator, size) ![]u8`\n- `picoid.customAlphabetAlloc(allocator, size, symbols) ![]u8`\n- `picoid.customRandomAlloc(allocator, size, symbols, random) ![]u8`\n- `picoid.formatInto(random, symbols, out) !void`\n- `picoid.format(allocator, random, symbols, size) ![]u8`\n\nRandom source helpers are available in `picoid.rngs`:\n\n- `picoid.rngs.default`\n- `picoid.rngs.non_secure`\n- `picoid.rngs.thread_local`\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/36546318?u=1e28f8f367cdb4f44f8320cb2fd85ff8f3754208&v=4",
+  "releases": [],
+  "owner_bio": "✦ Be best, not first ✦",
+  "owner_company": "@hireflix",
+  "owner_location": "Remote",
+  "owner_blog": "mariodev.xyz",
+  "owner_twitter_username": "mariodev__",
+  "owner_followers": 37,
+  "owner_following": 28,
+  "owner_created_at": "2018-02-16T17:50:15Z",
+  "category": "library"
+}
