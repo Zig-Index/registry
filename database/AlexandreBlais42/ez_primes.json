@@ -11,7 +11,7 @@
   "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-02-22T04:49:21Z",
+  "updated_at": "2026-02-22T05:00:44Z",
   "dependencies": [
     {
       "name": "clap",
@@ -20,7 +20,7 @@
     }
   ],
   "minimum_zig_version": "0.16.0-dev.2535+b5bd49460",
-  "readme": "# ez_primes\nPrime generation made easy! \n\n## Usage\nTo generate the first $n$ primes, simply do:\n```\nez_primes n\n```\n\n## How does it work?\nA segmented sieve of eratosthenes is used to sieve primes in chunks. The sieve is the same size as a cache line to reduce the amount of cache misses.\n\nSimply call `ez_primes.computePrimes(io, gpa, from, to)` to begin sieving if you're using `ez_primes` as a module.\n\n## Planned speed-ups\nAdding a wheel\n\nDetecting L1 cache size at runtime\n\nNot providing primes larger than $\\sqrt(n)$ to `sieveBlock`\n\n## Planned features\nIterator API\n\nC API\n\nPython API\n",
+  "readme": "# ez_primes\nPrime generation made easy! \n\n## Usage\nTo generate the first $n$ primes, simply do:\n```\nez_primes n\n```\n\n## How does it work?\nA segmented sieve of eratosthenes is used to sieve primes in chunks. The sieve is the same size as a cache line to reduce the amount of cache misses.\n\n## Can I use it as a module?\n\nYes! simply call `ez_primes.computePrimes(io, gpa, from, to)` to begin generating primes.\n\n## Planned speed-ups\nWheel sieving\n\nDetecting L1 cache size at runtime\n\nNot providing primes larger than $\\sqrt(n)$ to `sieveBlock`\n\nReduce the amount of cache misses when recolting primes after sieving\n\n## Planned features\nIterator API\n\nC API\n\nPython API\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/95235429?v=4",
   "releases": [
     {
