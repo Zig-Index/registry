@@ -13,11 +13,11 @@
   "stars": 26,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-01-22T13:55:15Z",
+  "updated_at": "2026-02-22T11:55:00Z",
   "dependencies": [
     {
       "name": "cbor",
-      "url": "git+https://github.com/neurocyte/cbor?ref=master#b6fc137250b7d3f70459652ee78c7b6cd9ad2826",
+      "url": "git+https://github.com/neurocyte/cbor?ref=zig-0.15#b6fc137250b7d3f70459652ee78c7b6cd9ad2826",
       "hash": "cbor-1.0.0-RcQE_HwwAQAiNkKC9ezLxHUMkWgHeVa3QyTfv4hi3VZR"
     },
     {
@@ -39,7 +39,7 @@
   "owner_location": null,
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 147,
+  "owner_followers": 153,
   "owner_following": 3,
   "owner_created_at": "2012-03-19T13:04:13Z",
   "homepage": "https://deepwiki.com/neurocyte/thespian",
