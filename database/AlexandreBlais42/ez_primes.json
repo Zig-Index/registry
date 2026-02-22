@@ -11,7 +11,7 @@
   "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-02-22T05:00:44Z",
+  "updated_at": "2026-02-22T16:20:49Z",
   "dependencies": [
     {
       "name": "clap",
@@ -20,7 +20,7 @@
     }
   ],
   "minimum_zig_version": "0.16.0-dev.2535+b5bd49460",
-  "readme": "# ez_primes\nPrime generation made easy! \n\n## Usage\nTo generate the first $n$ primes, simply do:\n```\nez_primes n\n```\n\n## How does it work?\nA segmented sieve of eratosthenes is used to sieve primes in chunks. The sieve is the same size as a cache line to reduce the amount of cache misses.\n\n## Can I use it as a module?\n\nYes! simply call `ez_primes.computePrimes(io, gpa, from, to)` to begin generating primes.\n\n## Planned speed-ups\nWheel sieving\n\nDetecting L1 cache size at runtime\n\nNot providing primes larger than $\\sqrt(n)$ to `sieveBlock`\n\nReduce the amount of cache misses when recolting primes after sieving\n\n## Planned features\nIterator API\n\nC API\n\nPython API\n",
+  "readme": "# ez_primes\nPrime generation made easy! \n\n## Usage\nTo generate the first $n$ primes, simply do:\n```\nez_primes n\n```\n\n## How does it compare to primesieve ?\n\nHere are the results on my laptop:\n\n|  n      | ez_primes | primesieve | delta  |\n|---------|-----------|------------|--------|\n|$10^6$   |   3.03ms  | 3.06ms     | -1.1%  |\n|$10^7$   |   16.3ms  | 11.7ms     | +38.8% |\n|$10^8$   |   120ms   | 89.3ms     | +34.5% |\n|$10^9$   |   1200ms  | 872ms      | +37.0% |\n|$10^{10}$|   12.5s   | 8.83s      | +41.8% |\n\n`ez_primes` is 40% slower than `primesieve`. There are still many optimizations available that will help close this gap.\nIn particular, `ez_primes` does 2700% more cache misses and 260% more branch misses than primesieve.\nI also noticed that `primesieve` uses a constant amount of memory while `ez_primes` does not. For example, at $n = 10^{10}$, `primesieve` uses 5.74MB and `ez_primes` uses 7.29**GB**. This results in a huge amount of cache misses and page faults, significantly slowing down the program.\n\n## How does it work?\nA segmented sieve of eratosthenes is used to sieve primes in chunks. The sieve is the same size as a cache line to reduce the amount of cache misses.\n\n## Can I use it as a module?\n\nYes! simply call `ez_primes.computePrimes(io, gpa, from, to)` to begin generating primes.\n\n## Planned speed-ups\nWheel sieving\n\nDetecting L1 cache size at runtime\n\nNot providing primes larger than $\\sqrt(n)$ to `sieveBlock`\n\nReduce the amount of cache misses when recolting primes after sieving\n\n## Planned features\nIterator API\n\nC API\n\nPython API\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/95235429?v=4",
   "releases": [
     {
