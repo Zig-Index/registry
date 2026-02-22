@@ -13,15 +13,15 @@
     "zig-package",
     "ziglang"
   ],
-  "stars": 140,
-  "forks": 19,
+  "stars": 143,
+  "forks": 21,
   "watchers": 1,
-  "updated_at": "2026-01-25T03:05:00Z",
+  "updated_at": "2026-02-22T10:27:24Z",
   "dependencies": [
     {
       "name": "curl",
-      "url": "https://github.com/curl/curl/releases/download/curl-8_8_0/curl-8.8.0.tar.gz",
-      "hash": "N-V-__8AAHipPQF9UuLPiaV1CtJzZIxvTN61tMGdFx8LGjIV"
+      "url": "https://github.com/curl/curl/releases/download/curl-8_18_0/curl-8.18.0.tar.gz",
+      "hash": "N-V-__8AALp9QAGn6CCHZ6fK_FfMyGtG824LSHYHHasM3w-y"
     },
     {
       "name": "zlib",
@@ -37,6 +37,15 @@
   "minimum_zig_version": "0.15.2",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/3848910?u=60f91a765c4ad95cb3a5a5b41d19ca12ee71a65d&v=4",
   "releases": [
+    {
+      "tag_name": "v0.4.0",
+      "name": "v0.4.0",
+      "body": "## What's Changed\r\n* feat: multipart support non-copying upload by @jiacai2050 in https://github.com/jiacai2050/zig-curl/pull/40\r\n* fix: mbedtls thread-safety by @xydone in https://github.com/jiacai2050/zig-curl/pull/42\r\n* fix illegal instructions on Windows by @MrScriptX in https://github.com/jiacai2050/zig-curl/pull/43\r\n\r\n## New Contributors\r\n* @xydone made their first contribution in https://github.com/jiacai2050/zig-curl/pull/42\r\n* @MrScriptX made their first contribution in https://github.com/jiacai2050/zig-curl/pull/43\r\n\r\n**Full Changelog**: https://github.com/jiacai2050/zig-curl/compare/v0.3.2...v0.4.0",
+      "prerelease": false,
+      "published_at": "2026-02-22T10:29:22Z",
+      "html_url": "https://github.com/jiacai2050/zig-curl/releases/tag/v0.4.0",
+      "assets": []
+    },
     {
       "tag_name": "v0.3.2",
       "name": "v0.3.2",
@@ -97,8 +106,8 @@
   "owner_location": "/home/mars",
   "owner_blog": "https://en.liujiacai.net/",
   "owner_twitter_username": "liujiacai",
-  "owner_followers": 1030,
-  "owner_following": 124,
+  "owner_followers": 1036,
+  "owner_following": 123,
   "owner_created_at": "2013-03-13T01:33:15Z",
   "homepage": "https://jiacai2050.github.io/zig-curl/",
   "license": "MIT",
