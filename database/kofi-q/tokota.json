@@ -14,10 +14,10 @@
     "ziglang",
     "addon"
   ],
-  "stars": 10,
-  "forks": 1,
+  "stars": 11,
+  "forks": 2,
   "watchers": 0,
-  "updated_at": "2026-02-07T19:57:12Z",
+  "updated_at": "2026-02-16T16:16:14Z",
   "dependencies": [
     {
       "name": "base",

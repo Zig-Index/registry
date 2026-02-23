@@ -14,10 +14,10 @@
     "zig-package",
     "ziglang"
   ],
-  "stars": 9,
-  "forks": 0,
+  "stars": 10,
+  "forks": 1,
   "watchers": 0,
-  "updated_at": "2026-02-05T18:27:03Z",
+  "updated_at": "2026-02-22T07:20:58Z",
   "dependencies": [
     {
       "name": "boringssl",
