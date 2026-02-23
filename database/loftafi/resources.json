@@ -10,12 +10,12 @@
   "stars": 3,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-02-23T06:41:10Z",
+  "updated_at": "2026-02-23T13:52:32Z",
   "dependencies": [
     {
       "name": "praxis",
-      "url": "git+https://github.com/loftafi/praxis.git#33914916c30cf9c472e0a759a98180c7458602ab",
-      "hash": "praxis-0.6.6-FPf2NXIEBwCvVux2c3SFgRKDkB_lCbwHd9UGoChX6X8e"
+      "url": "git+https://github.com/loftafi/praxis.git#136a57c1fbea3c42761caeec50fa46cdce123228",
+      "hash": "praxis-0.6.8-FPf2NfD3BgDUXwI1JUhJk0Cljgv9QL5wtowuf41Sr5Hg"
     },
     {
       "name": "zg",
@@ -28,7 +28,7 @@
       "hash": "zstbi-0.11.0-dev-L0Ea_06WBwCZoJBl6SD0bcHOLEEIrD5xbQ0TbXe-SQ5Y"
     }
   ],
-  "minimum_zig_version": "0.15.2",
+  "minimum_zig_version": "0.16.0",
   "readme": "# Resources\n\nThis zig module supports loading, searching, and bundling resources\ninto a bundle for distribution. The Zig\n[API documentation](https://loftafi.github.io/resources/docs/) is available\n[here](https://loftafi.github.io/resources/docs/)\n\n## Example usage\n\n```zig\n// Load a repository folder of files (with metadata files)\nvar bucket = try Resources.create(allocator);\ndefer bucket.destroy();\nseed(); // If a uid is generated, make sure it is unique.\n_ = bucket.loadDirectory(folder) catch |e| {\n    std.debug.print(\"error {any} while loading {s}\\n\", .{ e, folder });\n    return Error.FailedReadingRepo;\n};\n\n// Load a resource bundle of files.\nbucket.loadBundle(\"/path/to/bundle\");\n\n// Search for a resource by filename or word in a filename\nvar results: std.ArrayListUnmanaged(*Resource) = .empty.\ndefer results.deinit(allocator);\ntry bucket.search(keywords.items, .any, &results);\nfor (results.items) |resource| {\n    std.debug.print(\" {d}  {s}\\n\", .{resource.uid, sentence});\n}\n\n// Load a file from the resource bucket\nconst data = resources.loadResource(resource, allocator) catch |e| {\n    if (e == error.OutOfMemory) return error.OutOfMemory;\n    if (e == error.FileNotFound) return error.ResourceNotFound;\n    return error.ResourceReadError;\n};\n\n// Save the contents of a list of resources into a bundle\nbuket.saveBundle(\"/path/to/bundle\", results);\n\n```\n\n## Unicode filenames\n\nOn mac, some files may accidentally become NFD. You can convert all filenames\nto NFD usinc convmv:\n\n    convmv -r -f utf8 -t utf8 --nfc --notest .\n\n## License\n\nThis code is released under the terms of the MIT license. This\ncode is useful for my purposes. No warrantee is given or implied\nthat this library will be suitable for your purpose and no warantee\nis given or implied that this code is free from defects.\n\nThis package depends upon third party libraries, with potentially\ndifferent licences. See [praxis](https://github.com/loftafi/praxis),\n[zg](https://codeberg.org/atman/zg) and\n[zstbi](https://github.com/zig-gamedev/zstbi) for details.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/199742861?u=f3dc58206cc40c5e6ef5f95258d934e8a11f9e69&v=4",
   "releases": [],
