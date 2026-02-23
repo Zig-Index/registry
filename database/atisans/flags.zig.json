@@ -18,7 +18,7 @@
     {
       "tag_name": "0.1.1",
       "name": "Release 0.1.1",
-      "body": "fix: add native support for void union variants - Modify parse_subcommand to handle void type as subcommand variant - Add tests for void subcommand usage - Update README to \ndocument void support instead of struct {} workaround\n",
+      "body": "- Modify parse_subcommand to handle void type as subcommand variant\r\n- Add tests for void subcommand usage\r\n- Update README to document void support instead of struct {} workaround\r\n\r\ncloses https://github.com/atisans/flags.zig/issues/6\r\n",
       "prerelease": false,
       "published_at": "2026-02-23T07:12:03Z",
       "html_url": "https://github.com/atisans/flags.zig/releases/tag/0.1.1",
