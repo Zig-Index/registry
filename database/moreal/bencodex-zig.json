@@ -25,10 +25,10 @@
   "owner_bio": "A person",
   "owner_company": null,
   "owner_location": "Seoul, South Korea",
-  "owner_blog": "https://moreal.dev",
+  "owner_blog": "https://blog.moreal.dev",
   "owner_twitter_username": "dev_moreal",
-  "owner_followers": 225,
-  "owner_following": 464,
+  "owner_followers": 227,
+  "owner_following": 467,
   "owner_created_at": "2017-03-23T12:53:58Z",
   "license": "MIT",
   "category": "library"

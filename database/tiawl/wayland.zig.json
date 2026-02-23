@@ -12,10 +12,10 @@
     "ziglang",
     "zig-package"
   ],
-  "stars": 4,
+  "stars": 5,
   "forks": 4,
   "watchers": 1,
-  "updated_at": "2026-02-15T10:46:40Z",
+  "updated_at": "2026-02-17T18:26:43Z",
   "dependencies": [
     {
       "name": "wayland",

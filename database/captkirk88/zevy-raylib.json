@@ -13,10 +13,10 @@
     "raylib",
     "zevy"
   ],
-  "stars": 3,
+  "stars": 4,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-01-16T01:18:16Z",
+  "updated_at": "2026-02-21T13:58:25Z",
   "dependencies": [
     {
       "name": "zevy_ecs",

@@ -10,10 +10,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 5,
+  "stars": 6,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-12-17T03:26:28Z",
+  "updated_at": "2026-02-15T08:03:57Z",
   "dependencies": [
     {
       "name": "zig_dis_x86_64",

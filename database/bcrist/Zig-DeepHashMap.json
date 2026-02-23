@@ -13,10 +13,10 @@
     "zig-package",
     "ziglang"
   ],
-  "stars": 1,
+  "stars": 2,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-02-21T20:30:05Z",
+  "updated_at": "2026-02-22T22:18:40Z",
   "minimum_zig_version": "0.15.1",
   "readme": "# Zig-DeepHashMap\n\nProvides versions of `AutoHashMap`, etc. that follow pointers when hashing and comparing.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/2828351?v=4",

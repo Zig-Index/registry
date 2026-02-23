@@ -1,0 +1,63 @@
+{
+  "name": "ez-primes",
+  "owner": "AlexandreBlais42",
+  "repo": "ez-primes",
+  "description": "Prime number generation made easy",
+  "type": "package",
+  "topics": [
+    "prime-numbers",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-02-23T13:12:19Z",
+  "dependencies": [
+    {
+      "name": "clap",
+      "url": "git+https://github.com/Hejsil/zig-clap#27621cb7207643f914bae7b01902b22a8b5916e7",
+      "hash": "clap-0.11.0-oBajBxDoAQChQCl4LRM4tyf-VChKLbhYilS806xxzxrQ"
+    }
+  ],
+  "minimum_zig_version": "0.16.0-dev.2535+b5bd49460",
+  "readme": "# ez_primes\nPrime generation made easy! \n\n## Usage\nTo generate the first $n$ primes, simply do:\n```\nez_primes n\n```\n\n## How does it compare to primesieve ?\n\nHere are the results on my laptop:\n\n|  n      | ez_primes | primesieve | delta  |\n|---------|-----------|------------|--------|\n|$10^6$   |   3.00ms  | 3.05ms     | -1.6%  |\n|$10^7$   |   14.8ms  | 11.6ms     | +26.9% |\n|$10^8$   |   105ms   | 89.6ms     | +16.7% |\n|$10^9$   |   1030ms  | 873ms      | +17.7% |\n|$10^{10}$|   10.9s   | 8.78s      | +23.9% |\n\n`ez_primes` is 25% slower than `primesieve`. There are still many optimizations available that will help close this gap.\nIn particular, `ez_primes` does 6100% more cache misses and 110% more branch misses than primesieve.\nI also noticed that `primesieve` uses a constant amount of memory while `ez_primes` does not. For example, at $n = 10^{10}$, `primesieve` uses 5.74MB and `ez_primes` uses 7.29**GB**. This results in a huge amount of cache misses and page faults, significantly slowing down the program.\n\n## How does it work?\nA segmented sieve of eratosthenes is used to sieve primes in chunks. The sieve is the same size as a cache line to reduce the amount of cache misses.\n\n## Can I use it as a module?\n\nYes! simply call `ez_primes.computePrimes(io, gpa, from, to)` to begin generating primes.\n\n## Planned speed-ups\nWheel sieving\n\nDetecting L1 cache size at runtime\n\nNot providing primes larger than $\\sqrt(n)$ to `sieveBlock`\n\nReduce the amount of cache misses when recolting primes after sieving\n\n## Planned features\nIterator API\n\nC API\n\nPython API\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/95235429?v=4",
+  "releases": [
+    {
+      "tag_name": "0.1.0",
+      "name": "0.1.0",
+      "body": "Release 0.1.0\r\nThis basic implementation is 50% slower than [primesieve](https://github.com/kimwalisch/primesieve/tree/master).\r\nHowever, there are still many optimizations available.\r\n\r\nIf you can, compile from source to gain optimizations. `zig build` should to the trick.",
+      "prerelease": false,
+      "published_at": "2026-02-22T03:29:24Z",
+      "html_url": "https://github.com/AlexandreBlais42/ez-primes/releases/tag/0.1.0",
+      "assets": [
+        {
+          "name": "ez_primes-x86_64-windows-gnu.exe",
+          "url": "https://github.com/AlexandreBlais42/ez-primes/releases/download/0.1.0/ez_primes-x86_64-windows-gnu.exe",
+          "size": 866304,
+          "content_type": "application/x-msdos-program"
+        },
+        {
+          "name": "ez_primes-x86_64-linux-gnu",
+          "url": "https://github.com/AlexandreBlais42/ez-primes/releases/download/0.1.0/ez_primes-x86_64-linux-gnu",
+          "size": 3723360,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "ez_primes-aarch64-macos",
+          "url": "https://github.com/AlexandreBlais42/ez-primes/releases/download/0.1.0/ez_primes-aarch64-macos",
+          "size": 412008,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 3,
+  "owner_following": 4,
+  "owner_created_at": "2021-11-29T15:25:14Z",
+  "category": "library"
+}
