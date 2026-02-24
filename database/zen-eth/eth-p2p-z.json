@@ -16,10 +16,10 @@
     "multistream",
     "quic"
   ],
-  "stars": 26,
+  "stars": 28,
   "forks": 9,
   "watchers": 2,
-  "updated_at": "2026-02-10T20:14:15Z",
+  "updated_at": "2026-02-24T13:52:11Z",
   "dependencies": [
     {
       "name": "libxev",
@@ -33,8 +33,8 @@
     },
     {
       "name": "gremlin",
-      "url": "git+https://github.com/norma-core/gremlin.zig#bdfcf36c2f4b22bdbd96a5ef5385ff0b940cffc2",
-      "hash": "gremlin-0.1.0-E2s91WkYEQCC1_KteI5rN9EU_tuyyZftimIOI4S4f8Fc"
+      "url": "git+https://github.com/norma-core/gremlin.zig#4f6922f66b191b145dc3146dfc344c2498a57ea0",
+      "hash": "gremlin-0.1.0-E2s91STHEQAvlGGPBw_vUYNiA_YkGanSINVKpc2oqJw1"
     },
     {
       "name": "lsquic",

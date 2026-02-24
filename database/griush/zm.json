@@ -13,10 +13,10 @@
     "3d",
     "graphics"
   ],
-  "stars": 104,
+  "stars": 103,
   "forks": 11,
   "watchers": 1,
-  "updated_at": "2026-02-12T15:03:18Z",
+  "updated_at": "2026-02-23T18:24:54Z",
   "minimum_zig_version": "0.16.0-dev.2535+b5bd49460",
   "readme": "# zm - Zig Math library\nMoved to [Codeberg](https://codeberg.org/grius/zm). Not mirrored.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/57322933?v=4",
@@ -66,7 +66,7 @@
   "owner_followers": 22,
   "owner_following": 9,
   "owner_created_at": "2019-11-03T15:08:21Z",
-  "homepage": "https://griush.github.io/zm/",
+  "homepage": "https://codeberg.org/grius/zm",
   "license": "MIT",
   "category": "math"
 }

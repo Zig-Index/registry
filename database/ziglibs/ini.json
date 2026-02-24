@@ -11,10 +11,10 @@
     "ini",
     "ini-parser"
   ],
-  "stars": 37,
+  "stars": 36,
   "forks": 7,
   "watchers": 3,
-  "updated_at": "2026-02-08T16:33:51Z",
+  "updated_at": "2026-02-18T01:11:34Z",
   "minimum_zig_version": "0.15.0",
   "readme": "# INI parser library\n\nThis is a very simple ini-parser library that provides:\n- Raw record reading\n- Leading/trailing whitespace removal\n- Comments\n- Zig API\n- C API\n\n## Usage example\n\n### Zig \n\n```zig\npub fn main() !void {\n    const file = try std.fs.cwd().openFile(\"example.ini\", .{});\n    defer file.close();\n\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer if (gpa.deinit() != .ok) @panic(\"memory leaked\");\n\n    var read_buffer: [1024]u8 = undefined;\n    var file_reader = file.reader(&read_buffer);\n    var parser = ini.parse(gpa.allocator(), &file_reader.interface, \";#\");\n    defer parser.deinit();\n\n    var write_buffer: [1024]u8 = undefined;\n    var file_writer = std.fs.File.stdout().writer(&write_buffer);\n    var writer = &file_writer.interface;\n    defer writer.flush() catch @panic(\"Could not flush to stdout\");\n\n    while (try parser.next()) |record| {\n        switch (record) {\n            .section => |heading| try writer.print(\"[{s}]\\n\", .{heading}),\n            .property => |kv| try writer.print(\"{s} = {s}\\n\", .{ kv.key, kv.value }),\n            .enumeration => |value| try writer.print(\"{s}\\n\", .{value}),\n        }\n    }\n}\n```\n\n### C\n\n```c\n#include <ini.h>\n\n#include <stdio.h>\n#include <stdbool.h>\n\nint main() {\n  FILE * f = fopen(\"example.ini\", \"r\");\n  if(!f)\n    return 1;\n\n  struct ini_Parser parser;\n  char read_buffer[1024] = {0};\n  ini_create_file(&parser, read_buffer, sizeof read_buffer, f, \";#\", 2);\n\n  struct ini_Record record;\n  while(true)\n  {\n    enum ini_Error error = ini_next(&parser, &record);\n    if(error != INI_SUCCESS)\n      goto cleanup;\n\n    switch(record.type) {\n      case INI_RECORD_NUL: goto done;\n      case INI_RECORD_SECTION:\n        printf(\"[%s]\\n\", record.section);\n        break;\n      case INI_RECORD_PROPERTY:\n        printf(\"%s = %s\\n\", record.property.key, record.property.value);\n        break;\n      case INI_RECORD_ENUMERATION:\n        printf(\"%s\\n\", record.enumeration);\n        break;\n    }\n\n  }\ndone:\n\ncleanup:\n  ini_destroy(&parser);\n  fclose(f);\n  return 0;\n}\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/65570835?v=4",

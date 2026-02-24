@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 53,
+  "stars": 54,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-02-16T01:12:09Z",
+  "updated_at": "2026-02-22T22:06:58Z",
   "readme": "# Pek\n\n![loc](https://sloc.xyz/github/nektro/zig-pek)\n[![license](https://img.shields.io/github/license/nektro/zig-pek.svg)](https://github.com/nektro/zig-pek/blob/master/LICENSE)\n[![nektro @ github sponsors](https://img.shields.io/badge/sponsors-nektro-purple?logo=github)](https://github.com/sponsors/nektro)\n[![Zig](https://img.shields.io/badge/Zig-0.14-f7a41d)](https://ziglang.org/)\n[![Zigmod](https://img.shields.io/badge/Zigmod-latest-f7a41d)](https://github.com/nektro/zigmod)\n\nA comptime HTML preprocessor with a builtin template engine for Zig.\n\n## Example Document\n\n```fsharp\nhtml[lang=\"en\"](\n    head(\n        title(\"Pek Example\")\n        meta[charset=\"UTF-8\"]\n        meta[name=\"viewport\" content=\"width=device-width,initial-scale=1\"]\n    )\n    body(\n        h1(\"Pek Example\")\n        hr\n        p(\"This is an example HTML document written in \"a[href=\"https://github.com/nektro/zig-pek\"](\"Pek\")\".\")\n    )\n)\n```\n\n## Example Usage\n\nSee [test.zig](test.zig).\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/5464072?u=a84ae9f68c3b0567fe276def3ab932d2f2f6703f&v=4",
   "releases": [],
@@ -19,8 +19,8 @@
   "owner_location": "San Francisco, CA, USA",
   "owner_blog": "https://mlog.nektro.net/",
   "owner_twitter_username": "nektro",
-  "owner_followers": 596,
-  "owner_following": 255,
+  "owner_followers": 600,
+  "owner_following": 256,
   "owner_created_at": "2013-09-15T16:41:53Z",
   "license": "MPL-2.0",
   "category": "library"

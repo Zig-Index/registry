@@ -11,10 +11,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 22,
+  "stars": 23,
   "forks": 8,
   "watchers": 1,
-  "updated_at": "2026-02-02T19:51:59Z",
+  "updated_at": "2026-02-20T10:40:57Z",
   "readme": "# zfat\n\nBindings for the [FatFs](http://elm-chan.org/fsw/ff/00index_e.html) library\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/80392719?v=4",
   "releases": [],

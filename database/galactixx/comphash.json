@@ -11,10 +11,10 @@
     "compile-time",
     "zig-package"
   ],
-  "stars": 16,
+  "stars": 17,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-08-17T04:11:16Z",
+  "updated_at": "2026-02-22T22:12:34Z",
   "dependencies": [
     {
       "name": "zighash",

@@ -11,10 +11,10 @@
     "rpc",
     "rpc-framework"
   ],
-  "stars": 43,
+  "stars": 44,
   "forks": 2,
   "watchers": 1,
-  "updated_at": "2026-02-09T17:55:59Z",
+  "updated_at": "2026-02-20T13:46:48Z",
   "dependencies": [
     {
       "name": "s2s",

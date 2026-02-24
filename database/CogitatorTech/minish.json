@@ -12,10 +12,10 @@
     "zig-package",
     "software-framework"
   ],
-  "stars": 21,
+  "stars": 22,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-01-24T22:07:31Z",
+  "updated_at": "2026-02-24T05:05:15Z",
   "dependencies": [
     {
       "name": "chilli",

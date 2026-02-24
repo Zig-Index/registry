@@ -12,10 +12,10 @@
     "uart",
     "serial-port"
   ],
-  "stars": 88,
-  "forks": 28,
+  "stars": 90,
+  "forks": 27,
   "watchers": 3,
-  "updated_at": "2026-02-03T01:43:58Z",
+  "updated_at": "2026-02-14T14:43:04Z",
   "minimum_zig_version": "0.15.1",
   "readme": "# Zig Serial Port Library\n\nLibrary for configuring and listing serial ports.\n\n## Features\n\n- Basic serial port configuration\n  - Baud Rate\n  - Parity (none, even, odd, mark, space)\n  - Stop Bits (one, two)\n  - Handshake (none, hardware, software)\n  - Byte Size (5, 6, 7, 8)\n- Flush serial port send/receive buffers\n- List available serial ports\n- API: supports Windows, Linux and Mac\n\n## What version of Zig to use\n\nZig 0.15.1\n\n## Example\n\n```zig\n// Port configuration.\n// Serial ports are just files, \\\\.\\COM1 for COM1 on Windows:\nvar serial = try std.fs.cwd().openFile(\"\\\\\\\\.\\\\COM1\", .{ .mode = .read_write }) ;\ndefer serial.close();\n\ntry zig_serial.configureSerialPort(serial, zig_serial.SerialConfig{\n    .baud_rate = 19200,\n    .word_size = 8,\n    .parity = .none,\n    .stop_bits = .one,\n    .handshake = .none,\n});\n```\n\n## Usage\n\n### Library integration\n\nIntegrate the library in your project via the Zig package manager:\n\n- add `serial` to your `.zig.zon` file by providing the URL to the archive of a tag or specific commit of the library\n- to update the hash, run `zig fetch --save [URL/to/tag/or/commit.tar.gz]`\n\n### Running tests\n\nThe `build.zig` file contains a test step that can be called with `zig build test`. Note that this requires a serial port to be available on the system;\n\n- Linux: `/dev/ttyUSB0`\n- Mac: `/dev/cu.usbmodem101`\n- Windows: `COM3`\n\n### Building the examples\n\nYou can build the examples from the `./examples` directory by calling `zig build examples`. Binaries will be generated in `./zig-out/bin` by default.\n\n- Note that the `list_port_info` example currently only works on Windows\n\n### Building the documentation\n\nYou can generate the documentation by running `zig build docs`.\nAfter that you can browse it by:\n\n 1. starting the web server. For example, by running `python -m http.server 8000 zig-out/docs`\n 2. reading the docs from your browser at `http://127.0.0.1:8000`\n\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/80392719?v=4",

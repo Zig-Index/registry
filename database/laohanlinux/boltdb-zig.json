@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 14,
+  "stars": 15,
   "forks": 1,
   "watchers": 2,
-  "updated_at": "2026-02-24T03:00:05Z",
+  "updated_at": "2026-02-24T09:34:11Z",
   "minimum_zig_version": "0.11.0",
   "readme": "# boltdb-zig\n\nA pure Zig implementation of BoltDB, an embedded key/value database.\n\n## Overview\n\nboltdb-zig is a Zig port of the original [BoltDB](https://github.com/boltdb/bolt), which is a simple yet powerful embedded key/value database written in Go. It provides a consistent and ACID-compliant data store with the following features:\n\n- Pure Zig implementation\n- Single file backend\n- ACID transactions\n- Lock-free MVCC\n- Nested buckets\n\n## Status\n\n🚧 This project is currently under development.\n\n## Usage\n\n```zig\n# zig fetch --save git+https://github.com/laohanlinux/boltdb-zig.git\n```\n\nimport the library in your build.zig.zon file: [link](example/build.zig.zon)\n\n```\nconst boltdbDep = b.dependency(\"boltdb-zig\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\nconst exe = b.addExecutable(.{\n    .name = \"example\",\n    .root_source_file = b.path(\"src/main.zig\"),\n    .target = target,\n    .optimize = optimize,\n});\n\nexe.root_module.addImport(\"boltdb\", boltdbDep.module(\"boltdb\"));\n```\n\nHow use?\n[link](example/src/main.zig)\n\n## License\n\nThis project is licensed under the MIT License - see the LICENSE file for details.\n\n## Acknowledgments\n\n- Original [BoltDB](https://github.com/boltdb/bolt)\n\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/4718156?u=f12234abc854b85f1966e97c59406c90f7bb6b91&v=4",

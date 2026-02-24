@@ -12,10 +12,10 @@
     "zig-package",
     "zig-lib"
   ],
-  "stars": 34,
+  "stars": 35,
   "forks": 1,
   "watchers": 0,
-  "updated_at": "2026-01-27T18:00:43Z",
+  "updated_at": "2026-02-14T18:07:10Z",
   "dependencies": [
     {
       "name": "luau",
@@ -82,12 +82,12 @@
       "assets": []
     }
   ],
-  "owner_bio": "Infrastructure engineer: containers, microVMs, Kubernetes.\r\n@containerd maintainer.",
+  "owner_bio": "Building cloud at @NVIDIA - containers, microVMs, Kubernetes. @containerd maintainer.",
   "owner_company": "@NVIDIA",
   "owner_location": "Seattle, WA",
   "owner_blog": null,
   "owner_twitter_username": "mak_pav",
-  "owner_followers": 250,
+  "owner_followers": 251,
   "owner_following": 12,
   "owner_created_at": "2011-06-21T21:02:30Z",
   "homepage": "https://mxpv.github.io/luaz/",

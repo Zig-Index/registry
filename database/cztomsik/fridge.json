@@ -12,7 +12,7 @@
     "zig-package"
   ],
   "stars": 82,
-  "forks": 7,
+  "forks": 9,
   "watchers": 3,
   "updated_at": "2026-02-09T15:51:04Z",
   "dependencies": [
@@ -30,8 +30,8 @@
   "owner_location": "Brno, Czech Republic",
   "owner_blog": "https://www.avapls.com",
   "owner_twitter_username": "cztomsik",
-  "owner_followers": 193,
-  "owner_following": 250,
+  "owner_followers": 194,
+  "owner_following": 249,
   "owner_created_at": "2013-02-10T20:02:00Z",
   "license": "MIT",
   "category": "database"

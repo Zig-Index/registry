@@ -2,7 +2,7 @@
   "name": "zodd",
   "owner": "CogitatorTech",
   "repo": "zodd",
-  "description": "A small embeddable Datalog engine in Zig ⚡ (WIP)",
+  "description": "A small embeddable Datalog engine in Zig ⚡",
   "type": "package",
   "topics": [
     "datalog",
@@ -11,10 +11,10 @@
     "zig-package",
     "deductive-database-system"
   ],
-  "stars": 1,
+  "stars": 14,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-02-13T19:29:19Z",
+  "updated_at": "2026-02-19T02:54:54Z",
   "dependencies": [
     {
       "name": "minish",
