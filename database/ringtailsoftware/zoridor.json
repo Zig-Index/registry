@@ -10,10 +10,10 @@
     "quoridor",
     "zig"
   ],
-  "stars": 14,
+  "stars": 15,
   "forks": 1,
   "watchers": 2,
-  "updated_at": "2026-01-06T23:48:48Z",
+  "updated_at": "2026-02-25T08:55:25Z",
   "dependencies": [
     {
       "name": "mibu",

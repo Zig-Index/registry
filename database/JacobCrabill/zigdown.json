@@ -10,10 +10,10 @@
     "terminal",
     "zig-package"
   ],
-  "stars": 100,
+  "stars": 101,
   "forks": 9,
   "watchers": 3,
-  "updated_at": "2026-02-23T15:39:38Z",
+  "updated_at": "2026-02-24T15:03:53Z",
   "dependencies": [
     {
       "name": "stbi",

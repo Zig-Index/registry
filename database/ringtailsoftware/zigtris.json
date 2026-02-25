@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 28,
+  "stars": 29,
   "forks": 2,
   "watchers": 1,
-  "updated_at": "2026-01-10T08:34:29Z",
+  "updated_at": "2026-02-25T08:55:07Z",
   "dependencies": [
     {
       "name": "mibu",

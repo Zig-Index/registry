@@ -16,7 +16,7 @@
     "riscv32"
   ],
   "stars": 19,
-  "forks": 6,
+  "forks": 5,
   "watchers": 2,
   "updated_at": "2026-01-03T06:03:02Z",
   "minimum_zig_version": "0.15.1",
