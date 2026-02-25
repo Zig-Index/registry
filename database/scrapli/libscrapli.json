@@ -10,7 +10,7 @@
   "stars": 10,
   "forks": 2,
   "watchers": 5,
-  "updated_at": "2026-02-20T21:47:33Z",
+  "updated_at": "2026-02-25T00:37:31Z",
   "dependencies": [
     {
       "name": "pcre2",
@@ -32,11 +32,11 @@
     },
     {
       "name": "zlinter",
-      "url": "https://github.com/kurtwagner/zlinter/archive/81c4ae9.tar.gz",
-      "hash": "zlinter-0.0.1-OjQ08RF6CwBumm4GK6faynNS6XQNzPHmGnUEwgi3m2t7"
+      "url": "https://github.com/kurtwagner/zlinter/archive/b3c1e10.tar.gz",
+      "hash": "zlinter-0.0.1-OjQ08Xl6CwBdJn8i_uLyTdFAIKQIPUdOqt7M8KmlsgC5"
     }
   ],
-  "minimum_zig_version": "0.16.0-dev.2535+b5bd49460",
+  "minimum_zig_version": "0.16.0-dev.2637+6a9510c0e",
   "readme": "libscrapli\n==========\n\nlibscrapli is a zig project that aims to provide a unified \"core\" for scrapli. This is obviously \nuseful for the OG scrapli (python flavor) and scrapligo, but possibly for other languages/libraries \nor even for folks who would like to not have to reinvent the wheel for the \"core\" connection \nhandling and logic but want to write their own wrapper!\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/63824662?v=4",
   "releases": [
