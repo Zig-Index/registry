@@ -12,10 +12,10 @@
     "ziglang",
     "zig-package"
   ],
-  "stars": 108,
+  "stars": 109,
   "forks": 16,
   "watchers": 1,
-  "updated_at": "2026-02-23T21:53:13Z",
+  "updated_at": "2026-02-25T18:50:36Z",
   "dependencies": [
     {
       "name": "sdl",
@@ -29,8 +29,8 @@
     },
     {
       "name": "dcimgui",
-      "url": "git+https://github.com/dearimgui/dear_bindings#c8049278a3dcda45dea93555534c8cab250d566b",
-      "hash": "N-V-__8AADrXCAA2dA61i058pjoYHMhUPzM35yUsvZwYQ-nv"
+      "url": "git+https://github.com/dearimgui/dear_bindings#c2525696202ff641108b05157c9fde409149a743",
+      "hash": "N-V-__8AAErzCADq4m-7RMTFzUSDmYZ1yK3_55bqg3SsigpZ"
     },
     {
       "name": "toolbox",
@@ -57,7 +57,7 @@
   "owner_location": null,
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 13,
+  "owner_followers": 14,
   "owner_following": 7,
   "owner_created_at": "2019-11-04T15:35:14Z",
   "license": "Unlicense",
