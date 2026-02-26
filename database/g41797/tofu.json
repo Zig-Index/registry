@@ -14,7 +14,7 @@
   "stars": 21,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-02-26T04:49:30Z",
+  "updated_at": "2026-02-26T05:28:53Z",
   "dependencies": [
     {
       "name": "nats",
@@ -43,7 +43,7 @@
   "releases": [
     {
       "tag_name": "v0.0.10",
-      "name": "tofu based on Zig 0.15.2",
+      "name": "tofu Linux Zig 0.15.2",
       "body": "",
       "prerelease": false,
       "published_at": "2026-02-03T07:07:22Z",
