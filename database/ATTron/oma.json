@@ -1,0 +1,44 @@
+{
+  "name": "oma",
+  "owner": "ATTron",
+  "repo": "oma",
+  "description": "Runtime SIMD dispatch for Zig. Compile once per CPU level, pick the best at startup",
+  "type": "package",
+  "topics": [
+    "avx",
+    "avx-512",
+    "avx2",
+    "avx512",
+    "neon",
+    "simd",
+    "simd-instructions",
+    "simd-library",
+    "simd-parallelism",
+    "simd-programming"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-02-26T06:49:26Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.16.0-dev.2637+6a9510c0e",
+  "readme": "# oma - One Man Army\n\nRuntime SIMD dispatch for Zig.\n\nZig's `@Vector` picks SIMD width at compile time, which means distributed binaries have to choose one CPU level. `-Dcpu=native` crashes on older hardware; `-Dcpu=baseline` leaves performance on the table. oma compiles your hot functions once per microarchitecture level and picks the best one at startup.\n\n## Architectures\n\n| | Levels | |\n|---|---|---|\n| x86-64 | `x86_64` / `x86_64_v2` / `x86_64_v3` / `x86_64_v4` | SSE2 through AVX-512 |\n| AArch64 | `aarch64` / `aarch64_sve` / `aarch64_sve2` | NEON through SVE2 |\n\n## Usage\n\n### 1. Add the dependency\n\n```sh\nzig fetch --save git+https://github.com/ATTron/oma\n```\n\n### 2. Write a hot function\n\nNormal Zig in a separate file. Mark dispatch targets `pub` with `callconv(.c)`:\n\n```zig\n// src/dot_product.zig\npub fn dot(a: @Vector(4, f32), b: @Vector(4, f32)) callconv(.c) f32 {\n    return @reduce(.Add, a * b);\n}\n```\n\nEvery `pub callconv(.c)` function gets compiled N times automatically — `x86_64_v3_dot`, `aarch64_sve_dot`, etc. `@Vector` and `suggestVectorLength` use the widest registers available for each variant.\n\n### 3. Wire up the build\n\n```zig\n// build.zig\nconst std = @import(\"std\");\nconst oma = @import(\"oma\");\n\npub fn build(b: *std.Build) void {\n    const target = b.standardTargetOptions(.{});\n    const optimize = b.standardOptimizeOption(.{});\n    const oma_dep = b.dependency(\"oma\", .{});\n\n    const exe = b.addExecutable(.{\n        .name = \"myapp\",\n        .root_module = b.createModule(.{\n            .root_source_file = b.path(\"src/main.zig\"),\n            .target = target,\n            .optimize = optimize,\n            .imports = &.{.{ .name = \"oma\", .module = oma_dep.module(\"oma\") }},\n        }),\n    });\n\n    oma.addMultiVersion(oma_dep, exe, .{\n        .source = b.path(\"src/dot_product.zig\"),\n        .name = \"dot_product\",\n    });\n\n    b.installArtifact(exe);\n}\n```\n\n`addMultiVersion` picks the right levels for the target arch. One call per file — all `pub callconv(.c)` functions in the file are exported.\n\n### 4. Dispatch at runtime\n\n```zig\n// src/main.zig\nconst std = @import(\"std\");\nconst oma = @import(\"oma\");\nconst dot_product = @import(\"dot_product\");\n\npub fn main(init: std.process.Init) !void {\n    const io = init.io;\n\n    const dot = oma.resolveFrom(dot_product, \"dot\", io);\n\n    const a: @Vector(4, f32) = .{ 1.0, 2.0, 3.0, 4.0 };\n    const b: @Vector(4, f32) = .{ 5.0, 6.0, 7.0, 8.0 };\n    const result = dot(a, b); // 1*5 + 2*6 + 3*7 + 4*8 = 70\n\n    var stdout_buffer: [4096]u8 = undefined;\n    var stdout_file_writer: std.Io.File.Writer = .init(.stdout(), io, &stdout_buffer);\n    const stdout = &stdout_file_writer.interface;\n    try stdout.print(\"dot product: {d}\\n\", .{result});\n    try stdout.flush();\n}\n```\n\n`resolveFrom` detects the CPU, picks the best variant, and returns a typed function pointer. CPU detection is cached, so repeated calls just do a few enum comparisons — cheap enough to call inline.\n\n## Shared libraries / FFI\n\nIf you don't have `std.Io` (e.g. a `.so` loaded by Python), use the `NoIo` variants:\n\n```zig\nconst dot = oma.resolveFromNoIo(dot_product, \"dot\");\nconst level = oma.detectCpuLevelNoIo();\n```\n\nThese use `std.Io.Threaded.global_single_threaded` internally. The Io versions are preferred when you do have access to `main`'s Init.\n\n## How it works\n\n**Build time**: `addMultiVersion` generates a tiny wrapper that calls `exportAll` on your module. It compiles this wrapper N times — once per CPU level. Each compilation targets a different CPU model, so `suggestVectorLength` returns different widths and `@Vector` picks the right registers. Variants get unique symbol names like `x86_64_v3_dot`.\n\n**Runtime**: `detectCpuLevel` detects the CPU once and caches the result; subsequent calls return instantly. `resolveForLevel` walks the levels list highest-first and returns the `@extern` pointer for the best match.\n\n## Overriding levels\n\n```zig\noma.addMultiVersion(oma_dep, exe, .{\n    .source = b.path(\"src/hot_function.zig\"),\n    .levels = &.{ .x86_64_v3, .x86_64 }, // just AVX2 + baseline\n});\n```\n\nUse `resolveForLevel` to dispatch against custom levels at runtime:\n\n```zig\nconst levels = &.{ .x86_64_v3, .x86_64 };\nconst level = oma.detectCpuLevel(io);\nconst fn_ptr = oma.resolveForLevel(MyFn, \"my_func\", levels, level);\n```\n\n## Caveats\n\n- **`.name` and shared files**: If your hot file `@import`s files that the root module also uses, Zig errors with a file-ownership conflict. Fix: omit `.name` and use `resolve`/`resolveNoIo` with explicit function pointer types.\n- **`.imports` and circular deps**: Don't pass the parent compile step's own module as an import — it creates a dependency loop. Factor shared types into a standalone module.\n- **Shared `root_module`**: If multiple compile steps share a `root_module`, call `addMultiVersion` once per source per shared module, not per compile step.\n\n## Requirements\n\nRight now this only targets Zig 0.16.0-dev* or later\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/12820359?u=eb47a500f621e5ec77a2334436aeb03253c55f46&v=4",
+  "releases": [],
+  "owner_bio": "Helping move data between spacecraft and earth",
+  "owner_company": null,
+  "owner_location": "New York, NY",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 32,
+  "owner_following": 13,
+  "owner_created_at": "2015-06-09T21:06:31Z",
+  "license": "MIT",
+  "category": "library"
+}
