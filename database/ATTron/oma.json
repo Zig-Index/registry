@@ -19,7 +19,7 @@
   "stars": 7,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-02-27T00:03:39Z",
+  "updated_at": "2026-02-27T16:53:14Z",
   "dependencies": [
     {
       "name": "example",
@@ -39,6 +39,7 @@
   "owner_followers": 32,
   "owner_following": 13,
   "owner_created_at": "2015-06-09T21:06:31Z",
+  "homepage": "https://attron.github.io/oma/",
   "license": "MIT",
   "category": "library"
 }
