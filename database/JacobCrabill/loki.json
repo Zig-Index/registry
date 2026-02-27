@@ -1,0 +1,42 @@
+{
+  "name": "loki",
+  "owner": "JacobCrabill",
+  "repo": "loki",
+  "description": "Password manager library & TUI",
+  "type": "package",
+  "topics": [
+    "zig",
+    "zig-application",
+    "zig-library",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-02-27T04:02:11Z",
+  "dependencies": [
+    {
+      "name": "zigzag",
+      "url": "https://github.com/meszmate/zigzag/archive/b2610e0b51006c3b8074a102b2160416c9c5c786.tar.gz",
+      "hash": "zigzag-0.1.0-YXwYS6-JBgBi_fUOjGfriig6Q0tzTrKKoa10THNHgAOv"
+    },
+    {
+      "name": "known_folders",
+      "url": "git+https://github.com/ziglibs/known-folders.git#ab5cf5feb936fa3b72c95d3ad0c0c67791937ba1",
+      "hash": "known_folders-0.0.0-Fy-PJtTTAADUOhGKM0sxzG4eMkNQxRvx9e5dfHVyaeA3"
+    }
+  ],
+  "minimum_zig_version": "0.15.2",
+  "readme": "# Loki: Simple Password Manager\n\nLoki is a basic password manager for those wanting full control over their password database,\nincluding where it is stored and how it is synced.\n\n## Motivation\n\nI've long been a fan of [KeePassXC](https://keepassxc.org), but it has one main drawback: syncing\nbetween devices. I've been using Dropbox to sync my `.kdbx` file between my phone, laptop, desktop,\nand other computers, but (particularly on Android) Dropbox does not do a good job at syncing files\nin a timely manner after changes have been made, leading me to commonly have 4 different copies of\nmy database that I need to manually review, merge, and then delete.\n\n## Goals\n\nLoki is intended to be a simplified replacement for KeePassXC users just wanting to store usernames,\npasswords, URLs, and notes in a secure manner, and sync them reliably between all of their devices,\nwith no data lost in the process, _ever_.\n\nLoki is still under development, but is already capable of doing all of the above. The last feature\nneeded to reach MVP status is a merge-conflict resolution view.\n\n## Features\n\n- Simple TUI interface\n- All data is encrypted at rest\n- Git-like data storage\n- Similar functionality as KeePassXC:\n  - Organize entries in folders\n  - Entries contain title, description, username, password, URL, and notes\n  - Password generator with option to specify length and enable different sets of allowed characters\n- Version tracking of all changes\n  - See past versions of an entry\n  - No data is ever truly lost - roll back to a previous version of an entry at any time\n- Automatic syncing of the \"database\" to a remote server (**WIP**)\n  - Git-style push/pull synchronization\n  - Ability for the user to interactively resolve vesrion conflicts (**WIP**)\n\n## Storage Format\n\nSimilar to Git, all entries are stored as binary files inside the Loki database's `objects/`\ndirectory. The filename is the SHA-1 hash of the plaintext contents of the entry, and the contents\nare encrypted using the [Argon2id](https://datatracker.ietf.org/doc/rfc9106/) algorithm before\nwriting to disk.\n\n## TUI Interface\n\nThe TUI interface is fairly bare-bones, and was developed using the\n[`zigzag` library](https://github.com/meszmate/zigzag). At present, a user may create a new\ndatabase, add and \"move\" existing entries, view the complete history of an entry, generate random\npasswords, and copy data to the clipboard for easy logins.\n\n![Editing an entry](docs/images/edit-entry.png)\n\n![Generate a password](docs/images/generate-password.png)\n\n![View an entry's history](docs/images/history-view.png)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/5885545?u=7b2899754fd8ece26d7e42bb2a765b48f7c64407&v=4",
+  "releases": [],
+  "owner_bio": "Assembling and managing complex software systems",
+  "owner_company": null,
+  "owner_location": "Bend, OR",
+  "owner_blog": "http://jcrabill.dev",
+  "owner_twitter_username": null,
+  "owner_followers": 61,
+  "owner_following": 14,
+  "owner_created_at": "2013-11-08T05:02:12Z",
+  "category": "cli"
+}
