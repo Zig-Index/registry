@@ -10,12 +10,12 @@
   "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-07-19T17:51:50Z",
+  "updated_at": "2026-02-28T06:51:37Z",
   "dependencies": [
     {
       "name": "z",
-      "url": "https://github.com/madler/zlib/archive/refs/tags/v1.3.1.tar.gz",
-      "hash": "N-V-__8AAB0eQwD-0MdOEBmz7intriBReIsIDNlukNVoNu6o"
+      "url": "https://github.com/madler/zlib/archive/refs/tags/v1.3.2.tar.gz",
+      "hash": "N-V-__8AAI4ANwDM8MWhHTUFLKfvLE_n2NQk6mh0sFDzhTqO"
     }
   ],
   "minimum_zig_version": "0.14.0",
