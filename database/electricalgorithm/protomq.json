@@ -16,10 +16,10 @@
     "zig-library",
     "zig-package"
   ],
-  "stars": 17,
+  "stars": 19,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-02-25T09:05:30Z",
+  "updated_at": "2026-02-28T01:36:23Z",
   "dependencies": [
     {
       "name": "example",
@@ -31,6 +31,40 @@
   "readme": "\n<h1 align=\"center\">ProtoMQ</h1>\n\n<p align=\"center\">\n  <img src=\"assets/mascot.png\" alt=\"ProtoMQ Mascot\" width=\"280px\" />\n  <br />\n  <b>MQTT's simplicity. Protobuf's efficiency. Zig's bare-metal performance.</b>\n  <br />\n  Built for IoT and edge computing.\n</p>\n\n<p align=\"center\">\n  <a href=\"#quick-start\">Quick Start</a> •\n  <a href=\"#why-protomq\">Why ProtoMQ</a> •\n  <a href=\"#performance\">Performance</a> •\n  <a href=\"FEATURES.md\">Features</a> •\n  <a href=\"FAQ.md\">FAQ</a>\n</p>\n\n---\n\nProtoMQ is an MQTT broker that enforces **Protobuf schemas at the broker level**. All messages on the wire are Protobuf — the broker validates incoming payloads against registered `.proto` schemas and rejects anything that doesn't conform. The bundled CLI can accept JSON and encode it to Protobuf client-side for convenience.\n\n<p align=\"center\">\n  <img src=\"assets/terminal_demo.svg\" alt=\"ProtoMQ terminal demo\" width=\"780px\" />\n</p>\n\n- **Schema-enforced messaging** — `.proto` files define the contract. Malformed payloads get rejected *before* they reach subscribers.\n- **Custom Protobuf engine** — written from scratch in Zig. Runtime `.proto` parsing, zero external dependencies.\n- **Wildcard topic routing** — full MQTT `+` and `#` wildcard support via a trie-based topic broker.\n- **Service Discovery** — clients query `$SYS/discovery/request` to discover topics and download schemas on the fly. No pre-shared `.proto` files needed.\n- **Optional Admin HTTP API** — register new schemas and topic mappings at runtime, monitor connections and throughput. Disabled by default, zero overhead when off. See [FEATURES.md](FEATURES.md) for details.\n- **Runs in 2.6 MB** — the entire broker with 100 active connections fits in under 3 MB of memory.\n\n---\n\n### Why ProtoMQ\n\nIf you've worked with IoT sensor fleets, you've probably been through this: you start with JSON over MQTT because it's easy to debug, every language has a parser, and `mosquitto_sub` lets you eyeball what's going on. It works fine... until you start caring about bandwidth.\n\nA 12-field sensor reading weighs around 310 bytes in JSON. The same data in Protobuf: 82 bytes. On a cellular-connected device pushing telemetry every 5 seconds, that gap adds up to roughly 1.6 MB/day per device — multiply by a few thousand devices and the data bill starts hurting.\n\n<p align=\"center\">\n  <img src=\"assets/payload_comparison.svg\" alt=\"JSON vs Protobuf payload size comparison\" width=\"680px\" />\n</p>\n\nBut switching to Protobuf usually means code generation per language, keeping stubs in sync across firmware versions, and losing the ability to just read your payloads. ProtoMQ takes a different approach: the broker owns the `.proto` schemas and validates every message against them. The CLI can accept JSON and encode it to Protobuf before publishing, so you get a human-friendly workflow without sacrificing wire efficiency.\n\n| | Plain MQTT + JSON | ProtoMQ |\n|---|---|---|\n| Schema enforcement | None — anything goes | Validated at every `PUBLISH` |\n| Payload format | JSON (~170 bytes, 8 fields) | Protobuf (~48 bytes) |\n| Client bootstrap | Pre-shared docs | Built-in Service Discovery |\n| Code generation | Required per language | CLI encodes JSON → Protobuf for you |\n\n---\n\n### Under the Hood\n\nProtoMQ is not a wrapper around an existing broker — it's a ground-up implementation. Here's what makes it tick:\n\n- **`epoll` / `kqueue` event loop** — single-threaded, no abstraction layer. The network layer talks directly to the OS kernel I/O primitives. On Linux that's `epoll`, on macOS `kqueue`. No libuv, no tokio, no hidden threads.\n- **One allocator, full control** — every allocation goes through Zig's `std.mem.Allocator`. No GC, no hidden heap churn, no runtime. You can trace every byte the broker touches.\n- **Zero third-party dependencies** — the MQTT parser, TCP connection handler, Protobuf wire format encoder, `.proto` file parser — all written in Zig using only the standard library. `build.zig.zon` has an empty `dependencies` block.\n- **Runtime schema registry** — `.proto` files are parsed at startup and mapped to MQTT topics. With the Admin Server enabled, you can register new schemas and mappings at runtime over HTTP without restarting the broker.\n- **Comptime-generated lookup tables** — the MQTT packet parser uses Zig's `comptime` to build dispatch tables at compile time. No branching, no hash maps — just array indexing.\n- **Cross-compilation** — `zig build -Dtarget=aarch64-linux` produces a Raspberry Pi binary from a Mac. One command, no toolchain headaches.\n\n---\n\n### Quick Start\n\n**Docker:**\n\n```bash\ndocker compose up\n```\n\nThe server starts on port `1883` with the schemas from `schemas/`. Connect with any MQTT client.\n\n**From source** (requires [Zig 0.15.2+](https://ziglang.org/download/)):\n\n```bash\ngit clone https://github.com/electricalgorithm/protomq.git\ncd protomq\nzig build run-server\n```\n\n```bash\n# In another terminal — publish (CLI encodes JSON to Protobuf for you)\nzig build run-client -- publish --topic sensors/temp \\\n  --json '{\"device_id\":\"s-042\",\"temperature\":22.5,\"humidity\":61,\"timestamp\":1706140800}'\n\n# In another terminal — subscribe\nzig build run-client -- subscribe --topic \"sensors/#\"\n```\n\n---\n\n### Performance\n\nProtoMQ handles **208,000 messages/second** on an Apple M2 Pro and **147,000 msg/s** on a Raspberry Pi 5 — with sub-millisecond p99 latency and no memory leaks across 100,000 connection cycles.\n\n| Scenario | Apple M2 Pro | Raspberry Pi 5 |\n|----------|--------------|----------------|\n| **p99 latency** (100 clients) | 0.44 ms | 0.13 ms |\n| **Throughput** (10-byte msgs) | 208k msg/s | 147k msg/s |\n| **Throughput** (64 KB msgs) | 39k msg/s | 27k msg/s |\n| **Sustained load** (10 min) | 8,981 msg/s | 9,012 msg/s |\n| **Memory** (100 connections) | 2.6 MB | 2.5 MB |\n| **Connection churn** (100k cycles) | 1,496 conn/s | 1,548 conn/s |\n| **Memory leaks** | 0 MB | 0 MB |\n\nAll benchmarks run on loopback, `ReleaseSafe` mode, Zig 0.15.2. Methodology and raw results: [`benchmarks/`](benchmarks/README.md).\n\n---\n\n### Current Limitations\n\nQoS 0 only (at most once delivery), no persistent sessions, no retained messages, single-node deployment. These are scope decisions for the initial release — multi-node and QoS 1/2 are on the roadmap.\n\n### Contributing\n\nContributions are welcome. If you're interested in MQTT internals, Protobuf wire format, or systems programming in Zig, there's plenty to dig into. See [FEATURES.md](FEATURES.md) for the full feature set and [FAQ.md](FAQ.md) for deployment and configuration guides.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/27111270?u=bb86c651d01b204bce9141a0bc4de023c4369786&v=4",
   "releases": [
+    {
+      "tag_name": "0.2.0",
+      "name": "0.2.0",
+      "body": "## What's Changed\r\n* feat: add service discovery by @electricalgorithm in https://github.com/electricalgorithm/protomq/pull/1\r\n* docs(agents): add code style and git usage guides alongside remote benchmark workflow by @electricalgorithm in https://github.com/electricalgorithm/protomq/pull/2\r\n* feat: add admin HTTP server, MQTT schema discovery, CLI Protobuf decoding, and float display by @electricalgorithm in https://github.com/electricalgorithm/protomq/pull/3\r\n* docs(readme): overhaul README with visual assets, Docker quick-start, and storytelling by @electricalgorithm in https://github.com/electricalgorithm/protomq/pull/5\r\n\r\n**Full Changelog**: https://github.com/electricalgorithm/protomq/compare/0.1.0...0.2.0",
+      "prerelease": false,
+      "published_at": "2026-02-28T00:33:25Z",
+      "html_url": "https://github.com/electricalgorithm/protomq/releases/tag/0.2.0",
+      "assets": [
+        {
+          "name": "protomq-v0.2.0-aarch64-linux.tar.gz",
+          "url": "https://github.com/electricalgorithm/protomq/releases/download/0.2.0/protomq-v0.2.0-aarch64-linux.tar.gz",
+          "size": 1744364,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "protomq-v0.2.0-aarch64-macos.tar.gz",
+          "url": "https://github.com/electricalgorithm/protomq/releases/download/0.2.0/protomq-v0.2.0-aarch64-macos.tar.gz",
+          "size": 410325,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "protomq-v0.2.0-x86_64-linux.tar.gz",
+          "url": "https://github.com/electricalgorithm/protomq/releases/download/0.2.0/protomq-v0.2.0-x86_64-linux.tar.gz",
+          "size": 1800715,
+          "content_type": "application/x-gzip"
+        },
+        {
+          "name": "protomq-v0.2.0-x86_64-macos.tar.gz",
+          "url": "https://github.com/electricalgorithm/protomq/releases/download/0.2.0/protomq-v0.2.0-x86_64-macos.tar.gz",
+          "size": 449316,
+          "content_type": "application/x-gzip"
+        }
+      ]
+    },
     {
       "tag_name": "0.1.0",
       "name": "0.1.0",
@@ -68,7 +102,7 @@
   "owner_location": "Dresden, Germany",
   "owner_blog": "https://gyokhan.com",
   "owner_twitter_username": "gkhnkcmrli",
-  "owner_followers": 82,
+  "owner_followers": 83,
   "owner_following": 41,
   "owner_created_at": "2017-04-09T01:43:39Z",
   "homepage": "https://electricalgorithm.github.io/protomq/",
