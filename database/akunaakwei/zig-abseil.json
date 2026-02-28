@@ -10,15 +10,15 @@
   "stars": 1,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-10-15T18:43:27Z",
+  "updated_at": "2026-02-28T09:22:51Z",
   "dependencies": [
     {
       "name": "abseil",
-      "url": "https://github.com/abseil/abseil-cpp/archive/refs/tags/20250512.1.tar.gz",
-      "hash": "N-V-__8AAPVZnwDbTjOwxj7Svc8jGQDVnvG3Qz1XJ-L4fuL2"
+      "url": "https://github.com/abseil/abseil-cpp/archive/refs/tags/20260107.1.tar.gz",
+      "hash": "N-V-__8AAHvBpQC2PgAgIxqg7-WRzv6zAW3ItECY_C63R_Nn"
     }
   ],
-  "readme": "# abseil\r\nThis is abseil packaged for the Zig build system.",
+  "readme": "# abseil\r\nThis is abseil packaged for the zig build system.",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/11787994?v=4",
   "releases": [],
   "owner_company": null,

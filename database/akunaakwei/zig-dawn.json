@@ -10,7 +10,7 @@
   "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-02-28T08:17:08Z",
+  "updated_at": "2026-02-28T09:26:09Z",
   "dependencies": [
     {
       "name": "dawn",
@@ -19,33 +19,33 @@
     },
     {
       "name": "spirv_headers",
-      "url": "https://github.com/KhronosGroup/SPIRV-Headers/archive/refs/tags/vulkan-sdk-1.4.313.0.tar.gz",
-      "hash": "N-V-__8AAKpdOgAIPbYXgiad6KL36ClqzxujT_hktyn4JMHM"
+      "url": "https://github.com/KhronosGroup/SPIRV-Headers/archive/refs/tags/vulkan-sdk-1.4.341.0.tar.gz",
+      "hash": "N-V-__8AAL3WPACjJ68w-42pC9p4-xZRqOcpR2i6CYOMfMK7"
     },
     {
       "name": "spirv_tools",
-      "url": "https://github.com/akunaakwei/zig-spirv-tools/archive/99d15f75310960af518a17233c8b552549c94380.tar.gz",
-      "hash": "spirv_tools-0.0.0-lHQC6McrDAAWv2S08DrMWBweB2IL8vHS9BABp0ofDhjJ"
+      "url": "https://github.com/akunaakwei/zig-spirv-tools/archive/16ae31a617d46c7930bb4ed148741c5d68dafc4e.tar.gz",
+      "hash": "spirv_tools-0.0.0-lHQC6JLoDAAjA0QMgW-18JSNq7ytArb0gL7mWPFm_BU0"
     },
     {
       "name": "vulkan_headers",
-      "url": "https://github.com/KhronosGroup/Vulkan-Headers/archive/refs/tags/v1.4.321.tar.gz",
-      "hash": "N-V-__8AAI7-AQIsx0GGCNZVZDEQ-EhVjVd915WjwOOiSSA-"
+      "url": "https://github.com/KhronosGroup/Vulkan-Headers/archive/refs/tags/v1.4.344.tar.gz",
+      "hash": "N-V-__8AALnKOwISs8TmtQCFcJgDTE9kRnMhQCrbaafF5DD0"
     },
     {
       "name": "vulkan_utility",
-      "url": "https://github.com/akunaakwei/zig-vulkan-utility-libraries/archive/de798f109f64b0119117ad7236cabe080f8c0d97.tar.gz",
-      "hash": "vulkan_utility_libraries-0.0.0-z4P-yVAZAABq6zDFDyfDmFigWJPECrgh3qLvnqkJc95i"
+      "url": "https://github.com/akunaakwei/zig-vulkan-utility-libraries/archive/976099820d7b4b2289c823f72b6c9663275e4aa5.tar.gz",
+      "hash": "vulkan_utility_libraries-0.0.0-z4P-yVAZAACCgryJVbBifWV8QhSLq-GLXAJvnzzPhoGu"
     },
     {
       "name": "abseil",
-      "url": "https://github.com/akunaakwei/zig-abseil/archive/0a5df01293478998f15e0e67b82c15d962f8ff9e.tar.gz",
-      "hash": "abseil-0.0.0-IbFgeAcmAADmILdHZ8CeR69QKwje-CfU4HNip7ULEK1z"
+      "url": "https://github.com/akunaakwei/zig-abseil/archive/9f344b8a92fb5946d7441c05bb9352f3efcec0b0.tar.gz",
+      "hash": "abseil-0.0.0-IbFgeCYlAAAWLejIR_T6MuGfXyNF7w5ZXZq3awFsjZcE"
     },
     {
       "name": "glfw",
-      "url": "https://github.com/akunaakwei/glfw-zig/archive/4c2580bca9c58cfeddb0664df6518061315d5cbc.tar.gz",
-      "hash": "glfw-3.4.0-a4Mg8-XFBgDF-hM4YiGRL-zwK2-yw8c7GxVuFB9N-pzo"
+      "url": "https://codeberg.org/Games-by-Mason/glfw_zig/archive/2d9ca8aee2c0dd7ed7ce8e8ef47a0d79c9d48dd8.tar.gz",
+      "hash": "glfw-3.4.0-a4Mg87TIBgDULv53771vr6o_jE_JEP25sc3y9Vxr9ocM"
     }
   ],
   "minimum_zig_version": "0.15.1",
