@@ -10,7 +10,7 @@
   "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-01-03T10:42:33Z",
+  "updated_at": "2026-02-28T06:42:01Z",
   "minimum_zig_version": "0.15.2",
   "readme": "# zlib-ng\r\nThis is zlib-ng packaged for the zig build system.",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/11787994?v=4",
