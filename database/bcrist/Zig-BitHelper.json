@@ -17,7 +17,7 @@
   "stars": 2,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-02-22T22:18:40Z",
+  "updated_at": "2026-02-28T19:34:32Z",
   "minimum_zig_version": "0.15.1",
   "readme": "# Zig-BitHelper\n\nProvides some helper functions for dealing with integers as bit fields:\n\n  - bits.as: Similar to @bitCast, but works with enums as well\n  - bits.zx: Casts as unsigned and zero-extends to the requested size\n  - bits._1x: Casts as unsigned and one-extends to the requested size\n  - bits.sx: Casts as signed and then extends to the requested size\n  - bits.concat: Concatenates unsigned integers (little endian)\n  - bits.swapHalves: Swaps the high and low halves of an integer with event bit count\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/2828351?v=4",

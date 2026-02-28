@@ -14,7 +14,7 @@
   "stars": 0,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-02-25T00:51:41Z",
+  "updated_at": "2026-02-28T19:43:08Z",
   "minimum_zig_version": "0.15.1",
   "readme": "# Dizzy\n### Function Parameter Dependency Injection for Zig\n\nSee test.zig for example usage.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/2828351?v=4",

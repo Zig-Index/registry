@@ -19,7 +19,7 @@
   "stars": 0,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-09-13T05:05:06Z",
+  "updated_at": "2026-02-28T19:37:29Z",
   "minimum_zig_version": "0.15.1",
   "readme": "# Zig-ConsoleHelper\n## Console helpers for command line Zig applications\n\n* Configures Windows stdout/stderr for UTF-8 and enables virtual terminal escape processing\n* Generates escape sequences to change the current color/style\n* Prints file context information with optional line numbers and highlighting (e.g. for error messages)\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/2828351?v=4",
