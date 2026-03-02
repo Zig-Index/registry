@@ -11,7 +11,7 @@
     "microbenchmark"
   ],
   "stars": 17,
-  "forks": 0,
+  "forks": 1,
   "watchers": 0,
   "updated_at": "2026-01-04T07:04:40Z",
   "minimum_zig_version": "0.16.0-dev.1484+d0ba6642b",

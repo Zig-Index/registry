@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 7,
+  "stars": 8,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-11-24T09:05:43Z",
+  "updated_at": "2026-02-27T22:43:54Z",
   "minimum_zig_version": "0.15.0-dev.1145+3ae0ba096",
   "readme": "# Zigomponents\n\nZigomponents are HTML components written in Zig. The inspiration is derived from [gomponents](https://github.com/maragudk/gomponents). This project currently depends on zig master.\n\n## Building this project\n- Download and install zvm to manage different versions of zig.\n- Run `zvm install master` to install the latest version of zig.\n- Run `zvm use master` to use the latest version of zig.\n- Run `zig build` to build the project.\n\n## Features\n- Features here\n\n## Usage\n- Usage here\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/22221987?u=41d51bdf31d88c51b0710b218946aa4f3ff65787&v=4",
