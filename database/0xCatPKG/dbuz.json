@@ -10,10 +10,10 @@
     "zig",
     "ziglang"
   ],
-  "stars": 2,
+  "stars": 3,
   "forks": 3,
   "watchers": 0,
-  "updated_at": "2026-03-01T07:34:09Z",
+  "updated_at": "2026-03-02T13:45:28Z",
   "dependencies": [
     {
       "name": "xml",
