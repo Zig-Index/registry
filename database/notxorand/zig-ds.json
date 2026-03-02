@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 2,
+  "stars": 3,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-01-24T02:50:49Z",
+  "updated_at": "2026-03-02T07:30:20Z",
   "dependencies": [
     {
       "name": "example",
@@ -27,7 +27,7 @@
   "owner_location": null,
   "owner_blog": "notxorand.dev",
   "owner_twitter_username": "notxorand",
-  "owner_followers": 41,
+  "owner_followers": 42,
   "owner_following": 171,
   "owner_created_at": "2020-06-02T09:19:04Z",
   "license": "MIT",

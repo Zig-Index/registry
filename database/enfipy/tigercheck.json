@@ -19,6 +19,58 @@
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/24860875?u=1bec518c2cb8b1f6dd5c6ca7e671d9ca4850a5c5&v=4",
   "releases": [
     {
+      "tag_name": "0.1.4",
+      "name": "tigercheck 0.1.4",
+      "body": "Release 0.1.4\n\n- Source SHA: e2c16da3361a0f31d4f8d5ddb7057047e02c0f64\n- Zig version: 0.16.0-dev.2637+6a9510c0e\n- Targets: x86_64-linux aarch64-linux x86_64-windows aarch64-macos\n- Quality gates: test, precision-check, run (--gates policy,perf)",
+      "prerelease": false,
+      "published_at": "2026-03-01T14:50:45Z",
+      "html_url": "https://github.com/enfipy/tigercheck/releases/tag/0.1.4",
+      "assets": [
+        {
+          "name": "tigercheck-x86_64-linux.zip",
+          "url": "https://github.com/enfipy/tigercheck/releases/download/0.1.4/tigercheck-x86_64-linux.zip",
+          "size": 1755974,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "SHA256SUMS",
+          "url": "https://github.com/enfipy/tigercheck/releases/download/0.1.4/SHA256SUMS",
+          "size": 388,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "tigercheck-x86_64-windows.zip",
+          "url": "https://github.com/enfipy/tigercheck/releases/download/0.1.4/tigercheck-x86_64-windows.zip",
+          "size": 487848,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "tigercheck-aarch64-linux.zip",
+          "url": "https://github.com/enfipy/tigercheck/releases/download/0.1.4/tigercheck-aarch64-linux.zip",
+          "size": 1685585,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "tigercheck-aarch64-macos.zip",
+          "url": "https://github.com/enfipy/tigercheck/releases/download/0.1.4/tigercheck-aarch64-macos.zip",
+          "size": 410893,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "RELEASE_METADATA",
+          "url": "https://github.com/enfipy/tigercheck/releases/download/0.1.4/RELEASE_METADATA",
+          "size": 220,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "RELEASE_NOTES.md",
+          "url": "https://github.com/enfipy/tigercheck/releases/download/0.1.4/RELEASE_NOTES.md",
+          "size": 244,
+          "content_type": "text/markdown; charset=utf-8"
+        }
+      ]
+    },
+    {
       "tag_name": "0.1.3",
       "name": "tigercheck 0.1.3",
       "body": "Release 0.1.3\n\n- Source SHA: d2b2f1c66fcea65d926f3d08be482461289e1352\n- Zig version: 0.16.0-dev.2637+6a9510c0e\n- Targets: x86_64-linux aarch64-linux x86_64-windows aarch64-macos\n- Quality gates: test, precision-check, check-strict",

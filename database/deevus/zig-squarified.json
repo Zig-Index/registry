@@ -15,12 +15,13 @@
   "readme": "# zig-squarified\r\n\r\n**A library for generating squarified treemap layouts in Zig.**\r\n\r\n## Demo\r\n```\r\nzig build run\r\n```\r\nRuns a basic Raylib demo that displays a treemap.\r\n\r\n![image](assets/demo.png)\r\n\r\n## Install as a Zig package\r\n```\r\nzig fetch git+https://github.com/deevus/zig-squarified.git --save=squarified\r\n```\r\nImport as a dependency in your `build.zig`:\r\n```zig\r\nconst lib_squarified = b.dependency(\"squarified\", {});\r\nconst module_squarified = lib_squarified.module(\"squarified\");\r\n\r\nexe.root_module.addImport(\"squarified\", module_squarified);\r\n```\r\n\r\n## Usage\r\n```zig\r\nconst squarify = @import(\"squarified\");\r\nconst Squarify = squarify.Squarify(f32);\r\n\r\n// Create your root node\r\nconst root = Node{\r\n    .value = 100,\r\n    .data = 0,\r\n    .children = &[_]Node{\r\n        Node{ .value = 50, .data = 1 },\r\n        Node{ .value = 30, .data = 2 },\r\n        Node{ .value = 20, .data = 3 },\r\n    },\r\n};\r\n\r\n// Define your container\r\nconst container = squarify.Rect{ .x = 0, .y = 0, .width = 800, .height = 600 };\r\n\r\n// Squarify\r\nconst treemap = try Squarify.init(allocator).squarify(container, root);\r\ndefer treemap.deinit();\r\n```\r\n\r\n## Contributing\r\nPull requests and issues are welcome.\r\n\r\nEnjoy creating fast squarified treemaps with Zig!\r\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/856194?u=5b8b1338da39a0db1e02453e8a5428fcff1d262e&v=4",
   "releases": [],
-  "owner_company": null,
+  "owner_bio": "Co-founding maintainer of Scoop. CLI tooling and TrueNAS infrastructure.\r\n\r\n\r\nOpen to new contracts. Email below: ⬇️",
+  "owner_company": "Simon Hartcher Services Pty Ltd",
   "owner_location": "Wollongong, Australia",
   "owner_blog": "https://simonhartcher.com",
   "owner_twitter_username": null,
-  "owner_followers": 95,
-  "owner_following": 34,
+  "owner_followers": 96,
+  "owner_following": 35,
   "owner_created_at": "2011-06-17T10:16:24Z",
   "category": "library"
 }
