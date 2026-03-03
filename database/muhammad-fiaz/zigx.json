@@ -16,10 +16,10 @@
     "zigx-compression",
     "zigx-package"
   ],
-  "stars": 4,
+  "stars": 5,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-01-14T18:05:03Z",
+  "updated_at": "2026-03-03T12:51:28Z",
   "dependencies": [
     {
       "name": "zstd",
