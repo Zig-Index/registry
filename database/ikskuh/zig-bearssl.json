@@ -12,10 +12,10 @@
     "ssl",
     "tls"
   ],
-  "stars": 33,
+  "stars": 34,
   "forks": 11,
   "watchers": 2,
-  "updated_at": "2025-10-29T06:18:39Z",
+  "updated_at": "2026-03-03T06:49:42Z",
   "dependencies": [
     {
       "name": "bearssl",
