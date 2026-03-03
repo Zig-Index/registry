@@ -11,7 +11,7 @@
   "stars": 12,
   "forks": 2,
   "watchers": 2,
-  "updated_at": "2026-03-02T13:41:04Z",
+  "updated_at": "2026-03-03T16:03:52Z",
   "dependencies": [
     {
       "name": "wayland",
@@ -20,22 +20,22 @@
     },
     {
       "name": "libffi",
-      "url": "git+https://codeberg.org/vezel/libffi.git#3aac158d09755844f1d9892e86512e9afbbd6c37",
-      "hash": "libffi-3.5.2-7_tEtNc5FwAWDaCWKtJ6Mh4eEWn8poybcaMRLhIOtag8"
+      "url": "git+https://codeberg.org/vezel/libffi.git?ref=v3.5.2-3#e972331ede2dc7ca107b6c3d3998c3b66bcab4db",
+      "hash": "libffi-3.5.2-7_tEtCY7FwBjSWOed_hvKoIb_otUeege34q9FpLH_03N"
     },
     {
       "name": "libexpat",
-      "url": "git+https://github.com/allyourcodebase/libexpat.git?ref=2.7.1-1#472c1db660c813a952f235cb394f5997d2e83fe1",
-      "hash": "libexpat-2.7.1-1-y_akI-w7AABhqRN54g--MNNIR-zA1X2WZ36ZPriY84sb"
+      "url": "git+https://github.com/allyourcodebase/libexpat.git?ref=2.7.1-2#d0bb4a56bff357fb478988ade0f94a426490c4d8",
+      "hash": "libexpat-2.7.1-2-y_akI-47AAB-pppMdnxv9vkgNyerxr4IyfmHdz3aMtUm"
     },
     {
       "name": "libxml2",
-      "url": "git+https://github.com/allyourcodebase/libxml2.git?ref=2.15.1-1#236bcdeaa52f9743593fa2d1f36e93f8796c25e8",
-      "hash": "libxml2-2.15.1-1-qHdjhl9MAACMrhlLwgk80e6_KjaK4ZqabFa7jkBPxLQO"
+      "url": "git+https://github.com/allyourcodebase/libxml2.git?ref=2.15.1-2#2528fad1bf17a0a70999930cfd9280554f547787",
+      "hash": "libxml2-2.15.1-2-qHdjhmNMAAAiZOWqVridicq2oMf5NHv0n9W41bz9FtMM"
     }
   ],
-  "minimum_zig_version": "0.15.1",
-  "readme": "[![CI](https://github.com/allyourcodebase/wayland/actions/workflows/ci.yaml/badge.svg)](https://github.com/allyourcodebase/wayland/actions)\n\n# Wayland\n\nThis is [Wayland](https://gitlab.freedesktop.org/wayland/wayland), packaged for [Zig](https://ziglang.org/).\n\n## Installation\n\nFirst, update your `build.zig.zon`:\n\n```\n# Initialize a `zig build` project if you haven't already\nzig init\nzig fetch --save git+https://github.com/allyourcodebase/wayland.git#1.24.0-2\n```\n\nYou can then import `wayland` in your `build.zig` with:\n\n```zig\nconst wayland = b.dependency(\"wayland\", .{\n    .target = target,\n    .optimize = optimize,\n});\nconst wayland_server = wayland.artifact(\"wayland-server\");\nconst wayland_client = wayland.artifact(\"wayland-client\");\nconst wayland_egl = wayland.artifact(\"wayland-egl\");\nconst wayland_cursor = wayland.artifact(\"wayland-cursor\");\n\n// Makes sure we get `wayland-scanner` for the host platform even when cross-compiling\nconst wayland_host = b.dependency(\"wayland\", .{\n    .target = b.host,\n    .optimize = std.builtin.OptimizeMode.Debug,\n});\nconst wayland_scanner = wayland_host.artifact(\"wayland-scanner\");\n```\n",
+  "minimum_zig_version": "0.15.2",
+  "readme": "[![CI](https://github.com/allyourcodebase/wayland/actions/workflows/ci.yaml/badge.svg)](https://github.com/allyourcodebase/wayland/actions)\n\n# Wayland\n\nThis is [Wayland](https://gitlab.freedesktop.org/wayland/wayland), packaged for [Zig](https://ziglang.org/).\n\n## Installation\n\nFirst, update your `build.zig.zon`:\n\n```\n# Initialize a `zig build` project if you haven't already\nzig init\nzig fetch --save git+https://github.com/allyourcodebase/wayland.git#1.24.0-2\n```\n\nYou can then import `wayland` in your `build.zig` with:\n\n```zig\nconst wayland = b.dependency(\"wayland\", .{\n    .target = target,\n    .optimize = optimize,\n});\nconst wayland_server = wayland.artifact(\"wayland-server\");\nconst wayland_client = wayland.artifact(\"wayland-client\");\nconst wayland_egl = wayland.artifact(\"wayland-egl\");\nconst wayland_cursor = wayland.artifact(\"wayland-cursor\");\n\n// Makes sure we get `wayland-scanner` for the host platform even when cross-compiling\nconst wayland_host = b.dependency(\"wayland\", .{\n    .target = b.graph.host,\n    .optimize = std.builtin.OptimizeMode.Debug,\n});\nconst wayland_scanner = wayland_host.artifact(\"wayland-scanner\");\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
   "releases": [],
   "owner_bio": "...are belong to Ziguanas, but we'd also be delighted to give them back!",
