@@ -29,7 +29,7 @@
   ],
   "minimum_zig_version": "0.14.0",
   "readme": "## Template Zig 0.14 SDL3 iOS project\n\nA sample app that draws a box and some text lives \nin `src/app.zig`, and a template iOS xcode template\nproject is in `ios/cc.xcodeproject`.\n\n## Getting Started\n\n`git clone` this repository, and in the top level run:\n\n    zig build\n\nThis does several things.\n\n - Create a native macOS app `zig-out/bin/cc`\n - Create a iOS library and copies it into the xcode project.\n\n## Running on iPhone\n\nAfter doing `zig build` the zig code is copied into the xcode project.\nOpen the `ios/cc.xcodeproject`, configure for running on your phone\nthen press the run button. You will need basic background knowledge\nof how to build and run an xcode iOS project.\n\n\n\n",
-  "owner_avatar_url": "https://avatars.githubusercontent.com/u/199742861?u=f3dc58206cc40c5e6ef5f95258d934e8a11f9e69&v=4",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/199742861?u=291a353d33643e9cb913c2c5628437e3b22fb20f&v=4",
   "releases": [],
   "owner_bio": "Go • Zig • Rust",
   "owner_company": null,

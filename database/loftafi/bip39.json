@@ -20,7 +20,7 @@
   ],
   "minimum_zig_version": "0.14.0",
   "readme": "# BIP39 implementation for zig\n\nThis is a zig implementation of BIP39. It was created for educational purposes. Do\nnot use for anything important or of value. Use at your own risk.\n\n## Example usage\n\nBelow is example code that demonstrates how to create and read seed phrases.\n\n    // Generate a 12 word seed phrase\n    const secret_entropy = try generateEntropy(.length_12);\n    const seed_phrase = try entropyToSeedPhrase(i.entropy, allocator),\n    defer allocator.free(seed_phrase);\n\n    // Read the secret entropy from the seed phrase\n    var buffer = [_]u8{0} ** 32;\n    const extract_entropy = try seedPhraseToEntropy(seed_phrase, &buffer);\n\n    // Confirm the initial secret entropy matches what was\n    // read from the seed phrase.\n    try testing.expectEqualSlices(u8, secret_entropy, extract_entropy);\n\n    // Convert a seed phrase into a seed that can be used for\n    // generating a public/private key.\n    const optional_passphrase = \"\";\n    const seed = try createSeed(seed_phrase, optional_passphrase, allocator);\n    defer allocator.free(seed);\n\n## License\n\nThis code is released under the MIT license. License must be included in any\ndistribution or adaptation of this source. Use at your own risk. No warrantee\nis given or implied.\n",
-  "owner_avatar_url": "https://avatars.githubusercontent.com/u/199742861?u=f3dc58206cc40c5e6ef5f95258d934e8a11f9e69&v=4",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/199742861?u=291a353d33643e9cb913c2c5628437e3b22fb20f&v=4",
   "releases": [],
   "owner_bio": "Go • Zig • Rust",
   "owner_company": null,
