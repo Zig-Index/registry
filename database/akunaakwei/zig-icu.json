@@ -10,25 +10,25 @@
   "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-07-19T11:14:22Z",
+  "updated_at": "2026-03-04T09:13:56Z",
   "dependencies": [
     {
       "name": "icu",
-      "url": "https://github.com/unicode-org/icu/archive/refs/tags/release-77-1.tar.gz",
-      "hash": "N-V-__8AAGOrnBGugOIb3017joB922hCEBoh_PhGjSDua6HD"
+      "url": "https://github.com/unicode-org/icu/archive/refs/tags/release-78.2.tar.gz",
+      "hash": "N-V-__8AAOoP_RFbqol-p911iq3f6VewPtkqBG2KaIEJ9Ysn"
     },
     {
       "name": "icudtl",
-      "url": "https://github.com/unicode-org/icu/releases/download/release-77-1/icu4c-77_1-data-bin-l.zip",
-      "hash": "N-V-__8AAMEZ5wGRruy0dJbpOXy-qyDU139ZX9uU6ZvpjYBB"
+      "url": "https://github.com/unicode-org/icu/releases/download/release-78.2/icu4c-78.2-data-bin-l.zip",
+      "hash": "N-V-__8AAEGc-QHHv35lvwo3lh8XYJGNloQnHkgOeFcHGx2N"
     },
     {
       "name": "icudtb",
-      "url": "https://github.com/unicode-org/icu/releases/download/release-77-1/icu4c-77_1-data-bin-b.zip",
-      "hash": "N-V-__8AAMEZ5wEJOxG9SydA-RG_clugPMIiyrv8Sd9PO9xV"
+      "url": "https://github.com/unicode-org/icu/releases/download/release-78.2/icu4c-78.2-data-bin-b.zip",
+      "hash": "N-V-__8AAEGc-QE48id3GuAUZiYi6Fwtu9hq1RiyQZNU-Y9v"
     }
   ],
-  "minimum_zig_version": "0.14.0",
+  "minimum_zig_version": "0.15.2",
   "readme": "# icu\r\nThis is icu packaged for the Zig build system.",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/11787994?v=4",
   "releases": [],
