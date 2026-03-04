@@ -13,12 +13,12 @@
   "stars": 3,
   "forks": 3,
   "watchers": 0,
-  "updated_at": "2026-03-02T13:45:28Z",
+  "updated_at": "2026-03-04T18:46:31Z",
   "dependencies": [
     {
       "name": "xml",
-      "url": "git+https://github.com/edqx/dishwasher.git?branch=0.15.2#d0f03b6a4532f6f324a6640d474bfb653523c9ae",
-      "hash": "dishwasher-2.0.0-aXVByZyrAQApDLVb6eVdAvh2_kG_zokxdGGxlXdxwsDy"
+      "url": "git+https://github.com/edqx/dishwasher.git#14a17bb2ea1b53ac89f4bc914d8ba4c00ee1b310",
+      "hash": "dishwasher-2.0.0-aXVByTarAQCojk7aaxm436BqTMK13D-Ba6Z05klAIjsr"
     }
   ],
   "minimum_zig_version": "0.15.2",
