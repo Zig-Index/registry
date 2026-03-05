@@ -13,12 +13,12 @@
   "stars": 5,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-02-27T11:16:25Z",
+  "updated_at": "2026-03-05T02:44:40Z",
   "dependencies": [
     {
       "name": "websocket",
       "url": "https://github.com/karlseguin/websocket.zig/archive/refs/heads/master.tar.gz",
-      "hash": "websocket-0.1.0-ZPISdRNzAwAGszh62EpRtoQxu8wb1MSMVI6Ow0o2dmyJ"
+      "hash": "websocket-0.1.0-ZPISdRlzAwBB_Bz2UMMqxYqF6YEVTIBoFsbzwPUJTHIc"
     },
     {
       "name": "nostr",
@@ -26,7 +26,7 @@
       "hash": "nostr-0.1.8-JY6OcJ72CADZ8IIi9NQYOFFjj5Rldf-17TXKwv-Y9lY4"
     }
   ],
-  "readme": "# wisp - a lightweight nostr relay\n\n<img src=\"assets/wisp-logo.jpeg\" alt=\"Wisp Logo\" width=\"300\">\n\nA fast, lightweight [nostr](https://github.com/nostr-protocol/nostr) relay written in Zig.\n\n## Why Wisp?\n\n- **Fast**: 2x higher throughput than strfry, 10x lower latency\n- **Small**: Single 1.2MB binary, ~15MB RAM at idle\n- **Simple**: One command to run your personal relay with your feed\n- **Spider Mode**: Automatically syncs events from people you follow\n\n## Benchmarks\n\n| Relay | Events/sec | p50 Latency | p99 Latency |\n|-------|-----------|-------------|-------------|\n| Wisp | 1,993 | 0.55ms | 0.82ms |\n| strfry | 872 | 4.28ms | 9.92ms |\n\n*4 concurrent workers, 1k events. [Full results](https://github.com/privkeyio/nostr-bench/blob/main/reports/BENCHMARK_RESULTS.md)*\n\n## Quickstart\n\nDownload the [latest release](https://github.com/privkeyio/wisp/releases) or build from source:\n\n```sh\n# Build (requires Zig 0.15+)\nsudo apt install -y liblmdb-dev libsecp256k1-dev libssl-dev\ngit clone https://github.com/privkeyio/wisp && cd wisp\nzig build -Doptimize=ReleaseFast\n\n# Run your personal relay (replace with your npub)\n./zig-out/bin/wisp --spider-admin npub1yourkey...\n```\n\nSpider reads your follow list and pulls your feed. Point your client at `ws://localhost:7777`.\n\n## Features\n\n* NIPs: 1, 2, 9, 11, 13, 16, 22, 33, 40, 42, 45, 50, 65, 70, 77, 86\n* LMDB storage (no external database)\n* Spider mode for syncing events from external relays\n* Import/export to JSONL\n\n## Import/Export\n\n```sh\n./zig-out/bin/wisp export > backup.jsonl\n./zig-out/bin/wisp import < backup.jsonl\n```\n\n## Configuration\n\nCopy `wisp.toml.example` to `wisp.toml` and customize, or use environment variables with `WISP_` prefix:\n\n```sh\nWISP_PORT=8080 ./zig-out/bin/wisp\n```\n\nSee `wisp.toml.example` for all options.\n\n## Contributing\n\nSee [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on reporting issues and submitting pull requests.\n\n## Changelog\n\nSee [CHANGELOG.md](CHANGELOG.md) for a history of changes to this project.\n\n## License\n\nAGPL-3.0\n",
+  "readme": "# wisp - a lightweight nostr relay\n\n<img src=\"assets/wisp-logo.jpeg\" alt=\"Wisp Logo\" width=\"300\">\n\nA fast, lightweight [nostr](https://github.com/nostr-protocol/nostr) relay written in Zig.\n\n## Why Wisp?\n\n- **Fast**: 2x higher throughput than strfry, 10x lower latency\n- **Small**: Single 1.2MB binary, ~15MB RAM at idle\n- **Simple**: One command to run your personal relay with your feed\n- **Spider Mode**: Automatically syncs events from people you follow\n\n## Benchmarks\n\n| Relay | Events/sec | p50 Latency | p99 Latency |\n|-------|-----------|-------------|-------------|\n| Wisp | 1,993 | 0.55ms | 0.82ms |\n| strfry | 872 | 4.28ms | 9.92ms |\n\n*4 concurrent workers, 1k events. [Full results](https://github.com/privkeyio/nostr-bench/blob/main/reports/BENCHMARK_RESULTS.md)*\n\n## Quickstart\n\nDownload the [latest release](https://github.com/privkeyio/wisp/releases) or build from source:\n\n```sh\n# Build (requires Zig 0.15+)\nsudo apt install -y liblmdb-dev libsecp256k1-dev libssl-dev\ngit clone https://github.com/privkeyio/wisp && cd wisp\nzig build -Doptimize=ReleaseFast\n\n# Run your personal relay (replace with your npub)\n./zig-out/bin/wisp --spider-admin npub1yourkey...\n```\n\nSpider reads your follow list and pulls your feed. Point your client at `ws://localhost:7777`.\n\n## Features\n\n* NIPs: 1, 2, 9, 11, 13, 16, 22, 33, 40, 42, 45, 50, 65, 70, 77, 86\n* LMDB storage (no external database)\n* Spider mode for syncing events from external relays\n* Import/export to JSONL\n\n## Import/Export\n\n```sh\n./zig-out/bin/wisp export > backup.jsonl\n./zig-out/bin/wisp import < backup.jsonl\n```\n\n## Configuration\n\nCopy `wisp.toml.example` to `wisp.toml` and customize, or use environment variables with `WISP_` prefix:\n\n```sh\nWISP_PORT=8080 ./zig-out/bin/wisp\n```\n\nSee `wisp.toml.example` for all options.\n\n## Contributing\n\nSee [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on reporting issues and submitting pull requests.\n\n## Changelog\n\nSee [CHANGELOG.md](CHANGELOG.md) for a history of changes to this project.\n\n## License\n\nMIT\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/15005438?v=4",
   "releases": [
     {
@@ -137,5 +137,6 @@
   "owner_blog": "https://privkey.io/",
   "owner_twitter_username": null,
   "owner_created_at": "2015-10-06T22:18:34Z",
+  "license": "MIT",
   "category": "library"
 }
