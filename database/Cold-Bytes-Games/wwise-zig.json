@@ -19,6 +19,15 @@
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/96352918?v=4",
   "releases": [
     {
+      "tag_name": "v2025.1.5-zig0",
+      "name": "v2025.1.5-zig0",
+      "body": "First release of Wwise 2025.1 branch using 2025.1.5",
+      "prerelease": false,
+      "published_at": "2026-03-05T14:43:01Z",
+      "html_url": "https://github.com/Cold-Bytes-Games/wwise-zig/releases/tag/v2025.1.5-zig0",
+      "assets": []
+    },
+    {
       "tag_name": "v2024.1.10-zig0",
       "name": "v2024.1.10-zig0",
       "body": "Updated to Wwise 2024.1.10 and Zig 0.15.2",
@@ -187,15 +196,6 @@
       "prerelease": false,
       "published_at": "2024-03-10T19:07:09Z",
       "html_url": "https://github.com/Cold-Bytes-Games/wwise-zig/releases/tag/v2022.1.10-zig1",
-      "assets": []
-    },
-    {
-      "tag_name": "v2023.1.1-zig0",
-      "name": "v2023.1.1-zig0",
-      "body": "Support for Wwise 2023.1.1",
-      "prerelease": false,
-      "published_at": "2024-02-25T22:17:35Z",
-      "html_url": "https://github.com/Cold-Bytes-Games/wwise-zig/releases/tag/v2023.1.1-zig0",
       "assets": []
     }
   ],
