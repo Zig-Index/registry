@@ -12,7 +12,7 @@
   "stars": 13,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-03-06T03:35:57Z",
+  "updated_at": "2026-03-06T05:33:12Z",
   "readme": "# Zorm\n\n![loc](https://sloc.xyz/github/nektro/zig-zorm)\n[![license](https://img.shields.io/github/license/nektro/zig-zorm.svg)](https://github.com/nektro/zig-zorm/blob/master/LICENSE)\n[![nektro @ github sponsors](https://img.shields.io/badge/sponsors-nektro-purple?logo=github)](https://github.com/sponsors/nektro)\n[![Zig](https://img.shields.io/badge/Zig-0.14-f7a41d)](https://ziglang.org/)\n[![Zigmod](https://img.shields.io/badge/Zigmod-latest-f7a41d)](https://github.com/nektro/zigmod)\n\nThe database library for Zig.\n\n## Supports\n\n- Sqlite3\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/5464072?u=a84ae9f68c3b0567fe276def3ab932d2f2f6703f&v=4",
   "releases": [],
