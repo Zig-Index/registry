@@ -12,10 +12,10 @@
     "ssl",
     "tls"
   ],
-  "stars": 34,
+  "stars": 35,
   "forks": 11,
   "watchers": 2,
-  "updated_at": "2026-03-03T06:49:42Z",
+  "updated_at": "2026-03-04T10:10:00Z",
   "dependencies": [
     {
       "name": "bearssl",
@@ -31,7 +31,7 @@
   "owner_location": "Stuttgart - Germany",
   "owner_blog": "https://random-projects.net/",
   "owner_twitter_username": "ikskuh",
-  "owner_followers": 481,
+  "owner_followers": 483,
   "owner_following": 72,
   "owner_created_at": "2013-03-21T16:08:06Z",
   "license": "MIT",

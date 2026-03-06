@@ -9,10 +9,10 @@
     "zig-package",
     "zipf"
   ],
-  "stars": 0,
+  "stars": 5,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-01-24T10:57:20Z",
+  "updated_at": "2026-03-06T01:26:09Z",
   "dependencies": [
     {
       "name": "unzipf",
@@ -29,7 +29,7 @@
   "owner_location": "Japan",
   "owner_blog": null,
   "owner_twitter_username": "marisfaireborn",
-  "owner_followers": 30,
+  "owner_followers": 34,
   "owner_following": 34,
   "owner_created_at": "2023-10-11T16:05:16Z",
   "license": "MIT",

@@ -15,10 +15,10 @@
     "zig-package",
     "ziglang"
   ],
-  "stars": 22,
+  "stars": 23,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-03-02T08:57:27Z",
+  "updated_at": "2026-03-03T22:09:02Z",
   "dependencies": [
     {
       "name": "tls",
