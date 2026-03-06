@@ -1,0 +1,26 @@
+{
+  "name": "quickjs",
+  "owner": "allyourcodebase",
+  "repo": "quickjs",
+  "description": "Fabrice Bellard's QuickJS packaged for Zig.",
+  "type": "package",
+  "topics": [
+    "quickjs",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-03-06T19:02:54Z",
+  "minimum_zig_version": "0.14.0",
+  "readme": "# QuickJS\n\nThis is [QuickJS](https://github.com/bellard/quickjs) packaged for [Zig](https://ziglang.org).\n\n# Credits\n\nConverted from [zig's quickjs-ng](https://github.com/allyourcodebase/quickjs-ng)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
+  "releases": [],
+  "owner_bio": "...are belong to Ziguanas, but we'd also be delighted to give them back!",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2023-09-28T21:29:33Z",
+  "license": "MIT",
+  "category": "library"
+}
