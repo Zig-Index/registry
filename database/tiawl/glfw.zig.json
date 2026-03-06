@@ -14,7 +14,7 @@
   "stars": 32,
   "forks": 8,
   "watchers": 2,
-  "updated_at": "2026-02-28T17:13:33Z",
+  "updated_at": "2026-03-06T10:49:54Z",
   "dependencies": [
     {
       "name": "glfw",
@@ -33,8 +33,8 @@
     },
     {
       "name": "wayland_zig",
-      "url": "git+https://github.com/tiawl/wayland.zig?ref=toolbox-2.0.0#5ce41c9d999ba65da9ed744fb2a7b1af7972e22e",
-      "hash": "wayland_zig-1.0.0-JmY-j104CgAc55X6FW_CTUGOiChX6GSViUAREGQ06gtt"
+      "url": "git+https://github.com/tiawl/wayland.zig?ref=wayland-1.24.91#8411cc68c27f964d446806aaaf976dff4ab31f52",
+      "hash": "wayland_zig-1.0.0-JmY-jydTCgD_eTu3kgvCjrnYotc-kFZn9NyRQNddSItn"
     },
     {
       "name": "X11_zig",
