@@ -7,13 +7,22 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 121,
-  "forks": 10,
+  "stars": 129,
+  "forks": 11,
   "watchers": 2,
-  "updated_at": "2026-01-03T01:43:13Z",
+  "updated_at": "2026-03-07T06:21:56Z",
   "minimum_zig_version": "0.11.0",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/6951100?u=d1219532a4e544f59a9fd017eb83787d9ea9032e&v=4",
   "releases": [
+    {
+      "tag_name": "0.3.1",
+      "name": "0.3.1",
+      "body": "**Full Changelog**: https://github.com/akhildevelops/cudaz/compare/0.3.0...0.3.1\r\n\r\nCompatible with 13.x cuda version",
+      "prerelease": false,
+      "published_at": "2026-03-07T06:22:48Z",
+      "html_url": "https://github.com/akhildevelops/cudaz/releases/tag/0.3.1",
+      "assets": []
+    },
     {
       "tag_name": "0.3.0",
       "name": "0.3.0",
@@ -56,7 +65,7 @@
   "owner_location": "India",
   "owner_blog": null,
   "owner_twitter_username": "akhildevelops",
-  "owner_followers": 44,
+  "owner_followers": 45,
   "owner_following": 7,
   "owner_created_at": "2014-03-14T12:24:26Z",
   "category": "library"
