@@ -1,0 +1,45 @@
+{
+  "name": "testcontainers-zig",
+  "owner": "dragosv",
+  "repo": "testcontainers-zig",
+  "description": "A lightweight Zig library for writing tests with throwaway Docker containers",
+  "type": "package",
+  "topics": [
+    "automation",
+    "docker",
+    "hacktoberfest",
+    "testing",
+    "zig",
+    "ziglang",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-03-07T16:04:51Z",
+  "minimum_zig_version": "0.15.2",
+  "readme": "[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=develop&repo=1163891557&machine=standardLinux32gb&devcontainer_path=.devcontainer%2Fdevcontainer.json&location=EastUs)\n\n[![CI/CD](https://github.com/dragosv/testcontainers-zig/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/dragosv/testcontainers-zig/actions/workflows/ci.yml)\n[![Language](https://img.shields.io/badge/Zig-0.15.2-orange.svg)](https://ziglang.org)\n[![Docker](https://img.shields.io/badge/Docker%20Engine%20API-%20%201.44-blue)](https://docs.docker.com/engine/api/v1.44/)\n[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=shields)](http://makeapullrequest.com)\n\n# Testcontainers for Zig\n\nA lightweight Zig library for writing tests with throwaway Docker containers, inspired by [testcontainers-go](https://github.com/testcontainers/testcontainers-go).\n\n## Requirements\n\n- Zig 0.15.2+\n- Docker or Docker Desktop running\n\n## Installation\n\nAdd to your `build.zig.zon`:\n\n```zig\n.dependencies = .{\n    .testcontainers = .{\n        .url = \"git+https://github.com/dragosv/testcontainers-zig?ref=main#<commit>\",\n        .hash = \"<hash>\",\n    },\n},\n```\n\nThen in `build.zig`:\n\n```zig\nconst tc_dep = b.dependency(\"testcontainers\", .{ .target = target, .optimize = optimize });\nexe.root_module.addImport(\"testcontainers\", tc_dep.module(\"testcontainers\"));\n```\n\n## Quick Start\n\nSee [QUICKSTART.md](QUICKSTART.md) for a step-by-step guide.\n\n```zig\nconst std = @import(\"std\");\nconst tc  = @import(\"testcontainers\");\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const alloc = gpa.allocator();\n\n    const ctr = try tc.run(alloc, \"nginx:latest\", .{\n        .exposed_ports = &.{\"80/tcp\"},\n        .wait_strategy = tc.wait.forHttp(\"/\"),\n    });\n    defer ctr.terminate() catch {};\n    defer ctr.deinit();\n\n    const port = try ctr.mappedPort(\"80/tcp\", alloc);\n    std.debug.print(\"nginx ready on port {d}\\n\", .{port});\n}\n```\n\n## Modules\n\nPre-configured containers for common services:\n\n| Module | Default Image | Key Method |\n|--------|--------------|------------|\n| `modules.postgres` | `postgres:16-alpine` | `connectionString(alloc)` |\n| `modules.mysql` | `mysql:8.0` | `connectionString(alloc)` |\n| `modules.redis` | `redis:7-alpine` | `connectionString(alloc)` |\n| `modules.mongodb` | `mongo:7` | `connectionString(alloc)` |\n| `modules.rabbitmq` | `rabbitmq:3-management-alpine` | `amqpURL(alloc)`, `httpURL(alloc)` |\n| `modules.mariadb` | `mariadb:11` | `connectionString(alloc)` |\n| `modules.minio` | `minio/minio:latest` | `connectionString(alloc)` |\n| `modules.elasticsearch` | `elasticsearch:8.12.0` | `httpURL(alloc)` |\n| `modules.kafka` | `bitnami/kafka:3.7` | `brokers(alloc)` |\n| `modules.localstack` | `localstack/localstack:3` | `endpointURL(alloc)` |\n\n```zig\nvar provider = try tc.DockerProvider.init(alloc);\ndefer provider.deinit();\n\nconst pg = try tc.modules.postgres.run(&provider, tc.modules.postgres.default_image, .{\n    .username = \"myuser\",\n    .password = \"mypass\",\n    .database = \"mydb\",\n});\ndefer pg.terminate() catch {};\ndefer pg.deinit();\n\nconst url = try pg.connectionString(alloc);\ndefer alloc.free(url);\n```\n\n## Wait Strategies\n\n```zig\ntc.wait.forHttp(\"/health\")           // HTTP 200 response on the first exposed port\ntc.wait.forPort(\"5432/tcp\")          // TCP port open\ntc.wait.forLog(\"database system is ready\")  // substring in container stdout/stderr\ntc.wait.forHealthCheck()             // Docker HEALTHCHECK status == healthy\ntc.wait.forExec(&.{\"pg_isready\"})    // command exits with code 0\ntc.wait.forAll(&.{                   // all sub-strategies must pass\n    tc.wait.forPort(\"5432/tcp\"),\n    tc.wait.forLog(\"ready\"),\n})\n```\n\n## Test Integration\n\n```zig\nconst std = @import(\"std\");\nconst testing = std.testing;\nconst tc = @import(\"testcontainers\");\n\ntest \"postgres connection\" {\n    const alloc = testing.allocator;\n\n    var provider = try tc.DockerProvider.init(alloc);\n    defer provider.deinit();\n\n    const pg = try tc.modules.postgres.run(&provider, tc.modules.postgres.default_image, .{});\n    defer pg.terminate() catch {};\n    defer pg.deinit();\n\n    const url = try pg.connectionString(alloc);\n    defer alloc.free(url);\n\n    try testing.expect(url.len > 0);\n}\n```\n\n## Documentation\n\n| Document | Description |\n|----------|-------------|\n| [QUICKSTART.md](QUICKSTART.md) | 5-minute getting-started guide |\n| [ARCHITECTURE.md](ARCHITECTURE.md) | Design decisions and component overview |\n| [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md) | Full feature inventory and implementation stats |\n| [CONTRIBUTING.md](CONTRIBUTING.md) | How to contribute |\n| [examples/basic.zig](examples/basic.zig) | Runnable usage example |\n\n## Contributing\n\nContributions are welcome — please read [CONTRIBUTING.md](CONTRIBUTING.md) first.\n\n## License\n\nMIT — see [LICENSE](LICENSE).\n\n## Support\n\n[Slack](https://slack.testcontainers.org/) · [Stack Overflow](https://stackoverflow.com/questions/tagged/testcontainers) · [GitHub Issues](https://github.com/dragosv/testcontainers-zig/issues/)\n\n---\n\nCopyright © 2026 Dragos Varovici and contributors.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/422243?u=79e2ef36f9104df298b5cc73c4056a88f1ec9666&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "Initial release.\n\n## What's Changed\n* Parse Docker pull stream for embedded errors in imagePull by @Copilot in https://github.com/dragosv/testcontainers-zig/pull/6\n* Replace fixed header buffer with dynamic ArrayList in sendHttpRequest by @Copilot in https://github.com/dragosv/testcontainers-zig/pull/4\n* Fix RFC 7230 §3.3.3 violation: Transfer-Encoding takes precedence over Content-Length by @Copilot in https://github.com/dragosv/testcontainers-zig/pull/5\n* Using unix sockets by @dragosv in https://github.com/dragosv/testcontainers-zig/pull/1\n* Add MIT license by @dragosv in https://github.com/dragosv/testcontainers-zig/pull/8\n* TestContainers labels by @dragosv in https://github.com/dragosv/testcontainers-zig/pull/7\n* GitHub release workflow by @dragosv in https://github.com/dragosv/testcontainers-zig/pull/9\n\n## New Contributors\n* @dragosv made their first contribution in https://github.com/dragosv/testcontainers-zig/pull/1\n\n**Full Changelog**: https://github.com/dragosv/testcontainers-zig/commits/v0.1.0",
+      "prerelease": false,
+      "published_at": "2026-03-07T16:11:33Z",
+      "html_url": "https://github.com/dragosv/testcontainers-zig/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Passionate Polyglot Developer with a focus on localization and quality ",
+  "owner_company": null,
+  "owner_location": "Calgary, Canada",
+  "owner_blog": "http://www.linkedin.com/in/dragosvarovici",
+  "owner_twitter_username": null,
+  "owner_followers": 29,
+  "owner_following": 4,
+  "owner_created_at": "2010-09-30T13:51:42Z",
+  "homepage": "https://testcontainers.org",
+  "license": "MIT",
+  "category": "library"
+}
