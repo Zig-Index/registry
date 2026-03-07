@@ -15,10 +15,10 @@
     "hugging",
     "xorb"
   ],
-  "stars": 19,
+  "stars": 20,
   "forks": 2,
   "watchers": 1,
-  "updated_at": "2026-02-10T22:23:14Z",
+  "updated_at": "2026-03-07T11:58:37Z",
   "dependencies": [
     {
       "name": "lz4",
