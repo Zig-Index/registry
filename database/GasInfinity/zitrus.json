@@ -1,0 +1,207 @@
+{
+  "name": "zitrus",
+  "owner": "GasInfinity",
+  "repo": "zitrus",
+  "description": "Mirror of https://codeberg.org/GasInfinity/zitrus",
+  "type": "package",
+  "topics": [
+    "zig-package",
+    "3ds-homebrew",
+    "homebrew",
+    "nintendo-3ds",
+    "zig"
+  ],
+  "stars": 36,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-03-08T15:09:39Z",
+  "dependencies": [
+    {
+      "name": "zalloc",
+      "url": "git+https://github.com/GasInfinity/zalloc.git#14ab564b8683d6e7498ea455e47bd0dd08e4eb76",
+      "hash": "zalloc-0.0.0-xJbxwdsmAADqSpLvU298eMJ4MRG-rsepdJcfEEUwudQv"
+    },
+    {
+      "name": "zsflt",
+      "url": "git+https://github.com/GasInfinity/zsflt.git#1929cbae9d41c7e1178e494e42aa7b349a68cd8a",
+      "hash": "zsflt-0.0.1-_pCibQ4wAABnfZskVOk2Y14F056VNJtuqVpAEzUNBGfl"
+    },
+    {
+      "name": "zigimg",
+      "url": "git+https://github.com/zigimg/zigimg.git#d7717b3617d58160635623fe86d4bf86065498e0",
+      "hash": "zigimg-0.1.0-8_eo2vBrFQAvZmO9NzDP85_qC5JFksuMdyI_KMMEr4bq"
+    },
+    {
+      "name": "plz",
+      "url": "git+https://codeberg.org/GasInfinity/plz#8e46b75e722599b29ed78e84daf9447e953ac7e9",
+      "hash": "plz-0.0.1-_2WTq0LMAABkuO05fFOBysjGGVWyertKxPgHp9h2VDZR"
+    }
+  ],
+  "minimum_zig_version": "0.16.0",
+  "readme": "![Zitrus Logo](https://codeberg.org/GasInfinity/zitrus/raw/branch/main/assets/zitrus-logo.png)\n\n---\n![Zig support](https://img.shields.io/badge/Zig-0.16.x-color?logo=zig&color=%23f3ab20)\n  \n3DS homebrew sdk written entirely in zig.\n\n## Installation\n\n> [!NOTE]\n> Not even the language this project is written in is 1.0\n>\n> You acknowledge that any amount of breaking changes may occur until \n> the first stable (minor) release, a.k.a `0.1.0`. No ETA is given.\n\n```bash\nzig fetch --save git+https://codeberg.org/GasInfinity/zitrus\n```\n\nThen add this to your `build.zig`:\n```zig\nconst zitrus = @import(\"zitrus\");\n\nconst zitrus_dep = b.dependency(\"zitrus\", .{});\n\n// zitrus contains code useful for tooling outside of a 3DS environment.\nconst zitrus_mod = zitrus_dep.module(\"zitrus\");\n\nconst exe = b.addExecutable(.{\n    .name = \"app.elf\",\n    .root_module = b.createModule(.{\n        .root_source_file = b.path(\"src/main.zig\"),\n        .target = b.resolveTargetQuery(.{\n            .cpu_arch = .arm,\n            .os_tag = .@\"3ds\",\n        }),\n        .optimize = optimize,\n        .imports = &.{\n            .{ .name = \"zitrus\", .module = zitrus_mod },\n        },\n        .zig_lib_dir = zitrus_dep.namedLazyPath(\"juice/zig_lib\"),\n    }),\n});\n\n// 3DSX's are PIE's\nexe.pie = true;\n\n// Needed for any binary which targets the 3DS\nexe.setLinkerScript(zitrus_dep.namedLazyPath(\"horizon/ld\"));\n\n// You can skip installing the elf but it is recommended to keep it for debugging purposes\nb.installArtifact(exe);\n\nconst smdh: zitrus.MakeSmdh = .init(zitrus_dep, .{\n    .settings = b.path(\"path-to-smdh-settings.zon\"), // look at any demo for a quick sample.\n    .icon = b.path(\"path-to-icon.png/jpg/...\"), // supported formats depends on zigimg image decoding.\n});\n\n// See `MakeRomFs` if you need something patchable unlike `@embedFile`.\n\n// This step will convert your executable to 3dsx (the defacto homebrew executable format) to execute it in an emulator or real 3DS\nconst final_3dsx: zitrus.Make3dsx = .init(zitrus_dep, .{ .exe = exe, .smdh = smdh });\nfinal_3dsx.install(b, .default);\n```\n\nIn your root file, you must also add this, as there's no way to implicitly tell zig to evaluate/import/use it automagically:\n```zig\npub const std_os_options: std.Options.OperatingSystem = horizon.default_std_os_options;\n```\n\n## Examples / Demos\nCurrently there are multiple examples in the `demo/` directory. To build them, you must have `zig 0.15.1` in your path and run `zig build`.\n- [mango](demo/mango/) contains samples of how to use the mango graphics api.\n\n- [panic](demo/panic/) is a simple example that panics when opened to test panics and traces.\n- [info](demo/info) is a simple app that currently shows the console region and model (will be updated to show more info over time).\n- [bitmap](demo/bitmap/) is a port of the bitmap example in libctru's 3ds-examples.\n- [flappy](demo/flappy) is a simple fully functional flappy bird clone written entirely with software blitting.\n- [gpu](demo/gpu/) is a playground for [mango](src/mango.zig), bleeding edge features are tested there. Not really an example per-se.\n\n--- \n\nYou can (and are encouraged) to look at the `tools` directory as it is a good example of how to use the API's `zitrus` provides outside (and inside!) of a 3DS environment. Almost all tools are self-contained and span 50-300 LOC.\n\n*[There's also a WIP wiki](https://codeberg.org/GasInfinity/zitrus/wiki) (Looks like codeberg errors for some pages?)*\n\n## Coverage\n\nMoved to [Coverage.md](docs/Coverage.md)\n\n## Contributing\n\n**Please refrain from using LLMs to make PRs and/or Issues as-is**\n\nCurrently there's no place to discuss contributions or usage of the SDK, feel free to open an issue if you want to use `zitrus` but don't know how to start (remember, lack of documentation is *also* an issue!)\n\n## Why\n\nMoved to [Why.md](docs/Why.md)\n\n# Credits\n- [3dbrew](https://www.3dbrew.org/wiki/Main_Page) is seriously the best resource if you need info about the 3DS hardware/software.\n- [gbatek](https://problemkaputt.de/gbatek.htm#3dsreference) is the second best resource for low level info about the 3DS hardware.\n- @devkitPro for the tooling, a starting point/reference for this project and reference for unknown/undocumented/unspecified things (e.g: libctru and how tf jumping to home menu worked).\n- @azahar-emu/[azahar](https://github.com/azahar-emu/azahar) for providing an emulator to quickly test changes and the initial iterations.\n- @LumaTeam/[Luma3DS](https://github.com/LumaTeam/Luma3DS/) for literally saving my life when trying to debug things in my 2DS.\n- [@TuxSH](https://github.com/TuxSH/) for his kernel decompilations which allowed (and allow) me to understand more how it works.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/58077502?u=1f345335860e0dee813300d1cf347c28e9ccee12&v=4",
+  "releases": [
+    {
+      "tag_name": "dev",
+      "name": "dev",
+      "body": "Latest unstripped `ReleaseSafe` development version.",
+      "prerelease": true,
+      "published_at": "2025-11-10T13:07:22Z",
+      "html_url": "https://github.com/GasInfinity/zitrus/releases/tag/dev",
+      "assets": [
+        {
+          "name": "zitrus-x86_64-freebsd-0.0.0-pre1.dev.6+49fa08dc1.tar.gz",
+          "url": "https://github.com/GasInfinity/zitrus/releases/download/dev/zitrus-x86_64-freebsd-0.0.0-pre1.dev.6%2B49fa08dc1.tar.gz",
+          "size": 3297342,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zitrus-x86_64-netbsd-0.0.0-pre1.dev.6+49fa08dc1.tar.gz",
+          "url": "https://github.com/GasInfinity/zitrus/releases/download/dev/zitrus-x86_64-netbsd-0.0.0-pre1.dev.6%2B49fa08dc1.tar.gz",
+          "size": 3296963,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zitrus-arm-freebsd-0.0.0-pre1.dev.6+49fa08dc1.tar.gz",
+          "url": "https://github.com/GasInfinity/zitrus/releases/download/dev/zitrus-arm-freebsd-0.0.0-pre1.dev.6%2B49fa08dc1.tar.gz",
+          "size": 3316030,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zitrus-aarch64-macos-0.0.0-pre1.dev.6+49fa08dc1.tar.gz",
+          "url": "https://github.com/GasInfinity/zitrus/releases/download/dev/zitrus-aarch64-macos-0.0.0-pre1.dev.6%2B49fa08dc1.tar.gz",
+          "size": 927998,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zitrus-x86-linux-0.0.0-pre1.dev.6+49fa08dc1.tar.gz",
+          "url": "https://github.com/GasInfinity/zitrus/releases/download/dev/zitrus-x86-linux-0.0.0-pre1.dev.6%2B49fa08dc1.tar.gz",
+          "size": 3279570,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zitrus-x86_64-windows-0.0.0-pre1.dev.6+49fa08dc1.zip",
+          "url": "https://github.com/GasInfinity/zitrus/releases/download/dev/zitrus-x86_64-windows-0.0.0-pre1.dev.6%2B49fa08dc1.zip",
+          "size": 2941461,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zitrus-aarch64-windows-0.0.0-pre1.dev.6+49fa08dc1.zip",
+          "url": "https://github.com/GasInfinity/zitrus/releases/download/dev/zitrus-aarch64-windows-0.0.0-pre1.dev.6%2B49fa08dc1.zip",
+          "size": 2809977,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zitrus-x86_64-macos-0.0.0-pre1.dev.6+49fa08dc1.tar.gz",
+          "url": "https://github.com/GasInfinity/zitrus/releases/download/dev/zitrus-x86_64-macos-0.0.0-pre1.dev.6%2B49fa08dc1.tar.gz",
+          "size": 1001019,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zitrus-x86_64-linux-0.0.0-pre1.dev.6+49fa08dc1.tar.gz",
+          "url": "https://github.com/GasInfinity/zitrus/releases/download/dev/zitrus-x86_64-linux-0.0.0-pre1.dev.6%2B49fa08dc1.tar.gz",
+          "size": 3262420,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zitrus-aarch64-freebsd-0.0.0-pre1.dev.6+49fa08dc1.tar.gz",
+          "url": "https://github.com/GasInfinity/zitrus/releases/download/dev/zitrus-aarch64-freebsd-0.0.0-pre1.dev.6%2B49fa08dc1.tar.gz",
+          "size": 3173477,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zitrus-x86-windows-0.0.0-pre1.dev.6+49fa08dc1.zip",
+          "url": "https://github.com/GasInfinity/zitrus/releases/download/dev/zitrus-x86-windows-0.0.0-pre1.dev.6%2B49fa08dc1.zip",
+          "size": 3042390,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zitrus-x86-netbsd-0.0.0-pre1.dev.6+49fa08dc1.tar.gz",
+          "url": "https://github.com/GasInfinity/zitrus/releases/download/dev/zitrus-x86-netbsd-0.0.0-pre1.dev.6%2B49fa08dc1.tar.gz",
+          "size": 3346382,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zitrus-arm-linux-0.0.0-pre1.dev.6+49fa08dc1.tar.gz",
+          "url": "https://github.com/GasInfinity/zitrus/releases/download/dev/zitrus-arm-linux-0.0.0-pre1.dev.6%2B49fa08dc1.tar.gz",
+          "size": 3277430,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zitrus-aarch64-linux-0.0.0-pre1.dev.6+49fa08dc1.tar.gz",
+          "url": "https://github.com/GasInfinity/zitrus/releases/download/dev/zitrus-aarch64-linux-0.0.0-pre1.dev.6%2B49fa08dc1.tar.gz",
+          "size": 3202665,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zitrus-aarch64-netbsd-0.0.0-pre1.dev.6+49fa08dc1.tar.gz",
+          "url": "https://github.com/GasInfinity/zitrus/releases/download/dev/zitrus-aarch64-netbsd-0.0.0-pre1.dev.6%2B49fa08dc1.tar.gz",
+          "size": 3180387,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zitrus-riscv64-linux-0.0.0-pre1.dev.6+49fa08dc1.tar.gz",
+          "url": "https://github.com/GasInfinity/zitrus/releases/download/dev/zitrus-riscv64-linux-0.0.0-pre1.dev.6%2B49fa08dc1.tar.gz",
+          "size": 4420634,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zitrus-arm-netbsd-0.0.0-pre1.dev.6+49fa08dc1.tar.gz",
+          "url": "https://github.com/GasInfinity/zitrus/releases/download/dev/zitrus-arm-netbsd-0.0.0-pre1.dev.6%2B49fa08dc1.tar.gz",
+          "size": 3334059,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.0.0-pre",
+      "name": "v0.0.0-pre",
+      "body": "",
+      "prerelease": true,
+      "published_at": "2025-10-25T20:07:05Z",
+      "html_url": "https://github.com/GasInfinity/zitrus/releases/tag/v0.0.0-pre",
+      "assets": [
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/GasInfinity/zitrus/releases/download/v0.0.0-pre/aarch64-windows.zip",
+          "size": 617906,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "aarch64-macos.tar.gz",
+          "url": "https://github.com/GasInfinity/zitrus/releases/download/v0.0.0-pre/aarch64-macos.tar.gz",
+          "size": 645837,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-linux.tar.gz",
+          "url": "https://github.com/GasInfinity/zitrus/releases/download/v0.0.0-pre/x86_64-linux.tar.gz",
+          "size": 632235,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/GasInfinity/zitrus/releases/download/v0.0.0-pre/x86_64-windows.zip",
+          "size": 659885,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "aarch64-linux.tar.gz",
+          "url": "https://github.com/GasInfinity/zitrus/releases/download/v0.0.0-pre/aarch64-linux.tar.gz",
+          "size": 618517,
+          "content_type": "application/gzip"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "Programmer and student. Mainly focusing on low level, gamedev and OS related topics. Moved to Codeberg!",
+  "owner_company": null,
+  "owner_location": "Spain",
+  "owner_blog": "gasinfinity.dev",
+  "owner_twitter_username": null,
+  "owner_followers": 13,
+  "owner_following": 6,
+  "owner_created_at": "2019-11-22T13:23:36Z",
+  "license": "MIT",
+  "category": "library"
+}
