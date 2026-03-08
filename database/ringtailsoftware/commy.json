@@ -12,10 +12,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 47,
+  "stars": 51,
   "forks": 4,
-  "watchers": 1,
-  "updated_at": "2026-03-06T09:38:09Z",
+  "watchers": 2,
+  "updated_at": "2026-03-06T19:16:24Z",
   "dependencies": [
     {
       "name": "serial",
@@ -36,6 +36,52 @@
   "readme": "# Commy, a serial monitor\n\nCommy is a small console utility for communicating with tty, UART or COM port devices. It runs on Mac, Linux and Windows. Windows support is experimental (bug reports appreciated).\n\nDoes (some of) the same things as [tio](https://github.com/tio/tio), [minicom](https://en.wikipedia.org/wiki/Minicom), [screen](https://www.gnu.org/software/screen/), [miniterm.py](https://github.com/pyserial/pyserial/blob/master/serial/tools/miniterm.py), [zcom](https://github.com/ZigEmbeddedGroup/zcom), [PuTTY](https://www.putty.org/), etc.\n\nCommy incorporates a VT220/xterm/ECMA-48 terminal emulator for consistency whether running in [Windows Terminal](https://github.com/microsoft/terminal), [XTerm](https://en.wikipedia.org/wiki/Xterm) or [Terminal.app](https://en.wikipedia.org/wiki/Terminal_(macOS)).\n\n![Mac, Windows, Linux](https://github.com/ringtailsoftware/commy/actions/workflows/build.yml/badge.svg)\n\n![](demo.gif)\n\n# Build from source\n\nUse zig 0.15.2\n\n```shell\nzig build\nzig-out/bin/commy -h\n```\n\nThe binary is:\n\n```shell\nzig-out/bin/commy\n```\n\nCopy it to a directory in your path for easy access:\n\n```shell\nsudo cp zig-out/bin/commy /usr/local/bin\n```\n\nOr if you prefer, let zig install it in your home directory (assuming `~/.local/bin` is in your `$PATH`):\n\n```shell\nzig build -Doptimize=ReleaseSafe --prefix ~/.local\n```\n\n`commy` is a single statically linked binary. No further runtime files are required.\nYou may install it on another system by simply copying the binary. It can be cross compiled using zig's `-Dtarget`\n\n```shell\nzig build -Dtarget=x86_64-windows\n```\n\n# Typical use\n\nList available serial ports\n\n```shell\ncommy -l\n\n/dev/cu.usbmodem1124101\n/dev/cu.usbmodem1124203\n```\n\nConnect to a port\n\n```shell\ncommy /dev/cu.usbmodem1124203 115200\n```\n\nCommy will try to find available ports which match so connecting to `/dev/ttyUSB0` can be written as:\n\n```shell\ncommy USB0 115200\n```\n\nThe status bar at the top shows keyboard shortcuts. Press `ctrl-b` then `q`, `\\` or `x` to quit.\n\nLog data received from a device (only received data will be logged, unless local echo is enabled):\n\n```shell\ncommy /dev/cu.usbmodem1124203 115200 -o log.txt\n```\n\nEnable local echo of sent data, used for devices which do not echo back characters they receive:\n\n```shell\ncommy /dev/cu.usbmodem1124203 115200 -e\n```\n\n# Scrollback\n\nCommy supports moving back and forwards in terminal history. However, unlike some serial monitors, it stores screen updates rather than lines of incoming text. This means that a terminal UI can be rewound and replayed in time visually. To enter scrollback, press `ctrl-b`, then use up/down/pageup/pagedown to move through terminal history.\n\nTo run commy with a longer scrollback history, use a larger `-b <value>`.\n\n![](scrollback.gif)\n\n# Why use Commy?\n\nIt tells you how to quit.\n\nCommy does what I use GNU `screen` for, but it's better in two important respects. First, it is slightly smaller; and secondly it has the words \"ctrl-b and quit\" inscribed in large friendly letters on its cover.\n\n# Help text\n\n    Usage: commy [ARGS] [OPTIONS]\n\n    Args:\n        port                                          serial port file\n        speed                                         baudrate\n\n    Options:\n        -v, --version                                 Version\n        -l, --list                                    List available serial ports\n        -e, --echo                                    Enable local echo\n        -o, --output=<output>                         Log to file\n        -p, --parity=<parity>                         Parity\n                                                        values: { none, even, odd, mark, space }\n        -w, --wordsize=<wordsize>                     wordsize\n                                                        values: { five, six, seven, eight }\n        -s, --stop=<stop>                             stop\n                                                        values: { one, two }\n        -f, --flow=<flow>                             flow\n                                                        values: { none, software, hardware }\n        -b, --buffer=<buffer>                         Scrollback buffer size\n        -h, --help                                    Print this help and exit\n\n# Testing\n\nIf no serial device is available, commy can connect to a Linux serial terminal inside docker. From here, any standard linux terminal software can be used.\n\n```shell\ncd linux-test\n./lincommy.sh\n```\n\nThis will build commy, then build a docker container and start it. Inside the container `socat` will create a virtual serial port and bind it to `bash`. commy will then connect to the virtual serial port. Quitting commy will close down the docker container.\n\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/20110944?u=93548b94fa9de08e939a35745a2affd82408e198&v=4",
   "releases": [
+    {
+      "tag_name": "v1.2",
+      "name": "v1.2",
+      "body": "## Changelog\n* 0e55afc5729b1a8def9695575aeeb7b45efd0058 Fix usage string, use fork of yazap until upstream is fixed\n* be140f32161b20e1d338a1d72a039c3bb24917b5 Further fixes for #4\n* b1b6e56af58db663306815dca22ef060b67d6bd7 On poll error, quit. Occurs on Mac when unplugging a USB serial device. Fixes #4\n* db0ad24e018173ede65093a623657279808b7daa Updated for zig 0.15.2\n\n\n---\nReleased by [GoReleaser](https://github.com/goreleaser/goreleaser).\n",
+      "prerelease": false,
+      "published_at": "2026-03-06T09:47:37Z",
+      "html_url": "https://github.com/ringtailsoftware/commy/releases/tag/v1.2",
+      "assets": [
+        {
+          "name": "commy_Linux_x86_64.tar.gz",
+          "url": "https://github.com/ringtailsoftware/commy/releases/download/v1.2/commy_Linux_x86_64.tar.gz",
+          "size": 80224,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "commy_Darwin_x86_64.tar.gz",
+          "url": "https://github.com/ringtailsoftware/commy/releases/download/v1.2/commy_Darwin_x86_64.tar.gz",
+          "size": 62984,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "commy_Windows_x86_64.zip",
+          "url": "https://github.com/ringtailsoftware/commy/releases/download/v1.2/commy_Windows_x86_64.zip",
+          "size": 92379,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "commy_Darwin_arm64.tar.gz",
+          "url": "https://github.com/ringtailsoftware/commy/releases/download/v1.2/commy_Darwin_arm64.tar.gz",
+          "size": 66823,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "commy_1.2_checksums.txt",
+          "url": "https://github.com/ringtailsoftware/commy/releases/download/v1.2/commy_1.2_checksums.txt",
+          "size": 459,
+          "content_type": "text/plain; charset=utf-8"
+        },
+        {
+          "name": "commy_Linux_arm64.tar.gz",
+          "url": "https://github.com/ringtailsoftware/commy/releases/download/v1.2/commy_Linux_arm64.tar.gz",
+          "size": 88432,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
     {
       "tag_name": "v0.0.2",
       "name": "v0.0.2",

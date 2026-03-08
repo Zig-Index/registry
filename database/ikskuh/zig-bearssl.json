@@ -24,7 +24,7 @@
     }
   ],
   "readme": "# zig-bearssl\n\nA [BearSSL](https://bearssl.org/) binding for Zig, providing primitive (and probably unsafe, i'm no SSL expert) bindings for SSL and TLS connections to generic zig code.\n\nThis binding currently binds the git commit `3c040368f6791553610e362401db1efff4b4c5b8`.\n\n## Adding to your project\n\nYou can pull this into your project with:\n```sh\n zig fetch --save git+https://github.com/ikskuh/zig-bearssl\n```\n\nThen in your `build.zig` you can add the module.\n\n```zig\n// Assuming you have `target` and `optimize` defined already\n\nconst bearssl = b.dependency(\n    \"zig_bearssl\",\n    .{ .target = target, .optimize = optimize },\n);\n\n// Assuming you have an `exe_mod` representing your module\nexe_mod.addImport(\"bearssl\", bearssl.module(\"bearssl\"));\n```\n\nThen from inside your zig code you can do:\n\n```zig\nconst bearssl = @import(\"bearssl\")\n```\n",
-  "owner_avatar_url": "https://avatars.githubusercontent.com/u/3932972?u=2893028da897d46ed12f55aa05a935a80e7c119b&v=4",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/3932972?u=3311b7a90141a91c2e2725340248c1352dec6e52&v=4",
   "releases": [],
   "owner_bio": "Hacker, Dad & Demoscener from southern germany, loves lowlevel and oldschool stuff",
   "owner_company": null,

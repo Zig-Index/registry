@@ -18,7 +18,7 @@
   "watchers": 2,
   "updated_at": "2024-05-29T09:00:03Z",
   "readme": "# ⛓ Simple Linking Format\n\nSLF is a very simple object file format that can be used to link programs that don't require distinct sections for code and data.\n\n## Documentation\n\n- [Binary Format](docs/module-format.md)\n\n## Available Tools\n\n- `slf-ld` is the standalone linker that can be used to link object files into a flat binary\n- `slf-objdump` is a dumper for SLF files. It can list all sections as well as dump the raw binary data.\n\n## Available APIs\n\n`src/slf.zig` is a package that exports several APIs:\n\n- `slf.View` allows introspection of in-memory SLF files.\n- `slf.Linker` allows linking SLF files together.\n- `slf.Builder` allows the creation of new SLF files.\n\n## Project Status\n\n[![Build](https://github.com/MasterQ32/SLF/actions/workflows/cross-build.yml/badge.svg)](https://github.com/MasterQ32/SLF/actions/workflows/cross-build.yml)\n\n**Disclaimer: Feature complete, but still highly experimental.**\n\n### TODO\n\n- [ ] Add better diagnostics\n  - [ ] Add support for object/file names\n- [ ] Support exporting other file types\n  - [x] flat binary\n  - [ ] intel hex\n",
-  "owner_avatar_url": "https://avatars.githubusercontent.com/u/3932972?u=2893028da897d46ed12f55aa05a935a80e7c119b&v=4",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/3932972?u=3311b7a90141a91c2e2725340248c1352dec6e52&v=4",
   "releases": [],
   "owner_bio": "Hacker, Dad & Demoscener from southern germany, loves lowlevel and oldschool stuff",
   "owner_company": null,
