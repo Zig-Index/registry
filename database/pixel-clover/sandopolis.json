@@ -18,7 +18,7 @@
   "stars": 0,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-03-08T18:36:18Z",
+  "updated_at": "2026-03-08T18:50:08Z",
   "dependencies": [
     {
       "name": "minish",
@@ -52,9 +52,44 @@
     }
   ],
   "minimum_zig_version": "0.15.2",
-  "readme": "<div align=\"center\">\n  <picture>\n    <img alt=\"Sandopolis Logo\" src=\"logo.svg\" height=\"25%\" width=\"25%\">\n  </picture>\n<br>\n\n<h2>Sandopolis</h2>\n\n[![Tests](https://img.shields.io/github/actions/workflow/status/pixel-clover/sandopolis/tests.yml?label=tests&style=flat&labelColor=282c34&logo=github)](https://github.com/pixel-clover/sandopolis/actions/workflows/tests.yml)\n[![Docs](https://img.shields.io/badge/docs-read-blue?style=flat&labelColor=282c34&logo=read-the-docs)](https://pixel-clover.github.io/sandopolis/)\n[![License](https://img.shields.io/badge/license-MIT-007ec6?label=license&style=flat&labelColor=282c34&logo=open-source-initiative)](https://github.com/pixel-clover/sandopolis/blob/main/LICENSE)\n[![Zig Version](https://img.shields.io/badge/Zig-0.15.2-orange?logo=zig&labelColor=282c34)](https://ziglang.org/download/)\n[![Release](https://img.shields.io/github/release/pixel-clover/sandopolis.svg?label=release&style=flat&labelColor=282c34&logo=github)](https://github.com/pixel-clover/sandopolis/releases/latest)\n\nA Sega Genesis/Mega Drive emulator written in Zig and C\n\n</div>\n\n---\n\nSandopolis is a Sega Genesis/Mega Drive emulator written in Zig and C11.\n\n### Features\n\n- Implemented in Zig and C with a portable core and SDL3 frontend\n- Accurate Sega Genesis/Mega Drive emulation with good compatibility\n- Very configurable input and rendering settings\n- Debugging features including single stepping and register dumps\n- Has a permissive license that allows commercial use\n\nSee [ROADMAP.md](ROADMAP.md) for the list of implemented and planned features.\n\n> [!IMPORTANT]\n> This project is still in early development, so bugs and breaking changes are expected.\n> Please use the [issues page](https://github.com/pixel-clover/sandopolis/issues) to report bugs or request features.\n\n---\n\n### Quickstart\n\n#### Download the latest release\n\nYou can download the latest pre-build binaries from the project's [releases page](https://github.com/pixel-clover/sandopolis/releases).\n\nAlternatively, you can build the emulator from source by following the steps below.\n\n#### 1. Clone the repository\n\n```bash\ngit clone https://github.com/pixel-clover/sandopolis.git\ncd sandopolis\n```\n\n#### 2. Build the Sandopolis binary\n\n```bash\nzig build -Doptimize=ReleaseFast\n```\n\n#### 3. Run the emulator with a ROM\n\n```bash\n# Start the emulator with a ROM\n./zig-out/bin/sandopolis <path-to-rom>\n```\n\n> [!NOTE]\n> To build from source, you mainly need to have Zig, Git, and GNU Make installed.\n\n> [!NOTE]\n> Current version of the emulator is developed and tested using Zig 0.15.2.\n\n---\n\n### Documentation\n\nTo be added. \n\n---\n\n### Contributing\n\nSee [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to make a contribution.\n\n### License\n\nThis project is licensed under the MIT License (see [LICENSE](LICENSE)).\n\n### Acknowledgements\n\n* The logo is from [SVG Repo](https://www.svgrepo.com/svg/519365/sonic-runners) with some modifications.\n* This project uses material from the following projects and resources:\n    * [Minish](https://github.com/CogitatorTech/minish) framework for property-based testing\n    * [Rocket 68](https://github.com/habedi/rocket68) for the main CPU emulation\n    * [jgz80](https://github.com/carmiker/jgz80) for the Z80 chip emulation\n    * [SDL3](https://www.libsdl.org/) for the rendering and input (via [zsdl](https://github.com/zig-gamedev/zsdl) and [SDL](https://github.com/castholm/SDL))\n    * [Test ROMs](https://techdocs.exodusemulator.com/Console/SegaMegaDrive/Software.html#test-roms)\n",
+  "readme": "<div align=\"center\">\n  <picture>\n    <img alt=\"Sandopolis Logo\" src=\"logo.svg\" height=\"25%\" width=\"25%\">\n  </picture>\n<br>\n\n<h2>Sandopolis</h2>\n\n[![Tests](https://img.shields.io/github/actions/workflow/status/pixel-clover/sandopolis/tests.yml?label=tests&style=flat&labelColor=282c34&logo=github)](https://github.com/pixel-clover/sandopolis/actions/workflows/tests.yml)\n[![Docs](https://img.shields.io/badge/docs-read-blue?style=flat&labelColor=282c34&logo=read-the-docs)](https://pixel-clover.github.io/sandopolis/)\n[![License](https://img.shields.io/badge/license-MIT-007ec6?label=license&style=flat&labelColor=282c34&logo=open-source-initiative)](https://github.com/pixel-clover/sandopolis/blob/main/LICENSE)\n[![Zig Version](https://img.shields.io/badge/Zig-0.15.2-orange?logo=zig&labelColor=282c34)](https://ziglang.org/download/)\n[![Release](https://img.shields.io/github/release/pixel-clover/sandopolis.svg?label=release&style=flat&labelColor=282c34&logo=github)](https://github.com/pixel-clover/sandopolis/releases/latest)\n\nA Sega Genesis/Mega Drive emulator written in Zig and C\n\n</div>\n\n---\n\nSandopolis is a Sega Genesis/Mega Drive emulator written in Zig and C11.\n\n### Features\n\n- Implemented in Zig and C with a portable core and SDL3 frontend\n- Accurate Sega Genesis/Mega Drive emulation with good compatibility\n- Very configurable input and rendering settings\n- Debugging features including single stepping and register dumps\n- Has a permissive license that allows commercial use\n\nSee [ROADMAP.md](ROADMAP.md) for the list of implemented and planned features.\n\n> [!IMPORTANT]\n> This project is still in early development, so bugs and breaking changes are expected.\n> Please use the [issues page](https://github.com/pixel-clover/sandopolis/issues) to report bugs or request features.\n\n---\n\n### Quickstart\n\n#### Download the latest release\n\nYou can download the latest pre-build binaries from the project's [releases page](https://github.com/pixel-clover/sandopolis/releases).\n\nAlternatively, you can build the emulator from source by following the steps below.\n\n#### 1. Clone the repository\n\n```bash\ngit clone https://github.com/pixel-clover/sandopolis.git\ncd sandopolis\n```\n\n#### 2. Build the Sandopolis binary\n\n```bash\nzig build -Doptimize=ReleaseFast\n```\n\n#### 3. Run the emulator with a ROM\n\n```bash\n# Start the emulator with a ROM\n./zig-out/bin/sandopolis <path-to-rom>\n```\n\n> [!NOTE]\n> To build from source, you mainly need to have Zig, Git, and GNU Make installed.\n> Additionally, current version of the emulator is developed and tested using Zig 0.15.2.\n\n---\n\n### Documentation\n\nTo be added.\n\n---\n\n### Contributing\n\nSee [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to make a contribution.\n\n### License\n\nThis project is licensed under the MIT License (see [LICENSE](LICENSE)).\n\n### Acknowledgements\n\n* The logo is from [SVG Repo](https://www.svgrepo.com/svg/519365/sonic-runners) with some modifications.\n* This project uses material from the following projects and resources:\n    * [Minish](https://github.com/CogitatorTech/minish) framework for property-based testing\n    * [Rocket 68](https://github.com/habedi/rocket68) for the main CPU emulation\n    * [jgz80](https://github.com/carmiker/jgz80) for the Z80 chip emulation\n    * [SDL3](https://www.libsdl.org/) for the rendering and input (via [zsdl](https://github.com/zig-gamedev/zsdl) and [SDL](https://github.com/castholm/SDL))\n    * [Test ROMs](https://techdocs.exodusemulator.com/Console/SegaMegaDrive/Software.html#test-roms)\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/212158575?v=4",
-  "releases": [],
+  "releases": [
+    {
+      "tag_name": "v0.1.0-alpha.1",
+      "name": "Release v0.1.0-alpha.1",
+      "body": "The first pre-release of the Sandopolis Sega Genesis/Mega Drive emulator.",
+      "prerelease": false,
+      "published_at": "2026-03-08T18:54:15Z",
+      "html_url": "https://github.com/pixel-clover/sandopolis/releases/tag/v0.1.0-alpha.1",
+      "assets": [
+        {
+          "name": "sandopolis-linux-x86_64.zip",
+          "url": "https://github.com/pixel-clover/sandopolis/releases/download/v0.1.0-alpha.1/sandopolis-linux-x86_64.zip",
+          "size": 1102376,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "sandopolis-linux-aarch64.zip",
+          "url": "https://github.com/pixel-clover/sandopolis/releases/download/v0.1.0-alpha.1/sandopolis-linux-aarch64.zip",
+          "size": 1038560,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "sandopolis-macos-aarch64.zip",
+          "url": "https://github.com/pixel-clover/sandopolis/releases/download/v0.1.0-alpha.1/sandopolis-macos-aarch64.zip",
+          "size": 1015118,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "sandopolis-windows-x86_64.zip",
+          "url": "https://github.com/pixel-clover/sandopolis/releases/download/v0.1.0-alpha.1/sandopolis-windows-x86_64.zip",
+          "size": 1057446,
+          "content_type": "application/zip"
+        }
+      ]
+    }
+  ],
   "owner_bio": null,
   "owner_location": null,
   "owner_blog": null,
