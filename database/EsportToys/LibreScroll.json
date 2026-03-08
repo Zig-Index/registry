@@ -19,10 +19,26 @@
   "stars": 204,
   "forks": 6,
   "watchers": 4,
-  "updated_at": "2026-03-08T21:14:54Z",
+  "updated_at": "2026-03-08T21:42:36Z",
   "readme": "# LibreScroll\nSmooth inertial scrolling on Windows with any regular mouse.\n\n### [Download Here](https://github.com/EsportToys/LibreScroll/releases)\n\nhttps://github.com/EsportToys/LibreScroll/assets/98432183/c7fc05a5-6b10-4b91-9984-0d809a52b025\n\n\n## Instructions\n1. Run LibreScroll\n2. Hold Mouse 3 and move your mouse, the cursor will stay in-place, mouse motion is instead converted to scroll momentum.\n3. Release middle-mouse-button to halt scroll momentum and release the cursor.\n\n\nTo compile from source, run \n```\nzig build-exe main.zig main.rc main.manifest --subsystem windows\n```\n\n## Options\n\n![image](https://github.com/user-attachments/assets/00ea0369-4a97-49f5-99ca-1b8d97b2ad2b)\n\n### Friction\nThe rate at which momentum decays.\n\n(Units: deceleration per velocity, in s&#8315;&sup1;)\n\n### X/Y-Sensitivity\nThe horizontal/vertical multiplier at which mouse movement is converted to scroll momentum. \n\nSet a negative sensitivity to use reversed-direction scrolling, or zero to disable that axis entirely.\n\n(Units: scroll-velocity per mouse-displacement, in s&#8315;&sup1;)\n\n### Minimum X/Y Step\nThe granularity at which to send scrolling inputs.\n\nThis is a workaround for some legacy apps that do not handle smooth scrolling increments correctly. \n\nA \"standard\" coarse scrollwheel step is 120, and the smallest step is 1.\n\n### Flick Mode\nWhen enabled, releasing middle-mouse-button will not stop the scrolling momentum. \n\nPress any button again (or move the actual wheel) to stop the momentum.\n\n### ThinkPad Mode\nWhen enabled, scrolling snaps to either horizontal or vertical, never both at the same time.\n\nThis emulates how scrolling works on ThinkPad TrackPoints.\n\n### Pause/Unpause\nTemporarily disable the utility if you need to use the unmodified behavior in another app.\n\nThis kills the worker thread, which can be restarted by clicking Unpause or Apply.\n\n### Apply\nAfter modifying the preference, click this to apply the configuration as displayed.\n\nThis kills and restarts the worker thread with the new configuration.\n\n## Recommended Settings for ThinkPad users (replacing TPmiddle)\n\nWith your TrackPoint's middle button set to \"middle click mode\", the following configurations are recommended to emulate TPmiddle's direct scrolling:\n\n![image](https://github.com/user-attachments/assets/6a0ee926-d331-4481-8f6e-a5f6f2a01c94)\n\n```\nFriction: 30\nY-Sensitivity: 90\nX-Sensitivity: 90\nMinimum X-Step: 10\nMinimum Y-Step: 10\nFlick Mode: No\nThinkPad Mode: Yes\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/98668553?v=4",
   "releases": [
+    {
+      "tag_name": "v2.1.5",
+      "name": "",
+      "body": "### Removes vestigial cancel key being sent. \r\n\r\nPrior to implementing the low level mouse hook solution for filtering middle mouse buttons, this was used as a hack so that you can actually use LibreScroll with Chromium-based browsers, which enters into drag-scroll mode immediately upon wheel-button down (as opposed to the correct way in Firefox where it only begins upon the first mouse motion) and ignores any scroll inputs.\r\n\r\nThis hack had the side effects of creating the following annoyances:\r\n- middle-clicking on taskbar window thumbnails just cancels the preview before you even release the wheel button, so if you have LibreScroll running then you can't close windows using middle click.\r\n- some terminal-based apps will start doing weird stuff upon receiving the cancel key, like messing up the text buffer or just exiting certain modals unintentionally\r\n\r\nLibreScroll added the LLMouseHook filtering of middle click a long time ago so this hack is no longer needed, but I had forgotten to remove it and so those annoyances stayed, until now.",
+      "prerelease": false,
+      "published_at": "2026-03-08T21:57:59Z",
+      "html_url": "https://github.com/EsportToys/LibreScroll/releases/tag/v2.1.5",
+      "assets": [
+        {
+          "name": "LibreScroll-v2.1.5.zip",
+          "url": "https://github.com/EsportToys/LibreScroll/releases/download/v2.1.5/LibreScroll-v2.1.5.zip",
+          "size": 7831,
+          "content_type": "application/x-zip-compressed"
+        }
+      ]
+    },
     {
       "tag_name": "v2.1.4",
       "name": "v2.1.4",
