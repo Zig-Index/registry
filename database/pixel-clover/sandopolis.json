@@ -1,0 +1,61 @@
+{
+  "name": "sandopolis",
+  "owner": "pixel-clover",
+  "repo": "sandopolis",
+  "description": "A Sega Genesis/Mega Drive emulator in Zig and C (WIP)",
+  "type": "application",
+  "topics": [
+    "emulator",
+    "sega-genesis",
+    "sega-mega-drive",
+    "zig",
+    "zig-application"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2026-03-08T16:30:09Z",
+  "dependencies": [
+    {
+      "name": "minish",
+      "url": "https://github.com/CogitatorTech/minish/archive/refs/tags/v0.1.0.tar.gz",
+      "hash": "minish-0.1.0-SQtSTWHkAQACfz3xGuWHU8zbx320vK_47r2yto3Pq0Rf"
+    },
+    {
+      "name": "chilli",
+      "url": "https://github.com/CogitatorTech/chilli/archive/refs/tags/v0.2.2.tar.gz",
+      "hash": "chilli-0.2.2-c19PrvIyAQAgsL0VkYCKq0DuxU7rZUpRuH991zsyOkYQ"
+    },
+    {
+      "name": "zsdl",
+      "url": "https://github.com/zig-gamedev/zsdl/archive/refs/heads/main.tar.gz",
+      "hash": "zsdl-0.4.0-dev-rFpjEzgIXwBdDmlda0YnQPRVApMc1YEgbyzLWuT9GupM"
+    },
+    {
+      "name": "jgz80",
+      "url": "https://github.com/habedi/jgz80-fork/archive/refs/heads/master.tar.gz",
+      "hash": "N-V-__8AAOj4AgCPCxSePjb6U-Kb3CMWSn14SVV5AOOWXXCt"
+    },
+    {
+      "name": "rocket68",
+      "url": "https://github.com/habedi/rocket68/archive/refs/heads/main.tar.gz",
+      "hash": "rocket68-0.1.0-alpha.5-Jd6gXIGhAgDEazdf8Egn0nuf7v_kLUc7Lh9ngn1ATOJX"
+    },
+    {
+      "name": "sdl3",
+      "url": "https://github.com/libsdl-org/SDL/archive/refs/tags/release-3.4.2.tar.gz",
+      "hash": "N-V-__8AAGdF8wKsT6nK_zxmg0nzMsNPfarxHfO_bLRsmyJ3"
+    }
+  ],
+  "minimum_zig_version": "0.15.2",
+  "readme": "<div align=\"center\">\n  <picture>\n    <img alt=\"Sandopolis Logo\" src=\"logo.svg\" height=\"25%\" width=\"25%\">\n  </picture>\n<br>\n\n<h2>Sandopolis</h2>\n\n[![Tests](https://img.shields.io/github/actions/workflow/status/pixel-clover/sandopolis/tests.yml?label=tests&style=flat&labelColor=282c34&logo=github)](https://github.com/pixel-clover/sandopolis/actions/workflows/tests.yml)\n[![License](https://img.shields.io/badge/license-MIT-007ec6?label=license&style=flat&labelColor=282c34&logo=open-source-initiative)](https://github.com/pixel-clover/sandopolis/blob/main/LICENSE)\n[![Docs](https://img.shields.io/badge/docs-read-blue?style=flat&labelColor=282c34&logo=read-the-docs)](https://pixel-clover.github.io/sandopolis/)\n[![Zig Version](https://img.shields.io/badge/Zig-0.15.2-orange?logo=zig&labelColor=282c34)](https://ziglang.org/download/)\n[![Release](https://img.shields.io/github/release/pixel-clover/sandopolis.svg?label=release&style=flat&labelColor=282c34&logo=github)](https://github.com/pixel-clover/sandopolis/releases/latest)\n\nA Sega Genesis/Mega Drive emulator written in Zig and C\n\n</div>\n\n---\n\nSandopolis is a Sega Genesis/Mega Drive emulator writen in Zig and C11.\n\n### Features\n\n- Implemented in Zig and C with a portable core and SDL3 frontend\n- Accurate Sega Genesis/Mega Drive emulation with good compatibility\n- Very configurable input and rendering settings\n- Debugging features including single stepping and register dumps\n- Has a permissive license that allows commercial use\n\nSee [ROADMAP.md](ROADMAP.md) for the list of implemented and planned features.\n\n> [!IMPORTANT]\n> This project is still in early development, so bugs and breaking changes are expected.\n> Please use the [issues page](https://github.com/pixel-clover/sandopolis/issues) to report bugs or request features.\n\n---\n\n### Quickstart\n\n#### Building\n\n```bash\nBUILD_TYPE=ReleaseFast make build\n```\n\nBuild prerequisites:\n\n- Zig 0.15.2\n- CMake\n- A working C toolchain\n\nThe build vendors SDL3 from the official SDL source release declared in [`build.zig.zon`](build.zig.zon). `zsdl` is used only for Zig bindings; Sandopolis does not rely on checked-in platform SDL binaries such as `libSDL3.so`.\n`make build` and `make run` default to `ReleaseSafe`; use `BUILD_TYPE=Debug` when you specifically need an unoptimized debug build.\n\n#### Running\n\n```bash\n# Run with a ROM file\n./zig-out/bin/sandopolis path/to/rom.bin\n\n# Example with Sonic & Knuckles\n./zig-out/bin/sandopolis <path-to-rom>\n\n# Or use the convenience target\nmake run ARGS=\"<path-to-rom>\"\n```\n\n#### Controls\n\nControls are configurable via `sandopolis_input.cfg` or `SANDOPOLIS_INPUT_CONFIG`.\nController type is also configurable per player with `controller.p1` / `controller.p2` set to `three_button` or `six_button`.\nConfigurable gamepad bindings can also use `guide`, `left_stick`, `right_stick`, `misc1`, `left_trigger`, and `right_trigger`.\nAnalog thresholds are configurable with `analog.gamepad_axis`, `analog.joystick_axis`, and `analog.trigger`.\nThe bindings below are the defaults.\n\n##### Keyboard (Player 1)\n\n- Arrow Keys: D-Pad\n- A/S/D: Buttons A/B/C\n- Q/W/E: Buttons X/Y/Z\n- Tab: Mode\n- Enter: Start\n\n##### Keyboard (Player 2)\n\n- I/J/K/L: D-Pad\n- U/O/P: Buttons A/B/C\n- Semicolon/Apostrophe/Slash: Buttons X/Y/Z\n- .: Mode\n- Right Shift: Start\n\n##### Keyboard Hotkeys\n\n- Space: Single step and dump the updated debug state\n- Backspace: Dump CPU/Z80/VDP registers and the current 68K instruction\n- Escape: Exit\n\n##### Gamepad\n\n- D-Pad / Left Stick: D-Pad\n- South (A): Button A\n- East (B): Button B\n- West (X): Button X\n- North (Y): Button Y\n- Right Shoulder: Button C\n- Left Shoulder: Button Z\n- Back: Mode\n- Start: Start\n\nThe first two SDL gamepads are assigned to player 1 and player 2.\n\n##### Raw SDL Joystick Fallback\n\nIf SDL sees a controller as a joystick but not a gamepad, Sandopolis now assigns the first two non-gamepad joysticks to any remaining free player slots.\n\n- Axis 0 / Axis 1: D-Pad\n- Hat 0: D-Pad\n- Button 0/1/2/3: South/East/West/North\n- Button 4/5: Left Shoulder/Right Shoulder\n- Button 6/7: Back/Start\n\nThose fallback joystick inputs are translated through the existing gamepad bindings, so action remaps in `sandopolis_input.cfg` still apply.\n\n---\n\n### Contributing\n\nSee [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to make a contribution.\n\n### License\n\nThis project is licensed under the MIT License (see [LICENSE](LICENSE)).\n\n### Acknowledgements\n\n* The logo is from [SVG Repo](https://www.svgrepo.com/svg/519365/sonic-runners) with some modifications.\n* This project uses material from the following projects and resources:\n    * [Minish](https://github.com/CogitatorTech/minish) framework for property-based testing\n    * [Rocket 68](https://github.com/habedi/rocket68) for the main CPU emulation\n    * [jgz80](https://github.com/carmiker/jgz80) for the Z80 chip emulation\n    * [SDL3](https://www.libsdl.org/) for the rendering and input (via [zsdl](https://github.com/zig-gamedev/zsdl))\n    * [Test ROMs](https://techdocs.exodusemulator.com/Console/SegaMegaDrive/Software.html#test-roms)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/212158575?v=4",
+  "releases": [],
+  "owner_bio": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2025-05-17T18:36:37Z",
+  "license": "MIT",
+  "category": "cli"
+}
