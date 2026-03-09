@@ -15,10 +15,10 @@
     "websocket-server",
     "zig"
   ],
-  "stars": 81,
+  "stars": 83,
   "forks": 5,
   "watchers": 1,
-  "updated_at": "2026-03-04T00:54:32Z",
+  "updated_at": "2026-03-08T18:38:53Z",
   "dependencies": [
     {
       "name": "zio",
@@ -44,7 +44,7 @@
   "owner_location": "Trenčín, Slovakia",
   "owner_blog": "https://lalinsky.com",
   "owner_twitter_username": null,
-  "owner_followers": 317,
+  "owner_followers": 318,
   "owner_following": 29,
   "owner_created_at": "2010-03-11T19:55:55Z",
   "category": "library"
