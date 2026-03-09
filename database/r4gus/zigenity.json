@@ -163,10 +163,10 @@
       "assets": []
     }
   ],
-  "owner_bio": "OSS dev and organizer of Zigtoberfest",
+  "owner_bio": "OSS dev and organizer of Zigtoberfest\r\n-> now on Codeberg",
   "owner_company": null,
   "owner_location": "Germany",
-  "owner_blog": "https://zigtoberfest.de",
+  "owner_blog": "https://codeberg.org/r4gus",
   "owner_twitter_username": null,
   "owner_followers": 58,
   "owner_following": 27,

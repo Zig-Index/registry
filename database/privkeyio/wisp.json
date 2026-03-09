@@ -10,10 +10,10 @@
     "zig-package",
     "nostr-relay"
   ],
-  "stars": 5,
+  "stars": 6,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-03-05T02:44:40Z",
+  "updated_at": "2026-03-08T15:59:54Z",
   "dependencies": [
     {
       "name": "websocket",
