@@ -13,10 +13,10 @@
     "package",
     "zig-package"
   ],
-  "stars": 445,
-  "forks": 60,
+  "stars": 454,
+  "forks": 61,
   "watchers": 11,
-  "updated_at": "2026-02-18T22:05:12Z",
+  "updated_at": "2026-03-09T13:46:05Z",
   "dependencies": [
     {
       "name": "lua51",

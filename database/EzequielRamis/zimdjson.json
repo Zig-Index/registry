@@ -14,10 +14,10 @@
     "simdjson",
     "zig-library"
   ],
-  "stars": 152,
-  "forks": 4,
+  "stars": 160,
+  "forks": 9,
   "watchers": 4,
-  "updated_at": "2025-12-06T21:16:45Z",
+  "updated_at": "2026-03-06T10:13:38Z",
   "dependencies": [
     {
       "name": "parse_number_fxx",

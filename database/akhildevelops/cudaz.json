@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 129,
+  "stars": 130,
   "forks": 11,
   "watchers": 2,
-  "updated_at": "2026-03-07T06:21:56Z",
+  "updated_at": "2026-03-10T14:55:05Z",
   "minimum_zig_version": "0.11.0",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/6951100?u=d1219532a4e544f59a9fd017eb83787d9ea9032e&v=4",
   "releases": [

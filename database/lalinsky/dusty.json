@@ -15,10 +15,10 @@
     "websocket-server",
     "zig"
   ],
-  "stars": 83,
+  "stars": 84,
   "forks": 5,
   "watchers": 1,
-  "updated_at": "2026-03-08T18:38:53Z",
+  "updated_at": "2026-03-10T00:40:52Z",
   "dependencies": [
     {
       "name": "zio",

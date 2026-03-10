@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 213,
+  "stars": 222,
   "forks": 18,
   "watchers": 4,
-  "updated_at": "2026-01-05T21:49:56Z",
+  "updated_at": "2026-03-03T07:55:45Z",
   "dependencies": [
     {
       "name": "zmd",
