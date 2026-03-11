@@ -1,0 +1,34 @@
+{
+  "name": "zig-vmt-hook",
+  "owner": "xxhertz",
+  "repo": "zig-vmt-hook",
+  "description": "A VMT hook implementation in Zig. Works on x64 and x86 architectures. Windows only.",
+  "type": "package",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2026-03-11T07:15:12Z",
+  "dependencies": [
+    {
+      "name": "zigwin32",
+      "url": "git+https://github.com/marlersoft/zigwin32?ref=master#01793fe2abe5e6dc6f78b0d41170dc8d01584f1a",
+      "hash": "12205790582b13f84eab3cd4d54c7c8f2c3fda2ac9e1d3f2ac847d76c096bfbac825"
+    }
+  ],
+  "readme": "# To get started:\n\n\n```zig\n// Fetch the library via `zig fetch --save=vmthook git+https://github.com/xxhertz/zig-vmt-hook#main`\n// build.zig\nconst vmthook_dep = b.dependency(\"vmthook\", .{});\n// for dll/lib\nlib.root_module.addImport(\"vmthook\", vmthook_dep.module(\"hooking\"));\n// for exe\nexe.addImport(\"vmthook\", vmthook_dep.module(\"hooking\"));\n// for modules\nexe.addImport(\"vmthook\", vmthook_dep.module(\"hooking\"));\n```\n\n```zig\n// Import the library\nconst hooking = @import(\"vmthook\");\n```\n\n```zig\n// Initialize the library at runtime\nhooking.init(allocator);\n```\n\n```zig\n// Hook a function\noriginal_func = @ptrCast(hooking.virtual_hook(vtable, 10, &hook));\n```\n\n```zig\n// Release all hooks\nhooking.deinit();\n```\n\nThis works for both x86 and x64, you can see examples in my recent projects:\n* [zig-css-internal](https://github.com/xxhertz/zig-css-internal) for x86\n* [zig-gmod-internal](https://github.com/xxhertz/zig-gmod-internal/blob/main/src/root.zig) for x64",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/47288761?v=4",
+  "releases": [],
+  "owner_bio": "i'm fini\r\n\r\nco-creator of @CMD-X & teacher to friends",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "fini.work",
+  "owner_twitter_username": null,
+  "owner_followers": 31,
+  "owner_following": 32,
+  "owner_created_at": "2019-02-03T04:04:33Z",
+  "license": "MIT",
+  "category": "library"
+}
