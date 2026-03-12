@@ -27,6 +27,24 @@
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/231785?u=8a0cdeb97b0a614b0350536ecd6921ee6166c611&v=4",
   "releases": [
     {
+      "tag_name": "v0.9.3",
+      "name": "Zig 0.15 compatible, without local dependency",
+      "body": "I stubbed out the [ztap](https://github.com/mnemnion/ztap) dependency for the local copy. \r\n\r\nThis stubs it back in. ¯\\\\\\_(ツ)_/¯",
+      "prerelease": false,
+      "published_at": "2026-03-12T17:42:52Z",
+      "html_url": "https://github.com/mnemnion/runeset/releases/tag/v0.9.3",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.9.2",
+      "name": "Zig 0.15 compatibility",
+      "body": "Like it says",
+      "prerelease": false,
+      "published_at": "2026-03-12T17:39:07Z",
+      "html_url": "https://github.com/mnemnion/runeset/releases/tag/v0.9.2",
+      "assets": []
+    },
+    {
       "tag_name": "v0.9.1",
       "name": "Zig 0.14 compatibility, ZTAP tests",
       "body": "This brings Runeset into compatibility with Zig 0.14.  It also adds a `zig build ztap` step, which runs the test suite using a [ZTAP](https://github.com/mnemnion/ztap) test runner instead of the built in standard.",
