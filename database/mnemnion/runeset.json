@@ -28,20 +28,11 @@
   "releases": [
     {
       "tag_name": "v0.9.3",
-      "name": "Zig 0.15 compatible, without local dependency",
-      "body": "I stubbed out the [ztap](https://github.com/mnemnion/ztap) dependency for the local copy. \r\n\r\nThis stubs it back in. ¯\\\\\\_(ツ)_/¯",
+      "name": "Zig 0.15 compatible",
+      "body": "",
       "prerelease": false,
       "published_at": "2026-03-12T17:42:52Z",
       "html_url": "https://github.com/mnemnion/runeset/releases/tag/v0.9.3",
-      "assets": []
-    },
-    {
-      "tag_name": "v0.9.2",
-      "name": "Zig 0.15 compatibility",
-      "body": "Like it says",
-      "prerelease": false,
-      "published_at": "2026-03-12T17:39:07Z",
-      "html_url": "https://github.com/mnemnion/runeset/releases/tag/v0.9.2",
       "assets": []
     },
     {

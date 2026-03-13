@@ -14,7 +14,7 @@
   "stars": 32,
   "forks": 8,
   "watchers": 2,
-  "updated_at": "2026-03-06T13:31:00Z",
+  "updated_at": "2026-03-13T12:26:15Z",
   "dependencies": [
     {
       "name": "glfw",
@@ -28,8 +28,8 @@
     },
     {
       "name": "vulkan_zig",
-      "url": "git+https://github.com/tiawl/vulkan.zig?ref=v1.4.345#127857146ef1f940f5c604c3c2808e3d20e2e59b",
-      "hash": "vulkan_zig-1.0.0-p2wg3ibMPgGK9MXgk0VzuWrtdPTHEwF50t2XvgPP0QOK"
+      "url": "git+https://github.com/tiawl/vulkan.zig?ref=v1.4.346#8dee7ee700c68d514d0a9f948872e68f4523fb2a",
+      "hash": "vulkan_zig-1.0.0-p2wg3rYUQwHrFCTmGUuhMbDSNs1QsNuIF-VHjPhCmzhS"
     },
     {
       "name": "wayland_zig",
