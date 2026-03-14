@@ -18,12 +18,12 @@
   "stars": 751,
   "forks": 32,
   "watchers": 15,
-  "updated_at": "2026-03-08T06:29:53Z",
+  "updated_at": "2026-03-14T07:28:28Z",
   "dependencies": [
     {
       "name": "webui",
-      "url": "https://github.com/webui-dev/webui/archive/8d7c13895935f821f01d62dfc7e0243a99668925.tar.gz",
-      "hash": "webui-2.5.0-beta.4-pxqD5Rb7NwBVEwKyEzxwKAprzUIYjN20Y_Wffl_SWVdg"
+      "url": "https://github.com/webui-dev/webui/archive/62bed203df456cb150bc088ed4f1b173526e9776.tar.gz",
+      "hash": "webui-2.5.0-beta.4-pxqD5a53OADNensyGsjVC_i_ksZ_G1enGSSsVD6p2dgg"
     }
   ],
   "minimum_zig_version": "0.14.0",
