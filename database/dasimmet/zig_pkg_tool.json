@@ -8,10 +8,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 4,
+  "stars": 5,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-12-10T01:35:51Z",
+  "updated_at": "2026-03-13T21:10:14Z",
   "dependencies": [
     {
       "name": "known_folders",
