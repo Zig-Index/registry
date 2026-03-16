@@ -11,7 +11,7 @@
     "ansi-terminal"
   ],
   "stars": 96,
-  "forks": 7,
+  "forks": 8,
   "watchers": 3,
   "updated_at": "2026-02-09T17:46:25Z",
   "minimum_zig_version": "0.14.0",

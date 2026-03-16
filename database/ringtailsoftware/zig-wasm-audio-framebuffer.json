@@ -13,10 +13,10 @@
     "doom",
     "zig-package"
   ],
-  "stars": 74,
+  "stars": 75,
   "forks": 2,
   "watchers": 1,
-  "updated_at": "2026-02-10T11:12:44Z",
+  "updated_at": "2026-03-13T18:36:20Z",
   "dependencies": [
     {
       "name": "zeptolibc",

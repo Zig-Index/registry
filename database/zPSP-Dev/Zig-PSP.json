@@ -10,10 +10,10 @@
     "psp-sdk",
     "zig-package"
   ],
-  "stars": 113,
+  "stars": 114,
   "forks": 8,
   "watchers": 8,
-  "updated_at": "2026-03-14T09:12:12Z",
+  "updated_at": "2026-03-16T05:41:35Z",
   "dependencies": [
     {
       "name": "zPBPTool",
