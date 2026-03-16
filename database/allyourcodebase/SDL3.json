@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 32,
+  "stars": 33,
   "forks": 7,
   "watchers": 2,
-  "updated_at": "2026-03-07T18:02:57Z",
+  "updated_at": "2026-03-12T23:23:21Z",
   "dependencies": [
     {
       "name": "sdl",

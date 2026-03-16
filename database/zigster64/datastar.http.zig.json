@@ -10,10 +10,10 @@
     "hypermedia",
     "zig-package"
   ],
-  "stars": 21,
+  "stars": 22,
   "forks": 3,
   "watchers": 0,
-  "updated_at": "2026-02-07T04:24:49Z",
+  "updated_at": "2026-03-13T06:58:35Z",
   "dependencies": [
     {
       "name": "httpz",
