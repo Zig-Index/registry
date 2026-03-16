@@ -25,6 +25,28 @@
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/1062363?u=a5f4e0864bf7129e3e17312e870c201dc1cb59c7&v=4",
   "releases": [
     {
+      "tag_name": "v0.3.20",
+      "name": "v0.3.20",
+      "body": "**Full Changelog**: https://github.com/AlexJReid/zigxll/compare/v0.3.17...v0.3.20",
+      "prerelease": false,
+      "published_at": "2026-03-15T18:34:08Z",
+      "html_url": "https://github.com/AlexJReid/zigxll/releases/tag/v0.3.20",
+      "assets": [
+        {
+          "name": "output.xll",
+          "url": "https://github.com/AlexJReid/zigxll/releases/download/v0.3.20/output.xll",
+          "size": 39936,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "my_excel_functions.xll",
+          "url": "https://github.com/AlexJReid/zigxll/releases/download/v0.3.20/my_excel_functions.xll",
+          "size": 328664,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
       "tag_name": "v0.3.17",
       "name": "v0.3.17",
       "body": "**Full Changelog**: https://github.com/AlexJReid/zigxll/compare/v0.3.16...v0.3.17",
