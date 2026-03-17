@@ -12,10 +12,10 @@
     "zmq",
     "libzmq"
   ],
-  "stars": 34,
+  "stars": 35,
   "forks": 3,
   "watchers": 2,
-  "updated_at": "2026-03-11T19:57:14Z",
+  "updated_at": "2026-03-17T13:40:16Z",
   "dependencies": [
     {
       "name": "libzmq",

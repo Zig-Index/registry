@@ -13,10 +13,10 @@
     "zig-package",
     "ziglang"
   ],
-  "stars": 36,
+  "stars": 37,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-03-16T06:50:10Z",
+  "updated_at": "2026-03-17T07:42:57Z",
   "minimum_zig_version": "0.15.1",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/41784264?u=d300cf8becbfebb495634687c971048a63c07d2a&v=4",
   "releases": [
