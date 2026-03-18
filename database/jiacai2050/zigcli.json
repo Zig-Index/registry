@@ -14,7 +14,7 @@
   "stars": 120,
   "forks": 20,
   "watchers": 2,
-  "updated_at": "2026-03-18T07:23:03Z",
+  "updated_at": "2026-03-18T12:20:58Z",
   "dependencies": [
     {
       "name": "curl",
@@ -25,6 +25,64 @@
   "minimum_zig_version": "0.15.2",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/3848910?u=60f91a765c4ad95cb3a5a5b41d19ca12ee71a65d&v=4",
   "releases": [
+    {
+      "tag_name": "v0.4.0",
+      "name": "v0.4.0",
+      "body": "## What's Changed\r\n* feat: add gitignore module by @jiacai2050 in https://github.com/jiacai2050/zigcli/pull/53\r\n* Fix a integer overflow error caused by the small zstd decompression buffer size by @qilme in https://github.com/jiacai2050/zigcli/pull/54\r\n* fix: treat slash as invalid rules by @jiacai2050 in https://github.com/jiacai2050/zigcli/pull/55\r\n* Add newline to printVersion by @LDprg in https://github.com/jiacai2050/zigcli/pull/56\r\n* feat(gitignore): remove libc fnmatch dependency and implement pure Zig glob by @jiacai2050 in https://github.com/jiacai2050/zigcli/pull/59\r\n* feat(gitignore): Support recursive .gitignore filtering in tree/loc by @jiacai2050 in https://github.com/jiacai2050/zigcli/pull/61\r\n* refactor(simargs): improve naming consistency for internal types by @jiacai2050 in https://github.com/jiacai2050/zigcli/pull/62\r\n* pretty-table: add Cell struct with per-cell styling and horizontal span by @Copilot in https://github.com/jiacai2050/zigcli/pull/63\r\n* Add cowsay command by @Copilot in https://github.com/jiacai2050/zigcli/pull/65\r\n* Add `progress` binary: port of https://github.com/Xfennec/progress (Linux + macOS) by @Copilot in https://github.com/jiacai2050/zigcli/pull/66\r\n* Add fastfetch binary: system information fetcher by @Copilot in https://github.com/jiacai2050/zigcli/pull/69\r\n* feat: fastfetch support color by @jiacai2050 in https://github.com/jiacai2050/zigcli/pull/71\r\n* refactor(bin): rename binary to zfetch and modularize by @jiacai2050 in https://github.com/jiacai2050/zigcli/pull/72\r\n\r\n## New Contributors\r\n* @qilme made their first contribution in https://github.com/jiacai2050/zigcli/pull/54\r\n* @LDprg made their first contribution in https://github.com/jiacai2050/zigcli/pull/56\r\n\r\n**Full Changelog**: https://github.com/jiacai2050/zigcli/compare/v0.3.0...v0.4.0",
+      "prerelease": false,
+      "published_at": "2026-03-18T12:22:09Z",
+      "html_url": "https://github.com/jiacai2050/zigcli/releases/tag/v0.4.0",
+      "assets": [
+        {
+          "name": "zigcli-v0.4.0-aarch64-macos.zip",
+          "url": "https://github.com/jiacai2050/zigcli/releases/download/v0.4.0/zigcli-v0.4.0-aarch64-macos.zip",
+          "size": 2660009,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigcli-v0.4.0-x86_64-windows.zip",
+          "url": "https://github.com/jiacai2050/zigcli/releases/download/v0.4.0/zigcli-v0.4.0-x86_64-windows.zip",
+          "size": 8284159,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigcli-v0.4.0-aarch64-windows.zip",
+          "url": "https://github.com/jiacai2050/zigcli/releases/download/v0.4.0/zigcli-v0.4.0-aarch64-windows.zip",
+          "size": 8156856,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigcli-v0.4.0-aarch64-linux.zip",
+          "url": "https://github.com/jiacai2050/zigcli/releases/download/v0.4.0/zigcli-v0.4.0-aarch64-linux.zip",
+          "size": 10777575,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigcli-v0.4.0-x86_64-macos.zip",
+          "url": "https://github.com/jiacai2050/zigcli/releases/download/v0.4.0/zigcli-v0.4.0-x86_64-macos.zip",
+          "size": 2088451,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigcli-v0.4.0-x86_64-freebsd.zip",
+          "url": "https://github.com/jiacai2050/zigcli/releases/download/v0.4.0/zigcli-v0.4.0-x86_64-freebsd.zip",
+          "size": 4897739,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigcli-v0.4.0-aarch64-freebsd.zip",
+          "url": "https://github.com/jiacai2050/zigcli/releases/download/v0.4.0/zigcli-v0.4.0-aarch64-freebsd.zip",
+          "size": 3664383,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigcli-v0.4.0-x86_64-linux.zip",
+          "url": "https://github.com/jiacai2050/zigcli/releases/download/v0.4.0/zigcli-v0.4.0-x86_64-linux.zip",
+          "size": 10972855,
+          "content_type": "application/zip"
+        }
+      ]
+    },
     {
       "tag_name": "v0.3.0",
       "name": "v0.3.0",
