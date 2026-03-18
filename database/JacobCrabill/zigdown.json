@@ -13,7 +13,7 @@
   "stars": 104,
   "forks": 9,
   "watchers": 3,
-  "updated_at": "2026-03-17T00:35:55Z",
+  "updated_at": "2026-03-18T05:33:46Z",
   "dependencies": [
     {
       "name": "stbi",
@@ -74,6 +74,11 @@
       "name": "tree_sitter_json",
       "url": "https://github.com/tree-sitter/tree-sitter-json/archive/4d770d31f732d50d3ec373865822fbe659e47c75.tar.gz",
       "hash": "N-V-__8AACVXAgCEl--zqcqoXlvXpEMk5BTS748bsLVslERc"
+    },
+    {
+      "name": "tree_sitter_lua",
+      "url": "https://github.com/tree-sitter-grammars/tree-sitter-lua/archive/7040a79f95b0bf7517a9809a8d0ecd41197027ac.tar.gz",
+      "hash": "N-V-__8AAExZCQBbT7NCZKdW4KxnVtSRvSVqTtJt0FEqfSa9"
     },
     {
       "name": "tree_sitter_make",
