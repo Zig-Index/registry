@@ -8,10 +8,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 6,
+  "stars": 7,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-01-16T13:28:56Z",
+  "updated_at": "2026-03-18T04:47:59Z",
   "dependencies": [
     {
       "name": "mime",
