@@ -13,7 +13,24 @@
   "stars": 4,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-03-09T05:17:24Z",
+  "updated_at": "2026-03-18T10:26:28Z",
+  "dependencies": [
+    {
+      "name": "zlib_ng",
+      "url": "git+https://github.com/CalebQ42/zig-zlib-ng#8988c0850be6ad54ef53b8d85f323825b9fcb3ae",
+      "hash": "zlib_ng-2.3.3-pre1-2HYS4H5CAAD1PdTeOOZDvpLMXZzg0-4aBRUVdtq8LUXu"
+    },
+    {
+      "name": "zstd",
+      "url": "git+https://github.com/allyourcodebase/zstd.git?ref=1.5.7-1#e1a501be57f42c541e8a5597e4b59a074dfd09a3",
+      "hash": "zstd-1.5.7-1-KEItkAMwAAD6OKY3m0OOmXG7aL-aLUfrDqbP5J5oYapU"
+    },
+    {
+      "name": "lz4",
+      "url": "git+https://github.com/allyourcodebase/lz4.git?ref=1.10.0-6#41f52ab227caf9d48cf88c89a4d2946caa12b102",
+      "hash": "lz4-1.10.0-6-ewyzw-4NAAAWDpY4xpiqr4LQhZQAC0x_rGnW2iPh6jk2"
+    }
+  ],
   "minimum_zig_version": "0.15.2",
   "readme": "# zig-squashfs\n\nThis is my experiments to learn Zig. Might amount to something. Might not.\n\nA library and application to decompress or view squashfs archives.\n\n## Current State\n\nOverall works, but currently is missing some features ([see below](#capabilities)) and has significantly slow performance compared to `unsquashfs` ([see below](#performance)).\n\n## Build options\n\n> `-Duse_c_libs=true`\n\nInstead of using Zig's standard library for decompression, use the system's C libraries. Has the benefit of being much faster and enabling LZO and LZ4 decompression.\n\n> `-Dallow_lzo=true`\n\nEnable compiling with LZO decompression support. The LZO library currently has some issues with Zig when imported so it's easier to just disable it by default. Only has an effect when using `-Duse_c_libs=true`.\n\n> `-Ddebug=true`\n\nSets various build options that make debugging easier. Specifically, debug optimization is forced, valgrind support is enabled, error tracing is enabled, stipping is disabled, and copmilation uses LLVM (this is due to some linking issues when on Debug optimization and is required for debugging tools such as `lldb`. In the future this may be removed from the debug flag).\n\n> `-Dversion=0.0.0`\n\nSets the version of `unsquashfs` shown when `--version` is passed.\n\n## Capabilities\n\nMost features are present except for the following:\n\n* When using Zig decompression libraries then lzo and lz4 compression types are unavailable. I don't _currently_ plan on spending the time to find and validate a library since neither is popular.\n* When using C decompression libraries, lzo is not supported by default due to [some issues](#build-considerations). If it's needed it's trivial to fix, but it's easiest to just leave it disabled.\n\n## Performance\n\nThis is some basic observation's I've made about this library's performance when compared to `unsquashfs`. Unless otherwise stated, most observations were made when extracting my test archive (which is fairly small and uses zstd compression) and with `--release=fast`.\n\nCurrently, my only performance checks are checking execution time, nothing deeper.\n\n* Under ideal circumstances, my library is ~70% slower (.12s vs .20s).\n* Using Zig decompression libraries *significantly* increases decompression time by ~600%. Under ideal circumstances.\n* Performance improvements/regressions will be common. I'm still learning Zig.\n\nExample Times:\n\n* *unsquashfs, multi-threaded*: .12s\n* *unsquashfs, single-threaded*: .13s\n* *C-libs, single-threaded*: .45s\n* *C-libs, multi-threaded*: .20s\n* *Zig-libs, single-threaded*: 5.78s\n* *Zig-libs, multi-threaded*: 1.08s\n\n## Build considerations\n\nCompilation without `use_c_libs` works completely fine, but Zig has issues with some symbols from the lzo library that needs to be manually fixed. In particular you need to fix the definitions for `lzo_bytep` and `lzo_voidp` to be `*u8` and `?*anyopaque` respectively. Due to this, you have to manually enable LZO decompression using `-Dallow_lzo=true` when building.\n\n```zig\npub const lzo_bytep = @compileError(\"unable to translate C expr: unexpected token ''\");\n// /usr/include/lzo/lzoconf.h:148:9\npub const lzo_charp = @compileError(\"unable to translate C expr: unexpected token ''\");\n// /usr/include/lzo/lzoconf.h:149:9\npub const lzo_voidp = @compileError(\"unable to translate C expr: unexpected token ''\");\n```\n\nto\n\n```zig\npub const lzo_bytep = *u8;\n// /usr/include/lzo/lzoconf.h:148:9\npub const lzo_charp = @compileError(\"unable to translate C expr: unexpected token ''\");\n// /usr/include/lzo/lzoconf.h:149:9\npub const lzo_voidp = ?*anyopaque;\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/8998514?u=35e3a7483b8b15120c39776dbf1f4a5be21833c6&v=4",
