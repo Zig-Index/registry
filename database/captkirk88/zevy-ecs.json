@@ -2,7 +2,7 @@
   "name": "zevy-ecs",
   "owner": "captkirk88",
   "repo": "zevy-ecs",
-  "description": "High-performance, archetype-based Entity-Component-System (ECS) framework written in Zig. Manage entities, components, systems, resources, events, stages, states.  Inspired by rust Bevy",
+  "description": "ECS inspired by the rust Bevy api",
   "type": "package",
   "topics": [
     "archetype",
@@ -18,7 +18,7 @@
   "stars": 16,
   "forks": 1,
   "watchers": 0,
-  "updated_at": "2026-03-07T17:55:15Z",
+  "updated_at": "2026-03-18T23:23:27Z",
   "dependencies": [
     {
       "name": "zevy_reflect",
