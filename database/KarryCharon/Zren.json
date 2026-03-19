@@ -11,10 +11,10 @@
     "zig",
     "vm"
   ],
-  "stars": 7,
+  "stars": 8,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-12-25T00:36:43Z",
+  "updated_at": "2026-03-18T22:12:04Z",
   "dependencies": [
     {
       "name": "example",
