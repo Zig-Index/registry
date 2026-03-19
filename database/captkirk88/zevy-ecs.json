@@ -15,10 +15,10 @@
     "entity-component-framework",
     "zevy"
   ],
-  "stars": 16,
+  "stars": 17,
   "forks": 1,
   "watchers": 0,
-  "updated_at": "2026-03-18T23:23:27Z",
+  "updated_at": "2026-03-19T17:24:29Z",
   "dependencies": [
     {
       "name": "zevy_reflect",

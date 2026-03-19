@@ -8,10 +8,10 @@
     "wgpu-native",
     "zig-package"
   ],
-  "stars": 110,
+  "stars": 111,
   "forks": 24,
   "watchers": 5,
-  "updated_at": "2026-03-14T18:59:46Z",
+  "updated_at": "2026-03-19T17:58:38Z",
   "dependencies": [
     {
       "name": "example",
