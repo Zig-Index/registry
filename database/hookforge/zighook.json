@@ -2,15 +2,19 @@
   "name": "zighook",
   "owner": "hookforge",
   "repo": "zighook",
-  "description": "Experimental Zig runtime patching and hook framework for macOS AArch64",
+  "description": "Zig runtime patching and hook framework for reverse engineering.",
   "type": "package",
   "topics": [
-    "zig-package"
+    "zig-package",
+    "low-level-programming",
+    "reverse-engineering",
+    "runtime-hooks",
+    "ziglang"
   ],
   "stars": 2,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-03-19T20:02:31Z",
+  "updated_at": "2026-03-19T21:29:59Z",
   "dependencies": [
     {
       "name": "zydis_zig",
