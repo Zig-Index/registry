@@ -10,7 +10,7 @@
     "zig-package"
   ],
   "stars": 3,
-  "forks": 5,
+  "forks": 6,
   "watchers": 2,
   "updated_at": "2025-10-04T15:54:31Z",
   "readme": "# zig-wcwidth\n\nA port of [wcwidth](https://github.com/jquast/wcwidth) to zig\n\n`wcwidth` works with Zig 0.15.1.\n",
