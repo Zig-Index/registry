@@ -9,10 +9,10 @@
     "static-site-generator",
     "zig-package"
   ],
-  "stars": 1289,
-  "forks": 87,
-  "watchers": 15,
-  "updated_at": "2026-03-09T14:47:05Z",
+  "stars": 1296,
+  "forks": 89,
+  "watchers": 14,
+  "updated_at": "2026-03-20T17:34:44Z",
   "dependencies": [
     {
       "name": "afl_kit",

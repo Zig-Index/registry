@@ -10,10 +10,10 @@
     "pdf-viewer",
     "cli"
   ],
-  "stars": 494,
+  "stars": 502,
   "forks": 16,
   "watchers": 5,
-  "updated_at": "2026-03-06T22:15:58Z",
+  "updated_at": "2026-03-19T17:27:21Z",
   "dependencies": [
     {
       "name": "vaxis",

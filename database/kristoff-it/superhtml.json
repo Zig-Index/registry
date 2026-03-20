@@ -14,10 +14,10 @@
     "html",
     "validator"
   ],
-  "stars": 1244,
-  "forks": 58,
+  "stars": 1252,
+  "forks": 59,
   "watchers": 8,
-  "updated_at": "2026-03-09T16:14:41Z",
+  "updated_at": "2026-03-19T20:54:36Z",
   "dependencies": [
     {
       "name": "known_folders",

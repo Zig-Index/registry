@@ -11,10 +11,10 @@
     "zig-package",
     "vector-graphics"
   ],
-  "stars": 292,
-  "forks": 20,
+  "stars": 296,
+  "forks": 19,
   "watchers": 6,
-  "updated_at": "2025-10-29T14:45:49Z",
+  "updated_at": "2026-03-07T15:04:14Z",
   "dependencies": [
     {
       "name": "args",
