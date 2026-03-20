@@ -19,17 +19,17 @@
   "stars": 165,
   "forks": 15,
   "watchers": 4,
-  "updated_at": "2026-03-20T10:33:29Z",
+  "updated_at": "2026-03-20T11:51:34Z",
   "dependencies": [
+    {
+      "name": "ziex_js",
+      "url": "https://registry.npmjs.org/ziex/-/ziex-0.1.0-dev.805.tgz",
+      "hash": "ziex_js-0.1.0-dev.804-v1W0GcidAgBuHOWfnldUM6Ftmucf2fufYaGp2QUPL0fw"
+    },
     {
       "name": "httpz",
       "url": "git+https://github.com/nurulhudaapon/httpz.git#7268154f43f5827bf78668e8e79a00f2ebe4db13",
       "hash": "httpz-0.0.0-PNVzrBgtBwCVkSJyophIX6WHwDR0r8XhBGQr96Kk-1El"
-    },
-    {
-      "name": "zls",
-      "url": "git+https://github.com/nurulhudaapon/lspz.git?ref=0.15.x#ce6c8f02c78e622421cfc2405c67c5222819ec03",
-      "hash": "zls-0.15.0-rmm5fkjqIwDZpmDHyKwxa9K2gcI3FPaGVFPwjYWFBM5B"
     },
     {
       "name": "zli",
@@ -54,6 +54,11 @@
     {
       "name": "cachez",
       "url": "vendor/cachez"
+    },
+    {
+      "name": "zls",
+      "url": "git+https://github.com/nurulhudaapon/lspz.git?ref=0.15.x#ce6c8f02c78e622421cfc2405c67c5222819ec03",
+      "hash": "zls-0.15.0-rmm5fkjqIwDZpmDHyKwxa9K2gcI3FPaGVFPwjYWFBM5B"
     }
   ],
   "minimum_zig_version": "0.15.2",
