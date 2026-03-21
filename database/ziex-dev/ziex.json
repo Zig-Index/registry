@@ -16,10 +16,10 @@
     "zig-package",
     "server-side-rendering"
   ],
-  "stars": 168,
+  "stars": 167,
   "forks": 15,
   "watchers": 4,
-  "updated_at": "2026-03-21T13:43:52Z",
+  "updated_at": "2026-03-21T22:28:14Z",
   "dependencies": [
     {
       "name": "ziex_js",
@@ -57,8 +57,8 @@
     },
     {
       "name": "zls",
-      "url": "git+https://github.com/nurulhudaapon/lspz.git?ref=0.15.x#ce6c8f02c78e622421cfc2405c67c5222819ec03",
-      "hash": "zls-0.15.0-rmm5fkjqIwDZpmDHyKwxa9K2gcI3FPaGVFPwjYWFBM5B"
+      "url": "git+https://github.com/ziex-dev/zls.git?ref=zx-0.15.1#6afd4d52580899022d24f41689781ec4a9350602",
+      "hash": "zls-0.15.1-rmm5fgg2JABtvFCDJk6Up7CuP4Khm62Li4NkCfwniFnU"
     }
   ],
   "minimum_zig_version": "0.15.2",
