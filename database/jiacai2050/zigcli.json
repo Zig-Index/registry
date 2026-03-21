@@ -14,7 +14,7 @@
   "stars": 123,
   "forks": 20,
   "watchers": 2,
-  "updated_at": "2026-03-20T08:50:43Z",
+  "updated_at": "2026-03-21T09:16:02Z",
   "dependencies": [
     {
       "name": "curl",
@@ -607,7 +607,7 @@
   "owner_location": "/home/mars",
   "owner_blog": "https://en.liujiacai.net/",
   "owner_twitter_username": "liujiacai",
-  "owner_followers": 1042,
+  "owner_followers": 1044,
   "owner_following": 123,
   "owner_created_at": "2013-03-13T01:33:15Z",
   "homepage": "https://zigcli.liujiacai.net/",
