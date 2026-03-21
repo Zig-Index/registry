@@ -13,12 +13,12 @@
   "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-03-21T15:54:26Z",
+  "updated_at": "2026-03-21T18:21:59Z",
   "dependencies": [
     {
       "name": "zigzag",
-      "url": "https://github.com/meszmate/zigzag/archive/b2610e0b51006c3b8074a102b2160416c9c5c786.tar.gz",
-      "hash": "zigzag-0.1.0-YXwYS6-JBgBi_fUOjGfriig6Q0tzTrKKoa10THNHgAOv"
+      "url": "https://github.com/meszmate/zigzag/archive/21667da0f4ba34d1eae3f26e52b2f250a2308062.tar.gz",
+      "hash": "zigzag-0.1.2-YXwYS20gCwBHkWzwF2vwHINAIttgmmhbLWaE0hve5UHg"
     },
     {
       "name": "known_folders",
