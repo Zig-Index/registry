@@ -13,7 +13,7 @@
   "stars": 4,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-03-20T06:55:17Z",
+  "updated_at": "2026-03-21T07:13:49Z",
   "dependencies": [
     {
       "name": "zlib_ng",
@@ -29,6 +29,10 @@
       "name": "lz4",
       "url": "git+https://github.com/allyourcodebase/lz4.git?ref=1.10.0-6#41f52ab227caf9d48cf88c89a4d2946caa12b102",
       "hash": "lz4-1.10.0-6-ewyzw-4NAAAWDpY4xpiqr4LQhZQAC0x_rGnW2iPh6jk2"
+    },
+    {
+      "name": "minilzo",
+      "url": "../zig-minilzo"
     }
   ],
   "minimum_zig_version": "0.15.2",
