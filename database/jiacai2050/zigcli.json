@@ -14,7 +14,7 @@
   "stars": 123,
   "forks": 20,
   "watchers": 2,
-  "updated_at": "2026-03-22T13:36:36Z",
+  "updated_at": "2026-03-22T13:51:32Z",
   "dependencies": [
     {
       "name": "curl",
@@ -25,6 +25,64 @@
   "minimum_zig_version": "0.15.2",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/3848910?u=60f91a765c4ad95cb3a5a5b41d19ca12ee71a65d&v=4",
   "releases": [
+    {
+      "tag_name": "v0.5.0",
+      "name": "v0.5.0",
+      "body": "## v0.5.0 (2026-03-22)\r\n\r\n### Breaking Changes\r\n- **build**: package consumers must now import the single `zigcli` root module instead of adding\r\n  separate `simargs`, `pretty-table`, and `gitignore` modules, and the struct-based argument parser\r\n  is now named `structargs`\r\n  - Old:\r\n    - `exe.root_module.addImport(\"simargs\", zigcli.module(\"simargs\"));`\r\n    - `exe.root_module.addImport(\"pretty-table\", zigcli.module(\"pretty-table\"));`\r\n    - `exe.root_module.addImport(\"gitignore\", zigcli.module(\"gitignore\"));`\r\n  - New:\r\n    - `exe.root_module.addImport(\"zigcli\", zigcli.module(\"zigcli\"));`\r\n    - Use `zigcli.structargs` instead of `zigcli.simargs`\r\n\r\n### New Programs\r\n- **pretty-csv**: Pretty-print CSV/TSV files as aligned tables\r\n  - Auto-fits table width to terminal, truncates with `…`\r\n  - Three border styles: `ascii`, `box`, `dos`\r\n  - Transpose mode (`-t`): show each record as vertical key-value block\r\n  - Column selection (`-c 1,3,5`): display only specific columns\r\n  - Row separators (`--row-separator`) and right-aligned selected columns (`-r 2,4`)\r\n  - Configurable delimiter, padding, and max input size\r\n\r\n### Improvements\r\n- **build**: consolidate exported packages behind a single `zigcli` root module in `lib.zig`\r\n- **build**: run `.github/build-release.sh` target builds in parallel with per-target logs\r\n- **install**: make `docs/static/install.sh` install all packaged binaries by default\r\n- **zigcli**: add `csv` package for parsing delimited text into rows and fields\r\n  - Standard comma-separated parsing now follows RFC 4180 record and quoted-field rules\r\n  - Supports embedded newlines and doubled-quote unescaping in quoted fields\r\n  - Returns `error.UnclosedQuotedField` for unterminated quoted records\r\n- **zigcli**: add shared `term` module for ANSI colors and terminal capability helpers\r\n- **zigcli**: add shared `term.Style` for reusable ANSI-styled text output\r\n- **zigcli**: add `term.stdoutWidth()` as a convenience wrapper for stdout terminal-width detection\r\n- **structargs**: `print_help_on_error` now prints the subcommand-specific help context for subcommand parse failures\r\n- **pretty-table**: `Table(N).Owned` runtime row helper with string shorthand and Cell-level control\r\n  - `Table(N)` and `Table(N).Owned`: optional transpose mode\r\n  - `RuntimeTable`: runtime column count with footer rows, header/footer cell setters, row separators, per-column alignment, `\"{f}\"` formatting, optional cell truncation, and UTF-8-safe truncation boundaries\r\n  - Windows targets skip POSIX terminal-width probing during cross-compilation\r\n\r\n### Bug Fixes\r\n- **structargs**: Fixed memory leak when parse failed\r\n\r\n### Documentation\r\n- Added `gitignore` package docs\r\n- Added `term` package docs\r\n- Updated `pretty-table` and `structargs` docs for Zig 0.15 API\r\n\r\n\r\n### What's Changed\r\n* feat: add runtime table builder and pretty-csv utility by @jiacai2050 in https://github.com/jiacai2050/zigcli/pull/73\r\n* simargs: print help to stderr on parse error by @Copilot in https://github.com/jiacai2050/zigcli/pull/74\r\n* refactor: consolidate packages and add shared terminal module by @jiacai2050 in https://github.com/jiacai2050/zigcli/pull/75\r\n* refactor(build): reorganize project structure by @jiacai2050 in https://github.com/jiacai2050/zigcli/pull/76\r\n* feat(csv): add standard compliant CSV parser by @jiacai2050 in https://github.com/jiacai2050/zigcli/pull/77\r\n\r\n\r\n**Full Changelog**: https://github.com/jiacai2050/zigcli/compare/v0.4.0...v0.5.0",
+      "prerelease": false,
+      "published_at": "2026-03-22T13:53:01Z",
+      "html_url": "https://github.com/jiacai2050/zigcli/releases/tag/v0.5.0",
+      "assets": [
+        {
+          "name": "zigcli-v0.5.0-aarch64-macos.zip",
+          "url": "https://github.com/jiacai2050/zigcli/releases/download/v0.5.0/zigcli-v0.5.0-aarch64-macos.zip",
+          "size": 2703906,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigcli-v0.5.0-x86_64-freebsd.zip",
+          "url": "https://github.com/jiacai2050/zigcli/releases/download/v0.5.0/zigcli-v0.5.0-x86_64-freebsd.zip",
+          "size": 5049724,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigcli-v0.5.0-aarch64-freebsd.zip",
+          "url": "https://github.com/jiacai2050/zigcli/releases/download/v0.5.0/zigcli-v0.5.0-aarch64-freebsd.zip",
+          "size": 3783477,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigcli-v0.5.0-x86_64-windows.zip",
+          "url": "https://github.com/jiacai2050/zigcli/releases/download/v0.5.0/zigcli-v0.5.0-x86_64-windows.zip",
+          "size": 8442814,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigcli-v0.5.0-aarch64-linux.zip",
+          "url": "https://github.com/jiacai2050/zigcli/releases/download/v0.5.0/zigcli-v0.5.0-aarch64-linux.zip",
+          "size": 10948189,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigcli-v0.5.0-aarch64-windows.zip",
+          "url": "https://github.com/jiacai2050/zigcli/releases/download/v0.5.0/zigcli-v0.5.0-aarch64-windows.zip",
+          "size": 8121569,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigcli-v0.5.0-x86_64-macos.zip",
+          "url": "https://github.com/jiacai2050/zigcli/releases/download/v0.5.0/zigcli-v0.5.0-x86_64-macos.zip",
+          "size": 2321259,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigcli-v0.5.0-x86_64-linux.zip",
+          "url": "https://github.com/jiacai2050/zigcli/releases/download/v0.5.0/zigcli-v0.5.0-x86_64-linux.zip",
+          "size": 11178317,
+          "content_type": "application/zip"
+        }
+      ]
+    },
     {
       "tag_name": "v0.4.0",
       "name": "v0.4.0",
