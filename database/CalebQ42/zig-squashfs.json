@@ -13,7 +13,7 @@
   "stars": 4,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-03-21T07:13:49Z",
+  "updated_at": "2026-03-22T11:35:41Z",
   "dependencies": [
     {
       "name": "zlib_ng",
@@ -32,7 +32,8 @@
     },
     {
       "name": "minilzo",
-      "url": "../zig-minilzo"
+      "url": "git+https://github.com/CalebQ42/zig-minilzo.git#7cbae997b91a44d74b7cd6c073584dc9562a6c90",
+      "hash": "minilzo-2.10.0-Ij7BO8wLAADeWI4Pe4jp8XTDsDaquZR14oZ7_9yKKDWP"
     }
   ],
   "minimum_zig_version": "0.15.2",
