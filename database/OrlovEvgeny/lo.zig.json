@@ -17,6 +17,15 @@
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/4623930?u=d294e1cfb636a959e5b40506adee9ebb091de51c&v=4",
   "releases": [
     {
+      "tag_name": "v1.1.0",
+      "name": "v1.1.0",
+      "body": "## What's Changed\n* feat: add binary search, set ops with custom equality, and more by @OrlovEvgeny in https://github.com/OrlovEvgeny/lo.zig/pull/1\n\n## New Contributors\n* @OrlovEvgeny made their first contribution in https://github.com/OrlovEvgeny/lo.zig/pull/1\n\n**Full Changelog**: https://github.com/OrlovEvgeny/lo.zig/compare/v1.0.1...v1.1.0",
+      "prerelease": false,
+      "published_at": "2026-03-23T08:15:03Z",
+      "html_url": "https://github.com/OrlovEvgeny/lo.zig/releases/tag/v1.1.0",
+      "assets": []
+    },
+    {
       "tag_name": "v1.0.1",
       "name": "v1.0.1",
       "body": "**Full Changelog**: https://github.com/OrlovEvgeny/lo.zig/commits/v1.0.1",
