@@ -14,7 +14,7 @@
   "stars": 32,
   "forks": 9,
   "watchers": 2,
-  "updated_at": "2026-03-20T14:22:49Z",
+  "updated_at": "2026-03-23T20:52:10Z",
   "dependencies": [
     {
       "name": "glfw",
