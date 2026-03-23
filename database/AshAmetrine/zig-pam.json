@@ -1,0 +1,30 @@
+{
+  "name": "zig-pam",
+  "owner": "AshAmetrine",
+  "repo": "zig-pam",
+  "description": "Zig wrapper around the PAM C library (libpam)",
+  "type": "package",
+  "topics": [
+    "bindings",
+    "libpam",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-03-23T19:42:44Z",
+  "readme": "# Zig PAM Wrapper\n\nA Zig wrapper around the PAM (Pluggable Authentication Modules) C library (libpam).\n\n## Features\n\n- Minimal, direct mapping to PAM calls.\n- Typed flags and items for common operations.\n- Conversation helpers (`Messages`, `Prompt.respond`).\n\n## Requirements\n\n- Zig 0.15.2.\n- `libc`.\n- `libpam`.\n\n## Usage\n\nAdd the dependency with `zig fetch`:\n\n```sh\nzig fetch --save git+https://github.com/Kawaii-Ash/zig-pam\n```\n\nThen add it as an import in `build.zig`:\n\n```zig\nconst pam = b.dependency(\"zig_pam\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\nexe.root_module.addImport(\"pam\", pam.module(\"pam\"));\n```\n\n## Example\n\nThe example program lives at `example/main.zig`.\n\nTo build the included example:\n\n```sh\nzig build example\n```\n\nRun it:\n\n```sh\n./zig-out/bin/example <user>\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/120780645?u=f029fc180d73c78def0595ef83ee3c7c4d199caa&v=4",
+  "releases": [],
+  "owner_bio": "I'm Ashhh",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "ashametrine.dev",
+  "owner_twitter_username": null,
+  "owner_followers": 6,
+  "owner_following": 2,
+  "owner_created_at": "2022-12-17T10:00:17Z",
+  "license": "MIT",
+  "category": "library"
+}
