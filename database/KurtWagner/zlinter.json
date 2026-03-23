@@ -14,12 +14,12 @@
   "stars": 55,
   "forks": 2,
   "watchers": 1,
-  "updated_at": "2026-03-17T04:47:27Z",
+  "updated_at": "2026-03-23T00:36:08Z",
   "dependencies": [
     {
       "name": "zls",
-      "url": "git+https://github.com/zigtools/zls?ref=master#ddaf453b8c06a04d110926d787bdf63801496809",
-      "hash": "zls-0.16.0-dev-rmm5fn1HJgC3na6o7uksy8GMSopRbkqleMtKKAb0xQSs"
+      "url": "git+https://github.com/zigtools/zls?ref=master#3ec65a81a0b9be6a47f235d4cc5800201a35bdf0",
+      "hash": "zls-0.16.0-dev-rmm5fs2LJgA0Ph-lhNk7_DH1m0HjZZowbYHXvagSTmQM"
     }
   ],
   "minimum_zig_version": "0.15.1",
