@@ -1,0 +1,42 @@
+{
+  "name": "open-location-code-zig",
+  "owner": "bmorphism",
+  "repo": "open-location-code-zig",
+  "description": "Open Location Code (Plus Codes) for Zig - First-ever Zig implementation of Google's geocoding system",
+  "type": "package",
+  "topics": [
+    "geocoding",
+    "open-location-code",
+    "zig",
+    "zig-package",
+    "plus-codes"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-03-23T03:39:04Z",
+  "minimum_zig_version": "0.15.0",
+  "readme": "# Open Location Code (Plus Codes) for Zig\n\nA pure Zig implementation of [Google's Open Location Code](https://github.com/google/open-location-code) (Plus Codes) - a geocoding system for identifying any location on Earth.\n\n## Features\n\n- **Pure Zig** - No dependencies, works with Zig 0.15+\n- **Zero allocations** - All encoding uses caller-provided buffers\n- **Fully tested** - 35 tests including reference cities, edge cases, and fuzz tests\n- **Complete API** - encode, decode, shorten, recover, validate, full/short code detection\n\n## Installation\n\nAdd to your `build.zig.zon`:\n\n```zig\n.dependencies = .{\n    .open_location_code = .{\n        .url = \"https://github.com/bmorphism/open-location-code-zig/archive/refs/tags/v1.1.0.tar.gz\",\n        .hash = \"open_location_code-1.0.0-0pnGtSekAABZrcQoWZaEGyrs23Ud7w41iXjqGdz7ZHRh\",\n    },\n},\n```\n\nThen in your `build.zig`:\n\n```zig\nconst olc = b.dependency(\"open_location_code\", .{\n    .target = target,\n    .optimize = optimize,\n});\nexe.root_module.addImport(\"olc\", olc.module(\"olc\"));\n```\n\n## Usage\n\n```zig\nconst olc = @import(\"olc\");\n\npub fn main() void {\n    var buffer: [20]u8 = undefined;\n\n    // Encode coordinates to Plus Code\n    const len = olc.encode(37.7749, -122.4194, 10, &buffer) catch return;\n    const code = buffer[0..len];\n    // code = \"849VQHFJ+X6\"\n\n    // Decode Plus Code to area\n    const area = olc.decode(\"849VQHFJ+X6\") catch return;\n    std.debug.print(\"Center: {d}, {d}\\n\", .{\n        area.center_latitude(),\n        area.center_longitude(),\n    });\n\n    // Validate codes\n    _ = olc.is_valid(\"849VQHFJ+X6\");  // true\n    _ = olc.is_full(\"849VQHFJ+X6\");   // true\n    _ = olc.is_short(\"QHFJ+X6\");      // true\n}\n```\n\n## API Reference\n\n### `encode(lat: f64, lng: f64, code_length: u8, buffer: []u8) !usize`\n\nEncodes latitude/longitude to a Plus Code. Returns the number of bytes written.\n\n- `lat`: Latitude (-90 to 90)\n- `lng`: Longitude (-180 to 180)\n- `code_length`: Desired code length (2-15, default 10)\n- `buffer`: Output buffer (minimum 12 bytes for length 10)\n\n### `decode(code: []const u8) !CodeArea`\n\nDecodes a Plus Code to a `CodeArea` struct with:\n- `south_latitude`, `north_latitude`\n- `west_longitude`, `east_longitude`\n- `center_latitude()`, `center_longitude()` methods\n\n### `is_valid(code: []const u8) bool`\n\nReturns true if the code is a valid Plus Code.\n\n### `is_full(code: []const u8) bool`\n\nReturns true if the code is a full (not shortened) Plus Code.\n\n### `is_short(code: []const u8) bool`\n\nReturns true if the code is a shortened Plus Code.\n\n### `shorten(code: []const u8, ref_lat: f64, ref_lng: f64, buffer: []u8) !usize`\n\nShortens a full Plus Code relative to a reference location. The closer the reference, the shorter the result.\n\n### `recover(short_code: []const u8, ref_lat: f64, ref_lng: f64, buffer: []u8) !usize`\n\nRecovers a full Plus Code from a short code and reference location.\n\n## Examples\n\n| Location | Coordinates | Plus Code |\n|----------|-------------|-----------|\n| San Francisco | 37.7749, -122.4194 | 849VQHFJ+X6 |\n| London | 51.5074, -0.1278 | 9C3XGV4C+XV |\n| Tokyo | 35.6762, 139.6503 | 8Q7XMMG2+F4 |\n| Sydney | -33.8688, 151.2093 | 4RRH46J5+FP |\n| Origin (0,0) | 0.0, 0.0 | 6FG22222+22 |\n\n## Running Tests\n\n```bash\nzig build test\n```\n\n## License\n\nApache License 2.0 - See [LICENSE](LICENSE)\n\n## Author\n\nBarton Rhodes <freemorphism+zig@gmail.com>\n\n## Credits\n\nBased on [Google's Open Location Code](https://github.com/google/open-location-code) specification.\nCross-validated against Python and Go reference implementations.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1236584?u=ca9ae5ef43c28fe525f2fceed89823c180bc4a7e&v=4",
+  "releases": [
+    {
+      "tag_name": "v1.1.0",
+      "name": "v1.1.0",
+      "body": "## What's New\n\n- **shorten()**: Shorten full codes relative to a reference location\n- **recover()**: Recover full codes from short codes using a reference\n- Improved documentation with module-level docs and section headers\n- 35 comprehensive tests (up from 30)\n\n## API Additions\n\n```zig\n// Shorten a full code when near a reference point\nconst len = try olc.shorten(\"849VQHFJ+X6\", 37.775, -122.419, &buffer);\n// Result: \"QHFJ+X6\" (shortened)\n\n// Recover full code from short code\nconst len = try olc.recover(\"QHFJ+X6\", 37.775, -122.419, &buffer);\n// Result: \"849VQHFJ+X6\" (full code)\n```\n\n## Installation\n\nUpdate your `build.zig.zon`:\n```zig\n.open_location_code = .{\n    .url = \"https://github.com/bmorphism/open-location-code-zig/archive/refs/tags/v1.1.0.tar.gz\",\n    .hash = \"...\", // run zig fetch to get hash\n},\n```",
+      "prerelease": false,
+      "published_at": "2025-12-30T19:33:18Z",
+      "html_url": "https://github.com/bmorphism/open-location-code-zig/releases/tag/v1.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "\"Parametrised optics model cybernetic systems, namely dynamical systems steered by one or more agents. Then ⊛ represents agency\r\nbeing exerted on systems\"",
+  "owner_company": "@plurigrid",
+  "owner_location": "san francisco",
+  "owner_blog": "https://plurigrid.com",
+  "owner_twitter_username": "bmorphism",
+  "owner_followers": 267,
+  "owner_following": 1686,
+  "owner_created_at": "2011-12-02T17:30:22Z",
+  "license": "Apache-2.0",
+  "category": "library"
+}
