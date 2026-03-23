@@ -16,10 +16,10 @@
     "multistream",
     "quic"
   ],
-  "stars": 31,
-  "forks": 13,
+  "stars": 32,
+  "forks": 14,
   "watchers": 2,
-  "updated_at": "2026-03-20T15:27:30Z",
+  "updated_at": "2026-03-22T05:24:45Z",
   "dependencies": [
     {
       "name": "libxev",

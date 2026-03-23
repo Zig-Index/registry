@@ -11,10 +11,10 @@
     "crypto",
     "signatures"
   ],
-  "stars": 115,
+  "stars": 116,
   "forks": 10,
   "watchers": 4,
-  "updated_at": "2026-03-18T03:15:37Z",
+  "updated_at": "2026-03-23T01:19:40Z",
   "dependencies": [
     {
       "name": "clap",

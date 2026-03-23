@@ -16,10 +16,10 @@
     "simd-parallelism",
     "simd-programming"
   ],
-  "stars": 9,
+  "stars": 10,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-03-04T05:14:24Z",
+  "updated_at": "2026-03-22T06:04:58Z",
   "dependencies": [
     {
       "name": "example",
