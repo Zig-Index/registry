@@ -14,10 +14,10 @@
     "zig-package",
     "ziglang"
   ],
-  "stars": 30,
-  "forks": 2,
+  "stars": 31,
+  "forks": 3,
   "watchers": 1,
-  "updated_at": "2026-01-02T10:40:29Z",
+  "updated_at": "2026-03-24T12:59:44Z",
   "dependencies": [
     {
       "name": "zbor",
