@@ -10,7 +10,7 @@
     "zig-package"
   ],
   "stars": 576,
-  "forks": 77,
+  "forks": 78,
   "watchers": 8,
   "updated_at": "2026-03-20T20:06:06Z",
   "dependencies": [
@@ -30,7 +30,7 @@
   "owner_blog": "https://rischmann.fr",
   "owner_twitter_username": "vrischmann",
   "owner_followers": 119,
-  "owner_following": 47,
+  "owner_following": 45,
   "owner_created_at": "2012-07-02T23:09:35Z",
   "license": "MIT",
   "category": "library"

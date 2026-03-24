@@ -9,10 +9,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 1686,
-  "forks": 115,
+  "stars": 1688,
+  "forks": 116,
   "watchers": 11,
-  "updated_at": "2026-03-21T16:04:42Z",
+  "updated_at": "2026-03-23T16:19:42Z",
   "dependencies": [
     {
       "name": "zigimg",
@@ -97,8 +97,8 @@
   "owner_location": "St. Paul, MN",
   "owner_blog": "https://rockorager.dev",
   "owner_twitter_username": "rockorager",
-  "owner_followers": 300,
-  "owner_following": 5,
+  "owner_followers": 302,
+  "owner_following": 2,
   "owner_created_at": "2010-11-10T20:36:25Z",
   "homepage": "https://rockorager.github.io/libvaxis/",
   "license": "MIT",
