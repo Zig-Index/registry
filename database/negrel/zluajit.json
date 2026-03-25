@@ -10,10 +10,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 6,
+  "stars": 7,
   "forks": 1,
   "watchers": 0,
-  "updated_at": "2026-03-21T13:08:54Z",
+  "updated_at": "2026-03-25T07:54:45Z",
   "dependencies": [
     {
       "name": "luajit",
