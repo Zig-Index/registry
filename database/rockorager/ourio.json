@@ -8,10 +8,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 139,
+  "stars": 140,
   "forks": 4,
   "watchers": 4,
-  "updated_at": "2026-01-30T15:06:12Z",
+  "updated_at": "2026-03-24T20:04:10Z",
   "dependencies": [
     {
       "name": "tls",

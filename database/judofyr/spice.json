@@ -11,10 +11,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 950,
+  "stars": 951,
   "forks": 24,
   "watchers": 7,
-  "updated_at": "2026-03-22T13:21:32Z",
+  "updated_at": "2026-03-25T09:51:53Z",
   "dependencies": [
     {
       "name": "parg",
