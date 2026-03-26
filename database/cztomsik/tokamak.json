@@ -14,7 +14,7 @@
   "stars": 588,
   "forks": 18,
   "watchers": 8,
-  "updated_at": "2026-03-23T14:59:45Z",
+  "updated_at": "2026-03-26T16:24:19Z",
   "dependencies": [
     {
       "name": "httpz",
