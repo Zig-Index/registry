@@ -19,17 +19,21 @@
   "stars": 185,
   "forks": 18,
   "watchers": 3,
-  "updated_at": "2026-03-27T19:03:04Z",
+  "updated_at": "2026-03-27T21:22:21Z",
   "dependencies": [
     {
       "name": "ziex_js",
-      "url": "https://registry.npmjs.org/ziex/-/ziex-0.1.0-dev.864.tgz",
-      "hash": "ziex_js-0.1.0-dev.804-v1W0GVSeAgBgl6TzyQtwhDiCWMQhus5uPYQDnh1lBEgG"
+      "url": "https://registry.npmjs.org/ziex/-/ziex-0.1.0-test.2.tgz",
+      "hash": "ziex_js-0.1.0-dev.804-v1W0GbMDAwBsd2oeoCUMGZ2FXs99xoOQdA-Fwc5q-oUT"
     },
     {
       "name": "httpz",
       "url": "git+https://github.com/nurulhudaapon/httpz.git#7268154f43f5827bf78668e8e79a00f2ebe4db13",
       "hash": "httpz-0.0.0-PNVzrBgtBwCVkSJyophIX6WHwDR0r8XhBGQr96Kk-1El"
+    },
+    {
+      "name": "adapters",
+      "url": "pkg/adapters"
     },
     {
       "name": "zli",
