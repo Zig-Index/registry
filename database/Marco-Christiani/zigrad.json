@@ -14,10 +14,10 @@
     "zig-package",
     "ziglang"
   ],
-  "stars": 188,
-  "forks": 10,
+  "stars": 190,
+  "forks": 11,
   "watchers": 3,
-  "updated_at": "2026-03-20T20:16:13Z",
+  "updated_at": "2026-03-27T15:42:56Z",
   "dependencies": [
     {
       "name": "tracy",
