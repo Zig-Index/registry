@@ -11,7 +11,7 @@
     "zig-package"
   ],
   "stars": 118,
-  "forks": 13,
+  "forks": 14,
   "watchers": 3,
   "updated_at": "2026-02-22T21:57:14Z",
   "minimum_zig_version": "0.15.0-dev.1228+6dbcc3bd5",

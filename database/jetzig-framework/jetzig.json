@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 1445,
-  "forks": 51,
+  "stars": 1448,
+  "forks": 52,
   "watchers": 15,
-  "updated_at": "2026-03-23T18:39:26Z",
+  "updated_at": "2026-03-27T07:06:57Z",
   "dependencies": [
     {
       "name": "jetcommon",
