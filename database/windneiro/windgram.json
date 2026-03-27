@@ -1,0 +1,32 @@
+{
+  "name": "windgram",
+  "owner": "windneiro",
+  "repo": "windgram",
+  "description": "Zig library for the Telegram Bot API",
+  "type": "package",
+  "topics": [
+    "bot-framework",
+    "multithreading",
+    "telegram-bot-api",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 3,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-03-27T13:06:25Z",
+  "minimum_zig_version": "0.13.0",
+  "readme": "# windgram\n\n`windgram` is a Zig library for Telegram bots.\n\nThe project is still early, but the core is real: HTTPS requests to Telegram, long polling, a multithreaded dispatcher, and owned response parsing so data does not outlive its buffers by accident.\n\nThe point of `windgram` right now is not to look complete. The point is to be a small base that is easy to understand, easy to extend, and already useful for simple bots.\n\n## Current Shape\n\nWhat already works:\n\n- real Telegram Bot API requests\n- `getUpdates` long polling\n- multithreaded update processing\n- `getMe`\n- `getUpdates`\n- `sendMessage`\n- `Router`\n- `Context`\n- `ctx.reply()`\n- a runnable demo bot in `example_bot/`\n\nWhat is still missing:\n\n- most Bot API methods\n- webhook support\n- routers, filters, middleware\n- FSM and higher-level bot ergonomics\n\n## Quick Start\n\n```zig\nconst std = @import(\"std\");\nconst windgram = @import(\"windgram\");\n\nconst Bot = struct {\n    pub fn handle(_: *anyopaque, client: *windgram.Client, update: *const windgram.types.Update) !void {\n        const message = update.effectiveMessage() orelse return;\n        const text = message.text orelse return;\n\n        const result = try client.sendMessage(message.chat.id, text);\n        defer result.deinit();\n\n        switch (result) {\n            .ok => {},\n            .api_error => |api_err| std.log.err(\"{s}\", .{api_err.description}),\n        }\n    }\n};\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n\n    var client = windgram.Client.init(gpa.allocator(), \"PUT_BOT_TOKEN_HERE\");\n    defer client.deinit();\n\n    var bot = Bot{};\n    var poller = try windgram.Poller.init(gpa.allocator(), &client, .{\n        .context = &bot,\n        .handle_fn = Bot.handle,\n    }, 4, 20);\n    defer poller.deinit();\n\n    try poller.start();\n    defer poller.stop();\n\n    while (true) std.time.sleep(1 * std.time.ns_per_s);\n}\n```\n\n## Demo Bot\n\nThe demo lives in `example_bot/`.\n\n1. Put a bot token into `example_bot/token.zig`\n2. Run `zig build run-example`\n\nThe demo handles:\n\n- `/start`\n- `/help`\n- `/ping`\n- `/id`\n- `/echo <text>`\n\nAnything else gets a normal text reply, so it is easy to verify that updates are coming in and being processed.\n\n## API Coverage\n\nThe project currently implements 3 Telegram Bot API methods:\n\n- `getMe`\n- `getUpdates`\n- `sendMessage`\n\nThe full method-by-method checklist lives in [API_COVERAGE.md](C:\\Users\\Windneiro\\Desktop\\tgzig\\API_COVERAGE.md).\n\nThat checklist is based on the official Telegram Bot API page as of 2026-03-27:\n\n- [Telegram Bot API](https://core.telegram.org/bots/api)\n\n## Development\n\n```bash\nzig build test\nzig build\n```\n\n## Contributing\n\nThe best contributions right now are small and concrete:\n\n- add one missing method cleanly\n- add missing types around already-supported methods\n- add regression tests around parsing, ownership, or polling\n- tighten docs where the current behavior is unclear\n\nSee [CONTRIBUTING.md](C:\\Users\\Windneiro\\Desktop\\tgzig\\CONTRIBUTING.md) and [ROADMAP.md](C:\\Users\\Windneiro\\Desktop\\tgzig\\ROADMAP.md).\n\n## High-Level API\n\nThere is now a small high-level layer on top of the core client:\n\n- `Router`\n- `onCommand()`\n- `onText()`\n- `Context`\n- `ctx.reply()`\n\nThe low-level `Client` and `Poller` are still there. The higher-level API is just a convenience layer on top, not a replacement for the core pieces.\n\n## License\n\nMIT\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/71730912?u=f5cb1e90146e8aa85278f30f7c59c9a07986f1f9&v=4",
+  "releases": [],
+  "owner_bio": "Engineering high-concurrency systems with Rust & Elixir | Building for scale.",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 7,
+  "owner_following": 4,
+  "owner_created_at": "2020-09-22T20:03:18Z",
+  "license": "MIT",
+  "category": "library"
+}
