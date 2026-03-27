@@ -11,10 +11,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 1,
+  "stars": 2,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-03-19T07:31:13Z",
+  "updated_at": "2026-03-27T13:33:43Z",
   "dependencies": [
     {
       "name": "cpio",
