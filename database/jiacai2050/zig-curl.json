@@ -13,15 +13,15 @@
     "zig-package",
     "ziglang"
   ],
-  "stars": 147,
+  "stars": 146,
   "forks": 22,
   "watchers": 1,
-  "updated_at": "2026-03-11T16:43:16Z",
+  "updated_at": "2026-03-27T01:55:56Z",
   "dependencies": [
     {
       "name": "curl",
-      "url": "https://github.com/curl/curl/releases/download/curl-8_18_0/curl-8.18.0.tar.gz",
-      "hash": "N-V-__8AALp9QAGn6CCHZ6fK_FfMyGtG824LSHYHHasM3w-y"
+      "url": "https://github.com/curl/curl/releases/download/curl-8_19_0/curl-8.19.0.tar.gz",
+      "hash": "N-V-__8AAM-tPgFSsje3FI7iURLjDLSOquhtONinvYZp3AHh"
     },
     {
       "name": "zlib",
