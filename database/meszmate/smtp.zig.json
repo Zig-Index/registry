@@ -1,0 +1,32 @@
+{
+  "name": "smtp.zig",
+  "owner": "meszmate",
+  "repo": "smtp.zig",
+  "description": "An SMTP library for Zig with client, server, and email security features.",
+  "type": "package",
+  "topics": [
+    "smtp",
+    "smtp-server",
+    "zig",
+    "zig-library",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-03-30T10:50:50Z",
+  "readme": "# smtp.zig\n\n[![CI](https://github.com/meszmate/smtp.zig/actions/workflows/ci.yml/badge.svg)](https://github.com/meszmate/smtp.zig/actions/workflows/ci.yml)\n[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)\n\nAn SMTP library for Zig with client, server, and email security features.\n\n## Features\n\n- **SMTP Client** — Connect, authenticate, and send emails with TLS support\n- **SMTP Server** — Configurable server with middleware and extension support\n- **TLS Server Integration** — First-class STARTTLS and implicit TLS provider hooks for accepted connections\n- **Streaming Message APIs** — Stream `DATA`/`BDAT` bodies from readers and route incoming mail into queue-backed sinks\n- **Authentication** — PLAIN, LOGIN, and OAUTHBEARER mechanisms\n- **DKIM** — Ed25519-SHA256 signing with header canonicalization\n- **SPF** — Sender Policy Framework validation\n- **DMARC** — Domain-based Message Authentication, Reporting & Conformance\n- **ARC** — Authenticated Received Chain signing and validation\n- **MIME** — Message parsing and construction\n- **Message Queue** — Persistent queue with configurable retry strategies\n- **Storage Backends** — Filesystem and PostgreSQL store implementations\n- **Email Validation** — RFC-compliant address parsing and MX lookup\n- **State Machine** — Protocol state management for client and server\n- **Middleware** — Extensible server middleware pipeline\n- **Cross-platform** — Works on macOS, Linux, and Windows\n\n## Installation\n\nAdd smtp.zig to your `build.zig.zon`:\n\n```zig\n.dependencies = .{\n    .smtp = .{\n        .url = \"https://github.com/meszmate/smtp.zig/archive/refs/heads/main.tar.gz\",\n        .hash = \"...\",\n    },\n},\n```\n\nThen in your `build.zig`:\n\n```zig\nconst smtp = b.dependency(\"smtp\", .{\n    .target = target,\n    .optimize = optimize,\n});\nexe.root_module.addImport(\"smtp\", smtp.module(\"smtp\"));\n```\n\n## Quick Start\n\n### Sending an Email\n\n```zig\nconst std = @import(\"std\");\nconst smtp = @import(\"smtp\");\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    var client = try smtp.client.Client.connectTcp(allocator, \"smtp.example.com\", 587);\n    defer client.deinit();\n\n    _ = try client.ehlo(\"localhost\");\n    if (client.supportsStartTLS()) {\n        _ = try client.starttls(.{\n            .host_verification = .{ .explicit = \"smtp.example.com\" },\n        });\n    }\n    try client.authenticatePlain(\"user@example.com\", \"password\");\n    _ = try client.sendMail(\n        \"sender@example.com\",\n        &.{\"recipient@example.com\"},\n        \"From: sender@example.com\\r\\nTo: recipient@example.com\\r\\nSubject: Hello\\r\\n\\r\\nHello, World!\\r\\n\",\n    );\n    _ = try client.quit();\n}\n```\n\n### Serving Accepted Connections\n\n```zig\nconst smtp = @import(\"smtp\");\n\n// Accept a TCP connection with std.net, then hand it to the server.\nconst connection = try tcp_server.accept();\ntry server.serveAcceptedConnection(connection, .plaintext);\n### Streaming Large Message Bodies\n\n```zig\nvar file = try std.fs.cwd().openFile(\"message.eml\", .{});\ndefer file.close();\n\nvar read_buffer: [8192]u8 = undefined;\nvar reader = file.reader(&read_buffer);\n\n_ = try client.mailFrom(\"sender@example.com\", .{});\n_ = try client.rcptTo(\"recipient@example.com\", .{});\n_ = try client.sendDataReader(reader.interface());\n```\n\n### Email Validation\n\n```zig\nconst smtp = @import(\"smtp\");\n\n// Validate an email address\nconst valid = smtp.isValidEmail(\"user@example.com\");\n\n// Parse with full details\nconst addr = try smtp.parseEmailAddress(\"User Name <user@example.com>\");\n```\n\n### Parsing MIME Messages\n\n```zig\nvar parsed = try smtp.mime.parseMessageAlloc(allocator, raw_message);\ndefer parsed.deinit();\n\nif (parsed.root.children.len > 0) {\n    std.debug.print(\"first part type: {s}\\n\", .{parsed.root.children[0].content_type});\n}\n```\n\n### MX Lookup\n\n```zig\nconst smtp = @import(\"smtp\");\n\n// Find the best MX host for a domain\nconst mx_host = try smtp.bestMxHost(allocator, \"example.com\");\ndefer allocator.free(mx_host);\n```\n\n## Modules\n\n| Module | Description |\n|--------|-------------|\n| `client` | SMTP client with TLS, authentication, and pipelining |\n| `server` | SMTP server with middleware and extensions |\n| `auth` | Authentication mechanisms (PLAIN, LOGIN, OAUTHBEARER) |\n| `dkim` | DKIM signing with Ed25519-SHA256 |\n| `spf` | SPF record parsing and validation |\n| `dmarc` | DMARC policy evaluation |\n| `arc` | ARC chain validation and signing |\n| `mime` | MIME message parsing and construction |\n| `queue` | Message queue with retry strategies |\n| `store` | Storage backends (filesystem, PostgreSQL) |\n| `address` | Email address validation and normalization |\n| `dns` | DNS resolution utilities (MX, TXT) |\n| `wire` | Wire protocol encoding/decoding |\n| `state` | SMTP state machine |\n| `middleware` | Server middleware pipeline |\n| `extension` | SMTP extension handling |\n\n## Examples\n\nBuild and run examples:\n\n```bash\nzig build run-simple_client\nzig build run-simple_server\nzig build run-proxy\n```\n\n## Testing\n\n```bash\nzig build test\n```\n\n## Contributing\n\nSee [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.\n\n## License\n\n[MIT](LICENSE)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/149275727?u=2b017419b51e2f40705d9d4b643098e7f36cb7d4&v=4",
+  "releases": [],
+  "owner_bio": "\r\n",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "https://meszmate.com",
+  "owner_twitter_username": null,
+  "owner_followers": 15,
+  "owner_following": 6,
+  "owner_created_at": "2023-10-28T22:57:49Z",
+  "license": "MIT",
+  "category": "library"
+}
