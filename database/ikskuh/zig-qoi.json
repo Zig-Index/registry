@@ -13,10 +13,10 @@
     "image-decoder",
     "image-encoder"
   ],
-  "stars": 157,
+  "stars": 158,
   "forks": 10,
   "watchers": 3,
-  "updated_at": "2026-02-09T17:36:35Z",
+  "updated_at": "2026-03-30T11:45:00Z",
   "dependencies": [
     {
       "name": "args",

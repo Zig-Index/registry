@@ -11,10 +11,10 @@
     "ziglang",
     "zig-package"
   ],
-  "stars": 184,
+  "stars": 185,
   "forks": 21,
   "watchers": 3,
-  "updated_at": "2026-03-20T23:07:34Z",
+  "updated_at": "2026-03-30T02:08:43Z",
   "dependencies": [
     {
       "name": "webview",
