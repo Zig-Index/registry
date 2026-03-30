@@ -16,10 +16,10 @@
     "zig-library",
     "rf"
   ],
-  "stars": 244,
+  "stars": 247,
   "forks": 12,
   "watchers": 2,
-  "updated_at": "2026-03-23T06:27:57Z",
+  "updated_at": "2026-03-30T00:37:19Z",
   "dependencies": [
     {
       "name": "cfitsio",
