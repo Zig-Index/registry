@@ -19,12 +19,12 @@
   "stars": 190,
   "forks": 17,
   "watchers": 3,
-  "updated_at": "2026-03-29T22:00:38Z",
+  "updated_at": "2026-03-30T04:40:30Z",
   "dependencies": [
     {
       "name": "ziex_js",
-      "url": "https://registry.npmjs.org/ziex/-/ziex-0.1.0-test.2.tgz",
-      "hash": "ziex_js-0.1.0-dev.804-v1W0GbMDAwBsd2oeoCUMGZ2FXs99xoOQdA-Fwc5q-oUT"
+      "url": "https://registry.npmjs.org/ziex/-/ziex-0.1.0-dev.928.tgz",
+      "hash": "ziex_js-0.1.0-dev.804-v1W0GcvlAgCID6b8xE2BACBEnB0DFxaGiKNctXB14NDn"
     },
     {
       "name": "httpz",
@@ -70,102 +70,47 @@
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/240775591?v=4",
   "releases": [
     {
-      "tag_name": "v0.1.0-test.929",
-      "name": "v0.1.0-test.929",
-      "body": "",
-      "prerelease": true,
-      "published_at": "2026-03-29T04:41:26Z",
-      "html_url": "https://github.com/ziex-dev/ziex/releases/tag/v0.1.0-test.929",
-      "assets": []
-    },
-    {
-      "tag_name": "v0.1.0-test.928",
-      "name": "v0.1.0-test.928",
-      "body": "",
-      "prerelease": true,
-      "published_at": "2026-03-28T20:11:57Z",
-      "html_url": "https://github.com/ziex-dev/ziex/releases/tag/v0.1.0-test.928",
-      "assets": [
-        {
-          "name": "zx-linux-aarch64.tar.gz",
-          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-test.928/zx-linux-aarch64.tar.gz",
-          "size": 4121520,
-          "content_type": "application/gzip"
-        },
-        {
-          "name": "zx-macos-x64.tar.gz",
-          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-test.928/zx-macos-x64.tar.gz",
-          "size": 1232077,
-          "content_type": "application/gzip"
-        },
-        {
-          "name": "zx-linux-x64.tar.gz",
-          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-test.928/zx-linux-x64.tar.gz",
-          "size": 4131831,
-          "content_type": "application/gzip"
-        },
-        {
-          "name": "zx-windows-x64.zip",
-          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-test.928/zx-windows-x64.zip",
-          "size": 1275827,
-          "content_type": "application/zip"
-        },
-        {
-          "name": "zx-macos-aarch64.tar.gz",
-          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-test.928/zx-macos-aarch64.tar.gz",
-          "size": 1162054,
-          "content_type": "application/gzip"
-        },
-        {
-          "name": "zx-windows-aarch64.zip",
-          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-test.928/zx-windows-aarch64.zip",
-          "size": 1224924,
-          "content_type": "application/zip"
-        }
-      ]
-    },
-    {
       "tag_name": "v0.1.0-dev.928",
       "name": "v0.1.0-dev.928",
-      "body": "This is a developer preview of Ziex; some features are still works in progress.\nUpdate or install the Ziex CLI using the following scripts.\n\n## Installation\n\n##### Linux/macOS\n```bash\ncurl -fsSL https://ziex.dev/install | bash\n```\n##### Windows\n```powershell\npowershell -c \"irm ziex.dev/install.ps1 | iex\"\n```\n\n## Changelog\n\n### v0.1.0-dev.928\n\n#### Features\n- feat: preload wasm [`2806ce8`](https://github.com/nurulhudaapon/zx/commit/2806ce8ad9b0e97eb7836e587f03f4c3ab720788)\n- feat: bunjs/tailwindcss zig wrapper [`7bc631b`](https://github.com/nurulhudaapon/zx/commit/7bc631bcf9e178c7937bbf02405a098737cb1666)\n- feat(cli): npm-based CLI binary distribution (#89) [`78bc009`](https://github.com/nurulhudaapon/zx/commit/78bc0090598d3a4bf7aa9fdb6de04ea93ebb8420)\n- feat: @zigc/cli to let zig build run on verce/cf ci/cd [`2f519f3`](https://github.com/nurulhudaapon/zx/commit/2f519f36c06816acd12643d7b3b5bc7f149ae33f)\n- feat: create-zig npm package [`3601e2f`](https://github.com/nurulhudaapon/zx/commit/3601e2f1daeaad9646a6ae0f8c0913e421dee31f)\n- feat: zx.StyleSheet (#90) [`0618066`](https://github.com/nurulhudaapon/zx/commit/061806614e5dc9df567a0a42f5133d7b612a0865)\n- feat(style): zx.Style - add algebraic CSS calc expressions and refactor codegen into structured generator helpers. (#91) [`4546b41`](https://github.com/nurulhudaapon/zx/commit/4546b41b7eb576265e9c39f00515e0e7336995dc)\n- feat(devtool): introduce dedicated devserver [`df77017`](https://github.com/nurulhudaapon/zx/commit/df77017dcee8fca2116f86f767afe99673d82f5b)\n- feat(kv): putAs/ast(getAs) [`7f0c896`](https://github.com/nurulhudaapon/zx/commit/7f0c896d15fc8136b43f21a7bf069475ad8feefb)\n- feat(dx): syntax highlighting in error overlay [`6ba1f1c`](https://github.com/nurulhudaapon/zx/commit/6ba1f1cc84c4a873fa7df822e8da55df1e8602a6)\n- feat: make vercel template deployable using vercel ci/cd [`2e09ab8`](https://github.com/nurulhudaapon/zx/commit/2e09ab8833ea6145063c80f5929daa6cec7f38f4)\n- feat(ide): add dynamic host input and port-based data fetching (#92) [`d8dfc0e`](https://github.com/nurulhudaapon/zx/commit/d8dfc0ea060111bdaf3ed65574b52c95b05c99be)\n- feat(plugin): bun proper deps detection [`d13d072`](https://github.com/nurulhudaapon/zx/commit/d13d07200a1815bc9b705962948166a68b485989)\n\n#### Fixes\n- fix: resolve zig binary from build graph when using from zig build (#87) [`2ef3678`](https://github.com/nurulhudaapon/zx/commit/2ef3678e72bbffeb70c876a1dd90b2a87ba608cd)\n- fix(pg): injection module conditional import [`c5bdbc9`](https://github.com/nurulhudaapon/zx/commit/c5bdbc961a8467183c9dee8ee23cd5979b9c345b)\n- fix: move injections logic out of rendering [`372287e`](https://github.com/nurulhudaapon/zx/commit/372287e742c360beade95b45b718f6482c9a9274)\n- fix: playground issue with on using i128 StringHashMap [`8114564`](https://github.com/nurulhudaapon/zx/commit/811456462f1c2dd90ea29e0dc7bfe572d9406cce)\n- fix: wasmglue custom href [`0afd074`](https://github.com/nurulhudaapon/zx/commit/0afd07439ce9c0ed4a1e251c78055cd199db14cb)\n- fix: playground assets path [`0fdec4d`](https://github.com/nurulhudaapon/zx/commit/0fdec4dd00ce41dbea0ca875a811b64f06fde7f0)\n- fix: use getEnvvarowned for win [`5dc0f5a`](https://github.com/nurulhudaapon/zx/commit/5dc0f5ad4887d5a5c290dabd7155a2c1943daf75)\n- fix: symentic error [`9f96395`](https://github.com/nurulhudaapon/zx/commit/9f9639530e829ee1de8ffb9a0b34b0186be1ac2d)\n- fix: getenv on win [`ee1bb29`](https://github.com/nurulhudaapon/zx/commit/ee1bb29d9d05f23371a529610058a946e0bedad3)\n- fix: devserver fixes for win [`4b9d745`](https://github.com/nurulhudaapon/zx/commit/4b9d745e1ae4388cf275e759cd80cb22178ee0bb)\n- fix: cloudflare d1 provisioning [`a1136a1`](https://github.com/nurulhudaapon/zx/commit/a1136a15beaa689b4f62916e825e59d15bb75f26)\n- fix: add custom build file for vercel template [`9112faa`](https://github.com/nurulhudaapon/zx/commit/9112faa4787bec1fa87913366b9f3b187d7bd302)\n- fix(kv): use proper path separator for os [`6dff26b`](https://github.com/nurulhudaapon/zx/commit/6dff26b45c5208b43f63769214ca157554b3fccc)\n- fix: add missing paths for adapters [`17704a5`](https://github.com/nurulhudaapon/zx/commit/17704a54698162daa5e805c44e5d5b807dcba3bd)\n- fix: static path separator issue on win [`eb2d5a4`](https://github.com/nurulhudaapon/zx/commit/eb2d5a4d3de0d232bf7864aced28b822cd5a3fff)\n- fix: update vercel pkg install [`8573a29`](https://github.com/nurulhudaapon/zx/commit/8573a295d2fbfcb74abfb07e2698d2eda1f726d2)\n- fix: wasm std.timestamp todo issue [`149b277`](https://github.com/nurulhudaapon/zx/commit/149b277ca8357c7c9d3ab229523a9bac56aaea63)\n- fix(pg): add commit hash to pg assets cach [`c2929a3`](https://github.com/nurulhudaapon/zx/commit/c2929a37d7463e1de2065c524bfe53e9c6654dd2)\n- fix(cli): exit dev server if error on ci [`8aac8f9`](https://github.com/nurulhudaapon/zx/commit/8aac8f9256d3b43e17e0813bd3d8241599794859)\n\n#### Documentation\n- docs: update to use new pluging api [`40e6fc9`](https://github.com/nurulhudaapon/zx/commit/40e6fc98f68f679c53d9912fc5aff0eb67bcca7e)\n- docs: db example usage [`3488862`](https://github.com/nurulhudaapon/zx/commit/34888620d5eb7bfb4262734034c7ccdd5fed905d)\n- docs: bun bundle error [`88d0e61`](https://github.com/nurulhudaapon/zx/commit/88d0e61e69e99aeaa40e6948e1c482ff96582ff9)\n\n#### Miscellaneous\n- flake: build with -Dexclude-lsp=true (#88) [`c845a67`](https://github.com/nurulhudaapon/zx/commit/c845a67d78b8cc859ae477b9486ccaa5d6915cac)\n- refactor: move tree out of component.zig [`32f6f50`](https://github.com/nurulhudaapon/zx/commit/32f6f503d5097d8bdbd76ccfeb31c50195e73d51)\n- perf: use zig build cache [`82e89ab`](https://github.com/nurulhudaapon/zx/commit/82e89ab0f0c87d364ff8e5ab6f80a90b73e5ecc0)\n- chore: sync template version [`e24fe24`](https://github.com/nurulhudaapon/zx/commit/e24fe244af6e2a2ddf98e31b93f142ff93148dcc)\n- chore: update @zigc/cli version [`d46d799`](https://github.com/nurulhudaapon/zx/commit/d46d79919af70b410f61b6f97bbe95a7012fdb2c)\n- tempalte: add node package manager templ [`68cf99e`](https://github.com/nurulhudaapon/zx/commit/68cf99eed203233522485eaf240cb7a37e5f1fd1)\n- ci: template list the directories only [`100778b`](https://github.com/nurulhudaapon/zx/commit/100778b2f3b08d6f682bf360cda68cf93d0a90e6)\n- chore: rename database template [`94a3a65`](https://github.com/nurulhudaapon/zx/commit/94a3a656614b5ed93bc5e3b23a96f373b729ff37)\n- ci: update zx version in tempalte explicitly for tracked zon [`919484e`](https://github.com/nurulhudaapon/zx/commit/919484e3069dfd7ded6bae45dac666fb41e0c73c)\n- chore: cleanup node template [`532deee`](https://github.com/nurulhudaapon/zx/commit/532deee6de8c1d7899bc18d012cf0de8a77d3b9a)\n- chore: disable debug log [`1c81577`](https://github.com/nurulhudaapon/zx/commit/1c815770e15955af374e9a107cc904f1c76f6703)\n- wip: experimental jsx component [`c1bd348`](https://github.com/nurulhudaapon/zx/commit/c1bd3482a86cf37021e31ad92403c4ab166dd249)\n- wip(db): interface inspired from better-sqlite [`21275df`](https://github.com/nurulhudaapon/zx/commit/21275df57a0f403ecc8a7a5605bf55941ad596f2)\n- wip(db); wasm adapter [`e1cb177`](https://github.com/nurulhudaapon/zx/commit/e1cb177432e86caa1bcf2ca54304d049d2629936)\n- wip(db): sqlite adapter [`ef63077`](https://github.com/nurulhudaapon/zx/commit/ef630774a61611673e08f6518f44cd44052f65ba)\n- refactor: zx.cache to have backep up by zx.kv [`1433fd4`](https://github.com/nurulhudaapon/zx/commit/1433fd43bfb1b32168d148006ddf0086c216b36b)\n- refactor(db): move noop impl to noop.zig [`1947599`](https://github.com/nurulhudaapon/zx/commit/194759971444e726d1ac85da9ee986f68dfc13b9)\n- chore: sync zx version in templ [`7ec03f9`](https://github.com/nurulhudaapon/zx/commit/7ec03f967a9fd2cc9853a6a7a8114b49332498e6)\n- perf: incrementality for compilation and devserver reload [`406e674`](https://github.com/nurulhudaapon/zx/commit/406e67498069441aa8886cdd6e13ab7b56faaa31)\n- test: add initial e2e tests [`1e2ac6c`](https://github.com/nurulhudaapon/zx/commit/1e2ac6c9c9479802b66381a555ba62cec302dc6b)\n- ci: e2e test start webserver command [`9abfb8e`](https://github.com/nurulhudaapon/zx/commit/9abfb8ed5e9fb3fc4be6ebdab1b89804a7f19352)\n- ci: install missing node dep install [`7d63ad4`](https://github.com/nurulhudaapon/zx/commit/7d63ad439ca1cf2a1c6901da47fec509cf943cf6)\n- perf: bun dep use metafile=true instead [`7756f45`](https://github.com/nurulhudaapon/zx/commit/7756f45a5d2b3aca34b3a84b84ef6496991cc5bd)\n- cli: add deps (embedded file to dpes input) [`bd6f2fc`](https://github.com/nurulhudaapon/zx/commit/bd6f2fc2d4ac369174bda1f4120220d48beb29bc)\n- test(e2e): adapt playwright tests for playground [`4a24a9c`](https://github.com/nurulhudaapon/zx/commit/4a24a9c168dd5b60967d9a8c68c8197fad2f2973)\n- test(e2e): update test and app to pass tests [`1c35f9e`](https://github.com/nurulhudaapon/zx/commit/1c35f9ecc3ff37c7a46aa014871c5b1a52074c32)\n- test: disable flaky tests and fix home page test [`ccbd63a`](https://github.com/nurulhudaapon/zx/commit/ccbd63a10eb2407ae3ad514cb6676614ae0dfd5f)\n- test(e2e): use base url from config [`775d6c1`](https://github.com/nurulhudaapon/zx/commit/775d6c1fab63f90014b9baf8949e6d0987d6d546)\n- chore: bump version [`52bda98`](https://github.com/nurulhudaapon/zx/commit/52bda9816c750d9d797f02ca33712d800d781c73)\n\n### Contributors\n\n- @Andrew-Velox\n- @Cloudef\n- @Satheeshsk369\n- @jubayeramb\n- @nurulhudaapon\n\n",
+      "body": "This is a developer preview of Ziex; some features are still works in progress.\r\nUpdate or install the Ziex CLI using the following scripts.\r\n\r\n## Installation\r\n\r\n##### Linux/macOS\r\n```bash\r\ncurl -fsSL https://ziex.dev/install | bash\r\n```\r\n##### Windows\r\n```powershell\r\npowershell -c \"irm ziex.dev/install.ps1 | iex\"\r\n```\r\n\r\n## Changelog\r\n\r\n### v0.1.0-dev.928\r\n\r\n#### Features\r\n- feat: preload wasm [`2806ce8`](https://github.com/nurulhudaapon/zx/commit/2806ce8ad9b0e97eb7836e587f03f4c3ab720788)\r\n- feat: bunjs/tailwindcss zig wrapper [`7bc631b`](https://github.com/nurulhudaapon/zx/commit/7bc631bcf9e178c7937bbf02405a098737cb1666)\r\n- feat(cli): npm-based CLI binary distribution (#89) [`78bc009`](https://github.com/nurulhudaapon/zx/commit/78bc0090598d3a4bf7aa9fdb6de04ea93ebb8420)\r\n- feat: @zigc/cli to let zig build run on verce/cf ci/cd [`2f519f3`](https://github.com/nurulhudaapon/zx/commit/2f519f36c06816acd12643d7b3b5bc7f149ae33f)\r\n- feat: create-zig npm package [`3601e2f`](https://github.com/nurulhudaapon/zx/commit/3601e2f1daeaad9646a6ae0f8c0913e421dee31f)\r\n- feat: zx.StyleSheet (#90) [`0618066`](https://github.com/nurulhudaapon/zx/commit/061806614e5dc9df567a0a42f5133d7b612a0865)\r\n- feat(style): zx.Style - add algebraic CSS calc expressions and refactor codegen into structured generator helpers. (#91) [`4546b41`](https://github.com/nurulhudaapon/zx/commit/4546b41b7eb576265e9c39f00515e0e7336995dc)\r\n- feat(devtool): introduce dedicated devserver [`df77017`](https://github.com/nurulhudaapon/zx/commit/df77017dcee8fca2116f86f767afe99673d82f5b)\r\n- feat(kv): putAs/ast(getAs) [`7f0c896`](https://github.com/nurulhudaapon/zx/commit/7f0c896d15fc8136b43f21a7bf069475ad8feefb)\r\n- feat(dx): syntax highlighting in error overlay [`6ba1f1c`](https://github.com/nurulhudaapon/zx/commit/6ba1f1cc84c4a873fa7df822e8da55df1e8602a6)\r\n- feat: make vercel template deployable using vercel ci/cd [`2e09ab8`](https://github.com/nurulhudaapon/zx/commit/2e09ab8833ea6145063c80f5929daa6cec7f38f4)\r\n- feat(ide): add dynamic host input and port-based data fetching (#92) [`d8dfc0e`](https://github.com/nurulhudaapon/zx/commit/d8dfc0ea060111bdaf3ed65574b52c95b05c99be)\r\n- feat(plugin): bun proper deps detection [`d13d072`](https://github.com/nurulhudaapon/zx/commit/d13d07200a1815bc9b705962948166a68b485989)\r\n- feat(devtool): add dark mode (#96) [`26a5774`](https://github.com/nurulhudaapon/zx/commit/26a5774994b3405e0a79d3f53398a8e9ef579ac8)\r\n\r\n#### Fixes\r\n- fix: resolve zig binary from build graph when using from zig build (#87) [`2ef3678`](https://github.com/nurulhudaapon/zx/commit/2ef3678e72bbffeb70c876a1dd90b2a87ba608cd)\r\n- fix(pg): injection module conditional import [`c5bdbc9`](https://github.com/nurulhudaapon/zx/commit/c5bdbc961a8467183c9dee8ee23cd5979b9c345b)\r\n- fix: move injections logic out of rendering [`372287e`](https://github.com/nurulhudaapon/zx/commit/372287e742c360beade95b45b718f6482c9a9274)\r\n- fix: playground issue with on using i128 StringHashMap [`8114564`](https://github.com/nurulhudaapon/zx/commit/811456462f1c2dd90ea29e0dc7bfe572d9406cce)\r\n- fix: wasmglue custom href [`0afd074`](https://github.com/nurulhudaapon/zx/commit/0afd07439ce9c0ed4a1e251c78055cd199db14cb)\r\n- fix: playground assets path [`0fdec4d`](https://github.com/nurulhudaapon/zx/commit/0fdec4dd00ce41dbea0ca875a811b64f06fde7f0)\r\n- fix: use getEnvvarowned for win [`5dc0f5a`](https://github.com/nurulhudaapon/zx/commit/5dc0f5ad4887d5a5c290dabd7155a2c1943daf75)\r\n- fix: symentic error [`9f96395`](https://github.com/nurulhudaapon/zx/commit/9f9639530e829ee1de8ffb9a0b34b0186be1ac2d)\r\n- fix: getenv on win [`ee1bb29`](https://github.com/nurulhudaapon/zx/commit/ee1bb29d9d05f23371a529610058a946e0bedad3)\r\n- fix: devserver fixes for win [`4b9d745`](https://github.com/nurulhudaapon/zx/commit/4b9d745e1ae4388cf275e759cd80cb22178ee0bb)\r\n- fix: cloudflare d1 provisioning [`a1136a1`](https://github.com/nurulhudaapon/zx/commit/a1136a15beaa689b4f62916e825e59d15bb75f26)\r\n- fix: add custom build file for vercel template [`9112faa`](https://github.com/nurulhudaapon/zx/commit/9112faa4787bec1fa87913366b9f3b187d7bd302)\r\n- fix(kv): use proper path separator for os [`6dff26b`](https://github.com/nurulhudaapon/zx/commit/6dff26b45c5208b43f63769214ca157554b3fccc)\r\n- fix: add missing paths for adapters [`17704a5`](https://github.com/nurulhudaapon/zx/commit/17704a54698162daa5e805c44e5d5b807dcba3bd)\r\n- fix: static path separator issue on win [`eb2d5a4`](https://github.com/nurulhudaapon/zx/commit/eb2d5a4d3de0d232bf7864aced28b822cd5a3fff)\r\n- fix: update vercel pkg install [`8573a29`](https://github.com/nurulhudaapon/zx/commit/8573a295d2fbfcb74abfb07e2698d2eda1f726d2)\r\n- fix: wasm std.timestamp todo issue [`149b277`](https://github.com/nurulhudaapon/zx/commit/149b277ca8357c7c9d3ab229523a9bac56aaea63)\r\n- fix(pg): add commit hash to pg assets cach [`c2929a3`](https://github.com/nurulhudaapon/zx/commit/c2929a37d7463e1de2065c524bfe53e9c6654dd2)\r\n- fix(cli): exit dev server if error on ci [`8aac8f9`](https://github.com/nurulhudaapon/zx/commit/8aac8f9256d3b43e17e0813bd3d8241599794859)\r\n- fix(cli): add missing binary stubs [`c266775`](https://github.com/nurulhudaapon/zx/commit/c266775825e2c9f5e5e632adb9a38940a3a3edcf)\r\n- fix: unpublished cli version in ziex [`ebfc753`](https://github.com/nurulhudaapon/zx/commit/ebfc753f28a11bff858b358ed705efab2c7268a1)\r\n\r\n#### Documentation\r\n- docs: update to use new pluging api [`40e6fc9`](https://github.com/nurulhudaapon/zx/commit/40e6fc98f68f679c53d9912fc5aff0eb67bcca7e)\r\n- docs: db example usage [`3488862`](https://github.com/nurulhudaapon/zx/commit/34888620d5eb7bfb4262734034c7ccdd5fed905d)\r\n- docs: bun bundle error [`88d0e61`](https://github.com/nurulhudaapon/zx/commit/88d0e61e69e99aeaa40e6948e1c482ff96582ff9)\r\n\r\n#### Miscellaneous\r\n- flake: build with -Dexclude-lsp=true (#88) [`c845a67`](https://github.com/nurulhudaapon/zx/commit/c845a67d78b8cc859ae477b9486ccaa5d6915cac)\r\n- refactor: move tree out of component.zig [`32f6f50`](https://github.com/nurulhudaapon/zx/commit/32f6f503d5097d8bdbd76ccfeb31c50195e73d51)\r\n- perf: use zig build cache [`82e89ab`](https://github.com/nurulhudaapon/zx/commit/82e89ab0f0c87d364ff8e5ab6f80a90b73e5ecc0)\r\n- chore: sync template version [`e24fe24`](https://github.com/nurulhudaapon/zx/commit/e24fe244af6e2a2ddf98e31b93f142ff93148dcc)\r\n- chore: update @zigc/cli version [`d46d799`](https://github.com/nurulhudaapon/zx/commit/d46d79919af70b410f61b6f97bbe95a7012fdb2c)\r\n- tempalte: add node package manager templ [`68cf99e`](https://github.com/nurulhudaapon/zx/commit/68cf99eed203233522485eaf240cb7a37e5f1fd1)\r\n- ci: template list the directories only [`100778b`](https://github.com/nurulhudaapon/zx/commit/100778b2f3b08d6f682bf360cda68cf93d0a90e6)\r\n- chore: rename database template [`94a3a65`](https://github.com/nurulhudaapon/zx/commit/94a3a656614b5ed93bc5e3b23a96f373b729ff37)\r\n- ci: update zx version in tempalte explicitly for tracked zon [`919484e`](https://github.com/nurulhudaapon/zx/commit/919484e3069dfd7ded6bae45dac666fb41e0c73c)\r\n- chore: cleanup node template [`532deee`](https://github.com/nurulhudaapon/zx/commit/532deee6de8c1d7899bc18d012cf0de8a77d3b9a)\r\n- chore: disable debug log [`1c81577`](https://github.com/nurulhudaapon/zx/commit/1c815770e15955af374e9a107cc904f1c76f6703)\r\n- wip: experimental jsx component [`c1bd348`](https://github.com/nurulhudaapon/zx/commit/c1bd3482a86cf37021e31ad92403c4ab166dd249)\r\n- wip(db): interface inspired from better-sqlite [`21275df`](https://github.com/nurulhudaapon/zx/commit/21275df57a0f403ecc8a7a5605bf55941ad596f2)\r\n- wip(db); wasm adapter [`e1cb177`](https://github.com/nurulhudaapon/zx/commit/e1cb177432e86caa1bcf2ca54304d049d2629936)\r\n- wip(db): sqlite adapter [`ef63077`](https://github.com/nurulhudaapon/zx/commit/ef630774a61611673e08f6518f44cd44052f65ba)\r\n- refactor: zx.cache to have backep up by zx.kv [`1433fd4`](https://github.com/nurulhudaapon/zx/commit/1433fd43bfb1b32168d148006ddf0086c216b36b)\r\n- refactor(db): move noop impl to noop.zig [`1947599`](https://github.com/nurulhudaapon/zx/commit/194759971444e726d1ac85da9ee986f68dfc13b9)\r\n- chore: sync zx version in templ [`7ec03f9`](https://github.com/nurulhudaapon/zx/commit/7ec03f967a9fd2cc9853a6a7a8114b49332498e6)\r\n- perf: incrementality for compilation and devserver reload [`406e674`](https://github.com/nurulhudaapon/zx/commit/406e67498069441aa8886cdd6e13ab7b56faaa31)\r\n- test: add initial e2e tests [`1e2ac6c`](https://github.com/nurulhudaapon/zx/commit/1e2ac6c9c9479802b66381a555ba62cec302dc6b)\r\n- ci: e2e test start webserver command [`9abfb8e`](https://github.com/nurulhudaapon/zx/commit/9abfb8ed5e9fb3fc4be6ebdab1b89804a7f19352)\r\n- ci: install missing node dep install [`7d63ad4`](https://github.com/nurulhudaapon/zx/commit/7d63ad439ca1cf2a1c6901da47fec509cf943cf6)\r\n- perf: bun dep use metafile=true instead [`7756f45`](https://github.com/nurulhudaapon/zx/commit/7756f45a5d2b3aca34b3a84b84ef6496991cc5bd)\r\n- cli: add deps (embedded file to dpes input) [`bd6f2fc`](https://github.com/nurulhudaapon/zx/commit/bd6f2fc2d4ac369174bda1f4120220d48beb29bc)\r\n- test(e2e): adapt playwright tests for playground [`4a24a9c`](https://github.com/nurulhudaapon/zx/commit/4a24a9c168dd5b60967d9a8c68c8197fad2f2973)\r\n- test(e2e): update test and app to pass tests [`1c35f9e`](https://github.com/nurulhudaapon/zx/commit/1c35f9ecc3ff37c7a46aa014871c5b1a52074c32)\r\n- test: disable flaky tests and fix home page test [`ccbd63a`](https://github.com/nurulhudaapon/zx/commit/ccbd63a10eb2407ae3ad514cb6676614ae0dfd5f)\r\n- test(e2e): use base url from config [`775d6c1`](https://github.com/nurulhudaapon/zx/commit/775d6c1fab63f90014b9baf8949e6d0987d6d546)\r\n- chore: bump version [`52bda98`](https://github.com/nurulhudaapon/zx/commit/52bda9816c750d9d797f02ca33712d800d781c73)\r\n- chore(template): include zig cli in cloudflare templ [`b162230`](https://github.com/nurulhudaapon/zx/commit/b1622304faff40b96e8b3862f6336c0f3c3f6b8d)\r\n- refactor: remove @zigc to dedicated repo [`cbb63d1`](https://github.com/nurulhudaapon/zx/commit/cbb63d14cf971e1c7c5b5edfc980310c865727cd)\r\n- ci: add npm release automation [`6281b24`](https://github.com/nurulhudaapon/zx/commit/6281b2468d573a8e17cd1b003f91e100c6aca2d7)\r\n- ci: suipport manulal release dispatcher [`6da7b7d`](https://github.com/nurulhudaapon/zx/commit/6da7b7dc2a69955ef6f92e6b4535070f4a426e60)\r\n- ci: remoe node npm auth [`d44396f`](https://github.com/nurulhudaapon/zx/commit/d44396f6160b480702cc5952d27aa8036077461a)\r\n- ci: properly use oidc [`6c91879`](https://github.com/nurulhudaapon/zx/commit/6c91879551ce8716cd892969d8c86111cc202e57)\r\n- ci: add tag name args [`e5f7397`](https://github.com/nurulhudaapon/zx/commit/e5f7397276d0470fc700ab3237a474c889e88f09)\r\n- ci: fix duplicate publish [`c3e2cc1`](https://github.com/nurulhudaapon/zx/commit/c3e2cc127a257e24496e3cf585b03c27470ed104)\r\n- ci: remove cli code and add cli as dep to ziex [`b6c5eab`](https://github.com/nurulhudaapon/zx/commit/b6c5eab751826e232ede94ce609b959a4e08236d)\r\n- ci: fix pre release check [`e5d3ef8`](https://github.com/nurulhudaapon/zx/commit/e5d3ef8ded20119ff838d0d8c3c8d3f135e5a256)\r\n- ci: fix prepublish check [`c39847d`](https://github.com/nurulhudaapon/zx/commit/c39847de7c03543efbdce10f979597e03e576835)\r\n- ci: start verdacio separately [`a19777f`](https://github.com/nurulhudaapon/zx/commit/a19777f566b93ff7c0c721e9fc4b524fe6da50a3)\r\n- test(e2e): increase timeout of webserver start [`206739b`](https://github.com/nurulhudaapon/zx/commit/206739bc049a8cd9939a218dd0f6a194f0171272)\r\n- ci: only run when neccessary [`60bce8e`](https://github.com/nurulhudaapon/zx/commit/60bce8e718d9031bdf26c165abf5bb9bfc906c80)\r\n- ci: fix local registry start [`647eb5a`](https://github.com/nurulhudaapon/zx/commit/647eb5afa45a97e68b8f436c671c4f4ca3cb453f)\r\n- ci: explicit registry during smoke test [`2e997c8`](https://github.com/nurulhudaapon/zx/commit/2e997c8454a43691b9dcba410597befe219e73bd)\r\n- ci: fic smoke test registry [`9ec3d2b`](https://github.com/nurulhudaapon/zx/commit/9ec3d2b6f0606b236c781bd8270e07e963b8aeb3)\r\n- ci: use bunfig instead [`d2ca597`](https://github.com/nurulhudaapon/zx/commit/d2ca597cc299e0cee6e11412b2f0800cd75c1584)\r\n- ci: enable proxy in local registry [`4b99ef8`](https://github.com/nurulhudaapon/zx/commit/4b99ef8a9c63f26e8437ed04a09017a2950aa1ed)\r\n- refactor: simplify exec model for npm [`a29e8a2`](https://github.com/nurulhudaapon/zx/commit/a29e8a290d18d2e7289045651c107160eb395143)\r\n- refactor: rm jsglue_version [`11dbc24`](https://github.com/nurulhudaapon/zx/commit/11dbc2477bfb4ce9415a1861ceb35a995ae80911)\r\n- chore: sync template version [`d361c3d`](https://github.com/nurulhudaapon/zx/commit/d361c3d666ad99e3c3954e7983a5e7228275e553)\r\n\r\n### Contributors\r\n\r\n- @Andrew-Velox\r\n- @Cloudef\r\n- @Satheeshsk369\r\n- @jubayeramb\r\n- @nurulhudaapon\r\n\r\n",
       "prerelease": false,
-      "published_at": "2026-03-28T16:40:21Z",
+      "published_at": "2026-03-30T04:01:41Z",
       "html_url": "https://github.com/ziex-dev/ziex/releases/tag/v0.1.0-dev.928",
       "assets": [
         {
-          "name": "zx-windows-x64.zip",
-          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.928/zx-windows-x64.zip",
-          "size": 1275827,
-          "content_type": "application/zip"
-        },
-        {
-          "name": "zx-macos-aarch64.tar.gz",
-          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.928/zx-macos-aarch64.tar.gz",
-          "size": 1162056,
+          "name": "zx-macos-x64.tar.gz",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.928/zx-macos-x64.tar.gz",
+          "size": 1232096,
           "content_type": "application/gzip"
         },
         {
           "name": "zx-linux-aarch64.tar.gz",
           "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.928/zx-linux-aarch64.tar.gz",
-          "size": 4121530,
+          "size": 4121524,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zx-windows-x64.zip",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.928/zx-windows-x64.zip",
+          "size": 1275819,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zx-macos-aarch64.tar.gz",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.928/zx-macos-aarch64.tar.gz",
+          "size": 1162073,
           "content_type": "application/gzip"
         },
         {
           "name": "zx-linux-x64.tar.gz",
           "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.928/zx-linux-x64.tar.gz",
-          "size": 4131808,
-          "content_type": "application/gzip"
-        },
-        {
-          "name": "zx-macos-x64.tar.gz",
-          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.928/zx-macos-x64.tar.gz",
-          "size": 1232078,
+          "size": 4131841,
           "content_type": "application/gzip"
         },
         {
           "name": "zx-windows-aarch64.zip",
           "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.928/zx-windows-aarch64.zip",
-          "size": 1224922,
+          "size": 1224926,
           "content_type": "application/zip"
         }
       ]
@@ -948,6 +893,98 @@
           "name": "zx-macos-aarch64.tar.gz",
           "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.517/zx-macos-aarch64.tar.gz",
           "size": 1012583,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.0-dev.508",
+      "name": "v0.1.0-dev.508",
+      "body": "This is a developer preview of ZX; some features are still works in progress.\r\nUpdate or install the ZX CLI using the following scripts.\r\n\r\n## Installation\r\n\r\n##### Linux/macOS\r\n```bash\r\ncurl -fsSL https://ziex.dev/install | bash\r\n```\r\n##### Windows\r\n```powershell\r\npowershell -c \"irm ziex.dev/install.ps1 | iex\"\r\n```\r\n\r\n## Changelog\r\n\r\n### v0.1.0-dev.508\r\n\r\n#### Features\r\n- feat(vscode): add tempalte literal syntax support [`10ce6a2`](https://github.com/nurulhudaapon/zx/commit/10ce6a240d3ef1c0f5ae169903a5324811f48d68)\r\n- feat: spread operator for attribute [`9650bb2`](https://github.com/nurulhudaapon/zx/commit/9650bb2daa3043194d1a85a29a93a9b8cbbfcccb)\r\n- feat: error and notfound page [`28e5eae`](https://github.com/nurulhudaapon/zx/commit/28e5eae6bfb2c896429d7a78fd533af80076ea89)\r\n- feat: configurable methods [`c4f2bc5`](https://github.com/nurulhudaapon/zx/commit/c4f2bc56d57663afe00c85cafef9f15176314589)\r\n- feat: failable page [`34bc13d`](https://github.com/nurulhudaapon/zx/commit/34bc13d4e6901e9d616c53d4e7b90842d361d8b2)\r\n- feat: failable component [`70ba62b`](https://github.com/nurulhudaapon/zx/commit/70ba62be2577759c371b0a517eaea5e91d904503)\r\n- feat: template literal syntax for copmonent props [`d9d5703`](https://github.com/nurulhudaapon/zx/commit/d9d57031c9c301a4eb6ac32b702732cdf8b62fa1)\r\n- feat: streaming using builtin async attribute [`16afb8d`](https://github.com/nurulhudaapon/zx/commit/16afb8d696ae7bac7dc99b112b35b38db60e0b9e)\r\n- feat: component level caching [`8aba678`](https://github.com/nurulhudaapon/zx/commit/8aba678826ba6a51b758491eda64ad809c9a3d18)\r\n\r\n#### Fixes\r\n- fix: resolve prefixed space and forced multiline on zx_text (#34) [`8af83ad`](https://github.com/nurulhudaapon/zx/commit/8af83ad708851732ddd6b7c3423e382452482760)\r\n- fix: 404.html generation in export [`0638901`](https://github.com/nurulhudaapon/zx/commit/063890133f2c6048fa4f45cb56b9cfdcb1ef690b)\r\n- fix: rendering attribute and copy all files in site [`dfe5ca1`](https://github.com/nurulhudaapon/zx/commit/dfe5ca1ae5f8e6e532dbb8936fa446ec86d2910f)\r\n- fix: always have GET method enabled for page [`da7a5ac`](https://github.com/nurulhudaapon/zx/commit/da7a5ac04a40698124baee48de1f12cb2d46df2b)\r\n- fix: do not add event handler attribute [`9ec8318`](https://github.com/nurulhudaapon/zx/commit/9ec83180f20cced77761d1992d85b349429f549b)\r\n\r\n#### Documentation\r\n- docs: add link to section [`fefaf63`](https://github.com/nurulhudaapon/zx/commit/fefaf63c49c3ab803e104ca0395f6242ada341ec)\r\n- docs: reformat all zx file [`5a1bb1e`](https://github.com/nurulhudaapon/zx/commit/5a1bb1ea89a7653d4692e275d22f5abf8d8bbb42)\r\n- docs: remove test err return [`7109fdf`](https://github.com/nurulhudaapon/zx/commit/7109fdf70c1567206f3676963e3d909f80d19597)\r\n- docs: fix cli docs ref [`6c7c36a`](https://github.com/nurulhudaapon/zx/commit/6c7c36a340ca3f1df9809474b39e015c8efbee00)\r\n- docs: add proper linking from learn to ref [`569c0f7`](https://github.com/nurulhudaapon/zx/commit/569c0f799bd856a62aad159e05a50c38eab1f407)\r\n- docs: add shorthand and spread docs [`cdf985a`](https://github.com/nurulhudaapon/zx/commit/cdf985a4a10089605a8da094ea442b11edb977a9)\r\n- docs: fix example page layout [`58303be`](https://github.com/nurulhudaapon/zx/commit/58303befe14583f6842b7c72dbd493556ef1fce1)\r\n- docs: import jsz from vendor [`ae96238`](https://github.com/nurulhudaapon/zx/commit/ae96238e7740e80251e48e1009a637fd26453714)\r\n- docs: cleanup examples page [`be96ed6`](https://github.com/nurulhudaapon/zx/commit/be96ed648f5149da9e4ecef8d957f029a3ede3bb)\r\n- docs: remove unused import [`31d5b2f`](https://github.com/nurulhudaapon/zx/commit/31d5b2fc83d663bf2fb90b66aa02366855b0acdd)\r\n- docs: wip caching docs [`f3c22bc`](https://github.com/nurulhudaapon/zx/commit/f3c22bc943aeb94e16247cf3a512248a4d65f750)\r\n- docs: add delete item in todo example [`d71742b`](https://github.com/nurulhudaapon/zx/commit/d71742bc9dc1953d7b46c1e2e61d8dd78ea7d5c4)\r\n- docs: lightspeed perf [`46685d9`](https://github.com/nurulhudaapon/zx/commit/46685d9e79029b22a01a86d37fb5d2d018c28490)\r\n- docs: dark mode codeblock bg [`a575d00`](https://github.com/nurulhudaapon/zx/commit/a575d004996665255e981036076c1baa321e196c)\r\n\r\n#### Miscellaneous\r\n- refactor: remove rendering attribute related logic [`40075f8`](https://github.com/nurulhudaapon/zx/commit/40075f880cfcf6f6c5f1334224892a4ff2f38001)\r\n- refactor: remove old wasm test proj [`feeddcd`](https://github.com/nurulhudaapon/zx/commit/feeddcd410062dae246266a3f3bc6756b789a11e)\r\n- test: fix import path test [`74f923b`](https://github.com/nurulhudaapon/zx/commit/74f923bdbb62cf9ebc9548ea3c235e2f47d80a16)\r\n- wip: component event handler [`1a79921`](https://github.com/nurulhudaapon/zx/commit/1a79921ab8317fdc07f428def04df285122e6692)\r\n- test: add test to check duplicate attr preservation [`f7c9e5e`](https://github.com/nurulhudaapon/zx/commit/f7c9e5ed0753562a4ada07b53b12e934910357de)\r\n- refactor: remove {[var]:f} syntax support [`7c43ae9`](https://github.com/nurulhudaapon/zx/commit/7c43ae9749ea77db7cc0fea4352d319a888f563b)\r\n- refactor: make options passable to cmp [`61c22c9`](https://github.com/nurulhudaapon/zx/commit/61c22c9228a927882b2a56a668af6456c2666508)\r\n- wip: component level caching [`8ba9493`](https://github.com/nurulhudaapon/zx/commit/8ba949370631d22ec2bb6a9ff752c6af9148dfb5)\r\n- wip: csr diffing with key [`79bb4d9`](https://github.com/nurulhudaapon/zx/commit/79bb4d9b518563e8da090f9741d62de25feb93d7)\r\n- wip: cleanup vtree impl [`6d97481`](https://github.com/nurulhudaapon/zx/commit/6d974817c0c8c434933f72aa1b454eb5b6283aa4)\r\n- test: update test expect [`f8057a6`](https://github.com/nurulhudaapon/zx/commit/f8057a615f5a63866f4c46ad1e33382c8214790b)\r\n- chore: version bump [`296cea3`](https://github.com/nurulhudaapon/zx/commit/296cea3b7f22e0337c9b2b485bcc072c8352da48)\r\n- chore: sync template [`7875255`](https://github.com/nurulhudaapon/zx/commit/78752556b18e66320dec28473268f3bed108b201)\r\n\r\n### Contributors\r\n\r\n- @Andrew-Velox\r\n- @nurulhudaapon\r\n\r\n",
+      "prerelease": false,
+      "published_at": "2025-12-31T20:43:58Z",
+      "html_url": "https://github.com/ziex-dev/ziex/releases/tag/v0.1.0-dev.508",
+      "assets": [
+        {
+          "name": "zx-linux-aarch64.tar.gz",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.508/zx-linux-aarch64.tar.gz",
+          "size": 3769975,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zx-windows-x64.zip",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.508/zx-windows-x64.zip",
+          "size": 1165063,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zx-macos-aarch64.tar.gz",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.508/zx-macos-aarch64.tar.gz",
+          "size": 1012078,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zx-macos-x64.tar.gz",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.508/zx-macos-x64.tar.gz",
+          "size": 1073281,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zx-linux-x64.tar.gz",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.508/zx-linux-x64.tar.gz",
+          "size": 3790925,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zx-windows-aarch64.zip",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.508/zx-windows-aarch64.zip",
+          "size": 1119110,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.0-dev.460",
+      "name": "v0.1.0-dev.460",
+      "body": "This is a developer preview of ZX; some features are still works in progress.\nUpdate or install the ZX CLI using the following scripts.\n\n## Installation\n\n##### Linux/macOS\n```bash\ncurl -fsSL https://ziex.dev/install | bash\n```\n##### Windows\n```powershell\npowershell -c \"irm ziex.dev/install.ps1 | iex\"\n```\n\n## Changelog\n\n### v0.1.0-dev.460\n\n#### Features\n- feat: page level caching (#32) [`60e7d9b`](https://github.com/nurulhudaapon/zx/commit/60e7d9b95d6544d9c7b085589728776eda076b2d)\n- feat: introduce template string literal [`e220baf`](https://github.com/nurulhudaapon/zx/commit/e220bafdb4980d68b014b677032e1bf8952c6d22)\n- feat: sourcemap flag for transpile [`f7dab67`](https://github.com/nurulhudaapon/zx/commit/f7dab6793c9e1839a79fd2ffdb75a2e0d87f7c78)\n- feat(zx): introduce zx.ComponentContext & zx.ComponentCtx(type) [`7abdefe`](https://github.com/nurulhudaapon/zx/commit/7abdefef1ec942036e171bf69ff252cdc3557c1e)\n- feat: class={class} shorthanded -> {class} [`1bac3c9`](https://github.com/nurulhudaapon/zx/commit/1bac3c94bdd6292cd35d685cf5273814a4e87eb9)\n- feat: builtin attribute shorthand @{allocator} [`dd1179d`](https://github.com/nurulhudaapon/zx/commit/dd1179d1b722af6eb8ec4829c38a1f4e5d9f1f15)\n- feat: enabld all http method in page [`a80f92e`](https://github.com/nurulhudaapon/zx/commit/a80f92e20098a4778db839f063707d8487eb6c0d)\n- feat: add zx as step by default [`2e1f986`](https://github.com/nurulhudaapon/zx/commit/2e1f986825e61a4eff54a0bea603c29141d697b1)\n- feat(editor): shorthand attribute syntax [`35f03b2`](https://github.com/nurulhudaapon/zx/commit/35f03b237c69917c5d6f80ff3aaf36cb44a09cad)\n- feat: return zx.Build from zx.init [`a39be65`](https://github.com/nurulhudaapon/zx/commit/a39be65ea418d68a1f19d066198119b8123eee9a)\n- feat: add manual installation process [`ea5f9df`](https://github.com/nurulhudaapon/zx/commit/ea5f9df6c5b8cae637acd47c47976a25d9393a72)\n\n#### Fixes\n- fix(fmt): expression_mixed spacing (#33) [`3bd6f0a`](https://github.com/nurulhudaapon/zx/commit/3bd6f0a9fdcc0856bd3ee12880f19d3c5f953e78)\n- fix: temporarily remove expect check for plugin [`aabee50`](https://github.com/nurulhudaapon/zx/commit/aabee50c4eb1445e51b7eba1eaaa53e41c7f5565)\n- fix: add missing cachez dep [`44a49ba`](https://github.com/nurulhudaapon/zx/commit/44a49ba49982a82ded81fb14a01e540848d87af9)\n\n#### Documentation\n- docs: improve expressions secction [`17478c0`](https://github.com/nurulhudaapon/zx/commit/17478c0132be63dade988fe475d0d1446a8d7f11)\n- docs: proper example component name [`1dfeda2`](https://github.com/nurulhudaapon/zx/commit/1dfeda29c0ffec7556fb2f7d72250ff9f445fd8e)\n- docs: support multi tabs in example_block [`9746780`](https://github.com/nurulhudaapon/zx/commit/9746780091af1c40aa0dddbc6fb90f36d77e9b67)\n- docs: update expressions exmample [`ddafe4a`](https://github.com/nurulhudaapon/zx/commit/ddafe4acf3bcf7605e2ae985ab8929be8e13b4c7)\n- docs: move the cli docs to ref page [`feb15b8`](https://github.com/nurulhudaapon/zx/commit/feb15b8653c5d383e28768e67ff08c4f74b714b7)\n- docs: remove tree-sitter install step [`0728d05`](https://github.com/nurulhudaapon/zx/commit/0728d054afe655e04e07fc64453846f04945992b)\n- docs: make scripts ts [`97c8a7f`](https://github.com/nurulhudaapon/zx/commit/97c8a7fed567c5f38141383f4f1dd90e51f92859)\n- docs: bundle prettier for html formatting [`fe401bf`](https://github.com/nurulhudaapon/zx/commit/fe401bf0e01712e5d480f156eeb6f5c3256db3d6)\n- docs: fix missing prettier dep [`7b70d09`](https://github.com/nurulhudaapon/zx/commit/7b70d097cab26c350e05faa1209266431540cfc2)\n\n#### Miscellaneous\n- test: add if_while_if test (#30) [`50682a4`](https://github.com/nurulhudaapon/zx/commit/50682a460e2f2b2a9dbd449e4399cc38a3211b6a)\n- refactor: remove legacy transpiler (#31) [`7ce52f4`](https://github.com/nurulhudaapon/zx/commit/7ce52f4e84c1b6759071cfc9a92ae0cd406acfeb)\n- chore: vendor zig-js [`977112b`](https://github.com/nurulhudaapon/zx/commit/977112ba64abeff4f1be592db0c253196f727f1f)\n- chore: vendor zig-tree-sitter [`97e0bb2`](https://github.com/nurulhudaapon/zx/commit/97e0bb2fe60a0d76dcd14e5717ce285df03201e3)\n- chore: vendor zli [`da1238e`](https://github.com/nurulhudaapon/zx/commit/da1238eccf69e165a4efa2aa19181250541fece8)\n- chore: cleanup vendors [`71ce876`](https://github.com/nurulhudaapon/zx/commit/71ce876b89b22dfa0fcd5a74b61bf42c636a6fe4)\n- chore: further cleanup vendor [`b3a16c3`](https://github.com/nurulhudaapon/zx/commit/b3a16c3d6b66addda94b62d754d7995283a3f590)\n- chore: version bump [`dc8a794`](https://github.com/nurulhudaapon/zx/commit/dc8a7941e7df22c6e485a007b28974694425ee4f)\n- chore: version bump [`7dd90f8`](https://github.com/nurulhudaapon/zx/commit/7dd90f8b7c2731c17426996a8265846dc772db83)\n- chore: use vendored zig-tree-sitter [`0657ee3`](https://github.com/nurulhudaapon/zx/commit/0657ee383af46579b978ca2423a35ef60b16ee98)\n- chore: include link with changelog [`089eb56`](https://github.com/nurulhudaapon/zx/commit/089eb56fb1ea197b6679cd4d8b283a7fa244aca7)\n\n### Contributors\n\n- @Andrew-Velox\n- @nurulhudaapon\n\n",
+      "prerelease": false,
+      "published_at": "2025-12-28T10:59:12Z",
+      "html_url": "https://github.com/ziex-dev/ziex/releases/tag/v0.1.0-dev.460",
+      "assets": [
+        {
+          "name": "zx-macos-x64.tar.gz",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.460/zx-macos-x64.tar.gz",
+          "size": 1067858,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zx-linux-x64.tar.gz",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.460/zx-linux-x64.tar.gz",
+          "size": 3782312,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zx-linux-aarch64.tar.gz",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.460/zx-linux-aarch64.tar.gz",
+          "size": 3760864,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zx-windows-aarch64.zip",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.460/zx-windows-aarch64.zip",
+          "size": 1116024,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zx-windows-x64.zip",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.460/zx-windows-x64.zip",
+          "size": 1158908,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zx-macos-aarch64.tar.gz",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.460/zx-macos-aarch64.tar.gz",
+          "size": 1007786,
           "content_type": "application/gzip"
         }
       ]
