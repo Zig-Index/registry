@@ -11,7 +11,7 @@
   "stars": 39,
   "forks": 3,
   "watchers": 1,
-  "updated_at": "2026-01-06T11:07:44Z",
+  "updated_at": "2026-03-29T11:51:11Z",
   "dependencies": [
     {
       "name": "argzon",
@@ -26,7 +26,7 @@
   ],
   "minimum_zig_version": "0.15.2",
   "readme": "# liza\n\n## Zig codebase initializer.\n\n### Usage\n\n#### Executable\n\n- Build from source:\n\n```sh\ngit clone https://codeberg.org/tensorush/liza.git\ncd liza/\nzig build run -- -h\n```\n\n- Download latest release:\n\n```sh\nwget https://github.com/tensorush/liza/releases/latest/download/<archive>\ntar -xf <archive> # Unix\nunzip <archive> # Windows\n./<binary> -h\n```\n\n### Features\n\n- #### [Zig Executable Template (`exe`)](src/templates/exe/):\n    - Public API module creation.\n    - Dependency package usage.\n    - [Build steps](src/templates/exe/build.zig):\n        - `install` (default):\n            - Zig executable installation.\n            - Common build steps execution (see below).\n        - `run`: Zig executable run.\n        - Custom build steps (see below).\n        - Optional build steps (see below).\n    - Common build options exposure (see below).\n\n- #### [Zig Library Template (`lib`)](src/templates/lib/):\n    - Public root module creation.\n    - [Build steps](src/templates/lib/build.zig):\n        - `install` (default):\n            - Zig static library installation.\n            - Common build steps execution (see below).\n        - `run`: Example suite execution.\n        - Custom build steps, except `release` (see below).\n        - Optional build steps (see below).\n    - Common build options exposure (see below).\n\n- #### [Zig Build Template (`bld`)](src/templates/bld/):\n    - Public Translate-C module creation.\n    - Lazy dependency package usage.\n    - Configuration option usage.\n    - [Build steps](src/templates/bld/build.zig):\n        - `install` (default):\n            - C/C++ static library installation.\n            - Common build steps execution (see below).\n\n- #### Common Build Steps:\n    - `test`: Test suite execution.\n    - `fmt`: Formatting check execution.\n\n- #### Custom Build Steps:\n    - `tag`: Next version tag with [Zq](https://codeberg.org/tensorush/zq).\n    - `update`: Dependencies and minimum Zig version update with [Zq](https://codeberg.org/tensorush/zq).\n    - `release`: Archived binary release with Tar (Unix) and Zip (Windows).\n\n- #### Optional Build Steps:\n    - `doc` (`$d`): Documentation emission (`-d`, `doc`).\n    - `cov` (`$c`): [Kcov source code coverage](https://github.com/SimonKagstrom/kcov) generation (`-c`, `cov`).\n    - `lint` (`$l`): [Vale markup prose linting check](https://github.com/errata-ai/vale) execution (`-l`, `lint`).\n    - `spell` (`$s`): [Typos source code spelling check](https://github.com/crate-ci/typos) execution (`-s`, `spell`).\n    - `check` (`$k`): Build compilation check for [ZLS Build-On-Save](https://zigtools.org/zls/guides/build-on-save/) (`-k`, `check`).\n\n- #### Common Build Options:\n    - `-Ddebug`: Test suite execution under [LLDB debugger](https://lldb.llvm.org/).\n    - `-Dstrip`: Compilation without stack trace printing code.\n    - `-Dprofile`: Compilation with [Tracy profiler Zig bindings](https://github.com/Games-by-Mason/tracy_zig) support.\n    - `-Dno-bin -fincremental --watch`: Incremental compilation without binary emission.\n\n- #### [GitHub](src/templates/.github/workflows/ci.yaml) / [Forgejo](src/templates/.forgejo/workflows/ci.yaml) / [Woodpecker](src/templates/.woodpecker/ci.yaml) CI Workflow Template Jobs:\n    - `install`:\n        - Main artifacts' installation.\n        - `test`: Test suite execution.\n        - `fmt`: Formatting check execution.\n        - (**GitHub-only**) `cov` (`$c`): [Kcov source code coverage](https://github.com/SimonKagstrom/kcov) publication to [Codecov](https://docs.codecov.com/docs/github-2-getting-a-codecov-account-and-uploading-coverage#install-the-github-app-integration) (`-c`, `cov`).\n\n- #### [GitHub](src/templates/.github/workflows/cd.yaml) / [Forgejo](src/templates/.forgejo/workflows/cd.yaml) / [Woodpecker](src/templates/.woodpecker/cd.yaml) CD Workflow Template Jobs:\n    - (**`exe`-/`lib`-only**) `emit`→`deploy`: Documentation emission and deployment to [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-with-a-custom-github-actions-workflow) or [Codeberg Pages](https://codeberg.page) (`-d`, `doc`):\n        - (**Woodpecker-only**) [Generate Codeberg access token](https://docs.codeberg.org/advanced/access-token/) with `repository:write` permission and add it as `TOKEN` secret available on `Push` event.\n        - (**Woodpecker-only**) Add email as `EMAIL` secret available on `Push` event.\n\n- #### [GitHub](src/templates/.github/workflows/release.yaml) / [Woodpecker](src/templates/.woodpecker/release.yaml) Release Workflow Jobs:\n    - (**`exe`-only**) `release`: Release publication using [minisign](https://jedisct1.github.io/minisign/):\n      - Generate key pair without password: `minisign -GW`.\n      - Add `./minisign.pub` as `MINISIGN_PUBLIC_KEY` secret (available on `Tag` event in Woodpecker).\n      - Add `~/.minisign/minisign.key` as `MINISIGN_SECRET_KEY` secret (available on `Tag` event in Woodpecker).\n      - (**Woodpecker-only**) [Generate Codeberg access token](https://docs.codeberg.org/advanced/access-token/) with `misc:read` and `repository:write` permissions and add it as `TOKEN` secret available to `woodpeckerci/plugin-release` on `Tag` event.\n\n- #### [MIT License Template](src/templates/LICENSE):\n    - `$y`: Current year.\n    - `$n`: User name.\n\n- #### [`.gitignore` Template](src/templates/.gitignore):\n    - `$c`: [Kcov source code coverage](https://github.com/SimonKagstrom/kcov) artifacts (`-c`, `cov`).\n\n- #### [`.gitattributes`](src/templates/.gitattributes).\n",
-  "owner_avatar_url": "https://avatars.githubusercontent.com/u/48649707?v=4",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/48649707?u=6e91cb75bd6ace190eaf26ba22f05206d2c1288b&v=4",
   "releases": [
     {
       "tag_name": "v0.15.0",
@@ -653,11 +653,12 @@
       ]
     }
   ],
+  "owner_bio": "Looking for work, open to relocation. tensorush[at]gmail[dot]com",
   "owner_company": null,
-  "owner_location": null,
-  "owner_blog": null,
+  "owner_location": "Saint Petersburg, Russia",
+  "owner_blog": "codeberg.org/tensorush",
   "owner_twitter_username": null,
-  "owner_followers": 0,
+  "owner_followers": 15,
   "owner_following": 0,
   "owner_created_at": "2019-03-17T13:48:36Z",
   "license": "MIT",
