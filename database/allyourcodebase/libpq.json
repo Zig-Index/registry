@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 12,
+  "stars": 13,
   "forks": 5,
   "watchers": 3,
-  "updated_at": "2026-02-19T00:43:56Z",
+  "updated_at": "2026-03-31T05:54:44Z",
   "dependencies": [
     {
       "name": "upstream",
