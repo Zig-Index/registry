@@ -11,10 +11,10 @@
     "zig-package",
     "deductive-database-system"
   ],
-  "stars": 19,
+  "stars": 20,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-03-15T13:42:44Z",
+  "updated_at": "2026-03-30T19:49:48Z",
   "dependencies": [
     {
       "name": "minish",

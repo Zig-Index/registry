@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 6,
+  "stars": 7,
   "forks": 4,
   "watchers": 2,
-  "updated_at": "2025-08-26T01:07:28Z",
+  "updated_at": "2026-03-31T05:56:03Z",
   "minimum_zig_version": "0.14.0",
   "readme": "# QuickJS-NG\n\nThis is [QuickJS-NG](https://github.com/quickjs-ng/quickjs) packaged for [Zig](https://ziglang.org).\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",

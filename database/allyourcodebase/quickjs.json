@@ -8,10 +8,10 @@
     "quickjs",
     "zig-package"
   ],
-  "stars": 0,
+  "stars": 1,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-03-06T19:02:54Z",
+  "updated_at": "2026-03-31T05:52:07Z",
   "minimum_zig_version": "0.14.0",
   "readme": "# QuickJS\n\nThis is [QuickJS](https://github.com/bellard/quickjs) packaged for [Zig](https://ziglang.org).\n\n# Credits\n\nConverted from [zig's quickjs-ng](https://github.com/allyourcodebase/quickjs-ng)\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
