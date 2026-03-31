@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 149,
+  "stars": 148,
   "forks": 17,
   "watchers": 6,
-  "updated_at": "2025-07-28T13:01:36Z",
+  "updated_at": "2026-03-31T10:12:58Z",
   "dependencies": [
     {
       "name": "xcode_frameworks",
