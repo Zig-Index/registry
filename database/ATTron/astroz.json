@@ -19,7 +19,7 @@
   "stars": 248,
   "forks": 12,
   "watchers": 2,
-  "updated_at": "2026-03-31T08:31:41Z",
+  "updated_at": "2026-03-31T15:36:52Z",
   "dependencies": [
     {
       "name": "cfitsio",
@@ -28,8 +28,8 @@
     },
     {
       "name": "zignal",
-      "url": "git+https://github.com/arrufat/zignal#7e322c141f7f631a23a07b60c7394215c4018a37",
-      "hash": "zignal-0.10.0-dev-OrZ3s5kSKAAXeSkJO-xMJCBG7QeSXdiB8vtiJzsaUuvP"
+      "url": "git+https://github.com/arrufat/zignal#6f6b8ee01f337294d667ad000a82b5358c0a45d7",
+      "hash": "zignal-0.10.0-dev-OrZ3s7UAKABFoYmKmvQ2PRBOTvtL-8zXuAWJ7ZJmzROK"
     },
     {
       "name": "oma",
