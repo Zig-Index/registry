@@ -14,10 +14,10 @@
     "llvm-bindings",
     "libclang"
   ],
-  "stars": 58,
+  "stars": 59,
   "forks": 8,
   "watchers": 0,
-  "updated_at": "2026-03-22T13:05:17Z",
+  "updated_at": "2026-03-31T07:44:06Z",
   "dependencies": [
     {
       "name": "test_runner",

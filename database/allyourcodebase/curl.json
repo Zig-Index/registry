@@ -8,10 +8,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 8,
+  "stars": 9,
   "forks": 6,
   "watchers": 2,
-  "updated_at": "2026-03-04T15:34:14Z",
+  "updated_at": "2026-03-31T05:55:20Z",
   "dependencies": [
     {
       "name": "curl",
