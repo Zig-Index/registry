@@ -19,6 +19,15 @@
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/103378?v=4",
   "releases": [
     {
+      "tag_name": "v0.3.0",
+      "name": "Toupee v0.3.0",
+      "body": "Adds truthy/not-truthy conditional.",
+      "prerelease": false,
+      "published_at": "2026-04-01T21:47:04Z",
+      "html_url": "https://github.com/QuiteClose/toupee/releases/tag/v0.3.0",
+      "assets": []
+    },
+    {
       "tag_name": "v0.2.0",
       "name": "Toupee v0.2.0",
       "body": "### Toupee **0.2.0**\r\n\r\n1. **API / packaging**\r\n   - **`Simplify API`**: adds `src/transform.zig`, extends `Context` / `root.zig`, trims `build.zig.zon`.\r\n   - **`RenderResult`** (owned output + `deinit`) on the public API in `root.zig`.\r\n\r\n2. **Dynamic path segments**\r\n   - **`Add dynamic-path lookups`**: dot-paths support **`$(expression)`** for runtime segment choice (e.g. `palette.$(role)`), including nested `$(…)`; see `test/dynamic-path.test`.\r\n\r\n3. **`<t-define>` parsing**\r\n   - **`Recognize bare <t-define>``**: **`<t-define>` without `name`** is valid (empty name); parser/renderer + `extend.test`.\r\n\r\n4. **Whitespace / layout**\r\n   - **`Consume newline after t-slot`**: newline handling after `<t-slot>` (parser/renderer + `regression.test`).\r\n   - **`Test for blank line after include`**: behaviour/tests for blank line after `<t-include>`.\r\n\r\n5. **CI / docs**\r\n   - **`Add CI workflow`**: `.github/workflows/ci.yml` + README CI badge.",
