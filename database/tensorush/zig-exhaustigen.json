@@ -17,7 +17,7 @@
   "readme": "# zig-exhaustigen\n\n## Zig port of [exhaustigen-rs library](https://github.com/graydon/exhaustigen-rs) for exhaustive testing.\n\n### Usage\n\n1. Add `exhaustigen` dependency to `build.zig.zon`:\n\n```sh\nzig fetch --save git+https://github.com/tensorush/zig-exhaustigen.git\n```\n\n2. Use `exhaustigen` dependency in `build.zig`:\n\n```zig\nconst exhaustigen_dep = b.dependency(\"exhaustigen\", .{\n    .target = target,\n    .optimize = optimize,\n});\nconst exhaustigen_mod = exhaustigen_dep.module(\"exhaustigen\");\n\nconst root_mod = b.createModule(.{\n    .target = target,\n    .optimize = optimize,\n    .imports = &.{\n        .{ .name = \"exhaustigen\", .module = exhaustigen_mod },\n    },\n});\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/48649707?u=6e91cb75bd6ace190eaf26ba22f05206d2c1288b&v=4",
   "releases": [],
-  "owner_bio": "Looking for work, open to relocation. tensorush[at]gmail[dot]com",
+  "owner_bio": "Looking for work, open to relocation.\r\ntensorush[at]gmail[dot]com",
   "owner_company": null,
   "owner_location": "Saint Petersburg, Russia",
   "owner_blog": "codeberg.org/tensorush",

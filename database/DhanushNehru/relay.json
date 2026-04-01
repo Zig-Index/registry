@@ -15,10 +15,10 @@
     "server",
     "ziglang"
   ],
-  "stars": 5,
+  "stars": 6,
   "forks": 3,
   "watchers": 1,
-  "updated_at": "2026-03-29T14:41:45Z",
+  "updated_at": "2026-04-01T12:30:34Z",
   "dependencies": [
     {
       "name": "example",
