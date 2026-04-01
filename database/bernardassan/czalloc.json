@@ -19,7 +19,7 @@
   "stars": 1,
   "forks": 2,
   "watchers": 1,
-  "updated_at": "2025-11-12T18:11:43Z",
+  "updated_at": "2026-04-01T21:21:57Z",
   "minimum_zig_version": "0.15.0-dev.558+9279ff888",
   "readme": "# czalloc\nOverride C global allocators to use Zig allocators in a Zig + C mixed project\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/22438427?u=765913766be40c17a87b73d4ced0a90e552b4243&v=4",
