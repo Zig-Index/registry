@@ -10,7 +10,7 @@
   "stars": 3,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-03-30T08:58:54Z",
+  "updated_at": "2026-04-02T22:07:07Z",
   "dependencies": [
     {
       "name": "resources",
@@ -31,9 +31,14 @@
       "name": "zstbi",
       "url": "git+https://github.com/zaddok/zstbi.git#456b7620bf8036d29454d98cb506e0428e6510ae",
       "hash": "zstbi-0.11.0-dev-L0Ea_06WBwCZoJBl6SD0bcHOLEEIrD5xbQ0TbXe-SQ5Y"
+    },
+    {
+      "name": "translator",
+      "url": "git+https://github.com/loftafi/translator.git#c7dc2e6eb7484bdd357e896dd00b84167c81fa6c",
+      "hash": "translator-0.1.0-cfHZxhBFAAC6x0sw5TCYEmPo7IluVfO4wzggUI6EomWT"
     }
   ],
-  "minimum_zig_version": "0.16.1",
+  "minimum_zig_version": "0.16.0",
   "readme": "# Engine\n\nThis zig module provides a lightweight GUI api based around SDL3\nand SDL3 TTF.\n\nThis code is released under the terms of the MIT license. This\ncode is useful for my purposes. No warrantee is given or implied\nthat this library will be suitable for your purpose and no warantee\nis given or implied that this code is free from defects.\n\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/199742861?u=291a353d33643e9cb913c2c5628437e3b22fb20f&v=4",
   "releases": [],
