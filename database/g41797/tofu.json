@@ -2,7 +2,7 @@
   "name": "tofu",
   "owner": "g41797",
   "repo": "tofu",
-  "description": "Tofu - Async messaging for Zig",
+  "description": "Tofu - Async messaging for boring systems",
   "type": "package",
   "topics": [
     "async",
@@ -14,7 +14,7 @@
   "stars": 26,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-03-11T17:25:47Z",
+  "updated_at": "2026-04-02T11:20:43Z",
   "dependencies": [
     {
       "name": "nats",

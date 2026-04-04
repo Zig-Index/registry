@@ -11,10 +11,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 9,
+  "stars": 10,
   "forks": 2,
   "watchers": 1,
-  "updated_at": "2026-02-14T06:52:32Z",
+  "updated_at": "2026-04-03T14:38:06Z",
   "dependencies": [
     {
       "name": "mdbx",

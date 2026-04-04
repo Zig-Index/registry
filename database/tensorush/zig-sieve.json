@@ -17,7 +17,7 @@
   "readme": "# zig-sieve\n\n## Zig implementation of [SIEVE cache eviction algorithm](https://cachemon.github.io/SIEVE-website/).\n\n### Usage\n\n1. Add `sieve` dependency to `build.zig.zon`:\n\n```sh\nzig fetch --save git+https://github.com/tensorush/zig-sieve.git\n```\n\n2. Use `sieve` dependency in `build.zig`:\n\n```zig\nconst sieve_dep = b.dependency(\"sieve\", .{\n    .target = target,\n    .optimize = optimize,\n});\nconst sieve_mod = sieve_dep.module(\"sieve\");\n\nconst root_mod = b.createModule(.{\n    .target = target,\n    .optimize = optimize,\n    .imports = &.{\n        .{ .name = \"sieve\", .module = sieve_mod },\n    },\n});\n```\n\n### Benchmarks (MacBook M1 Pro)\n\n- Sequence - the time to cache and retrieve integer values:\n\n```sh\n$ zig build bench -- s\nSequence: 22.958us\n```\n\n- Composite - the time to cache and retrieve composite values:\n\n```sh\n$ zig build bench -- c\nComposite: 37.668us\n```\n\n- Composite (normal) - the time to cache and retrieve normally-distributed composite values:\n\n```sh\n$ zig build bench -- n\nComposite Normal: 108.001us\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/48649707?u=6e91cb75bd6ace190eaf26ba22f05206d2c1288b&v=4",
   "releases": [],
-  "owner_bio": "Looking for work, open to relocation. tensorush[at]gmail[dot]com",
+  "owner_bio": "Looking for work, open to relocation.\r\ntensorush[at]gmail[dot]com",
   "owner_company": null,
   "owner_location": "Saint Petersburg, Russia",
   "owner_blog": "codeberg.org/tensorush",

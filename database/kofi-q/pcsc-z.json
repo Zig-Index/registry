@@ -14,10 +14,10 @@
     "pcsc-lite",
     "smart-card"
   ],
-  "stars": 2,
+  "stars": 3,
   "forks": 1,
   "watchers": 0,
-  "updated_at": "2026-02-16T16:21:48Z",
+  "updated_at": "2026-04-04T06:34:40Z",
   "dependencies": [
     {
       "name": "base",
