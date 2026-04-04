@@ -15,7 +15,7 @@
   "stars": 112,
   "forks": 18,
   "watchers": 1,
-  "updated_at": "2026-04-04T13:59:30Z",
+  "updated_at": "2026-04-04T15:39:57Z",
   "dependencies": [
     {
       "name": "sdl",
@@ -39,13 +39,13 @@
     },
     {
       "name": "vulkan_zig",
-      "url": "git+https://github.com/tiawl/vulkan.zig?ref=v1.4.347#3524d3611271282400840624c3127ed97079dbae",
-      "hash": "vulkan_zig-1.0.0-p2wg3qtGRAGLpNqSpXxl1lF0e_TWCexe9M5rxHOZWBtG"
+      "url": "git+https://github.com/tiawl/vulkan.zig?ref=v1.4.348#62fffe3696344826313828fa700146bd9e8721b7",
+      "hash": "vulkan_zig-1.0.0-p2wg3kWrRQFBQPH66bNMgJh0lv8iHpsQtUiMp8nF_QPO"
     },
     {
       "name": "glfw_zig",
-      "url": "git+https://github.com/tiawl/glfw.zig?ref=wayland.zig-wayland-protocols-1.48#8ae4dc3afdc08ec2293df3802805f26cdce18d18",
-      "hash": "glfw_zig-1.0.0-NrvYo8fSGQDWlwoWseEQLPlyfGTwx3Miozs-gzvKAvo7"
+      "url": "git+https://github.com/tiawl/glfw.zig?ref=vulkan.zig-v1.4.348#ec3d8127e1e5c2fd361f5c02c99ccf671619eb55",
+      "hash": "glfw_zig-1.0.0-NrvYo8fSGQDds8fkhwYepCg57sUbgmv6ohe0JGhwPuca"
     }
   ],
   "minimum_zig_version": "0.15.2",
