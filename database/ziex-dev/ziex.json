@@ -16,10 +16,10 @@
     "zig-package",
     "server-side-rendering"
   ],
-  "stars": 197,
+  "stars": 198,
   "forks": 16,
   "watchers": 4,
-  "updated_at": "2026-04-04T07:30:24Z",
+  "updated_at": "2026-04-04T09:15:24Z",
   "dependencies": [
     {
       "name": "ziex_js",
@@ -73,7 +73,7 @@
       "tag_name": "v0.1.0-dev.987",
       "name": "v0.1.0-dev.987",
       "body": "This is a developer preview of Ziex; some features are still works in progress.\nUpdate or install the Ziex CLI using the following scripts.\n\n## Installation\n\n##### Linux/macOS\n```bash\ncurl -fsSL https://ziex.dev/install | bash\n```\n##### Windows\n```powershell\npowershell -c \"irm ziex.dev/install.ps1 | iex\"\n```\n\n## Changelog\n\n### v0.1.0-dev.987\n\n#### Fixes\n- fix: update default database file extension from .sql to .db [`f4924a3`](https://github.com/nurulhudaapon/zx/commit/f4924a3e01abd4c76ab1ea4a8604f4315fec49cf)\n\n#### Miscellaneous\n- chore: add zig-pkg to gitingore [`ab077e3`](https://github.com/nurulhudaapon/zx/commit/ab077e35b0b7067b06f9ba81e0f3bb44bbb1a918)\n- refactor: rename zx.platform [`b1e995d`](https://github.com/nurulhudaapon/zx/commit/b1e995d19be343207c0df2ca6fc9461f7e2acdbf)\n- chore: sync template versions [`14fe6d6`](https://github.com/nurulhudaapon/zx/commit/14fe6d6084b21b88c10c036b7c019c92dde792f2)\n- chore: remove unused main.zig cf template [`fd6ee9d`](https://github.com/nurulhudaapon/zx/commit/fd6ee9d6f57924995225b910b689d104b958b90e)\n- refactor: rm pkg/playground [`17c77cc`](https://github.com/nurulhudaapon/zx/commit/17c77cc8cd560fa296b1e0574eb88922db97b5f7)\n- refactor: rm deprecated apis, wasm logic dedupe [`aaf69b3`](https://github.com/nurulhudaapon/zx/commit/aaf69b3cc793ddd6faff8dcfb621608d6d40cd87)\n- chore: bump version [`6cf3b80`](https://github.com/nurulhudaapon/zx/commit/6cf3b80639273ef855ecbea311b641c49c137c80)\n\n### Contributors\n\n- @nurulhudaapon\n\n",
-      "prerelease": true,
+      "prerelease": false,
       "published_at": "2026-04-04T07:50:01Z",
       "html_url": "https://github.com/ziex-dev/ziex/releases/tag/v0.1.0-dev.987",
       "assets": [
