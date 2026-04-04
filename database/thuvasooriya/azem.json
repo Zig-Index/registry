@@ -11,10 +11,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 0,
+  "stars": 1,
   "forks": 1,
   "watchers": 0,
-  "updated_at": "2025-10-17T21:53:22Z",
+  "updated_at": "2026-04-03T22:26:55Z",
   "dependencies": [
     {
       "name": "dvui",
