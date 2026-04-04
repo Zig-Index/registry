@@ -12,10 +12,10 @@
     "ziglang",
     "zig-package"
   ],
-  "stars": 111,
+  "stars": 112,
   "forks": 18,
   "watchers": 1,
-  "updated_at": "2026-03-29T09:48:33Z",
+  "updated_at": "2026-04-04T13:59:30Z",
   "dependencies": [
     {
       "name": "sdl",
@@ -29,8 +29,8 @@
     },
     {
       "name": "dcimgui",
-      "url": "git+https://github.com/dearimgui/dear_bindings#79e2f490530865602184a357ff054687c3bb464f",
-      "hash": "N-V-__8AAKcPCQBo2ZZZBaKHfPkAdZC7m5ZlOZDQb2FXkKYi"
+      "url": "git+https://github.com/dearimgui/dear_bindings#ac4c71e986122402e35773a75bf81c9b57f43865",
+      "hash": "N-V-__8AALMPCQAZEggHJy_2n8p_qPfVBPi-DV9fhCdlJVnp"
     },
     {
       "name": "toolbox",
@@ -44,8 +44,8 @@
     },
     {
       "name": "glfw_zig",
-      "url": "git+https://github.com/tiawl/glfw.zig?ref=vulkan.zig-v1.4.347#fc333fb5e86ead03ca404fb1df15464b39108f1b",
-      "hash": "glfw_zig-1.0.0-NrvYozDSGQCSlWl_LTSeRefBRIz30COr8T8FVk0wpBwh"
+      "url": "git+https://github.com/tiawl/glfw.zig?ref=wayland.zig-wayland-protocols-1.48#8ae4dc3afdc08ec2293df3802805f26cdce18d18",
+      "hash": "glfw_zig-1.0.0-NrvYo8fSGQDWlwoWseEQLPlyfGTwx3Miozs-gzvKAvo7"
     }
   ],
   "minimum_zig_version": "0.15.2",
