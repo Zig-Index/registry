@@ -18,12 +18,12 @@
   "stars": 17,
   "forks": 1,
   "watchers": 0,
-  "updated_at": "2026-04-04T23:52:10Z",
+  "updated_at": "2026-04-05T03:39:17Z",
   "dependencies": [
     {
       "name": "zevy_reflect",
-      "url": "git+https://github.com/captkirk88/zevy-reflect#c152e09d0cc552fb58d5db81e1ca17f6365ba2b1",
-      "hash": "zevy_reflect-1.0.1-Ob80cPmgAgD9tpG3mS-zzA3pFje8OSXUBwCDYIVf0YTE"
+      "url": "git+https://github.com/captkirk88/zevy-reflect#49b435ee2b62a2084d848672eb61f4c78211a43d",
+      "hash": "zevy_reflect-1.1.0-Ob80cDDaAgAcCca73mY7LB5PVcJ8YJEroQ0Ca6pUf3fW"
     },
     {
       "name": "zevy_buildtools",
