@@ -15,7 +15,7 @@
   "stars": 112,
   "forks": 18,
   "watchers": 1,
-  "updated_at": "2026-04-04T15:39:57Z",
+  "updated_at": "2026-04-05T20:58:23Z",
   "dependencies": [
     {
       "name": "sdl",
@@ -29,8 +29,8 @@
     },
     {
       "name": "dcimgui",
-      "url": "git+https://github.com/dearimgui/dear_bindings#ac4c71e986122402e35773a75bf81c9b57f43865",
-      "hash": "N-V-__8AALMPCQAZEggHJy_2n8p_qPfVBPi-DV9fhCdlJVnp"
+      "url": "git+https://github.com/dearimgui/dear_bindings#05f6a235c2d1963b17d98730b6a9d09f705e001c",
+      "hash": "N-V-__8AAFMfCQDc_SkDHo7VP9rsVxjv_n3w8DkpXs_mmUjB"
     },
     {
       "name": "toolbox",
