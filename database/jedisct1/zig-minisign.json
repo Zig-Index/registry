@@ -11,10 +11,10 @@
     "crypto",
     "signatures"
   ],
-  "stars": 118,
+  "stars": 120,
   "forks": 10,
   "watchers": 4,
-  "updated_at": "2026-03-28T10:05:36Z",
+  "updated_at": "2026-04-06T00:27:34Z",
   "dependencies": [
     {
       "name": "clap",
@@ -50,8 +50,8 @@
   "owner_location": "Antibes, France",
   "owner_blog": "https://00f.net",
   "owner_twitter_username": "jedisct1",
-  "owner_followers": 4186,
-  "owner_following": 176,
+  "owner_followers": 4187,
+  "owner_following": 178,
   "owner_created_at": "2009-09-09T10:20:57Z",
   "category": "crypto"
 }

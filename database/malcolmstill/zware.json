@@ -11,10 +11,10 @@
     "wasm",
     "zig-package"
   ],
-  "stars": 400,
+  "stars": 403,
   "forks": 18,
   "watchers": 7,
-  "updated_at": "2026-03-31T15:22:36Z",
+  "updated_at": "2026-04-04T19:35:45Z",
   "dependencies": [
     {
       "name": "wabt",

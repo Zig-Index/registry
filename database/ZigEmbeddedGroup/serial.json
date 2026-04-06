@@ -13,7 +13,7 @@
     "serial-port"
   ],
   "stars": 92,
-  "forks": 29,
+  "forks": 28,
   "watchers": 3,
   "updated_at": "2026-03-11T16:24:03Z",
   "minimum_zig_version": "0.15.1",
