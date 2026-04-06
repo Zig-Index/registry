@@ -7,15 +7,15 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 34,
-  "forks": 8,
+  "stars": 35,
+  "forks": 9,
   "watchers": 2,
-  "updated_at": "2026-04-01T01:22:37Z",
+  "updated_at": "2026-04-06T23:04:13Z",
   "dependencies": [
     {
       "name": "sdl",
-      "url": "https://github.com/libsdl-org/SDL/archive/refs/tags/release-3.4.0.tar.gz",
-      "hash": "N-V-__8AABtk8gIAP7ZQ4yacjIPcrx3btsH0bGNpJG4MPpm6"
+      "url": "https://github.com/libsdl-org/SDL/archive/refs/tags/release-3.4.4.tar.gz",
+      "hash": "N-V-__8AAL9L9AJxY67Fhxp52_VHlLps195MF3irmi4z8Qge"
     },
     {
       "name": "dbus",
