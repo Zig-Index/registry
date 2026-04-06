@@ -1,0 +1,45 @@
+{
+  "name": "unicoder",
+  "owner": "mnemnion",
+  "repo": "unicoder",
+  "description": "Zig Un-Standard Unicode Library",
+  "type": "package",
+  "topics": [
+    "transcode",
+    "unicode",
+    "utf-8",
+    "utf8",
+    "wtf-8",
+    "zig",
+    "zig-package",
+    "ziglang"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-04-06T20:57:18Z",
+  "minimum_zig_version": "0.15.2",
+  "readme": "# Unicoder: Un-standard Unicode Library\n\nThink of `unicoder` as a reimagining of Zig's `std.unicode`.  The\nstandard library has a well-defined purview, concerning itself with\nvalidation, transcoding, iteration, and similar basic encoding-level\noperations.\n\nUnicoder covers the same ground, while being more efficient, better\norganized, and encouraging patterns of use not available through\n`std.unicode`.\n\n## Guide\n\nThe library namespace is organized into sections, based on what the\nfunctions and types in that section operate on:\n\n- `codepoint` for `u21`s\n- `utf8` and `wtf8` for byte-oriented encodings\n- `utf16` and `wtf16` for wide encodings.\n\nThe encoding libraries (not you, `codepoint`) have 'exact' semantics:\nlike the standard library, they validate as they go, and throw an error\nif they encounter any sequence which is ill-formed according to the\nspecification.  Unlike stdlib, there is only one error.  The `8` series\nhave a function `diagnoseError` which leverages stdlib to tell you\nexactly what's wrong, if you care.\n\n```zig\nconst cp1 = try std.unicode.utf8CountCodepoints(str);\nconst cp2 = try unicoder.utf8.countCodepoints(str);\nassert(cp1 == cp2);\n```\n\nAs a drop-in replacement for `std.unicode` in existing code, this\npattern will get you pretty far.\n\n### Cursors\n\nFunctions which work across a slice, which is most of them, come in\n'cursor' variants.  A cursor is a `*usize`, which the function will\nupdate for you as it does its business.  This is almost always what you\nwant.\n\n### Lossy and Valid\n\nThe exact semantics are closest to stdlib, offering the easiest\nupgrade pathway for existing code, and do make the most sense for some\napplications.\n\nHowever, variants are provided: for example, `utf8.lossy` and\n`utf8.valid`.  The 'lossy' variation replaces ill-formed sequences with\nthe Unicode Replacement Character, `U+FFFD`, using the Substitution of\nMaximal Subparts algorithm.  This is the recommended approach to ill-\nformed sequences in the Unicode standard, and with good reason.  As\nguidance, lossy should be seriously considered any time the result of\noperations will not be saved to disk or sent over the network, and is\neven appropriate if it will be, in some cases.\n\nThe valid libraries are for when you know that slices contain\nvalidly-encoded whatever-it-is.  They discount the possibility that\nthis isn't the case completely, and if that's wrong, the behavior\nis unspecified, and the consequences may include memory hazards and\nsecurity vulnerabilities.  These expose the functions `validate` and\n`validateCursor`, which do not make such assumptions (obviously) in\nanswering the question to which they are put.\n\nIt is strenuously recommended that users of `valid` libs create a\ncustom `struct` type to represent known-good sequences, as a way of\ntracking provenance of already-validated slices.  Users are also advised\nthat it is rare that validity is a hard prerequisite of operating on\nprobably-Unicode.\n\nSome routines in `valid` will assert validity before operations\ncommence, in debug modes only.  Which of these do so is undocumented,\nand subject to change.\n\n## Endianness\n\nThis library is deliberately biased toward little-endian 16 bit\nencodings.  Broadly, we consider the presence of big-endian 16 bit\nUnicode to represent a problem to be solved as early as possible.\n\nThe `(u|w)tf16` libraries have a function to normalize a buffer of\n`u16`s into LE form, if they're in BE form.  Since it is impossible to\nnon-heuristically check which is which, this will do the opposite if\nthe opposite is, in fact, the case.\n\nPlease understand that endianness in encoding contexts refers to\n\"network order\", and no accommodation to native endianness is made in\nterms of the `unicoder` interface.\n\n## Performance\n\nThis library is based on [runerip][rrip], which contains benchmarks\nagainst stdlib, demonstrating significant performance improvements.\nThese have not been ported to `unicoder`, and probably will not be,\nbecause the algorithms are identical, simply more complete and better\norganized.\n\nOne caveat: some routines in `std.unicode` try to consume an ASCII-only\nprefix before switching to the full-unicode path, using SIMD on systems\nwhich support it: most of them, these days.  It's safe to conjecture\nthat those will be faster in the event that such an ASCII prefix exists.\n\nIt is contemplated that future editions of this library will have\n\"expect ASCII\" variations, which improve on this trick by attempting to\nreturn to the fast path after the slow path sees appropriate amounts\nof pure-ASCII text.  We do not expect such a refinement to be an\noptimization in the general case, however, so it will not be baked into\nthe baseline routines.\n\n## Fancy Stuff\n\nThis library covers only the most basic aspects of Unicode.  For fuller\nsupport, there are a couple good options.  Disclosure: I maintain `zg`.\n\nI recommend [zg][zg] for most cases, as it's the most feature-complete,\nat least at the time of writing.  However, [uucode][uucd] has a unique\nand very clever approach to building the tries which both libraries\nuse, which is amenable to tailoring, something `zg` does not provide\nat all.  So if you need to customize behavior, `uucode` is the way to\ngo.\n\nAs of `zg`'s latest release, there is little to no difference in how\neach library does the things which both libraries do.\n\nIn any case, `unicoder` is more narrowly scoped, and will remain so.\nAll three libraries use the [Höhrmann Algorithm][utfdfa], first ported\nto Zig for use in `runerip`.\n\n[rrip]: https://github.com/mnemnion/runerip/\n[zg]: https://codeberg.org/atman/zg\n[uucd]: https://github.com/jacobsandlund/uucode\n[utfdfa]: https://bjoern.hoehrmann.de/utf-8/decoder/dfa/\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/231785?u=8a0cdeb97b0a614b0350536ecd6921ee6166c611&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.0",
+      "name": "Unicoder Debutante Release",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2026-04-06T17:45:19Z",
+      "html_url": "https://github.com/mnemnion/unicoder/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": "Eastern Standard Tribe",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 97,
+  "owner_following": 21,
+  "owner_created_at": "2010-03-27T23:31:39Z",
+  "homepage": "https://mnemnion.github.io/unicoder/",
+  "license": "MIT",
+  "category": "library"
+}

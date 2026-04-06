@@ -19,7 +19,7 @@
   "stars": 2,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-01-25T13:43:39Z",
+  "updated_at": "2026-04-06T20:49:47Z",
   "dependencies": [
     {
       "name": "verilator",
