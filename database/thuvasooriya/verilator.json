@@ -19,12 +19,12 @@
   "stars": 2,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-04-06T20:49:47Z",
+  "updated_at": "2026-04-07T05:08:36Z",
   "dependencies": [
     {
-      "name": "verilator",
-      "url": "git+https://github.com/verilator/verilator?ref=v5.044#8df584ca1ddde5c8afbd15dc5fdcb677a78f9af2",
-      "hash": "N-V-__8AAItNnQI8Rn60c2LPUcVNWTT_iuI-MdJW6tGqgtZH"
+      "name": "upstream",
+      "url": "git+https://github.com/verilator/verilator#v5.046",
+      "hash": "N-V-__8AABDjmgJI4wbntv5seE__SvRxLciFJuI6l8fxeuR6"
     },
     {
       "name": "flex",
