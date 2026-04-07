@@ -12,9 +12,9 @@
     "zig-package"
   ],
   "stars": 84,
-  "forks": 9,
+  "forks": 10,
   "watchers": 3,
-  "updated_at": "2026-03-30T14:07:12Z",
+  "updated_at": "2026-04-07T07:33:54Z",
   "dependencies": [
     {
       "name": "sqlite_source",
