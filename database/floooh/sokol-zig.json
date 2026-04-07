@@ -10,10 +10,10 @@
     "crossplatform",
     "zig-package"
   ],
-  "stars": 661,
+  "stars": 663,
   "forks": 76,
   "watchers": 9,
-  "updated_at": "2026-04-06T18:36:01Z",
+  "updated_at": "2026-04-07T15:12:07Z",
   "dependencies": [
     {
       "name": "emsdk",
@@ -33,7 +33,7 @@
   "owner_location": "Berlin",
   "owner_blog": "http://floooh.github.io",
   "owner_twitter_username": null,
-  "owner_followers": 2994,
+  "owner_followers": 2995,
   "owner_following": 37,
   "owner_created_at": "2012-05-02T15:38:15Z",
   "license": "Zlib",
