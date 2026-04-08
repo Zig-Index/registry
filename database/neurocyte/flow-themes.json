@@ -11,7 +11,7 @@
   "stars": 12,
   "forks": 9,
   "watchers": 1,
-  "updated_at": "2026-04-08T09:19:37Z",
+  "updated_at": "2026-04-08T16:36:55Z",
   "dependencies": [
     {
       "name": "theme_1984",
@@ -142,12 +142,33 @@
       "name": "cbor",
       "url": "git+https://github.com/neurocyte/cbor?ref=master#66c28df31b8e4448dac7edf063417f2234d6f3c9",
       "hash": "cbor-1.1.0-RcQE_DZMAQBg77bTLWHEMF7QSF2lWUudUbarD9xC5yVJ"
+    },
+    {
+      "name": "theme_starfall",
+      "url": "git+https://github.com/chandan00761/starfall-visual-studio-code?ref=main#ec8d12a160042dea53b651d507fcb41f118fb87c",
+      "hash": "N-V-__8AADJTUQAu-OzC23GuzN_not1GCjo-nEK0kXbtoB7y"
     }
   ],
   "minimum_zig_version": "0.15.2",
   "readme": "# flow-themes\nThemes compiler for Flow-Control, the text editor\n\n## Requirements\n\n - zig 0.15.1\n - hjson (installed in your PATH)\n\n## Build\n\n`zig build`\n\nThis will download and compile all the themes and create a zig module\nin `zig-out` that can be referenced as a dependency from another project's\n`build.zig.zon`.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/1552770?u=5c42562ca7bf8db5e586c5f373541572957629fe&v=4",
   "releases": [
+    {
+      "tag_name": "master-80ac47f701dc4fab73dafb5c0da10b0c9e395052",
+      "name": "Tarball release",
+      "body": "Tarball release",
+      "prerelease": false,
+      "published_at": "2026-04-08T16:37:32Z",
+      "html_url": "https://github.com/neurocyte/flow-themes/releases/tag/master-80ac47f701dc4fab73dafb5c0da10b0c9e395052",
+      "assets": [
+        {
+          "name": "flow-themes.tar.gz",
+          "url": "https://github.com/neurocyte/flow-themes/releases/download/master-80ac47f701dc4fab73dafb5c0da10b0c9e395052/flow-themes.tar.gz",
+          "size": 172585,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
     {
       "tag_name": "master-32b5be45c4c001902fc8ff226d2e790e462148ed",
       "name": "Tarball release",
@@ -448,22 +469,6 @@
           "name": "flow-themes.tar.gz",
           "url": "https://github.com/neurocyte/flow-themes/releases/download/master-82b64b6a7fc99d0c7560ee057d3b1f6021446dc4/flow-themes.tar.gz",
           "size": 77629,
-          "content_type": "application/gzip"
-        }
-      ]
-    },
-    {
-      "tag_name": "master-8b79cf6d79373c142393ec26a81b19f4701f4372",
-      "name": "Tarball release",
-      "body": "Tarball release",
-      "prerelease": false,
-      "published_at": "2025-01-25T20:42:29Z",
-      "html_url": "https://github.com/neurocyte/flow-themes/releases/tag/master-8b79cf6d79373c142393ec26a81b19f4701f4372",
-      "assets": [
-        {
-          "name": "flow-themes.tar.gz",
-          "url": "https://github.com/neurocyte/flow-themes/releases/download/master-8b79cf6d79373c142393ec26a81b19f4701f4372/flow-themes.tar.gz",
-          "size": 76969,
           "content_type": "application/gzip"
         }
       ]
