@@ -11,7 +11,7 @@
   "stars": 12,
   "forks": 9,
   "watchers": 1,
-  "updated_at": "2026-04-08T08:04:05Z",
+  "updated_at": "2026-04-08T09:19:37Z",
   "dependencies": [
     {
       "name": "theme_1984",
@@ -148,6 +148,22 @@
   "readme": "# flow-themes\nThemes compiler for Flow-Control, the text editor\n\n## Requirements\n\n - zig 0.15.1\n - hjson (installed in your PATH)\n\n## Build\n\n`zig build`\n\nThis will download and compile all the themes and create a zig module\nin `zig-out` that can be referenced as a dependency from another project's\n`build.zig.zon`.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/1552770?u=5c42562ca7bf8db5e586c5f373541572957629fe&v=4",
   "releases": [
+    {
+      "tag_name": "master-32b5be45c4c001902fc8ff226d2e790e462148ed",
+      "name": "Tarball release",
+      "body": "Tarball release",
+      "prerelease": false,
+      "published_at": "2026-04-08T09:20:13Z",
+      "html_url": "https://github.com/neurocyte/flow-themes/releases/tag/master-32b5be45c4c001902fc8ff226d2e790e462148ed",
+      "assets": [
+        {
+          "name": "flow-themes.tar.gz",
+          "url": "https://github.com/neurocyte/flow-themes/releases/download/master-32b5be45c4c001902fc8ff226d2e790e462148ed/flow-themes.tar.gz",
+          "size": 167590,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
     {
       "tag_name": "master-8fee56fed587a41140e0f1e3df5f133eaba30fff",
       "name": "Tarball release",
@@ -448,22 +464,6 @@
           "name": "flow-themes.tar.gz",
           "url": "https://github.com/neurocyte/flow-themes/releases/download/master-8b79cf6d79373c142393ec26a81b19f4701f4372/flow-themes.tar.gz",
           "size": 76969,
-          "content_type": "application/gzip"
-        }
-      ]
-    },
-    {
-      "tag_name": "master-770924d1aba9cc33440b66e865bd4f7dca871074",
-      "name": "Tarball release",
-      "body": "Tarball release",
-      "prerelease": false,
-      "published_at": "2025-01-14T18:43:08Z",
-      "html_url": "https://github.com/neurocyte/flow-themes/releases/tag/master-770924d1aba9cc33440b66e865bd4f7dca871074",
-      "assets": [
-        {
-          "name": "flow-themes.tar.gz",
-          "url": "https://github.com/neurocyte/flow-themes/releases/download/master-770924d1aba9cc33440b66e865bd4f7dca871074/flow-themes.tar.gz",
-          "size": 75825,
           "content_type": "application/gzip"
         }
       ]
