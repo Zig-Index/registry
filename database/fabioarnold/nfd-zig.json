@@ -11,13 +11,23 @@
     "file-dialog"
   ],
   "stars": 66,
-  "forks": 19,
+  "forks": 20,
   "watchers": 1,
-  "updated_at": "2026-04-07T11:22:59Z",
+  "updated_at": "2026-04-08T07:05:07Z",
   "minimum_zig_version": "0.15.1",
   "readme": "# nfd-zig\n\n`nfd-zig` is a Zig binding to the library [nativefiledialog](https://github.com/mlabbe/nativefiledialog)\nwhich provides a convenient cross-platform interface to opening file dialogs in\nLinux, macOS and Windows.\n\nThis library has been tested on Windows 10, macOS 11.1 and Linux.\n\n## Usage\n\nYou can run the demo with `zig build run`. The demo's source is in `src/demo.zig`.\n\nIf you want to add the library to your own project:\n\n- Fetch the `nfd` dependency:\n\n```bash\nzig fetch --save git+https://github.com/fabioarnold/nfd-zig.git\n```\n\nThis will add the `nfd` dependency to your `build.zig.zon`. e.g.,\n\n```zig\n.nfd = .{\n    .url = \"git+https://github.com/fabioarnold/nfd-zig.git#0ad2a0c092ffba0c98613d619b82100c991f5ad6\",\n    .hash = \"nfd-0.1.0-11fxvN6IBgD5rvvfjrw1wPqibMsbUJ-h2ZcGR6FOEvrm\",\n},\n```\n\n- Add the module in your `build.zig`:\n\n```zig\nconst nfd = b.dependency(\"nfd\", .{ .target = target, .optimize = optimize });\nconst nfd_mod = nfd.module(\"nfd\");\nexe.root_module.addImport(\"nfd\", nfd_mod);\n```\n\n- Import and use it your code, e.g., `main.zig`:\n\n```zig\nconst nfd = @import(\"nfd\");\n\npub fn main() !void {\n    const filter = \"txt\";\n    const default_path: ?[]const u8 = null;\n    const path: ?[]const u8 = try nfd.openFileDialog(filter, default_path);\n}\n```\n\n## Screenshot\n\n![Open dialog on Windows 10](https://raw.githubusercontent.com/mlabbe/nativefiledialog/67345b80ebb429ecc2aeda94c478b3bcc5f7888e/screens/open_win.png)\n![Open dialog on Linux with GTK 3](https://raw.githubusercontent.com/mlabbe/nativefiledialog/67345b80ebb429ecc2aeda94c478b3bcc5f7888e/screens/open_gtk3.png)\n![Open dialog on MacOS with Cocoa](https://raw.githubusercontent.com/mlabbe/nativefiledialog/refs/heads/master/screens/open_cocoa.png)\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/473672?u=650e05a51a6013964860bda90c3fcd2733b0776c&v=4",
-  "releases": [],
+  "releases": [
+    {
+      "tag_name": "0.15.1",
+      "name": "0.15.1",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2026-04-08T07:02:57Z",
+      "html_url": "https://github.com/fabioarnold/nfd-zig/releases/tag/0.15.1",
+      "assets": []
+    }
+  ],
   "owner_company": "@TigerBeetle",
   "owner_location": "Darmstadt, Germany",
   "owner_blog": "https://fabioarnold.de",
