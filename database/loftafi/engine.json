@@ -10,7 +10,7 @@
   "stars": 3,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-04-08T05:18:34Z",
+  "updated_at": "2026-04-09T06:17:15Z",
   "dependencies": [
     {
       "name": "resources",
@@ -34,8 +34,8 @@
     },
     {
       "name": "translator",
-      "url": "git+https://github.com/loftafi/translator.git#675884182b48a93682928658f6b1cb2ac899bc3d",
-      "hash": "translator-0.1.1-cfHZxhBFAAD51EaolRdA9jyvI5ftkHDFGk1QYOrX92T3"
+      "url": "git+https://github.com/loftafi/translator.git#9ed101c88e4ae10a8aed52edbbfd4cab6cace46d",
+      "hash": "translator-0.1.2-cfHZxjhNAABQ53rYfbMsRpCFPaTwn_XDumJYChaOOGQF"
     }
   ],
   "minimum_zig_version": "0.16.0",
