@@ -10,10 +10,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 4,
+  "stars": 5,
   "forks": 2,
   "watchers": 0,
-  "updated_at": "2026-03-27T17:25:18Z",
+  "updated_at": "2026-04-07T18:29:53Z",
   "dependencies": [
     {
       "name": "protobuf",

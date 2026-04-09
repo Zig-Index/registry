@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 12,
+  "stars": 13,
   "forks": 3,
   "watchers": 5,
-  "updated_at": "2026-04-08T00:28:07Z",
+  "updated_at": "2026-04-09T06:59:53Z",
   "dependencies": [
     {
       "name": "pcre2",

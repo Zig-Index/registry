@@ -24,7 +24,7 @@
   ],
   "minimum_zig_version": "0.14.1",
   "readme": "# hawwaz\n\nThis is a little Zig library that provides a function to calculate the\n[_abjad_ numeral](https://en.wikipedia.org/wiki/Abjad_numerals) value of a\nstring of Arabic-script text. A few options can be configured: Mashriqi vs.\nMaghribi letter order, whether to count an _alif madda_ as one or two *alif*s,\netc. The logic is based on implementations that I've written in other languages,\nincluding [TypeScript](https://github.com/theodore-s-beers/abjadcalc) and\n[Rust](https://github.com/theodore-s-beers/abjad-rs).\n\nI hope to add more documentation here later. For the time being, it may be\ninstructive to review the notes on my site\n[abjadcalc.com](https://www.abjadcalc.com/).\n\nTo build the library and run tests:\n\n```sh\nzig build test\n```\n",
-  "owner_avatar_url": "https://avatars.githubusercontent.com/u/32523293?u=efb1809b3ae5663f417f7bb9319c1030e1a9b182&v=4",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/32523293?u=a4ae601ba5fb0f25cfd83cdfff8f7ab8e487511f&v=4",
   "releases": [],
   "owner_bio": "Research software engineer, Persian and Arabic philologist",
   "owner_company": null,
