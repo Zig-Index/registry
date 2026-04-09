@@ -13,11 +13,20 @@
   "stars": 97,
   "forks": 9,
   "watchers": 3,
-  "updated_at": "2026-03-29T08:14:11Z",
-  "minimum_zig_version": "0.14.0",
-  "readme": "# ansi_term\n\n![CI](https://github.com/ziglibs/ansi_term/workflows/CI/badge.svg)\n\nZig library for dealing with ANSI Terminals (escape codes, styles, etc.)\n\n> [!IMPORTANT]\n> This library was renamed from `ansi-term`, now using an underscore\n\nThis was originally code which was extracted from\n[lscolors](https://github.com/ziglibs/lscolors) for use in\nother zig libraries. More features have been added since.\n\n`ansi_term` is designed to work with Zig 0.14.0.\n\n## Documentation\n\nAutomatically generated documentation for the project\ncan be found at https://ziglibs.github.io/ansi_term/.\nNote that autodoc is currently in beta; the website may be broken or incomplete.\n",
+  "updated_at": "2026-04-09T19:58:26Z",
+  "minimum_zig_version": "0.15.2",
+  "readme": "# ansi_term\n\n![CI](https://github.com/ziglibs/ansi_term/workflows/CI/badge.svg)\n\nZig library for dealing with ANSI Terminals (escape codes, styles, etc.)\n\n> [!IMPORTANT]\n> This library was renamed from `ansi-term`, now using an underscore\n\nThis was originally code which was extracted from\n[lscolors](https://github.com/ziglibs/lscolors) for use in\nother zig libraries. More features have been added since.\n\n`ansi_term` is designed to work with Zig 0.15.2.\n\n## Documentation\n\nAutomatically generated documentation for the project\ncan be found at https://ziglibs.github.io/ansi_term/.\nNote that autodoc is currently in beta; the website may be broken or incomplete.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/65570835?v=4",
   "releases": [
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "## What's Changed\r\n* Address deprecations in std.Build by @lishaduck in https://github.com/ziglibs/ansi_term/pull/39\r\n* Add terminal-related escape codes by @DanikVitek in https://github.com/ziglibs/ansi_term/pull/40\r\n* Bump mlugg/setup-zig from 1 to 2 by @dependabot[bot] in https://github.com/ziglibs/ansi_term/pull/41\r\n* Bump actions/checkout from 4 to 5 by @dependabot[bot] in https://github.com/ziglibs/ansi_term/pull/42\r\n* Bump actions/upload-pages-artifact from 3 to 4 by @dependabot[bot] in https://github.com/ziglibs/ansi_term/pull/43\r\n* Bump actions/checkout from 5 to 6 by @dependabot[bot] in https://github.com/ziglibs/ansi_term/pull/44\r\n* Bump actions/deploy-pages from 4 to 5 by @dependabot[bot] in https://github.com/ziglibs/ansi_term/pull/45\r\n\r\n## New Contributors\r\n* @lishaduck made their first contribution in https://github.com/ziglibs/ansi_term/pull/39\r\n* @DanikVitek made their first contribution in https://github.com/ziglibs/ansi_term/pull/40\r\n\r\n**Full Changelog**: https://github.com/ziglibs/ansi_term/compare/v0.1.0...v0.2.0",
+      "prerelease": false,
+      "published_at": "2026-04-09T20:12:55Z",
+      "html_url": "https://github.com/ziglibs/ansi_term/releases/tag/v0.2.0",
+      "assets": []
+    },
     {
       "tag_name": "v0.1.0",
       "name": "v0.1.0",
