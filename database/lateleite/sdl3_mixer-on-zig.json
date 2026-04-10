@@ -1,0 +1,73 @@
+{
+  "name": "sdl3_mixer-on-zig",
+  "owner": "lateleite",
+  "repo": "sdl3_mixer-on-zig",
+  "description": "SDL3_Mixer library wrapped with Zig's build system",
+  "type": "package",
+  "topics": [
+    "sdl-mixer",
+    "sdl3",
+    "sdl3-mixer",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 0,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2026-04-09T14:33:07Z",
+  "dependencies": [
+    {
+      "name": "gme",
+      "url": "git+https://github.com/lateleite/gme-on-zig.git",
+      "hash": "gme-0.6.4-EWwvb_sOAAAYdi6yJzM3NazSI5RVoGdZNOHWq-uqG9OY"
+    },
+    {
+      "name": "ogg",
+      "url": "git+https://github.com/lateleite/ogg-on-zig.git",
+      "hash": "ogg-1.3.6-rt5OMAkHAADD9W0wAUrgZW9eo2prpVd5EMs7ElLAbwrf"
+    },
+    {
+      "name": "opus",
+      "url": "git+https://github.com/lateleite/opus-on-zig.git",
+      "hash": "opus-1.6.1-H5oCMJ07AAC7PwzGeycOjaNNY_18aWiQrux7AaGr3oTm"
+    },
+    {
+      "name": "opusfile",
+      "url": "git+https://github.com/lateleite/opusfile-on-zig.git",
+      "hash": "opusfile-0.13.0-git-0iSaa0oJAADc-4aa7h0VAIQNa-ZrYapiDNce7pD-BXeV"
+    },
+    {
+      "name": "sdl",
+      "url": "git+https://github.com/castholm/SDL.git#95980cb420254ff4578657a5a85abfb44046507a",
+      "hash": "sdl-0.4.1+3.4.2-SDL--umApAGq9hhwKcquz9eEQtR1x7S3pnQUe2mNpjVj"
+    },
+    {
+      "name": "sdl_mixer",
+      "url": "https://github.com/libsdl-org/SDL_mixer/archive/refs/tags/release-3.2.0.tar.gz",
+      "hash": "N-V-__8AAEX25gBY0zDPXBeJfrigANNzvayiaz8HmvgJ7e3y"
+    },
+    {
+      "name": "vorbis",
+      "url": "git+https://github.com/lateleite/vorbis-on-zig.git",
+      "hash": "vorbis-1.3.8-git-DtYmdQAKAABoNn2Gtyo7xO3Z4hYbuXpKwC0S2tWZ4sAx"
+    },
+    {
+      "name": "xmp",
+      "url": "git+https://github.com/lateleite/xmp-on-zig.git",
+      "hash": "xmp-4.7.0-MziVqCceAACkwaojWmmbvHPfsHpcFe8ePUHdySjHWWay"
+    }
+  ],
+  "minimum_zig_version": "0.15.2",
+  "readme": "# SDL3_Mixer on Zig\n\nThis repository wraps the upstream SDL3_Mixer library source code with Zig's build system.\n\nZig 0.15.2 is required.\n\nThe build setup support the following audio decoders:\n\n- FLAC through dr_flac\n- GME's formats\n- MIDI through TiMidity\n- Module/tracker music through XMP\n- MP3 through dr_mp3\n- Opus\n- Vorbis\n\nIt also uses [castholm's SDL3 port by default](https://github.com/castholm/SDL).\n\n## Installing as a `build.zig.zon` package\n\nRun in your Zig project:\n```sh\nzig fetch --save-exact=sdl3_mixer git+https://github.com/lateleite/sdl3_mixer-on-zig.git\n```\n\nThen in your `build.zig` file:\n```zig\npub fn build(b: *std.Build) !void {\n    // ...\n\n    // Add a reference to the package you've just fetched...\n    const dep_mixer = b.dependency(\"sdl3_mixer\", .{\n        .target = target,\n        .optimize = optimize,\n        // you may choose to use your system's SDL3 library,\n        // instead of building and statically linking another.\n        //.@\"use-system-sdl\" = false,\n    });\n    const lib_mixer = dep_mixer.artifact(\"SDL_mixer\");\n\n    // ...then link the library to your module\n    your_module.linkLibrary(lib_mixer);\n\n    // ...\n}\n```\n\nAfter that, you may use SDL3_Mixer's header files in your module.\n\n## License\n\nAll (build) code here is released to public domain or under the BSD Zero Clause license, choose whichever you prefer.\n\nYou may find SDL3_Mixer's license at [https://github.com/libsdl-org/SDL_mixer/blob/8c52ef985c3c6495fcb5cf7a118aa544388c2765/LICENSE.txt](https://github.com/libsdl-org/SDL_mixer/blob/8c52ef985c3c6495fcb5cf7a118aa544388c2765/LICENSE.txt).\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/4953934?u=1fff7749f85d042e96c41619b8519de370f3c04a&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "leite.ee",
+  "owner_twitter_username": null,
+  "owner_followers": 95,
+  "owner_following": 3,
+  "owner_created_at": "2013-07-06T12:25:50Z",
+  "license": "0BSD",
+  "category": "library"
+}
