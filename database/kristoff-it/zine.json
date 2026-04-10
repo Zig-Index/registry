@@ -9,10 +9,10 @@
     "static-site-generator",
     "zig-package"
   ],
-  "stars": 1303,
+  "stars": 1304,
   "forks": 93,
   "watchers": 14,
-  "updated_at": "2026-04-10T19:22:45Z",
+  "updated_at": "2026-04-10T20:35:56Z",
   "dependencies": [
     {
       "name": "lsp_kit",
@@ -46,8 +46,8 @@
     },
     {
       "name": "superhtml",
-      "url": "git+https://github.com/kristoff-it/superhtml#41e9e7d3c75b908139be809a05121dd06fc7ce64",
-      "hash": "superhtml-0.6.2-Y7MdPB5FJABo5YvCLKzgWJBWSdC3Ieye3jkt_Evkb5XH"
+      "url": "git+https://github.com/kristoff-it/superhtml#248895ac07370464248d7af7b83213a3a80f510c",
+      "hash": "superhtml-0.6.2-Y7MdPCRFJACeDRBHLwVYloNaB9uSo3U6os3ZPyudlJLT"
     },
     {
       "name": "zeit",
@@ -66,8 +66,8 @@
     },
     {
       "name": "supermd",
-      "url": "git+https://github.com/kristoff-it/supermd#00b13c7bf88bad631e6835b860ccd5492a90b254",
-      "hash": "supermd-0.1.0-3Mco3COYWACRh4fk7M0inK6TzVOfm7oNS2dUq8GdpdFg"
+      "url": "git+https://github.com/kristoff-it/supermd#44ee1fe6c697d289832125bd894f8f621322df57",
+      "hash": "supermd-0.1.0-3Mco3COYWADsmlFpwymglxJFs_hQNs22819xlGowQiuV"
     }
   ],
   "minimum_zig_version": "0.15.0",
