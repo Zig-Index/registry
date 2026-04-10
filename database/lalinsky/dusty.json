@@ -18,7 +18,7 @@
   "stars": 90,
   "forks": 6,
   "watchers": 1,
-  "updated_at": "2026-04-07T07:47:06Z",
+  "updated_at": "2026-04-10T18:53:06Z",
   "dependencies": [
     {
       "name": "zio",
