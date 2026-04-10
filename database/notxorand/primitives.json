@@ -10,7 +10,7 @@
   "stars": 4,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-04-10T22:25:22Z",
+  "updated_at": "2026-04-10T22:55:08Z",
   "dependencies": [
     {
       "name": "example",
@@ -19,7 +19,7 @@
     }
   ],
   "minimum_zig_version": "0.14.1",
-  "readme": "# zig data structures\n\nThis is a compilation of common data structures and trees in Zig. Most of these exist in the Rust ecosystem already (not standardised), so I'm mostly porting them over.\n\nIt's a work in progress, with plans for:\n\n+ [x] bitmap\n+ [x] bloom filter\n+ [x] skip list\n+ [ ] ring buffer\n+ [ ] cuckoo filter\n+ [ ] merkle tree\n+ [ ] merkle mountain range (mmr)\n+ [ ] sparse merkle tree (smt)\n+ [ ] lamport clock\n+ [ ] vector clock\n\nNote: I just started writing Zig, so don't expect things to necessarily work as expected.\n",
+  "readme": "# primitives\n\nThis is a compilation of common data structures, trees, and concurrency primitives in Zig. Most of these exist in the Rust ecosystem already (not standardised), so I'm mostly porting them over.\n\n## Implemented\n\n### Data Structures\n+ [x] bitmap\n+ [x] bloom filter\n+ [x] skip list\n\n### Concurrency & Synchronization\n+ [x] Arc(T) - Atomic Reference Counted smart pointer\n+ [x] Mutex(T) - Generic mutex with RAII Guard pattern\n\n### Time & Ordering\n+ [x] Hybrid Logical Clock (HLC) - causally consistent timestamping\n+ [x] Last-Write-Wins (LWW) Registry - conflict-free replicated registry using HLC\n\n## Planned\n\n+ [ ] ring buffer\n+ [ ] cuckoo filter\n+ [ ] merkle tree\n+ [ ] merkle mountain range (mmr)\n+ [ ] sparse merkle tree (smt)\n+ [ ] lamport clock\n+ [ ] vector clock\n\n## Notes\n\n+ Most implementations include comprehensive test coverage.\n+ Arc and Mutex can be composed for thread-safe shared mutable state (e.g., `Arc(Mutex(T))`).\n+ HLC provides total ordering of events across distributed systems with causal consistency.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/66304707?u=fefb7b93b211438faa29221cd00aaf1cb349163a&v=4",
   "releases": [],
   "owner_bio": "i must not fear. fear is the mind-killer",
