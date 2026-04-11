@@ -16,10 +16,10 @@
     "video-games",
     "libretro"
   ],
-  "stars": 12,
+  "stars": 13,
   "forks": 1,
   "watchers": 2,
-  "updated_at": "2026-04-11T14:08:50Z",
+  "updated_at": "2026-04-11T18:27:09Z",
   "dependencies": [
     {
       "name": "minish",
