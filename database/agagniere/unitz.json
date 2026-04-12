@@ -11,11 +11,11 @@
   "stars": 1,
   "forks": 0,
   "watchers": 2,
-  "updated_at": "2026-04-12T13:55:07Z",
+  "updated_at": "2026-04-12T21:27:53Z",
   "dependencies": [
     {
       "name": "comath",
-      "url": "git+https://github.com/InKryption/comath?ref=main#502c5e65c3708e14f19e19fb78c18123e4cb752c",
+      "url": "git+https://codeberg.org/InKryption/comath?ref=main#502c5e65c3708e14f19e19fb78c18123e4cb752c",
       "hash": "comath-0.1.0-wKZ2n-ffAQD0U6AGU-dnus5nW1yRJP5SXtycwQDQoKNb"
     }
   ],
