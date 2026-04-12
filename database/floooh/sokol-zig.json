@@ -13,7 +13,7 @@
   "stars": 663,
   "forks": 74,
   "watchers": 9,
-  "updated_at": "2026-04-11T10:16:29Z",
+  "updated_at": "2026-04-12T16:57:54Z",
   "dependencies": [
     {
       "name": "emsdk",
@@ -33,7 +33,7 @@
   "owner_location": "Berlin",
   "owner_blog": "http://floooh.github.io",
   "owner_twitter_username": null,
-  "owner_followers": 2995,
+  "owner_followers": 2998,
   "owner_following": 37,
   "owner_created_at": "2012-05-02T15:38:15Z",
   "license": "Zlib",
