@@ -189,10 +189,10 @@
       "assets": []
     }
   ],
-  "owner_bio": "((year, language) for language in ('various assemblers', 'c', 'c++', 'erlang', 'java', 'javascript', 'elixir', 'python') for year in range(1978, now()))",
+  "owner_bio": "((year, language) for language in ('asm', 'c', 'c++', 'erlang', 'java', 'javascript', 'elixir', 'python', 'rust', 'zig') for year in range(1978, beforeLLMs())",
   "owner_company": "syntazo",
   "owner_location": "new york",
-  "owner_blog": "syntazo.com",
+  "owner_blog": "https://thanos.github.io/",
   "owner_twitter_username": null,
   "owner_followers": 42,
   "owner_following": 7,

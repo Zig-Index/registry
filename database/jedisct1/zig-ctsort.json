@@ -12,10 +12,10 @@
     "zig-package",
     "djbsort"
   ],
-  "stars": 15,
+  "stars": 16,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-03-19T11:14:54Z",
+  "updated_at": "2026-04-13T12:22:39Z",
   "dependencies": [
     {
       "name": "example",

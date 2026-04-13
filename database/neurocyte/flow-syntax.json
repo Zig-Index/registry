@@ -10,9 +10,9 @@
     "zig-package"
   ],
   "stars": 17,
-  "forks": 15,
+  "forks": 16,
   "watchers": 1,
-  "updated_at": "2026-04-12T17:08:07Z",
+  "updated_at": "2026-04-13T14:35:00Z",
   "dependencies": [
     {
       "name": "tree_sitter",
