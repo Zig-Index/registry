@@ -11,21 +11,21 @@
   "stars": 0,
   "forks": 3,
   "watchers": 2,
-  "updated_at": "2025-11-14T17:43:13Z",
+  "updated_at": "2026-04-13T19:48:45Z",
   "dependencies": [
     {
       "name": "libxkbcommon",
-      "url": "git+https://github.com/xkbcommon/libxkbcommon.git?ref=xkbcommon-1.11.0#0f9cefb1fedb23433666fa5d9045e48ff030c006",
-      "hash": "N-V-__8AAFRAZAD02nId1w02lyWXmN-hvo873BSh9wZDxjSN"
+      "url": "git+https://github.com/xkbcommon/libxkbcommon.git?ref=xkbcommon-1.13.1#6f76d19db72b5d450e927b41e1e96cbe3252aba8",
+      "hash": "N-V-__8AALGdawC4U4VZt8pBwXK8gBVv2OTdm2naBwU9xHcb"
     },
     {
       "name": "libxml2",
-      "url": "git+https://github.com/allyourcodebase/libxml2.git?ref=2.15.1#532cdc21c1c25b2f3f63ed355392b80cc405cbe0",
-      "hash": "libxml2-2.15.1-qHdjhi9MAADPDiXFeNsWnUmr03JdmfAnVMNmcnL28rzM"
+      "url": "git+https://github.com/allyourcodebase/libxml2.git?ref=2.15.1-2#2528fad1bf17a0a70999930cfd9280554f547787",
+      "hash": "libxml2-2.15.1-2-qHdjhmNMAAAiZOWqVridicq2oMf5NHv0n9W41bz9FtMM"
     }
   ],
-  "minimum_zig_version": "0.15.1",
-  "readme": "[![CI](https://github.com/allyourcodebase/libxkbcommon/actions/workflows/ci.yaml/badge.svg)](https://github.com/allyourcodebase/libxkbcommon/actions)\n\n# libxkbcommon\n\nThis is [libxkbcommon](https://github.com/xkbcommon/libxkbcommon), packaged for [Zig](https://ziglang.org/).\n\n## Installation\n\nFirst, update your `build.zig.zon`:\n\n```\n# Initialize a `zig build` project if you haven't already\nzig init\nzig fetch --save git+https://github.com/allyourcodebase/libxkbcommon.git#1.11.0-1\n```\n\nYou can then import `libxkbcommon` in your `build.zig` with:\n\n```zig\nconst libxkbcommon_dependency = b.dependency(\"libxkbcommon\", .{\n    .target = target,\n    .optimize = optimize,\n\n    // Set the XKB config root.\n    // Will default to \"${INSTALL_PREFIX}/share/X11/xkb\" i.e. `zig-out/share/X11/xkb`.\n    // Most distributions will use `/usr/share/X11/xkb`.\n    //\n    // The value `\"\"` will not set a default config root directory.\n    // To configure the config root at runtime, use the \"XKB_CONFIG_ROOT\" environment variable.\n    //\n    // This example will assume that the config root of the host system is in `/usr`.\n    // This does not work on distributions that don't follow the Filesystem Hierarchy Standard (FHS) like NixOS.\n    .@\"xkb-config-root\" = \"/usr/share/X11/xkb\",\n\n    // The X locale root.\n    // Will default to \"${INSTALL_PREFIX}/share/X11/locale\" i.e. `zig-out/share/X11/locale`.\n    // Most distributions will use `/usr/share/X11/locale`.\n    //\n    // To configure the config root at runtime, use the \"XLOCALEDIR\" environment variable.\n    //\n    // This example will assume that the config root of the host system is in `/usr`.\n    // This does not work on distributions that don't follow the Filesystem Hierarchy Standard (FHS) like NixOS.\n    .@\"x-locale-root\" = \"/usr/share/X11/locale\",\n});\nyour_exe.linkLibrary(libxkbcommon_dependency.artifact(\"libxkbcommon\"));\n```\n\nFor more information, please refer to the [User-configuration](https://github.com/xkbcommon/libxkbcommon/blob/master/doc/user-configuration.md) docs of libxkbcommon.\n",
+  "minimum_zig_version": "0.15.2",
+  "readme": "[![CI](https://github.com/allyourcodebase/libxkbcommon/actions/workflows/ci.yaml/badge.svg)](https://github.com/allyourcodebase/libxkbcommon/actions)\n\n# libxkbcommon\n\nThis is [libxkbcommon](https://github.com/xkbcommon/libxkbcommon), packaged for [Zig](https://ziglang.org/).\n\n## Installation\n\nFirst, update your `build.zig.zon`:\n\n```\n# Initialize a `zig build` project if you haven't already\nzig init\nzig fetch --save git+https://github.com/allyourcodebase/libxkbcommon.git#1.13.1\n```\n\nYou can then import `libxkbcommon` in your `build.zig` with:\n\n```zig\nconst libxkbcommon_dependency = b.dependency(\"libxkbcommon\", .{\n    .target = target,\n    .optimize = optimize,\n\n    // Set the XKB config root.\n    // Will default to \"${INSTALL_PREFIX}/share/X11/xkb\" i.e. `zig-out/share/X11/xkb`.\n    // Most distributions will use `/usr/share/X11/xkb`.\n    //\n    // The value `\"\"` will not set a default config root directory.\n    // To configure the config root at runtime, use the \"XKB_CONFIG_ROOT\" environment variable.\n    //\n    // This example will assume that the config root of the host system is in `/usr`.\n    // This does not work on distributions that don't follow the Filesystem Hierarchy Standard (FHS) like NixOS.\n    .@\"xkb-config-root\" = \"/usr/share/X11/xkb\",\n    .@\"xkb-legacy-root\" = \"/usr/share/X11/xkb\", // Legacy X11 config root\n\n    // The X locale root.\n    // Will default to \"${INSTALL_PREFIX}/share/X11/locale\" i.e. `zig-out/share/X11/locale`.\n    // Most distributions will use `/usr/share/X11/locale`.\n    //\n    // To configure the config root at runtime, use the \"XLOCALEDIR\" environment variable.\n    //\n    // This example will assume that the config root of the host system is in `/usr`.\n    // This does not work on distributions that don't follow the Filesystem Hierarchy Standard (FHS) like NixOS.\n    .@\"x-locale-root\" = \"/usr/share/X11/locale\",\n});\nyour_exe.linkLibrary(libxkbcommon_dependency.artifact(\"libxkbcommon\"));\n```\n\nFor more information, please refer to the [User-configuration](https://github.com/xkbcommon/libxkbcommon/blob/master/doc/user-configuration.md) docs of libxkbcommon.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
   "releases": [],
   "owner_bio": "...are belong to Ziguanas, but we'd also be delighted to give them back!",
