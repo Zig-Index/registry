@@ -18,17 +18,22 @@
   "stars": 22,
   "forks": 2,
   "watchers": 1,
-  "updated_at": "2026-04-04T11:47:51Z",
+  "updated_at": "2026-04-14T14:35:16Z",
   "dependencies": [
     {
       "name": "lz4",
-      "url": "https://github.com/jedisct1/zig-lz4/archive/refs/tags/0.1.1.tar.gz",
-      "hash": "lz4-0.1.0-fUqx0aNqAwAgCD6q9krWFpMsUwLWZ-NRuuTxmHMOaxoV"
+      "url": "https://github.com/jedisct1/zig-lz4/archive/refs/tags/0.1.2.tar.gz",
+      "hash": "lz4-0.1.2-fUqx0Y9oAwBZn6riH_Br9lGJGBR0c8pVsmGB9L8fwWT_"
+    },
+    {
+      "name": "hctr2",
+      "url": "https://github.com/jedisct1/zig-hctr2/archive/refs/tags/0.1.8.tar.gz",
+      "hash": "hctr2-0.1.6-mu7McdIoAwB4BY7OgLazIChsNvSpyMLbTRgx2Et68FYd"
     },
     {
       "name": "ultracdc",
-      "url": "https://github.com/jedisct1/zig-ultracdc/archive/refs/tags/0.1.2.tar.gz",
-      "hash": "ultracdc-0.1.2-vd07qR94AACdcUsYVamB6e4yT5SR0AZKaz2NKQSvX821"
+      "url": "https://github.com/jedisct1/zig-ultracdc/archive/refs/tags/0.1.3.tar.gz",
+      "hash": "ultracdc-0.1.2-vd07qRt4AAC8AGdSmhQgrXzNSryUgGAf9nRubypS_6T9"
     }
   ],
   "minimum_zig_version": "0.16.0-dev.2903+b15aa0540",
