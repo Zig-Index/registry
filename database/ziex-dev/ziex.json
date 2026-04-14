@@ -16,15 +16,15 @@
     "zig-package",
     "server-side-rendering"
   ],
-  "stars": 206,
+  "stars": 207,
   "forks": 16,
   "watchers": 4,
-  "updated_at": "2026-04-12T09:31:54Z",
+  "updated_at": "2026-04-14T05:09:03Z",
   "dependencies": [
     {
       "name": "ziex_js",
-      "url": "https://registry.npmjs.org/ziex/-/ziex-0.1.0-dev.978.tgz",
-      "hash": "ziex_js-0.1.0-dev.804-v1W0GT9sAwAXecIjAGLWF2ct3RnIrul3axZ0e4VETrXf"
+      "url": "https://registry.npmjs.org/ziex/-/ziex-0.1.0-dev.1000.tgz",
+      "hash": "ziex_js-0.1.0-dev.804-v1W0GT1tAwAjZsTzmZWS4c8VEaNPFV0ABzqEMhmR6-xj"
     },
     {
       "name": "httpz",
