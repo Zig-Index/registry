@@ -24,6 +24,7 @@
   "readme": "# Ogg on Zig\n\nThis repository wraps the upstream OGG container library source code with Zig's build system.\n\nZig 0.15.2 is required.\n\n## Installing as a `build.zig.zon` package\n\nRun in your Zig project:\n```sh\nzig fetch --save-exact=ogg git+https://github.com/lateleite/ogg-on-zig.git\n```\n\nThen in your `build.zig` file:\n```zig\npub fn build(b: *std.Build) !void {\n    // ...\n\n    // Add a reference to the package you've just fetched...\n    const dep_ogg = b.dependency(\"ogg\", .{\n        .target = target,\n        .optimize = optimize,\n    });\n    const lib_ogg = dep_ogg.artifact(\"ogg\");\n\n    // ...then link the library to your module\n    your_module.linkLibrary(lib_ogg);\n\n    // ...\n}\n```\n\nAfter that, you may use Ogg's header files in your module.\n\n## License\n\nAll (build) code here is released to public domain or under the BSD Zero Clause license, choose whichever you prefer.\n\nYou may find Ogg's license at [https://github.com/xiph/ogg/blob/06a5e0262cdc28aa4ae6797627a783b5010440f0/COPYING](https://github.com/xiph/ogg/blob/06a5e0262cdc28aa4ae6797627a783b5010440f0/COPYING).\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/4953934?u=1fff7749f85d042e96c41619b8519de370f3c04a&v=4",
   "releases": [],
+  "owner_bio": "( ﾟДﾟ)",
   "owner_company": null,
   "owner_location": null,
   "owner_blog": "leite.ee",
