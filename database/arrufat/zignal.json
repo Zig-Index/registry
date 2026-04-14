@@ -17,7 +17,7 @@
     "wasm"
   ],
   "stars": 362,
-  "forks": 10,
+  "forks": 11,
   "watchers": 4,
   "updated_at": "2026-04-09T02:36:52Z",
   "minimum_zig_version": "0.16.0-dev.2984+cb7d2b056",

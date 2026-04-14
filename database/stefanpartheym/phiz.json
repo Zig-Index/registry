@@ -12,7 +12,7 @@
   "stars": 2,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-03-26T14:35:18Z",
+  "updated_at": "2026-04-14T13:21:24Z",
   "dependencies": [
     {
       "name": "zalgebra",
@@ -26,8 +26,8 @@
     },
     {
       "name": "zig_tracy",
-      "url": "git+https://github.com/cipharius/zig-tracy.git#fb0c7693726fc41a1d9e3ab2a897dc663d884584",
-      "hash": "zig_tracy-0.0.5-aOIqsQdyAADb7w5ji1KMsWBV6ek3SftSsY2yfTvUHycr"
+      "url": "git+https://github.com/cipharius/zig-tracy.git#22f290947ca272a4aea2a7e5b00ec29fb0c1a8d6",
+      "hash": "zig_tracy-0.0.5-aOIqsYFsAAB11_thqyvA3Gq_7vCruca5bAuTWgySlBEz"
     }
   ],
   "minimum_zig_version": "0.15.1",
@@ -38,7 +38,7 @@
   "owner_location": "Munich - Germany",
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 18,
+  "owner_followers": 19,
   "owner_following": 48,
   "owner_created_at": "2011-10-03T13:45:39Z",
   "license": "MIT",
