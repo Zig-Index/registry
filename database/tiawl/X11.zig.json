@@ -14,7 +14,7 @@
   "stars": 12,
   "forks": 4,
   "watchers": 1,
-  "updated_at": "2026-03-28T18:30:35Z",
+  "updated_at": "2026-04-14T20:54:14Z",
   "dependencies": [
     {
       "name": "XScrnSaver",
@@ -93,11 +93,11 @@
     },
     {
       "name": "toolbox",
-      "url": "git+https://github.com/tiawl/toolbox?ref=2.0.0#8cfe99b13c380c0a0437e9edc05ab4b961b242d6",
-      "hash": "toolbox-2.0.0-kRAu4EF8AAC9LKCNAHFDbj1RzTI4yczjgz7PL_9YjYqb"
+      "url": "git+https://github.com/tiawl/toolbox#d26b12bc2bf6bb0856a591d384cace3fd50445eb",
+      "hash": "toolbox-2.0.1-kRAu4DODAAC4GkZ714OgwurhfE5YXxI3BMQAlecmxa5f"
     }
   ],
-  "minimum_zig_version": "0.15.2",
+  "minimum_zig_version": "0.16.0",
   "readme": "# X11.zig\n\nThis is a fork of [hexops/x11-headers][1] which itself gather various [xorg][6] headers [GLFW][3] needs.\n\n## Why this forkception ?\n\nThe intention under this fork is the same as [hexops][4] had when they opened their repository: gather [xorg][6] headers and package them to compile [GLFW][4] with [Zig][5].\n\nHowever this repository has subtle differences:\n* Add [xorg][6] sources needed for [libX11][2] compilation,\n* No shell scripting for maintainability tasks,\n* A cron runs every day to check [xorg][6] repositories and other dependencies. Then it updates this repository if a new release is available.\n\n## Dependencies\n\nThe [Zig][5] part of this package is relying on the latest [Zig][5] release (0.15.2) and will only be updated for the next one.\nIt you use a more recent [Zig][5] version, please consider the `zig-nightly` branch and `*-nightly` tags.\n\nFor other dependencies see [the build.zig.zon](https://github.com/tiawl/X11.zig/blob/zig-stable/build.zig.zon)\n\n## `zig build` options\n\nThese additional options have mainly been implemented for maintainability tasks but they maybe could be useful for edge usecases:\n```\n  -Dfetch   Update build.zig.zon then stop execution\n  -Dupdate  Update binding\n```\n\n## License\n\nThis repository is not subject to a unique License:\n\nThe parts of this repository originated from this repository are dedicated to the public domain. See the LICENSE file for more details.\n\n**For other parts, it is subject to the License restrictions their respective owners choosed. By design, the public domain code is incompatible with the License notion. In this case, the License prevails. So if you have any doubt about a file property, open an issue.**\n\n[1]:https://github.com/hexops/x11-headers\n[2]:https://gitlab.freedesktop.org/xorg/lib/libx11\n[3]:https://github.com/glfw/glfw\n[4]:https://github.com/hexops\n[5]:https://codeberg.org/ziglang/zig\n[6]:https://gitlab.freedesktop.org/xorg\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/57362253?u=519d9e3f04e4833f75c34cb6ceb371670ccddc4b&v=4",
   "releases": [],

@@ -14,7 +14,7 @@
   "stars": 36,
   "forks": 9,
   "watchers": 2,
-  "updated_at": "2026-04-10T16:05:32Z",
+  "updated_at": "2026-04-14T20:51:15Z",
   "dependencies": [
     {
       "name": "glfw",
@@ -23,26 +23,26 @@
     },
     {
       "name": "toolbox",
-      "url": "git+https://github.com/tiawl/toolbox?ref=2.0.0#8cfe99b13c380c0a0437e9edc05ab4b961b242d6",
-      "hash": "toolbox-2.0.0-kRAu4EF8AAC9LKCNAHFDbj1RzTI4yczjgz7PL_9YjYqb"
+      "url": "git+https://github.com/tiawl/toolbox#d26b12bc2bf6bb0856a591d384cace3fd50445eb",
+      "hash": "toolbox-2.0.1-kRAu4DODAAC4GkZ714OgwurhfE5YXxI3BMQAlecmxa5f"
     },
     {
       "name": "vulkan_zig",
-      "url": "git+https://github.com/tiawl/vulkan.zig?ref=v1.4.349#6cf6b6bec2577ea30dfc2a6c303be9dcab801375",
-      "hash": "vulkan_zig-1.0.0-p2wg3leLRwGU6k9nlyawhakm034JoUbU1Fy8RiwIqHEd"
+      "url": "git+https://github.com/tiawl/vulkan.zig.git#71eba896ef48fd052d6d769182c58d43891258c8",
+      "hash": "vulkan_zig-1.0.0-p2wg3imLRwEG2tD1e6RcVOSiwHtmgAHPlxNZAm1uz96r"
     },
     {
       "name": "wayland_zig",
-      "url": "git+https://github.com/tiawl/wayland.zig?ref=wayland-protocols-1.48#7ac4c2bc789b44c71620015bf5a7bdd713cdb8b6",
-      "hash": "wayland_zig-1.0.0-JmY-j81WCgBZhwJQkSmgsf25jk2s9-BmAeY0bP96qCbK"
+      "url": "git+https://github.com/tiawl/wayland.zig.git#d33645e0159326e52fda77518d2921056820564b",
+      "hash": "wayland_zig-1.0.0-JmY-j59WCgDcQblajrMuWIW29GyjmJQGYfmqL6PsnkdW"
     },
     {
       "name": "X11_zig",
-      "url": "git+https://github.com/tiawl/X11.zig?ref=toolbox-2.0.0#73eb80968506dd7fc7fdc6ef53515171b7a294fc",
-      "hash": "X11_zig-1.0.0-UuAzbKsKwADkteukor47VtrF2jAzgcPVoGpBm_uhp9Ec"
+      "url": "git+https://github.com/tiawl/X11.zig.git#fb034ddce9d8408ae6c5d48756dd9c08360ea84a",
+      "hash": "X11_zig-1.0.0-UuAzbLYKwADCzwLQHtxEOrUTixw6WDWIkYpVN5K82Bdv"
     }
   ],
-  "minimum_zig_version": "0.15.2",
+  "minimum_zig_version": "0.16.0",
   "readme": "# glfw.zig\n\nThis is a fork of [hexops/glfw][1] which is itself a fork of [glfw/glfw][2].\n\n## Why this forkception ?\n\nThe intention under this fork is the same as [hexops][4] had when they forked [glfw/glfw][2]: package it for [Zig][3]. So:\n* Unnecessary files have been deleted,\n* The build system has been replaced with `build.zig`.\n\nHowever this repository has subtle differences for maintainability tasks:\n* No shell scripting,\n* A cron runs every day to check [glfw/glfw][2] and other dependencies. Then it updates this repository if a new release is available.\n\n## How to use it\n\nThe goal of this repository is not to provide a [Zig][3] binding for [glfw/glfw][2]. The point of this repository is to abstract the [glfw/glfw][2] compilation process with [Zig][3] (which is not easy to maintain) to let you focus on your application. So you can use **glfw.zig**:\n- as raw (see GLFW examples [here](https://github.com/tiawl/cimgui.zig/blob/zig-stable/examples)),\n- as a daily updated interface for your [Zig][3] binding of [glfw/glfw][2]\n\n## Dependencies\n\nThe [Zig][3] part of this package is relying on the latest [Zig][3] release (0.15.2) and will only be updated for the next one.\nIt you use a more recent [Zig][3] version, please consider the `zig-nightly` branch and `*-nightly` tags.\n\nFor other dependencies see [the build.zig.zon](https://github.com/tiawl/glfw.zig/blob/zig-stable/build.zig.zon)\n\n## `zig build` options\n\nThese additional options have mainly been implemented for maintainability tasks but they maybe could be useful for edge usecases:\n```\n  -Dfetch   Update build.zig.zon then stop execution\n  -Dupdate  Update binding\n```\n\n## License\n\nThis repository is not subject to a unique License:\n\nThe parts of this repository originated from this repository are dedicated to the public domain. See the LICENSE file for more details.\n\n**For other parts, it is subject to the License restrictions their respective owners choosed. By design, the public domain code is incompatible with the License notion. In this case, the License prevails. So if you have any doubt about a file property, open an issue.**\n\n[1]:https://github.com/hexops/glfw\n[2]:https://github.com/glfw/glfw\n[3]:https://codeberg.org/ziglang/zig\n[4]:https://github.com/hexops\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/57362253?u=519d9e3f04e4833f75c34cb6ceb371670ccddc4b&v=4",
   "releases": [],

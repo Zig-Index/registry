@@ -14,7 +14,7 @@
   "stars": 2,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-04-10T15:49:34Z",
+  "updated_at": "2026-04-14T20:50:53Z",
   "dependencies": [
     {
       "name": "glslang",
@@ -23,11 +23,11 @@
     },
     {
       "name": "toolbox",
-      "url": "git+https://github.com/tiawl/toolbox?ref=2.0.0#8cfe99b13c380c0a0437e9edc05ab4b961b242d6",
-      "hash": "toolbox-2.0.0-kRAu4EF8AAC9LKCNAHFDbj1RzTI4yczjgz7PL_9YjYqb"
+      "url": "git+https://github.com/tiawl/toolbox#d26b12bc2bf6bb0856a591d384cace3fd50445eb",
+      "hash": "toolbox-2.0.1-kRAu4DODAAC4GkZ714OgwurhfE5YXxI3BMQAlecmxa5f"
     }
   ],
-  "minimum_zig_version": "0.15.2",
+  "minimum_zig_version": "0.16.0",
   "readme": "# glslang.zig\n\nThis is a fork of [KhronosGroup/glslang][1] packaged for [Zig][2]\n\n## Why this fork ?\n\nThe intention under this fork is to package [KhronosGroup/glslang][1] for [Zig][2]. So:\n* Unnecessary files have been deleted,\n* The build system has been replaced with `build.zig`,\n* A cron runs every day to check [KhronosGroup/glslang][1] and other dependencies. Then it updates this repository if a new release is available.\n\n## How to use it\n\nThe goal of this repository is not to provide a [Zig][2] binding for [KhronosGroup/glslang][1]. The point of this repository is to abstract the [KhronosGroup/glslang][1] compilation process with [Zig][2] (which is not easy to maintain) to let you focus on your application. So you can use **glslang.zig**:\n- as raw (no available example, open an issue if you are interested in, we will be happy to help you),\n- as a daily updated interface for your [Zig][2] binding of [KhronosGroup/glslang][1] (again: no available example).\n\n## Dependencies\n\nThe [Zig][2] part of this package is relying on the latest [Zig][2] release (0.15.2) and will only be updated for the next one.\nIt you use a more recent [Zig][2] version, please consider the `zig-nightly` branch and `*-nightly` tags.\n\nFor other dependencies see [the build.zig.zon](https://github.com/tiawl/glslang.zig/blob/zig-stable/build.zig.zon)\n\n## `zig build` options\n\nThese additional options have mainly been implemented for maintainability tasks but they maybe could be useful for edge usecases:\n```\n  -Dfetch   Update build.zig.zon then stop execution\n  -Dupdate  Update binding\n```\n\n## License\n\nThis repository is not subject to a unique License:\n\nThe parts of this repository originated from this repository are dedicated to the public domain. See the LICENSE file for more details.\n\n**For other parts, it is subject to the License restrictions their respective owners choosed. By design, the public domain code is incompatible with the License notion. In this case, the License prevails. So if you have any doubt about a file property, open an issue.**\n\n[1]:https://github.com/KhronosGroup/glslang\n[2]:https://codeberg.org/ziglang/zig\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/57362253?u=519d9e3f04e4833f75c34cb6ceb371670ccddc4b&v=4",
   "releases": [],
