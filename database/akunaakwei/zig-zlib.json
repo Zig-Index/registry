@@ -1,8 +1,8 @@
 {
-  "name": "zig-sdl3",
+  "name": "zig-zlib",
   "owner": "akunaakwei",
-  "repo": "zig-sdl3",
-  "description": "sdl3 for zig",
+  "repo": "zig-zlib",
+  "description": "zlib packaged for zig",
   "type": "package",
   "topics": [
     "zig-package"
@@ -10,16 +10,16 @@
   "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-04-15T07:10:17Z",
+  "updated_at": "2026-04-15T07:09:40Z",
   "dependencies": [
     {
-      "name": "sdl",
-      "url": "https://github.com/libsdl-org/SDL/archive/refs/tags/release-3.2.26.tar.gz",
-      "hash": "N-V-__8AAH6GjAPdfAbJaCvgcvc3AcVlINdg2ufslfY_c-xJ"
+      "name": "z",
+      "url": "https://github.com/madler/zlib/archive/refs/tags/v1.3.2.tar.gz",
+      "hash": "N-V-__8AAI4ANwDM8MWhHTUFLKfvLE_n2NQk6mh0sFDzhTqO"
     }
   ],
-  "minimum_zig_version": "0.16.0",
-  "readme": "# SDL3\r\nThis is [SDL3](https://github.com/libsdl-org/SDL) packaged for the zig build system.",
+  "minimum_zig_version": "0.14.0",
+  "readme": "# zlib\r\nThis is zlib packaged for the Zig build system.",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/11787994?v=4",
   "releases": [],
   "owner_company": null,

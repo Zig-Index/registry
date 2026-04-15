@@ -10,7 +10,7 @@
   "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-04-12T09:55:38Z",
+  "updated_at": "2026-04-15T06:57:34Z",
   "dependencies": [
     {
       "name": "dawn",
@@ -24,8 +24,8 @@
     },
     {
       "name": "spirv_tools",
-      "url": "https://github.com/akunaakwei/zig-spirv-tools/archive/16ae31a617d46c7930bb4ed148741c5d68dafc4e.tar.gz",
-      "hash": "spirv_tools-0.0.0-lHQC6JLoDAAjA0QMgW-18JSNq7ytArb0gL7mWPFm_BU0"
+      "url": "https://github.com/akunaakwei/zig-spirv-tools/archive/4bb64ddcb7dd6d26c7e46cbdd8a6bc43a48f2003.tar.gz",
+      "hash": "spirv_tools-20.26.1-lHQC6E_pDADcuBVFTKN2k5yeP-_RjKg7mYCA4gcEP1e_"
     },
     {
       "name": "vulkan_headers",
@@ -34,22 +34,22 @@
     },
     {
       "name": "vulkan_utility",
-      "url": "https://github.com/akunaakwei/zig-vulkan-utility-libraries/archive/976099820d7b4b2289c823f72b6c9663275e4aa5.tar.gz",
-      "hash": "vulkan_utility_libraries-0.0.0-z4P-yVAZAACCgryJVbBifWV8QhSLq-GLXAJvnzzPhoGu"
+      "url": "https://github.com/akunaakwei/zig-vulkan-utility-libraries/archive/c85c3f3cb2782332fe00bd5a71fb09991fa4f3dd.tar.gz",
+      "hash": "vulkan_utility_libraries-0.0.0-z4P-ycoZAADFIiX9tAAdnqvWbnC_UTIvdrOhob2RffNK"
     },
     {
       "name": "abseil",
-      "url": "https://github.com/akunaakwei/zig-abseil/archive/9f344b8a92fb5946d7441c05bb9352f3efcec0b0.tar.gz",
-      "hash": "abseil-0.0.0-IbFgeCYlAAAWLejIR_T6MuGfXyNF7w5ZXZq3awFsjZcE"
+      "url": "https://github.com/akunaakwei/zig-abseil/archive/e741311c8743fce74142dd61cf9ac79d6b251eff.tar.gz",
+      "hash": "abseil-0.0.0-IbFgeKslAAA7XplCOJgfmugSI5dI3Io0H5hSXg_-EoYt"
     },
     {
       "name": "glfw",
-      "url": "https://codeberg.org/Games-by-Mason/glfw_zig/archive/2d9ca8aee2c0dd7ed7ce8e8ef47a0d79c9d48dd8.tar.gz",
-      "hash": "glfw-3.4.0-a4Mg87TIBgDULv53771vr6o_jE_JEP25sc3y9Vxr9ocM"
+      "url": "https://codeberg.org/Games-by-Mason/glfw_zig/archive/398e67ad42750ae16e4d11d4abb1e7455c0d0139.tar.gz",
+      "hash": "glfw-3.4.0-a4Mg88DIBgAhxrur_Nm1I6n3nFdyVhaG8CK01QBiyCZe"
     }
   ],
-  "minimum_zig_version": "0.15.1",
-  "readme": "# dawn\r\nThis is dawn packaged for the zig build system.",
+  "minimum_zig_version": "0.16.0",
+  "readme": "# dawn\r\nThis is [dawn](https://github.com/google/dawn) packaged for the zig build system.",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/11787994?v=4",
   "releases": [],
   "owner_company": null,

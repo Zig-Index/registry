@@ -10,7 +10,7 @@
   "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-02-28T06:35:49Z",
+  "updated_at": "2026-04-15T07:00:57Z",
   "dependencies": [
     {
       "name": "mimalloc",
@@ -18,8 +18,8 @@
       "hash": "N-V-__8AALkiTgCAYi1CcemIkDIW4xssyHm6m6KmV45hRMSQ"
     }
   ],
-  "minimum_zig_version": "0.14.0",
-  "readme": "# mimalloc\r\nThis is the mimalloc allocator for Zig.",
+  "minimum_zig_version": "0.16.0",
+  "readme": "# mimalloc\r\nThis is the [mimalloc](https://github.com/microsoft/mimalloc) allocator for Zig.",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/11787994?v=4",
   "releases": [],
   "owner_company": null,

@@ -10,7 +10,7 @@
   "stars": 2,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-03-18T13:23:17Z",
+  "updated_at": "2026-04-15T05:52:17Z",
   "dependencies": [
     {
       "name": "abseil",
@@ -18,7 +18,8 @@
       "hash": "N-V-__8AAHvBpQC2PgAgIxqg7-WRzv6zAW3ItECY_C63R_Nn"
     }
   ],
-  "readme": "# abseil\r\nThis is abseil packaged for the zig build system.",
+  "minimum_zig_version": "0.16.0",
+  "readme": "# abseil\r\nThis is [abseil](https://github.com/abseil/abseil-cpp) packaged for the zig build system.",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/11787994?v=4",
   "releases": [],
   "owner_company": null,
