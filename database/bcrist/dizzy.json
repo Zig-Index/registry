@@ -2,7 +2,7 @@
   "name": "dizzy",
   "owner": "bcrist",
   "repo": "dizzy",
-  "description": "Zig Comptime Dependency Injection",
+  "description": "mirror of codeberg.org/bcrist/dizzy",
   "type": "package",
   "topics": [
     "dependency-injection",
@@ -14,8 +14,8 @@
   "stars": 0,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-04-14T21:30:46Z",
-  "minimum_zig_version": "0.15.1",
+  "updated_at": "2026-04-15T02:56:25Z",
+  "minimum_zig_version": "0.16.0",
   "readme": "# Dizzy\n### Function Parameter Dependency Injection for Zig\n\nSee test.zig for example usage.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/2828351?v=4",
   "releases": [],
@@ -26,5 +26,6 @@
   "owner_followers": 9,
   "owner_following": 0,
   "owner_created_at": "2012-11-18T17:51:58Z",
+  "homepage": "https://codeberg.org/bcrist/dizzy",
   "category": "library"
 }
