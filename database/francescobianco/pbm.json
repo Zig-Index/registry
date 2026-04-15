@@ -1,0 +1,29 @@
+{
+  "name": "pbm",
+  "owner": "francescobianco",
+  "repo": "pbm",
+  "description": "Packbase Manager",
+  "type": "package",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-04-15T21:32:11Z",
+  "minimum_zig_version": "0.15.0",
+  "readme": "# pbm - Packbase Manager\n\nCLI client for managing the [packbase](https://github.com/yafb/packbase) server.\n\n## Installation\n\n```bash\nmake build\nmake install\n```\n\nOr download the binary from the [releases page](https://github.com/yafb/pbm/releases).\n\n## Quick Start\n\n1. Start the packbase server with Docker:\n\n```bash\ndocker run -p 9122:9122 -d yafb/packbase\n```\n\n2. Check the server status:\n\n```bash\npbm status\n```\n\nExample output:\n\n```\nservice    packbase  (r0016)\nhealthy    14/85  (71 unhealthy)\ndisk       22% used\n\nupdate     idle\npackages   85 total  ·  85 probed  ·  1 synced\nsource     83 packages\ntarballs   0 present  ·  91 created\nrepos      1 scanned\n```\n\n## Commands\n\n| Command | Description |\n|---------|-------------|\n| `pbm ping` | Check if the server is reachable |\n| `pbm status` | Show server status |\n| `pbm info [package]` | Show server info or package details |\n| `pbm list` | List all available packages |\n| `pbm search <query>` | Search packages by name |\n| `pbm fetch <git_url>` | Add a new package from git repository |\n| `pbm update` | Sync local state with package sources |\n| `pbm check <package>` | Check health and metadata of a package |\n| `pbm clone <package>` | Git-clone a hosted package |\n\n## Global Options\n\n| Option | Description | Default |\n|--------|-------------|---------|\n| `--host <host>` | Server host | localhost |\n| `--port <port>` | Server port | 9122 |\n| `--print-json` | Print raw JSON from server | - |\n| `--print-curl` | Print equivalent curl command | - |\n| `--timeout <sec>` | Polling timeout for update (default: 10) | 10 |\n\n## Configuration\n\nOptions are read in order of precedence:\n1. Flags `--host` / `--port`\n2. Environment variable `PACKBASE_URL` (e.g. `http://myserver:9122`)\n3. File `.pbmrc` in current directory\n4. File `.pbmrc` in home directory\n\nFor authentication with `fetch`, use the `PACKBASE_TOKEN` environment variable.\n\n## Examples\n\n```bash\n# Check connection\npbm ping\n\n# Search packages\npbm search zlib\n\n# Add a package (requires TOKEN)\nPACKBASE_TOKEN=xxx pbm fetch https://github.com/example/package\n\n# Update data (with polling)\npbm update --timeout 30\n\n# Curl mode for debugging\npbm --print-curl status\n```\n\n## Shell Completion\n\nBash:\n```bash\nmake completion\n# or manually\nsudo cp contrib/pbm-completion.bash /etc/bash_completion.d/pbm\n```\n\nZsh:\n```bash\nsudo cp contrib/pbm-completion.zsh /usr/share/zsh/site-functions/_pbm\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/472171?u=7828bcef99dcd7389e0ff966339772eb4c0bcbe5&v=4",
+  "releases": [],
+  "owner_bio": "Software Enginner @javanile  ~ Vulgarizer DevOps ~ BPKG Maintainer ~ Open Source CRM Veteran ~ Chess Player ~ Father & Husband",
+  "owner_company": "@Javanile",
+  "owner_location": "Sicily, Italy",
+  "owner_blog": "https://yafb.net",
+  "owner_twitter_username": null,
+  "owner_followers": 196,
+  "owner_following": 741,
+  "owner_created_at": "2010-11-08T09:57:27Z",
+  "homepage": "https://zub.javanile.org",
+  "license": "MIT",
+  "category": "library"
+}
