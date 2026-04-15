@@ -11,7 +11,7 @@
   "stars": 9,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-04-15T21:42:34Z",
+  "updated_at": "2026-04-15T22:50:03Z",
   "readme": "# zig-git\n\n![loc](https://sloc.xyz/github/nektro/zig-git)\n[![license](https://img.shields.io/github/license/nektro/zig-git.svg)](https://github.com/nektro/zig-git/blob/master/LICENSE)\n[![nektro @ github sponsors](https://img.shields.io/badge/sponsors-nektro-purple?logo=github)](https://github.com/sponsors/nektro)\n[![Zig](https://img.shields.io/badge/Zig-0.14-f7a41d)](https://ziglang.org/)\n[![Zigmod](https://img.shields.io/badge/Zigmod-latest-f7a41d)](https://github.com/nektro/zigmod)\n\nInspect into the depths of your .git folder purely from Zig.\n\n## Resources\n\n- https://git-scm.com/book/en/v2/Git-Internals-Git-Objects\n- https://git-scm.com/docs/gitformat-pack\n- https://awasu.com/weblog/git-guts/delta-objects/\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/5464072?u=a84ae9f68c3b0567fe276def3ab932d2f2f6703f&v=4",
   "releases": [],
