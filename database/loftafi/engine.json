@@ -10,7 +10,7 @@
   "stars": 3,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-04-13T03:38:19Z",
+  "updated_at": "2026-04-15T01:30:38Z",
   "dependencies": [
     {
       "name": "resources",
@@ -19,13 +19,13 @@
     },
     {
       "name": "sdl",
-      "url": "git+https://github.com/castholm/SDL.git#887fa805e40d5c7bb3955ae69b89ed566c6a0471",
-      "hash": "sdl-0.4.0+3.4.0-SDL--rq2owEZsySGuHCuVJ9naEvH3i3e_pyUIjziBtJ-"
+      "url": "git+https://github.com/castholm/SDL.git#c5ba24c694b5d520cdc1d029d8def398690d6894",
+      "hash": "sdl-0.4.2+3.4.4-SDL--kB3pQHKG_4zWG-pH04ZcZZj_IRF7dwMpxNVGwd6"
     },
     {
       "name": "sdl_ttf",
-      "url": "git+https://github.com/loftafi/SDL_ttf.git#1664f9dd72900cc54902222c656e922e62812206",
-      "hash": "sdl_ttf-3.2.26-2-9xyaiOwVBwBas0CEbu59d9QdQHmBKgpjDso-g1kjSdCP"
+      "url": "git+https://github.com/loftafi/SDL_ttf.git#9840b80ed31152e706152ceaf7e75cf9d3d0c6bd",
+      "hash": "sdl_ttf-3.2.26-3-9xyaiOwVBwB_wfOYOjujxAdD3rZPUkTYQYKscywJYUfl"
     },
     {
       "name": "zstbi",
