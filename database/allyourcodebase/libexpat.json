@@ -11,7 +11,7 @@
   "stars": 3,
   "forks": 0,
   "watchers": 2,
-  "updated_at": "2026-04-16T22:33:44Z",
+  "updated_at": "2026-04-16T22:54:37Z",
   "dependencies": [
     {
       "name": "libexpat",
@@ -20,7 +20,7 @@
     }
   ],
   "minimum_zig_version": "0.16.0-dev.3133+5ec8e45f3",
-  "readme": "[![CI](https://github.com/allyourcodebase/libexpat/actions/workflows/ci.yaml/badge.svg)](https://github.com/allyourcodebase/libexpat/actions)\n\n# Expat\n\nThis is [Expat](https://github.com/libexpat/libexpat), packaged for [Zig](https://ziglang.org/).\n\n## Installation\n\nFirst, update your `build.zig.zon`:\n\n```\n# Initialize a `zig build` project if you haven't already\nzig init\nzig fetch --save git+https://github.com/allyourcodebase/libexpat.git#2.7.1-2\n```\n\nYou can then import `expat` in your `build.zig` with:\n\n```zig\nconst expat_dependency = b.dependency(\"expat\", .{\n    .target = target,\n    .optimize = optimize,\n});\nyour_exe.linkLibrary(expat_dependency.artifact(\"expat\"));\n```\n",
+  "readme": "[![CI](https://github.com/allyourcodebase/libexpat/actions/workflows/ci.yaml/badge.svg)](https://github.com/allyourcodebase/libexpat/actions)\n\n# Expat\n\nThis is [Expat](https://github.com/libexpat/libexpat), packaged for [Zig](https://ziglang.org/).\n\n## Installation\n\nFirst, update your `build.zig.zon`:\n\n```\n# Initialize a `zig build` project if you haven't already\nzig init\nzig fetch --save git+https://github.com/allyourcodebase/libexpat.git#2.7.1-3\n```\n\nYou can then import `expat` in your `build.zig` with:\n\n```zig\nconst expat_dependency = b.dependency(\"expat\", .{\n    .target = target,\n    .optimize = optimize,\n});\nyour_exe.linkLibrary(expat_dependency.artifact(\"expat\"));\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
   "releases": [],
   "owner_bio": "...are belong to Ziguanas, but we'd also be delighted to give them back!",
