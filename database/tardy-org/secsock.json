@@ -14,7 +14,7 @@
   "stars": 13,
   "forks": 13,
   "watchers": 0,
-  "updated_at": "2026-04-16T12:54:21Z",
+  "updated_at": "2026-04-16T14:04:48Z",
   "dependencies": [
     {
       "name": "bearssl",
@@ -26,8 +26,8 @@
     },
     {
       "name": "tardy",
-      "url": "git+https://github.com/tardy-org/tardy?ref=v0.3.0#26cbc3cab7993b04e6447471eb523b21376d7dee",
-      "hash": "tardy-0.3.0-69wrgn77AwDLFqiryrDCuNl-q7xF9VEUdONc7ytrNvsM"
+      "url": "git+https://github.com/tardy-org/tardy?ref=v0.3.1#f36525f9b36159bb9196ccb1734a67b55ba2c1ca",
+      "hash": "tardy-0.3.1-69wrgn77AwCO0ma2a0hOPgreoJogu-uYWlcgo2TgkgBO"
     }
   ],
   "minimum_zig_version": "0.15.2",
