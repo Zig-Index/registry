@@ -9,9 +9,9 @@
     "zig-package"
   ],
   "stars": 9,
-  "forks": 6,
+  "forks": 7,
   "watchers": 2,
-  "updated_at": "2026-03-31T05:55:20Z",
+  "updated_at": "2026-04-16T22:34:14Z",
   "dependencies": [
     {
       "name": "curl",
@@ -35,8 +35,8 @@
     },
     {
       "name": "openssl",
-      "url": "git+https://github.com/allyourcodebase/openssl#cad7ccba47e42fa608ca655ec14ae33202df86e1",
-      "hash": "openssl-3.3.2-TC9C3Wa3ZACgB1hZbrLOQCK9XccIBaW_F3imFfIeYP06"
+      "url": "git+https://github.com/allyourcodebase/openssl.git#0ac677650d43eadf669067d050992118b13338d2",
+      "hash": "openssl-3.3.2-TC9C3Ze3ZABaKR5hc8KRnRPhTClKrKQKqTnXTUYkvmSR"
     },
     {
       "name": "mbedtls",
@@ -44,7 +44,7 @@
       "hash": "mbedtls-3.6.4-E4NUR2wWAAAUSvVbho9aaU31-e4D8glu9l1VfxKezBkV"
     }
   ],
-  "minimum_zig_version": "0.15.1",
+  "minimum_zig_version": "0.16.0",
   "readme": "[![CI](https://github.com/allyourcodebase/curl/actions/workflows/ci.yaml/badge.svg)](https://github.com/allyourcodebase/curl/actions)\n\n# curl\n\nThis is [curl](https://github.com/curl/curl), packaged for [Zig](https://ziglang.org/).\n\n## Installation\n\n> [!WARNING]\n>\n> Curl depends on https://github.com/allyourcodebase/openssl which currently doesn't work on macOS. Consider using a different ssl implementation.\n\n### Standalone library (libcurl) and command-line tool (curl)\n\n```bash\ngit clone https://github.com/allyourcodebase/curl\ncd curl\nzig build -Doptimize=ReleaseFast\n```\n\nThe library and CLI tool can be found in the newly created `./zig-out` directory. The `zig build run` build step may be used to directly run curl.\n\n#### Avoid system dependencies\n\nBy default, curl requires some system dependencies that have not been ported to the zig build system yet. These dependencies may be either manually installed on the host system or disabled with the following build command:\n\n```bash\n# Windows\nzig build -Doptimize=ReleaseFast -Dlibpsl=false -Dlibssh2=false -Dlibidn2=false -Dnghttp2=false\n# Posix\nzig build -Doptimize=ReleaseFast -Dlibpsl=false -Dlibssh2=false -Dlibidn2=false -Dnghttp2=false -Ddisable-ldap\n```\n\n### Zig Build System\n\nFirst, update your `build.zig.zon`:\n\n```\n# Initialize a `zig build` project if you haven't already\nzig init\nzig fetch --save git+https://github.com/allyourcodebase/curl.git\n```\n\nYou can then import curl in your `build.zig` with:\n\n```zig\nconst curl_dependency = b.dependency(\"curl\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\n// A custom `artifact` function is provided because the build system\n// provides no way to differentiate between the library (libcurl) and\n// the command-line tool (curl) since they are both named \"curl\" in\n// the build system.\n// See https://github.com/ziglang/zig/issues/20377\nconst curlExe = @import(\"curl\").artifact(curl_dependency, .exe);\nconst libCurl = @import(\"curl\").artifact(curl_dependency, .lib);\n\nyour_exe.root_module.linkLibrary(libCurl);\n```\n\n#### Avoid system dependencies\n\nBy default, curl requires some system dependencies that have not been ported to the zig build system yet. These dependencies may be either manually installed on the host system or disabled with the following change to the `build.zig`:\n\n```zig\nconst curl_dependency = b.dependency(\"curl\", .{\n    .target = target,\n    .optimize = optimize,\n    .libpsl = false,\n    .libssh2 = false,\n    .libidn2 = false,\n    .nghttp2 = false,\n    .@\"disable-ldap\" = true,\n});\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
   "releases": [],

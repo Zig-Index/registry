@@ -9,9 +9,9 @@
     "zig"
   ],
   "stars": 1,
-  "forks": 3,
+  "forks": 4,
   "watchers": 2,
-  "updated_at": "2025-12-28T21:11:49Z",
+  "updated_at": "2026-04-16T22:23:53Z",
   "dependencies": [
     {
       "name": "elfutils",
@@ -20,13 +20,13 @@
     },
     {
       "name": "zlib",
-      "url": "git+https://github.com/allyourcodebase/zlib#61e7df7e996ec5a5f13a653db3c419adb340d6ef",
-      "hash": "zlib-1.3.1-ZZQ7lbYMAAB1hTSOKSXAKAgHsfDcyWNH_37ojw5WSpgR"
+      "url": "git+https://github.com/allyourcodebase/zlib.git#d3b5519d3b73616a6bfece0712f080029d2a9244",
+      "hash": "zlib-1.3.2-ZZQ7lc8NAAAHm9MDfplvwoesXvk4tVm6VCsiI8KnIbT0"
     },
     {
       "name": "zstd",
-      "url": "git+https://github.com/allyourcodebase/zstd.git?ref=1.5.7#01327d49cbc56dc24c20a167bb0055d7fc23de84",
-      "hash": "zstd-1.5.7-KEItkJ8vAAC5_rRlKmLflYQ-eKXbAIQBWZNmmJtS18q0"
+      "url": "git+https://github.com/allyourcodebase/zstd.git#e1a501be57f42c541e8a5597e4b59a074dfd09a3",
+      "hash": "zstd-1.5.7-1-KEItkAMwAAD6OKY3m0OOmXG7aL-aLUfrDqbP5J5oYapU"
     },
     {
       "name": "argp_standalone",
