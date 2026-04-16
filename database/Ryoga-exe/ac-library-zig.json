@@ -14,11 +14,20 @@
   "stars": 6,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2025-11-29T14:50:18Z",
-  "minimum_zig_version": "0.15.1",
+  "updated_at": "2026-04-16T07:45:07Z",
+  "minimum_zig_version": "0.16.0",
   "readme": "# ac-library-zig\n\nac-library-zig is a Zig implementation of AtCoder Library (ACL).\n\nSee below for ACL.\n\n- [Original repository (implemented in C++)](https://github.com/atcoder/ac-library)\n- [AtCoder Library (ACL) - AtCoder](https://atcoder.jp/posts/517)\n- [AtCoder Library - Codeforces](https://codeforces.com/blog/entry/82400)\n\n## API Reference\n\nAutomatically generated API Reference for the project can be found at https://repos.ryoga.dev/ac-library-zig.\n\n> [!NOTE]\n> Zig autodoc is in beta;\n> the website may be broken or incomplete.\n\n## Installation\n\nAdd `ac-library-zig` package to your `build.zig.zon` by following command:\n\n```shell\n# Use tagged release of ac-library-zig\n# Replace `<REPLACE ME>` with the version of ac-library-zig that you want to use\n# See: https://github.com/Ryoga-exe/ac-library-zig/releases\nzig fetch --save=ac-library git+https://github.com/Ryoga-exe/ac-library-zig#<REPLACE ME>\n\n# Use latest build of master branch\nzig fetch --save=ac-library git+https://github.com/Ryoga-exe/ac-library-zig\n```\n\nYou can then import `ac-library` in your `build.zig` with:\n\n```zig\nconst ac_library = b.dependency(\"ac-library\", .{});\nconst exe = b.addExecutable(...);\nexe.root_module.addImport(\"ac-library\", ac_library.module(\"ac-library\"));\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/49950206?u=afc964f56275c5460c1272df19caba6135d6d72b&v=4",
   "releases": [
+    {
+      "tag_name": "v0.6.0",
+      "name": "v0.6.0",
+      "body": "This release is compatible with Zig v0.16.0.\r\n\r\n## What's Changed\r\n* Update for Zig 0.16.0 (https://github.com/Ryoga-exe/ac-library-zig/pull/27)\r\n\r\n\r\n**Full Changelog**: https://github.com/Ryoga-exe/ac-library-zig/compare/v0.5.1...v0.6.0",
+      "prerelease": false,
+      "published_at": "2026-04-16T07:46:42Z",
+      "html_url": "https://github.com/Ryoga-exe/ac-library-zig/releases/tag/v0.6.0",
+      "assets": []
+    },
     {
       "tag_name": "v0.5.1",
       "name": "v0.5.1",
