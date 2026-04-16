@@ -10,12 +10,12 @@
   "stars": 3,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-04-15T22:34:40Z",
+  "updated_at": "2026-04-15T23:56:46Z",
   "dependencies": [
     {
       "name": "resources",
-      "url": "git+https://github.com/loftafi/resources.git#30d3960c644e6c6278114949b694ec4dbc096ea2",
-      "hash": "resources-1.3.5-J0GwI5OBAgBscl3gq40ZPzeWjbDY-ngcXFF6KP8I_dtp"
+      "url": "git+https://github.com/loftafi/resources.git#36ed533f31588b7bc05899aabacf30ab1ece1536",
+      "hash": "resources-1.3.6-J0GwI5OBAgAqGGnAq7uJeQqslnGBp2z2VJ_iWgVVBM1H"
     },
     {
       "name": "sdl",
@@ -34,8 +34,8 @@
     },
     {
       "name": "translator",
-      "url": "git+https://github.com/loftafi/translator.git#2ea56c45ec36074ef37b31777dec0e43392c221b",
-      "hash": "translator-0.1.3-cfHZxjlNAAApU4gxoJFShwHxy59dA03QurGsU2CDJx2Q"
+      "url": "git+https://github.com/loftafi/translator.git#117f65d4c95dbae43ce039ff99132f62c8978b8b",
+      "hash": "translator-0.1.5-cfHZxjlNAACxYNpsGTA8FunsWueI62RiBEOUi_b1pwj_"
     }
   ],
   "minimum_zig_version": "0.16.0",
