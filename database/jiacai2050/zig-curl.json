@@ -14,9 +14,9 @@
     "ziglang"
   ],
   "stars": 147,
-  "forks": 22,
+  "forks": 23,
   "watchers": 1,
-  "updated_at": "2026-04-02T20:47:22Z",
+  "updated_at": "2026-04-17T09:47:28Z",
   "dependencies": [
     {
       "name": "curl",
@@ -34,7 +34,7 @@
       "hash": "N-V-__8AAFrtpQI1j9eOv7aN3lt3eH1TJfH4npAdRIrg2gGH"
     }
   ],
-  "minimum_zig_version": "0.15.2",
+  "minimum_zig_version": "0.16.0",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/3848910?u=60f91a765c4ad95cb3a5a5b41d19ca12ee71a65d&v=4",
   "releases": [
     {
@@ -106,8 +106,8 @@
   "owner_location": "/home/mars",
   "owner_blog": "https://en.liujiacai.net/",
   "owner_twitter_username": "liujiacai",
-  "owner_followers": 1050,
-  "owner_following": 114,
+  "owner_followers": 1052,
+  "owner_following": 116,
   "owner_created_at": "2013-03-13T01:33:15Z",
   "homepage": "https://jiacai2050.github.io/zig-curl/",
   "license": "MIT",
