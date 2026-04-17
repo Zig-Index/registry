@@ -11,9 +11,9 @@
     "zig-package"
   ],
   "stars": 28,
-  "forks": 2,
+  "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-04-15T12:04:20Z",
+  "updated_at": "2026-04-17T20:46:00Z",
   "dependencies": [
     {
       "name": "cbor",
