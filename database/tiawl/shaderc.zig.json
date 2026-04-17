@@ -14,7 +14,7 @@
   "stars": 7,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-04-14T22:12:06Z",
+  "updated_at": "2026-04-17T13:48:37Z",
   "dependencies": [
     {
       "name": "shaderc",
@@ -23,22 +23,22 @@
     },
     {
       "name": "toolbox",
-      "url": "git+https://github.com/tiawl/toolbox?ref=zig-0.16.0#7d7d056c47e1bc9a66c4ab4d53928c86f1cbb954",
-      "hash": "toolbox-2.0.1-kRAu4DODAAC4GkZ714OgwurhfE5YXxI3BMQAlecmxa5f"
+      "url": "git+https://github.com/tiawl/toolbox?ref=2.0.2#6eff672e76e867c277183aee1b8c5c1b70ff4915",
+      "hash": "toolbox-2.0.2-kRAu4BibAADKQMUUYyFacpyGgKCWxPyrcxa6ziZQZXwH"
     },
     {
       "name": "spirv_zig",
-      "url": "git+https://github.com/tiawl/spirv.zig?ref=zig-0.16.0#74e754a0ad16b4b1603ec3c21503725ff34ab645",
-      "hash": "spirv_zig-1.0.0-u_xqh9pKfwBkzJEdHUw0IGqcTG6hhz3rJeX5iTHoJJom"
+      "url": "git+https://github.com/tiawl/spirv.zig?ref=toolbox-2.0.2#5459141609eaeae2b4d9756f339d64cb9fc48f4f",
+      "hash": "spirv_zig-1.0.0-u_xqhwiQfwAslsnz-R_5KRAN0nmGfJk_FT5Ly4OxjDu-"
     },
     {
       "name": "glslang_zig",
-      "url": "git+https://github.com/tiawl/glslang.zig?ref=zig-0.16.0#22ba65d7a4c6e4eefd2a604214b2381c5e53b89b",
-      "hash": "glslang_zig-1.0.0-QiUC6kf1XgBlDNTspmPbQC33a-7Vt8y_COCn7Nuekxf2"
+      "url": "git+https://github.com/tiawl/glslang.zig?ref=toolbox-2.0.2#d65bb714fa0f6685c46bd0e78cad9c67cacdd2fc",
+      "hash": "glslang_zig-1.0.0-QiUC6qz1XgB--wVl30PMCJDzt-uFaT2dYAWA2gPeoD5h"
     }
   ],
   "minimum_zig_version": "0.16.0",
-  "readme": "# shaderc.zig\n\nThis is a fork of [google/shaderc][1] packaged for [Zig][2]\n\n## Why this fork ?\n\nThe intention under this fork is to package [google/shaderc][1] for [Zig][2]. So:\n* Unnecessary files have been deleted,\n* The build system has been replaced with `build.zig`,\n* A cron runs every day to check [google/shaderc][1] and other dependencies. Then it updates this repository if a new release is available.\n\n## How to use it\n\nThe goal of this repository is not to provide a [Zig][2] binding for [google/shaderc][1]. The point of this repository is to abstract the [google/shaderc][1] compilation process with [Zig][2] (which is not easy to maintain) to let you focus on your application. So you can use **shaderc.zig**:\n- as raw (see into the `example` directory),\n- as a daily updated interface for your [Zig][2] binding of [google/shaderc][1].\n\n## Dependencies\n\nThe [Zig][2] part of this package is relying on the latest [Zig][2] release (0.15.2) and will only be updated for the next one.\nIt you use a more recent [Zig][2] version, please consider the `zig-nightly` branch and `*-nightly` tags.\n\nFor other dependencies see [the build.zig.zon](https://github.com/tiawl/shaderc.zig/blob/zig-stable/build.zig.zon)\n\n## `zig build` options\n\nThese additional options have mainly been implemented for maintainability tasks but they maybe could be useful for edge usecases:\n```\n  -Dfetch   Update build.zig.zon then stop execution\n  -Dupdate  Update binding\n```\n\n## License\n\nThis repository is not subject to a unique License:\n\nThe parts of this repository originated from this repository are dedicated to the public domain. See the LICENSE file for more details.\n\n**For other parts, it is subject to the License restrictions their respective owners choosed. By design, the public domain code is incompatible with the License notion. In this case, the License prevails. So if you have any doubt about a file property, open an issue.**\n\n[1]:https://github.com/google/shaderc\n[2]:https://codeberg.org/ziglang/zig\n",
+  "readme": "# shaderc.zig\n\nThis is a fork of [google/shaderc][1] packaged for [Zig][2]\n\n## Why this fork ?\n\nThe intention under this fork is to package [google/shaderc][1] for [Zig][2]. So:\n* Unnecessary files have been deleted,\n* The build system has been replaced with `build.zig`,\n* A cron runs every day to check [google/shaderc][1] and other dependencies. Then it updates this repository if a new release is available.\n\n## How to use it\n\nThe goal of this repository is not to provide a [Zig][2] binding for [google/shaderc][1]. The point of this repository is to abstract the [google/shaderc][1] compilation process with [Zig][2] (which is not easy to maintain) to let you focus on your application. So you can use **shaderc.zig**:\n- as raw (see into the `example` directory),\n- as a daily updated interface for your [Zig][2] binding of [google/shaderc][1].\n\n## Dependencies\n\nThe [Zig][2] part of this package requires the latest (0.16.0) or the master (0.17.0-dev) [Zig][2] release.\n\nFor other dependencies see [the build.zig.zon](https://github.com/tiawl/shaderc.zig/blob/zig-stable/build.zig.zon)\n\n## `zig build` options\n\nThese additional options have mainly been implemented for maintainability tasks but they maybe could be useful for edge usecases:\n```\n  -Dfetch   Update build.zig.zon then stop execution\n  -Dupdate  Update binding\n```\n\n## License\n\nThis repository is not subject to a unique License:\n\nThe parts of this repository originated from this repository are dedicated to the public domain. See the LICENSE file for more details.\n\n**For other parts, it is subject to the License restrictions their respective owners choosed. By design, the public domain code is incompatible with the License notion. In this case, the License prevails. So if you have any doubt about a file property, open an issue.**\n\n[1]:https://github.com/google/shaderc\n[2]:https://codeberg.org/ziglang/zig\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/57362253?u=519d9e3f04e4833f75c34cb6ceb371670ccddc4b&v=4",
   "releases": [],
   "owner_bio": "Starter villain trapped in a while loop",
