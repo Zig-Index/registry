@@ -10,7 +10,7 @@
   "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-01-03T10:54:10Z",
+  "updated_at": "2026-04-18T08:52:08Z",
   "dependencies": [
     {
       "name": "libzip",
@@ -19,37 +19,37 @@
     },
     {
       "name": "autoconfigheader",
-      "url": "https://github.com/akunaakwei/zig-autoconfigheader/archive/71ad985da68e897ad168117f04cb519466b759cd.tar.gz",
-      "hash": "autoconfigheader-0.0.1-M7E_ZQ4nAAATJAY2WlwDXjd1EETCQMDvTfCBQaAVFMgB"
+      "url": "https://github.com/akunaakwei/zig-autoconfigheader/archive/dd856954fc1bc1f5ec8803553c61f99499a371a5.tar.gz",
+      "hash": "autoconfigheader-0.0.1-M7E_ZRwvAAB-ZvHawPwPk7ZSYQSrEuTdjz1nyhGPiTwW"
     },
     {
       "name": "mawk",
-      "url": "https://github.com/akunaakwei/zig-mawk/archive/7d60616cd324eef46176babf231b7f5950b73fec.tar.gz",
-      "hash": "mawk-1.3.4-anuHUHE2AABoqR3_NH_X6AqeKRAFhT_vbmEkV-PpsKJR"
+      "url": "https://github.com/akunaakwei/zig-mawk/archive/54a3b57f921fd2a0d839d40ac5a86cbe1b1e9e23.tar.gz",
+      "hash": "mawk-1.3.4-anuHUNQ2AACQfEJ-wWwpTsoPvI1Sp2fCAuNJ0ChMLwVG"
     },
     {
       "name": "zlib_ng",
-      "url": "https://github.com/akunaakwei/zig-zlib-ng/archive/47d21424d8563ef78096f787cb56692be0e94c9d.tar.gz",
-      "hash": "zlib_ng-2.3.2-O92soDc5AACuyk3AbAx4qYT1RVQF_Kj0weQvyVmLpMTz"
+      "url": "https://github.com/akunaakwei/zig-zlib-ng/archive/c9442b5a498056d8321afa4994f485618bc1b726.tar.gz",
+      "hash": "zlib_ng-2.3.3-O92soEg4AAAUkddexVEGzFRFsYdVFgmKwRRkGHRTLLS7"
     },
     {
       "name": "bzip2",
-      "url": "https://github.com/akunaakwei/zig-bzip2/archive/86378fb0bda23a19e73ff985efee28cb6168db3d.tar.gz",
-      "hash": "bzip2-1.0.8-x1Hi7ggMAADABRaL5NII4o5DrIntwlTl_IpAcHGzA1Cq"
+      "url": "https://github.com/akunaakwei/zig-bzip2/archive/2645d49915c6828da0db27520f9db3db5106727b.tar.gz",
+      "hash": "bzip2-1.0.8-x1Hi7kQMAAAz9_SWVfRJGaFvgu7e3yFMXYv1mu_uJ8gf"
     },
     {
       "name": "xz",
-      "url": "https://github.com/akunaakwei/zig-xz/archive/d01038bce5762c9fe520dd8bbf2c543311f73943.tar.gz",
-      "hash": "xz-5.8.2-6v47_JYeAAAwKtZxu1r3QUcw8BLEMcyXzi9zBimsD8M4"
+      "url": "https://github.com/akunaakwei/zig-xz/archive/e2d389262c8291907e3e4c6fb119819141c16c0f.tar.gz",
+      "hash": "xz-5.8.2-6v47_JYeAABSL-jonprpL5-E_YaaGc4B5xrbe93WsJ3G"
     },
     {
       "name": "zstd",
-      "url": "https://github.com/akunaakwei/zig-zstd/archive/5904d1268686a67ce9291bec290b44f5c7de5318.zip",
-      "hash": "zstd-1.5.7-biH4jGcSAAABEOoCl0woGj2_mzxSqPtOnAbeEFrHf5Qc"
+      "url": "https://github.com/akunaakwei/zig-zstd/archive/4303868d0f73087bf89ca14f0fee1b4d3b8169b3.zip",
+      "hash": "zstd-1.5.7-biH4jLMSAADwOkeZC9Zxz5co20f2jwSVpeB-EHQcQ1bA"
     }
   ],
-  "minimum_zig_version": "0.15.2",
-  "readme": "# libzip\r\nThis is libzip packaged for the zig build system.",
+  "minimum_zig_version": "0.16.0",
+  "readme": "# libzip\r\nThis is [libzip](https://github.com/nih-at/libzip) packaged for the zig build system.",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/11787994?v=4",
   "releases": [],
   "owner_company": null,

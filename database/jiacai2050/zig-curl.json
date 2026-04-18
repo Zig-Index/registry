@@ -16,7 +16,7 @@
   "stars": 147,
   "forks": 23,
   "watchers": 1,
-  "updated_at": "2026-04-18T05:56:37Z",
+  "updated_at": "2026-04-18T07:43:43Z",
   "dependencies": [
     {
       "name": "curl",
@@ -37,6 +37,15 @@
   "minimum_zig_version": "0.16.0",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/3848910?u=60f91a765c4ad95cb3a5a5b41d19ca12ee71a65d&v=4",
   "releases": [
+    {
+      "tag_name": "v0.5.0",
+      "name": "v0.5.0",
+      "body": "## What's Changed\r\n* feat: curl diagnostics by @xydone in https://github.com/jiacai2050/zig-curl/pull/46\r\n* feat(diagnostics): Improve error diagnostics usability by @jiacai2050 in https://github.com/jiacai2050/zig-curl/pull/47\r\n* bump curl to 8.19.0 by @MrScriptX in https://github.com/jiacai2050/zig-curl/pull/49\r\n* feat: update to zig 0.16.0 by @xydone in https://github.com/jiacai2050/zig-curl/pull/50\r\n\r\n\r\n**Full Changelog**: https://github.com/jiacai2050/zig-curl/compare/v0.4.0...v0.5.0",
+      "prerelease": false,
+      "published_at": "2026-04-18T07:45:28Z",
+      "html_url": "https://github.com/jiacai2050/zig-curl/releases/tag/v0.5.0",
+      "assets": []
+    },
     {
       "tag_name": "v0.4.0",
       "name": "v0.4.0",

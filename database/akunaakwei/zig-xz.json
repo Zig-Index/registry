@@ -10,7 +10,7 @@
   "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-12-29T12:38:50Z",
+  "updated_at": "2026-04-18T08:08:29Z",
   "dependencies": [
     {
       "name": "xz",
@@ -18,7 +18,7 @@
       "hash": "N-V-__8AAEMMYgB6Yo8k_-EQh5fbZpSC023jD0natJR5DzzP"
     }
   ],
-  "minimum_zig_version": "0.15.2",
+  "minimum_zig_version": "0.16.0",
   "readme": "# xz\r\nThis is [xz utils](https://github.com/tukaani-project/xz) packaged for the zig build system.",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/11787994?v=4",
   "releases": [],
