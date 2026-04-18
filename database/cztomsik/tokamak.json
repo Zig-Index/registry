@@ -11,10 +11,10 @@
     "rest",
     "dependency-injection"
   ],
-  "stars": 594,
-  "forks": 18,
+  "stars": 596,
+  "forks": 20,
   "watchers": 8,
-  "updated_at": "2026-04-06T08:19:49Z",
+  "updated_at": "2026-04-18T07:03:02Z",
   "dependencies": [
     {
       "name": "httpz",
@@ -30,7 +30,7 @@
   "owner_location": "Brno, Czech Republic",
   "owner_blog": "https://www.avapls.com",
   "owner_twitter_username": "cztomsik",
-  "owner_followers": 193,
+  "owner_followers": 194,
   "owner_following": 250,
   "owner_created_at": "2013-02-10T20:02:00Z",
   "homepage": "https://tomsik.cz/tokamak/",
