@@ -13,15 +13,15 @@
   "stars": 5,
   "forks": 2,
   "watchers": 0,
-  "updated_at": "2026-04-07T18:29:53Z",
+  "updated_at": "2026-04-18T12:48:20Z",
   "dependencies": [
     {
       "name": "protobuf",
-      "url": "git+https://github.com/Arwalk/zig-protobuf?ref=v4.0.0#622e9e84f6df66758718b1196e1ccd6dd45a8930",
-      "hash": "protobuf-3.0.0-0e82avQuKADcHgDzDixSMGN22hzGEgwFE0tEJUWnWu5Q"
+      "url": "git+https://github.com/Arwalk/zig-protobuf?ref=v5.0.0#1f6cb06156b3ff4f52f98bc14f829c0b8393a6fc",
+      "hash": "protobuf-5.0.0-0e82avKUKAAVwTWJzTIEZ14Fu0zC11_lElR8tE6H__y1"
     }
   ],
-  "minimum_zig_version": "0.15.1",
+  "minimum_zig_version": "0.16.0",
   "readme": "## OpenTelemetry Protobuf Zig\n\n[OpenTelemetry Protobuf definitions](https://github.com/open-telemetry/opentelemetry-proto) packaged for Zig.\n\n---\n\nThis repository checks out the official OpenTelemetry Protobuf definitions in a submodule and contains a Zig build to expose the generated Zig code as a package.\n\n### Import the package\n\nThe following command will checkout the latest avaiable commit on `main`, which _should_ also be the latest tagged version.\n\n```bash\nzig fetch --save \"git+https://github.com/zig-o11y/opentelemetry-proto\"\n```\n\nTo specify a tag, add the ref (e.g. `v1.6.0` tag).\n\n```bash\nzig fetch --save \"git+https://github.com/zig-o11y/opentelemetry-proto#v1.6.0\"\n```\n\nTags in this repository will mirror the tags in the OpenTelemetry official repository.\n\n### Generate the code for a new release\n\nWhen a new tag is added in the upstream repository, there is a build step we can use to update the generated code.\nPick a tag from the upstream repo, say <vX.Y.Z>, and run:\n\n```zig\nzig build update-tag -Dtag=<vX.Y.Z>\n```\n\n### Dependencies\n\nThe marvellous [`zig-protobuf`](https://github.com/Arwalk/zig-protobuf/) library from @Arwalk.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/195921428?v=4",
   "releases": [],
