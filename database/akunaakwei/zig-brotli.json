@@ -10,7 +10,7 @@
   "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-01-03T10:42:05Z",
+  "updated_at": "2026-04-18T11:18:45Z",
   "dependencies": [
     {
       "name": "brotli",
@@ -18,8 +18,8 @@
       "hash": "N-V-__8AAJudKgCQCuIiH6MJjAiIJHfg_tT_Ew-0vZwVkCo_"
     }
   ],
-  "minimum_zig_version": "0.15.1",
-  "readme": "# brotli\r\nThis is brotli packaged for the zig build system.",
+  "minimum_zig_version": "0.16.0",
+  "readme": "# brotli\r\nThis is [brotli](https://github.com/google/brotli) packaged for the zig build system.",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/11787994?v=4",
   "releases": [],
   "owner_company": null,

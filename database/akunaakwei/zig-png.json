@@ -10,26 +10,26 @@
   "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-02-28T06:33:37Z",
+  "updated_at": "2026-04-18T11:34:08Z",
   "dependencies": [
     {
       "name": "png",
-      "url": "https://github.com/pnggroup/libpng/archive/refs/tags/v1.6.55.tar.gz",
-      "hash": "N-V-__8AAKYYYAB-0nN4xAj-pwthHbfArVwRJ3RNVrS899TN"
+      "url": "https://github.com/pnggroup/libpng/archive/refs/tags/v1.6.58.tar.gz",
+      "hash": "N-V-__8AAJexYAClrDiJ2R-eT-rfMNK2Qd3--2FRhY7e5nvn"
     },
     {
-      "name": "z",
-      "url": "https://github.com/akunaakwei/zig-z/archive/90f9f5b5892f248426f86ec87d2ad210017b4fbb.tar.gz",
-      "hash": "z-1.3.1-bMk6UWILAACBq0z3H3a5qZNyCx0O7BVePzsBnlIv4zVr"
+      "name": "zlib_ng",
+      "url": "https://github.com/akunaakwei/zig-zlib-ng/archive/c9442b5a498056d8321afa4994f485618bc1b726.tar.gz",
+      "hash": "zlib_ng-2.3.3-O92soEg4AAAUkddexVEGzFRFsYdVFgmKwRRkGHRTLLS7"
     },
     {
       "name": "mawk",
-      "url": "https://github.com/akunaakwei/zig-mawk/archive/7d60616cd324eef46176babf231b7f5950b73fec.zip",
-      "hash": "mawk-1.3.4-anuHUHE2AABoqR3_NH_X6AqeKRAFhT_vbmEkV-PpsKJR"
+      "url": "https://github.com/akunaakwei/zig-mawk/archive/54a3b57f921fd2a0d839d40ac5a86cbe1b1e9e23.zip",
+      "hash": "mawk-1.3.4-anuHUNQ2AACQfEJ-wWwpTsoPvI1Sp2fCAuNJ0ChMLwVG"
     }
   ],
-  "minimum_zig_version": "0.15.1",
-  "readme": "# libpng\r\nThis is libpng packaged for the zig build system.",
+  "minimum_zig_version": "0.16.0",
+  "readme": "# libpng\r\nThis is [libpng](https://github.com/pnggroup/libpng) packaged for the zig build system.",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/11787994?v=4",
   "releases": [],
   "owner_company": null,
