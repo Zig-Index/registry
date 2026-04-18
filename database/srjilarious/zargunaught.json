@@ -11,15 +11,15 @@
   "stars": 0,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-03-28T13:16:00Z",
+  "updated_at": "2026-04-18T01:55:39Z",
   "dependencies": [
     {
       "name": "testz",
-      "url": "https://github.com/srjilarious/testz/archive/refs/tags/v1.1.0.tar.gz",
-      "hash": "testz-1.1.0-abaPyRr0CAD7nMXVE8c40UoSSUoeLQN_NQWoQjEivQ0T"
+      "url": "https://github.com/srjilarious/testz/archive/refs/tags/v1.2.0.tar.gz",
+      "hash": "testz-1.2.0-abaPyUhKCgC26UcPU4iP3zpaVMyNEbihGecCaisssARM"
     }
   ],
-  "minimum_zig_version": "0.15.1",
+  "minimum_zig_version": "0.16.0",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/1356248?u=b4e78dd97be59fc9c316238e479cd50e50a2cb9c&v=4",
   "releases": [
     {
