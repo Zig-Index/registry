@@ -2,7 +2,7 @@
   "name": "Zig-Intel-Hex",
   "owner": "bcrist",
   "repo": "Zig-Intel-Hex",
-  "description": "Intel Hex format library in Zig",
+  "description": "mirror of codeberg.org/bcrist/zig-intel-hex",
   "type": "package",
   "topics": [
     "encoding",
@@ -17,7 +17,7 @@
   "stars": 0,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-02-28T19:46:23Z",
+  "updated_at": "2026-04-18T15:06:47Z",
   "minimum_zig_version": "0.15.1",
   "readme": "# Zig-Intel-Hex\n\nPrints binary data into Intel Hex format.\n\nTODO: Parsing\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/2828351?v=4",
@@ -29,6 +29,7 @@
   "owner_followers": 9,
   "owner_following": 0,
   "owner_created_at": "2012-11-18T17:51:58Z",
+  "homepage": "https://codeberg.org/bcrist/zig-intel-hex",
   "license": "MIT",
   "category": "library"
 }
