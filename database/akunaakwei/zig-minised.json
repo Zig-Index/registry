@@ -10,7 +10,7 @@
   "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-10-29T08:04:21Z",
+  "updated_at": "2026-04-18T10:41:36Z",
   "dependencies": [
     {
       "name": "minised",
@@ -18,7 +18,7 @@
       "hash": "N-V-__8AAKsoAQDtiTXrFhXFip245h-UKQb9_RD4y30IxuKP"
     }
   ],
-  "minimum_zig_version": "0.15.2",
+  "minimum_zig_version": "0.16.0",
   "readme": "# minised\r\nThis is [minised](http://www.exactcode.de/opensource/minised/) packaged for the zig build system.",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/11787994?v=4",
   "releases": [],
