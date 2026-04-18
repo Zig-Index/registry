@@ -14,10 +14,20 @@
   "stars": 2,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-08-22T20:29:16Z",
+  "updated_at": "2026-04-18T18:06:51Z",
+  "minimum_zig_version": "0.16.0",
   "readme": "# shuffling-allocator.zig\n\nThe **ShufflingAllocator** package provides a type that wraps an existing allocator and shuffles the order of heap allocations, effectively randomizing the placement of heap-allocated memory. This randomization is useful for testing, benchmarking, and performance evaluation, allowing you to decouple the effects of memory locality from performance metrics during code optimization or profiling.\n\n## Features\n\n- **Heap Allocation Shuffling**: Randomizes the placement of heap allocations to avoid accidental memory locality, reducing cache effects during performance testing.\n- **Concurrency Support**: Designed to support multi-threaded environments while maintaining proper synchronization using mutexes.\n- **Customizable Randomization**: Uses a global random state to shuffle allocations across different size classes, enhancing the reliability of performance tests.\n- **Raw Memory Management**: Provides custom alloc, free, resize, and remap methods adhering to the Zig standard library's allocator interface.\n\n## Use Cases\n\n- **Performance Testing**: Separate the impact of memory locality from other performance factors when benchmarking code changes.\n- **Memory Management Research**: Experiment with different allocation patterns and their impact on system performance.\n- **Randomization for Debugging**: Randomize heap allocations to test for latent bugs or memory-related issues that depend on specific memory layouts.\n\n### **Note on Security Use Cases**\nWhile randomizing heap allocation addresses certain memory access patterns that could influence performance, this package is **not** designed for security purposes (e.g., as a substitute for Address Space Layout Randomization (ASLR)). If you're looking for a solution focused on security hardening, this package may not meet your needs due to design choices that prioritize performance over security.\n\n## Installation\n\nTo use this package in your Zig project, you can simply import it:\n\n```zig\nconst ShufflingAllocator = @import(\"shuffling_allocator\").ShufflingAllocator;\n```\n\n## API Reference\nThis is the primary type in this package, implementing the standard `std.mem.Allocator` interface, with the following methods:\n\n- `alloc`: Allocates memory with randomized placement. If the memory size is too large for shuffling, it falls back to standard allocation.\n- `free`: Frees the memory, also randomizing its location in the heap.\n- `resize`: Resizes the allocated memory without applying shuffling.\n- `remap`: Remaps the memory without applying shuffling.\n\nInspired by https://github.com/fitzgen/shuffling-allocator\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/51416554?u=77d5ff88d269c348985295baa6bd915873b09249&v=4",
   "releases": [
+    {
+      "tag_name": "v0.3.0",
+      "name": "v0.3.0",
+      "body": "## What's Changed\r\n* build: zig 0.16.0 by @hendriknielaender in https://github.com/hendriknielaender/shuffling-allocator.zig/pull/8\r\n\r\n\r\n**Full Changelog**: https://github.com/hendriknielaender/shuffling-allocator.zig/compare/v0.2.0...v0.3.0",
+      "prerelease": false,
+      "published_at": "2026-04-18T18:07:11Z",
+      "html_url": "https://github.com/hendriknielaender/shuffling-allocator.zig/releases/tag/v0.3.0",
+      "assets": []
+    },
     {
       "tag_name": "v0.2.0",
       "name": "v0.2.0",
