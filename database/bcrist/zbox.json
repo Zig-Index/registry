@@ -2,7 +2,7 @@
   "name": "zbox",
   "owner": "bcrist",
   "repo": "zbox",
-  "description": "SVG Block Diagram Generator",
+  "description": "mirror of codeberg.org/bcrist/zbox",
   "type": "package",
   "topics": [
     "block-diagram",
@@ -16,15 +16,15 @@
   "stars": 1,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-02-28T21:49:53Z",
+  "updated_at": "2026-04-18T16:39:35Z",
   "dependencies": [
     {
       "name": "deep_hash_map",
-      "url": "git+https://github.com/bcrist/zig-deephashmap#ec22725ad1e4ea65488fe7c5bc1f2041d92bf87c",
-      "hash": "deep_hash_map-1.0.1-RLYshCUbAABnDZhPzE87HipEv7FG7ktpMSxLRxWvXuO7"
+      "url": "git+https://codeberg.org/bcrist/zig-deephashmap#da64d909973dddfa4649dda1140f3af0c2c7d4cb",
+      "hash": "deep_hash_map-1.0.1-RLYshKIgAADSXYf_IHDZrrXc9-jx-o-gJoviqNiuuS4-"
     }
   ],
-  "minimum_zig_version": "0.15.1",
+  "minimum_zig_version": "0.16.0",
   "readme": "# ZBox\n\nZBox is a tool for programmatically creating SVG block diagrams in Zig.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/2828351?v=4",
   "releases": [],
@@ -35,6 +35,6 @@
   "owner_followers": 9,
   "owner_following": 0,
   "owner_created_at": "2012-11-18T17:51:58Z",
-  "license": "MIT",
+  "homepage": "https://codeberg.org/bcrist/zbox",
   "category": "library"
 }
