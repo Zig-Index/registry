@@ -1,0 +1,69 @@
+{
+  "name": "gnoll",
+  "owner": "kobolds-io",
+  "repo": "gnoll",
+  "description": "zig application configuration handled well",
+  "type": "package",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 1,
+  "watchers": 0,
+  "updated_at": "2026-04-19T17:39:08Z",
+  "dependencies": [
+    {
+      "name": "yaml",
+      "url": "https://github.com/MiahDrao97/zig-yaml/archive/refs/heads/main.tar.gz",
+      "hash": "zig_yaml-0.2.0-2lSyvD_MAgDhFYZI-YUkIc8TptY9C3jZZkodfY0KuyVS"
+    }
+  ],
+  "minimum_zig_version": "0.16.0",
+  "readme": "# Gnoll\n\n`gnoll` is a simple library that helps you load your configs from files. It currently supports the following file formats.\n\n- `json`\n- `yaml`\n\n`gnoll` is no real substitute for a well thoughtout configuration system but will play nicely with application code.\n\n## Usage\n\nUsing `gnoll` is pretty simple.\n\n```zig\n// import the library into your file\nconst gnoll = @import(\"gnoll\");\nconst Gnoll = gnoll.Gnoll;\nconst ConfigInfo = gnoll.ConfigInfo; // if you like types\nconst GnollOptions = gnoll.GnollOptions; // if you like types\n\n// Define your config type\nconst TestConfig = struct {\n    key_0: u32,\n    key_1: []const u8,\n    key_2: struct {\n        key_0: []f32,\n    },\n};\n\nfn main(init: std.process.Init) !void {\n    const io = init.io;\n\n    // Define some filepaths to check for configuration files\n    const gnoll_options = GnollOptions{\n        .config_infos = &.{\n            // if we can't find this file, fallback to the next one etc...\n            ConfigInfo{\n                .filepath = \"./test_data/config_0.json\",\n                .format = .json,\n            },\n            ConfigInfo{\n                .filepath = \"./test_data/config_1.yaml\",\n                .format = .yaml,\n            },\n        },\n    };\n\n    // Initialize Gnoll with your config Type\n    var gnoll = try Gnoll(TestConfig).init(allocator, io, gnoll_options);\n    defer gnoll.deinit(allocator);\n\n    // get values from `gnoll` after initialization\n    std.debug.print(\"key_0 value: {d}\\n\", .{gnoll.config.key_0});\n    std.debug.print(\"key_2.key_0 value: {any}\\n\", .{gnoll.config.key_2.key_0});\n}\n```\n\n## Installation\n\n| zig version | stdx version |\n|-------------|--------------|\n| 0.15.x      | 0.1.0        |\n| 0.16.0      | 0.2.0        |\n\n\nYou can install gnoll just like any other zig dependency by editing your `build.zig.zon` file or by using the `zig fetch` command.\n\n```bash\nzig fetch --save https://gitlab.com/kobolds-io/gnoll/-/archive/v0.2.0/gnoll-v0.2.0.tar.gz\n```\n\nIn your `build.zig` file add the library as a dependency.\n\n```zig\n// ...boilerplate\n\nconst gnoll_dep = b.dependency(\"gnoll\", .{\n    .target = target,\n    .optimize = optimize,\n});\nconst gnoll_mod = gnoll_dep.module(\"gnoll\");\n\nexe.root_module.addImport(\"gnoll\", gnoll_mod);\n```\n\n## Overview\n\n`gnoll` works by cycling through the passed `GnollOptions` during the `init` function call to find a valid configuration. Once a configuration file exists on the file system, `gnoll` will use the appropriate parser to load into the `gnoll.config` field. Overall, pretty simple but nice and useful.\n\n## Features\n\n| Feature                                        | Implemented |\n| ---------------------------------------------- | ----------- |\n| `json` support                                 | yes         |\n| `yaml` support                                 | yes         |\n| `toml` support                                 | no          |\n| do not immediately fail on first failed parsed | no          |\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/192920687?v=4",
+  "releases": [
+    {
+      "tag_name": "v0.0.4",
+      "name": "v0.0.4",
+      "body": "## What's Changed\r\n* fix yaml import for lib by @bahodge in https://github.com/kobolds-io/gnoll/pull/11\r\n* bump version numbers to v0.0.4 by @bahodge in https://github.com/kobolds-io/gnoll/pull/12\r\n\r\n\r\n**Full Changelog**: https://github.com/kobolds-io/gnoll/compare/v0.0.3...v0.0.4",
+      "prerelease": false,
+      "published_at": "2025-09-10T16:06:27Z",
+      "html_url": "https://github.com/kobolds-io/gnoll/releases/tag/v0.0.4",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.3",
+      "name": "v0.0.3",
+      "body": "## What's Changed\r\n* bump version numbers to v0.0.3 by @bahodge in https://github.com/kobolds-io/gnoll/pull/10\r\n* Fixes issue with exporting library\r\n\r\n\r\n**Full Changelog**: https://github.com/kobolds-io/gnoll/compare/v0.0.2...v0.0.3",
+      "prerelease": false,
+      "published_at": "2025-09-10T05:06:47Z",
+      "html_url": "https://github.com/kobolds-io/gnoll/releases/tag/v0.0.3",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.2",
+      "name": "v0.0.2",
+      "body": "**This is the initial release of gnoll** View the readme for usage information.\r\n\r\n## What's Changed\r\n* bump version numbers to v0.0.2 by @bahodge in https://github.com/kobolds-io/gnoll/pull/7\r\n\r\n\r\n**Full Changelog**: https://github.com/kobolds-io/gnoll/compare/v0.0.1...v0.0.2",
+      "prerelease": false,
+      "published_at": "2025-09-10T03:46:31Z",
+      "html_url": "https://github.com/kobolds-io/gnoll/releases/tag/v0.0.2",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.0.1",
+      "name": "v0.0.1",
+      "body": "## What's Changed\r\n* Chore/add readme by @bahodge in https://github.com/kobolds-io/gnoll/pull/3\r\n* bump version numbers to v0.0.1 by @bahodge in https://github.com/kobolds-io/gnoll/pull/6\r\n\r\n\r\n**Full Changelog**: https://github.com/kobolds-io/gnoll/commits/v0.0.1",
+      "prerelease": true,
+      "published_at": "2025-09-10T03:47:16Z",
+      "html_url": "https://github.com/kobolds-io/gnoll/releases/tag/v0.0.1",
+      "assets": []
+    }
+  ],
+  "owner_bio": "A friendly software company",
+  "owner_location": "United States of America",
+  "owner_blog": "https://kobolds.io",
+  "owner_twitter_username": null,
+  "owner_created_at": "2024-12-26T20:59:24Z",
+  "license": "Apache-2.0",
+  "category": "library"
+}
