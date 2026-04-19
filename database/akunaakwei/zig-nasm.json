@@ -10,7 +10,7 @@
   "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-11-02T18:15:43Z",
+  "updated_at": "2026-04-19T17:49:59Z",
   "dependencies": [
     {
       "name": "nasm",
@@ -18,8 +18,8 @@
       "hash": "N-V-__8AAOdiwQAcuTPO3dqgQrt8BtvnkUYJ1Z5tP5qQOphI"
     }
   ],
-  "minimum_zig_version": "0.15.0",
-  "readme": "# nasm\r\nThis is nasm for the zig build system.  \r\nAdditionaly there is a custom build step to compile assembly to object files.",
+  "minimum_zig_version": "0.16.0",
+  "readme": "# nasm\r\nThis is [nasm](https://www.nasm.us/) for the zig build system.  \r\nAdditionaly there is a custom build step to compile assembly to object files.",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/11787994?v=4",
   "releases": [],
   "owner_company": null,
