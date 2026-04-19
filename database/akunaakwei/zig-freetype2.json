@@ -10,7 +10,7 @@
   "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-11-09T08:50:18Z",
+  "updated_at": "2026-04-19T07:55:05Z",
   "dependencies": [
     {
       "name": "freetype",
@@ -19,36 +19,36 @@
     },
     {
       "name": "minised",
-      "url": "https://github.com/akunaakwei/zig-minised/archive/b16150f22df6cf5671ca6f78adc848f6559989c7.tar.gz",
-      "hash": "minised-1.16.0-_f0wsBgdAADVm-qLrUJ8ZX_A4GjjI5oeJogHFE8EBR5f"
+      "url": "https://github.com/akunaakwei/zig-minised/archive/9139b3adffad95e3a7b659550cbf4861961985aa.tar.gz",
+      "hash": "minised-1.16.0-_f0wsIchAACr_gy42XO_PYnxQWdLkHcvy_bT7KseALI1"
     },
     {
       "name": "brotli",
-      "url": "https://github.com/akunaakwei/zig-brotli/archive/075c504d2337cb154dc810cd1675d0b7aef68df0.tar.gz",
-      "hash": "brotli-1.2.0-KPf9F2MVAADiZY1lCWWlksYMm-kKlP2PmVoGcBowe_kS"
+      "url": "https://github.com/akunaakwei/zig-brotli/archive/b332c3de4203fece301aadd64efd667b6f6cb938.tar.gz",
+      "hash": "brotli-1.2.0-KPf9F_wVAAAGDjnpF2bHcZy5HmSR9hsqXixVnY3IkK2t"
     },
     {
-      "name": "miniz",
-      "url": "https://github.com/akunaakwei/zig-miniz/archive/590e680e6d80b66eff258073ea0bcbbbbe75c317.zip",
-      "hash": "miniz-3.1.0-0VR2HbYUAADcyREPqtywcywp_2HImnMYYk8EispopYRW"
+      "name": "zlib_ng",
+      "url": "https://github.com/akunaakwei/zig-zlib-ng/archive/c9442b5a498056d8321afa4994f485618bc1b726.tar.gz",
+      "hash": "zlib_ng-2.3.3-O92soEg4AAAUkddexVEGzFRFsYdVFgmKwRRkGHRTLLS7"
     },
     {
       "name": "png",
-      "url": "https://github.com/akunaakwei/zig-png/archive/aee83558274e6417d97791148f9003e8d9feec24.tar.gz",
-      "hash": "png-1.6.50-NSN6g9k5AACRjjxMHhqQLSGnKz8d_CYKj4qf0ft0Z3Od"
+      "url": "https://github.com/akunaakwei/zig-png/archive/c762720a90c6667a3020978da7b802d5b9be9d41.tar.gz",
+      "hash": "png-1.6.55-NSN6g186AAB9TcffUqKAK9mVADPVartn8kw_Xh3yMSHj"
     },
     {
       "name": "bzip2",
-      "url": "https://github.com/akunaakwei/zig-bzip2/archive/86378fb0bda23a19e73ff985efee28cb6168db3d.tar.gz",
-      "hash": "bzip2-1.0.8-x1Hi7ggMAADABRaL5NII4o5DrIntwlTl_IpAcHGzA1Cq"
+      "url": "https://github.com/akunaakwei/zig-bzip2/archive/2645d49915c6828da0db27520f9db3db5106727b.tar.gz",
+      "hash": "bzip2-1.0.8-x1Hi7kQMAAAz9_SWVfRJGaFvgu7e3yFMXYv1mu_uJ8gf"
     },
     {
       "name": "harfbuzz",
-      "url": "https://github.com/akunaakwei/zig-harfbuzz/archive/0bd2402b06908b187ad4d54f749e85b84bce26fb.tar.gz",
-      "hash": "harfbuzz-12.1.0-bK6F46MNAACubZTZW0fNZry1-JL4_aGFks6EJMbkAPeo"
+      "url": "https://github.com/akunaakwei/zig-harfbuzz/archive/b3c3984ddbfab99fd446b89d0ac934e89be933b5.tar.gz",
+      "hash": "harfbuzz-12.1.0-bK6F49AOAAC5fvkM_d6sVivKRHh2oYarpdVr5QfGDfK3"
     }
   ],
-  "minimum_zig_version": "0.15.1",
+  "minimum_zig_version": "0.16.0",
   "readme": "# freetype\r\nThis is freetype packaged for the zig build system.",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/11787994?v=4",
   "releases": [],

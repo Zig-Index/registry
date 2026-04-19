@@ -10,7 +10,7 @@
   "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-10-29T08:07:08Z",
+  "updated_at": "2026-04-19T07:54:23Z",
   "dependencies": [
     {
       "name": "harfbuzz",
@@ -19,17 +19,17 @@
     },
     {
       "name": "icu",
-      "url": "https://github.com/akunaakwei/zig-icu/archive/6f4e3a4765ebf7602a512c0fc9dfd8c75d207f63.tar.gz",
-      "hash": "icu-77.1.0-b1DbVOOrAAARxFFjP-nWibrw4HkGrJO-gTOUFAQvjpQR"
+      "url": "https://github.com/akunaakwei/zig-icu/archive/5d7aedbadb00f515922c82973556739b164cc015.tar.gz",
+      "hash": "icu-78.2.0-b1DbVLtcAAA2O-MYPITRXss2r9tl5D-3s7yycYHZ6Xtj"
     },
     {
       "name": "freetype2",
-      "url": "https://github.com/akunaakwei/zig-freetype2/archive/c9955cb2e84c04c7773fd02b6f2d356b231c6d09.tar.gz",
-      "hash": "freetype2-2.14.1-8g4_vtlaAABmIX9PKnBEA0-VwD38NX7Iv59OW812hOQ2"
+      "url": "https://github.com/akunaakwei/zig-freetype2/archive/310b141c8b3f9443ec7aa158dc1e2f6cb84431b6.tar.gz",
+      "hash": "freetype2-2.14.1-8g4_vhlbAAA0m1UuUxr7A5Pn8Y0h25pNmcHT9fX3TY_d"
     }
   ],
-  "minimum_zig_version": "0.15.1",
-  "readme": "# harfbuzz\r\nThis is harfbuzz packaged for the zig build system.",
+  "minimum_zig_version": "0.16.0",
+  "readme": "# harfbuzz\r\nThis is [harfbuzz](https://github.com/harfbuzz/harfbuzz) packaged for the zig build system.",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/11787994?v=4",
   "releases": [],
   "owner_company": null,

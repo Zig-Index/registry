@@ -10,7 +10,7 @@
   "stars": 0,
   "forks": 1,
   "watchers": 0,
-  "updated_at": "2025-08-21T18:53:07Z",
+  "updated_at": "2026-04-19T08:19:28Z",
   "dependencies": [
     {
       "name": "patch",
@@ -18,7 +18,7 @@
       "hash": "N-V-__8AAJPSEgDcozcxiSvegfkjtNmn6GcEB8wT_c3xq86P"
     }
   ],
-  "minimum_zig_version": "0.15.1",
+  "minimum_zig_version": "0.16.0",
   "readme": "# patch\r\nThis is gnu patch utility packaged for the Zig build system.  \r\nAdditionaly there is a custom build step to apply patch files.",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/11787994?v=4",
   "releases": [],
