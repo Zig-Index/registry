@@ -11,9 +11,9 @@
     "zig-package"
   ],
   "stars": 665,
-  "forks": 75,
+  "forks": 76,
   "watchers": 9,
-  "updated_at": "2026-04-19T10:40:53Z",
+  "updated_at": "2026-04-19T13:06:51Z",
   "dependencies": [
     {
       "name": "emsdk",
