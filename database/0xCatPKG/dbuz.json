@@ -10,10 +10,10 @@
     "zig",
     "ziglang"
   ],
-  "stars": 3,
+  "stars": 4,
   "forks": 4,
   "watchers": 0,
-  "updated_at": "2026-04-05T20:50:02Z",
+  "updated_at": "2026-04-20T10:13:01Z",
   "dependencies": [
     {
       "name": "dishwasher",

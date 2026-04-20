@@ -10,7 +10,7 @@
     "zig-package"
   ],
   "stars": 3,
-  "forks": 1,
+  "forks": 2,
   "watchers": 1,
   "updated_at": "2025-04-18T17:51:55Z",
   "readme": "# zig-asn1\n\nZig parser for ASN.1 DER binary encoding.\n\n- [ITU X.680](https://www.itu.int/rec/dologin_pub.asp?lang=e&id=T-REC-X.680-202102-I!!PDF-E&type=items) Abstract Syntax Notation One (ASN.1)\n- [ITU X.690](https://www.itu.int/rec/dologin_pub.asp?lang=e&id=T-REC-X.690-202102-I!!PDF-E&type=items) ASN.1 encoding rules\n",

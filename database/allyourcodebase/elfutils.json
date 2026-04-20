@@ -8,10 +8,10 @@
     "zig-package",
     "zig"
   ],
-  "stars": 1,
+  "stars": 2,
   "forks": 4,
   "watchers": 2,
-  "updated_at": "2026-04-16T22:23:53Z",
+  "updated_at": "2026-04-18T19:43:22Z",
   "dependencies": [
     {
       "name": "elfutils",
