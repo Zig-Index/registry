@@ -16,21 +16,151 @@
     "synthwave",
     "tune-generator"
   ],
-  "stars": 640,
-  "forks": 22,
+  "stars": 642,
+  "forks": 21,
   "watchers": 7,
-  "updated_at": "2026-03-30T02:05:45Z",
+  "updated_at": "2026-04-21T13:16:57Z",
   "dependencies": [
     {
       "name": "clap",
-      "url": "https://github.com/Hejsil/zig-clap/archive/refs/tags/0.10.0.tar.gz",
-      "hash": "clap-0.10.0-oBajB434AQBDh-Ei3YtoKIRxZacVPF1iSwp3IX_ZB8f0"
+      "url": "https://github.com/Hejsil/zig-clap/archive/refs/tags/0.12.0.tar.gz",
+      "hash": "clap-0.12.0-oBajB7foAQDqlSwaSG5g0yq7xGbQARUsBk5T64gAOqP5"
     }
   ],
-  "minimum_zig_version": "0.14.0",
-  "readme": "# `linuxwave` 🐧🎵\n\n<p align=\"center\">\n\n<img src=\"https://github.com/orhun/linuxwave/blob/main/assets/demo.gif\" alt=\"demo\">\n<a href=\"https://github.com/orhun/linuxwave/releases\"><img src=\"https://img.shields.io/github/v/release/orhun/linuxwave?style=flat&amp;labelColor=1d1d1d&amp;color=424242&amp;logo=GitHub&amp;logoColor=white\" alt=\"GitHub Release\"></a>\n<a href=\"https://codecov.io/gh/orhun/linuxwave\"><img src=\"https://img.shields.io/codecov/c/gh/orhun/linuxwave?style=flat&amp;labelColor=1d1d1d&amp;color=424242&amp;logo=Codecov&amp;logoColor=white\" alt=\"Coverage\"></a>\n<a href=\"https://github.com/orhun/linuxwave/actions?query=workflow%3A%22Continuous+Integration%22\"><img src=\"https://img.shields.io/github/actions/workflow/status/orhun/linuxwave/ci.yml?branch=main&amp;style=flat&amp;labelColor=1d1d1d&amp;color=424242&amp;logo=GitHub%20Actions&amp;logoColor=white\" alt=\"Continuous Integration\"></a>\n<a href=\"https://github.com/orhun/linuxwave/actions?query=workflow%3A%22Continuous+Deployment%22\"><img src=\"https://img.shields.io/github/actions/workflow/status/orhun/linuxwave/cd.yml?style=flat&amp;labelColor=1d1d1d&amp;color=424242&amp;logo=GitHub%20Actions&amp;logoColor=white&amp;label=deploy\" alt=\"Continuous Deployment\"></a>\n<a href=\"https://hub.docker.com/r/orhunp/gpg-tui\"><img src=\"https://img.shields.io/github/actions/workflow/status/orhun/linuxwave/docker.yml?style=flat&amp;labelColor=1d1d1d&amp;color=424242&amp;label=docker&amp;logo=Docker&amp;logoColor=white\" alt=\"Docker Builds\"></a>\n<a href=\"https://orhun.dev/linuxwave/docs/\"><img src=\"https://img.shields.io/github/actions/workflow/status/orhun/linuxwave/pages.yml?style=flat&amp;labelColor=1d1d1d&amp;color=424242&amp;logo=Zig&amp;logoColor=white&amp;label=docs\" alt=\"Documentation\"></a>\n\n<p align=\"center\">\n<a href=\"https://www.youtube.com/watch?v=SLiEuvDmo8M\"><strong>Click here to watch the demo!</strong></a><br>\n<a href=\"https://open.spotify.com/track/0ChxCDjs6wKnl8iu71K7yp\">Listen to \"linuxwave\" on Spotify!</a>\n</p>\n\n</p>\n\n<details>\n  <summary>Table of Contents</summary>\n\n<!-- vim-markdown-toc GFM -->\n\n- [Motivation ✨](#motivation-)\n- [Installation 🤖](#installation-)\n  - [Build from source](#build-from-source)\n    - [Prerequisites](#prerequisites)\n    - [Instructions](#instructions)\n  - [Binary releases](#binary-releases)\n  - [Arch Linux](#arch-linux)\n  - [Void Linux](#void-linux)\n  - [Docker](#docker)\n    - [Images](#images)\n    - [Usage](#usage)\n    - [Building](#building)\n- [Examples 🎵](#examples-)\n- [Presets 🎹](#presets-)\n- [Usage 📚](#usage-)\n  - [`scale`](#scale)\n  - [`note`](#note)\n  - [`rate`](#rate)\n  - [`channels`](#channels)\n  - [`format`](#format)\n  - [`volume`](#volume)\n  - [`duration`](#duration)\n  - [`input`](#input)\n  - [`output`](#output)\n- [Related Projects](#related-projects)\n- [Funding 💖](#funding-)\n- [Contributing 🌱](#contributing-)\n- [License ⚖️](#license-)\n- [Copyright ⛓️](#copyright-)\n\n<!-- vim-markdown-toc -->\n\n</details>\n\n## Motivation ✨\n\n- [Bash One Liner - Compose Music From Entropy in /dev/urandom](https://web.archive.org/web/20230122184930/https://blog.robertelder.org/bash-one-liner-compose-music/)\n  - ['Music' from /dev/urandom](https://news.ycombinator.com/item?id=11238247)\n\n## Installation 🤖\n\n### Build from source\n\n#### Prerequisites\n\n- [Zig](https://ziglang.org/download/) (`0.14`)\n\n#### Instructions\n\n1. Clone the repository.\n\n```sh\ngit clone https://github.com/orhun/linuxwave && cd linuxwave/\n```\n\n2. Build.\n\n```sh\nzig build --release=safe\n```\n\nBinary will be located at `zig-out/bin/linuxwave`. You can also run the binary directly via `zig build run`.\n\nIf you want to use `linuxwave` in your Zig project as a package, the API documentation is available [here](https://orhun.dev/linuxwave/docs).\n\n### Binary releases\n\nSee the available binaries for different targets from the [releases page](https://github.com/orhun/linuxwave/releases). They are automated via [Continuous Deployment](.github/workflows/cd.yml) workflow.\n\nRelease tarballs are signed with the following PGP key: [0xC0701E98290D90B8](https://keyserver.ubuntu.com/pks/lookup?search=0xC0701E98290D90B8&op=vindex)\n\n### Arch Linux\n\n`linuxwave` can be installed from the [community repository](https://archlinux.org/packages/community/x86_64/linuxwave/) using [pacman](https://wiki.archlinux.org/title/Pacman):\n\n```sh\npacman -S linuxwave\n```\n\n### Void Linux\n\n`linuxwave` can be installed from official Void Linux package repository:\n\n```sh\nxbps-install linuxwave\n```\n\n### Docker\n\n#### Images\n\nDocker builds are [automated](./.github/workflows/docker.yml) and images are available in the following registries:\n\n- [Docker Hub](https://hub.docker.com/r/orhunp/linuxwave)\n- [GitHub Container Registry](https://github.com/orhun/linuxwave/pkgs/container/linuxwave)\n\n#### Usage\n\nThe following command can be used to generate `output.wav` in the current working directory:\n\n```sh\ndocker run --rm -v \"$(pwd)\":/app \"orhunp/linuxwave:${TAG:-latest}\"\n```\n\n#### Building\n\nCustom Docker images can be built from the [Dockerfile](./Dockerfile):\n\n```sh\ndocker build -t linuxwave .\n```\n\n## Examples 🎵\n\n**Default**: Read random data from `/dev/urandom` to generate a 20-second music composition in the A4 scale and save it to `output.wav`:\n\n```sh\nlinuxwave\n```\n\nOr play it directly with [mpv](https://mpv.io/) without saving:\n\n```sh\nlinuxwave -o - | mpv -\n```\n\nTo use the A minor blues scale:\n\n```sh\nlinuxwave -s 0,3,5,6,7,10 -n 220 -o blues.wav\n```\n\nRead from an arbitrary file and turn it into a 10-second music composition in the C major scale:\n\n```sh\nlinuxwave -i build.zig -n 261.63 -d 10 -o music.wav\n```\n\nRead from stdin via giving `-` as input:\n\n```sh\ncat README.md | linuxwave -i -\n```\n\nWrite to stdout via giving `-` as output:\n\n```\nlinuxwave -o - > output.wav\n```\n\n## Presets 🎹\n\nGenerate a **calming music** with a sample rate of 2000 Hz and a 32-bit little-endian signed integer format:\n\n```sh\nlinuxwave -r 2000 -f S32_LE -o calm.wav\n```\n\nGenerate a **chiptune music** with a sample rate of 44100 Hz, stereo (2-channel) output and 8-bit unsigned integer format:\n\n```sh\nlinuxwave -r 44100 -f U8 -c 2 -o chiptune.wav\n```\n\nGenerate a **boss stage music** with the volume of 65:\n\n```sh\nlinuxwave -s 0,7,1 -n 60 -v 65 -o boss.wav\n```\n\nGenerate a **spooky low-fidelity music** with a sample rate of 1000 Hz, 4-channel output:\n\n```sh\nlinuxwave -s 0,1,5,3 -n 100 -r 1000 -v 55 -c 4 -o spooky_manor.wav\n```\n\nFeel free to [submit a pull request](CONTRIBUTING.md) to show off your preset here!\n\nAlso, see [this discussion](https://github.com/orhun/linuxwave/discussions/1) for browsing the music generated by our community.\n\n## Usage 📚\n\n```\nOptions:\n  -s, --scale <SCALE>            Sets the musical scale [default: 0,2,3,5,7,8,10,12]\n  -n, --note <HZ>                Sets the frequency of the note [default: 440 (A4)]\n  -r, --rate <HZ>                Sets the sample rate [default: 24000]\n  -c, --channels <NUM>           Sets the number of channels [default: 1]\n  -f, --format <FORMAT>          Sets the sample format [default: S16_LE]\n  -v, --volume <VOL>             Sets the volume (0-100) [default: 50]\n  -d, --duration <SECS>          Sets the duration [default: 20]\n  -i, --input <FILE>             Sets the input file [default: /dev/urandom]\n  -o, --output <FILE>            Sets the output file [default: output.wav]\n  -V, --version                  Display version information.\n  -h, --help                     Display this help and exit.\n```\n\n### `scale`\n\nSets the musical scale for the output. It takes a list of [semitones](https://en.wikipedia.org/wiki/Semitone) separated by commas as its argument.\n\nThe default value is `0,2,3,5,7,8,10,12`, which represents a major scale starting from C.\n\nHere are other examples:\n\n- A natural minor scale: `0,2,3,5,7,8,10`\n- A pentatonic scale starting from G: `7,9,10,12,14`\n- A blues scale starting from D: `2,3,4,6,7,10`\n- An octatonic scale starting from F#: `6,7,9,10,12,13,15,16`\n- Ryukyuan (Okinawa) Japanese scale: `4,5,7,11`\n\n### `note`\n\nThe `note` option sets the frequency of the note played. It takes a frequency in Hz as its argument.\n\nThe default value is `440`, which represents A4. You can see the frequencies of musical notes [here](https://pages.mtu.edu/~suits/notefreqs.html).\n\nOther examples would be:\n\n- A3 (220 Hz)\n- C4 (261.63 Hz)\n- G4 (392 Hz)\n- A4 (440 Hz) (default)\n- E5 (659.26 Hz)\n\n### `rate`\n\nSets the sample rate for the output in Hertz (Hz).\n\nThe default value is `24000`.\n\n### `channels`\n\nSets the number of audio channels in the output file. It takes an integer as its argument, representing the number of audio channels to generate. The default value is `1`, indicating mono audio.\n\nFor stereo audio, set the value to `2`. For multi-channel audio, specify the desired number of channels.\n\nNote that the more audio channels you use, the larger the resulting file size will be.\n\n### `format`\n\nSets the sample format for the output file. It takes a string representation of the format as its argument.\n\nThe default value is `S16_LE`, which represents 16-bit little-endian signed integer.\n\nPossible values are:\n\n- `U8`: Unsigned 8-bit.\n- `S16_LE`: Signed 16-bit little-endian.\n- `S24_LE`: Signed 24-bit little-endian.\n- `S32_LE`: Signed 32-bit little-endian.\n\n### `volume`\n\nSets the volume of the output file as a percentage from 0 to 100.\n\nThe default value is `50`.\n\n### `duration`\n\nSets the duration of the output file in seconds. It takes a float as its argument.\n\nThe default value is `20` seconds.\n\n### `input`\n\nSets the input file for the music generation. It takes a filename as its argument.\n\nThe default value is `/dev/urandom`, which generates random data.\n\nYou can provide _any_ type of file for this argument and it will generate music based on the contents of that file.\n\n### `output`\n\nSets the output file. It takes a filename as its argument.\n\nThe default value is `output.wav`.\n\n## Related Projects\n\n- [linuxwavegui](https://github.com/Arcmyx/linuxwavegui) – A graphical interface for linuxwave with tempo shifting, pitch control, flawed (but still cool-sounding) MIDI generation, and an interactive piano for scale selection.\n\n## Funding 💖\n\nIf you find `linuxwave` and/or other projects on my [GitHub profile](https://github.com/orhun) useful, consider supporting me on [GitHub Sponsors](https://github.com/sponsors/orhun) or [becoming a patron](https://www.patreon.com/join/orhunp)!\n\n[![Support me on GitHub Sponsors](https://img.shields.io/github/sponsors/orhun?style=flat&logo=GitHub&labelColor=424242&color=1d1d1d&logoColor=white)](https://github.com/sponsors/orhun)\n[![Support me on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dorhunp%26type%3Dpatrons&style=flat&logo=Patreon&labelColor=424242&color=1d1d1d&logoColor=white)](https://patreon.com/join/orhunp)\n[![Support me on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dorhunp%26type%3Dpledges&style=flat&logo=Patreon&labelColor=424242&color=1d1d1d&logoColor=white&label=)](https://patreon.com/join/orhunp)\n\n## Contributing 🌱\n\nSee our [Contribution Guide](./CONTRIBUTING.md) and please follow the [Code of Conduct](./CODE_OF_CONDUCT.md) in all your interactions with the project.\n\n## License ⚖️\n\nLicensed under [The MIT License](./LICENSE).\n\n## Copyright ⛓️\n\nCopyright © 2023-2024, [Orhun Parmaksız](mailto:orhunparmaksiz@gmail.com)\n",
+  "minimum_zig_version": "0.16.0",
+  "readme": "# `linuxwave` 🐧🎵\n\n<p align=\"center\">\n\n<img src=\"https://github.com/orhun/linuxwave/blob/main/assets/demo.gif\" alt=\"demo\">\n<a href=\"https://github.com/orhun/linuxwave/releases\"><img src=\"https://img.shields.io/github/v/release/orhun/linuxwave?style=flat&amp;labelColor=1d1d1d&amp;color=424242&amp;logo=GitHub&amp;logoColor=white\" alt=\"GitHub Release\"></a>\n<a href=\"https://codecov.io/gh/orhun/linuxwave\"><img src=\"https://img.shields.io/codecov/c/gh/orhun/linuxwave?style=flat&amp;labelColor=1d1d1d&amp;color=424242&amp;logo=Codecov&amp;logoColor=white\" alt=\"Coverage\"></a>\n<a href=\"https://github.com/orhun/linuxwave/actions?query=workflow%3A%22Continuous+Integration%22\"><img src=\"https://img.shields.io/github/actions/workflow/status/orhun/linuxwave/ci.yml?branch=main&amp;style=flat&amp;labelColor=1d1d1d&amp;color=424242&amp;logo=GitHub%20Actions&amp;logoColor=white\" alt=\"Continuous Integration\"></a>\n<a href=\"https://github.com/orhun/linuxwave/actions?query=workflow%3A%22Continuous+Deployment%22\"><img src=\"https://img.shields.io/github/actions/workflow/status/orhun/linuxwave/cd.yml?style=flat&amp;labelColor=1d1d1d&amp;color=424242&amp;logo=GitHub%20Actions&amp;logoColor=white&amp;label=deploy\" alt=\"Continuous Deployment\"></a>\n<a href=\"https://hub.docker.com/r/orhunp/gpg-tui\"><img src=\"https://img.shields.io/github/actions/workflow/status/orhun/linuxwave/docker.yml?style=flat&amp;labelColor=1d1d1d&amp;color=424242&amp;label=docker&amp;logo=Docker&amp;logoColor=white\" alt=\"Docker Builds\"></a>\n<a href=\"https://orhun.dev/linuxwave/docs/\"><img src=\"https://img.shields.io/github/actions/workflow/status/orhun/linuxwave/pages.yml?style=flat&amp;labelColor=1d1d1d&amp;color=424242&amp;logo=Zig&amp;logoColor=white&amp;label=docs\" alt=\"Documentation\"></a>\n\n<p align=\"center\">\n<a href=\"https://www.youtube.com/watch?v=SLiEuvDmo8M\"><strong>Click here to watch the demo!</strong></a><br>\n<a href=\"https://open.spotify.com/track/0ChxCDjs6wKnl8iu71K7yp\">Listen to \"linuxwave\" on Spotify!</a>\n</p>\n\n</p>\n\n<details>\n  <summary>Table of Contents</summary>\n\n<!-- vim-markdown-toc GFM -->\n\n- [Motivation ✨](#motivation-)\n- [Installation 🤖](#installation-)\n  - [Build from source](#build-from-source)\n    - [Prerequisites](#prerequisites)\n    - [Instructions](#instructions)\n  - [Binary releases](#binary-releases)\n  - [Arch Linux](#arch-linux)\n  - [Void Linux](#void-linux)\n  - [Docker](#docker)\n    - [Images](#images)\n    - [Usage](#usage)\n    - [Building](#building)\n- [Examples 🎵](#examples-)\n- [Presets 🎹](#presets-)\n- [Usage 📚](#usage-)\n  - [`scale`](#scale)\n  - [`note`](#note)\n  - [`rate`](#rate)\n  - [`channels`](#channels)\n  - [`format`](#format)\n  - [`volume`](#volume)\n  - [`duration`](#duration)\n  - [`input`](#input)\n  - [`output`](#output)\n- [Related Projects](#related-projects)\n- [Funding 💖](#funding-)\n- [Contributing 🌱](#contributing-)\n- [License ⚖️](#license-)\n- [Copyright ⛓️](#copyright-)\n\n<!-- vim-markdown-toc -->\n\n</details>\n\n## Motivation ✨\n\n- [Bash One Liner - Compose Music From Entropy in /dev/urandom](https://web.archive.org/web/20230122184930/https://blog.robertelder.org/bash-one-liner-compose-music/)\n  - ['Music' from /dev/urandom](https://news.ycombinator.com/item?id=11238247)\n\n## Installation 🤖\n\n### Build from source\n\n#### Prerequisites\n\n- [Zig](https://ziglang.org/download/) (`0.16`)\n\n#### Instructions\n\n1. Clone the repository.\n\n```sh\ngit clone https://github.com/orhun/linuxwave && cd linuxwave/\n```\n\n2. Build.\n\n```sh\nzig build --release=safe\n```\n\nBinary will be located at `zig-out/bin/linuxwave`. You can also run the binary directly via `zig build run`.\n\nIf you want to use `linuxwave` in your Zig project as a package, the API documentation is available [here](https://orhun.dev/linuxwave/docs).\n\n### Binary releases\n\nSee the available binaries for different targets from the [releases page](https://github.com/orhun/linuxwave/releases). They are automated via [Continuous Deployment](.github/workflows/cd.yml) workflow.\n\nRelease tarballs are signed with the following PGP key: [0xC0701E98290D90B8](https://keyserver.ubuntu.com/pks/lookup?search=0xC0701E98290D90B8&op=vindex)\n\n### Arch Linux\n\n`linuxwave` can be installed from the [community repository](https://archlinux.org/packages/community/x86_64/linuxwave/) using [pacman](https://wiki.archlinux.org/title/Pacman):\n\n```sh\npacman -S linuxwave\n```\n\n### Void Linux\n\n`linuxwave` can be installed from official Void Linux package repository:\n\n```sh\nxbps-install linuxwave\n```\n\n### Docker\n\n#### Images\n\nDocker builds are [automated](./.github/workflows/docker.yml) and images are available in the following registries:\n\n- [Docker Hub](https://hub.docker.com/r/orhunp/linuxwave)\n- [GitHub Container Registry](https://github.com/orhun/linuxwave/pkgs/container/linuxwave)\n\n#### Usage\n\nThe following command can be used to generate `output.wav` in the current working directory:\n\n```sh\ndocker run --rm -v \"$(pwd)\":/app \"orhunp/linuxwave:${TAG:-latest}\"\n```\n\n#### Building\n\nCustom Docker images can be built from the [Dockerfile](./Dockerfile):\n\n```sh\ndocker build -t linuxwave .\n```\n\n## Examples 🎵\n\n**Default**: Read random data from `/dev/urandom` to generate a 20-second music composition in the A4 scale and save it to `output.wav`:\n\n```sh\nlinuxwave\n```\n\nOr play it directly with [mpv](https://mpv.io/) without saving:\n\n```sh\nlinuxwave -o - | mpv -\n```\n\nTo use the A minor blues scale:\n\n```sh\nlinuxwave -s 0,3,5,6,7,10 -n 220 -o blues.wav\n```\n\nRead from an arbitrary file and turn it into a 10-second music composition in the C major scale:\n\n```sh\nlinuxwave -i build.zig -n 261.63 -d 10 -o music.wav\n```\n\nRead from stdin via giving `-` as input:\n\n```sh\ncat README.md | linuxwave -i -\n```\n\nWrite to stdout via giving `-` as output:\n\n```\nlinuxwave -o - > output.wav\n```\n\n## Presets 🎹\n\nGenerate a **calming music** with a sample rate of 2000 Hz and a 32-bit little-endian signed integer format:\n\n```sh\nlinuxwave -r 2000 -f S32_LE -o calm.wav\n```\n\nGenerate a **chiptune music** with a sample rate of 44100 Hz, stereo (2-channel) output and 8-bit unsigned integer format:\n\n```sh\nlinuxwave -r 44100 -f U8 -c 2 -o chiptune.wav\n```\n\nGenerate a **boss stage music** with the volume of 65:\n\n```sh\nlinuxwave -s 0,7,1 -n 60 -v 65 -o boss.wav\n```\n\nGenerate a **spooky low-fidelity music** with a sample rate of 1000 Hz, 4-channel output:\n\n```sh\nlinuxwave -s 0,1,5,3 -n 100 -r 1000 -v 55 -c 4 -o spooky_manor.wav\n```\n\nFeel free to [submit a pull request](CONTRIBUTING.md) to show off your preset here!\n\nAlso, see [this discussion](https://github.com/orhun/linuxwave/discussions/1) for browsing the music generated by our community.\n\n## Usage 📚\n\n```\nOptions:\n  -s, --scale <SCALE>            Sets the musical scale [default: 0,2,3,5,7,8,10,12]\n  -n, --note <HZ>                Sets the frequency of the note [default: 440 (A4)]\n  -r, --rate <HZ>                Sets the sample rate [default: 24000]\n  -c, --channels <NUM>           Sets the number of channels [default: 1]\n  -f, --format <FORMAT>          Sets the sample format [default: S16_LE]\n  -v, --volume <VOL>             Sets the volume (0-100) [default: 50]\n  -d, --duration <SECS>          Sets the duration [default: 20]\n  -i, --input <FILE>             Sets the input file [default: /dev/urandom]\n  -o, --output <FILE>            Sets the output file [default: output.wav]\n  -V, --version                  Display version information.\n  -h, --help                     Display this help and exit.\n```\n\n### `scale`\n\nSets the musical scale for the output. It takes a list of [semitones](https://en.wikipedia.org/wiki/Semitone) separated by commas as its argument.\n\nThe default value is `0,2,3,5,7,8,10,12`, which represents a major scale starting from C.\n\nHere are other examples:\n\n- A natural minor scale: `0,2,3,5,7,8,10`\n- A pentatonic scale starting from G: `7,9,10,12,14`\n- A blues scale starting from D: `2,3,4,6,7,10`\n- An octatonic scale starting from F#: `6,7,9,10,12,13,15,16`\n- Ryukyuan (Okinawa) Japanese scale: `4,5,7,11`\n\n### `note`\n\nThe `note` option sets the frequency of the note played. It takes a frequency in Hz as its argument.\n\nThe default value is `440`, which represents A4. You can see the frequencies of musical notes [here](https://pages.mtu.edu/~suits/notefreqs.html).\n\nOther examples would be:\n\n- A3 (220 Hz)\n- C4 (261.63 Hz)\n- G4 (392 Hz)\n- A4 (440 Hz) (default)\n- E5 (659.26 Hz)\n\n### `rate`\n\nSets the sample rate for the output in Hertz (Hz).\n\nThe default value is `24000`.\n\n### `channels`\n\nSets the number of audio channels in the output file. It takes an integer as its argument, representing the number of audio channels to generate. The default value is `1`, indicating mono audio.\n\nFor stereo audio, set the value to `2`. For multi-channel audio, specify the desired number of channels.\n\nNote that the more audio channels you use, the larger the resulting file size will be.\n\n### `format`\n\nSets the sample format for the output file. It takes a string representation of the format as its argument.\n\nThe default value is `S16_LE`, which represents 16-bit little-endian signed integer.\n\nPossible values are:\n\n- `U8`: Unsigned 8-bit.\n- `S16_LE`: Signed 16-bit little-endian.\n- `S24_LE`: Signed 24-bit little-endian.\n- `S32_LE`: Signed 32-bit little-endian.\n\n### `volume`\n\nSets the volume of the output file as a percentage from 0 to 100.\n\nThe default value is `50`.\n\n### `duration`\n\nSets the duration of the output file in seconds. It takes a float as its argument.\n\nThe default value is `20` seconds.\n\n### `input`\n\nSets the input file for the music generation. It takes a filename as its argument.\n\nThe default value is `/dev/urandom`, which generates random data.\n\nYou can provide _any_ type of file for this argument and it will generate music based on the contents of that file.\n\n### `output`\n\nSets the output file. It takes a filename as its argument.\n\nThe default value is `output.wav`.\n\n## Related Projects\n\n- [linuxwavegui](https://github.com/Arcmyx/linuxwavegui) – A graphical interface for linuxwave with tempo shifting, pitch control, flawed (but still cool-sounding) MIDI generation, and an interactive piano for scale selection.\n\n## Funding 💖\n\nIf you find `linuxwave` and/or other projects on my [GitHub profile](https://github.com/orhun) useful, consider supporting me on [GitHub Sponsors](https://github.com/sponsors/orhun) or [becoming a patron](https://www.patreon.com/join/orhunp)!\n\n[![Support me on GitHub Sponsors](https://img.shields.io/github/sponsors/orhun?style=flat&logo=GitHub&labelColor=424242&color=1d1d1d&logoColor=white)](https://github.com/sponsors/orhun)\n[![Support me on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dorhunp%26type%3Dpatrons&style=flat&logo=Patreon&labelColor=424242&color=1d1d1d&logoColor=white)](https://patreon.com/join/orhunp)\n[![Support me on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dorhunp%26type%3Dpledges&style=flat&logo=Patreon&labelColor=424242&color=1d1d1d&logoColor=white&label=)](https://patreon.com/join/orhunp)\n\n## Contributing 🌱\n\nSee our [Contribution Guide](./CONTRIBUTING.md) and please follow the [Code of Conduct](./CODE_OF_CONDUCT.md) in all your interactions with the project.\n\n## License ⚖️\n\nLicensed under [The MIT License](./LICENSE).\n\n## Copyright ⛓️\n\nCopyright © 2023-2024, [Orhun Parmaksız](mailto:orhunparmaksiz@gmail.com)\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/24392180?u=8efd6f14a04f081cf0e9dbe5e9237dfc2d380596&v=4",
   "releases": [
+    {
+      "tag_name": "v0.4.0",
+      "name": "Release v0.4.0",
+      "body": "## [0.4.0] - 2026-04-21\n\n### 📚 Documentation\n\n- *(readme)* Add 'Related Projects' section to README ([#46](https://github.com/orhun/linuxwave/issues/46))\n\n### ⚙️ Miscellaneous Tasks\n\n- *(build)* Switch build structure to working on base modules & simplify imports ([#41](https://github.com/orhun/linuxwave/issues/41))\n- *(uncategorized)* [**breaking**] Adjust for Zig 0.16 ([#59](https://github.com/orhun/linuxwave/issues/59))\n\n<!-- generated by git-cliff -->",
+      "prerelease": false,
+      "published_at": "2026-04-21T13:18:50Z",
+      "html_url": "https://github.com/orhun/linuxwave/releases/tag/v0.4.0",
+      "assets": [
+        {
+          "name": "v0.4.0.zip.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.4.0/v0.4.0.zip.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "v0.4.0.zip",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.4.0/v0.4.0.zip",
+          "size": 1035236,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "v0.4.0.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.4.0/v0.4.0.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "v0.4.0.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.4.0/v0.4.0.tar.gz",
+          "size": 1004852,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.4.0-aarch64-windows.zip",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.4.0/linuxwave-0.4.0-aarch64-windows.zip",
+          "size": 294685,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.4.0-x86_64-macos.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.4.0/linuxwave-0.4.0-x86_64-macos.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.4.0-x86_64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.4.0/linuxwave-0.4.0-x86_64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.4.0-x86_64-macos.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.4.0/linuxwave-0.4.0-x86_64-macos.tar.gz.sha512",
+          "size": 166,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.4.0-x86_64-windows.zip",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.4.0/linuxwave-0.4.0-x86_64-windows.zip",
+          "size": 315932,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.4.0-aarch64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.4.0/linuxwave-0.4.0-aarch64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.4.0-x86_64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.4.0/linuxwave-0.4.0-x86_64-linux.tar.gz.sha512",
+          "size": 166,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.4.0-x86_64-macos.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.4.0/linuxwave-0.4.0-x86_64-macos.tar.gz",
+          "size": 256279,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.4.0-aarch64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.4.0/linuxwave-0.4.0-aarch64-linux.tar.gz.sha512",
+          "size": 167,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.4.0-x86_64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.4.0/linuxwave-0.4.0-x86_64-linux.tar.gz",
+          "size": 1135948,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.4.0-aarch64-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.4.0/linuxwave-0.4.0-aarch64-linux.tar.gz",
+          "size": 1091182,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.4.0-arm-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.4.0/linuxwave-0.4.0-arm-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.4.0-arm-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.4.0/linuxwave-0.4.0-arm-linux.tar.gz.sha512",
+          "size": 163,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.4.0-arm-linux.tar.gz",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.4.0/linuxwave-0.4.0-arm-linux.tar.gz",
+          "size": 1156405,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.4.0-riscv64-linux.tar.gz.sig",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.4.0/linuxwave-0.4.0-riscv64-linux.tar.gz.sig",
+          "size": 566,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "linuxwave-0.4.0-riscv64-linux.tar.gz.sha512",
+          "url": "https://github.com/orhun/linuxwave/releases/download/v0.4.0/linuxwave-0.4.0-riscv64-linux.tar.gz.sha512",
+          "size": 167,
+          "content_type": "binary/octet-stream"
+        }
+      ]
+    },
     {
       "tag_name": "v0.3.0",
       "name": "Release v0.3.0",
@@ -1495,7 +1625,7 @@
   "owner_location": "Ankara, Turkey",
   "owner_blog": "orhun.dev",
   "owner_twitter_username": null,
-  "owner_followers": 4601,
+  "owner_followers": 4668,
   "owner_following": 536,
   "owner_created_at": "2016-12-05T15:47:47Z",
   "homepage": "http://orhun.dev/linuxwave/",

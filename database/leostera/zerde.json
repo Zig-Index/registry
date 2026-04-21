@@ -1,0 +1,53 @@
+{
+  "name": "zerde",
+  "owner": "leostera",
+  "repo": "zerde",
+  "description": "comptime-fused serialization library for zig",
+  "type": "package",
+  "topics": [
+    "bson",
+    "cbor",
+    "deserialization",
+    "json",
+    "serde",
+    "serialization",
+    "toml",
+    "wasm",
+    "yaml",
+    "zig"
+  ],
+  "stars": 8,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-04-21T13:37:49Z",
+  "dependencies": [
+    {
+      "name": "toml",
+      "url": "git+https://github.com/sam701/zig-toml#a73c9423d88ed413204b39638fab7e9bccdb83fd",
+      "hash": "toml-0.3.0-bV14Be6EAQDr0fkyURz4jYFyTAMPcwlNN0FEPVjDnXTR"
+    },
+    {
+      "name": "zbor",
+      "url": "git+https://codeberg.org/r4gus/zbor#e96cd55a111bcbd76b1b51e4988a44ead1b0b48e",
+      "hash": "zbor-0.21.1-kr-CoPJ7AwCFwvJhlhfWF-E4qI7rnHF0MM0NwuZ1WOdU"
+    },
+    {
+      "name": "zbench",
+      "url": "https://github.com/hendriknielaender/zBench/archive/c24d128bfa80ec6a1b495b84ec827c6a0bec7865.tar.gz",
+      "hash": "zbench-0.11.2-YTdc76Q_AQAxonIKZ2-H1PdcESJGwyuYylw6RkPiBqyx"
+    }
+  ],
+  "minimum_zig_version": "0.16.0",
+  "readme": "# zerde\n\n`zerde` is a comptime-specialized serialization framework for Zig.\n\nPoint it at a Zig type and a format, and it generates a typed serializer or\ndeserializer for that exact combination.\n\nWhat you get:\n\n- one typed API across JSON, TOML, YAML, CBOR, BSON, MessagePack, and binary\n- fast read and write paths without a required runtime value tree\n- per-type and per-call customization for field renames and wire-shape policy\n- owned, arena-backed, and aliased slice parse entrypoints\n- wasm/WASI pointer+length helpers for moving typed values across JS boundaries and parsing JSON, YAML, MessagePack, and other format payloads inside the module\n\n```zig\nconst std = @import(\"std\");\nconst zerde = @import(\"zerde\");\n\nconst StrawHat = struct {\n    name: []const u8,\n    bounty: u32,\n    role: enum { captain, navigator, cook, shipwright },\n\n    pub const serde = .{\n        .rename_all = .snake_case,\n    };\n};\n\npub fn main() !void {\n    const allocator = std.heap.page_allocator;\n\n    const crew_mate = StrawHat{\n        .name = \"Franky\",\n        .bounty = 394_000_000,\n        .role = .shipwright,\n    };\n\n    var out: std.Io.Writer.Allocating = .init(allocator);\n    defer out.deinit();\n\n    try zerde.serialize(zerde.json, &out.writer, crew_mate);\n\n    var decoded = try zerde.parseSliceOwned(zerde.json, StrawHat, allocator, out.written());\n    defer decoded.deinit();\n\n    std.debug.print(\"{s}\\n\", .{out.written()});\n}\n```\n\n## Formats\n\n| Format | Serialize | Reader deserialize | Slice deserialize | Aliased slice parse | Notes |\n| --- | --- | --- | --- | --- | --- |\n| Binary | yes | yes | yes | yes | Schema-driven compact binary format |\n| BSON | yes | yes | yes | yes | Typed BSON path |\n| MessagePack | yes | yes | yes | yes | Typed MessagePack path |\n| JSON | yes | yes | yes | yes | Fully typed fast path, benchmarked against `std.json` |\n| TOML | yes | yes | yes | yes | Practical TOML subset centered on scalars, arrays, tables, and arrays-of-tables |\n| CBOR | yes | yes | yes | yes | Definite-length writer; read accepts definite and indefinite arrays/maps |\n| YAML | yes | yes | yes | yes | Practical block-YAML subset with block mappings, block sequences, and flow scalar arrays |\n\n## WebAssembly / WASI\n\n`zerde` is not limited to its compact binary transport in wasm.\n\nThe `zerde.wasm` helpers can:\n\n- serialize typed Zig values into wasm-friendly pointer+length buffers\n- parse JSON, YAML, MessagePack, and other supported payloads inside the module\n- reserialize those typed values back into JSON, binary, or another format before handing bytes back to JS\n\n```zig\nconst std = @import(\"std\");\nconst zerde = @import(\"zerde\");\n\nconst CrewManifest = struct {\n    captainName: []const u8,\n    bounty: u32,\n    shipwright: bool,\n\n    pub const serde = .{\n        .rename_all = .snake_case,\n    };\n};\n\npub fn normalizeJson(allocator: std.mem.Allocator, input: []const u8) !zerde.wasm.OwnedBuffer {\n    const manifest = try zerde.wasm.parseFormatWith(zerde.json, CrewManifest, allocator, zerde.wasm.sliceDescriptor(input), .{\n        .rename_all = .snake_case,\n    }, .{});\n    defer zerde.free(allocator, manifest);\n\n    return zerde.wasm.serializeFormatOwnedWith(zerde.json, allocator, manifest, .{\n        .rename_all = .snake_case,\n    }, .{});\n}\n```\n\nBrowser-oriented wasm examples live in [`examples/`](examples), and you can build them with `zig build examples`.\n\n## Install\n\nAdd `zerde` as a Zig dependency:\n\n```sh\nzig fetch --save git+https://github.com/leostera/zerde\n```\n\nThen import it from your `build.zig`:\n\n```zig\nconst zerde_dep = b.dependency(\"zerde\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\nexe.root_module.addImport(\"zerde\", zerde_dep.module(\"zerde\"));\n```\n\nAnd from your Zig code:\n\n```zig\nconst zerde = @import(\"zerde\");\n```\n\nBenchmark history and per-format runs live in [`bench/`](bench).\n\n## Customization\n\n`zerde` accepts configuration at two levels:\n\n- call-site config passed to `serializeWith`, `deserializeWith`, `parseSliceWith`, or `parseSliceAliasedWith`\n- per-type config through `pub const serde = .{ ... }`\n\nSupported typed-layer options today:\n\n- `rename_all`\n- `omit_null_fields`\n- `deny_unknown_fields`\n- per-field `rename`\n\nExample:\n\n```zig\nconst std = @import(\"std\");\nconst zerde = @import(\"zerde\");\n\nconst User = struct {\n    firstName: []const u8,\n    createdAt: i64,\n    nickname: ?[]const u8,\n\n    pub const serde = .{\n        .rename_all = .snake_case,\n        .fields = .{\n            .createdAt = .{ .rename = \"created_at_unix\" },\n        },\n    };\n};\n\npub fn main() !void {\n    var out: std.Io.Writer.Allocating = .init(std.heap.page_allocator);\n    defer out.deinit();\n\n    try zerde.serializeWith(zerde.json, &out.writer, User{\n        .firstName = \"Franky\",\n        .createdAt = 42,\n        .nickname = null,\n    }, .{\n        .omit_null_fields = true,\n    }, .{});\n}\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/854222?u=3005fa5b987217f0a1e7f3ec491b1ba2b68bdb03&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "Prague, Czechia",
+  "owner_blog": "https://leostera.com",
+  "owner_twitter_username": "leostera",
+  "owner_followers": 912,
+  "owner_following": 96,
+  "owner_created_at": "2011-06-16T14:24:07Z",
+  "license": "MIT",
+  "category": "library"
+}
