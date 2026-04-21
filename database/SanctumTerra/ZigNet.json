@@ -4,17 +4,11 @@
   "repo": "ZigNet",
   "description": "Raknet implementation for ZigLang.",
   "type": "package",
-  "topics": [
-    "mcbe",
-    "minecraft",
-    "raknet",
-    "zig",
-    "zig-package"
-  ],
+  "topics": [],
   "stars": 6,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-04-21T10:44:32Z",
+  "updated_at": "2026-04-21T21:49:19Z",
   "dependencies": [
     {
       "name": "BinaryStream",
