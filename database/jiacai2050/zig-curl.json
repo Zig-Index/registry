@@ -13,10 +13,10 @@
     "zig-package",
     "ziglang"
   ],
-  "stars": 147,
+  "stars": 148,
   "forks": 23,
   "watchers": 1,
-  "updated_at": "2026-04-18T07:43:43Z",
+  "updated_at": "2026-04-21T09:49:22Z",
   "dependencies": [
     {
       "name": "curl",
