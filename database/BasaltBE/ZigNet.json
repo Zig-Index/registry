@@ -16,7 +16,7 @@
   "stars": 1,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-04-21T21:49:58Z",
+  "updated_at": "2026-04-21T21:55:27Z",
   "dependencies": [
     {
       "name": "example",
@@ -25,6 +25,7 @@
     }
   ],
   "minimum_zig_version": "0.16.0",
+  "readme": "Raknet for Zig.\n\nWill write docs later someday\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/275066458?v=4",
   "releases": [],
   "owner_bio": null,
