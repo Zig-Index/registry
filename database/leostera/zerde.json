@@ -16,10 +16,10 @@
     "yaml",
     "zig"
   ],
-  "stars": 8,
+  "stars": 10,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-04-21T13:37:49Z",
+  "updated_at": "2026-04-21T15:00:31Z",
   "dependencies": [
     {
       "name": "toml",

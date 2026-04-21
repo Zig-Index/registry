@@ -17,6 +17,15 @@
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/34946442?u=5de89bdf8ffb0f3c7b211d4f6598709ce622e831&v=4",
   "releases": [
     {
+      "tag_name": "zig-0.16.0",
+      "name": "zig-0.16.0",
+      "body": "This release of Stitch supports Zig 0.16.0\r\n\r\nPlease use the main branch if you use Zig master.",
+      "prerelease": false,
+      "published_at": "2026-04-17T09:23:03Z",
+      "html_url": "https://github.com/cryptocode/stitch/releases/tag/zig-0.16.0",
+      "assets": []
+    },
+    {
       "tag_name": "zig-0.15.2",
       "name": "zig-0.15.2",
       "body": "This release of Stitch supports Zig 0.15.2\r\n\r\nPlease use the main branch if you use Zig master.",

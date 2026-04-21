@@ -26,6 +26,15 @@
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/65570835?v=4",
   "releases": [
     {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "## What's Changed\r\n* update to zig 0.15.2 in 8d34d0b30beaf5860b4cbe2aa482d2acece6d817\r\n* breaking: add base directory to LsColors.styleForPath in d2a032425207318c12f533223008d2fd3004731c\r\n\r\n**Full Changelog**: https://github.com/ziglibs/lscolors/compare/v0.1.0...v0.2.0",
+      "prerelease": false,
+      "published_at": "2026-04-10T14:54:41Z",
+      "html_url": "https://github.com/ziglibs/lscolors/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
       "tag_name": "v0.1.0",
       "name": "v0.1.0",
       "body": "first tagged release",

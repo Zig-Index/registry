@@ -11,10 +11,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 8,
+  "stars": 9,
   "forks": 3,
   "watchers": 1,
-  "updated_at": "2026-01-22T21:10:31Z",
+  "updated_at": "2026-04-21T00:25:08Z",
   "minimum_zig_version": "0.15.1",
   "readme": "# CBC mode for Zig\n\nDon't use CBC.\n\nUnless you really, really, really have to.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/124872?v=4",
