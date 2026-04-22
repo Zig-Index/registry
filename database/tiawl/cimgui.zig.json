@@ -12,10 +12,10 @@
     "ziglang",
     "zig-package"
   ],
-  "stars": 113,
-  "forks": 18,
+  "stars": 115,
+  "forks": 19,
   "watchers": 1,
-  "updated_at": "2026-04-17T13:51:05Z",
+  "updated_at": "2026-04-22T08:51:03Z",
   "dependencies": [
     {
       "name": "sdl",
@@ -24,8 +24,8 @@
     },
     {
       "name": "zigglgen",
-      "url": "git+https://github.com/castholm/zigglgen#6b21369ac50de8826f8af60a7edb33693b4ec7bf",
-      "hash": "zigglgen-0.5.0-zigglr_CLwBs1aABtYVtxNPo1SB8AzgKMVouoqULqkDQ"
+      "url": "git+https://github.com/castholm/zigglgen#7e55ad15655fc4d602ed3bcbe7fb487592063156",
+      "hash": "zigglgen-0.5.0-ziggltzDLwA0Gk0Pj6QMij1j6Z_jkvGEtGKBM6-YlI_s"
     },
     {
       "name": "dcimgui",
