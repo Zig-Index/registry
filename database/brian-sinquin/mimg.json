@@ -1,0 +1,227 @@
+{
+  "name": "mimg",
+  "owner": "brian-sinquin",
+  "repo": "mimg",
+  "description": "A chained image modifier written in Zig",
+  "type": "package",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-04-23T19:07:48Z",
+  "dependencies": [
+    {
+      "name": "zigimg",
+      "url": "https://github.com/zigimg/zigimg/archive/master.tar.gz",
+      "hash": "zigimg-0.1.0-8_eo2vUZFgAAtN1c6dAO5DdqL0d4cEWHtn6iR5ucZJti"
+    },
+    {
+      "name": "zine",
+      "url": "https://github.com/kristoff-it/zine/archive/refs/heads/main.tar.gz",
+      "hash": "zine-0.11.2-ou6nIDd6FgAQCo8y1pypWVcGxfH91Vlqdspeop3Hjrwj"
+    }
+  ],
+  "readme": "\n# mimg\n\nA high-performance command-line image processing tool written in Zig.\n\n**[View Documentation & Gallery](https://mimg.brian-sinquin.fr)**\n\n## Features\n\n- Fast image processing with support for multiple formats (PNG, JPEG, BMP, QOI)\n- Chainable modifiers for complex transformations\n- Built-in presets for common operations\n- Comprehensive set of filters and effects\n- Zero external dependencies\n\n## Installation\n\n### Build from Source\n\n```bash\ngit clone https://github.com/brian-sinquin/mimg.git\ncd mimg\nzig build\n```\n\nThe compiled binary will be available at `zig-out/bin/mimg`.\n\n### Requirements\n\n- Zig 0.15.1 or later\n\n## Usage\n\n### Basic Syntax\n\n```bash\nmimg <input> [modifiers...] [-o output]\n```\n\n### Examples\n\n```bash\n# Adjust brightness\nmimg input.png brightness 20 -o output.png\n\n# Chain multiple modifiers\nmimg input.png grayscale blur 5 -o output.png\n\n# Use a preset\nmimg input.png preset vintage -o output.png\n```\n\n## Documentation\n\n- [Installation Guide](docs/installation.md)\n- [Available Modifiers](docs/modifiers.md)\n- [Usage Examples](docs/examples.md)\n- [Presets](docs/presets.md)\n- [Supported Formats](docs/formats.md)\n\n## Development\n\n### Build the Website\n\nGenerate the documentation website with gallery examples:\n\n```bash\nzig build website\n```\n\nOutput will be in `website/zig-out/`.\n\n### Run Tests\n\n```bash\nzig build test\n```\n\n## License\n\nMIT License - see [LICENSE](LICENSE) for details.\n\n## Links\n\n- [Documentation](https://mimg.brian-sinquin.fr)\n- [Gallery](https://mimg.brian-sinquin.fr/gallery)\n- [GitHub Repository](https://github.com/brian-sinquin/mimg)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/148503669?u=d803ec8062c7fb959b709eee257be38c96f91232&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.5",
+      "name": "",
+      "body": "",
+      "prerelease": false,
+      "published_at": "2025-12-31T11:59:48Z",
+      "html_url": "https://github.com/brian-sinquin/mimg/releases/tag/v0.1.5",
+      "assets": [
+        {
+          "name": "mimg-x86_64-windows.zip",
+          "url": "https://github.com/brian-sinquin/mimg/releases/download/v0.1.5/mimg-x86_64-windows.zip",
+          "size": 859617,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "mimg-x86_64-linux.tar.gz",
+          "url": "https://github.com/brian-sinquin/mimg/releases/download/v0.1.5/mimg-x86_64-linux.tar.gz",
+          "size": 3079067,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "mimg-x86_64-macos.tar.gz",
+          "url": "https://github.com/brian-sinquin/mimg/releases/download/v0.1.5/mimg-x86_64-macos.tar.gz",
+          "size": 896703,
+          "content_type": "binary/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.4",
+      "name": "Release v0.1.4",
+      "body": "# mimg v0.1.4 Release Notes\r\n\r\n**Release Date:** 2025-10-15\r\n\r\n## Highlights\r\n\r\n- Major performance improvements across image resizing, gradients, and color operations.\r\n- Optimized core math and filter routines for faster processing.\r\n- Expanded filter capabilities and improved code organization.\r\n- All existing commands and APIs remain fully compatible.\r\n\r\n## Verification\r\n\r\n- All tests and builds pass.\r\n- No breaking changes.\r\n",
+      "prerelease": false,
+      "published_at": "2025-10-15T21:52:58Z",
+      "html_url": "https://github.com/brian-sinquin/mimg/releases/tag/v0.1.4",
+      "assets": [
+        {
+          "name": "mimg-v0.1.4-x86_64-macos",
+          "url": "https://github.com/brian-sinquin/mimg/releases/download/v0.1.4/mimg-v0.1.4-x86_64-macos",
+          "size": 1558065,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "mimg-v0.1.4-x86_64-linux",
+          "url": "https://github.com/brian-sinquin/mimg/releases/download/v0.1.4/mimg-v0.1.4-x86_64-linux",
+          "size": 1531744,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "mimg-v0.1.4-x86_64-windows.exe",
+          "url": "https://github.com/brian-sinquin/mimg/releases/download/v0.1.4/mimg-v0.1.4-x86_64-windows.exe",
+          "size": 1684480,
+          "content_type": "binary/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.3",
+      "name": "Release v0.1.3",
+      "body": "# Release Notes\r\n\r\n## Version 0.1.3\r\n\r\n### Improvements\r\n- Added progress indicators for long-running operations\r\n- Improved memory usage with better buffer management\r\n- Enhanced build system optimizations\r\n\r\n### Technical Changes\r\n- Progress bars for batch processing operations\r\n- Memory optimization for image processing pipeline\r\n- Better buffer reuse in filter operations\r\n\r\n---\r\n\r\n*For detailed documentation, see [docs/](docs/)*",
+      "prerelease": false,
+      "published_at": "2025-10-13T12:41:38Z",
+      "html_url": "https://github.com/brian-sinquin/mimg/releases/tag/v0.1.3",
+      "assets": [
+        {
+          "name": "mimg-v0.1.3-x86_64-windows.pdb",
+          "url": "https://github.com/brian-sinquin/mimg/releases/download/v0.1.3/mimg-v0.1.3-x86_64-windows.pdb",
+          "size": 6766592,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "mimg-v0.1.3-x86_64-windows.exe",
+          "url": "https://github.com/brian-sinquin/mimg/releases/download/v0.1.3/mimg-v0.1.3-x86_64-windows.exe",
+          "size": 1741824,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "mimg-v0.1.3-x86_64-linux",
+          "url": "https://github.com/brian-sinquin/mimg/releases/download/v0.1.3/mimg-v0.1.3-x86_64-linux",
+          "size": 1584112,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "mimg-v0.1.3-x86_64-macos",
+          "url": "https://github.com/brian-sinquin/mimg/releases/download/v0.1.3/mimg-v0.1.3-x86_64-macos",
+          "size": 1522548,
+          "content_type": "binary/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.2",
+      "name": "Release v0.1.2",
+      "body": "# Release Notes - v0.1.2\r\n\r\n## SIMD Performance Optimization\r\n\r\nThis release introduces comprehensive SIMD vectorization improvements for enhanced image processing performance.\r\n\r\n### Key Improvements\r\n- **Complete SIMD refactoring** of all color adjustment functions using proper `@Vector(4, f32)` and `@Vector(4, u8)` operations\r\n- **New SIMD utilities module** (`src/simd_utils.zig`) with centralized vector operations and pixel processing helpers\r\n- **Eliminated manual 4-pixel chunking** and replaced with efficient vectorized operations\r\n- **Maintained type safety** while significantly improving performance\r\n\r\n### Refactored Functions\r\n- `adjustBrightness`, `adjustContrast`, `adjustSaturation`\r\n- `adjustGamma`, `adjustExposure`, `adjustVibrance`\r\n- `invertColors`, `grayscaleImage`, `applySepia`\r\n- All functions now use proper SIMD vectorization\r\n\r\n### Performance Impact\r\n- Improved throughput for color adjustments and effects\r\n- Reduced code duplication and improved maintainability\r\n- Better memory efficiency with vectorized operations\r\n\r\n### Version 0.1.2 Core Features\r\n- ✅ Gather input image from URL\r\n- ✅ Check first arg is a file path then assume URL, else error\r\n- ✅ Load batch of images using wildcards with multithreading\r\n- ✅ Use preset files by dispatching each line's chain on input\r\n- ✅ Better help message\r\n- ✅ Improve error handling\r\n- ✅ Add unit tests\r\n- ✅ File extension conversion\r\n\r\n## Technical Details\r\n- **Zig Version**: 0.15.1\r\n- **SIMD Operations**: `@Vector(4, f32)` and `@Vector(4, u8)` for 4-pixel parallel processing\r\n- **Memory Management**: Automatic buffer reuse and tiled processing for large images\r\n- **Compatibility**: All existing APIs and command-line interfaces preserved\r\n\r\n## Testing\r\n- ✅ All unit tests pass\r\n- ✅ Batch processing validated\r\n- ✅ Gallery generation works correctly\r\n- ✅ No compilation errors or warnings\r\n\r\n---\r\n\r\n*For more information, see [README.md](README.md) and [performance benchmarks](README.md#performance).*\"",
+      "prerelease": false,
+      "published_at": "2025-10-12T21:43:48Z",
+      "html_url": "https://github.com/brian-sinquin/mimg/releases/tag/v0.1.2",
+      "assets": [
+        {
+          "name": "mimg-v0.1.2-x86_64-windows.exe",
+          "url": "https://github.com/brian-sinquin/mimg/releases/download/v0.1.2/mimg-v0.1.2-x86_64-windows.exe",
+          "size": 1577984,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "mimg-v0.1.2-x86_64-macos",
+          "url": "https://github.com/brian-sinquin/mimg/releases/download/v0.1.2/mimg-v0.1.2-x86_64-macos",
+          "size": 1440972,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "mimg-v0.1.2-x86_64-linux",
+          "url": "https://github.com/brian-sinquin/mimg/releases/download/v0.1.2/mimg-v0.1.2-x86_64-linux",
+          "size": 1420624,
+          "content_type": "binary/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.1",
+      "name": "Release v0.1.1",
+      "body": "# mimg v0.1.1\r\n\r\n## Changes\r\n\r\n- Fixed saturation algorithm (HSL → luminance-based interpolation)\r\n- Fixed hue-shift algorithm (HSL → RGB)\r\n- Simplified gallery template\r\n- Cleaner build scripts\r\n- New modifiers\r\n- Improved README\r\n\r\n---",
+      "prerelease": false,
+      "published_at": "2025-10-05T15:36:20Z",
+      "html_url": "https://github.com/brian-sinquin/mimg/releases/tag/v0.1.1",
+      "assets": [
+        {
+          "name": "mimg-v0.1.1-x86_64-linux",
+          "url": "https://github.com/brian-sinquin/mimg/releases/download/v0.1.1/mimg-v0.1.1-x86_64-linux",
+          "size": 4626016,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "mimg-v0.1.1-x86_64-macos",
+          "url": "https://github.com/brian-sinquin/mimg/releases/download/v0.1.1/mimg-v0.1.1-x86_64-macos",
+          "size": 850358,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "mimg-v0.1.1-x86_64-windows.pdb",
+          "url": "https://github.com/brian-sinquin/mimg/releases/download/v0.1.1/mimg-v0.1.1-x86_64-windows.pdb",
+          "size": 2904064,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "mimg-v0.1.1-x86_64-windows.exe",
+          "url": "https://github.com/brian-sinquin/mimg/releases/download/v0.1.1/mimg-v0.1.1-x86_64-windows.exe",
+          "size": 1028096,
+          "content_type": "binary/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "First release v0.1.0",
+      "body": "# mimg v0.1.0\r\n\r\nInitial release of mimg, a command-line image manipulation tool built with Zig.\r\n\r\n## Features\r\n\r\n- **18 image processing modifiers**: invert, resize, crop, rotate, flip, grayscale, brightness, contrast, saturation, gamma, blur, gaussian-blur, sharpen, emboss, sepia, vignette, posterize, hue-shift, median-filter\r\n- **Modifier chaining**: Apply multiple effects in sequence\r\n- **Gallery system**: 29 example images with `zig build gallery`\r\n- **Cross-platform**: Binaries for Linux, macOS, Windows (x86_64, ARM, RISC-V, i386)\r\n- **Silent operation**: No output by default, use `--verbose` for details\r\n\r\n## Usage\r\n\r\n```bash\r\n# Single modifier\r\nmimg image.png invert --output result.png\r\n\r\n# Chain modifiers\r\nmimg image.png brightness 20 contrast 1.5 sharpen --output enhanced.png\r\n\r\n# Generate gallery\r\nzig build gallery\r\n```\r\n\r\n## Installation\r\n\r\nDownload binaries from [GitHub Releases](https://github.com/yourusername/mimg/releases).\r\n\r\nOr build from source:\r\n```bash\r\nzig build -Doptimize=ReleaseSafe\r\n```\r\n\r\n## Special Thanks\r\n\r\nLena Söderberg for the iconic test image.\r\n\r\n---\r\n\r\nSee gallery.md for complete documentation and examples.",
+      "prerelease": false,
+      "published_at": "2025-10-05T13:57:51Z",
+      "html_url": "https://github.com/brian-sinquin/mimg/releases/tag/v0.1.0",
+      "assets": [
+        {
+          "name": "mimg-v0.1.0-x86_64-linux",
+          "url": "https://github.com/brian-sinquin/mimg/releases/download/v0.1.0/mimg-v0.1.0-x86_64-linux",
+          "size": 4461944,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "mimg-v0.1.0-x86_64-macos",
+          "url": "https://github.com/brian-sinquin/mimg/releases/download/v0.1.0/mimg-v0.1.0-x86_64-macos",
+          "size": 799211,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "mimg-v0.1.0-x86_64-windows.pdb",
+          "url": "https://github.com/brian-sinquin/mimg/releases/download/v0.1.0/mimg-v0.1.0-x86_64-windows.pdb",
+          "size": 2785280,
+          "content_type": "binary/octet-stream"
+        },
+        {
+          "name": "mimg-v0.1.0-x86_64-windows.exe",
+          "url": "https://github.com/brian-sinquin/mimg/releases/download/v0.1.0/mimg-v0.1.0-x86_64-windows.exe",
+          "size": 993280,
+          "content_type": "binary/octet-stream"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "Postdoctoral position.\r\n#Lasers #Photonics #Optoelectronics #Julia",
+  "owner_company": "Max Born Institute for Nonlinear Optics and Short Pulse Spectroscopy",
+  "owner_location": null,
+  "owner_blog": "brian-sinquin.fr",
+  "owner_twitter_username": null,
+  "owner_followers": 6,
+  "owner_following": 49,
+  "owner_created_at": "2023-10-19T22:41:27Z",
+  "homepage": "https://mimg.brian-sinquin.fr",
+  "license": "MIT",
+  "category": "library"
+}
