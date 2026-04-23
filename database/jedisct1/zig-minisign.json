@@ -11,15 +11,15 @@
     "crypto",
     "signatures"
   ],
-  "stars": 119,
+  "stars": 121,
   "forks": 10,
   "watchers": 4,
-  "updated_at": "2026-04-14T14:32:23Z",
+  "updated_at": "2026-04-23T07:43:35Z",
   "dependencies": [
     {
       "name": "clap",
-      "url": "git+https://github.com/Hejsil/zig-clap#27621cb7207643f914bae7b01902b22a8b5916e7",
-      "hash": "clap-0.11.0-oBajBxDoAQChQCl4LRM4tyf-VChKLbhYilS806xxzxrQ"
+      "url": "git+https://github.com/Hejsil/zig-clap#8d97efa1ee1e575443c7888d5c38e1c3fc145cf5",
+      "hash": "clap-0.12.0-oBajB7foAQDqlSwaSG5g0yq7xGbQARUsBk5T64gAOqP5"
     }
   ],
   "minimum_zig_version": "0.16.0",
@@ -50,8 +50,8 @@
   "owner_location": "Antibes, France",
   "owner_blog": "https://00f.net",
   "owner_twitter_username": "jedisct1",
-  "owner_followers": 4189,
-  "owner_following": 178,
+  "owner_followers": 4203,
+  "owner_following": 179,
   "owner_created_at": "2009-09-09T10:20:57Z",
   "category": "crypto"
 }
