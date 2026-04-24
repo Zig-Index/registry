@@ -12,12 +12,12 @@
   "stars": 0,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-04-24T08:06:26Z",
+  "updated_at": "2026-04-24T08:20:46Z",
   "dependencies": [
     {
       "name": "bigfloat_test_lists",
-      "url": "git+https://codeberg.org/TemariVirus/zig-bigfloat-test-lists#dbea047b3e7dc91a8e120c5d2749d83c75056d8e",
-      "hash": "bigfloat_test_lists-0.0.1-SPSp1nloBwEt4mM3EiY8fYCCKR5zgfVKY-90RuSkHY-W"
+      "url": "git+https://codeberg.org/TemariVirus/zig-bigfloat-test-lists#6d28980907e05aade4147a7b01cb190eec772850",
+      "hash": "bigfloat_test_lists-0.2.0-SPSp1nJoBwFSBI3wGwD3eRZV9s6QjWCLGJ07EdgaZ3i8"
     }
   ],
   "minimum_zig_version": "0.16.0",
