@@ -13,10 +13,10 @@
     "zig-package",
     "ziglang"
   ],
-  "stars": 148,
+  "stars": 149,
   "forks": 23,
   "watchers": 1,
-  "updated_at": "2026-04-21T09:49:22Z",
+  "updated_at": "2026-04-24T12:29:06Z",
   "dependencies": [
     {
       "name": "curl",
@@ -115,7 +115,7 @@
   "owner_location": "/home/mars",
   "owner_blog": "https://en.liujiacai.net/",
   "owner_twitter_username": "liujiacai",
-  "owner_followers": 1052,
+  "owner_followers": 1053,
   "owner_following": 116,
   "owner_created_at": "2013-03-13T01:33:15Z",
   "homepage": "https://jiacai2050.github.io/zig-curl/",
