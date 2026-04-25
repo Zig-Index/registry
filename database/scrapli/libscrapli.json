@@ -10,7 +10,7 @@
   "stars": 14,
   "forks": 5,
   "watchers": 5,
-  "updated_at": "2026-04-25T17:31:02Z",
+  "updated_at": "2026-04-25T20:41:35Z",
   "dependencies": [
     {
       "name": "pcre2",
@@ -53,6 +53,78 @@
           "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-rc.6/libscrapli-v0.0.1-rc.6.tar.gz",
           "size": 298934,
           "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libscrapli-aarch64-macos-dynamic.0.0.1-rc.6.dylib",
+          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-rc.6/libscrapli-aarch64-macos-dynamic.0.0.1-rc.6.dylib",
+          "size": 1107792,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libscrapli-aarch64-macos-dynamic.0.0.1-rc.6.dylib.sha256",
+          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-rc.6/libscrapli-aarch64-macos-dynamic.0.0.1-rc.6.dylib.sha256",
+          "size": 138,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libscrapli-aarch64-linux-musl.so.0.0.1-rc.6",
+          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-rc.6/libscrapli-aarch64-linux-musl.so.0.0.1-rc.6",
+          "size": 13275136,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libscrapli-aarch64-linux-musl.so.0.0.1-rc.6.sha256",
+          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-rc.6/libscrapli-aarch64-linux-musl.so.0.0.1-rc.6.sha256",
+          "size": 137,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libscrapli-x86_64-linux-musl.so.0.0.1-rc.6",
+          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-rc.6/libscrapli-x86_64-linux-musl.so.0.0.1-rc.6",
+          "size": 13419760,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libscrapli-x86_64-linux-musl.so.0.0.1-rc.6.sha256",
+          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-rc.6/libscrapli-x86_64-linux-musl.so.0.0.1-rc.6.sha256",
+          "size": 135,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libscrapli-x86_64-linux-gnu.so.0.0.1-rc.6",
+          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-rc.6/libscrapli-x86_64-linux-gnu.so.0.0.1-rc.6",
+          "size": 13516120,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libscrapli-x86_64-linux-gnu.so.0.0.1-rc.6.sha256",
+          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-rc.6/libscrapli-x86_64-linux-gnu.so.0.0.1-rc.6.sha256",
+          "size": 133,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libscrapli-aarch64-linux-gnu.so.0.0.1-rc.6",
+          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-rc.6/libscrapli-aarch64-linux-gnu.so.0.0.1-rc.6",
+          "size": 13370040,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libscrapli-aarch64-linux-gnu.so.0.0.1-rc.6.sha256",
+          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-rc.6/libscrapli-aarch64-linux-gnu.so.0.0.1-rc.6.sha256",
+          "size": 135,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libscrapli-aarch64-macos.0.0.1-rc.6.dylib.sha256",
+          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-rc.6/libscrapli-aarch64-macos.0.0.1-rc.6.dylib.sha256",
+          "size": 130,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libscrapli-aarch64-macos.0.0.1-rc.6.dylib",
+          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-rc.6/libscrapli-aarch64-macos.0.0.1-rc.6.dylib",
+          "size": 5217104,
+          "content_type": "application/octet-stream"
         }
       ]
     },
