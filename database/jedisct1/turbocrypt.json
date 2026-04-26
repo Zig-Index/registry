@@ -17,7 +17,7 @@
   "stars": 58,
   "forks": 4,
   "watchers": 2,
-  "updated_at": "2026-04-14T14:29:32Z",
+  "updated_at": "2026-04-26T18:24:59Z",
   "dependencies": [
     {
       "name": "hctr2",
@@ -425,8 +425,8 @@
   "owner_location": "Antibes, France",
   "owner_blog": "https://00f.net",
   "owner_twitter_username": "jedisct1",
-  "owner_followers": 4189,
-  "owner_following": 178,
+  "owner_followers": 4205,
+  "owner_following": 179,
   "owner_created_at": "2009-09-09T10:20:57Z",
   "license": "MIT",
   "category": "library"
