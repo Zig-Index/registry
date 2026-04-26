@@ -10,7 +10,7 @@
   "stars": 14,
   "forks": 5,
   "watchers": 5,
-  "updated_at": "2026-04-26T11:59:29Z",
+  "updated_at": "2026-04-26T19:50:43Z",
   "dependencies": [
     {
       "name": "pcre2",
@@ -22,8 +22,8 @@
     },
     {
       "name": "xml",
-      "url": "https://github.com/carlmontanari/zig-xml/archive/3a521fa.tar.gz",
-      "hash": "xml-0.2.0-ZTbP3xY6AgDJfDkfwttfskdwZVn2B41zGlE7_g2pnQQf"
+      "url": "https://github.com/ianprime0509/zig-xml/archive/b97f2ab.tar.gz",
+      "hash": "xml-0.2.0-ZTbP3yI6AgB9Rpd2hQrueO63ib0Bm6mQiL_WB1t7JAmP"
     },
     {
       "name": "yaml",
@@ -32,8 +32,8 @@
     },
     {
       "name": "zlinter",
-      "url": "https://github.com/kurtwagner/zlinter/archive/d358076.tar.gz",
-      "hash": "zlinter-0.0.1-OjQ08dLoCwBUQ4PmDPvrZNU8QXjHUrs7jp-JLwX5fmO0"
+      "url": "https://github.com/kurtwagner/zlinter/archive/9b4d67b.tar.gz",
+      "hash": "zlinter-0.0.1-OjQ08c7oCwDIwhlde7eDKMACNTsqAhGXy5vB7GdfGobG"
     }
   ],
   "minimum_zig_version": "0.16.0",
