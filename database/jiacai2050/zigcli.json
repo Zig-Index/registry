@@ -11,10 +11,10 @@
     "lines-of-code",
     "tree"
   ],
-  "stars": 125,
+  "stars": 126,
   "forks": 21,
   "watchers": 2,
-  "updated_at": "2026-04-22T11:38:22Z",
+  "updated_at": "2026-04-26T03:42:07Z",
   "dependencies": [
     {
       "name": "curl",
@@ -25,6 +25,64 @@
   "minimum_zig_version": "0.16.0",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/3848910?u=60f91a765c4ad95cb3a5a5b41d19ca12ee71a65d&v=4",
   "releases": [
+    {
+      "tag_name": "v0.6.1",
+      "name": "v0.6.1",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2026-04-26T03:44:25Z",
+      "html_url": "https://github.com/jiacai2050/zigcli/releases/tag/v0.6.1",
+      "assets": [
+        {
+          "name": "zigcli-v0.6.1-aarch64-windows.zip",
+          "url": "https://github.com/jiacai2050/zigcli/releases/download/v0.6.1/zigcli-v0.6.1-aarch64-windows.zip",
+          "size": 9665296,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigcli-v0.6.1-x86_64-macos.zip",
+          "url": "https://github.com/jiacai2050/zigcli/releases/download/v0.6.1/zigcli-v0.6.1-x86_64-macos.zip",
+          "size": 2985757,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigcli-v0.6.1-aarch64-macos.zip",
+          "url": "https://github.com/jiacai2050/zigcli/releases/download/v0.6.1/zigcli-v0.6.1-aarch64-macos.zip",
+          "size": 3826130,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigcli-v0.6.1-aarch64-freebsd.zip",
+          "url": "https://github.com/jiacai2050/zigcli/releases/download/v0.6.1/zigcli-v0.6.1-aarch64-freebsd.zip",
+          "size": 7813868,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigcli-v0.6.1-x86_64-freebsd.zip",
+          "url": "https://github.com/jiacai2050/zigcli/releases/download/v0.6.1/zigcli-v0.6.1-x86_64-freebsd.zip",
+          "size": 8242736,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigcli-v0.6.1-x86_64-windows.zip",
+          "url": "https://github.com/jiacai2050/zigcli/releases/download/v0.6.1/zigcli-v0.6.1-x86_64-windows.zip",
+          "size": 10091730,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigcli-v0.6.1-x86_64-linux.zip",
+          "url": "https://github.com/jiacai2050/zigcli/releases/download/v0.6.1/zigcli-v0.6.1-x86_64-linux.zip",
+          "size": 16392115,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zigcli-v0.6.1-aarch64-linux.zip",
+          "url": "https://github.com/jiacai2050/zigcli/releases/download/v0.6.1/zigcli-v0.6.1-aarch64-linux.zip",
+          "size": 16066998,
+          "content_type": "application/zip"
+        }
+      ]
+    },
     {
       "tag_name": "v0.6.0",
       "name": "v0.6.0",
@@ -723,7 +781,7 @@
   "owner_location": "/home/mars",
   "owner_blog": "https://en.liujiacai.net/",
   "owner_twitter_username": "liujiacai",
-  "owner_followers": 1052,
+  "owner_followers": 1053,
   "owner_following": 116,
   "owner_created_at": "2013-03-13T01:33:15Z",
   "homepage": "https://zigcli.liujiacai.net/",
