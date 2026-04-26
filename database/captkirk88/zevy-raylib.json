@@ -13,15 +13,15 @@
     "raylib",
     "zevy"
   ],
-  "stars": 4,
+  "stars": 5,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-02-21T13:58:25Z",
+  "updated_at": "2026-04-26T01:24:14Z",
   "dependencies": [
     {
       "name": "zevy_ecs",
-      "url": "git+https://github.com/captkirk88/zevy-ecs#42d60ef5132b4e49f25d483a9e0bf3cc381011c4",
-      "hash": "zevy_ecs-1.56.0-VoL9mfcHBwC2yi_OpqH7utw9PuTC7NafZszTiHfwaf1X"
+      "url": "git+https://github.com/captkirk88/zevy-ecs#f896588c697247d98d068f992cbe82cf5f1e5ce9",
+      "hash": "zevy_ecs-2.5.0-VoL9mTiGCABi3l8aO_zyOr5bDTtFHPPFRnvuM2kvPFhA"
     },
     {
       "name": "zevy_ecs",
@@ -29,37 +29,41 @@
     },
     {
       "name": "raylib_zig",
-      "url": "git+https://github.com/raylib-zig/raylib-zig#3cd4d3179d967fc8b931514603fdbc4a43a1d771",
-      "hash": "raylib_zig-5.6.0-dev-KE8REE1LBQCL7lia-DwUkusWI1G4kJmhtatLh2kNsuiE"
+      "url": "git+https://github.com/raylib-zig/raylib-zig#4b6a05cd102d51f00523dd5c5e18e628df359d20",
+      "hash": "raylib_zig-5.6.0-dev-KE8REKNmBQDek2Sz27ULioxYpY9IYR0K0CeIC-iJRLCI"
     },
     {
       "name": "known_folders",
-      "url": "git+https://github.com/ziglibs/known-folders#83d39161eac2ed6f37ad3cb4d9dd518696ce90bb",
-      "hash": "known_folders-0.0.0-Fy-PJv3LAAABBRVoZWVrKZdyLoUfl5VRY5fqRRRdnF5L"
+      "url": "git+https://github.com/ziglibs/known-folders#5865fd0f1bc5241de8355fcf2066692bf1b0ea02",
+      "hash": "known_folders-0.0.0-Fy-PJpLKAAAmMEnwre7fFcfsxBGULd24N8Bp2pWEu3sf"
     },
     {
       "name": "xml",
-      "url": "git+https://github.com/ianprime0509/zig-xml#8874de5b846f4e3e806a062cd11a01b2bb90fc7a",
-      "hash": "xml-0.2.0-ZTbP3wE6AgCsnyZut_plzxi6WB2tzzh3kFRBOp3AL7n9"
+      "url": "git+https://github.com/ianprime0509/zig-xml#b97f2ab4868ae3cac9902b33a40d3f31d2df739d",
+      "hash": "xml-0.2.0-ZTbP3yI6AgB9Rpd2hQrueO63ib0Bm6mQiL_WB1t7JAmP"
     },
     {
       "name": "zevy_reflect",
-      "url": "git+https://github.com/captkirk88/zevy-reflect#e67338b3af4a349fc28405e067aeeb4fc6ebecee",
-      "hash": "zevy_reflect-0.1.1-8SzYxp-EAgBh15o08H-D0pQr947iCr2L4ykj7WrUutrw"
+      "url": "git+https://github.com/captkirk88/zevy-reflect#ff340d60c5103e401bfabc3e3d88190b7b05a582",
+      "hash": "zevy_reflect-1.3.0-Ob80cL4lAwAxtbOO5oAqqpmwCAXLmb1NJyjcHz78iJ8B"
     },
     {
       "name": "zevy_mem",
-      "url": "git+https://github.com/captkirk88/zevy-mem#25828047262ad07974ee2a70f3785fe5e8615eea",
-      "hash": "zevy_mem-0.0.1-jK9L0bEyAwBCQAlAvIs637HC6Ks_FI7hPKooaPx7PQFa"
+      "url": "git+https://github.com/captkirk88/zevy-mem#e94c598f8e60ca413a41ac1fde64569d5c932c8e",
+      "hash": "zevy_mem-1.2.1-jK9L0ak8AwA_fFzDRbCmoqGwoRhRkMC5HEEaRCYVlfWG"
     },
     {
       "name": "zevy_buildtools",
-      "url": "git+https://github.com/captkirk88/zevy-buildtools#561ed918d436408d0d2e41ec7d779a2aae3827ed",
-      "hash": "zevy_buildtools-0.0.0-So808V6LAAAVAZIE09gpma9MunuIWcGA5ElEK4i9K406"
+      "url": "../zevy-buildtools"
+    },
+    {
+      "name": "zevy_buildtools",
+      "url": "git+https://github.com/captkirk88/zevy-buildtools#05641c88d798956ce32b29d28cce22063d7f8ab0",
+      "hash": "zevy_buildtools-1.3.1-AG3r_BgMAQDR1ZMxA86vSPXobEnPLWE2--8gxLRGyqYI"
     }
   ],
-  "minimum_zig_version": "0.15.1",
-  "readme": "# Zevy Raylib\n\nZevy Raylib is an integration layer that connects the Zevy ECS with the Raylib game library. It provides input handling, asset loading utilities, GUI components, and a plugin system to register common engine features easily.\n\n[license]: https://img.shields.io/github/license/captkirk88/zevy-raylib?style=for-the-badge&logo=opensourcehardware&label=License&logoColor=C0CAF5&labelColor=414868&color=8c73cc\n\n[![][license]](https://github.com/captkirk88/zevy-raylib/blob/main/LICENSE)\n\n> [!WARNING]\n> This is entirely experimental and mostly for testing zevy-ecs in a more robust way.\n\n### Requirements\n\n- Zig 0.15.1\n\n### Table of contents\n\n- [Introduction](#introduction)\n- [Quick Start](#quick-start)\n- [Input](#input)\n  - [InputManager](#inputmanager)\n  - [Bindings & Types](#bindings--types)\n- [IO (Assets)](#io-assets)\n  - [AssetManager](#assetmanager)\n  - [Schemes & Loaders](#schemes--loaders)\n- [GUI](#gui)\n- [Embed](#embed)\n- [Plugins](#plugins)\n  - [RaylibPlugin (app.plugin.zig)](#raylibplugin-apppluginzig)\n  - [AssetsPlugin (assets.plugin.zig)](#assetsplugin-assetspluginzig)\n  - [InputPlugin (input.plugin.zig)](#inputplugin-inputpluginzig)\n- [Contributing](#contributing)\n\n---\n\n## Introduction\n\nZevy Raylib is a small library that wires the Raylib runtime into a Zevy ECS-based app. It handles window creation, input harvesting, asset management and sets up RayGui-based UI systems over the Zevy scheduler.\n\n---\n\n## Quick Start\n\n[Examples](examples/) can be ran with:\n\n```bash\nzig build examples\n```\n\n> [!WARNING]\n> This library and its APIs are experimental. They are intended as a convenient integration layer for example apps and prototypes.\n> The API and internal behavior can and will change without backward compatibility guarantees.\n> Tests and cross-platform coverage are limited — treat this as a development-ready library, not production-ready.\n> Please open issues or submit PRs if you rely on features that should be stabilized or suggested.\n\n---\n\n## Input\n\nThe input layer provides the following:\n\n- `InputManager` — the main runtime service that polls raylib for input state and dispatches events.\n- `InputBindings` and `InputBinding` — mapping action names to input chords.\n- Input types and helpers (keyboard, mouse, touch, gesture, and gamepads).\n\n### InputManager\n\n`InputManager` is designed to be added to the ECS via the `InputPlugin` and optionally polled directly from systems. It supports event handlers and action checking API:\n\n- `isActionActive(\"action_name\")` — check if action is currently active\n- `wasActionTriggered(\"action_name\")` — check a press event this frame\n- `addEventHandler` — subscribe to input events\n\n### Bindings & Types\n\nInput bindings, chords, and actions are declared with types located inside the `input` folder. Use the `InputBindings` helper to create action mappings from keyboard/mouse/gamepad/touch inputs.\n\n---\n\n## IO (Assets)\n\nThe IO module provides a powerful `AssetManager<T, Loader>` generator for loading and tracking assets.\n\n\n### AssetManager\n\nUse `AssetManager` to queue asset loads and process them in a separate step. It validates asset paths (supports builtin `embedded://` scheme), manages unload, and stores assets in a string-to-entry map.\n\nUseful methods:\n\n- `loadAsset(file, settings)` — queue asset for asynchronous loading\n- `loadAssetNow(file, settings)` — load asset immediately\n- `process()` — perform a single step of queued loaders\n- `unloadAsset(handle)` — release a loaded asset\n\n### Schemes & Loaders\n\nThe system supports schemes (for `embedded://` content or custom resolvers) and allows custom loaders via `AssetLoader` and `AssetUnloader` wrappers.\n\n---\n\n## GUI\n\nZevy Raylib exposes a RayGui-based GUI layer tied to the Zevy scheduler.\n\n- `src/gui/ui.zig` — exports `components`, `layout`, `renderer`, and `systems`\n- `src/gui/*` — UI primitives, layout engines (flex, grid, anchor, dock), render systems\n\nThe `RayGuiPlugin` registers a `GuiStage` and several systems:\n\n- uiInputSystem — maps engine input to GUI events\n- flexLayoutSystem / gridLayoutSystem / anchorLayoutSystem / dockLayoutSystem — layout pass\n- uiRenderSystem — draws the UI after the normal draw stage\n\nExamples are available in `src/gui/examples.zig` and unit tests in `src/gui/ui_tests.zig` and `src/gui/ui_render_tests.zig`.\n\n---\n\n## Embed\n\nThe `embed` module exposes helpers to include binary assets in the compiled artifact. See `embed.zig` in `src/builtin`. Use `embedded://` URIs with the asset manager to reference compiled-in assets.\n\n- `src/builtin/embed.zig` — helper utilities\n\n---\n\n## Plugins\n\nZevy Raylib defines several convenience plugins that register and configure services with the Zevy ECS system.\n\n- `src/app.plugin.zig` — Raylib application and RayGui plugin\n- `src/assets.plugin.zig` — assets resource (wraps `io.Assets`)\n- `src/input.plugin.zig` — registers `InputManager` and the input system\n\n### RaylibPlugin (`app.plugin.zig`)\n\nProvides:\n\n- Window creation (`rl.initWindow`) with title, width, height\n- Audio device initialization (`rl.initAudioDevice`)\n- Logging of the window and audio state\n- Cleaning up in `deinit` (close audio and window)\n\nUsage example:\n\n```zig\ntry plugs.add(RaylibPlugin, RaylibPlugin{ .title = \"My App\", .width = 800, .height = 600 });\n```\n\n### RayGuiPlugin (`app.plugin.zig`)\n\nWires RayGui into the Zevy scheduler and adds UI systems to a `GuiStage`. The plugin registers the UI systems and the `uiRenderSystem` into the drawing stage.\n\n### AssetsPlugin (`assets.plugin.zig`)\n\nCreates and registers `io.Assets` in the ECS as a resource so your systems can call `loadAsset` and `process` through the `io` API.\n\n### InputPlugin (`input.plugin.zig`)\n\nRegisters the `InputManager` resource and attaches an input `update` system that polls device state and emits events each frame.\n\n---\n\n## Examples & Tests\n\n- `src/input/tests.zig` — Input unit tests\n- `*_tests.zig` — IO tests for asset managers and loaders\n\nSome tests are ommitted on Debug builds. To test all use -Doptimize=Release(Safe/Small/Fast).\n\n---\n\n## Contributing\n\n- Follow existing Zig patterns\n- Register new plugins in `src/root.zig` by adding them to `plug()`\n- Add unit tests beside features in the `src/*` directory. Prefer tests to be named `*_tests.zig`.\n",
+  "minimum_zig_version": "0.16.0",
+  "readme": "# Zevy Raylib\n\nZevy Raylib is an integration layer that connects the Zevy ECS with the Raylib game library. It provides input handling, asset loading utilities, GUI components, and a plugin system to register common engine features easily.\n\n[license]: https://img.shields.io/github/license/captkirk88/zevy-raylib?style=for-the-badge&logo=opensourcehardware&label=License&logoColor=C0CAF5&labelColor=414868&color=8c73cc\n\n[![][license]](https://github.com/captkirk88/zevy-raylib/blob/main/LICENSE)\n\n[![Zig Version](https://img.shields.io/badge/zig-0.16.0.dev-blue.svg)](https://ziglang.org/)\n\n> [!WARNING]\n> This is entirely experimental and mostly for testing zevy-ecs in a more robust way.\n\n### Table of contents\n\n- [Introduction](#introduction)\n- [Quick Start](#quick-start)\n- [Input](#input)\n  - [InputManager](#inputmanager)\n  - [Bindings & Types](#bindings--types)\n- [IO (Assets)](#io-assets)\n  - [AssetManager](#assetmanager)\n  - [Schemes & Loaders](#schemes--loaders)\n- [GUI](#gui)\n- [Embed](#embed)\n- [Plugins](#plugins)\n  - [RaylibPlugin (app.plugin.zig)](#raylibplugin-apppluginzig)\n  - [AssetsPlugin (assets.plugin.zig)](#assetsplugin-assetspluginzig)\n  - [InputPlugin (input.plugin.zig)](#inputplugin-inputpluginzig)\n- [Contributing](#contributing)\n\n---\n\n## Introduction\n\nZevy Raylib is a small library that wires the Raylib runtime into a Zevy ECS-based app. It handles window creation, input harvesting, asset management and sets up RayGui-based UI systems over the Zevy scheduler.\n\n---\n\n## Quick Start\n\n[Examples](examples/) can be ran with:\n\n```bash\nzig build examples\n```\n\n> [!WARNING]\n> This library and its APIs are experimental. They are intended as a convenient integration layer for example apps and prototypes.\n> The API and internal behavior can and will change without backward compatibility guarantees.\n> Tests and cross-platform coverage are limited — treat this as a development-ready library, not production-ready.\n> Please open issues or submit PRs if you rely on features that should be stabilized or suggested.\n\n---\n\n## Input\n\nThe input layer provides the following:\n\n- `InputManager` — the main runtime service that polls raylib for input state and dispatches events.\n- `InputBindings` and `InputBinding` — mapping action names to input chords.\n- Input types and helpers (keyboard, mouse, touch, gesture, and gamepads).\n\n### InputManager\n\n`InputManager` is designed to be added to the ECS via the `InputPlugin` and optionally polled directly from systems. It supports event handlers and action checking API:\n\nIn ECS systems, access it through the default Zevy ECS resource params, for example `zevy_ecs.params.ResMut(zevy_raylib.input.InputManager)` when the system updates input state.\n\n- `isActionActive(\"action_name\")` — check if action is currently active\n- `wasActionTriggered(\"action_name\")` — check a press event this frame\n- `addEventHandler` — subscribe to input events\n\n### Bindings & Types\n\nInput bindings, chords, and actions are declared with types located inside the `input` folder. Use the `InputBindings` helper to create action mappings from keyboard/mouse/gamepad/touch inputs.\n\n---\n\n## IO (Assets)\n\nThe IO module provides a powerful `AssetManager<T, Loader>` generator for loading and tracking assets.\n\n\n### AssetManager\n\nUse `AssetManager` to queue asset loads and process them in a separate step. It validates asset paths (supports builtin `embedded://` scheme), manages unload, and stores assets in a string-to-entry map.\n\nUseful methods:\n\n- `loadAsset(file, settings)` — queue asset for asynchronous loading\n- `loadAssetNow(file, settings)` — load asset immediately\n- `process()` — perform a single step of queued loaders\n- `unloadAsset(handle)` — release a loaded asset\n\n### Schemes & Loaders\n\nThe system supports schemes (for `embedded://` content or custom resolvers) and allows custom loaders via `AssetLoader` and `AssetUnloader` wrappers.\n\n---\n\n## GUI\n\nZevy Raylib exposes a RayGui-based GUI layer tied to the Zevy scheduler.\n\n- `src/gui/ui.zig` — exports `components`, `layout`, `renderer`, and `systems`\n- `src/gui/*` — UI primitives, layout engines (flex, grid, anchor, dock), render systems\n\nThe `RayGuiPlugin` registers a `GuiStage` and several systems:\n\n- uiInputSystem — maps engine input to GUI events\n- flexLayoutSystem / gridLayoutSystem / anchorLayoutSystem / dockLayoutSystem — layout pass\n- uiRenderSystem — draws the UI after the normal draw stage\n\nExamples are available in `src/gui/examples.zig` and unit tests in `src/gui/ui_tests.zig` and `src/gui/ui_render_tests.zig`.\n\n---\n\n## Embed\n\nThe `embed` module exposes helpers to include binary assets in the compiled artifact. See `embed.zig` in `src/builtin`. Use `embedded://` URIs with the asset manager to reference compiled-in assets.\n\n- `src/builtin/embed.zig` — helper utilities\n\n---\n\n## Plugins\n\nZevy Raylib defines several convenience plugins that register and configure services with the Zevy ECS system.\n\n- `src/app.plugin.zig` — Raylib application and RayGui plugin\n- `src/assets.plugin.zig` — assets resource (wraps `io.Assets`)\n- `src/input.plugin.zig` — registers `InputManager` and the input system\n\n### RaylibPlugin (`app.plugin.zig`)\n\nProvides:\n\n- Window creation (`rl.initWindow`) with title, width, height\n- Audio device initialization (`rl.initAudioDevice`)\n- Logging of the window and audio state\n- Cleaning up in `deinit` (close audio and window)\n\nUsage example:\n\n```zig\ntry plugs.add(RaylibPlugin, RaylibPlugin{ .title = \"My App\", .width = 800, .height = 600 });\n```\n\n### RayGuiPlugin (`app.plugin.zig`)\n\nWires RayGui into the Zevy scheduler and adds UI systems to a `GuiStage`. The plugin registers the UI systems and the `uiRenderSystem` into the drawing stage.\n\n### AssetsPlugin (`assets.plugin.zig`)\n\nCreates and registers `io.Assets` in the ECS as a resource so your systems can call `loadAsset` and `process` through the `io` API.\n\n### InputPlugin (`input.plugin.zig`)\n\nRegisters the `InputManager` resource and attaches an input `update` system that polls device state and emits events each frame.\n\n---\n\n## Examples & Tests\n\n- `src/input/tests.zig` — Input unit tests\n- `*_tests.zig` — IO tests for asset managers and loaders\n\nSome tests are ommitted on Debug builds. To test all use -Doptimize=Release(Safe/Small/Fast).\n\n---\n\n## Contributing\n\n- Follow existing Zig patterns\n- Register new plugins in `src/root.zig` by adding them to `plug()`\n- Add unit tests beside features in the `src/*` directory. Prefer tests to be named `*_tests.zig`.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/6296457?u=57a7319f473f4c068419efb04c3c3b0f54a42efe&v=4",
   "releases": [],
   "owner_bio": "Am I A.I?",
@@ -67,8 +71,8 @@
   "owner_location": "Moon",
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 6,
-  "owner_following": 12,
+  "owner_followers": 7,
+  "owner_following": 13,
   "owner_created_at": "2014-01-01T08:56:32Z",
   "category": "library"
 }
