@@ -12,7 +12,7 @@
   "stars": 5,
   "forks": 9,
   "watchers": 1,
-  "updated_at": "2026-04-17T13:13:20Z",
+  "updated_at": "2026-04-26T12:21:07Z",
   "minimum_zig_version": "0.16.0",
   "readme": "# Toolbox\n\nA wrapper around `std.Build` to make debugging easier for C APIs I package & maintain for [Zig][2]\n\n## Important note\n\nThis package was originally thought for the [tiawl/spaceporn][1] dependencies chain. It is actively used in it. For this reason, I do not recommend using it outside of this scope. But this is also a good reason to make it evolve in a way that could answer other needs. So this repository is open to breaking proposals.\n\n## Dependencies\n\nThe [Zig][2] part of this package requires the latest (0.16.0) or the master (0.17.0-dev) [Zig][2] release.\n\n## License\n\nThis repository is dedicated to the public domain. See the LICENSE file for more details.\n\n[1]:https://github.com/tiawl/spaceporn\n[2]:https://codeberg.org/ziglang/zig\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/57362253?u=519d9e3f04e4833f75c34cb6ceb371670ccddc4b&v=4",

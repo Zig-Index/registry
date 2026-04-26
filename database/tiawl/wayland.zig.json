@@ -15,7 +15,7 @@
   "stars": 5,
   "forks": 5,
   "watchers": 1,
-  "updated_at": "2026-04-17T13:23:54Z",
+  "updated_at": "2026-04-26T11:48:07Z",
   "dependencies": [
     {
       "name": "wayland",
