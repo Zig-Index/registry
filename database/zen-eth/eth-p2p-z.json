@@ -16,10 +16,10 @@
     "multistream",
     "quic"
   ],
-  "stars": 32,
-  "forks": 15,
+  "stars": 36,
+  "forks": 16,
   "watchers": 2,
-  "updated_at": "2026-03-22T05:24:45Z",
+  "updated_at": "2026-04-27T04:07:29Z",
   "dependencies": [
     {
       "name": "libxev",
@@ -38,8 +38,13 @@
     },
     {
       "name": "lsquic",
-      "url": "git+https://github.com/zen-eth/lsquic.git?ref=anshalshukla/zig-0.15.2-upgrade#87391b162a9d05053bd256fadf716bc7ced1ce63",
-      "hash": "lsquic-0.0.0-jO7gdogfAAD9odKzV7c3R5ewa2LrX-73Kh6B5GJgS7Rh"
+      "url": "git+https://github.com/zen-eth/lsquic#56f7bb9aceabd50f17004d19df6c539d176cae98",
+      "hash": "lsquic-0.0.0-jO7gdu0fAABG1R6pRTgwAfzjjfw1VEnUx3btbDvzykiJ"
+    },
+    {
+      "name": "lsquic_zig",
+      "url": "git+https://github.com/zen-eth/lsquic.zig#4ec44b5c29d4eea93e066a15a83b0008a8347882",
+      "hash": "lsquic_zig-0.0.0-Q3LEcK5-AADc_niBa0YEVGx-DzhjwLZRIMd8DHYnJ1_k"
     },
     {
       "name": "cache",
