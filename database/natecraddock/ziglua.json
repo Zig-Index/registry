@@ -13,10 +13,10 @@
     "package",
     "zig-package"
   ],
-  "stars": 468,
-  "forks": 62,
+  "stars": 472,
+  "forks": 63,
   "watchers": 10,
-  "updated_at": "2026-04-24T01:21:08Z",
+  "updated_at": "2026-04-27T07:52:59Z",
   "dependencies": [
     {
       "name": "lua51",
@@ -45,13 +45,13 @@
     },
     {
       "name": "luajit",
-      "url": "https://github.com/LuaJIT/LuaJIT/archive/1c3b5a4d722598ecbb9219480142eda682e87bb1.tar.gz",
-      "hash": "N-V-__8AADvoQgDNXzLQ8axn5XarZnk9amsbNxFk1GRxj5mH"
+      "url": "https://github.com/LuaJIT/LuaJIT/archive/18b087cd2cd4ddc4a79782bf155383a689d5093d.tar.gz",
+      "hash": "N-V-__8AAODpQgCVrpfzE2ze9FA_rOuByh3WKyIyk5iS_o9a"
     },
     {
       "name": "luau",
-      "url": "https://github.com/luau-lang/luau/archive/refs/tags/0.653.tar.gz",
-      "hash": "N-V-__8AAFB1kwDHb7dLmDsOv91rOkqorfDB_2nJtqnp4F-b"
+      "url": "https://github.com/luau-lang/luau/archive/refs/tags/0.718.tar.gz",
+      "hash": "N-V-__8AAHD3twASfaoQIBT7MgqysHE9qE1pnme3FsEVRc84"
     },
     {
       "name": "translate_c",
