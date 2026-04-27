@@ -14,10 +14,10 @@
     "http-server",
     "tardy"
   ],
-  "stars": 723,
+  "stars": 728,
   "forks": 36,
   "watchers": 12,
-  "updated_at": "2026-04-16T14:27:57Z",
+  "updated_at": "2026-04-27T00:40:54Z",
   "dependencies": [
     {
       "name": "tardy",

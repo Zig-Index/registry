@@ -9,10 +9,10 @@
     "readline",
     "zig-package"
   ],
-  "stars": 88,
+  "stars": 89,
   "forks": 16,
   "watchers": 4,
-  "updated_at": "2026-04-09T16:49:21Z",
+  "updated_at": "2026-04-11T11:50:52Z",
   "dependencies": [
     {
       "name": "wcwidth",

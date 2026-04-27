@@ -9,10 +9,10 @@
     "sqlite",
     "zig-package"
   ],
-  "stars": 583,
-  "forks": 81,
+  "stars": 586,
+  "forks": 82,
   "watchers": 8,
-  "updated_at": "2026-04-16T08:13:46Z",
+  "updated_at": "2026-04-22T04:45:55Z",
   "dependencies": [
     {
       "name": "sqlite",

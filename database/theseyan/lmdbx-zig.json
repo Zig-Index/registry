@@ -11,10 +11,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 10,
+  "stars": 12,
   "forks": 2,
   "watchers": 1,
-  "updated_at": "2026-04-24T19:01:27Z",
+  "updated_at": "2026-04-25T21:56:38Z",
   "dependencies": [
     {
       "name": "mdbx",
@@ -105,7 +105,7 @@
   "owner_location": "Agartala, India",
   "owner_blog": "seyan.co",
   "owner_twitter_username": "sayanjdas",
-  "owner_followers": 45,
+  "owner_followers": 46,
   "owner_following": 4,
   "owner_created_at": "2017-08-13T05:59:42Z",
   "license": "MIT",

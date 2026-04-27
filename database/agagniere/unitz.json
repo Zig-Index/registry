@@ -6,12 +6,13 @@
   "type": "package",
   "topics": [
     "zig-package",
-    "physics"
+    "physics",
+    "zig-library"
   ],
   "stars": 1,
   "forks": 0,
   "watchers": 2,
-  "updated_at": "2026-04-13T13:11:50Z",
+  "updated_at": "2026-04-25T14:20:56Z",
   "dependencies": [
     {
       "name": "comath",

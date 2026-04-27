@@ -12,10 +12,10 @@
     "zig-package",
     "zig-lib"
   ],
-  "stars": 35,
+  "stars": 36,
   "forks": 2,
   "watchers": 0,
-  "updated_at": "2026-04-14T17:57:12Z",
+  "updated_at": "2026-04-19T00:44:18Z",
   "dependencies": [
     {
       "name": "luau",

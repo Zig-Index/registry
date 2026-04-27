@@ -11,10 +11,10 @@
     "zig-library",
     "zig-package"
   ],
-  "stars": 206,
-  "forks": 24,
+  "stars": 205,
+  "forks": 23,
   "watchers": 5,
-  "updated_at": "2026-04-23T14:44:34Z",
+  "updated_at": "2026-04-25T00:52:22Z",
   "dependencies": [
     {
       "name": "clay",

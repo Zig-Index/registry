@@ -16,10 +16,10 @@
     "cross-platform-gui",
     "gui-library"
   ],
-  "stars": 2587,
+  "stars": 2606,
   "forks": 98,
   "watchers": 34,
-  "updated_at": "2026-04-06T07:52:54Z",
+  "updated_at": "2026-04-27T08:13:55Z",
   "dependencies": [
     {
       "name": "macos_sdk",

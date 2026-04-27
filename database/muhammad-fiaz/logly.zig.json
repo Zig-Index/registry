@@ -16,10 +16,10 @@
     "zig-logging-package",
     "logly"
   ],
-  "stars": 50,
+  "stars": 52,
   "forks": 2,
   "watchers": 0,
-  "updated_at": "2026-04-03T17:14:37Z",
+  "updated_at": "2026-04-20T14:59:38Z",
   "dependencies": [
     {
       "name": "zstd",

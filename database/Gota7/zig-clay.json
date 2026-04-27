@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 21,
+  "stars": 22,
   "forks": 3,
   "watchers": 1,
-  "updated_at": "2025-10-06T09:32:09Z",
+  "updated_at": "2026-04-25T04:29:47Z",
   "dependencies": [
     {
       "name": "clay_src",

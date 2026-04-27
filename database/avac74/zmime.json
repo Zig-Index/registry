@@ -14,7 +14,7 @@
     "mime-types"
   ],
   "stars": 3,
-  "forks": 0,
+  "forks": 1,
   "watchers": 1,
   "updated_at": "2026-01-06T11:51:02Z",
   "minimum_zig_version": "0.15.2",

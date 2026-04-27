@@ -15,10 +15,10 @@
     "blockchain",
     "zig-package"
   ],
-  "stars": 115,
+  "stars": 116,
   "forks": 16,
   "watchers": 2,
-  "updated_at": "2026-02-24T08:02:30Z",
+  "updated_at": "2026-04-14T17:10:10Z",
   "dependencies": [
     {
       "name": "c_kzg_4844",

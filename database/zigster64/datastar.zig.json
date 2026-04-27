@@ -10,10 +10,10 @@
     "zig-package",
     "zig-library"
   ],
-  "stars": 28,
+  "stars": 32,
   "forks": 1,
   "watchers": 0,
-  "updated_at": "2026-04-14T09:50:01Z",
+  "updated_at": "2026-04-26T08:19:48Z",
   "dependencies": [
     {
       "name": "pubsub",

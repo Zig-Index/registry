@@ -11,10 +11,10 @@
     "zig-package",
     "ziglang"
   ],
-  "stars": 61,
+  "stars": 62,
   "forks": 3,
   "watchers": 1,
-  "updated_at": "2026-04-19T02:04:09Z",
+  "updated_at": "2026-04-23T17:16:02Z",
   "dependencies": [
     {
       "name": "zls",

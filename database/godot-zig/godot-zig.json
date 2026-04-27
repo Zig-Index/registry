@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 288,
-  "forks": 23,
+  "stars": 289,
+  "forks": 24,
   "watchers": 10,
-  "updated_at": "2026-03-01T05:02:37Z",
+  "updated_at": "2026-04-27T07:14:54Z",
   "dependencies": [
     {
       "name": "case",

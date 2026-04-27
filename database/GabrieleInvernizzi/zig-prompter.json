@@ -11,10 +11,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 22,
+  "stars": 25,
   "forks": 4,
   "watchers": 1,
-  "updated_at": "2026-02-20T14:45:52Z",
+  "updated_at": "2026-04-19T03:42:58Z",
   "dependencies": [
     {
       "name": "mibu",

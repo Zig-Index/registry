@@ -16,10 +16,10 @@
     "yaml",
     "zig"
   ],
-  "stars": 27,
+  "stars": 35,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-04-22T07:32:28Z",
+  "updated_at": "2026-04-27T11:42:36Z",
   "dependencies": [
     {
       "name": "toml",
@@ -55,7 +55,7 @@
   "owner_location": "Prague, Czechia",
   "owner_blog": "https://leostera.com",
   "owner_twitter_username": "leostera",
-  "owner_followers": 914,
+  "owner_followers": 915,
   "owner_following": 96,
   "owner_created_at": "2011-06-16T14:24:07Z",
   "license": "MIT",

@@ -11,10 +11,10 @@
     "regex",
     "compile-time"
   ],
-  "stars": 153,
+  "stars": 154,
   "forks": 15,
   "watchers": 4,
-  "updated_at": "2026-03-04T13:50:09Z",
+  "updated_at": "2026-04-06T18:33:25Z",
   "readme": "# Zig compile time regular expressions\nGenerating fast code since 2020\n\n## Features\n- Comptime regular expression compilation\n- Comptime and runtime matching\n- UTF8, UTF16le, ASCII, codepoint array support\n- Captures (with named `(:<name>...)` support)\n- `|`, `*`, `+`, `?`, `(:?...)`, `[...]`, `[^...]`, `{N}`, `{min,}`, `{min,max}`\n- '\\d', '\\s' character classes\n\n## TODO\n- Faster generated code using DFAs when possible\n- search, findAll, etc.\n- More character classes\n- More features (backreferences etc.)\n\n## Example\n\n```zig\ntest \"runtime matching\" {\n    @setEvalBranchQuota(1250);\n    // The encoding is utf8 by default, you can use .ascii, .utf16le, .codepoint here instead.\n    if (try match(\"(?<test>def|abc)([😇ω])+\", .{.encoding = .utf8}, \"abc😇ωωωωω\")) |res| {\n        std.debug.warn(\"Test: {}, 1: {}\\n\", .{ res.capture(\"test\"), res.captures[1] });\n    }\n}\n\ntest \"comptime matching\" {\n    @setEvalBranchQuota(2700);\n    if (comptime try match(\"(?<test>def|abc)([😇ω])+\", .{}, \"abc😇ωωωωω\")) |res| {\n        @compileError(\"Test: \" ++ res.capture(\"test\").? ++ \", 1: \" ++ res.captures[1].?);\n    }\n}\n```\n\nSee tests.zig for more examples.  \n[Small benchmark with ctregex, PCRE2](https://gist.github.com/alexnask/c537360ae0163863564fba6e660f442b)  \n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/265903?u=a6353bd1505f2acb70acc7f215684168a7c46943&v=4",
   "releases": [],
@@ -22,7 +22,7 @@
   "owner_location": null,
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 171,
+  "owner_followers": 172,
   "owner_following": 24,
   "owner_created_at": "2010-05-05T20:15:05Z",
   "category": "library"

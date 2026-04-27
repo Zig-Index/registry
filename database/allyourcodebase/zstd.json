@@ -8,10 +8,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 14,
+  "stars": 15,
   "forks": 4,
   "watchers": 4,
-  "updated_at": "2026-04-21T14:14:35Z",
+  "updated_at": "2026-04-22T16:32:55Z",
   "dependencies": [
     {
       "name": "zstd",
