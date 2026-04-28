@@ -14,10 +14,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 3,
+  "stars": 2,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-01-21T04:46:18Z",
+  "updated_at": "2026-04-28T06:13:22Z",
   "dependencies": [
     {
       "name": "assimp",
