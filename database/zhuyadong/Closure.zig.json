@@ -12,7 +12,7 @@
   "stars": 4,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-11-16T14:57:32Z",
+  "updated_at": "2026-04-28T05:41:27Z",
   "dependencies": [
     {
       "name": "example",
@@ -24,6 +24,15 @@
   "readme": "# Closure.zig\nNow we can use closure in zig ;)\n## Example: up value support\n```zig\n    var val: i32 = 100;\n    var clo = Closure.make(&.{ .pval = &val }, struct {\n        pub fn call(up: anytype) void {\n            up.pval.* = 400;\n        }\n    });\n    try clo.call(.{});\n    try t.expect(val == 400);\n```\n## Example: up value + call argument\n```zig\n    var val: i32 = 100;\n    var clo = Closure.make(&.{ .pval = &val }, struct {\n        pub fn call(up: anytype, new_val: i32) void {\n            up.pval.* = new_val;\n        }\n    });\n    try clo.call(&.{@as(i32, 900)});\n    try t.expect(val == 900);\n```\n## Example: up value on heap\n```zig\n    const t = std.testing;\n    var val: i32 = 100;\n    var clo = Closure.new(t.allocator, &.{ .pval = &val }, struct {\n        pub fn call(up: anytype, new_val: i32) void {\n            up.pval.* = new_val;\n        }\n    });\n    defer clo.deinit();\n    try clo.call(&.{@as(i32, 900)});\n    try t.expect(val == 900);\n```\n\n## Example: Make the parameters of the closure clearly readable\n```zig\n    var val:i32 = 100;\n    var clo:Closure.Of(fn (new_val: i32) void) = Closure.make(&.{ .pval = &val }, struct {\n        pub fn call(up: anytype, new_val: i32) void {\n            up.pval.* = new_val;\n        }\n    });\n    try clo.call(&.{@as(i32, 400)});\n    try t.expect(val == 400);\n```\n\n## Example: Optional deinit function\nYou can define an optional `deinit` function in your Func struct. It will be called when the closure is deinitialized, before the memory is freed (for heap closures) or before the ptr is set to null (for stack closures).\n\n```zig\n    const Data = struct {\n        age: i32,\n        name: []const u8,\n    };\n    var data: Data = .{ .age = 10, .name = \"default\" };\n    \n    var clo = try Closure.new(t.allocator, &.{ .data = &data }, struct {\n        pub fn call(up: anytype, new_age: i32, new_name: []const u8) void {\n            up.data.* = .{ .age = new_age, .name = new_name };\n        }\n        pub fn deinit(up: anytype) void {\n            up.data.* = .{ .age = 0, .name = \"deinitialized\" };\n        }\n    });\n    try clo.call(&.{ @as(i32, 80), @as([]const u8, \"hello\") });\n    clo.deinit();\n    // deinit function was called\n    try t.expectEqualStrings(data.name, \"deinitialized\");\n```\n\n## Example: Error handling\nThe `call` method returns `!void` and will return `error.Deinitialized` if the closure has already been deinitialized.\n\n```zig\n    var clo = try Closure.new(t.allocator, &.{ .data = &data }, struct {\n        pub fn call(up: anytype) void {\n            // ...\n        }\n    });\n    clo.deinit();\n    // Now calling clo.call() will return an error\n    const result = clo.call(.{});\n    try t.expectError(error.Deinitialized, result);\n```\n\nMore examples in source code: [here](src/root.zig) ",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/910428?v=4",
   "releases": [
+    {
+      "tag_name": "0.2.3",
+      "name": "0.2.3",
+      "body": "update to zig 0.16",
+      "prerelease": false,
+      "published_at": "2026-04-28T05:42:20Z",
+      "html_url": "https://github.com/zhuyadong/Closure.zig/releases/tag/0.2.3",
+      "assets": []
+    },
     {
       "tag_name": "0.2.2",
       "name": "0.2.2",
