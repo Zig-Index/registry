@@ -13,7 +13,7 @@
   "stars": 28,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-04-25T12:06:44Z",
+  "updated_at": "2026-04-28T14:50:38Z",
   "dependencies": [
     {
       "name": "cbor",
