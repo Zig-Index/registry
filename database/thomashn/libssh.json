@@ -10,7 +10,7 @@
   "stars": 3,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2025-12-15T11:08:54Z",
+  "updated_at": "2026-04-28T17:17:07Z",
   "dependencies": [
     {
       "name": "libssh",
@@ -24,16 +24,16 @@
     },
     {
       "name": "zlib",
-      "url": "git+https://github.com/allyourcodebase/zlib.git#61e7df7e996ec5a5f13a653db3c419adb340d6ef",
-      "hash": "zlib-1.3.1-ZZQ7lbYMAAB1hTSOKSXAKAgHsfDcyWNH_37ojw5WSpgR"
+      "url": "git+https://github.com/allyourcodebase/zlib.git#d3b5519d3b73616a6bfece0712f080029d2a9244",
+      "hash": "zlib-1.3.2-ZZQ7lc8NAAAHm9MDfplvwoesXvk4tVm6VCsiI8KnIbT0"
     },
     {
       "name": "openssl",
-      "url": "git+https://github.com/allyourcodebase/openssl.git#cad7ccba47e42fa608ca655ec14ae33202df86e1",
-      "hash": "openssl-3.3.2-TC9C3Wa3ZACgB1hZbrLOQCK9XccIBaW_F3imFfIeYP06"
+      "url": "git+https://github.com/allyourcodebase/openssl.git#6b318b447c8ff7529e3a2337a1df2a9b4816fee2",
+      "hash": "openssl-3.3.2-TC9C3Ze3ZABaKR5hc8KRnRPhTClKrKQKqTnXTUYkvmSR"
     }
   ],
-  "minimum_zig_version": "0.15.1",
+  "minimum_zig_version": "0.16.0",
   "readme": "# libssh\nThis is [libssh](https://www.libssh.org/),\npackaged for [Zig](https://ziglang.org/).\n\n## How to use it\nFirst, update your `build.zig.zon`:\n\n```\nzig fetch --save git+https://github.com/thomashn/libssh#<commit>\n```\n\nNext, add this snippet to your `build.zig` script:\n```zig\nconst libssh_dep = b.dependency(\"libssh\", .{\n    .target = target,\n    .optimize = optimize,\n});\nyour_compilation.linkLibrary(libssh_dep.artifact(\"libssh\"));\n```\n\nThis will provide libssh as a static library to `your_compilation`.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/7386615?u=ee713d137ce495ed1e9fa7def62c54c32c8f134c&v=4",
   "releases": [],
