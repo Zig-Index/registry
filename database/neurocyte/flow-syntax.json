@@ -12,12 +12,12 @@
   "stars": 17,
   "forks": 16,
   "watchers": 1,
-  "updated_at": "2026-04-28T12:07:20Z",
+  "updated_at": "2026-04-28T20:25:44Z",
   "dependencies": [
     {
       "name": "tree_sitter",
-      "url": "https://github.com/neurocyte/tree-sitter/releases/download/master-70dbb6fa9d998bcf599c3aaeecac7479e9ee3f0c/source.tar.gz",
-      "hash": "tree_sitter-0.26.7-z0LhyGSQZzENNbCzqsMPu63xwpZI1WTHcf62imt-H6YL"
+      "url": "https://github.com/neurocyte/tree-sitter/releases/download/master-260b35dbe31ac5a6efc364248939cb0a85ef66ee/source.tar.gz",
+      "hash": "tree_sitter-0.26.7-z0LhyHsnXjO6l86unw-63C06Mq3rVmVaWkJDQGMGaTY4"
     },
     {
       "name": "cbor",
