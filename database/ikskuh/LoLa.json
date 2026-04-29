@@ -16,8 +16,8 @@
   ],
   "stars": 233,
   "forks": 13,
-  "watchers": 6,
-  "updated_at": "2026-04-26T11:10:56Z",
+  "watchers": 5,
+  "updated_at": "2026-04-29T22:46:41Z",
   "dependencies": [
     {
       "name": "args",
