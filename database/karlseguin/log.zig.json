@@ -12,9 +12,9 @@
     "zig-package"
   ],
   "stars": 177,
-  "forks": 9,
+  "forks": 10,
   "watchers": 2,
-  "updated_at": "2026-04-26T01:39:40Z",
+  "updated_at": "2026-04-29T00:10:41Z",
   "dependencies": [
     {
       "name": "metrics",
@@ -29,7 +29,7 @@
   "owner_location": "Singapore",
   "owner_blog": "https://www.openmymind.net/",
   "owner_twitter_username": "karlseguin",
-  "owner_followers": 2501,
+  "owner_followers": 2504,
   "owner_following": 3,
   "owner_created_at": "2010-02-19T04:01:58Z",
   "license": "MIT",
