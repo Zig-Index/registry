@@ -10,12 +10,12 @@
   "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-04-29T22:23:21Z",
+  "updated_at": "2026-04-30T01:39:41Z",
   "dependencies": [
     {
-      "name": "example",
-      "url": "https://example.com/foo.tar.gz",
-      "hash": "..."
+      "name": "zest",
+      "url": "git+https://github.com/cloudboss/zest#cd7532a068d1e8ca87df0dee9ea9c191d24bd41a",
+      "hash": "zest-0.1.0-2zk2nt1EAABzZoN2yRNsVSyQ-BQpMlsZu8hMvHMjPE2m"
     }
   ],
   "minimum_zig_version": "0.16.0",
