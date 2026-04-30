@@ -13,12 +13,12 @@
   "stars": 56,
   "forks": 7,
   "watchers": 3,
-  "updated_at": "2026-04-30T02:43:57Z",
+  "updated_at": "2026-04-30T16:16:49Z",
   "dependencies": [
     {
       "name": "vaxis",
-      "url": "git+https://github.com/rockorager/libvaxis#0c9d3cb786e8c73414cad84f04eaae2d987e92ef",
-      "hash": "vaxis-0.6.0-BWNV_MnUCQCAVGshfkSx9a91DRlIb4IyuFLnnzcmARHI"
+      "url": "git+https://github.com/rockorager/libvaxis#70abae4a3f0492e433a68dd368e139455e9f2d97",
+      "hash": "vaxis-0.6.0-BWNV_MnUCQAlixGV7X9lkRu-gMKc2OSkjAk9VwTbVfiB"
     },
     {
       "name": "zeit",
@@ -45,6 +45,24 @@
   "readme": "# comlink\n\nAn experimental IRC client written in zig. Join the discussion in #comlink on\nlibera.chat.\n\n![screenshot of comlink](screenshot.png)\n\n## Installation\n\n### Arch Linux\n\n[comlink](https://aur.archlinux.org/packages/comlink) is available as a package in the AUR. It can be installed using an AUR helper (e.g. paru).\n\n```sh\nparu -S comlink\n```\n\n### Zig Build System\n\n`comlink` is written in zig and can be installed using the zig build system,\nversion 0.16.0.\n\n```sh\ngit clone https://github.com/rockorager/comlink\ncd comlink\nzig build -Doptimize=ReleaseSafe --prefix ~/.local\n```\n\n## Configuration\n\nConfiguration is loaded from `$HOME/.config/comlink/init.lua`\n\nWorks best with `soju`. [irctoday](https://irctoday.com) runs a paid instance of `soju`, and\nanother paid alternative is [pico.sh](https://pico.sh/irc)\n\n```lua\nlocal comlink = require(\"comlink\")\n\nlocal config = {\n\tserver = \"chat.sr.ht\",\n\tuser = \"rockorager\",\n\tnick = \"rockorager\",\n\tpassword = \"password\",\n\treal_name = \"Tim Culverhouse\",\n\ttls = true,\n}\n\n-- Pass the server config to connect. Connect to as many servers as you need\ncomlink.connect(config)\n\n-- Bind a key to an action\ncomlink.bind(\"ctrl+c\", \"quit\")\n```\n\nStoring passwords in configuration files is generally considered a poor\nsecurity practice. The following example reads the password from an external\npassword manager:\n\n```lua\nlocal comlink = require(\"comlink\")\n\nlocal proc =\n  assert(io.popen(\"hiq -dFpassword proto=irc address=irc.example.com nickname=alex\", \"r\"))\nlocal password = proc:read(\"*l\")\nproc:close()\n\nlocal config = {\n\t-- …other fields here…\n\tpassword = password,\n}\n```\n\n## Contributing\n\nPatches accepted on the [mailing list](https://lists.sr.ht/~rockorager/comlink)\n\nPull requests accepted on [Github](https://github.com/rockorager/comlink)\n\nPull requests accepted on\n[tangled.sh](https://tangled.sh/@rockorager.dev/comlink)\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/476352?u=aff432b811e969bae9d2f71a01510895e4bf469e&v=4",
   "releases": [
+    {
+      "tag_name": "v0.2.1",
+      "name": "v0.2.1",
+      "body": "**Full Changelog**: https://github.com/rockorager/comlink/compare/v0.2.0...v0.2.1",
+      "prerelease": false,
+      "published_at": "2026-04-30T16:17:20Z",
+      "html_url": "https://github.com/rockorager/comlink/releases/tag/v0.2.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "## What's Changed\r\n* docs(README): add Arch Linux installation instructions by @koibtw in https://github.com/rockorager/comlink/pull/11\r\n* chore: add desktop file by @tranzystorekk in https://github.com/rockorager/comlink/pull/12\r\n* Querycmd by @PalanixYT in https://github.com/rockorager/comlink/pull/15\r\n* Add explicit join commands. Will open buffer when using join command by @PalanixYT in https://github.com/rockorager/comlink/pull/17\r\n* Fix part command for last buffer by @PalanixYT in https://github.com/rockorager/comlink/pull/19\r\n* vxfw by @rockorager in https://github.com/rockorager/comlink/pull/20\r\n* Document example on using a password command by @WhyNotHugo in https://github.com/rockorager/comlink/pull/22\r\n* README: add irctoday by @sewnie in https://github.com/rockorager/comlink/pull/23\r\n* fix: deinit on app error by @sewnie in https://github.com/rockorager/comlink/pull/24\r\n\r\n## New Contributors\r\n* @koibtw made their first contribution in https://github.com/rockorager/comlink/pull/11\r\n* @PalanixYT made their first contribution in https://github.com/rockorager/comlink/pull/15\r\n* @rockorager made their first contribution in https://github.com/rockorager/comlink/pull/20\r\n* @WhyNotHugo made their first contribution in https://github.com/rockorager/comlink/pull/22\r\n* @sewnie made their first contribution in https://github.com/rockorager/comlink/pull/23\r\n\r\n**Full Changelog**: https://github.com/rockorager/comlink/compare/v0.1.1...v0.2.0",
+      "prerelease": false,
+      "published_at": "2026-04-30T15:27:57Z",
+      "html_url": "https://github.com/rockorager/comlink/releases/tag/v0.2.0",
+      "assets": []
+    },
     {
       "tag_name": "v0.1.1",
       "name": "v0.1.1",

@@ -9,10 +9,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 1759,
-  "forks": 126,
+  "stars": 1760,
+  "forks": 127,
   "watchers": 12,
-  "updated_at": "2026-04-29T18:57:45Z",
+  "updated_at": "2026-04-30T14:39:25Z",
   "dependencies": [
     {
       "name": "zigimg",
