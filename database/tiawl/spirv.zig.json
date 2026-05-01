@@ -15,12 +15,12 @@
   "stars": 2,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-04-28T13:06:58Z",
+  "updated_at": "2026-05-01T12:31:14Z",
   "dependencies": [
     {
       "name": "mimalloc",
-      "url": "git+https://github.com/microsoft/mimalloc#b1963961a5cdb1996c9ad2e356014089b7a94ea3",
-      "hash": "N-V-__8AAFBuVACNNEYgYaDUg8wG4Y5VLsAgqDE35mYiOJjC"
+      "url": "git+https://github.com/microsoft/mimalloc#fef6b0dd70f9d7fa0750b0d0b9fbb471203b94cd",
+      "hash": "N-V-__8AAOWTVACcagSNiPBJgyuynw0y5x5TmF6Ike7j1rFy"
     },
     {
       "name": "toolbox",
