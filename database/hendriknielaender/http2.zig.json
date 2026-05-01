@@ -14,12 +14,12 @@
   "stars": 42,
   "forks": 4,
   "watchers": 1,
-  "updated_at": "2026-04-23T10:56:06Z",
+  "updated_at": "2026-05-01T07:46:37Z",
   "dependencies": [
     {
       "name": "boring",
-      "url": "https://github.com/hendriknielaender/boring/archive/refs/tags/v0.1.0.tar.gz",
-      "hash": "boring-0.1.0-K6muvnZACQDRk5_hhGfQbLYzHDZrDpuEJHDJ2xsEN-X7"
+      "url": "https://github.com/hendriknielaender/boring/archive/refs/tags/v0.1.1.tar.gz",
+      "hash": "boring-0.1.0-K6muvtBGCQAHvnOGuLmCcLZn-WgZkddupoEFKwSKpL7U"
     },
     {
       "name": "turboapi_core",
@@ -91,7 +91,7 @@
   "owner_blog": "double-trouble.dev",
   "owner_twitter_username": null,
   "owner_followers": 65,
-  "owner_following": 258,
+  "owner_following": 260,
   "owner_created_at": "2019-06-05T17:02:09Z",
   "license": "MIT",
   "category": "library"
