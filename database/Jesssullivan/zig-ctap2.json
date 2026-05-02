@@ -1,0 +1,82 @@
+{
+  "name": "zig-ctap2",
+  "owner": "Jesssullivan",
+  "repo": "zig-ctap2",
+  "description": "Portable FIDO2/WebAuthn in Zig with C FFI — direct USB HID, no Apple entitlements needed",
+  "type": "package",
+  "topics": [
+    "ctap2",
+    "ffi",
+    "fido2",
+    "library",
+    "webauthn",
+    "c-interop",
+    "zig",
+    "zig-package",
+    "c-abi",
+    "hidraw"
+  ],
+  "stars": 1,
+  "forks": 1,
+  "watchers": 0,
+  "updated_at": "2026-05-02T04:44:37Z",
+  "minimum_zig_version": "0.15.2",
+  "readme": "# zig-ctap2\n\nPortable CTAP2/FIDO2 USB HID library in Zig with a stable C ABI for native applications on macOS and Linux.\n\n**License:** Zlib OR MIT\n\n**Docs:** https://transscendsurvival.org/zig-ctap2/\n\n## Why\n\nApple applications commonly reach passkeys and platform authenticators through AuthenticationServices (`ASAuthorizationController`, authorization providers, and app/browser entitlements). Linux-native applications commonly need a lower-level path to USB security keys through hidraw.\n\nzig-ctap2 provides a small, stable FFI boundary for CTAP2 over USB HID: device enumeration, makeCredential, getAssertion, getInfo, PIN protocol v2, keepalive callbacks, and raw-response parsing. It is useful when a native app needs portable external-authenticator operations without binding all credential logic to one OS application framework.\n\nIt does not replace SwiftUI, AppKit, UIKit, Cocoa, AuthenticationServices UI, passkeys/iCloud Keychain, platform authenticators, browser WebAuthn policy, Secure Enclave, LocalAuthentication, biometric prompts, attestation policy validation, origin/RP policy, account sync, or application UI lifecycle.\n\n## Features\n\n- **CTAP2 protocol**: makeCredential, getAssertion, getInfo, with structured response parsing\n- **PIN protocol v2**: ECDH P-256 key agreement, AES-256-CBC, HMAC-SHA-256 for PIN-authenticated operations\n- **CTAPHID framing**: 64-byte packet fragmentation/reassembly, CID management, keepalive handling\n- **Minimal CBOR codec**: encoder/decoder for the CTAP2 subset (integers, byte/text strings, arrays, maps, booleans)\n- **Platform HID transports**: macOS (IOKit), Linux (hidraw)\n- **C FFI**: 16 exported functions callable from Swift, C, C++, or any language with C interop\n- **Zig package API**: Direct Zig imports use `src/root.zig`; C ABI exports stay in `src/ffi.zig`\n- **Error mapping**: All CTAP2 status codes mapped to human-readable messages\n- **Property-based tests**: 1000-iteration roundtrip tests for CBOR and CTAPHID framing\n\n## Requirements\n\n- Zig 0.15.2+\n- macOS 13+ (IOKit) or Linux (hidraw)\n- USB security key (tested with YubiKey 5C NFC)\n\n## Installation\n\n### Zig Package Manager (recommended)\n\n```bash\nzig fetch --save git+https://github.com/Jesssullivan/zig-ctap2.git\n```\n\nThen in your `build.zig`:\n\n```zig\nconst dep = b.dependency(\"zig_ctap2\", .{ .target = target, .optimize = optimize });\nexe.root_module.addImport(\"zig-ctap2\", dep.module(\"zig-ctap2\"));\n```\n\n### Git Submodule (C FFI consumers)\n\n```bash\ngit submodule add https://github.com/Jesssullivan/zig-ctap2.git vendor/ctap2\ncd vendor/ctap2 && zig build -Doptimize=ReleaseFast\n```\n\nLink `-lctap2` and include `ctap2.h`. At final link time, add platform frameworks:\n- **macOS:** `-framework IOKit -framework CoreFoundation`\n- **Linux:** no extra libraries needed (uses hidraw via kernel)\n\n## Build\n\n```bash\n# Static library (libctap2.a)\nzig build -Doptimize=ReleaseFast\n\n# Run unit tests\nzig build test\n\n# Run property-based tests\nzig build test-pbt\n\n# Run hardware tests (requires YubiKey connected)\nYUBIKEY_TESTS=1 zig build test-hardware\n\n# Build C example\nzig build example\n```\n\nWith [just](https://just.systems) (recommended):\n\n```bash\njust test-all     # unit + PBT tests\njust build        # ReleaseFast static library\njust info         # show library stats\njust              # list all recipes\n```\n\nWith Nix:\n\n```bash\nnix develop       # dev shell with Zig 0.15.2\n```\n\n## Architecture\n\n```mermaid\ngraph TD\n    A[Application / Browser] -->|C FFI| B[ffi.zig]\n    B --> C[ctap2.zig<br/>Commands + Response Parsing]\n    B --> D[pin.zig<br/>PIN Protocol v2]\n    C --> E[cbor.zig<br/>CBOR Codec]\n    D --> E\n    C --> F[ctaphid.zig<br/>HID Framing]\n    D --> F\n    F --> G{Platform}\n    G -->|macOS| H[hid_macos.zig<br/>IOKit HID]\n    G -->|Linux| I[hid_linux.zig<br/>hidraw]\n```\n\n### Registration Flow\n\n```mermaid\nsequenceDiagram\n    participant App\n    participant FFI as ffi.zig\n    participant CTAP as ctap2.zig\n    participant CBOR as cbor.zig\n    participant HID as ctaphid.zig\n    participant Key as YubiKey\n\n    App->>FFI: ctap2_make_credential_parsed()\n    FFI->>CTAP: encodeMakeCredential()\n    CTAP->>CBOR: CBOR encode request\n    CBOR-->>CTAP: bytes\n    CTAP->>HID: CTAPHID_CBOR (fragmented)\n    HID->>Key: USB HID packets\n    Note over Key: User touches key\n    Key-->>HID: Response packets\n    HID-->>CTAP: Reassembled CBOR\n    CTAP->>CTAP: parseMakeCredentialResponse()\n    CTAP-->>FFI: credential_id, attestation_object\n    FFI-->>App: Structured result\n```\n\n### Error Handling\n\n```mermaid\ngraph TD\n    E[CTAP2 Status Byte] -->|0x00| OK[Success]\n    E -->|0x2E| NC[No Credentials<br/>for this site]\n    E -->|0x27| OD[Operation Denied<br/>by user]\n    E -->|0x31| IP[Incorrect PIN]\n    E -->|0x32| PB[PIN Blocked]\n    E -->|0x35| PNS[PIN Not Set]\n    E -->|0x36| PV[PIN Policy<br/>Violation]\n\n    style OK fill:#2d5,stroke:#1a3\n    style NC fill:#d52,stroke:#a31\n    style OD fill:#d52,stroke:#a31\n    style IP fill:#d85,stroke:#a63\n    style PB fill:#d52,stroke:#a31\n    style PNS fill:#d85,stroke:#a63\n    style PV fill:#d85,stroke:#a63\n```\n\n## C API\n\nAll functions are blocking (with timeouts) and thread-safe. See [`include/ctap2.h`](include/ctap2.h) for full signatures.\n\n### Core Operations\n\n```c\n#include \"ctap2.h\"\n\n// Enumerate connected FIDO2 devices\nint count = ctap2_device_count();\n\n// Register a credential (raw CBOR response)\nint bytes = ctap2_make_credential(\n    client_data_hash, rp_id, rp_name,\n    user_id, user_id_len, user_name, user_display_name,\n    alg_ids, alg_count, resident_key,\n    result_buf, result_buf_len\n);\n\n// Authenticate (raw CBOR response)\nint bytes = ctap2_get_assertion(\n    client_data_hash, rp_id,\n    allow_list_ids, allow_list_id_lens, allow_list_count,\n    result_buf, result_buf_len\n);\n\n// Get device capabilities\nint bytes = ctap2_get_info(result_buf, result_buf_len);\n```\n\n### Parsed Responses\n\nThese perform the CTAP2 command AND parse the CBOR, returning structured fields:\n\n```c\n// Register + parse → credential_id, attestation_object\nint status = ctap2_make_credential_parsed(\n    client_data_hash, rp_id, rp_name,\n    user_id, user_id_len, user_name, user_display_name,\n    alg_ids, alg_count, resident_key,\n    out_credential_id, &out_credential_id_len,\n    out_attestation_object, &out_attestation_object_len\n);\n\n// Authenticate + parse → credential_id, auth_data, signature, user_handle\nint status = ctap2_get_assertion_parsed(\n    client_data_hash, rp_id,\n    allow_list_ids, allow_list_id_lens, allow_list_count,\n    out_credential_id, &out_credential_id_len,\n    out_auth_data, &out_auth_data_len,\n    out_signature, &out_signature_len,\n    out_user_handle, &out_user_handle_len\n);\n```\n\n### Pure Parsing (no I/O)\n\nParse raw CTAP2 response bytes you already have:\n\n```c\nctap2_parse_make_credential_response(response, len, ...);\nctap2_parse_get_assertion_response(response, len, fallback_cred, ...);\n```\n\n### PIN Protocol\n\n```c\n// Check remaining PIN retries\nint retries;\nctap2_get_pin_retries(&retries);\n\n// Get PIN token (ECDH + AES-256-CBC handshake)\nuint8_t pin_token[32];\nctap2_get_pin_token(\"123456\", pin_token, 32);\n\n// PIN-authenticated registration\nctap2_make_credential_with_pin(\n    client_data_hash, rp_id, rp_name, ...,\n    pin_token, 2,  // pin_protocol = 2\n    out_credential_id, &out_credential_id_len,\n    out_attestation_object, &out_attestation_object_len\n);\n\n// PIN-authenticated assertion\nctap2_get_assertion_with_pin(\n    client_data_hash, rp_id, ...,\n    pin_token, 2,\n    out_credential_id, &out_credential_id_len, ...\n);\n```\n\n### Utilities\n\n```c\n// Human-readable error messages\nconst char *msg = ctap2_status_message(0x35);\n// → \"PIN not set - configure a PIN on your security key first\"\n\n// Debug: last IOKit return code\nint ioret = ctap2_debug_last_ioreturn();\n```\n\n### Status Codes\n\n| Code | Meaning |\n|------|---------|\n| `CTAP2_OK` (0) | Success |\n| `CTAP2_ERR_NO_DEVICE` (-1) | No FIDO2 device connected |\n| `CTAP2_ERR_TIMEOUT` (-2) | Device communication timeout |\n| `CTAP2_ERR_PROTOCOL` (-3) | CTAPHID protocol error |\n| `CTAP2_ERR_BUFFER_TOO_SMALL` (-4) | Output buffer too small |\n| `CTAP2_ERR_OPEN_FAILED` (-5) | Failed to open HID device |\n| `CTAP2_ERR_WRITE_FAILED` (-6) | USB write failed |\n| `CTAP2_ERR_READ_FAILED` (-7) | USB read failed |\n| `CTAP2_ERR_CBOR` (-8) | CBOR encoding/decoding error |\n| `CTAP2_ERR_DEVICE` (-9) | CTAP2 device error (check status byte) |\n| `CTAP2_ERR_PIN` (-10) | PIN protocol error |\n\n## Apple / Swift / Objective-C Interop\n\nzig-ctap2 parallels only the USB HID CTAP2 portion of an Apple authenticator flow. The Apple analogs are `ASAuthorizationController` and WebAuthn/passkey APIs at the application layer, plus IOKit HID at the transport layer. This library implements the transport/protocol side, not the Apple UI, passkey, account, entitlement, or browser policy side.\n\nCurrent parity:\n\n- Available: C ABI callable from Swift, Objective-C, C, C++, and other FFI hosts.\n- Available: macOS USB HID transport through IOKit and CoreFoundation.\n- Available: Linux USB HID transport through hidraw.\n- Available: makeCredential, getAssertion, getInfo, CTAPHID framing, CTAP2 response parsing, PIN protocol v2, and keepalive callback variants.\n- Not yet available: SwiftPM/modulemap packaging, ObjC nullability annotations, dedicated Swift wrapper types, ObjC sample app, WebAuthn request/response helper types, attestation statement validation, origin/RP policy checks, browser mediation semantics, platform authenticators, passkeys/iCloud Keychain, Secure Enclave, LocalAuthentication, biometric prompts, NFC, BLE, or CTAP extensions such as hmac-secret/credProtect.\n\nGood starter contributions should focus on those interop and documentation gaps before expanding the ABI.\n\n## macOS USB Permissions\n\nOn macOS with hardened runtime, add to your entitlements:\n\n```xml\n<key>com.apple.security.device.usb</key>\n<true/>\n```\n\nThe user must grant **Input Monitoring** permission in System Settings > Privacy & Security.\n\nzig-ctap2 does not use `com.apple.developer.web-browser.public-key-credential` because it does not call AuthenticationServices WebAuthn/passkey UI. Applications still need the USB entitlement above when hardened runtime policies apply, and they remain responsible for their own WebAuthn, RP, origin, attestation, and UX policy.\n\n## Contributing\n\nStart with the [`good first issue`](https://github.com/Jesssullivan/zig-ctap2/labels/good%20first%20issue) and [`help wanted`](https://github.com/Jesssullivan/zig-ctap2/labels/help%20wanted) queues. The best early contributions are small Swift/ObjC interop examples, documentation truthing, header annotations, WebAuthn mapping examples, and build/package smoke tests.\n\n## Tested Devices\n\n- YubiKey 5C NFC (USB, firmware 5.x)\n\n## Status\n\n- [x] makeCredential (registration)\n- [x] getAssertion (authentication)\n- [x] getInfo (device capabilities)\n- [x] CBOR response parsing (structured result types)\n- [x] CTAP2 error code mapping (human-readable messages)\n- [x] PIN protocol v2 (ECDH P-256, AES-256-CBC, HMAC-SHA-256)\n- [x] Property-based tests (CBOR + CTAPHID, 1000 iterations each)\n- [x] Hardware integration tests (YubiKey roundtrips)\n- [ ] Extensions (credProtect, hmac-secret)\n- [ ] NFC transport\n\n## License\n\nDual-licensed under [Zlib](https://opensource.org/licenses/Zlib) and [MIT](https://opensource.org/licenses/MIT). Choose whichever you prefer.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/37297218?v=4",
+  "releases": [
+    {
+      "tag_name": "v0.4.1",
+      "name": "v0.4.1",
+      "body": "**Full Changelog**: https://github.com/Jesssullivan/zig-ctap2/compare/v0.4.0...v0.4.1",
+      "prerelease": false,
+      "published_at": "2026-04-29T19:06:00Z",
+      "html_url": "https://github.com/Jesssullivan/zig-ctap2/releases/tag/v0.4.1",
+      "assets": [
+        {
+          "name": "zig-ctap2-0.4.1.tar.gz",
+          "url": "https://github.com/Jesssullivan/zig-ctap2/releases/download/v0.4.1/zig-ctap2-0.4.1.tar.gz",
+          "size": 4706742,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-ctap2-0.4.1-autodoc.tar.gz",
+          "url": "https://github.com/Jesssullivan/zig-ctap2/releases/download/v0.4.1/zig-ctap2-0.4.1-autodoc.tar.gz",
+          "size": 2785103,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.4.0",
+      "name": "v0.4.0",
+      "body": "## What's Changed\n* Add keepalive callback FFI for dock touch indicator by @Jesssullivan in https://github.com/Jesssullivan/zig-ctap2/pull/22\n* Fix ctap2_get_assertion_with_keepalive arg mismatch by @Jesssullivan in https://github.com/Jesssullivan/zig-ctap2/pull/23\n* Fix Linux build: platform IOReturn guard + Zig 0.15 ArrayList by @Jesssullivan in https://github.com/Jesssullivan/zig-ctap2/pull/24\n* fix(security): harden hidraw enumeration and FFI bounds by @Jesssullivan in https://github.com/Jesssullivan/zig-ctap2/pull/25\n* fix: add DevicesNotAccessible to macOS error set by @Jesssullivan in https://github.com/Jesssullivan/zig-ctap2/pull/26\n* productionize: package metadata, module export, docs by @Jesssullivan in https://github.com/Jesssullivan/zig-ctap2/pull/27\n* Add autodoc CI job and release workflow by @Jesssullivan in https://github.com/Jesssullivan/zig-ctap2/pull/28\n\n\n**Full Changelog**: https://github.com/Jesssullivan/zig-ctap2/compare/v0.3.1...v0.4.0",
+      "prerelease": false,
+      "published_at": "2026-04-25T18:41:24Z",
+      "html_url": "https://github.com/Jesssullivan/zig-ctap2/releases/tag/v0.4.0",
+      "assets": [
+        {
+          "name": "zig-ctap2-0.4.0.tar.gz",
+          "url": "https://github.com/Jesssullivan/zig-ctap2/releases/download/v0.4.0/zig-ctap2-0.4.0.tar.gz",
+          "size": 4704022,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-ctap2-0.4.0-autodoc.tar.gz",
+          "url": "https://github.com/Jesssullivan/zig-ctap2/releases/download/v0.4.0/zig-ctap2-0.4.0-autodoc.tar.gz",
+          "size": 2784846,
+          "content_type": "application/gzip"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "moar languages 😻",
+  "owner_company": null,
+  "owner_location": "Lewiston, ME",
+  "owner_blog": "https://transscendsurvival.org/",
+  "owner_twitter_username": null,
+  "owner_followers": 19,
+  "owner_following": 16,
+  "owner_created_at": "2018-03-12T12:37:09Z",
+  "homepage": "https://transscendsurvival.org/zig-ctap2/",
+  "category": "library"
+}

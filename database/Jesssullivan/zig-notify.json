@@ -1,0 +1,70 @@
+{
+  "name": "zig-notify",
+  "owner": "Jesssullivan",
+  "repo": "zig-notify",
+  "description": "Cross-platform notifications in Zig with C FFI — macOS osascript / Linux libnotify",
+  "type": "package",
+  "topics": [
+    "abstraction",
+    "d-bus",
+    "libnotify",
+    "c-interop",
+    "ffi",
+    "linux",
+    "macos",
+    "notifications",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-05-02T04:44:39Z",
+  "minimum_zig_version": "0.15.2",
+  "readme": "# zig-notify\n\nCross-platform notification abstraction in Zig with C FFI -- macOS (osascript) and Linux (libnotify).\n\n**License:** Zlib OR MIT\n\n**Docs:** https://transscendsurvival.org/zig-notify/\n\n## Why\n\nDesktop notifications have different native surfaces on Apple platforms and Linux. Apple applications often call through Swift, Objective-C, AppKit, SwiftUI, or `UNUserNotificationCenter`; Linux applications commonly use libnotify over D-Bus.\n\nzig-notify provides a small, stable C ABI for the narrow local-notification capability: initialize the backend, send a title/body notification, optionally request permission, and clean up. It is meant to make this capability portable across Apple and Linux ports without requiring the rest of an application to keep Apple-specific notification call sites.\n\nIt is not a SwiftUI, AppKit, UIKit, Cocoa, APNs, or full `UNUserNotificationCenter` replacement. The current macOS backend deliberately uses `osascript display notification` instead of linking `UserNotifications.framework`.\n\n## Features\n\n- **Send notifications**: Title, body, and urgency level\n- **Permission handling**: Request notification permission (macOS), no-op on Linux\n- **Lifecycle**: Init/deinit for proper resource management (Linux)\n- **C FFI**: 4 exported functions callable from Swift, C, C++, or any language with C interop\n- **macOS**: osascript (AppleScript `display notification`)\n- **Linux**: libnotify (GLib notification API)\n\n## Installation\n\n### Zig Package Manager (recommended)\n\n```bash\nzig fetch --save git+https://github.com/Jesssullivan/zig-notify.git\n```\n\nThen in your `build.zig`:\n\n```zig\nconst dep = b.dependency(\"zig_notify\", .{ .target = target, .optimize = optimize });\nexe.root_module.addImport(\"zig-notify\", dep.module(\"zig-notify\"));\n```\n\n### Git Submodule (C FFI consumers)\n\n```bash\ngit submodule add https://github.com/Jesssullivan/zig-notify.git vendor/notify\ncd vendor/notify && zig build -Doptimize=ReleaseFast\n```\n\nLink (macOS): `-lzig-notify` (no frameworks; uses osascript binary).\nLink (Linux): `-lzig-notify -lnotify -lglib-2.0 -lgobject-2.0`.\nInclude: `#include \"zig_notify.h\"`.\n\n## Requirements\n\n- Zig 0.15.2+\n- macOS 13+ or Linux (libnotify)\n\n## Architecture\n\n```mermaid\ngraph TD\n    A[Application] -->|C FFI| B[ffi.zig<br/>4 exported functions]\n    B --> C[notify.zig<br/>Platform dispatch]\n    C -->|macOS| D[notify_macos.zig<br/>osascript]\n    C -->|Linux| E[notify_linux.zig<br/>libnotify]\n\n    D --> F[osascript -e<br/>display notification]\n    E --> G[notify_notification_new<br/>notify_notification_show]\n\n    style B fill:#48c,stroke:#269\n    style D fill:#a6d,stroke:#84b\n    style E fill:#6a4,stroke:#483\n```\n\n## Build\n\n```bash\n# Static library (libzig-notify.a)\nzig build -Doptimize=ReleaseFast\n\n# Run unit tests\nzig build test\n\n# Build C example\nzig build example\n```\n\nWith Nix:\n\n```bash\nnix develop       # dev shell with Zig 0.15.2\n```\n\n## Platform Support\n\n| Platform | Backend | Packages | Status |\n|----------|---------|----------|--------|\n| macOS 13+ (arm64/x86_64) | osascript (AppleScript) | None | CI build; runtime uses system `osascript` |\n| Linux (x86_64/arm64) | libnotify (GLib) | `libnotify-dev` (apt) / `libnotify-devel` (dnf) | CI build; runtime needs a notification daemon |\n| Cross-compilation | -- | Platform libs linked by the final application | Build surface supported |\n\n## C FFI API Reference\n\nHeader: [`include/zig_notify.h`](include/zig_notify.h)\n\n### Types\n\n```c\ntypedef enum {\n    ZIG_NOTIFY_URGENCY_LOW = 0,\n    ZIG_NOTIFY_URGENCY_NORMAL = 1,\n    ZIG_NOTIFY_URGENCY_CRITICAL = 2,\n} zig_notify_urgency_t;\n```\n\n### Initialize\n\n```c\n// Initialize the notification system.\n// Must be called before zig_notify_send on Linux (calls notify_init).\n// No-op on macOS.\n// Returns: 0 on success, -1 on failure\nint zig_notify_init(const char *app_name, size_t app_name_len);\n```\n\n### Send Notification\n\n```c\n// Send a desktop notification.\n// body may be NULL (body_len = 0) for title-only notifications.\n// Returns: 0 on success, -1 on failure\n//\n// macOS: osascript \"display notification\" (urgency ignored)\n// Linux: notify_notification_new + notify_notification_show\nint zig_notify_send(\n    const char *title, size_t title_len,\n    const char *body, size_t body_len,\n    zig_notify_urgency_t urgency\n);\n```\n\n### Request Permission\n\n```c\n// Request notification permission (macOS only, no-op on Linux).\n// Returns: 0 if granted, -1 if denied, -2 on error\n//\n// Currently returns 0 on all platforms (osascript does not require permission).\nint zig_notify_request_permission(void);\n```\n\n### Cleanup\n\n```c\n// Clean up notification resources.\n// Should be called on app exit on Linux (calls notify_uninit).\n// No-op on macOS.\nvoid zig_notify_deinit(void);\n```\n\n## Zig API Reference\n\nFor direct Zig usage (not via C FFI):\n\n| Module | Public API | Description |\n|--------|-----------|-------------|\n| `notify.zig` | `send(title, body, urgency) !void` | Send a notification (platform-dispatched) |\n| `notify.zig` | `init(app_name) !void` | Initialize (Linux: notify_init) |\n| `notify.zig` | `deinit()` | Cleanup (Linux: notify_uninit) |\n| `notify.zig` | `Urgency` (enum: low, normal, critical) | Notification urgency level |\n\n## Apple / Swift / Objective-C Interop\n\nzig-notify replaces only the simple local-notification call site. The Apple analogs are `UNUserNotificationCenter.add`, `UNMutableNotificationContent` for title/body text, and legacy AppleScript notification calls. It does not replace SwiftUI view state, AppKit application lifecycle, notification categories/actions, delivered-notification queries, scheduled notifications, APNs, attachments, sounds, or delegate callbacks.\n\nCurrent parity:\n\n- Available: C ABI callable from Swift, Objective-C, C, C++, and other FFI hosts.\n- Available: macOS title/body notifications without linking Apple notification frameworks.\n- Available: Linux title/body/urgency notifications through libnotify.\n- Not yet available: SwiftPM/modulemap packaging, ObjC nullability annotations, dedicated Swift wrapper types, ObjC sample app, `UNUserNotificationCenter` migration examples, notification categories/actions, scheduling, attachments, and callback/delegate surfaces.\n\nGood starter contributions should focus on those missing interop and documentation gaps before expanding the ABI.\n\n## Integration\n\n### As a Git Submodule\n\n```bash\ngit submodule add https://github.com/Jesssullivan/zig-notify.git vendor/notify\ncd vendor/notify && zig build -Doptimize=ReleaseFast\n```\n\nLink (macOS): `-lzig-notify` (no frameworks needed; osascript is a system binary)\n\nLink (Linux): `-lzig-notify -lnotify -lglib-2.0 -lgobject-2.0`\n\nInclude: `#include \"zig_notify.h\"` (path: `vendor/notify/include/`)\n\n### Swift via Bridging Header\n\nThis repo does not yet ship a SwiftPM package or module map. Today, add `include/zig_notify.h` to a bridging header and link the static library yourself.\n\n```swift\nimport Foundation\n\nlet title = \"Download Complete\"\nlet body = \"file.zip has been saved\"\nvar titleCString = Array(title.utf8CString)\nvar bodyCString = Array(body.utf8CString)\n\ntitleCString.withUnsafeBufferPointer { titleBuffer in\n    bodyCString.withUnsafeBufferPointer { bodyBuffer in\n        _ = zig_notify_send(\n            titleBuffer.baseAddress,\n            title.utf8.count,\n            bodyBuffer.baseAddress,\n            body.utf8.count,\n            ZIG_NOTIFY_URGENCY_NORMAL\n        )\n    }\n}\n```\n\n## Contributing\n\nStart with the [`good first issue`](https://github.com/Jesssullivan/zig-notify/labels/good%20first%20issue) and [`help wanted`](https://github.com/Jesssullivan/zig-notify/labels/help%20wanted) queues. The best early contributions are small Swift/ObjC interop examples, documentation truthing, header annotations, and build/package smoke tests.\n\n## License\n\nDual-licensed under [Zlib](https://opensource.org/licenses/Zlib) and [MIT](https://opensource.org/licenses/MIT). Choose whichever you prefer.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/37297218?v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.1",
+      "name": "v0.1.1",
+      "body": "zig-notify v0.1.1 is a productionization and truthing release.\n\nHighlights:\n- Separates the Zig package API (`src/root.zig`) from the C ABI export layer (`src/ffi.zig`).\n- Updates package metadata to Zig 0.15.2 and version 0.1.1.\n- Corrects public docs and headers to state the actual macOS backend: `osascript display notification`, not `UNUserNotificationCenter`.\n- Canonicalizes docs at https://transscendsurvival.org/zig-notify/.\n- Adds an Apple interop guide describing Swift/Objective-C parity gaps and non-goals.\n- Adds GitHub issue/PR templates, security policy, and good-first contributor funnel.\n- Extends CI to run on owned `jess/**` branches and validate build, tests, C example build, autodoc, and secret scan.\n\nValidation:\n- GitHub CI passed on main for macOS and Ubuntu: https://github.com/Jesssullivan/zig-notify/actions/runs/25124040038\n- Docs deploy passed: https://github.com/Jesssullivan/zig-notify/actions/runs/25124040041\n- Release workflow passed: https://github.com/Jesssullivan/zig-notify/actions/runs/25124198919\n\nFull changelog: https://github.com/Jesssullivan/zig-notify/compare/v0.1.0...v0.1.1",
+      "prerelease": false,
+      "published_at": "2026-04-29T17:36:52Z",
+      "html_url": "https://github.com/Jesssullivan/zig-notify/releases/tag/v0.1.1",
+      "assets": [
+        {
+          "name": "zig-notify-v0.1.1.tar.gz",
+          "url": "https://github.com/Jesssullivan/zig-notify/releases/download/v0.1.1/zig-notify-v0.1.1.tar.gz",
+          "size": 31450,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "## What's Changed\n* fix(build): add Fedora/Rocky/Arch glib-2.0 include paths by @Jesssullivan in https://github.com/Jesssullivan/zig-notify/pull/1\n* Productionize: build.zig.zon, autodoc, examples, agent metadata by @Jesssullivan in https://github.com/Jesssullivan/zig-notify/pull/2\n* Add autodoc CI job and release workflow by @Jesssullivan in https://github.com/Jesssullivan/zig-notify/pull/3\n* Fix: run release workflow on macOS by @Jesssullivan in https://github.com/Jesssullivan/zig-notify/pull/4\n\n## New Contributors\n* @Jesssullivan made their first contribution in https://github.com/Jesssullivan/zig-notify/pull/1\n\n**Full Changelog**: https://github.com/Jesssullivan/zig-notify/commits/v0.1.0",
+      "prerelease": false,
+      "published_at": "2026-04-25T18:50:20Z",
+      "html_url": "https://github.com/Jesssullivan/zig-notify/releases/tag/v0.1.0",
+      "assets": [
+        {
+          "name": "zig-notify-v0.1.0.tar.gz",
+          "url": "https://github.com/Jesssullivan/zig-notify/releases/download/v0.1.0/zig-notify-v0.1.0.tar.gz",
+          "size": 25008,
+          "content_type": "application/gzip"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "moar languages 😻",
+  "owner_company": null,
+  "owner_location": "Lewiston, ME",
+  "owner_blog": "https://transscendsurvival.org/",
+  "owner_twitter_username": null,
+  "owner_followers": 19,
+  "owner_following": 16,
+  "owner_created_at": "2018-03-12T12:37:09Z",
+  "homepage": "https://transscendsurvival.org/zig-notify/",
+  "category": "library"
+}

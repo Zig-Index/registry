@@ -1,0 +1,68 @@
+{
+  "name": "zig-crypto",
+  "owner": "Jesssullivan",
+  "repo": "zig-crypto",
+  "description": "Portable Zig crypto primitives with a stable C FFI: SHA-256, HMAC, AES-CBC, PBKDF2, P-256, Ed25519. No OpenSSL.",
+  "type": "package",
+  "topics": [
+    "attestation-compatibility",
+    "cryptography-algorithms",
+    "primitives",
+    "c-interop",
+    "cryptography",
+    "ffi",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-05-02T04:44:40Z",
+  "minimum_zig_version": "0.15.2",
+  "readme": "# zig-crypto\n\nPortable cryptographic primitives in Zig with a stable C FFI -- SHA-256, HMAC-SHA-256, AES-CBC, PBKDF2, ECDH P-256, Ed25519, and CSPRNG.\n\n- **License:** Zlib OR MIT\n- **Docs:** <https://transscendsurvival.org/zig-crypto/> ([source](docs/)).\n\n## Why\n\nzig-crypto is a small native capability layer for applications that need portable crypto without binding core behavior to one platform's framework surface. It compiles to a static library, exposes a narrow C ABI, and uses Zig's `std.crypto` instead of OpenSSL, CommonCrypto, or other system crypto dependencies.\n\nIt is part of the Tinyland Zig Libraries pattern: use Zig to build hermetic native libraries with stable FFI contracts so Swift, C, C++, Zig, Python, GTK, WebKit, or other application layers can call the same primitive surface across macOS and Linux. The goal is portability and auditability: keep app-level developer experience intact while moving framework-bound capabilities behind small, documented native interfaces.\n\nIn Tinyland planning, this is the de-attestation direction: app code keeps its presentation and workflow layer while Zig owns the native capability contract. For this repo, the proven scope is crypto. A SwiftUI, Cocoa, UIKit, Objective-C, GTK, WebKit, or CLI app can call `zig_crypto.h` through the same C ABI instead of binding crypto behavior directly to one ecosystem's crypto APIs.\n\nSibling libraries are related work for keychain storage, desktop notifications, and CTAP2/WebAuthn-style device flows. They follow the same boundary pattern, but each repo should be evaluated on its own implementation, package, and platform support.\n\n## Apple / Swift / Objective-C Parity\n\nzig-crypto does not replace SwiftUI, UIKit, AppKit, or Cocoa application structure. It replaces the crypto capability calls that those apps would otherwise route through Apple-specific frameworks.\n\n| Apple ecosystem surface | zig-crypto surface | Status |\n|-------------------------|--------------------|--------|\n| CryptoKit `SHA256`, CommonCrypto `CC_SHA256` | `zig_crypto_sha256`, `zig_crypto_sha256_hex` | Available |\n| CryptoKit `HMAC<SHA256>`, CommonCrypto `CCHmac` | `zig_crypto_hmac_sha256` | Available |\n| CommonCrypto `CCCrypt` / `CCCryptor` AES-CBC with PKCS#7 | AES-128/256-CBC encrypt/decrypt | Available |\n| CommonCrypto `CCKeyDerivationPBKDF` PBKDF2-SHA1 workflows | `zig_crypto_pbkdf2_sha1` | Available |\n| CryptoKit `P256.KeyAgreement` ECDH primitive | `zig_crypto_p256_generate`, `zig_crypto_p256_ecdh` | Available for the documented CTAP2-style `SHA-256(x-coordinate)` shared secret, not CryptoKit `SharedSecret` / HKDF API parity |\n| CryptoKit `Curve25519.Signing` Ed25519-style signing | Ed25519 generate/from-seed/sign/verify | Available through C ABI raw key bytes, not Swift key types |\n| Security.framework `SecRandomCopyBytes` | `zig_crypto_random` | Available |\n\nKnown Swift/ObjC parity gaps are intentionally small and suitable for first issues:\n\n- Add a SwiftPM/modulemap wrapper and Swift smoke test for importing `zig_crypto.h`.\n- Add Objective-C sample code and header annotations for a cleaner ObjC/Swift bridge.\n- Add side-by-side CryptoKit/CommonCrypto migration examples for the supported primitives.\n- Document non-goals clearly: no Swift `Data` convenience layer, no `NSError` bridge, no CommonCrypto-compatible symbol names, no CryptoKit AES-GCM/HKDF/`SharedSecret`/Swift-key parity, and no Secure Enclave/keychain/notification/AuthenticationServices/CTAP2 transport in this repo.\n\n## Contributing\n\nContributor work should keep the C ABI stable, preserve the Zig 0.15.2 build path, and avoid adding system crypto dependencies. Start with the [good first issue queue](https://github.com/Jesssullivan/zig-crypto/labels/good%20first%20issue), especially the Swift/Objective-C interop gaps called out in the [Apple interop guide](docs/guides/apple-interop.md).\n\nBefore opening a change, run the focused validation commands from [CONTRIBUTING.md](CONTRIBUTING.md). For larger API or packaging changes, open an issue first so the C ABI, Zig package API, and documentation impact can be scoped together.\n\n## Features\n\n- **SHA-256**: Single-shot and incremental hashing, hex output\n- **HMAC-SHA-256**: RFC 4231-conformant message authentication\n- **AES-128-CBC / AES-256-CBC**: Encrypt/decrypt with PKCS#7 padding\n- **AES-256-CBC raw**: No-padding mode for CTAP2 PIN protocol\n- **PBKDF2-SHA1**: RFC 6070-conformant key derivation\n- **ECDH P-256**: Key generation and shared secret derivation\n- **Ed25519**: Key generation, signing, verification\n- **CSPRNG**: OS-backed cryptographically secure random bytes\n- **C FFI**: 17 exported functions\n- **Zig package API**: `src/root.zig` exposes the primitive modules for Zig consumers\n- **Property-based tests**: Roundtrip tests for SHA-256, AES, ECDH, Ed25519\n\n## Installation\n\n### Zig Package Manager (recommended)\n\n```bash\nzig fetch --save git+https://github.com/Jesssullivan/zig-crypto.git\n```\n\nThen in your `build.zig`:\n\n```zig\nconst dep = b.dependency(\"zig_crypto\", .{ .target = target, .optimize = optimize });\nexe.root_module.addImport(\"zig-crypto\", dep.module(\"zig-crypto\"));\n```\n\n### Git Submodule (C FFI consumers)\n\n```bash\ngit submodule add https://github.com/Jesssullivan/zig-crypto.git vendor/crypto\ncd vendor/crypto && zig build -Doptimize=ReleaseFast\n```\n\nLink `-lzig-crypto` and include `#include \"zig_crypto.h\"`.\n\n## Requirements\n\n- Zig 0.15.2+\n- No platform-specific dependencies (pure Zig std.crypto)\n\n## Architecture\n\n```mermaid\ngraph TD\n    A[Application] -->|C ABI| B[ffi.zig<br/>17 exported functions]\n    A -->|Zig package| R[root.zig]\n    B --> C[sha256.zig]\n    B --> D[hmac.zig]\n    B --> E[aes.zig]\n    B --> F[pbkdf2.zig]\n    B --> G[ecdh.zig]\n    B --> H[ed25519.zig]\n    B --> I[random.zig]\n    R --> C\n    R --> D\n    R --> E\n    R --> F\n    R --> G\n    R --> H\n    R --> I\n    C --> Z[std.crypto]\n    D --> Z\n    E --> Z\n    F --> Z\n    G --> Z\n    H --> Z\n    I --> Z\n```\n\n## Build\n\n```bash\nzig build -Doptimize=ReleaseFast   # static library\nzig build test                      # unit tests\nzig build test-pbt                  # property-based tests\nzig build docs                      # generate API documentation\nzig build example                   # build and run C example\n```\n\nWith [just](https://just.systems): `just test-all`, `just build`, `just info`.\n\n## Platform Support\n\n| Platform | Status | Notes |\n|----------|--------|-------|\n| macOS | Supported | No frameworks needed |\n| Linux | Supported | No system crypto libraries needed |\n| Cross-compilation | Supported | Pure Zig, no platform dependencies |\n\n## Tinyland Zig Libraries\n\nThe library family targets small native surfaces that are often tangled with platform frameworks or entitlement/provisioning flows. `zig-crypto` is the crypto proof in that pattern; sibling libraries are related work with their own implementation and platform-support status.\n\n| Library | Surface | Current role |\n|---------|---------|--------------|\n| `zig-crypto` | Crypto primitives | Pure Zig static library and C ABI for hashes, MACs, AES, PBKDF2, P-256, Ed25519, and CSPRNG |\n| `zig-keychain` | Secret storage | Related boundary target for keychain/secret storage portability |\n| `zig-notify` | Desktop notifications | Related boundary target for notification portability |\n| `zig-ctap2` | FIDO2/WebAuthn device flows | Related boundary target for CTAP2 HID and PIN protocol flows |\n\nEach library should stay small enough to audit, package, and link independently.\n\n## C API Reference\n\nHeader: [`include/zig_crypto.h`](include/zig_crypto.h). All functions are thread-safe and stateless.\n\n| Function | Returns | Description |\n|----------|---------|-------------|\n| `zig_crypto_sha256` | void | SHA-256 hash (out: 32 bytes) |\n| `zig_crypto_sha256_hex` | size_t (64) | SHA-256 as hex (out: 64 bytes) |\n| `zig_crypto_hmac_sha256` | void | HMAC-SHA-256 (out: 32 bytes) |\n| `zig_crypto_aes128_cbc_encrypt` | int | AES-128-CBC encrypt, PKCS#7 |\n| `zig_crypto_aes128_cbc_decrypt` | int | AES-128-CBC decrypt, PKCS#7 |\n| `zig_crypto_aes256_cbc_encrypt` | int | AES-256-CBC encrypt, PKCS#7 |\n| `zig_crypto_aes256_cbc_decrypt` | int | AES-256-CBC decrypt, PKCS#7 |\n| `zig_crypto_aes256_cbc_encrypt_raw` | int | AES-256-CBC no padding (CTAP2) |\n| `zig_crypto_aes256_cbc_decrypt_raw` | int | AES-256-CBC no unpadding (CTAP2) |\n| `zig_crypto_pbkdf2_sha1` | void | PBKDF2-HMAC-SHA1 key derivation |\n| `zig_crypto_p256_generate` | int (0/-1) | Generate P-256 key pair |\n| `zig_crypto_p256_ecdh` | int (0/-1) | ECDH shared secret |\n| `zig_crypto_ed25519_generate` | void | Generate Ed25519 key pair |\n| `zig_crypto_ed25519_from_seed` | int (0/-1) | Deterministic key from seed |\n| `zig_crypto_ed25519_sign` | int (0/-1) | Sign message (sig: 64 bytes) |\n| `zig_crypto_ed25519_verify` | bool | Verify signature |\n| `zig_crypto_random` | bool | Fill with secure random bytes |\n\n## Integration\n\n```bash\ngit submodule add https://github.com/Jesssullivan/zig-crypto.git vendor/crypto\ncd vendor/crypto && zig build -Doptimize=ReleaseFast\n```\n\nLink: `-lzig-crypto`. Include: `#include \"zig_crypto.h\"`.\n\n## License\n\nDual-licensed under [Zlib](https://opensource.org/licenses/Zlib) and [MIT](https://opensource.org/licenses/MIT). Choose whichever you prefer.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/37297218?v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.1",
+      "name": "v0.1.1",
+      "body": "## v0.1.1\n\nProductionization closeout for the `zig-crypto` package, build, docs, and Apple interop positioning.\n\n### Highlights\n\n- Corrects public C ABI documentation to 17 exported `zig_crypto_*` functions.\n- Adds `src/root.zig` as the Zig package API root while keeping `src/ffi.zig` as the C ABI surface.\n- Updates package metadata for Zig 0.15.2 and includes examples in `build.zig.zon`.\n- Canonicalizes docs to `https://transscendsurvival.org/zig-crypto/`.\n- Adds Apple / Swift / Objective-C interop docs for the stable C ABI story.\n- Scopes Apple analog claims to verified crypto calls: CryptoKit SHA/HMAC/P-256 primitive shape/Ed25519-style signing, CommonCrypto AES-CBC/PBKDF2, and Security.framework random bytes.\n- Makes Swift/ObjC parity gaps explicit for follow-up issues: SwiftPM/modulemap, ObjC sample, migration examples, and header nullability.\n\n### Validation\n\nRelease workflow passed build, tests, C example, autodoc generation, and source tarball creation.\n\n**Full Changelog**: https://github.com/Jesssullivan/zig-crypto/compare/v0.1.0...v0.1.1",
+      "prerelease": false,
+      "published_at": "2026-04-29T16:36:33Z",
+      "html_url": "https://github.com/Jesssullivan/zig-crypto/releases/tag/v0.1.1",
+      "assets": [
+        {
+          "name": "zig-crypto-v0.1.1.tar.gz",
+          "url": "https://github.com/Jesssullivan/zig-crypto/releases/download/v0.1.1/zig-crypto-v0.1.1.tar.gz",
+          "size": 38973,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "## What's Changed\n* Productionize: build.zig.zon, autodoc, examples, agent metadata by @Jesssullivan in https://github.com/Jesssullivan/zig-crypto/pull/1\n\n## New Contributors\n* @Jesssullivan made their first contribution in https://github.com/Jesssullivan/zig-crypto/pull/1\n\n**Full Changelog**: https://github.com/Jesssullivan/zig-crypto/commits/v0.1.0",
+      "prerelease": false,
+      "published_at": "2026-04-25T18:41:15Z",
+      "html_url": "https://github.com/Jesssullivan/zig-crypto/releases/tag/v0.1.0",
+      "assets": [
+        {
+          "name": "zig-crypto-v0.1.0.tar.gz",
+          "url": "https://github.com/Jesssullivan/zig-crypto/releases/download/v0.1.0/zig-crypto-v0.1.0.tar.gz",
+          "size": 32524,
+          "content_type": "application/gzip"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "moar languages 😻",
+  "owner_company": null,
+  "owner_location": "Lewiston, ME",
+  "owner_blog": "https://transscendsurvival.org/",
+  "owner_twitter_username": null,
+  "owner_followers": 19,
+  "owner_following": 16,
+  "owner_created_at": "2018-03-12T12:37:09Z",
+  "homepage": "https://transscendsurvival.org/zig-crypto/",
+  "category": "library"
+}
