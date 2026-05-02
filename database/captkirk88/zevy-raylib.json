@@ -16,12 +16,12 @@
   "stars": 5,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-04-28T01:08:54Z",
+  "updated_at": "2026-05-02T01:30:58Z",
   "dependencies": [
     {
       "name": "zevy_ecs",
-      "url": "git+https://github.com/captkirk88/zevy-ecs#f896588c697247d98d068f992cbe82cf5f1e5ce9",
-      "hash": "zevy_ecs-2.5.0-VoL9mTiGCABi3l8aO_zyOr5bDTtFHPPFRnvuM2kvPFhA"
+      "url": "git+https://github.com/captkirk88/zevy-ecs#9072fcffdf00797463075230d5d3d92962001084",
+      "hash": "zevy_ecs-2.6.0-VoL9mbzZCAAXril87rKCnxkMahEkM4HIZDQm_ygvUWIe"
     },
     {
       "name": "zevy_ecs",
@@ -29,8 +29,8 @@
     },
     {
       "name": "raylib_zig",
-      "url": "git+https://github.com/raylib-zig/raylib-zig#4b6a05cd102d51f00523dd5c5e18e628df359d20",
-      "hash": "raylib_zig-5.6.0-dev-KE8REKNmBQDek2Sz27ULioxYpY9IYR0K0CeIC-iJRLCI"
+      "url": "git+https://github.com/raylib-zig/raylib-zig#58f3c0fa328fc9ff48d17c2c3771ab9c5114aaa6",
+      "hash": "raylib_zig-6.0.0-KE8REMNkBQCpxwqT9ubVNf5aEOcWRUVIaH2sgt_sDDoZ"
     },
     {
       "name": "known_folders",
@@ -49,8 +49,8 @@
     },
     {
       "name": "zevy_mem",
-      "url": "git+https://github.com/captkirk88/zevy-mem#e94c598f8e60ca413a41ac1fde64569d5c932c8e",
-      "hash": "zevy_mem-1.2.1-jK9L0ak8AwA_fFzDRbCmoqGwoRhRkMC5HEEaRCYVlfWG"
+      "url": "git+https://github.com/captkirk88/zevy-mem#3ac8ef7fa1ca630e53e3b7b55a9a22ebc1e1bae3",
+      "hash": "zevy_mem-1.2.2-jK9L0dU-AwDHI13yVz1pGLRiLFWNQWPeGEi6AXvkuqSO"
     },
     {
       "name": "zevy_buildtools",
