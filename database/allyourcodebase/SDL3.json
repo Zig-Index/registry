@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 37,
+  "stars": 38,
   "forks": 11,
   "watchers": 2,
-  "updated_at": "2026-04-27T01:21:24Z",
+  "updated_at": "2026-05-02T17:33:05Z",
   "dependencies": [
     {
       "name": "sdl",
@@ -64,8 +64,8 @@
     },
     {
       "name": "usb",
-      "url": "https://github.com/libusb/libusb/archive/a61afe5f75d969c4561a1d0ad753aa23cee6329a.zip",
-      "hash": "N-V-__8AAGT5GgAxQXXIen0EleLF0xfjZZMkR7soefwO0s7E"
+      "url": "https://github.com/libusb/libusb/archive/a61afe5f75d969c4561a1d0ad753aa23cee6329a.tar.gz",
+      "hash": "N-V-__8AAF75GgCMh7ghqwWLiqe8NJszRIU8EWOIkQzyv7dc"
     },
     {
       "name": "xcursor",
@@ -99,7 +99,7 @@
     },
     {
       "name": "opengl",
-      "url": "https://github.com/KhronosGroup/OpenGL-Registry/archive/200cea4030cb49d3e40677379e6368a5f0e8c27b.zip",
+      "url": "https://github.com/KhronosGroup/OpenGL-Registry/archive/200cea4030cb49d3e40677379e6368a5f0e8c27b.tar.gz",
       "hash": "N-V-__8AAGJE5QqpMdB7CdsJRTzpYhbtgDgfqfd_ZbcaCTsD"
     },
     {
