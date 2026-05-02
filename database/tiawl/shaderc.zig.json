@@ -14,7 +14,7 @@
   "stars": 7,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-04-28T15:29:30Z",
+  "updated_at": "2026-05-02T16:07:19Z",
   "dependencies": [
     {
       "name": "shaderc",
@@ -33,8 +33,8 @@
     },
     {
       "name": "glslang_zig",
-      "url": "git+https://github.com/tiawl/glslang.zig?ref=toolbox-2.0.2#d65bb714fa0f6685c46bd0e78cad9c67cacdd2fc",
-      "hash": "glslang_zig-1.0.0-QiUC6qz1XgB--wVl30PMCJDzt-uFaT2dYAWA2gPeoD5h"
+      "url": "git+https://github.com/tiawl/glslang.zig?ref=16.3.0#3bb397fbd5b7b9fc4a6e930656e361f4744593cb",
+      "hash": "glslang_zig-1.0.0-QiUC6ppgXwBM6UXLK4EbEKs6FhnL3nbWTsf5iyNfzO4k"
     }
   ],
   "minimum_zig_version": "0.16.0",
