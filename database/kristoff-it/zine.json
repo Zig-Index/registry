@@ -9,10 +9,10 @@
     "static-site-generator",
     "zig-package"
   ],
-  "stars": 1346,
+  "stars": 1352,
   "forks": 93,
   "watchers": 14,
-  "updated_at": "2026-04-27T10:22:19Z",
+  "updated_at": "2026-05-03T13:25:13Z",
   "dependencies": [
     {
       "name": "lsp_kit",
@@ -70,7 +70,7 @@
       "hash": "supermd-0.1.0-3Mco3COYWADsmlFpwymglxJFs_hQNs22819xlGowQiuV"
     }
   ],
-  "minimum_zig_version": "0.15.0",
+  "minimum_zig_version": "0.16.0",
   "readme": "<h1 align=\"center\">Zine</h1>\n<h3 align=\"center\"><em>Fast, Scalable, Flexible Static Site Generator (SSG)</em></h3>\n<p align=\"center\">Zine is pronounced like in <a href=\"https://en.wikipedia.org/wiki/Zine\">fan<em>zine</em></a></a>.</p>\n\n## Development Status\nZine is still a young project, not yet at feature parity with more popular\nalternatives (e.g. Hugo), but it's perfectly able to handle a personal website\nwith a blog.\n\n## Getting Started\nGo to https://zine-ssg.io to get started.\n\n## GitHub Actions\nIf you plan to build your website with GitHub Actions, take a look at [kristoff-it/setup-zine](https://github.com/marketplace/actions/setup-zine), the official\nGitHub Action to get access to Zine in your runner.\n\nWe also have more complete guides at https://zine-ssg.io/docs/.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/1950733?u=4c433986c229d3bff345521171a121c84014917e&v=4",
   "releases": [
@@ -593,7 +593,7 @@
   "owner_location": "Milan, Italy",
   "owner_blog": "https://kristoff.it",
   "owner_twitter_username": null,
-  "owner_followers": 1388,
+  "owner_followers": 1399,
   "owner_following": 22,
   "owner_created_at": "2012-07-10T15:27:34Z",
   "homepage": "https://zine-ssg.io",
