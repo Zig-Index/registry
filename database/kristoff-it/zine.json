@@ -9,10 +9,10 @@
     "static-site-generator",
     "zig-package"
   ],
-  "stars": 1354,
+  "stars": 1355,
   "forks": 93,
   "watchers": 14,
-  "updated_at": "2026-05-03T21:33:20Z",
+  "updated_at": "2026-05-04T19:34:41Z",
   "dependencies": [
     {
       "name": "lsp_kit",
@@ -21,8 +21,8 @@
     },
     {
       "name": "scripty",
-      "url": "git+https://github.com/kristoff-it/scripty#4b815a13e2456e5552c7ce43759f69e40ffdc702",
-      "hash": "scripty-0.1.0-LKK5O7j0AABV5Y9oNimQCXTzFXPQ_ZPWivEcUGmeXJZB"
+      "url": "git+https://github.com/kristoff-it/scripty#9c1e5903acd2a591f87f577b2ea08895e7168b9d",
+      "hash": "scripty-0.1.0-LKK5OzcUAQDVndpJNPAm4eC_-G0HaXUdQejzb9X6C2vq"
     },
     {
       "name": "tracy",
@@ -46,8 +46,8 @@
     },
     {
       "name": "superhtml",
-      "url": "git+https://github.com/kristoff-it/superhtml#32cff9e05c65904d557db94118b81e5b0d407208",
-      "hash": "superhtml-0.6.2-Y7MdPN1yJABtImZK-nuTEXnlynIfInhUBZenBhN5S4Qx"
+      "url": "git+https://github.com/kristoff-it/superhtml#5ca7066c50b10c459aa6d1ad011bc37124c2d354",
+      "hash": "superhtml-0.6.2-Y7MdPCZxJADwkXTXHmwQ0AKWKgbmQjJBnT7QTVqaX9Vp"
     },
     {
       "name": "zeit",
@@ -56,8 +56,8 @@
     },
     {
       "name": "flow_syntax",
-      "url": "git+https://github.com/neurocyte/flow-syntax#12a8e42b8b9b71166090c773f0fd9a7bddebab58",
-      "hash": "flow_syntax-0.7.2-X8jOofVaAQAXpiaYN0_DkpnspNKz2GhcoNgqgeO-lBrF"
+      "url": "git+https://github.com/neurocyte/flow-syntax#28d643c3fd8455faab0ea12383da9d6ddcbe9cb0",
+      "hash": "flow_syntax-0.7.2-X8jOoeFgAQBquxUXx-h5g_xXQzcNAOtyz3M4fVUwgrOd"
     },
     {
       "name": "ziggy",
@@ -66,8 +66,8 @@
     },
     {
       "name": "supermd",
-      "url": "git+https://github.com/kristoff-it/supermd#93b67c047438e534997c764708019ce54d7f0d82",
-      "hash": "supermd-0.1.0-3Mco3PeYWACKSeKJx5SOo5_uQRorQwiX-NiiHDtiCfs6"
+      "url": "git+https://github.com/kristoff-it/supermd#4132146450f1ecbaa3fbd75cfeabccd754d6e716",
+      "hash": "supermd-0.1.0-3Mco3CiXWABRpK_kiTdTuVJ7eZOm102_E8j5C6qyRh_2"
     },
     {
       "name": "translate_c",
@@ -598,7 +598,7 @@
   "owner_location": "Milan, Italy",
   "owner_blog": "https://kristoff.it",
   "owner_twitter_username": null,
-  "owner_followers": 1399,
+  "owner_followers": 1401,
   "owner_following": 22,
   "owner_created_at": "2012-07-10T15:27:34Z",
   "homepage": "https://zine-ssg.io",
