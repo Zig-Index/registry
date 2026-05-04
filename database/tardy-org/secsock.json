@@ -11,10 +11,10 @@
     "zig-package",
     "tardy"
   ],
-  "stars": 13,
+  "stars": 14,
   "forks": 13,
   "watchers": 0,
-  "updated_at": "2026-04-16T14:04:48Z",
+  "updated_at": "2026-04-29T05:34:34Z",
   "dependencies": [
     {
       "name": "bearssl",

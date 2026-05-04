@@ -11,10 +11,10 @@
     "ziglang",
     "zig-package"
   ],
-  "stars": 6,
-  "forks": 0,
+  "stars": 7,
+  "forks": 1,
   "watchers": 0,
-  "updated_at": "2026-04-27T14:32:01Z",
+  "updated_at": "2026-04-27T20:09:18Z",
   "dependencies": [
     {
       "name": "toml",
