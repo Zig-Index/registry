@@ -10,7 +10,7 @@
   "stars": 14,
   "forks": 4,
   "watchers": 5,
-  "updated_at": "2026-05-05T01:36:50Z",
+  "updated_at": "2026-05-05T23:43:28Z",
   "dependencies": [
     {
       "name": "pcre2",
@@ -40,6 +40,82 @@
   "readme": "libscrapli\n==========\n\nlibscrapli is a zig project that aims to provide a unified \"core\" for scrapli. This is obviously \nuseful for the OG scrapli (python flavor) and scrapligo, but possibly for other languages/libraries \nor even for folks who would like to not have to reinvent the wheel for the \"core\" connection \nhandling and logic but want to write their own wrapper!\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/63824662?v=4",
   "releases": [
+    {
+      "tag_name": "v0.0.1-rc.14",
+      "name": "v0.0.1-rc.14",
+      "body": "**Full Changelog**: https://github.com/scrapli/libscrapli/compare/v0.0.1-rc.13...v0.0.1-rc.14",
+      "prerelease": false,
+      "published_at": "2026-05-05T23:47:11Z",
+      "html_url": "https://github.com/scrapli/libscrapli/releases/tag/v0.0.1-rc.14",
+      "assets": [
+        {
+          "name": "libscrapli-v0.0.1-rc.14.tar.gz",
+          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-rc.14/libscrapli-v0.0.1-rc.14.tar.gz",
+          "size": 301225,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "libscrapli-aarch64-linux-musl.so.0.0.1-rc.14.sha256",
+          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-rc.14/libscrapli-aarch64-linux-musl.so.0.0.1-rc.14.sha256",
+          "size": 138,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libscrapli-aarch64-linux-musl.so.0.0.1-rc.14",
+          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-rc.14/libscrapli-aarch64-linux-musl.so.0.0.1-rc.14",
+          "size": 13365624,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libscrapli-aarch64-linux-gnu.so.0.0.1-rc.14",
+          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-rc.14/libscrapli-aarch64-linux-gnu.so.0.0.1-rc.14",
+          "size": 13460544,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libscrapli-aarch64-linux-gnu.so.0.0.1-rc.14.sha256",
+          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-rc.14/libscrapli-aarch64-linux-gnu.so.0.0.1-rc.14.sha256",
+          "size": 136,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libscrapli-x86_64-linux-musl.so.0.0.1-rc.14",
+          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-rc.14/libscrapli-x86_64-linux-musl.so.0.0.1-rc.14",
+          "size": 13494464,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libscrapli-x86_64-linux-musl.so.0.0.1-rc.14.sha256",
+          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-rc.14/libscrapli-x86_64-linux-musl.so.0.0.1-rc.14.sha256",
+          "size": 136,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libscrapli-aarch64-macos.0.0.1-rc.14.dylib.sha256",
+          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-rc.14/libscrapli-aarch64-macos.0.0.1-rc.14.dylib.sha256",
+          "size": 131,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libscrapli-aarch64-macos.0.0.1-rc.14.dylib",
+          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-rc.14/libscrapli-aarch64-macos.0.0.1-rc.14.dylib",
+          "size": 5234928,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libscrapli-x86_64-linux-gnu.so.0.0.1-rc.14",
+          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-rc.14/libscrapli-x86_64-linux-gnu.so.0.0.1-rc.14",
+          "size": 13590848,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "libscrapli-x86_64-linux-gnu.so.0.0.1-rc.14.sha256",
+          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-rc.14/libscrapli-x86_64-linux-gnu.so.0.0.1-rc.14.sha256",
+          "size": 134,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
     {
       "tag_name": "v0.0.1-rc.13",
       "name": "v0.0.1-rc.13",
@@ -1306,64 +1382,6 @@
           "name": "libscrapli-x86_64-macos.dylib.0.0.1-beta.22",
           "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-beta.22/libscrapli-x86_64-macos.dylib.0.0.1-beta.22",
           "size": 5574696,
-          "content_type": "application/octet-stream"
-        }
-      ]
-    },
-    {
-      "tag_name": "v0.0.1-beta.21",
-      "name": "v0.0.1-beta.21",
-      "body": "## What's Changed\r\n* feat: user provided nc capabilities by @carlmontanari in https://github.com/scrapli/libscrapli/pull/17\r\n\r\n\r\n**Full Changelog**: https://github.com/scrapli/libscrapli/compare/v0.0.1-beta.20...v0.0.1-beta.21",
-      "prerelease": false,
-      "published_at": "2026-02-04T01:52:05Z",
-      "html_url": "https://github.com/scrapli/libscrapli/releases/tag/v0.0.1-beta.21",
-      "assets": [
-        {
-          "name": "libscrapli-v0.0.1-beta.21.tar.gz",
-          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-beta.21/libscrapli-v0.0.1-beta.21.tar.gz",
-          "size": 543950,
-          "content_type": "application/x-gtar"
-        },
-        {
-          "name": "checksums.txt",
-          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-beta.21/checksums.txt",
-          "size": 717,
-          "content_type": "text/plain; charset=utf-8"
-        },
-        {
-          "name": "libscrapli-aarch64-linux-gnu.so.0.0.1-beta.21",
-          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-beta.21/libscrapli-aarch64-linux-gnu.so.0.0.1-beta.21",
-          "size": 14116896,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "libscrapli-aarch64-linux-musl.so.0.0.1-beta.21",
-          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-beta.21/libscrapli-aarch64-linux-musl.so.0.0.1-beta.21",
-          "size": 14016792,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "libscrapli-aarch64-macos.dylib.0.0.1-beta.21",
-          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-beta.21/libscrapli-aarch64-macos.dylib.0.0.1-beta.21",
-          "size": 5707136,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "libscrapli-x86_64-linux-gnu.so.0.0.1-beta.21",
-          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-beta.21/libscrapli-x86_64-linux-gnu.so.0.0.1-beta.21",
-          "size": 13736864,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "libscrapli-x86_64-linux-musl.so.0.0.1-beta.21",
-          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-beta.21/libscrapli-x86_64-linux-musl.so.0.0.1-beta.21",
-          "size": 13630808,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "libscrapli-x86_64-macos.dylib.0.0.1-beta.21",
-          "url": "https://github.com/scrapli/libscrapli/releases/download/v0.0.1-beta.21/libscrapli-x86_64-macos.dylib.0.0.1-beta.21",
-          "size": 5574604,
           "content_type": "application/octet-stream"
         }
       ]
