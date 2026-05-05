@@ -8,10 +8,10 @@
     "serialization-format",
     "zig-package"
   ],
-  "stars": 524,
+  "stars": 531,
   "forks": 39,
   "watchers": 8,
-  "updated_at": "2026-04-24T13:58:02Z",
+  "updated_at": "2026-05-05T16:08:30Z",
   "dependencies": [
     {
       "name": "known_folders",
@@ -29,7 +29,7 @@
       "hash": "zig_yaml-0.2.0-C1161jirAgAUjfuDVZPH4SvzvXYu0FlvakDifJzAsEF2"
     }
   ],
-  "minimum_zig_version": "0.16.0-dev.1236+26db54d69",
+  "minimum_zig_version": "0.16.0",
   "readme": "# Ziggy\nA data serialization language for expressing clear API messages, config files, etc.\n\n\n## Examples and documentation\nSee the official website: https://ziggy-lang.io\n\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/1950733?u=4c433986c229d3bff345521171a121c84014917e&v=4",
   "releases": [
@@ -85,7 +85,7 @@
   "owner_location": "Milan, Italy",
   "owner_blog": "https://kristoff.it",
   "owner_twitter_username": null,
-  "owner_followers": 1388,
+  "owner_followers": 1401,
   "owner_following": 22,
   "owner_created_at": "2012-07-10T15:27:34Z",
   "homepage": "https://ziggy-lang.io",
