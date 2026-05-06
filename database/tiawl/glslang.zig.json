@@ -2,7 +2,7 @@
   "name": "glslang.zig",
   "owner": "tiawl",
   "repo": "glslang.zig",
-  "description": "glslang packaged for @ziglang",
+  "description": "@KhronosGroup's glslang packaged for @ziglang",
   "type": "package",
   "topics": [
     "binding",
@@ -14,7 +14,7 @@
   "stars": 2,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-05-06T19:48:50Z",
+  "updated_at": "2026-05-06T20:42:02Z",
   "dependencies": [
     {
       "name": "glslang",

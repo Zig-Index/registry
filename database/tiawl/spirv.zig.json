@@ -2,7 +2,7 @@
   "name": "spirv.zig",
   "owner": "tiawl",
   "repo": "spirv.zig",
-  "description": "spirv-tools packaged for @ziglang ",
+  "description": "@KhronosGroup's SPIRV-Tools & SPIRV-Headers packaged for @ziglang ",
   "type": "package",
   "topics": [
     "binding",
@@ -15,7 +15,7 @@
   "stars": 2,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-05-06T19:48:25Z",
+  "updated_at": "2026-05-06T20:36:02Z",
   "dependencies": [
     {
       "name": "mimalloc",

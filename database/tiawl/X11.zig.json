@@ -2,7 +2,7 @@
   "name": "X11.zig",
   "owner": "tiawl",
   "repo": "X11.zig",
-  "description": "libX11 packaged for @ziglang",
+  "description": "@freedesktop's Xlib packaged for @ziglang",
   "type": "package",
   "topics": [
     "binding",
@@ -14,7 +14,7 @@
   "stars": 12,
   "forks": 4,
   "watchers": 1,
-  "updated_at": "2026-05-06T19:46:45Z",
+  "updated_at": "2026-05-06T20:53:13Z",
   "dependencies": [
     {
       "name": "XScrnSaver",

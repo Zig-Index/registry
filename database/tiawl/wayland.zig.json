@@ -2,7 +2,7 @@
   "name": "wayland.zig",
   "owner": "tiawl",
   "repo": "wayland.zig",
-  "description": "wayland headers packaged for @ziglang",
+  "description": "@freedesktop's wayland headers packaged for @ziglang",
   "type": "package",
   "topics": [
     "binding",
@@ -15,7 +15,7 @@
   "stars": 5,
   "forks": 5,
   "watchers": 1,
-  "updated_at": "2026-05-06T19:47:38Z",
+  "updated_at": "2026-05-06T20:52:36Z",
   "dependencies": [
     {
       "name": "wayland",
