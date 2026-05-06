@@ -12,10 +12,10 @@
     "zig-package",
     "ziglang"
   ],
-  "stars": 4,
+  "stars": 5,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-04-17T10:30:13Z",
+  "updated_at": "2026-05-05T23:41:00Z",
   "dependencies": [
     {
       "name": "zbench",

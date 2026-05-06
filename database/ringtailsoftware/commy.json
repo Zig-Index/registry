@@ -12,10 +12,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 52,
-  "forks": 4,
+  "stars": 53,
+  "forks": 5,
   "watchers": 2,
-  "updated_at": "2026-03-22T04:23:19Z",
+  "updated_at": "2026-04-29T10:58:16Z",
   "dependencies": [
     {
       "name": "serial",

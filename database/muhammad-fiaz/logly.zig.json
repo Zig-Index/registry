@@ -16,10 +16,10 @@
     "zig-logging-package",
     "logly"
   ],
-  "stars": 52,
+  "stars": 53,
   "forks": 2,
   "watchers": 0,
-  "updated_at": "2026-04-20T14:59:38Z",
+  "updated_at": "2026-04-29T22:36:46Z",
   "dependencies": [
     {
       "name": "zstd",
@@ -1322,7 +1322,7 @@
   "owner_location": "india",
   "owner_blog": "muhammadfiaz.com",
   "owner_twitter_username": "muhammadfiaz_",
-  "owner_followers": 102,
+  "owner_followers": 103,
   "owner_following": 0,
   "owner_created_at": "2020-12-03T14:17:55Z",
   "homepage": "https://muhammad-fiaz.github.io/logly.zig/",

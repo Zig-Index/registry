@@ -9,12 +9,17 @@
     "http2",
     "zig",
     "zig-library",
-    "zig-package"
+    "zig-package",
+    "boringssl",
+    "openssl",
+    "tls",
+    "tls-proxy",
+    "tls-support"
   ],
-  "stars": 42,
+  "stars": 43,
   "forks": 4,
   "watchers": 1,
-  "updated_at": "2026-05-01T13:33:16Z",
+  "updated_at": "2026-05-06T09:56:47Z",
   "dependencies": [
     {
       "name": "boring",
@@ -91,7 +96,7 @@
   "owner_blog": "double-trouble.dev",
   "owner_twitter_username": null,
   "owner_followers": 65,
-  "owner_following": 260,
+  "owner_following": 262,
   "owner_created_at": "2019-06-05T17:02:09Z",
   "license": "MIT",
   "category": "library"

@@ -13,10 +13,10 @@
     "zio",
     "zig"
   ],
-  "stars": 51,
+  "stars": 52,
   "forks": 3,
   "watchers": 2,
-  "updated_at": "2026-04-22T20:28:20Z",
+  "updated_at": "2026-05-02T16:13:29Z",
   "dependencies": [
     {
       "name": "zio",
@@ -32,7 +32,7 @@
   "owner_location": "Trenčín, Slovakia",
   "owner_blog": "https://lalinsky.com",
   "owner_twitter_username": null,
-  "owner_followers": 331,
+  "owner_followers": 333,
   "owner_following": 27,
   "owner_created_at": "2010-03-11T19:55:55Z",
   "license": "Apache-2.0",

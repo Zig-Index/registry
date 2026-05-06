@@ -8,10 +8,10 @@
     "zig-package",
     "cli"
   ],
-  "stars": 40,
+  "stars": 41,
   "forks": 3,
   "watchers": 1,
-  "updated_at": "2026-04-25T11:43:40Z",
+  "updated_at": "2026-04-29T07:21:21Z",
   "dependencies": [
     {
       "name": "argzon",
