@@ -10,7 +10,7 @@
   "stars": 0,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-05-09T17:16:06Z",
+  "updated_at": "2026-05-09T21:13:56Z",
   "dependencies": [
     {
       "name": "boringssl",
@@ -24,8 +24,8 @@
     },
     {
       "name": "patch",
-      "url": "git+https://github.com/akunaakwei/zig-patch.git#cf883b44599956f63e1944ad6b2f9aedfa49e6ae",
-      "hash": "patch-2.6.1-po1jOcdvAADJrHMB3Un90dGynHFC40q6udBgPIi7KpYi"
+      "url": "git+https://github.com/lukaskastern/patch.git#300478c43fe616a66679e8c71a8dd6009859b973",
+      "hash": "patch-2.6.1-po1jOYlvAAC_clmNabN6gAYkcG5ikj89DZSu0KYC7nHe"
     },
     {
       "name": "googletest",
