@@ -10,12 +10,12 @@
   "stars": 0,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-05-09T16:57:10Z",
+  "updated_at": "2026-05-09T17:16:06Z",
   "dependencies": [
     {
       "name": "boringssl",
-      "url": "https://github.com/google/boringssl/archive/5622da92e1e7bacb5d0785ff5650a5a23b143b84.tar.gz",
-      "hash": "N-V-__8AALNPTAg4NYYxg9JBYM-yGB8-T1iza-OvymI1uPJY"
+      "url": "https://github.com/google/boringssl/archive/d589045a772678d5ca131f4c8087d001b9258380.tar.gz",
+      "hash": "N-V-__8AAO-t0g0Vv4tDWScq8vnEbEMShTyCcdPEgt9syb7p"
     },
     {
       "name": "nasm",
@@ -29,7 +29,7 @@
     },
     {
       "name": "googletest",
-      "url": "git+https://github.com/allyourcodebase/googletest#f8acbec3df11c23efebe6aa9efba2d79cc42e727",
+      "url": "git+https://github.com/lukaskastern/googletest#f8acbec3df11c23efebe6aa9efba2d79cc42e727",
       "hash": "googletest-1.15.2-vLU55pAVAABMlCpsee0jewNDhyAtv_6HbquizuRA0spo"
     }
   ],
