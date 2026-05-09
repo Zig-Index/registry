@@ -1,0 +1,82 @@
+{
+  "name": "comptime-serde",
+  "owner": "jiacai2050",
+  "repo": "comptime-serde",
+  "description": "Compile-time serialization and deserialization for Zig. Zero runtime overhead — all type dispatch happens at comptime.",
+  "type": "package",
+  "topics": [
+    "serde",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-05-09T09:33:23Z",
+  "dependencies": [
+    {
+      "name": "zigcli",
+      "url": "git+https://github.com/jiacai2050/zigcli.git#76c5b533d44a13ce70bddd696378f904c9af5ac3",
+      "hash": "zigcli-0.6.1-ORC7jLRBBgAb-rLTyCIC6Ys0-hGJTfnnKwi6mZQ6lzt1"
+    }
+  ],
+  "readme": "# comptime-serde\n\n![](https://img.shields.io/badge/zig%20version-0.16.0-F7A41D.svg)\n![](https://github.com/jiacai2050/comptime-serde/actions/workflows/ci.yml/badge.svg)\n\n> Compile-time serialization and deserialization for Zig.\n\nDefine your struct once, automatically serialize/deserialize across JSON, TOML, YAML, and Protobuf — zero runtime overhead, all type dispatch happens at comptime via `@typeInfo`.\n\n```\n                          ┌─────────────┐\n                          │  Zig Struct │\n                          └──────┬──────┘\n                                 │\n                      Serde(format, T)\n                                 │\n            ┌────────┬───────────┼───────────┬──────────┐\n            ▼        ▼           ▼           ▼          ▼\n        ┌──────┐ ┌──────┐  ┌────────┐  ┌────────┐ ┌──────────┐\n        │ JSON │ │ TOML │  │  YAML  │  │Protobuf│ │  ...     │\n        └──────┘ └──────┘  └────────┘  └────────┘ └──────────┘\n```\n\nRequires **Zig 0.16.0**.\n\n## Usage\n\n```zig\nconst serde = @import(\"comptime_serde\");\n\nconst User = struct {\n    name: []const u8,\n    age: u32,\n    active: bool,\n};\n\n// JSON\nconst json = serde.Serde(.json, User);\nvar json_buf: [512]u8 = undefined;\nvar json_writer = std.Io.Writer.fixed(&json_buf);\ntry json.serialize(&json_writer, User{ .name = \"alice\", .age = 30, .active = true });\n// json_buf contains: {\"name\":\"alice\",\"age\":30,\"active\":true}\n\nvar json_result = try json.deserialize(allocator, \"{\\\"name\\\":\\\"alice\\\",\\\"age\\\":30,\\\"active\\\":true}\");\ndefer json_result.deinit();\n// json_result.value is a User\n\n// TOML\nconst toml = serde.Serde(.toml, User);\nvar toml_buf: [512]u8 = undefined;\nvar toml_writer = std.Io.Writer.fixed(&toml_buf);\ntry toml.serialize(&toml_writer, User{ .name = \"alice\", .age = 30, .active = true });\n// toml_buf contains:\n// name = \"alice\"\n// age = 30\n// active = true\n\n// YAML\nconst yaml = serde.Serde(.yaml, User);\nvar yaml_buf: [512]u8 = undefined;\nvar yaml_writer = std.Io.Writer.fixed(&yaml_buf);\ntry yaml.serialize(&yaml_writer, User{ .name = \"alice\", .age = 30, .active = true });\n// yaml_buf contains:\n// name: alice\n// age: 30\n// active: true\n\n// Protobuf (binary wire format)\nconst pb = serde.Serde(.protobuf, User);\nvar pb_buf: [512]u8 = undefined;\nvar pb_writer = std.Io.Writer.fixed(&pb_buf);\ntry pb.serialize(&pb_writer, allocator, User{ .name = \"alice\", .age = 30, .active = true });\n// pb_writer.buffered() contains proto3 wire format bytes\n\nvar pb_result = try pb.deserialize(allocator, pb_writer.buffered());\ndefer pb_result.deinit();\n// pb_result.value is a User\n```\n\n## Supported types\n\n| Type | JSON | TOML | YAML | Protobuf |\n|------|------|------|------|----------|\n| `bool` | `true` / `false` | `true` / `false` | `true` / `false` | varint |\n| Integers | `42` | `42` | `42` | varint (zigzag for signed) |\n| Floats | `3.14` | `3.14` | `3.14` | fixed32 / fixed64 |\n| `[]const u8` | `\"hello\"` | `\"hello\"` | `hello` | length-delimited |\n| `[N]u8` | `\"hello\"` | `\"hello\"` | `hello` | — |\n| `[]T` / `[N]T` | `[1,2,3]` | `[1, 2, 3]` | `- 1`<br>`- 2` | packed repeated |\n| `?T` | value or `null` | value or `\"\"` | value or `null` | field absent if null |\n| `struct` | `{\"key\":value}` | `[table]` sections | indented mapping | nested message |\n| `[]const Struct` | `[{...}]` | `[[array]]` sections | `- key: val` | repeated message |\n| Multi-line `[]const u8` | `\"a\\nb\"` | `\"\"\"\\na\\nb\"\"\"` | `\\|-` block scalar | — |\n| `enum` | `\"active\"` | `\"active\"` | `active` | varint |\n\n### Protobuf notes\n\nThe protobuf format encodes structs as proto3 wire format. Field numbers are assigned by struct field declaration order (1-based). No `.proto` file is needed — just define your Zig struct and serialize directly. Signed integers use zigzag encoding (equivalent to `sint32`/`sint64` in proto3).\n\nStruct fields with default values are optional during deserialization.\n\n## Installation\n\nAdd to your `build.zig.zon`:\n\n```bash\n# Latest version\nzig fetch --save git+https://github.com/jiacai2050/comptime-serde.git\n# Tagged version\nzig fetch --save git+https://github.com/jiacai2050/comptime-serde.git#v0.1.0\n```\n\nThen in `build.zig`:\n\n```zig\nconst serde_dep = b.dependency(\"comptime_serde\", .{});\nexe.root_module.addImport(\"comptime_serde\", serde_dep.module(\"comptime_serde\"));\n```\n\n## serde-gen CLI\n\nA code generation tool that infers Zig struct definitions from data files.\n\nPre-built binaries are available on the [GitHub Releases](https://github.com/jiacai2050/comptime-serde/releases) page, or build from source:\n\n```bash\n# Build from source\nzig build\n\n# Generate from JSON (format auto-detected from extension)\nserde-gen config.json\n\n# Force format explicitly\nserde-gen --format toml config.txt\n\n# Custom top-level struct name\nserde-gen --root-name Config config.yaml\n\n# Show help / version\nserde-gen --help\nserde-gen --version\n```\n\nOptions:\n\n| Flag | Description |\n|------|-------------|\n| `--format json\\|toml\\|yaml` | Force format (default: auto-detect from extension) |\n| `--root-name NAME` | Name of the top-level struct (default: `Root`) |\n| `-h`, `--help` | Show usage |\n\nExample — given `config.json`:\n\n```json\n{\"name\": \"myapp\", \"port\": 8080, \"server\": {\"host\": \"localhost\", \"tls\": true}}\n```\n\nOutput:\n\n```zig\nconst Server = struct {\n    host: []const u8,\n    tls: bool,\n};\n\nconst Root = struct {\n    name: []const u8,\n    port: i64,\n    server: Server,\n};\n```\n\n## Running tests\n\n```\nzig build test\n```\n\n## License\n\nMIT\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/3848910?u=60f91a765c4ad95cb3a5a5b41d19ca12ee71a65d&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2026-05-09T07:36:38Z",
+      "html_url": "https://github.com/jiacai2050/comptime-serde/releases/tag/v0.1.0",
+      "assets": [
+        {
+          "name": "serde-gen-v0.1.0-x86_64-windows.zip",
+          "url": "https://github.com/jiacai2050/comptime-serde/releases/download/v0.1.0/serde-gen-v0.1.0-x86_64-windows.zip",
+          "size": 339615,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "serde-gen-v0.1.0-aarch64-windows.zip",
+          "url": "https://github.com/jiacai2050/comptime-serde/releases/download/v0.1.0/serde-gen-v0.1.0-aarch64-windows.zip",
+          "size": 316875,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "serde-gen-v0.1.0-aarch64-macos.tar.gz",
+          "url": "https://github.com/jiacai2050/comptime-serde/releases/download/v0.1.0/serde-gen-v0.1.0-aarch64-macos.tar.gz",
+          "size": 245569,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "serde-gen-v0.1.0-x86_64-linux.tar.gz",
+          "url": "https://github.com/jiacai2050/comptime-serde/releases/download/v0.1.0/serde-gen-v0.1.0-x86_64-linux.tar.gz",
+          "size": 1189086,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "serde-gen-v0.1.0-aarch64-linux.tar.gz",
+          "url": "https://github.com/jiacai2050/comptime-serde/releases/download/v0.1.0/serde-gen-v0.1.0-aarch64-linux.tar.gz",
+          "size": 1156592,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "serde-gen-v0.1.0-x86_64-macos.tar.gz",
+          "url": "https://github.com/jiacai2050/comptime-serde/releases/download/v0.1.0/serde-gen-v0.1.0-x86_64-macos.tar.gz",
+          "size": 266336,
+          "content_type": "application/gzip"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "Rust developer at day and Zig at night.\r\n\r\n\r\nHost of @EmacsTalk and @RustTalk.\r\n",
+  "owner_company": "@zigcc",
+  "owner_location": "/home/mars",
+  "owner_blog": "https://en.liujiacai.net/",
+  "owner_twitter_username": "liujiacai",
+  "owner_followers": 1055,
+  "owner_following": 116,
+  "owner_created_at": "2013-03-13T01:33:15Z",
+  "category": "library"
+}
