@@ -10,7 +10,7 @@
   "stars": 0,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-05-09T21:13:56Z",
+  "updated_at": "2026-05-10T15:39:39Z",
   "dependencies": [
     {
       "name": "boringssl",
@@ -24,8 +24,8 @@
     },
     {
       "name": "patch",
-      "url": "git+https://github.com/lukaskastern/patch.git#300478c43fe616a66679e8c71a8dd6009859b973",
-      "hash": "patch-2.6.1-po1jOYlvAAC_clmNabN6gAYkcG5ikj89DZSu0KYC7nHe"
+      "url": "git+https://github.com/lukaskastern/patch.git#56b7eb8708955f4e330456ef3ae816b74a789bfd",
+      "hash": "patch-2.6.1-po1jOY5vAABWkdNnlxzrwMOSWfjOb_RUH8tcJVPK8Mgl"
     },
     {
       "name": "googletest",
@@ -36,6 +36,15 @@
   "readme": "# BoringSSL\r\n\r\nThis is [BoringSSL](https://github.com/google/boringssl), packaged for Zig.\r\n\r\n## Installation\r\n\r\nFirst, update your `build.zig.zon`:\r\n\r\n```\r\n# Initialize a `zig build` project if you haven't already\r\nzig init\r\nzig fetch --save git+https://github.com/lukaskastern/boringssl.git\r\n```\r\n\r\nYou can then import `boringssl` in your `build.zig` with:\r\n\r\n```zig\r\nconst boringssl_dependency = b.dependency(\"boringssl\", .{\r\n    .target = target,\r\n    .optimize = optimize,\r\n});\r\nyour_exe.linkLibrary(boringssl_dependency.artifact(\"bcm\"));\r\nyour_exe.linkLibrary(boringssl_dependency.artifact(\"ssl\"));\r\nyour_exe.linkLibrary(boringssl_dependency.artifact(\"crypto\"));\r\n```\r\n\r\nAnd use the library like this:\r\n```zig\r\nconst ssl = @cImport({\r\n    @cInclude(\"openssl/ssl.h\");\r\n});\r\n\r\nconst ctx = ssl.EVP_CIPHER_CTX_new();\r\n...\r\n...\r\n```\r\n\r\n## Notes\r\n\r\n### Windows support:\r\nAt the moment only x86_64-windows-gnu is functional. MSVC doesn't work!\r\n\r\nGNU doesn't seem an official target by boringssl for windows which is why we need the [patch](patches/p256_gnuc.patch).\r\n\r\n### Zig Version\r\nThe target zig version is 0.16.0\r\n\r\n\r\n## Updating upstream boringssl\r\nWe build boringssl by utilizing the [sources.json](https://github.com/google/boringssl/blob/main/gen/sources.json) it provides.\r\n\r\nThis file is used to generate the build graph. Sadly I haven't found a way to access it directly from the dependency.\r\n\r\nMeaning it has to be manually copied into [sources.json](sources.json) in this repository.\r\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/40829791?u=f48144616bcec0bd3c477560229ab2fbd15d456b&v=4",
   "releases": [
+    {
+      "tag_name": "0.16.0-0.20260508.0",
+      "name": "0.16.0-0.20260508.0",
+      "body": "## What's Changed\r\n* fix: CI by @LukasKastern in https://github.com/LukasKastern/boringssl/pull/8\r\n\r\n\r\n**Full Changelog**: https://github.com/LukasKastern/boringssl/compare/0.15.2-0.20250514.0...0.16.0-0.20260508.0",
+      "prerelease": false,
+      "published_at": "2026-05-10T15:40:51Z",
+      "html_url": "https://github.com/LukasKastern/boringssl/releases/tag/0.16.0-0.20260508.0",
+      "assets": []
+    },
     {
       "tag_name": "0.15.2-0.20250514.0",
       "name": "0.15.2-0.20250514.0",
