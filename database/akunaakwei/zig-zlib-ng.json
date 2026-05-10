@@ -9,7 +9,7 @@
   ],
   "stars": 0,
   "forks": 0,
-  "watchers": 0,
+  "watchers": 1,
   "updated_at": "2026-04-18T08:05:13Z",
   "minimum_zig_version": "0.16.0",
   "readme": "# zlib-ng\r\nThis is [zlib-ng](https://github.com/zlib-ng/zlib-ng) packaged for the zig build system.",
