@@ -13,12 +13,12 @@
   "stars": 1,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-05-09T05:17:34Z",
+  "updated_at": "2026-05-10T06:08:55Z",
   "dependencies": [
     {
       "name": "zest",
-      "url": "git+https://github.com/cloudboss/zest#a87952beff65fe25bec5fdbefc6573abe26c6e58",
-      "hash": "zest-0.1.0-2zk2njFJAADnAZaID9xfG02TgcdPO6EPtHe_5PuFvNH_"
+      "url": "git+https://github.com/cloudboss/zest#2ec1ae4848887223e585e105a92ca57d7612d332",
+      "hash": "zest-0.1.0-2zk2nsZKAAD5f-v2ykUVtvZNmA_Wh2Nwhe49-PbLNdAx"
     }
   ],
   "minimum_zig_version": "0.16.0",
