@@ -12,12 +12,12 @@
   "stars": 2,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-05-10T05:32:01Z",
+  "updated_at": "2026-05-10T14:39:27Z",
   "dependencies": [
     {
       "name": "zigcli",
-      "url": "git+https://github.com/jiacai2050/zigcli.git#76c5b533d44a13ce70bddd696378f904c9af5ac3",
-      "hash": "zigcli-0.6.1-ORC7jLRBBgAb-rLTyCIC6Ys0-hGJTfnnKwi6mZQ6lzt1"
+      "url": "git+https://github.com/jiacai2050/zigcli.git?ref=v0.6.2#35e013d209b18d0e9c1df85e7e2044e15bde22ad",
+      "hash": "zigcli-0.6.2-ORC7jMFFBgDegrwcsueXsOekZh-HHlKHLJQuostneMpS"
     }
   ],
   "readme": "# comptime-serde\n\n![](https://img.shields.io/badge/zig%20version-0.16.0-F7A41D.svg)\n[![](https://github.com/jiacai2050/comptime-serde/actions/workflows/ci.yml/badge.svg)](https://github.com/jiacai2050/comptime-serde/actions/workflows/ci.yml)\n\n> Compile-time serialization and deserialization for Zig.\n\nDefine your struct once, automatically serialize/deserialize across JSON, TOML, YAML, and Protobuf — zero runtime overhead, all type dispatch happens at comptime via `@typeInfo`.\n\n<picture>\n  <source media=\"(prefers-color-scheme: dark)\" srcset=\"docs/src/architecture-dark.svg\">\n  <img alt=\"comptime-serde architecture\" src=\"docs/src/architecture.svg\" width=\"640\">\n</picture>\n\n## Installation\n\n```bash\n# Latest version\nzig fetch --save git+https://github.com/jiacai2050/comptime-serde.git\n# Tagged version\nzig fetch --save git+https://github.com/jiacai2050/comptime-serde.git#v0.2.0\n```\n\n```zig\n// build.zig\nconst serde_dep = b.dependency(\"comptime_serde\", .{});\nexe.root_module.addImport(\"comptime_serde\", serde_dep.module(\"comptime_serde\"));\n```\n\n## Quick example\n\n```zig\nconst serde = @import(\"comptime_serde\");\n\nconst User = struct {\n    name: []const u8,\n    age: u32,\n};\n\nconst json = serde.Serde(.json, User);\n\nvar buf: [512]u8 = undefined;\nvar writer = std.Io.Writer.fixed(&buf);\ntry json.serialize(&writer, .{ .name = \"alice\", .age = 30 });\n// {\"name\":\"alice\",\"age\":30}\n\nvar result = try json.deserialize(allocator, \"{\\\"name\\\":\\\"alice\\\",\\\"age\\\":30}\");\ndefer result.deinit();\n// result.value is a User\n```\n\n## serde-gen CLI\n\n```bash\ncurl -fsSL https://jiacai2050.github.io/comptime-serde/install.sh | sh\n```\n\nInfers Zig struct definitions from JSON/TOML/YAML files:\n\n```bash\nserde-gen config.json\n```\n\n## Documentation\n\n- User guide: [jiacai2050.github.io/comptime-serde](https://jiacai2050.github.io/comptime-serde/)\n- API reference: [jiacai2050.github.io/comptime-serde/apidocs](https://jiacai2050.github.io/comptime-serde/apidocs)\n\n## License\n\nMIT\n",
@@ -28,43 +28,43 @@
       "name": "v0.2.0",
       "body": null,
       "prerelease": false,
-      "published_at": "2026-05-10T05:32:44Z",
+      "published_at": "2026-05-10T14:40:27Z",
       "html_url": "https://github.com/jiacai2050/comptime-serde/releases/tag/v0.2.0",
       "assets": [
         {
-          "name": "serde-gen-v0.2.0-aarch64-windows.zip",
-          "url": "https://github.com/jiacai2050/comptime-serde/releases/download/v0.2.0/serde-gen-v0.2.0-aarch64-windows.zip",
-          "size": 318158,
-          "content_type": "application/zip"
-        },
-        {
           "name": "serde-gen-v0.2.0-x86_64-windows.zip",
           "url": "https://github.com/jiacai2050/comptime-serde/releases/download/v0.2.0/serde-gen-v0.2.0-x86_64-windows.zip",
-          "size": 340142,
+          "size": 343177,
           "content_type": "application/zip"
         },
         {
           "name": "serde-gen-v0.2.0-x86_64-linux.tar.gz",
           "url": "https://github.com/jiacai2050/comptime-serde/releases/download/v0.2.0/serde-gen-v0.2.0-x86_64-linux.tar.gz",
-          "size": 1191113,
+          "size": 1196904,
           "content_type": "application/gzip"
         },
         {
-          "name": "serde-gen-v0.2.0-x86_64-macos.tar.gz",
-          "url": "https://github.com/jiacai2050/comptime-serde/releases/download/v0.2.0/serde-gen-v0.2.0-x86_64-macos.tar.gz",
-          "size": 267328,
-          "content_type": "application/gzip"
+          "name": "serde-gen-v0.2.0-aarch64-windows.zip",
+          "url": "https://github.com/jiacai2050/comptime-serde/releases/download/v0.2.0/serde-gen-v0.2.0-aarch64-windows.zip",
+          "size": 320565,
+          "content_type": "application/zip"
         },
         {
           "name": "serde-gen-v0.2.0-aarch64-linux.tar.gz",
           "url": "https://github.com/jiacai2050/comptime-serde/releases/download/v0.2.0/serde-gen-v0.2.0-aarch64-linux.tar.gz",
-          "size": 1159367,
+          "size": 1165026,
           "content_type": "application/gzip"
         },
         {
           "name": "serde-gen-v0.2.0-aarch64-macos.tar.gz",
           "url": "https://github.com/jiacai2050/comptime-serde/releases/download/v0.2.0/serde-gen-v0.2.0-aarch64-macos.tar.gz",
-          "size": 246292,
+          "size": 250671,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "serde-gen-v0.2.0-x86_64-macos.tar.gz",
+          "url": "https://github.com/jiacai2050/comptime-serde/releases/download/v0.2.0/serde-gen-v0.2.0-x86_64-macos.tar.gz",
+          "size": 271655,
           "content_type": "application/gzip"
         }
       ]
