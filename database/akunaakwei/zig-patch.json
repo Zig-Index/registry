@@ -7,14 +7,14 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 0,
+  "stars": 1,
   "forks": 1,
   "watchers": 0,
-  "updated_at": "2026-04-19T17:44:54Z",
+  "updated_at": "2026-05-10T18:08:46Z",
   "dependencies": [
     {
       "name": "patch",
-      "url": "https://ftpmirror.gnu.org/patch/patch-2.6.1.tar.gz",
+      "url": "https://mirrors.kernel.org/gnu/patch/patch-2.6.1.tar.gz",
       "hash": "N-V-__8AAJPSEgDcozcxiSvegfkjtNmn6GcEB8wT_c3xq86P"
     }
   ],
