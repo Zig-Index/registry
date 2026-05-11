@@ -12,10 +12,10 @@
     "ziglang",
     "zig-package"
   ],
-  "stars": 116,
+  "stars": 117,
   "forks": 20,
   "watchers": 1,
-  "updated_at": "2026-05-08T19:42:19Z",
+  "updated_at": "2026-05-11T07:24:09Z",
   "dependencies": [
     {
       "name": "sdl",
@@ -29,8 +29,8 @@
     },
     {
       "name": "dcimgui",
-      "url": "git+https://github.com/dearimgui/dear_bindings#42af84a267109a9f8f4d9879826eb4d415de6c19",
-      "hash": "N-V-__8AAPQhCQA0nygW60Np2fcZdByxnewDwg9JpumhRqSb"
+      "url": "git+https://github.com/dearimgui/dear_bindings#c9ff64913915df41c0f4beef485b98a1c685eda5",
+      "hash": "N-V-__8AAPErCQARgFL-uXKTjXbwnJv4IPOIC8kr-yJrFXEr"
     },
     {
       "name": "vulkan_zig",
