@@ -9,10 +9,10 @@
     "parser",
     "zig-package"
   ],
-  "stars": 1,
+  "stars": 0,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2025-08-18T22:46:54Z",
+  "updated_at": "2026-05-11T20:57:28Z",
   "dependencies": [
     {
       "name": "mvzr",
