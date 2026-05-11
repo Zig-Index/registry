@@ -48,6 +48,76 @@
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/13855668?u=7423262c8d6a46bc9cce88be8bc2e190271db147&v=4",
   "releases": [
     {
+      "tag_name": "v0.0.8",
+      "name": "v0.0.8",
+      "body": "**Full Changelog**: https://github.com/burdzwastaken/zig-opa-wasm/compare/v0.0.7...v0.0.8",
+      "prerelease": false,
+      "published_at": "2026-05-09T21:54:32Z",
+      "html_url": "https://github.com/burdzwastaken/zig-opa-wasm/releases/tag/v0.0.8",
+      "assets": [
+        {
+          "name": "opa-zig-zware-x86_64-macos.tar.gz",
+          "url": "https://github.com/burdzwastaken/zig-opa-wasm/releases/download/v0.0.8/opa-zig-zware-x86_64-macos.tar.gz",
+          "size": 540025,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "checksums.txt",
+          "url": "https://github.com/burdzwastaken/zig-opa-wasm/releases/download/v0.0.8/checksums.txt",
+          "size": 894,
+          "content_type": "text/plain"
+        },
+        {
+          "name": "opa-zig-wasmer-aarch64-linux.tar.gz",
+          "url": "https://github.com/burdzwastaken/zig-opa-wasm/releases/download/v0.0.8/opa-zig-wasmer-aarch64-linux.tar.gz",
+          "size": 1776521,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "opa-zig-wasmer-x86_64-macos.tar.gz",
+          "url": "https://github.com/burdzwastaken/zig-opa-wasm/releases/download/v0.0.8/opa-zig-wasmer-x86_64-macos.tar.gz",
+          "size": 483665,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "opa-zig-wasmer-aarch64-macos.tar.gz",
+          "url": "https://github.com/burdzwastaken/zig-opa-wasm/releases/download/v0.0.8/opa-zig-wasmer-aarch64-macos.tar.gz",
+          "size": 443759,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zig-opa-wasm.tar.gz",
+          "url": "https://github.com/burdzwastaken/zig-opa-wasm/releases/download/v0.0.8/zig-opa-wasm.tar.gz",
+          "size": 106448,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "opa-zig-zware-x86_64-linux.tar.gz",
+          "url": "https://github.com/burdzwastaken/zig-opa-wasm/releases/download/v0.0.8/opa-zig-zware-x86_64-linux.tar.gz",
+          "size": 1998508,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "opa-zig-wasmer-x86_64-linux.tar.gz",
+          "url": "https://github.com/burdzwastaken/zig-opa-wasm/releases/download/v0.0.8/opa-zig-wasmer-x86_64-linux.tar.gz",
+          "size": 1736010,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "opa-zig-zware-aarch64-macos.tar.gz",
+          "url": "https://github.com/burdzwastaken/zig-opa-wasm/releases/download/v0.0.8/opa-zig-zware-aarch64-macos.tar.gz",
+          "size": 503212,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "opa-zig-zware-aarch64-linux.tar.gz",
+          "url": "https://github.com/burdzwastaken/zig-opa-wasm/releases/download/v0.0.8/opa-zig-zware-aarch64-linux.tar.gz",
+          "size": 1940648,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
+    {
       "tag_name": "v0.0.7",
       "name": "v0.0.7",
       "body": "**Full Changelog**: https://github.com/burdzwastaken/zig-opa-wasm/compare/v0.0.6...v0.0.7",

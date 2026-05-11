@@ -10,10 +10,10 @@
     "crossplatform",
     "zig-package"
   ],
-  "stars": 671,
-  "forks": 77,
+  "stars": 672,
+  "forks": 78,
   "watchers": 9,
-  "updated_at": "2026-05-09T16:34:16Z",
+  "updated_at": "2026-05-11T13:29:41Z",
   "dependencies": [
     {
       "name": "emsdk",
