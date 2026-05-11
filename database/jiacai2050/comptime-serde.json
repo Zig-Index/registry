@@ -12,7 +12,7 @@
   "stars": 2,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-05-10T14:39:27Z",
+  "updated_at": "2026-05-11T03:23:50Z",
   "dependencies": [
     {
       "name": "zigcli",
@@ -20,7 +20,8 @@
       "hash": "zigcli-0.6.2-ORC7jMFFBgDegrwcsueXsOekZh-HHlKHLJQuostneMpS"
     }
   ],
-  "readme": "# comptime-serde\n\n![](https://img.shields.io/badge/zig%20version-0.16.0-F7A41D.svg)\n[![](https://github.com/jiacai2050/comptime-serde/actions/workflows/ci.yml/badge.svg)](https://github.com/jiacai2050/comptime-serde/actions/workflows/ci.yml)\n\n> Compile-time serialization and deserialization for Zig.\n\nDefine your struct once, automatically serialize/deserialize across JSON, TOML, YAML, and Protobuf — zero runtime overhead, all type dispatch happens at comptime via `@typeInfo`.\n\n<picture>\n  <source media=\"(prefers-color-scheme: dark)\" srcset=\"docs/src/architecture-dark.svg\">\n  <img alt=\"comptime-serde architecture\" src=\"docs/src/architecture.svg\" width=\"640\">\n</picture>\n\n## Installation\n\n```bash\n# Latest version\nzig fetch --save git+https://github.com/jiacai2050/comptime-serde.git\n# Tagged version\nzig fetch --save git+https://github.com/jiacai2050/comptime-serde.git#v0.2.0\n```\n\n```zig\n// build.zig\nconst serde_dep = b.dependency(\"comptime_serde\", .{});\nexe.root_module.addImport(\"comptime_serde\", serde_dep.module(\"comptime_serde\"));\n```\n\n## Quick example\n\n```zig\nconst serde = @import(\"comptime_serde\");\n\nconst User = struct {\n    name: []const u8,\n    age: u32,\n};\n\nconst json = serde.Serde(.json, User);\n\nvar buf: [512]u8 = undefined;\nvar writer = std.Io.Writer.fixed(&buf);\ntry json.serialize(&writer, .{ .name = \"alice\", .age = 30 });\n// {\"name\":\"alice\",\"age\":30}\n\nvar result = try json.deserialize(allocator, \"{\\\"name\\\":\\\"alice\\\",\\\"age\\\":30}\");\ndefer result.deinit();\n// result.value is a User\n```\n\n## serde-gen CLI\n\n```bash\ncurl -fsSL https://jiacai2050.github.io/comptime-serde/install.sh | sh\n```\n\nInfers Zig struct definitions from JSON/TOML/YAML files:\n\n```bash\nserde-gen config.json\n```\n\n## Documentation\n\n- User guide: [jiacai2050.github.io/comptime-serde](https://jiacai2050.github.io/comptime-serde/)\n- API reference: [jiacai2050.github.io/comptime-serde/apidocs](https://jiacai2050.github.io/comptime-serde/apidocs)\n\n## License\n\nMIT\n",
+  "minimum_zig_version": "0.16.0",
+  "readme": "# comptime-serde\n\n![](https://img.shields.io/badge/zig%20version-0.16.0-F7A41D.svg)\n[![](https://github.com/jiacai2050/comptime-serde/actions/workflows/ci.yml/badge.svg)](https://github.com/jiacai2050/comptime-serde/actions/workflows/ci.yml)\n\n> Compile-time serialization and deserialization for Zig.\n\nDefine your struct once, automatically serialize/deserialize across JSON, TOML, YAML, and Protobuf — zero runtime overhead, all type dispatch happens at comptime via `@typeInfo`.\n\n<picture>\n  <source media=\"(prefers-color-scheme: dark)\" srcset=\"docs/src/architecture-dark.svg\">\n  <img alt=\"comptime-serde architecture\" src=\"docs/src/architecture.svg\" width=\"640\">\n</picture>\n\n## Installation\n\n```bash\n# Latest version\nzig fetch --save git+https://github.com/jiacai2050/comptime-serde.git\n# Tagged version\nzig fetch --save git+https://github.com/jiacai2050/comptime-serde.git#v0.2.0\n```\n\n```zig\n// build.zig\nconst serde_dep = b.dependency(\"comptime_serde\", .{});\nexe.root_module.addImport(\"comptime_serde\", serde_dep.module(\"comptime_serde\"));\n```\n\n## Quick example\n\n```zig\nconst serde = @import(\"comptime_serde\");\n\nconst User = struct {\n    name: []const u8,\n    age: u32,\n};\n\nconst json = serde.Serde(.json, User);\n\nvar buf: [512]u8 = undefined;\nvar writer = std.Io.Writer.fixed(&buf);\ntry json.serialize(&writer, .{ .name = \"alice\", .age = 30 });\n// {\"name\":\"alice\",\"age\":30}\n\nvar result = try json.deserialize(allocator, \"{\\\"name\\\":\\\"alice\\\",\\\"age\\\":30}\");\ndefer result.deinit();\n// result.value is a User\n```\n\n## serde-gen CLI\n\n```bash\ncurl -fsSL https://jiacai2050.github.io/comptime-serde/install.sh | sh\n```\n\nInfers Zig struct definitions from JSON/TOML/YAML files:\n\n```bash\nserde-gen config.json\n```\n\n## Documentation\n\n- [User guide](https://jiacai2050.github.io/comptime-serde/)\n- [API reference](https://jiacai2050.github.io/comptime-serde/apidocs)\n\n## License\n\n[MIT](./LICENSE)\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/3848910?u=60f91a765c4ad95cb3a5a5b41d19ca12ee71a65d&v=4",
   "releases": [
     {
@@ -125,5 +126,6 @@
   "owner_following": 116,
   "owner_created_at": "2013-03-13T01:33:15Z",
   "homepage": "https://jiacai2050.github.io/comptime-serde/",
+  "license": "MIT",
   "category": "library"
 }
