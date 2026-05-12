@@ -11,7 +11,7 @@
   "stars": 12,
   "forks": 9,
   "watchers": 1,
-  "updated_at": "2026-04-19T19:42:56Z",
+  "updated_at": "2026-05-12T15:01:24Z",
   "dependencies": [
     {
       "name": "theme_1984",
@@ -158,6 +158,22 @@
   "readme": "# flow-themes\nThemes compiler for Flow-Control, the text editor\n\n## Requirements\n\n - zig 0.15.1\n - hjson (installed in your PATH)\n\n## Build\n\n`zig build`\n\nThis will download and compile all the themes and create a zig module\nin `zig-out` that can be referenced as a dependency from another project's\n`build.zig.zon`.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/1552770?u=5c42562ca7bf8db5e586c5f373541572957629fe&v=4",
   "releases": [
+    {
+      "tag_name": "master-b0476d4c299a2255230cbc939e01ae6e987fe837",
+      "name": "Tarball release",
+      "body": "Tarball release",
+      "prerelease": false,
+      "published_at": "2026-05-12T14:17:00Z",
+      "html_url": "https://github.com/neurocyte/flow-themes/releases/tag/master-b0476d4c299a2255230cbc939e01ae6e987fe837",
+      "assets": [
+        {
+          "name": "flow-themes.tar.gz",
+          "url": "https://github.com/neurocyte/flow-themes/releases/download/master-b0476d4c299a2255230cbc939e01ae6e987fe837/flow-themes.tar.gz",
+          "size": 174992,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
     {
       "tag_name": "master-e03b6d03d41e24d7a32ada8dd6c29acec964b0df",
       "name": "Tarball release",
@@ -461,29 +477,13 @@
           "content_type": "application/gzip"
         }
       ]
-    },
-    {
-      "tag_name": "master-59bf204551bcb238faddd06779063570e7e6d431",
-      "name": "Tarball release",
-      "body": "Tarball release",
-      "prerelease": false,
-      "published_at": "2025-02-26T20:57:18Z",
-      "html_url": "https://github.com/neurocyte/flow-themes/releases/tag/master-59bf204551bcb238faddd06779063570e7e6d431",
-      "assets": [
-        {
-          "name": "flow-themes.tar.gz",
-          "url": "https://github.com/neurocyte/flow-themes/releases/download/master-59bf204551bcb238faddd06779063570e7e6d431/flow-themes.tar.gz",
-          "size": 96053,
-          "content_type": "application/gzip"
-        }
-      ]
     }
   ],
   "owner_company": null,
   "owner_location": null,
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 163,
+  "owner_followers": 164,
   "owner_following": 3,
   "owner_created_at": "2012-03-19T13:04:13Z",
   "license": "MIT",
