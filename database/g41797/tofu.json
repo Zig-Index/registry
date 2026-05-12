@@ -14,7 +14,7 @@
   "stars": 27,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-05-12T03:24:20Z",
+  "updated_at": "2026-05-12T07:15:46Z",
   "dependencies": [
     {
       "name": "nats",
@@ -38,8 +38,8 @@
     },
     {
       "name": "usockets",
-      "url": "git+https://github.com/g41797/uSockets.git#edce228e42f6d3d6668cdbce0596286a1da40def",
-      "hash": "N-V-__8AAI8iBgBz2NZLHnqt7PlggLFY8u4CBZGHmMkYIZZu"
+      "url": "git+https://github.com/g41797/uSockets.git#03cc4f6112a78ed7712c7128871a9dd8ed404a9d",
+      "hash": "N-V-__8AAJgiBgDScguFso1evr-0R_1yO_N4mkqFAO33pe_7"
     }
   ],
   "minimum_zig_version": "0.15.2",
