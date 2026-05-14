@@ -19,7 +19,7 @@
   "stars": 2,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-05-14T14:34:36Z",
+  "updated_at": "2026-05-14T18:29:50Z",
   "dependencies": [
     {
       "name": "zstd",
