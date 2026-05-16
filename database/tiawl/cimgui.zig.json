@@ -15,7 +15,7 @@
   "stars": 117,
   "forks": 20,
   "watchers": 1,
-  "updated_at": "2026-05-15T12:28:04Z",
+  "updated_at": "2026-05-16T13:06:50Z",
   "dependencies": [
     {
       "name": "sdl",
@@ -34,18 +34,18 @@
     },
     {
       "name": "vulkan_zig",
-      "url": "git+https://github.com/tiawl/vulkan.zig?ref=v1.4.352#5141c2f47162d432bf02f36f446ef8210cc7cc92",
-      "hash": "vulkan_zig-1.0.0-p2wg3nZkfwEWY6QdCrwReCYcHALOPwTdnbfI4fjE7lzQ"
+      "url": "git+https://github.com/tiawl/vulkan.zig#6a2b3cb66530aa0bdea3374d46606e22bcdb42b2",
+      "hash": "vulkan_zig-1.0.0-p2wg3oJkfwHvCr0FEGZ-Y2YkyjQVDzc5pL1jKO2Ut7Zh"
     },
     {
       "name": "toolbox",
-      "url": "git+https://github.com/tiawl/toolbox?ref=2.0.2#6eff672e76e867c277183aee1b8c5c1b70ff4915",
-      "hash": "toolbox-2.0.2-kRAu4BibAADKQMUUYyFacpyGgKCWxPyrcxa6ziZQZXwH"
+      "url": "git+https://github.com/tiawl/toolbox#6f736bba2859dca469492a0ddbe289e0b3d294e2",
+      "hash": "toolbox-2.0.2-kRAu4O6aAAAxP6SQ-xIfkIQO8x5RwYAA_zaGG2eYzDA7"
     },
     {
       "name": "glfw_zig",
-      "url": "git+https://github.com/tiawl/glfw.zig?ref=vulkan.zig-v1.4.352#5c9af1a16119e9bbfde839af6746f7fc7c3850a0",
-      "hash": "glfw_zig-1.0.0-NrvYoybRGQBbJ6Dp6_MS3RieeJfO_smGunDHNEK9D4XX"
+      "url": "git+https://github.com/tiawl/glfw.zig#cf46f9984a27502f0e2e2a1bf1511096480cc879",
+      "hash": "glfw_zig-1.0.0-NrvYowHRGQA0F0gP1hL7uLEeoIin83yiNfd329-G9iBa"
     }
   ],
   "minimum_zig_version": "0.16.0",
