@@ -14,7 +14,7 @@
   "stars": 12,
   "forks": 4,
   "watchers": 1,
-  "updated_at": "2026-05-16T12:42:32Z",
+  "updated_at": "2026-05-16T14:04:23Z",
   "dependencies": [
     {
       "name": "XScrnSaver",
@@ -93,7 +93,7 @@
     },
     {
       "name": "toolbox",
-      "url": "git+https://github.com/tiawl/toolbox#6f736bba2859dca469492a0ddbe289e0b3d294e2",
+      "url": "git+https://github.com/tiawl/toolbox?ref=2.1.0#d6707186fcf520534dd0bdb20934c9b6b67582b5",
       "hash": "toolbox-2.0.2-kRAu4O6aAAAxP6SQ-xIfkIQO8x5RwYAA_zaGG2eYzDA7"
     }
   ],

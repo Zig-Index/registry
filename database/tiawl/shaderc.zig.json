@@ -14,7 +14,7 @@
   "stars": 7,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-05-16T13:08:11Z",
+  "updated_at": "2026-05-16T13:36:48Z",
   "dependencies": [
     {
       "name": "shaderc",
