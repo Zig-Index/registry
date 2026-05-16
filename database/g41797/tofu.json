@@ -14,13 +14,8 @@
   "stars": 27,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-05-16T16:03:00Z",
+  "updated_at": "2026-05-16T16:21:02Z",
   "dependencies": [
-    {
-      "name": "nats",
-      "url": "git+https://github.com/g41797/nats#b4655d4154457b8f4af31a34f93ef4445da66fd3",
-      "hash": "nats-0.0.3-obw1dFV7BgDV_yIz3BlpO5ThGIbOHoYDsl_9gAvgqDwX"
-    },
     {
       "name": "mailbox",
       "url": "git+https://github.com/g41797/mailbox#09ce9a443d17a36df47925e8927252fcde3c6940",
