@@ -16,12 +16,12 @@
   "stars": 5,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-05-07T00:40:25Z",
+  "updated_at": "2026-05-17T15:37:16Z",
   "dependencies": [
     {
       "name": "zevy_ecs",
-      "url": "git+https://github.com/captkirk88/zevy-ecs#ea076522877d8875776d160a8e6a2532ffd8a03b",
-      "hash": "zevy_ecs-2.6.1-VoL9mVbeCABLb0T37suSquexlut03Rc9at6UgSa_GAYj"
+      "url": "git+https://github.com/captkirk88/zevy-ecs#c85804fa874808f03f613bb668b6296ec93ea93d",
+      "hash": "zevy_ecs-2.6.2-VoL9ma_jCACpo3hz9-YIi8bKits305qMPOmnyoIxC0tW"
     },
     {
       "name": "zevy_ecs",
@@ -29,8 +29,8 @@
     },
     {
       "name": "raylib_zig",
-      "url": "git+https://github.com/raylib-zig/raylib-zig#58f3c0fa328fc9ff48d17c2c3771ab9c5114aaa6",
-      "hash": "raylib_zig-6.0.0-KE8REMNkBQCpxwqT9ubVNf5aEOcWRUVIaH2sgt_sDDoZ"
+      "url": "git+https://github.com/raylib-zig/raylib-zig#97be2c7ae646a2f09856604b138c427c0af1b952",
+      "hash": "raylib_zig-6.0.0-KE8REDJ4BQBu7lKwYNt6R4j5ywPeS37zqW6zrtjCcRwH"
     },
     {
       "name": "known_folders",
@@ -44,8 +44,8 @@
     },
     {
       "name": "zevy_reflect",
-      "url": "git+https://github.com/captkirk88/zevy-reflect#ff340d60c5103e401bfabc3e3d88190b7b05a582",
-      "hash": "zevy_reflect-1.3.0-Ob80cL4lAwAxtbOO5oAqqpmwCAXLmb1NJyjcHz78iJ8B"
+      "url": "git+https://github.com/captkirk88/zevy-reflect#64f2e8e69d540d5ef58c1fb9e6a99d101895cc13",
+      "hash": "zevy_reflect-1.4.0-Ob80cIgtAwAqt-3io-JZAGjGevxem_Me0oc_rlZ-2Ag_"
     },
     {
       "name": "zevy_mem",
@@ -58,8 +58,8 @@
     },
     {
       "name": "zevy_buildtools",
-      "url": "git+https://github.com/captkirk88/zevy-buildtools#38f7c32543131ba83d07d0176efa456494f49b5d",
-      "hash": "zevy_buildtools-1.3.1-AG3r_IcOAQAy2B139jsxugf8u0bPEWfsnp0YZFHd9Q3U"
+      "url": "git+https://github.com/captkirk88/zevy-buildtools#ef611bb2308a577eca6c2cceba68bbdcab6e10e7",
+      "hash": "zevy_buildtools-1.3.2-AG3r_IMOAQBvTaraIbje0VPv3I9jWxz67Cqoq4cr_Z_C"
     }
   ],
   "minimum_zig_version": "0.16.0",
