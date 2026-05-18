@@ -15,10 +15,10 @@
     "clap-rs",
     "cli"
   ],
-  "stars": 32,
+  "stars": 31,
   "forks": 3,
   "watchers": 1,
-  "updated_at": "2026-05-05T11:13:51Z",
+  "updated_at": "2026-05-18T08:16:37Z",
   "dependencies": [
     {
       "name": "zterm",
