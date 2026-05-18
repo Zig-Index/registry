@@ -16,12 +16,12 @@
   "stars": 5,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-05-17T15:37:16Z",
+  "updated_at": "2026-05-17T23:14:44Z",
   "dependencies": [
     {
       "name": "zevy_ecs",
-      "url": "git+https://github.com/captkirk88/zevy-ecs#c85804fa874808f03f613bb668b6296ec93ea93d",
-      "hash": "zevy_ecs-2.6.2-VoL9ma_jCACpo3hz9-YIi8bKits305qMPOmnyoIxC0tW"
+      "url": "git+https://github.com/captkirk88/zevy-ecs#22fe2f0e0b91e17f47b7781eaaa4e57f3d43e5a8",
+      "hash": "zevy_ecs-2.6.3-VoL9mbX1CADd_NC5nsBxIqzp10FwdLOWBxvVCeTbqUdB"
     },
     {
       "name": "zevy_ecs",
