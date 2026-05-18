@@ -14,7 +14,7 @@
   "stars": 12,
   "forks": 4,
   "watchers": 1,
-  "updated_at": "2026-05-16T14:04:23Z",
+  "updated_at": "2026-05-18T13:10:01Z",
   "dependencies": [
     {
       "name": "XScrnSaver",
@@ -63,8 +63,8 @@
     },
     {
       "name": "Xi",
-      "url": "git+https://gitlab.freedesktop.org/xorg/lib/libxi?ref=libXi-1.8.2#3c2d5aedd7708c75710b39268631762de904c304",
-      "hash": "N-V-__8AAPVzDQBJt3bUATh5SVq-T6QI-Ns9v2pSScvG_cwH"
+      "url": "git+https://gitlab.freedesktop.org/xorg/lib/libxi?ref=libXi-1.8.3#f00f7e9140b4707775331950dd67851e55058c40",
+      "hash": "N-V-__8AAPR0DQAuD3_ZopKbezyogf0SLNe6GiYF3RlaaNrh"
     },
     {
       "name": "Xau",

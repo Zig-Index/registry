@@ -1,0 +1,101 @@
+{
+  "name": "glfw",
+  "owner": "Techatrix",
+  "repo": "glfw",
+  "description": "glfw ported to the zig build system ",
+  "type": "package",
+  "topics": [
+    "zig",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-04-25T11:36:29Z",
+  "dependencies": [
+    {
+      "name": "glfw",
+      "url": "git+https://github.com/glfw/glfw.git?ref=3.4#7b6aead9fb88b3623e3b3725ebb42670cbe4c579",
+      "hash": "N-V-__8AAKE_TAAJO1RHyQ6MPZFPLLCAyHNu7iYXh7n1KEfH"
+    },
+    {
+      "name": "xcode_frameworks",
+      "url": "git+https://code.hexops.org/hexops/xcode-frameworks.git#8a1cfb373587ea4c9bb1468b7c986462d8d4e10e",
+      "hash": "N-V-__8AALShqgXkvqYU6f__FrA22SMWmi2TXCJjNTO1m8XJ"
+    },
+    {
+      "name": "evdev_proto",
+      "url": "git+https://github.com/Techatrix/evdev-proto.git#5fb05f7f34e02c6cde48b7055871a48a6b5d3e56",
+      "hash": "evdev_proto-5.8.0-SfcL4UozAQApBm-pP5nyp96jfEZp9clFY7Cl6G477dis"
+    },
+    {
+      "name": "wayland",
+      "url": "git+https://github.com/allyourcodebase/wayland.git?ref=1.24.0-4#1a08737f01842c2c11fd2d22bec795ffcd7fec67",
+      "hash": "wayland-1.24.0-4-dxEBa-N8AABxP_wW0QMcnzmY_h_P1sqtpY9tenhmLz10"
+    },
+    {
+      "name": "libxkbcommon",
+      "url": "git+https://github.com/xkbcommon/libxkbcommon.git?ref=xkbcommon-1.11.0#0f9cefb1fedb23433666fa5d9045e48ff030c006",
+      "hash": "N-V-__8AAFRAZAD02nId1w02lyWXmN-hvo873BSh9wZDxjSN"
+    },
+    {
+      "name": "xorgproto",
+      "url": "git+https://gitlab.freedesktop.org/xorg/proto/xorgproto?ref=xorgproto-2025.1#c18d2bc22813793bba7f0e4e603c0104d7724802",
+      "hash": "N-V-__8AAG86ZgA2-SHGTO4n81-Sj8LNvSASCKZ91wOWZ7Sg"
+    },
+    {
+      "name": "libx11",
+      "url": "git+https://gitlab.freedesktop.org/xorg/lib/libx11?ref=libX11-1.8.13#6c75545a1deb51f5903992c52af6bc35cc9bc103",
+      "hash": "N-V-__8AANL5xACqderCBKpnIFKe282dZAikvyc--kNSKWgd"
+    },
+    {
+      "name": "libxrandr",
+      "url": "git+https://gitlab.freedesktop.org/xorg/lib/libxrandr?ref=libXrandr-1.5.5#540c3ceef2be3e513b18002a858c7a9591dd749a",
+      "hash": "N-V-__8AAGlRAgBdkf1F-Y410qIz6cV4C62ZAUk_SGeUVriw"
+    },
+    {
+      "name": "libxinerama",
+      "url": "git+https://gitlab.freedesktop.org/xorg/lib/libxinerama?ref=libXinerama-1.1.6#cc4ac9cf36fdf3815381b791e47a90b8aebc7e78",
+      "hash": "N-V-__8AADGbAADcSgAMV_BzmUHtufxO65p2fWn8YYOXU16O"
+    },
+    {
+      "name": "libxcursor",
+      "url": "git+https://gitlab.freedesktop.org/xorg/lib/libxcursor?ref=libXcursor-1.2.3#8ae6cf61b18ecddf26f72a07bbfbd1ea9f022c36",
+      "hash": "N-V-__8AAKtlAgAAqwksheZkCSajEEPpi2XivNet-_3hZyz2"
+    },
+    {
+      "name": "libxi",
+      "url": "git+https://gitlab.freedesktop.org/xorg/lib/libxi?ref=libXi-1.8.2#3c2d5aedd7708c75710b39268631762de904c304",
+      "hash": "N-V-__8AAPVzDQBJt3bUATh5SVq-T6QI-Ns9v2pSScvG_cwH"
+    },
+    {
+      "name": "libxext",
+      "url": "git+https://gitlab.freedesktop.org/xorg/lib/libxext?ref=libXext-1.3.6#3826a58d190c2d8093d3586cb33867668cbb4553",
+      "hash": "N-V-__8AAKbaBwCHCqin8ym--Sq1JjkgGknUDDGABcfOD5Ax"
+    },
+    {
+      "name": "libxrender",
+      "url": "git+https://gitlab.freedesktop.org/xorg/lib/libxrender?ref=libXrender-0.9.12#46e12ff9e8e4d3f0313a2f097df93dbfdc14f92f",
+      "hash": "N-V-__8AANorBADbt-RlITZJofNvQWTiaQlv7r7lWYtxAqGx"
+    },
+    {
+      "name": "libxfixes",
+      "url": "git+https://gitlab.freedesktop.org/xorg/lib/libxfixes?ref=libXfixes-6.0.2#70d5b0e37f8a759f3dbc218f22954347ceed094a",
+      "hash": "N-V-__8AAFIgAQCJSug37AGy4zypGtiDtUR9wtQa8U74Nm0a"
+    }
+  ],
+  "minimum_zig_version": "0.16.0",
+  "readme": "[![CI](https://github.com/Techatrix/glfw/actions/workflows/ci.yaml/badge.svg)](https://github.com/Techatrix/glfw/actions)\n\n# glfw\n\nThis is [glfw](https://github.com/glfw/glfw), packaged for [Zig](https://ziglang.org/).\n\n## Installation\n\nFirst, update your `build.zig.zon`:\n\n```\n# Initialize a `zig build` project if you haven't already\nzig init\nzig fetch --save git+https://github.com/Techatrix/glfw.git\n```\n\nYou can then import `glfw` in your `build.zig` with:\n\n```zig\nconst glfw_dependency = b.dependency(\"glfw\", .{\n    .target = target,\n    .optimize = optimize,\n    // Uncomment to always fetch dependency header\n    // files instead of using pre-bundled ones.\n    // .@\"prefer-bundled-headers\" = false,\n});\nyour_exe.root_module.linkLibrary(glfw_dependency.artifact(\"glfw\"));\n```\n\n## Pre-Bundled Dependencies\n\nGLFW internally requires header files from various projects:\n\n- `wayland-protocols` generated using `wayland-scanner`\n- `wayland-client`\n- `wayland-cursor`\n- `wayland-egl`\n- `libxkbcommon`\n- `xorgproto`\n- `libx11`\n- `libxrandr`\n- `libxinerama`\n- `libxcursor`\n- `libxi`\n- `libxext`\n- `libxrender`\n- `libxfixes`\n\nBy default, this repository avoids fetching from all of these projects and instead uses pre-bundled header files that can be found in the `deps` directory.\n\nThe following options are offered to opt into alternative approaches:\n\n- Fetch from upstream repositories which can be enabled using `-Dprefer-bundled-headers=false`.\n- Lookup dependencies on the host system which can be enabled using Zig's [System Integration Options](https://ziglang.org/download/0.12.0/release-notes.html#Ability-to-Declare-Optional-System-Library-Integration).\n\n### Update\n\nThe header files have been collected using the following command:\n\n```\nzig build -Donly-install-dependency-headers -Dprefer-bundled-headers=false -Dx11 -Dwayland --prefix deps\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/19954306?u=46b41c812ab0a548744ee6eea503b68e8cb7f1bf&v=4",
+  "releases": [],
+  "owner_bio": "Always working on @ziglang related tooling",
+  "owner_company": null,
+  "owner_location": "Hamburg, Germany",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 97,
+  "owner_following": 3,
+  "owner_created_at": "2016-06-15T14:18:42Z",
+  "license": "MIT",
+  "category": "library"
+}

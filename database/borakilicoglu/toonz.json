@@ -1,0 +1,32 @@
+{
+  "name": "toonz",
+  "owner": "borakilicoglu",
+  "repo": "toonz",
+  "description": "Zig implementation of TOON (Token-Oriented Object Notation).",
+  "type": "package",
+  "topics": [
+    "toon",
+    "zig",
+    "zig-toon",
+    "toon-format",
+    "toon-parser",
+    "zig-library",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-04-08T19:05:41Z",
+  "minimum_zig_version": "0.13.0",
+  "readme": "![TOON](https://raw.githubusercontent.com/toon-format/toon/main/.github/og.png)\n\n# toonz\n\nZig implementation of TOON (Token-Oriented Object Notation).\n\nThis repo is a spec-driven encoder/decoder project built against the official TOON specification and upstream conformance fixtures.\n\n## Current State\n\nThe project is no longer a bootstrap stub. It currently supports a substantial TOON surface:\n\n- primitives\n- objects\n- inline primitive arrays\n- tabular arrays\n- nested arrays\n- list-format mixed arrays\n- root forms\n- delimiter-aware parsing\n- strict validation subset\n- whitespace tolerance subset\n- number decoding normalization subset\n- path expansion (`expandPaths = safe | off`)\n- key folding (`keyFolding = safe | off`)\n\n`zig build test` currently passes.\n\n## Reference Sources\n\n- Spec: [SPEC.md](https://github.com/toon-format/spec/blob/main/SPEC.md)\n- Conformance tests: [tests](https://github.com/toon-format/spec/tree/main/tests)\n- Reference implementation: [toon package](https://github.com/toon-format/toon/tree/main/packages/toon)\n- Initial seed doc reviewed for this project: [Implementations](https://toonformat.dev/ecosystem/implementations.html)\n\n## Main Files\n\n- `src/lib.zig`: public API\n- `src/encode.zig`: encoder\n- `src/decode.zig`: decoder\n- `src/fixtures.zig`: official fixture runner\n- `src/tokenizer.zig`: line scanner and indentation metadata\n- `src/value.zig`: recursive cleanup helpers\n\n## Build\n\n```sh\nzig build test\n```\n\n## Installation\n\nThis project is currently consumed as a source dependency from the repository.\n\nAdd `toonz` to your `build.zig.zon` dependencies, then import the module in `build.zig`:\n\n```zig\nconst toonz = b.dependency(\"toonz\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\nexe.root_module.addImport(\"toonz\", toonz.module(\"toonz\"));\n```\n\n## Example\n\n**JSON**\n\n```json\n{\"users\":[{\"id\":1,\"name\":\"Ada\"},{\"id\":2,\"name\":\"Bob\"}]}\n```\n\n**TOON**\n\n```toon\nusers[2]{id,name}:\n  1,Ada\n  2,Bob\n```\n\n## API Matrix\n\n| Function | Input | Output | Notes |\n|----------|-------|--------|-------|\n| `encodeAlloc` | `std.json.Value` | TOON text | Encoder options include delimiter, indentation, trailing newline, and key folding |\n| `decodeAlloc` | TOON text | `std.json.Value` | Decoder options include strict validation and path expansion |\n| `transcodeJsonToToonAlloc` | JSON text | TOON text | Parses JSON, then encodes TOON |\n| `transcodeToonToJsonAlloc` | TOON text | JSON text | Decodes TOON, then serializes JSON |\n\n## Usage\n\nEncode a `std.json.Value` into TOON:\n\n```zig\nconst std = @import(\"std\");\nconst toonz = @import(\"toonz\");\n\nvar arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);\ndefer arena.deinit();\nconst allocator = arena.allocator();\n\nvar user = std.json.ObjectMap.init(allocator);\ntry user.put(\"name\", .{ .string = \"Bora\" });\ntry user.put(\"active\", .{ .bool = true });\n\nconst value = std.json.Value{ .object = user };\nconst output = try toonz.encodeAlloc(allocator, value, .{\n    .trailing_newline = false,\n});\n\nstd.debug.print(\"{s}\\n\", .{output});\n```\n\nDecode TOON into `std.json.Value`:\n\n```zig\nconst std = @import(\"std\");\nconst toonz = @import(\"toonz\");\n\nvar arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);\ndefer arena.deinit();\nconst allocator = arena.allocator();\n\nvar value = try toonz.decodeAlloc(\n    allocator,\n    \"user.name: Bora\\nuser.active: true\\n\",\n    .{\n        .expand_paths = .safe,\n        .strict = true,\n    },\n);\ndefer toonz.deinitValue(allocator, &value);\n```\n\nTranscode raw JSON text to TOON:\n\n```zig\nconst std = @import(\"std\");\nconst toonz = @import(\"toonz\");\n\nvar arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);\ndefer arena.deinit();\nconst allocator = arena.allocator();\n\nconst output = try toonz.transcodeJsonToToonAlloc(\n    allocator,\n    \"{\\\"name\\\":\\\"Bora\\\",\\\"active\\\":true}\",\n    .{ .trailing_newline = false },\n);\n\nstd.debug.print(\"{s}\\n\", .{output});\n```\n\nTranscode TOON text to raw JSON text:\n\n```zig\nconst std = @import(\"std\");\nconst toonz = @import(\"toonz\");\n\nvar arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);\ndefer arena.deinit();\nconst allocator = arena.allocator();\n\nconst output = try toonz.transcodeToonToJsonAlloc(\n    allocator,\n    \"user.name: Bora\\nuser.active: true\\n\",\n    .{ .expand_paths = .safe },\n);\n\nstd.debug.print(\"{s}\\n\", .{output});\n```\n\n## Contributing\n\nContribution and commit rules live in `CONTRIBUTING.md`.\n\n## Credit\n\nTOON was created by [Johann Schopplich](https://johannschopplich.com/).\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/1382214?u=409f1e6e9915f2e458aaa34aa3033a81b5cbf7be&v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 179,
+  "owner_following": 158,
+  "owner_created_at": "2012-01-26T14:54:41Z",
+  "category": "library"
+}
