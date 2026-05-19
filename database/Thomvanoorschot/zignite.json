@@ -16,10 +16,10 @@
     "zig-package",
     "ziglang"
   ],
-  "stars": 39,
+  "stars": 40,
   "forks": 1,
   "watchers": 3,
-  "updated_at": "2026-04-08T12:02:58Z",
+  "updated_at": "2026-05-13T18:13:22Z",
   "dependencies": [
     {
       "name": "emsdk",

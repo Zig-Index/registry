@@ -13,7 +13,7 @@
   "stars": 3,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-05-19T09:28:09Z",
+  "updated_at": "2026-05-19T11:18:11Z",
   "dependencies": [
     {
       "name": "zig_args",

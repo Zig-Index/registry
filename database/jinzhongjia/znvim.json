@@ -11,7 +11,7 @@
     "zig-package"
   ],
   "stars": 28,
-  "forks": 2,
+  "forks": 1,
   "watchers": 2,
   "updated_at": "2026-04-26T05:21:04Z",
   "dependencies": [
@@ -58,7 +58,7 @@
   "owner_location": "Singapore",
   "owner_blog": "https://blog.nvimer.org",
   "owner_twitter_username": null,
-  "owner_followers": 96,
+  "owner_followers": 97,
   "owner_following": 9,
   "owner_created_at": "2018-07-27T10:00:34Z",
   "homepage": "https://jinzhongjia.github.io/znvim/",

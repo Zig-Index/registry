@@ -9,10 +9,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 2,
+  "stars": 3,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-05-12T13:53:12Z",
+  "updated_at": "2026-05-17T23:32:19Z",
   "dependencies": [
     {
       "name": "zigcli",
@@ -122,7 +122,7 @@
   "owner_location": "/home/mars",
   "owner_blog": "https://en.liujiacai.net/",
   "owner_twitter_username": "liujiacai",
-  "owner_followers": 1057,
+  "owner_followers": 1062,
   "owner_following": 116,
   "owner_created_at": "2013-03-13T01:33:15Z",
   "homepage": "https://jiacai2050.github.io/comptime-serde/",

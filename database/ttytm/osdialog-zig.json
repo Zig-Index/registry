@@ -16,10 +16,10 @@
     "color-picker",
     "dialog"
   ],
-  "stars": 16,
+  "stars": 17,
   "forks": 2,
   "watchers": 1,
-  "updated_at": "2025-12-24T03:40:53Z",
+  "updated_at": "2026-05-15T13:50:55Z",
   "dependencies": [
     {
       "name": "osdialog",

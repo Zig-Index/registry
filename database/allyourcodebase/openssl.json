@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 25,
+  "stars": 26,
   "forks": 14,
   "watchers": 2,
-  "updated_at": "2026-04-20T10:58:40Z",
+  "updated_at": "2026-05-16T10:31:01Z",
   "dependencies": [
     {
       "name": "openssl",

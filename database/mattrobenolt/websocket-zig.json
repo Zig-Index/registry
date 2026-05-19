@@ -12,10 +12,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 7,
-  "forks": 1,
+  "stars": 8,
+  "forks": 2,
   "watchers": 0,
-  "updated_at": "2026-04-04T00:53:56Z",
+  "updated_at": "2026-05-19T01:58:05Z",
   "dependencies": [
     {
       "name": "libxev",
@@ -32,7 +32,7 @@
   "owner_location": "Reno, NV",
   "owner_blog": "https://mattrobenolt.com",
   "owner_twitter_username": "mattrobenolt",
-  "owner_followers": 536,
+  "owner_followers": 537,
   "owner_following": 0,
   "owner_created_at": "2010-08-25T14:09:54Z",
   "license": "MIT",
