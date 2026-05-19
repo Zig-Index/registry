@@ -14,7 +14,7 @@
   "stars": 27,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-05-19T03:59:26Z",
+  "updated_at": "2026-05-19T08:28:35Z",
   "dependencies": [
     {
       "name": "mailbox",
@@ -37,12 +37,12 @@
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/9116281?u=2db219a6136b07d51afe2002b80a7e47b3b37427&v=4",
   "releases": [
     {
-      "tag_name": "v0.0.10",
-      "name": "tofu Linux Zig 0.15.2",
+      "tag_name": "v0.0.14",
+      "name": "tofu zig 0.15.2 dual {posix|usockets}",
       "body": "",
       "prerelease": false,
-      "published_at": "2026-02-03T07:07:22Z",
-      "html_url": "https://github.com/g41797/tofu/releases/tag/v0.0.10",
+      "published_at": "2026-05-19T08:52:22Z",
+      "html_url": "https://github.com/g41797/tofu/releases/tag/v0.0.14",
       "assets": []
     }
   ],
