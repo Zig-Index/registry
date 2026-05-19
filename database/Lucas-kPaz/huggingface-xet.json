@@ -19,7 +19,7 @@
   "stars": 1,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-05-19T19:28:56Z",
+  "updated_at": "2026-05-19T21:46:08Z",
   "dependencies": [
     {
       "name": "lz4",
