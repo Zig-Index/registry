@@ -14,7 +14,7 @@
   "stars": 27,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-05-18T16:04:46Z",
+  "updated_at": "2026-05-19T03:59:26Z",
   "dependencies": [
     {
       "name": "mailbox",
@@ -25,6 +25,11 @@
       "name": "usockets",
       "url": "git+https://github.com/g41797/uSockets.git#master",
       "hash": "N-V-__8AALwjBgA3LAMIs1wy-EY8ATSedwDeOKjPRG8U1K18"
+    },
+    {
+      "name": "wepoll",
+      "url": "git+https://github.com/piscisaureus/wepoll#dist",
+      "hash": "N-V-__8AAHdDAQBYE31YD6dB4IlHQ_qqBAEu07X4VB56RL2Q"
     }
   ],
   "minimum_zig_version": "0.15.2",
