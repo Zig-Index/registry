@@ -20,6 +20,15 @@
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/231785?u=8a0cdeb97b0a614b0350536ecd6921ee6166c611&v=4",
   "releases": [
     {
+      "tag_name": "v0.2.1",
+      "name": null,
+      "body": "Zig 0.16 compatibility\n\nMinor changes to tests were required, the library itself needed no\nchanges, and received none.",
+      "prerelease": false,
+      "published_at": "2026-05-19T14:29:20Z",
+      "html_url": "https://github.com/mnemnion/zelda/releases/tag/v0.2.1",
+      "assets": []
+    },
+    {
       "tag_name": "v0.2.0",
       "name": "Zelda II: The Adventure of Link",
       "body": "Now Zig 0.15.2 compatible, and much enhanced, with\r\nsorting, filter, and a few other bells and whistles.",

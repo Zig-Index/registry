@@ -12,9 +12,41 @@
   "stars": 2,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-05-19T13:57:53Z",
+  "updated_at": "2026-05-19T17:53:58Z",
+  "dependencies": [
+    {
+      "name": "impeller_sdk_macos_arm64",
+      "url": "https://github.com/KercyDing/zig-impeller/releases/download/sdk-4c525dac/impeller-sdk-macos-arm64.tar.gz",
+      "hash": "impeller_sdk_macos_arm64-0.0.1-OC2y7fYRqQDF1sXfEJzaqmy6dNOYf8oi9YwikSYxbZxI"
+    },
+    {
+      "name": "impeller_sdk_macos_x64",
+      "url": "https://github.com/KercyDing/zig-impeller/releases/download/sdk-4c525dac/impeller-sdk-macos-x64.tar.gz",
+      "hash": "impeller_sdk_macos_x64-0.0.1-Qx6VKLw5qgDLKYijngdnEmjCrBmu8Yl6iBe-wKaK1cvq"
+    },
+    {
+      "name": "impeller_sdk_linux_arm64",
+      "url": "https://github.com/KercyDing/zig-impeller/releases/download/sdk-4c525dac/impeller-sdk-linux-arm64.tar.gz",
+      "hash": "impeller_sdk_linux_arm64-0.0.1-FxXa4x7EfQDeLPETrPiDOFn4SbZAZrQ4wFp1i3Ce8mPH"
+    },
+    {
+      "name": "impeller_sdk_linux_x64",
+      "url": "https://github.com/KercyDing/zig-impeller/releases/download/sdk-4c525dac/impeller-sdk-linux-x64.tar.gz",
+      "hash": "impeller_sdk_linux_x64-0.0.1-327TimQMhQB1ATFVpxexP1SrzdOHyA3pP6lYTRhu0hqF"
+    },
+    {
+      "name": "impeller_sdk_windows_arm64",
+      "url": "https://github.com/KercyDing/zig-impeller/releases/download/sdk-4c525dac/impeller-sdk-windows-arm64.tar.gz",
+      "hash": "impeller_sdk_windows_arm64-0.0.1-dZsxgCyIZwCtuVtzW-_ATBPQjbRFEKnV7uc-VBfI4AL3"
+    },
+    {
+      "name": "impeller_sdk_windows_x64",
+      "url": "https://github.com/KercyDing/zig-impeller/releases/download/sdk-4c525dac/impeller-sdk-windows-x64.tar.gz",
+      "hash": "impeller_sdk_windows_x64-0.0.1-QN1vuip8aAAr5f8FAWswt8sLScmOBhIqonIsa7E4gGSS"
+    }
+  ],
   "minimum_zig_version": "0.16.0",
-  "readme": "# zig-impeller\n\nZig bindings for Impeller's standalone `impeller.h` API.\n\n<p align=\"left\">\n  <img src=\"https://github.com/user-attachments/assets/938615ee-55aa-4a76-a106-c778151ede53\" width=\"400\">\n</p>\n\n> Examples [here](https://github.com/KercyDing/zig-impeller-examples).\n\n## Features\n\n- Linux + Vulkan\n- macOS + Metal\n- Windows + Vulkan\n- Zig wrappers for contexts, surfaces, paints, paths, textures, display lists, typography, and basic geometry\n\n## Install\n\n```bash\nzig fetch --save git+https://github.com/KercyDing/zig-impeller#main\n```\n\nAdd the dependency in `build.zig`:\n\n```zig\n// ...\nconst impeller_dep = b.dependency(\"zig_impeller\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\nconst exe_mod = b.createModule(.{\n    .root_source_file = b.path(\"src/main.zig\"),\n    .target = target,\n    .optimize = optimize,\n    .imports = &.{\n        .{ .name = \"impeller\", .module = impeller_dep.module(\"impeller\") },\n    },\n});\nconst exe = b.addExecutable(.{\n    .name = \"app\",\n    .root_module = exe_mod,\n});\n// ...\n```\n\nThen import it:\n\n```zig\nconst impeller = @import(\"impeller\");\n```\n\n## Minimal drawing\n\nCore drawing code:\n\n```zig\nvar builder = try impeller.DisplayListBuilder.init(null);\ndefer builder.deinit();\n\nvar paint = try impeller.Paint.init();\ndefer paint.deinit();\n\npaint.setColor(impeller.srgb(1.0, 1.0, 1.0, 1.0));\nbuilder.drawPaint(paint);\n\npaint.setColor(impeller.srgb(0.2, 0.4, 1.0, 1.0));\nbuilder.drawRect(impeller.rect(120.0, 100.0, 240.0, 160.0), paint);\n\nvar list = try builder.build();\ndefer list.deinit();\n\ntry surface.draw(list);\ntry surface.present();\n```\n\n## Examples\n\nRunnable GLFW examples now live in the separate `zig-impeller-examples` repository so this package stays a pure library dependency with no GLFW requirement.\n\n## Status\n\n- All of `impeller.h` is wrapped\n- `zig build test` runs unit tests\n- `FragmentProgram` is wrapped, but shader packaging is not documented here yet\n\n## Tools\n\nFetch the latest stable Impeller SDK:\n\n```bash\npython3 tools/fetch_sdk.py\n```\n\nThis writes a vendor-like SDK tree to `tools/impeller_<sha8>/`. Use `--channel beta` for the latest beta SDK, or `--sha <engine-sha>` for a specific Flutter engine revision.\n\nExport the current vendored `impeller.h` surface:\n\n```bash\npython3 tools/export_h.py --output ./impeller_h.md\n```\n\nCompare the current vendored header with a newly fetched SDK:\n\n```bash\npython3 tools/diff_h.py --new tools/impeller_<sha8>\n```\n\n## LICENSE\n\n[MIT](LICENSE)\n",
+  "readme": "# zig-impeller\n\nZig bindings for Impeller's standalone `impeller.h` API.\n\n<p align=\"left\">\n  <img src=\"https://github.com/user-attachments/assets/938615ee-55aa-4a76-a106-c778151ede53\" width=\"400\">\n</p>\n\n> Examples [here](https://github.com/KercyDing/zig-impeller-examples).\n\n## Features\n\n- Linux + Vulkan\n- macOS + Metal\n- Windows + Vulkan\n- Zig wrappers for contexts, surfaces, paints, paths, textures, display lists, typography, and basic geometry\n\n## Install\n\n```bash\nzig fetch --save git+https://github.com/KercyDing/zig-impeller#main\n```\n\nAdd the dependency in `build.zig`:\n\n```zig\n// ...\nconst impeller_dep = b.dependency(\"zig_impeller\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\nconst exe_mod = b.createModule(.{\n    .root_source_file = b.path(\"src/main.zig\"),\n    .target = target,\n    .optimize = optimize,\n    .imports = &.{\n        .{ .name = \"impeller\", .module = impeller_dep.module(\"impeller\") },\n    },\n});\nconst exe = b.addExecutable(.{\n    .name = \"app\",\n    .root_module = exe_mod,\n});\n// ...\n```\n\nThen import it:\n\n```zig\nconst impeller = @import(\"impeller\");\n```\n\n## Minimal drawing\n\nCore drawing code:\n\n```zig\nvar builder = try impeller.DisplayListBuilder.init(null);\ndefer builder.deinit();\n\nvar paint = try impeller.Paint.init();\ndefer paint.deinit();\n\npaint.setColor(impeller.srgb(1.0, 1.0, 1.0, 1.0));\nbuilder.drawPaint(paint);\n\npaint.setColor(impeller.srgb(0.2, 0.4, 1.0, 1.0));\nbuilder.drawRect(impeller.rect(120.0, 100.0, 240.0, 160.0), paint);\n\nvar list = try builder.build();\ndefer list.deinit();\n\ntry surface.draw(list);\ntry surface.present();\n```\n\n## Examples\n\nRunnable GLFW examples now live in the separate `zig-impeller-examples` repository so this package stays a pure library dependency with no GLFW requirement.\n\n## Status\n\n- All of `impeller.h` is wrapped\n- `zig build test` runs unit tests\n- `FragmentProgram` is wrapped, but shader packaging is not documented here yet\n\n## Tools\n\nFetch the latest stable Impeller SDK:\n\n```bash\npython3 tools/fetch_sdk.py\n```\n\nThis writes a vendor-like SDK tree to `tools/impeller_<sha8>/`. Use `--channel beta` for the latest beta SDK, or `--sha <engine-sha>` for a specific Flutter engine revision.\n\nExport the current vendored `impeller.h` surface:\n\n```bash\npython3 tools/export_h.py --output ./impeller_h.md\n```\n\nCompare the current vendored header with a newly fetched SDK:\n\n```bash\npython3 tools/diff_h.py --new tools/impeller_<sha8>\n```\n\nPackage per-platform SDK tarballs for lazy dependencies:\n\n```bash\npython3 tools/package_sdk.py --out-dir dist\n```\n\nThe `Package Impeller SDK` GitHub Actions workflow runs this manually, uploads the tarballs to a GitHub Release, and can update the generated lazy dependency entries in `build.zig.zon`.\n\n## LICENSE\n\n[MIT](LICENSE)\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/152250600?u=c35b31793669f3a8dbabe8dc56fbe03c094ef5eb&v=4",
   "releases": [],
   "owner_bio": "Talk less, code more.",
