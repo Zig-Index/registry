@@ -15,7 +15,7 @@
   "stars": 2,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-05-20T13:40:21Z",
+  "updated_at": "2026-05-21T15:52:35Z",
   "dependencies": [
     {
       "name": "mimalloc",
