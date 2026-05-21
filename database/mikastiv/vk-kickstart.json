@@ -14,14 +14,14 @@
     "zig-package"
   ],
   "stars": 10,
-  "forks": 3,
+  "forks": 4,
   "watchers": 1,
-  "updated_at": "2026-04-19T23:41:40Z",
+  "updated_at": "2026-05-21T02:06:52Z",
   "dependencies": [
     {
       "name": "vulkan",
-      "url": "git+https://github.com/Snektron/vulkan-zig#be16fc99f7f794cba90334978c6c5aadeda8094f",
-      "hash": "vulkan-0.0.0-r7Ytx-V9AwCwHxS2TaZ-KJCp_3axidu3ASZUg3B512-k"
+      "url": "git+https://github.com/snektron/vulkan-zig.git#b496a6a561ffbbeb530b0f9ed4e059f88c0723a5",
+      "hash": "vulkan-0.0.0-r7Ytx7N9AwD7IZt5_XNHtkJ4G9qY0pCH-cpcOsbL8wzD"
     },
     {
       "name": "vulkan_headers",
