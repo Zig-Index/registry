@@ -1,0 +1,58 @@
+{
+  "name": "mneme",
+  "owner": "mneme-db",
+  "repo": "mneme",
+  "description": "mneme is an embedded-first vector / memory database core written in Zig.",
+  "type": "package",
+  "topics": [
+    "machine-learning",
+    "vector-database",
+    "zig-package",
+    "database"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-05-21T05:24:52Z",
+  "dependencies": [
+    {
+      "name": "zlinter",
+      "url": "git+https://github.com/kurtwagner/zlinter?ref=0.16.x#9b4d67b9725e7137ac876cc628fe5dd2ca5a2681",
+      "hash": "zlinter-0.0.1-OjQ08c7oCwDIwhlde7eDKMACNTsqAhGXy5vB7GdfGobG"
+    }
+  ],
+  "minimum_zig_version": "0.16.0",
+  "readme": "# mneme\n\n`mneme` is an embedded-first vector / memory database core written in Zig.\n\n## What Is mneme\n\n`mneme` is a local library, not a server. It focuses on:\n\n- deterministic in-process behavior\n- explicit memory ownership\n- exact + approximate vector search\n- a stable C ABI for language wrappers\n\nCurrent state: Phase 1 through Phase 5 hardening are implemented (core engine + persistence + HNSW + C ABI + productization docs/CI).\n\n## Why mneme Exists\n\nMany vector systems optimize for distributed deployment first. `mneme` optimizes for:\n\n- embedded use cases\n- predictable host integration\n- wrapper-friendly ABI contracts\n- educational clarity of implementation\n\n## Core Features\n\n- fixed-dimension collections with cosine metric\n- insert/delete/count\n- exact flat top-k search\n- in-memory HNSW ANN search\n- canonical persistence (`.mneme`, current `format_version = 2`)\n- stable C ABI (`include/mneme.h`)\n\n## Zig Example\n\n```zig\nconst std = @import(\"std\");\nconst mneme = @import(\"mneme\");\n\npub fn main() !void {\n    var gpa: std.heap.DebugAllocator(.{}) = .init;\n    defer std.debug.assert(gpa.deinit() == .ok);\n\n    var c = try mneme.Collection.init(gpa.allocator(), \"docs\", 3, .cosine);\n    defer c.deinit();\n\n    const v = [_]f32{ 1.0, 0.0, 0.0 };\n    try c.insert(\"doc_1\", &v, null);\n\n    const exact = try c.search(&v, 5);\n    defer c.freeSearchResults(exact);\n\n    try c.buildHnsw(.{ .m = 16, .ef_construction = 64, .ef_search = 32, .seed = 42 });\n    const ann = try c.searchWithOptions(&v, 5, .{ .index = .hnsw, .ef_search = null });\n    defer c.freeSearchResults(ann);\n}\n```\n\n## C Example\n\nSee runnable smoke example:\n\n- `examples/c/basic.c`\n\nBuild and run:\n\n```bash\nzig build c-integration\n```\n\n## Persistence Format (`.mneme`)\n\n- versioned binary format, current `format_version = 2`\n- canonical data only (collection config + points)\n- CRC32 footer checksum\n- strict parser rejects trailing bytes\n- HNSW graph is derived in-memory and rebuilt after load\n\n## HNSW Support\n\n- build index from current points: `buildHnsw`\n- query-time selection via `searchWithOptions` (Zig) or `mneme_collection_search_hnsw` (C ABI)\n- stale-index detection after mutations (`MNEME_ERROR_INDEX_STALE`)\n\n## C ABI Usage\n\nHeader:\n\n- `include/mneme.h`\n\nDesign + wrapper docs:\n\n- `docs/design/c_abi.md`\n- `docs/learning/phase_04_language_wrapper_guide.md`\n\nNotes:\n\n- `mneme_abi_version()` currently returns `1`\n- `mneme_last_error()` is thread-local\n- explicit ownership contract: creators/searchers allocate; callers free\n\n## Build Instructions\n\n```bash\nzig build\nzig build test\nzig build lint\nzig build lib\nzig build c-integration\n```\n\nCoverage (Linux-oriented, `kcov` required):\n\n```bash\nzig build coverage\nzig build coverage-c-integration\n```\n\n## Known Limitations\n\n- no metadata filtering\n- HNSW is not persisted\n- no multi-query batch search optimization yet\n- no Windows support workflow yet\n- no Python/Elixir production wrapper packages yet\n\n## Roadmap\n\n- Phase 6: Python packaging over stable C ABI\n- Phase 7: Elixir wrapper\n- Later: metadata filtering + hybrid queries\n- Later: persisted ANN structures and SIMD acceleration\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/280438073?v=4",
+  "releases": [
+    {
+      "tag_name": "v0.5.0",
+      "name": "v0.5.0",
+      "body": "# mneme v0.5.0 Release Notes\r\n\r\n`mneme` is an embedded-first vector / memory database core written in Zig.\r\n\r\n## Highlights\r\n\r\n- Phase 5 productization completed.\r\n- C ABI hardening pass finished for failure-path safety and wrapper ergonomics.\r\n- Tag-triggered GitHub release workflow added for multi-platform C ABI binaries.\r\n- Documentation system expanded for external adopters and wrapper authors.\r\n\r\n## What Changed\r\n\r\n### C ABI hardening and contracts\r\n\r\n- strengthened invalid-argument behavior for out-pointers:\r\n  - `mneme_collection_create`\r\n  - `mneme_collection_load`\r\n  - `mneme_collection_search_flat`\r\n  - `mneme_collection_search_hnsw`\r\n- batch contracts clarified and tested:\r\n  - optional `out_inserted` / `out_deleted` pointers are accepted\r\n  - fail-fast partial-progress semantics are explicit in header/docs\r\n- thread-local error handling retained:\r\n  - `mneme_last_error()` remains thread-local and must be read on the same thread\r\n\r\n### Build and release engineering\r\n\r\n- added tag-triggered release workflow on tags matching `v*`\r\n- release assets are produced per platform:\r\n  - `mneme-<tag>-linux-x86_64.tar.gz`\r\n  - `mneme-<tag>-macos-arm64.tar.gz`\r\n- each archive contains:\r\n  - `lib/libmneme.so` (Linux) or `lib/libmneme.dylib` (macOS)\r\n  - `include/mneme.h`\r\n  - `SHA256SUMS`\r\n\r\n### CI updates\r\n\r\n- core CI runs on Ubuntu and macOS\r\n- `coverage-c-integration` split into a separate optional workflow job\r\n- Linux `kcov` coverage remains non-blocking\r\n\r\n### Documentation and project metadata\r\n\r\n- README rewritten for external developers\r\n- added:\r\n  - `VERSIONING.md`\r\n  - `CHANGELOG.md`\r\n  - `CONTRIBUTING.md`\r\n- added Phase 5 learning docs and code walkthrough:\r\n  - `docs/learning/phase_05_productization.md`\r\n  - `docs/learning/phase_05_abi_design_lessons.md`\r\n  - `docs/learning/phase_05_code_walkthrough.md`\r\n\r\n## Compatibility\r\n\r\n- Library version: `0.5.0`\r\n- C ABI version: `1` (unchanged)\r\n- File format version: `2` (unchanged)\r\n\r\n## Known Limitations\r\n\r\n- metadata filtering is not implemented\r\n- HNSW index is not persisted\r\n- no multi-query batch search optimization yet\r\n- no Windows support workflow yet\r\n- no production Python/Elixir wrapper packages yet\r\n\r\n## Upgrade Notes\r\n\r\n- Wrapper authors should continue to probe optional/additive symbols when needed.\r\n- Prefer release archives for deterministic header+library consumption in wrapper pipelines.\r\n",
+      "prerelease": false,
+      "published_at": "2026-04-29T16:26:41Z",
+      "html_url": "https://github.com/mneme-db/mneme/releases/tag/v0.5.0",
+      "assets": [
+        {
+          "name": "mneme-v0.5.0-macos-arm64.tar.gz",
+          "url": "https://github.com/mneme-db/mneme/releases/download/v0.5.0/mneme-v0.5.0-macos-arm64.tar.gz",
+          "size": 714800,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "mneme-v0.5.0-linux-x86_64.tar.gz",
+          "url": "https://github.com/mneme-db/mneme/releases/download/v0.5.0/mneme-v0.5.0-linux-x86_64.tar.gz",
+          "size": 2507387,
+          "content_type": "application/gzip"
+        }
+      ]
+    }
+  ],
+  "owner_bio": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2026-04-29T15:12:00Z",
+  "license": "MIT",
+  "category": "database"
+}
