@@ -19,7 +19,7 @@
   "stars": 16,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-05-22T02:38:52Z",
+  "updated_at": "2026-05-22T18:07:11Z",
   "dependencies": [
     {
       "name": "dotenv",
@@ -105,6 +105,11 @@
       "name": "metriks",
       "url": "git+https://github.com/im-ng/metrics.zig.git#2011171f3542f213b4742f96ed0934f56218b8a7",
       "hash": "metriks-0.0.0-sq540f2_AQCTNA7_ZQWKehRfXynKHT_0baiw5RFDv_3W"
+    },
+    {
+      "name": "sqlite",
+      "url": "git+https://github.com/vrischmann/zig-sqlite.git#fb73a6cca771c0c26fbab1a1f7689c23ec786257",
+      "hash": "sqlite-3.48.0-F2R_a8WODgDamFQx1fOrpgY7IdluD4Sr_P7G0UPxUUMr"
     },
     {
       "name": "dotenv",
