@@ -1,0 +1,30 @@
+{
+  "name": "vftrait",
+  "owner": "Verafahn",
+  "repo": "vftrait",
+  "description": "A library for duck type checking during compilation.",
+  "type": "package",
+  "topics": [
+    "compile-time",
+    "trait",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-05-23T12:22:33Z",
+  "minimum_zig_version": "0.16.0",
+  "readme": "# vftrait\n\nA library for duck type checking during compilation. It provides the `satisfyTrait` function to verify at compile time whether a type satisfies the contract defined by a trait. \n\nSimilar concepts in other languages:\n| **Language** | **Concept** | **Keyword** |\n|---|---|---|\n| Rust | Trait | `trait` / `impl` |\n| C++ | Concept | `concept` / `requires` |\n| Haskell | Typeclass | `class` / `instance` |\n| Swift | Protocol | `protocol` |\n| Go | Interface (structural) | `interface` |\n| Java | Interface (nominal) | `interface` / `implements` |\n\n\n## Installation\n\nRun the following command to add vftrait to your project:\n\n```sh\nzig fetch --save git+https://github.com/Verafahn/vftrait#master\n```\n\nThen add the module in your `build.zig`:\n\n```zig\nconst vftrait = b.dependency(\"vftrait\", .{}).module(\"vftrait\");\nexe.root_module.addImport(\"vftrait\", vftrait);\n```\n\n## Quick Start\n\nDefine a trait as a struct whose declarations describe the contract.  \nThen call `satisfyTrait` to check whether a type implements the trait.\n\n```zig\nconst vftrait = @import(\"vftrait\");\n\n// 1. Define the trait\nconst Printable = struct {\n    pub fn format(self: *const @This(), writer: anytype) !void {\n        _ = self;\n        _ = writer;\n    }\n};\n\n// 2. Implement the trait implicitly (no `impl` keyword required)\nconst Point = struct {\n    x: f32,\n    y: f32,\n\n    pub fn format(self: *const @This(), writer: anytype) !void {\n        try writer.print(\"Point({{.x = {d}, .y = {d}}})\", .{ self.x, self.y });\n    }\n};\n\n// 3. Check at compile time\ncomptime {\n    if (!vftrait.satisfyTrait(Printable, Point)) {\n        @compileError(\"Point must implement Printable\");\n    }\n}\n```\n\nFor example, a specific usage example:\n\n```zig\nconst vftrait = @import(\"vftrait\");\nconst std = @import(\"std\");\n\npub const Drawable = struct {\n    pub fn draw(self: *const @This()) void {\n        _ = self;\n    }\n};\n\npub const Circle = struct {\n    radius: f32,\n\n    pub fn draw(self: *const @This()) void {\n        std.debug.print(\"Circle(radius={})\", .{self.radius});\n    }\n};\n\npub const Point = struct {\n    x: f32,\n    y: f32,\n\n    pub fn draw(self: *const @This()) void {\n        std.debug.print(\"Point(x={}, y={})\", .{ self.x, self.y });\n    }\n};\n\npub fn draw(shape: anytype) void {\n    vftrait.assertSatisfyTrait(Drawable, @TypeOf(shape));\n    shape.draw();\n    return;\n}\n\npub fn main(init: std.process.Init) !void {\n    _ = init;\n\n    const circle = Circle{ .radius = 5.0 };\n    draw(circle);\n    const point = Point{ .x = 1.0, .y = 2.0 };\n    draw(point);\n\n    // draw(10); // Error: @TypeOf(10) does not satisfy Drawable\n}\n```\n\n## Trait Contract Elements\n\nThe trait struct can contain four kinds of declarations:\n\n| Category                | Zig Declaration                         | Example                                    |\n| ----------------------- | --------------------------------------- | ------------------------------------------ |\n| **Associated constant** | `pub const name: T = ...;`              | `pub const max_size: usize = 1024;`        |\n| **Associated type**     | `pub const Name = some_type;`           | `pub const Item = struct {};`              |\n| **Associated function** | `pub fn name(...) ... { }`              | `pub fn fromInt(n: i32) Self { }`          |\n| **Method**              | `pub fn name(self: *Self, ...) ... { }` | `pub fn clone(self: *const Self) Self { }` |\n\n## Matching Rules\n\n- **Constants**: Must have exactly the same type.\n- **Types**: Must be of the same kind (e.g., `struct` vs `struct`, `error` vs `error`).  \n  Nested types are **not** recursively checked – only the top‑level kind is compared.\n- **Functions and methods**: Must have the same calling convention and arity, and each parameter type and return type must be **isomorphic** (structurally equivalent) to the corresponding associated type in the trait.\n\n## Special Feature: `anytype` with `type`\n\nWhen an associated type in the trait is set to the built‑in `type`, that position accepts any type:\n\n```zig\nconst vftrait = @import(\"vftrait\");\n\nconst Trait = struct {\n    pub const Value = type; // Accepts any type\n    pub fn get(self: *const @This()) Value {\n        _ = self;\n    }\n};\n\nconst IntHolder = struct {\n    pub const Value = i32;\n    pub fn get(self: *const @This()) i32 {\n        _ = self;\n        return 42;\n    }\n};\n\nconst StrHolder = struct {\n    pub const Value = []const u8;\n    pub fn get(self: *const @This()) []const u8 {\n        _ = self;\n        return \"hi\";\n    }\n};\n\ncomptime {\n    @compileLog(vftrait.satisfyTrait(Trait, IntHolder)); // true\n    @compileLog(vftrait.satisfyTrait(Trait, StrHolder)); // true\n}\n```\n\nThis also works for `u32`, `struct`, `union`, `error`, `enum`, pointers, optionals, and any other type.\n\n## Requirements\n\n- Zig ≥ 0.16.0\n\n## License\n\nMIT\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/264734945?v=4",
+  "releases": [],
+  "owner_company": null,
+  "owner_location": "China",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 0,
+  "owner_following": 0,
+  "owner_created_at": "2026-03-01T04:08:55Z",
+  "license": "MIT",
+  "category": "library"
+}
