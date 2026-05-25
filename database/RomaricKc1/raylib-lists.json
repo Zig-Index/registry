@@ -12,7 +12,7 @@
   "stars": 1,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-05-25T12:01:10Z",
+  "updated_at": "2026-05-25T18:26:29Z",
   "dependencies": [
     {
       "name": "raylib_zig",
