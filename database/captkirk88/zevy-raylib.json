@@ -16,12 +16,12 @@
   "stars": 5,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-05-24T11:07:24Z",
+  "updated_at": "2026-05-25T14:57:47Z",
   "dependencies": [
     {
       "name": "zevy_ecs",
-      "url": "git+https://github.com/captkirk88/zevy-ecs#fa759c83daebbf57b18fb55a43a2f240090de186",
-      "hash": "zevy_ecs-2.6.6-VoL9macjCQDQrRZl85EtDly8fFhiM0TCRfrtSKE2-4rT"
+      "url": "git+https://github.com/captkirk88/zevy-ecs#0ad189ee0dfc55f123a4d14eef6c12f95f4ea64b",
+      "hash": "zevy_ecs-2.7.0-VoL9mbY4CQAGobW2pbtKrK2Q94e0itAqbrQ8nO02H5TH"
     },
     {
       "name": "zevy_ecs",
@@ -49,8 +49,8 @@
     },
     {
       "name": "zevy_mem",
-      "url": "git+https://github.com/captkirk88/zevy-mem#3ac8ef7fa1ca630e53e3b7b55a9a22ebc1e1bae3",
-      "hash": "zevy_mem-1.2.2-jK9L0dU-AwDHI13yVz1pGLRiLFWNQWPeGEi6AXvkuqSO"
+      "url": "git+https://github.com/captkirk88/zevy-mem#94ea6a002fc2a850f9ffaf328cbd19d417df451c",
+      "hash": "zevy_mem-1.2.3-jK9L0ek_AwDV1MUrbzDEjHriTpIZdppaGVvBuXEcz2MP"
     },
     {
       "name": "zevy_buildtools",
@@ -63,7 +63,7 @@
     }
   ],
   "minimum_zig_version": "0.16.0",
-  "readme": "# Zevy Raylib\n\n[license]: https://img.shields.io/github/license/captkirk88/zevy-raylib?style=for-the-badge&logo=opensourcehardware&label=License&logoColor=C0CAF5&labelColor=414868&color=8c73cc\n\n[![][license]](https://github.com/captkirk88/zevy-raylib/blob/main/LICENSE)\n\n[![Zig Version](https://img.shields.io/badge/zig-0.16.0-blue.svg)](https://ziglang.org/)\n\n> [!WARNING]\n> This library and its APIs are experimental.\n> The API and internal behavior can and will change without backward compatibility guarantees.\n> Tests and cross-platform coverage are limited — treat this as a development-ready library, not production-ready.\n> Please open issues or submit PRs if you rely on features that should be stabilized or suggested.\n\n### Table of contents\n\n- [Introduction](#introduction)\n- [Quick Start](#quick-start)\n- [Contributing](#contributing)\n- [Projects](#projects)\n- [License](#license)\n\n---\n\n## Introduction\n\nZevy Raylib is a small library that wires the Raylib runtime into a Zevy ECS-based app. It handles window creation, input harvesting, asset management and sets up RayGui-based UI systems with multiple layout options.\n\n---\n\n## Quick Start\n\n[Examples](examples/) can be ran with:\n\n```bash\nzig build examples\n```\n\n---\n\n## Contributing\n\n- Follow existing Zig patterns\n- Register new plugins in `src/root.zig` by adding them to `plug()`\n- Add unit tests beside features in the `src/*` directory. Prefer tests to be named `*_tests.zig`.\n\n## Projects\n- [zevy-alloy](https://github.com/captkirk88/zevy-alloy)\n- [zevy-ecs](https://github.com/captkirk88/zevy-ecs)\n",
+  "readme": "# Zevy Raylib\n\n[license]: https://img.shields.io/github/license/captkirk88/zevy-raylib?style=for-the-badge&logo=opensourcehardware&label=License&logoColor=C0CAF5&labelColor=414868&color=8c73cc\n\n[![][license]](https://github.com/captkirk88/zevy-raylib/blob/main/LICENSE)\n\n[![Zig Version](https://img.shields.io/badge/zig-0.16.0-blue.svg)](https://ziglang.org/)\n\n> [!WARNING]\n> This library and its APIs are experimental.\n> The API and internal behavior can and will change without backward compatibility guarantees.\n> Tests and cross-platform coverage are limited — treat this as a development-ready library, not production-ready.\n> Please open issues or submit PRs if you rely on features that should be stabilized or suggested.\n\n### Table of contents\n\n- [Introduction](#introduction)\n- [Quick Start](#quick-start)\n- [Contributing](#contributing)\n- [Projects](#projects)\n- [License](#license)\n\n---\n\n## Introduction\n\nZevy Raylib is a small library that wires the Raylib runtime into a Zevy ECS-based app. It handles window creation, input harvesting, asset management and sets up RayGui-based UI systems with multiple layout options.\n\n---\n\n## Quick Start\n\n[Examples](examples/) can be ran with:\n\n```bash\nzig build examples\n```\n\n> [!NOTE]\n> Requires `libgl-dev libx11-dev libxrandr-dev libxinerama-dev libxi-dev libxcursor-dev` on Linux.\n\n---\n\n## Contributing\n\n- Follow existing Zig patterns\n- Register new plugins in `src/root.zig` by adding them to `plug()`\n- Add unit tests beside features in the `src/*` directory. Prefer tests to be named `*_tests.zig`.\n\n## Projects\n- [zevy-alloy](https://github.com/captkirk88/zevy-alloy)\n- [zevy-ecs](https://github.com/captkirk88/zevy-ecs)\n\n## License\n[MIT](LICENSE)",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/6296457?u=57a7319f473f4c068419efb04c3c3b0f54a42efe&v=4",
   "releases": [],
   "owner_bio": "Am I A.I?",
