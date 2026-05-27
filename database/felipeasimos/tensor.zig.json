@@ -12,34 +12,7 @@
   "stars": 2,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-05-20T05:47:14Z",
-  "dependencies": [
-    {
-      "name": "zgpu",
-      "url": "https://github.com/felipeasimos/zgpu/archive/refs/heads/library-paths-for-modules.zip",
-      "hash": "zgpu-0.12.0-dev-nqFT5KKnCABtT_uYooM65qFdADyrGyaCQrpzNF20CRHt"
-    },
-    {
-      "name": "dawn_x86_64_windows_gnu",
-      "url": "https://github.com/michal-z/webgpu_dawn-x86_64-windows-gnu/archive/d3a68014e6b6b53fd330a0ccba99e4dcfffddae5.tar.gz",
-      "hash": "N-V-__8AAGsYnAT5RIzeAu881RveLghQ1EidqgVBVx10gVTo"
-    },
-    {
-      "name": "dawn_x86_64_linux_gnu",
-      "url": "https://github.com/michal-z/webgpu_dawn-x86_64-linux-gnu/archive/7d70db023bf254546024629cbec5ee6113e12a42.tar.gz",
-      "hash": "N-V-__8AAK7XUQNKNRnv1J6i189jtURJKjp3HTftoyD4Y4CB"
-    },
-    {
-      "name": "dawn_aarch64_macos",
-      "url": "https://github.com/michal-z/webgpu_dawn-aarch64-macos/archive/d2360cdfff0cf4a780cb77aa47c57aca03cc6dfe.tar.gz",
-      "hash": "N-V-__8AALVIRAIf5nfpx8-4mEo2RGsynVryPQPcHk95qFM5"
-    },
-    {
-      "name": "dawn_x86_64_macos",
-      "url": "https://github.com/michal-z/webgpu_dawn-x86_64-macos/archive/901716b10b31ce3e0d3fe479326b41e91d59c661.tar.gz",
-      "hash": "N-V-__8AAIz1QAKx8C8vft2YoHjGTjEAkH2QMR2UiAo8xZJ-"
-    }
-  ],
+  "updated_at": "2026-05-26T23:16:05Z",
   "minimum_zig_version": "0.16.0",
   "readme": "# tensor.zig\n\nA Zig tensor library with compile-time shapes and efficient operations.\n\nFollowing the explicity of zig, there is no hidden copies of tensors happening at any point in this library!\n> But what if this messes up too much the strides and shapes?\nThen a compile error is thrown to help you manually tweak the operations. No performance / memory surprises at runtime!\n\n## Tensor Creation\n\n```zig\n// Create tensor with compile-time shape\nvar tensor = Tensor(f64, .{3, 3}).init(&data);\nvar ref = TensorRef(f64, .{3, 3}).init(data[0..]);\n\n// Create zero-filled tensor\nvar zeros = Tensor(f64, .{2, 2}).zeroes();\n\n// Create random tensor\nvar rand = Tensor(f64, .{2, 2}).random(rng);\n```\n\n## Basic Operations\n\n### Element Access\n```zig\n// Get scalar value\nvar value = tensor.scalar(.{0, 1});\n\n// Get mutable reference\nvar ref = tensor.mut(.{0, 1});\n\n// Clone subtensor\nvar sub = tensor.clone(.{0});\n```\n\n### References and Slicing\n```zig\n// Get reference of subtensor\nvar ref = tensor.ref(.{0});\n\n// Slice with ranges\nvar slice = tensor.slice(.{.{1, 3}, .{0, 2}});\n\n// Reshape (contiguous tensors only)\nvar reshaped = tensor.reshape(.{6});\n```\n\n### Element-wise Operations\n```zig\n// In-place operation\ntensor.wise(other, &result, addFunc);\n\n// Create new tensor\nvar result = tensor.wiseNew(scalar, addFunc);\n\n// Apply function\ntensor.apply(squareFunc);\n```\n\n### Matrix Operations\n```zig\n// Matrix multiplication\nop.matmul(&a, &b, &result);\n\n// Matrix multiplication with new result\nvar result = op.matmulNew(&a, &b);\n\n// Transpose\nvar transposed = tensor.transpose(.{});\n```\n\n### Broadcasting\n```zig\n// Broadcast to target shape\nvar broadcasted = tensor.broadcast(.{3, 4});\n```\n\n### Iteration\n```zig\n// Iterate over elements\nvar iter = tensor.iter();\nwhile (iter.next()) |item| {\n    // item.indices, item.value\n}\n```\n\n## Function Factories\n\n```zig\nconst func = @import(\"tensor\").func;\n\n// Basic arithmetic\nconst add = func.addFactory(f64);\nconst sub = func.subFactory(f64);\nconst mul = func.mulFactory(f64);\nconst div = func.divFactory(f64);\n```\n\n## Getting column major matrices\n\nBefore initializing the data inside the matrix, you just need to tranpose the indices approprietly. One easy way to do this is calling `transpose`:\n\n```zig\nconst b_transposed = b.transpose(.{});\n// you can avoid data copies using a `ref`.\n// if your tensor is already a ref nothing will be copied\nconst b_ref_for_sure_not_copied = b.ref(.{}).transpose(.{});\n```\n\nYou can also just clone a transposed matrix.\n\n## Note\n\n> In the beginning, this was supposed to be a tensor library in which all metadata (shape, strides) would be only comptime-time known. However, this design decision hits a hard wall when implementing stuff like GEMM: this design forces slices to have compile time known arguments (at least in a decent API), which forces us to unroll outermost loops in GEMM, in the macrokernel. This would be catastrophic for instruction caches in large matrices.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/34526320?u=47f78fc22d602d9acc459e3752cbf7e3aa879ed4&v=4",
