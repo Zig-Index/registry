@@ -16,7 +16,7 @@
   "stars": 5,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-05-27T02:00:16Z",
+  "updated_at": "2026-05-27T19:07:15Z",
   "dependencies": [
     {
       "name": "zevy_ecs",

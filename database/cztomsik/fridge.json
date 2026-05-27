@@ -14,7 +14,7 @@
   "stars": 87,
   "forks": 8,
   "watchers": 3,
-  "updated_at": "2026-05-25T15:07:36Z",
+  "updated_at": "2026-05-27T17:09:50Z",
   "dependencies": [
     {
       "name": "sqlite_source",
