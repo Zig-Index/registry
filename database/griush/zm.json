@@ -13,10 +13,10 @@
     "3d",
     "graphics"
   ],
-  "stars": 103,
+  "stars": 102,
   "forks": 11,
   "watchers": 1,
-  "updated_at": "2026-02-23T18:24:54Z",
+  "updated_at": "2026-05-12T03:25:32Z",
   "minimum_zig_version": "0.16.0-dev.2535+b5bd49460",
   "readme": "# zm - Zig Math library\nMoved to [Codeberg](https://codeberg.org/grius/zm). Not mirrored.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/57322933?v=4",

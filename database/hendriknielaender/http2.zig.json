@@ -16,10 +16,10 @@
     "tls-proxy",
     "tls-support"
   ],
-  "stars": 43,
+  "stars": 45,
   "forks": 4,
   "watchers": 1,
-  "updated_at": "2026-05-06T09:56:47Z",
+  "updated_at": "2026-05-18T15:30:21Z",
   "dependencies": [
     {
       "name": "boring",
@@ -95,8 +95,8 @@
   "owner_location": "Hamburg",
   "owner_blog": "double-trouble.dev",
   "owner_twitter_username": null,
-  "owner_followers": 65,
-  "owner_following": 262,
+  "owner_followers": 68,
+  "owner_following": 265,
   "owner_created_at": "2019-06-05T17:02:09Z",
   "license": "MIT",
   "category": "library"

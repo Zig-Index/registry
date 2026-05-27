@@ -16,10 +16,10 @@
     "resetful",
     "web-framework"
   ],
-  "stars": 173,
-  "forks": 10,
+  "stars": 175,
+  "forks": 11,
   "watchers": 2,
-  "updated_at": "2026-04-22T10:43:01Z",
+  "updated_at": "2026-05-08T05:19:50Z",
   "dependencies": [
     {
       "name": "url",

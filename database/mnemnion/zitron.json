@@ -22,6 +22,15 @@
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/231785?u=8a0cdeb97b0a614b0350536ecd6921ee6166c611&v=4",
   "releases": [
     {
+      "tag_name": "v0.2.3",
+      "name": null,
+      "body": "Optimistic codegen with -F\n\nThe point of the FIFO (file-in-file-out) mode, is to get a\nfile out: it exists to support language servers, so there's\nno percentage in not generating whatever code we can.\n\nSo in addition to automatically quieting any other artifacts,\nsuch as a separate enum file, .out file, SQL, `-F` also declines\nto bail early on parse errors, instead generating the best .zig\nit can under the circumstances.",
+      "prerelease": false,
+      "published_at": "2026-05-21T14:44:42Z",
+      "html_url": "https://github.com/mnemnion/zitron/releases/tag/v0.2.3",
+      "assets": []
+    },
+    {
       "tag_name": "v0.2.2",
       "name": null,
       "body": "Unbundle flag\n\nThis release adds `-u --unbundle`.  When passed, Zitron does not try\nand fuse common code into single switch statements.  This makes source\nmapping and debugging easier, and may or may not have any\ncode-generation implications, depending on compiler vagaries.  Why risk\nit, though.",
@@ -134,7 +143,7 @@
   "owner_location": "Eastern Standard Tribe",
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 99,
+  "owner_followers": 97,
   "owner_following": 21,
   "owner_created_at": "2010-03-27T23:31:39Z",
   "homepage": "https://github.com/mnemnion/zitron/blob/trunk/doc/zitron.md",

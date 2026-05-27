@@ -15,7 +15,7 @@
     "tui"
   ],
   "stars": 147,
-  "forks": 19,
+  "forks": 20,
   "watchers": 3,
   "updated_at": "2026-05-11T08:10:10Z",
   "minimum_zig_version": "0.15.1",
@@ -27,7 +27,7 @@
   "owner_location": "Tokyo",
   "owner_blog": null,
   "owner_twitter_username": "xyaman_",
-  "owner_followers": 46,
+  "owner_followers": 47,
   "owner_following": 26,
   "owner_created_at": "2017-09-18T21:06:40Z",
   "license": "MIT",

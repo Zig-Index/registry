@@ -10,10 +10,10 @@
     "zig-package",
     "zig-library"
   ],
-  "stars": 34,
+  "stars": 35,
   "forks": 3,
   "watchers": 0,
-  "updated_at": "2026-05-18T17:05:56Z",
+  "updated_at": "2026-05-22T10:19:10Z",
   "dependencies": [
     {
       "name": "pubsub",
@@ -45,7 +45,7 @@
   "owner_location": "Outback Australia, middle of nowhere",
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 61,
+  "owner_followers": 63,
   "owner_following": 54,
   "owner_created_at": "2020-10-03T12:46:34Z",
   "license": "MIT",

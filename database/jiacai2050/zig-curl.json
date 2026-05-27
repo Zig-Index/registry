@@ -2,7 +2,7 @@
   "name": "zig-curl",
   "owner": "jiacai2050",
   "repo": "zig-curl",
-  "description": "Zig bindings for libcurl",
+  "description": "Libcurl bindings for Zig",
   "type": "package",
   "topics": [
     "libcurl",
@@ -13,10 +13,10 @@
     "zig-package",
     "ziglang"
   ],
-  "stars": 149,
-  "forks": 23,
+  "stars": 151,
+  "forks": 22,
   "watchers": 1,
-  "updated_at": "2026-04-24T12:29:06Z",
+  "updated_at": "2026-05-14T00:13:15Z",
   "dependencies": [
     {
       "name": "curl",
@@ -115,7 +115,7 @@
   "owner_location": "/home/mars",
   "owner_blog": "https://en.liujiacai.net/",
   "owner_twitter_username": "liujiacai",
-  "owner_followers": 1054,
+  "owner_followers": 1062,
   "owner_following": 116,
   "owner_created_at": "2013-03-13T01:33:15Z",
   "homepage": "https://jiacai2050.github.io/zig-curl/",

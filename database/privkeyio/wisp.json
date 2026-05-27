@@ -2,7 +2,7 @@
   "name": "wisp",
   "owner": "privkeyio",
   "repo": "wisp",
-  "description": "a lightweight nostr relay",
+  "description": "Fast, lightweight Nostr relay with spider mode that syncs notes from people you follow",
   "type": "package",
   "topics": [
     "nostr",
@@ -11,9 +11,9 @@
     "nostr-relay"
   ],
   "stars": 11,
-  "forks": 1,
+  "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-05-20T17:48:24Z",
+  "updated_at": "2026-05-26T03:05:19Z",
   "dependencies": [
     {
       "name": "websocket",

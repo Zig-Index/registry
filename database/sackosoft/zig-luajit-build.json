@@ -9,10 +9,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 22,
+  "stars": 23,
   "forks": 8,
   "watchers": 0,
-  "updated_at": "2026-05-17T02:45:47Z",
+  "updated_at": "2026-05-20T03:55:15Z",
   "dependencies": [
     {
       "name": "upstream",
