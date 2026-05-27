@@ -16,7 +16,7 @@
   "stars": 5,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-05-25T14:57:47Z",
+  "updated_at": "2026-05-27T02:00:16Z",
   "dependencies": [
     {
       "name": "zevy_ecs",
@@ -44,8 +44,8 @@
     },
     {
       "name": "zevy_reflect",
-      "url": "git+https://github.com/captkirk88/zevy-reflect#3b85f88aea47e69c62443bc96c01ae876119822d",
-      "hash": "zevy_reflect-1.4.2-Ob80cCkvAwB4yWZ6OfIbO0tYgatrSJc08N40qQRBkga1"
+      "url": "git+https://github.com/captkirk88/zevy-reflect#bb19665ede7f789e2bf67678577492256d43f284",
+      "hash": "zevy_reflect-1.4.6-Ob80cFVtAwAmnLn8leQcWQiFbmE3lsm_8BlxmdNJ_xnu"
     },
     {
       "name": "zevy_mem",
