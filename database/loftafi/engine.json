@@ -10,7 +10,7 @@
   "stars": 3,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-05-24T22:25:55Z",
+  "updated_at": "2026-05-28T22:50:01Z",
   "dependencies": [
     {
       "name": "resources",
@@ -23,11 +23,6 @@
       "hash": "sdl-0.4.2+3.4.4-SDL--kB3pQHKG_4zWG-pH04ZcZZj_IRF7dwMpxNVGwd6"
     },
     {
-      "name": "sdl_ttf",
-      "url": "git+https://github.com/loftafi/SDL_ttf.git#9840b80ed31152e706152ceaf7e75cf9d3d0c6bd",
-      "hash": "sdl_ttf-3.2.26-3-9xyaiOwVBwB_wfOYOjujxAdD3rZPUkTYQYKscywJYUfl"
-    },
-    {
       "name": "zstbi",
       "url": "git+https://github.com/zaddok/zstbi.git#456b7620bf8036d29454d98cb506e0428e6510ae",
       "hash": "zstbi-0.11.0-dev-L0Ea_06WBwCZoJBl6SD0bcHOLEEIrD5xbQ0TbXe-SQ5Y"
@@ -36,6 +31,11 @@
       "name": "translator",
       "url": "git+https://github.com/loftafi/translator.git#ac07a6006040f195f8cc4a4de07af3f4bb1d3436",
       "hash": "translator-0.1.8-cfHZxjhNAAAgL8zOVPESfQGNaAGYbz4X0m50as2_6aGs"
+    },
+    {
+      "name": "TrueType",
+      "url": "git+https://codeberg.org/loftafi/TrueType?ref=glyphclass-underflow#e46bd6a01e1be78ee280284733993a988eaef0d6",
+      "hash": "TrueType-0.0.0-Ne-mWOdyAQDy0_HzImRIFlqXnBWQ97MlU6S1dGJvH4nX"
     }
   ],
   "minimum_zig_version": "0.16.0",
