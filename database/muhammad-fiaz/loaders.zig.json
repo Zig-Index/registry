@@ -1,0 +1,115 @@
+{
+  "name": "loaders.zig",
+  "owner": "muhammad-fiaz",
+  "repo": "loaders.zig",
+  "description": "A fast, high-performance terminal loading indicator and progress bar library for Zig.",
+  "type": "package",
+  "topics": [
+    "loaders",
+    "progressbar",
+    "zig",
+    "zig-lang",
+    "zig-language",
+    "zig-lib",
+    "zig-library",
+    "zig-package",
+    "progressbar-zig",
+    "zig-progressbar"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-05-28T14:55:45Z",
+  "minimum_zig_version": "0.16.0",
+  "readme": "<div align=\"center\">\n<img  height=\"400\" alt=\"loader zig\" src=\"https://github.com/user-attachments/assets/042252d5-0594-4984-bece-deb3b232d91f\" />\n\n<a href=\"https://muhammad-fiaz.github.io/loaders.zig/\"><img src=\"https://img.shields.io/badge/docs-muhammad--fiaz.github.io-blue\" alt=\"Documentation\"></a>\n<a href=\"https://ziglang.org/\"><img src=\"https://img.shields.io/badge/Zig-0.16.0-orange.svg?logo=zig\" alt=\"Zig Version\"></a>\n<a href=\"https://github.com/muhammad-fiaz/loaders.zig\"><img src=\"https://img.shields.io/github/stars/muhammad-fiaz/loaders.zig\" alt=\"GitHub stars\"></a>\n<a href=\"https://github.com/muhammad-fiaz/loaders.zig/issues\"><img src=\"https://img.shields.io/github/issues/muhammad-fiaz/loaders.zig\" alt=\"GitHub issues\"></a>\n<a href=\"https://github.com/muhammad-fiaz/loaders.zig/pulls\"><img src=\"https://img.shields.io/github/issues-pr/muhammad-fiaz/loaders.zig\" alt=\"GitHub pull requests\"></a>\n<a href=\"https://github.com/muhammad-fiaz/loaders.zig\"><img src=\"https://img.shields.io/github/last-commit/muhammad-fiaz/loaders.zig\" alt=\"GitHub last commit\"></a>\n<a href=\"https://github.com/muhammad-fiaz/loaders.zig\"><img src=\"https://img.shields.io/github/license/muhammad-fiaz/loaders.zig\" alt=\"License\"></a>\n<a href=\"https://github.com/muhammad-fiaz/loaders.zig/actions/workflows/ci.yml\"><img src=\"https://github.com/muhammad-fiaz/loaders.zig/actions/workflows/ci.yml/badge.svg\" alt=\"CI\"></a>\n<img src=\"https://img.shields.io/badge/platforms-linux%20%7C%20windows%20%7C%20macos-blue\" alt=\"Supported Platforms\">\n<a href=\"https://github.com/muhammad-fiaz/loaders.zig/actions/workflows/release.yml\"><img src=\"https://github.com/muhammad-fiaz/loaders.zig/actions/workflows/release.yml/badge.svg\" alt=\"Release\"></a>\n<a href=\"https://github.com/muhammad-fiaz/loaders.zig/releases/latest\"><img src=\"https://img.shields.io/github/v/release/muhammad-fiaz/loaders.zig?label=Latest%20Release&style=flat-square\" alt=\"Latest Release\"></a>\n<a href=\"https://pay.muhammadfiaz.com\"><img src=\"https://img.shields.io/badge/Sponsor-pay.muhammadfiaz.com-ff69b4?style=flat&logo=heart\" alt=\"Sponsor\"></a>\n<a href=\"https://github.com/sponsors/muhammad-fiaz\"><img src=\"https://img.shields.io/badge/Sponsor-%F0%9F%92%96-pink?style=social&logo=github\" alt=\"GitHub Sponsors\"></a>\n\n<p><em>A fast, high-performance terminal loading indicator and progress bar library for Zig.</em></p>\n\n<b><a href=\"https://muhammad-fiaz.github.io/loaders.zig/\">Documentation</a> |\n<a href=\"https://muhammad-fiaz.github.io/loaders.zig/api/\">API Reference</a> |\n<a href=\"https://muhammad-fiaz.github.io/loaders.zig/guide/getting-started\">Quick Start</a> |\n<a href=\"https://github.com/muhammad-fiaz/loaders.zig/blob/main/README.md\">Source</a></b>\n\n</div>\n\n`loaders.zig` is a production-oriented Zig library for animated spinners, progress bars, and multi-progress terminal UIs. It is designed for low overhead, clean output, and cross-platform terminal behavior on Linux, Windows, and macOS.\n\n> [!NOTE]\n> This project is still evolving, but the current API is built to be practical for real CLI tools and long-running terminal workflows.\n\n**⭐ If you find `loaders.zig` useful, consider starring the repository.**\n\n---\n\n<details>\n<summary><strong>Table of Contents</strong> (click to expand)</summary>\n\n- [Prerequisites](#prerequisites)\n- [Supported Platforms](#supported-platforms)\n- [Features](#features)\n- [Installation](#installation)\n  - [Option A: Stable Release](#option-a--stable-release-recommended-for-production)\n  - [Option B: Nightly / Beta](#option-b--nightly--beta-latest-main-branch)\n  - [Option C: Build from Source](#option-c--build-from-source)\n- [Quick Start](#quick-start)\n- [Usage Examples](#usage-examples)\n- [Configuration](#configuration)\n- [Documentation](#documentation)\n- [Building](#building)\n- [Contributing](#contributing)\n- [License](#license)\n- [Links](#links)\n\n</details>\n\n---\n\n<details>\n<summary><strong>Features</strong> (click to expand)</summary>\n\n| Feature | Description | Documentation |\n|---------|-------------|---------------|\n| **Simple & Fluent API** | Add progress indicators in just a few lines. | [Guide](https://muhammad-fiaz.github.io/loaders.zig/guide/getting-started) |\n| **Progress Bars** | Animated single-bar progress with percentage, ETA, and rate display. | [Guide](https://muhammad-fiaz.github.io/loaders.zig/guide/progress-bar) |\n| **Spinners** | Background-threaded terminal spinners for non-blocking work. | [Guide](https://muhammad-fiaz.github.io/loaders.zig/guide/spinner) |\n| **Multi Progress** | Render multiple concurrent bars or spinners together. | [Guide](https://muhammad-fiaz.github.io/loaders.zig/guide/multi-progress) |\n| **Styling** | Configure brackets, fills, colors, and suffixes. | [Guide](https://muhammad-fiaz.github.io/loaders.zig/guide/styling) |\n| **Themes** | Use built-in visual presets for bars and spinners. | [Guide](https://muhammad-fiaz.github.io/loaders.zig/guide/themes) |\n| **ANSI Colors** | Support for 16-color ANSI, 256-color, and RGB output. | [Guide](https://muhammad-fiaz.github.io/loaders.zig/guide/colors) |\n| **Cross-Platform TTY Handling** | Detects terminal capabilities on Windows and POSIX systems. | [Guide](https://muhammad-fiaz.github.io/loaders.zig/guide/advanced) |\n| **No-Color Friendly** | Respects `NO_COLOR` and redirected output. | [Guide](https://muhammad-fiaz.github.io/loaders.zig/guide/advanced) |\n| **Stack-Friendly** | Designed to work well in small CLI tools and longer-running programs. | [API](https://muhammad-fiaz.github.io/loaders.zig/api/) |\n\n</details>\n\n---\n\n<details>\n<summary><strong>Prerequisites & Supported Platforms</strong> (click to expand)</summary>\n\n<br>\n\n## Prerequisites\n\nBefore using `loaders.zig`, ensure you have:\n\n| Requirement | Version | Notes |\n|-------------|---------|-------|\n| **Zig** | 0.16.0 | Install from [ziglang.org](https://ziglang.org/download/) |\n| **Operating System** | Windows, Linux, macOS | Cross-platform support |\n| **Terminal** | Any modern terminal | For color and cursor control |\n\n---\n\n## Supported Platforms\n\n| Platform | Status |\n|----------|--------|\n| **Windows** | Full support |\n| **Linux** | Full support |\n| **macOS** | Full support |\n\n---\n\n### Color Support\n\n| Terminal | Support |\n|----------|---------|\n| **Windows Terminal** | Native ANSI |\n| **PowerShell / CMD** | Supported with terminal capabilities |\n| **iTerm2 / Terminal.app** | Native |\n| **GNOME Terminal / Konsole** | Native |\n| **VS Code Terminal** | Native |\n\n</details>\n\n---\n\n## Installation\n\n### Option A — Stable Release (Recommended for Production)\n\nPin to a specific tagged release for reproducible builds:\n\n```bash\nzig fetch --save https://github.com/muhammad-fiaz/loaders.zig/archive/refs/tags/0.0.1.tar.gz\n```\n\nThis automatically adds the dependency to your `build.zig.zon`:\n\n```zig\n.dependencies = .{\n    .loaders = .{\n        .url = \"https://github.com/muhammad-fiaz/loaders.zig/archive/refs/tags/0.0.1.tar.gz\",\n        .hash = \"...\", // auto-filled by zig fetch --save\n    },\n},\n```\n\n### Option B — Nightly / Beta (Latest Main Branch)\n\nUse the latest unreleased code from `main`. This tracks HEAD and may include breaking changes:\n\n```bash\nzig fetch --save git+https://github.com/muhammad-fiaz/loaders.zig.git\n```\n\nThis adds a git dependency to your `build.zig.zon`:\n\n```zig\n.dependencies = .{\n    .loaders = .{\n        .url = \"git+https://github.com/muhammad-fiaz/loaders.zig.git\",\n        .hash = \"...\", // auto-filled by zig fetch --save\n    },\n},\n```\n\n> [!TIP]\n> Use `zig fetch --save` (with URL) for the automatic flow. It resolves the hash and writes it into `build.zig.zon` for you.\n\n### Option C — Build from Source\n\n```bash\ngit clone https://github.com/muhammad-fiaz/loaders.zig.git\ncd loaders.zig\nzig build\n```\n\n---\n\n## Quick Start\n\n### Progress Bar\n\n```zig\nconst std = @import(\"std\");\nconst loaders = @import(\"loaders\");\n\npub fn main(init: std.process.Init) !void {\n    const io = init.io;\n    var bar = loaders.Bar.init(io, .{\n        .label = \"Processing\",\n        .total = 100,\n        .show_percent = true,\n        .show_elapsed = true,\n    });\n    defer bar.done();\n\n    for (0..100) |i| {\n        bar.setCompleted(i + 1);\n        bar.render();\n        try io.sleep(std.Io.Duration.fromMilliseconds(30), .awake);\n    }\n}\n```\n\n### Spinner\n\n```zig\nconst std = @import(\"std\");\nconst loaders = @import(\"loaders\");\n\npub fn main(init: std.process.Init) !void {\n    const io = init.io;\n    const sp = try loaders.Spinner.start(io, .{\n        .text = \"Syncing local database...\",\n        .style = loaders.SpinnerStyle.dots,\n    });\n\n    try io.sleep(std.Io.Duration.fromSeconds(2), .awake);\n    sp.succeed(io, \"Database synchronized successfully!\");\n}\n```\n\n### Multi Progress\n\n```zig\nconst std = @import(\"std\");\nconst loaders = @import(\"loaders\");\n\npub fn main(init: std.process.Init) !void {\n    const io = init.io;\n    var mb = loaders.MultiBar.init(io, std.Io.File.stderr(), null, .{});\n\n    const a = mb.addBar(.{ .label = \"Asset A\", .total = 100 });\n    const b = mb.addBar(.{ .label = \"Asset B\", .total = 100 });\n\n    for (0..100) |i| {\n        a.setCompleted(i + 1);\n        b.setCompleted(i + 1);\n        mb.render();\n        try io.sleep(std.Io.Duration.fromMilliseconds(20), .awake);\n    }\n\n    mb.done();\n}\n```\n\n---\n\n## Usage Examples\n\n- [Getting Started](https://muhammad-fiaz.github.io/loaders.zig/guide/getting-started)\n- [Progress Bars](https://muhammad-fiaz.github.io/loaders.zig/guide/progress-bar)\n- [Spinners](https://muhammad-fiaz.github.io/loaders.zig/guide/spinner)\n- [Multi Progress](https://muhammad-fiaz.github.io/loaders.zig/guide/multi-progress)\n- [Styling](https://muhammad-fiaz.github.io/loaders.zig/guide/styling)\n- [Colors](https://muhammad-fiaz.github.io/loaders.zig/guide/colors)\n- [Themes](https://muhammad-fiaz.github.io/loaders.zig/guide/themes)\n- [Advanced](https://muhammad-fiaz.github.io/loaders.zig/guide/advanced)\n\n---\n\n## Configuration\n\nThe core options are available through `BarOptions` and `SpinnerOptions` in the API reference.\n\n- `label`, `text`, and `prefix` for user-facing messages\n- `total`, `show_percent`, `show_elapsed`, `show_eta`, and `show_rate` for progress details\n- `style`, `color_enabled`, and custom bracket/fill fields for output control\n- `file` and `term` for stream selection and terminal capability detection\n\nSee the full API at [API Reference](https://muhammad-fiaz.github.io/loaders.zig/api/).\n\n---\n\n## Documentation\n\n### Online Documentation\n\nFull documentation is available at: https://muhammad-fiaz.github.io/loaders.zig/\n\n### Generating Local Documentation\n\n```bash\ncd docs\nbun install\nbun run build\n```\n\nThe output is written to `docs/.vitepress/dist/`.\n\n---\n\n## Building\n\n```bash\nzig build test\nzig build examples\nzig fmt --check build.zig src/ examples/\n```\n\n---\n\n## Contributing\n\nContributions are welcome! Please read the [Contributing Guide](CONTRIBUTING.md) for details on how to get started, run tests, and submit pull requests.\n\n---\n\n## License\n\nMIT License - see [LICENSE](LICENSE) for details.\n\n---\n\n## Links\n\n- **Documentation**: https://muhammad-fiaz.github.io/loaders.zig/\n- **API Reference**: https://muhammad-fiaz.github.io/loaders.zig/api/\n- **Guide**: https://muhammad-fiaz.github.io/loaders.zig/guide/\n- **Repository**: https://github.com/muhammad-fiaz/loaders.zig\n- **Issues**: https://github.com/muhammad-fiaz/loaders.zig/issues\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/75434191?u=e23dc1e7c2fe9c80a958e1dc8df6c6165bb1c2fb&v=4",
+  "releases": [
+    {
+      "tag_name": "0.0.1",
+      "name": "v0.0.1",
+      "body": "\n\n## 📃 Documentation\n\nFull documentation can be found at https://muhammad-fiaz.github.io/loaders.zig/\n\n## 📦 Installation\n\n### Option A — Stable Release (Recommended)\n\n```bash\nzig fetch --save https://github.com/muhammad-fiaz/loaders.zig/archive/refs/tags/0.0.1.tar.gz\n```\n\n> [!NOTE]\n> After running, Zig updates your `build.zig.zon` with the correct hash automatically.\n\nThe entry will look like:\n\n```zig\n.dependencies = .{\n    .loaders = .{\n        .url = \"https://github.com/muhammad-fiaz/loaders.zig/archive/refs/tags/0.0.1.tar.gz\",\n        .hash = \"loaders-0.0.1-k_pNaaYaAgBNY4Buy5HfTUkpR0rEp6AntVp3zr4QO0F3\",\n    },\n},\n```\n\n### Option B — Nightly / Beta (Latest Main)\n\nFor the latest unreleased code from `main`:\n\n```bash\nzig fetch --save git+https://github.com/muhammad-fiaz/loaders.zig.git\n```\n\n> [!WARNING]\n> Nightly tracks HEAD and may include breaking changes. Use the stable release for production.\n\n## ⬇️ Downloads (Prebuilt Library)\n\n| Platform | Architecture | File |\n|----------|--------------|------|\n| Windows | x86_64 | [loaders-x86_64-windows.lib](https://github.com/muhammad-fiaz/loaders.zig/releases/download/0.0.1/loaders-x86_64-windows.lib) |\n| Windows | x86 | [loaders-x86-windows.lib](https://github.com/muhammad-fiaz/loaders.zig/releases/download/0.0.1/loaders-x86-windows.lib) |\n| Linux | x86_64 | [libloaders-x86_64-linux.a](https://github.com/muhammad-fiaz/loaders.zig/releases/download/0.0.1/libloaders-x86_64-linux.a) |\n| Linux | x86 | [libloaders-x86-linux.a](https://github.com/muhammad-fiaz/loaders.zig/releases/download/0.0.1/libloaders-x86-linux.a) |\n| Linux | aarch64 (ARM64) | [libloaders-aarch64-linux.a](https://github.com/muhammad-fiaz/loaders.zig/releases/download/0.0.1/libloaders-aarch64-linux.a) |\n| macOS | x86_64 (Intel) | [libloaders-x86_64-macos.a](https://github.com/muhammad-fiaz/loaders.zig/releases/download/0.0.1/libloaders-x86_64-macos.a) |\n| macOS | aarch64 (Apple Silicon) | [libloaders-aarch64-macos.a](https://github.com/muhammad-fiaz/loaders.zig/releases/download/0.0.1/libloaders-aarch64-macos.a) |\n| Bare Metal | x86_64 | [libloaders-x86_64-freestanding.a](https://github.com/muhammad-fiaz/loaders.zig/releases/download/0.0.1/libloaders-x86_64-freestanding.a) |\n| Bare Metal | aarch64 | [libloaders-aarch64-freestanding.a](https://github.com/muhammad-fiaz/loaders.zig/releases/download/0.0.1/libloaders-aarch64-freestanding.a) |\n| Bare Metal | RISC-V 64 | [libloaders-riscv64-freestanding.a](https://github.com/muhammad-fiaz/loaders.zig/releases/download/0.0.1/libloaders-riscv64-freestanding.a) |\n| Bare Metal | ARM | [libloaders-arm-freestanding.a](https://github.com/muhammad-fiaz/loaders.zig/releases/download/0.0.1/libloaders-arm-freestanding.a) |\n\n### 🛠️ Using Prebuilt Libraries\n\n1. Download the library for your platform.\n2. Place it in your project (e.g., in a `libs/` folder).\n3. Update your `build.zig`:\n\n```zig\n// Assuming you placed the library in `libs/`\nexe.addLibraryPath(b.path(\"libs\"));\nexe.linkSystemLibrary(\"loaders\");\n```\n",
+      "prerelease": false,
+      "published_at": "2026-05-28T14:59:20Z",
+      "html_url": "https://github.com/muhammad-fiaz/loaders.zig/releases/tag/0.0.1",
+      "assets": [
+        {
+          "name": "libloaders-x86_64-macos.a",
+          "url": "https://github.com/muhammad-fiaz/loaders.zig/releases/download/0.0.1/libloaders-x86_64-macos.a",
+          "size": 1936,
+          "content_type": "application/x-archive"
+        },
+        {
+          "name": "loaders-x86_64-windows.lib",
+          "url": "https://github.com/muhammad-fiaz/loaders.zig/releases/download/0.0.1/loaders-x86_64-windows.lib",
+          "size": 992,
+          "content_type": "application/vnd.microsoft.portable-executable"
+        },
+        {
+          "name": "libloaders-aarch64-freestanding.a",
+          "url": "https://github.com/muhammad-fiaz/loaders.zig/releases/download/0.0.1/libloaders-aarch64-freestanding.a",
+          "size": 2956,
+          "content_type": "application/x-archive"
+        },
+        {
+          "name": "loaders-x86-windows.lib",
+          "url": "https://github.com/muhammad-fiaz/loaders.zig/releases/download/0.0.1/loaders-x86-windows.lib",
+          "size": 992,
+          "content_type": "application/vnd.microsoft.portable-executable"
+        },
+        {
+          "name": "libloaders-x86_64-linux.a",
+          "url": "https://github.com/muhammad-fiaz/loaders.zig/releases/download/0.0.1/libloaders-x86_64-linux.a",
+          "size": 2804,
+          "content_type": "application/x-archive"
+        },
+        {
+          "name": "libloaders-x86-linux.a",
+          "url": "https://github.com/muhammad-fiaz/loaders.zig/releases/download/0.0.1/libloaders-x86-linux.a",
+          "size": 2084,
+          "content_type": "application/x-archive"
+        },
+        {
+          "name": "libloaders-aarch64-macos.a",
+          "url": "https://github.com/muhammad-fiaz/loaders.zig/releases/download/0.0.1/libloaders-aarch64-macos.a",
+          "size": 2064,
+          "content_type": "application/x-archive"
+        },
+        {
+          "name": "libloaders-aarch64-linux.a",
+          "url": "https://github.com/muhammad-fiaz/loaders.zig/releases/download/0.0.1/libloaders-aarch64-linux.a",
+          "size": 2956,
+          "content_type": "application/x-archive"
+        },
+        {
+          "name": "libloaders-riscv64-freestanding.a",
+          "url": "https://github.com/muhammad-fiaz/loaders.zig/releases/download/0.0.1/libloaders-riscv64-freestanding.a",
+          "size": 3548,
+          "content_type": "application/x-archive"
+        },
+        {
+          "name": "libloaders-arm-freestanding.a",
+          "url": "https://github.com/muhammad-fiaz/loaders.zig/releases/download/0.0.1/libloaders-arm-freestanding.a",
+          "size": 2188,
+          "content_type": "application/x-archive"
+        },
+        {
+          "name": "libloaders-x86_64-freestanding.a",
+          "url": "https://github.com/muhammad-fiaz/loaders.zig/releases/download/0.0.1/libloaders-x86_64-freestanding.a",
+          "size": 2804,
+          "content_type": "application/x-archive"
+        }
+      ]
+    }
+  ],
+  "owner_bio": "Open Source Contributor ✨ and Maintainer 🔥| Full Stack Developer 🧑‍💻",
+  "owner_company": "@FiazTechnologies",
+  "owner_location": "india",
+  "owner_blog": "muhammadfiaz.com",
+  "owner_twitter_username": "muhammadfiaz_",
+  "owner_followers": 106,
+  "owner_following": 0,
+  "owner_created_at": "2020-12-03T14:17:55Z",
+  "homepage": "https://muhammad-fiaz.github.io/loaders.zig/",
+  "license": "MIT",
+  "category": "library"
+}
