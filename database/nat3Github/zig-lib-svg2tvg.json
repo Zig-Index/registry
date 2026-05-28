@@ -14,10 +14,10 @@
     "zig-package",
     "mit-license"
   ],
-  "stars": 4,
+  "stars": 5,
   "forks": 11,
-  "watchers": 1,
-  "updated_at": "2026-03-01T01:10:46Z",
+  "watchers": 2,
+  "updated_at": "2026-05-28T10:01:57Z",
   "dependencies": [
     {
       "name": "xml",

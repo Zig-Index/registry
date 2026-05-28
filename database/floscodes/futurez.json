@@ -1,0 +1,54 @@
+{
+  "name": "futurez",
+  "owner": "floscodes",
+  "repo": "futurez",
+  "description": "A small runtime for running futures in zig.",
+  "type": "package",
+  "topics": [
+    "zig-package"
+  ],
+  "stars": 9,
+  "forks": 1,
+  "watchers": 0,
+  "updated_at": "2026-05-28T10:22:44Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.14.0",
+  "readme": "# futurez\n\n[![CI](https://github.com/floscodes/futurez/actions/workflows/ci.yml/badge.svg)](https://github.com/floscodes/futurez/actions/workflows/ci.yml)\n[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)\n\nfuturez is a small runtime for running asynchronous tasks using futures in Zig.\n\n\n## Minimal Example\n\n```zig\nconst std = @import(\"std\");\nconst futurez = @import(\"futurez\");\nconst Runtime = futurez.Runtime;\n\nfn main() !void {\n    const allocator = std.heap.page_allocator;\n    var rt = try Runtime.init(allocator);\n    defer rt.deinit();\n\n    const task = try rt.spawn(myTaskFunction, .{});\n    const result = task.join(i32);\n    std.debug.print(\"Result: {d}\\n\", .{result});\n}\n\nfn myTaskFunction() i32 {\n    return 42;\n}\n```\n\nFor a complete example showcasing advanced usage with dynamic allocations and multiple parameters, see [examples/basic.zig](./examples/basic.zig).\n\n## Overview\n\nfuturez spawns as many worker threads as logical CPU cores available on your machine. These threads continuously pick up and run asynchronous tasks you spawn via `Runtime.spawn`. Finished tasks remain in the task queue until you call the `join()` method on the associated `*Task` to retrieve the result.\n\nYou can also control the number of worker threads by initializing the runtime with a specific core count using `initWithCores()`:\n\n```zig\nconst allocator = std.heap.page_allocator;\nvar rt = try Runtime.initWithCores(allocator, 4);\ndefer rt.deinit();\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/69145145?u=1f34029b5dbb89a3c737460130fe5a41d66831bd&v=4",
+  "releases": [
+    {
+      "tag_name": "0.2.0",
+      "name": "v0.2.0 – Zig 0.16 support & rename to future",
+      "body": "  What's Changed\r\n  \r\n  Renamed: coroutinez → futurez\r\n\r\n  The project has been renamed to futurez to better reflect what it actually does: a thread-pool-based future/task runtime, not a coroutine runtime.\r\n\r\n  Zig 0.16 support\r\n\r\n  - Migrated from std.Thread.Mutex/std.Thread.Condition to std.Io.Mutex/std.Io.Condition\r\n  - Migrated from the managed std.ArrayList API to the new unmanaged API\r\n  - Replaced std.time.sleep (removed in 0.16)\r\n\r\n  Bug fixes\r\n\r\n  - initWithCores did not actually limit the thread count (passed wrong argument to initRuntime)\r\n  - Iterator invalidation in deinit when multiple tasks were unjoined (for loop over a slice that was modified during iteration)\r\n  - Memory leak in spawn when task_queue.append failed — allocations were not cleaned up\r\n  - Functions returning !T (error unions) were unsafely cast; the output field now stores only the payload type\r\n  - testfn3 hardcoded std.testing.allocator internally instead of accepting an allocator as parameter\r\n  - Use-after-free in workerThread: t.cond.broadcast() was called after mutexUnlock, giving join() a window to free the task first — fixed by broadcasting before\r\n  unlocking\r\n  - Wrong import name in examples/basic.zig; const rt was const instead of var\r\n",
+      "prerelease": false,
+      "published_at": "2026-05-28T10:22:05Z",
+      "html_url": "https://github.com/floscodes/futurez/releases/tag/0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "0.1.0",
+      "name": "v0.1.0",
+      "body": "## Breaking Changes\r\n* Rename package from `azync` to `coroutinez`\r\n* Rename datatype `Future` to `Task`\r\n* Rename `Await` method to `join`\r\n\r\n## Docs\r\n* Refactor README and improve example by @bnidev in https://github.com/floscodes/coroutinez/pull/2",
+      "prerelease": false,
+      "published_at": "2025-06-27T17:33:47Z",
+      "html_url": "https://github.com/floscodes/futurez/releases/tag/0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Building and sharing in the open.",
+  "owner_company": null,
+  "owner_location": "Vienna, Austria",
+  "owner_blog": "floscodes.net",
+  "owner_twitter_username": null,
+  "owner_followers": 104,
+  "owner_following": 129,
+  "owner_created_at": "2020-08-03T09:34:52Z",
+  "license": "MIT",
+  "category": "library"
+}
