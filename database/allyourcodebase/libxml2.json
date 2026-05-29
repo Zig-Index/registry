@@ -11,7 +11,7 @@
   "stars": 5,
   "forks": 3,
   "watchers": 2,
-  "updated_at": "2026-03-31T05:55:16Z",
+  "updated_at": "2026-05-29T20:47:56Z",
   "dependencies": [
     {
       "name": "libxml2",

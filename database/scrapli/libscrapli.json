@@ -10,7 +10,7 @@
   "stars": 14,
   "forks": 5,
   "watchers": 5,
-  "updated_at": "2026-05-27T03:24:42Z",
+  "updated_at": "2026-05-29T19:13:48Z",
   "dependencies": [
     {
       "name": "pcre2",
