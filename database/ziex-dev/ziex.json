@@ -19,12 +19,12 @@
   "stars": 240,
   "forks": 17,
   "watchers": 3,
-  "updated_at": "2026-05-29T07:22:42Z",
+  "updated_at": "2026-05-29T11:05:20Z",
   "dependencies": [
     {
       "name": "ziex_js",
-      "url": "https://registry.npmjs.org/ziex/-/ziex-0.1.0-dev.1014.tgz",
-      "hash": "ziex_js-0.1.0-dev.804-v1W0GXFyAwBPFp90LeyI_plexclVbbXIj_kN-iKxmalY"
+      "url": "https://registry.npmjs.org/ziex/-/ziex-0.1.0-dev.1068.tgz",
+      "hash": "ziex_js-0.1.0-dev.804-v1W0GeSJAwB9VtCZUXY2kcTcFeOK5NKGNBQb4vBnvfYK"
     },
     {
       "name": "httpz",
@@ -69,6 +69,52 @@
   "readme": "<p align=\"center\">\n    <img src=\"https://raw.githubusercontent.com/ziex-dev/branding/main/banner.svg\" alt=\"Ziex banner\" width=\"100%\" />\n</p>\n\nA full-stack web framework for Zig. Write declarative UI components using familiar JSX patterns, transpiled to efficient Zig code.\n\nZiex combines the power and performance of Zig with the expressiveness of JSX, enabling you to build fast, type-safe web applications.\n\n**[Documentation →](https://ziex.dev/learn)**\n\n\n\n> **Note:** Most of the API and syntax are finalized and stable, and server-side rendering (SSR) features are production-ready, Ziex continues to evolve with ongoing improvements to client-side rendering and state management. You can start using the documented features today, as they are stable and unlikely to change. Areas still under development are not yet documented and will be added as they mature.\n\n\n## Installation\n\n##### Linux/macOS\n```bash\ncurl -fsSL https://ziex.dev/install | bash\n```\n\n##### Windows\n```powershell\npowershell -c \"irm ziex.dev/install.ps1 | iex\"\n\n```\n##### Installing Zig\n```bash\nbrew install zig # macOS\nwinget install -e --id zig.zig # Windows\n```\n[_See for other platforms →_](https://ziglang.org/learn/getting-started/)\n\n\n## At a Glance\n\n```tsx site/pages/examples/playground.zx\npub fn Playground(allocator: zx.Allocator) zx.Component {\n    const is_loading = true;\n    var i: usize = 0;\n\n    return (\n        <main @allocator={allocator}>\n            <h1>Hello, Ziex!</h1>\n\n            {for (users) |user| (\n                <Profile name={user.name} age={user.age} role={user.role} />\n            )}\n\n            {if (is_loading) (<p>Loading...</p>) else (<p>Loaded</p>)}\n\n            {while (i < 5) : (i += 1) (<i>{i}</i>)}\n        </main>\n    );\n}\n\nfn Profile(ctx: *zx.ComponentCtx(User)) zx.Component {\n    return (\n        <div @allocator={ctx.allocator}>\n            <h3>{ctx.props.name}</h3>\n            <div>{ctx.props.age}</div>\n            <strong>\n                {switch (ctx.props.role) {\n                    .admin => \"Admin\",\n                    .member => \"Member\",\n                }}\n            </strong>\n        </div>\n    );\n}\n\nconst User = struct { name: []const u8, age: u32, role: enum { admin, member } };\n\nconst users = [_]User{\n    .{ .name = \"John\", .age = 20, .role = .admin },\n    .{ .name = \"Jane\", .age = 21, .role = .member },\n};\n\nconst zx = @import(\"zx\");\n```\n\nTry this in [Playground →](https://ziex.dev/playground#data=eF59U01vnDAQ_StTTtAiyGZVqSKAEuVSVa2USy8NUUTAu2sJbGQgoUv83ztjlo-y2_rCfLx5zMyze-uhSH_vlWxF7h07K7Cq9gV2AuawnRaFzNJGqgCOnXc3eg5597KspGCigT4RgCeTom6A18-FTHMu9hBBo1p2M2RfUwU8gLbmR4aZKwwPCcWaVgmwB49OWKZcwO3086ifTB3PMAM9bOKvDLMu_OKs-xD6GBiZx9PvpAK7rZmqHXin7_vydxPXg5I7XjAQacminnAemRrS_eijpUHJYvTJ1OCvunL0WQt8B_a8GgfssIq_D47neaFfxQ6womZTguUmeM70dqAebQ4hfHYgIOtTBBui5HHPdehzUzYWhD6t89Shg2s3lKTzMK6dNV0AH5eK3jed_RPHcy4LfUGxnL_-JRhyev8RbRsbRKVkVQ87RuG2axiSLnG0-9Cn4ApXN0qK_SpKp6_feJMdwJ5JSDBnHGR9vDQv8eZFMSTWHZmJ5f4DWbLyhakB-sPYF7Far3r1z5pdjjTJM7wl0gDfCpa0GW7fXMwAHp-GbPvFpZuJb2p77ZpLGQATbYlAM4cLpyY16JuZ1LwDZH18fiL-0yq8HowQmEisb_JAowOtHAPXV2gSP9qnFWn3Ulkq2LJssygbW8G6ZTPHDpO3HC-YauzEOnaJRTuw9B927V4U)\n\n<details>\n<summary>Explanation of this</summary>\n\n```tsx site/pages/examples/playground.zx\n// A Zig function that returns a `zx.Component`.\npub fn Playground(allocator: zx.Allocator) zx.Component {\n    const is_loading = true;\n    var i: usize = 0;\n\n    // HTML Block is always surrounded by parentheses and can contain HTML elements and control flow statements.\n    return (\n        // @allocator or any other attribute starting with `@` is called builtin attribute\n        // `@allocator` is used to specify the allocator for the component and its children for mem allocation.\n        <main @allocator={allocator}>\n            <h1>Hello, Ziex!</h1>\n\n            // `for` loop to iterate over `users` array and render a `Profile` component for each user.\n            // Since this is an expression the HTMLs are inside parenteses not curly braces.\n            {for (users) |user| (\n                // `Profile` component is called with props: name, age, and role.\n                // Optional props can be omitted, and the component will receive default values for them.\n                <Profile name={user.name} age={user.age} role={user.role} />\n            )}\n\n            // `if` statement works just like other control flow statements.\n            {if (is_loading) (<p>Loading...</p>) else (<p>Loaded</p>)}\n\n            // `while` loop with an optional increment statement.\n            {while (i < 5) : (i += 1) (<i>{i}</i>)}\n        </main>\n    );\n}\n\n// A Ziex Component is a Zig function that returns a `zx.Component`.\n// It can have signatures like:\n// - `pub fn ComponentName(allocator: zx.Allocator) zx.Component`\n// - `pub fn ComponentName(ctx: *zx.ComponentCtx<PropsType>) zx.Component`\n// - `pub fn ComponentName(allocator: zx.Allocator, props: PropsType) zx.Component`\nfn Profile(ctx: *zx.ComponentCtx(User)) zx.Component {\n    return (\n        <div @allocator={ctx.allocator}>\n        // Exrepssion starts with `{` and ends with `}`. You can use it to access props, call functions, any valid Zig expression\n            <h3>{ctx.props.name}</h3>\n            <div>{ctx.props.age}</div>\n            <strong>\n                {switch (ctx.props.role) {\n                    .admin => \"Admin\",\n                    .member => \"Member\",\n                }}\n            </strong>\n        </div>\n    );\n}\n\nconst User = struct { name: []const u8, age: u32, role: enum { admin, member } };\n\nconst users = [_]User{\n    .{ .name = \"John\", .age = 20, .role = .admin },\n    .{ .name = \"Jane\", .age = 21, .role = .member },\n};\n\nconst zx = @import(\"zx\");\n```\n\n</details>\n\n## Features\n- **JSX-like Syntax**: Write declarative UI components using familiar JSX patterns, transpiled to efficient Zig code.\n- **Full-Stack Capabilities**: Build both frontend and backend of your web application using\n- **It's Fast**: Significantly faster at SSR than many other frameworks.\n- **Compile-time Safety**: Zig's type system catches bugs at compile time. No runtime surprises, no GC.\n- **Familiar Syntax**: Familiar JSX-like syntax, or plain HTML-style markup, with full access to Zig's control flow.\n- **Server-side Rendering**: Render per request on the server for dynamic data, auth, and personalized pages for best performance and SEO.\n- **Static Site Generation**: Pre-render pages at build/export time into static HTML for fast CDN delivery.\n- **File System Routing**: Folder structure defines routes. No configs, no magic strings, just files in folders.\n- **Client-side Rendering**: Optional client-side rendering for interactive experiences when you need it.\n- **Control Flow in Zig's Syntax**: if/else, for/while, and switch all work as expected. It's just Zig.\n- **Developer Tooling**: CLI, hot reload, and editor extensions for the best DX.\n\n## Roadmap\n\nWe track our feature roadmap and bugs using GitHub Issues. \nYou can view our current progress and planned features here:\n\n**[Check out the Ziex Issue Tracker →](https://github.com/ziex-dev/ziex/issues)**\n\n## Versions\n| Zig         | Ziex              | Branch            | Status         |\n|-------------|-------------------|-------------------|----------------|\n| `0.16.0`    | `0.1.0-dev.1050+` | `main`            | Unstable (dev) |\n| `0.15.2`    | `0.1.0-dev-1050`  | `zig-0.15`        | Stable (dev)   |\n\n\n## Editor Support\n\n* [VSCode](https://marketplace.visualstudio.com/items?itemName=ziex.ziex)/[VSCode Forks](https://open-vsx.org/extension/ziex/ziex) Extension\n* [Neovim](/ide/neovim/)\n* [Helix](/ide/helix/)\n* [Zed](/ide/zed/)\n\n## Community\n\n- [Discord](https://ziex.dev/r/discord)\n- [Topic on Ziggit](https://ziex.dev/r/ziggit)\n- [Project on Zig Discord Community](https://ziex.dev/r/zig-discord) (Join Zig Discord first: https://discord.gg/zig)\n\n\n## Links\n\n* [Codeberg Mirror](https://codeberg.org/ziex/ziex) - ZX repository mirror on Codeberg\n* [ziex.dev](https://github.com/ziex-dev/ziex/tree/main/site) - Official documentation site of ZX made using ZX.\n* [example-blog](https://github.com/ziex-dev/example-blog) - Demo blog web application built with ZX\n* [zx-numbers-game](https://github.com/Andrew-Velox/zx-numbers-game) - ZX numbers game\n* [Comparision with other frameworks](https://ziex.dev/vs)\n\n## Contributing\n\nContributions are welcome! Currently trying out ZX and reporting issues for edge cases and providing feedback are greatly appreciated.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/240775591?v=4",
   "releases": [
+    {
+      "tag_name": "v0.1.0-dev.1068",
+      "name": "v0.1.0-dev.1068",
+      "body": "This is a developer preview of Ziex; some features are still works in progress.\nUpdate or install the Ziex CLI using the following scripts.\n\n## Installation\n\n##### Linux/macOS\n```bash\ncurl -fsSL https://ziex.dev/install | bash\n```\n##### Windows\n```powershell\npowershell -c \"irm ziex.dev/install.ps1 | iex\"\n```\n\n## Changelog\n\n### v0.1.0-dev.1068\n\n#### Features\n- feat(csr): client event type generation [`ff24de0`](https://github.com/nurulhudaapon/zx/commit/ff24de02909bd78146c13f161d0182c2c7268956)\n\n#### Fixes\n- fix: ignore asserting mem leak on freestanding [`b465338`](https://github.com/nurulhudaapon/zx/commit/b4653385a24bbf10a77d75a9d968385c26e7dc49)\n- fix: retry accept on transient error (#114) [`6d0d80f`](https://github.com/nurulhudaapon/zx/commit/6d0d80ff3451d171f47b35df1ec60f6875efe5e7)\n- fix: Zig 0.16.0 migration regressions - dev log (#118) [`820ba84`](https://github.com/nurulhudaapon/zx/commit/820ba8496838504ad32358524a5ed04d9688b9c3)\n- fix: site scripts, replace bun with rebuild (#119) [`66493af`](https://github.com/nurulhudaapon/zx/commit/66493af8190a7bc9e355f7c9a8852c8c2d06c411)\n\n#### Documentation\n- docs: improve lighthouse score [`3ead4a7`](https://github.com/nurulhudaapon/zx/commit/3ead4a7f589e1cd49ea92fdc10cb319d4b1349f8)\n- docs: fix and expand client-side rendering documentation (#115) [`0711dcf`](https://github.com/nurulhudaapon/zx/commit/0711dcfa31ea079f98f49844eb4094095323df87)\n\n#### Miscellaneous\n- refactor: encapsulate internal fields [`efa090e`](https://github.com/nurulhudaapon/zx/commit/efa090e9ab7e014df3ce88b75dd13a42c4fe3426)\n- refactor: camel to snake for generated events [`26f8b93`](https://github.com/nurulhudaapon/zx/commit/26f8b93475c0c77b6455565c5368e3b252b62b4f)\n- refactor(migration): Zig 0.16.0 (#116) [`25c3630`](https://github.com/nurulhudaapon/zx/commit/25c36305472c8331582659e38dedc567bec84f60)\n- refactor: move docker from bundle to template [`03163c0`](https://github.com/nurulhudaapon/zx/commit/03163c0a976c5a8c2abde9ba316ad45a504db99e)\n- test: increase transpile perf max time [`b29018b`](https://github.com/nurulhudaapon/zx/commit/b29018b97ca60359d95e5b2a831a0d6ba988dde6)\n- chore: rm zig-0.16 branch [`cf85ea0`](https://github.com/nurulhudaapon/zx/commit/cf85ea0a5ca3a92dd2c671934da41ada7f2827ec)\n- chore: update bench to latest ziex [`2526ebc`](https://github.com/nurulhudaapon/zx/commit/2526ebc3fc1785a40f1768ff4c070da5678cb56d)\n- refactor: update zig version in dockerfile [`80f1d0f`](https://github.com/nurulhudaapon/zx/commit/80f1d0fdcda6ea2d9b3bcec393733727a65fb075)\n- doc: hide ssr dependant example [`71db58a`](https://github.com/nurulhudaapon/zx/commit/71db58ab3b11495a2fb711d373118947129aaa51)\n- refactor: upgrade templates to Zig 0.16.0 [`c93e3b5`](https://github.com/nurulhudaapon/zx/commit/c93e3b5ee0f451210f83193b414022267726bab8)\n- chore: bump ziex version [`e80ab38`](https://github.com/nurulhudaapon/zx/commit/e80ab388f1f8f4b1f105f929d12ba2520fc1b122)\n- ci: temp disable ssr build [`f10620d`](https://github.com/nurulhudaapon/zx/commit/f10620dab15b06f0df68dca5927befedade2343e)\n- ci: rm ssr dep from post deploy [`e7ff58f`](https://github.com/nurulhudaapon/zx/commit/e7ff58f9002a30aaf91c34af634d3e4b412a48f3)\n\n### Contributors\n\n- @Andrew-Velox\n- @nurulhudaapon\n\n",
+      "prerelease": true,
+      "published_at": "2026-05-29T10:31:30Z",
+      "html_url": "https://github.com/ziex-dev/ziex/releases/tag/v0.1.0-dev.1068",
+      "assets": [
+        {
+          "name": "zx-macos-aarch64.tar.gz",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.1068/zx-macos-aarch64.tar.gz",
+          "size": 1274971,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zx-windows-aarch64.zip",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.1068/zx-windows-aarch64.zip",
+          "size": 1356597,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zx-macos-x64.tar.gz",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.1068/zx-macos-x64.tar.gz",
+          "size": 1344852,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zx-linux-aarch64.tar.gz",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.1068/zx-linux-aarch64.tar.gz",
+          "size": 4435733,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zx-windows-x64.zip",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.1068/zx-windows-x64.zip",
+          "size": 1423003,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zx-linux-x64.tar.gz",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.1068/zx-linux-x64.tar.gz",
+          "size": 4448989,
+          "content_type": "application/gzip"
+        }
+      ]
+    },
     {
       "tag_name": "v0.1.0-dev.1050",
       "name": "v0.1.0-dev.1050",
@@ -939,52 +985,6 @@
           "name": "zx-linux-aarch64.tar.gz",
           "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.589/zx-linux-aarch64.tar.gz",
           "size": 3822150,
-          "content_type": "application/gzip"
-        }
-      ]
-    },
-    {
-      "tag_name": "v0.1.0-dev.562",
-      "name": "v0.1.0-dev.562",
-      "body": "This is a developer preview of ZX; some features are still works in progress.\nUpdate or install the ZX CLI using the following scripts.\n\n## Installation\n\n##### Linux/macOS\n```bash\ncurl -fsSL https://ziex.dev/install | bash\n```\n##### Windows\n```powershell\npowershell -c \"irm ziex.dev/install.ps1 | iex\"\n```\n\n## Changelog\n\n### v0.1.0-dev.562\n\n#### Features\n- feat: progress for socket in route [`855612a`](https://github.com/nurulhudaapon/zx/commit/855612a49c9f2c8c3c7785a37da75071c6d99db4)\n- feat: realtime socket in route.zig [`20bc206`](https://github.com/nurulhudaapon/zx/commit/20bc2066165a9d73f7679a62a9fc00d07bc97751)\n\n#### Fixes\n- fix: client side fragment handling [`03c86fd`](https://github.com/nurulhudaapon/zx/commit/03c86fd5f51620d47ee6e7cb4be05d8f01c460d5)\n- fix(fmt): fix nested switch indentation (#36) [`d17dab9`](https://github.com/nurulhudaapon/zx/commit/d17dab9f6ca4bb2296df70ea75fc9b917d541fa7)\n- fix(export): zx export issue on windows (#37) [`eaf873e`](https://github.com/nurulhudaapon/zx/commit/eaf873ef977f380f260ad85f55f41a75a22f5773)\n\n#### Documentation\n- docs: add progress example [`5c4b936`](https://github.com/nurulhudaapon/zx/commit/5c4b936a756d0cbc24311cd2ae42eb87c4782e1d)\n- docs: update checklist [`e6f95d2`](https://github.com/nurulhudaapon/zx/commit/e6f95d29d70ea9675f1502328b2e92a3e1f6b26f)\n\n#### Miscellaneous\n- refactor: use positional array instead of zon for hydration [`3f8f3c6`](https://github.com/nurulhudaapon/zx/commit/3f8f3c6e0c5cb33dfbdcc4f5bf39e3716e41b86f)\n- refactor: renamed client files [`ef155e8`](https://github.com/nurulhudaapon/zx/commit/ef155e84805818a05cf2335cb1aa9a3f43a996fc)\n- chore: file renaming [`ab48ef1`](https://github.com/nurulhudaapon/zx/commit/ab48ef1e025a24fa93a9d52481c90f43fcdb1d95)\n- chore: upstream venoder/cache.zig [`f673606`](https://github.com/nurulhudaapon/zx/commit/f673606cfead8b4ab05ca79365a1286f04d83fdd)\n- chore: reformat zig/zx files [`1b1aa24`](https://github.com/nurulhudaapon/zx/commit/1b1aa24fa0ec5152c8f727719020e074e635b435)\n- test: retry flaky test [`7f1d892`](https://github.com/nurulhudaapon/zx/commit/7f1d8927df1ea515d3209505ae2cad98a4a658f2)\n- test: add more fmt tests [`80cf4ec`](https://github.com/nurulhudaapon/zx/commit/80cf4ec6e8ed29e6ba5d2ef87c13c8fdb5c37aa4)\n- chore: cp instead of ln sync queries [`2e07cc8`](https://github.com/nurulhudaapon/zx/commit/2e07cc886195f6bffc9de94d99e000d389c43721)\n- chore: version bump [`3296074`](https://github.com/nurulhudaapon/zx/commit/32960748bd1aa94d4c619105bf13ecc04ec5d4c2)\n\n### Contributors\n\n- @Andrew-Velox\n- @nurulhudaapon\n\n",
-      "prerelease": false,
-      "published_at": "2026-01-10T18:33:47Z",
-      "html_url": "https://github.com/ziex-dev/ziex/releases/tag/v0.1.0-dev.562",
-      "assets": [
-        {
-          "name": "zx-windows-aarch64.zip",
-          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.562/zx-windows-aarch64.zip",
-          "size": 1123110,
-          "content_type": "application/zip"
-        },
-        {
-          "name": "zx-windows-x64.zip",
-          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.562/zx-windows-x64.zip",
-          "size": 1169141,
-          "content_type": "application/zip"
-        },
-        {
-          "name": "zx-linux-x64.tar.gz",
-          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.562/zx-linux-x64.tar.gz",
-          "size": 3803517,
-          "content_type": "application/gzip"
-        },
-        {
-          "name": "zx-linux-aarch64.tar.gz",
-          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.562/zx-linux-aarch64.tar.gz",
-          "size": 3786051,
-          "content_type": "application/gzip"
-        },
-        {
-          "name": "zx-macos-x64.tar.gz",
-          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.562/zx-macos-x64.tar.gz",
-          "size": 1077118,
-          "content_type": "application/gzip"
-        },
-        {
-          "name": "zx-macos-aarch64.tar.gz",
-          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.562/zx-macos-aarch64.tar.gz",
-          "size": 1017259,
           "content_type": "application/gzip"
         }
       ]
