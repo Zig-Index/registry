@@ -16,10 +16,10 @@
     "zig-package",
     "server-side-rendering"
   ],
-  "stars": 241,
+  "stars": 242,
   "forks": 17,
   "watchers": 3,
-  "updated_at": "2026-05-30T12:52:43Z",
+  "updated_at": "2026-05-30T15:02:29Z",
   "dependencies": [
     {
       "name": "ziex_js",
@@ -72,33 +72,33 @@
     {
       "tag_name": "v0.1.0-dev.1068",
       "name": "v0.1.0-dev.1068",
-      "body": "This is a developer preview of Ziex; some features are still works in progress.\nUpdate or install the Ziex CLI using the following scripts.\n\n## Installation\n\n##### Linux/macOS\n```bash\ncurl -fsSL https://ziex.dev/install | bash\n```\n##### Windows\n```powershell\npowershell -c \"irm ziex.dev/install.ps1 | iex\"\n```\n\n## Changelog\n\n### v0.1.0-dev.1068\n\n#### Features\n- feat(csr): client event type generation [`ff24de0`](https://github.com/nurulhudaapon/zx/commit/ff24de02909bd78146c13f161d0182c2c7268956)\n\n#### Fixes\n- fix: ignore asserting mem leak on freestanding [`b465338`](https://github.com/nurulhudaapon/zx/commit/b4653385a24bbf10a77d75a9d968385c26e7dc49)\n- fix: retry accept on transient error (#114) [`6d0d80f`](https://github.com/nurulhudaapon/zx/commit/6d0d80ff3451d171f47b35df1ec60f6875efe5e7)\n- fix: Zig 0.16.0 migration regressions - dev log (#118) [`820ba84`](https://github.com/nurulhudaapon/zx/commit/820ba8496838504ad32358524a5ed04d9688b9c3)\n- fix: site scripts, replace bun with rebuild (#119) [`66493af`](https://github.com/nurulhudaapon/zx/commit/66493af8190a7bc9e355f7c9a8852c8c2d06c411)\n\n#### Documentation\n- docs: improve lighthouse score [`3ead4a7`](https://github.com/nurulhudaapon/zx/commit/3ead4a7f589e1cd49ea92fdc10cb319d4b1349f8)\n- docs: fix and expand client-side rendering documentation (#115) [`0711dcf`](https://github.com/nurulhudaapon/zx/commit/0711dcfa31ea079f98f49844eb4094095323df87)\n\n#### Miscellaneous\n- refactor: encapsulate internal fields [`efa090e`](https://github.com/nurulhudaapon/zx/commit/efa090e9ab7e014df3ce88b75dd13a42c4fe3426)\n- refactor: camel to snake for generated events [`26f8b93`](https://github.com/nurulhudaapon/zx/commit/26f8b93475c0c77b6455565c5368e3b252b62b4f)\n- refactor(migration): Zig 0.16.0 (#116) [`25c3630`](https://github.com/nurulhudaapon/zx/commit/25c36305472c8331582659e38dedc567bec84f60)\n- refactor: move docker from bundle to template [`03163c0`](https://github.com/nurulhudaapon/zx/commit/03163c0a976c5a8c2abde9ba316ad45a504db99e)\n- test: increase transpile perf max time [`b29018b`](https://github.com/nurulhudaapon/zx/commit/b29018b97ca60359d95e5b2a831a0d6ba988dde6)\n- chore: rm zig-0.16 branch [`cf85ea0`](https://github.com/nurulhudaapon/zx/commit/cf85ea0a5ca3a92dd2c671934da41ada7f2827ec)\n- chore: update bench to latest ziex [`2526ebc`](https://github.com/nurulhudaapon/zx/commit/2526ebc3fc1785a40f1768ff4c070da5678cb56d)\n- refactor: update zig version in dockerfile [`80f1d0f`](https://github.com/nurulhudaapon/zx/commit/80f1d0fdcda6ea2d9b3bcec393733727a65fb075)\n- doc: hide ssr dependant example [`71db58a`](https://github.com/nurulhudaapon/zx/commit/71db58ab3b11495a2fb711d373118947129aaa51)\n- refactor: upgrade templates to Zig 0.16.0 [`c93e3b5`](https://github.com/nurulhudaapon/zx/commit/c93e3b5ee0f451210f83193b414022267726bab8)\n- chore: bump ziex version [`e80ab38`](https://github.com/nurulhudaapon/zx/commit/e80ab388f1f8f4b1f105f929d12ba2520fc1b122)\n- ci: temp disable ssr build [`f10620d`](https://github.com/nurulhudaapon/zx/commit/f10620dab15b06f0df68dca5927befedade2343e)\n- ci: rm ssr dep from post deploy [`e7ff58f`](https://github.com/nurulhudaapon/zx/commit/e7ff58f9002a30aaf91c34af634d3e4b412a48f3)\n\n### Contributors\n\n- @Andrew-Velox\n- @nurulhudaapon\n\n",
-      "prerelease": true,
-      "published_at": "2026-05-29T10:31:30Z",
+      "body": "This is a developer preview of Ziex; some features are still works in progress.\r\nUpdate or install the Ziex CLI using the following scripts.\r\n\r\nFirst release of `Zig 0.16.0`\r\n\r\n## Installation\r\n\r\n##### Linux/macOS\r\n```bash\r\ncurl -fsSL https://ziex.dev/install | bash\r\n```\r\n##### Windows\r\n```powershell\r\npowershell -c \"irm ziex.dev/install.ps1 | iex\"\r\n```\r\n\r\n## Changelog\r\n\r\n### v0.1.0-dev.1068\r\n\r\n#### Features\r\n- feat(csr): client event type generation [`ff24de0`](https://github.com/nurulhudaapon/zx/commit/ff24de02909bd78146c13f161d0182c2c7268956)\r\n\r\n#### Fixes\r\n- fix: ignore asserting mem leak on freestanding [`b465338`](https://github.com/nurulhudaapon/zx/commit/b4653385a24bbf10a77d75a9d968385c26e7dc49)\r\n- fix: retry accept on transient error (#114) [`6d0d80f`](https://github.com/nurulhudaapon/zx/commit/6d0d80ff3451d171f47b35df1ec60f6875efe5e7)\r\n- fix: Zig 0.16.0 migration regressions - dev log (#118) [`820ba84`](https://github.com/nurulhudaapon/zx/commit/820ba8496838504ad32358524a5ed04d9688b9c3)\r\n- fix: site scripts, replace bun with rebuild (#119) [`66493af`](https://github.com/nurulhudaapon/zx/commit/66493af8190a7bc9e355f7c9a8852c8c2d06c411)\r\n\r\n#### Documentation\r\n- docs: improve lighthouse score [`3ead4a7`](https://github.com/nurulhudaapon/zx/commit/3ead4a7f589e1cd49ea92fdc10cb319d4b1349f8)\r\n- docs: fix and expand client-side rendering documentation (#115) [`0711dcf`](https://github.com/nurulhudaapon/zx/commit/0711dcfa31ea079f98f49844eb4094095323df87)\r\n\r\n#### Miscellaneous\r\n- refactor: encapsulate internal fields [`efa090e`](https://github.com/nurulhudaapon/zx/commit/efa090e9ab7e014df3ce88b75dd13a42c4fe3426)\r\n- refactor: camel to snake for generated events [`26f8b93`](https://github.com/nurulhudaapon/zx/commit/26f8b93475c0c77b6455565c5368e3b252b62b4f)\r\n- refactor(migration): Zig 0.16.0 (#116) [`25c3630`](https://github.com/nurulhudaapon/zx/commit/25c36305472c8331582659e38dedc567bec84f60)\r\n- refactor: move docker from bundle to template [`03163c0`](https://github.com/nurulhudaapon/zx/commit/03163c0a976c5a8c2abde9ba316ad45a504db99e)\r\n- test: increase transpile perf max time [`b29018b`](https://github.com/nurulhudaapon/zx/commit/b29018b97ca60359d95e5b2a831a0d6ba988dde6)\r\n- chore: rm zig-0.16 branch [`cf85ea0`](https://github.com/nurulhudaapon/zx/commit/cf85ea0a5ca3a92dd2c671934da41ada7f2827ec)\r\n- chore: update bench to latest ziex [`2526ebc`](https://github.com/nurulhudaapon/zx/commit/2526ebc3fc1785a40f1768ff4c070da5678cb56d)\r\n- refactor: update zig version in dockerfile [`80f1d0f`](https://github.com/nurulhudaapon/zx/commit/80f1d0fdcda6ea2d9b3bcec393733727a65fb075)\r\n- doc: hide ssr dependant example [`71db58a`](https://github.com/nurulhudaapon/zx/commit/71db58ab3b11495a2fb711d373118947129aaa51)\r\n- refactor: upgrade templates to Zig 0.16.0 [`c93e3b5`](https://github.com/nurulhudaapon/zx/commit/c93e3b5ee0f451210f83193b414022267726bab8)\r\n- chore: bump ziex version [`e80ab38`](https://github.com/nurulhudaapon/zx/commit/e80ab388f1f8f4b1f105f929d12ba2520fc1b122)\r\n- ci: temp disable ssr build [`f10620d`](https://github.com/nurulhudaapon/zx/commit/f10620dab15b06f0df68dca5927befedade2343e)\r\n- ci: rm ssr dep from post deploy [`e7ff58f`](https://github.com/nurulhudaapon/zx/commit/e7ff58f9002a30aaf91c34af634d3e4b412a48f3)\r\n\r\n### Contributors\r\n\r\n- @Andrew-Velox\r\n- @nurulhudaapon\r\n\r\n",
+      "prerelease": false,
+      "published_at": "2026-05-30T14:45:49Z",
       "html_url": "https://github.com/ziex-dev/ziex/releases/tag/v0.1.0-dev.1068",
       "assets": [
         {
-          "name": "zx-macos-aarch64.tar.gz",
-          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.1068/zx-macos-aarch64.tar.gz",
-          "size": 1274971,
-          "content_type": "application/gzip"
-        },
-        {
-          "name": "zx-windows-aarch64.zip",
-          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.1068/zx-windows-aarch64.zip",
-          "size": 1356597,
-          "content_type": "application/zip"
-        },
-        {
-          "name": "zx-macos-x64.tar.gz",
-          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.1068/zx-macos-x64.tar.gz",
-          "size": 1344852,
+          "name": "zx-linux-x64.tar.gz",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.1068/zx-linux-x64.tar.gz",
+          "size": 4448989,
           "content_type": "application/gzip"
         },
         {
           "name": "zx-linux-aarch64.tar.gz",
           "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.1068/zx-linux-aarch64.tar.gz",
-          "size": 4435733,
+          "size": 4435736,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zx-macos-aarch64.tar.gz",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.1068/zx-macos-aarch64.tar.gz",
+          "size": 1274970,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zx-macos-x64.tar.gz",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.1068/zx-macos-x64.tar.gz",
+          "size": 1344841,
           "content_type": "application/gzip"
         },
         {
@@ -108,10 +108,10 @@
           "content_type": "application/zip"
         },
         {
-          "name": "zx-linux-x64.tar.gz",
-          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.1068/zx-linux-x64.tar.gz",
-          "size": 4448989,
-          "content_type": "application/gzip"
+          "name": "zx-windows-aarch64.zip",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.1068/zx-windows-aarch64.zip",
+          "size": 1356597,
+          "content_type": "application/zip"
         }
       ]
     },
