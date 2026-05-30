@@ -12,7 +12,7 @@
   "stars": 2,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-05-25T12:08:01Z",
+  "updated_at": "2026-05-30T21:20:42Z",
   "dependencies": [
     {
       "name": "raylib_zig",
@@ -21,7 +21,7 @@
     }
   ],
   "minimum_zig_version": "0.16.0",
-  "readme": "# Raylib Bar chart lib\n\nBar chart widget for [Raylib-zig](https://github.com/Not-Nik/raylib-zig).\n\nExample usage here -> [ZISTORY](https://github.com/RomaricKc1/zistory).\n\nTested on Zig version `0.16.0`.\n\n> [!NOTE]\n> This is configured to work on `wayland`. If you are on `x11`, you'll need to\n> change the display `backend`.\n\nIn the raylib dependency.\n\n```zig\nconst raylib_dep = b.dependency(\"raylib_zig\", .{\n    .target = target,\n    .optimize = optimize,\n    .linux_display_backend = .X11,\n});\n```\n\n## Usage\n\nThe project must have been created using `zig init`.\n\nRun this to add it to your `build.zig.zon`:\n\n```\nzig fetch --save git+https://github.com/RomaricKc1/raylib-bar_chart/\n```\n\nAnd add these lines to your `build.zig` file:\n\n```zig\nconst rl_bar_chart_dep = b.dependency(\"raylib_bar_chart\", .{\n    .target = target,\n    .optimize = optimize,\n});\nconst rl_bar_chart = rl_bar_chart_dep.module(\"raylib_bar_chart\"); // bar chart widget\n```\n\nNow add the modules to your target:\n\n```zig\nexe.root_module.addImport(\"rl_bar_chart\", rl_bar_chart);\n```\n\nYou can then import it in your code.\n\n```zig\nconst rl_bar_chart = @import(\"rl_bar_chart\");\n```\n\n## Checkout another widget\n\n- [Raylib-lists](https://github.com/RomaricKc1/raylib-lists)\n",
+  "readme": "# Raylib Bar chart lib\n\nBar chart widget for [Raylib-zig](https://github.com/Not-Nik/raylib-zig).\n\nExample usage here -> [ZISTORY](https://github.com/RomaricKc1/zistory).\n\nTested on Zig version `0.16.0` and `0.17.0-dev.387+31f157d80`.\n\n> [!NOTE]\n> This is configured to work on `wayland`. If you are on `x11`, you'll need to\n> change the display `backend`.\n\nIn the raylib dependency.\n\n```zig\nconst raylib_dep = b.dependency(\"raylib_zig\", .{\n    .target = target,\n    .optimize = optimize,\n    .linux_display_backend = .X11,\n});\n```\n\n## Usage\n\nThe project must have been created using `zig init`.\n\nRun this to add it to your `build.zig.zon`:\n\n```\nzig fetch --save git+https://github.com/RomaricKc1/raylib-bar_chart/\n```\n\nAnd add these lines to your `build.zig` file:\n\n```zig\nconst rl_bar_chart_dep = b.dependency(\"raylib_bar_chart\", .{\n    .target = target,\n    .optimize = optimize,\n});\nconst rl_bar_chart = rl_bar_chart_dep.module(\"raylib_bar_chart\"); // bar chart widget\n```\n\nNow add the modules to your target:\n\n```zig\nexe.root_module.addImport(\"rl_bar_chart\", rl_bar_chart);\n```\n\nYou can then import it in your code.\n\n```zig\nconst rl_bar_chart = @import(\"rl_bar_chart\");\n```\n\n## Checkout another widget\n\n- [Raylib-lists](https://github.com/RomaricKc1/raylib-lists)\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/45500198?u=f8ed918a3913f7270320b20f4ed8b9c180a1b7f1&v=4",
   "releases": [],
   "owner_bio": "[🇷 🇪 🇩 🇦 🇨 🇹 🇪 🇩 ] ",
