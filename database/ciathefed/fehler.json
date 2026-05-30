@@ -1,0 +1,112 @@
+{
+  "name": "fehler",
+  "owner": "ciathefed",
+  "repo": "fehler",
+  "description": "A comprehensive error reporting system for Zig",
+  "type": "package",
+  "topics": [
+    "error-reporting",
+    "zig-package"
+  ],
+  "stars": 61,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-05-30T02:00:23Z",
+  "minimum_zig_version": "0.16.0",
+  "readme": "# fehler\n\nA comprehensive error reporting system for Zig that provides rich, colorful diagnostic output similar to modern compilers like Rust's `rustc` and Zig's own compiler.\n\n![Static Badge](https://img.shields.io/badge/Zig-0.16.0-ec915c?style=flat-square&logo=zig)\n![Tests](https://img.shields.io/github/actions/workflow/status/ciathefed/fehler/zig.yml?label=Tests%20%F0%9F%A7%AA&style=flat-square)\n\n## Features\n\n- 🎨 **Colorful Output**: ANSI color-coded diagnostics with severity-based coloring\n- 📍 **Range-Based Highlighting**: Precise source range highlighting with start and end positions\n- 📝 **Source Context**: Displays source code snippets with error highlighting\n- 🎯 **Smart Underlining**: Uses carets (`^`) for single characters and tildes (`~`) for ranges\n- 🔧 **Help Messages**: Optional help text for guiding users to solutions\n- 🏗️ **Fluent Interface**: Builder pattern for easy diagnostic construction\n- 🧠 **Memory Safe**: Proper memory management with allocator-based design\n- 🎨 **Multiple Output Formats**: Supports `Fehler` (default), `GCC`, and `MSVC` styles\n\n## Install\n\n### Latest Release (recommended)\n\n```shell\nzig fetch --save \"git+https://github.com/ciathefed/fehler#v0.7.0\"\n````\n\n### Latest on `main` (bleeding edge)\n\n```shell\nzig fetch --save \"git+https://github.com/ciathefed/fehler#main\"\n```\n\nAdd `fehler` to your imports in `build.zig`:\n\n```zig\nconst fehler = b.dependency(\"fehler\", .{\n    .target = target,\n    .optimize = optimize,\n});\nexe.root_module.addImport(\"fehler\", fehler.module(\"fehler\"));\n```\n\n## Quick Start\n\n```zig\nconst std = @import(\"std\");\nconst ErrorReporter = @import(\"fehler\").ErrorReporter;\nconst Diagnostic = @import(\"fehler\").Diagnostic;\nconst Severity = @import(\"fehler\").Severity;\nconst SourceRange = @import(\"fehler\").SourceRange;\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    // Initialize reporter with default Fehler format\n    var reporter = ErrorReporter.init(allocator);\n\n    // Or specify a different format with withFormat()\n    // var reporter = ErrorReporter.init(allocator).withFormat(.gcc);\n\n    defer reporter.deinit();\n\n    const source =\n        \\\\const std = @import(\"std\");\n        \\\\\n        \\\\pub fn main() void {\n        \\\\    const x = 42;\n        \\\\    const y = x + \"hello\"; // Error here!\n        \\\\    std.debug.print(\"Result: {}\\n\", .{y});\n        \\\\}\n    ;\n\n    try reporter.addSource(\"example.zig\", source);\n\n    const diagnostic = Diagnostic.init(.err, \"type mismatch: cannot add integer and string\")\n        .withRange(SourceRange.span(\"example.zig\", 5, 19, 5, 25))\n        .withHelp(\"consider converting the string to an integer using std.fmt.parseInt()\")\n        .withCode(\"E0001\")\n        .withUrl(\"https://docs.example.org/errors/E0001\");\n\n    reporter.report(diagnostic);\n}\n```\n\n## Output Examples\n\n### Fehler (default)\n\n![Fehler Example](./assets/example_fehler.png)\n\n### GCC style\n\n```zig\nvar reporter = ErrorReporter.init(allocator).withFormat(.gcc);\nreporter.report(diagnostic);\n```\n\n![GCC Example](./assets/example_gcc.png)\n\n### MSVC style\n\n```zig\nvar reporter = ErrorReporter.init(allocator).withFormat(.msvc);\nreporter.report(diagnostic);\n```\n\n![MSVC Example](./assets/example_msvc.png)\n\n## API Reference\n\n### Core Types\n\n#### `Severity`\n\nRepresents the severity level of a diagnostic:\n\n- `.fatal` - Fatal error, unrecoverable internal error (red)\n- `.err` - Error (red)\n- `.warn` - Warning (yellow)\n- `.note` - Note/info (blue)\n- `.todo` - To-do reminder, incomplete feature (magenta)\n- `.unimplemented` - Feature not implemented (cyan)\n\n```zig\nconst severity = Severity.err;\nconst color = severity.color();  // Returns ANSI color code\nconst label = severity.label();  // Returns \"error\", \"warning\", \"note\", etc\n```\n\n#### `Position`\n\nRepresents a position in source code:\n\n```zig\nconst position = Position{\n    .line = 42,\n    .column = 10,\n};\n```\n\n#### `SourceRange`\n\nRepresents a range in source code with start and end positions:\n\n```zig\n// Single character range\nconst single_char = SourceRange.single(\"main.zig\", 42, 10);\n\n// Multi-character range on same line\nconst same_line = SourceRange.span(\"main.zig\", 42, 10, 42, 20);\n\n// Multi-line range\nconst multi_line = SourceRange.span(\"main.zig\", 42, 10, 45, 5);\n\n// Check range properties\nconst is_single = range.isSingleChar();    // true for single character\nconst is_multiline = range.isMultiline();  // true for multi-line ranges\nconst length = range.length();             // length for single-line ranges\n```\n\n#### `Diagnostic`\n\nThe main diagnostic message structure:\n\n```zig\n// Basic diagnostic\nconst diag = Diagnostic.init(.err, \"undefined variable 'foo'\");\n\n// With single character location (backward compatible)\nconst diag_with_loc = Diagnostic.init(.err, \"undefined variable 'foo'\")\n    .withLocation(\"main.zig\", 10, 5);\n\n// With range highlighting\nconst diag_with_range = Diagnostic.init(.err, \"type mismatch\")\n    .withRange(SourceRange.span(\"main.zig\", 10, 5, 10, 15));\n\n// With help text\nconst diag_with_help = Diagnostic.init(.warn, \"unused variable 'bar'\")\n    .withHelp(\"prefix with '_' to silence this warning\");\n\n// With error code\nconst diag_with_code = Diagnostic.init(.err, \"syntax error\")\n    .withCode(\"E0001\");\n\n// With documentation URL\nconst diag_with_url = Diagnostic.init(.err, \"syntax error\")\n    .withUrl(\"https://docs.example.org/errors/E0001\");\n\n// Chained (fluent interface) with range, help, code, and URL\nconst full_diag = Diagnostic.init(.err, \"parse error\")\n    .withRange(SourceRange.span(\"parser.zig\", 25, 8, 25, 12))\n    .withHelp(\"expected ';' after expression\")\n    .withCode(\"E2002\")\n    .withUrl(\"https://docs.example.org/errors/E2002\");\n```\n\n#### `ErrorReporter`\n\nThe main error reporting system:\n\n```zig\n// Initialize reporter (default Fehler format)\nvar reporter = ErrorReporter.init(allocator);\n\n// Change output format if desired\nvar reporter_gcc = reporter.withFormat(.gcc);\nvar reporter_msvc = reporter.withFormat(.msvc);\n\n// Add source files\ntry reporter.addSource(\"main.zig\", source_content);\n\n// Report single diagnostic\nreporter.report(diagnostic);\n\n// Report multiple diagnostics\nconst diagnostics = [_]Diagnostic{ diag1, diag2, diag3 };\nreporter.reportMany(&diagnostics);\n```\n\n#### `emitSarif`\n\nExports diagnostics to SARIF format (version 2.1.0) as a JSON stream.\n\n```zig\ntry emitSarif(allocator, diagnostics, writer);\n```\n\nWrites a `runs` array with all diagnostics as SARIF `results`. If a `code` is set, it's included as a rule ID.\n\n```zig\nconst file = try std.fs.cwd().createFile(\"report.sarif.json\", .{});\ndefer file.close();\n\ntry emitSarif(std.heap.page_allocator, &[_]Diagnostic{diag}, file.writer());\n```\n\nUse this to integrate with editors or CI tools that support SARIF (e.g. GitHub, VS Code, etc).\n\n### Convenience Functions\n\n#### `createDiagnostic`\n\nShorthand for creating diagnostics with single-character location:\n\n```zig\nconst diag = createDiagnostic(\n    .err,\n    \"syntax error\",\n    \"parser.zig\",\n    25,\n    8\n);\n// Equivalent to:\n// Diagnostic.init(.err, \"syntax error\")\n//     .withLocation(\"parser.zig\", 25, 8)\n```\n\n#### `createDiagnosticRange`\n\nShorthand for creating diagnostics with range highlighting:\n\n```zig\nconst diag = createDiagnosticRange(\n    .warn,\n    \"long variable name\",\n    \"main.zig\",\n    15, 8,    // start line, start column\n    15, 25    // end line, end column\n);\n// Equivalent to:\n// Diagnostic.init(.warn, \"long variable name\")\n//     .withRange(SourceRange.span(\"main.zig\", 15, 8, 15, 25))\n```\n\n## Highlighting Examples\n\nThe diagnostic system uses different visual indicators based on the range:\n\n### Single Character (Caret `^`)\n\n```zig\n   5 |     const y = x + \"hello\";\n     |               ^\n```\n\n### Single Line Range (Tildes `~`)\n\n```zig\n   5 |     const very_long_variable_name = 42;\n     |           ~~~~~~~~~~~~~~~~~~~~~~~\n```\n\n### Multi-line Range (Tildes `~`)\n\n```zig\n   5 |     const result = calculate(\n     |                    ~~~~~~~~~\n   6 |         param1,\n     | ~~~~~~~~~~~~~~~\n   7 |         param2\n     | ~~~~~~~~~~~~~~\n   8 |     );\n     | ~~~~~\n```\n\n## Contributing\n\nContributions are welcome. If you find a bug or want to add a feature, open an issue or pull request.\n\nTo contribute code:\n\n1. Fork the repository\n2. Create a new branch\n3. Make your changes\n4. Open a pull request with a clear description\n\nPlease follow the [Conventional Commits](https://www.conventionalcommits.org/) format for commit messages. Examples:\n\n- `fix: handle empty source input in reporter`\n- `feat: add support for range-based highlighting`\n- `refactor: simplify diagnostic builder`\n\nKeep changes focused and minimal. Include tests when appropriate.\n\n## License\n\nThis project is licensed under the [MIT License](./LICENSE)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/183272735?u=cd376ff37a2470ecc323b67461fd9a3319118383&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.7.0",
+      "name": "v0.7.0",
+      "body": "### ✨ Features\r\n* `feat: emitSarif now accepts *std.Io.Writer instead of *std.io.Writer for 0.16.0 compatibility`\r\n\r\n### 🧱 Non-Breaking Changes\r\n* updated `root.zig` for Zig 0.16.0 API\r\n* migrated `std.array_list.Managed` to `std.ArrayList` with explicit allocator passing\r\n* rewrote `emitSarif` JSON output using `std.json.fmt` (old streaming builder API removed)\r\n* bumped `minimum_zig_version` to `0.16.0` in `build.zig.zon`\r\n* updated GitHub Actions CI workflow to use Zig 0.16.0\r\n\r\n### 📝 Documentation\r\n* updated README to reflect Zig 0.16.0 changes and new `std.Io.Writer` requirement",
+      "prerelease": false,
+      "published_at": "2026-05-30T01:43:54Z",
+      "html_url": "https://github.com/ciathefed/fehler/releases/tag/v0.7.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.6.1",
+      "name": "v0.6.1",
+      "body": "### 🐛 Fixes\r\n* fix: apply reserve first pattern to `addSource` method for strong exception safety \r\n\r\n*Thanks @matklad! & @KilianHanich*",
+      "prerelease": false,
+      "published_at": "2025-08-29T16:01:17Z",
+      "html_url": "https://github.com/ciathefed/fehler/releases/tag/v0.6.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.6.0",
+      "name": "v0.6.0",
+      "body": "### ✨ Features\r\n* `feat: emitSarif now requires an allocator argument for flexible memory management`\r\n\r\n### 🧱 Non-Breaking Changes\r\n* updated `root.zig` and `test.zig` for Zig 0.15.1 API\r\n* removed unnecessary ArrayList capacity handling (defaults to unmanaged)\r\n* bumped `minimum_zig_version` to 0.15.1\r\n* updated GitHub Actions CI workflow to use Zig 0.15.1\r\n\r\n### 📝 Documentation\r\n* updated README to reflect Zig 0.15.1 changes and `emitSarif` allocator requirement",
+      "prerelease": false,
+      "published_at": "2025-08-26T21:36:08Z",
+      "html_url": "https://github.com/ciathefed/fehler/releases/tag/v0.6.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.5.1",
+      "name": "v0.5.1",
+      "body": "### 🔥 Removed\r\n\r\n* Dead code\r\n* Redundant comments",
+      "prerelease": false,
+      "published_at": "2025-07-21T17:06:01Z",
+      "html_url": "https://github.com/ciathefed/fehler/releases/tag/v0.5.1",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.5.0",
+      "name": "v0.5.0",
+      "body": "### ✨ Features\r\n\r\n* `feat: add emitSarif() function to export diagnostics in SARIF 2.1.0 JSON format`\r\n* `feat: support writing SARIF output to any std.io.Writer for flexible integration`\r\n* Include rule IDs, messages, and precise source locations in SARIF output\r\n* Add tests verifying SARIF output correctness and structure\r\n* Update README with SARIF usage examples and API documentation\r\n* Add top-level module doc comment describing fehler library and features\r\n\r\n### 🧱 Non-Breaking Changes\r\n\r\n* Existing diagnostic reporting and formatting remain unchanged and opt-in\r\n* SARIF export does not affect terminal output or other existing formats\r\n\r\n### 📝 Documentation\r\n\r\n* README updated to document `emitSarif` function and usage\r\n* API reference expanded with SARIF export details\r\n",
+      "prerelease": false,
+      "published_at": "2025-07-11T16:50:50Z",
+      "html_url": "https://github.com/ciathefed/fehler/releases/tag/v0.5.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.4.0",
+      "name": "v0.4.0",
+      "body": "### ✨ Features\r\n\r\n* `feat: add new severity levels: fatal, todo, and unimplemented`",
+      "prerelease": false,
+      "published_at": "2025-07-08T04:03:24Z",
+      "html_url": "https://github.com/ciathefed/fehler/releases/tag/v0.4.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.3.0",
+      "name": "v0.3.0",
+      "body": "### ✨ Features\r\n\r\n* `feat: add support for GCC and MSVC output formats`\r\n* `feat: add ErrorReporter.withFormat() for changing output style`\r\n* Maintains `rich` (fehler-style) as the default diagnostic format\r\n* GCC format mirrors `gcc`/`clang`-style diagnostics: `file:line:col: error: message`\r\n* MSVC format follows `filename(line,col): error message` structure\r\n\r\n### 🧱 Non-Breaking Changes\r\n\r\n* `ErrorReporter.init()` signature remains unchanged for backward compatibility\r\n* `.withFormat()` is now the preferred method to switch formats\r\n\r\n### 🖼 Visuals\r\n\r\n* Added `example_gcc.png` and `example_msvc.png` to showcase alternative output styles\r\n* Rich format remains ANSI-colored and detailed\r\n\r\n### 📝 Documentation\r\n\r\n* Updated README to include `withFormat()` usage and output format examples\r\n* API section now documents `OutputFormat` enum and visual differences across formats\r\n* Screenshot references added for all output styles",
+      "prerelease": false,
+      "published_at": "2025-07-06T15:17:16Z",
+      "html_url": "https://github.com/ciathefed/fehler/releases/tag/v0.3.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "body": "### ✨ Features\r\n\r\n* `feat: replace SourceLoc with Position and SourceRange for range support`\r\n* Diagnostics now support multi-character ranges using `~` underlines\r\n* Single-character errors still use `^`, both styled with severity color\r\n\r\n### 💥 Breaking Changes\r\n\r\n* Replaced `SourceLoc` with `Position` and `SourceRange` types\r\n* `.withLocation(SourceLoc)` replaced by `.withLocation(file, line, column)` or `.withRange(SourceRange)`\r\n\r\n### 🖼 Visuals\r\n\r\n* Caret (`^`) and tilde (`~`) now use the same color as the diagnostic severity\r\n* Updated `example.png` to showcase new highlighting style\r\n\r\n### 📝 Documentation\r\n\r\n* Updated README examples and API reference to reflect new range-based API\r\n* Clarified migration examples from `v0.1.0` to current version",
+      "prerelease": false,
+      "published_at": "2025-07-05T18:30:55Z",
+      "html_url": "https://github.com/ciathefed/fehler/releases/tag/v0.2.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "### ✨ Features\r\n\r\n* `feat: implement core error reporting system`\r\n* `feat: add error code and URL support to Diagnostic`\r\n\r\n### 📝 Documentation\r\n\r\n* Embedded `example.png` in README to preview output\r\n* Added fallback `<img>` tag for compatibility with external renderers (e.g. zigistry.dev)\r\n* Expanded API reference in README to include `.code` and `.url` support\r\n\r\n### 🛠 CI\r\n\r\n* Setup GitHub Actions for Zig 0.14.1 compatibility and builds",
+      "prerelease": false,
+      "published_at": "2025-07-05T14:51:20Z",
+      "html_url": "https://github.com/ciathefed/fehler/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "I do programming and things.",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 1,
+  "owner_following": 0,
+  "owner_created_at": "2024-09-29T09:08:24Z",
+  "homepage": "https://ciathefed.github.io/fehler/",
+  "license": "MIT",
+  "category": "library"
+}
