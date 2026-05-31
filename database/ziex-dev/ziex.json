@@ -16,10 +16,10 @@
     "zig-package",
     "server-side-rendering"
   ],
-  "stars": 243,
+  "stars": 244,
   "forks": 17,
   "watchers": 3,
-  "updated_at": "2026-05-30T22:14:22Z",
+  "updated_at": "2026-05-31T08:02:29Z",
   "dependencies": [
     {
       "name": "ziex_js",
@@ -28,8 +28,8 @@
     },
     {
       "name": "httpz",
-      "url": "git+https://github.com/karlseguin/http.zig.git#744c588608d2b13e6dba2013577b2e0928877f19",
-      "hash": "httpz-0.0.0-PNVzrCzKCAAKOXAKsuPzDZYzstlou0FLBp3HlDoRgmUa"
+      "url": "git+https://github.com/karlseguin/http.zig.git?ref=dev#affbcc1bdedb03fc90a985c2f5c5dc65f7b42f5b",
+      "hash": "httpz-0.0.0-PNVzrILKCADcKBmMLyKYRo0XAUPVMeUvkOLpsdiSkH-I"
     },
     {
       "name": "adapters",
