@@ -10,7 +10,7 @@
   "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-03-01T07:49:12Z",
+  "updated_at": "2026-06-02T10:00:37Z",
   "dependencies": [
     {
       "name": "highway",
@@ -18,7 +18,7 @@
       "hash": "N-V-__8AAKYPjAALEjmG0ER8e44ANYhP5HmiJW6-iRSgDdXS"
     }
   ],
-  "minimum_zig_version": "0.15.2",
+  "minimum_zig_version": "0.16.0",
   "readme": "# Google Highway\n\nThis is [Google Highway](https://github.com/google/highway), packaged for\n[Zig](https://ziglang.org/).\n\n**Does not yet include `libhwy_contrib`.**\n\n## How to use it\n\nFirst, update your `build.zig.zon`:\n\n```\nzig fetch --save git+https://github.com/allyourcodebase/highway\n```\n\nNext, in `build.zig`, declare the dependency and link with the static library:\n\n```zig\nconst highway_dep = b.dependency(\"highway\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\n// ...\nexe.linkLibrary(highway_dep.artifact(\"hwy\"));\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
   "releases": [],
