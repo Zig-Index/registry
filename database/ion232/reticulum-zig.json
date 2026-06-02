@@ -14,10 +14,10 @@
     "rns",
     "embedded"
   ],
-  "stars": 39,
+  "stars": 40,
   "forks": 5,
   "watchers": 2,
-  "updated_at": "2026-05-10T20:25:33Z",
+  "updated_at": "2026-06-02T07:40:07Z",
   "dependencies": [
     {
       "name": "ohsnap",

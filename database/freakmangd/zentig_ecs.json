@@ -11,10 +11,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 25,
+  "stars": 24,
   "forks": 2,
   "watchers": 1,
-  "updated_at": "2026-02-22T06:01:06Z",
+  "updated_at": "2026-06-01T19:54:37Z",
   "dependencies": [
     {
       "name": "zmath",

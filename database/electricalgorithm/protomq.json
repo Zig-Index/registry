@@ -16,10 +16,10 @@
     "zig-library",
     "zig-package"
   ],
-  "stars": 31,
+  "stars": 33,
   "forks": 1,
   "watchers": 0,
-  "updated_at": "2026-05-01T19:49:14Z",
+  "updated_at": "2026-06-01T07:59:48Z",
   "dependencies": [
     {
       "name": "example",
