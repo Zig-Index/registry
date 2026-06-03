@@ -9,10 +9,10 @@
     "sqlite",
     "zig-package"
   ],
-  "stars": 592,
-  "forks": 84,
+  "stars": 598,
+  "forks": 86,
   "watchers": 8,
-  "updated_at": "2026-05-19T20:18:28Z",
+  "updated_at": "2026-06-02T21:34:44Z",
   "dependencies": [
     {
       "name": "sqlite",
@@ -29,7 +29,7 @@
   "owner_location": "France",
   "owner_blog": "https://rischmann.fr",
   "owner_twitter_username": "vrischmann",
-  "owner_followers": 121,
+  "owner_followers": 120,
   "owner_following": 45,
   "owner_created_at": "2012-07-02T23:09:35Z",
   "license": "MIT",

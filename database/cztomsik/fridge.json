@@ -11,10 +11,10 @@
     "database",
     "zig-package"
   ],
-  "stars": 87,
+  "stars": 88,
   "forks": 8,
   "watchers": 3,
-  "updated_at": "2026-05-27T17:09:50Z",
+  "updated_at": "2026-06-02T20:56:43Z",
   "dependencies": [
     {
       "name": "sqlite_source",

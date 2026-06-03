@@ -12,10 +12,10 @@
     "ziglang",
     "zig-package"
   ],
-  "stars": 123,
+  "stars": 125,
   "forks": 21,
   "watchers": 1,
-  "updated_at": "2026-06-01T08:23:55Z",
+  "updated_at": "2026-06-02T12:15:32Z",
   "dependencies": [
     {
       "name": "sdl",

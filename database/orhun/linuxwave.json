@@ -16,10 +16,10 @@
     "synthwave",
     "tune-generator"
   ],
-  "stars": 645,
+  "stars": 648,
   "forks": 22,
   "watchers": 7,
-  "updated_at": "2026-05-20T23:06:07Z",
+  "updated_at": "2026-06-01T20:17:35Z",
   "dependencies": [
     {
       "name": "clap",
@@ -1620,12 +1620,12 @@
       ]
     }
   ],
-  "owner_bio": "Terminal Chef at @ratatui |\r\n\r\nMaintainer at @archlinux btw  ",
-  "owner_company": "@ratatui | @archlinux",
-  "owner_location": "Ankara, Turkey",
+  "owner_bio": "Terminal Chef @ratatui | Rust Developer Advocate @JetBrains |\r\nMaintainer @archlinux btw  ",
+  "owner_company": "@ratatui | @jetbrains | @archlinux",
+  "owner_location": "Berlin, Germany",
   "owner_blog": "orhun.dev",
   "owner_twitter_username": null,
-  "owner_followers": 5018,
+  "owner_followers": 5057,
   "owner_following": 539,
   "owner_created_at": "2016-12-05T15:47:47Z",
   "homepage": "http://orhun.dev/linuxwave/",
