@@ -17,9 +17,9 @@
     "server-side-rendering"
   ],
   "stars": 251,
-  "forks": 17,
+  "forks": 18,
   "watchers": 3,
-  "updated_at": "2026-06-03T01:59:51Z",
+  "updated_at": "2026-06-03T09:27:23Z",
   "dependencies": [
     {
       "name": "ziex_js",

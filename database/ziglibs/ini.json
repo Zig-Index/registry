@@ -12,7 +12,7 @@
     "ini-parser"
   ],
   "stars": 36,
-  "forks": 8,
+  "forks": 9,
   "watchers": 3,
   "updated_at": "2026-05-25T08:43:20Z",
   "minimum_zig_version": "0.16.0",
