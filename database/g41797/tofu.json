@@ -14,12 +14,12 @@
   "stars": 28,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-05-26T09:32:21Z",
+  "updated_at": "2026-06-04T11:33:17Z",
   "dependencies": [
     {
       "name": "mailbox",
-      "url": "git+https://github.com/g41797/mailbox#09ce9a443d17a36df47925e8927252fcde3c6940",
-      "hash": "mailbox-0.0.13-a-vFm3lcAAD33j3q2G2Hj6lnDahYuT1ESGBq99aVehow"
+      "url": "git+https://github.com/g41797/mailbox#d30ff69f1fa0288e1a8cb96b24ae3b552739f490",
+      "hash": "mailbox-0.0.15-8ABL0kt8AADKxnp3BayHaNX3niZ0mR3lsHc1R4x6npnn"
     },
     {
       "name": "usockets",
