@@ -19,7 +19,7 @@
   "stars": 12,
   "forks": 8,
   "watchers": 2,
-  "updated_at": "2026-04-25T11:44:41Z",
+  "updated_at": "2026-06-04T18:33:11Z",
   "dependencies": [
     {
       "name": "AFLplusplus",
@@ -27,7 +27,7 @@
       "hash": "N-V-__8AAKE4uAAJZgEcPdaXnWqoj-IwYf3G2h9YSm-x92gg"
     }
   ],
-  "minimum_zig_version": "0.15.1",
+  "minimum_zig_version": "0.16.0",
   "readme": "# AFLplusplus\n\n[![CI][ci-shd]][ci-url]\n[![LC][lc-shd]][lc-url]\n\n## Zig build for [AFLplusplus](https://github.com/AFLplusplus/AFLplusplus).\n\n\n### :arrow_down: Dependencies\n\nRequires a build of LLVM. You can either get one from your favorite package manager, or [build it yourself](https://github.com/ziglang/zig/wiki/How-to-build-LLVM,-libclang,-and-liblld-from-source).\n\n### :rocket: Usage\n\n```sh\ngit clone https://github.com/allyourcodebase/AFLplusplus.git\ncd AFLplusplus/\nzig build\n```\n\n### :100: Easy Source Fuzzing with AFL++\n\nFor help fuzzing your executables, see [kristoff-it/zig-afl-kit](https://github.com/kristoff-it/zig-afl-kit).\n\n<!-- MARKDOWN LINKS -->\n\n[ci-shd]: https://img.shields.io/github/actions/workflow/status/allyourcodebase/AFLplusplus/ci.yaml?branch=main&style=for-the-badge&logo=github&label=CI&labelColor=black\n[ci-url]: https://github.com/allyourcodebase/AFLplusplus/blob/main/.github/workflows/ci.yaml\n[lc-shd]: https://img.shields.io/github/license/allyourcodebase/AFLplusplus.svg?style=for-the-badge&labelColor=black\n[lc-url]: https://github.com/allyourcodebase/AFLplusplus/blob/main/LICENSE\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
   "releases": [],
