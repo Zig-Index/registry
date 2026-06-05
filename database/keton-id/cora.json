@@ -12,7 +12,7 @@
   "stars": 1,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-06-04T05:40:03Z",
+  "updated_at": "2026-06-05T13:32:37Z",
   "dependencies": [
     {
       "name": "vaxis",
@@ -24,6 +24,94 @@
   "readme": "# cora 🤫\n\n[![CI](https://github.com/keton-id/cora/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/keton-id/cora/actions/workflows/ci.yml)\n[![License: AGPL-3.0-only](https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)\n[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/keton-id/cora/pulls)\n\n> *\"He never let anyone hear his true voice.\"*\n\n**Zero-knowledge secret injection for AI agents. Written in Zig.**\n\nYour agent never holds secret values. Not in memory. Not on disk. Not ever.\nOne encrypted file. One passphrase. Carry it anywhere.\n\n---\n\n## The Problem\n\nEvery AI agent runtime today has the same flaw:\n\n```bash\nANTHROPIC_API_KEY=sk-ant-... claude -p \"summarize this repo\"\n```\n\nYour agent now has `sk-ant-...` in its environment. Every skill can read it.\nEvery prompt injection can ask for it. Every malicious plugin can exfiltrate it.\n\n---\n\n## The Fix\n\n```bash\ncr unlock                                       # enter passphrase — service starts\ncr exec claude-task -- claude -p \"summarize this repo\"\n```\n\nClaude spawns. It needs `ANTHROPIC_API_KEY`. The Cora service injects it\ndirectly into the subprocess environment after verifying the caller binary\nat the **kernel level**.\n\nThe `cr` client process never reads the value. The Claude subprocess uses it\nand exits. Memory zeroed.\n\nPrompt injection tries `\"print ANTHROPIC_API_KEY\"` against the orchestrating\nagent — nothing to print. The value was never in that process.\n\n---\n\n## Install\n\nPick whichever fits your trust model — click to expand.\n\n<details>\n<summary><strong>A. Pre-built binary via install script</strong> &nbsp;<em>(recommended)</em></summary>\n\n```bash\ncurl -fsSL https://raw.githubusercontent.com/keton-id/cora/main/install.sh | sh\n```\n\nFetches the latest stable release for your OS/arch, verifies the SHA256\nchecksum, and installs to `/usr/local/bin` (or `~/.local/bin` without sudo).\n\nFlags:\n\n```bash\n# Pin a specific tag\ncurl -fsSL https://raw.githubusercontent.com/keton-id/cora/main/install.sh \\\n    | sh -s -- --version {{VERSION}}\n\n# Track a prerelease channel\ncurl -fsSL https://raw.githubusercontent.com/keton-id/cora/main/install.sh \\\n    | sh -s -- --channel alpha\n```\n\n</details>\n\n<details>\n<summary><strong>B. Homebrew</strong> &nbsp;<code>brew install cora</code> &nbsp;<em>(macOS + Linux)</em></summary>\n\n```bash\nbrew tap keton-id/tap\nbrew install cora\n```\n\nThe package name is `cora`; the installed binary is `cr`. `brew upgrade cora`\npicks up new stable releases. The\n[`keton-id/homebrew-tap`](https://github.com/keton-id/homebrew-tap) repo\nis updated automatically by Cora's release pipeline on every stable\ntag. Pre-release alpha tags are **not** pushed to the tap.\n\n</details>\n\n<details>\n<summary><strong>C. Scoop</strong> &nbsp;<code>scoop install cora</code> &nbsp;<em>(Windows)</em></summary>\n\n```powershell\nscoop bucket add keton-id https://github.com/keton-id/scoop-bucket\nscoop install cora\n```\n\nThe package name is `cora`; the installed binary is `cr.exe`. `scoop update cora`\npicks up new stable releases. The\n[`keton-id/scoop-bucket`](https://github.com/keton-id/scoop-bucket) repo\nis updated automatically on every stable tag.\n\n</details>\n\n<details>\n<summary><strong>D. npm</strong> &nbsp;<code>npm i -g @keton-id/cora</code></summary>\n\n```bash\nnpm i -g @keton-id/cora\n```\n\nOr one-shot via `npx`:\n\n```bash\nnpx @keton-id/cora --help\n```\n\nShips a single npm package that bundles prebuilt `cr` binaries for\nevery supported platform — macOS x64/arm64, Linux x64/arm64, Windows\nx64/arm64. A tiny JS launcher (`bin/cr.js`) picks the matching binary\nat runtime. No postinstall download, no native node addon. Only\nstable releases publish to npm; alphas stay on GitHub Releases.\n\n</details>\n\n<details>\n<summary><strong>E. Manual download from GitHub Releases</strong></summary>\n\nGrab the archive for your platform from the\n[Releases page](https://github.com/keton-id/cora/releases) and verify\nthe checksum yourself.\n\nPOSIX (tarball):\n\n```bash\nVERSION=1.0.0\nTARGET=aarch64-macos        # or x86_64-macos / x86_64-linux / aarch64-linux\ncurl -fsSLO \"https://github.com/keton-id/cora/releases/download/v${VERSION}/cr-${VERSION}-${TARGET}.tar.gz\"\ncurl -fsSLO \"https://github.com/keton-id/cora/releases/download/v${VERSION}/cr-${VERSION}-${TARGET}.tar.gz.sha256\"\nshasum -a 256 -c <(echo \"$(cat cr-${VERSION}-${TARGET}.tar.gz.sha256)  cr-${VERSION}-${TARGET}.tar.gz\")\ntar xzf \"cr-${VERSION}-${TARGET}.tar.gz\"\nsudo install -m 0755 cr /usr/local/bin/\n```\n\nWindows (zip):\n\n```powershell\n$VERSION = \"1.0.0\"\n$TARGET  = \"x86_64-windows\"   # or aarch64-windows\nInvoke-WebRequest \"https://github.com/keton-id/cora/releases/download/v$VERSION/cr-$VERSION-$TARGET.zip\" -OutFile cr.zip\nExpand-Archive cr.zip -DestinationPath $Env:LOCALAPPDATA\\cora\\bin\n$Env:PATH += \";$Env:LOCALAPPDATA\\cora\\bin\"\ncr version\n```\n\n</details>\n\n<details>\n<summary><strong>F. Build from source</strong> &nbsp;<em>(Zig 0.16+)</em></summary>\n\n```bash\ngit clone https://github.com/keton-id/cora && cd cora\n```\n\nNative Zig workflow:\n\n```bash\nzig build -Doptimize=ReleaseSafe\nsudo install -m 0755 zig-out/bin/cr /usr/local/bin/cr\n```\n\nConvenience wrapper via `make`:\n\n```bash\nmake release\nmake install                      # installs to ~/.local/bin by default\n```\n\nInstall to another prefix:\n\n```bash\nmake install PREFIX=/usr/local\n```\n\n</details>\n\n---\n\n## Quick Start (with Claude Code)\n\n```bash\n# First-time setup\ncr init                                   # passphrase prompt + confirm\ncr secrets set ANTHROPIC_API_KEY          # paste real key\ncr policy allow $(which cr)               # cr itself is the IPC client\ncr policy allow $(which claude)           # the agent we'll spawn\ncr policy task add claude-task ANTHROPIC_API_KEY\n\n# Use it\ncr unlock                                 # decrypt + start background service\ncr exec claude-task -- claude -p \"say hi\"\ncr audit tail                             # see what happened\ncr lock                                   # zero memory, stop service\n```\n\nThe `claude` subprocess sees `$ANTHROPIC_API_KEY`. The orchestrating `cr exec`\nprocess only gets back `child pid <N> exit <code>`.\n\nVerify by grepping for the value in any state Cora touches:\n\n```bash\ngrep -a 'sk-ant-' cora.zon               # → no hits (encrypted)\ngrep -a 'sk-ant-' ~/.cora/audit.jsonl    # → no hits (names only)\n```\n\n---\n\n## How It Works\n\n```\ncora.zon (always encrypted on disk — XChaCha20-Poly1305)\n    ↓ cr unlock (Argon2id passphrase → key → decrypt → key zeroed)\nService memory (secrets live here while unlocked)\n    ↓ cr exec\nSubprocess env (secret injected directly, agent never touches it)\n    ↓ task done\nsecureZero — temporary copy zeroed immediately\n    ↓ cr lock\nAll memory zeroed. Back to encrypted at rest.\n```\n\n---\n\n## Portable\n\n`cora.zon` is one file. Take it to any machine, container, or CI/CD environment.\nNo OS keychain dependency. No cloud. No sync service.\n\n```bash\nscp cora.zon user@server:~/\n# cr unlock on server — same passphrase, same secrets\n```\n\n---\n\n## What's Inside\n\n| Feature                | Command                                  |\n| ---------------------- | ---------------------------------------- |\n| Encrypted file at rest | `cr init`                                |\n| Manage secrets         | `cr secrets set\\|list\\|delete`           |\n| Caller allowlist       | `cr policy allow\\|deny PATH`             |\n| Task scoping           | `cr policy task add NAME SECRETS...`     |\n| Service lifecycle      | `cr unlock` / `cr lock` / `cr status`    |\n| Spawn agent            | `cr exec TASK -- argv...`                |\n| Audit trail            | `cr audit tail` / `cr audit show`        |\n| Interactive menu       | `cr tui`                                 |\n| Identity debug         | `cr verify --pid PID`                    |\n\nRun `cr` with no args for full usage.\n\n---\n\n## How It's Different\n\n|                   | cora                | .env files | Vault   |\n| ----------------- | ------------------- | ---------- | ------- |\n| Storage           | **Encrypted file**  | Plaintext  | Cloud   |\n| Portable          | **Yes — one file**  | Partial    | No      |\n| Memory zeroing    | **`secureZero`**    | GC         | N/A     |\n| Caller verified   | **OS kernel**       | Nothing    | Nothing |\n| Agent gets value? | **Never**           | Yes        | Depends |\n| Infra required    | **None**            | None       | Heavy   |\n| Single binary     | **Yes**             | N/A        | No      |\n| Interactive TUI   | **Yes (pane-based)** | No         | No      |\n\n---\n\n## License\n\nAGPL-3.0 — free to use, modify, and distribute.\nIf you build on Cora, your code stays open too.\n\n---\n\n## Security\n\nRead [SECURITY.md](SECURITY.md) for the threat model, known residuals, and\nresponsible disclosure (via GitHub Security Advisories).\n\n---\n\n*Named after Donquixote Rosinante(Corazon) — who hid everything to protect what mattered.*\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/269140032?v=4",
   "releases": [
+    {
+      "tag_name": "v0.9.1-alpha.1",
+      "name": "v0.9.1-alpha.1",
+      "body": "## [0.9.1-alpha.1](https://github.com/keton-id/cora/compare/v0.9.0-alpha.1...v0.9.1-alpha.1) (2026-06-04)\n\n\n### Bug Fixes\n\n* **ci:** align scoop manifest artifact names with build output ([ee072f2](https://github.com/keton-id/cora/commit/ee072f2840c0238a8f365ce411a53635a038e58e))",
+      "prerelease": true,
+      "published_at": "2026-06-05T12:56:34Z",
+      "html_url": "https://github.com/keton-id/cora/releases/tag/v0.9.1-alpha.1",
+      "assets": [
+        {
+          "name": "cr-0.9.1-alpha.1-x86_64-macos.tar.gz",
+          "url": "https://github.com/keton-id/cora/releases/download/v0.9.1-alpha.1/cr-0.9.1-alpha.1-x86_64-macos.tar.gz",
+          "size": 423255,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "cr-0.9.1-alpha.1-aarch64-macos.tar.gz",
+          "url": "https://github.com/keton-id/cora/releases/download/v0.9.1-alpha.1/cr-0.9.1-alpha.1-aarch64-macos.tar.gz",
+          "size": 409838,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "cr-0.9.1-alpha.1-aarch64-linux.tar.gz.sha256",
+          "url": "https://github.com/keton-id/cora/releases/download/v0.9.1-alpha.1/cr-0.9.1-alpha.1-aarch64-linux.tar.gz.sha256",
+          "size": 65,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "cr-0.9.1-alpha.1-x86_64-linux.tar.gz",
+          "url": "https://github.com/keton-id/cora/releases/download/v0.9.1-alpha.1/cr-0.9.1-alpha.1-x86_64-linux.tar.gz",
+          "size": 2044102,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "cr-0.9.1-alpha.1-aarch64-linux.tar.gz",
+          "url": "https://github.com/keton-id/cora/releases/download/v0.9.1-alpha.1/cr-0.9.1-alpha.1-aarch64-linux.tar.gz",
+          "size": 2048804,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "cr-0.9.1-alpha.1-aarch64-macos.tar.gz.sha256",
+          "url": "https://github.com/keton-id/cora/releases/download/v0.9.1-alpha.1/cr-0.9.1-alpha.1-aarch64-macos.tar.gz.sha256",
+          "size": 65,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "cr-0.9.1-alpha.1-x86_64-linux.tar.gz.sha256",
+          "url": "https://github.com/keton-id/cora/releases/download/v0.9.1-alpha.1/cr-0.9.1-alpha.1-x86_64-linux.tar.gz.sha256",
+          "size": 65,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "cr-0.9.1-alpha.1-x86_64-macos.tar.gz.sha256",
+          "url": "https://github.com/keton-id/cora/releases/download/v0.9.1-alpha.1/cr-0.9.1-alpha.1-x86_64-macos.tar.gz.sha256",
+          "size": 65,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "cr-0.9.1-alpha.1-x86_64-windows.zip",
+          "url": "https://github.com/keton-id/cora/releases/download/v0.9.1-alpha.1/cr-0.9.1-alpha.1-x86_64-windows.zip",
+          "size": 497598,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "cr-0.9.1-alpha.1-aarch64-windows.zip",
+          "url": "https://github.com/keton-id/cora/releases/download/v0.9.1-alpha.1/cr-0.9.1-alpha.1-aarch64-windows.zip",
+          "size": 477625,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "cr-0.9.1-alpha.1-aarch64-windows.zip.sha256",
+          "url": "https://github.com/keton-id/cora/releases/download/v0.9.1-alpha.1/cr-0.9.1-alpha.1-aarch64-windows.zip.sha256",
+          "size": 65,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "cr-0.9.1-alpha.1-x86_64-windows.zip.sha256",
+          "url": "https://github.com/keton-id/cora/releases/download/v0.9.1-alpha.1/cr-0.9.1-alpha.1-x86_64-windows.zip.sha256",
+          "size": 65,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "SHA256SUMS",
+          "url": "https://github.com/keton-id/cora/releases/download/v0.9.1-alpha.1/SHA256SUMS",
+          "size": 619,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
     {
       "tag_name": "v0.9.0",
       "name": "v0.9.0",
@@ -1423,6 +1511,7 @@
   "owner_blog": "https://keton.id/",
   "owner_twitter_username": null,
   "owner_created_at": "2026-03-18T08:41:13Z",
+  "homepage": "http://cora.keton.id/",
   "license": "AGPL-3.0",
   "category": "library"
 }
