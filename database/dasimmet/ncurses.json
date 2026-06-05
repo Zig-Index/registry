@@ -11,7 +11,7 @@
   "stars": 1,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-09-15T18:14:00Z",
+  "updated_at": "2026-06-05T08:12:35Z",
   "dependencies": [
     {
       "name": "ncurses",
@@ -20,11 +20,11 @@
     },
     {
       "name": "awk",
-      "url": "git+https://github.com/dasimmet/zig-awk.git#ba0b266aa73960fbb7ccaad99793850af9bbc4fe",
-      "hash": "awk-1.3.4-20250131-NbEIKrAeAAB565hDroVE1bUkG8R69e_RrP3H7SKR8Lzp"
+      "url": "git+https://github.com/dasimmet/zig-awk.git#dd92d12e3030ab1c64e24db22a10e4e7f4f31058",
+      "hash": "awk-1.3.4-20250131-NbEIKqAeAAAeHTurAAD7L5cd1jH6HOBuaPXRT7VAqDej"
     }
   ],
-  "minimum_zig_version": "0.15.1",
+  "minimum_zig_version": "0.16.0",
   "readme": "# ncurses built with zig\n\nmy try at building ncurses without autotools.\nstill a big todo...working on gettig the demo to run...\n\nalso, the c files in `src` are copied from an autotools build on ubuntu amd64...\nmost of them use `awk` to process the capability data files,\nmaybe those tools could become zig build steps.\n\n```\nzig build\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/2773256?u=609e5b7eac1f972a0854a240741c5c8deca85518&v=4",
   "releases": [],
