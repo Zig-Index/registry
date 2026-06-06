@@ -12,7 +12,7 @@
   "stars": 2,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-06-06T10:00:09Z",
+  "updated_at": "2026-06-06T11:08:24Z",
   "dependencies": [
     {
       "name": "vaxis",
@@ -21,9 +21,209 @@
     }
   ],
   "minimum_zig_version": "0.16.0",
-  "readme": "# cora 🤫\n\n[![CI](https://github.com/keton-id/cora/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/keton-id/cora/actions/workflows/ci.yml)\n[![License: AGPL-3.0-only](https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)\n[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/keton-id/cora/pulls)\n\n[![macOS](https://img.shields.io/github/v/release/keton-id/cora?include_prereleases&filter=cora-macos-v*&label=macOS&color=0db7ed&logo=apple&logoColor=white)](https://github.com/keton-id/cora/releases?q=cora-macos-)\n[![Linux](https://img.shields.io/github/v/release/keton-id/cora?include_prereleases&filter=cora-linux-v*&label=Linux&color=fcc624&logo=linux&logoColor=black)](https://github.com/keton-id/cora/releases?q=cora-linux-)\n[![Windows](https://img.shields.io/github/v/release/keton-id/cora?include_prereleases&filter=cora-windows-v*&label=Windows&color=00a4ef&logo=windows&logoColor=white)](https://github.com/keton-id/cora/releases?q=cora-windows-)\n\n<!--\nPer-OS version badges auto-update from GitHub Releases. Each badge tracks\nthe newest release whose tag matches `cora-{os}-v*` (prereleases included).\nAfter v1.0, drop `include_prereleases` to track stable only.\n-->\n\n\n> *\"He never let anyone hear his true voice.\"*\n\n**Zero-knowledge secret injection for AI agents. Written in Zig.**\n\nYour agent never holds secret values. Not in memory. Not on disk. Not ever.\nOne encrypted file. One passphrase. Carry it anywhere.\n\n---\n\n## The Problem\n\nEvery AI agent runtime today has the same flaw:\n\n```bash\nANTHROPIC_API_KEY=sk-ant-... claude -p \"summarize this repo\"\n```\n\nYour agent now has `sk-ant-...` in its environment. Every skill can read it.\nEvery prompt injection can ask for it. Every malicious plugin can exfiltrate it.\n\n---\n\n## The Fix\n\n```bash\ncr unlock                                       # enter passphrase — service starts\ncr exec claude-task -- claude -p \"summarize this repo\"\n```\n\nClaude spawns. It needs `ANTHROPIC_API_KEY`. The Cora service injects it\ndirectly into the subprocess environment after verifying the caller binary\nat the **kernel level**.\n\nThe `cr` client process never reads the value. The Claude subprocess uses it\nand exits. Memory zeroed.\n\nPrompt injection tries `\"print ANTHROPIC_API_KEY\"` against the orchestrating\nagent — nothing to print. The value was never in that process.\n\n---\n\n## Install\n\nPick whichever fits your trust model — click to expand.\n\n<details>\n<summary><strong>A. Pre-built binary via install script</strong> &nbsp;<em>(recommended)</em></summary>\n\n```bash\ncurl -fsSL https://raw.githubusercontent.com/keton-id/cora/main/install.sh | sh\n```\n\nFetches the latest stable release for your OS/arch, verifies the SHA256\nchecksum, and installs to `/usr/local/bin` (or `~/.local/bin` without sudo).\n\nFlags:\n\n```bash\n# Pin a specific tag (per-OS form — the script auto-prefixes if you pass plain X.Y.Z)\ncurl -fsSL https://raw.githubusercontent.com/keton-id/cora/main/install.sh \\\n    | sh -s -- --version 1.0.0\n\n# Track a prerelease channel for your OS\ncurl -fsSL https://raw.githubusercontent.com/keton-id/cora/main/install.sh \\\n    | sh -s -- --channel alpha\n```\n\n</details>\n\n<details>\n<summary><strong>B. Homebrew</strong> &nbsp;<code>brew install cora</code> &nbsp;<em>(macOS + Linux)</em></summary>\n\n```bash\nbrew tap keton-id/tap\nbrew install cora\n```\n\nThe package name is `cora`; the installed binary is `cr`. `brew upgrade cora`\npicks up new stable releases. The\n[`keton-id/homebrew-tap`](https://github.com/keton-id/homebrew-tap) repo\nis updated automatically by Cora's release pipeline on every stable\ntag. Pre-release alpha tags are **not** pushed to the tap.\n\n</details>\n\n<details>\n<summary><strong>C. Scoop</strong> &nbsp;<code>scoop install cora</code> &nbsp;<em>(Windows)</em></summary>\n\n```powershell\nscoop bucket add keton-id https://github.com/keton-id/scoop-bucket\nscoop install cora\n```\n\nThe package name is `cora`; the installed binary is `cr.exe`. `scoop update cora`\npicks up new stable releases. The\n[`keton-id/scoop-bucket`](https://github.com/keton-id/scoop-bucket) repo\nis updated automatically on every stable tag.\n\n</details>\n\n<details>\n<summary><strong>D. npm</strong> &nbsp;<code>npm i -g @keton-id/cora</code></summary>\n\n```bash\nnpm i -g @keton-id/cora\n```\n\nOr one-shot via `npx`:\n\n```bash\nnpx @keton-id/cora --help\n```\n\nThe meta `@keton-id/cora` package is a tiny ESM launcher with six\n`optionalDependencies` — one per `<platform>-<arch>` subpackage. npm\nuses each subpackage's `os`/`cpu` fields at install time to silently\nskip the five that don't match your host, so only the matching prebuilt\n`cr` binary lands on disk. No postinstall download, no native node\naddon, no `vendor/` bundle. Only stable releases publish to npm;\nalphas stay on GitHub Releases.\n\n`@keton-id/cora`'s version tracks the upstream release semver. Each\nsubpackage is versioned by its own mirror tag and pinned in the meta's\n`optionalDependencies` to its actual current version on the registry\n(queried live at publish time), so an out-of-step per-OS release\n(e.g. a Windows-only fix that does not retag macOS) ships cleanly —\nthe meta still re-publishes and points each OS at the right subpackage\nversion.\n\n</details>\n\n<details>\n<summary><strong>E. Manual download from GitHub Releases</strong></summary>\n\nGrab the archive for your platform from the\n[Releases page](https://github.com/keton-id/cora/releases) and verify\nthe checksum yourself.\n\nEach OS has its own tag prefix — pick the one for your host:\n`cora-macos-v<X.Y.Z>`, `cora-linux-v<X.Y.Z>`, or `cora-windows-v<X.Y.Z>`.\n\nPOSIX (tarball):\n\n```bash\nOS=macos                    # or linux\nVERSION=1.0.0\nTARGET=aarch64-macos        # or x86_64-macos / x86_64-linux / aarch64-linux\nTAG=\"cora-${OS}-v${VERSION}\"\ncurl -fsSLO \"https://github.com/keton-id/cora/releases/download/${TAG}/cr-${VERSION}-${TARGET}.tar.gz\"\ncurl -fsSLO \"https://github.com/keton-id/cora/releases/download/${TAG}/cr-${VERSION}-${TARGET}.tar.gz.sha256\"\nshasum -a 256 -c <(echo \"$(cat cr-${VERSION}-${TARGET}.tar.gz.sha256)  cr-${VERSION}-${TARGET}.tar.gz\")\ntar xzf \"cr-${VERSION}-${TARGET}.tar.gz\"\nsudo install -m 0755 cr /usr/local/bin/\n```\n\nWindows (zip):\n\n```powershell\n$VERSION = \"1.0.0\"\n$TARGET  = \"x86_64-windows\"   # or aarch64-windows\n$TAG     = \"cora-windows-v$VERSION\"\nInvoke-WebRequest \"https://github.com/keton-id/cora/releases/download/$TAG/cr-$VERSION-$TARGET.zip\" -OutFile cr.zip\nExpand-Archive cr.zip -DestinationPath $Env:LOCALAPPDATA\\cora\\bin\n$Env:PATH += \";$Env:LOCALAPPDATA\\cora\\bin\"\ncr version\n```\n\n</details>\n\n<details>\n<summary><strong>F. Build from source</strong> &nbsp;<em>(Zig 0.16+)</em></summary>\n\n```bash\ngit clone https://github.com/keton-id/cora && cd cora\n```\n\nNative Zig workflow:\n\n```bash\nzig build -Doptimize=ReleaseSafe\nsudo install -m 0755 zig-out/bin/cr /usr/local/bin/cr\n```\n\nConvenience wrapper via `make`:\n\n```bash\nmake release\nmake install                      # installs to ~/.local/bin by default\n```\n\nInstall to another prefix:\n\n```bash\nmake install PREFIX=/usr/local\n```\n\n</details>\n\n---\n\n## Quick Start (with Claude Code)\n\n```bash\n# First-time setup\ncr init                                   # passphrase prompt + confirm\ncr secrets set ANTHROPIC_API_KEY          # paste real key\ncr policy allow $(which cr)               # cr itself is the IPC client\ncr policy allow $(which claude)           # the agent we'll spawn\ncr policy task add claude-task ANTHROPIC_API_KEY\n\n# Use it\ncr unlock                                 # decrypt + start background service\ncr exec claude-task -- claude -p \"say hi\"\ncr audit tail                             # see what happened\ncr lock                                   # zero memory, stop service\n```\n\nThe `claude` subprocess sees `$ANTHROPIC_API_KEY`. The orchestrating `cr exec`\nprocess only gets back `child pid <N> exit <code>`.\n\nVerify by grepping for the value in any state Cora touches:\n\n```bash\ngrep -a 'sk-ant-' cora.zon               # → no hits (encrypted)\ngrep -a 'sk-ant-' ~/.cora/audit.jsonl    # → no hits (names only)\n```\n\n---\n\n## How It Works\n\n```\ncora.zon (always encrypted on disk — XChaCha20-Poly1305)\n    ↓ cr unlock (Argon2id passphrase → key → decrypt → key zeroed)\nService memory (secrets live here while unlocked)\n    ↓ cr exec\nSubprocess env (secret injected directly, agent never touches it)\n    ↓ task done\nsecureZero — temporary copy zeroed immediately\n    ↓ cr lock\nAll memory zeroed. Back to encrypted at rest.\n```\n\n---\n\n## Portable\n\n`cora.zon` is one file. Take it to any machine, container, or CI/CD environment.\nNo OS keychain dependency. No cloud. No sync service.\n\n```bash\nscp cora.zon user@server:~/\n# cr unlock on server — same passphrase, same secrets\n```\n\n---\n\n## What's Inside\n\n| Feature                | Command                                  |\n| ---------------------- | ---------------------------------------- |\n| Encrypted file at rest | `cr init`                                |\n| Manage secrets         | `cr secrets set\\|list\\|delete`           |\n| Caller allowlist       | `cr policy allow\\|deny PATH`             |\n| Task scoping           | `cr policy task add NAME SECRETS...`     |\n| Service lifecycle      | `cr unlock` / `cr lock` / `cr status`    |\n| Spawn agent            | `cr exec TASK -- argv...`                |\n| Audit trail            | `cr audit tail` / `cr audit show`        |\n| Interactive menu       | `cr tui`                                 |\n| Identity debug         | `cr verify --pid PID`                    |\n\nRun `cr` with no args for full usage.\n\n---\n\n## How It's Different\n\n|                   | cora                | .env files | Vault   |\n| ----------------- | ------------------- | ---------- | ------- |\n| Storage           | **Encrypted file**  | Plaintext  | Cloud   |\n| Portable          | **Yes — one file**  | Partial    | No      |\n| Memory zeroing    | **`secureZero`**    | GC         | N/A     |\n| Caller verified   | **OS kernel**       | Nothing    | Nothing |\n| Agent gets value? | **Never**           | Yes        | Depends |\n| Infra required    | **None**            | None       | Heavy   |\n| Single binary     | **Yes**             | N/A        | No      |\n| Interactive TUI   | **Yes (pane-based)** | No         | No      |\n\n---\n\n## License\n\nAGPL-3.0 — free to use, modify, and distribute.\nIf you build on Cora, your code stays open too.\n\n---\n\n## Security\n\nRead [SECURITY.md](SECURITY.md) for the threat model, known residuals, and\nresponsible disclosure (via GitHub Security Advisories).\n\n---\n\n*Named after Donquixote Rosinante(Corazon) — who hid everything to protect what mattered.*\n",
+  "readme": "# cora 🤫\n\n[![CI](https://github.com/keton-id/cora/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/keton-id/cora/actions/workflows/ci.yml)\n[![License: AGPL-3.0-only](https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)\n[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/keton-id/cora/pulls)\n\n**Stable latest**\n\n[![macOS](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/keton-id/cora/main/.github/badges/stable-macos.json)](https://github.com/keton-id/cora/releases?q=cora-macos-)\n[![Linux](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/keton-id/cora/main/.github/badges/stable-linux.json)](https://github.com/keton-id/cora/releases?q=cora-linux-)\n[![Windows](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/keton-id/cora/main/.github/badges/stable-windows.json)](https://github.com/keton-id/cora/releases?q=cora-windows-)\n\n**Pre-release latest**\n\n[![macOS](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/keton-id/cora/main/.github/badges/prerelease-macos.json)](https://github.com/keton-id/cora/releases?q=cora-macos-)\n[![Linux](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/keton-id/cora/main/.github/badges/prerelease-linux.json)](https://github.com/keton-id/cora/releases?q=cora-linux-)\n[![Windows](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/keton-id/cora/main/.github/badges/prerelease-windows.json)](https://github.com/keton-id/cora/releases?q=cora-windows-)\n\n<!--\nPer-OS version badges auto-update from repo-managed JSON files. The release\nworkflow regenerates both `stable` and `pre-release` lanes from the GitHub\nReleases API after each publish, so badges follow the real latest release\nper OS instead of whichever tag happened to trigger the workflow.\n-->\n\n\n> *\"He never let anyone hear his true voice.\"*\n\n**Zero-knowledge secret injection for AI agents. Written in Zig.**\n\nYour agent never holds secret values. Not in memory. Not on disk. Not ever.\nOne encrypted file. One passphrase. Carry it anywhere.\n\n---\n\n## The Problem\n\nEvery AI agent runtime today has the same flaw:\n\n```bash\nANTHROPIC_API_KEY=sk-ant-... claude -p \"summarize this repo\"\n```\n\nYour agent now has `sk-ant-...` in its environment. Every skill can read it.\nEvery prompt injection can ask for it. Every malicious plugin can exfiltrate it.\n\n---\n\n## The Fix\n\n```bash\ncr unlock                                       # enter passphrase — service starts\ncr exec claude-task -- claude -p \"summarize this repo\"\n```\n\nClaude spawns. It needs `ANTHROPIC_API_KEY`. The Cora service injects it\ndirectly into the subprocess environment after verifying the caller binary\nat the **kernel level**.\n\nThe `cr` client process never reads the value. The Claude subprocess uses it\nand exits. Memory zeroed.\n\nPrompt injection tries `\"print ANTHROPIC_API_KEY\"` against the orchestrating\nagent — nothing to print. The value was never in that process.\n\n---\n\n## Install\n\nPick whichever fits your trust model — click to expand.\n\n<details>\n<summary><strong>A. Pre-built binary via install script</strong> &nbsp;<em>(recommended)</em></summary>\n\n```bash\ncurl -fsSL https://raw.githubusercontent.com/keton-id/cora/main/install.sh | sh\n```\n\nFetches the latest stable release for your OS/arch, verifies the SHA256\nchecksum, and installs to `/usr/local/bin` (or `~/.local/bin` without sudo).\n\nFlags:\n\n```bash\n# Pin a specific tag (per-OS form — the script auto-prefixes if you pass plain X.Y.Z)\ncurl -fsSL https://raw.githubusercontent.com/keton-id/cora/main/install.sh \\\n    | sh -s -- --version 1.0.0\n\n# Track a prerelease channel for your OS\ncurl -fsSL https://raw.githubusercontent.com/keton-id/cora/main/install.sh \\\n    | sh -s -- --channel alpha\n```\n\n</details>\n\n<details>\n<summary><strong>B. Homebrew</strong> &nbsp;<code>brew install cora</code> &nbsp;<em>(macOS + Linux)</em></summary>\n\n```bash\nbrew tap keton-id/tap\nbrew install cora\n```\n\nThe package name is `cora`; the installed binary is `cr`. `brew upgrade cora`\npicks up new stable releases. The\n[`keton-id/homebrew-tap`](https://github.com/keton-id/homebrew-tap) repo\nis updated automatically by Cora's release pipeline on every stable\ntag. Pre-release alpha tags are **not** pushed to the tap.\n\n</details>\n\n<details>\n<summary><strong>C. Scoop</strong> &nbsp;<code>scoop install cora</code> &nbsp;<em>(Windows)</em></summary>\n\n```powershell\nscoop bucket add keton-id https://github.com/keton-id/scoop-bucket\nscoop install cora\n```\n\nThe package name is `cora`; the installed binary is `cr.exe`. `scoop update cora`\npicks up new stable releases. The\n[`keton-id/scoop-bucket`](https://github.com/keton-id/scoop-bucket) repo\nis updated automatically on every stable tag.\n\n</details>\n\n<details>\n<summary><strong>D. npm</strong> &nbsp;<code>npm i -g @keton-id/cora</code></summary>\n\n```bash\nnpm i -g @keton-id/cora\n```\n\nOr one-shot via `npx`:\n\n```bash\nnpx @keton-id/cora --help\n```\n\nThe meta `@keton-id/cora` package is a tiny ESM launcher with six\n`optionalDependencies` — one per `<platform>-<arch>` subpackage. npm\nuses each subpackage's `os`/`cpu` fields at install time to silently\nskip the five that don't match your host, so only the matching prebuilt\n`cr` binary lands on disk. No postinstall download, no native node\naddon, no `vendor/` bundle. Only stable releases publish to npm;\nalphas stay on GitHub Releases.\n\n`@keton-id/cora`'s version tracks the upstream release semver. Each\nsubpackage is versioned by its own mirror tag and pinned in the meta's\n`optionalDependencies` to its actual current version on the registry\n(queried live at publish time), so an out-of-step per-OS release\n(e.g. a Windows-only fix that does not retag macOS) ships cleanly —\nthe meta still re-publishes and points each OS at the right subpackage\nversion.\n\n</details>\n\n<details>\n<summary><strong>E. Manual download from GitHub Releases</strong></summary>\n\nGrab the archive for your platform from the\n[Releases page](https://github.com/keton-id/cora/releases) and verify\nthe checksum yourself.\n\nEach OS has its own tag prefix — pick the one for your host:\n`cora-macos-v<X.Y.Z>`, `cora-linux-v<X.Y.Z>`, or `cora-windows-v<X.Y.Z>`.\n\nPOSIX (tarball):\n\n```bash\nOS=macos                    # or linux\nVERSION=1.0.0\nTARGET=aarch64-macos        # or x86_64-macos / x86_64-linux / aarch64-linux\nTAG=\"cora-${OS}-v${VERSION}\"\ncurl -fsSLO \"https://github.com/keton-id/cora/releases/download/${TAG}/cr-${VERSION}-${TARGET}.tar.gz\"\ncurl -fsSLO \"https://github.com/keton-id/cora/releases/download/${TAG}/cr-${VERSION}-${TARGET}.tar.gz.sha256\"\nshasum -a 256 -c <(echo \"$(cat cr-${VERSION}-${TARGET}.tar.gz.sha256)  cr-${VERSION}-${TARGET}.tar.gz\")\ntar xzf \"cr-${VERSION}-${TARGET}.tar.gz\"\nsudo install -m 0755 cr /usr/local/bin/\n```\n\nWindows (zip):\n\n```powershell\n$VERSION = \"1.0.0\"\n$TARGET  = \"x86_64-windows\"   # or aarch64-windows\n$TAG     = \"cora-windows-v$VERSION\"\nInvoke-WebRequest \"https://github.com/keton-id/cora/releases/download/$TAG/cr-$VERSION-$TARGET.zip\" -OutFile cr.zip\nExpand-Archive cr.zip -DestinationPath $Env:LOCALAPPDATA\\cora\\bin\n$Env:PATH += \";$Env:LOCALAPPDATA\\cora\\bin\"\ncr version\n```\n\n</details>\n\n<details>\n<summary><strong>F. Build from source</strong> &nbsp;<em>(Zig 0.16+)</em></summary>\n\n```bash\ngit clone https://github.com/keton-id/cora && cd cora\n```\n\nNative Zig workflow:\n\n```bash\nzig build -Doptimize=ReleaseSafe\nsudo install -m 0755 zig-out/bin/cr /usr/local/bin/cr\n```\n\nConvenience wrapper via `make`:\n\n```bash\nmake release\nmake install                      # installs to ~/.local/bin by default\n```\n\nInstall to another prefix:\n\n```bash\nmake install PREFIX=/usr/local\n```\n\n</details>\n\n---\n\n## Quick Start (with Claude Code)\n\n```bash\n# First-time setup\ncr init                                   # passphrase prompt + confirm\ncr secrets set ANTHROPIC_API_KEY          # paste real key\ncr policy allow $(which cr)               # cr itself is the IPC client\ncr policy allow $(which claude)           # the agent we'll spawn\ncr policy task add claude-task ANTHROPIC_API_KEY\n\n# Use it\ncr unlock                                 # decrypt + start background service\ncr exec claude-task -- claude -p \"say hi\"\ncr audit tail                             # see what happened\ncr lock                                   # zero memory, stop service\n```\n\nThe `claude` subprocess sees `$ANTHROPIC_API_KEY`. The orchestrating `cr exec`\nprocess only gets back `child pid <N> exit <code>`.\n\nVerify by grepping for the value in any state Cora touches:\n\n```bash\ngrep -a 'sk-ant-' cora.zon               # → no hits (encrypted)\ngrep -a 'sk-ant-' ~/.cora/audit.jsonl    # → no hits (names only)\n```\n\n---\n\n## How It Works\n\n```\ncora.zon (always encrypted on disk — XChaCha20-Poly1305)\n    ↓ cr unlock (Argon2id passphrase → key → decrypt → key zeroed)\nService memory (secrets live here while unlocked)\n    ↓ cr exec\nSubprocess env (secret injected directly, agent never touches it)\n    ↓ task done\nsecureZero — temporary copy zeroed immediately\n    ↓ cr lock\nAll memory zeroed. Back to encrypted at rest.\n```\n\n---\n\n## Portable\n\n`cora.zon` is one file. Take it to any machine, container, or CI/CD environment.\nNo OS keychain dependency. No cloud. No sync service.\n\n```bash\nscp cora.zon user@server:~/\n# cr unlock on server — same passphrase, same secrets\n```\n\n---\n\n## What's Inside\n\n| Feature                | Command                                  |\n| ---------------------- | ---------------------------------------- |\n| Encrypted file at rest | `cr init`                                |\n| Manage secrets         | `cr secrets set\\|list\\|delete`           |\n| Caller allowlist       | `cr policy allow\\|deny PATH`             |\n| Task scoping           | `cr policy task add NAME SECRETS...`     |\n| Service lifecycle      | `cr unlock` / `cr lock` / `cr status`    |\n| Spawn agent            | `cr exec TASK -- argv...`                |\n| Audit trail            | `cr audit tail` / `cr audit show`        |\n| Interactive menu       | `cr tui`                                 |\n| Identity debug         | `cr verify --pid PID`                    |\n\nRun `cr` with no args for full usage.\n\n---\n\n## How It's Different\n\n|                   | cora                | .env files | Vault   |\n| ----------------- | ------------------- | ---------- | ------- |\n| Storage           | **Encrypted file**  | Plaintext  | Cloud   |\n| Portable          | **Yes — one file**  | Partial    | No      |\n| Memory zeroing    | **`secureZero`**    | GC         | N/A     |\n| Caller verified   | **OS kernel**       | Nothing    | Nothing |\n| Agent gets value? | **Never**           | Yes        | Depends |\n| Infra required    | **None**            | None       | Heavy   |\n| Single binary     | **Yes**             | N/A        | No      |\n| Interactive TUI   | **Yes (pane-based)** | No         | No      |\n\n---\n\n## License\n\nAGPL-3.0 — free to use, modify, and distribute.\nIf you build on Cora, your code stays open too.\n\n---\n\n## Security\n\nRead [SECURITY.md](SECURITY.md) for the threat model, known residuals, and\nresponsible disclosure (via GitHub Security Advisories).\n\n---\n\n*Named after Donquixote Rosinante(Corazon) — who hid everything to protect what mattered.*\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/269140032?v=4",
   "releases": [
+    {
+      "tag_name": "cora-linux-v0.9.5",
+      "name": "Cora linux v0.9.5",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2026-06-06T10:31:12Z",
+      "html_url": "https://github.com/keton-id/cora/releases/tag/cora-linux-v0.9.5",
+      "assets": [
+        {
+          "name": "cr-0.9.5-x86_64-linux.tar.gz",
+          "url": "https://github.com/keton-id/cora/releases/download/cora-linux-v0.9.5/cr-0.9.5-x86_64-linux.tar.gz",
+          "size": 2045905,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "SHA256SUMS",
+          "url": "https://github.com/keton-id/cora/releases/download/cora-linux-v0.9.5/SHA256SUMS",
+          "size": 191,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "cr-0.9.5-x86_64-linux.tar.gz.sha256",
+          "url": "https://github.com/keton-id/cora/releases/download/cora-linux-v0.9.5/cr-0.9.5-x86_64-linux.tar.gz.sha256",
+          "size": 65,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "cr-0.9.5-aarch64-linux.tar.gz.sha256",
+          "url": "https://github.com/keton-id/cora/releases/download/cora-linux-v0.9.5/cr-0.9.5-aarch64-linux.tar.gz.sha256",
+          "size": 65,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "cr-0.9.5-aarch64-linux.tar.gz",
+          "url": "https://github.com/keton-id/cora/releases/download/cora-linux-v0.9.5/cr-0.9.5-aarch64-linux.tar.gz",
+          "size": 2051470,
+          "content_type": "application/x-gtar"
+        }
+      ]
+    },
+    {
+      "tag_name": "cora-macos-v0.9.5",
+      "name": "Cora macos v0.9.5",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2026-06-06T10:28:42Z",
+      "html_url": "https://github.com/keton-id/cora/releases/tag/cora-macos-v0.9.5",
+      "assets": [
+        {
+          "name": "cr-0.9.5-x86_64-macos.tar.gz",
+          "url": "https://github.com/keton-id/cora/releases/download/cora-macos-v0.9.5/cr-0.9.5-x86_64-macos.tar.gz",
+          "size": 423631,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "cr-0.9.5-aarch64-macos.tar.gz.sha256",
+          "url": "https://github.com/keton-id/cora/releases/download/cora-macos-v0.9.5/cr-0.9.5-aarch64-macos.tar.gz.sha256",
+          "size": 65,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "cr-0.9.5-x86_64-macos.tar.gz.sha256",
+          "url": "https://github.com/keton-id/cora/releases/download/cora-macos-v0.9.5/cr-0.9.5-x86_64-macos.tar.gz.sha256",
+          "size": 65,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "SHA256SUMS",
+          "url": "https://github.com/keton-id/cora/releases/download/cora-macos-v0.9.5/SHA256SUMS",
+          "size": 191,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "cr-0.9.5-aarch64-macos.tar.gz",
+          "url": "https://github.com/keton-id/cora/releases/download/cora-macos-v0.9.5/cr-0.9.5-aarch64-macos.tar.gz",
+          "size": 410327,
+          "content_type": "application/x-gtar"
+        }
+      ]
+    },
+    {
+      "tag_name": "cora-windows-v0.9.5-alpha.2",
+      "name": "Cora windows v0.9.5-alpha.2",
+      "body": null,
+      "prerelease": true,
+      "published_at": "2026-06-06T10:25:14Z",
+      "html_url": "https://github.com/keton-id/cora/releases/tag/cora-windows-v0.9.5-alpha.2",
+      "assets": [
+        {
+          "name": "cr-0.9.5-alpha.2-aarch64-windows.zip",
+          "url": "https://github.com/keton-id/cora/releases/download/cora-windows-v0.9.5-alpha.2/cr-0.9.5-alpha.2-aarch64-windows.zip",
+          "size": 477805,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "cr-0.9.5-alpha.2-x86_64-windows.zip",
+          "url": "https://github.com/keton-id/cora/releases/download/cora-windows-v0.9.5-alpha.2/cr-0.9.5-alpha.2-x86_64-windows.zip",
+          "size": 498256,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "cr-0.9.5-alpha.2-x86_64-windows.zip.sha256",
+          "url": "https://github.com/keton-id/cora/releases/download/cora-windows-v0.9.5-alpha.2/cr-0.9.5-alpha.2-x86_64-windows.zip.sha256",
+          "size": 65,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "SHA256SUMS",
+          "url": "https://github.com/keton-id/cora/releases/download/cora-windows-v0.9.5-alpha.2/SHA256SUMS",
+          "size": 205,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "cr-0.9.5-alpha.2-aarch64-windows.zip.sha256",
+          "url": "https://github.com/keton-id/cora/releases/download/cora-windows-v0.9.5-alpha.2/cr-0.9.5-alpha.2-aarch64-windows.zip.sha256",
+          "size": 65,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "cora-macos-v0.9.5-alpha.2",
+      "name": "Cora macos v0.9.5-alpha.2",
+      "body": null,
+      "prerelease": true,
+      "published_at": "2026-06-06T10:25:08Z",
+      "html_url": "https://github.com/keton-id/cora/releases/tag/cora-macos-v0.9.5-alpha.2",
+      "assets": [
+        {
+          "name": "cr-0.9.5-alpha.2-aarch64-macos.tar.gz.sha256",
+          "url": "https://github.com/keton-id/cora/releases/download/cora-macos-v0.9.5-alpha.2/cr-0.9.5-alpha.2-aarch64-macos.tar.gz.sha256",
+          "size": 65,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "cr-0.9.5-alpha.2-x86_64-macos.tar.gz.sha256",
+          "url": "https://github.com/keton-id/cora/releases/download/cora-macos-v0.9.5-alpha.2/cr-0.9.5-alpha.2-x86_64-macos.tar.gz.sha256",
+          "size": 65,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "cr-0.9.5-alpha.2-x86_64-macos.tar.gz",
+          "url": "https://github.com/keton-id/cora/releases/download/cora-macos-v0.9.5-alpha.2/cr-0.9.5-alpha.2-x86_64-macos.tar.gz",
+          "size": 423645,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "SHA256SUMS",
+          "url": "https://github.com/keton-id/cora/releases/download/cora-macos-v0.9.5-alpha.2/SHA256SUMS",
+          "size": 207,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "cr-0.9.5-alpha.2-aarch64-macos.tar.gz",
+          "url": "https://github.com/keton-id/cora/releases/download/cora-macos-v0.9.5-alpha.2/cr-0.9.5-alpha.2-aarch64-macos.tar.gz",
+          "size": 410319,
+          "content_type": "application/x-gtar"
+        }
+      ]
+    },
+    {
+      "tag_name": "cora-linux-v0.9.5-alpha.2",
+      "name": "Cora linux v0.9.5-alpha.2",
+      "body": null,
+      "prerelease": true,
+      "published_at": "2026-06-06T10:25:02Z",
+      "html_url": "https://github.com/keton-id/cora/releases/tag/cora-linux-v0.9.5-alpha.2",
+      "assets": [
+        {
+          "name": "cr-0.9.5-alpha.2-aarch64-linux.tar.gz.sha256",
+          "url": "https://github.com/keton-id/cora/releases/download/cora-linux-v0.9.5-alpha.2/cr-0.9.5-alpha.2-aarch64-linux.tar.gz.sha256",
+          "size": 65,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "cr-0.9.5-alpha.2-x86_64-linux.tar.gz.sha256",
+          "url": "https://github.com/keton-id/cora/releases/download/cora-linux-v0.9.5-alpha.2/cr-0.9.5-alpha.2-x86_64-linux.tar.gz.sha256",
+          "size": 65,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "cr-0.9.5-alpha.2-aarch64-linux.tar.gz",
+          "url": "https://github.com/keton-id/cora/releases/download/cora-linux-v0.9.5-alpha.2/cr-0.9.5-alpha.2-aarch64-linux.tar.gz",
+          "size": 2051181,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "SHA256SUMS",
+          "url": "https://github.com/keton-id/cora/releases/download/cora-linux-v0.9.5-alpha.2/SHA256SUMS",
+          "size": 207,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "cr-0.9.5-alpha.2-x86_64-linux.tar.gz",
+          "url": "https://github.com/keton-id/cora/releases/download/cora-linux-v0.9.5-alpha.2/cr-0.9.5-alpha.2-x86_64-linux.tar.gz",
+          "size": 2045903,
+          "content_type": "application/x-gtar"
+        }
+      ]
+    },
     {
       "tag_name": "cora-linux-v0.9.4",
       "name": "Cora linux v0.9.4",
@@ -860,446 +1060,6 @@
           "name": "SHA256SUMS",
           "url": "https://github.com/keton-id/cora/releases/download/v0.8.0-alpha.1/SHA256SUMS",
           "size": 619,
-          "content_type": "application/octet-stream"
-        }
-      ]
-    },
-    {
-      "tag_name": "v0.7.0",
-      "name": "v0.7.0",
-      "body": "## What's Changed\n* chore(changelog): enrich v0.6.1 with contributors by @github-actions[bot] in https://github.com/keton-id/cora/pull/24\n* feat(cli): add help and version flag conventions by @mulhamna in https://github.com/keton-id/cora/pull/25\n* ci(release): publish @keton-id/cora to npm by @mulhamna in https://github.com/keton-id/cora/pull/27\n* chore(main): release 0.7.0-alpha.1 by @mulhamna in https://github.com/keton-id/cora/pull/26\n\n\n**Full Changelog**: https://github.com/keton-id/cora/compare/v0.6.1...v0.7.0\n",
-      "prerelease": false,
-      "published_at": "2026-06-02T16:11:10Z",
-      "html_url": "https://github.com/keton-id/cora/releases/tag/v0.7.0",
-      "assets": [
-        {
-          "name": "cr-0.7.0-x86_64-macos.tar.gz",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.7.0/cr-0.7.0-x86_64-macos.tar.gz",
-          "size": 414390,
-          "content_type": "application/x-gtar"
-        },
-        {
-          "name": "cr-0.7.0-aarch64-linux.tar.gz.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.7.0/cr-0.7.0-aarch64-linux.tar.gz.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "cr-0.7.0-x86_64-linux.tar.gz",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.7.0/cr-0.7.0-x86_64-linux.tar.gz",
-          "size": 2019463,
-          "content_type": "application/x-gtar"
-        },
-        {
-          "name": "cr-0.7.0-aarch64-linux.tar.gz",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.7.0/cr-0.7.0-aarch64-linux.tar.gz",
-          "size": 2025682,
-          "content_type": "application/x-gtar"
-        },
-        {
-          "name": "cr-0.7.0-aarch64-macos.tar.gz",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.7.0/cr-0.7.0-aarch64-macos.tar.gz",
-          "size": 402534,
-          "content_type": "application/x-gtar"
-        },
-        {
-          "name": "cr-0.7.0-aarch64-macos.tar.gz.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.7.0/cr-0.7.0-aarch64-macos.tar.gz.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "cr-0.7.0-x86_64-linux.tar.gz.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.7.0/cr-0.7.0-x86_64-linux.tar.gz.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "cr-0.7.0-x86_64-macos.tar.gz.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.7.0/cr-0.7.0-x86_64-macos.tar.gz.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "cr-0.7.0-aarch64-windows-preview.zip",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.7.0/cr-0.7.0-aarch64-windows-preview.zip",
-          "size": 464721,
-          "content_type": "application/zip"
-        },
-        {
-          "name": "cr-0.7.0-x86_64-windows-preview.zip",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.7.0/cr-0.7.0-x86_64-windows-preview.zip",
-          "size": 484144,
-          "content_type": "application/zip"
-        },
-        {
-          "name": "cr-0.7.0-aarch64-windows-preview.zip.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.7.0/cr-0.7.0-aarch64-windows-preview.zip.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "cr-0.7.0-x86_64-windows-preview.zip.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.7.0/cr-0.7.0-x86_64-windows-preview.zip.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "SHA256SUMS",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.7.0/SHA256SUMS",
-          "size": 587,
-          "content_type": "application/octet-stream"
-        }
-      ]
-    },
-    {
-      "tag_name": "v0.7.0-alpha.1",
-      "name": "v0.7.0-alpha.1",
-      "body": "## [0.7.0-alpha.1](https://github.com/keton-id/cora/compare/v0.6.1-alpha.1...v0.7.0-alpha.1) (2026-06-02)\n\n\n### Features\n\n* **cli:** add help and version conventions module ([170e234](https://github.com/keton-id/cora/commit/170e234e64f9742307e32b7f4d6f6983b69ec3cb))\n* **cli:** add help and version flag conventions ([3df2f08](https://github.com/keton-id/cora/commit/3df2f088818d2f14adfb32ef09d45d2c6ec427b7))\n* **cli:** add outPrint helper for pipe-friendly data output ([57b6739](https://github.com/keton-id/cora/commit/57b673928ee73a40648b010b43f7931fbf2514fa))\n* **npm:** add @keton-id/cora package, JS launcher, and CI prepare script ([91c544c](https://github.com/keton-id/cora/commit/91c544ca143db3e03775aae4dc9b08914586d764))\n\n\n### Bug Fixes\n\n* **cli:** use proven write path in outPrint and assert stdout in tests ([e9998f7](https://github.com/keton-id/cora/commit/e9998f7fc9e98e2d830629e4d329a893d80570e8))",
-      "prerelease": true,
-      "published_at": "2026-06-02T16:06:32Z",
-      "html_url": "https://github.com/keton-id/cora/releases/tag/v0.7.0-alpha.1",
-      "assets": [
-        {
-          "name": "cr-0.7.0-alpha.1-x86_64-linux.tar.gz",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.7.0-alpha.1/cr-0.7.0-alpha.1-x86_64-linux.tar.gz",
-          "size": 2019473,
-          "content_type": "application/x-gtar"
-        },
-        {
-          "name": "cr-0.7.0-alpha.1-x86_64-macos.tar.gz",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.7.0-alpha.1/cr-0.7.0-alpha.1-x86_64-macos.tar.gz",
-          "size": 414393,
-          "content_type": "application/x-gtar"
-        },
-        {
-          "name": "cr-0.7.0-alpha.1-aarch64-linux.tar.gz",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.7.0-alpha.1/cr-0.7.0-alpha.1-aarch64-linux.tar.gz",
-          "size": 2025646,
-          "content_type": "application/x-gtar"
-        },
-        {
-          "name": "cr-0.7.0-alpha.1-aarch64-macos.tar.gz",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.7.0-alpha.1/cr-0.7.0-alpha.1-aarch64-macos.tar.gz",
-          "size": 402535,
-          "content_type": "application/x-gtar"
-        },
-        {
-          "name": "cr-0.7.0-alpha.1-aarch64-linux.tar.gz.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.7.0-alpha.1/cr-0.7.0-alpha.1-aarch64-linux.tar.gz.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "cr-0.7.0-alpha.1-aarch64-macos.tar.gz.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.7.0-alpha.1/cr-0.7.0-alpha.1-aarch64-macos.tar.gz.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "cr-0.7.0-alpha.1-x86_64-linux.tar.gz.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.7.0-alpha.1/cr-0.7.0-alpha.1-x86_64-linux.tar.gz.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "cr-0.7.0-alpha.1-x86_64-macos.tar.gz.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.7.0-alpha.1/cr-0.7.0-alpha.1-x86_64-macos.tar.gz.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "cr-0.7.0-alpha.1-aarch64-windows-preview.zip",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.7.0-alpha.1/cr-0.7.0-alpha.1-aarch64-windows-preview.zip",
-          "size": 464720,
-          "content_type": "application/zip"
-        },
-        {
-          "name": "cr-0.7.0-alpha.1-x86_64-windows-preview.zip",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.7.0-alpha.1/cr-0.7.0-alpha.1-x86_64-windows-preview.zip",
-          "size": 484127,
-          "content_type": "application/zip"
-        },
-        {
-          "name": "cr-0.7.0-alpha.1-aarch64-windows-preview.zip.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.7.0-alpha.1/cr-0.7.0-alpha.1-aarch64-windows-preview.zip.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "cr-0.7.0-alpha.1-x86_64-windows-preview.zip.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.7.0-alpha.1/cr-0.7.0-alpha.1-x86_64-windows-preview.zip.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "SHA256SUMS",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.7.0-alpha.1/SHA256SUMS",
-          "size": 635,
-          "content_type": "application/octet-stream"
-        }
-      ]
-    },
-    {
-      "tag_name": "v0.6.1",
-      "name": "v0.6.1",
-      "body": "## What's Changed\n* fix(ci): insert stable CHANGELOG heading when missing by @mulhamna in https://github.com/keton-id/cora/pull/22\n* chore(main): release 0.6.1-alpha.1 by @mulhamna in https://github.com/keton-id/cora/pull/23\n\n\n**Full Changelog**: https://github.com/keton-id/cora/compare/v0.6.0...v0.6.1\n",
-      "prerelease": false,
-      "published_at": "2026-05-29T10:26:23Z",
-      "html_url": "https://github.com/keton-id/cora/releases/tag/v0.6.1",
-      "assets": [
-        {
-          "name": "cr-0.6.1-x86_64-linux.tar.gz",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.1/cr-0.6.1-x86_64-linux.tar.gz",
-          "size": 2005871,
-          "content_type": "application/x-gtar"
-        },
-        {
-          "name": "cr-0.6.1-aarch64-macos.tar.gz",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.1/cr-0.6.1-aarch64-macos.tar.gz",
-          "size": 396165,
-          "content_type": "application/x-gtar"
-        },
-        {
-          "name": "cr-0.6.1-aarch64-linux.tar.gz",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.1/cr-0.6.1-aarch64-linux.tar.gz",
-          "size": 2007959,
-          "content_type": "application/x-gtar"
-        },
-        {
-          "name": "cr-0.6.1-x86_64-macos.tar.gz",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.1/cr-0.6.1-x86_64-macos.tar.gz",
-          "size": 408411,
-          "content_type": "application/x-gtar"
-        },
-        {
-          "name": "cr-0.6.1-aarch64-linux.tar.gz.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.1/cr-0.6.1-aarch64-linux.tar.gz.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "cr-0.6.1-aarch64-macos.tar.gz.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.1/cr-0.6.1-aarch64-macos.tar.gz.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "cr-0.6.1-x86_64-macos.tar.gz.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.1/cr-0.6.1-x86_64-macos.tar.gz.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "cr-0.6.1-x86_64-linux.tar.gz.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.1/cr-0.6.1-x86_64-linux.tar.gz.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "cr-0.6.1-x86_64-windows-preview.zip",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.1/cr-0.6.1-x86_64-windows-preview.zip",
-          "size": 478007,
-          "content_type": "application/zip"
-        },
-        {
-          "name": "cr-0.6.1-aarch64-windows-preview.zip",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.1/cr-0.6.1-aarch64-windows-preview.zip",
-          "size": 458852,
-          "content_type": "application/zip"
-        },
-        {
-          "name": "cr-0.6.1-aarch64-windows-preview.zip.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.1/cr-0.6.1-aarch64-windows-preview.zip.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "cr-0.6.1-x86_64-windows-preview.zip.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.1/cr-0.6.1-x86_64-windows-preview.zip.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "SHA256SUMS",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.1/SHA256SUMS",
-          "size": 587,
-          "content_type": "application/octet-stream"
-        }
-      ]
-    },
-    {
-      "tag_name": "v0.6.1-alpha.1",
-      "name": "v0.6.1-alpha.1",
-      "body": "## [0.6.1-alpha.1](https://github.com/keton-id/cora/compare/v0.6.0-alpha.1...v0.6.1-alpha.1) (2026-05-29)\n\n\n### Bug Fixes\n\n* **ci:** insert stable CHANGELOG heading when missing ([fa043c0](https://github.com/keton-id/cora/commit/fa043c08c4fe1b66875033ed795f0e8ab61a7bff))\n* **ci:** insert stable CHANGELOG heading when missing, pass prev/repo ([cb18d89](https://github.com/keton-id/cora/commit/cb18d89b231f0f69858ab11d9d184e024ee5848a))",
-      "prerelease": true,
-      "published_at": "2026-05-29T10:23:45Z",
-      "html_url": "https://github.com/keton-id/cora/releases/tag/v0.6.1-alpha.1",
-      "assets": [
-        {
-          "name": "cr-0.6.1-alpha.1-aarch64-macos.tar.gz",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.1-alpha.1/cr-0.6.1-alpha.1-aarch64-macos.tar.gz",
-          "size": 396162,
-          "content_type": "application/x-gtar"
-        },
-        {
-          "name": "cr-0.6.1-alpha.1-aarch64-linux.tar.gz",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.1-alpha.1/cr-0.6.1-alpha.1-aarch64-linux.tar.gz",
-          "size": 2007969,
-          "content_type": "application/x-gtar"
-        },
-        {
-          "name": "cr-0.6.1-alpha.1-x86_64-macos.tar.gz",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.1-alpha.1/cr-0.6.1-alpha.1-x86_64-macos.tar.gz",
-          "size": 408411,
-          "content_type": "application/x-gtar"
-        },
-        {
-          "name": "cr-0.6.1-alpha.1-x86_64-linux.tar.gz",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.1-alpha.1/cr-0.6.1-alpha.1-x86_64-linux.tar.gz",
-          "size": 2005878,
-          "content_type": "application/x-gtar"
-        },
-        {
-          "name": "cr-0.6.1-alpha.1-aarch64-linux.tar.gz.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.1-alpha.1/cr-0.6.1-alpha.1-aarch64-linux.tar.gz.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "cr-0.6.1-alpha.1-aarch64-macos.tar.gz.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.1-alpha.1/cr-0.6.1-alpha.1-aarch64-macos.tar.gz.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "cr-0.6.1-alpha.1-x86_64-macos.tar.gz.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.1-alpha.1/cr-0.6.1-alpha.1-x86_64-macos.tar.gz.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "cr-0.6.1-alpha.1-x86_64-linux.tar.gz.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.1-alpha.1/cr-0.6.1-alpha.1-x86_64-linux.tar.gz.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "cr-0.6.1-alpha.1-aarch64-windows-preview.zip",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.1-alpha.1/cr-0.6.1-alpha.1-aarch64-windows-preview.zip",
-          "size": 458853,
-          "content_type": "application/zip"
-        },
-        {
-          "name": "cr-0.6.1-alpha.1-x86_64-windows-preview.zip.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.1-alpha.1/cr-0.6.1-alpha.1-x86_64-windows-preview.zip.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "cr-0.6.1-alpha.1-aarch64-windows-preview.zip.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.1-alpha.1/cr-0.6.1-alpha.1-aarch64-windows-preview.zip.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "cr-0.6.1-alpha.1-x86_64-windows-preview.zip",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.1-alpha.1/cr-0.6.1-alpha.1-x86_64-windows-preview.zip",
-          "size": 478008,
-          "content_type": "application/zip"
-        },
-        {
-          "name": "SHA256SUMS",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.1-alpha.1/SHA256SUMS",
-          "size": 635,
-          "content_type": "application/octet-stream"
-        }
-      ]
-    },
-    {
-      "tag_name": "v0.6.0",
-      "name": "v0.6.0",
-      "body": "## What's Changed\n* security(windows): close tier-1 preview parity gaps from audit by @mulhamna in https://github.com/keton-id/cora/pull/19\n* ci: enrich stable CHANGELOG with @author, #PR, and contributors by @mulhamna in https://github.com/keton-id/cora/pull/21\n* chore(main): release 0.6.0-alpha.1 by @mulhamna in https://github.com/keton-id/cora/pull/20\n\n\n**Full Changelog**: https://github.com/keton-id/cora/compare/v0.5.1...v0.6.0\n",
-      "prerelease": false,
-      "published_at": "2026-05-29T10:01:10Z",
-      "html_url": "https://github.com/keton-id/cora/releases/tag/v0.6.0",
-      "assets": [
-        {
-          "name": "cr-0.6.0-x86_64-macos.tar.gz",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.0/cr-0.6.0-x86_64-macos.tar.gz",
-          "size": 408409,
-          "content_type": "application/x-gtar"
-        },
-        {
-          "name": "cr-0.6.0-aarch64-linux.tar.gz",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.0/cr-0.6.0-aarch64-linux.tar.gz",
-          "size": 2007961,
-          "content_type": "application/x-gtar"
-        },
-        {
-          "name": "cr-0.6.0-x86_64-linux.tar.gz",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.0/cr-0.6.0-x86_64-linux.tar.gz",
-          "size": 2005858,
-          "content_type": "application/x-gtar"
-        },
-        {
-          "name": "cr-0.6.0-aarch64-linux.tar.gz.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.0/cr-0.6.0-aarch64-linux.tar.gz.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "cr-0.6.0-aarch64-macos.tar.gz",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.0/cr-0.6.0-aarch64-macos.tar.gz",
-          "size": 396167,
-          "content_type": "application/x-gtar"
-        },
-        {
-          "name": "cr-0.6.0-x86_64-linux.tar.gz.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.0/cr-0.6.0-x86_64-linux.tar.gz.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "cr-0.6.0-aarch64-macos.tar.gz.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.0/cr-0.6.0-aarch64-macos.tar.gz.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "cr-0.6.0-x86_64-macos.tar.gz.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.0/cr-0.6.0-x86_64-macos.tar.gz.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "cr-0.6.0-aarch64-windows-preview.zip",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.0/cr-0.6.0-aarch64-windows-preview.zip",
-          "size": 458853,
-          "content_type": "application/zip"
-        },
-        {
-          "name": "cr-0.6.0-x86_64-windows-preview.zip",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.0/cr-0.6.0-x86_64-windows-preview.zip",
-          "size": 478007,
-          "content_type": "application/zip"
-        },
-        {
-          "name": "cr-0.6.0-aarch64-windows-preview.zip.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.0/cr-0.6.0-aarch64-windows-preview.zip.sha256",
-          "size": 65,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "SHA256SUMS",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.0/SHA256SUMS",
-          "size": 587,
-          "content_type": "application/octet-stream"
-        },
-        {
-          "name": "cr-0.6.0-x86_64-windows-preview.zip.sha256",
-          "url": "https://github.com/keton-id/cora/releases/download/v0.6.0/cr-0.6.0-x86_64-windows-preview.zip.sha256",
-          "size": 65,
           "content_type": "application/octet-stream"
         }
       ]
