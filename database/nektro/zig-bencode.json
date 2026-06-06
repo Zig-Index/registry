@@ -10,7 +10,7 @@
     "zig"
   ],
   "stars": 1,
-  "forks": 1,
+  "forks": 0,
   "watchers": 1,
   "updated_at": "2026-06-01T23:42:32Z",
   "readme": "# zig-bencode\n\n![loc](https://sloc.xyz/github/nektro/zig-bencode)\n[![license](https://img.shields.io/github/license/nektro/zig-bencode.svg)](https://github.com/nektro/zig-bencode/blob/master/LICENSE)\n[![nektro @ github sponsors](https://img.shields.io/badge/sponsors-nektro-purple?logo=github)](https://github.com/sponsors/nektro)\n[![Zig](https://img.shields.io/badge/Zig-0.15-f7a41d)](https://ziglang.org/)\n[![Zigmod](https://img.shields.io/badge/Zigmod-latest-f7a41d)](https://github.com/nektro/zigmod)\n\nBencode parser for Zig.\n\nhttps://en.wikipedia.org/wiki/Bencode\n\nhttps://www.bittorrent.org/beps/bep_0003.html#bencoding\n\n## Usage\n\nAdd the following to the bottom of your `zigmod.yml`\n\n```yml\ndependencies:\n  - src: git https://github.com/nektro/zig-bencode\n```\n\nIn your code\n\n```zig\nconst bencode = @import(\"bencode\");\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    const alloc = &gpa.allocator;\n\n    const file = @embedFile(\"./some/path/to.torrent\");\n    var buf = std.io.fixedBufferStream(file);\n    const r = buf.reader();\n    const ben = try bencode.parse(r, alloc);\n\n    // do something with `ben`...\n}\n```\n",
