@@ -13,12 +13,13 @@
     "zig-library",
     "bevy",
     "entity-component-framework",
-    "zevy"
+    "zevy",
+    "game"
   ],
   "stars": 28,
   "forks": 1,
   "watchers": 0,
-  "updated_at": "2026-06-07T02:01:38Z",
+  "updated_at": "2026-06-07T22:38:23Z",
   "dependencies": [
     {
       "name": "zevy_reflect",
