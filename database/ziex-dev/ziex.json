@@ -70,6 +70,52 @@
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/240775591?v=4",
   "releases": [
     {
+      "tag_name": "v0.1.0-dev.1146",
+      "name": "v0.1.0-dev.1146",
+      "body": "This is a developer preview of Ziex; some features are still works in progress.\nUpdate or install the Ziex CLI using the following scripts.\n\n## Installation\n\n##### Linux/macOS\n```bash\ncurl -fsSL https://ziex.dev/install | bash\n```\n##### Windows\n```powershell\npowershell -c \"irm ziex.dev/install.ps1 | iex\"\n```\n\n## Changelog\n\n### v0.1.0-dev.1146\n\n#### Miscellaneous\n- ci: relax alreaxy present check [`31524da`](https://github.com/nurulhudaapon/zx/commit/31524da9a2ba72ba5d5299bb1de2426e2c305b1c)\n\n### Contributors\n\n- @nurulhudaapon\n\n",
+      "prerelease": true,
+      "published_at": "2026-06-07T00:14:04Z",
+      "html_url": "https://github.com/ziex-dev/ziex/releases/tag/v0.1.0-dev.1146",
+      "assets": [
+        {
+          "name": "zx-linux-x64.tar.gz",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.1146/zx-linux-x64.tar.gz",
+          "size": 5847874,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zx-linux-aarch64.tar.gz",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.1146/zx-linux-aarch64.tar.gz",
+          "size": 5777864,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zx-macos-x64.tar.gz",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.1146/zx-macos-x64.tar.gz",
+          "size": 1364704,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zx-windows-x64.zip",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.1146/zx-windows-x64.zip",
+          "size": 2195261,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "zx-macos-aarch64.tar.gz",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.1146/zx-macos-aarch64.tar.gz",
+          "size": 1293546,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "zx-windows-aarch64.zip",
+          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.1146/zx-windows-aarch64.zip",
+          "size": 2094502,
+          "content_type": "application/zip"
+        }
+      ]
+    },
+    {
       "tag_name": "v0.1.0-dev.1145",
       "name": "v0.1.0-dev.1145",
       "body": "This is a developer preview of Ziex; some features are still works in progress.\nUpdate or install the Ziex CLI using the following scripts.\n\n## Installation\n\n##### Linux/macOS\n```bash\ncurl -fsSL https://ziex.dev/install | bash\n```\n##### Windows\n```powershell\npowershell -c \"irm ziex.dev/install.ps1 | iex\"\n```\n\n## Changelog\n\n### v0.1.0-dev.1145\n\n",
@@ -939,52 +985,6 @@
           "name": "zx-linux-aarch64.tar.gz",
           "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.606/zx-linux-aarch64.tar.gz",
           "size": 3867974,
-          "content_type": "application/gzip"
-        }
-      ]
-    },
-    {
-      "tag_name": "v0.1.0-dev.598",
-      "name": "v0.1.0-dev.598",
-      "body": "This is a developer preview of ZX; some features are still works in progress.\nUpdate or install the ZX CLI using the following scripts.\n\n## Installation\n\n##### Linux/macOS\n```bash\ncurl -fsSL https://ziex.dev/install | bash\n```\n##### Windows\n```powershell\npowershell -c \"irm ziex.dev/install.ps1 | iex\"\n```\n\n## Changelog\n\n### v0.1.0-dev.598\n\n#### Features\n- feat(ssg): static.getParams\" [`f3de3f5`](https://github.com/nurulhudaapon/zx/commit/f3de3f57339fa55503ec55a1cf3ac04b970887a3)\n\n#### Documentation\n- docs: update layout links [`cd14f0e`](https://github.com/nurulhudaapon/zx/commit/cd14f0e72edd05ff4516194c8ae976f55271ee72)\n\n#### Miscellaneous\n- chore: include .gitattributes to have .zx file syntax highliting on gh [`943000c`](https://github.com/nurulhudaapon/zx/commit/943000cd60d804d8a3b0db73819b9bba9b06f813)\n- test: remove debug from export test [`0e61f8a`](https://github.com/nurulhudaapon/zx/commit/0e61f8aa01c6f66a01c57439d09ba28373e6b74a)\n- chore: version bump [`51bae6c`](https://github.com/nurulhudaapon/zx/commit/51bae6cf28ea3eb6bfd7e805121aea7f62ae5a4a)\n\n### Contributors\n\n- @nurulhudaapon\n\n",
-      "prerelease": false,
-      "published_at": "2026-01-22T08:45:53Z",
-      "html_url": "https://github.com/ziex-dev/ziex/releases/tag/v0.1.0-dev.598",
-      "assets": [
-        {
-          "name": "zx-macos-x64.tar.gz",
-          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.598/zx-macos-x64.tar.gz",
-          "size": 1104338,
-          "content_type": "application/gzip"
-        },
-        {
-          "name": "zx-linux-x64.tar.gz",
-          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.598/zx-linux-x64.tar.gz",
-          "size": 3882552,
-          "content_type": "application/gzip"
-        },
-        {
-          "name": "zx-macos-aarch64.tar.gz",
-          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.598/zx-macos-aarch64.tar.gz",
-          "size": 1040928,
-          "content_type": "application/gzip"
-        },
-        {
-          "name": "zx-windows-x64.zip",
-          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.598/zx-windows-x64.zip",
-          "size": 1195233,
-          "content_type": "application/zip"
-        },
-        {
-          "name": "zx-windows-aarch64.zip",
-          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.598/zx-windows-aarch64.zip",
-          "size": 1146406,
-          "content_type": "application/zip"
-        },
-        {
-          "name": "zx-linux-aarch64.tar.gz",
-          "url": "https://github.com/ziex-dev/ziex/releases/download/v0.1.0-dev.598/zx-linux-aarch64.tar.gz",
-          "size": 3868144,
           "content_type": "application/gzip"
         }
       ]
