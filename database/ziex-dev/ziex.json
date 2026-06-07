@@ -16,10 +16,10 @@
     "zig-package",
     "server-side-rendering"
   ],
-  "stars": 256,
+  "stars": 257,
   "forks": 18,
   "watchers": 3,
-  "updated_at": "2026-06-07T09:32:08Z",
+  "updated_at": "2026-06-07T14:34:16Z",
   "dependencies": [
     {
       "name": "ziex_js",
