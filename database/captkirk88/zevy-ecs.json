@@ -19,7 +19,7 @@
   "stars": 28,
   "forks": 1,
   "watchers": 0,
-  "updated_at": "2026-06-07T22:38:23Z",
+  "updated_at": "2026-06-07T23:43:45Z",
   "dependencies": [
     {
       "name": "zevy_reflect",
@@ -33,8 +33,8 @@
     },
     {
       "name": "zevy_mem",
-      "url": "git+https://github.com/captkirk88/zevy-mem#2e91ded097ded214a5127c907f2fae59f1f4e975",
-      "hash": "zevy_mem-1.2.3-jK9L0WI_AwCKY26zPbmwvI51hJ7_J80TQk09tmOlVeph"
+      "url": "git+https://github.com/captkirk88/zevy-mem#3c95febdfa7297df76dd984d4fe3f4c230d66639",
+      "hash": "zevy_mem-1.2.6-jK9L0StRAwCKsWC0jJfruTlkj3fkAxeWvaPjtQgmNOwC"
     }
   ],
   "minimum_zig_version": "0.16.0",
