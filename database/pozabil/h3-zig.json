@@ -1,0 +1,45 @@
+{
+  "name": "h3-zig",
+  "owner": "pozabil",
+  "repo": "h3-zig",
+  "description": "Zig bindings for Uber H3, a hexagonal hierarchical geospatial indexing system",
+  "type": "package",
+  "topics": [
+    "bindings",
+    "c-bindings",
+    "geospatial",
+    "h3",
+    "hexagon",
+    "spatial-indexing",
+    "uber-h3",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 2,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-06-08T10:57:47Z",
+  "minimum_zig_version": "0.15.2",
+  "readme": "# h3-zig\n\n[![CI](https://github.com/pozabil/h3-zig/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/pozabil/h3-zig/actions/workflows/ci.yml)\n![Zig](https://img.shields.io/badge/Zig-0.15.2%20%7C%200.16.0-f7a41d)\n![H3](https://img.shields.io/badge/H3-v4.5.0-0f766e)\n![Package](https://img.shields.io/badge/package-0.1.0-blue)\n[![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)\n\nZig bindings for [H3 v4.5.0](https://github.com/uber/h3/tree/v4.5.0), Uber's Hexagonal Hierarchical Geospatial Indexing System.\n\nH3 indexes geographies into a hierarchical hexagonal grid. This package vendors the upstream H3 C library and compiles it through Zig, so consumers do not need a system `h3` install. The public surface has two layers:\n\n- `h3.raw` / `h3.c`: translated `h3api.h` access to the complete public C API.\n- top-level `h3.*` functions: thin Zig wrappers that return values, accept slices, and map `H3Error` codes to `h3.Error`.\n\n## Install\n\nAdd the tagged package archive to your `build.zig.zon`:\n\n```sh\nzig fetch --save https://github.com/pozabil/h3-zig/archive/refs/tags/v0.1.0.tar.gz\n```\n\nThen import the package module from your `build.zig`:\n\n```zig\nconst h3 = b.dependency(\"h3\", .{\n    .target = target,\n    .optimize = optimize,\n});\n\nexe.root_module.addImport(\"h3\", h3.module(\"h3\"));\n```\n\n## Use\n\nAdd the package as a Zig dependency, then import the exposed `h3` module:\n\n```zig\nconst h3 = @import(\"h3\");\n\npub fn main() !void {\n    const statue = h3.latLngDegrees(40.689167, -74.044444);\n    const cell = try h3.latLngToCell(statue, 10);\n\n    var buffer: [h3.h3StringBufferLength]u8 = undefined;\n    const text = try h3.h3ToString(cell, &buffer);\n    _ = text; // \"8a2a1072b59ffff\"\n}\n```\n\n## Build And Test\n\n```sh\nzig fmt --check build.zig build.zig.zon src test\nzig build test\nbash tools/check-api-coverage.sh\ncd test/consumer && zig build test\n```\n\nThe tests are derived from upstream public H3 examples, CLI fixtures, and test fixtures. They exercise indexing, string conversion, boundaries, grid traversal, hierarchy, compaction, directed edges, vertexes, polygons, local IJ, metrics, linked polygons, raw C access, error mapping, 55,000 upstream random center fixture rows, selected base-cell center rows, and an upstream boundary fixture sample.\n\n`zig build test-valgrind` runs the same unit and public-contract test executables under Valgrind on Linux systems with Valgrind installed. In CI, this gate pins `x86_64-linux-gnu` with `baseline` CPU features so the result does not depend on the specific hosted runner CPU.\n\nGitHub Actions runs native tests on Linux x64, Linux arm64, Windows x64, macOS Intel, and macOS arm64 in both Debug and ReleaseSafe modes for Zig `0.15.2` and Zig `0.16.0`. It also runs a Linux Valgrind memory gate and cross-compiles library artifacts for Linux and Windows x64/arm64 targets on both Zig versions. The supported native runtime matrix and build-only cross-compile matrix have passed the GitHub-hosted `CI` workflow.\n\n## Reference Docs\n\n- [Public API Matrix](docs/public-api-matrix.md): C functions mapped to Zig wrappers.\n- [Upstream Test Coverage](docs/upstream-test-coverage.md): upstream test and fixture parity.\n- [Support Policy](docs/support-policy.md): supported Zig versions, platforms, and release requirements.\n- [Safe Wrapper Audit](docs/safe-wrapper-audit.md): ownership, buffer, and error semantics.\n\n## Ownership\n\nAllocator-returning helpers allocate Zig-owned slices that callers must free. `cellsToLinkedMultiPolygon` returns C-owned linked memory; release it with `destroyLinkedMultiPolygon`.\n\nBuffer-taking helpers preserve H3's public C conventions. Some H3 APIs fill pre-sized arrays that may contain `h3.h3Null`; use `countNonNull` if you need the populated count.\n\n## Upstream Snapshot\n\n- H3 version: [`v4.5.0`](https://github.com/uber/h3/tree/v4.5.0)\n- Upstream commit: `1b536c34225191ba24a75a840f634d4a48c3b206`\n- Upstream license: Apache-2.0\n\nVendored source lives under `vendor/h3/`. `vendor/h3/src/h3lib/include/h3api.h` is generated from upstream `h3api.h.in` with version values substituted.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/87725612?u=301b70375c0df5e7a6c3a91b975e29d329dca57a&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.0",
+      "name": "h3-zig v0.1.0 for H3 v4.5.0",
+      "body": "Initial production-ready release of Zig bindings for upstream H3 v4.5.0.\r\n\r\n## Versions\r\n- h3-zig: v0.1.0\r\n- Vendored H3: [v4.5.0](https://github.com/uber/h3/tree/v4.5.0)\r\n- Upstream H3 commit: 1b536c34225191ba24a75a840f634d4a48c3b206\r\n- Supported Zig: 0.15.2, 0.16.0\r\n\r\n## Install\r\n```sh\r\nzig fetch --save https://github.com/pozabil/h3-zig/archive/refs/tags/v0.1.0.tar.gz\r\n\r\n## Highlights\r\n- Complete public H3 API wrapper coverage: 79/79\r\n- Raw C API available through h3.c / h3.raw\r\n- Safe Zig wrappers with error mapping, slices, and allocator helpers\r\n- Consumer integration test that imports the package as an external Zig dependency\r\n- Upstream public fixture-backed tests\r\n- Linux Valgrind memory gate\r\n- GitHub CI across Linux x64/arm64, Windows x64, macOS Intel/arm64\r\n- Cross-compile smoke builds for Linux and Windows x64/arm64",
+      "prerelease": false,
+      "published_at": "2026-06-07T21:49:42Z",
+      "html_url": "https://github.com/pozabil/h3-zig/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 3,
+  "owner_following": 4,
+  "owner_created_at": "2021-07-20T20:50:58Z",
+  "license": "Apache-2.0",
+  "category": "library"
+}
