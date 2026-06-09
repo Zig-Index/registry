@@ -9,10 +9,10 @@
     "static-site-generator",
     "zig-package"
   ],
-  "stars": 1407,
+  "stars": 1409,
   "forks": 98,
   "watchers": 14,
-  "updated_at": "2026-06-09T16:19:19Z",
+  "updated_at": "2026-06-09T20:52:45Z",
   "dependencies": [
     {
       "name": "lsp_kit",
@@ -76,7 +76,7 @@
     }
   ],
   "minimum_zig_version": "0.17.0-dev.812+5434f85c4",
-  "readme": "<h1 align=\"center\">Zine</h1>\n<h3 align=\"center\"><em>Fast, Scalable, Flexible Static Site Generator (SSG)</em></h3>\n<p align=\"center\">Zine is pronounced like in <a href=\"https://en.wikipedia.org/wiki/Zine\">fan<em>zine</em></a></a>.</p>\n\n## Development Status\nZine is still a young project, not yet at feature parity with more popular\nalternatives (e.g. Hugo), but it's perfectly able to handle a personal website\nwith a blog.\n\n## Getting Started\nGo to https://zine-ssg.io to get started.\n\n## GitHub Actions\nIf you plan to build your website with GitHub Actions, take a look at [kristoff-it/setup-zine](https://github.com/marketplace/actions/setup-zine), the official\nGitHub Action to get access to Zine in your runner.\n\nWe also have more complete guides at https://zine-ssg.io/docs/.\n",
+  "readme": "<h1 align=\"center\">Zine</h1>\n<h3 align=\"center\"><em>Fast, Scalable, Flexible Static Site Generator (SSG)</em></h3>\n<p align=\"center\">Zine is pronounced like in <a href=\"https://en.wikipedia.org/wiki/Zine\">fan<em>zine</em></a></a>.</p>\n\n## Development Status\nZine is still a young project, not yet at feature parity with more popular\nalternatives (e.g. Hugo), but it's perfectly able to handle a personal website\nwith a blog.\n\n## Getting Started\nGo to https://zine-ssg.io to get started.\n\n## GitHub Actions\nIf you plan to build your website with GitHub Actions, take a look at [kristoff-it/setup-zine](https://github.com/marketplace/actions/setup-zine), the official\nGitHub Action to get access to Zine in your runner.\n\nWe also have more complete guides at https://zine-ssg.io/docs/.\n\n\n## Contributing\n\n- Ask before embarking on doing complicated work that might not be upstreamed.\n- No LLMs, thank you.",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/1950733?u=4c433986c229d3bff345521171a121c84014917e&v=4",
   "releases": [
     {
