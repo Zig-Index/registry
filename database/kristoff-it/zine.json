@@ -9,10 +9,10 @@
     "static-site-generator",
     "zig-package"
   ],
-  "stars": 1409,
+  "stars": 1410,
   "forks": 98,
   "watchers": 14,
-  "updated_at": "2026-06-09T20:52:45Z",
+  "updated_at": "2026-06-09T22:39:52Z",
   "dependencies": [
     {
       "name": "lsp_kit",
@@ -66,8 +66,8 @@
     },
     {
       "name": "supermd",
-      "url": "git+https://github.com/kristoff-it/supermd#76a43686add44fefbb89fc30ba6fce3b4f3a356d",
-      "hash": "supermd-0.1.0-3Mco3E-XWACwqlsi-OOOSLfKyoutlDoRbjoiJ9PXOSH4"
+      "url": "git+https://github.com/kristoff-it/supermd#d92be7eb5c4807123dd9a52a88fac2ccd59c5b82",
+      "hash": "supermd-0.1.0-3Mco3LidWABc21D8DA_dn49JtwqAFos1Z9XRs88uOwas"
     },
     {
       "name": "translate_c",
