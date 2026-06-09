@@ -9,20 +9,20 @@
     "static-site-generator",
     "zig-package"
   ],
-  "stars": 1402,
-  "forks": 97,
+  "stars": 1407,
+  "forks": 98,
   "watchers": 14,
-  "updated_at": "2026-06-07T15:56:39Z",
+  "updated_at": "2026-06-09T16:19:19Z",
   "dependencies": [
     {
       "name": "lsp_kit",
-      "url": "git+https://github.com/zigtools/lsp-kit#ec325a3c33d1da7708cf513355208f74d9560580",
-      "hash": "lsp_kit-0.1.0-bi_PL_kyDACVTEhLaMq2-PJx0MocqRyjXDAN0ybMUyQQ"
+      "url": "git+https://github.com/zigtools/lsp-kit#dcbb8dd686d85a8f178a4389e730d41dd727b991",
+      "hash": "lsp_kit-0.1.0-bi_PL2UzDADxFRnnSjhhN7-ZTi9fDMom827yIp_ptc8l"
     },
     {
       "name": "scripty",
-      "url": "git+https://github.com/kristoff-it/scripty#9c1e5903acd2a591f87f577b2ea08895e7168b9d",
-      "hash": "scripty-0.1.0-LKK5OzcUAQDVndpJNPAm4eC_-G0HaXUdQejzb9X6C2vq"
+      "url": "git+https://github.com/kristoff-it/scripty#ad75ad546bc7dd2ece4acd23404e25cd65a4bde9",
+      "hash": "scripty-0.1.0-LKK5O-sUAQDifuGq_k00NAdEgJjNxXoFTt9js_A7Yx4F"
     },
     {
       "name": "tracy",
@@ -36,8 +36,8 @@
     },
     {
       "name": "wuffs",
-      "url": "git+https://github.com/allyourcodebase/wuffs#6fd35cb51e90c4f69c64f3a2c28eb8aa36dc9c8b",
-      "hash": "wuffs-0.4.0-alpha.9+3837.20240914-3CHJgRMKAAAuMytwtlaBGjTMPVuDQSnCE3qMGg2NDTfr"
+      "url": "git+https://github.com/allyourcodebase/wuffs#5ea19ed8a0b78e3ab3d3d4d016d8b49e1af107a2",
+      "hash": "wuffs-0.4.0-alpha.9+3837.20240914-3CHJgZULAAARz_ehNESEv1jtLWo3q8nOTqNWH3-vADsK"
     },
     {
       "name": "frameworks",
@@ -46,36 +46,36 @@
     },
     {
       "name": "superhtml",
-      "url": "git+https://github.com/kristoff-it/superhtml#5ca7066c50b10c459aa6d1ad011bc37124c2d354",
-      "hash": "superhtml-0.6.2-Y7MdPCZxJADwkXTXHmwQ0AKWKgbmQjJBnT7QTVqaX9Vp"
+      "url": "git+https://github.com/kristoff-it/superhtml#090f80d2ba256fb1b425c952f27953792cae6688",
+      "hash": "superhtml-0.6.2-Y7MdPCtyJAD930ctpUN02LzUt0sA6h34YIVxEODm7FOv"
     },
     {
       "name": "zeit",
-      "url": "git+https://github.com/rockorager/zeit?ref=0.16#fdaad9c5884f41a3640c768f4f9fc116e763c321",
-      "hash": "zeit-0.6.0-5I6bk3K6AgCFnc_9CN7KJjaeNJz1VuwP4DA7Gs9vgxuz"
+      "url": "git+https://github.com/rockorager/zeit#905396257dcf0b1bfa3c0e8265657a0e748105ad",
+      "hash": "zeit-0.10.0-dev-5I6bk3m9AgB8Ndev81pibV70MJe9VCOXAGZBNU833c4Y"
     },
     {
       "name": "flow_syntax",
-      "url": "git+https://github.com/neurocyte/flow-syntax#28d643c3fd8455faab0ea12383da9d6ddcbe9cb0",
-      "hash": "flow_syntax-0.7.2-X8jOoeFgAQBquxUXx-h5g_xXQzcNAOtyz3M4fVUwgrOd"
+      "url": "git+https://github.com/neurocyte/flow-syntax#65e76b959b9ac7c2aab8aba0d7decc5a3f04e4e1",
+      "hash": "flow_syntax-0.7.2-X8jOoQlmAQA3iLvWcCZZr1sYEEiBpHqi8VWqweKwwxGB"
     },
     {
       "name": "ziggy",
-      "url": "git+https://github.com/kristoff-it/ziggy?ref=old#0fdd57cbb052e7aa5930b3ed960ea3450f9dc2b0",
-      "hash": "ziggy-0.1.0-kTg8v15ABgBGDedRmKfxGUWBxSxMBnEfYjazvZKVVrzP"
+      "url": "git+https://github.com/kristoff-it/ziggy?ref=old#189d1d5e862e896df49d8afca8e49e0cb1835785",
+      "hash": "ziggy-0.1.0-kTg8v3xBBgD66kzRYoOgByokYiVMupy4dew5buN45X-y"
     },
     {
       "name": "supermd",
-      "url": "git+https://github.com/kristoff-it/supermd#4132146450f1ecbaa3fbd75cfeabccd754d6e716",
-      "hash": "supermd-0.1.0-3Mco3CiXWABRpK_kiTdTuVJ7eZOm102_E8j5C6qyRh_2"
+      "url": "git+https://github.com/kristoff-it/supermd#76a43686add44fefbb89fc30ba6fce3b4f3a356d",
+      "hash": "supermd-0.1.0-3Mco3E-XWACwqlsi-OOOSLfKyoutlDoRbjoiJ9PXOSH4"
     },
     {
       "name": "translate_c",
-      "url": "git+https://codeberg.org/ziglang/translate-c#7a1a9fdc4ab00835748a6657ecbb835e3d5d45f7",
-      "hash": "translate_c-0.0.0-Q_BUWvP1BgCjAk6PWv5286tOlvzD9-X-NkuTzh0KxY0Q"
+      "url": "git+https://codeberg.org/kristoff/translate-c?ref=0.17.x#c01b34d1e57010019d77ffef1dbc704af870a2eb",
+      "hash": "translate_c-0.0.0-Q_BUWrEwBwDpXYYuHRSbbDDpjB0NHXcusTe4yYJXzYlA"
     }
   ],
-  "minimum_zig_version": "0.16.0",
+  "minimum_zig_version": "0.17.0-dev.812+5434f85c4",
   "readme": "<h1 align=\"center\">Zine</h1>\n<h3 align=\"center\"><em>Fast, Scalable, Flexible Static Site Generator (SSG)</em></h3>\n<p align=\"center\">Zine is pronounced like in <a href=\"https://en.wikipedia.org/wiki/Zine\">fan<em>zine</em></a></a>.</p>\n\n## Development Status\nZine is still a young project, not yet at feature parity with more popular\nalternatives (e.g. Hugo), but it's perfectly able to handle a personal website\nwith a blog.\n\n## Getting Started\nGo to https://zine-ssg.io to get started.\n\n## GitHub Actions\nIf you plan to build your website with GitHub Actions, take a look at [kristoff-it/setup-zine](https://github.com/marketplace/actions/setup-zine), the official\nGitHub Action to get access to Zine in your runner.\n\nWe also have more complete guides at https://zine-ssg.io/docs/.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/1950733?u=4c433986c229d3bff345521171a121c84014917e&v=4",
   "releases": [
@@ -598,8 +598,8 @@
   "owner_location": "Milan, Italy",
   "owner_blog": "https://kristoff.it",
   "owner_twitter_username": null,
-  "owner_followers": 1423,
-  "owner_following": 22,
+  "owner_followers": 1429,
+  "owner_following": 21,
   "owner_created_at": "2012-07-10T15:27:34Z",
   "homepage": "https://zine-ssg.io",
   "license": "MIT",
