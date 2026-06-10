@@ -13,12 +13,12 @@
   "stars": 688,
   "forks": 82,
   "watchers": 9,
-  "updated_at": "2026-06-09T10:55:43Z",
+  "updated_at": "2026-06-10T19:37:31Z",
   "dependencies": [
     {
       "name": "emsdk",
-      "url": "git+https://github.com/emscripten-core/emsdk?ref=5.0.6#948c31acd3f369a5da276e33ab2ed57108c165e5",
-      "hash": "N-V-__8AAMXHCQBSMMTsbLPKGw_6MjsNwQIJWmtoc1fzEuAz"
+      "url": "git+https://github.com/emscripten-core/emsdk?ref=6.0.0#d223ae73c6998296e3ab27cf81dc2c2c9fd383de",
+      "hash": "N-V-__8AAFzfCQCASN6D5b3L8-QbCR9pCMDgNoKp69omdc4V"
     },
     {
       "name": "shdc",
@@ -33,7 +33,7 @@
   "owner_location": "Berlin",
   "owner_blog": "http://floooh.github.io",
   "owner_twitter_username": null,
-  "owner_followers": 3052,
+  "owner_followers": 3053,
   "owner_following": 37,
   "owner_created_at": "2012-05-02T15:38:15Z",
   "license": "Zlib",
