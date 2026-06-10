@@ -1,0 +1,59 @@
+{
+  "name": "zevy-alloy",
+  "owner": "captkirk88",
+  "repo": "zevy-alloy",
+  "description": "Compile a ZSL (Zig Shader Language) to GLSL, HLSL, METAL, DXIL(tool req), SPIRV(tool req)",
+  "type": "package",
+  "topics": [
+    "dxil",
+    "glsl",
+    "hlsl",
+    "metal",
+    "spirv",
+    "zevy",
+    "zevy-ecs",
+    "zig",
+    "zig-library",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-06-10T00:44:30Z",
+  "dependencies": [
+    {
+      "name": "zevy_buildtools",
+      "url": "git+https://github.com/captkirk88/zevy-buildtools#ef611bb2308a577eca6c2cceba68bbdcab6e10e7",
+      "hash": "zevy_buildtools-1.3.2-AG3r_IMOAQBvTaraIbje0VPv3I9jWxz67Cqoq4cr_Z_C"
+    },
+    {
+      "name": "zevy_ecs",
+      "url": "git+https://github.com/captkirk88/zevy-ecs#161b18b39cc4847c344bc05aae9ec2ab1c0bcf1e",
+      "hash": "zevy_ecs-3.0.5-VoL9mbdtCgB8kM5k--kIWIRY5gz_9k9tzNe6mX8YGOCx"
+    },
+    {
+      "name": "zevy_raylib",
+      "url": "git+https://github.com/captkirk88/zevy-raylib#d205b215062a05cf4c61128aa5bcdc52704d9356",
+      "hash": "zevy_raylib-0.2.9-6RwEicmiGgCxEvCrCeICOa05BFlQhM2W2Y4rFEEwcBYn"
+    },
+    {
+      "name": "raylib_zig",
+      "url": "git+https://github.com/raylib-zig/raylib-zig#97be2c7ae646a2f09856604b138c427c0af1b952",
+      "hash": "raylib_zig-6.0.0-KE8REDJ4BQBu7lKwYNt6R4j5ywPeS37zqW6zrtjCcRwH"
+    }
+  ],
+  "minimum_zig_version": "0.16.0",
+  "readme": "# zevy-alloy\n\n> Experimental: zevy-alloy is early-stage and may change in breaking ways.\n> Metal support is currently untested, open to contributions and testers.\n> HLSL output is currently untested, open to contributions and testers.\n\nzevy-alloy is a ZSL shader compiler and build integration library for Zig projects.\nIt compiles `.zsl` shader sources to multiple targets, including GLSL 450, GLSL 330,\nGLSL ES 300, HLSL, Metal, WGSL, SPIR-V, and DXIL.\n\n## Purpose\n\n- Provide a single shader authoring path (`.zsl`) for multiple graphics backends.\n- Expose a CLI for direct shader compilation.\n- Expose build helpers to compile shaders from `build.zig`.\n\n## Usage\n\n### Build\n\n```bash\nzig build\n```\n\n### Run tests\n\n```bash\nzig build test\n```\n\n### Compile configured shaders from build script\n\n```bash\nzig build shaders\n```\n\n### CLI\n\n```bash\nzevy-alloy <command> <file.zsl> [options]\n```\n\nCommands:\n\n- `compile`: generate requested shader outputs.\n- `validate`: validate existing generated shader files at the requested output paths.\n\nAvailable output options:\n\n- `--out-hlsl <path>`\n- `--out-glsl <path>` (GLSL 450)\n- `--out-glsl330 <path>`\n- `--out-glsles <path>` (GLSL ES 300)\n- `--out-msl <path>`\n- `--out-wgsl <path>`\n- `--out-spv <path>`\n- `--out-dxil <path>`\n- `--spirv-env <env>` where `<env>` is `opengl`, `vulkan1.0`, `vulkan1.1`, `vulkan1.2`, `vulkan1.3`, or `vulkan1.4`\n- `--spirv-version <ver>` where `<ver>` is `spv1.0` through `spv1.6`\n- `--dxil-model <model>` where `<model>` is `6.0` through `6.8`\n- `--local-size <x,y,z>` (override compute local size)\n- `--local-size-x <n>`\n- `--local-size-y <n>`\n- `--local-size-z <n>`\n\nIf no output flags are provided, zevy-alloy uses default output paths next to the source file for all supported formats.\n\nValidation uses backend tools where available:\n\n- GLSL: `glslangValidator`\n- SPIR-V: `spirv-val`\n- HLSL and DXIL: `dxc`\n- WGSL: currently checked for file presence/content only, no external validation tool used yet.\n- MSL: currently checked for file presence/content only, no external validation tool used yet.\n\nWGSL generation uses `spirv-cross` (`spirv-cross --wgsl ...`) under the hood.\nIf `spirv-cross` is not available on PATH, WGSL output requests are reported and skipped.\n\nCompatibility behavior is strict for versioned targets: if a shader uses features that are incompatible with a requested backend/profile (for example, storage buffers in GLSL 330/ES 300, or standalone uniforms for Vulkan SPIR-V), zevy-alloy fails generation instead of silently emitting partial output.\n\nCompute shaders can also set local size in source with a module-level declaration:\n\n```zig\nconst zsl = @import(\"zsl\");\n\npub const compute: zsl.ComputeOpts = .{\n\t.local_size_x = 8,\n\t.local_size_y = 8,\n\t.local_size_z = 1,\n};\n```\n\nPrecedence is deterministic: CLI override flags win over source `compute` options, and if neither is set, local size defaults to `1,1,1`.\n\n## Examples\n\nSee [examples/](examples/) for sample shaders and usage patterns.\n\n### App-based circles example (zevy_raylib integration)\n\nThe [examples/circles.zig](examples/circles.zig) sample now uses `app.run()` and staged systems instead of a manual game loop.\n\nRun it with:\n\n```bash\nzig build circles --release=fast\n```\n\n## ZLS and IntelliSense\n\nFor editor IntelliSense with ZLS (Zig Language Server), import the ZSL stub module in shader files:\n\n```zig\nconst zsl = @import(\"zsl\");\n```\n\nIf your editor cannot resolve that module automatically, point it at the local stub file [zsl.zig](zsl.zig), which provides the type/function surface used for completions and diagnostics.\n\nPlain uniforms are now intended to be declared as top-level `pub var` values with an explicit type, for example `pub var time: f32 = 0.0;`. Buffer/sampler/texture resources still use the explicit `zsl.UniformBuffer(...)`, `zsl.StorageBuffer(...)`, `zsl.Texture2D(...)`, and similar wrapper types in the `pub var` annotation. The older `zsl.Uniform(...)` wrapper is still accepted for compatibility, but it is deprecated.\n\nEntry-point input and output struct names are not special. You can name them however you want; `PSInput` and `PSOutput` are just examples used in older shader snippets.\n\n\n\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/6296457?u=57a7319f473f4c068419efb04c3c3b0f54a42efe&v=4",
+  "releases": [],
+  "owner_bio": "Am I A.I?",
+  "owner_company": "Evil Lair",
+  "owner_location": "Moon",
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 7,
+  "owner_following": 15,
+  "owner_created_at": "2014-01-01T08:56:32Z",
+  "license": "MIT",
+  "category": "library"
+}
