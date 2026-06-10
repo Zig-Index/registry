@@ -10,10 +10,10 @@
     "zig-library",
     "zig-package"
   ],
-  "stars": 1536,
+  "stars": 1539,
   "forks": 117,
   "watchers": 13,
-  "updated_at": "2026-06-08T23:36:17Z",
+  "updated_at": "2026-06-10T08:07:56Z",
   "dependencies": [
     {
       "name": "metrics",

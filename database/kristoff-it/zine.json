@@ -9,10 +9,10 @@
     "static-site-generator",
     "zig-package"
   ],
-  "stars": 1410,
+  "stars": 1411,
   "forks": 98,
   "watchers": 14,
-  "updated_at": "2026-06-09T23:18:36Z",
+  "updated_at": "2026-06-10T09:53:15Z",
   "dependencies": [
     {
       "name": "lsp_kit",
