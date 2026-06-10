@@ -14,10 +14,10 @@
     "zig-package",
     "zig-library"
   ],
-  "stars": 603,
+  "stars": 604,
   "forks": 23,
   "watchers": 3,
-  "updated_at": "2026-05-27T20:58:57Z",
+  "updated_at": "2026-06-08T17:25:07Z",
   "dependencies": [
     {
       "name": "vaxis",

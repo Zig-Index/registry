@@ -9,10 +9,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 301,
+  "stars": 302,
   "forks": 54,
   "watchers": 3,
-  "updated_at": "2026-06-06T05:35:19Z",
+  "updated_at": "2026-06-09T10:21:14Z",
   "dependencies": [
     {
       "name": "libz",

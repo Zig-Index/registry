@@ -9,12 +9,13 @@
     "zig",
     "zig-library",
     "zig-package",
-    "deductive-database-system"
+    "deductive-database-system",
+    "logic-programming"
   ],
-  "stars": 20,
+  "stars": 22,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-06-04T08:01:02Z",
+  "updated_at": "2026-06-07T14:24:00Z",
   "dependencies": [
     {
       "name": "minish",

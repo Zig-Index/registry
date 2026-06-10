@@ -13,10 +13,10 @@
     "image-decoder",
     "image-encoder"
   ],
-  "stars": 159,
+  "stars": 160,
   "forks": 10,
   "watchers": 3,
-  "updated_at": "2026-05-15T19:57:34Z",
+  "updated_at": "2026-06-08T07:30:48Z",
   "dependencies": [
     {
       "name": "args",
@@ -38,7 +38,7 @@
   "owner_location": "Stuttgart - Germany",
   "owner_blog": "https://random-projects.net/",
   "owner_twitter_username": "ikskuh",
-  "owner_followers": 485,
+  "owner_followers": 486,
   "owner_following": 70,
   "owner_created_at": "2013-03-21T16:08:06Z",
   "license": "MIT",

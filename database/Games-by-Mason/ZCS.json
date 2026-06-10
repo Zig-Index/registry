@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 149,
+  "stars": 150,
   "forks": 4,
   "watchers": 4,
-  "updated_at": "2026-04-25T00:52:20Z",
+  "updated_at": "2026-06-10T11:43:22Z",
   "dependencies": [
     {
       "name": "slot_map",

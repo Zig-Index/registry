@@ -13,7 +13,7 @@
     "ssh-server"
   ],
   "stars": 27,
-  "forks": 2,
+  "forks": 3,
   "watchers": 2,
   "updated_at": "2026-05-16T21:47:31Z",
   "minimum_zig_version": "0.14.0",

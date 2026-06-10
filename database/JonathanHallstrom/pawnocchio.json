@@ -19,43 +19,43 @@
       "name": "tool dev builds",
       "body": null,
       "prerelease": true,
-      "published_at": "2026-06-01T21:25:07Z",
+      "published_at": "2026-06-10T14:05:47Z",
       "html_url": "https://github.com/JonathanHallstrom/pawnocchio/releases/tag/tool-dev-builds",
       "assets": [
         {
-          "name": "pawnocchio-2.0-dev-9d637fe-linux-x86_64-tools",
-          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/tool-dev-builds/pawnocchio-2.0-dev-9d637fe-linux-x86_64-tools",
-          "size": 713736,
+          "name": "pawnocchio-2.0-dev-3dbfe3c-linux-aarch64-tools",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/tool-dev-builds/pawnocchio-2.0-dev-3dbfe3c-linux-aarch64-tools",
+          "size": 675160,
           "content_type": "application/octet-stream"
         },
         {
-          "name": "pawnocchio-2.0-dev-9d637fe-macos-x86_64-tools",
-          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/tool-dev-builds/pawnocchio-2.0-dev-9d637fe-macos-x86_64-tools",
-          "size": 603579,
+          "name": "pawnocchio-2.0-dev-3dbfe3c-linux-x86_64-tools",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/tool-dev-builds/pawnocchio-2.0-dev-3dbfe3c-linux-x86_64-tools",
+          "size": 717560,
           "content_type": "application/octet-stream"
         },
         {
-          "name": "pawnocchio-2.0-dev-9d637fe-windows-aarch64-tools.exe",
-          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/tool-dev-builds/pawnocchio-2.0-dev-9d637fe-windows-aarch64-tools.exe",
-          "size": 846848,
+          "name": "pawnocchio-2.0-dev-3dbfe3c-macos-x86_64-tools",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/tool-dev-builds/pawnocchio-2.0-dev-3dbfe3c-macos-x86_64-tools",
+          "size": 607734,
           "content_type": "application/octet-stream"
         },
         {
-          "name": "pawnocchio-2.0-dev-9d637fe-macos-aarch64-tools",
-          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/tool-dev-builds/pawnocchio-2.0-dev-9d637fe-macos-aarch64-tools",
-          "size": 603888,
+          "name": "pawnocchio-2.0-dev-3dbfe3c-windows-aarch64-tools.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/tool-dev-builds/pawnocchio-2.0-dev-3dbfe3c-windows-aarch64-tools.exe",
+          "size": 849920,
           "content_type": "application/octet-stream"
         },
         {
-          "name": "pawnocchio-2.0-dev-9d637fe-linux-aarch64-tools",
-          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/tool-dev-builds/pawnocchio-2.0-dev-9d637fe-linux-aarch64-tools",
-          "size": 671368,
+          "name": "pawnocchio-2.0-dev-3dbfe3c-macos-aarch64-tools",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/tool-dev-builds/pawnocchio-2.0-dev-3dbfe3c-macos-aarch64-tools",
+          "size": 604320,
           "content_type": "application/octet-stream"
         },
         {
-          "name": "pawnocchio-2.0-dev-9d637fe-windows-x86_64-tools.exe",
-          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/tool-dev-builds/pawnocchio-2.0-dev-9d637fe-windows-x86_64-tools.exe",
-          "size": 921600,
+          "name": "pawnocchio-2.0-dev-3dbfe3c-windows-x86_64-tools.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/tool-dev-builds/pawnocchio-2.0-dev-3dbfe3c-windows-x86_64-tools.exe",
+          "size": 926208,
           "content_type": "application/octet-stream"
         }
       ]
@@ -65,127 +65,127 @@
       "name": "pre release builds",
       "body": null,
       "prerelease": true,
-      "published_at": "2026-05-27T14:34:30Z",
+      "published_at": "2026-06-06T09:54:39Z",
       "html_url": "https://github.com/JonathanHallstrom/pawnocchio/releases/tag/pre-release-builds",
       "assets": [
         {
-          "name": "pawnocchio-2.0-dev-7e54688-linux-x86_64",
-          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-7e54688-linux-x86_64",
-          "size": 52269376,
+          "name": "pawnocchio-2.0-dev-24dadb5-linux-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-24dadb5-linux-x86_64",
+          "size": 70162688,
           "content_type": "application/octet-stream"
         },
         {
-          "name": "pawnocchio-2.0-dev-7e54688-linux-x86_64_v2",
-          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-7e54688-linux-x86_64_v2",
-          "size": 52259856,
+          "name": "pawnocchio-2.0-dev-24dadb5-linux-aarch64-modern",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-24dadb5-linux-aarch64-modern",
+          "size": 70040008,
           "content_type": "application/octet-stream"
         },
         {
-          "name": "pawnocchio-2.0-dev-7e54688-linux-aarch64-modern",
-          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-7e54688-linux-aarch64-modern",
-          "size": 52148320,
+          "name": "pawnocchio-2.0-dev-24dadb5-linux-aarch64-dotprod",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-24dadb5-linux-aarch64-dotprod",
+          "size": 70041768,
           "content_type": "application/octet-stream"
         },
         {
-          "name": "pawnocchio-2.0-dev-7e54688-linux-aarch64",
-          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-7e54688-linux-aarch64",
-          "size": 52148320,
+          "name": "pawnocchio-2.0-dev-24dadb5-linux-x86_64_v2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-24dadb5-linux-x86_64_v2",
+          "size": 70151168,
           "content_type": "application/octet-stream"
         },
         {
-          "name": "pawnocchio-2.0-dev-7e54688-linux-aarch64-dotprod",
-          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-7e54688-linux-aarch64-dotprod",
-          "size": 52148320,
+          "name": "pawnocchio-2.0-dev-24dadb5-linux-aarch64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-24dadb5-linux-aarch64",
+          "size": 70041760,
           "content_type": "application/octet-stream"
         },
         {
-          "name": "pawnocchio-2.0-dev-7e54688-linux-x86_64_v3",
-          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-7e54688-linux-x86_64_v3",
-          "size": 52252064,
+          "name": "pawnocchio-2.0-dev-24dadb5-linux-x86_64_v3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-24dadb5-linux-x86_64_v3",
+          "size": 70143904,
           "content_type": "application/octet-stream"
         },
         {
-          "name": "pawnocchio-2.0-dev-7e54688-linux-x86_64_v4",
-          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-7e54688-linux-x86_64_v4",
-          "size": 52241744,
+          "name": "pawnocchio-2.0-dev-24dadb5-linux-x86_64_v4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-24dadb5-linux-x86_64_v4",
+          "size": 70139008,
           "content_type": "application/octet-stream"
         },
         {
-          "name": "pawnocchio-2.0-dev-7e54688-linux-x86_64_znver1",
-          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-7e54688-linux-x86_64_znver1",
-          "size": 52204624,
+          "name": "pawnocchio-2.0-dev-24dadb5-linux-x86_64_znver1",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-24dadb5-linux-x86_64_znver1",
+          "size": 70098272,
           "content_type": "application/octet-stream"
         },
         {
-          "name": "pawnocchio-2.0-dev-7e54688-linux-x86_64_znver2",
-          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-7e54688-linux-x86_64_znver2",
-          "size": 52204848,
+          "name": "pawnocchio-2.0-dev-24dadb5-linux-x86_64_znver2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-24dadb5-linux-x86_64_znver2",
+          "size": 70098544,
           "content_type": "application/octet-stream"
         },
         {
-          "name": "pawnocchio-2.0-dev-7e54688-linux-x86_64_znver3",
-          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-7e54688-linux-x86_64_znver3",
-          "size": 52271824,
+          "name": "pawnocchio-2.0-dev-24dadb5-linux-x86_64_znver3",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-24dadb5-linux-x86_64_znver3",
+          "size": 70165408,
           "content_type": "application/octet-stream"
         },
         {
-          "name": "pawnocchio-2.0-dev-7e54688-linux-x86_64_znver4",
-          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-7e54688-linux-x86_64_znver4",
-          "size": 52327168,
+          "name": "pawnocchio-2.0-dev-24dadb5-linux-x86_64_znver4",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-24dadb5-linux-x86_64_znver4",
+          "size": 70234256,
           "content_type": "application/octet-stream"
         },
         {
-          "name": "pawnocchio-2.0-dev-7e54688-linux-x86_64_znver5",
-          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-7e54688-linux-x86_64_znver5",
-          "size": 52327168,
+          "name": "pawnocchio-2.0-dev-24dadb5-linux-x86_64_znver5",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-24dadb5-linux-x86_64_znver5",
+          "size": 70234256,
           "content_type": "application/octet-stream"
         },
         {
-          "name": "pawnocchio-2.0-dev-7e54688-macos-aarch64-apple_m1",
-          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-7e54688-macos-aarch64-apple_m1",
-          "size": 52134256,
+          "name": "pawnocchio-2.0-dev-24dadb5-macos-aarch64-apple_m1",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-24dadb5-macos-aarch64-apple_m1",
+          "size": 70060528,
           "content_type": "application/octet-stream"
         },
         {
-          "name": "pawnocchio-2.0-dev-7e54688-macos-x86_64",
-          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-7e54688-macos-x86_64",
-          "size": 52086848,
+          "name": "pawnocchio-2.0-dev-24dadb5-macos-x86_64",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-24dadb5-macos-x86_64",
+          "size": 69978216,
           "content_type": "application/octet-stream"
         },
         {
-          "name": "pawnocchio-2.0-dev-7e54688-macos-x86_64_v2",
-          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-7e54688-macos-x86_64_v2",
-          "size": 52082705,
+          "name": "pawnocchio-2.0-dev-24dadb5-macos-x86_64_v2",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-24dadb5-macos-x86_64_v2",
+          "size": 69974073,
           "content_type": "application/octet-stream"
         },
         {
-          "name": "pawnocchio-2.0-dev-7e54688-windows-aarch64-dotprod.exe",
-          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-7e54688-windows-aarch64-dotprod.exe",
-          "size": 52295168,
+          "name": "pawnocchio-2.0-dev-24dadb5-windows-aarch64-dotprod.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-24dadb5-windows-aarch64-dotprod.exe",
+          "size": 70188544,
           "content_type": "application/octet-stream"
         },
         {
-          "name": "pawnocchio-2.0-dev-7e54688-windows-aarch64-modern.exe",
-          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-7e54688-windows-aarch64-modern.exe",
-          "size": 52295168,
+          "name": "pawnocchio-2.0-dev-24dadb5-windows-aarch64-modern.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-24dadb5-windows-aarch64-modern.exe",
+          "size": 70187008,
           "content_type": "application/octet-stream"
         },
         {
-          "name": "pawnocchio-2.0-dev-7e54688-windows-aarch64.exe",
-          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-7e54688-windows-aarch64.exe",
-          "size": 52295168,
+          "name": "pawnocchio-2.0-dev-24dadb5-windows-x86_64_v2.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-24dadb5-windows-x86_64_v2.exe",
+          "size": 70369280,
           "content_type": "application/octet-stream"
         },
         {
-          "name": "pawnocchio-2.0-dev-7e54688-windows-x86_64.exe",
-          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-7e54688-windows-x86_64.exe",
-          "size": 52486656,
+          "name": "pawnocchio-2.0-dev-24dadb5-windows-x86_64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-24dadb5-windows-x86_64.exe",
+          "size": 70377472,
           "content_type": "application/octet-stream"
         },
         {
-          "name": "pawnocchio-2.0-dev-7e54688-windows-x86_64_v2.exe",
-          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-7e54688-windows-x86_64_v2.exe",
-          "size": 52481024,
+          "name": "pawnocchio-2.0-dev-24dadb5-windows-aarch64.exe",
+          "url": "https://github.com/JonathanHallstrom/pawnocchio/releases/download/pre-release-builds/pawnocchio-2.0-dev-24dadb5-windows-aarch64.exe",
+          "size": 70188544,
           "content_type": "application/octet-stream"
         }
       ]
@@ -2535,7 +2535,7 @@
   "owner_location": null,
   "owner_blog": null,
   "owner_twitter_username": null,
-  "owner_followers": 29,
+  "owner_followers": 30,
   "owner_following": 6,
   "owner_created_at": "2021-05-26T11:15:04Z",
   "license": "GPL-3.0",

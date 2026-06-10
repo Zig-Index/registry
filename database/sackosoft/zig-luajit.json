@@ -13,10 +13,10 @@
     "zig-package",
     "lua-bindings"
   ],
-  "stars": 78,
+  "stars": 79,
   "forks": 6,
   "watchers": 1,
-  "updated_at": "2026-06-02T18:57:28Z",
+  "updated_at": "2026-06-04T04:56:40Z",
   "dependencies": [
     {
       "name": "luajit_build",

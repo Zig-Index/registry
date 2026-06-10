@@ -15,9 +15,9 @@
     "validator"
   ],
   "stars": 1294,
-  "forks": 63,
+  "forks": 64,
   "watchers": 9,
-  "updated_at": "2026-06-09T15:55:39Z",
+  "updated_at": "2026-06-10T06:45:38Z",
   "dependencies": [
     {
       "name": "known_folders",

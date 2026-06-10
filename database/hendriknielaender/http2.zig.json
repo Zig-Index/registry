@@ -16,10 +16,10 @@
     "tls-proxy",
     "tls-support"
   ],
-  "stars": 45,
+  "stars": 44,
   "forks": 4,
   "watchers": 1,
-  "updated_at": "2026-05-18T15:30:21Z",
+  "updated_at": "2026-06-05T18:53:18Z",
   "dependencies": [
     {
       "name": "boring",

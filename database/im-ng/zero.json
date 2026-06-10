@@ -16,10 +16,10 @@
     "webframework",
     "ziglang"
   ],
-  "stars": 16,
+  "stars": 18,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-06-03T04:02:39Z",
+  "updated_at": "2026-06-07T15:12:02Z",
   "dependencies": [
     {
       "name": "dotenv",

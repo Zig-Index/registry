@@ -13,10 +13,10 @@
     "initialization",
     "zig-package"
   ],
-  "stars": 10,
+  "stars": 11,
   "forks": 4,
   "watchers": 1,
-  "updated_at": "2026-05-30T17:28:59Z",
+  "updated_at": "2026-06-04T14:52:37Z",
   "dependencies": [
     {
       "name": "vulkan",

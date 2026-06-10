@@ -13,10 +13,10 @@
     "binding",
     "zig-package"
   ],
-  "stars": 1732,
-  "forks": 251,
+  "stars": 1751,
+  "forks": 252,
   "watchers": 16,
-  "updated_at": "2026-06-03T01:46:58Z",
+  "updated_at": "2026-06-10T07:45:52Z",
   "dependencies": [
     {
       "name": "raylib",

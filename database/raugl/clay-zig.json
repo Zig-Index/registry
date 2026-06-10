@@ -11,10 +11,10 @@
     "zig-binding",
     "zig-package"
   ],
-  "stars": 32,
+  "stars": 33,
   "forks": 7,
   "watchers": 1,
-  "updated_at": "2026-04-27T19:47:35Z",
+  "updated_at": "2026-06-09T20:16:06Z",
   "dependencies": [
     {
       "name": "clay_src",
