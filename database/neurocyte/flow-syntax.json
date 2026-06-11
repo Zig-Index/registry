@@ -12,7 +12,7 @@
   "stars": 19,
   "forks": 17,
   "watchers": 1,
-  "updated_at": "2026-06-11T15:32:14Z",
+  "updated_at": "2026-06-11T20:32:22Z",
   "dependencies": [
     {
       "name": "tree_sitter",
