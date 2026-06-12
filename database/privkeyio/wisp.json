@@ -13,22 +13,36 @@
   "stars": 12,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-06-12T01:42:05Z",
+  "updated_at": "2026-06-12T21:49:21Z",
   "dependencies": [
     {
       "name": "websocket",
-      "url": "https://github.com/karlseguin/websocket.zig/archive/97fefafa59cc78ce177cff540b8685cd7f699276.tar.gz",
-      "hash": "websocket-0.1.0-ZPISdRlzAwBB_Bz2UMMqxYqF6YEVTIBoFsbzwPUJTHIc"
+      "url": "https://github.com/karlseguin/websocket.zig/archive/6d309f7a9790030f2fc070323b5defc64a15c13b.tar.gz",
+      "hash": "websocket-0.1.0-ZPISdV_aBACU9pGuvrTQ2z8uxz_Sp8JnJgQaiGKQIx1l"
     },
     {
       "name": "nostr",
-      "url": "https://github.com/privkeyio/libnostr-z/archive/3322715dc9c75b4cb50087c14dad8b7996b31a82.tar.gz",
-      "hash": "nostr-0.1.8-JY6OcJ72CADZ8IIi9NQYOFFjj5Rldf-17TXKwv-Y9lY4"
+      "url": "https://github.com/privkeyio/libnostr-z/archive/refs/tags/v0.3.0.tar.gz",
+      "hash": "nostr-0.3.0-JY6OcJJ0DwDrcooJo6viPaiDg6ohNPie0wV10XykgQPE"
+    },
+    {
+      "name": "httpz",
+      "url": "https://github.com/karlseguin/http.zig/archive/5f60277d3b3beffef86321869b13c57f7acc3c5b.tar.gz",
+      "hash": "httpz-0.0.0-PNVzrJrbCACyokt2AARAG7Ul7h7xlZxL7BYAdpsAs1_-"
     }
   ],
   "readme": "# wisp - a lightweight nostr relay\n\n<img src=\"assets/wisp-logo.jpeg\" alt=\"Wisp Logo\" width=\"300\">\n\nA fast, lightweight [nostr](https://github.com/nostr-protocol/nostr) relay written in Zig.\n\n## Why Wisp?\n\n- **Fast**: 2x higher throughput than strfry, 10x lower latency\n- **Small**: Single 1.2MB binary, ~15MB RAM at idle\n- **Simple**: One command to run your personal relay with your feed\n- **Spider Mode**: Automatically syncs events from people you follow\n\n## Quickstart\n\n### Docker\n\n```sh\ndocker run -d -p 7777:7777 -v wisp-data:/data ghcr.io/privkeyio/wisp --spider-admin npub1yourkey...\n```\n\n### Build from source\n\nDownload the [latest release](https://github.com/privkeyio/wisp/releases) or build from source:\n\n```sh\n# 1. Install dependencies (requires Zig 0.15+)\nsudo apt install -y liblmdb-dev libsecp256k1-dev libssl-dev\n\n# 2. Build\ngit clone https://github.com/privkeyio/wisp && cd wisp\nzig build -Doptimize=ReleaseFast\n\n# 3. Run (replace with your npub)\n./zig-out/bin/wisp --spider-admin npub1yourkey...\n```\n\nThat's it. Wisp will fetch your follow list, sync notes from popular relays, and serve them at `ws://localhost:7777`. Add this relay URL to your Nostr client.\n\nFor more options, see `wisp.toml.example`.\n\n## Features\n\n* NIPs: 1, 2, 9, 11, 13, 16, 33, 40, 42, 45, 50, 65, 70, 77, 86\n* LMDB storage (no external database)\n* Spider mode for syncing events from external relays\n* Import/export to JSONL\n\n## Import/Export\n\n```sh\n./zig-out/bin/wisp export > backup.jsonl\n./zig-out/bin/wisp import < backup.jsonl\n```\n\n## Configuration\n\nCopy `wisp.toml.example` to `wisp.toml` and customize, or use environment variables with `WISP_` prefix:\n\n```sh\nWISP_PORT=8080 ./zig-out/bin/wisp\n```\n\nSee `wisp.toml.example` for all options.\n\n## Deploy (wss://)\n\nTo make your relay publicly accessible with TLS, run wisp with Caddy:\n\n```sh\n# Run wisp\ndocker run -d --restart always -p 7777:7777 -v wisp-data:/data \\\n  ghcr.io/privkeyio/wisp --spider-admin npub1yourkey...\n\n# Install Caddy for automatic TLS\nsudo apt install -y caddy\n```\n\nCreate `/etc/caddy/Caddyfile`:\n\n```\nrelay.yourdomain.com {\n    reverse_proxy localhost:7777\n}\n```\n\n```sh\nsudo systemctl restart caddy\n```\n\nYour relay is now live at `wss://relay.yourdomain.com`.\n\n## Benchmarks\n\n| Relay | Events/sec | p50 Latency | p99 Latency |\n|-------|-----------|-------------|-------------|\n| Wisp | 1,993 | 0.55ms | 0.82ms |\n| strfry | 872 | 4.28ms | 9.92ms |\n\n*4 concurrent workers, 1k events. [Full results](https://github.com/privkeyio/nostr-bench/blob/main/reports/BENCHMARK_RESULTS.md)*\n\n## Contributing\n\nSee [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on reporting issues and submitting pull requests.\n\n## Changelog\n\nSee [CHANGELOG.md](CHANGELOG.md) for a history of changes to this project.\n\n## License\n\nMIT\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/15005438?v=4",
   "releases": [
+    {
+      "tag_name": "v0.3.0",
+      "name": "v0.3.0",
+      "body": "Zig 0.16 support, with reliability and correctness fixes.\n\nThis release migrates wisp to **Zig 0.16** (stable) and hardens several paths. The relay architecture is unchanged (thread-per-connection); the epoll I/O rework is tracked separately.\n\n## Highlights\n- **Zig 0.16**: time, randomness, filesystem, networking, and sync moved to the new `std.Io` interface. Dependencies: libnostr-z v0.3.0, a 0.16-compatible websocket.zig.\n- **SIGPIPE**: a client disconnecting mid-write no longer terminates the process (now an `EPIPE` handled by the write paths). The relay survives heavy concurrent-connection load.\n- **Accept loop**: replaced the `SO_RCVTIMEO`-on-accept trick (which panics under 0.16) with `poll()` + accept-when-ready, preserving prompt shutdown.\n- **Spider sync**: reconnects and re-subscribes when the follow list changes (adds/removals/replacements), fixing missed catch-up after the contact list is bootstrapped post-connect.\n- **Per-IP connection limit**: atomic `tryAcquireConnection` closes a check-then-act race.\n- **IPv6**: client IPs are normalized (brackets stripped) for ACLs and per-IP limits.\n- **import/export**: I/O errors now propagate (non-zero exit) instead of being silently treated as completion.\n- Minor leak guards in the subscription candidate paths.\n\n## Compatibility\n- Requires **Zig 0.16** to build. For Zig 0.15, use [`v0.2.2`](https://github.com/privkeyio/wisp/releases/tag/v0.2.2).\n\nValidated against the full integration suite (protocol, NIP-42/45/50/70/77/86, negentropy, spider, concurrency).",
+      "prerelease": false,
+      "published_at": "2026-06-12T19:41:45Z",
+      "html_url": "https://github.com/privkeyio/wisp/releases/tag/v0.3.0",
+      "assets": []
+    },
     {
       "tag_name": "v0.2.2",
       "name": "v0.2.2",
