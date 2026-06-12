@@ -10,12 +10,12 @@
   "stars": 2,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-06-08T19:55:57Z",
+  "updated_at": "2026-06-12T22:23:14Z",
   "dependencies": [
     {
       "name": "upstream",
-      "url": "git+https://github.com/grpc/grpc?ref=v1.81.1#e84a8a2f04095f2772ba42a4abccde4f9243e75b",
-      "hash": "N-V-__8AAO7drARucOBAC-nUd2N5HF6kbaTpob8fSM1rq1hS"
+      "url": "git+https://github.com/grpc/grpc?ref=v1.82.0-pre1#f3289ea4eba5cc9656bf6141d33172a0cd0b0790",
+      "hash": "N-V-__8AAEJTvgRWOnMhB96STegzqqExWFYK_uTGpi6vMxjj"
     },
     {
       "name": "abseil",
@@ -29,8 +29,8 @@
     },
     {
       "name": "boringssl",
-      "url": "git+https://github.com/google/boringssl#c63fadbde60a2224c22189d14c4001bbd2a3a629",
-      "hash": "N-V-__8AAMk7QghOaiEFo3db_JLRq_fM0eCxR4RaroVJmAaJ"
+      "url": "git+https://github.com/google/boringssl#2b44a3701a4788e1ef866ddc7f143060a3d196c9",
+      "hash": "N-V-__8AAGBEPgg0SDGiOZzhP7FChT8yyFI5YqU3soU43b5p"
     },
     {
       "name": "cares",
