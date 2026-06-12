@@ -8,10 +8,10 @@
     "serialization-format",
     "zig-package"
   ],
-  "stars": 545,
+  "stars": 547,
   "forks": 43,
   "watchers": 8,
-  "updated_at": "2026-06-11T20:58:41Z",
+  "updated_at": "2026-06-12T16:07:53Z",
   "dependencies": [
     {
       "name": "known_folders",
