@@ -8,9 +8,9 @@
     "zig-package"
   ],
   "stars": 1480,
-  "forks": 52,
+  "forks": 53,
   "watchers": 15,
-  "updated_at": "2026-06-10T17:55:20Z",
+  "updated_at": "2026-06-12T18:19:12Z",
   "dependencies": [
     {
       "name": "jetcommon",
