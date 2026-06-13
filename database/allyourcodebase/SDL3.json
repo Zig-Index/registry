@@ -10,7 +10,7 @@
   "stars": 43,
   "forks": 13,
   "watchers": 2,
-  "updated_at": "2026-06-08T18:15:05Z",
+  "updated_at": "2026-06-12T23:55:16Z",
   "dependencies": [
     {
       "name": "sdl",
@@ -64,8 +64,8 @@
     },
     {
       "name": "usb",
-      "url": "https://github.com/libusb/libusb/archive/a61afe5f75d969c4561a1d0ad753aa23cee6329a.tar.gz",
-      "hash": "N-V-__8AAF75GgCMh7ghqwWLiqe8NJszRIU8EWOIkQzyv7dc"
+      "url": "https://github.com/libusb/libusb/archive/a61afe5f75d969c4561a1d0ad753aa23cee6329a.zip",
+      "hash": "N-V-__8AAGT5GgAxQXXIen0EleLF0xfjZZMkR7soefwO0s7E"
     },
     {
       "name": "xcursor",
