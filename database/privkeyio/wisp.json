@@ -13,7 +13,7 @@
   "stars": 12,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-06-13T14:15:03Z",
+  "updated_at": "2026-06-13T17:44:32Z",
   "dependencies": [
     {
       "name": "websocket",
@@ -22,8 +22,8 @@
     },
     {
       "name": "nostr",
-      "url": "https://github.com/privkeyio/libnostr-z/archive/refs/tags/v0.3.0.tar.gz",
-      "hash": "nostr-0.3.0-JY6OcJJ0DwDrcooJo6viPaiDg6ohNPie0wV10XykgQPE"
+      "url": "https://github.com/privkeyio/libnostr-z/archive/refs/tags/v0.3.3.tar.gz",
+      "hash": "nostr-0.3.3-JY6OcOSaDwCoLI1RJOisJcxXrdzzP3Z57GyVBoC0wx2-"
     },
     {
       "name": "httpz",
@@ -34,6 +34,15 @@
   "readme": "# wisp - a lightweight nostr relay\n\n<img src=\"assets/wisp-logo.jpeg\" alt=\"Wisp Logo\" width=\"300\">\n\nA fast, lightweight [nostr](https://github.com/nostr-protocol/nostr) relay written in Zig.\n\n## Why Wisp?\n\n- **Fast**: 2x higher throughput than strfry, 10x lower latency\n- **Small**: Single 1.2MB binary, ~15MB RAM at idle\n- **Simple**: One command to run your personal relay with your feed\n- **Spider Mode**: Automatically syncs events from people you follow\n\n## Quickstart\n\n### Docker\n\n```sh\ndocker run -d -p 7777:7777 -v wisp-data:/data ghcr.io/privkeyio/wisp --spider-admin npub1yourkey...\n```\n\n### Build from source\n\nDownload the [latest release](https://github.com/privkeyio/wisp/releases) or build from source:\n\n```sh\n# 1. Install dependencies (requires Zig 0.15+)\nsudo apt install -y liblmdb-dev libsecp256k1-dev libssl-dev\n\n# 2. Build\ngit clone https://github.com/privkeyio/wisp && cd wisp\nzig build -Doptimize=ReleaseFast\n\n# 3. Run (replace with your npub)\n./zig-out/bin/wisp --spider-admin npub1yourkey...\n```\n\nThat's it. Wisp will fetch your follow list, sync notes from popular relays, and serve them at `ws://localhost:7777`. Add this relay URL to your Nostr client.\n\nFor more options, see `wisp.toml.example`.\n\n## Features\n\n* NIPs: 1, 2, 9, 11, 13, 16, 33, 40, 42, 45, 50, 65, 70, 77, 86\n* LMDB storage (no external database)\n* Spider mode for syncing events from external relays\n* Import/export to JSONL\n* Prometheus metrics at `GET /metrics`\n\n## Monitoring\n\nOperational metrics are exposed in Prometheus format at `GET /metrics` on the\nrelay's port (connections, events stored/rejected/broadcast, REQ count, rate\nlimiting). The endpoint honors the relay's IP allowlist/blocklist, so restrict\nit there or at your reverse proxy/firewall if you don't want it public.\n\n## Import/Export\n\n```sh\n./zig-out/bin/wisp export > backup.jsonl\n./zig-out/bin/wisp import < backup.jsonl\n```\n\n## Configuration\n\nCopy `wisp.toml.example` to `wisp.toml` and customize, or use environment variables with `WISP_` prefix:\n\n```sh\nWISP_PORT=8080 ./zig-out/bin/wisp\n```\n\nSee `wisp.toml.example` for all options.\n\n## Deploy (wss://)\n\nTo make your relay publicly accessible with TLS, run wisp with Caddy:\n\n```sh\n# Run wisp\ndocker run -d --restart always -p 7777:7777 -v wisp-data:/data \\\n  ghcr.io/privkeyio/wisp --spider-admin npub1yourkey...\n\n# Install Caddy for automatic TLS\nsudo apt install -y caddy\n```\n\nCreate `/etc/caddy/Caddyfile`:\n\n```\nrelay.yourdomain.com {\n    reverse_proxy localhost:7777\n}\n```\n\n```sh\nsudo systemctl restart caddy\n```\n\nYour relay is now live at `wss://relay.yourdomain.com`.\n\n## Benchmarks\n\n| Relay | Events/sec | p50 Latency | p99 Latency |\n|-------|-----------|-------------|-------------|\n| Wisp | 1,993 | 0.55ms | 0.82ms |\n| strfry | 872 | 4.28ms | 9.92ms |\n\n*4 concurrent workers, 1k events. [Full results](https://github.com/privkeyio/nostr-bench/blob/main/reports/BENCHMARK_RESULTS.md)*\n\n## Contributing\n\nSee [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on reporting issues and submitting pull requests.\n\n## Changelog\n\nSee [CHANGELOG.md](CHANGELOG.md) for a history of changes to this project.\n\n## License\n\nMIT\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/15005438?v=4",
   "releases": [
+    {
+      "tag_name": "v0.4.1",
+      "name": "v0.4.1",
+      "body": "### Fixed\n- No longer send `CLOSED` in reply to a client `CLOSE` (NIP-01 compliance).\n\n### Changed\n- Updated libnostr-z to v0.3.3 (WebSocket frame-loss and TCP_NODELAY fixes).",
+      "prerelease": false,
+      "published_at": "2026-06-13T17:44:46Z",
+      "html_url": "https://github.com/privkeyio/wisp/releases/tag/v0.4.1",
+      "assets": []
+    },
     {
       "tag_name": "v0.4.0",
       "name": "v0.4.0",
