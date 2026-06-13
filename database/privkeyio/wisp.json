@@ -13,7 +13,7 @@
   "stars": 12,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-06-13T17:44:32Z",
+  "updated_at": "2026-06-13T18:28:14Z",
   "dependencies": [
     {
       "name": "websocket",
@@ -37,11 +37,36 @@
     {
       "tag_name": "v0.4.1",
       "name": "v0.4.1",
-      "body": "### Fixed\n- No longer send `CLOSED` in reply to a client `CLOSE` (NIP-01 compliance).\n\n### Changed\n- Updated libnostr-z to v0.3.3 (WebSocket frame-loss and TCP_NODELAY fixes).",
+      "body": "### Fixed\n- No longer send `CLOSED` in reply to a client `CLOSE` (NIP-01 compliance).\n\n### Changed\n- Updated libnostr-z to v0.3.3 (WebSocket frame-loss and TCP_NODELAY fixes).\n\n## What's Changed\n* Scale epoll workers to host CPU count by @kwsantiago in https://github.com/privkeyio/wisp/pull/69\n* Keep request-handler pool constant across epoll workers by @kwsantiago in https://github.com/privkeyio/wisp/pull/70\n* Add Prometheus metrics endpoint (#50) by @kwsantiago in https://github.com/privkeyio/wisp/pull/72\n* Add scanner unit tests, fuzz targets, and stress coverage by @kwsantiago in https://github.com/privkeyio/wisp/pull/73\n* Add connection matcher and NIP-86 dispatch tests by @kwsantiago in https://github.com/privkeyio/wisp/pull/76\n* Fix event rate limiting for limits over 255 by @kwsantiago in https://github.com/privkeyio/wisp/pull/79\n* Reduce relay memory footprint by @kwsantiago in https://github.com/privkeyio/wisp/pull/80\n* Security hardening: query rate limiting, IP matching, proxy headers, negentropy auth by @kwsantiago in https://github.com/privkeyio/wisp/pull/82\n* Don't send CLOSED in reply to client CLOSE (NIP-01) by @kwsantiago in https://github.com/privkeyio/wisp/pull/84\n* Bump Dockerfile Zig to 0.16.0 to match build by @kwsantiago in https://github.com/privkeyio/wisp/pull/85\n\n\n**Full Changelog**: https://github.com/privkeyio/wisp/compare/v0.4.0...v0.4.1",
       "prerelease": false,
       "published_at": "2026-06-13T17:44:46Z",
       "html_url": "https://github.com/privkeyio/wisp/releases/tag/v0.4.1",
-      "assets": []
+      "assets": [
+        {
+          "name": "wisp-macos-x86_64.tar.gz",
+          "url": "https://github.com/privkeyio/wisp/releases/download/v0.4.1/wisp-macos-x86_64.tar.gz",
+          "size": 1785991,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "wisp-linux-arm64.tar.gz",
+          "url": "https://github.com/privkeyio/wisp/releases/download/v0.4.1/wisp-linux-arm64.tar.gz",
+          "size": 1746682,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "wisp-macos-arm64.tar.gz",
+          "url": "https://github.com/privkeyio/wisp/releases/download/v0.4.1/wisp-macos-arm64.tar.gz",
+          "size": 1764104,
+          "content_type": "application/gzip"
+        },
+        {
+          "name": "wisp-linux-x86_64.tar.gz",
+          "url": "https://github.com/privkeyio/wisp/releases/download/v0.4.1/wisp-linux-x86_64.tar.gz",
+          "size": 1788115,
+          "content_type": "application/gzip"
+        }
+      ]
     },
     {
       "tag_name": "v0.4.0",
@@ -50,7 +75,32 @@
       "prerelease": false,
       "published_at": "2026-06-12T21:56:23Z",
       "html_url": "https://github.com/privkeyio/wisp/releases/tag/v0.4.0",
-      "assets": []
+      "assets": [
+        {
+          "name": "wisp-linux-x86_64.tar.gz",
+          "url": "https://github.com/privkeyio/wisp/releases/download/v0.4.0/wisp-linux-x86_64.tar.gz",
+          "size": 1786372,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "wisp-linux-arm64.tar.gz",
+          "url": "https://github.com/privkeyio/wisp/releases/download/v0.4.0/wisp-linux-arm64.tar.gz",
+          "size": 1740729,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "wisp-macos-x86_64.tar.gz",
+          "url": "https://github.com/privkeyio/wisp/releases/download/v0.4.0/wisp-macos-x86_64.tar.gz",
+          "size": 1779584,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "wisp-macos-arm64.tar.gz",
+          "url": "https://github.com/privkeyio/wisp/releases/download/v0.4.0/wisp-macos-arm64.tar.gz",
+          "size": 1758157,
+          "content_type": "application/x-gtar"
+        }
+      ]
     },
     {
       "tag_name": "v0.3.0",
@@ -59,7 +109,32 @@
       "prerelease": false,
       "published_at": "2026-06-12T19:41:45Z",
       "html_url": "https://github.com/privkeyio/wisp/releases/tag/v0.3.0",
-      "assets": []
+      "assets": [
+        {
+          "name": "wisp-macos-arm64.tar.gz",
+          "url": "https://github.com/privkeyio/wisp/releases/download/v0.3.0/wisp-macos-arm64.tar.gz",
+          "size": 1716920,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "wisp-linux-x86_64.tar.gz",
+          "url": "https://github.com/privkeyio/wisp/releases/download/v0.3.0/wisp-linux-x86_64.tar.gz",
+          "size": 1738086,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "wisp-macos-x86_64.tar.gz",
+          "url": "https://github.com/privkeyio/wisp/releases/download/v0.3.0/wisp-macos-x86_64.tar.gz",
+          "size": 1735424,
+          "content_type": "application/x-gtar"
+        },
+        {
+          "name": "wisp-linux-arm64.tar.gz",
+          "url": "https://github.com/privkeyio/wisp/releases/download/v0.3.0/wisp-linux-arm64.tar.gz",
+          "size": 1703779,
+          "content_type": "application/x-gtar"
+        }
+      ]
     },
     {
       "tag_name": "v0.2.2",
