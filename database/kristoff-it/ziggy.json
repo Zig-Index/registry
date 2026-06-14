@@ -8,10 +8,10 @@
     "serialization-format",
     "zig-package"
   ],
-  "stars": 547,
+  "stars": 549,
   "forks": 43,
   "watchers": 8,
-  "updated_at": "2026-06-13T14:42:10Z",
+  "updated_at": "2026-06-14T17:35:24Z",
   "dependencies": [
     {
       "name": "known_folders",
@@ -34,7 +34,7 @@
       "hash": "afl_kit-0.1.0-NdJ3ctQfAACNK1UANoF4pwkWOdW-JGLXHby9OE9-xMPq"
     }
   ],
-  "minimum_zig_version": "0.17.0-dev.824+af27e8d06",
+  "minimum_zig_version": "0.17.0-dev.857+2b2b85c5f",
   "readme": "# Ziggy\nA data serialization language for expressing clear API messages, config files, etc.\n\n\n## Examples and documentation\nSee the official website: https://ziggy-lang.io\n\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/1950733?u=4c433986c229d3bff345521171a121c84014917e&v=4",
   "releases": [
