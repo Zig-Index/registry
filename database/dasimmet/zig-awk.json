@@ -8,10 +8,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 0,
+  "stars": 1,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-06-05T06:46:50Z",
+  "updated_at": "2026-06-15T06:45:24Z",
   "dependencies": [
     {
       "name": "mawk",

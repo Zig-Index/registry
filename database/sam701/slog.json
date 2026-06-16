@@ -9,10 +9,10 @@
     "zig-package",
     "ziglang"
   ],
-  "stars": 9,
+  "stars": 10,
   "forks": 1,
   "watchers": 2,
-  "updated_at": "2026-01-11T09:07:09Z",
+  "updated_at": "2026-06-13T22:14:10Z",
   "dependencies": [
     {
       "name": "zeit",

@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 33,
+  "stars": 34,
   "forks": 4,
   "watchers": 5,
-  "updated_at": "2026-04-13T23:21:05Z",
+  "updated_at": "2026-06-12T13:19:39Z",
   "dependencies": [
     {
       "name": "valgrind_h",

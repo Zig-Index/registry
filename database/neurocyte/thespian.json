@@ -10,10 +10,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 30,
+  "stars": 31,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-06-11T13:54:22Z",
+  "updated_at": "2026-06-16T14:27:28Z",
   "dependencies": [
     {
       "name": "cbor",
