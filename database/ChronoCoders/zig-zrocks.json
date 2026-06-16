@@ -1,0 +1,44 @@
+{
+  "name": "zig-zrocks",
+  "owner": "ChronoCoders",
+  "repo": "zig-zrocks",
+  "description": "RocksDB bindings for Zig 0.13: idiomatic C API wrapper with typed errors, allocator-aware slices, and full column family support",
+  "type": "package",
+  "topics": [
+    "database",
+    "embedded-database",
+    "key-value-store",
+    "rocksdb",
+    "storage",
+    "systems-programming",
+    "zig",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-06-16T19:33:27Z",
+  "minimum_zig_version": "0.13.0",
+  "readme": "zrocks is a RocksDB binding for Zig 0.13 that wraps the official C API with typed errors, allocator-aware slices, and full column family support.\n\nRocksDB is a C++ library, and linking C++ across toolchains is fragile: the GNU libstdc++ and LLVM libc++ ABIs are not interchangeable, so Zig's bundled libc++ does not match a g++-compiled RocksDB and the link fails with undefined symbols. zrocks avoids that by binding RocksDB's stable C API (`rocksdb/c.h`) through `@cImport`, and by linking the GNU C++ runtime (`libstdc++`, `libgcc_s`) that the vendored library was compiled against. On top of the raw C calls it adds an idiomatic Zig layer: every fallible function returns a typed error union, returned values are slices owned by a caller-supplied allocator, and every handle has an explicit deinit path.\n\n## Requirements\n\n- Zig 0.13.0\n- RocksDB 9.7.4, vendored and built from source on the first build\n- `cmake`, `g++`, and `curl` to configure and compile the vendored library\n- Compression development libraries: snappy, zlib, bzip2, lz4, zstd\n\n## Build\n\nThe vendored RocksDB static library is built first. This downloads RocksDB 9.7.4 and compiles it with CMake, and is only needed once:\n\n```\nzig build vendor\n```\n\nThen build the static library and run the tests:\n\n```\nzig build\nzig build test\n```\n\nBy default zrocks builds and links the vendored RocksDB. If `rocksdb/c.h` and a `librocksdb` are present in standard system locations they are detected and used automatically. Pass `-Dsystem-rocksdb=true` to force system linking, or `-Dsystem-rocksdb=false` to force the vendored build.\n\n## Usage\n\n```zig\nconst std = @import(\"std\");\nconst rocks = @import(\"zrocks\");\n\npub fn main() !void {\n    var gpa = std.heap.GeneralPurposeAllocator(.{}){};\n    defer _ = gpa.deinit();\n    const allocator = gpa.allocator();\n\n    const db = try rocks.DB.open(allocator, \"/tmp/zrocks-demo\", .{\n        .create_if_missing = true,\n        .compression = .zstd,\n        .write_buffer_size = 64 * 1024 * 1024,\n    });\n    defer db.close();\n\n    try db.put(\"user:1\", \"alice\");\n    try db.put(\"user:2\", \"bob\");\n\n    if (try db.get(allocator, \"user:1\")) |value| {\n        defer allocator.free(value);\n        std.debug.print(\"user:1 = {s}\\n\", .{value});\n    }\n\n    var it = try db.iterator();\n    defer it.deinit();\n\n    it.seek(\"user:\");\n    while (it.valid()) : (it.next()) {\n        if (!std.mem.startsWith(u8, it.key(), \"user:\")) break;\n        std.debug.print(\"{s} -> {s}\\n\", .{ it.key(), it.value() });\n    }\n    try it.status();\n}\n```\n\nValues returned by `get` are owned by the allocator you pass in and must be freed. Iterator `key` and `value` slices are borrowed and remain valid only until the next iterator movement.\n\n## API\n\nAll public entry points are in `src/rocksdb.zig`.\n\n### DB open / close / options\n\n- `DB.open(allocator, path, Options)` opens or creates a database.\n- `DB.openColumnFamilies(allocator, path, Options, descriptors, out_handles)` opens a database with a known set of column families and fills `out_handles`.\n- `DB.close()` closes the database and frees its default read and write options.\n- `Options`: `create_if_missing`, `create_missing_column_families`, `compression`, `write_buffer_size`, `max_open_files`.\n- `Compression`: `none`, `snappy`, `zlib`, `bz2`, `lz4`, `lz4hc`, `xpress`, `zstd`.\n\n### Point operations\n\n- `DB.put`, `DB.get`, `DB.delete`, and the column family variants `putCf`, `getCf`, `deleteCf`.\n- `get` and `getCf` return an allocator-owned `?[]u8` that is null when the key is absent; the caller frees it.\n- `DB.multiGet(allocator, keys)` returns `[]?[]u8`, one slot per key; free it with `DB.freeMultiGet`.\n\n### WriteBatch\n\n- `WriteBatch.init`, `deinit`, `put`, `putCf`, `delete`, `deleteCf`, `clear`, `count`.\n- `DB.write(batch)` commits the batch atomically.\n\n### Iterator\n\n- `DB.iterator()`, `DB.iteratorOpt(ReadOptions)`, and `DB.iteratorCf(cf)` create iterators.\n- `Iterator`: `seekToFirst`, `seekToLast`, `seek`, `seekForPrev`, `next`, `prev`, `valid`, `key`, `value`, `status`, `deinit`.\n- `key` and `value` return borrowed slices valid only until the next iterator movement.\n\n### Column families\n\n- `DB.createColumnFamily(allocator, name, Options)` and `DB.dropColumnFamily(cf)`.\n- `listColumnFamilies(allocator, path, Options)` returns the column family names; free them with `freeColumnFamilyNames`.\n- `CfDescriptor` pairs a name with `Options`; `ColumnFamily.deinit` destroys a handle.\n\n### Snapshot\n\n- `DB.createSnapshot()` and `DB.releaseSnapshot(snapshot)`.\n- `ReadOptions.init`, `deinit`, `setSnapshot`, then `DB.getOpt` or `DB.iteratorOpt` for a consistent read.\n\n### Compaction\n\n- `DB.compactRange(start, limit)` and `DB.compactRangeCf(cf, start, limit)`; null bounds mean open ended.\n\n### Error handling\n\n- Every fallible call returns `Error`, a union of `NotFound`, `Corruption`, `NotSupported`, `InvalidArgument`, `IoError`, `MergeInProgress`, `Incomplete`, `ShutdownInProgress`, `TimedOut`, `Aborted`, `Busy`, `Expired`, `TryAgain`, `Unknown`, and `OutOfMemory`.\n- RocksDB reports failures as `char*` strings. zrocks classifies each one into the matching `Error` and frees the string immediately, so no failure is silent and no error memory leaks.\n\n## Tests\n\nThe suite in `src/rocksdb_test.zig` has 13 tests covering:\n\n- open and close roundtrip, including reopen\n- put then get, delete then get returns null, and missing key returns null\n- `multiGet` batch lookup with a missing key in the middle\n- `WriteBatch` atomicity across put and delete\n- iterator forward scan in key order\n- iterator seek, `seekToLast`, and prev\n- column family full lifecycle: create, write, read, list, reopen with descriptors, drop\n- snapshot isolation of reads from later writes\n- manual compaction smoke test\n- Snappy and bzip2 compression roundtrips that write, compact to SST, and read back\n\nAll 13 tests pass in Debug, ReleaseSafe, and ReleaseFast.\n\nThe usage example above is built as part of the suite so the README snippet stays verifiable. Compile it with `zig build example`, or compile and run it with `zig build run-example`.\n\n## License\n\nMIT License.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/176089227?u=4869193ffbdb97f03dc864a4cd84269c2b301364&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.0",
+      "name": "zrocks v0.1.0",
+      "body": "Initial release. 13 tests passing across Debug, ReleaseSafe, and ReleaseFast. Wraps RocksDB v9.7.4 C API with idiomatic Zig: typed errors, allocator-owned slices, WriteBatch, Iterator, column families, snapshots, compaction, and Snappy/bzip2/LZ4/Zstd compression.",
+      "prerelease": false,
+      "published_at": "2026-06-12T21:38:58Z",
+      "html_url": "https://github.com/ChronoCoders/zig-zrocks/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Systems engineer building privacy protocols, settlement infrastructure, and network security tooling.",
+  "owner_company": "Chronocoder",
+  "owner_location": "New York, US",
+  "owner_blog": "https://chronocoder.dev",
+  "owner_twitter_username": null,
+  "owner_followers": 88,
+  "owner_following": 86,
+  "owner_created_at": "2024-07-20T00:38:08Z",
+  "category": "database"
+}
