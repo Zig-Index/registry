@@ -10,10 +10,10 @@
     "cpp-libraries",
     "zig-package"
   ],
-  "stars": 20,
+  "stars": 21,
   "forks": 7,
   "watchers": 0,
-  "updated_at": "2026-04-13T18:39:05Z",
+  "updated_at": "2026-06-17T03:14:32Z",
   "dependencies": [
     {
       "name": "core",

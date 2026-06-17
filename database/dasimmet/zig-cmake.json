@@ -7,10 +7,10 @@
   "topics": [
     "zig-package"
   ],
-  "stars": 3,
+  "stars": 4,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-04-27T08:12:40Z",
+  "updated_at": "2026-06-17T18:42:33Z",
   "dependencies": [
     {
       "name": "cmake",

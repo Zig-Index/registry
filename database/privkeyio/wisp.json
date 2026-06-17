@@ -13,7 +13,7 @@
   "stars": 12,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-06-17T03:13:14Z",
+  "updated_at": "2026-06-17T21:13:54Z",
   "dependencies": [
     {
       "name": "websocket",
@@ -27,7 +27,7 @@
     },
     {
       "name": "httpz",
-      "url": "https://github.com/privkeyio/http.zig/archive/06945003d534e048f8f3a16413685c07eb8872a7.tar.gz",
+      "url": "https://github.com/karlseguin/http.zig/archive/80a76ddee50e348f0c6ce5ccb6ac860dbb510f20.tar.gz",
       "hash": "httpz-0.0.0-PNVzrIDeCAAPK5gkCAuTcCmqRfn0u65AYxxojzjsy-Pn"
     }
   ],

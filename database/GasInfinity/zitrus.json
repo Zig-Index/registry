@@ -11,10 +11,10 @@
     "nintendo-3ds",
     "zig"
   ],
-  "stars": 41,
+  "stars": 42,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-06-14T14:34:37Z",
+  "updated_at": "2026-06-17T11:29:34Z",
   "dependencies": [
     {
       "name": "zalloc",
