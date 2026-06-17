@@ -9,10 +9,10 @@
     "static-site-generator",
     "zig-package"
   ],
-  "stars": 1416,
+  "stars": 1417,
   "forks": 98,
   "watchers": 14,
-  "updated_at": "2026-06-16T16:49:01Z",
+  "updated_at": "2026-06-17T14:52:07Z",
   "dependencies": [
     {
       "name": "lsp_kit",
@@ -21,8 +21,8 @@
     },
     {
       "name": "scripty",
-      "url": "git+https://github.com/kristoff-it/scripty#ad75ad546bc7dd2ece4acd23404e25cd65a4bde9",
-      "hash": "scripty-0.1.0-LKK5O-sUAQDifuGq_k00NAdEgJjNxXoFTt9js_A7Yx4F"
+      "url": "git+https://github.com/kristoff-it/scripty#e23d9cdd1d246d3c4da246504649185c677ef3e9",
+      "hash": "scripty-0.1.0-LKK5O-sUAQD3oo3zhQHzZwYuTNVmvgaEvIxhu8JCfbI6"
     },
     {
       "name": "tracy",
@@ -46,8 +46,8 @@
     },
     {
       "name": "superhtml",
-      "url": "git+https://github.com/kristoff-it/superhtml#090f80d2ba256fb1b425c952f27953792cae6688",
-      "hash": "superhtml-0.6.2-Y7MdPCtyJAD930ctpUN02LzUt0sA6h34YIVxEODm7FOv"
+      "url": "git+https://github.com/kristoff-it/superhtml#3e37d8b00b211ac1591766cfb0ea3efd2845bff2",
+      "hash": "superhtml-0.7.0-Y7MdPA2FJgBZCErPQ-_4Znh0o8Je1skuGxoCh4M4gRyf"
     },
     {
       "name": "zeit",
@@ -66,8 +66,8 @@
     },
     {
       "name": "supermd",
-      "url": "git+https://github.com/kristoff-it/supermd#d92be7eb5c4807123dd9a52a88fac2ccd59c5b82",
-      "hash": "supermd-0.1.0-3Mco3LidWABc21D8DA_dn49JtwqAFos1Z9XRs88uOwas"
+      "url": "git+https://github.com/kristoff-it/supermd#82f1517eba7fbe39dc69825e826733ddc31e1140",
+      "hash": "supermd-0.1.0-3Mco3PWdWADsk6S2KVpF0Wz-rGPA7pDHbc0iAtSWA6Si"
     },
     {
       "name": "translate_c",
@@ -79,6 +79,64 @@
   "readme": "<h1 align=\"center\">Zine</h1>\n<h3 align=\"center\"><em>Fast, Scalable, Flexible Static Site Generator (SSG)</em></h3>\n<p align=\"center\">Zine is pronounced like in <a href=\"https://en.wikipedia.org/wiki/Zine\">fan<em>zine</em></a></a>.</p>\n\n## Development Status\nZine is still a young project, not yet at feature parity with more popular\nalternatives (e.g. Hugo), but it's perfectly able to handle a personal website\nwith a blog.\n\n## Getting Started\nGo to https://zine-ssg.io to get started.\n\n## GitHub Actions\nIf you plan to build your website with GitHub Actions, take a look at [kristoff-it/setup-zine](https://github.com/marketplace/actions/setup-zine), the official\nGitHub Action to get access to Zine in your runner.\n\nWe also have more complete guides at https://zine-ssg.io/docs/.\n\n\n## Contributing\n\n- Ask before embarking on doing complicated work that might not be upstreamed.\n- No LLMs, thank you.",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/1950733?u=4c433986c229d3bff345521171a121c84014917e&v=4",
   "releases": [
+    {
+      "tag_name": "v0.11.3",
+      "name": "v0.11.3",
+      "body": "Last v0.11.x release, Zine will soon upgrade to a new version of [Ziggy](https://ziggy-lang.io) which will include some breaking changes.\r\n\r\nThis version of Zine upgrades from Zig 0.15.0 to 0.17.0-dev, please report any *new* bugs you encounter, and make sure to use the safe upgrade procedure (see link below).\r\n\r\nFull release notes: https://zine-ssg.io/log/#v0.11.3",
+      "prerelease": false,
+      "published_at": "2026-06-17T14:10:51Z",
+      "html_url": "https://github.com/kristoff-it/zine/releases/tag/v0.11.3",
+      "assets": [
+        {
+          "name": "aarch64-freebsd.15.0.tar.xz",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.11.3/aarch64-freebsd.15.0.tar.xz",
+          "size": 10606000,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "aarch64-linux-musl.tar.xz",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.11.3/aarch64-linux-musl.tar.xz",
+          "size": 10824636,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "aarch64-macos.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.11.3/aarch64-macos.zip",
+          "size": 12962091,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "aarch64-windows.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.11.3/aarch64-windows.zip",
+          "size": 12642230,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-freebsd.15.0.tar.xz",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.11.3/x86_64-freebsd.15.0.tar.xz",
+          "size": 10977364,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "x86_64-linux-musl.tar.xz",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.11.3/x86_64-linux-musl.tar.xz",
+          "size": 11164212,
+          "content_type": "application/x-xz"
+        },
+        {
+          "name": "x86_64-macos.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.11.3/x86_64-macos.zip",
+          "size": 12783608,
+          "content_type": "application/zip"
+        },
+        {
+          "name": "x86_64-windows.zip",
+          "url": "https://github.com/kristoff-it/zine/releases/download/v0.11.3/x86_64-windows.zip",
+          "size": 12820022,
+          "content_type": "application/zip"
+        }
+      ]
+    },
     {
       "tag_name": "v0.11.2",
       "name": "v0.11.2",
@@ -582,15 +640,6 @@
       "published_at": "2024-08-29T18:37:10Z",
       "html_url": "https://github.com/kristoff-it/zine/releases/tag/v0.4.1",
       "assets": []
-    },
-    {
-      "tag_name": "v0.4.0",
-      "name": "v0.4.0",
-      "body": "**The SuperMD update!**\r\n\r\n**With this release Zine is now at a point where the development experience is representative of what the final product will look like.**\r\n\r\nError messages need to be improved and a lot of developer tooling is still missing, so take that into account, but the core authoring process is now mostly there.\r\n\r\n**Zine is also now featureful enough to begin the porting process for the official Zig website!**\r\n\r\nSee the full changelog on the official website: https://zine-ssg.io/log/",
-      "prerelease": false,
-      "published_at": "2024-08-29T18:08:57Z",
-      "html_url": "https://github.com/kristoff-it/zine/releases/tag/v0.4.0",
-      "assets": []
     }
   ],
   "owner_bio": "vp of community @ziglang • curator of software you can love (https://sycl.it)",
@@ -598,7 +647,7 @@
   "owner_location": "Milan, Italy",
   "owner_blog": "https://kristoff.it",
   "owner_twitter_username": null,
-  "owner_followers": 1433,
+  "owner_followers": 1434,
   "owner_following": 21,
   "owner_created_at": "2012-07-10T15:27:34Z",
   "homepage": "https://zine-ssg.io",
