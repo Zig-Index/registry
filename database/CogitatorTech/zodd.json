@@ -12,10 +12,10 @@
     "deductive-database-system",
     "logic-programming"
   ],
-  "stars": 22,
+  "stars": 23,
   "forks": 0,
   "watchers": 1,
-  "updated_at": "2026-06-07T14:24:00Z",
+  "updated_at": "2026-06-18T05:01:46Z",
   "dependencies": [
     {
       "name": "minish",

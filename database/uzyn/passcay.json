@@ -16,10 +16,10 @@
     "fido2",
     "fido2-webauth"
   ],
-  "stars": 33,
+  "stars": 34,
   "forks": 4,
   "watchers": 1,
-  "updated_at": "2026-06-14T16:26:53Z",
+  "updated_at": "2026-06-18T04:55:45Z",
   "dependencies": [
     {
       "name": "zbor",

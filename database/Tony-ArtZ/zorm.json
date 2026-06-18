@@ -16,10 +16,10 @@
     "postgresql",
     "sql"
   ],
-  "stars": 37,
+  "stars": 38,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-06-09T00:48:28Z",
+  "updated_at": "2026-06-18T04:54:39Z",
   "dependencies": [
     {
       "name": "example",

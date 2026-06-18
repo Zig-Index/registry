@@ -10,10 +10,10 @@
     "zig-package",
     "ziglang"
   ],
-  "stars": 6,
+  "stars": 5,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2025-09-22T14:58:40Z",
+  "updated_at": "2026-06-18T12:29:21Z",
   "readme": "This library is a simple linear algebra library.\n\nThis library was written for my own use, and will be extended and optimized as I need it.\n\n\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/85748765?u=aedb06a7b1afcfbb8c854c2c7ca78e233b8d5619&v=4",
   "releases": [

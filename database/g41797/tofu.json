@@ -11,10 +11,10 @@
     "zig-library",
     "zig-package"
   ],
-  "stars": 28,
+  "stars": 29,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-06-06T17:53:46Z",
+  "updated_at": "2026-06-18T04:57:10Z",
   "dependencies": [
     {
       "name": "mailbox",
