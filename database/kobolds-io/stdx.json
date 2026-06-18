@@ -10,10 +10,10 @@
     "lib",
     "std"
   ],
-  "stars": 13,
+  "stars": 14,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-06-05T02:18:43Z",
+  "updated_at": "2026-06-18T05:13:44Z",
   "dependencies": [
     {
       "name": "zbench",
