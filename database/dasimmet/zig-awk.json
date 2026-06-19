@@ -11,16 +11,16 @@
   "stars": 1,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-06-15T06:45:24Z",
+  "updated_at": "2026-06-19T17:27:41Z",
   "dependencies": [
     {
       "name": "mawk",
-      "url": "https://invisible-island.net/archives/mawk/mawk-1.3.4-20250131.tgz",
-      "hash": "N-V-__8AAL6_GQAf7euJ5ASn0CsnxtwKtqzHtXx1cQ9DPITv"
+      "url": "https://invisible-island.net/archives/mawk/mawk-1.3.4-20260302.tgz",
+      "hash": "N-V-__8AAMoSGgC7VUhjPoqDyG3tQUy0VHEwqMbzJyQX9Tau"
     }
   ],
   "minimum_zig_version": "0.16.0",
-  "readme": "# zig build for MAWK\n\nawk interpreter built with zig.\n\n<https://invisible-island.net/mawk>\n\n```\nzig build\n```\n",
+  "readme": "# zig build for MAWK\n\nawk interpreter built with zig.\n\n<https://invisible-island.net/mawk>\n\nto build it:\n\n```\nzig build\n```\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/2773256?u=609e5b7eac1f972a0854a240741c5c8deca85518&v=4",
   "releases": [],
   "owner_bio": "@ziglang enthusiast",
