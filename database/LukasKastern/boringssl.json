@@ -11,7 +11,7 @@
   "stars": 0,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-06-20T09:02:38Z",
+  "updated_at": "2026-06-20T12:11:19Z",
   "dependencies": [
     {
       "name": "boringssl",
@@ -30,8 +30,8 @@
     },
     {
       "name": "googletest",
-      "url": "git+https://github.com/lukaskastern/googletest#f8acbec3df11c23efebe6aa9efba2d79cc42e727",
-      "hash": "googletest-1.15.2-vLU55pAVAABMlCpsee0jewNDhyAtv_6HbquizuRA0spo"
+      "url": "git+https://github.com/allyourcodebase/googletest#1c0070a093a1f4b17f0cddf5c20f3fc63681191b",
+      "hash": "googletest-1.15.2-vLU55pAVAADd_J-vQKNwzEvPw695vo8YgmJmZyUkA0zX"
     }
   ],
   "readme": "# BoringSSL\r\n\r\nThis is [BoringSSL](https://github.com/google/boringssl), packaged for Zig.\r\n\r\n## Installation\r\n\r\nFirst, update your `build.zig.zon`:\r\n\r\n```\r\n# Initialize a `zig build` project if you haven't already\r\nzig init\r\nzig fetch --save git+https://github.com/lukaskastern/boringssl.git\r\n```\r\n\r\nYou can then import `boringssl` in your `build.zig` with:\r\n\r\n```zig\r\nconst boringssl_dependency = b.dependency(\"boringssl\", .{\r\n    .target = target,\r\n    .optimize = optimize,\r\n});\r\nyour_exe.linkLibrary(boringssl_dependency.artifact(\"bcm\"));\r\nyour_exe.linkLibrary(boringssl_dependency.artifact(\"ssl\"));\r\nyour_exe.linkLibrary(boringssl_dependency.artifact(\"crypto\"));\r\n```\r\n\r\nAnd use the library like this:\r\n```zig\r\nconst ssl = @cImport({\r\n    @cInclude(\"openssl/ssl.h\");\r\n});\r\n\r\nconst ctx = ssl.EVP_CIPHER_CTX_new();\r\n...\r\n...\r\n```\r\n\r\n## Notes\r\n\r\n### Windows support:\r\nAt the moment only x86_64-windows-gnu is functional. MSVC doesn't work!\r\n\r\nGNU doesn't seem an official target by boringssl for windows which is why we need the [patch](patches/p256_gnuc.patch).\r\n\r\n### Zig Version\r\nThe target zig version is 0.16.0\r\n\r\n\r\n## Updating upstream boringssl\r\nWe build boringssl by utilizing the [sources.json](https://github.com/google/boringssl/blob/main/gen/sources.json) it provides.\r\n\r\nThis file is used to generate the build graph. Sadly I haven't found a way to access it directly from the dependency.\r\n\r\nMeaning it has to be manually copied into [sources.json](sources.json) in this repository.\r\n",
