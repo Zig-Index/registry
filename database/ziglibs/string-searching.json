@@ -14,7 +14,7 @@
   "stars": 27,
   "forks": 0,
   "watchers": 3,
-  "updated_at": "2025-11-24T09:53:01Z",
+  "updated_at": "2026-06-19T22:57:02Z",
   "readme": "# string-searching\n\n![CI](https://github.com/ziglibs/zig-string-searching/workflows/CI/badge.svg)\n\nImplementation of some string-search algorithms in\n[zig](https://ziglang.org). Compatible with zig 0.13.0.\n\n### Boyer-Moore string searching\n\nPorted from the implementation in the Go standard library:\n[strings/search.go](https://golang.org/src/strings/search.go).\n\n### Bitap algorithm\n\nInspired by the code on the [Wikipedia\narticle](https://en.wikipedia.org/wiki/Bitap_algorithm).\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/65570835?v=4",
   "releases": [],
