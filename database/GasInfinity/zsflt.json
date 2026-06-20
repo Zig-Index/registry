@@ -2,7 +2,7 @@
   "name": "zsflt",
   "owner": "GasInfinity",
   "repo": "zsflt",
-  "description": "an ieee soft-float library",
+  "description": "Mirror of https://codeberg.org/GasInfinity/zsflt",
   "type": "package",
   "topics": [
     "zig-package"
@@ -10,8 +10,8 @@
   "stars": 0,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2025-10-10T18:32:09Z",
-  "minimum_zig_version": "0.15.1",
+  "updated_at": "2026-06-20T18:00:44Z",
+  "minimum_zig_version": "0.16.0",
   "readme": "# zsflt\n\nAn IEEE soft-float + fixed point library, used extensively in [zitrus](https://github.com/GasInfinity/zitrus/tree/main).\n\n## Coverage:\n- Conversion between arbitrary IEEE754 floating point values with nearest-even rounding handling almost all denormal cases (except denormal -> normal where DAZ currently).\n- Arbitrary Fixed-point values and conversion between floating point and fixed.\n",
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/58077502?u=1f345335860e0dee813300d1cf347c28e9ccee12&v=4",
   "releases": [],
