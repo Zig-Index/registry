@@ -14,7 +14,7 @@
   "stars": 42,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-06-20T14:20:01Z",
+  "updated_at": "2026-06-21T14:52:16Z",
   "dependencies": [
     {
       "name": "zalloc",
@@ -23,8 +23,8 @@
     },
     {
       "name": "zsflt",
-      "url": "git+https://github.com/GasInfinity/zsflt.git#1929cbae9d41c7e1178e494e42aa7b349a68cd8a",
-      "hash": "zsflt-0.0.1-_pCibQ4wAABnfZskVOk2Y14F056VNJtuqVpAEzUNBGfl"
+      "url": "git+https://codeberg.org/GasInfinity/zsflt#6c9dca3ba3ec6e66377ea5e8b6fb60d6a864e078",
+      "hash": "zsflt-0.0.1-_pCibRg4AAAT8b3hKRbqrY_uDTCu4OaWKtSmr7MLqi42"
     },
     {
       "name": "zigimg",
