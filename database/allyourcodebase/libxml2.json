@@ -8,10 +8,10 @@
     "zig",
     "zig-package"
   ],
-  "stars": 5,
+  "stars": 6,
   "forks": 3,
   "watchers": 2,
-  "updated_at": "2026-06-05T23:09:56Z",
+  "updated_at": "2026-06-22T07:41:09Z",
   "dependencies": [
     {
       "name": "libxml2",
@@ -35,8 +35,8 @@
     },
     {
       "name": "translate_c",
-      "url": "git+https://codeberg.org/ziglang/translate-c#3c14149bd7b660136cf2bfe430da53a512b1800c",
-      "hash": "translate_c-0.0.0-Q_BUWr4UBwC72C2njDOHFiidoSd0xGJtRa6Rt3ZJNIyH"
+      "url": "git+https://codeberg.org/ziglang/translate-c#1b33d1d273f7035a16c45457efdf2afda7cf0925",
+      "hash": "translate_c-0.0.0-Q_BUWrI7BwCBn0jcYDTs1UP047kxSYoFpV6vD6Vuy9Vo"
     }
   ],
   "minimum_zig_version": "0.15.1",
