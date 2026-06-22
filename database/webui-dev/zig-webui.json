@@ -15,10 +15,10 @@
     "linux",
     "windows"
   ],
-  "stars": 814,
-  "forks": 34,
+  "stars": 816,
+  "forks": 35,
   "watchers": 14,
-  "updated_at": "2026-06-16T05:41:16Z",
+  "updated_at": "2026-06-22T03:05:22Z",
   "dependencies": [
     {
       "name": "webui",
