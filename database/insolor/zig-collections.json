@@ -1,0 +1,49 @@
+{
+  "name": "zig-collections",
+  "owner": "insolor",
+  "repo": "zig-collections",
+  "description": "Implementation of some useful data structures in Zig. Inspired by Python's collections module.",
+  "type": "package",
+  "topics": [
+    "zig",
+    "ziglang",
+    "zig-library",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 1,
+  "updated_at": "2026-06-22T19:26:42Z",
+  "readme": "# Zig Collections\n\n[![zig build test](https://github.com/insolor/zig-collections/actions/workflows/zig-build-test.yml/badge.svg)](https://github.com/insolor/zig-collections/actions/workflows/zig-build-test.yml)\n[![documentation](https://img.shields.io/badge/docs-mkdocs-708FCC.svg?style=flat)](https://insolor.github.io/zig-collections/)\n\nImplementation of some useful data structures in Zig. Inspired by Python's [`collections`](https://docs.python.org/3/library/collections.html) module.\n\nSupported zig versions:\n\n| Version | Support |\n| :-----: | :-----: |\n| 0.14.0  | ✅      |\n| 0.14.1  | ✅      |\n| 0.15.1  | ✅      |\n| 0.15.2  | ✅      |\n| 0.16.0  | ✅      |\n\n## Installation\n\n1. In the root directory of your project, run the following command to add `zig_collections` to your `build.zig.zon` file (replace 0.0.2 with the latest release number):\n\n    ```bash\n    zig fetch --save https://github.com/insolor/zig-collections/archive/refs/tags/0.0.2.zip\n    ```\n\n    Replace `0.0.2` in the URL with the tag you want to use.\n\n2. Add zig_collections as a dependency module in your `build.zig` file, example:\n\n    ```zig\n    const zig_collections = b.dependency(\"zig_collections\", .{});\n    exe.root_module.addImport(\"zig_collections\", zig_collections.module(\"zig_collections\"));\n    ```\n\nAfter that, you'll be able to import `zig_collections` namespace from your code:\n\n```zig\nconst zig_collections = @import(\"zig_collections\");\nconst Counter = zig_collections.Counter;\nconst DefaultHashMap = zig_collections.DefaultHashMap;\n```\n\n## Usage examples\n\nImplemented so far:\n\n- ✅ `Counter`:\n  - a minimal functionality is implemented: increment of a value of a key, counting of duplicate values from a slice or an iterator\n- ✅ `defaultdict` (`DefaultHashMap`)\n\n### `Counter` usage examples\n\n```zig\ntest \"add from slice\" {\n    var counter = Counter(u8).init(allocator);\n    defer counter.deinit();\n\n    const array = [_]u8{ 1, 2, 2, 3, 3, 3 };\n    try counter.addFromSlice(array[0..]);\n    try expectEqual(1, counter.get(1));\n    try expectEqual(2, counter.get(2));\n    try expectEqual(3, counter.get(3));\n}\n\ntest \"add from iterator\" {\n    var counter = Counter([]const u8).init(allocator);\n    defer counter.deinit();\n\n    const text = \"alice bob alice\";\n    var iterator = std.mem.splitScalar(u8, text, ' ');\n    try counter.addFromIterator(&iterator);\n    try expectEqual(2, counter.get(\"alice\"));\n    try expectEqual(1, counter.get(\"bob\"));\n}\n```\n\n### `DefaultHashMap` example\n\n```zig\ntest \"DefaultHashMap with list\" {\n    const EmptyArrayListFactory = struct {\n        allocator: std.mem.Allocator,\n\n        fn produce(self: @This()) ArrayList(u8) {\n            return ArrayList(u8).init(self.allocator);\n        }\n    };\n\n    var map = collections.DefaultHashMap(\n        u8,\n        ArrayList(u8),\n        EmptyArrayListFactory{ .allocator = allocator },\n        EmptyArrayListFactory.produce,\n    ).init(allocator);\n\n    defer map.deinit();\n\n    const array = [_]u8{ 3, 3, 1, 2, 3, 2 };\n    for (array, 0..) |item, i| {\n        try map.get(item).append(@intCast(i));\n    }\n\n    try expectEqualDeep(&[_]u8{2}, map.get(1).items);\n    try expectEqualDeep(&[_]u8{ 3, 5 }, map.get(2).items);\n    try expectEqualDeep(&[_]u8{ 0, 1, 4 }, map.get(3).items);\n}\n```\n\nCorresponding Python code:\n\n```python\nfrom collections import defaultdict\n\ndmap = defaultdict(list)\n\narray = [3, 3, 1, 2, 3, 2]\nfor i, item in enumerate(array):\n    dmap[item].append(i)\n\nassert [2] == dmap[1]\nassert [3, 5] == dmap[2]\nassert [0, 1, 4] == dmap[3]\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/2442833?v=4",
+  "releases": [
+    {
+      "tag_name": "0.0.3",
+      "name": "0.0.3",
+      "body": "## Main changes\r\n\r\n* Add support for string keys to DefaultHashMap by @insolor in https://github.com/insolor/zig-collections/pull/39\r\n\r\n## What's Changed\r\n* Bump mkdocs-material from 9.6.15 to 9.6.16 by @dependabot[bot] in https://github.com/insolor/zig-collections/pull/12\r\n* Add zig 0.15.1 to the test workflow by @insolor in https://github.com/insolor/zig-collections/pull/13\r\n* Bump mkdocs-material from 9.6.16 to 9.6.18 by @dependabot[bot] in https://github.com/insolor/zig-collections/pull/14\r\n* Bump typing-extensions from 4.14.1 to 4.15.0 by @dependabot[bot] in https://github.com/insolor/zig-collections/pull/15\r\n* Bump actions/checkout from 4 to 5 in the github-actions group by @dependabot[bot] in https://github.com/insolor/zig-collections/pull/16\r\n* Add basic support for unmanaged structures as values of DefaultHashMap by @insolor in https://github.com/insolor/zig-collections/pull/17\r\n* Bump actions/setup-python from 5 to 6 in the github-actions group by @dependabot[bot] in https://github.com/insolor/zig-collections/pull/18\r\n* Bump mkdocs-material from 9.6.18 to 9.6.21 by @dependabot[bot] in https://github.com/insolor/zig-collections/pull/20\r\n* Bump mkdocstrings from 0.30.0 to 0.30.1 by @dependabot[bot] in https://github.com/insolor/zig-collections/pull/19\r\n* Bump astral-sh/setup-uv from 6 to 7 in the github-actions group by @dependabot[bot] in https://github.com/insolor/zig-collections/pull/21\r\n* Bump mkdocs-material from 9.6.21 to 9.6.23 by @dependabot[bot] in https://github.com/insolor/zig-collections/pull/22\r\n* Bump mkdocs-git-revision-date-localized-plugin from 1.4.7 to 1.5.0 by @dependabot[bot] in https://github.com/insolor/zig-collections/pull/23\r\n* Bump actions/checkout from 5 to 6 in the github-actions group by @dependabot[bot] in https://github.com/insolor/zig-collections/pull/26\r\n* Bump mkdocs-material from 9.6.23 to 9.7.0 by @dependabot[bot] in https://github.com/insolor/zig-collections/pull/24\r\n* Try to build docs on pull requests by @insolor in https://github.com/insolor/zig-collections/pull/27\r\n* Bump mkdocstrings from 0.30.1 to 1.0.0 by @dependabot[bot] in https://github.com/insolor/zig-collections/pull/25\r\n* Bump mkdocs-material from 9.7.0 to 9.7.1 by @dependabot[bot] in https://github.com/insolor/zig-collections/pull/28\r\n* Bump mkdocstrings from 1.0.0 to 1.0.2 by @dependabot[bot] in https://github.com/insolor/zig-collections/pull/29\r\n* Bump mkdocs-git-revision-date-localized-plugin from 1.5.0 to 1.5.1 by @dependabot[bot] in https://github.com/insolor/zig-collections/pull/30\r\n* Bump pymdown-extensions from 10.16 to 10.16.1 by @dependabot[bot] in https://github.com/insolor/zig-collections/pull/32\r\n* Bump urllib3 from 2.5.0 to 2.6.3 by @dependabot[bot] in https://github.com/insolor/zig-collections/pull/31\r\n* Bump mkdocstrings from 1.0.2 to 1.0.3 by @dependabot[bot] in https://github.com/insolor/zig-collections/pull/33\r\n* Bump mkdocs-material from 9.7.1 to 9.7.3 by @dependabot[bot] in https://github.com/insolor/zig-collections/pull/34\r\n* Bump requests from 2.32.4 to 2.33.0 by @dependabot[bot] in https://github.com/insolor/zig-collections/pull/35\r\n* Bump mkdocs-material from 9.7.3 to 9.7.6 by @dependabot[bot] in https://github.com/insolor/zig-collections/pull/37\r\n* Add zig 0.16.0 to tests by @insolor in https://github.com/insolor/zig-collections/pull/38\r\n* Fix get_version.py script name, add dry run for draft-release by @insolor in https://github.com/insolor/zig-collections/pull/40\r\n\r\n\r\n**Full Changelog**: https://github.com/insolor/zig-collections/compare/0.0.2....0.0.3",
+      "prerelease": false,
+      "published_at": "2026-04-25T21:01:59Z",
+      "html_url": "https://github.com/insolor/zig-collections/releases/tag/0.0.3",
+      "assets": []
+    },
+    {
+      "tag_name": "0.0.2",
+      "name": "0.0.2",
+      "body": "## What's Changed\r\n* `Counter` and `DefaultHashMap` implemented by @insolor\r\n\r\n**Full Changelog**: https://github.com/insolor/zig-collections/commits/0.0.2",
+      "prerelease": false,
+      "published_at": "2025-07-26T20:17:32Z",
+      "html_url": "https://github.com/insolor/zig-collections/releases/tag/0.0.2",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Backend software developer. Founder of the Dwarf Fortress localization project.",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_followers": 55,
+  "owner_following": 63,
+  "owner_created_at": "2012-09-28T05:16:56Z",
+  "license": "MIT",
+  "category": "library"
+}
