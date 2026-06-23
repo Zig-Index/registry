@@ -14,10 +14,10 @@
     "zig-package",
     "r5rs"
   ],
-  "stars": 26,
+  "stars": 27,
   "forks": 1,
   "watchers": 2,
-  "updated_at": "2026-05-12T21:18:31Z",
+  "updated_at": "2026-06-20T02:50:34Z",
   "dependencies": [
     {
       "name": "chilli",

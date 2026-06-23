@@ -12,10 +12,10 @@
     "zig-package",
     "zig-lib"
   ],
-  "stars": 40,
+  "stars": 39,
   "forks": 2,
   "watchers": 0,
-  "updated_at": "2026-06-18T04:53:29Z",
+  "updated_at": "2026-06-18T19:51:02Z",
   "dependencies": [
     {
       "name": "luau",
@@ -82,8 +82,8 @@
       "assets": []
     }
   ],
-  "owner_bio": "Building cloud at @NVIDIA - containers, microVMs, Kubernetes. @containerd maintainer.",
-  "owner_company": "@NVIDIA",
+  "owner_bio": "Building cloud infra at @Netflix.\r\n@containerd maintainer.",
+  "owner_company": "@Netflix",
   "owner_location": "Seattle, WA",
   "owner_blog": null,
   "owner_twitter_username": "mak_pav",

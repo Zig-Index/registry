@@ -13,10 +13,10 @@
     "zig-pkg",
     "zig-packages"
   ],
-  "stars": 3,
+  "stars": 4,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-06-20T13:10:54Z",
+  "updated_at": "2026-06-21T00:29:48Z",
   "dependencies": [
     {
       "name": "example",

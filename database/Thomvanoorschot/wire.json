@@ -14,10 +14,10 @@
     "tcp-server",
     "zig-package"
   ],
-  "stars": 23,
+  "stars": 24,
   "forks": 1,
   "watchers": 1,
-  "updated_at": "2026-05-02T10:35:55Z",
+  "updated_at": "2026-06-20T18:54:32Z",
   "dependencies": [
     {
       "name": "libxev",

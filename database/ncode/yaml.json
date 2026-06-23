@@ -19,6 +19,15 @@
   "owner_avatar_url": "https://avatars.githubusercontent.com/u/52380?u=3f81d390c655268364fbd76e8652c0ac67d8879c&v=4",
   "releases": [
     {
+      "tag_name": "v0.2.1",
+      "name": "v0.2.1",
+      "body": "## What's Changed\r\n* Bound emitter output growth before allocation by @ncode in https://github.com/ncode/yaml/pull/14\r\n\r\n\r\n**Full Changelog**: https://github.com/ncode/yaml/compare/0.2.0...v0.2.1",
+      "prerelease": false,
+      "published_at": "2026-06-22T14:02:37Z",
+      "html_url": "https://github.com/ncode/yaml/releases/tag/v0.2.1",
+      "assets": []
+    },
+    {
       "tag_name": "0.2.0",
       "name": "0.2.0",
       "body": "## What's Changed\r\n* Refactor internal YAML architecture by @ncode in https://github.com/ncode/yaml/pull/13\r\n\r\n\r\n**Full Changelog**: https://github.com/ncode/yaml/compare/0.1.0...0.2.0",

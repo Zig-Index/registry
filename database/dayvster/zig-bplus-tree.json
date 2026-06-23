@@ -11,10 +11,10 @@
     "zig-libary",
     "zig-pkg"
   ],
-  "stars": 1,
+  "stars": 2,
   "forks": 1,
   "watchers": 0,
-  "updated_at": "2026-06-20T13:08:26Z",
+  "updated_at": "2026-06-22T19:27:01Z",
   "dependencies": [
     {
       "name": "example",

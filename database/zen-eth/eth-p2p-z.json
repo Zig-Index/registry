@@ -19,7 +19,7 @@
   "stars": 38,
   "forks": 16,
   "watchers": 3,
-  "updated_at": "2026-06-18T10:08:08Z",
+  "updated_at": "2026-06-20T05:29:10Z",
   "dependencies": [
     {
       "name": "secp256k1",

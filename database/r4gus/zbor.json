@@ -13,10 +13,10 @@
     "parsing",
     "zig-package"
   ],
-  "stars": 52,
+  "stars": 53,
   "forks": 7,
   "watchers": 1,
-  "updated_at": "2026-06-18T07:42:09Z",
+  "updated_at": "2026-06-21T02:57:59Z",
   "dependencies": [
     {
       "name": "example",

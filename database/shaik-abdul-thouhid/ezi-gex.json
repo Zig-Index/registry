@@ -16,10 +16,10 @@
     "dfa-regex",
     "lazy-dfa"
   ],
-  "stars": 2,
+  "stars": 3,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-06-21T10:41:47Z",
+  "updated_at": "2026-06-23T05:27:10Z",
   "dependencies": [
     {
       "name": "ezi_code",
