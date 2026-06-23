@@ -12,12 +12,12 @@
   "stars": 2,
   "forks": 0,
   "watchers": 0,
-  "updated_at": "2026-06-23T05:18:11Z",
+  "updated_at": "2026-06-23T17:18:35Z",
   "dependencies": [
     {
       "name": "impeller_sdk",
-      "url": "git+https://github.com/impeller-interop/impeller-sdk?ref=stable#a15a380007808bf4b40f5615d9c13e321115d8ad",
-      "hash": "impeller_sdk-0.0.1-TZhUmZUjAAAxihJ6gvEn092_MarreLl21tQnKPA_TrPq"
+      "url": "git+https://github.com/impeller-interop/impeller-sdk?ref=stable#8defef42678abf2d61d7567a28ef32ac0237e5ad",
+      "hash": "impeller_sdk-0.0.1-TZhUmZ0jAAAxaP_fW_vCfFYPM0JqCU3ZZJxO83Ki69ZT"
     }
   ],
   "minimum_zig_version": "0.16.0",
