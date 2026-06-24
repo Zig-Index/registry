@@ -1,0 +1,147 @@
+{
+  "name": "zog",
+  "owner": "aikoschurmann",
+  "repo": "zog",
+  "description": "⚡ A blisteringly fast, zero-allocation JSONL search engine in Zig. Query and aggregate massive datasets at 4.0 GB/s using SIMD-accelerated \"Blind Scanning.\" Up to 50x faster than jq.",
+  "type": "package",
+  "topics": [
+    "cli",
+    "grep",
+    "jaq",
+    "jq",
+    "json",
+    "jsonl",
+    "ripgrep",
+    "simd",
+    "systems-programming",
+    "zig"
+  ],
+  "stars": 42,
+  "forks": 1,
+  "watchers": 0,
+  "updated_at": "2026-06-24T20:02:16Z",
+  "minimum_zig_version": "0.13.0",
+  "readme": "# ⚡ zog\n*A blisteringly fast, zero-allocation JSONL search engine.*\n\n**zog** is a high-performance command-line tool designed to query massive JSONL datasets at the physical speed limit of your hardware. It doesn't fully parse JSON; it blasts through it—giving you `jq`-like data extraction at `grep`-beating speeds.\n\n---\n\n## 🚀 Benchmarks\n\nTested on a **1 GB JSONL dataset** (6.7 million lines) on a modern NVMe SSD.\n\n| Benchmark              | zog (file) | zog (pipe) | ripgrep    | jq/jaq     |\n|------------------------|------------|------------|------------|------------|\n| Simple Key Match       | **4.03 GB/s** | 2.38 GB/s  | 2.30 GB/s  | 0.07 GB/s |\n| Substring Match (HAS)  | **2.49 GB/s** | 2.09 GB/s  | 1.53 GB/s  | 0.07 GB/s |\n| Numeric Comparison     | **3.39 GB/s** | 2.41 GB/s  | 2.97 GB/s  | 0.10 GB/s |\n| Field Extraction (TSV) | **2.83 GB/s** | 2.21 GB/s  | N/A        | 0.10 GB/s |\n| JSON Re-Formatting     | **2.77 GB/s** | 2.18 GB/s  | N/A        | 0.10 GB/s |\n| Aggregations           | **2.41 GB/s** | 1.91 GB/s  | N/A        | 0.05 GB/s |\n| Complex Logic (OR/AND) | **2.24 GB/s** | 1.93 GB/s  | 0.54 GB/s  | 0.06 GB/s |\n\n**Performance Summary:**\n- **20–50x faster** than `jq/jaq` for typical queries\n- **Faster than ripgrep** for all matching categories while offering structured field extraction\n- **4.1x faster than ripgrep** for complex multi-condition logic\n- Maintains **1.9–4.0 GB/s** throughput even with field extraction and aggregations\n- **Unique capability:** Aggregations (COUNT, SUM, MIN, MAX, AVG) at near line-speed (>2.4 GB/s)\n\n---\n\n## 🛠️ Usage\n\n### Example Dataset\n\nAll examples below use this `demo.jsonl` file:\n\n```json\n{\"name\": \"Alice\", \"age\": 25, \"balance\": 100.50, \"active\": true, \"tier\": 1}\n{\"name\": \"Bob\", \"age\": 30, \"balance\": -50.25, \"active\": false, \"tier\": 2}\n{\"name\": \"Charlie\", \"age\": 30, \"balance\": 0.0, \"active\": true, \"tier\": 3}\n{\"name\": \"Dave\", \"age\": 45, \"balance\": 5000.00, \"active\": true, \"tier\": 4}\n{\"name\": \"Eve\", \"age\": \"45\", \"balance\": \"99.99\", \"active\": \"true\", \"tier\": 5}\n```\n\n### Basic Syntax\n\n```bash\nzog [--file <path>] [--limit <number>] [--count] [--header] [SELECT <fields> WHERE] <key> <op> <val> [AND/OR ...]\n```\n\n**Operators:** `eq`, `neq`, `gt`, `lt`, `gte`, `lte`, `has`, `exists`, `in`\n\n**Type Prefixes:** `s:` (string), `n:` (numeric/primitive), `b:` (boolean/primitive - alias for `n:`)\n\n### Simple Equality Query\n\nFind all entries where `age` equals `30`:\n\n```bash\nzog --file demo.jsonl age eq 30\n# {\"name\": \"Bob\", \"age\": 30, \"balance\": -50.25, \"active\": false, \"tier\": 2}\n# {\"name\": \"Charlie\", \"age\": 30, \"balance\": 0.0, \"active\": true, \"tier\": 3}\n```\n\nOr from stdin:\n\n```bash\ncat demo.jsonl | zog age eq 30\n```\n\n### Logical Operators\n\n**AND** - All conditions must match:\n\n```bash\nzog --file demo.jsonl age eq 30 AND tier gt 2\n# {\"name\": \"Charlie\", \"age\": 30, \"balance\": 0.0, \"active\": true, \"tier\": 3}\n```\n\n**OR** - Any condition can match:\n\n```bash\nzog --file demo.jsonl tier eq 1 OR tier eq 5\n# {\"name\": \"Alice\", \"age\": 25, \"balance\": 100.50, \"active\": true, \"tier\": 1}\n# {\"name\": \"Eve\", \"age\": \"45\", \"balance\": \"99.99\", \"active\": \"true\", \"tier\": 5}\n```\n\n**NOT** - Negate a condition:\n\n```bash\nzog --file demo.jsonl NOT age eq 30\n# {\"name\": \"Alice\", \"age\": 25, \"balance\": 100.50, \"active\": true, \"tier\": 1}\n# {\"name\": \"Dave\", \"age\": 45, \"balance\": 5000.00, \"active\": true, \"tier\": 4}\n# {\"name\": \"Eve\", \"age\": \"45\", \"balance\": \"99.99\", \"active\": \"true\", \"tier\": 5}\n```\n\n**Mixed Logic:**\n\n```bash\nzog --file demo.jsonl age eq 30 AND balance lt 0 OR tier eq 1\n# {\"name\": \"Alice\", \"age\": 25, \"balance\": 100.50, \"active\": true, \"tier\": 1}\n# {\"name\": \"Bob\", \"age\": 30, \"balance\": -50.25, \"active\": false, \"tier\": 2}\n```\n\n### Query Semantics & Order of Operations\n\n**Operator Precedence:** `AND` binds tighter than `OR`\n\nzog evaluates conditions left-to-right, grouping consecutive `AND` conditions together. Each `OR` creates a new group.\n\n**Examples:**\n\n```bash\n# A AND B OR C AND D\n# Evaluated as: (A AND B) OR (C AND D)\nzog --file demo.jsonl age eq 30 AND balance lt 0 OR tier eq 1 AND active eq true\n# {\"name\": \"Alice\", \"age\": 25, \"balance\": 100.50, \"active\": true, \"tier\": 1}\n# {\"name\": \"Bob\", \"age\": 30, \"balance\": -50.25, \"active\": false, \"tier\": 2}\n\n# A OR B AND C\n# Evaluated as: A OR (B AND C)\nzog --file demo.jsonl tier eq 1 OR age eq 30 AND balance lt 0\n# {\"name\": \"Alice\", \"age\": 25, \"balance\": 100.50, \"active\": true, \"tier\": 1}\n# {\"name\": \"Bob\", \"age\": 30, \"balance\": -50.25, \"active\": false, \"tier\": 2}\n```\n\n**No Parentheses:** zog does not support explicit parentheses. For complex logic requiring different groupings, use multiple zog invocations:\n\n```bash\n# To get (A OR B) AND C, run two stages:\ncat data.jsonl | zog A OR B | zog C\n```\n\n**Field Evaluation:** When multiple fields are specified in SELECT, they're extracted independently—order doesn't affect results, only output column order.\n\n### Comparison Operators\n\n```bash\n# Greater than\nzog --file demo.jsonl balance gt 100\n# {\"name\": \"Alice\", \"age\": 25, \"balance\": 100.50, \"active\": true, \"tier\": 1}\n# {\"name\": \"Dave\", \"age\": 45, \"balance\": 5000.00, \"active\": true, \"tier\": 4}\n\n# Less than or equal\nzog --file demo.jsonl tier lte 2\n# {\"name\": \"Alice\", \"age\": 25, \"balance\": 100.50, \"active\": true, \"tier\": 1}\n# {\"name\": \"Bob\", \"age\": 30, \"balance\": -50.25, \"active\": false, \"tier\": 2}\n\n# Not equal\nzog --file demo.jsonl age neq 30\n# {\"name\": \"Alice\", \"age\": 25, \"balance\": 100.50, \"active\": true, \"tier\": 1}\n# {\"name\": \"Dave\", \"age\": 45, \"balance\": 5000.00, \"active\": true, \"tier\": 4}\n# {\"name\": \"Eve\", \"age\": \"45\", \"balance\": \"99.99\", \"active\": \"true\", \"tier\": 5}\n\n# Exists\nzog --file demo.jsonl balance exists\n# {\"name\": \"Alice\", \"age\": 25, \"balance\": 100.50, \"active\": true, \"tier\": 1}\n# ...\n```\n\n### Substring Matching\n\nUse the `has` operator to search for substrings within values:\n\n```bash\n# Find all entries with names containing \"li\"\nzog --file demo.jsonl name has li\n# {\"name\": \"Alice\", \"age\": 25, \"balance\": 100.50, \"active\": true, \"tier\": 1}\n# {\"name\": \"Charlie\", \"age\": 30, \"balance\": 0.0, \"active\": true, \"tier\": 3}\n```\n\n### Multi-Value Matching (IN)\n\nUse the `in` operator to match a field against multiple values at once:\n\n```bash\n# Find entries where tier is 1, 3, or 5\nzog --file demo.jsonl tier in 1,3,5\n# {\"name\": \"Alice\", \"age\": 25, \"balance\": 100.50, \"active\": true, \"tier\": 1}\n# {\"name\": \"Charlie\", \"age\": 30, \"balance\": 0.0, \"active\": true, \"tier\": 3}\n# {\"name\": \"Eve\", \"age\": \"45\", \"balance\": \"99.99\", \"active\": \"true\", \"tier\": 5}\n\n# Match multiple string values\nzog --file logs.jsonl level in error,critical,warn\n```\n\n### Field Extraction (SELECT)\n\nExtract specific fields instead of printing entire JSONL lines:\n\n```bash\nzog --file demo.jsonl SELECT name,tier WHERE balance lt 100\n```\n\n**Output:**\n\n```plaintext\nBob     2\nCharlie 3\nEve     5\n```\n\n**Bare SELECT (no WHERE):** Extract fields from every line without filtering:\n\n```bash\nzog --file demo.jsonl --limit 3 SELECT name,age\n# Alice   25\n# Bob     30\n# Charlie 30\n```\n\n**Column Headers:** Use `--header` to print a header row with field names:\n\n```bash\nzog --file demo.jsonl --header SELECT name,tier WHERE balance lt 100\n# name    tier\n# Bob     2\n# Charlie 3\n# Eve     5\n```\n\n### Aggregations\n\nzog can compute aggregations over matching records at near line-speed (~2 GB/s):\n\n**Available Aggregations:**\n- `count:field` - Count non-null values\n- `sum:field` - Sum numeric values\n- `min:field` - Find minimum value\n- `max:field` - Find maximum value\n- `avg:field` - Find average value\n\n**Syntax:** zog supports shell-safe colon syntax (`count:field`). The colon syntax avoids shell escaping issues.\n\n**Computation:** All aggregations are computed in a single pass over the data. Each field maintains its own independent aggregation state—`min:age` and `max:balance` don't conflict; they compute the minimum age and maximum balance separately.\n\n**Important:** If you include **any** aggregation (count, sum, min, max), zog switches to \"aggregation mode\" and outputs a single summary row. Raw fields (without an aggregation function) will output as `null` in JSON or empty in TSV/CSV:\n\n```bash\n# Mixing raw field with aggregations - raw field outputs null/empty\nzog --file demo.jsonl SELECT name,count:name WHERE tier gte 2\n# Output: <empty>    4\n# (name has no aggregation, so it's empty in the summary row)\n\n# Solution: Either use all raw fields or all aggregations\nzog --file demo.jsonl SELECT name WHERE tier gte 2        # Raw mode: prints each line\nzog --file demo.jsonl SELECT count:name WHERE tier gte 2  # Aggregation mode: prints summary\n```\n\n**Examples:**\n\n```bash\n# Independent aggregations on different fields\nzog --file demo.jsonl SELECT min:age,max:balance WHERE active eq true\n# Output: 25.0000    5000.0000\n# (minimum age is 25, maximum balance is 5000 - completely independent)\n\n# You can even do min AND max on the same field\nzog --file demo.jsonl SELECT min:age,max:age WHERE active eq true\n# Output: 25.0000    45.0000\n\n# Count all matching records\nzog --file demo.jsonl SELECT count:name WHERE tier gte 2\n# Output: 4\n\n# Multiple aggregations\nzog --file demo.jsonl SELECT count:name,sum:balance,avg:age,min:age,max:tier WHERE active eq true\n# Output: 4    5200.4900    32.5000    25.0000    5.0000\n\n# Limit results\nzog --file demo.jsonl --limit 2 active eq true\n# {\"name\": \"Alice\", \"age\": 25, \"balance\": 100.50, \"active\": true, \"tier\": 1}\n# {\"name\": \"Charlie\", \"age\": 30, \"balance\": 0.0, \"active\": true, \"tier\": 3}\n\n# Count matching lines (without printing them)\nzog --file demo.jsonl --count active eq true\n# 3\n\n# Short flag -c\nzog --file demo.jsonl -c tier gte 2\n# 4\n\n# Total balance across all records (no WHERE clause needed)\ncat demo.jsonl | zog SELECT sum:balance\n# Output: 5150.2400\n```\n\n**Output Formats:**\n\n```bash\n# TSV (default)\nzog --file demo.jsonl SELECT count:name,sum:balance WHERE tier gte 2\n# 4    5049.7400\n\n# JSON\nzog --file demo.jsonl --format json SELECT count:name,sum:balance WHERE tier gte 2\n# {\"count:name\": 4, \"sum:balance\": 5049.7400}\n\n# CSV\nzog --file demo.jsonl --format csv SELECT count:name,sum:balance WHERE tier gte 2\n# 4,5049.7400\n```\n\n**Performance:** Aggregations run at ~2 GB/s—**40x faster** than jq while using zero heap allocations.\n\n### Type Handling\n\nzog automatically detects JSON types (strings, numbers, booleans, null). You can force strict type matching using prefixes:\n- `s:` - Force string match only\n- `n:` - Force numeric/primitive match only (numbers, booleans, null)\n- `b:` - Alias for `n:` (semantic clarity when matching booleans)\n\n**Auto-detection (Inclusive - Default):**\n\n```bash\nzog --file demo.jsonl SELECT name,tier WHERE balance lt 100\n# Bob     2\n# Charlie 3\n# Eve     5\n# Matches both numeric values (-50.25, 0.0) AND string \"99.99\"\n```\n\n**Force String Match Only:**\n\n```bash\nzog --file demo.jsonl SELECT name,tier WHERE balance lt s:100\n# Eve     5\n# Only matches \"balance\": \"99.99\" (string type)\n# Excludes numeric -50.25 and 0.0\n```\n\n**Force Numeric/Primitive Match Only:**\n\n```bash\nzog --file demo.jsonl SELECT name,tier WHERE balance lt n:100\n# Bob     2\n# Charlie 3\n# Only matches numeric values\n# Excludes string \"99.99\"\n```\n\n**Boolean Matching (n: vs b:):**\n\n```bash\n# Auto-detection matches both boolean true AND string \"true\"\nzog --file demo.jsonl SELECT name WHERE active eq true\n# Alice\n# Charlie\n# Dave\n# Eve\n\n# Using b: (or n:) matches only the boolean primitive\nzog --file demo.jsonl SELECT name WHERE active eq b:true\n# Alice\n# Charlie\n# Dave\n# Excludes Eve (who has \"active\": \"true\" as a string)\n```\n\n**Note:** Both `n:` and `b:` are functionally identical—they force primitive (non-string) matching. Use `b:` for semantic clarity when matching booleans.\n\n**When to use type forcing:**\n- Use `s:` when you specifically need string matches (e.g., version numbers stored as strings)\n- Use `n:` or `b:` when you want to exclude string values from primitive comparisons\n- Default behavior (no prefix) is inclusive and matches both—ideal for most cases\n\n### Unix Pipelining\n\nzog works seamlessly with standard Unix tools:\n\n```bash\n# Live log monitoring\ntail -f app.jsonl | zog level eq error\n\n# Chain with other tools\ncat large_data.jsonl | zog status gte 500 | wc -l\n\n# Use exit codes in scripts (0 = match found, 1 = no matches)\nif zog --file logs.jsonl level eq error > /dev/null 2>&1; then\n  echo \"Errors found!\"\nfi\n\n# Extract and process\nzog --file demo.jsonl SELECT name WHERE tier gte 3 | sort\n# Charlie\n# Dave\n# Eve\n\n# Aggregate pipeline analytics\ncat logs.jsonl | zog SELECT sum:bytes,count:request_id WHERE status eq 200\n```\n\n---\n\n## 📦 Installation\n\nzog is a single, static binary with zero dependencies.\n\n### Download Prebuilt Binary\n\nDownload the latest binary for your OS from the [Releases](https://github.com/aikoschurmann/zog/releases) page.\n\n```bash\n# macOS (Apple Silicon)\ncurl -L https://github.com/aikoschurmann/zog/releases/latest/download/zog-macos-arm64 -o zog\nchmod +x zog\nsudo mv zog /usr/local/bin/\n\n# Linux (x86_64)\ncurl -L https://github.com/aikoschurmann/zog/releases/latest/download/zog-linux-x64 -o zog\nchmod +x zog\nsudo mv zog /usr/local/bin/\n```\n\n### Build from Source\n\nIf you have [Zig](https://ziglang.org/download/) installed:\n\n```bash\ngit clone https://github.com/aikoschurmann/zog.git\ncd zog\nzig build -Doptimize=ReleaseFast\n```\n\nThe compiled binary will be located at `./zig-out/bin/zog`.\n\n---\n\n## 🧠 Architecture: The \"Blind Scanner\"\n\nTraditional JSON tools like `jq` build a full Abstract Syntax Tree (AST) to validate and understand the nested structure of your data. This is 100% accurate, but computationally expensive—bottlenecking at ~0.04 GB/s.\n\nzog takes a fundamentally different approach. It acts as a **\"Blind Scanner\"**:\n\n### 1. Double-Buffered Async I/O\n\nInstead of the standard \"Read-then-Process\" loop which stalls the CPU while waiting for the disk, zog uses a background producer thread. While your CPU is busy SIMD-scanning the current 8 MB block, the disk is already filling the next buffer in parallel. This saturates NVMe bandwidth, keeping the CPU fed with data at all times.\n\n### 2. SIMD Fast Path\n\nInstead of checking every byte one by one, zog loads 32-byte chunks of your log file into 256-bit SIMD (AVX2/NEON) registers. It uses bitmasking and trailing-zero counts (`@ctz`) to identify newlines and search keys simultaneously—skipping dozens of CPU branches per cycle.\n\n### 3. Zero Heap Allocations\n\nzog never allocates memory on the heap during the scan. It searches the raw bytes for `\"key\":\"value\"` patterns, intelligently skips whitespace and colons, validates primitive boundaries, counts backslashes to respect JSON escaping rules, and extracts your data strictly in-place.\n\n### 4. Pre-Compilation of Query Plans\n\nBefore scanning begins, zog \"compiles\" your query into an optimized execution plan. Keys are pre-quoted, numeric values are pre-parsed, SIMD character vectors are pre-built, and type-forcing flags are resolved—eliminating all runtime overhead from the hot path.\n\n---\n\n## ⚠️ Limitations & Trade-offs\n\nzog achieves its performance by treating JSON as a literal sequence of UTF-8 bytes rather than a hierarchical data structure. To maintain speeds of 2–3+ GB/s, zog makes the following architectural trade-offs:\n\n### 1. Structural Ignorance (Nesting)\n\nzog does not track object nesting or balance braces, so it cannot distinguish between a \"root\" key and a key located inside a nested sub-object.\n\n**False Positive Example:**\n\n```json\n{\"id\": 5, \"metadata\": {\"id\": 10}}\n```\n\nSearching for `id eq 10` will match this line, even though the root `id` is `5`.\n\n**When This Matters:** Rarely. For standard JSONL logs (flat or lightly nested), this is not an issue.\n\n### 2. Literal Numeric Matching\n\nzog identifies numbers as raw byte sequences rather than logical values and does not perform numeric normalization.\n\n**Example:**\n\n- Searching for `balance eq 90` will **not** match `\"balance\": 90.0`\n- Searching for `count eq 99` will **not** match `\"count\": 995` (boundary integrity is enforced)\n\n**Workaround:** Use comparison operators (`gte`, `lte`) for numeric ranges when precision varies.\n\n### 3. Single-Line JSONL Only\n\nzog is strictly designed for line-delimited JSON (JSONL/NDJSON). Multi-line pretty-printed JSON is not supported.\n\n### 4. UTF-8 Literal Keys\n\nzog matches the exact bytes of your search key. If your JSON uses Unicode escape sequences in keys (e.g., `\"le\\u0076el\"`), the literal match will fail.\n\n**Supported Encodings:** UTF-8 only. UTF-16/UTF-32 are not supported.\n\n---\n\n## 🎯 Use Cases\n\nzog is purpose-built for high-throughput log analysis and incident response:\n\n✅ **DevOps & SRE:** Filter production logs for errors, slow queries, or HTTP 5xx responses  \n✅ **Security:** Hunt for suspicious activity in audit logs or access logs  \n✅ **Data Engineering:** Pre-filter massive datasets before loading into analysis tools  \n✅ **Analytics:** Compute aggregations (COUNT, SUM, MIN, MAX) over billions of records at 2+ GB/s  \n✅ **CLI Workflows:** Chain with `grep`, `awk`, `sort`, `uniq` for powerful one-liners  \n✅ **Real-time Monitoring:** Pipe live log streams (`tail -f`, `journalctl -f`) for instant filtering\n\n❌ **NOT suitable for:**\n- Validating JSON schema or syntax\n- Queries requiring deep nesting awareness\n- Pretty-printed JSON files\n- Non-JSONL formats (XML, YAML, etc.)\n\n---\n\n## 🤝 Contributing\n\nContributions are welcome! Please open an issue or submit a pull request on [GitHub](https://github.com/aikoschurmann/zog).",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/53011986?u=8c1a44a557894b437b8ae078f696a811e18e43dc&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.5",
+      "name": "v0.1.5",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2026-03-08T00:03:51Z",
+      "html_url": "https://github.com/aikoschurmann/zog/releases/tag/v0.1.5",
+      "assets": [
+        {
+          "name": "zog-linux-amd64",
+          "url": "https://github.com/aikoschurmann/zog/releases/download/v0.1.5/zog-linux-amd64",
+          "size": 2678600,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "zog-macos-arm64",
+          "url": "https://github.com/aikoschurmann/zog/releases/download/v0.1.5/zog-macos-arm64",
+          "size": 377072,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.4",
+      "name": "v0.1.4",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2026-02-22T18:24:52Z",
+      "html_url": "https://github.com/aikoschurmann/zog/releases/tag/v0.1.4",
+      "assets": [
+        {
+          "name": "zog-linux-amd64",
+          "url": "https://github.com/aikoschurmann/zog/releases/download/v0.1.4/zog-linux-amd64",
+          "size": 2267928,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "zog-macos-arm64",
+          "url": "https://github.com/aikoschurmann/zog/releases/download/v0.1.4/zog-macos-arm64",
+          "size": 294416,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.3",
+      "name": "v0.1.3",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2026-02-21T21:14:06Z",
+      "html_url": "https://github.com/aikoschurmann/zog/releases/tag/v0.1.3",
+      "assets": [
+        {
+          "name": "zog-linux-amd64",
+          "url": "https://github.com/aikoschurmann/zog/releases/download/v0.1.3/zog-linux-amd64",
+          "size": 2095496,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "zog-macos-arm64",
+          "url": "https://github.com/aikoschurmann/zog/releases/download/v0.1.3/zog-macos-arm64",
+          "size": 260608,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.2",
+      "name": "v0.1.2",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2026-02-21T17:23:00Z",
+      "html_url": "https://github.com/aikoschurmann/zog/releases/tag/v0.1.2",
+      "assets": [
+        {
+          "name": "zog-linux-amd64",
+          "url": "https://github.com/aikoschurmann/zog/releases/download/v0.1.2/zog-linux-amd64",
+          "size": 2058560,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "zog-macos-arm64",
+          "url": "https://github.com/aikoschurmann/zog/releases/download/v0.1.2/zog-macos-arm64",
+          "size": 243872,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "tag_name": "v0.1.1",
+      "name": "v0.1.1",
+      "body": null,
+      "prerelease": false,
+      "published_at": "2026-02-20T20:08:46Z",
+      "html_url": "https://github.com/aikoschurmann/zog/releases/tag/v0.1.1",
+      "assets": [
+        {
+          "name": "zog-macos-arm64",
+          "url": "https://github.com/aikoschurmann/zog/releases/download/v0.1.1/zog-macos-arm64",
+          "size": 199360,
+          "content_type": "application/octet-stream"
+        },
+        {
+          "name": "zog-linux-amd64",
+          "url": "https://github.com/aikoschurmann/zog/releases/download/v0.1.1/zog-linux-amd64",
+          "size": 1758224,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    }
+  ],
+  "owner_company": null,
+  "owner_location": "Brussels",
+  "owner_blog": "https://aikoschurmann.com",
+  "owner_twitter_username": null,
+  "owner_followers": 7,
+  "owner_following": 4,
+  "owner_created_at": "2019-07-17T15:27:03Z",
+  "license": "MIT",
+  "category": "cli"
+}
