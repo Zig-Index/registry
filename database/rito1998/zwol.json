@@ -13,10 +13,10 @@
     "cli",
     "zig-package"
   ],
-  "stars": 33,
+  "stars": 34,
   "forks": 2,
   "watchers": 1,
-  "updated_at": "2026-04-14T19:05:11Z",
+  "updated_at": "2026-06-24T09:59:00Z",
   "dependencies": [
     {
       "name": "clap",
