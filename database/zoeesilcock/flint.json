@@ -1,0 +1,70 @@
+{
+  "name": "flint",
+  "owner": "zoeesilcock",
+  "repo": "flint",
+  "description": "Building blocks for the game engine your game actually needs.",
+  "type": "package",
+  "topics": [
+    "game-development",
+    "zig",
+    "imgui",
+    "sdl3",
+    "sdl",
+    "flint",
+    "zig-package"
+  ],
+  "stars": 28,
+  "forks": 2,
+  "watchers": 1,
+  "updated_at": "2026-06-25T12:27:17Z",
+  "dependencies": [
+    {
+      "name": "sdl",
+      "url": "git+https://github.com/castholm/SDL.git#v0.5.1+3.4.10",
+      "hash": "sdl-0.5.1+3.4.10-SDL--kbMpgGMXke11Ujh5HUPKch7G_SUAS12LI0QFoqj"
+    },
+    {
+      "name": "imgui",
+      "url": "git+https://github.com/ocornut/imgui.git#v1.92.8-docking",
+      "hash": "N-V-__8AAKmrgQA-iEFHovAwDtF8olu0VkgmKg_3T15wRPzJ"
+    },
+    {
+      "name": "dear_bindings",
+      "url": "https://github.com/dearimgui/dear_bindings/releases/download/DearBindings_v0.21_ImGui_v1.92.8-docking/DearBindings_v0.21_ImGui_v1.92.8-docking.zip",
+      "hash": "N-V-__8AAHjIWwRO78zqgyaTG2ySwMVTr8uoNcPQRwY6NHKC"
+    }
+  ],
+  "minimum_zig_version": "0.16.0",
+  "readme": "# Flint\n*Strike your own engine*\n\nBuilding blocks for the game engine your game actually needs.\n\n\n## Quick start\nTo get your own project up and running quickly you can use the project generator to create a new project based on our template. The current template is currently 2D and uses Aseprite for assets, we will add more templates in the future as they become available.\n\n```\ngit clone https://github.com/zoeesilcock/flint.git && cd flint\n\nzig build new -- ../my_new_project\n\ncd ../my_new_project && zig build run\n```\n\n\n## Demo\nA quick demo of some of the coolest features: comptime generated inspector windows, and code/asset hot reloading:\n![Flint demo](demo.gif)\n\n\n## Usage\nTo use this in your own projects you include it as a dependency, integrate it into your `build.zig` file and then implement a library which follows the API expected by the main executable. See the [documentation](https://zoeesilcock.github.io/flint/), and the examples for more details.\n\n### Add dependency\n```\nzig fetch --save git+https://github.com/zoeesilcock/flint.git#v0.11.0\n```\n\n### Exposed modules\n* sdl - exposes the SDL C API.\n* imgui - exposes the ImGui C API and backend integrations for the SDL3 Renderer and SDL3 GPU APIs.\n* internal - exposes tools used to generate editors and tools for internal builds.\n* aseprite - exposes the aseprite importer.\n\n### Hot reloading\nBoth the code and the assets automatically update in-game when modified. For code this is achieved by having the entire game code inside a shared library with a thin executable that takes care of reloading the shared library when it changes. When Flint detects a change in the code it triggers `zig build -Dlib_only`. When it detects a change in the dynamic library it loads the new one, making it fully automated. For assets the executable lets the game know when assets have changed so that it can react to that in whatever way that makes sense, the examples reload the assets which shows changes instantly without interrupting the game.\n\n### Packaging\nBuilding and packaging for release is a broad topic and works differently on each platform. Flint doesn't provide an automated way to do this yet, so it has to be done manually. The executable looks for the game library and assets in a few different places to help make it portable.\n\n#### Asset search paths\nAsset paths default to being relative to the current working directory, if not found there it will try relative to the directory of the executable. This allows the assets to be in the root directory of the project during development and in the same directory as the executable for release. Internal builds support hot reloading of assets even when the executable is not in the development environment, so it's possible to share an internal build with an artist to work on the assets. We might consider baking the assets into the library for release builds in the future.\n\n#### Library search paths\nIn development mode it defaults to looking for the library in zig-out (zig-out/bin on Windows and zig-out/lib otherwise). If it fails to find the game library it will look in the same directory as the executable as well as in `./lib` relative to the executable. This allows using the default output locations while developing and then a couple of options when packaging for release.\n\nFor other libraries like SDL, the executable looks in the same directory as the executable and in `./lib` relative to the executable. Windows is an exception here as it has its own [search order](https://learn.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order) for DLLs. The simplest approach is to place the SDL library in the same directory as the executable.\n\n\n## Examples\n\n### [Diamonds](examples/diamonds/README.md)\nThis example is inspired by the classic game [Diamonds](https://en.wikipedia.org/wiki/Diamonds_\\(video_game\\)). The objective is to clear the screen of colored blocks without hitting spiky blocks. It uses the SDL3 Renderer API to render 2D sprites based on Aseprite files.\n![Diamonds screenshot](examples/diamonds/screenshot.png)\n\n### [Cube](examples/cube/README.md)\nThis example uses the SDL3 GPU API to render a cube.\n![Cube screenshot](examples/cube/screenshot.png)\n\n### [Template](examples/template/README.md)\nThis example aims to a minimal implementation of a project. If you want to get up and running with your own project quickly this is a good place to start.\n\n\n## Rationale\nMaking games is hard and time consuming, and it's usually not possible to know in advance what will be fun. This means that iteration speed and flexibility of experimentation are the most important factors in increasing the chances of finding the fun.\n\nMainstream game engines are very general and are rarely well suited for any specific type of game. Iteration speed is often quite low which breaks us out of flow every time we make a change. Most tasks include painfully manual and repetitive workflows that require navigating complex UIs with the mouse.\n\nSince each game is unique, the best engine, editor, and workflows for any specific game are also unique. Making a general purpose game engine is a bigger undertaking than making a game, but making the parts of a game engine needed for a specific game is more manageable.\n\nThis project aims to identify and implement tools needed to create bespoke game engines. This is not a game engine, but rather a set of tools and ideas that help you build the right engine for your game.\n\n### Guiding principles\n* **Programmer-centric**\\\n    We prefer data in text or code so it can be manipulated with standard text editors and version control tools.\n* **Integrated asset pipeline**\\\n    Asset creation and deployment should be integrated and streamlined to allow for quick iteration and experimentation.\n* **Low dependencies**\\\n    We prefer to own the code that makes our games unique.\n    * We chose SDL3 for its wide platform support.\n    * We chose Dear ImGui since it's very widely used, but may replace it with something like [DVUI](https://github.com/david-vanderson/dvui) in the future.\n* **Open source**\\\n    We prefer the freedom to use our tools however we like without arbitrary rules, licensing fees, vendor lock-in or rug pulls.\n\n\n## Development\nThis project is built using the zig build system, use `zig build -h` for a list of options or look at the `build.zig` file for more details.\n\n### Debugging\nDebugger configurations for VS Code are included in the main project as well as the example projects, it will prompt to install the required extension if you don't have it. When using VS Code it is also helpful to open the workspace file located in `.vscode/flint.code-workspace` to get an overview of the full project.\n\n### Documentation\nThe documentation is generated using the zig autodoc system. It can be generated locally or [viewed online](https://zoeesilcock.github.io/flint/).\n\nTo generate and run locally:\n```\nzig build docs\npython -m http.server -b 127.0.0.1 8000 -d zig-out/docs/\n```\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/554766?u=cc9726c01824d8d15b10c9ede1cdcd5757d2cd2d&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.11.0",
+      "name": "Flint v0.11.0",
+      "body": "### Added\r\n* Added RPath entries to Linux/Mac builds so the executable can find libraries in the executable directory and in ./lib. This allows for packaging the executable with the libraries. On Windows it will follow the normal DLL search order, so it's easiest to place the libraries in the same directory as the executable.\r\n* Added a module with utilities for dealing with the file system, to begin with it covers Flints own needs.\r\n* Added the ability to define a build matrix that allows automating building of all permutations of your game that you want. It supports three dimensions: target platform, optimize mode, and internal/release builds. This gives a fast way to catch any compilation errors that aren't happening on the native target or in release mode for example. This also includes basic packaging by copying assets, executable, and libraries into the same directory which provides an easy way to test all permutations of the game.\r\n\r\n### Changed\r\n* [Breaking] Updated minimum Zig version to 0.16.0.\r\n* Updated SDL to version 3.4.8.\r\n* Updated imgui to version 1.92.8.\r\n* Changed where we look for the game library to make the executable more portable. The order is now: zig-out if internal build, same directory as executable, and finally a directory called \"lib\" in the same directory as the executable.\r\n* The workaround to deal with building the game library while it is open on Windows is now only applied if the library is found in the dev directory (zig-out/bin), otherwise we skip it. This allows internal builds to be portable.\r\n* Changed where we look for assets to make the executable more portable. Previously the asset paths only worked relative to the current working directory, now we have a fallback which looks relative to the executable directory if not found in the current directory.\r\n* [Breaking] Refactored how Flint is integrated into the build.zig of projects that use it. Now there is a single function called `integrate` that can be imported in `build.zig`, it returns a struct containing the executable, the Flint module and the build options module. The modules can then be included in your game library as you wish. See the Template example for the new suggested setup.\r\n* Moved C translation of SDL and Imgui from `@cImport`/`@cDefine`/`@cInclude` in zig files to using `b.addTranslateC` in the build.zig file.\r\n* [Breaking] Changed the naming of the init functions in game libraries to match the type of dependency that they will receive. So what was previously always `init` is now either `initMinimal`, `initFull2D` or `initFull3D`. This makes the library code clearer and in line with the GameLib documentation. It also removes the need to specify the dependency set used by the game in the `GameSettings`.\r\n\r\n### Fixed\r\n* Fixed a mistake that caused the SDL library artifact to not be installed to the build directory.\r\n\r\n### Removed\r\n* [Breaking] Removed the custom log function exposed at `GameLib.logFn` since it isn't needed anymore, the default log function works from dynamic libraries since zig 0.16.0. Remove any uses of it.\r\n* Removed the LoggingAllocator from examples as it hasn't been of any use and just adds extra complexity.",
+      "prerelease": false,
+      "published_at": "2026-05-31T10:36:33Z",
+      "html_url": "https://github.com/zoeesilcock/flint/releases/tag/v0.11.0",
+      "assets": []
+    },
+    {
+      "tag_name": "v0.10.0",
+      "name": "Flint v0.10.0",
+      "body": "### Added\r\n* Renamed project to Flint to better reflect what the project has turned into.\r\n* Added a CHANGELOG.md file.\r\n* Added a quick start command that allows creating a new Flint project based on the template example using `zig build new -- ../my_new_project`.\r\n* Added a sprite to the Template example.\r\n\r\n### Changed\r\n* Updated imgui to version 1.92.7.\r\n* Updated SDL to version 3.4.2.\r\n* Moved the memory usage window from the Diamonds example into the `internal` module.\r\n* Changed the `linkSDL` and `buildExecutable` exposed build functions to take the install step which decides when to install artifacts like the executable and the SDL/Imgui libraries. If you want them to always be istalled you can pass `b.getInstallStep()` to get the default step that is triggered on all `zig build` invocations.\r\n* The executable now checks for changes in the code and runs `zig build -Dlib_only` which allows hot reloading of code to work without running your own instance of `zig build -Dlib_only --watch`.\r\n* Moved the function for opening sprites in Aseprite from the Diamonds example to the `aseprite` module.\r\n\r\n### Fixed\r\n* Fixed the Cube example so it works on AMD GPUs.\r\n* Non-internal builds now work entirely without imgui.\r\n* Fixed a memory leak in the Diamonds example.\r\n* Fixed zero FPS in Diamonds example.",
+      "prerelease": false,
+      "published_at": "2026-04-04T09:18:31Z",
+      "html_url": "https://github.com/zoeesilcock/flint/releases/tag/v0.10.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Full stack web developer (mostly JS/TS, NodeJS and React) and indie game developer (Unity and C#). Learning Zig to improve my low level skills.",
+  "owner_company": null,
+  "owner_location": null,
+  "owner_blog": "https://zoeetrope.com",
+  "owner_twitter_username": null,
+  "owner_followers": 30,
+  "owner_following": 22,
+  "owner_created_at": "2011-01-09T23:29:17Z",
+  "license": "MIT",
+  "category": "library"
+}
