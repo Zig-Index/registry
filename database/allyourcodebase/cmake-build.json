@@ -1,0 +1,35 @@
+{
+  "name": "cmake-build",
+  "owner": "allyourcodebase",
+  "repo": "cmake-build",
+  "description": "Zig build CMake (build-system gen)",
+  "type": "package",
+  "topics": [
+    "build-system",
+    "cmake",
+    "cpp",
+    "zig-package"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-06-25T01:31:38Z",
+  "dependencies": [
+    {
+      "name": "cmake",
+      "url": "git+https://github.com/kitware/cmake#936afa9823c9a592ba9406236dd95dbfe1179a10",
+      "hash": "N-V-__8AAH6skQMlTqaQ_GXBjMcS56lVRMRQ_1nEXA1UxMSX"
+    }
+  ],
+  "minimum_zig_version": "0.16.0",
+  "readme": "# CMake built with the Zig build system\n\nBuilds [CMake](https://cmake.org) (v4.3) from source using `build.zig`, relying\nonly on Zig's bundled `libc`/`libc++` toolchain. Everything CMake needs\n(kwsys, libuv, jsoncpp, librhash, zlib, bzip2, zstd, expat, curl, libarchive)\nis vendored in the CMake source tree, so there are **no system dependencies**\nand cross-compilation works out of the box.\n\n## Requirements\n\n- Zig `0.16.0` or master\n- Nothing else — no system CMake, OpenSSL, or other libraries are needed.\n\n## Build\n\nThere are two flavors, selected by `-Dfull`:\n\n| Flavor | Flag | Result |\n| --- | --- | --- |\n| **Bootstrap** (default) | *(none)* | Minimal self-hosting `cmake` (runs `cmake -E …`); no `--help`/`--version`/docs. |\n| **Full** | `-Dfull` | A real `cmake`: `--version`, `--help`, generators, configure/generate/build. |\n\n### Targets\n\n```sh\nzig build -Dfull -Dtarget=x86_64-linux-musl     # Linux (static, host-runnable)\nzig build -Dfull -Dtarget=aarch64-macos         # macOS (frameworkless)\nzig build -Dfull -Dtarget=x86_64-windows-gnu    # Windows (mingw)\n# and others, run 'zig targets' to check all available targets\n```\n\nOptional flags: `-Doptimize=ReleaseFast|ReleaseSmall|ReleaseSafe|Debug` (default `Debug`).\n\n## Use\n\nThe full build installs the runtime data (`Modules/`, `Templates/`) next to the\nbinary at `zig-out/share/cmake-4.3`, so `cmake` resolves `CMAKE_ROOT`\nautomatically — run it directly from `zig-out`.\n\n```sh\n# Version & help\n./zig-out/bin/cmake --version\n./zig-out/bin/cmake -h\n\n# Command mode (works in both bootstrap and full builds)\n./zig-out/bin/cmake -E echo \"hello\"\n./zig-out/bin/cmake -E make_directory build\n./zig-out/bin/cmake -E tar cf archive.tar file1 file2\n```\n\n### Configure & build a project\n\n```sh\n# Given a project with a CMakeLists.txt in ./src:\n./zig-out/bin/cmake -S src -B build      # configure + generate (Unix Makefiles)\ncmake --build build                       # or: make -C build\n```\n\nExample `src/CMakeLists.txt`:\n\n```cmake\ncmake_minimum_required(VERSION 3.10)\nproject(hello C)\nadd_executable(hello main.c)\n```\n\n```sh\n./zig-out/bin/cmake -S src -B build\nmake -C build\n./build/hello\n```\n\n## How it works\n\n`build.zig` replicates the upstream `bootstrap` script's logic in Zig:\n\n- All preprocessor configuration flows through `addCMacro` / `addConfigHeader`\n  (cmake-style `@VAR@` / `#cmakedefine` templates rendered per target OS).\n- Each vendored third-party library is compiled as its own static archive\n  (`cLib(...)`) and linked into the final `cmake` executable.\n- No build-time globbing — source lists are explicit arrays.\n\nSee the comments in `build.zig` for the per-OS specifics (config-header values,\nthe macOS frameworkless CoreFoundation stubs, the Windows winsock/mingw fixes,\netc.).\n\n## License\n\n- This build glue (`build.zig`, `build.zig.zon`, this README) — [MIT](LICENSE)\n- The CMake source it builds — BSD-3-Clause, © Kitware, Inc. and Contributors,\n  retained as [`LICENSE.cmake`](LICENSE.cmake).\n\nBSD-3-Clause is permissive and compatible with MIT; the only requirement is\npreserving CMake's copyright notice, which `LICENSE.cmake` does.\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/146390816?v=4",
+  "releases": [],
+  "owner_bio": "...are belong to Ziguanas, but we'd also be delighted to give them back!",
+  "owner_location": null,
+  "owner_blog": null,
+  "owner_twitter_username": null,
+  "owner_created_at": "2023-09-28T21:29:33Z",
+  "license": "MIT",
+  "category": "library"
+}

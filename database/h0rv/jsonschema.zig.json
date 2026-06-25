@@ -1,0 +1,49 @@
+{
+  "name": "jsonschema.zig",
+  "owner": "h0rv",
+  "repo": "jsonschema.zig",
+  "description": "",
+  "type": "package",
+  "topics": [
+    "json",
+    "jsonschema",
+    "zig",
+    "zig-package",
+    "zig-library"
+  ],
+  "stars": 1,
+  "forks": 0,
+  "watchers": 0,
+  "updated_at": "2026-06-25T02:30:12Z",
+  "dependencies": [
+    {
+      "name": "example",
+      "url": "https://example.com/foo.tar.gz",
+      "hash": "..."
+    }
+  ],
+  "minimum_zig_version": "0.16.0",
+  "readme": "# jsonschema.zig\n\n[![Zig](https://img.shields.io/badge/zig-0.16.0%2B-orange.svg)](https://ziglang.org/download/)\n[![Draft 2020-12](https://img.shields.io/badge/JSON%20Schema-Draft%202020--12-blue.svg)](https://json-schema.org/draft/2020-12)\n[![Conformance](https://img.shields.io/badge/test--suite-100%25-brightgreen.svg)](#conformance)\n\nA JSON Schema **Draft 2020-12** toolkit for Zig:\n\n- **[Validator](docs/validator.md)**: validate any JSON instance against any JSON\n  Schema document at runtime. Passes the entire official test suite (see\n  [conformance](#conformance)).\n- **[Emitter](docs/emitter.md)**: generate a JSON Schema document from a Zig type\n  at comptime.\n\nThe two are independent; use either or both.\n\n## Install\n\n```sh\nzig fetch --save=jsonschema git+https://github.com/h0rv/jsonschema.zig.git\n```\n\nThen wire the module into your `build.zig`:\n\n```zig\nconst dep = b.dependency(\"jsonschema\", .{ .target = target, .optimize = optimize });\nexe.root_module.addImport(\"jsonschema\", dep.module(\"jsonschema\"));\n```\n\nThe module name is `jsonschema`; the root source file is `src/jsonschema.zig`.\nRequires Zig 0.16.0+.\n\n## Validate JSON against a schema\n\n```zig\nconst std = @import(\"std\");\nconst jsonschema = @import(\"jsonschema\");\n\npub fn main(init: std.process.Init) !void {\n    const gpa = init.gpa;\n\n    const schema = try std.json.parseFromSlice(std.json.Value, gpa,\n        \\\\{\"type\":\"object\",\"required\":[\"name\"],\n        \\\\ \"properties\":{\"name\":{\"type\":\"string\",\"minLength\":1},\n        \\\\               \"age\":{\"type\":\"integer\",\"minimum\":0}}}\n    , .{});\n    defer schema.deinit();\n\n    const instance = try std.json.parseFromSlice(std.json.Value, gpa,\n        \\\\{\"name\":\"Ada\",\"age\":42}\n    , .{});\n    defer instance.deinit();\n\n    const ok = try jsonschema.isValid(gpa, &schema.value, &instance.value, .{});\n    std.debug.print(\"valid: {}\\n\", .{ok});\n}\n```\n\nFor reusable schemas, remote `$ref` resolution, error details, and `format`\nassertion, see the **[validator guide](docs/validator.md)**.\n\n## Generate a schema from a Zig type\n\n```zig\nconst User = struct {\n    name: []const u8,\n    age: u8 = 18,\n\n    pub const jsonschema = .{\n        .title = \"User\",\n        .fields = .{ .name = .{ .minLength = 1 } },\n    };\n};\n\nconst schema = try jsonschema.stringifyAlloc(User, allocator, .{ .whitespace = .indent_2 });\ndefer allocator.free(schema);\n```\n\nType mapping, metadata, tagged unions, `$defs`, and the strict preset are\ncovered in the **[emitter guide](docs/emitter.md)**.\n\n## Conformance\n\nThe validator passes the entire official\n[JSON-Schema-Test-Suite](https://github.com/json-schema-org/JSON-Schema-Test-Suite)\nfor Draft 2020-12, vendored under `tests/suite/`:\n\n| Run | Result |\n| --- | --- |\n| `zig build suite` (required) | **1299 / 1299** |\n| `zig build suite -- --optional` (all optional groups) | **1461 / 1461** |\n| `zig build suite -- --format` (`format` as an assertion) | **2086 / 2086** |\n\nIt implements every Draft 2020-12 keyword, including `$ref`/`$dynamicRef`/`$id`/\n`$anchor`/`$dynamicAnchor` resolution, `unevaluatedItems`/`unevaluatedProperties`\nwith full annotation tracking, `$vocabulary` gating, a Thompson-NFA ECMA-262\nregex engine (no catastrophic backtracking) for `pattern`, exact big-integer\n`multipleOf`, and the `format` vocabulary with RFC 3492 Punycode / IDNA2008\nhostname validation.\n\n## Develop\n\n```sh\nzig build test                  # unit tests + emitter tests + required suite\nzig build suite -- --format     # full conformance incl. optional + format\nzig build run                   # run the emitter demo\n```\n\n(Or via mise: `mise run test`, `mise run suite-all`, `mise run check`.)\n\n## Scope\n\nThis package validates JSON against Draft 2020-12 schemas and emits schemas from\nZig types. It does not deserialize values, generate OpenAPI, or build provider\nrequest payloads. The validator performs no network or filesystem I/O; register\nremote `$ref` documents with `Validator.addResource`.\n\n## License\n\n[MIT](LICENSE)\n",
+  "owner_avatar_url": "https://avatars.githubusercontent.com/u/45851384?u=6f232753b7eb1840f5bd83adf5185cd462bba9af&v=4",
+  "releases": [
+    {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "body": "**Full Changelog**: https://github.com/h0rv/jsonschema.zig/commits/v0.1.0",
+      "prerelease": false,
+      "published_at": "2026-06-04T13:59:37Z",
+      "html_url": "https://github.com/h0rv/jsonschema.zig/releases/tag/v0.1.0",
+      "assets": []
+    }
+  ],
+  "owner_bio": "Writer (of formal computer languages)",
+  "owner_company": null,
+  "owner_location": "~/",
+  "owner_blog": "horv.co",
+  "owner_twitter_username": null,
+  "owner_followers": 39,
+  "owner_following": 74,
+  "owner_created_at": "2018-12-13T13:46:05Z",
+  "license": "MIT",
+  "category": "library"
+}
